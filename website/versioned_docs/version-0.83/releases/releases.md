@@ -1,33 +1,33 @@
 ---
 id: releases
-title: Releases Overview
+title: 版本发布概览
 ---
 
 import ReleasesTable from '@site/src/components/releases/ReleasesTable';
 
-New React Native releases are shipped **every two months**, usually resulting in six (6) new minors per year.
+新的 React Native 版本**每两个月发布一次**，通常一年会有六（6）个次要版本。
 
-Below is the schedule and current status of recent and upcoming React Native releases:
+以下是最近和即将发布的 React Native 版本的时间表和当前状态：
 
 <ReleasesTable />
 
-The different support level presented in the table are defined as such:
+表格中展示的不同支持级别定义如下：
 
-- **Future**
-  - After a new version branch gets cut, creating new Release Candidates to allow the community to test the upcoming version is very important. New RC releases are done at a high pace, as soon as viable.
-- **Active**
-  - Stable releases in active support receive frequent updates. Latest stable has the highest priority, and at the start of its stable cycle (right after .0 is released) multiple patches will be done as soon as possible to stabilize the version and ensure a good upgrade experience to the community.
-- **End of Cycle**
-  - A version in this support bracket will receive less patches, unless some important regressions need to be addressed. Once a next version becomes the new latest stable, before the version in EoC moves over into Unsupported one last patch released will be produced with the latest receive pick requests.
-- **Unsupported**
-  - When a version is in the unsupported stage, no new released are to be expected. Only very important regressions might create exceptions to this rule; it is recommended that codebases using an unsupported version upgrade as soon as possible.
+- **未来版本**
+  - 在创建新版本分支后，发布新的候选发行版本（RC）以便社区测试即将发布的版本非常重要。新的 RC 版本会以较快的速度发布，一旦可行即推出。
+- **活跃支持**
+  - 稳定版本处于活跃支持阶段时，会频繁接收更新。最新稳定版本优先级最高，在其稳定周期开始（即.0版本发布后）会尽快发布多个补丁，以稳定该版本并确保社区的良好升级体验。
+- **生命周期结束**
+  - 处于此支持阶段的版本将较少收到补丁，除非需要解决重要的回归问题。一旦下一个版本成为新的最新稳定版本，生命周期结束的版本在转为不支持之前，会发布最后一个带有最新补丁申请的补丁版本。
+- **不支持**
+  - 当版本进入不支持阶段时，不再发布新版本。仅在非常重要的回归问题时例外；建议使用不支持版本的代码库尽快升级。
 
-## Commitment to Stability
+## 稳定性承诺
 
-In order to support users upgrading React Native versions, we’re committed to maintain the **latest 3 minor series** (e.g. 0.78.x, 0.77.x and 0.76.x when 0.78 is the latest release).
+为了支持用户升级 React Native 版本，我们承诺维护**最新的 3 个次要版本系列**（例如，当 0.78 是最新版本时，维护 0.78.x、0.77.x 和 0.76.x）。
 
-For those releases we’ll be publishing regular updates and bug fixes.
+对于这些版本，我们将定期发布更新和 bug 修复。
 
-You can read more about our support policy on [the react-native-releases working group](https://github.com/reactwg/react-native-releases/blob/main/docs/support.md).
+您可以在 [react-native-releases 工作组](https://github.com/reactwg/react-native-releases/blob/main/docs/support.md) 处阅读更多关于我们的支持政策。
 
-More information on our versioning, and what we consider a breaking change is available in our [versioning policy](./releases/versioning-policy) page.
+关于我们的版本管理及何谓破坏性更改的更多信息，请参见我们的 [版本管理政策](./releases/versioning-policy) 页面。

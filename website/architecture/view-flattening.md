@@ -1,21 +1,21 @@
 ---
 id: view-flattening
-title: View Flattening
+title: 视图扁平化
 ---
 
 import FabricWarning from './\_fabric-warning.mdx';
 
 <FabricWarning />
 
-#### View Flattening is an optimization by the React Native renderer to avoid deep layout trees.
+#### 视图扁平化是 React Native 渲染器的一种优化，旨在避免深层布局树。
 
-The React API is designed to be declarative and reusable through composition. This provides a great model for intuitive development. However, in implementation, these qualities of the API lead to the creation of deep [React Element Trees](architecture-glossary.md#react-element-tree-and-react-element), where a large majority of React Element Nodes only affect the layout of a View and don’t render anything on the screen. We call these types of nodes **“Layout-Only”** Nodes.
+React API 设计为声明式且通过组合实现可重用。这为直观开发提供了良好的模型。然而，在实现过程中，该 API 的这些特性导致创建了深层的 [React 元素树](architecture-glossary.md#react-element-tree-and-react-element)，其中绝大多数 React 元素节点仅影响视图的布局，而不在屏幕上渲染任何内容。我们称这类节点为**“仅布局”**节点。
 
-Conceptually, each of the Nodes of the React Element Tree have a 1:1 relationship with a view on the screen, therefore rendering a deep React Element Tree that is composed by a large amount of “Layout-Only” Node leads to poor performance during rendering.
+从概念上讲，React 元素树中的每个节点与屏幕上的一个视图有 1:1 的关系，因此渲染一个由大量“仅布局”节点组成的深层 React 元素树会导致渲染性能降低。
 
-Here is a common use case that is affected by the cost of "Layout Only" views.
+以下是一个受“仅布局”视图代价影响的常见用例。
 
-Imagine you want to render an image and a title that is handled by the `TitleComponent`, and you include this component as a child of the `ContainerComponent` that has some margin styles. After decomposing the components, the React code would look like this:
+假设你想渲染一张图片和一个由 `TitleComponent` 处理的标题，并且你将此组件作为带有一些 margin 样式的 `ContainerComponent` 的子组件。在分解组件后，React 代码如下：
 
 ```jsx
 function MyComponent() {
@@ -24,7 +24,7 @@ function MyComponent() {
       <View style={{margin: 10}} /> // ContainerComponent
         <View style={{margin: 10}}> // TitleComponent
           <Image {...} />
-          <Text {...}>This is a title</Text>
+          <Text {...}>这是一个标题</Text>
         </View>
       </View>
     </View>
@@ -32,18 +32,18 @@ function MyComponent() {
 }
 ```
 
-As part of the render process, React Native will produce the following trees:
+作为渲染过程的一部分，React Native 会生成如下树：
 
 ![Diagram one](/docs/assets/Architecture/view-flattening/diagram-one.png)
 
-Note that the Views (2) and (3) are “Layout Only” views, because they are rendered on the screen but they only render a `margin` of `10 px` on top of their children.
+注意，视图（2）和（3）是“仅布局”视图，因为它们在屏幕上渲染，但仅仅在其子视图之上渲染了一个 `10 px` 的 `margin`。
 
-To improve the performance of these types of React Element Trees, the renderer implements a View Flattening mechanism that merges or flattens these types of Nodes, reducing the depth of the [host view](architecture-glossary.md#host-view-tree-and-host-view) hierarchy that is rendered on the screen. This algorithm takes into consideration props like: `margin`, `padding`, `backgroundColor`, `opacity`, etc.
+为了提升此类 React 元素树的性能，渲染器实现了视图扁平化机制，将这类节点合并或扁平化，减少在屏幕上渲染的[宿主视图](architecture-glossary.md#host-view-tree-and-host-view)层级的深度。该算法会考虑诸如 `margin`、`padding`、`backgroundColor`、`opacity` 等属性。
 
-The View Flattening algorithm is integrated by design as part of the diffing stage of the renderer, which means that we don’t use extra CPU cycles to optimize the React Element Tree flattening these types of views. As the rest of the core, the View flattening algorithm is implemented in C++ and its benefits are shared by default on all supported platforms.
+视图扁平化算法作为渲染器差异计算阶段的内建部分，这意味着不需要额外的 CPU 资源来优化此类视图的 React 元素树扁平化。与核心部分一样，视图扁平化算法用 C++ 实现，并且其优势默认应用于所有支持的平台。
 
-In the case of the previous example, the Views (2) and (3) would be flattened as part of the “diffing algorithm” and as a result their styles will be merged into the View (1):
+针对之前的示例，视图（2）和（3）会作为“差异算法”的一部分被扁平化，结果它们的样式将合并到视图（1）中：
 
 ![Diagram two](/docs/assets/Architecture/view-flattening/diagram-two.png)
 
-It is important to note that this optimization allows the renderer to avoid the creation and render of two host views. From the user’s perspective there are no visible changes on the screen.
+需要注意的是，这项优化让渲染器避免了创建并渲染两个宿主视图。从用户角度来看，屏幕上没有任何可见变化。

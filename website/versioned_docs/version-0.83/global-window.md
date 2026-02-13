@@ -3,6 +3,6 @@ id: global-window
 title: window
 ---
 
-[`window`](https://developer.mozilla.org/en-US/docs/Web/API/Window/window) is an alias for [`globalThis`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/globalThis), as defined in Web specifications.
+[`window`](https://developer.mozilla.org/en-US/docs/Web/API/Window/window) 是 [`globalThis`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/globalThis) 的别名，如 Web 规范中所定义。
 
-The use of `globalThis` is recommended over `window`.
+推荐使用 `globalThis` 替代 `window`。

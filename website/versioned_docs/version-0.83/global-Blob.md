@@ -4,7 +4,7 @@ title: Blob
 ---
 
 :::warning
-🚧 This page is work in progress, so please refer to the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/Blob) for more information.
+🚧 此页面正在建设中，如需更多信息，请参阅 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/Blob)。
 :::
 
-The global `Blob` class, as defined in Web specifications.
+全局 `Blob` 类，如网页规范中所定义。

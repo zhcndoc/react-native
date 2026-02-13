@@ -1,87 +1,87 @@
 ---
-title: React Native - H2 2021 Recap
+title: React Native - 2021 年下半年回顾
 authors: [cortinico]
 tags: [announcement]
 ---
 
-While we're all still excited for the [release of React Native 0.67](/blog/2022/01/19/version-067), we want to take a moment to **celebrate** what the community achieved in the last half and share what we have on the **horizon** for the future of React Native.
+虽然我们仍然对 [React Native 0.67 发布](/blog/2022/01/19/version-067) 感到兴奋，但我们想花点时间来**庆祝**社区在过去半年的成就，并分享 React Native 未来的**展望**。
 
 <!--truncate-->
 
-Specifically, H2 2021 was an [exciting half for both us and the community](/blog/2021/08/19/h2-2021#pushing-the-technology-forward) where we had the opportunity to invest more in our open-source ecosystem. We revamped some of our processes and created new ones from scratch that will help you, us, and the community to enjoy a **better** React Native experience.
+具体来说，2021 年下半年对我们和社区来说都是一个[激动人心的半年](/blog/2021/08/19/h2-2021#pushing-the-technology-forward)，我们有机会加大对开源生态系统的投入。我们重塑了一些流程，并从零开始创建了新的流程，帮助你、我们和社区享受**更好**的 React Native 体验。
 
-## Repository Health
+## 仓库健康状况
 
-In H2 2021, we invested in tackling some of the _OSS debt_ that our repository built up over the years. Specifically, most of our focus was around **pull requests**. We built an internal process to make sure all the new pull requests are addressed in a timely manner.
+在 2021 年下半年，我们着力解决了多年来积累的 _开源负债_。特别地，我们的大部分关注点集中在**拉取请求（PR）**上。我们建立了一个内部流程，确保所有新拉取请求都能及时处理。
 
-Although this is not a complete list, we would like to highlight some **impactful** PRs we received from our contributors:
+虽然这不是完整列表，但我们想强调一些贡献者提交的**有影响力**的 PR：
 
-- **Accessibility**
-  - [#31630](https://github.com/facebook/react-native/pull/31630) `Added Support for Entrance/exit from collection by Flatlist` by [@anaskhraza](https://github.com/anaskhraza)
-- **Crash**
-  - [#29452](https://github.com/facebook/react-native/pull/29452) `Fix - TextInput Drawable to avoid Null Pointer Exception RuntimeError` by [@fabriziobertoglio1987](https://github.com/fabriziobertoglio1987)
-- **Display**
-  - [#31777](https://github.com/facebook/react-native/pull/31777) `fix: TouchableNativeFeedback ripple starts on previous touch location` by [@intergalacticspacehighway](https://github.com/intergalacticspacehighway)
-  - [#31789](https://github.com/facebook/react-native/pull/31789) `Fix support for blobs larger than 64 KB on Android` by [@tomekzaw](https://github.com/tomekzaw)
-  - [#31007](https://github.com/facebook/react-native/pull/31007) `Fix selectionColor doesn't style Android TextInput selection handles` by [@fabriziobertoglio1987](https://github.com/fabriziobertoglio1987)
-  - [#32398](https://github.com/facebook/react-native/pull/32398) `Fix Android border positioning regression` by [@oblador](https://github.com/oblador)
-  - [#29099](https://github.com/facebook/react-native/pull/29099) `[Android] Allows to set individual (left,top,right,bottom) dotted/dashed` by [@fabriziobertoglio1987](https://github.com/fabriziobertoglio1987)
-  - [#29117](https://github.com/facebook/react-native/pull/29117) `[Android] Fix font weight numeric values` by [@fabriziobertoglio1987](https://github.com/fabriziobertoglio1987)
-- **Interaction**
-  - [#28995](https://github.com/facebook/react-native/pull/28995) `[Android] Fix TextInput Cursor jumping to the right when placeholder null` by [@fabriziobertoglio1987](https://github.com/fabriziobertoglio1987)
-  - [#28952](https://github.com/facebook/react-native/pull/28952) `[Android] Fix non selectable Text in FlatList` by [@fabriziobertoglio1987](https://github.com/fabriziobertoglio1987)
-  - [#29046](https://github.com/facebook/react-native/pull/29046) `[Android] onKeyPress event not fired with numeric keys` by [@fabriziobertoglio1987](https://github.com/fabriziobertoglio1987)
-  - [#31500](https://github.com/facebook/react-native/pull/31500) `fix#29319 - ios dismiss modal` by [@intergalacticspacehighway](https://github.com/intergalacticspacehighway)
-  - [#32179](https://github.com/facebook/react-native/pull/32179) `Fix: multiline textinput start "jerking" when trying to move cursor.` by [@xiankuncheng](https://github.com/xiankuncheng)
-  - [#29039](https://github.com/facebook/react-native/pull/29039) `Fix to make taps on views outside parent bounds work on Android` by [@hsource](https://github.com/hsource)
-- **Performance**
-  - [#31764](https://github.com/facebook/react-native/pull/31764) `Optimize font handling on iOS` by [@Adlai-Holler](https://github.com/Adlai-Holler)
-  - [#32536](https://github.com/facebook/react-native/pull/32536) `Don't reconstruct app component on split-screen` by [@Somena1](https://github.com/Somena1)
-- **Testing**
-  - [#31401](https://github.com/facebook/react-native/pull/31401) `Add unit tests for VirtualizedList render quirks` by [@NickGerleman](https://github.com/NickGerleman)
+- **辅助功能**
+  - [#31630](https://github.com/facebook/react-native/pull/31630) 由 [@anaskhraza](https://github.com/anaskhraza) 提交的 `Added Support for Entrance/exit from collection by Flatlist`
+- **崩溃修复**
+  - [#29452](https://github.com/facebook/react-native/pull/29452) 由 [@fabriziobertoglio1987](https://github.com/fabriziobertoglio1987) 提交的 `Fix - TextInput Drawable to avoid Null Pointer Exception RuntimeError`
+- **显示**
+  - [#31777](https://github.com/facebook/react-native/pull/31777) 由 [@intergalacticspacehighway](https://github.com/intergalacticspacehighway) 提交的 `fix: TouchableNativeFeedback ripple starts on previous touch location`
+  - [#31789](https://github.com/facebook/react-native/pull/31789) 由 [@tomekzaw](https://github.com/tomekzaw) 提交的 `Fix support for blobs larger than 64 KB on Android`
+  - [#31007](https://github.com/facebook/react-native/pull/31007) 由 [@fabriziobertoglio1987](https://github.com/fabriziobertoglio1987) 提交的 `Fix selectionColor doesn't style Android TextInput selection handles`
+  - [#32398](https://github.com/facebook/react-native/pull/32398) 由 [@oblador](https://github.com/oblador) 提交的 `Fix Android border positioning regression`
+  - [#29099](https://github.com/facebook/react-native/pull/29099) 由 [@fabriziobertoglio1987](https://github.com/fabriziobertoglio1987) 提交的 `[Android] Allows to set individual (left,top,right,bottom) dotted/dashed`
+  - [#29117](https://github.com/facebook/react-native/pull/29117) 由 [@fabriziobertoglio1987](https://github.com/fabriziobertoglio1987) 提交的 `[Android] Fix font weight numeric values`
+- **交互**
+  - [#28995](https://github.com/facebook/react-native/pull/28995) 由 [@fabriziobertoglio1987](https://github.com/fabriziobertoglio1987) 提交的 `[Android] Fix TextInput Cursor jumping to the right when placeholder null`
+  - [#28952](https://github.com/facebook/react-native/pull/28952) 由 [@fabriziobertoglio1987](https://github.com/fabriziobertoglio1987) 提交的 `[Android] Fix non selectable Text in FlatList`
+  - [#29046](https://github.com/facebook/react-native/pull/29046) 由 [@fabriziobertoglio1987](https://github.com/fabriziobertoglio1987) 提交的 `[Android] onKeyPress event not fired with numeric keys`
+  - [#31500](https://github.com/facebook/react-native/pull/31500) 由 [@intergalacticspacehighway](https://github.com/intergalacticspacehighway) 提交的 `fix#29319 - ios dismiss modal`
+  - [#32179](https://github.com/facebook/react-native/pull/32179) 由 [@xiankuncheng](https://github.com/xiankuncheng) 提交的 `Fix: multiline textinput start "jerking" when trying to move cursor.`
+  - [#29039](https://github.com/facebook/react-native/pull/29039) 由 [@hsource](https://github.com/hsource) 提交的 `Fix to make taps on views outside parent bounds work on Android`
+- **性能**
+  - [#31764](https://github.com/facebook/react-native/pull/31764) 由 [@Adlai-Holler](https://github.com/Adlai-Holler) 提交的 `Optimize font handling on iOS`
+  - [#32536](https://github.com/facebook/react-native/pull/32536) 由 [@Somena1](https://github.com/Somena1) 提交的 `Don't reconstruct app component on split-screen`
+- **测试**
+  - [#31401](https://github.com/facebook/react-native/pull/31401) 由 [@NickGerleman](https://github.com/NickGerleman) 提交的 `Add unit tests for VirtualizedList render quirks`
 
-Some of those PRs addressed issues that were impacting both Meta and the overall OSS community, given the number of reactions on the corresponding issue they closed.
+这些 PR 中有些解决了影响 Meta 和整个开源社区的问题，考虑到相关 issue 上的反应数量，就能看出它们的重要性。
 
-There are so many more PRs we would like to call out, and we want to **thank** again all the people that are spending their time to help us address bugs and improve React Native.
+还有许多我们想要特别提及的 PR，也再次**感谢**所有花时间帮助我们修复漏洞和改进 React Native 的人们。
 
-## Community Engagement
+## 社区参与
 
-At the beginning of the half we set a goal to **communicate** with our community more and set process for the behavior to continue. Here were some of our engagements in H2 2021:
+年初我们设定了一个目标，想要**更多地与社区沟通**并建立流程确保这种状态持续下去。以下是 2021 年下半年我们的一些社区活动：
 
 <!--alex ignore gross-->
 
-- We had the opportunity to participate in [React Native EU](https://www.react-native.eu/) with a talk from [Joshua Gross](https://twitter.com/joshuaisgross) - [Bringing the Fabric renderer to the “Facebook” app](https://www.youtube.com/watch?v=xKOkILSLs0Q&t=3987s)
-- We hosted an [“Ask Us Anything“ (AUA) on Reddit](https://www.reddit.com/r/reactnative/comments/pzdo1r/react_native_team_aua_thursday_oct_14_9am_pt/) and received over 100 questions! AUAs are a great opportunity for both us, to get a sense of the community engagement, and you all, to ask any kind of questions. If you haven’t yet, make sure you check the answers as some of them are extremely insightful
-- We shared our [Many Platform Vision](https://reactnative.dev/blog/2021/08/26/many-platform-vision), a guide for gotchas for [Android 12 and iOS 15](https://reactnative.dev/blog/2021/09/01/preparing-your-app-for-iOS-15-and-android-12), and the progress and [vision for Hermes to become the default JS engine](https://reactnative.dev/blog/2021/10/26/toward-hermes-being-the-default) for React Native!
-- Our own [Kevin Gozali](https://twitter.com/fkgozali) appeared on [an episode of React Native Radio podcast](https://reactnativeradio.com/episodes/rnr-222-the-new-architecture-with-kevin-gozali-from-the-rn-core-team) to talk about the new architecture.
-- At [ReactConf 2021](https://conf.reactjs.org/), ReactConf [Rick Hanlon](https://twitter.com/rickhanlonii) shared the unified many-platform vision for React and React Native. Moreover, [Eric Rozell](https://twitter.com/EricRozell) and [Steven Moyes](https://twitter.com/moyessa) got to share the amazing progress React Native Desktop has made in supporting both Meta and Microsoft apps and showcasing the Many Platform Vision in practice.
+- 我们有机会参与了 [React Native EU](https://www.react-native.eu/)，由 [Joshua Gross](https://twitter.com/joshuaisgross) 带来了主题演讲——[把 Fabric 渲染器带到 “Facebook” 应用](https://www.youtube.com/watch?v=xKOkILSLs0Q&t=3987s)
+- 我们在 Reddit 举办了一场 [“Ask Us Anything”（问我们任何事）活动](https://www.reddit.com/r/reactnative/comments/pzdo1r/react_native_team_aua_thursday_oct_14_9am_pt/)，收到了超过 100 个问题！AUA 是我们了解社区参与度的绝佳机会，也便于大家提出各种问题。如果还没看过，请务必查看回答，有些答复非常有见地
+- 发布了我们的[多平台愿景](https://reactnative.dev/blog/2021/08/26/many-platform-vision)、关于[Android 12 和 iOS 15 注意事项的指南](https://reactnative.dev/blog/2021/09/01/preparing-your-app-for-iOS-15-and-android-12)，以及 Hermes 成为 React Native 默认 JS 引擎的进展及[愿景](https://reactnative.dev/blog/2021/10/26/toward-hermes-being-the-default)！
+- 我们的 [Kevin Gozali](https://twitter.com/fkgozali) 参与了 [React Native Radio 播客的一期节目](https://reactnativeradio.com/episodes/rnr-222-the-new-architecture-with-kevin-gozali-from-the-rn-core-team)，讨论了新架构。
+- 在 [ReactConf 2021](https://conf.reactjs.org/)，ReactConf 的 [Rick Hanlon](https://twitter.com/rickhanlonii) 分享了 React 和 React Native 的统一多平台愿景。此外， [Eric Rozell](https://twitter.com/EricRozell) 和 [Steven Moyes](https://twitter.com/moyessa) 分享了 React Native Desktop 在支持 Meta 和微软应用方面取得的惊人进展，展示了多平台愿景的实践。
 
-Beyond sharing more updates in H2 2021, we also **leaned** on our community more than ever. We relied on critical feedback from contributors as they dogfooded early drafts of the New Architecture material. As well, we were heavily supported by the expertise of our community in debugging critical release issues and improvements.
+除了发布更多更新，2021 年下半年我们也比以往更加**依赖**社区。我们依靠贡献者的关键反馈，因为他们先行试用新架构的早期草案。同时，社区的专业知识在调试关键发布问题和改进方面也给予了巨大支持。
 
-There is a wealth of knowledge that our community brings into React Native, and we need to continue to nurture it.
+社区为 React Native 带来了宝贵的知识，我们需要继续培养这份力量。
 
-## The New Architecture Rollout and Releases
+## 新架构的推广与发布
 
-2022 is going to be the year of the **New Architecture in open source**.
+2022 年将是开源领域**新架构**的关键之年。
 
-We’ve been working hard to deliver the infrastructure needed to rollout the New Architecture to apps and libraries. We involved some of our partners and core contributors/library maintainers to refine our support for the new architecture to get early stage feedback.
+我们一直在努力提供必要的基础设施，以推动新架构在应用和库中的推广。我们邀请了一些合作伙伴和核心贡献者/库维护者参与，完善新架构的支持，收集早期反馈。
 
-We are now preparing to release a new guide on our website: [Getting Started with the New Architecture](https://github.com/facebook/react-native-website/pull/2879). That will be the entry point to a collection of material that we’re going to release in 2022 and will help you migrate/start your project with the new architecture.
+目前我们正在准备在官网发布一份新指南：[快速上手新架构](https://github.com/facebook/react-native-website/pull/2879)。这将成为一系列资料的入口，这些资料将于 2022 年发布，帮助你迁移或启动基于新架构的项目。
 
-Moreover, we would like to stress the [importance of **giving feedback**](https://github.com/facebook/react-native-website/pull/2879) on the New Architecture material. We’re still in the process of finalizing the last details and your input will help everyone adopt the new architecture more seamlessly.
+另外，我们想强调[对新架构资料提供**反馈**的重要性](https://github.com/facebook/react-native-website/pull/2879)。我们仍在完善细节，你的意见将帮助大家更顺畅地采用新架构。
 
-**Releases** play a critical role in the New Architecture rollout. Our goal last half was to ensure any release blocking issues did not stagnate. We approached the problem by [clarifying and improving process and responsibilities](https://github.com/facebook/react-native/wiki/Releases) for better accountability. Our release coordination now occurs in a [dedicated discussions repository](https://github.com/reactwg/react-native-releases/discussions) with [clearer release issue reporting](https://github.com/facebook/react-native/issues/new?assignees=&labels=Needs%3A+Triage+%3Amag%3A%2CType%3A+Upgrade+Issue&template=upgrade-regression-form.yml).
+**发布过程**在新架构推广中扮演关键角色。我们上半年的目标是确保无阻塞发布问题停滞。为此，我们通过[明确及改善流程和责任分配](https://github.com/facebook/react-native/wiki/Releases)来提高问责制。发布协调现在在一个[专门的讨论仓库](https://github.com/reactwg/react-native-releases/discussions)中进行，并有[更清晰的问题报告流程](https://github.com/facebook/react-native/issues/new?assignees=&labels=Needs%3A+Triage+%3Amag%3A%2CType%3A+Upgrade+Issue&template=upgrade-regression-form.yml)。
 
-In H1 2022, we will continue to iterate on release responsibilities to support new architecture rollout. If you’d like to help out testing release candidates or [working on improvements](https://github.com/facebook/react-native/projects/18), feel free to [join the discussion](https://github.com/reactwg/react-native-releases/discussions/categories/improvements)!
+2022 年上半年，我们将继续迭代发布职责以支持新架构推广。如果你有兴趣帮助测试发布候选版本或[参与改进工作](https://github.com/facebook/react-native/projects/18)，欢迎[加入讨论](https://github.com/reactwg/react-native-releases/discussions/categories/improvements)！
 
-## To Mobile and beyond
+## 向移动端及更远的未来
 
-As you can see from [the ReactConf talk lineup](https://conf.reactjs.org/), React Native is not only Android & iOS.
+正如你可以从[ReactConf 的演讲列表](https://conf.reactjs.org/)中看到的，React Native 不仅仅是 Android 和 iOS。
 
-Earlier in 2021, we shared our [Many Platform Vision](https://reactnative.dev/blog/2021/08/26/many-platform-vision), and we had a successful time rolling out React Native on both Desktop and VR.
+2021 年早些时候，我们分享了[多平台愿景](https://reactnative.dev/blog/2021/08/26/many-platform-vision)，并在 Desktop 和 VR 端成功推动了 React Native。
 
-We’re looking forward to **converging patterns** that are platform-specific into the React Native experience.
+我们期待将平台特有的模式逐步**融合**到 React Native 体验中。
 
-Finally, we want to thank again the community for the enormous support in H2 2021. It’s always amazing to see how contributors come together and support each other on GitHub, fixing bugs, sharing their and helping us deliver React Native to millions of users.
+最后，我们再次感谢社区在 2021 年下半年给予的巨大支持。看到贡献者们齐心协力，在 GitHub 上修复 bug、分享经验，帮助我们为数百万用户交付 React Native，总是令人感到惊喜。
 
-Stay tuned and looking forward to an **even more amazing 2022** 🎉!
+敬请关注，期待**更加精彩的 2022 年**🎉！

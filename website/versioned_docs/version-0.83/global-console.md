@@ -1,17 +1,17 @@
 ---
 id: global-console
-title: console
+title: 控制台
 ---
 
 :::warning
-🚧 This page is work in progress, so please refer to the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/console) for more information.
+🚧 本页面正在建设中，如需更多信息，请参阅 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/console)。
 :::
 
-The global `console` object, as defined in Web specifications.
+全局的 `console` 对象，按 Web 规范定义。
 
 ---
 
-## Methods
+## 方法
 
 ### `timeStamp()`
 
@@ -26,18 +26,18 @@ console.timeStamp(
 ): void;
 ```
 
-The `console.timeStamp` API allows you to add custom timing entries in the Performance panel timeline.
+`console.timeStamp` API 允许你在性能面板的时间线中添加自定义的时间条目。
 
-**Parameters:**
+**参数:**
 
-| Name       | Type               | Required | Description                                                                                                                                                                                                                                                                                                   |
-| ---------- | ------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| label      | `string`           | Yes      | The label for the timing entry.                                                                                                                                                                                                                                                                               |
-| start      | `string \| number` | No       | <ul><li>If string, the name of a previously recorded timestamp with `console.timeStamp`.</li><li>If number, the [DOMHighResTimeStamp](https://developer.mozilla.org/en-US/docs/Web/API/DOMHighResTimeStamp). For example, from `performance.now()`.</li><li>If undefined, the current time is used.</li></ul> |
-| end        | `string \| number` | No       | <ul><li>If string, the name of a previously recorded timestamp with `console.timeStamp`.</li><li>If number, the [DOMHighResTimeStamp](https://developer.mozilla.org/en-US/docs/Web/API/DOMHighResTimeStamp). For example, from `performance.now()`.</li><li>If undefined, the current time is used.</li></ul> |
-| trackName  | `string`           | No       | The name of the custom track.                                                                                                                                                                                                                                                                                 |
-| trackGroup | `string`           | No       | The name of the track group.                                                                                                                                                                                                                                                                                  |
-| color      | `DevToolsColor`    | No       | The color of the entry.                                                                                                                                                                                                                                                                                       |
+| 名称       | 类型               | 是否必需 | 描述                                                                                                                                                                                                                                                                                                    |
+| ---------- | ------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| label      | `string`           | 是       | 时间条目的标签。                                                                                                                                                                                                                                                                                         |
+| start      | `string \| number` | 否       | <ul><li>如果是字符串，则是先前用 `console.timeStamp` 记录的时间戳名称。</li><li>如果是数字，则是 [DOMHighResTimeStamp](https://developer.mozilla.org/en-US/docs/Web/API/DOMHighResTimeStamp)，例如，来自 `performance.now()`。</li><li>如果未定义，则使用当前时间。</li></ul>  |
+| end        | `string \| number` | 否       | <ul><li>如果是字符串，则是先前用 `console.timeStamp` 记录的时间戳名称。</li><li>如果是数字，则是 [DOMHighResTimeStamp](https://developer.mozilla.org/en-US/docs/Web/API/DOMHighResTimeStamp)，例如，来自 `performance.now()`。</li><li>如果未定义，则使用当前时间。</li></ul>  |
+| trackName  | `string`           | 否       | 自定义轨迹的名称。                                                                                                                                                                                                                                                                                       |
+| trackGroup | `string`           | 否       | 轨迹组的名称。                                                                                                                                                                                                                                                                                           |
+| color      | `DevToolsColor`    | 否       | 条目的颜色。                                                                                                                                                                                                                                                                                             |
 
 ```tsx
 type DevToolsColor =

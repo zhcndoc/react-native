@@ -1,146 +1,146 @@
-<h2>Installing dependencies</h2>
+<h2>安装依赖项</h2>
 
-You will need Node, the React Native command line interface, a JDK, and Android Studio.
+您将需要 Node、React Native 命令行接口、JDK 和 Android Studio。
 
-While you can use any editor of your choice to develop your app, you will need to install Android Studio in order to set up the necessary tooling to build your React Native app for Android.
+虽然您可以使用任何自己喜欢的编辑器来开发应用，但为了搭建构建 React Native Android 应用所需的工具，您需要安装 Android Studio。
 
-<h3 id="jdk">Node, JDK</h3>
+<h3 id="jdk">Node、JDK</h3>
 
-We recommend installing Node via [Chocolatey](https://chocolatey.org/install), a popular package manager for Windows.
+我们推荐通过 Windows 上流行的包管理器 [Chocolatey](https://chocolatey.org/install) 来安装 Node。
 
-It is recommended to use an LTS version of Node. If you want to be able to switch between different versions, you might want to install Node via [nvm-windows](https://github.com/coreybutler/nvm-windows), a Node version manager for Windows.
+推荐使用 Node 的 LTS 版本。如果您想在不同版本间切换，可以通过 [nvm-windows](https://github.com/coreybutler/nvm-windows) —— Windows 版本的 Node 版本管理器 来安装 Node。
 
-React Native also requires [Java SE Development Kit (JDK)](https://openjdk.java.net/projects/jdk/17/), which can be installed using Chocolatey as well.
+React Native 还需要 [Java SE 开发工具包 (JDK)](https://openjdk.java.net/projects/jdk/17/)，也可以用 Chocolatey 来安装。
 
-Open an Administrator Command Prompt (right click Command Prompt and select "Run as Administrator"), then run the following command:
+打开一个管理员命令提示符（右键点击命令提示符，选择“以管理员身份运行”），然后运行以下命令：
 
 ```powershell
 choco install -y nodejs-lts microsoft-openjdk17
 ```
 
-If you have already installed Node on your system, make sure it is Node 20.19.4 or newer. If you already have a JDK on your system, we recommend JDK17. You may encounter problems using higher JDK versions.
+如果您系统中已安装 Node，请确保是 20.19.4 版本或更高版本。如果系统已有 JDK，推荐使用 JDK17。使用更高版本的 JDK 可能会遇到问题。
 
 :::note
-You can find additional installation options on [Node's Downloads page](https://nodejs.org/en/download/).
+您可以在 [Node 的下载页面](https://nodejs.org/en/download/) 找到更多安装选项。
 :::
 
 :::info
-If you're using the latest version of Java Development Kit, you'll need to change the Gradle version of your project so it can recognize the JDK. You can do that by going to `{project root folder}\android\gradle\wrapper\gradle-wrapper.properties` and changing the `distributionUrl` value to upgrade the Gradle version. You can check out [here the latest releases of Gradle](https://gradle.org/releases/).
+如果您使用的是最新版本的 Java 开发工具包，您需要修改项目的 Gradle 版本以便其识别该 JDK。操作方法是在 `{project root folder}\android\gradle\wrapper\gradle-wrapper.properties` 文件中更改 `distributionUrl` 的值以升级 Gradle 版本。您可以在[此处查看 Gradle 最新版本](https://gradle.org/releases/)。
 :::
 
-<h3>Android development environment</h3>
+<h3>Android 开发环境</h3>
 
-Setting up your development environment can be somewhat tedious if you're new to Android development. If you're already familiar with Android development, there are a few things you may need to configure. In either case, please make sure to carefully follow the next few steps.
+如果您是 Android 开发新手，搭建开发环境可能稍显繁琐。如果您已经熟悉 Android 开发，则可能只需配置一些内容。无论哪种情况，请务必认真按照接下来的步骤操作。
 
-<h4 id="android-studio">1. Install Android Studio</h4>
+<h4 id="android-studio">1. 安装 Android Studio</h4>
 
-[Download and install Android Studio](https://developer.android.com/studio). While on Android Studio installation wizard, make sure the boxes next to all of the following items are checked:
+[下载并安装 Android Studio](https://developer.android.com/studio)。在 Android Studio 安装向导中，请确保勾选以下所有项目：
 
 - `Android SDK`
 - `Android SDK Platform`
-- `Android Virtual Device`
-- If you are not already using Hyper-V: `Performance (Intel ® HAXM)` ([See here for AMD or Hyper-V](https://android-developers.googleblog.com/2018/07/android-emulator-amd-processor-hyper-v.html))
+- `Android 虚拟设备（Android Virtual Device）`
+- 如果您尚未使用 Hyper-V：`性能 (Intel ® HAXM)`（[AMD 或 Hyper-V 请见这里](https://android-developers.googleblog.com/2018/07/android-emulator-amd-processor-hyper-v.html)）
 
-Then, click "Next" to install all of these components.
+然后点击“下一步”安装所有这些组件。
 
 :::note
-If the checkboxes are grayed out, you will have a chance to install these components later on.
+如果复选框呈灰色，您可以稍后安装这些组件。
 :::
 
-Once setup has finalized and you're presented with the Welcome screen, proceed to the next step.
+安装完成并进入欢迎界面后，继续下一步。
 
-<h4 id="android-sdk">2. Install the Android SDK</h4>
+<h4 id="android-sdk">2. 安装 Android SDK</h4>
 
-Android Studio installs the latest Android SDK by default. Building a React Native app with native code, however, requires the `Android 15 (VanillaIceCream)` SDK in particular. Additional Android SDKs can be installed through the SDK Manager in Android Studio.
+Android Studio 默认安装最新的 Android SDK。但构建含有原生代码的 React Native 应用需要特定的 `Android 15 (VanillaIceCream)` SDK。您可以通过 Android Studio 的 SDK 管理器安装额外的 Android SDK。
 
-To do that, open Android Studio, click on "More Actions" button and select "SDK Manager".
+具体操作是，打开 Android Studio，点击“更多操作”按钮，选择“SDK 管理器”。
 
-![Android Studio Welcome](/docs/assets/GettingStartedAndroidStudioWelcomeWindows.png)
+![Android Studio 欢迎界面](/docs/assets/GettingStartedAndroidStudioWelcomeWindows.png)
 
 :::tip
-The SDK Manager can also be found within the Android Studio "Settings" dialog, under **Languages & Frameworks** → **Android SDK**.
+SDK 管理器也可在 Android Studio 的“设置”对话框中找到，路径为 **语言与框架** → **Android SDK**。
 :::
 
-Select the "SDK Platforms" tab from within the SDK Manager, then check the box next to "Show Package Details" in the bottom right corner. Look for and expand the `Android 15 (VanillaIceCream)` entry, then make sure the following items are checked:
+在 SDK 管理器中选择“SDK 平台”标签页，然后勾选右下角的“显示包详情”。找到并展开 `Android 15 (VanillaIceCream)` 项，确保以下项目被选中：
 
 - `Android SDK Platform 35`
-- `Intel x86 Atom_64 System Image` or `Google APIs Intel x86 Atom System Image`
+- `Intel x86 Atom_64 系统映像` 或 `Google APIs Intel x86 Atom 系统映像`
 
-Next, select the "SDK Tools" tab and check the box next to "Show Package Details" here as well. Look for and expand the `Android SDK Build-Tools` entry, then make sure that `36.0.0` and `Android SDK Command-line Tools (latest)` are selected.
+接着，选择“SDK 工具”标签页，也勾选“显示包详情”。找到并展开 `Android SDK Build-Tools` 项，确保选中 `36.0.0` 和 `Android SDK 命令行工具 (最新)`。
 
-Finally, click "Apply" to download and install the Android SDK and related build tools.
+最后点击“应用”来下载并安装 Android SDK 及相关构建工具。
 
-<h4>3. Configure the ANDROID_HOME environment variable</h4>
+<h4>3. 配置 ANDROID_HOME 环境变量</h4>
 
-The React Native tools require some environment variables to be set up in order to build apps with native code.
+React Native 工具需要设置一些环境变量，才能构建含原生代码的应用。
 
-1. Open the **Windows Control Panel.**
-2. Click on **User Accounts,** then click **User Accounts** again
-3. Click on **Change my environment variables**
-4. Click on **New...** to create a new `ANDROID_HOME` user variable that points to the path to your Android SDK:
+1. 打开 **Windows 控制面板**。
+2. 点击 **用户账户**，然后再次点击 **用户账户**。
+3. 点击 **更改我的环境变量**。
+4. 点击 **新建...**，创建一个新的用户变量 `ANDROID_HOME`，指向您的 Android SDK 路径：
 
-![ANDROID_HOME Environment Variable](/docs/assets/GettingStartedAndroidEnvironmentVariableANDROID_HOME.png)
+![ANDROID_HOME 环境变量示例](/docs/assets/GettingStartedAndroidEnvironmentVariableANDROID_HOME.png)
 
-The SDK is installed, by default, at the following location:
+SDK 默认安装路径为：
 
 ```powershell
 %LOCALAPPDATA%\Android\Sdk
 ```
 
-You can find the actual location of the SDK in the Android Studio "Settings" dialog, under **Languages & Frameworks** → **Android SDK**.
+您也可以在 Android Studio 的“设置”对话框中找到 SDK 的实际路径，路径为 **语言与框架** → **Android SDK**。
 
-Open a new Command Prompt window to ensure the new environment variable is loaded before proceeding to the next step.
+打开一个新的命令提示符窗口，确保新环境变量已加载，然后继续下一步。
 
-1. Open powershell
-2. Copy and paste **Get-ChildItem -Path Env:\\** into powershell
-3. Verify `ANDROID_HOME` has been added
+1. 打开 powershell
+2. 复制并粘贴命令 **Get-ChildItem -Path Env:\\** 到 powershell
+3. 确认 `ANDROID_HOME` 已添加
 
-<h4>4. Add platform-tools to Path</h4>
+<h4>4. 将 platform-tools 添加到 Path</h4>
 
-1. Open the **Windows Control Panel.**
-2. Click on **User Accounts,** then click **User Accounts** again
-3. Click on **Change my environment variables**
-4. Select the **Path** variable.
-5. Click **Edit.**
-6. Click **New** and add the path to platform-tools to the list.
+1. 打开 **Windows 控制面板**。
+2. 点击 **用户账户**，然后再次点击 **用户账户**。
+3. 点击 **更改我的环境变量**。
+4. 选择 **Path** 变量。
+5. 点击 **编辑**。
+6. 点击 **新建**，将 platform-tools 的路径添加到列表中。
 
-The default location for this folder is:
+该文件夹的默认路径为：
 
 ```powershell
 %LOCALAPPDATA%\Android\Sdk\platform-tools
 ```
 
-<h2>Preparing the Android device</h2>
+<h2>准备 Android 设备</h2>
 
-You will need an Android device to run your React Native Android app. This can be either a physical Android device, or more commonly, you can use an Android Virtual Device which allows you to emulate an Android device on your computer.
+您需要一个 Android 设备来运行 React Native Android 应用。这既可以是真实的 Android 设备，也可以是更常用的 Android 虚拟设备（AVD），后者允许您在电脑上模拟 Android 设备。
 
-Either way, you will need to prepare the device to run Android apps for development.
+无论哪种方式，您都需要准备设备以开发运行 Android 应用。
 
-<h3>Using a physical device</h3>
+<h3>使用真实设备</h3>
 
-If you have a physical Android device, you can use it for development in place of an AVD by plugging it in to your computer using a USB cable and following the instructions [here](running-on-device.md).
+如果您有真实的 Android 设备，可以通过 USB 线连接电脑，将其用于开发，作为 AVD 的替代方案，详细操作请参见[这里](running-on-device.md)。
 
-<h3>Using a virtual device</h3>
+<h3>使用虚拟设备</h3>
 
-If you use Android Studio to open `./AwesomeProject/android`, you can see the list of available Android Virtual Devices (AVDs) by opening the "AVD Manager" from within Android Studio. Look for an icon that looks like this:
+如果您用 Android Studio 打开 `./AwesomeProject/android`，可以在 Android Studio 内打开“AVD 管理器”查看可用的 Android 虚拟设备列表。寻找类似下面的图标：
 
-<img src="/docs/assets/GettingStartedAndroidStudioAVD.svg" alt="Android Studio AVD Manager" width="100"/>
+<img src="/docs/assets/GettingStartedAndroidStudioAVD.svg" alt="Android Studio AVD 管理器" width="100"/>
 
-If you have recently installed Android Studio, you will likely need to [create a new AVD](https://developer.android.com/studio/run/managing-avds.html). Select "Create Virtual Device...", then pick any Phone from the list and click "Next", then select the **VanillaIceCream** API Level 35 image.
+如果刚安装 Android Studio，您很可能需要[新建一个 AVD](https://developer.android.com/studio/run/managing-avds.html)。选择“创建虚拟设备...”，然后从列表中挑选任意一款手机，点击“下一步”，然后选择 **VanillaIceCream** API Level 35 镜像。
 
 :::note
-If you don't have HAXM installed, click on "Install HAXM" or follow [these instructions](https://github.com/intel/haxm/wiki/Installation-Instructions-on-Windows) to set it up, then go back to the AVD Manager.
+如果您未安装 HAXM，点击“安装 HAXM”或按[这些指令](https://github.com/intel/haxm/wiki/Installation-Instructions-on-Windows)执行安装，然后回到 AVD 管理器。
 :::
 
-Click "Next" then "Finish" to create your AVD. At this point you should be able to click on the green triangle button next to your AVD to launch it.
+点击“下一步”，然后点击“完成”来创建您的 AVD。此时，您可以点击虚拟设备旁的绿色三角按钮启动它。
 
-<h3>That's it!</h3>
+<h3>就这些！</h3>
 
-Congratulations! You successfully set up your development environment.
+恭喜！您已成功搭建开发环境。
 
 <center><img src="/docs/assets/GettingStartedCongratulations.png" width="150"></img></center>
 
-<h2>Now what?</h2>
+<h2>接下来做什么？</h2>
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](integration-with-existing-apps.md).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](getting-started).
+- 如果您想将这段新的 React Native 代码添加到已有应用中，请查看 [集成指南](integration-with-existing-apps.md)。
+- 如果您想进一步了解 React Native，请参阅 [React Native 入门](getting-started)。

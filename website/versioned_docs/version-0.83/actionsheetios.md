@@ -3,9 +3,9 @@ id: actionsheetios
 title: ActionSheetIOS
 ---
 
-Displays native to iOS [Action Sheet](https://developer.apple.com/design/human-interface-guidelines/action-sheets) component.
+显示 iOS 原生的 [操作表](https://developer.apple.com/design/human-interface-guidelines/action-sheets) 组件。
 
-## Example
+## 示例
 
 ```SnackPlayer name=ActionSheetIOS%20Example&supportedPlatforms=ios
 import React, {useState} from 'react';
@@ -18,14 +18,14 @@ const App = () => {
   const onPress = () =>
     ActionSheetIOS.showActionSheetWithOptions(
       {
-        options: ['Cancel', 'Generate number', 'Reset'],
+        options: ['取消', '生成数字', '重置'],
         destructiveButtonIndex: 2,
         cancelButtonIndex: 0,
         userInterfaceStyle: 'dark',
       },
       buttonIndex => {
         if (buttonIndex === 0) {
-          // cancel action
+          // 取消操作
         } else if (buttonIndex === 1) {
           setResult(String(Math.floor(Math.random() * 100) + 1));
         } else if (buttonIndex === 2) {
@@ -38,7 +38,7 @@ const App = () => {
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <Text style={styles.result}>{result}</Text>
-        <Button onPress={onPress} title="Show Action Sheet" />
+        <Button onPress={onPress} title="显示操作表" />
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -58,9 +58,9 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `showActionSheetWithOptions()`
 
@@ -71,33 +71,33 @@ static showActionSheetWithOptions: (
 );
 ```
 
-Display an iOS action sheet. The `options` object must contain one or more of:
+显示一个 iOS 操作表。`options` 对象必须包含以下一项或多项：
 
-- `options` (array of strings) - a list of button titles (required)
-- `cancelButtonIndex` (int) - index of cancel button in `options`
-- `cancelButtonTintColor` (string) - the [color](colors) used for the change the text color of the cancel button
-- `destructiveButtonIndex` (int or array of ints) - indices of destructive buttons in `options`
-- `title` (string) - a title to show above the action sheet
-- `message` (string) - a message to show below the title
-- `anchor` (number) - the node to which the action sheet should be anchored (used for iPad)
-- `tintColor` (string) - the [color](colors) used for non-destructive button titles
-- `disabledButtonIndices` (array of numbers) - a list of button indices which should be disabled
-- `userInterfaceStyle` (string) - the interface style used for the action sheet, can be set to `light` or `dark`, otherwise the default system style will be used
+- `options`（字符串数组）- 按钮标题列表（必填）
+- `cancelButtonIndex`（整数）- `options` 中取消按钮的索引
+- `cancelButtonTintColor`（字符串）- 用于更改取消按钮文本颜色的[颜色](colors)
+- `destructiveButtonIndex`（整数或整数数组）- `options` 中破坏性按钮的索引
+- `title`（字符串）- 显示在操作表上方的标题
+- `message`（字符串）- 显示在标题下方的消息
+- `anchor`（数字）- 操作表应锚定的节点（用于 iPad）
+- `tintColor`（字符串）- 用于非破坏性按钮标题的[颜色](colors)
+- `disabledButtonIndices`（数字数组）- 需禁用的按钮索引列表
+- `userInterfaceStyle`（字符串）- 操作表的界面样式，可设置为 `light` 或 `dark`，否则使用默认系统样式
 
-The 'callback' function takes one parameter, the zero-based index of the selected item.
+`callback` 函数接收一个参数，即所选项的零基索引。
 
-Minimal example:
+最简示例：
 
 ```tsx
 ActionSheetIOS.showActionSheetWithOptions(
   {
-    options: ['Cancel', 'Remove'],
+    options: ['取消', '删除'],
     destructiveButtonIndex: 1,
     cancelButtonIndex: 0,
   },
   buttonIndex => {
     if (buttonIndex === 1) {
-      /* destructive action */
+      /* 破坏性操作 */
     }
   },
 );
@@ -111,7 +111,7 @@ ActionSheetIOS.showActionSheetWithOptions(
 static dismissActionSheet();
 ```
 
-Dismisses the most upper iOS action sheet presented, if no action sheet is present a warning is displayed.
+关闭最上层展示的 iOS 操作表，如果没有操作表展示，会显示警告。
 
 ---
 
@@ -125,20 +125,20 @@ static showShareActionSheetWithOptions: (
 );
 ```
 
-Display the iOS share sheet. The `options` object should contain one or both of `message` and `url` and can additionally have a `subject` or `excludedActivityTypes`:
+显示 iOS 分享表。`options` 对象应包含 `message` 和/或 `url`，此外可含有 `subject` 或 `excludedActivityTypes`：
 
-- `url` (string) - a URL to share
-- `message` (string) - a message to share
-- `subject` (string) - a subject for the message
-- `excludedActivityTypes` (array) - the activities to exclude from the ActionSheet
+- `url`（字符串）- 待分享的 URL
+- `message`（字符串）- 待分享的信息
+- `subject`（字符串）- 信息的主题
+- `excludedActivityTypes`（数组）- 需从操作表中排除的活动类型
 
 :::note
-If `url` points to a local file, or is a base64-encoded uri, the file it points to will be loaded and shared directly. In this way, you can share images, videos, PDF files, etc. If `url` points to a remote file or address it must conform to URL format as described in [RFC 2396](https://www.ietf.org/rfc/rfc2396.txt). For example, a web URL without a proper protocol (HTTP/HTTPS) will not be shared.
+如果 `url` 指向本地文件，或是 base64 编码 URI，则直接加载并分享该文件。这样，可以分享图片、视频、PDF 等文件。如果 `url` 指向远程文件或地址，则必须符合 [RFC 2396](https://www.ietf.org/rfc/rfc2396.txt) 中描述的 URL 格式。例如，没有合法协议（HTTP/HTTPS）的网络 URL 将无法分享。
 :::
 
-The 'failureCallback' function takes one parameter, an error object. The only property defined on this object is an optional `stack` property of type `string`.
+`failureCallback` 函数接收一个参数，为错误对象。该对象上定义的唯一属性是可选的字符串类型 `stack`。
 
-The 'successCallback' function takes two parameters:
+`successCallback` 函数接收两个参数：
 
-- a boolean value signifying success or failure
-- a string that, in the case of success, indicates the method of sharing
+- 一个布尔值，表示成功或失败
+- 一个字符串，成功时表示分享方式

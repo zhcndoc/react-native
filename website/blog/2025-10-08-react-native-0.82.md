@@ -1,92 +1,93 @@
 ---
-title: 'React Native 0.82 - A New Era'
+title: 'React Native 0.82 - 新纪元'
 authors: [vzaidman, cortinico, gabrieldonadel, alanjhughes]
-tags: [engineering]
+tags: [工程]
 date: 2025-10-08
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# **React Native 0.82 - A New Era**
+# **React Native 0.82 - 新纪元**
 
-Today we're excited to release React Native 0.82: the first React Native that runs entirely on the New Architecture.
+今天我们很高兴发布 React Native 0.82：第一版完全运行在新架构（New Architecture）上的 React Native。
 
-This is a milestone release for React Native and we believe it's the start of a new era. In future versions we will be removing the remaining code from the Legacy Architecture to reduce install size and streamline the codebase.
+这是 React Native 的一个里程碑版本，我们相信这是一个新纪元的开始。在未来的版本中，我们将移除遗留架构（Legacy Architecture）中的剩余代码，以减少安装包大小并简化代码库。
 
-In addition, 0.82 also ships with an experimental opt-in to a newer version of Hermes called Hermes V1. We’re also enabling several React features by updating the React version to 19.1.1, and shipping support for DOM Node APIs.
+此外，0.82 还推出了实验性的 Hermes 新版本 Hermes V1 的可选支持。我们也通过升级 React 版本到 19.1.1 启用多个 React 新功能，并加入了对 DOM Node API 的支持。
 
-### Highlights
+### 重点内容
 
-- [New Architecture Only](/blog/2025/10/08/react-native-0.82#new-architecture-only)
-- [Experimental Hermes V1](/blog/2025/10/08/react-native-0.82#experimental-hermes-v1)
+- [仅支持新架构](/blog/2025/10/08/react-native-0.82#new-architecture-only)
+- [实验性 Hermes V1](/blog/2025/10/08/react-native-0.82#experimental-hermes-v1)
 - [React 19.1.1](/blog/2025/10/08/react-native-0.82#react-1911)
-- [DOM Node APIs](/blog/2025/10/08/react-native-0.82#dom-node-apis)
+- [DOM Node API](/blog/2025/10/08/react-native-0.82#dom-node-apis)
 
 <!--truncate-->
 
-## New Architecture Only
+## 仅支持新架构
 
-In React Native 0.76 we announced that [The New Architecture](/blog/2024/10/23/the-new-architecture-is-here) became the default architecture of React Native.
+在 React Native 0.76 版本中，我们宣布了 [新架构](/blog/2024/10/23/the-new-architecture-is-here) 已成为 React Native 的默认架构。
 
-Since then, the New Architecture has been tested and refined and we're confident in making it the **only** architecture for this and future versions of React Native.
+从那时起，新架构经历了测试和完善，我们有信心将它作为当前及未来 React Native 版本的**唯一**架构。
 
-This means that if you try to set `newArchEnabled=false` on Android, or if you try to install CocoaPods with `RCT_NEW_ARCH_ENABLED=0` on iOS, these will be ignored and your app will still run using the New Architecture.
+这意味着，如果你在 Android 上尝试设置 `newArchEnabled=false`，或者在 iOS 上使用 `RCT_NEW_ARCH_ENABLED=0` 安装 CocoaPods，这些设置将被忽略，应用仍然会运行在新架构下。
 
-### How to migrate
+### 如何迁移
 
-If you haven’t migrated your project to the New Architecture, we recommend first migrating your project to React Native 0.81 or Expo SDK 54. These are the last versions that allow you to use the Legacy Architecture. They contain warnings and performance improvements specifically to help migrating to the New Architecture.
-<br/> Then enable the New Architecture in 0.81 and verify that your application is working fine.
-<br/> Once you're using the New Architecture in 0.81, you can update safely to React Native 0.82 which prevents enabling the Legacy Architecture.
+如果你还没有迁移项目到新架构，我们建议先迁移到 React Native 0.81 或 Expo SDK 54。这是最后支持使用遗留架构的版本。它们包含了专门帮助迁移到新架构的警告和性能改进。
+<br/> 然后在 0.81 版本启用新架构，确认你的应用正常运行。
+<br/> 一旦在 0.81 中使用了新架构，你就可以安全更新到 React Native 0.82，该版本将禁止启用遗留架构。
 
-If an incompatible 3rd party dependency is blocking you from migrating to the New Architecture, we recommend you reach out to the library maintainers directly.
+如果有不兼容的第三方依赖阻碍了你的迁移，我们建议你直接联系库的维护者。
 
-If a bug in React Native core is blocking you from migrating, we recommend you reach out to us [through our issue tracker](https://github.com/facebook/react-native/issues/new/choose).
+如果是 React Native 核心的 bug 阻碍了你迁移，欢迎通过我们的 [问题追踪器](https://github.com/facebook/react-native/issues/new/choose) 联络我们。
 
-### Interop Layers & 3P library compatibility
+### 互操作层和第三方库兼容性
 
-We will keep the interop layers in the codebase for the foreseeable future. All the classes and functions that are required by the interop layers won’t be removed anytime soon. We will share further updates in the future regarding the removal of Interop Layers.
+我们将在未来可预见的时期内保留互操作层代码。所有互操作层必需的类和函数暂时不会被删除。后续我们会分享相关移除互操作层的更新。
 
-We’ve also verified that the 3P libraries that offer backward compatibility with both architectures will keep on working with 0.82 where New Architecture is the only architecture.
+我们也验证了提供对两个架构向后兼容的第三方库在 0.82 版本（仅新架构）下依旧可用。
 
-### Removal of Legacy Architecture classes
+### 遗留架构类的移除
 
-To ensure backward compatibility and reduce breaking changes, we are not removing any APIs of the Legacy Architecture from the core of React Native in this version. Removing the Legacy Architecture will allow us to save significant size on the overall bundle size, therefore the removal is scheduled to start from the next version of React Native.
+为了保持向后兼容并减少破坏性变动，此版本不会从 React Native 核心库中移除遗留架构的任何 API。彻底移除遗留架构将显著缩减整体包大小，因此计划从下个版本开始进行移除。
 
-You can find more information in [RFC0929: Removal of the Legacy Architecture of React Native](https://github.com/react-native-community/discussions-and-proposals/pull/929).
+更多信息可参阅 [RFC0929: React Native 遗留架构移除](https://github.com/react-native-community/discussions-and-proposals/pull/929)。
 
-## Experimental Hermes V1
+## 实验性 Hermes V1
 
-React Native 0.82 adds support for opting into Hermes V1.
+React Native 0.82 新增支持可选启用 Hermes V1。
 
-Hermes V1 is the next evolution of Hermes. We've been experimenting with it internally in our apps, and it is now time for the community to try it as well. It comes with improvements in the compiler and in the VM that boost Hermes performance.
+Hermes V1 是 Hermes 的下一代版本。我们已经在我们的应用中进行了内部试验，现在是社区尝试它的时机。它在编译器和虚拟机层面都做了改进，可以提升 Hermes 性能。
 
-From initial tests and benchmarks, Hermes V1 outperforms current Hermes in various scenarios. We have seen improvements in bundle loading and TTI. The improvements strongly depend on the details of your apps.
+初步测试和基准显示，Hermes V1 在多种场景下性能优于当前 Hermes。我们观察到包加载时间和首次可交互时间（TTI）的提升。性能改进高度依赖于具体应用情况。
 
-On the [Expensify app](https://github.com/Expensify/App), a real world and complex application, we have seen the following improvements:
-| Metric | Android (low end device) | iOS |
+在一个现实且复杂的应用 [Expensify app](https://github.com/Expensify/App) 中，我们测试得出以下提升：
+
+| 指标 | Android（低端设备） | iOS |
 | --- | --- | --- |
-| Bundle Load Time | 3.2% faster | 9% faster |
-| Total TTI | 7.6% faster | 2.5% faster |
-| Content TTI | 7.2% faster | 7.5% faster |
+| 包加载时间 | 快 3.2% | 快 9% |
+| 总体 TTI | 快 7.6% | 快 2.5% |
+| 内容 TTI | 快 7.2% | 快 7.5% |
 
-For Total TTI, we measured the time it takes from bundle loading to when the first screen in the app is rendered and it is interactive.
+总体 TTI 指从包加载完成到应用中第一个屏幕渲染并可交互的时间。
 
-For Content TTI, we measured the time it takes for a component to be interactive, starting from the first rendering of the component itself.
+内容 TTI 指从组件首次渲染到该组件可交互的时间。
 
-Hermes V1 does not yet contain JS-to-native compilation (previously known as “Static Hermes”) or the JIT compilation that was [presented during React Native EU 2023](https://www.youtube.com/watch?v=q-xKYA0EO-c). We are still testing these features, and will share more as we make progress.
+Hermes V1 尚未包含 JS 到原生的编译（之前称为“静态 Hermes”）或 React Native EU 2023 展示的 JIT 编译功能。我们仍在测试这些功能，进展会及时分享。
 
-### How to enable Hermes V1
+### 如何启用 Hermes V1
 
 :::info
 
-While Hermes V1 is in the experimental phase, you’ll need to build React Native from source to try it out. Once Hermes V1 ships as default in a future React Native version, this restriction will be lifted.
+由于 Hermes V1 仍处于实验阶段，需要从源码构建 React Native 才能尝试。等 Hermes V1 在后续 React Native 版本默认发布后，这限制将被取消。
 
 :::
 
-To try Hermes V1 in your own project, use the following steps:
+尝试在项目中使用 Hermes V1，请按照如下步骤：
 
-1. Force your package manager to resolve the experimental version of Hermes V1 compiler package by modifying the corresponding section of your `package.json` file (note that the current versioning convention is only for the experimental phase of Hermes V1):
+1. 通过修改 `package.json` 中对应部分，强制你的包管理器解析 Hermes V1 编译器的实验版本（当前版本号格式仅适用于 Hermes V1 实验阶段）：
 
 <Tabs>
   <TabItem label="yarn" value="yarn" default>
@@ -105,13 +106,13 @@ To try Hermes V1 in your own project, use the following steps:
   </TabItem>
 </Tabs>
 
-2. Enable Hermes V1 for Android by adding `hermesV1Enabled=true` inside the `android/gradle.properties`:
+2. 在 Android 上启用 Hermes V1，在 `android/gradle.properties` 文件中添加：
 
 ```sh title="android/gradle.properties"
 hermesV1Enabled=true
 ```
 
-Also, configure React Native [to build from source](https://reactnative.dev/contributing/how-to-build-from-source#android) by editing `android/settings.gradle`:
+并配置 React Native [从源码构建](https://reactnative.dev/contributing/how-to-build-from-source#android)，编辑 `android/settings.gradle`：
 
 ```jsx title="android/settings.gradle"
   includeBuild('../node_modules/react-native') {
@@ -123,40 +124,40 @@ Also, configure React Native [to build from source](https://reactnative.dev/cont
   }
 ```
 
-3. Enable Hermes V1 for iOS by installing pods with `RCT_HERMES_V1_ENABLED=1` environment variable.
+3. 在 iOS 上启用 Hermes V1，执行安装 pods 命令时设置环境变量 `RCT_HERMES_V1_ENABLED=1`：
 
 ```sh
 RCT_HERMES_V1_ENABLED=1 bundle exec pod install
 ```
 
-Keep in mind that Hermes V1 is not compatible with the precompiled React Native builds, so make sure you don’t use the `RCT_USE_PREBUILT_RNCORE` flag when installing pods.
+注意 Hermes V1 不兼容预编译的 React Native 构建，因此安装 pods 时不要使用 `RCT_USE_PREBUILT_RNCORE` 标志。
 
-4. To confirm if your app is running Hermes V1, execute the following code within your app or DevTools console. This code will return the Hermes version, which should match the version specified in step 1 (`250829098.0.1`):
+4. 要确认你的应用是否运行的是 Hermes V1，可以在应用或者开发工具控制台执行以下代码以获取 Hermes 版本，应与步骤 1 中版本号相符（`250829098.0.1`）：
 
 ```jsx
-// expecting "250829098.0.1" in Hermes V1
+// 在 Hermes V1 中预期输出 "250829098.0.1"
 HermesInternal.getRuntimeProperties()['OSS Release Version'];
 ```
 
 ## React 19.1.1
 
-This release of React Native ships with the latest React stable: [React 19.1.1](https://github.com/facebook/react/releases/tag/v19.1.1).
+本次发布的 React Native 搭载了最新版 React 稳定版：[React 19.1.1](https://github.com/facebook/react/releases/tag/v19.1.1)。
 
-This release of React contains full support for owner stacks for React Native. Back in React Native 0.80, when we shipped support for 19.1.0, we [mentioned](/blog/2025/06/12/react-native-0.80#react-1910) that owner stacks were not fully supported if you were using the [`@babel/plugin-transform-function-name`](https://babeljs.io/docs/babel-plugin-transform-function-name) Babel plugin. This release lifts this restriction and enables owner stacks for all React Native users.
+该 React 版本对 React Native 提供完整的 owner 栈支持。在 React Native 0.80（React 19.1.0）中，我们提到过在使用 [`@babel/plugin-transform-function-name`](https://babeljs.io/docs/babel-plugin-transform-function-name) Babel 插件时，owner 栈未被完全支持。本次更新解除该限制，使所有 React Native 用户都能使用 owner 栈。
 
-| BEFORE                                                                                                            | AFTER                                                                                                         |
-| ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| <center>![Example error thrown without Owner Stacks](../static/blog/assets/0.82-owners-stack-before.png)</center> | <center>![Example error thrown with Owner Stacks](../static/blog/assets/0.82-owners-stack-after.png)</center> |
+| 之前                                                                                                               | 之后                                                                                                        |
+| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| <center>![没有 Owner Stack 的错误示例](../static/blog/assets/0.82-owners-stack-before.png)</center>                  | <center>![启用 Owner Stack 的错误示例](../static/blog/assets/0.82-owners-stack-after.png)</center>            |
 
-React 19.1.1 also improves the reliability of [`useDeferredValue`](https://react.dev/reference/react/useDeferredValue) and [`startTransition`](https://react.dev/reference/react/startTransition) in a Suspense boundary for React Native. These are essential React features, designed to boost app responsiveness. Previously both were wrongly showing the fallback component when used together with a Suspense boundary on React Native. With React 19.1.1, they now consistently perform as expected on React Native, aligning their behavior with Web.
+React 19.1.1 还改进了在 React Native Suspense 边界中 [`useDeferredValue`](https://react.dev/reference/react/useDeferredValue) 和 [`startTransition`](https://react.dev/reference/react/startTransition) 的稳定性。这些关键功能旨在提升应用响应速度。此前这两者在 React Native 中与 Suspense 联合使用时，会错误地显示回退组件。19.1.1 版本已使它们行为与 Web 一致，表现稳定可靠。
 
-## DOM Node APIs
+## DOM Node API
 
-Starting from React Native 0.82, native components will provide DOM-like nodes via refs.
+从 React Native 0.82 起，原生组件将通过 ref 提供类似 DOM 的节点。
 
 <!--alex ignore just retext-equality-->
 
-Before, native components provided React Native-specific objects with just a handful of methods like `measure` and `setNativeProps`. After this release, they will provide [nodes implementing a subset of the DOM API](https://reactnative.dev/docs/element-nodes) to traverse the UI tree, measure layout, and more as on Web. For example:
+以前，原生组件提供的是 React Native 特有的对象，仅包含少量方法如 `measure` 和 `setNativeProps`。本次发布后，这些组件将提供[实现了部分 DOM API](https://reactnative.dev/docs/element-nodes) 的节点，允许遍历 UI 树、测量布局等功能，类似于 Web。例如：
 
 ```jsx
 function MyComponent(props) {
@@ -165,7 +166,7 @@ function MyComponent(props) {
   useEffect(() => {
     const element = ref.current;
 
-    // New methods
+    // 新方法
     element.parentNode;
     element.parentElement;
     element.childNodes;
@@ -174,7 +175,7 @@ function MyComponent(props) {
     const doc = element.ownerDocument;
     const maybeElement = doc.getElementById('some-view');
 
-    // Legacy methods are still available
+    // 仍支持遗留方法
     element.measure((x, y, width, height, pageX, pageY) => {
       /* ... */
     });
@@ -184,44 +185,44 @@ function MyComponent(props) {
 }
 ```
 
-Additionally, this will expose access to leaf [text nodes](https://reactnative.dev/docs/text-nodes) (created by the `Text` component) and [document nodes](https://reactnative.dev/docs/document-nodes) representing React Native root nodes.
+此外，这次改动也暴露了原生叶子 [文本节点](https://reactnative.dev/docs/text-nodes)（由 `Text` 组件创建）和表示 React Native 根节点的 [文档节点](https://reactnative.dev/docs/document-nodes)。
 
-This is a backwards compatible change, as the new nodes will continue implementing the legacy methods (like `measure`).
+这是向后兼容的改动，因为新节点仍会实现遗留方法（如 `measure`）。
 
-For more information, please check our [documentation](https://reactnative.dev/docs/nodes).
+更多信息请查阅我们的[文档](https://reactnative.dev/docs/nodes)。
 
-## Other changes
+## 其他变动
 
-### Web Performance APIs (Canary)
+### Web 性能 API（Canary 版）
 
-React Native now implements a subset of the performance APIs available on Web:
+React Native 现在实现了部分 Web 性能 API：
 
-- [High Resolution Time](https://www.w3.org/TR/hr-time-3/): defines `performance.now()` and `performance.timeOrigin`.
-- [Performance Timeline](https://w3c.github.io/performance-timeline/): defines `PerformanceObserver` and methods to access performance entries in the performance object (`getEntries()`, `getEntriesByType()`, `getEntriesByName()`).
-- [User Timing](https://w3c.github.io/user-timing/): defines `performance.mark` and `performance.measure`.
-- [Event Timing API](https://w3c.github.io/event-timing/): defines `event` entry types reported to `PerformanceObserver`.
-- [Long Tasks API](https://w3c.github.io/longtasks/): defines `longtask` entry types reported to `PerformanceObserver`.
+- [高精度时间](https://www.w3.org/TR/hr-time-3/)：定义了 `performance.now()` 和 `performance.timeOrigin`。
+- [性能时间线](https://w3c.github.io/performance-timeline/)：定义了 `PerformanceObserver` 及性能对象中访问条目的方法（`getEntries()`, `getEntriesByType()`, `getEntriesByName()`）。
+- [用户定时](https://w3c.github.io/user-timing/)：定义了 `performance.mark` 和 `performance.measure`。
+- [事件定时 API](https://w3c.github.io/event-timing/)：定义了上报给 `PerformanceObserver` 的事件条目类型。
+- [长任务 API](https://w3c.github.io/longtasks/)：定义了上报给 `PerformanceObserver` 的长任务条目类型。
 
-They allow tracking different aspects of performance in your app at runtime (for telemetry) and they will be visible in the performance panel in React Native DevTools (available in a future version of React Native).
+它们允许你在运行时跟踪应用性能不同方面（用于遥测），并将在未来版本的 React Native DevTools 性能面板中可见。
 
-They are currently **available only in the [canary release level](https://reactnative.dev/docs/releases/release-levels)**, and will be released as stable in a future version of React Native.
+目前**仅在 [canary 发行级别](https://reactnative.dev/docs/releases/release-levels) 可用**，未来会在正式版中发布。
 
-### Optimized Debug Build Type for Android
+### 优化的 Android 调试构建类型
 
-Starting with React Native 0.82, you will be able to use the `debugOptimized` build type to speed up your development experience.
+从 React Native 0.82 开始，你可以使用 `debugOptimized` 构建类型来加快开发速度。
 
-Historically, Android creates two default build variants:
+以往，Android 默认创建两个构建变体：
 
-- `debug`, used by default when developing and that allows you to connect to the various debugger tools such as React Native DevTools, Metro, the Android JVM and C++ debugger
-- `release`, used when shipping your application to production. This is fully optimized, with obfuscation and optimization that will make debugging harder.
+- `debug`，开发时默认使用，支持连接 React Native DevTools、Metro、Android JVM 和 C++ 调试器。
+- `release`，生产环境发布用，完全优化且具混淆和性能优化，调试较困难。
 
-As most React Native developers won’t need to use the C++ debugger when developing, we introduced the `debugOptimized` build type.
+考虑到大多数 React Native 开发者开发时不需要使用 C++ 调试器，新增了 `debugOptimized` 类型。
 
-With `debugOptimized` your animations and re-rendering will be faster, because you’re running a React Native build with several C++ optimizations enabled. At the same time you will still be able to use React Native Dev Tools to debug your JavaScript code.
+使用 `debugOptimized` 后动画和重渲染更快，因为启用了多项 C++ 优化，同时你依然可以使用 React Native DevTools 调试 JavaScript。
 
-When using `debugOptimized`, you won’t be able to use the C++ native debuggers, but you will still be able to use it if you use the debug build type.
+使用 `debugOptimized` 不能使用 C++ 原生调试器，想要使用需回退到 `debug` 构建。
 
-To run the `debugOptimized` variant for your app you can invoke:
+运行 `debugOptimized` 变体命令示例如下：
 
 <Tabs>
   <TabItem label="Community CLI" value="Community CLI" default>
@@ -238,84 +239,84 @@ To run the `debugOptimized` variant for your app you can invoke:
 
 :::info
 
-The `debugOptimized` build type has also been backported to React Native 0.81 and Expo SDK 54.
+`debugOptimized` 构建类型也已回移植到 React Native 0.81 和 Expo SDK 54。
 
 :::
 
-You can see the `debugOptimized` in action in these samples where we’re rendering several animations on screens.
+以下示例展示了多动画界面下不同构建类型的性能表现。
 
-The build running `debug` is running at ~20FPS while the `debugOptimized` one is running at ~60FPS:
+`debug` 版本约为 20FPS，`debugOptimized` 版本约为 60FPS：
 | `debug` | `debugOptimized` |
 | ------- | ---------------- |
-| ![Example build running with `debug`](../static/blog/assets/0.82-debug.gif) | ![Example build running with `debugOptimized`](../static/blog/assets/0.82-debug-optimized.gif) |
+| ![debug 模式运行示例](../static/blog/assets/0.82-debug.gif) | ![debugOptimized 模式运行示例](../static/blog/assets/0.82-debug-optimized.gif) |
 
-## Breaking Changes
+## 破坏性变更
 
-### Uncaught promise rejections will now raise `console.error`
+### 未捕获的 promise 拒绝现在会触发 `console.error`
 
-Following the [improvement of reporting uncaught JavaScript errors](/blog/2025/08/12/react-native-0.81#improved-reporting-of-uncaught-javascript-errors) in the previous version, we will now be reporting uncaught promises through that mechanism as well:
+继上个版本[改进未捕获 JS 错误报告机制](/blog/2025/08/12/react-native-0.81#improved-reporting-of-uncaught-javascript-errors) 后，现将通过同样方式报告未捕获的 promise 拒绝：
 
-![Example of a promise rejection reported to console](../static/blog/assets/0.82-uncaught-promise-rejection-report.png)
+![promise 拒绝错误报告示例](../static/blog/assets/0.82-uncaught-promise-rejection-report.png)
 
-Due to a bug, these were completely swallowed and ignored previously, so please expect some pre-existing errors to surface after upgrading to React Native 0.81. For that reason, previously pre-existing errors might also surface in JavaScript errors reported to your backend, and create a surge in new reports.
+此前因 bug，这类错误会完全被吞掉忽略，因此升级到 0.81 后可能突然出现大量之前未报的数据。也会导致后台收到大量新 JavaScript 错误报告。
 
-### Other Breaking Changes
+### 其他破坏性变更
 
-#### General
+#### 通用
 
-- Move `ReactNativeFeatureFlags` to `src/private`
-  - In general you should not depend on `ReactNativeFeatureFlags` at all as that is a private API.
-- Type of `Appearance.setColorScheme()` has been updated to no longer accept a nullable value
-  - Use 'unspecified' instead of null/undefined in the edge case that the color scheme needs to be reset.
+- 将 `ReactNativeFeatureFlags` 移至 `src/private`
+  - 一般情况下你不应依赖 `ReactNativeFeatureFlags`，它是私有 API。
+- 更新了 `Appearance.setColorScheme()` 参数类型，不再接受 nullable 值
+  - 需使用 'unspecified' 来代替 null/undefined 用于重置颜色方案的边缘情况。
 
 #### iOS
 
-- Migrated `RCTDisplayLink` away from legacy api `RCTModuleData` as we plan to remove it in the future.
+- 将 `RCTDisplayLink` 迁移走遗留 API `RCTModuleData`，未来计划移除该 API。
 
 #### Android
 
-- Class `com.facebook.react.bridge.JSONArguments` is removed as was accidentally `public`
-- Deprecate `MessageQueueThreadPerfStats`
-  - We deprecated this API and replaced it with stub. You should not rely on stats from this API anymore as the provided stats were not reliable
-- Bump Gradle from 8.x to 9.0.0
-  - List of all the changes in the next major stable version of Gradle 9.0.0 is available [here](https://gradle.org/whats-new/gradle-9/) but we expect no impact at all to users
+- 移除类 `com.facebook.react.bridge.JSONArguments`，此前意外设为 `public`
+- 废弃 `MessageQueueThreadPerfStats`
+  - 已废弃此 API，并替换为空实现。你不应依赖该 API 获取的统计数据，因为之前数据不准确。
+- 将 Gradle 从 8.x 升级至 9.0.0
+  - Gradle 9.0.0 主要变更列表见 [这里](https://gradle.org/whats-new/gradle-9/)，我们预期对用户无影响。
 
 #### C++
 
-- Delete backward compatibility headers for `CallbackWrapper.h` / `LongLivedObject.h`
-  - The correct include for those headers is `#include <react/bridging/LongLivedObject.h>` and `#include <react/bridging/CallbackWrapper.h>`.
-  - You should not use the old includes under `#import <ReactCommon/….h>`
+- 删除 `CallbackWrapper.h` 和 `LongLivedObject.h` 的向后兼容头文件
+  - 应该改为使用 `#include <react/bridging/LongLivedObject.h>` 和 `#include <react/bridging/CallbackWrapper.h>`。
+  - 不应再使用旧的 `#import <ReactCommon/….h>` 引入方式。
 
-Read the full list of breaking changes in the [CHANGELOG for 0.82](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0820).
+完整破坏性变更列表见 [0.82 版本 CHANGELOG](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0820)。
 
-## Acknowledgements
+## 致谢
 
-React Native 0.82 contains over 868 commits from 93 contributors. Thanks for all your hard work!
+React Native 0.82 包含来自 93 位贡献者的超过 868 条提交。感谢大家的努力！
 
-We want to send a special thank you to those community members that shipped significant contributions in this release:
+特别感谢在此版本贡献突出的社区成员：
 
-- [Dawid Małecki](https://github.com/coado) and [Jakub Piasecki](https://github.com/j-piasecki) for the help in rolling out Hermes V1.
-- [Krystof Woldrich](https://github.com/krystofwoldrich) for the support with fixing the swallowing of uncaught promise rejections.
-- [Riccardo Cipolleschi](https://github.com/cipolleschi) for the support with writing the React 19.1.1 and Hermes V1 paragraph above.
-- [Rubén Norte](https://github.com/rubennorte) for the support with writing the DOM API and Performance API paragraphs.
-- [Tomasz Zawadzki](https://github.com/tomekzaw/) for the support with the `debugOptimized` benchmarking.
+- [Dawid Małecki](https://github.com/coado) 和 [Jakub Piasecki](https://github.com/j-piasecki) 协助推出 Hermes V1。
+- [Krystof Woldrich](https://github.com/krystofwoldrich) 辅助修复未捕获 promise 拒绝被吞的 bug。
+- [Riccardo Cipolleschi](https://github.com/cipolleschi) 协助撰写 React 19.1.1 和 Hermes V1 相关章节。
+- [Rubén Norte](https://github.com/rubennorte) 协助撰写 DOM API 和性能 API 章节。
+- [Tomasz Zawadzki](https://github.com/tomekzaw/) 协助调试 `debugOptimized` 性能测试。
 
-## Upgrade to 0.82
+## 升级到 0.82
 
-Please use the [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) to view code changes between React Native versions for existing projects, in addition to the [upgrading to new versions docs](/docs/upgrading).
+请使用 [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) 查看现有项目在不同版本间的代码变更，同时参考[升级文档](/docs/upgrading)。
 
-To create a new project:
+创建新项目：
 
 ```bash
 npx @react-native-community/cli@latest init MyProject --version latest
 ```
 
-If you use Expo, React Native 0.82 will be available as part of the expo@canary releases.
+若使用 Expo，React Native 0.82 将包含在 expo@canary 版本中。
 
-The next SDK, SDK 55, will be shipped with the next stable release of React Native: 0.83.
+下一个 SDK（SDK 55）将随 React Native 下一个稳定版 0.83 发布。
 
 :::info
 
-0.82 is now the latest stable version of React Native and 0.79.x moves to unsupported. For more information see [React Native's support policy](https://github.com/reactwg/react-native-releases/blob/main/docs/support.md).
+0.82 现为 React Native 最新稳定版本，0.79.x 将进入不再支持状态。详情见 [React Native 支持策略](https://github.com/reactwg/react-native-releases/blob/main/docs/support.md)。
 
 :::

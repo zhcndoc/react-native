@@ -1,53 +1,53 @@
 ---
-title: The State of the React Native Community in 2018
+title: 2018 年 React Native 社区现状
 author: Lorenzo Sciandra
-authorTitle: Core Maintainer & React Native Developer
+authorTitle: 核心维护者 & React Native 开发者
 authorURL: 'https://github.com/kelset'
 authorImageURL: 'https://avatars2.githubusercontent.com/u/16104054?s=460&v=4'
 authorTwitter: kelset
-tags: [announcement]
+tags: [公告]
 ---
 
-In 2018 the React Native Community made a number of changes to the way we develop and communicate about React Native. We believe that a few years from now we will look back and see that this shift was a turning point for React Native.
+2018 年，React Native 社区在开发和沟通 React Native 的方式上做出了诸多改变。我们相信几年后回头看，这次转变将被视为 React Native 的一个转折点。
 
-A lot of people are excited about the rewrite of React Native's architecture, widely known as [Fabric](https://github.com/react-native-community/discussions-and-proposals/issues/4). Among other things, this will fix fundamental limitations in React Native's architecture and will set up React Native for success in the future together with [JSI and TurboModules](https://github.com/react-native-community/discussions-and-proposals/issues/40).
+许多人对 React Native 架构的重写感到兴奋，这就是广为人知的 [Fabric](https://github.com/react-native-community/discussions-and-proposals/issues/4)。除了其他改进之外，这将解决 React Native 架构中的根本性限制，并结合 [JSI 和 TurboModules](https://github.com/react-native-community/discussions-and-proposals/issues/40) 为 React Native 的未来成功奠定基础。
 
-The biggest shift in 2018 was to empower the React Native Community. From the beginning, Facebook encouraged developers from all around the world to participate in React Native's open source project. Since then, a number of core contributors emerged to handle, among other things, the release process.
+2018 年最大的转变是赋能 React Native 社区。从一开始，Facebook 就鼓励来自全球的开发者参与到 React Native 的开源项目中。从那时起，出现了一批核心贡献者，负责包括发布流程在内的各项事务。
 
-These members took a few substantial steps towards making the whole community more empowered to shape the future of this project with the following resources:
+这些成员采取了几个重要步骤，使整个社区在塑造项目未来方面更具权能，并提供了以下资源：
 
 ## [`react-native-releases`](https://github.com/react-native-community/react-native-releases) 📬
 
-This repository, created in January, serves the dual purpose of allowing everyone to keep up the new releases in a more collaborative manner and opened the conversation of what would be part of a certain release to whomever wanted to suggest a cherry-pick (like for [0.57.8](https://github.com/react-native-community/react-native-releases/issues/71) and all its previous versions).
+这个仓库创建于一月，双重作用是让所有人可以更协作的方式跟进新版本发布，并向任何想要建议 cherry-pick 的人开放版本内容的讨论（例如[0.57.8](https://github.com/react-native-community/react-native-releases/issues/71)及其之前所有版本）。
 
-This has been the driving force behind moving away from a monthly release cycle, and the "long term support" approach currently used for version 0.57.x.
+它是推动摆脱月度发布周期、以及目前针对 0.57.x 版本采用“长期支持”策略的主力。
 
-Half of the credit for reaching these decisions goes to the other repository created this year:
+这些决定的另一半功劳归于今年创建的另一个仓库：
 
 ## [`discussions-and-proposals`](https://github.com/react-native-community/discussions-and-proposals) 🗣
 
-This repository, created in July, expanded on the idea of a more open environment for conversations on React Native. Previously, this need was handled by issues labelled [`For Discussion`](https://github.com/facebook/react-native/labels/For%20Discussion) in the main repository, but we wanted to expand this strategy to an RFC approach that other libraries have (e.g. React).
+这个仓库创建于七月，拓展了 React Native 更开放对话环境的理念。此前，这个需求由主仓库中标注为 [`For Discussion`](https://github.com/facebook/react-native/labels/For%20Discussion) 的 issue 负责，但我们希望将这策略扩展成类似 RFC 的模式，类似其他库（如 React）采用的做法。
 
-This experiment immediately found its role in the React Native lifecycle. The Facebook team is now using the community RFC process to discuss what could [be improved in React Native](https://github.com/react-native-community/discussions-and-proposals/issues/64), and coordinate the efforts around the [Lean Core project](https://github.com/react-native-community/discussions-and-proposals/issues/6) - among other interesting discussions.
+这一实验很快在 React Native 生命周期中找到自己的定位。Facebook 团队现正利用社区 RFC 流程来讨论 [React Native 可改进之处](https://github.com/react-native-community/discussions-and-proposals/issues/64)，并协调围绕 [Lean Core 项目](https://github.com/react-native-community/discussions-and-proposals/issues/6) 的努力——以及其他有趣的讨论。
 
 ## [@ReactNativeComm](https://twitter.com/ReactNativeComm) 🐣
 
-We are aware that our approach to communicate these efforts has not been as effective as we would have liked, and in an attempt to give you all an easier time keeping up with everything going on in the React Native Community (from releases to active discussions) we created a new twitter account that you can rely on [@ReactNativeComm](https://twitter.com/ReactNativeComm).
+我们意识到，沟通这些工作的方式未能达到理想效果。为方便大家更轻松地跟进 React Native 社区的所有动态（从发布到活跃讨论），我们创建了一个可以依赖的新推特账号 [@ReactNativeComm](https://twitter.com/ReactNativeComm)。
 
-If you are not on that social network, remember that you can always watch repositories via GitHub; this feature improved these past few months with the possibility of being notified only for releases, so you should consider using it anyway.
+如果你没有使用该社交网络，记得你总可以通过 GitHub 观看仓库；这几个月该功能得到改进，可以仅接收版本发布的通知，建议你也试试用它。
 
-## What awaits ahead 🎓
+## 未来展望 🎓
 
-Over the past 7-8 months, core contributors enhanced the [React Native Community GitHub organization](https://github.com/react-native-community) to take more ownership over the development of React Native, and enhance collaboration with Facebook. But this always lacked the formal structure that similar projects may have in place.
+过去 7-8 个月来，核心贡献者增强了 [React Native Community GitHub 组织](https://github.com/react-native-community) 对 React Native 开发的掌控力，并加强了与 Facebook 的协作。但这始终缺乏类似项目所具备的正式架构。
 
-This organization can set the example for everyone in the larger developer community by enforcing a set of standards for all the packages/repos hosted in it, providing a single place for maintainers to help each other and contribute quality code that conforms to community-agreed standards.
+该组织可以通过对所托管的所有包和仓库施行一套标准，为更广泛的开发者社区树立榜样，提供维护者相互协助、贡献符合社区共识标准代码的统一平台。
 
-In early 2019, we will have this new set of guidelines in place. Let us know what you think in the [dedicated discussion](https://github.com/react-native-community/discussions-and-proposals/issues/63).
+2019 年初，我们将出台这套新指南。欢迎在 [专门讨论帖](https://github.com/react-native-community/discussions-and-proposals/issues/63) 中告诉我们你的看法。
 
-We are confident that with these changes, the community will become more collaborative so that when we reach 1.0, we will all continue to write (even more) awesome apps by leveraging this joint effort 🤗
+我们确信，有了这些改变，社区将变得更加协作，以至于当我们达到 1.0 版本时，我们都能通过这种共同努力，继续构建（甚至更多）精彩的应用 🤗
 
 ---
 
-I hope you are as excited as we are about the future of this community. We're excited to see all of you involved either in the conversations happening in the repositories listed above or via the awesome code you’ll produce.
+希望你和我们一样，对这个社区的未来充满期待。我们期待你们积极参与上述仓库中的对话，或通过你们出色的代码贡献一份力量。
 
-Happy coding!
+编程愉快！

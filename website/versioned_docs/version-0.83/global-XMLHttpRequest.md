@@ -4,7 +4,7 @@ title: XMLHttpRequest
 ---
 
 :::warning
-🚧 This page is work in progress, so please refer to the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) for more information.
+🚧 此页面正在建设中，请参考 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) 获取更多信息。
 :::
 
-The global `XMLHttpRequest` class, as defined in Web specifications.
+全局的 `XMLHttpRequest` 类，定义于 Web 规范中。

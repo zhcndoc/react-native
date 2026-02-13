@@ -1,5 +1,5 @@
 ---
-title: 'React Native 0.83 - React 19.2, New DevTools features, no breaking changes'
+title: 'React Native 0.83 - React 19.2，新 DevTools 功能，无破坏性变更'
 authors: [huntie, cipolleschi, gabrieldonadel, alanjhughes]
 tags: [announcement, release]
 date: 2025-12-10
@@ -8,121 +8,121 @@ date: 2025-12-10
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# React Native 0.83 - React 19.2, New DevTools features, no breaking changes
+# React Native 0.83 - React 19.2，新 DevTools 功能，无破坏性变更
 
-Today we are excited to release React Native 0.83!
+今天我们很高兴发布 React Native 0.83！
 
-This release includes React 19.2, significant new features for React Native DevTools, and support for the Web Performance and Intersection Observer APIs (Canary). This is also the first React Native release with no user facing breaking changes.
+该版本包含 React 19.2，为 React Native DevTools 带来了显著的新功能，并支持 Web Performance 和 Intersection Observer API（Canary）。这也是首个没有用户可感知破坏性变更的 React Native 版本。
 
-### Highlights
+### 亮点
 
 - [React 19.2](/blog/2025/12/10/react-native-0.83#react-192)
-- [New DevTools features](/blog/2025/12/10/react-native-0.83#new-devtools-features)
-- [Intersection Observers (Canary)](/blog/2025/12/10/react-native-0.83#intersection-observers-canary)
-- [Web Performance APIs as stable](/blog/2025/12/10/react-native-0.83#web-performance-apis-as-stable)
+- [新的 DevTools 功能](/blog/2025/12/10/react-native-0.83#new-devtools-features)
+- [Intersection Observer（Canary）](/blog/2025/12/10/react-native-0.83#intersection-observers-canary)
+- [Web Performance API 正式稳定](/blog/2025/12/10/react-native-0.83#web-performance-apis-as-stable)
 
 <!--truncate-->
 
 ## React 19.2
 
-This release includes React 19.2, bringing the new `<Activity>` and `useEffectEvent` APIs to React Native.
+本次发布包含 React 19.2，为 React Native 带来了新的 `<Activity>` 组件和 `useEffectEvent` API。
 
-:::warning Important: [CVE-2025-55182](https://react.dev/blog/2025/12/03/critical-security-vulnerability-in-react-server-components)
+:::warning 重要提示: [CVE-2025-55182](https://react.dev/blog/2025/12/03/critical-security-vulnerability-in-react-server-components)
 
-At time of release, `react-native@0.83.0` depends on `react@19.2.0`, and you might also have seen the recent [Critical Security Vulnerability in React Server Components](https://react.dev/blog/2025/12/03/critical-security-vulnerability-in-react-server-components).
+发布时，`react-native@0.83.0` 依赖于 `react@19.2.0`，你可能也注意到了最近关于 [React 服务器组件的严重安全漏洞](https://react.dev/blog/2025/12/03/critical-security-vulnerability-in-react-server-components) 的通告。
 
-We want to stress that **React Native is NOT directly affected by this vulnerability**, as it does not depend on the impacted packages:
+我们要强调的是，**React Native 不直接受此漏洞影响**，因为它不依赖受影响的包：
 
 - `react-server-dom-webpack`
 - `react-server-dom-parcel`
 - `react-server-dom-turbopack`
 
-**However**, if you are using React Native as part of a **monorepo** where these packages may be present, please check and upgrade them immediately.
+**但是**，如果你是在包含这些包的**monorepo**中使用 React Native，请务必立刻检查并升级它们。
 
-We will update all React dependencies to `19.2.1` in our next patch release.
+我们将在下一个补丁版本中更新所有 React 依赖到 `19.2.1`。
 
 :::
 
 ### `<Activity>`
 
-`<Activity>` lets you break your app into "activities" that can be controlled and prioritized. You can use Activity as an alternative to conditionally rendering parts of your app, and it currently supports 2 modes: `'visible'` and `'hidden'`.
+`<Activity>` 允许你将应用划分成可以控制和优先处理的“活动”块。你可以用 Activity 替代条件渲染的方式，目前支持两种模式：`'visible'` 和 `'hidden'`。
 
-- `hidden`: hides the children, unmounts effects, and defers all updates until React has nothing left to work on.
-- `visible`: shows the children, mounts effects, and allows updates to be processed normally.
+- `hidden`：隐藏子元素，卸载副作用，并推迟所有更新直到 React 没有工作要做。
+- `visible`：显示子元素，激活副作用，允许正常处理更新。
 
-One interesting feature of trees hidden using `<Activity mode='hidden'>` is that they preserve their state. So, when they become visible again, they, for example, keep the search status and the selection from a previous user interaction.
+用 `<Activity mode='hidden'>` 隐藏的树保持其状态。因此，当再次显示时，例如会保持之前用户的搜索状态和选中状态。
 
 | React 19.1.1                                      | React 19.2.1                                   |
 | ------------------------------------------------- | ---------------------------------------------- |
 | ![](/blog/assets/0.83-react-19.2-no-activity.gif) | ![](/blog/assets/0.83-react-19.2-activity.gif) |
 
-You can read more about `<Activity>` in the [React docs](https://react.dev/reference/react/Activity).
+你可以在 [React 文档](https://react.dev/reference/react/Activity) 中查看更多关于 `<Activity>` 的内容。
 
 ### `useEffectEvent`
 
-One common pattern with `useEffect` is to notify the app code about some kind of "event" from an external system. The problem with this approach is that a change to any value used inside such an event will cause the surrounding Effect to re-run.
+一个常见的 `useEffect` 用法是向应用代码通知外部系统的“事件”。这个用法的问题是，任何依赖值变化都会导致相关 Effect 重新执行。
 
-To solve this, most users disable the lint rule and exclude the dependency. But that can lead to bugs since the linter can no longer help you keep the dependencies up to date if you need to update the Effect later.
+为了解决这个问题，大多数用户会禁用 lint 规则并排除依赖，但这可能导致错误，因为 lint 不再帮你维护正确的依赖。
 
-With `useEffectEvent`, you can split the "event" part of this logic out of the Effect that emits it.
+使用 `useEffectEvent`，你可以将“事件”逻辑从发出事件的 Effect 中分离出来。
 
-You can read more about `useEffectEvent` in the [React docs](https://react.dev/reference/react/useEffectEvent).
+你可以在 [React 文档](https://react.dev/reference/react/useEffectEvent) 中了解更多关于 `useEffectEvent` 的内容。
 
-## New DevTools features
+## 新的 DevTools 功能
 
-In 0.83 we're excited to deliver some long awaited features and quality of life improvements to React Native DevTools.
+在 0.83 版本中，我们为 React Native DevTools 带来了一些期待已久的功能和体验提升。
 
-### Network and Performance panels
+### 网络和性能面板
 
-Network inspection and performance tracing are two powerful new capabilities in React Native DevTools, available today.
+网络检查和性能跟踪是 React Native DevTools 中两项强大的新能力，现已可用。
 
-![Network panel list in React Native DevTools](/docs/assets/debugging-rndt-network.jpg)
+![React Native DevTools 中的网络面板列表](/docs/assets/debugging-rndt-network.jpg)
 
-**Network inspection**, now available for all React Native apps, allows you to view and understand the network requests made by your app. Logged requests provide detailed metadata such as timings and headers sent/received, as well as response previews. And — for the first time — you can use the Initiator tab to see where in your code a network request originated.
+**网络检查** 现支持所有 React Native 应用，可以查看和理解应用发出的网络请求。请求日志包含详细元数据，如时间信息、请求/响应头及响应预览。此外——首次支持——你可以通过 Initiator 标签查看请求源自代码的具体位置。
 
 <details>
-<summary><strong>💡 Network event coverage, Expo support</strong></summary>
+<summary><strong>💡 网络事件覆盖及 Expo 支持</strong></summary>
 
-**Which network events are captured?**
+**捕获哪些网络事件？**
 
-Today, we record all network calls through `fetch()`, `XMLHttpRequest`, and `<Image>` — with support for custom networking libraries, such as Expo Fetch, coming later.
+目前，我们记录所有通过 `fetch()`、`XMLHttpRequest` 和 `<Image>` 发送的网络请求 —— 未来将支持 Expo Fetch 等自定义网络库。
 
-**Expo Network differences**
+**Expo 网络差异**
 
-Because of this, apps using Expo will continue to see the "Expo Network" panel — a separate implementation by the Expo framework which will log these additional request sources but has slightly reduced features.
+因此，使用 Expo 的应用仍会看到 “Expo 网络” 面板 —— 由 Expo 框架实现，记录额外请求源，但功能稍弱：
 
-- Coverage for Expo-specific network events.
-- No request initiator support.
-- No Performance panel integration.
+- 覆盖 Expo 特有的网络事件。
+- 不支持请求发起者功能。
+- 无法与性能面板整合。
 
-We're working with Expo to integrate Expo Fetch and third party networking libraries with our new Network inspection pipeline in future releases.
+我们正在与 Expo 合作，计划未来版本将 Expo Fetch 和第三方网络库接入我们的网络检查管线。
 
 </details>
 
-![A performance trace in React Native DevTools](/docs/assets/debugging-rndt-performance.jpg)
+![React Native DevTools 中的性能跟踪](/docs/assets/debugging-rndt-performance.jpg)
 
-**Performance tracing** allows you to record a performance session within your app to understand how your JavaScript code is running and what operations took the most time. In React Native, we show JavaScript execution, React Performance tracks, Network events, and custom [User Timings](https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/User_timing), rendered in a single performance timeline.
+**性能跟踪** 允许你在应用内录制性能会话，了解 JavaScript 执行情况和耗时操作。React Native 中展示 JavaScript 执行、React 性能轨迹、网络事件和自定义的 [User Timing](https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/User_timing)，均在单一时间轴上呈现。
 
-Together with support for the Web Performance APIs in 0.83, this is a powerful feature set providing fine-grained visibility into what might be making your React Native apps slow. We encourage everyone to try out the Performance panel and make it a part of your daily workflow.
+结合 0.83 中的 Web Performance API 支持，这是一套强大的功能，能细粒度洞察导致 React Native 应用卡顿的原因。我们鼓励大家尝试性能面板，将其作为日常工作的一部分。
 
-Learn more about our newest [React Native DevTools features](/docs/react-native-devtools) and [React Performance tracks](https://react.dev/reference/dev-tools/react-performance-tracks).
+了解更多关于最新 [React Native DevTools 功能](/docs/react-native-devtools) 和 [React 性能轨迹](https://react.dev/reference/dev-tools/react-performance-tracks)。
 
-### New desktop app
+### 新桌面应用
 
-Previously, React Native DevTools launched in a browser window and required Chrome or Edge to be installed. Today, we're introducing a vastly improved desktop experience with our new bundled desktop app. It features:
+之前，React Native DevTools 在浏览器中启动，需要安装 Chrome 或 Edge。现在我们推出全新打包桌面应用，体验大幅改进，特点包括：
 
-- **The same zero-install setup as before**, now with **no web browser requirement**.
-- **Faster launch** via a lightweight and notarized desktop binary. In rare cases where this cannot be downloaded (such as a corporate firewall), we fall back to the previous browser launch flow.
-- **Better windowing**, with improved multitasking on macOS, auto-raise on breakpoint, auto-raise when reconnecting to the same app, and saved window arrangements on relaunch.
-- **Improved reliability** by running DevTools separately from your personal browser profile. In particular, this resolves bug reports we have received about certain preinstalled Chrome extensions causing React Native DevTools to break.
+- **零安装设置同之前一样**，且**不再依赖网页浏览器**。
+- **启动更快**，采用轻量且经过公证的桌面二进制文件。少数情况下（如公司防火墙）下载失败，会回退到浏览器启动方式。
+- **更好的窗口管理**：macOS 上支持更优多任务处理，断点自动激活窗口，应用重新连接时自动置顶，重启时保存窗口布局。
+- **更高稳定性**，DevTools 进程独立于个人浏览器配置，特别解决了某些预装 Chrome 扩展导致 DevTools 崩溃的问题。
 
-![React Native DevTools icon in the macOS Dock](/blog/assets/0.83-rndt-desktop-app.jpg)
+![macOS Dock 中的 React Native DevTools 图标](/blog/assets/0.83-rndt-desktop-app.jpg)
 
-## Intersection Observers (Canary)
+## Intersection Observer（Canary）
 
-As part of our effort to bring web APIs to React Native, we have added support for [`IntersectionObserver`](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) in the [canary release](https://reactnative.dev/docs/next/releases/release-levels#how-to-initialize-react-native-using-canary--experimental) for 0.83.
+作为将 Web API 引入 React Native 的努力之一，我们在 0.83 的[canary 版本](https://reactnative.dev/docs/next/releases/release-levels#how-to-initialize-react-native-using-canary--experimental)中添加了对 [`IntersectionObserver`](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) 的支持。
 
-`IntersectionObserver` allows you to asynchronously observe layout intersections between a target element and its ancestor. Please see our [API](https://reactnative.dev/docs/next/global-intersectionobserver) and [implementation docs](https://github.com/facebook/react-native/blob/main/packages/react-native/src/private/webapis/intersectionobserver/__docs__/README.md) for more details. We've also included [examples](https://github.com/facebook/react-native/tree/main/packages/rn-tester/js/examples/IntersectionObserver) in RNTester.
+`IntersectionObserver` 允许你异步监听目标元素与其祖先元素布局交叉情况。详情请参见我们的 [API](https://reactnative.dev/docs/next/global-intersectionobserver) 和 [实现文档](https://github.com/facebook/react-native/blob/main/packages/react-native/src/private/webapis/intersectionobserver/__docs__/README.md)。RNTester 中也包含了相关 [示例](https://github.com/facebook/react-native/tree/main/packages/rn-tester/js/examples/IntersectionObserver)。
 
 <p style={{textAlign: 'center'}}>
   <video width={320} controls="controls" autoPlay>
@@ -130,38 +130,38 @@ As part of our effort to bring web APIs to React Native, we have added support f
   </video>
 </p>
 
-## Other changes
+## 其他变更
 
-### Web Performance APIs as stable
+### Web Performance API 正式稳定
 
-As introduced in 0.82, React Native now implements a subset of the [Performance APIs](https://developer.mozilla.org/en-US/docs/Web/API/Performance_API) available on Web — now rolled out as stable:
+自 0.82 起，React Native 实现了 Web 版中部分 [Performance API](https://developer.mozilla.org/en-US/docs/Web/API/Performance_API)，现已正式稳定发布：
 
-- [High Resolution Time](https://www.w3.org/TR/hr-time-3/): defines `performance.now()` and `performance.timeOrigin`.
-- [Performance Timeline](https://w3c.github.io/performance-timeline/): defines `PerformanceObserver` and methods to access performance entries in the performance object (`getEntries()`, `getEntriesByType()`, `getEntriesByName()`).
-- [User Timing](https://w3c.github.io/user-timing/): defines `performance.mark` and `performance.measure`.
-- [Event Timing API](https://w3c.github.io/event-timing/): defines `event` entry types reported to `PerformanceObserver`.
-- [Long Tasks API](https://w3c.github.io/longtasks/): defines `longtask` entry types reported to `PerformanceObserver`.
+- [高精度时间](https://www.w3.org/TR/hr-time-3/)：定义了 `performance.now()` 和 `performance.timeOrigin`。
+- [性能时间线](https://w3c.github.io/performance-timeline/)：定义 `PerformanceObserver` 及访问性能条目方法 (`getEntries()`、`getEntriesByType()`、`getEntriesByName()`)。
+- [用户计时](https://w3c.github.io/user-timing/)：定义 `performance.mark` 和 `performance.measure`。
+- [事件计时 API](https://w3c.github.io/event-timing/)：定义上报给 `PerformanceObserver` 的 `event` 条目类型。
+- [长期任务 API](https://w3c.github.io/longtasks/)：定义上报给 `PerformanceObserver` 的 `longtask` 条目类型。
 
-These APIs allow tracking different aspects of performance in your app, visible in the Performance panel in React Native DevTools, as well as at runtime via `PerformanceObserver`.
+这些 API 允许你跟踪应用中的各种性能指标，可在 React Native DevTools 的性能面板中查看，也能通过 `PerformanceObserver` 在运行时使用。
 
-`PerformanceObserver` also works in production builds, opening new opportunities for capturing real world performance metrics in your apps.
+`PerformanceObserver` 还支持生产环境构建，为捕获真实应用性能指标开启了新可能。
 
-### Experimental - Hermes V1
+### 实验特性 - Hermes V1
 
-![Hermes logo](/blog/assets/0.83-hermes-v1.jpg)
+![Hermes 徽标](/blog/assets/0.83-hermes-v1.jpg)
 
-Hermes V1 is the next evolution of Hermes, with improvements in the compiler and the VM that significantly boost JavaScript performance.
+Hermes V1 是 Hermes 的下一个演进版本，编译器和运行时均有显著改进，大幅提升 JavaScript 性能。
 
-In React Native 0.82, we released Hermes V1 as an experimental opt-in. And in 0.83, Hermes V1 includes further performance improvements.
+在 React Native 0.82 中，我们作为实验特性首次发布了 Hermes V1。0.83 中，Hermes V1 性能进一步增强。
 
 <details>
-<summary><strong>💡 Enabling Hermes V1</strong></summary>
+<summary><strong>💡 如何启用 Hermes V1</strong></summary>
 
-**Note**: While Hermes V1 is in the experimental phase, you’ll need to build React Native from source to try it out.
+**注意**：Hermes V1 目前仍是实验版，需要从源码构建 React Native 以便尝试。
 
-To try Hermes V1 in your own project, use the following steps:
+在项目中尝试 Hermes V1，步骤如下：
 
-1. Force your package manager to resolve the experimental version of Hermes V1 compiler package by modifying the corresponding section of your package.json file (note that the current versioning convention is only for the experimental phase of Hermes V1):
+1. 通过修改 `package.json` 中相关部分，强制包管理器解析 Hermes V1 编译器的实验版本（版本号用于实验阶段）：
 
   <div style={{marginLeft: 'var(--ifm-list-left-padding)'}}>
   <Tabs>
@@ -178,13 +178,13 @@ To try Hermes V1 in your own project, use the following steps:
    </Tabs>
    </div>
 
-2. Enable Hermes V1 for Android by adding hermesV1Enabled=true inside `android/gradle.properties`:
+2. 安卓启用 Hermes V1，在 `android/gradle.properties` 中添加：
 
    ```gradle title="android/gradle.properties"
    hermesV1Enabled=true
    ```
 
-   Also, configure React Native to build from source by editing android/settings.gradle:
+   并通过编辑 `android/settings.gradle` 配置 React Native 从源码构建：
 
    ```gradle title="android/settings.gradle"
      includeBuild('../node_modules/react-native') {
@@ -196,46 +196,47 @@ To try Hermes V1 in your own project, use the following steps:
      }
    ```
 
-3. Enable Hermes V1 for iOS by installing pods with `RCT_HERMES_V1_ENABLED=1` environment variable.
+3. iOS 启用 Hermes V1，安装 CocoaPods 时传入环境变量：
 
    ```
    RCT_HERMES_V1_ENABLED=1 bundle exec pod install
    ```
 
-   Keep in mind that Hermes V1 is not compatible with the precompiled React Native builds, so make sure you don’t use the `RCT_USE_PREBUILT_RNCORE` flag when installing pods.
+   注意 Hermes V1 与预编译 React Native 构建不兼容，安装 pods 时请勿使用 `RCT_USE_PREBUILT_RNCORE` 标志。
 
-4. To confirm if your app is running Hermes V1, execute the following code within your app or the DevTools console. This code will return the Hermes version, which should match the version specified in step 1 (250829098.0.1):
+4. 在应用或 DevTools 控制台中运行以下代码确认 Hermes 版本，应与步骤 1 中指定的版本号匹配（250829098.0.1）：
 
    ```ts
-   // expecting "250829098.0.1" in Hermes V1
+   // Hermes V1 预期返回 "250829098.0.1"
    HermesInternal.getRuntimeProperties()['OSS Release Version'];
    ```
 
 </details>
 
-### Experimental - Compile out the Legacy Architecture on iOS
+### 实验特性 - iOS 上编译时剔除 Legacy Architecture
 
-In this release, we are adding a new flag for iOS that allows you to compile out the Legacy Architecture from the codebase.
-If your app is already on the New Architecture, you can try to remove the legacy architecture code by installing your pods with:
+本次发布新增 iOS 标志，允许在编译时剔除 Legacy Architecture 代码。
+
+如果你的应用已切换至 New Architecture，可以通过以下命令安装 pods 来尝试剔除旧架构代码：
 
 ```
 RCT_REMOVE_LEGACY_ARCH=1 bundle exec pod install
 ```
 
-This should reduce both the build time and the size of your app. The improvements depend on how many third party libraries you are using: in our tests, using a new app without dependencies, the build time was reduced from 73.0 seconds to 58.2 seconds, and the app size went from 51.2 Mb to 48.2 Mb.
+这能缩短构建时间并减小应用体积，具体效果取决于你使用的第三方库数量。在我们测试的新项目（无依赖）中，构建时间从 73.0 秒降至 58.2 秒，应用大小从 51.2Mb 降至 48.2Mb。
 
 :::info
-`RCT_REMOVE_LEGACY_ARCH` is not compatible with React Native precompiled binaries. If you are using precompiled binaries, you'll need to reinstall the pods and build the app from source.
+`RCT_REMOVE_LEGACY_ARCH` 不兼容 React Native 预编译二进制。如果使用预编译二进制，需重新安装 pods 并从源码构建应用。
 :::
 
-### Experimental - Debug your precompiled binaries on iOS
+### 实验特性 - iOS 上调试预编译二进制
 
-In this release, we've implemented the ability to debug the React Native code that is shipped with a precompiled binary. This is primarily helpful to library maintainers or if you are developing a native module or a native component.
+本版本新增调试自带预编译二进制中 React Native 代码的能力，主要面向库维护者或开发原生模块及组件的用户。
 
-To debug the binary code shipped with the React Native precompiled binary, follow these steps:
+调试预编译二进制的步骤如下：
 
 ```sh
-# From the ios folder of your project
+# 在项目 ios 目录下执行
 bundle exec pod cache clean --all
 bundle exec pod deintegrate
 RCT_USE_RN_DEP=1 RCT_USE_PREBUILT_RNCORE=1
@@ -243,63 +244,63 @@ RCT_SYMBOLICATE_PREBUILT_FRAMEWORKS=1 bundle exec pod install
 open <your-project>.xcworkspace
 ```
 
-The magic is done by the `RCT_SYMBOLICATE_PREBUILT_FRAMEWORKS` flag, which instructs CocoaPods to download the React Native dSYM files and expand them in the proper folder.
+这里的关键是 `RCT_SYMBOLICATE_PREBUILT_FRAMEWORKS` 标志，指示 CocoaPods 下载 React Native 的 dSYM 文件并展开到正确目录。
 
-At this point, you can put a breakpoint in your app, for example in `AppDelegate.swift`, and build and run the app from Xcode.
+此时可在 Xcode 中 AppDelegate.swift 等处设置断点，构建并运行应用。
 
-When the application pauses, open the Xcode console and run the LLDB command:
+应用暂停时，在 Xcode 控制台运行 LLDB 命令：
 
 ```sh
-# If you are running the app in the simulator
-add-dsym <path-to-your-app>/ios/Pods/React-Core-prebuilt/React.xcframework/ios-arm64_x86_64-simulator/React.framework/dSYMs/React.framework.dSYM
+# 模拟器运行时
+add-dsym <your-app-path>/ios/Pods/React-Core-prebuilt/React.xcframework/ios-arm64_x86_64-simulator/React.framework/dSYMs/React.framework.dSYM
 
-# If you are running the app on a physical device
-add-dsym <path-to-your-app>/ios/Pods/React-Core-prebuilt/React.xcframework/ios-arm64/React.framework/dSYMs/React.framework.dSYM
+# 真机运行时
+add-dsym <your-app-path>/ios/Pods/React-Core-prebuilt/React.xcframework/ios-arm64/React.framework/dSYMs/React.framework.dSYM
 ```
 
-Now you can step into the React Native code.
+之后即可单步调试 React Native 代码。
 
-## Breaking Changes
+## 破坏性变更
 
-We're working hard to make React Native releases more predictable and easier to upgrade. React Native 0.83 is the first release with **no user facing breaking changes**.
+我们致力于让 React Native 版本发布更可预测、升级更简便。React Native 0.83 是第一个**无用户感知破坏性变更**的版本。
 
-If you are on React Native 0.82, you should be able to upgrade your app to React Native 0.83 without any changes to your app code.
+如果你当前使用 React Native 0.82，升级到 0.83 理应无需对应用代码做任何改动。
 
-To learn more about what we consider a breaking change, have a look at [this article](/docs/releases/versioning-policy#what-is-a-breaking-change).
+想了解哪些属于破坏性变更，请参见[此文](/docs/releases/versioning-policy#what-is-a-breaking-change)。
 
-## Deprecations
+## 弃用
 
-This release ships two deprecations that are Android specific:
+本次发布包含两个 Android 相关的弃用：
 
-- **Networking**: The `sendRequestInternal` method is being phased out and it is now deprecated.
-- **Animation**: `startOperationBatch` and `finishOperationBatch` are now deprecated.
+- **网络**：`sendRequestInternal` 方法被淘汰，现已弃用。
+- **动画**：`startOperationBatch` 和 `finishOperationBatch` 被弃用。
 
-## Acknowledgements
+## 鸣谢
 
-React Native 0.83 contains over 594 commits from 56 contributors. Thanks for all your hard work!
+React Native 0.83 版本包含来自 56 位贡献者的超过 594 次提交。感谢大家的辛勤工作！
 
-We want to send a special thank you to those community members that shipped significant contributions in this release:
+特别感谢在此发布中推动重要贡献的社区成员：
 
-- [Ruslan Lesiutin](https://github.com/hoxyq), [Moti Zilberman](https://github.com/motiz88), and [Alex Hunt](https://x.com/huntie) for the React Native DevTools Performance and Network features.
-- [Moti Zilberman](https://github.com/motiz88) for the React Native DevTools desktop app.
-- [Luna Wei](https://github.com/lunaleaps) for Intersection Observers.
-- [Rubén Norte](https://github.com/rubennorte) for the Web Performance APIs.
-- [Dawid Małecki](https://github.com/coado) and [Jakub Piasecki](https://github.com/j-piasecki) for the rollout of Hermes V1.
-- [Ramanpreet Nara](https://github.com/rsnara) for the `RCT_REMOVE_LEGACY_ARCH` flag.
-- [Christian Falch](https://github.com/chrfalch) for precompiled iOS binary debugging.
+- [Ruslan Lesiutin](https://github.com/hoxyq)、[Moti Zilberman](https://github.com/motiz88)、[Alex Hunt](https://x.com/huntie) 贡献了 React Native DevTools 性能和网络功能。
+- [Moti Zilberman](https://github.com/motiz88) 贡献了 React Native DevTools 桌面应用。
+- [Luna Wei](https://github.com/lunaleaps) 贡献了 Intersection Observer。
+- [Rubén Norte](https://github.com/rubennorte) 贡献了 Web Performance API。
+- [Dawid Małecki](https://github.com/coado) 和 [Jakub Piasecki](https://github.com/j-piasecki) 负责 Hermes V1 推出。
+- [Ramanpreet Nara](https://github.com/rsnara) 贡献了 `RCT_REMOVE_LEGACY_ARCH` 标志。
+- [Christian Falch](https://github.com/chrfalch) 贡献了 iOS 预编译二进制调试。
 
-## Upgrade to 0.83
+## 升级至 0.83
 
-Please use the [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) to view code changes between React Native versions for existing projects, in addition to the [Upgrading docs](/docs/upgrading).
+请使用 [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) 查看现有项目各 React Native 版本间的代码变更，结合 [升级文档](/docs/upgrading) 使用。
 
-To create a new project:
+新建项目请执行：
 
 ```sh
 npx @react-native-community/cli@latest init MyProject --version latest
 ```
 
-If you use Expo, React Native 0.83 will be available in SDK 55, which will be released in January 2026.
+如果你使用 Expo，React Native 0.83 将包含在 2026 年 1 月发布的 SDK 55 中。
 
-### Supported versions
+### 支持版本
 
-0.83 is now the latest stable version of React Native and 0.80.x moves to unsupported. For more information see [React Native's support policy](https://github.com/reactwg/react-native-releases/blob/main/docs/support.md).
+0.83 现为 React Native 最新稳定版本，0.80.x 版本转为不再支持。更多信息请参见 [React Native 支持政策](https://github.com/reactwg/react-native-releases/blob/main/docs/support.md)。

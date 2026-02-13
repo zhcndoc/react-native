@@ -1,26 +1,26 @@
 ---
 id: architecture-overview
-title: Architecture Overview
+title: 架构概览
 slug: /overview
 ---
 
 :::info
-Welcome to the Architecture Overview! If you're getting started with React Native, please refer to <a href="/docs/getting-started">Guides</a> section. Continue reading to learn how internals of React Native work!
+欢迎阅读架构概览！如果你刚开始学习 React Native，请参考 <a href="/docs/getting-started">入门指南</a> 部分。继续阅读，了解 React Native 内部的工作原理！
 
-This section is a work in progress and more material will be added in the future. Please make sure to come back later to check for new information.
+本部分内容仍在进行中，未来会添加更多资料。请务必稍后回来查看更新的信息。
 :::
 
-Architecture Overview is intended to share conceptual overview of how React Native's internals work. The intended audience includes library authors and core contributors. If you are an app developer, it is not a requirement to be familiar with this material to be effective with React Native. You can still benefit from the overview as it will give you insights into how React Native works under the hood. Feel free to share your feedback on the <a href="https://github.com/reactwg/react-native-new-architecture/discussions/9">discussion inside the working group</a> for this section.
+架构概览旨在分享 React Native 内部工作机制的概念性概述。目标读者包括库作者和核心贡献者。如果你是应用开发者，熟悉这些内容并非使用 React Native 的必要条件。你仍然可以从这部分内容中获益，因为它能让你深入了解 React Native 的底层运行机制。欢迎在本部分的 <a href="https://github.com/reactwg/react-native-new-architecture/discussions/9">工作组讨论</a> 中分享你的反馈。
 
-## Table of Contents
+## 目录
 
-- [About the New Architecture](landing-page)
-- Rendering
+- [关于新架构](landing-page)
+- 渲染
   - [Fabric](fabric-renderer)
-  - [Render, Commit, and Mount](render-pipeline)
-  - [Cross Platform Implementation](xplat-implementation)
-  - [View Flattening](view-flattening)
-  - [Threading Model](threading-model)
-- Build Tools
-  - [Bundled Hermes](bundled-hermes)
-- [Glossary](glossary)
+  - [渲染、提交与挂载](render-pipeline)
+  - [跨平台实现](xplat-implementation)
+  - [视图扁平化](view-flattening)
+  - [线程模型](threading-model)
+- 构建工具
+  - [集成 Hermes](bundled-hermes)
+- [术语表](glossary)

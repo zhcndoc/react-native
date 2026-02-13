@@ -1,6 +1,6 @@
 ---
 id: hermes
-title: Using Hermes
+title: 使用 Hermes
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
@@ -9,37 +9,37 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
   <img width={300} height={300} className="hermes-logo" src="/docs/assets/HermesLogo.svg" style={{height: "auto"}}/>
 </a>
 
-[Hermes](https://hermesengine.dev) is an open-source JavaScript engine optimized for React Native. For many apps, using Hermes will result in improved start-up time, decreased memory usage, and smaller app size when compared to JavaScriptCore.
-Hermes is used by default by React Native and no additional configuration is required to enable it.
+[Hermes](https://hermesengine.dev) 是一个为 React Native 优化的开源 JavaScript 引擎。对于许多应用来说，使用 Hermes 会带来更快的启动时间，更低的内存使用，以及相比 JavaScriptCore 更小的应用体积。  
+React Native 默认使用 Hermes，无需额外配置即可启用。
 
-## Bundled Hermes
+## 内置 Hermes
 
-React Native comes with a **bundled version** of Hermes.
-We are building a version of Hermes for you whenever we release a new version of React Native. This will make sure you're consuming a version of Hermes which is fully compatible with the version of React Native you're using.
+React Native 自带一个 **内置版本** 的 Hermes。  
+每当我们发布新的 React Native 版本时，都会为您构建一个 Hermes 版本。这样可以确保您使用的 Hermes 版本与您使用的 React Native 版本完全兼容。
 
-This change is fully transparent to users of React Native. You can still disable Hermes using the command described in this page.
-You can [read more about the technical implementation on this page](/architecture/bundled-hermes).
+这一变更对 React Native 用户完全透明。您仍然可以使用本文介绍的命令来禁用 Hermes。  
+您可以在此页面查看更多关于技术实现的内容[/architecture/bundled-hermes](/architecture/bundled-hermes)。
 
-## Confirming Hermes is in use
+## 确认 Hermes 是否正在使用
 
-If you've recently created a new app from scratch, you should see if Hermes is enabled in the welcome view:
+如果您最近从头创建了一个新应用，可以在欢迎界面查看 Hermes 是否启用：
 
 <figure>
-<img src="/docs/assets/HermesApp.png" height="600" alt="Where to find JS engine status in the new project?" />
+<img src="/docs/assets/HermesApp.png" height="600" alt="在新项目中哪里查看 JS 引擎状态？" />
 </figure>
 
-A `HermesInternal` global variable will be available in JavaScript that can be used to verify that Hermes is in use:
+JavaScript 中会有一个名为 `HermesInternal` 的全局变量，可用来验证是否正在使用 Hermes：
 
 ```jsx
 const isHermes = () => !!global.HermesInternal;
 ```
 
 :::caution
-If you are using a non-standard way of loading the JS bundle, it is possible that the `HermesInternal` variable is available but you aren't using the highly optimised pre-compiled bytecode.
-Confirm that you are using the `.hbc` file and also benchmark the before/after as detailed below.
+如果您使用了非标准方式加载 JS bundle，可能会出现 `HermesInternal` 变量存在，但实际上未使用高度优化的预编译字节码的情况。  
+请确认您正在使用 `.hbc` 文件，并参考下面的说明对比前后的性能差异。
 :::
 
-To see the benefits of Hermes, try making a release build/deployment of your app to compare. For example; from the root of your project:
+要体验 Hermes 的优势，请尝试为您的应用制作发布版构建/部署，并进行比较。例如，在项目根目录下运行：
 
 <Tabs groupId="platform" queryString defaultValue={constants.defaultPlatform} values={constants.platforms} className="pill-tabs">
 <TabItem value="android">
@@ -88,8 +88,9 @@ yarn ios --mode Release
 </TabItem>
 </Tabs>
 
-This will compile JavaScript to Hermes Bytecode during build time which will improve your app's startup speed on device.
+这会在构建时将 JavaScript 编译为 Hermes 字节码，提升设备上的应用启动速度。
 
-## Switching back to JavaScriptCore
+## 切换回 JavaScriptCore
 
-React Native also supports using JavaScriptCore as the [JavaScript engine](javascript-environment). Follow the instructions [from the community repository](https://github.com/react-native-community/javascriptcore) to opt-out of Hermes.
+React Native 也支持使用 JavaScriptCore 作为[javaScript 引擎](javascript-environment)。  
+请按照[社区仓库](https://github.com/react-native-community/javascriptcore)中的说明操作，来选择不使用 Hermes。

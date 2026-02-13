@@ -1,25 +1,25 @@
 ---
 id: publishing-to-app-store
-title: Publishing to Apple App Store
+title: 发布到 Apple App Store
 ---
 
-The publishing process is the same as any other native iOS app, with some additional considerations to take into account.
+发布流程与其他原生 iOS 应用相同，但需要考虑一些额外的事项。
 
 :::info
-If you are using Expo, read the Expo guide for [Deploying to App Stores](https://docs.expo.dev/distribution/app-stores/) to build and submit your app for the Apple App Store. This guide works with any React Native app to automate the deployment process.
+如果你使用的是 Expo，请查阅 Expo 的[发布到应用商店指南](https://docs.expo.dev/distribution/app-stores/)，以构建并提交你的应用到 Apple App Store。本指南适用于任何 React Native 应用，可实现自动化部署流程。
 :::
 
-### 1. Configure release scheme
+### 1. 配置发布方案
 
-Building an app for distribution in the App Store requires using the `Release` scheme in Xcode. Apps built for `Release` will automatically disable the in-app Dev Menu, which will prevent your users from inadvertently accessing the menu in production. It will also bundle the JavaScript locally, so you can put the app on a device and test whilst not connected to the computer.
+构建用于 App Store 分发的应用需要在 Xcode 中使用 `Release` 方案。使用 `Release` 构建的应用会自动禁用应用内的开发菜单，从而防止用户在生产环境中误触该菜单。同时，它会将 JavaScript 本地打包，这样你即可将应用安装到设备上，在未连接电脑的情况下进行测试。
 
-To configure your app to be built using the `Release` scheme, go to **Product** → **Scheme** → **Edit Scheme**. Select the **Run** tab in the sidebar, then set the Build Configuration dropdown to `Release`.
+要配置你的应用使用 `Release` 方案构建，请依次点击 **Product** → **Scheme** → **Edit Scheme**。在侧边栏选择 **Run** 标签，然后将 Build Configuration 下拉菜单设置为 `Release`。
 
 ![](/docs/assets/ConfigureReleaseScheme.png)
 
-#### Pro Tips
+#### 专业提示
 
-The static bundle is built every time you target a physical device, even in Debug. If you want to save time, turn off bundle generation in Debug by adding the following to your shell script in the Xcode Build Phase `Bundle React Native code and images`:
+静态包每次针对物理设备构建时都会生成，即使是在 Debug 模式下。如果想节省时间，可以通过在 Xcode 构建阶段 `Bundle React Native code and images` 的 shell 脚本中添加如下内容，关闭 Debug 模式下的打包生成：
 
 ```shell
  if [ "${CONFIGURATION}" == "Debug" ]; then
@@ -27,33 +27,33 @@ The static bundle is built every time you target a physical device, even in Debu
  fi
 ```
 
-### 2. Build app for release
+### 2. 构建发布版本应用
 
-You can now build your app for release by tapping <kbd>Cmd ⌘</kbd> + <kbd>B</kbd> or selecting **Product** → **Build** from the menu bar. Once built for release, you'll be able to distribute the app to beta testers and submit the app to the App Store.
+现在你可以通过按 <kbd>Cmd ⌘</kbd> + <kbd>B</kbd> 或从菜单栏选择 **Product** → **Build** 构建发布版本的应用。构建完成后，你可以将应用分发给测试人员或者提交到 App Store。
 
 :::info
-You can also use the `React Native CLI` to perform this operation using the option `--mode` with the value `Release` (e.g. from the root of your project: `npm run ios -- --mode="Release"` or `yarn ios --mode Release`).
+你也可以使用 `React Native CLI` 通过 `--mode` 选项指定值为 `Release` 来执行这一步（例如，在项目根目录运行：`npm run ios -- --mode="Release"` 或 `yarn ios --mode Release`）。
 :::
 
-Once you are done with the testing and ready to publish to App Store, follow along with this guide.
+测试完成并准备发布到 App Store 后，请按照以下步骤操作：
 
-- Launch your terminal, and navigate into the iOS folder of your app and type `open .`.
-- Double click on YOUR_APP_NAME.xcworkspace. It should launch Xcode.
-- Click on `Product` → `Archive`. Make sure to set the device to "Any iOS Device (arm64)".
+- 打开终端，进入你的应用的 iOS 文件夹，输入 `open .`。
+- 双击 YOUR_APP_NAME.xcworkspace，启动 Xcode。
+- 点击 `Product` → `Archive`。确保将设备设置为 “Any iOS Device (arm64)”。
 
 :::note
-Check your Bundle Identifier and make sure it is exactly same as the one you have created in the Identifiers in Apple Developer Dashboard.
+检查你的 Bundle Identifier，确保它与 Apple 开发者后台的标识符完全一致。
 :::
 
-- After the archive is completed, in the archive window, click on `Distribute App`.
-- Click on `App Store Connect` now (if you want to publish in App Store).
-- Click `Upload` → Make sure all the checkboxes are selected, hit `Next`.
-- Choose between `Automatically manage signing` and `Manually manage signing` based on your needs.
-- Click on `Upload`.
-- Now you can find it in the App Store Connect under TestFlight.
+- 存档完成后，在存档窗口点击 `Distribute App`。
+- 选择 `App Store Connect`（如果你想发布到 App Store）。
+- 点击 `Upload` → 确认所有复选框已选中，点击 `Next`。
+- 根据需要选择 `Automatically manage signing` 或 `Manually manage signing`。
+- 点击 `Upload`。
+- 现在你可以在 App Store Connect 的 TestFlight 中找到它。
 
-Now fill up the necessary information and in the Build Section, select the build of the app and click on `Save` → `Submit For Review`.
+接着填写必要的信息，在 Build 部分选择应用构建版本，点击 `Save` → `Submit For Review`。
 
-### 3. Screenshots
+### 3. 截图
 
-The Apple Store requires you have screenshots for the latest devices. The reference for such devices would be found [here](https://developer.apple.com/help/app-store-connect/reference/screenshot-specifications/). Note that screenshots for some display sizes are not required if they are provided for other sizes.
+苹果商店要求你为最新设备提供截图。支持设备的参考信息见[此处](https://developer.apple.com/help/app-store-connect/reference/screenshot-specifications/)。注意，如果某些屏幕尺寸已提供截图，部分尺寸的截图则不必重复提交。

@@ -3,17 +3,17 @@ id: toastandroid
 title: ToastAndroid
 ---
 
-React Native's ToastAndroid API exposes the Android platform's ToastAndroid module as a JS module. It provides the method `show(message, duration)` which takes the following parameters:
+React Native 的 ToastAndroid API 将 Android 平台的 ToastAndroid 模块作为 JS 模块暴露。它提供了 `show(message, duration)` 方法，参数如下：
 
-- _message_ A string with the text to toast
-- _duration_ The duration of the toast—either `ToastAndroid.SHORT` or `ToastAndroid.LONG`
+- _message_ 要显示的文本字符串
+- _duration_ Toast 显示的时长——可以是 `ToastAndroid.SHORT` 或 `ToastAndroid.LONG`
 
-You can alternatively use `showWithGravity(message, duration, gravity)` to specify where the toast appears in the screen's layout. May be `ToastAndroid.TOP`, `ToastAndroid.BOTTOM` or `ToastAndroid.CENTER`.
+你也可以使用 `showWithGravity(message, duration, gravity)` 来指定 toast 在屏幕布局中的显示位置。位置可为 `ToastAndroid.TOP`、`ToastAndroid.BOTTOM` 或 `ToastAndroid.CENTER`。
 
-The `showWithGravityAndOffset(message, duration, gravity, xOffset, yOffset)` method adds the ability to specify an offset with in pixels.
+`showWithGravityAndOffset(message, duration, gravity, xOffset, yOffset)` 方法可以进一步指定像素偏移量。
 
 :::note
-Starting with Android 11 (API level 30), setting the gravity has no effect on text toasts. Read about the changes [here](https://developer.android.com/about/versions/11/behavior-changes-11#text-toast-api-changes).
+从 Android 11（API 级别 30）开始，设置重力（gravity）不会对文本 toast 有效。详见[这里](https://developer.android.com/about/versions/11/behavior-changes-11#text-toast-api-changes)。
 :::
 
 ```SnackPlayer name=Toast%20Android%20API%20Example&supportedPlatforms=android
@@ -23,12 +23,12 @@ import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   const showToast = () => {
-    ToastAndroid.show('A pikachu appeared nearby !', ToastAndroid.SHORT);
+    ToastAndroid.show('附近出现了一个皮卡丘！', ToastAndroid.SHORT);
   };
 
   const showToastWithGravity = () => {
     ToastAndroid.showWithGravity(
-      'All Your Base Are Belong To Us',
+      '你所有的基地都属于我们',
       ToastAndroid.SHORT,
       ToastAndroid.CENTER,
     );
@@ -36,7 +36,7 @@ const App = () => {
 
   const showToastWithGravityAndOffset = () => {
     ToastAndroid.showWithGravityAndOffset(
-      'A wild toast appeared!',
+      '一个野生的 toast 出现了！',
       ToastAndroid.LONG,
       ToastAndroid.BOTTOM,
       25,
@@ -47,13 +47,13 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <Button title="Toggle Toast" onPress={() => showToast()} />
+        <Button title="切换 Toast" onPress={() => showToast()} />
         <Button
-          title="Toggle Toast With Gravity"
+          title="切换带重力的 Toast"
           onPress={() => showToastWithGravity()}
         />
         <Button
-          title="Toggle Toast With Gravity & Offset"
+          title="切换带重力和偏移的 Toast"
           onPress={() => showToastWithGravityAndOffset()}
         />
       </SafeAreaView>
@@ -76,9 +76,9 @@ export default App;
 
 ---
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `show()`
 
@@ -90,7 +90,7 @@ static show(message: string, duration: number);
 
 ### `showWithGravity()`
 
-This property will only work on Android API 29 and below. For similar functionality on higher Android APIs, consider using snackbar or notification.
+该属性仅在 Android API 29 及以下版本有效。在更高的 Android API 上，类似功能建议使用 snackbar 或通知实现。
 
 ```tsx
 static showWithGravity(message: string, duration: number, gravity: number);
@@ -100,7 +100,7 @@ static showWithGravity(message: string, duration: number, gravity: number);
 
 ### `showWithGravityAndOffset()`
 
-This property will only work on Android API 29 and below. For similar functionality on higher Android APIs, consider using snackbar or notification.
+该属性仅在 Android API 29 及以下版本有效。在更高的 Android API 上，类似功能建议使用 snackbar 或通知实现。
 
 ```tsx
 static showWithGravityAndOffset(
@@ -112,11 +112,11 @@ static showWithGravityAndOffset(
 );
 ```
 
-## Properties
+## 属性
 
 ### `SHORT`
 
-Indicates the duration on the screen.
+表示在屏幕上的显示时长。
 
 ```tsx
 static SHORT: number;
@@ -126,7 +126,7 @@ static SHORT: number;
 
 ### `LONG`
 
-Indicates the duration on the screen.
+表示在屏幕上的显示时长。
 
 ```tsx
 static LONG: number;
@@ -136,7 +136,7 @@ static LONG: number;
 
 ### `TOP`
 
-Indicates the position on the screen.
+表示在屏幕上的位置。
 
 ```tsx
 static TOP: number;
@@ -146,7 +146,7 @@ static TOP: number;
 
 ### `BOTTOM`
 
-Indicates the position on the screen.
+表示在屏幕上的位置。
 
 ```tsx
 static BOTTOM: number;
@@ -156,7 +156,7 @@ static BOTTOM: number;
 
 ### `CENTER`
 
-Indicates the position on the screen.
+表示在屏幕上的位置。
 
 ```tsx
 static CENTER: number;

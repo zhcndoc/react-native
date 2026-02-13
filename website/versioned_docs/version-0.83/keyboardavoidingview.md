@@ -3,9 +3,9 @@ id: keyboardavoidingview
 title: KeyboardAvoidingView
 ---
 
-This component will automatically adjust its height, position, or bottom padding based on the keyboard height to remain visible while the virtual keyboard is displayed.
+该组件会根据键盘的高度自动调整自身的高度、位置或底部内边距，以确保在虚拟键盘显示时仍然保持可见。
 
-## Example
+## 示例
 
 ```SnackPlayer name=KeyboardAvoidingView&supportedPlatforms=android,ios
 import React from 'react';
@@ -69,45 +69,45 @@ export default KeyboardAvoidingComponent;
 
 ---
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
 ### [View Props](view.md#props)
 
-Inherits [View Props](view.md#props).
+继承自 [View Props](view.md#props)。
 
 ---
 
 ### `behavior`
 
-Specify how to react to the presence of the keyboard.
+指定对键盘出现时的反应方式。
 
 :::note
-Android and iOS both interact with this prop differently. On both iOS and Android, setting `behavior` is recommended.
+Android 和 iOS 对此属性的处理方式不同。建议在 iOS 和 Android 上都设置 `behavior`。
 :::
 
-| Type                                        |
+| 类型                                        |
 | ------------------------------------------- |
-| enum(`'height'`, `'position'`, `'padding'`) |
+| 枚举(`'height'`, `'position'`, `'padding'`) |
 
 ---
 
 ### `contentContainerStyle`
 
-The style of the content container (View) when behavior is `'position'`.
+当 `behavior` 为 `'position'` 时，内容容器（View）的样式。
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
-| [View Style](view-style-props.md) |
+| [View 样式](view-style-props.md) |
 
 ---
 
 ### `enabled`
 
-Enabled or disabled KeyboardAvoidingView.
+是否启用 KeyboardAvoidingView。
 
-| Type    | Default |
+| 类型    | 默认值 |
 | ------- | ------- |
 | boolean | `true`  |
 
@@ -115,8 +115,8 @@ Enabled or disabled KeyboardAvoidingView.
 
 ### `keyboardVerticalOffset`
 
-This is the distance between the top of the user screen and the react native view, may be non-zero in some use cases.
+这是用户屏幕顶部与 React Native 视图之间的距离，在某些情况下可能非零。
 
-| Type   | Default |
+| 类型   | 默认值 |
 | ------ | ------- |
 | number | `0`     |

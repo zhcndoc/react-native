@@ -1,73 +1,73 @@
-## Installing dependencies
+## 安装依赖
 
-You will need Node, Watchman, the React Native command line interface, Xcode and CocoaPods.
+你需要 Node、Watchman、React Native 命令行工具、Xcode 和 CocoaPods。
 
-While you can use any editor of your choice to develop your app, you will need to install Xcode in order to set up the necessary tooling to build your React Native app for iOS.
+虽然你可以使用任何你喜欢的编辑器来开发应用，但你需要安装 Xcode 来设置构建 iOS React Native 应用所需的工具。
 
 ### Node & Watchman
 
-We recommend installing Node and Watchman using [Homebrew](https://brew.sh/). Run the following commands in a Terminal after installing Homebrew:
+我们推荐使用 [Homebrew](https://brew.sh/) 来安装 Node 和 Watchman。安装完 Homebrew 后，在终端运行以下命令：
 
 ```shell
 brew install node
 brew install watchman
 ```
 
-If you have already installed Node on your system, make sure it is Node 20.19.4 or newer.
+如果你的系统里已经安装了 Node，请确保版本为 20.19.4 或更新。
 
-[Watchman](https://facebook.github.io/watchman) is a tool by Facebook for watching changes in the filesystem. It is highly recommended you install it for better performance.
+[Watchman](https://facebook.github.io/watchman) 是 Facebook 开发的一个文件系统变更监视工具。强烈建议安装它以获得更好的性能。
 
 ### Xcode
 
-Please use the **latest version** of Xcode.
+请使用 **最新版本** 的 Xcode。
 
-The easiest way to install Xcode is via the [Mac App Store](https://itunes.apple.com/us/app/xcode/id497799835?mt=12). Installing Xcode will also install the iOS Simulator and all the necessary tools to build your iOS app.
+安装 Xcode 最简单的方式是通过 [Mac App Store](https://itunes.apple.com/us/app/xcode/id497799835?mt=12)。安装 Xcode 会同时安装 iOS 模拟器及构建 iOS 应用所需的所有工具。
 
-#### Command Line Tools
+#### 命令行工具
 
-You will also need to install the Xcode Command Line Tools. Open Xcode, then choose **Settings... (or Preferences...)** from the Xcode menu. Go to the Locations panel and install the tools by selecting the most recent version in the Command Line Tools dropdown.
+你还需要安装 Xcode 命令行工具。打开 Xcode，选择 Xcode 菜单中的 **Settings...（或 Preferences...）**。进入 Locations（位置）面板，在 Command Line Tools（命令行工具）下拉菜单中选择最新版本进行安装。
 
-![Xcode Command Line Tools](/docs/assets/GettingStartedXcodeCommandLineTools.png)
+![Xcode 命令行工具](/docs/assets/GettingStartedXcodeCommandLineTools.png)
 
-#### Installing an iOS Simulator in Xcode
+#### 在 Xcode 中安装 iOS 模拟器
 
-To install a simulator, open **Xcode > Settings... (or Preferences...)** and select the **Platforms (or Components)** tab. Select a simulator with the corresponding version of iOS you wish to use.
+要安装模拟器，打开 **Xcode > Settings...（或 Preferences...）**，选择 **Platforms（或 Components）** 标签。选择你想使用的对应 iOS 版本的模拟器。
 
-If you are using Xcode version 14.0 or greater to install a simulator, open **Xcode > Settings > Platforms** tab, then click "+" icon and select **iOS…** option.
+如果你使用的是 Xcode 14.0 或更高版本安装模拟器，打开 **Xcode > Settings > Platforms** 标签，点击 "+" 图标并选择 **iOS…** 选项。
 
 #### CocoaPods
 
-[CocoaPods](https://cocoapods.org/) is one of the dependency management system available for iOS. CocoaPods is a Ruby [gem](https://en.wikipedia.org/wiki/RubyGems). You can install CocoaPods using the version of Ruby that ships with the latest version of macOS.
+[CocoaPods](https://cocoapods.org/) 是 iOS 上常用的依赖管理工具。CocoaPods 是一个 Ruby [gem](https://en.wikipedia.org/wiki/RubyGems)。你可以使用 macOS 最新版本自带的 Ruby 来安装 CocoaPods。
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+更多信息，请访问 [CocoaPods 入门指南](https://guides.cocoapods.org/using/getting-started.html)。
 
-### [Optional] Configuring your environment
+### [可选] 配置你的环境
 
-Starting from React Native version 0.69, it is possible to configure the Xcode environment using the `.xcode.env` file provided by the template.
+从 React Native 0.69 版本开始，可以使用模板中提供的 `.xcode.env` 文件配置 Xcode 环境。
 
-The `.xcode.env` file contains an environment variable to export the path to the `node` executable in the `NODE_BINARY` variable.
-This is the **suggested approach** to decouple the build infrastructure from the system version of `node`. You should customize this variable with your own path or your own `node` version manager, if it differs from the default.
+`.xcode.env` 文件包含一个环境变量，用于将 `node` 可执行文件的路径导出到 `NODE_BINARY` 变量中。  
+这是 **推荐的做法**，用来将构建环境与系统默认的 `node` 版本解耦。如果你的路径不同或你使用了自己的 `node` 版本管理工具，请自行定制该变量。
 
-On top of this, it's possible to add any other environment variable and to source the `.xcode.env` file in your build script phases. If you need to run script that requires some specific environment, this is the **suggested approach**: it allows to decouple the build phases from a specific environment.
+此外，你还可以添加其他环境变量，并在构建脚本中引用 `.xcode.env` 文件。如果你需要在脚本中运行特定环境下的命令，这是 **推荐做法**：可以让构建阶段与具体环境解耦。
 
-:::info
-If you are already using [NVM](https://nvm.sh/) (a command which helps you install and switch between versions of Node.js) and [zsh](https://ohmyz.sh/), you might want to move the code that initialize NVM from your `~/.zshrc` into a `~/.zshenv` file to help Xcode find your Node executable:
+:::info  
+如果你已经使用 [NVM](https://nvm.sh/)（一个帮助安装和切换 Node.js 版本的命令行工具）和 [zsh](https://ohmyz.sh/)，建议你将初始化 NVM 的代码从 `~/.zshrc` 移动到 `~/.zshenv` 文件，帮助 Xcode 找到你的 Node 可执行文件：
 
 ```zsh
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # 这会加载 nvm
 ```
 
-You might also want to ensure that all "shell script build phase" of your Xcode project, is using `/bin/zsh` as its shell.
+你还应确保 Xcode 项目中所有“shell 脚本构建阶段”都使用 `/bin/zsh` 作为 shell。  
 :::
 
-<h3>That's it!</h3>
+<h3>就这些！</h3>
 
-Congratulations! You successfully set up your development environment.
+恭喜你！你已成功搭建好开发环境。
 
 <center><img src="/docs/assets/GettingStartedCongratulations.png" width="150"></img></center>
 
-<h2>Now what?</h2>
+<h2>接下来？</h2>
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](integration-with-existing-apps.md).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](getting-started).
+- 如果你想把这段新的 React Native 代码集成到已有应用中，请查看[集成指南](integration-with-existing-apps.md)。
+- 如果你想了解更多关于 React Native 的内容，请查看[React Native 简介](getting-started)。

@@ -1,74 +1,74 @@
 ---
-title: 'Use a framework to build React Native apps'
+title: '使用框架构建 React Native 应用'
 authors: [cortinico]
-tags: [announcement]
+tags: [公告]
 date: 2024-06-25
 ---
 
-At [React Conf](https://www.youtube.com/live/0ckOUBiuxVY?si=pU4qP4eB5iWfY0IG&t=2320), we updated our guidance on the best tool to get started building React Native apps: a **React Native framework** - a toolbox with all the necessary APIs to let you build production-ready apps.
+在 [React Conf](https://www.youtube.com/live/0ckOUBiuxVY?si=pU4qP4eB5iWfY0IG&t=2320) 上，我们更新了关于开始构建 React Native 应用的最佳工具的指导：**React Native 框架**——一个包含所有必要 API 的工具箱，帮助你构建生产就绪的应用。
 
-Using React Native frameworks, such as Expo, is now the **recommended** approach to create new apps.
+使用 React Native 框架，例如 Expo，现在是创建新应用的**推荐**方式。
 
-In this blogpost we want to walk you through what they are in detail and what they mean for you as a React Native developer starting a new project.
+在这篇博文中，我们将详细介绍它们是什么，以及它们对你作为React Native开发者启动新项目意味着什么。
 
 <!-- truncate  -->
 
-## What is a React Native framework?
+## 什么是 React Native 框架？
 
-If you’ve been building production apps, you probably know that there is a set of common problems you will need to solve sooner or later.
+如果你一直在构建生产环境应用，你可能知道早晚都需要解决一组常见问题。
 
-When building any application on either web or native, you probably want your users to navigate through different screens, fetch data, and store the state of your user. But for native apps there is even more to deal with: you need tools to upgrade your native code between React Native versions, manage compatible versions of all of your dependencies, and deal with native build tools.
+构建任何网络或原生应用时，你都会希望用户能够在不同的屏幕间导航、获取数据并存储用户状态。但对于原生应用来说，有更多需要处理的内容：你需要工具来升级不同 React Native 版本间的原生代码，管理所有依赖的兼容版本，并处理原生构建工具。
 
-It takes a village to bring an app from idea to production without the right tools.
+没有合适的工具，让一个应用从想法变成生产环境需要整个团队的力量。
 
-We want you to focus on writing beautiful applications and features for your users, and not solving those common problems over and over.
+我们希望你专注于为用户编写漂亮的应用和功能，而不是反复解决那些常见问题。
 
-That’s why we believe that the best way for you to experience React Native is through a framework that offers a toolbox with all the necessary tools you need to build production-ready applications.
+这就是为什么我们认为，体验 React Native 的最佳方式是通过提供完整工具箱的框架，帮助你构建生产就绪的应用。
 
-We’ve found that **you’re either using a framework or you’re building your own framework**.
+我们发现，**你要么在使用一个框架，要么在自己构建框架**。
 
-There is nothing wrong with building your own framework, by crafting your own solutions for routing, navigation, deploying, and so on. Major corporations like Meta and Microsoft build their own frameworks internally to integrate deeply into their brownfield apps. But we believe that most people will be better off by using an existing framework.
+自己构建框架、制定自己的路由、导航、部署等解决方案没错。像 Meta 和微软这样的巨头公司都会在内部构建自己的框架，以便深入集成现有的复杂应用。但我们相信，大多数人使用现成框架会更好。
 
-If you’ve been using React on web, you’re probably familiar with a similar concept of [production-grade React frameworks](https://react.dev/learn/start-a-new-react-project#production-grade-react-frameworks).
+如果你在 Web 上使用 React，你可能对类似的[生产级 React 框架](https://react.dev/learn/start-a-new-react-project#production-grade-react-frameworks)概念比较熟悉。
 
-As of today, the only recommended community framework for React Native is [Expo](https://docs.expo.dev/). Folks at Expo have been investing in the React Native ecosystem since the early days of React Native and as of today, we believe the developer experience offered by Expo is best in class.
+截至目前，唯一被推荐的 React Native 社区框架是 [Expo](https://docs.expo.dev/)。Expo 团队自 React Native 早期起一直在投资其生态系统，如今我们认为 Expo 提供的开发者体验处于行业领先水平。
 
 :::note
 
-Expo, the framework, is and will remain free and open source, while Expo Application Services (EAS) is an optional paid service.
+Expo 框架是且将一直保持免费和开源，而 Expo 应用服务（EAS）是可选付费服务。
 
 :::
 
 <!--alex ignore he-she retext-equality-->
 
-If you haven’t used Expo recently, make sure you don’t miss [this talk from Kadi @ Expo](https://www.youtube.com/live/0ckOUBiuxVY?si=N-WSfmAJSMfd6wDL&t=3888) where she’s showcasing what you can do with Expo in 2024.
+如果你最近没用过 Expo，千万不要错过 [Expo 的 Kadi 演讲](https://www.youtube.com/live/0ckOUBiuxVY?si=N-WSfmAJSMfd6wDL&t=3888)，她展示了 2024 年使用 Expo 可以做些什么。
 
-We’ve also updated the [Getting Started page](https://reactnative.dev/docs/environment-setup) on the website to reflect this recommendation.
+我们还更新了网站上的 [入门指导页](https://reactnative.dev/docs/environment-setup)，以反映这一推荐。
 
-## How will frameworks affect you?
+## 框架将如何影响你？
 
-If you’re already using a recommended framework such as Expo, you’re already good to go!
+如果你已经在使用像 Expo 这样的推荐框架，那你已经准备好开始了！
 
-If you'd like to migrate your existing app to Expo, you can find instructions on [the official Expo website](https://docs.expo.dev/bare/overview/). Expo offers many benefits, such as an easier way to [upgrade your React Native version](https://docs.expo.dev/workflow/upgrading-expo-sdk-walkthrough/), a better developer experience, and much more.
+如果你想将现有应用迁移到 Expo，可以在 [官方 Expo 网站](https://docs.expo.dev/bare/overview/) 找到迁移指南。Expo 提供许多好处，比如更便捷的 [升级 React Native 版本](https://docs.expo.dev/workflow/upgrading-expo-sdk-walkthrough/)、更优的开发者体验等。
 
-However, if you can't or don't want to migrate to Expo, that's fine too. Using React Native without an official framework will continue to be supported. The tools you’ve been using such as React Native Community CLI, Template and [Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) will keep on working as usual.
+但是，如果你不能或者不想迁移到 Expo，也没关系。继续使用无官方框架的 React Native 仍将被支持。你一直使用的工具，如 React Native Community CLI、模板和 [升级助手](https://react-native-community.github.io/upgrade-helper/) 依然照常工作。
 
-The `react-native init` command has moved out of core and is now accessible via:
+`react-native init` 命令已从核心库移出，现在可以通过以下命令访问：
 
 ```
 npx @react-native-community/cli@latest init
 ```
 
-and on GitHub at [react-native-community/cli](https://github.com/react-native-community/cli).
+同时可在 GitHub 上找到：[react-native-community/cli](https://github.com/react-native-community/cli)。
 
-If you’re a React Native library developer, we collected a list of recommendations on which APIs to use. [Read more in the RFC](https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0759-react-native-frameworks.md#what-do-we-recommend-to-react-native-library-developers).
+如果你是 React Native 库的开发者，我们整理了一份关于推荐使用哪些 API 的建议列表。[详情请见 RFC](https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0759-react-native-frameworks.md#what-do-we-recommend-to-react-native-library-developers)。
 
-## Further reading
+## 进一步阅读
 
-If you’re interested in learning more about the reasoning behind this decision, we invite you to read the [RFC0759: React Native Frameworks](https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0759-react-native-frameworks.md#what-do-we-recommend-to-react-native-library-developers). This RFC is a result of a multi-month effort involving countless discussions and brainstorming among different partners and players of the React Native ecosystem.
+如果你有兴趣了解这一决定背后的原因，欢迎阅读 [RFC0759：React Native 框架](https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0759-react-native-frameworks.md#what-do-we-recommend-to-react-native-library-developers)。这份 RFC 是多月努力的成果，包含了无数来自 React Native 生态内不同合作伙伴和参与者的讨论与头脑风暴。
 
-While Expo today is the only recommended framework, the RFC also contains [guidelines](https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0759-react-native-frameworks.md#becoming-a-react-native-framework) on how to become a recommended framework, as we hope to see more competition and innovation in this space.
+尽管目前 Expo 是唯一被推荐的框架，该 RFC 也包含了[如何成为推荐框架的指导](https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0759-react-native-frameworks.md#becoming-a-react-native-framework)，我们希望看到这个领域出现更多竞争与创新。
 
-Moreover, you should check out the talk [useFrameworks()](https://www.youtube.com/watch?v=lifGTznLBcw) at App.js 2024 where we presented this RFC and the necessary changes in a short format.
+此外，你还可以观看在 App.js 2024 上的演讲 [useFrameworks()](https://www.youtube.com/watch?v=lifGTznLBcw)，在那里我们以简短的形式介绍了这一 RFC 及必要的变更。
 
-We believe that by clarifying the respective responsibilities of React Native Core and the Frameworks, we can foster a healthier ecosystem and drive growth & innovation for React Native.
+我们相信，通过明确 React Native 核心与框架各自的职责，可以促进生态系统的健康发展，推动 React Native 的增长与创新。

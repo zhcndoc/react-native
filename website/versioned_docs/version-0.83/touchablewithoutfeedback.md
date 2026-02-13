@@ -4,14 +4,14 @@ title: TouchableWithoutFeedback
 ---
 
 :::tip
-If you're looking for a more extensive and future-proof way to handle touch-based input, check out the [Pressable](pressable.md) API.
+如果你正在寻找一种更全面、更具未来适应性的方式来处理触摸输入，请查看 [Pressable](pressable.md) API。
 :::
 
-Do not use unless you have a very good reason. All elements that respond to press should have a visual feedback when touched.
+除非有非常充分的理由，否则不要使用。所有响应按压的元素在被触摸时都应具有视觉反馈。
 
-`TouchableWithoutFeedback` supports only one child. If you wish to have several child components, wrap them in a View. Importantly, `TouchableWithoutFeedback` works by cloning its child and applying responder props to it. It is therefore required that any intermediary components pass through those props to the underlying React Native component.
+`TouchableWithoutFeedback` 只支持一个子元素。如果你希望包含多个子组件，请将它们包装在一个 View 中。重要的是，`TouchableWithoutFeedback` 通过克隆其子组件并将响应者属性应用到它来工作。因此，任何中间组件都需要将这些属性传递给底层的 React Native 组件。
 
-## Usage Pattern
+## 使用模式
 
 ```tsx
 function MyComponent(props: MyComponentProps) {
@@ -27,7 +27,7 @@ function MyComponent(props: MyComponentProps) {
 </TouchableWithoutFeedback>;
 ```
 
-## Example
+## 示例
 
 ```SnackPlayer name=TouchableWithoutFeedback
 import React, {useState} from 'react';
@@ -45,11 +45,11 @@ const TouchableWithoutFeedbackExample = () => {
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <View style={styles.countContainer}>
-          <Text style={styles.countText}>Count: {count}</Text>
+          <Text style={styles.countText}>计数: {count}</Text>
         </View>
         <TouchableWithoutFeedback onPress={onPress}>
           <View style={styles.button}>
-            <Text>Touch Here</Text>
+            <Text>点这里触摸</Text>
           </View>
         </TouchableWithoutFeedback>
       </SafeAreaView>
@@ -82,17 +82,17 @@ export default TouchableWithoutFeedbackExample;
 
 ---
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
 ### `accessibilityIgnoresInvertColors` <div className="label ios">iOS</div>
 
-A value indicating this view should or should not be inverted when color inversion is turned on. A value of `true` will tell the view to not be inverted even if color inversion is turned on.
+指示当启用颜色反转时，该视图是否应被反转。`true` 表示即使启用了颜色反转，该视图也不被反转。
 
-See the [Accessibility guide](accessibility.md#accessibilityignoresinvertcolors) for more information.
+更多信息请参阅 [辅助功能指南](accessibility.md#accessibilityignoresinvertcolors)。
 
-| Type    |
+| 类型    |
 | ------- |
 | Boolean |
 
@@ -100,9 +100,9 @@ See the [Accessibility guide](accessibility.md#accessibilityignoresinvertcolors)
 
 ### `accessible`
 
-When `true`, indicates that the view is an accessibility element. By default, all the touchable elements are accessible.
+为 `true` 时，表示该视图是一个辅助功能元素。默认情况下，所有可触摸元素都是可访问的。
 
-| Type |
+| 类型 |
 | ---- |
 | bool |
 
@@ -110,9 +110,9 @@ When `true`, indicates that the view is an accessibility element. By default, al
 
 ### `accessibilityLabel`
 
-Overrides the text that's read by the screen reader when the user interacts with the element. By default, the label is constructed by traversing all the children and accumulating all the `Text` nodes separated by space.
+覆盖屏幕阅读器与用户交互时朗读的文本。默认标签通过遍历所有子元素并累积所有的 `Text` 节点，用空格分隔构成。
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -120,11 +120,11 @@ Overrides the text that's read by the screen reader when the user interacts with
 
 ### `accessibilityLanguage` <div className="label ios">iOS</div>
 
-A value indicating which language should be used by the screen reader when the user interacts with the element. It should follow the [BCP 47 specification](https://www.rfc-editor.org/info/bcp47).
+指定屏幕阅读器应使用的语言，遵循 [BCP 47规范](https://www.rfc-editor.org/info/bcp47)。
 
-See the [iOS `accessibilityLanguage` doc](https://developer.apple.com/documentation/objectivec/nsobject/1615192-accessibilitylanguage) for more information.
+更多信息请参阅 [iOS `accessibilityLanguage` 文档](https://developer.apple.com/documentation/objectivec/nsobject/1615192-accessibilitylanguage)。
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -132,9 +132,9 @@ See the [iOS `accessibilityLanguage` doc](https://developer.apple.com/documentat
 
 ### `accessibilityHint`
 
-An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not clear from the accessibility label.
+辅助功能提示，用于帮助用户理解执行操作后会发生什么，当该结果无法从辅助功能标签明确看出时使用。
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -142,39 +142,39 @@ An accessibility hint helps users understand what will happen when they perform 
 
 ### `accessibilityRole`
 
-`accessibilityRole` communicates the purpose of a component to the user of an assistive technology.
+`accessibilityRole` 用于向辅助技术的用户传达组件的用途。
 
-`accessibilityRole` can be one of the following:
+`accessibilityRole` 可以是以下之一：
 
-- `'none'` - Used when the element has no role.
-- `'button'` - Used when the element should be treated as a button.
-- `'link'` - Used when the element should be treated as a link.
-- `'search'` - Used when the text field element should also be treated as a search field.
-- `'image'` - Used when the element should be treated as an image. Can be combined with button or link, for example.
-- `'keyboardkey'` - Used when the element acts as a keyboard key.
-- `'text'` - Used when the element should be treated as static text that cannot change.
-- `'adjustable'` - Used when an element can be "adjusted" (e.g. a slider).
-- `'imagebutton'` - Used when the element should be treated as a button and is also an image.
-- `'header'` - Used when an element acts as a header for a content section (e.g. the title of a navigation bar).
-- `'summary'` - Used when an element can be used to provide a quick summary of current conditions in the app when the app first launches.
-- `'alert'` - Used when an element contains important text to be presented to the user.
-- `'checkbox'` - Used when an element represents a checkbox which can be checked, unchecked, or have mixed checked state.
-- `'combobox'` - Used when an element represents a combo box, which allows the user to select among several choices.
-- `'menu'` - Used when the component is a menu of choices.
-- `'menubar'` - Used when a component is a container of multiple menus.
-- `'menuitem'` - Used to represent an item within a menu.
-- `'progressbar'` - Used to represent a component which indicates progress of a task.
-- `'radio'` - Used to represent a radio button.
-- `'radiogroup'` - Used to represent a group of radio buttons.
-- `'scrollbar'` - Used to represent a scroll bar.
-- `'spinbutton'` - Used to represent a button which opens a list of choices.
-- `'switch'` - Used to represent a switch which can be turned on and off.
-- `'tab'` - Used to represent a tab.
-- `'tablist'` - Used to represent a list of tabs.
-- `'timer'` - Used to represent a timer.
-- `'toolbar'` - Used to represent a tool bar (a container of action buttons or components).
+- `'none'` - 元素无角色。
+- `'button'` - 元素应被视为按钮。
+- `'link'` - 元素应被视为链接。
+- `'search'` - 文本字段元素也应被视为搜索字段。
+- `'image'` - 元素应被视为图像。可与按钮或链接结合使用。
+- `'keyboardkey'` - 元素充当键盘按键。
+- `'text'` - 元素应被视为静态文本，不可变化。
+- `'adjustable'` - 元素可“调整”（例如滑块）。
+- `'imagebutton'` - 元素既是按钮又是图像。
+- `'header'` - 元素充当内容区域的标题（例如导航栏标题）。
+- `'summary'` - 元素用于在应用启动时快速提供当前状态摘要。
+- `'alert'` - 元素包含重要文本，应呈现给用户。
+- `'checkbox'` - 元素代表可选中、未选中或混合状态的复选框。
+- `'combobox'` - 元素代表组合框，允许用户从多个选项中选择。
+- `'menu'` - 元素是一个选项菜单。
+- `'menubar'` - 元素是多个菜单的容器。
+- `'menuitem'` - 元素是菜单内的项目。
+- `'progressbar'` - 元素表示任务进度条。
+- `'radio'` - 元素表示单选按钮。
+- `'radiogroup'` - 元素表示单选按钮组。
+- `'scrollbar'` - 元素表示滚动条。
+- `'spinbutton'` - 元素表示打开选择列表的按钮。
+- `'switch'` - 元素表示开关，可开或关。
+- `'tab'` - 元素表示标签页。
+- `'tablist'` - 元素表示标签页列表。
+- `'timer'` - 元素表示计时器。
+- `'toolbar'` - 元素表示工具栏（动作按钮或组件的容器）。
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -182,33 +182,33 @@ An accessibility hint helps users understand what will happen when they perform 
 
 ### `accessibilityState`
 
-Describes the current state of a component to the user of an assistive technology.
+描述组件当前状态，供辅助技术使用。
 
-See the [Accessibility guide](accessibility.md#accessibilitystate-ios-android) for more information.
+更多信息请参阅 [辅助功能指南](accessibility.md#accessibilitystate-ios-android)。
 
-| Type                                                                                             |
+| 类型                                                                                             |
 | ------------------------------------------------------------------------------------------------ |
-| object: `{disabled: bool, selected: bool, checked: bool or 'mixed', busy: bool, expanded: bool}` |
+| 对象: `{disabled: bool, selected: bool, checked: bool 或 'mixed', busy: bool, expanded: bool}` |
 
 ---
 
 ### `accessibilityActions`
 
-Accessibility actions allow an assistive technology to programmatically invoke the actions of a component. The `accessibilityActions` property should contain a list of action objects. Each action object should contain the field name and label.
+辅助功能动作允许辅助技术以编程方式调用组件的动作。该属性应包含一个动作对象列表，每个对象应包含名称和标签字段。
 
-See the [Accessibility guide](accessibility.md#accessibility-actions) for more information.
+更多信息请参阅 [辅助功能指南](accessibility.md#accessibility-actions)。
 
-| Type  |
+| 类型  |
 | ----- |
-| array |
+| 数组 |
 
 ---
 
 ### `aria-busy`
 
-Indicates an element is being modified and that assistive technologies may want to wait until the changes are complete before informing the user about the update.
+表示元素正在被修改，辅助技术可能希望等待变更完成后再通知用户。
 
-| Type    | Default |
+| 类型    | 默认值 |
 | ------- | ------- |
 | boolean | false   |
 
@@ -216,19 +216,19 @@ Indicates an element is being modified and that assistive technologies may want 
 
 ### `aria-checked`
 
-Indicates the state of a checkable element. This field can either take a boolean or the "mixed" string to represent mixed checkboxes.
+表示可选中元素的状态。可为布尔值或字符串 "mixed"（混合状态复选框）。
 
-| Type             | Default |
+| 类型             | 默认值 |
 | ---------------- | ------- |
-| boolean, 'mixed' | false   |
+| boolean，'mixed' | false   |
 
 ---
 
 ### `aria-disabled`
 
-Indicates that the element is perceivable but disabled, so it is not editable or otherwise operable.
+表示该元素可感知，但被禁用，不可编辑或操作。
 
-| Type    | Default |
+| 类型    | 默认值 |
 | ------- | ------- |
 | boolean | false   |
 
@@ -236,9 +236,9 @@ Indicates that the element is perceivable but disabled, so it is not editable or
 
 ### `aria-expanded`
 
-Indicates whether an expandable element is currently expanded or collapsed.
+表示可展开元素当前是展开还是折叠状态。
 
-| Type    | Default |
+| 类型    | 默认值 |
 | ------- | ------- |
 | boolean | false   |
 
@@ -246,11 +246,11 @@ Indicates whether an expandable element is currently expanded or collapsed.
 
 ### `aria-hidden`
 
-Indicates whether the element is hidden from assistive technologies.
+表示元素是否对辅助技术隐藏。
 
-For example, in a window that contains sibling views `A` and `B`, setting `aria-hidden` to `true` on view `B` causes VoiceOver to ignore the `B` element and its children.
+例如，在包含兄弟视图 A 和 B 的窗口中，将 `aria-hidden` 设为 `true` 的视图 B 会使 VoiceOver 忽略 B 视图及其子视图。
 
-| Type    | Default |
+| 类型    | 默认值 |
 | ------- | ------- |
 | boolean | false   |
 
@@ -258,9 +258,9 @@ For example, in a window that contains sibling views `A` and `B`, setting `aria-
 
 ### `aria-label`
 
-Defines a string value that labels an interactive element.
+定义交互元素的文本标签。
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -268,23 +268,23 @@ Defines a string value that labels an interactive element.
 
 ### `aria-live` <div className="label android">Android</div>
 
-Indicates that an element will be updated, and describes the types of updates the user agents, assistive technologies, and user can expect from the live region.
+表示元素将被更新，并描述用户代理、辅助技术和用户可以预期的动态区域更新类型。
 
-- **off** Accessibility services should not announce changes to this view.
-- **polite** Accessibility services should announce changes to this view.
-- **assertive** Accessibility services should interrupt ongoing speech to immediately announce changes to this view.
+- **off** 辅助服务不应该朗读该视图的变更。
+- **polite** 辅助服务应礼貌地朗读变更。
+- **assertive** 辅助服务应立即中断正在朗读内容，优先朗读变更。
 
-| Type                                     | Default |
+| 类型                                     | 默认值 |
 | ---------------------------------------- | ------- |
-| enum(`'assertive'`, `'off'`, `'polite'`) | `'off'` |
+| 枚举(`'assertive'`, `'off'`, `'polite'`) | `'off'` |
 
 ---
 
 ### `aria-modal` <div className="label ios">iOS</div>
 
-Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver. Has precedence over the [`accessibilityViewIsModal`](#accessibilityviewismodal-ios) prop.
+布尔值，指示 VoiceOver 是否应忽略与接收者视图为兄弟关系的元素。在 [`accessibilityViewIsModal`](#accessibilityviewismodal-ios) 属性前有优先级。
 
-| Type    | Default |
+| 类型    | 默认值 |
 | ------- | ------- |
 | boolean | false   |
 
@@ -292,41 +292,41 @@ Boolean value indicating whether VoiceOver should ignore the elements within vie
 
 ### `aria-selected`
 
-Indicates whether a selectable element is currently selected or not.
+表示当前是否选中可选元素。
 
-| Type    |
+| 类型    |
 | ------- |
 | boolean |
 
 ### `onAccessibilityAction`
 
-Invoked when the user performs the accessibility actions. The only argument to this function is an event containing the name of the action to perform.
+当用户执行辅助功能动作时调用。函数唯一参数是包含要执行动作名称的事件。
 
-See the [Accessibility guide](accessibility.md#accessibility-actions) for more information.
+更多信息见 [辅助功能指南](accessibility.md#accessibility-actions)。
 
-| Type     |
+| 类型     |
 | -------- |
-| function |
+| 函数     |
 
 ---
 
 ### `accessibilityValue`
 
-Represents the current value of a component. It can be a textual description of a component's value, or for range-based components, such as sliders and progress bars, it contains range information (minimum, current, and maximum).
+表示组件的当前值。可以是组件值的文本描述，或者对于基于范围的组件（如滑块和进度条），包含范围信息（最小值、当前值和最大值）。
 
-See the [Accessibility guide](accessibility.md#accessibilityvalue-ios-android) for more information.
+更多信息见 [辅助功能指南](accessibility.md#accessibilityvalue-ios-android)。
 
-| Type                                                            |
+| 类型                                                            |
 | --------------------------------------------------------------- |
-| object: `{min: number, max: number, now: number, text: string}` |
+| 对象: `{min: number, max: number, now: number, text: string}` |
 
 ---
 
 ### `aria-valuemax`
 
-Represents the maximum value for range-based components, such as sliders and progress bars. Has precedence over the `max` value in the `accessibilityValue` prop.
+表示基于范围的组件（如滑块和进度条）的最大值。优先于 `accessibilityValue` 中的 `max`。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -334,9 +334,9 @@ Represents the maximum value for range-based components, such as sliders and pro
 
 ### `aria-valuemin`
 
-Represents the minimum value for range-based components, such as sliders and progress bars. Has precedence over the `min` value in the `accessibilityValue` prop.
+表示基于范围的组件（如滑块和进度条）的最小值。优先于 `accessibilityValue` 中的 `min`。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -344,9 +344,9 @@ Represents the minimum value for range-based components, such as sliders and pro
 
 ### `aria-valuenow`
 
-Represents the current value for range-based components, such as sliders and progress bars. Has precedence over the `now` value in the `accessibilityValue` prop.
+表示基于范围的组件（如滑块和进度条）的当前值。优先于 `accessibilityValue` 中的 `now`。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -354,9 +354,9 @@ Represents the current value for range-based components, such as sliders and pro
 
 ### `aria-valuetext`
 
-Represents the textual description of the component. Has precedence over the `text` value in the `accessibilityValue` prop.
+表示组件的文本描述。优先于 `accessibilityValue` 中的 `text`。
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -364,9 +364,9 @@ Represents the textual description of the component. Has precedence over the `te
 
 ### `delayLongPress`
 
-Duration (in milliseconds) from `onPressIn` before `onLongPress` is called.
+从 `onPressIn` 开始，到调用 `onLongPress` 的延迟时间（毫秒）。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -374,9 +374,9 @@ Duration (in milliseconds) from `onPressIn` before `onLongPress` is called.
 
 ### `delayPressIn`
 
-Duration (in milliseconds), from the start of the touch, before `onPressIn` is called.
+触摸开始到调用 `onPressIn` 的延迟时间（毫秒）。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -384,9 +384,9 @@ Duration (in milliseconds), from the start of the touch, before `onPressIn` is c
 
 ### `delayPressOut`
 
-Duration (in milliseconds), from the release of the touch, before `onPressOut` is called.
+触摸释放到调用 `onPressOut` 的延迟时间（毫秒）。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -394,9 +394,9 @@ Duration (in milliseconds), from the release of the touch, before `onPressOut` i
 
 ### `disabled`
 
-If true, disable all interactions for this component.
+为 `true` 时，禁用该组件的所有交互。
 
-| Type |
+| 类型 |
 | ---- |
 | bool |
 
@@ -404,21 +404,21 @@ If true, disable all interactions for this component.
 
 ### `hitSlop`
 
-This defines how far your touch can start away from the button. This is added to `pressRetentionOffset` when moving off of the button.
+定义触摸开始点可以与按钮边界的最大距离。该距离会加到 `pressRetentionOffset` 上，当触摸点离开按钮区域时生效。
 
 :::note
-The touch area never extends past the parent view bounds and the Z-index of sibling views always takes precedence if a touch hits two overlapping views.
+触摸区域永远不会超出父视图边界，并且如果两个重叠视图都被触摸，具有更高 Z-index 的视图优先响应。
 :::
 
-| Type                   |
+| 类型                   |
 | ---------------------- |
-| [Rect](rect) or number |
+| [Rect](rect) 或 数字    |
 
 ### `id`
 
-Used to locate this view from native code. Has precedence over `nativeID` prop.
+用于从原生代码定位此视图。优先于 `nativeID`。
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -426,9 +426,9 @@ Used to locate this view from native code. Has precedence over `nativeID` prop.
 
 ### `onBlur`
 
-Invoked when the item loses focus.
+当元素失去焦点时调用。
 
-| Type                                                     |
+| 类型                                                     |
 | -------------------------------------------------------- |
 | `md ({nativeEvent: [TargetEvent](targetevent)}) => void` |
 
@@ -436,9 +436,9 @@ Invoked when the item loses focus.
 
 ### `onFocus`
 
-Invoked when the item receives focus.
+当元素获得焦点时调用。
 
-| Type                                                     |
+| 类型                                                     |
 | -------------------------------------------------------- |
 | `md ({nativeEvent: [TargetEvent](targetevent)}) => void` |
 
@@ -446,9 +446,9 @@ Invoked when the item receives focus.
 
 ### `onLayout`
 
-Invoked on mount and on layout changes.
+组件挂载及布局变化时调用。
 
-| Type                                                     |
+| 类型                                                     |
 | -------------------------------------------------------- |
 | `md ({nativeEvent: [LayoutEvent](layoutevent)}) => void` |
 
@@ -456,57 +456,57 @@ Invoked on mount and on layout changes.
 
 ### `onLongPress`
 
-Called if the time after `onPressIn` lasts longer than 370 milliseconds. This time period can be customized with [`delayLongPress`](#delaylongpress).
+从 `onPressIn` 开始超过 370 毫秒后调用。该时间可用 [`delayLongPress`](#delaylongpress) 自定义。
 
-| Type     |
+| 类型     |
 | -------- |
-| function |
+| 函数     |
 
 ---
 
 ### `onPress`
 
-Called when the touch is released, but not if cancelled (e.g. by a scroll that steals the responder lock). The first function argument is an event in form of [PressEvent](pressevent).
+触摸释放时调用，若被取消（例如滚动抢占响应锁）则不调用。第一个函数参数是一个 [PressEvent](pressevent) 事件。
 
-| Type     |
+| 类型     |
 | -------- |
-| function |
+| 函数     |
 
 ---
 
 ### `onPressIn`
 
-Called as soon as the touchable element is pressed and invoked even before onPress. This can be useful when making network requests. The first function argument is an event in form of [PressEvent](pressevent).
+一开始按下触摸时调用，甚至早于 `onPress`。可用于发起网络请求。第一个函数参数是一个 [PressEvent](pressevent) 事件。
 
-| Type     |
+| 类型     |
 | -------- |
-| function |
+| 函数     |
 
 ---
 
 ### `onPressOut`
 
-Called as soon as the touch is released even before onPress. The first function argument is an event in form of [PressEvent](pressevent).
+触摸释放时调用，早于 `onPress`。第一个函数参数是一个 [PressEvent](pressevent) 事件。
 
-| Type     |
+| 类型     |
 | -------- |
-| function |
+| 函数     |
 
 ---
 
 ### `pressRetentionOffset`
 
-When the scroll view is disabled, this defines how far your touch may move off of the button, before deactivating the button. Once deactivated, try moving it back and you'll see that the button is once again reactivated! Move it back and forth several times while the scroll view is disabled. Ensure you pass in a constant to reduce memory allocations.
+当滚动视图被禁用时，定义触摸可以偏离按钮的最大距离，超过此距离按钮将被失效。失效后，将触摸点移回按钮内，按钮会再次激活！可多次演示。建议传入常量以减少内存分配。
 
-| Type                   |
+| 类型                   |
 | ---------------------- |
-| [Rect](rect) or number |
+| [Rect](rect) 或 数字    |
 
 ---
 
 ### `nativeID`
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -514,9 +514,9 @@ When the scroll view is disabled, this defines how far your touch may move off o
 
 ### `testID`
 
-Used to locate this view in end-to-end tests.
+用于在端到端测试中定位该视图。
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -524,8 +524,8 @@ Used to locate this view in end-to-end tests.
 
 ### `touchSoundDisabled` <div className="label android">Android</div>
 
-If true, doesn't play a system sound on touch.
+为 `true` 时，触摸时不播放系统音效。
 
-| Type    |
+| 类型    |
 | ------- |
 | Boolean |

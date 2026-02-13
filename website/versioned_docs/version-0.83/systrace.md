@@ -1,13 +1,13 @@
 ---
 id: systrace
-title: Systrace
+title: Systrace（系统跟踪）
 ---
 
-`Systrace` is a standard Android marker-based profiling tool (and is installed when you install the Android platform-tools package). Profiled code blocks are surrounded by start/end markers which are then visualized in a colorful chart format. Both the Android SDK and React Native framework provide standard markers that you can visualize.
+`Systrace` 是一个标准的 Android 基于标记的性能分析工具（安装 Android platform-tools 包时会一并安装）。被分析的代码块被起止标记包围，随后以彩色图表格式进行可视化。Android SDK 和 React Native 框架均提供了可以可视化的标准标记。
 
-## Example
+## 示例
 
-`Systrace` allows you to mark JavaScript (JS) events with a tag and an integer value. Capture the non-Timed JS events in EasyProfiler.
+`Systrace` 允许你用标签和整数值标记 JavaScript (JS) 事件。在 EasyProfiler 中捕获非定时（non-Timed）的 JS 事件。
 
 ```SnackPlayer name=Systrace%20Example
 import React from 'react';
@@ -16,7 +16,7 @@ import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   const enableProfiling = () => {
-    Systrace.setEnabled(true); // Call setEnabled to turn on the profiling.
+    Systrace.setEnabled(true); // 调用 setEnabled 来开启性能分析。
     Systrace.beginEvent('event_label');
     Systrace.counterEvent('event_label', 10);
   };
@@ -33,11 +33,11 @@ const App = () => {
         </Text>
         <View style={styles.buttonsColumn}>
           <Button
-            title="Capture the non-Timed JS events in EasyProfiler"
+            title="在 EasyProfiler 中捕获非定时的 JS 事件"
             onPress={() => enableProfiling()}
           />
           <Button
-            title="Stop capturing"
+            title="停止捕获"
             onPress={() => stopProfiling()}
             color="#FF0000"
           />
@@ -75,9 +75,9 @@ export default App;
 
 ---
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `isEnabled()`
 
@@ -93,7 +93,7 @@ static isEnabled(): boolean;
 static beginEvent(eventName: string | (() => string), args?: EventArgs);
 ```
 
-beginEvent/endEvent for starting and then ending a profile within the same call stack frame.
+beginEvent / endEvent 用于在同一调用栈帧内开始并结束一次性能分析。
 
 ---
 
@@ -114,7 +114,7 @@ static beginAsyncEvent(
 ): number;
 ```
 
-beginAsyncEvent/endAsyncEvent for starting and then ending a profile where the end can either occur on another thread or out of the current stack frame, eg await the returned cookie variable should be used as input into the endAsyncEvent call to end the profile.
+beginAsyncEvent / endAsyncEvent 用于开始并结束一次性能分析，结束操作可以发生在线程之外或当前栈帧外，例如 await。返回的 cookie 变量应作为参数传递给 endAsyncEvent 来结束性能分析。
 
 ---
 
@@ -136,4 +136,4 @@ static endAsyncEvent(
 static counterEvent(eventName: string | (() => string), value: number);
 ```
 
-Register the value to the profileName on the systrace timeline.
+向 systrace 时间线上的 profileName 注册该值。

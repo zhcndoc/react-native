@@ -22,7 +22,7 @@ const isProductionDeployment =
   !!process.env.NETLIFY && process.env.CONTEXT === 'production';
 
 const lastVersion = versions[0];
-const copyright = `Copyright © ${new Date().getFullYear()} Meta Platforms, Inc.`;
+const copyright = `<a target="_blank" style="text-decoration: none;" href="https://www.zhcndoc.com">简中文档</a>｜<a rel="nofollow" target="_blank" style="text-decoration: none;" href="https://beian.miit.gov.cn">沪ICP备2024070610号-3</a>`;
 
 export type EditUrlButton = {
   label: string;
@@ -34,8 +34,7 @@ const commonDocsOptions: PluginContentDocs.Options = {
   showLastUpdateAuthor: false,
   showLastUpdateTime: true,
   editUrl: (options => {
-    const baseUrl =
-      'https://github.com/facebook/react-native-website/edit/main';
+    const baseUrl = 'https://github.com/zhcndoc/react-native/edit/main';
     const nextReleasePath = `docs/${options.docPath}`;
     const isNextRelease = options.version === 'current';
     const buttons: EditUrlButton[] = [
@@ -77,12 +76,11 @@ const config: Config = {
     experimental_faster: (process.env.DOCUSAURUS_FASTER ?? 'true') === 'true',
   },
 
-  title: 'React Native',
-  tagline:
-    'A framework for building native apps for Android, iOS, and more using React',
+  title: 'React Native 中文文档',
+  tagline: '一个使用 React 构建 Android、iOS 等原生应用的框架',
   organizationName: 'Meta Platforms, Inc.',
   projectName: 'react-native',
-  url: 'https://reactnative.dev',
+  url: 'https://react-native.zhcndoc.com',
   baseUrl: '/',
   clientModules: [
     './modules/snackPlayerInitializer.ts',
@@ -90,6 +88,10 @@ const config: Config = {
   ],
   trailingSlash: false, // because trailing slashes can break some existing relative links
   scripts: [
+    {
+      src: 'https://www.zhcndoc.com/js/common.js',
+      async: true,
+    },
     {
       src: 'https://cdn.jsdelivr.net/npm/focus-visible@5.2.0/dist/focus-visible.min.js',
       defer: true,
@@ -108,8 +110,8 @@ const config: Config = {
     facebookAppId: '1677033832619985',
   },
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: 'zh-CN',
+    locales: ['zh-CN'],
   },
   onBrokenLinks: 'warn',
   headTags: [
@@ -157,7 +159,7 @@ const config: Config = {
             },
           },
         ],
-        inLanguage: 'en-US',
+        inLanguage: 'zh-CN',
       }),
     },
     {
@@ -206,9 +208,9 @@ const config: Config = {
             require.resolve('./src/css/versions.scss'),
           ],
         },
-        gtag: {
-          trackingID: 'G-58L13S6BDP',
-        },
+        // gtag: {
+        //   trackingID: 'G-58L13S6BDP',
+        // },
       } satisfies Preset.Options,
     ],
   ],
@@ -407,16 +409,16 @@ const config: Config = {
         },
       ],
     },
-    announcementBar: {
-      id: 'watch_keynote',
-      content:
-        'Re-watch the latest <a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/watch?v=NiYwlvXsBKw">React Native Keynote</a> from React Conf 2025',
-      backgroundColor: '#20232a',
-      textColor: '#fff',
-      isCloseable: false,
-    },
+    // announcementBar: {
+    //   id: 'watch_keynote',
+    //   content:
+    //     'Re-watch the latest <a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/watch?v=NiYwlvXsBKw">React Native Keynote</a> from React Conf 2025',
+    //   backgroundColor: '#20232a',
+    //   textColor: '#fff',
+    //   isCloseable: false,
+    // },
     navbar: {
-      title: 'React Native',
+      title: 'React Native 中文文档',
       logo: {
         src: 'img/header_logo.svg',
         alt: '',
@@ -424,27 +426,27 @@ const config: Config = {
       style: 'dark',
       items: [
         {
-          label: 'Development',
+          label: '开发',
           type: 'dropdown',
           position: 'right',
           items: [
             {
-              label: 'Guides',
+              label: '指南',
               type: 'doc',
               docId: 'getting-started',
             },
             {
-              label: 'Components',
+              label: '组件',
               type: 'doc',
               docId: 'components-and-apis',
             },
             {
-              label: 'APIs',
+              label: 'API 参考',
               type: 'doc',
               docId: 'accessibilityinfo',
             },
             {
-              label: 'Architecture',
+              label: '架构',
               type: 'doc',
               docId: 'architecture-overview',
               docsPluginId: 'architecture',
@@ -454,25 +456,25 @@ const config: Config = {
         {
           type: 'doc',
           docId: 'overview',
-          label: 'Contributing',
+          label: '贡献',
           position: 'right',
           docsPluginId: 'contributing',
         },
         {
           type: 'doc',
           docId: 'overview',
-          label: 'Community',
+          label: '社区',
           position: 'right',
           docsPluginId: 'community',
         },
         {
           to: '/showcase',
-          label: 'Showcase',
+          label: '展示',
           position: 'right',
         },
         {
           to: '/blog',
-          label: 'Blog',
+          label: '博客',
           position: 'right',
         },
         {
@@ -482,7 +484,7 @@ const config: Config = {
           dropdownItemsAfter: [
             {
               to: '/versions',
-              label: 'All versions',
+              label: '所有版本',
             },
           ],
         },
@@ -499,43 +501,43 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Develop',
+          title: '开发',
           items: [
             {
-              label: 'Guides',
+              label: '指南',
               to: 'docs/getting-started',
             },
             {
-              label: 'Components',
+              label: '组件',
               to: 'docs/components-and-apis',
             },
             {
-              label: 'APIs',
+              label: 'API 参考',
               to: 'docs/accessibilityinfo',
             },
             {
-              label: 'Architecture',
+              label: '架构',
               to: 'architecture/overview',
             },
           ],
         },
         {
-          title: 'Participate',
+          title: '参与',
           items: [
             {
-              label: 'Showcase',
+              label: '展示',
               to: 'showcase',
             },
             {
-              label: 'Contributing',
+              label: '贡献',
               to: 'contributing/overview',
             },
             {
-              label: 'Community',
+              label: '社区',
               to: 'community/overview',
             },
             {
-              label: 'Directory',
+              label: '目录',
               href: 'https://reactnative.directory/',
             },
             {
@@ -545,10 +547,10 @@ const config: Config = {
           ],
         },
         {
-          title: 'Find us',
+          title: '关注我们',
           items: [
             {
-              label: 'Blog',
+              label: '博客',
               to: 'blog',
             },
             {
@@ -566,18 +568,18 @@ const config: Config = {
           ],
         },
         {
-          title: 'Explore More',
+          title: '探索更多',
           items: [
             {
               label: 'ReactJS',
               href: 'https://react.dev/',
             },
             {
-              label: 'Privacy Policy',
+              label: '隐私政策',
               href: 'https://opensource.fb.com/legal/privacy/',
             },
             {
-              label: 'Terms of Service',
+              label: '服务条款',
               href: 'https://opensource.fb.com/legal/terms/',
             },
           ],

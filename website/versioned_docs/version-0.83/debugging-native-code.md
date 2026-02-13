@@ -1,36 +1,36 @@
 ---
 id: debugging-native-code
-title: Debugging Native Code
+title: 调试原生代码
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 <div className="banner-native-code-required">
-  <h3>Projects with Native Code Only</h3>
-  <p>The following section only applies to projects with native code exposed. If you are using the managed Expo workflow, see the guide on <a href="https://docs.expo.dev/workflow/prebuild/" target="_blank">prebuild</a> to use this API.</p>
+  <h3>仅包含原生代码的项目</h3>
+  <p>以下内容仅适用于暴露了原生代码的项目。如果你使用的是托管的 Expo 工作流，请参阅关于 <a href="https://docs.expo.dev/workflow/prebuild/" target="_blank">预构建（prebuild）</a> 的指南来使用此 API。</p>
 </div>
 
-## Accessing Logs
+## 访问日志
 
-You can display the native logs for an iOS or Android app by using the following commands in a terminal while the app is running:
+在应用运行时，您可以通过在终端使用以下命令来查看 iOS 或 Android 应用的原生日志：
 
 ```shell
-# For Android:
+# 用于 Android：
 npx react-native log-android
-# Or, for iOS:
+# 或者，用于 iOS：
 npx react-native log-ios
 ```
 
-You may also access these through Debug > Open System Log… in the iOS Simulator or by running `adb logcat "*:S" ReactNative:V ReactNativeJS:V` in a terminal while an Android app is running on a device or emulator.
+您也可以通过 iOS 模拟器上的 Debug > Open System Log… 来访问，或者在 Android 设备或模拟器上运行应用时，在终端运行 `adb logcat "*:S" ReactNative:V ReactNativeJS:V`。
 
 <details>
-<summary>**💡 Custom Native Logs**</summary>
+<summary>**💡 自定义原生日志**</summary>
 
-If you are writing a Native Module and want to add custom logs to your module for debugging purposes, you can use the following method:
+如果您正在编写原生模块，并想为模块添加自定义日志以便调试，可以使用以下方法：
 
-#### Android (Java/Kotlin)
+#### Android（Java/Kotlin）
 
-In your native module, use the `Log` class to add logs that can be viewed in Logcat:
+在您的原生模块中，使用 `Log` 类添加可在 Logcat 中查看的日志：
 
 ```java
 import android.util.Log;
@@ -40,40 +40,40 @@ private void log(String message) {
 }
 ```
 
-To view these logs in Logcat, use this command, replacing `YourModuleName` with your custom tag:
+要在 Logcat 中查看这些日志，使用以下命令，将 `YourModuleName` 替换为您的自定义标签：
 
 ```shell
 adb logcat "*:S" ReactNative:V ReactNativeJS:V YourModuleName:D
 ```
 
-#### iOS (Objective-C/Swift)
+#### iOS（Objective-C/Swift）
 
-In your native module, use `NSLog` for custom logs:
+在您的原生模块中，使用 `NSLog` 添加自定义日志：
 
 ```objective-c
 NSLog(@"YourModuleName: %@", message);
 ```
 
-Or, in Swift:
+或者在 Swift 中：
 
 ```swift
 print("YourModuleName: \(message)")
 ```
 
-These logs will appear in the Xcode console when running the app.
+这些日志将在 Xcode 控制台中显示，前提是您正在运行该应用。
 
 </details>
 
-## Debugging in a Native IDE
+## 在原生 IDE 中调试
 
-When working with native code, such as when writing native modules, you can launch the app from Android Studio or Xcode and take advantage of the native debugging features (setting up breakpoints, etc.) as you would in case of building a standard native app.
+当处理原生代码时，例如编写原生模块，您可以通过 Android Studio 或 Xcode 启动应用，利用其原生调试功能（设置断点等），就像构建常规原生应用一样。
 
-Another option is to run your application using the React Native CLI and attach the native debugger of the native IDE (Android Studio or Xcode) to the process.
+另一种方式是使用 React Native CLI 运行应用，并将原生 IDE（Android Studio 或 Xcode）的原生调试器附加到该进程。
 
 ### Android Studio
 
-On Android Studio you can do this by going on the "Run" option on the menu bar, clicking on "Attach to Process..." and selecting the running React Native app.
+在 Android Studio 中，您可以通过点击菜单栏的“Run”选项，选择“Attach to Process...”，然后选择正在运行的 React Native 应用来实现。
 
 ### Xcode
 
-On Xcode click on "Debug" on the top menu bar, select the "Attach to process" option, and select the application in the list of "Likely Targets".
+在 Xcode 中，点击顶部菜单栏的“Debug”，选择“Attach to process”选项，然后在“Likely Targets”列表中选择您的应用程序。

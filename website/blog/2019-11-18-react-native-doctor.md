@@ -1,18 +1,18 @@
 ---
-title: Meet Doctor, a new React Native command
+title: 认识 Doctor —— 一个新的 React Native 命令
 author: Lucas Bento
-authorTitle: React Native Community
+authorTitle: React Native 社区
 authorURL: 'https://twitter.com/lbentosilva'
 authorImageURL: 'https://avatars3.githubusercontent.com/u/6207220?s=460&v=4'
 authorTwitter: lbentosilva
-tags: [announcement]
+tags: [公告]
 ---
 
-After over 20 pull requests from 6 contributors in the React Native Community, we're excited to launch `react-native doctor`, a new command to help you out with getting started, troubleshooting and automatically fixing errors with your development environment. The `doctor` command is heavily inspired by [Expo](https://expo.io/) and [Homebrew](https://brew.sh/)'s own doctor command with a pinch of UI inspired by [Jest](https://jestjs.io/).
+在 React Native 社区 6 位贡献者提交了 20 多个拉取请求后，我们很高兴推出 `react-native doctor`，这是一个新命令，旨在帮助你开始使用、排查问题并自动修复开发环境中的错误。`doctor` 命令的设计灵感主要来源于 [Expo](https://expo.io/) 和 [Homebrew](https://brew.sh/) 自带的 doctor 命令，同时 UI 上借鉴了 [Jest](https://jestjs.io/) 的风格。
 
 <!--truncate-->
 
-Here it is in action:
+下面是它的演示：
 
 <p style={{textAlign: 'center'}}>
   <video width={700} controls="controls" autoPlay style={{borderRadius: 5}}>
@@ -20,43 +20,43 @@ Here it is in action:
   </video>
 </p>
 
-## How it works
+## 它是如何工作的
 
-The `doctor` command currently supports most of the software and libraries that React Native relies on, such as CocoaPods, Xcode and Android SDK. With `doctor` we'll find issues with your development environment and give you the option to automatically fix them. If `doctor` is not able to fix an issue, it will display a message and a helpful link explaining how to fix it manually as the following:
+`doctor` 命令目前支持大部分 React Native 依赖的软件和库，比如 CocoaPods、Xcode 和 Android SDK。使用 `doctor`，我们可以检测你的开发环境中的问题，并提供自动修复的选项。如果 `doctor` 无法修复某个问题，它会展示一条信息和一个有用的链接，指导你如何手动修复，示例如下：
 
 <p style={{textAlign: 'center'}}>
-  <img width={700} src="/img/DoctorManualInstallationMessage.png" alt="Doctor command with a link to help on Android SDK's installation" title="Doctor command with a link to help on Android SDK's installation" />
+  <img width={700} src="/img/DoctorManualInstallationMessage.png" alt="Doctor 命令，带有指向 Android SDK 安装帮助的链接" title="Doctor 命令，带有指向 Android SDK 安装帮助的链接" />
 </p>
 
-## Try it now
+## 现在就试试吧
 
-The `doctor` command is available as a part of React Native 0.62. However, you can try it without upgrading yet:
+`doctor` 命令作为 React Native 0.62 的一部分已经提供。不过，你也可以在不升级的情况下试用它：
 
 ```sh
 npx @react-native-community/cli doctor
 ```
 
-## What checks are currently supported
+## 当前支持哪些检查
 
-`doctor` currently supports the following checks:
+`doctor` 目前支持以下检查：
 
-- Node.js (>= 8.3)
-- yarn (>= 1.10)
-- npm (>= 4)
-- Watchman (>= 4), used for watching changes in the filesystem when in development mode.
+- Node.js（>= 8.3）
+- yarn（>= 1.10）
+- npm（>= 4）
+- Watchman（>= 4），用于开发模式下监视文件系统的变动。
 
-Specific to the Android environment:
+针对 Android 环境：
 
-- Android SDK (>= 26), the software runtime for Android.
-- Android NDK (>= 19), the native development toolkit for Android.
-- `ANDROID_HOME`, environment variable required by the Android SDK setup.
+- Android SDK（>= 26），Android 的软件运行环境。
+- Android NDK（>= 19），Android 的原生开发工具包。
+- `ANDROID_HOME`，Android SDK 配置所需的环境变量。
 
-And to the iOS environment:
+针对 iOS 环境：
 
-- Xcode (>= 10), IDE for developing, building and shipping iOS applications.
-- CocoaPods, library dependency management tool for iOS applications.
-- ios-deploy (optional), library used internally by the CLI to install applications on a physical iOS device.
+- Xcode（>= 10），用于开发、构建和发布 iOS 应用的 IDE。
+- CocoaPods，iOS 应用的库依赖管理工具。
+- ios-deploy（可选），CLI 内部使用的库，用于安装应用到真机 iOS 设备。
 
-## Thanks
+## 致谢
 
-Huge thanks for the React Native Community for working on this, in particular [@thymikee](https://github.com/thymikee), [@thib92](https://github.com/thib92), [@jmeistrich](https://github.com/jmeistrich), [@tido64](https://github.com/tido64) and [@rickhanlonii](https://github.com/rickhanlonii).
+非常感谢 React Native 社区对此项目的贡献，尤其感谢 [@thymikee](https://github.com/thymikee)、[@thib92](https://github.com/thib92)、[@jmeistrich](https://github.com/jmeistrich)、[@tido64](https://github.com/tido64) 和 [@rickhanlonii](https://github.com/rickhanlonii)。

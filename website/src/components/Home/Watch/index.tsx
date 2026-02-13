@@ -25,16 +25,15 @@ function Watch() {
   return (
     <Section>
       <SectionTitle
-        title="Watch and learn"
+        title="观看并学习"
         description={
           <>
-            Watch talks by the React team and learn how to get the most out of
-            React Native.
+            观看 React 团队的演讲，了解如何充分利用 React Native。
             <br />
-            Find the latest on{' '}
+            了解最新动态，请关注{' '}
             <a href="https://bsky.app/profile/reactnative.dev">
               Bluesky
-            </a> and{' '}
+            </a> 和{' '}
             <a href="https://twitter.com/intent/follow?screen_name=reactnative&region=follow_link">
               X
             </a>

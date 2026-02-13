@@ -1,126 +1,126 @@
 ---
-title: 'React Native 0.78 - React 19 and more'
+title: 'React Native 0.78 - React 19 及更多内容'
 authors: [vonovak, shubham, fabriziocucci, cipolleschi]
 tags: [engineering]
 date: 2025-02-19
 ---
 
-# React Native 0.78 - React 19 and more
+# React Native 0.78 - React 19 及更多内容
 
-Today we are excited to release React Native 0.78!
+今天我们很高兴发布 React Native 0.78！
 
-This release ships React 19 in React Native and some other relevant features like native support for Android Vector drawables and better brownfield integration for iOS.
+本次发布在 React Native 中引入了 React 19 以及一些其他相关功能，例如原生支持 Android 矢量图片（Vector drawables）和 iOS 更好的棕地集成（brownfield integration）。
 
-### Highlights
+### 亮点
 
 - [React 19](/blog/2025/02/19/react-native-0.78#react-19)
-- [Towards smaller and faster releases](/blog/2025/02/19/react-native-0.78#towards-smaller-and-faster-releases)
-- [Opt-in for JavaScript logs in Metro](/blog/2025/02/19/react-native-0.78#opt-in-for-javascript-logs-in-metro)
-- [Added support for Android XML drawables](/blog/2025/02/19/react-native-0.78#added-support-for-android-xml-drawables)
-- [ReactNativeFactory on iOS](/blog/2025/02/19/react-native-0.78#reactnativefactory-on-ios)
+- [迈向更小更快的发布](/blog/2025/02/19/react-native-0.78#towards-smaller-and-faster-releases)
+- [Metro 中的 JavaScript 日志可选择开启](/blog/2025/02/19/react-native-0.78#opt-in-for-javascript-logs-in-metro)
+- [新增对 Android XML drawable 的支持](/blog/2025/02/19/react-native-0.78#added-support-for-android-xml-drawables)
+- [iOS 上的 ReactNativeFactory](/blog/2025/02/19/react-native-0.78#reactnativefactory-on-ios)
 
 <!--truncate-->
 
-## Highlights
+## 亮点
 
 ### React 19
 
-React 19 is now available on React Native!
+React 19 现已可在 React Native 中使用！
 
-React 19 requires updating your app, as we introduced some changes from React 18. For example, we removed some APIs such as `propTypes`, and you need to adjust your app to make it compatible with the new version of React.
+React 19 需要你更新你的应用，因为与 React 18 相比引入了一些变更。例如，我们移除了一些 API，比如 `propTypes`，你需要调整应用以兼容 React 的新版本。
 
-Follow our step-by-step [instructions to upgrade](https://react.dev/blog/2024/04/25/react-19-upgrade-guide) your app to React 19.
+请按照我们的分步[升级指南](https://react.dev/blog/2024/04/25/react-19-upgrade-guide)将你的应用升级到 React 19。
 
-After the migration, you’ll be able to leverage all the new features of React, including (non exhaustively):
+迁移后，你将能够利用 React 的所有新特性，包括但不限于：
 
-- **[Actions](https://react.dev/blog/2024/12/05/react-19#actions):** these are functions that use async transitions. Async transitions automatically manage submitting data for you: they handle pending states, optimistic updates, error handling and more.
-- **[useActionState](https://react.dev/reference/react/useActionState):** a utility hook built on top of Actions. It takes a function and returns a wrapped Action to call. When the action is called, it will return the last result of the Action and its `pending` state.
-- **[useOptimistic](https://react.dev/reference/react/useOptimistic):** a new hook that simplifies showing the final state of an update optimistically while the async request is underway. If the request errors, React will switch back to the previous value automatically.
-- **[`use`](https://react.dev/reference/react/use):** this is a new API that allows access to resources during render. You can now read a promise or a context with `use` and React will Suspend until they resolve.
-- **[`ref` as `props`](https://react.dev/blog/2024/12/05/react-19#ref-as-a-prop):** you can now pass `ref` as a `prop` like you do with any other prop. Function components will no longer need `forwardRef` and you can migrate your components now.
-- And many others
+- **[Actions](https://react.dev/blog/2024/12/05/react-19#actions)：** 这是使用异步过渡（async transitions）的函数。异步过渡能自动帮助你管理数据提交，处理挂起状态、乐观更新、错误处理等。
+- **[useActionState](https://react.dev/reference/react/useActionState)：** 基于 Actions 构建的实用 Hook。接收一个函数并返回一个封装好的 Action 调用。当调用该 Action 时，会返回最近一次的结果及其 `pending` 状态。
+- **[useOptimistic](https://react.dev/reference/react/useOptimistic)：** 一个新的 Hook，可简化在异步请求进行时以乐观方式显示最终更新状态。如果请求失败，React 会自动回退到之前的值。
+- **[`use`](https://react.dev/reference/react/use)：** 全新的 API，允许在渲染期间访问资源。你现在可以使用 `use` 读取 Promise 或 Context，React 会 Suspend（挂起）等待它们解析。
+- **[`ref` 作为 `props`](https://react.dev/blog/2024/12/05/react-19#ref-as-a-prop)：** 你现在可以像传递其他 props 一样传递 `ref`。函数式组件不再需要 `forwardRef`，你可以立即迁移组件。
+- 以及更多其他功能
 
-For a complete list of the new available features, have a look at the [React 19 release blog post](https://react.dev/blog/2024/12/05/react-19).
+完整的新功能列表，请参见 [React 19 发布博客](https://react.dev/blog/2024/12/05/react-19)。
 
-#### React Compiler
+#### React 编译器
 
-React Compiler is a build-time tool designed to optimize React applications by automatically applying memoization. While developers can manually use APIs like `useMemo`, `useCallback`, and `React.memo` to prevent unnecessary recomputation of unchanged parts of an app, they could also forget or misuse these optimizations. React Compiler addresses this by leveraging its understanding of JavaScript and of the [Rules of React](https://react.dev/reference/rules) to automatically memoize values or groups of values within components and hooks.
+React 编译器是一个构建时工具，旨在通过自动应用记忆化优化 React 应用。虽然开发者可以手动使用 `useMemo`、`useCallback` 和 `React.memo` 等 API 避免不必要的重新计算，但也可能会忘记或误用这些优化。React 编译器通过理解 JavaScript 及 [React 规则](https://react.dev/reference/rules)，自动为组件和 Hooks 中的值或值组进行记忆化。
 
-With this release, we simplified the process to enable the React Compiler in your React Native apps. [In previous versions](https://react.dev/learn/react-compiler#using-react-compiler-with-react-17-or-18), you had to install two packages: the compiler and its runtime. After those packages were installed, you had to configure a Babel plugin to enable React Compiler through Metro.
+本次发布简化了在 React Native 应用中启用 React 编译器的流程。[之前版本](https://react.dev/learn/react-compiler#using-react-compiler-with-react-17-or-18)需要安装两个包：编译器和运行时。安装后还需配置 Babel 插件才能通过 Metro 启用 React 编译器。
 
-Now, you only need to install the compiler itself and to configure the Babel plugin. To learn how to enable it, you can follow our step-by-step [guide](https://react.dev/learn/react-compiler#usage-with-babel).
+现在，只需安装编译器本身并配置 Babel 插件即可。想了解如何启用，请参阅我们的分步[指南](https://react.dev/learn/react-compiler#usage-with-babel)。
 
-To verify that the compiler is running, you can open the React Native DevTools: you should see that the components that are memoized have the `Memo ✨` tag attached to them in the Component Inspector.
+可通过打开 React Native DevTools 验证编译器是否运行：在组件检查器中，已记忆化的组件上应显示 `Memo ✨` 标签。
 
-If you want to learn more about React Compiler, these are useful resources:
+如想深入了解 React 编译器，可参考以下资料：
 
-- [React Compiler](https://react.dev/learn/react-compiler) docs
-- [React Compiler Deep Dive](https://www.youtube.com/watch?v=uA_PVyZP7AI)
+- [React 编译器文档](https://react.dev/learn/react-compiler)
+- [React 编译器深度解析视频](https://www.youtube.com/watch?v=uA_PVyZP7AI)
 
-### Towards smaller and faster releases
+### 迈向更小更快的发布
 
-We’re updating our release process to ship stable React Native releases more frequently in 2025.
+我们正在更新发布流程，计划在 2025 年更频繁地发布稳定版 React Native。
 
-It will be easier for you to update the React Native version because we’ll be reducing the number of breaking changes we ship. Faster releases also means that all the bugfixes we ship internally are reaching you earlier, and you can benefit from the latest features we develop inside React Native.
+这将让你更容易更新 React Native 版本，因为我们会减少引入破坏性变更的数量。更快的发布也意味着我们内部修复的所有 Bug 能更快到达你手中，你还能更早享受我们在 React Native 中开发的最新功能。
 
-We believe this new model will benefit every developer in the React Native ecosystem, as fewer breaking changes means a more stable framework that everyone can rely on.
+我们相信此新模型将惠及 React Native 生态的每一位开发者，更少的破坏性变更意味着更稳定的框架，更值得信赖。
 
-### Opt-in for JavaScript logs in Metro
+### Metro 中的 JavaScript 日志可选择开启
 
-We've added an opt-in to restore JavaScript log streaming via the Metro dev server, [previously removed in 0.77](/blog/2025/01/21/version-0.77#removal-of-consolelog-streaming-in-metro) for Community CLI users. This is in response to user feedback, as well as reviewing where we are with our replacement offerings today.
+我们新增了一个可选开启选项，以恢复通过 Metro 开发服务器流式传输 JavaScript 日志的功能，之前版本 0.77 中已为社区 CLI 用户移除该功能（[详情见 0.77 版本更新](/blog/2025/01/21/version-0.77#removal-of-consolelog-streaming-in-metro)）。此举响应了用户反馈，并基于我们对替代方案现状的评估。
 
-To opt in, use the new `--client-logs` flag. This can also be aliased via an npm script for convenience.
+要启用该功能，请使用新的 `--client-logs` 标志。也可以通过 npm 脚本别名方便使用。
 
 ```sh
 npx @react-native-community/cli start --client-logs
 ```
 
-Log streaming in Metro will still be going away in future and remains off by default. However, we intend to give developers a longer migration period to adapt to this change.
+Metro 中的日志流功能将来仍会被移除，且默认关闭。然而，我们计划给予开发者更长的迁移期以适应这一变更。
 
-This update will also be made available in the incoming 0.77.1 minor release.
+此更新也将发布于即将到来的 0.77.1 小版本中。
 
-### Added support for Android XML drawables
+### 新增对 Android XML drawable 的支持
 
-In React Native 0.78, we’re shipping a new way to load icons, illustrations, and other graphic elements on Android as [XML resources](https://developer.android.com/guide/topics/resources/drawable-resource). This means you can use [vector drawables](https://developer.android.com/develop/ui/views/graphics/vector-drawable-resources) for displaying vector images at any scale without losing quality, or [shape drawables](https://developer.android.com/guide/topics/resources/drawable-resource#Shape) for drawing more basic embellishments. This is all supported by the same `Image` component that you know and love. To use this feature today, you can import XML resources like any other [static resource](/docs/next/images#static-image-resources) by referencing them in the `source` prop. Furthermore, using XML resources rather than bitmaps will also help you reduce your application size and will result in better rendering across screens with different DPI.
+在 React Native 0.78 中，我们提供了在 Android 上以 [XML 资源](https://developer.android.com/guide/topics/resources/drawable-resource) 方式加载图标、插图及其它图形元素的新方式。这意味着你可以使用 [矢量 drawable](https://developer.android.com/develop/ui/views/graphics/vector-drawable-resources) 来无损缩放显示矢量图，或使用 [形状 drawable](https://developer.android.com/guide/topics/resources/drawable-resource#Shape) 用于绘制基础装饰。这一切均由你熟悉的 `Image` 组件支持。要使用此功能，你可像引用任何其他[静态资源](/docs/next/images#static-image-resources)一样，在 `source` 属性中引用 XML 资源。同时，使用 XML 资源代替位图有助于减小应用大小，并能在不同 DPI 的屏幕上获得更好渲染效果。
 
 ```js
-// via require
+// 通过 require 引入
 <Image
   source={require('./img/my_icon.xml')}
   style={{width: 40, height: 40}}
 />;
 
-// or via import
+// 或通过 import 引入
 import MyIcon from './img/my_icon.xml';
 <Image source={MyIcon} style={{width: 40, height: 40}} />;
 ```
 
-#### Performance & Quality
+#### 性能与质量
 
-[Like all other image types](/docs/next/images#off-thread-decoding), Android’s XML resources are loaded and inflated off the main thread so you don’t drop any frames. This means the resource is not guaranteed to display instantly but also does not prevent user input while the resource is loading. Off-thread decoding is especially important when you need to render many icons at the same time. Internal apps realized some significant performance improvements when using Android’s vector drawables.
+[与其他图片类型相同](/docs/next/images#off-thread-decoding)，Android XML 资源的加载和解析均在主线程之外执行，因此不会掉帧。这意味着资源不会立即显示，但不会阻塞用户输入。线程外解码在需要同时渲染许多图标时尤为重要。内部应用在使用 Android 矢量 drawable 时实现了显著的性能提升。
 
-Utilizing resource types like vector drawables are the perfect way to display images without loss of quality, and can result in smaller APK files since you don't need to include an image type for every screen density. Furthermore, vector drawables are copied from memory once they’re loaded so if you render the same icon more than once they will all display at the same time.
+使用矢量 drawable 等资源类型可以完美展示无损图像，且可显著减小 APK 文件，因为无需针对每个屏幕密度包含不同图片。此外，矢量 drawable 加载后会复制一次至内存，因此多次渲染同一图标时都能即时显示。
 
-#### Trade-offs
+#### 权衡
 
-It’s important to note that drawable XML resources are not perfect, and there are constraints to using them:
+需要注意的是，drawable XML 资源不是完美无缺，且存在以下限制：
 
-- They must be referenced at build time of your Android application. These resources are passed into a build step with the [Android Asset Packaging Tool](https://developer.android.com/tools/aapt2) (AAPT) to convert raw XML into binary XML. Android does not support loading raw XML files, [this is a known limitation](https://issuetracker.google.com/issues/62435069).
-- They cannot be loaded over the network by Metro. If you change the directory or name of an XML resource, you will need to rebuild your Android application each time.
-- They have no dimensions. By default, they will display with a 0x0 size and you need to provide a width and height for them to show up.
-- They are not fully customizable at runtime; you can only control dimensions or the overall tint color but you can’t customize individual element attributes _inside_ the resource like stroke widths, border radius, or colors. These types of customizations require different variants of your XML resource.
+- 必须在 Android 应用构建时被引用。这些资源会经过 [Android 资源打包工具](https://developer.android.com/tools/aapt2)（AAPT）转换成二进制 XML。Android 不支持加载原始 XML 文件，[这是已知限制](https://issuetracker.google.com/issues/62435069)。
+- Metro 无法通过网络加载它们。如果更改 XML 资源的目录或名称，需要每次重新构建 Android 应用。
+- 不包含尺寸信息。默认显示为 0x0 大小，你需要指定宽高才能显示。
+- 运行时无法完全定制；只能控制尺寸和整体着色（tint color），但无法定制资源内部各个元素的属性，如描边宽度、边角半径或颜色。这类定制需要准备不同变体的 XML 资源。
 
 :::info
-Android’s vector drawables are not a 1:1 replacement for libraries like `react-native-svg`. They are designed specifically for Android and do not work for iOS. If you want to have the same SVGs across all platforms, you'll have to continue using `react-native-svg`. Vector drawables merely offer performance benefits at the expense of customization.
+Android 的矢量 drawable 不能完全替代像 `react-native-svg` 这样的库。它们是专为 Android 设计，iOS 不支持。如果你想在所有平台保持相同的 SVG 文件，仍需使用 `react-native-svg`。矢量 drawable 的优势在于性能，但代价是定制性较低。
 :::
 
-### ReactNativeFactory on iOS
+### iOS 上的 ReactNativeFactory
 
-With React Native 0.78 we improved the integration of React Native on iOS.
+React Native 0.78 改进了 iOS 上的集成体验。
 
-This version introduces a new class called `RCTReactNativeFactory` that allows you to create instances of React Native without the need of an AppDelegate. This should allow you to create a new version of React Native in a ViewController, for example. This simplifies dramatically the integration with Brownfield apps.
+该版本引入了一个新类 `RCTReactNativeFactory`，允许你无需 AppDelegate 即可创建 React Native 实例。例如，你可以在 ViewController 中直接创建一个 React Native 视图，大大简化了与棕地应用的集成。
 
-Imagine that you want to show a React Native view in a View Controller of your app. Starting from React Native 0.78, what you need to do, after installing all the dependencies as shown in [this guide](/docs/next/integration-with-existing-apps?language=apple#1-set-up-directory-structure), is to add this code:
+假设你想在应用的某个 View Controller 中展示 React Native 视图。从 0.78 开始，完成[此指南](/docs/next/integration-with-existing-apps?language=apple#1-set-up-directory-structure)中的依赖安装后，只需要添加如下代码：
 
 ```diff
 
@@ -159,25 +159,25 @@ public class ViewController {
 
 ```
 
-React Native will be loaded in the View Controller as soon as you navigate to it.
+只要你跳转到该 View Controller，React Native 就会被加载。
 
-This code creates an `RCTReactNativeFactory`, assigns a delegate to it, and asks it to create a `rootView` for a React Native’s view.
+这段代码创建了一个 `RCTReactNativeFactory`，赋予了它一个代理，并请求它根据 React Native 模块名称创建一个 rootView。
 
-The delegate is defined below, and it overrides the `sourceURL` and the `bundleURL` properties to tell React Native where it can find the JS bundle to load in the view.
+代理类定义在下方，重写了 `sourceURL` 和 `bundleURL` 方法，告诉 React Native 从哪里加载 JS bundle。
 
-## Other Breaking Changes
+## 其他破坏性变更
 
-### General
+### 通用
 
 - React Native DevTools
-  - Removed FuseboxClient CDP domain
+  - 移除了 FuseboxClient CDP 域
 - Codegen
-  - Separate component array types and command array types
+  - 区分组件数组类型与命令数组类型
 
 ### Android
 
-- Nullability changes: migrating `RootView` to Kotlin resulted in changes of parameter types from nullable to non nullable.
-- The following classes have been moved from public to internal, or removed, and can’t be accessed anymore:
+- 可空性变更：因将 `RootView` 迁移至 Kotlin，参数类型由可空变为非可空。
+- 以下类已由公共变为内部或被移除，无法访问：
   - `com.facebook.react.bridge.GuardedResultAsyncTask`
   - `com.facebook.react.uimanager.ComponentNameResolver`
   - `com.facebook.react.uimanager.FabricViewStateManager`
@@ -185,32 +185,32 @@ The delegate is defined below, and it overrides the `sourceURL` and the `bundleU
 
 ### iOS
 
-- Change Image load event size info from logical size to pixel (This only affects the Old Architecture)
+- 修改 Image 加载事件中的尺寸信息，由逻辑尺寸改为像素（仅影响旧架构）
 
-## Acknowledgements
+## 致谢
 
-React Native 0.78 contains over 509 commits from 87 contributors. Thanks for all your hard work!
+React Native 0.78 包含了来自 87 位贡献者的 509+ 次提交。感谢大家的辛勤付出！
 
-Thanks to all the additional authors that worked on documenting features in this release post:
+感谢以下额外作者为本次发布文档的撰写所做的贡献：
 
-- [Dream11](https://github.com/ds-horizon) team for the thorough testing of React 19 features in React Native
-- [Nicola Corti](https://github.com/cortinico) for the work on Faster Releases
-- [Alex Hunt](https://github.com/huntie) for the work on the Metro logs opt-in
-- [Peter Abbondanzo](https://github.com/Abbondanzo) for the work on Android XML Drawable Support
-- [Oskar Kwaśniewski](https://github.com/okwasniewski) for the work on the ReactNativeFactory
+- [Dream11](https://github.com/ds-horizon) 团队，对 React Native 中 React 19 功能进行了全面测试
+- [Nicola Corti](https://github.com/cortinico) 提供了关于更快发布的工作成果
+- [Alex Hunt](https://github.com/huntie) 贡献了 Metro 日志可选开启功能
+- [Peter Abbondanzo](https://github.com/Abbondanzo) 负责 Android XML Drawable 支持
+- [Oskar Kwaśniewski](https://github.com/okwasniewski) 负责 ReactNativeFactory 部分
 
-## Upgrade to 0.78
+## 升级到 0.78
 
-Please use the [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) to view code changes between React Native versions for existing projects, in addition to the Upgrading docs.
+请使用 [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) 来查看当前项目中不同 React Native 版本间的代码变动，搭配官方升级文档使用。
 
-To create a new project:
+创建新项目：
 
 ```
 npx @react-native-community/cli@latest init MyProject --version latest
 ```
 
-If you use Expo, [React Native 0.78 will be supported in a canary release of the Expo SDK](https://expo.dev/changelog/react-native-78).
+若使用 Expo，[React Native 0.78 将支持 Expo SDK 试验版](https://expo.dev/changelog/react-native-78)。
 
 :::info
-0.78 is now the latest stable version of React Native and 0.75.x moves to unsupported. For more information see [React Native's support policy](https://github.com/reactwg/react-native-releases/blob/main/docs/support.md). We aim to publish a final end-of-life update of 0.75 in the near future.
+0.78 现为 React Native 的最新稳定版本，0.75.x 将进入不再支持状态。更多详情请参阅 [React Native 支持政策](https://github.com/reactwg/react-native-releases/blob/main/docs/support.md)。我们计划在近期发布 0.75 的最终生命周期结束版本更新。
 :::

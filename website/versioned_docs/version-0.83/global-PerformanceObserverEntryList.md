@@ -3,4 +3,4 @@ id: global-PerformanceObserverEntryList
 title: PerformanceObserverEntryList
 ---
 
-The global [`PerformanceObserverEntryList`](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserverEntryList) class, as defined in Web specifications.
+全局的 [`PerformanceObserverEntryList`](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserverEntryList) 类，按照 Web 规范定义。

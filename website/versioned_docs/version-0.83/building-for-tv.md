@@ -1,11 +1,11 @@
 ---
 id: building-for-tv
-title: 🗑️ Building For TV Devices
+title: 🗑️ 针对电视设备构建
 hide_table_of_contents: true
 ---
 
-TV devices support has been implemented with the intention of making existing React Native applications work on Apple TV and Android TV, with few or no changes needed in the JavaScript code for the applications.
+电视设备支持的实现目的是让现有的 React Native 应用可以运行在 Apple TV 和 Android TV 上，且在应用的 JavaScript 代码中几乎无需或无需做任何修改。
 
-:::warning Deprecated
-TV support has moved to the [React Native for TV](https://github.com/react-native-tvos/react-native-tvos#readme) repository. Please see the **README** there for information on projects for Apple TV or Android TV.
+:::warning 弃用
+电视支持已迁移至 [React Native for TV](https://github.com/react-native-tvos/react-native-tvos#readme) 仓库。请查阅该仓库中的 **README**，了解针对 Apple TV 或 Android TV 的项目相关信息。
 :::

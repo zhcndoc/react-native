@@ -1,17 +1,17 @@
 ---
 id: tutorial
-title: Learn the Basics
+title: 学习基础知识
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-React Native is like React, but it uses native components instead of web components as building blocks. So to understand the basic structure of a React Native app, you need to understand some of the basic React concepts, like JSX, components, `state`, and `props`. If you already know React, you still need to learn some React Native specific stuff, like the native components. This tutorial is aimed at all audiences, whether you have React experience or not.
+React Native 就像 React，但它使用原生组件而不是网页组件作为构建模块。所以，要理解一个 React Native 应用的基本结构，你需要理解一些基本的 React 概念，比如 JSX、组件、`state` 和 `props`。如果你已经了解 React，你仍然需要学习一些 React Native 特有的内容，比如原生组件。本教程适合所有人群，无论你有没有 React 经验。
 
-Let's do this thing.
+让我们开始吧。
 
 ## Hello World
 
-In accordance with the ancient traditions of our people, we must first build an app that does nothing except say "Hello, world!". Here it is:
+遵循我们祖先的古老传统，我们必须先构建一个除了显示 “Hello, world!” 外什么都不做的应用。代码如下：
 
 ```SnackPlayer name=Hello%20World
 import React from 'react';
@@ -32,36 +32,36 @@ const HelloWorldApp = () => {
 export default HelloWorldApp;
 ```
 
-If you are feeling curious, you can play around with sample code directly in the web simulators. You can also paste it into your `App.js` file to create a real app on your local machine.
+如果你感到好奇，可以直接在网页模拟器中玩转示例代码。你也可以将其粘贴到你的 `App.js` 文件中，在本地机器上创建一个真正的应用。
 
-## What's going on here?
+## 这里发生了什么？
 
-1. First of all, we need to import `React` to be able to use `JSX`, which will then be transformed to the native components of each platform.
-2. On line 2, we import the `Text` and `View` components from `react-native`
+1. 首先，我们需要导入 `React`，以便能使用 `JSX`，它随后会被转换为各个平台的原生组件。
+2. 在第二行，我们从 `react-native` 中导入了 `Text` 和 `View` 组件。
 
-Then we define the `HelloWorldApp` function, which is a [function component](https://react.dev/reference/react/Component) and behaves in the same way as in React for the web. This function returns a `View` component with some styles and a`Text` as its child.
+接着我们定义了 `HelloWorldApp` 函数，这是一个[函数组件](https://react.dev/reference/react/Component)，行为和网页上的 React 一样。该函数返回一个带有样式的 `View` 组件，里面包含一个 `Text` 作为子组件。
 
-The `Text` component allows us to render a text, while the `View` component renders a container. This container has several styles applied, let's analyze what each one is doing.
+`Text` 组件用于渲染文本，而 `View` 组件渲染一个容器。这个容器被应用了几种样式，让我们来分析每一项的作用。
 
-The first style that we find is `flex: 1`, the [`flex`](layout-props#flex) prop will define how your items are going to "fill" over the available space along your main axis. Since we only have one container, it will take all the available space of the parent component. In this case, it is the only component, so it will take all the available screen space.
+首先是 `flex: 1`，[`flex`](layout-props#flex) 属性决定你的项目沿主轴将如何“填充”可用空间。由于这里只有一个容器，它会占满父组件所有可用空间。本例中它是唯一组件，因此会占满整个屏幕可用空间。
 
-The following style is [`justifyContent`](layout-props#justifycontent): "center". This aligns children of a container in the center of the container's main axis. Finally, we have [`alignItems`](layout-props#alignitems): "center", which aligns children of a container in the center of the container's cross axis.
+接下来是 [`justifyContent`](layout-props#justifycontent): "center"，它将容器的子组件沿主轴居中对齐。最后是 [`alignItems`](layout-props#alignitems): "center"，它将容器的子组件沿交叉轴居中对齐。
 
-Some of the things in here might not look like JavaScript to you. Don't panic. _This is the future_.
+这里的一些内容你可能看起来不像 JavaScript，不用慌。_这就是未来_。
 
-First of all, ES2015 (also known as ES6) is a set of improvements to JavaScript that is now part of the official standard, but not yet supported by all browsers, so often it isn't used yet in web development. React Native ships with ES2015 support, so you can use this stuff without worrying about compatibility. `import`, `export`, `const` and `from` in the example above are all ES2015 features. If you aren't familiar with ES2015, you can probably pick it up by reading through sample code like this tutorial has. If you want, [this page](https://babeljs.io/learn-es2015/) has a good overview of ES2015 features.
+首先，ES2015（又名 ES6）是一组对 JavaScript 的改进，现在已成为官方标准，但还未被所有浏览器支持，所以通常 web 开发还未完全使用。React Native 内置支持 ES2015，因此你可以放心使用这些新特性。示例中的 `import`、`export`、`const` 和 `from` 都是 ES2015 特性。如果你不熟悉 ES2015，可以通过阅读本教程中的示例代码来学习这部分内容。如果想要系统了解，[这个页面](https://babeljs.io/learn-es2015/) 提供了 ES2015 特性的良好概览。
 
-The other unusual thing in this code example is `<View><Text>Hello world!</Text></View>`. This is JSX - a syntax for embedding XML within JavaScript. Many frameworks use a specialized templating language which lets you embed code inside markup language. In React, this is reversed. JSX lets you write your markup language inside code. It looks like HTML on the web, except instead of web things like `<div>` or `<span>`, you use React components. In this case, `<Text>` is a [Core Component](intro-react-native-components) that displays some text and `View` is like the `<div>` or `<span>`.
+另一个代码中不寻常的部分是 `<View><Text>Hello world!</Text></View>`。这是 JSX —— 一种允许你在 JavaScript 中嵌入 XML 的语法。许多框架使用专门的模板语言，允许你在标记语言中嵌入代码。而 React 则相反，JSX 允许你在代码中写标记语言。看起来类似网页上的 HTML，但不是用 `<div>` 或 `<span>` 这些网页元素，而是用 React 组件。这里 `<Text>` 是一个[核心组件](intro-react-native-components)，用于显示文本，`View` 则类似 `<div>` 或 `<span>`。
 
-## Components
+## 组件
 
-So this code is defining `HelloWorldApp`, a new `Component`. When you're building a React Native app, you'll be making new components a lot. Anything you see on the screen is some sort of component.
+这段代码定义了一个新的 `Component` —— `HelloWorldApp`。当你构建 React Native 应用时，会经常创建新组件。屏幕上看到的任何事物都是某种组件。
 
 ## Props
 
-Most components can be customized when they are created, with different parameters. These creation parameters are called props.
+大多数组件都可以在创建时通过不同参数进行定制。这些创建时传入的参数称为 props。
 
-Your own components can also use `props`. This lets you make a single component that is used in many different places in your app, with slightly different properties in each place. Refer to `props.YOUR_PROP_NAME` in your functional components or `this.props.YOUR_PROP_NAME` in your class components. Here's an example:
+你自己的组件也可以使用 `props`。这允许你创建一个组件，并在应用的多个位置以不同的属性复用它。在函数组件中通过 `props.YOUR_PROP_NAME` 访问，在类组件中通过 `this.props.YOUR_PROP_NAME` 访问。示例如下：
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -138,26 +138,26 @@ export default LotsOfGreetings;
 </TabItem>
 </Tabs>
 
-Using `name` as a prop lets us customize the `Greeting` component, so we can reuse that component for each of our greetings. This example also uses the `Greeting` component in JSX. The power to do this is what makes React so cool.
+使用 `name` 作为 prop 让我们可以自定义 `Greeting` 组件，这样可以在每个问候中复用该组件。这个例子也在 JSX 中使用了 `Greeting` 组件。能够这样做正是 React 很酷的原因。
 
-The other new thing going on here is the [`View`](view.md) component. A [`View`](view.md) is useful as a container for other components, to help control style and layout.
+这里的另一个新玩意是 [`View`](view.md) 组件。[`View`](view.md) 主要用作其他组件的容器，帮助控制样式和布局。
 
-With `props` and the basic [`Text`](text.md), [`Image`](image.md), and [`View`](view.md) components, you can build a wide variety of static screens. To learn how to make your app change over time, you need to [learn about State](#state).
+通过 `props` 和基本的 [`Text`](text.md)、[`Image`](image.md) 与 [`View`](view.md) 组件，你可以构建各种静态界面。想要让你的应用随时间变化，接下来你需要[了解 State](#state)。
 
 ## State
 
-Unlike props [that are read-only](https://react.dev/reference/react/Component#props) and should not be modified, the `state` allows React components to change their output over time in response to user actions, network responses and anything else.
+与只读的 props 不同（[props 是只读的](https://react.dev/reference/react/Component#props)，不应被修改），`state` 允许 React 组件随着时间推移响应用户操作、网络响应等事件，动态更新其输出。
 
-#### What's the difference between state and props in React?
+#### React 中 state 和 props 有何区别？
 
-In a React component, the props are the variables that we pass from a parent component to a child component. Similarly, the state are also variables, with the difference that they are not passed as parameters, but rather that the component initializes and manages them internally.
+在 React 组件中，props 是从父组件传递给子组件的变量。state 也是变量，但不同之处在于它们不是作为参数传递，而是组件内部初始化和管理的。
 
-#### Are there differences between React and React Native to handle the state?
+#### React 和 React Native 对状态管理有区别吗？
 
 <div className="two-columns">
 
 ```tsx
-// ReactJS Counter Example using Hooks!
+// ReactJS 使用 Hooks 实现计数器示例！
 
 import React, {useState} from 'react';
 
@@ -168,10 +168,10 @@ const App = () => {
 
   return (
     <div className="container">
-      <p>You clicked {count} times</p>
+      <p>你点击了 {count} 次</p>
       <button
         onClick={() => setCount(count + 1)}>
-        Click me!
+        点击我！
       </button>
     </div>
   );
@@ -188,7 +188,7 @@ const App = () => {
 ```
 
 ```tsx
-// React Native Counter Example using Hooks!
+// React Native 使用 Hooks 实现计数器示例！
 
 import React, {useState} from 'react';
 import {View, Text, Button, StyleSheet} from 'react-native';
@@ -198,16 +198,16 @@ const App = () => {
 
   return (
     <View style={styles.container}>
-      <Text>You clicked {count} times</Text>
+      <Text>你点击了 {count} 次</Text>
       <Button
         onPress={() => setCount(count + 1)}
-        title="Click me!"
+        title="点击我！"
       />
     </View>
   );
 };
 
-// React Native Styles
+// React Native 样式
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -219,9 +219,9 @@ const styles = StyleSheet.create({
 
 </div>
 
-As shown above, there is no difference in handling the `state` between [React](https://react.dev/learn/state-a-components-memory) and `React Native`. You can use the state of your components both in classes and in function components using [hooks](https://react.dev/reference/react/useState)!
+如上所示，React（[React 状态介绍](https://react.dev/learn/state-a-components-memory)）和 React Native 之间在处理 `state` 上没有区别。你可以使用类组件的 state，也可以通过[hooks](https://react.dev/reference/react/useState) 在函数组件中使用 state！
 
-In the following example we will show the same above counter example using classes.
+下面的示例展示了同样的计数器，使用类组件实现。
 
 ```SnackPlayer name=Hello%20Classes
 import React, {Component} from 'react';
@@ -242,10 +242,10 @@ class App extends Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity style={styles.button} onPress={this.onPress}>
-          <Text>Click me</Text>
+          <Text>点击我</Text>
         </TouchableOpacity>
         <View>
-          <Text>You clicked {this.state.count} times</Text>
+          <Text>你点击了 {this.state.count} 次</Text>
         </View>
       </View>
     );

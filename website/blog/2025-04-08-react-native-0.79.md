@@ -1,85 +1,85 @@
 ---
-title: 'React Native 0.79 - Faster tooling and much more'
+title: 'React Native 0.79 - 更快的工具链和更多功能'
 authors: [alanjhughes, shubham, fabriziocucci, cortinico]
 tags: [engineering]
 date: 2025-04-08
 ---
 
-# React Native 0.79 - Faster tooling, faster startup and much more
+# React Native 0.79 - 更快的启动速度，更快的工具链和更多优化
 
-Today we are excited to release React Native 0.79!
+今天我们很高兴发布 React Native 0.79！
 
-This release ships with performance improvements on various fronts, as well as several bugfixes. First, Metro is now faster to start thanks to deferred hashing, and has stable support for package exports. Startup time in Android will also be improved thanks to changes in the JS bundle compressions and much more.
+该版本在多个方面带来了性能提升，并修复了若干问题。首先，得益于延迟哈希，Metro 启动速度更快，并且对 package exports 提供了稳定支持。Android 启动时间也将因为 JS Bundle 压缩方式的改变等诸多优化而得到提升。
 
-### Highlights
+### 亮点
 
-- [New Metro Features](/blog/2025/04/08/react-native-0.79#metro-faster-startup-and-package-exports-support)
-- [JSC moving to a Community Package](/blog/2025/04/08/react-native-0.79#jsc-moving-to-community-package)
-- [iOS: Swift-Compatible Native Modules registration](/blog/2025/04/08/react-native-0.79#ios-swift-compatible-native-modules-registration)
-- [Android: Faster App Startup](/blog/2025/04/08/react-native-0.79#android-faster-app-startup)
-- [Removal of Remote JS Debugging](/blog/2025/04/08/react-native-0.79#removal-of-remote-js-debugging)
+- [Metro 新特性](/blog/2025/04/08/react-native-0.79#metro-faster-startup-and-package-exports-support)
+- [JSC 迁移至社区包](/blog/2025/04/08/react-native-0.79#jsc-moving-to-community-package)
+- [iOS：Swift 兼容的原生模块注册](/blog/2025/04/08/react-native-0.79#ios-swift-compatible-native-modules-registration)
+- [Android：更快的应用启动](/blog/2025/04/08/react-native-0.79#android-faster-app-startup)
+- [移除远程 JS 调试](/blog/2025/04/08/react-native-0.79#removal-of-remote-js-debugging)
 
 <!--truncate-->
 
-## Highlights
+## 亮点详解
 
-### Metro: Faster startup and package exports support
+### Metro：更快的启动和 package exports 支持
 
-This release ships with [Metro 0.82](https://github.com/facebook/metro/releases/tag/v0.82.0).This version uses deferred hashing to improve the speed of first `yarn start` typically by over 3x (more in larger projects and monorepos) making your development experience and CI builds faster on a daily basis.
+本次发布包含了 [Metro 0.82](https://github.com/facebook/metro/releases/tag/v0.82.0) 版本。该版本引入了延迟哈希技术，提升了首次执行 `yarn start` 的速度，通常提高3倍以上（大型项目和 monorepos 中提升更明显），为日常开发体验与 CI 构建带来加速。
 
-![metro startup comparison](../static/blog/assets/0.79-metro-startup-comparison.gif)
+![metro 启动速度对比](../static/blog/assets/0.79-metro-startup-comparison.gif)
 
-Also in Metro 0.82, we’re promoting `package.json` `"exports"` and `"imports"` field resolution to stable. `"exports"` resolution was [introduced in React Native 0.72](/blog/2023/06/21/package-exports-support), and `"imports"` support was added in a community contribution - both will now be enabled by default for all the projects on React Native 0.79.
+另外，在 Metro 0.82 中，我们将 `package.json` 中 `"exports"` 和 `"imports"` 字段解析提升为稳定功能。`"exports"` 功能于 [React Native 0.72](/blog/2023/06/21/package-exports-support) 引入，`"imports"` 支持为社区贡献，这两个字段将在 React Native 0.79 所有项目中默认启用。
 
-This improves compatibility with modern npm dependencies, and opens up new, standards-compliant ways to organise your projects.
+这提升了与现代 npm 依赖的兼容性，并开辟了符合标准的项目组织方案。
 
-:::warning Breaking change
+:::warning 破坏性变更
 
-While we've been testing `package.json` `"exports"` in the community for a while, this switchover can be a breaking change for certain packages and project setups.
+虽然我们在社区中已经对 `package.json` 的 `"exports"` 功能进行了较长时间的测试，但该切换可能对部分包和项目配置造成破坏性变更。
 
-In particular, we're aware of user reported incompatibilities for some popular packages including Firebase and AWS Amplify, and are working to get these fixed at source.
+我们特别注意到用户反馈中，一些流行包（如 Firebase 和 AWS Amplify）存在兼容问题，正在努力与相关方修复。
 
-If you're encountering issues:
+如遇问题：
 
-- Please update to the Metro [0.81.5 hotfix](https://github.com/facebook/metro/releases/tag/v0.81.5), or set [`resolver.unstable_enablePackageExports = false`](https://metrobundler.dev/docs/configuration/#unstable_enablepackageexports-experimental) to opt out.
-- See [expo/expo#36551](https://github.com/expo/expo/discussions/36551) for affected packages and future updates.
+- 请升级至 Metro [0.81.5 热修复版本](https://github.com/facebook/metro/releases/tag/v0.81.5)，或通过设置 [`resolver.unstable_enablePackageExports = false`](https://metrobundler.dev/docs/configuration/#unstable_enablepackageexports-experimental) 来禁用该功能。
+- 更多受影响的包及后续更新，请参考 [expo/expo#36551](https://github.com/expo/expo/discussions/36551)。
 
 :::
 
-### JSC moving to Community Package
+### JSC 迁移至社区包
 
-As part of our effort to reduce the API surface of React Native, we're in the process of moving the JavaScriptCore (JSC) engine to a community-maintained package: `@react-native-community/javascriptcore`
+作为减少 React Native API 面积的工作之一，我们正将 JavaScriptCore (JSC) 引擎迁移至社区维护的包：`@react-native-community/javascriptcore`
 
-This change will not affect users that are using Hermes.
+此更改不会影响使用 Hermes 的用户。
 
-Starting with React Native 0.79, you can use a community supported version of JSC by following the [installation instructions in the readme](https://github.com/react-native-community/javascriptcore#installation). The JSC version provided by React Native core will still be available in 0.79, but we’re planning to remove it [in the near future](https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0836-lean-core-jsc.md).
+从 React Native 0.79 开始，您可通过遵循 [社区包的安装说明](https://github.com/react-native-community/javascriptcore#installation)，使用社区支持的 JSC 版本。React Native 核心提供的 JSC 版本将在 0.79 中继续可用，但 [不久后将移除](https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0836-lean-core-jsc.md)。
 
-Moving JSC to a community maintained package will allow us to update the JSC version more frequently and offer you the latest features. The community maintained JSC will follow a separate release schedule from React Native.
+将 JSC 迁移至社区包使我们能更频繁地更新 JSC 版本，为您提供最新功能。社区维护的 JSC 版本将独立于 React Native 版本更新。
 
-### iOS: Swift-Compatible Native Modules registration
+### iOS：Swift 兼容的原生模块注册
 
-In this release, we are revamping the way in which you can register your Native Module into the React Native runtime. The new approach follows the same approach of components, described in the [official documentation](/docs/next/the-new-architecture/using-codegen#configuring-codegen).
+本次发布重构了将原生模块注册入 React Native runtime 的方式。新方法与组件注册的方式一致，具体可参见[官方文档](/docs/next/the-new-architecture/using-codegen#configuring-codegen)。
 
-Starting from this version of React Native, you can register your modules by modifying the `package.json` file. We introduced a new `modulesProvider` field in the `ios` property:
+从本版本起，可以通过修改 `package.json` 文件注册模块。我们在 `ios` 配置中引入了新的 `modulesProvider` 字段：
 
 ```diff
 "codegenConfig": {
      "ios": {
 +       "modulesProvider": {
-+         "JS Name for the module": "ObjC Module provider for the pure C++ TM or a class conforming to RCTTurboModule"
++         "模块的 JS 名称": "用于纯 C++ Turbo Module 的 ObjC 模块提供者，或符合 RCTTurboModule 的类"
 +     }
     }
 }
 ```
 
-Codegen will take care to create all the relevant code starting from your `package.json` file.
+Codegen 会从您的 `package.json` 自动生成相关代码。
 
-If you do use a pure C++ Native Module you will have to follow this recommended configuration:
+如果您使用纯 C++ 原生模块，建议按以下方式配置：
 
 <details>
-<summary>Configure pure C++Native Modules in your app</summary>
+<summary>为纯 C++ 原生模块配置应用</summary>
 
-For pure C++ Native Modules, you need to add a new ObjectiveC++ class to glue together the C++ Native Module with the rest of the App:
+对于纯 C++ 原生模块，您需要添加一个 ObjectiveC++ 类，将 C++ 模块与应用其它部分连接：
 
 ```objc title="CppNativeModuleProvider.h"
 #import <Foundation/Foundation.h>
@@ -111,68 +111,66 @@ NS_ASSUME_NONNULL_END
 
 </details>
 
-With this new approach, we unified the registration of Native Modules for both app developers and library maintainers. Libraries can specify the same properties in their `package.json` and Codegen will take care of the rest.
+通过该方法，我们统一了应用开发者与库维护者的原生模块注册方式。库也可在 `package.json` 中声明相同字段，Codegen 负责其余流程。
 
-This approach solves the limitation we introduced in 0.77 that prevented the registration of a pure C++ Native Module with a Swift `AppDelegate`. As you can see, none of these changes modifies the `AppDelegate` and the generated code will work for `AppDelegate` implemented with both Swift and Objective-C.
+此方案解决了 0.77 版本中纯 C++ 原生模块无法在 Swift 实现的 `AppDelegate` 中注册的限制。正如所示，该改动无需修改 `AppDelegate`，且生成代码可同时兼容 Swift 与 Objective-C 实现的 `AppDelegate`。
 
-### Android: Faster App Startup
+### Android：更快的应用启动
 
-We’re also shipping a change to improve your Android startup time by a significant amount.
+我们还带来了显著提升 Android 启动速度的改动。
 
-Starting with this version, we won’t be compressing the JavaScript bundle anymore inside the APK. Previously, the Android system needed to uncompress the JavaScript bundle before your app could start. This was causing a significant slowdown during the app startup.
+从本版本起，将不再压缩 APK 内的 JavaScript Bundle。之前，Android 系统需先解压 JS Bundle 才能启动，导致启动变慢。
 
-Starting from this release, we will be shipping the JavaScript Bundle uncompressed by default, so your Android apps will be generally faster to start.
+本次发布默认以未压缩形式打包 JavaScript Bundle，令 Android 应用启动更快。
 
-The [Margelo](https://margelo.com) team tested this feature on the Discord app and got a significant performance boost: Discord’s time-to-interactive (TTI) was reduced by 400ms, which was a 12% speedup with a one-line change (tested on a Samsung A14).
+[Margelo 团队](https://margelo.com) 在 Discord 应用上测试该特性，时间响应 (TTI) 缩短了 400ms，相当于 12% 的速度提升（在三星 A14 机型测试，且仅改动一行配置）。
 
-On the other hand, storing the bundle uncompressed, will result in a higher space consumption for your application on the user device. If this is a concern to you, you can toggle this behavior using the `enableBundleCompression` property in your `app/build.gradle` file.
+但同时，未压缩 Bundle 会导致应用在设备上的存储空间占用增加。如有空间方面顾虑，可在 `app/build.gradle` 中的 `enableBundleCompression` 属性切换此行为：
 
 ```kotlin title="app/build.gradle"
 react {
   // ...
-  // If you want to compress the JS bundle (slower startup, less
-  // space consumption)
+  // 如果希望压缩 JS Bundle（启动较慢，空间占用较小）
   enableBundleCompression = true
-  // If don't you want to compress the JS bundle (faster startup,
-  // higher space consumption)
+  // 如果不希望压缩 JS Bundle（启动较快，但占用空间较大）
   enableBundleCompression = false
 
-  // Default is `false`
+  // 默认值为 `false`
 }
 ```
 
-Please note that the APK size will increase in this release, but your users won’t be paying the extra cost in APK download size, as the APKs are compressed when downloaded from the network.
+请注意，本次发布 APK 初始大小会增加，但网络下载时 APK 本身仍会被压缩，用户不会因此多消耗下载流量。
 
-## Breaking Changes
+## 破坏性变更
 
-### Removal of Remote JS Debugging
+### 移除远程 JS 调试
 
-As part of our ongoing efforts to improve debugging, we're removing Remote JS Debugging via Chrome. This legacy debugging method was deprecated, [and moved to a runtime opt-in, in React Native 0.73](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#remote-javascript-debugging). Please use [React Native DevTools](/docs/react-native-devtools) for modern and reliable debugging.
+为了提升调试体验，我们移除了基于 Chrome 的远程 JS 调试功能。此遗留调试方式已在 React Native 0.73 中[被弃用并转为运行时显式启用](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#remote-javascript-debugging)。请使用更现代且可靠的 [React Native DevTools](/docs/react-native-devtools) 进行调试。
 
-This also means that React Native is no longer compatible with the [react-native-debugger](https://github.com/jhen0409/react-native-debugger) community project. For developers that want to use third party debugging extensions, such as Redux DevTools, we recommend [Expo DevTools Plugins](https://github.com/expo/dev-plugins), or integrating the standalone versions of these tools.
+这也意味着 React Native 不再兼容社区项目 [react-native-debugger](https://github.com/jhen0409/react-native-debugger)。想使用第三方调试扩展（如 Redux DevTools）的开发者，建议采用 [Expo DevTools 插件](https://github.com/expo/dev-plugins) 或集成这些工具的独立版本。
 
-Read more in [this dedicated post](https://github.com/react-native-community/discussions-and-proposals/discussions/872).
+详情请参阅 [此专项讨论帖子](https://github.com/react-native-community/discussions-and-proposals/discussions/872)。
 
-### Internal modules updated to `export` syntax
+### 内部模块更新为 `export` 语法
 
-As part of modernizing our JavaScript codebase, we've updated a number of implementation modules within `react-native` to consistently use `export` syntax instead of `module.exports`.
+为使 JavaScript 代码现代化，我们更新了 `react-native` 内部若干实现模块，统一使用 `export` 语法代替 `module.exports`。
 
-We've updated around **46 APIs** in total, which can be found in the [changelog](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0790).
+共更新约 **46 个 API**，详情见 [变更日志](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0790)。
 
-This change has a subtle impact on existing imports:
+此更改对现有导入有细微影响：
 
 <details>
-<summary>**Case 1: Default export**</summary>
+<summary>案例 1：默认导出</summary>
 
 ```diff
-  // CHANGED - require() syntax
+  // 变更前 - require 语法
 - const ImageBackground = require('react-native/Libraries/Image/ImageBackground');
 + const ImageBackground = require('react-native/Libraries/Image/ImageBackground').default;
 
-// Unchanged - import syntax
+// 不变 - import 语法
 import ImageBackground from 'react-native/Libraries/Image/ImageBackground';
 
-// RECOMMENDED - root import
+// 推荐 - 从根路径导入
 import {ImageBackground} from 'react-native';
 
 ```
@@ -181,82 +179,82 @@ import {ImageBackground} from 'react-native';
 
 <details>
 
-<summary>**Case 2: Secondary exports**</summary>
+<summary>案例 2：二级导出</summary>
 
-There are very few cases of this pattern, again unaffected when using the root `'react-native'` import.
+此类情况较少，使用根路径 `'react-native'` 导入时无变化。
 
 ```diff
-  // Unchanged - require() syntax
+  // 不变 - require 语法
   const BlobRegistry = require('react-native/Libraries/Blob/BlobRegistry');
 
-  // Unchanged - require() syntax with destructuring
+  // 不变 - require 解构语法
   const {register, unregister} = require('react-native/Libraries/Blob/BlobRegistry');
 
-  // CHANGED - import syntax as single object
+  // 变更 - import 单对象语法
 - import BlobRegistry from 'react-native/Libraries/Blob/BlobRegistry';
 + import * as BlobRegistry from 'react-native/Libraries/Blob/BlobRegistry';
 
 
-  // Unchanged - import syntax with destructuring
+  // 不变 - import 解构语法
   import {register, unregister} from 'react-native/Libraries/Blob/BlobRegistry';
 
-  // RECOMMENDED - root import
+  // 推荐 - 从根路径导入
   import {BlobRegistry} from 'react-native';
 ```
 
 </details>
 
-We expect the impact of this change to be extremely limited, particularly for projects written in TypeScript and using `import` syntax. Please check for any type errors to update your code.
+我们预期该变更影响极小，特别是对于使用 TypeScript 及 `import` 语法的项目。请检查有无类型错误及时调整代码。
 
 :::tip
 
-**The root `react-native` import is strongly recommended**
+**强烈推荐使用根路径 `react-native` 进行导入**
 
-As a general takeaway, we strongly recommend importing from the root `'react-native'` path, to avoid extraneous breaking changes in the future. In our next release, we will be deprecating deep imports, as part of better defining React Native's public JavaScript API ([see the RFC](https://github.com/react-native-community/discussions-and-proposals/pull/894)).
+作为通用建议，推荐从根路径 `'react-native'` 导入，以减少未来可能出现的破坏性变更。在下一版本中，我们将废弃深度导入，旨在更明确 React Native 的公共 JS API 边界（详见[RFC 说明](https://github.com/react-native-community/discussions-and-proposals/pull/894)）。
 
 :::
 
-### Other Breaking Changes
+### 其他破坏性变更
 
-This list contains a series of other breaking changes we suspect could have a minor impact to your product code and are worth noting.
+以下为疑似对产品代码有轻微影响的其他破坏性变更，值得注意：
 
-- **Invalid unitless lengths in box shadows and filters**:
-  - In order to make React Native more compliant with the CSS/Web specs, we now don’t support anymore unitless lengths in `box-shadow` and `filter`. This means that if you were using a `box-shadow` of `1 1 black` we won’t be rendering. You should instead specify units such as `1px 1px black`
-- **Remove incorrect hwb() syntax support from normalize-color:**
-  - In order to make React Native more compliant with the CSS/Web specs, we now restrict some invalid syntax for `hwb()`. Historically React Native used to support comma separated values (e.g. `hwb(0, 0%, 100%)`) which we now don’t support anymore (you should migrate to `hwb(0 0% 100%)`). You can read more about this change [here](https://github.com/facebook/react-native/commit/676359efd9e478d69ad430cff213acc87b273580).
-- **Libraries/Core/ExceptionsManager exports update**
-  - As part of our effort to modernize the React Native JS API, we updated <code>[ExceptionsManager](https://github.com/facebook/react-native/blob/0.79-stable/packages/react-native/Libraries/Core/ExceptionsManager.js)</code> to now export a default `ExceptionsManager` object, and `SyntheticError` as a secondary export.
+- **无单位的长度值（unitless）在 box-shadow 和 filter 中无效**：
+  - 为增强 React Native 与 CSS/Web 标准的兼容性，现不再支持 box-shadow 和 filter 中无单位的长度值。例如，`box-shadow: 1 1 black` 不再生效，应指定单位如 `1px 1px black`。
+- **从 normalize-color 中移除错误的 hwb() 语法支持**：
+  - 为了符合 CSS/Web 规范，限制了对非法 hwb() 语法的支持。历史上 React Native 支持逗号分隔形式（如 `hwb(0, 0%, 100%)`），现已废弃，应改为空格分隔（`hwb(0 0% 100%)`）。详情见 [此提交](https://github.com/facebook/react-native/commit/676359efd9e478d69ad430cff213acc87b273580)。
+- **Libraries/Core/ExceptionsManager 导出更新**：
+  - 作为底层 JS API 现代化改进，`[ExceptionsManager](https://github.com/facebook/react-native/blob/0.79-stable/packages/react-native/Libraries/Core/ExceptionsManager.js)` 现在默认导出一个 `ExceptionsManager` 对象，并以二级导出形式提供 `SyntheticError`。
 
-## Acknowledgements
+## 致谢
 
-React Native 0.79 contains over 944 commits from 100 contributors. Thanks for all your hard work!
+React Native 0.79 汇集了来自 100 名贡献者的 944 次提交。感谢大家的辛勤付出！
 
-We want to send a thank you to those community members that shipped significant contributions in this release:
+特别感谢本次版本中作出重要贡献的社区成员：
 
-- [Marc Rousavy](https://github.com/mrousavy) for developing and documenting the “Android: Faster App Startup” feature
-- [Kudo Chien](https://github.com/Kudo) and [Oskar Kwaśniewski](https://github.com/okwasniewski)for working on the `@react-native-community/javascriptcore` package and writing the “JSC moving to Community Package” section
-- [James Lawson](https://github.com/facebook/metro/pull/1302) for adding support for import subpath resolution [in Metro](https://github.com/facebook/metro/pull/1302).
+- [Marc Rousavy](https://github.com/mrousavy) 致力于开发与文档撰写“Android：更快的应用启动”功能
+- [Kudo Chien](https://github.com/Kudo) 和 [Oskar Kwaśniewski](https://github.com/okwasniewski) 参与 `@react-native-community/javascriptcore` 包开发，撰写“JSC 迁移至社区包”章节
+- [James Lawson](https://github.com/facebook/metro/pull/1302) 为 Metro 新增导入子路径解析支持 [详情](https://github.com/facebook/metro/pull/1302)
 
-Moreover, we also want to thank the additional authors that worked on documenting features in this release post:
+同时感谢其他作者对本发布文档的支持：
 
-- [Rob Hogan](https://github.com/robhogan) for the “New Metro Features” section
-- [Alex Hunt](https://github.com/huntie) for the “Removal of Remote JS Debugging” and “Internal modules updated to export syntax” sections
-- [Riccardo Cipolleschi](https://github.com/cipolleschi) for the work on iOS Native Module registration
+- [Rob Hogan](https://github.com/robhogan) 撰写“Metro 新特性”章节
+- [Alex Hunt](https://github.com/huntie) 撰写“移除远程 JS 调试”及“内部模块更新为 export 语法”章节
+- [Riccardo Cipolleschi](https://github.com/cipolleschi) 贡献 iOS 原生模块注册部分内容
 
-## Upgrade to 0.79
+## 升级至 0.79
 
-Please use the [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) to view code changes between React Native versions for existing projects, in addition to the Upgrading docs.
+请使用 [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) 查看不同版本间的代码变更，以及参考升级文档。
 
-To create a new project:
+创建新项目请执行：
 
 ```sh
 npx @react-native-community/cli@latest init MyProject --version latest
 ```
 
-If you use Expo, React Native 0.79 will be supported in the upcoming Expo SDK 53 as the default version of React Native.
+若使用 Expo，React Native 0.79 将作为默认版本包含于即将发布的 Expo SDK 53。
 
 :::info
 
-0.79 is now the latest stable version of React Native and 0.76.x moves to unsupported. For more information see [React Native's support policy](https://github.com/reactwg/react-native-releases/blob/main/docs/support.md). We aim to publish a final end-of-life update of 0.76 in the near future.
+0.79 现为 React Native 最新稳定版，0.76.x 版本转入不再支持。详情见 [React Native 支持政策](https://github.com/reactwg/react-native-releases/blob/main/docs/support.md)。我们计划在近期发布 0.76 最终终止支持更新。
 
 :::

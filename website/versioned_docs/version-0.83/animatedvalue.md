@@ -3,15 +3,15 @@ id: animatedvalue
 title: Animated.Value
 ---
 
-Standard value for driving animations. One `Animated.Value` can drive multiple properties in a synchronized fashion, but can only be driven by one mechanism at a time. Using a new mechanism (e.g. starting a new animation, or calling `setValue`) will stop any previous ones.
+用于驱动动画的标准值。一个 `Animated.Value` 可以以同步方式驱动多个属性，但一次只能被一种机制驱动。使用新的机制（例如启动一个新动画，或调用 `setValue`）会停止任何之前的机制。
 
-Typically initialized with `useAnimatedValue(0);` or `new Animated.Value(0);` in class components.
+通常通过 `useAnimatedValue(0);` 或在类组件中使用 `new Animated.Value(0);` 来初始化。
 
 ---
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `setValue()`
 
@@ -19,13 +19,13 @@ Typically initialized with `useAnimatedValue(0);` or `new Animated.Value(0);` in
 setValue(value: number);
 ```
 
-Directly set the value. This will stop any animations running on the value and update all the bound properties.
+直接设置值。这将停止任何正在运行的动画，并更新所有绑定的属性。
 
-**Parameters:**
+**参数:**
 
-| Name  | Type   | Required | Description |
-| ----- | ------ | -------- | ----------- |
-| value | number | Yes      | Value       |
+| 名称  | 类型   | 必填 | 说明     |
+| ----- | ------ | ---- | -------- |
+| value | number | 是   | 值       |
 
 ---
 
@@ -35,13 +35,13 @@ Directly set the value. This will stop any animations running on the value and u
 setOffset(offset: number);
 ```
 
-Sets an offset that is applied on top of whatever value is set, whether via `setValue`, an animation, or `Animated.event`. Useful for compensating things like the start of a pan gesture.
+设置一个偏移值，应用于无论是通过 `setValue`，动画，还是 `Animated.event` 设置的值之上。对于补偿如开始手势拖动（pan gesture）等情况很有用。
 
-**Parameters:**
+**参数:**
 
-| Name   | Type   | Required | Description  |
-| ------ | ------ | -------- | ------------ |
-| offset | number | Yes      | Offset value |
+| 名称   | 类型   | 必填 | 说明         |
+| ------ | ------ | ---- | ------------ |
+| offset | number | 是   | 偏移值       |
 
 ---
 
@@ -51,7 +51,7 @@ Sets an offset that is applied on top of whatever value is set, whether via `set
 flattenOffset();
 ```
 
-Merges the offset value into the base value and resets the offset to zero. The final output of the value is unchanged.
+将偏移值合并到基础值中，并将偏移重置为零。值的最终输出保持不变。
 
 ---
 
@@ -61,7 +61,7 @@ Merges the offset value into the base value and resets the offset to zero. The f
 extractOffset();
 ```
 
-Sets the offset value to the base value, and resets the base value to zero. The final output of the value is unchanged.
+将偏移值设置为基础值，并将基础值重置为零。值的最终输出保持不变。
 
 ---
 
@@ -71,15 +71,15 @@ Sets the offset value to the base value, and resets the base value to zero. The 
 addListener(callback: (state: {value: number}) => void): string;
 ```
 
-Adds an asynchronous listener to the value so you can observe updates from animations. This is useful because there is no way to synchronously read the value because it might be driven natively.
+为值添加异步监听器，以便观察动画中的更新。由于值可能由原生驱动，无法同步读取，因此此功能很有用。
 
-Returns a string that serves as an identifier for the listener.
+返回一个字符串，作为监听器的标识符。
 
-**Parameters:**
+**参数:**
 
-| Name     | Type     | Required | Description                                                                                 |
-| -------- | -------- | -------- | ------------------------------------------------------------------------------------------- |
-| callback | function | Yes      | The callback function which will receive an object with a `value` key set to the new value. |
+| 名称     | 类型     | 必填 | 说明                                                             |
+| -------- | -------- | ---- | ---------------------------------------------------------------- |
+| callback | function | 是   | 回调函数，将接收一个包含新值的 `{value}` 键的对象。              |
 
 ---
 
@@ -89,13 +89,13 @@ Returns a string that serves as an identifier for the listener.
 removeListener(id: string);
 ```
 
-Unregister a listener. The `id` param shall match the identifier previously returned by `addListener()`.
+注销一个监听器。`id` 参数应匹配之前 `addListener()` 返回的标识符。
 
-**Parameters:**
+**参数:**
 
-| Name | Type   | Required | Description                        |
-| ---- | ------ | -------- | ---------------------------------- |
-| id   | string | Yes      | Id for the listener being removed. |
+| 名称 | 类型   | 必填 | 说明               |
+| ---- | ------ | ---- | ------------------ |
+| id   | string | 是   | 要移除的监听器的ID |
 
 ---
 
@@ -105,7 +105,7 @@ Unregister a listener. The `id` param shall match the identifier previously retu
 removeAllListeners();
 ```
 
-Remove all registered listeners.
+移除所有已注册的监听器。
 
 ---
 
@@ -115,13 +115,13 @@ Remove all registered listeners.
 stopAnimation(callback?: (value: number) => void);
 ```
 
-Stops any running animation or tracking. `callback` is invoked with the final value after stopping the animation, which is useful for updating state to match the animation position with layout.
+停止任何正在运行的动画或跟踪。停止动画后会调用 `callback`，并传入最终值，可用于更新状态以匹配动画和布局位置。
 
-**Parameters:**
+**参数:**
 
-| Name     | Type     | Required | Description                                   |
-| -------- | -------- | -------- | --------------------------------------------- |
-| callback | function | No       | A function that will receive the final value. |
+| 名称     | 类型     | 必填 | 说明                     |
+| -------- | -------- | ---- | ------------------------ |
+| callback | function | 否   | 接收最终值的回调函数     |
 
 ---
 
@@ -131,13 +131,13 @@ Stops any running animation or tracking. `callback` is invoked with the final va
 resetAnimation(callback?: (value: number) => void);
 ```
 
-Stops any animation and resets the value to its original.
+停止任何动画并将值重置为初始值。
 
-**Parameters:**
+**参数:**
 
-| Name     | Type     | Required | Description                                      |
-| -------- | -------- | -------- | ------------------------------------------------ |
-| callback | function | No       | A function that will receive the original value. |
+| 名称     | 类型     | 必填 | 说明                       |
+| -------- | -------- | ---- | -------------------------- |
+| callback | function | 否   | 接收初始值的回调函数       |
 
 ---
 
@@ -147,24 +147,24 @@ Stops any animation and resets the value to its original.
 interpolate(config: InterpolationConfigType);
 ```
 
-Interpolates the value before updating the property, e.g. mapping 0-1 to 0-10.
+在更新属性前对值进行插值，例如将 0-1 映射到 0-10。
 
-See `AnimatedInterpolation.js`
+详见 `AnimatedInterpolation.js`
 
-**Parameters:**
+**参数:**
 
-| Name   | Type   | Required | Description |
-| ------ | ------ | -------- | ----------- |
-| config | object | Yes      | See below.  |
+| 名称   | 类型   | 必填 | 说明       |
+| ------ | ------ | ---- | ---------- |
+| config | object | 是   | 见下文说明 |
 
-The `config` object is composed of the following keys:
+`config` 对象包含以下键：
 
-- `inputRange`: an array of numbers
-- `outputRange`: an array of numbers or strings
-- `easing` (optional): a function that returns a number, given an input number
-- `extrapolate` (optional): a string such as 'extend', 'identity', or 'clamp'
-- `extrapolateLeft` (optional): a string such as 'extend', 'identity', or 'clamp'
-- `extrapolateRight` (optional): a string such as 'extend', 'identity', or 'clamp'
+- `inputRange`：数字数组
+- `outputRange`：数字或字符串数组
+- `easing`（可选）：输入一个数字返回一个数字的函数
+- `extrapolate`（可选）：字符串，如 'extend'、'identity' 或 'clamp'
+- `extrapolateLeft`（可选）：字符串，如 'extend'、'identity' 或 'clamp'
+- `extrapolateRight`（可选）：字符串，如 'extend'、'identity' 或 'clamp'
 
 ---
 
@@ -174,11 +174,11 @@ The `config` object is composed of the following keys:
 animate(animation, callback);
 ```
 
-Typically only used internally, but could be used by a custom Animation class.
+通常仅供内部使用，但自定义 Animation 类也可调用。
 
-**Parameters:**
+**参数:**
 
-| Name      | Type      | Required | Description         |
-| --------- | --------- | -------- | ------------------- |
-| animation | Animation | Yes      | See `Animation.js`. |
-| callback  | function  | Yes      | Callback function.  |
+| 名称      | 类型      | 必填 | 说明               |
+| --------- | --------- | ---- | ------------------ |
+| animation | Animation | 是   | 参见 `Animation.js` |
+| callback  | function  | 是   | 回调函数           |

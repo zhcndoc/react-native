@@ -1,29 +1,29 @@
 ---
 id: render-pipeline
-title: Render, Commit, and Mount
+title: 渲染、提交与挂载
 ---
 
 import FabricWarning from './\_fabric-warning.mdx';
 
 <FabricWarning />
 
-The React Native renderer goes through a sequence of work to render React logic to a [host platform](architecture-glossary.md#host-platform). This sequence of work is called the render pipeline and occurs for initial renders and updates to the UI state. This document goes over the render pipeline and how it differs in those scenarios.
+React Native 渲染器会经历一系列工作，将 React 逻辑渲染到[宿主平台](architecture-glossary.md#host-platform)。这系列工作被称为渲染管线（render pipeline），会在初始渲染和 UI 状态更新时进行。本文档介绍了渲染管线以及它在不同场景下的差异。
 
-The render pipeline can be broken into three general phases:
+渲染管线可分为三个一般阶段：
 
-1. **Render:** React executes product logic which creates a [React Element Trees](architecture-glossary.md#react-element-tree-and-react-element) in JavaScript. From this tree, the renderer creates a [React Shadow Tree](architecture-glossary.md#react-shadow-tree-and-react-shadow-node) in C++.
-2. **Commit**: After a React Shadow Tree is fully created, the renderer triggers a commit. This **promotes** both the React Element Tree and the newly created React Shadow Tree as the “next tree” to be mounted. This also schedules calculation of its layout information.
-3. **Mount:** The React Shadow Tree, now with the results of layout calculation, is transformed into a [Host View Tree](architecture-glossary.md#host-view-tree-and-host-view).
+1. **渲染（Render）：** React 执行产品逻辑，在 JavaScript 中创建[React 元素树](architecture-glossary.md#react-element-tree-and-react-element)。渲染器基于此树，在 C++ 中创建[React 影子树](architecture-glossary.md#react-shadow-tree-and-react-shadow-node)。
+2. **提交（Commit）：** React 影子树创建完毕后，渲染器触发提交。该操作**升级**React 元素树和新创建的 React 影子树为即将“挂载的下一棵树”，并安排其布局信息的计算。
+3. **挂载（Mount）：** React 影子树在完成布局计算后，被转换成[宿主视图树](architecture-glossary.md#host-view-tree-and-host-view)。
 
-> The phases of the render pipeline may occur on different threads. Refer to the [Threading Model](threading-model) doc for more detail.
+> 渲染管线的各阶段可能在不同线程上执行。详情请参见[线程模型](threading-model)文档。
 
-![React Native renderer Data flow](/docs/assets/Architecture/renderer-pipeline/data-flow.jpg)
+![React Native 渲染器数据流](/docs/assets/Architecture/renderer-pipeline/data-flow.jpg)
 
 ---
 
-## Initial Render
+## 初始渲染
 
-Imagine you want to render the following:
+假设你想渲染以下内容：
 
 ```jsx
 function MyComponent() {
@@ -37,51 +37,50 @@ function MyComponent() {
 // <MyComponent />
 ```
 
-In the example above, `<MyComponent />` is a [React Element](architecture-glossary.md#react-element-tree-and-react-element). React recursively reduces this _React Element_ to a terminal [React Host Component](architecture-glossary.md#react-host-components-or-host-components) by invoking it (or its `render` method if implemented with a JavaScript class) until every _React Element_ cannot be reduced any further. Now you have a _React Element Tree_ of [React Host Components](architecture-glossary.md#react-host-components-or-host-components).
+在上面示例中，`<MyComponent />` 是一个[React 元素](architecture-glossary.md#react-element-tree-and-react-element)。React 递归调用该元素（或如果使用 JavaScript 类实现，则调用其 `render` 方法），直到所有元素都被减少为终端的[React 宿主组件](architecture-glossary.md#react-host-components-or-host-components)。最终得到一个由 [React 宿主组件](architecture-glossary.md#react-host-components-or-host-components) 组成的_React 元素树_。
 
-### Phase 1. Render
+### 阶段 1. 渲染
 
-![Phase one: render](/docs/assets/Architecture/renderer-pipeline/phase-one-render.png)
+![阶段一：渲染](/docs/assets/Architecture/renderer-pipeline/phase-one-render.png)
 
-During this process of element reduction, as each _React Element_ is invoked, the renderer also synchronously creates a [React Shadow Node](architecture-glossary.md#react-shadow-tree-and-react-shadow-node). This happens only for _React Host Components_, not for [React Composite Components](architecture-glossary.md#react-composite-components). In the example above, the `<View>` leads to the creation of a `ViewShadowNode` object, and the
-`<Text>` leads to the creation of a `TextShadowNode` object. Notably, there is never a _React Shadow Node_ that directly represents `<MyComponent>`.
+在元素递归处理过程中，每当调用一个 _React 元素_，渲染器会同步创建一个[React 影子节点](architecture-glossary.md#react-shadow-tree-and-react-shadow-node)。此操作仅针对 _React 宿主组件_，不会为[React 组合组件](architecture-glossary.md#react-composite-components) 创建。以上例中，`<View>` 生成一个 `ViewShadowNode` 对象，`<Text>` 生成一个 `TextShadowNode` 对象。值得注意的是，没有任何 React 影子节点会直接对应 `<MyComponent>`。
 
-Whenever React creates a parent-child relationship between two _React Element Nodes_, the renderer creates the same relationship between the corresponding _React Shadow Nodes_. This is how the _React Shadow Tree_ is assembled.
+每当 React 创建两个 _React 元素节点_ 之间的父子关系，渲染器会在对应的 _React 影子节点_ 之间创建同样的关系。这样便组装成了 _React 影子树_。
 
-**Additional Details**
+**更多细节**
 
-- The operations (creation of _React Shadow Node_, creation of parent-child relationship between two _React Shadow Nodes_) are synchronous and thread-safe operations that are executed from React (JavaScript) into the renderer (C++), usually on the JavaScript thread.
-- The _React Element Tree_ (and its constituent _React Element Nodes_) do not exist indefinitely. It is a temporal representation materialized by “fibers” in React. Each “fiber” that represents a host component stores a C++ pointer to the _React Shadow Node_, made possible by JSI. [Learn more about “fibers” in this document.](https://github.com/acdlite/react-fiber-architecture#what-is-a-fiber)
-- The _React Shadow Tree_ is immutable. In order to update any _React Shadow Node_, the renderer creates a new _React Shadow Tree_. However, the renderer provides cloning operations to make state updates more performant (see [React State Updates](render-pipeline#react-state-updates) for more details).
+- 这些操作（创建 _React 影子节点_，创建两节点间的父子节点关系）是同步且线程安全的，从 React（JavaScript）执行到渲染器（C++），通常在 JavaScript 线程上。
+- _React 元素树_（以及其构成的元素节点）并非永久存在。它是由 React 的 “fiber” 机制临时实现的表示。代表宿主组件的每个 “fiber” 会存储一个指向 _React 影子节点_ 的 C++ 指针，这由 JSI 技术实现。[详细了解 “fiber” 机制请见此文档。](https://github.com/acdlite/react-fiber-architecture#what-is-a-fiber)
+- _React 影子树_ 是不可变的。要更新任何 _React 影子节点_，渲染器必须创建新的一棵 _React 影子树_。不过渲染器提供克隆操作，来提升状态更新性能（详见[React 状态更新](render-pipeline#react-state-updates)）。
 
-In the example above, the result of the render phase looks like this:
+上述示例中，渲染阶段完成后的结构如下：
 
-![Step one](/docs/assets/Architecture/renderer-pipeline/render-pipeline-1.png)
+![步骤一](/docs/assets/Architecture/renderer-pipeline/render-pipeline-1.png)
 
-After the _React Shadow Tree_ is complete, the renderer triggers a commit of the _React Element Tree_.
+_React 影子树_ 完成后，渲染器触发 _React 元素树_ 的提交。
 
-### Phase 2. Commit
+### 阶段 2. 提交
 
-![Phase two: commit](/docs/assets/Architecture/renderer-pipeline/phase-two-commit.png)
+![阶段二：提交](/docs/assets/Architecture/renderer-pipeline/phase-two-commit.png)
 
-The commit phase consists of two operations: _Layout Calculation_ and _Tree Promotion_.
+提交阶段包含两个操作：_布局计算_ 和 _树升级_。
 
-- **Layout Calculation:** This operation calculates the position and size of each _React Shadow Node_. In React Native, this involves invoking Yoga to calculate the layout of each _React Shadow Node_. The actual calculation requires each _React Shadow Node_’s styles which originate from a _React Element_ in JavaScript. It also requires the layout constraints of the root of the _React Shadow Tree_, which determines the amount of available space that the resulting nodes can occupy.
+- **布局计算：** 计算每个 _React 影子节点_ 的位置和大小。在 React Native 中，这一步调用 Yoga 来完成布局计算。具体需要每个节点的样式信息，这些样式源于 JavaScript 中的 _React 元素_。它还需要 _React 影子树_ 根节点的布局约束——决定了子节点可用空间大小。
 
-![Step two](/docs/assets/Architecture/renderer-pipeline/render-pipeline-2.png)
+![步骤二](/docs/assets/Architecture/renderer-pipeline/render-pipeline-2.png)
 
-- **Tree Promotion (New Tree → Next Tree):** This operation promotes the new _React Shadow Tree_ as the “next tree” to be mounted. This promotion indicates that the new _React Shadow Tree_ has all the information to be mounted and represents the latest state of the _React Element Tree_. The “next tree” mounts on the next “tick” of the UI Thread.
+- **树升级（新树 → 下一棵树）：** 将新的 _React 影子树_ 升级为即将挂载的“下一棵树”。这表示新树已具备所有挂载所需信息，且表示最新的 _React 元素树_ 状态。“下一棵树”将在 UI 线程的下一个时刻挂载。
 
-**Additional Details**
+**更多细节**
 
-- These operations are asynchronously executed on a background thread.
-- Majority of layout calculation executes entirely within C++. However, the layout calculation of some components depend on the _host platform_ (e.g. `Text`, `TextInput`, etc.). Size and position of text is specific to each _host platform_ and needs to be calculated on the _host platform_ layer. For this purpose, Yoga invokes a function defined in the _host platform_ to calculate the component’s layout.
+- 这些操作异步在后台线程上执行。
+- 绝大多数布局计算完全在 C++ 内完成，但部分组件布局依赖于[宿主平台]（如 `Text`、`TextInput` 等）。文本的大小和位置因平台而异，需在宿主平台层计算。Yoga 会调用宿主平台定义的函数计算这些组件的布局。
 
-### Phase 3. Mount
+### 阶段 3. 挂载
 
-![Phase three: mount](/docs/assets/Architecture/renderer-pipeline/phase-three-mount.png)
+![阶段三：挂载](/docs/assets/Architecture/renderer-pipeline/phase-three-mount.png)
 
-The mount phase transforms the _React Shadow Tree_ (which now contains data from layout calculation) into a _Host_ _View Tree_ with rendered pixels on the screen. As a reminder, the _React Element Tree_ looks like this:
+挂载阶段将包含布局数据的 _React 影子树_ 转换成带有渲染像素显示在屏幕上的 _宿主视图树_。回顾一下，_React 元素树_ 是这样的：
 
 ```jsx
 <View>
@@ -89,28 +88,28 @@ The mount phase transforms the _React Shadow Tree_ (which now contains data from
 </View>
 ```
 
-At a high level, React Native renderer creates a corresponding [Host View](architecture-glossary.md#host-view-tree-and-host-view) for each _React Shadow Node_ and mounts it on screen. In the example above, the renderer creates an instance of `android.view.ViewGroup` for the `<View>` and `android.widget.TextView` for `<Text>` and populates it with “Hello World”. Similarly for iOS a `UIView` is created and text is populated with a call to `NSLayoutManager`. Each host view is then configured to use props from its React Shadow Node, and its size and position is configured using the calculated layout information.
+高层次上，React Native 渲染器会为每个 _React 影子节点_ 创建一个对应的[宿主视图](architecture-glossary.md#host-view-tree-and-host-view)，并将其挂载到屏幕。例如上述示例中，渲染器为 `<View>` 创建一个 `android.view.ViewGroup` 实例，为 `<Text>` 创建一个 `android.widget.TextView`，并设置文本为 “Hello World”。iOS 则会创建 `UIView` 并通过 `NSLayoutManager` 设置文本内容。每个宿主视图根据其 React 影子节点的属性配置，并用计算好的布局信息设置尺寸和位置。
 
-![Step two](/docs/assets/Architecture/renderer-pipeline/render-pipeline-3.png)
+![步骤二](/docs/assets/Architecture/renderer-pipeline/render-pipeline-3.png)
 
-In more detail, the mounting phase consists of these three steps:
+挂载阶段包含以下三个步骤：
 
-- **Tree Diffing:** This step computes the diff between the “previously rendered tree” and the “next tree” entirely in C++. The result is a list of atomic mutation operations to be performed on host views (e.g. `createView`, `updateView`, `removeView`, `deleteView`, etc). This step is also where the React Shadow Tree is flattened to avoid creating unnecessary host views. See [View Flattening](view-flattening) for details about this algorithm.
-- **Tree Promotion (Next Tree → Rendered Tree)**: This step atomically promotes the “next tree” to “previously rendered tree” so that the next mount phase computes a diff against the proper tree.
-- **View Mounting**: This step applies the atomic mutation operations onto corresponding host views. This step executes in the _host platform_ on UI thread.
+- **树差异计算（Tree Diffing）：** 这一步在完全的 C++ 内部计算“前一棵已渲染树”和“下一棵树”之间的差异，结果是对宿主视图需要执行的原子变更操作列表（如 `createView`、`updateView`、`removeView`、`deleteView` 等）。这一步还负责将 React 影子树扁平化，避免创建不必要的宿主视图。详细算法见[视图扁平化](view-flattening)。
+- **树升级（下一棵树 → 已渲染树）：** 原子地将“下一棵树”升级为“前一棵已渲染树”，以使下一轮挂载正确计算差异。
+- **视图挂载（View Mounting）：** 将这些原子变更操作应用到对应宿主视图。此操作在宿主平台的 UI 线程上执行。
 
-**Additional Details**
+**更多细节**
 
-- The operations are synchronously executed on UI thread. If the commit phase executes on background thread, the mounting phase is scheduled for the next “tick” of UI thread. On the other hand, if the commit phase executes on UI thread, mounting phase executes synchronously on the same thread.
-- Scheduling, implementation, and execution of the mounting phase heavily depends on the _host platform_. For example, the renderer architecture of the mounting layer currently differs between Android and iOS.
-- During the initial render, the “previously rendered tree” is empty. As such, the tree diffing step will result in a list of mutation operations that consists only of creating views, setting props, and adding views to each other. Tree diffing becomes more important for performance when processing [React State Updates](#react-state-updates).
-- In current production tests, a _React Shadow Tree_ typically consists of about 600-1000 _React Shadow Nodes_ (before view flattening), the trees get reduced to ~200 nodes after view flattening. On iPad or desktop apps, this quantity may increase 10-fold.
+- 这些操作在 UI 线程同步执行。如果提交阶段在后台线程执行，挂载阶段会排期到 UI 线程的下一个时刻执行；反之如果提交阶段在 UI 线程执行，则挂载阶段也同步在该线程执行。
+- 挂载阶段的调度、实现和执行高度依赖宿主平台，例如当前 Android 和 iOS 的挂载架构存在差异。
+- 初始渲染时，“前一已渲染树”为空，因此树差异计算步骤生成的变更操作仅包括创建视图、设置属性和层级添加；树差异计算在处理[React 状态更新](#react-state-updates)时对性能更为关键。
+- 目前生产环境测试中，一棵 _React 影子树_ 通常包括约 600–1000 个节点（视图扁平化前），经扁平化后降至约 200 个节点。在 iPad 或桌面应用中，节点数可能成倍增长。
 
 ---
 
-## React State Updates
+## React 状态更新
 
-Let’s explore each phase of the render pipeline when the state of a _React Element Tree_ is updated. Let’s say, you’ve rendered the following component in an initial render:
+让我们来看看在 _React 元素树_ 状态更新时，渲染管线各阶段的工作流程。假设你已经完成了以下组件的初次渲染：
 
 ```jsx
 function MyComponent() {
@@ -127,11 +126,11 @@ function MyComponent() {
 }
 ```
 
-Applying what was described in the [Initial Render](#initial-render) section, you would expect the following trees to be created:
+依照[初始渲染](#initial-render)步骤，生成的树如下：
 
-![Render pipeline 4](/docs/assets/Architecture/renderer-pipeline/render-pipeline-4.png)
+![渲染管线 4](/docs/assets/Architecture/renderer-pipeline/render-pipeline-4.png)
 
-Notice that **Node 3** maps to a host view with a **red background**, and **Node 4** maps to a host view with a **blue background**. Assume that as the result of a state update in JavaScript product logic, the background of the first nested `<View>` changes from `'red'` to `'yellow'`. This is what the new _React Element Tree_ might look:
+注意，**节点 3** 对应一个背景为 **红色** 的宿主视图，**节点 4** 对应背景为 **蓝色** 的视图。假设某次状态更新中，第一个嵌套的 `<View>` 的背景色从 `'red'` 变成 `'yellow'`。此时新的 _React 元素树_ 是：
 
 ```jsx
 <View>
@@ -144,80 +143,79 @@ Notice that **Node 3** maps to a host view with a **red background**, and **Node
 </View>
 ```
 
-**How is this update processed by React Native?**
+**React Native 会如何处理此更新？**
 
-When a state update occurs, the renderer needs to conceptually update the _React Element Tree_ in order to update the host views that are already mounted. But in order to preserve thread safety, both the _React Element Tree_ as well as the _React Shadow Tree_ must be immutable. This means that instead of mutating the current _React Element Tree_ and _React Shadow Tree_, React must create a new copy of each tree which incorporates the new props, styles, and children.
+为了更新已经挂载的宿主视图，渲染器需要概念性地更新 _React 元素树_。但为了线程安全，_React 元素树_ 和 _React 影子树_ 都必须是不可变的。这意味着 React 并不会变更现有两棵树，而是必须创建新副本，并带入更新后的属性、样式和子元素。
 
-Let’s explore each phase of the render pipeline during a state update.
+接下来，让我们看状态更新时，渲染管线的各阶段流程。
 
-### Phase 1. Render
+### 阶段 1. 渲染
 
-![Phase one: render](/docs/assets/Architecture/renderer-pipeline/phase-one-render.png)
+![阶段一：渲染](/docs/assets/Architecture/renderer-pipeline/phase-one-render.png)
 
-When React creates a new _React Element Tree_ that incorporates the new state, it must clone every _React Element_ and _React Shadow Node_ that is impacted by the change. After cloning, the new _React Shadow Tree_ is committed.
+当 React 创建包含新状态的 _React 元素树_ 时，会克隆所有受更新影响的 _React 元素_ 和 _React 影子节点_。完成克隆后，新的 _React 影子树_ 会被提交。
 
-React Native renderer leverages structural sharing to minimize the overhead of immutability. When a _React Element_ is cloned to include the new state, every _React Element_ that is on the path up to the root is cloned. **React will only clone a React Element if it requires an update to its props, style, or children.** Any _React Elements_ that are unchanged by the state update are shared by the old and new trees.
+React Native 渲染器利用结构共享以减少不可变实现的性能开销。克隆一个 _React 元素_ 并应用新状态时，从此节点向根节点路径上的所有节点都会被克隆。**只有需要更新其属性、样式或子元素的 React 元素才会被克隆。那些未受状态更新影响的元素会被旧树和新树共享。**
 
-In the above example, React creates the new tree using these operations:
+以上例中，React 执行以下操作创建新的树：
 
-1. CloneNode(**Node 3**, `{backgroundColor: 'yellow'}`) → **Node 3'**
-2. CloneNode(**Node 2**) → **Node 2'**
-3. AppendChild(**Node 2'**, **Node 3'**)
-4. AppendChild(**Node 2'**, **Node 4**)
-5. CloneNode(**Node 1**) → **Node 1'**
-6. AppendChild(**Node 1'**, **Node 2'**)
+1. CloneNode(**节点 3**，`{backgroundColor: 'yellow'}`) → **节点 3'**
+2. CloneNode(**节点 2**) → **节点 2'**
+3. AppendChild(**节点 2'**, **节点 3'**)
+4. AppendChild(**节点 2'**, **节点 4**)
+5. CloneNode(**节点 1**) → **节点 1'**
+6. AppendChild(**节点 1'**, **节点 2'**)
 
-After these operations, **Node 1'** represents the root of the new _React Element Tree_. Let's assign **T** to the “previously rendered tree” and **T'** to the “new tree”:
+操作完成后，**节点 1'** 代表新 _React 元素树_ 根节点。将**T**指定为“已渲染树”，**T'** 作为“新树”：
 
-![Render pipeline 5](/docs/assets/Architecture/renderer-pipeline/render-pipeline-5.png)
+![渲染管线 5](/docs/assets/Architecture/renderer-pipeline/render-pipeline-5.png)
 
-Notice how **T** and **T'** both share **Node 4**. Structural sharing improves performance and reduces memory usage.
+你可以看到 **T** 和 **T'** 都共享 **节点 4**。结构共享提升性能并减少内存使用。
 
-### Phase 2. Commit
+### 阶段 2. 提交
 
-![Phase two: commit](/docs/assets/Architecture/renderer-pipeline/phase-two-commit.png)
+![阶段二：提交](/docs/assets/Architecture/renderer-pipeline/phase-two-commit.png)
 
-After React creates the new _React Element Tree_ and _React Shadow Tree_, it must commit them.
+React 创建新 _React 元素树_ 和 _React 影子树_ 后，需提交它们。
 
-- **Layout Calculation:** Similar to Layout Calculation during [Initial Render](#initial-render). One important difference is that layout calculation may cause shared _React Shadow Nodes_ to be cloned. This can happen because if the parent of a shared _React Shadow Node_ incurs a layout change, the layout of the shared _React Shadow Node_ may also change.
-- **Tree Promotion (New Tree → Next Tree):** Similar to Tree Promotion during [Initial Render](#initial-render).
+- **布局计算：** 操作与[初始渲染](#initial-render)阶段布局计算相似。不同的是，共享的 _React 影子节点_ 可能会被克隆，因为其父节点的布局变化可能会导致共享节点的布局也需更新。
+- **树升级（新树 → 下一棵树）：** 与[初始渲染](#initial-render)阶段的树升级相同。
 
-### Phase 3. Mount
+### 阶段 3. 挂载
 
-![Phase three: mount](/docs/assets/Architecture/renderer-pipeline/phase-three-mount.png)
+![阶段三：挂载](/docs/assets/Architecture/renderer-pipeline/phase-three-mount.png)
 
-- **Tree Promotion (Next Tree → Rendered Tree)**: This step atomically promotes the “next tree” to “previously rendered tree” so that the next mount phase computes a diff against the proper tree.
-- **Tree Diffing:** This step computes the diff between the “previously rendered tree” (**T**) and the “next tree” (**T'**). The result is a list of atomic mutation operations to be performed on _host views_.
-  - In the above example, the operations consist of: `UpdateView(**Node 3**, {backgroundColor: 'yellow'})`
-  - The diff can be calculated for any currently mounted tree with any new tree. The renderer can skip some intermediate versions of the tree.
-- **View Mounting**: This step applies the atomic mutation operations onto corresponding _host views_. In the above example, only the `backgroundColor` of **View 3** will be updated (to yellow).
+- **树升级（下一棵树 → 已渲染树）**：将“下一棵树”原子地升级为“已渲染树”，以便后续挂载阶段对正确树进行差异计算。
+- **树差异计算**：计算“已渲染树”**T** 和“下一棵树”**T'**的差异，产生应用于宿主视图的原子变更操作列表。
+  - 以上示例操作为：`UpdateView(**节点 3**, {backgroundColor: 'yellow'})`
+  - 差异计算可以用于任意已挂载树与任意新的树，渲染器可跳过某些中间版本。
+- **视图挂载**：将这些变更应用至对应宿主视图。示例中仅更新 **视图 3** 的 `backgroundColor` 为黄色。
 
-![Render pipeline 6](/docs/assets/Architecture/renderer-pipeline/render-pipeline-6.png)
+![渲染管线 6](/docs/assets/Architecture/renderer-pipeline/render-pipeline-6.png)
 
 ---
 
-## React Native Renderer State Updates
+## React Native 渲染器状态更新
 
-For most information in the _Shadow Tree_, React is the single owner and single source of truth. All data originates from React and there is a single-direction flow of data.
+对于 _影子树_ 中的大部分信息，React 是唯一拥有者，也是唯一可信来源。所有数据来源于 React，数据流单向。
 
-However, there is one exception and important mechanism: components in C++ can contain state that is not directly exposed to JavaScript, and JavaScript is not the source of truth. C++ and _Host Platform_ control this _C++ State_. Generally, this is only relevant if you are developing a complicated _Host Component_ that needs _C++ State_. The vast majority of _Host Components_ do not need this functionality.
+然而，有一个例外和重要机制：C++ 中的组件可持有不直接暴露给 JavaScript 的状态，且 JavaScript 非其可信来源。此类 _C++ 状态_ 由 C++ 和[宿主平台]控制。一般只有当你开发复杂的 _宿主组件_ 且需要 _C++ 状态_ 时才相关。绝大多数 _宿主组件_ 不需此功能。
 
-For example, `ScrollView` uses this mechanism to let the renderer know what the current offset is. The update is triggered from the _host platform_, specifically from the host view that represents the `ScrollView` component. The information about offset is used in an API like [measure](https://reactnative.dev/docs/direct-manipulation#measurecallback). Since this update stems from the host platform, and does not affect the React Element Tree, this state data is held by _C++ State_.
+例如，`ScrollView` 利用此机制让渲染器知晓当前偏移量。更新由宿主平台层触发，具体来自表示该 `ScrollView` 组件的宿主视图。偏移量信息用于类似 [measure](https://reactnative.dev/docs/direct-manipulation#measurecallback) 的 API。因该更新源自宿主平台，且不影响 React 元素树，故其状态数据保存在 _C++ 状态_ 中。
 
-Conceptually, _C++ State_ updates are similar to the [React State Updates](render-pipeline#react-state-updates) described above.
-With two important differences:
+概念上，_C++ 状态_ 更新类似于上文描述的[React 状态更新](render-pipeline#react-state-updates)，但有两点重要区别：
 
-1. They skip the “render phase” since React is not involved.
-2. The updates can originate and happen on any thread, including the main thread.
+1. 跳过“渲染阶段”，因 React 不参与该过程。
+2. 更新可发生在任何线程，包括主线程。
 
-### Phase 2. Commit
+### 阶段 2. 提交
 
-![Phase two: commit](/docs/assets/Architecture/renderer-pipeline/phase-two-commit.png)
+![阶段二：提交](/docs/assets/Architecture/renderer-pipeline/phase-two-commit.png)
 
-When performing a _C++ State_ update, a block of code requests an update of a `ShadowNode` (**N**) to set _C++ State_ to value **S**. React Native renderer will repeatedly attempt to get the latest committed version of **N**, clone it with a new state **S**, and commit **N’** to the tree. If React, or another _C++ State_ update, has performed another commit during this time, the _C++ State_ commit will fail and the renderer will retry the _C++ State_ update many times until a commit succeeds. This prevents source-of-truth collisions and races.
+执行 _C++ 状态_ 更新时，某段代码请求将 `ShadowNode` (**N**) 的 _C++ 状态_ 设置为值 **S**。React Native 渲染器会反复尝试获取 **N** 的最新已提交版本，克隆它并设置新状态 **S**，再提交新的 **N'** 到树中。如果 React 或其他 _C++ 状态_ 更新期间另行提交，当前 _C++ 状态_ 提交会失败，渲染器将反复重试直到成功提交。此机制避免了数据源冲突和竞态条件。
 
-### Phase 3. Mount
+### 阶段 3. 挂载
 
-![Phase three: mount](/docs/assets/Architecture/renderer-pipeline/phase-three-mount.png)
+![阶段三：挂载](/docs/assets/Architecture/renderer-pipeline/phase-three-mount.png)
 
-The _Mount Phase_ is practically identical to the [Mount Phase of React State Updates](#react-state-updates). The renderer still needs to recompute layout, perform a tree diff, etc. See the sections above for details.
+此处的挂载阶段基本等同于[React 状态更新](#react-state-updates)的挂载阶段。渲染器依然需要重新计算布局、执行树差异计算等。详情见上文相关章节。

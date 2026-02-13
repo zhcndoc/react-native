@@ -1,41 +1,41 @@
 ---
-title: 'React Native Monthly #4'
+title: 'React Native 月刊 #4'
 authors: [grabbou]
-tags: [engineering]
+tags: [工程]
 ---
 
-The React Native monthly meeting continues! Here are the notes from each team:
+React Native 月度会议持续进行！以下是各团队的会议记录：
 
 ### Callstack
 
-- [React Native EU](https://react-native.eu) is over. More than 300 participants from 33 countries have visited Wroclaw. Talks can be found [on YouTube](https://www.youtube.com/channel/UCUNE_g1mQPuyW975WjgjYxA/videos).
-- We are slowly getting back to our open source schedule after the conference. One thing worth mentioning is that we are working on a next release of [react-native-opentok](https://github.com/callstack/react-native-opentok) that fixes most of the existing issues.
+- [React Native EU](https://react-native.eu) 已经结束。来自33个国家的300多名参与者访问了弗罗茨瓦夫。演讲视频可以在 [YouTube](https://www.youtube.com/channel/UCUNE_g1mQPuyW975WjgjYxA/videos) 上观看。
+- 会议结束后，我们正逐步恢复开源项目的发布时间表。值得一提的是，我们正在开发[react-native-opentok](https://github.com/callstack/react-native-opentok)的下一个版本，修复了大部分现有问题。
 
 ### GeekyAnts
 
-Trying to lower the entry barrier for the developers embracing React Native with the following things:
+尝试通过以下方式降低开发者使用 React Native 的门槛：
 
-- Announced [BuilderX.io](https://builderx.io/) at [React Native EU](https://react-native.eu). BuilderX is a design tool that directly works with JavaScript files (only React Native is supported at the moment) to generate beautiful, readable, and editable code.
-- Launched [ReactNativeSeed.com](https://reactnativeseed.com/) which provides a set of boilerplates for your next React Native project. It comes with a variety of options that include TypeScript & Flow for data-types, MobX, Redux, and mobx-state-tree for state-management with CRNA and plain React-Native as the stack.
+- 在 [React Native EU](https://react-native.eu) 宣布了 [BuilderX.io](https://builderx.io/)。BuilderX 是一款设计工具，可以直接操作 JavaScript 文件（目前仅支持 React Native），生成美观、易读且可编辑的代码。
+- 推出了 [ReactNativeSeed.com](https://reactnativeseed.com/) ，为你的下一个 React Native 项目提供一套初始化模板。模板选项丰富，包括 TypeScript 和 Flow 用于数据类型，状态管理支持 MobX、Redux 和 mobx-state-tree，支持 CRNA 及纯 React-Native 技术栈。
 
 ### Expo
 
-- Will release SDK 21 shortly, which adds support for react-native 0.48.3 and a bunch of bugfixes/reliability improvements/new features in the Expo SDK, including video recording, a new splash screen API, support for `react-native-gesture-handler`, and improved error handling.
-- Re: [react-native-gesture-handler](https://github.com/kmagiera/react-native-gesture-handler), [Krzysztof Magiera](https://github.com/kmagiera) of [Software Mansion](https://swmansion.com/) continues pushing this forward and we've been helping him with testing it and funding part of his development time. Having this integrated in Expo in SDK21 will allow people to play with it easily in Snack, so we're excited to see what people come up with.
-- Re: improved error logging / handling - see [this gist of an internal Expo PR](https://gist.github.com/brentvatne/00407710a854627aa021fdf90490b958) for details on logging, (in particular, "Problem 2"), and [this commit](https://github.com/expo/xdl/commit/1d62eca293dfb867fc0afc920c3dad94b7209987) for a change that handles failed attempts to import npm standard library modules. There is plenty of opportunity to improve error messages upstream in React Native in this way and we will work on follow up upstream PRs. It would be great for the community to get involved too.
-- [native.directory](https://native.directory/) continues to grow, you can add your projects from [the GitHub repo](https://github.com/react-community/native-directory).
-- Visit hackathons around North America, including [PennApps](https://pennapps.com/), [Hack The North](https://hackthenorth.com/), [HackMIT](https://hackmit.org/), and soon [MHacks](https://mhacks.org/).
+- 即将发布 SDK 21，支持 react-native 0.48.3，同时带来一系列修复、稳定性提升和新功能，包括视频录制、新的启动屏 API、支持 `react-native-gesture-handler` 以及改进的错误处理。
+- 关于 [react-native-gesture-handler](https://github.com/kmagiera/react-native-gesture-handler)，[Krzysztof Magiera](https://github.com/kmagiera) 来自 [Software Mansion](https://swmansion.com/) 持续推进此项目，我们协助测试并资助了部分开发时间。SDK 21 集成该功能后，大家可以在 Snack 中轻松试用，非常期待大家的创意展现。
+- 关于改进的错误日志和处理——详情可见[这段 Expo 内部 PR 的 gist](https://gist.github.com/brentvatne/00407710a854627aa021fdf90490b958)（特别是“问题2”部分），以及[这次提交](https://github.com/expo/xdl/commit/1d62eca293dfb867fc0afc920c3dad94b7209987)，它处理了导入 npm 标准库模块失败的情况。React Native 有很多机会在上游改进错误信息，我们会持续推动相关 PR，也欢迎社区加入。
+- [native.directory](https://native.directory/) 持续增长，你可以从[GitHub 仓库](https://github.com/react-community/native-directory)添加你的项目。
+- 参加北美各地的黑客马拉松活动，包括 [PennApps](https://pennapps.com/)、[Hack The North](https://hackthenorth.com/)、[HackMIT](https://hackmit.org/) 以及即将到来的 [MHacks](https://mhacks.org/)。
 
 ### Facebook
 
-- Working on improving `<Text>` and `<TextInput>` components on Android. (Native auto-growing for `<TextInput>`; deeply nested `<Text>` components layout issues; better code structure; performance optimizations).
-- We're still looking for additional contributors who would like to help triage issues and pull requests.
+- 正在改进 Android 平台上的 `<Text>` 和 `<TextInput>` 组件。（包括 `<TextInput>` 的原生自动增长，深层嵌套的 `<Text>` 组件布局问题，更好的代码结构以及性能优化）。
+- 我们依旧在寻找更多贡献者，帮助处理问题和 Pull Request。
 
 ### Microsoft
 
-- Released Code Signing feature for CodePush. React Native developers are now able to sign their application bundles in CodePush. The announcement can be found [here](https://microsoft.github.io/code-push/articles/CodeSigningAnnouncement.html)
-- Working on completing integration of CodePush to Mobile Center. Considering test/crash integration as well.
+- 发布了 CodePush 的代码签名功能。React Native 开发者现在可以在 CodePush 中对应用包进行签名。相关公告见 [这里](https://microsoft.github.io/code-push/articles/CodeSigningAnnouncement.html)。
+- 正在完成 CodePush 与 Mobile Center 的集成，同时考虑增加测试和崩溃集成。
 
-## Next session
+## 下一次会议
 
-The next session is scheduled for Wednesday 10, October 2017. As this was only our fourth meeting, we'd like to know how do these notes benefit the React Native community. Feel free to ping me [on Twitter](https://twitter.com/grabbou) if you have any suggestion on how we should improve the output of the meeting.
+下一次会议定于 2017 年 10 月 10 日星期三。鉴于这仅是我们的第四次会议，我们希望了解这些会议记录如何为 React Native 社区带来帮助。如果你有任何关于如何改进会议成果的建议，欢迎通过 [Twitter](https://twitter.com/grabbou) 联系我。

@@ -1,37 +1,37 @@
 ---
-title: React Native at F8 and Open Source Podcast
+title: React Native 在 F8 大会和开源播客中的表现
 authors: [cpojer]
-tags: [announcement]
+tags: [公告]
 ---
 
-This week, [Eli White](https://twitter.com/Eli_White) gave a talk at [F8 2019](https://developers.facebook.com/videos/2019/mobile-innovation-with-react-native-componentkit-and-litho/) about React Native in Facebook's Android and iOS applications. We are excited to share what we've been up to for the past two years and what we're doing next.
+本周，[Eli White](https://twitter.com/Eli_White) 在 [F8 2019](https://developers.facebook.com/videos/2019/mobile-innovation-with-react-native-componentkit-and-litho/) 大会上做了一个关于 React Native 在 Facebook 安卓和 iOS 应用中的应用的演讲。我们很高兴分享过去两年的工作成果以及我们接下来的计划。
 
-Check out the video on [Facebook's developer website](https://developers.facebook.com/videos/2019/mobile-innovation-with-react-native-componentkit-and-litho/):
+请在[Facebook 开发者网站](https://developers.facebook.com/videos/2019/mobile-innovation-with-react-native-componentkit-and-litho/)观看视频：
 
 <a href="https://developers.facebook.com/videos/2019/mobile-innovation-with-react-native-componentkit-and-litho/">
   <img
     src="/blog/assets/eli-at-f8.png"
-    alt="F8 Talk about React Native"
+    alt="F8 演讲关于 React Native"
   />
 </a>
 
-#### Highlights from the talk:
+#### 演讲亮点：
 
-- We spent 2017 and 2018 focused on React Native's largest product, Facebook's Marketplace. We collaborated with the Marketplace team to improve quality and add delight to the product. At this point, Marketplace is one of the highest quality products in the Facebook app both on Android and iOS.
-- Marketplace's performance was a big challenge as well, especially on mid-end Android devices. We cut startup time by more than 50% over the last year with more improvements on the way! The biggest improvements are being built into React Native and will be coming to the community later this year.
-- We have the confidence that we can build the high quality and performant apps that Facebook needs with React Native. This confidence has let us invest in bigger bets, like [rethinking the core of React Native](https://www.youtube.com/watch?v=UcqRXTriUVI&app=desktop).
-- Microsoft supports and uses React Native for Windows, enabling people to use their expertise and codebase to render to Microsofts's Universal Windows Platform. Check out Microsoft Build next week to [hear them talk about that more](https://mybuild.techcommunity.microsoft.com/sessions/77321).
+- 我们在 2017 和 2018 年主要专注于 React Native 最大的产品——Facebook 的 Marketplace。我们与 Marketplace 团队合作，提升质量并增加产品的吸引力。至此，Marketplace 已成为 Facebook 应用中安卓和 iOS 平台上质量最高的产品之一。
+- Marketplace 的性能也是一大挑战，特别是在中端安卓设备上。过去一年我们将启动时间缩短了超过 50%，未来还会有更多改进！最大的性能提升正在被内置到 React Native 中，并将在今年晚些时候带给社区。
+- 我们有信心使用 React Native 构建出 Facebook 需要的高质量且高性能的应用。这份信心让我们敢于做更大胆的尝试，比如[重新设计 React Native 核心](https://www.youtube.com/watch?v=UcqRXTriUVI&app=desktop)。
+- 微软支持并使用 React Native for Windows，让用户能够利用他们的技术专长和代码库渲染到微软的通用 Windows 平台。请关注下周的 Microsoft Build，届时可[听他们分享更多](https://mybuild.techcommunity.microsoft.com/sessions/77321)。
 
-### React Radio Podcast about Open Source
+### React Radio 播客谈开源
 
-Eli's talk concludes by talking about our recent open source work. We gave [an update on our progress in March](/blog/2019/03/01/react-native-open-source-update) and recently [Nader Dabit](https://twitter.com/dabit3) and [Gant Laborde](https://twitter.com/GantLaborde) invited Christoph for a chat on their podcast, [React Native Radio](https://devchat.tv/react-native-radio/react-native-open-source-the-react-native-community-feat-christoph-nakazawa/), to chat about React Native in open source.
+Eli 的演讲以介绍我们近期的开源工作收尾。我们在三月时进行了[进展更新](/blog/2019/03/01/react-native-open-source-update)，最近，[Nader Dabit](https://twitter.com/dabit3) 和 [Gant Laborde](https://twitter.com/GantLaborde) 邀请 Christoph 参加他们的播客 [React Native Radio](https://devchat.tv/react-native-radio/react-native-open-source-the-react-native-community-feat-christoph-nakazawa/)，聊了聊 React Native 在开源方面的情况。
 
-#### Highlights from the podcast:
+#### 播客亮点：
 
-- We talked about how the React Native team at Facebook thinks about open source and how we are building a sustainable community that scales for a project of React Native's [size](https://octoverse.github.com/projects#repositories).
-- We are on track to remove multiple modules as part of the [Lean Core](https://github.com/facebook/react-native/issues/23313) effort. Many modules like WebView and the React Native CLI have received more than 100 Pull Requests since they were extracted.
-- Next, we'll be focusing on overhauling the React Native website and documentation. Stay tuned!
+- 我们谈到了 Facebook 的 React Native 团队如何看待开源，以及我们如何建设一个可持续且能应对 React Native 这样[庞大项目规模](https://octoverse.github.com/projects#repositories)的社区。
+- 作为 [Lean Core](https://github.com/facebook/react-native/issues/23313) 计划的一部分，我们正按计划移除多个模块。许多模块如 WebView 和 React Native CLI 自被拆分以来已收到超过 100 个 Pull Request。
+- 接下来，我们将重点改版 React Native 网站和文档，敬请期待！
 
-You'll find the episode in your favorite podcasting app soon or you can listen to the recording right here:
+你很快就能在喜欢的播客应用中找到本期节目，或者你也可以直接在这里收听录音：
 
-<audio controls style={{display: 'block', margin: '0 auto'}} src="https://media.devchat.tv/reactnativeradio/React_Native_Radio_Episode_121.mp3"> {' '} Audio is unsupported in this browser.{' '} </audio>
+<audio controls style={{display: 'block', margin: '0 auto'}} src="https://media.devchat.tv/reactnativeradio/React_Native_Radio_Episode_121.mp3"> {' '} 该浏览器不支持音频播放。{' '} </audio>

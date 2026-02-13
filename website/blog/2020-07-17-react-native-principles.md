@@ -1,49 +1,49 @@
 ---
-title: React Native Team Principles
+title: React Native 团队原则
 authors: [Eli White]
-tags: [announcement]
+tags: [公告]
 ---
 
-The React Native team at Facebook is guided by principles that help determine how we prioritize our work on React Native. These principles represent our team specifically and do not necessarily represent every stakeholder in the React Native community. We are sharing these principles here to be more transparent about what drives us, how we make decisions, and how we focus our efforts.
+Facebook 的 React Native 团队遵循一些原则，帮助我们确定如何优先处理 React Native 的工作。这些原则专门代表我们的团队，并不一定代表 React Native 社区中的所有利益相关者。我们在此分享这些原则，以便更加透明地说明驱动我们的因素、我们如何做出决策以及我们如何集中精力。
 
-## **Native Experience**
+## **原生体验**
 
-Our top priority for React Native is to **match the expectations people have for each platform**. This is why React Native renders to platform primitives. We value native look-and-feel over cross-platform consistency.
+我们对 React Native 的首要目标是**满足人们对每个平台的期望**。这就是为什么 React Native 渲染的是平台原语。我们重视原生的外观和感觉胜过跨平台的一致性。
 
-For example, the TextInput in React Native renders to a UITextField on iOS. This ensures that integration with password managers and keyboard controls work out of the box. By using platform primitives, React Native apps are also able to stay up-to-date with design and behavior changes from new releases of Android and iOS.
+例如，React Native 中的 TextInput 在 iOS 上渲染为 UITextField。这确保了与密码管理器和键盘控制的开箱即用的集成。通过使用平台原语，React Native 应用也能及时跟进 Android 和 iOS 新版本中的设计和行为变化。
 
-In order to match the look-and-feel of native apps, we must also match their performance. This is where we focus our most ambitious efforts. For example, Facebook created Hermes, [a new JavaScript Engine built from scratch for React Native on Android](https://facebook.github.io/react-native/blog/2019/07/17/hermes). Hermes significantly improves the start time of React Native apps. We are also working on major architectural changes that optimize the threading model and make React Native easier to interoperate with native code.
+为了匹配原生应用的外观和感觉，我们还必须匹配它们的性能。这是我们投入最雄心勃勃精力的地方。例如，Facebook 创建了 Hermes，[一个为 Android 上的 React Native 从零构建的新 JavaScript 引擎](https://facebook.github.io/react-native/blog/2019/07/17/hermes)。Hermes 显著提升了 React Native 应用的启动时间。我们还在进行主要的架构变动，优化线程模型，使 React Native 更易于与原生代码互操作。
 
-## Massive Scale
+## 大规模
 
-Hundreds of screens in the Facebook app are implemented with React Native. The Facebook app is used by billions of people on a huge range of devices. **This is why** **we invest in the most challenging problems at scale.**
+Facebook 应用中有数百个屏幕是使用 React Native 实现的。Facebook 应用被数十亿人使用，涵盖各种设备。**这就是为什么我们投资于规模上最具挑战性的问题。**
 
-Deploying React Native in our apps lets us identify problems that we wouldn’t see at a smaller scale. For example, Facebook focuses on improving performance across a broad spectrum of devices from the newest iPhone to many older generations of Android devices. This focus informs our architecture projects such as Hermes, Fabric, and TurboModules.
+在我们的应用中部署 React Native，让我们能够发现小规模中看不到的问题。例如，Facebook 专注于提升从最新 iPhone 到众多老代 Android 设备的广泛设备性能。这种关注指导了我们的架构项目，如 Hermes、Fabric 和 TurboModules。
 
-We have proven that React Native can scale to massive organizations too. When hundreds of developers are working on the same app, gradual adoption is a must. This is why we made sure that React Native can be adopted one screen at a time. Soon, we will be taking this one step further and enable migrating individual native views of an existing native screen to React Native.
+我们已经证明 React Native 也能扩展到庞大组织。当数百名开发者在同一个应用上工作时，渐进式采用是必须的。这也是为什么我们确保 React Native 可以逐个屏幕地被采纳。很快，我们将更进一步，使现有原生屏幕的单个原生视图迁移到 React Native 成为可能。
 
-A focus on massive scale means there are many things our team isn’t currently working on. For example, our team doesn’t drive the adoption of React Native in the industry. We also do not actively build solutions for problems that we don’t see at scale. We are proud that we have [many partners and core contributors](https://github.com/facebook/react-native/blob/master/ECOSYSTEM.md) that are able to focus on those important areas for the community.
+关注大规模意味着我们团队目前并未致力于许多其他方面。例如，我们团队并不推动 React Native 在行业中的采用。我们也不会积极为那些在规模上看不到的问题构建解决方案。我们为有[众多合作伙伴和核心贡献者](https://github.com/facebook/react-native/blob/master/ECOSYSTEM.md)能够专注于社区这些重要领域感到自豪。
 
-## Developer Velocity
+## 开发者速度
 
-Great user experiences are created iteratively. **It should only take a few seconds to seeing the result of code changes** in a running app. React Native's architecture enables it to provide near-instant feedback during development.
+优秀的用户体验是通过迭代创造的。**在运行中的应用中看到代码改动结果，应该只需几秒钟。** React Native 的架构使其能提供近乎即时的开发反馈。
 
-We often hear from teams that adopting React Native significantly improved their development velocity. These teams find that the instant feedback during development makes it much easier to try different ideas and add extra polish when they don’t have to interrupt their coding session for every little change. When we make changes to React Native, we make sure to preserve this quality of the developer experience.
+我们经常听到团队反馈，采用 React Native 显著提高了他们的开发速度。这些团队发现开发时的即时反馈让尝试不同想法与添加额外润色变得更加轻松，开发过程中不必为每一点小改动中断编码。当我们对 React Native 做出改动时，我们会确保保持这种优质的开发者体验。
 
-Instant feedback is not the only way that React Native improves developer velocity. Teams can leverage the fast-growing ecosystem of high quality open source packages. Teams can also share business logic between Android, iOS, and the web. This helps them ship updates faster and reduce organizational silos between platform teams.
+即时反馈并不是 React Native 提高开发速度的唯一方式。团队还可以利用不断增长的高质量开源包生态。团队还可以在 Android、iOS 和 Web 之间共享业务逻辑。这有助于他们更快发布更新，并减少平台团队之间的组织孤岛。
 
-## Every Platform
+## 支持所有平台
 
-When we introduced React Native in 2014, we presented it with our motto “Learn once, write anywhere” — and we mean _anywhere_. **Developers should be able to reach as many people as possible without being limited by device model or operating system.**
+2014 年我们推出 React Native 时，提出了我们的口号“Learn once, write anywhere（学一次，写处处）”——我们的意思是 _处处_。**开发者应该能够触及尽可能多的人，而不受限于设备型号或操作系统。**
 
-React Native targets very different platforms including mobile, desktop, web, TV, VR, game consoles, and more. We want to enable rich experiences on each platform instead of requiring developers to build for the lowest common denominator. To accomplish this, we focus on supporting the unique features of each platform. This ranges from varying input mechanisms (e.g. touch, pen, mouse) to fundamentally different consumption experiences like 3D environments in VR.
+React Native 目标覆盖非常不同的平台，包括移动端、桌面端、网页、电视、虚拟现实、游戏主机等。我们希望在每个平台上实现丰富体验，而不要求开发者只为最低公共标准构建。为此，我们专注于支持每个平台独特的特性。这包括不同的输入机制（如触屏、笔、鼠标）到在虚拟现实中截然不同的三维体验。
 
-This principle informed our decision to implement React Native’s new core architecture in cross-platform C++ to promote parity across platforms. We are also refining the public interface targeted at other platform maintainers like Microsoft with Windows and macOS. We strive to enable any platforms to support React Native.
+这一原则促使我们决定用跨平台的 C++ 实现 React Native 的新核心架构，以促进各平台间的一致性。我们也在完善面向其他平台维护者（如微软 Windows 和 macOS）的公共接口。我们致力于让任何平台支持 React Native。
 
-## Declarative UI
+## 声明式 UI
 
-We don’t believe in deploying the exact same user interface on every platform, we believe in **exposing each platform’s unique capabilities with the same declarative programming model**. Our declarative programming model is React.
+我们不认为应该在每个平台部署完全相同的用户界面，我们相信**用相同的声明式编程模型展现每个平台独特的能力**。我们的声明式编程模型是 React。
 
-In our experience, the unidirectional data flow popularized by React makes applications easier to understand. We prefer to express a screen as a composition of declarative components rather than imperatively managed views. React’s success on the web and the direction of the new native Android and iOS frameworks show that the industry has also embraced declarative UI.
+在我们的经验中，React 推广的单向数据流让应用更易于理解。我们倾向于将一个屏幕表达为声明式组件的组合，而不是命令式管理视图。React 在 Web 上的成功以及原生 Android 和 iOS 新框架的发展显示，行业也已接受声明式 UI。
 
-React popularized declarative user interfaces. However, there remain many unsolved problems that React is uniquely positioned to solve. React Native will continue to build on top of the innovations of React and remain at the forefront of the declarative user interface movement.
+React 推广了声明式用户界面。然而，仍有许多未解问题，而 React 处于解决这些问题的独特位置。React Native 将继续基于 React 的创新，并保持在声明式用户界面运动的前沿。

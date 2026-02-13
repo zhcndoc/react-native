@@ -1,11 +1,11 @@
 ---
 id: targetevent
-title: TargetEvent Object Type
+title: TargetEvent 对象类型
 ---
 
-`TargetEvent` object is returned in the callback as a result of focus change, for example `onFocus` or `onBlur` in the [TextInput](textinput) component.
+`TargetEvent` 对象作为焦点变化的回调结果返回，例如在 [TextInput](textinput) 组件中的 `onFocus` 或 `onBlur`。
 
-## Example
+## 示例
 
 ```
 {
@@ -13,17 +13,17 @@ title: TargetEvent Object Type
 }
 ```
 
-## Keys and values
+## 键和值
 
 ### `target`
 
-The node id of the element receiving the TargetEvent.
+接收 TargetEvent 事件的元素节点 id。
 
-| Type                        | Optional |
-| --------------------------- | -------- |
-| number, `null`, `undefined` | No       |
+| 类型                         | 是否可选 |
+| ---------------------------- | -------- |
+| number，`null`，`undefined`  | 否       |
 
-## Used by
+## 使用于
 
 - [`TextInput`](textinput)
 - [`TouchableWithoutFeedback`](touchablewithoutfeedback)

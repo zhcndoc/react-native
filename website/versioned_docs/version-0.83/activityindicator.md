@@ -3,11 +3,11 @@ id: activityindicator
 title: ActivityIndicator
 ---
 
-Displays a circular loading indicator.
+显示一个圆形的加载指示器。
 
-## Example
+## 示例
 
-```SnackPlayer name=ActivityIndicator%20Example
+```SnackPlayer name=ActivityIndicator%20示例
 import React from 'react';
 import {ActivityIndicator, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
@@ -38,56 +38,56 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
 ### [View Props](view#props)
 
-Inherits [View Props](view#props).
+继承自 [View Props](view#props)。
 
 ---
 
 ### `animating`
 
-Whether to show the indicator (`true`) or hide it (`false`).
+是否显示指示器（`true`）或隐藏（`false`）。
 
-| Type | Default |
-| ---- | ------- |
-| bool | `true`  |
+| 类型  | 默认值  |
+| ----- | ------- |
+| bool  | `true`  |
 
 ---
 
 ### `color`
 
-The foreground color of the spinner.
+指示器的前景颜色。
 
-| Type            | Default                                                                                                                                                                                         |
+| 类型            | 默认值                                                                                                                                                                                           |
 | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [color](colors) | `null` (system accent default color)<div className="label android">Android</div><hr/><ins style={{background: '#999'}} className="color-box" />`'#999999'` <div className="label ios">iOS</div> |
+| [color](colors) | `null`（系统强调色默认颜色）<div className="label android">Android</div><hr/><ins style={{background: '#999'}} className="color-box" />`'#999999'` <div className="label ios">iOS</div> |
 
 ---
 
 ### `hidesWhenStopped` <div className="label ios">iOS</div>
 
-Whether the indicator should hide when not animating.
+在不动画时是否隐藏指示器。
 
-| Type | Default |
-| ---- | ------- |
-| bool | `true`  |
+| 类型  | 默认值  |
+| ----- | ------- |
+| bool  | `true`  |
 
 ---
 
 ### `ref`
 
-A ref setter that will be assigned an [element node](element-nodes) when mounted.
+一个 ref 设置器，挂载时会被分配一个[元素节点](element-nodes)。
 
 ---
 
 ### `size`
 
-Size of the indicator.
+指示器的大小。
 
-| Type                                                                               | Default   |
-| ---------------------------------------------------------------------------------- | --------- |
-| enum(`'small'`, `'large'`)<hr/>number <div className="label android">Android</div> | `'small'` |
+| 类型                                                                               | 默认值   |
+| ---------------------------------------------------------------------------------- | -------- |
+| 枚举(`'small'`, `'large'`)<hr/>数字 <div className="label android">Android</div> | `'small'` |

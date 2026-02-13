@@ -4,11 +4,11 @@ title: AppRegistry
 ---
 
 <div className="banner-native-code-required">
-  <h3>Project with Native Code Required</h3>
-  <p>If you are using the managed Expo workflow there is only ever one entry component registered with <code>AppRegistry</code> and it is handled automatically (or through <a href="https://docs.expo.dev/versions/latest/sdk/register-root-component/">registerRootComponent</a>). You do not need to use this API.</p>
+  <h3>需要原生代码的项目</h3>
+  <p>如果您使用托管的 Expo 工作流，则 <code>AppRegistry</code> 中注册的入口组件始终只有一个，并且由系统自动处理（或通过 <a href="https://docs.expo.dev/versions/latest/sdk/register-root-component/">registerRootComponent</a>）。您无需使用此 API。</p>
 </div>
 
-`AppRegistry` is the JS entry point to running all React Native apps. App root components should register themselves with `AppRegistry.registerComponent`, then the native system can load the bundle for the app and then actually run the app when it's ready by invoking `AppRegistry.runApplication`.
+`AppRegistry` 是运行所有 React Native 应用的 JS 入口点。应用根组件应通过 `AppRegistry.registerComponent` 注册自己，然后原生系统可以加载该应用的 bundle 并在准备好后通过调用 `AppRegistry.runApplication` 来实际运行应用。
 
 ```tsx
 import {Text, AppRegistry} from 'react-native';
@@ -22,15 +22,15 @@ const App = () => (
 AppRegistry.registerComponent('Appname', () => App);
 ```
 
-To "stop" an application when a view should be destroyed, call `AppRegistry.unmountApplicationComponentAtRootTag` with the tag that was passed into `runApplication`. These should always be used as a pair.
+当视图应被销毁时，要“停止”一个应用，请使用传入 `runApplication` 的 tag 调用 `AppRegistry.unmountApplicationComponentAtRootTag`。这两个方法应总是成对使用。
 
-`AppRegistry` should be required early in the `require` sequence to make sure the JS execution environment is setup before other modules are required.
+`AppRegistry` 应该在 `require` 顺序中尽早被引入，以确保 JS 执行环境在加载其他模块前被设置好。
 
 ---
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `getAppKeys()`
 
@@ -38,7 +38,7 @@ To "stop" an application when a view should be destroyed, call `AppRegistry.unmo
 static getAppKeys(): string[];
 ```
 
-Returns an array of strings.
+返回字符串数组。
 
 ---
 
@@ -48,7 +48,7 @@ Returns an array of strings.
 static getRegistry(): {sections: string[]; runnables: Runnable[]};
 ```
 
-Returns a [Registry](appregistry#registry) object.
+返回一个 [Registry](appregistry#registry) 对象。
 
 ---
 
@@ -58,13 +58,13 @@ Returns a [Registry](appregistry#registry) object.
 static getRunnable(appKey: string): : Runnable | undefined;
 ```
 
-Returns a [Runnable](appregistry#runnable) object.
+返回一个 [Runnable](appregistry#runnable) 对象。
 
-**Parameters:**
+**参数：**
 
-| Name                                                        | Type   |
-| ----------------------------------------------------------- | ------ |
-| appKey <div className="label basic required">Required</div> | string |
+| 名称                                                         | 类型     |
+| ------------------------------------------------------------ | -------- |
+| appKey <div className="label basic required">必需</div>      | string   |
 
 ---
 
@@ -74,7 +74,7 @@ Returns a [Runnable](appregistry#runnable) object.
 static getSectionKeys(): string[];
 ```
 
-Returns an array of strings.
+返回字符串数组。
 
 ---
 
@@ -84,7 +84,7 @@ Returns an array of strings.
 static getSections(): Record<string, Runnable>;
 ```
 
-Returns a [Runnables](appregistry#runnables) object.
+返回一个 [Runnables](appregistry#runnables) 对象。
 
 ---
 
@@ -98,15 +98,15 @@ static registerCancellableHeadlessTask(
 );
 ```
 
-Register a headless task which can be cancelled. A headless task is a bit of code that runs without a UI.
+注册一个可取消的无界面任务。无界面任务是指无需 UI 进行运行的代码。
 
-**Parameters:**
+**参数：**
 
-| Name                                                                                  | Type                                                 | Description                                                                                                                                                                                                                         |
-| ------------------------------------------------------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| taskKey<br/><div className="label basic required two-lines">Required</div>            | string                                               | The native id for this task instance that was used when startHeadlessTask was called.                                                                                                                                               |
-| taskProvider<br/><div className="label basic required two-lines">Required</div>       | [TaskProvider](appregistry#taskprovider)             | A promise returning function that takes some data passed from the native side as the only argument. When the promise is resolved or rejected the native side is notified of this event and it may decide to destroy the JS context. |
-| taskCancelProvider<br/><div className="label basic required two-lines">Required</div> | [TaskCancelProvider](appregistry#taskcancelprovider) | a void returning function that takes no arguments; when a cancellation is requested, the function being executed by taskProvider should wrap up and return ASAP.                                                                    |
+| 名称                                                                                  | 类型                                                 | 说明                                                                                                                                                                                                                           |
+| ------------------------------------------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| taskKey<br/><div className="label basic required two-lines">必需</div>                 | string                                               | 此任务实例的原生 ID，在调用 startHeadlessTask 时使用。                                                                                                                                                                        |
+| taskProvider<br/><div className="label basic required two-lines">必需</div>            | [TaskProvider](appregistry#taskprovider)             | 一个返回 Promise 的函数，该函数接受来自原生端传递的数据作为唯一参数。当 Promise 解析或拒绝时，原生端将接收到该事件通知，可能决定销毁 JS 上下文。                                                                       |
+| taskCancelProvider<br/><div className="label basic required two-lines">必需</div>      | [TaskCancelProvider](appregistry#taskcancelprovider) | 一个无参数且无返回值的函数；当请求取消时，正在执行的 taskProvider 中的函数应尽快结束并返回。                                                                                                                                |
 
 ---
 
@@ -120,13 +120,13 @@ static registerComponent(
 ): string;
 ```
 
-**Parameters:**
+**参数：**
 
-| Name                                                                   | Type              |
-| ---------------------------------------------------------------------- | ----------------- |
-| appKey <div className="label basic required">Required</div>            | string            |
-| componentProvider <div className="label basic required">Required</div> | ComponentProvider |
-| section                                                                | boolean           |
+| 名称                                                                 | 类型              |
+| -------------------------------------------------------------------- | ----------------- |
+| appKey <div className="label basic required">必需</div>              | string            |
+| componentProvider <div className="label basic required">必需</div>   | ComponentProvider |
+| section                                                              | boolean           |
 
 ---
 
@@ -136,11 +136,11 @@ static registerComponent(
 static registerConfig(config: AppConfig[]);
 ```
 
-**Parameters:**
+**参数：**
 
-| Name                                                        | Type                                 |
-| ----------------------------------------------------------- | ------------------------------------ |
-| config <div className="label basic required">Required</div> | [AppConfig](appregistry#appconfig)[] |
+| 名称                                                                   | 类型                                   |
+| ---------------------------------------------------------------------- | ------------------------------------ |
+| config <div className="label basic required">必需</div>                | [AppConfig](appregistry#appconfig)[] |
 
 ---
 
@@ -153,16 +153,16 @@ static registerHeadlessTask(
 );
 ```
 
-Register a headless task. A headless task is a bit of code that runs without a UI.
+注册一个无界面任务。无界面任务是无需 UI 即可运行的代码。
 
-This is a way to run tasks in JavaScript while your app is in the background. It can be used, for example, to sync fresh data, handle push notifications, or play music.
+这是一种在应用处于后台时运行 JavaScript 任务的方法。例如可以用来同步最新数据、处理推送通知或播放音乐。
 
-**Parameters:**
+**参数：**
 
-| Name                                                                        | Type                                     | Description                                                                                                                                                                                                                         |
-| --------------------------------------------------------------------------- | ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| taskKey <div className="label basic required two-lines">Required</div>      | string                                   | The native id for this task instance that was used when startHeadlessTask was called.                                                                                                                                               |
-| taskProvider <div className="label basic required two-lines">Required</div> | [TaskProvider](appregistry#taskprovider) | A promise returning function that takes some data passed from the native side as the only argument. When the promise is resolved or rejected the native side is notified of this event and it may decide to destroy the JS context. |
+| 名称                                                                                  | 类型                                                 | 说明                                                                                                                                                                                                                           |
+| ------------------------------------------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| taskKey<br/><div className="label basic required two-lines">必需</div>                 | string                                               | 此任务实例的原生 ID，在调用 startHeadlessTask 时使用。                                                                                                                                                                        |
+| taskProvider<br/><div className="label basic required two-lines">必需</div>            | [TaskProvider](appregistry#taskprovider)             | 一个返回 Promise 的函数，该函数接受来自原生端传递的数据作为唯一参数。当 Promise 解析或拒绝时，原生端将接收到该事件通知，可能决定销毁 JS 上下文。                                                                       |
 
 ---
 
@@ -172,12 +172,12 @@ This is a way to run tasks in JavaScript while your app is in the background. It
 static registerRunnable(appKey: string, func: Runnable): string;
 ```
 
-**Parameters:**
+**参数：**
 
-| Name                                                        | Type     |
-| ----------------------------------------------------------- | -------- |
-| appKey <div className="label basic required">Required</div> | string   |
-| run <div className="label basic required">Required</div>    | function |
+| 名称                                                         | 类型     |
+| ------------------------------------------------------------ | -------- |
+| appKey <div className="label basic required">必需</div>      | string   |
+| run <div className="label basic required">必需</div>         | function |
 
 ---
 
@@ -190,12 +190,12 @@ static registerSection(
 );
 ```
 
-**Parameters:**
+**参数：**
 
-| Name                                                           | Type              |
-| -------------------------------------------------------------- | ----------------- |
-| appKey <div className="label basic required">Required</div>    | string            |
-| component <div className="label basic required">Required</div> | ComponentProvider |
+| 名称                                                        | 类型              |
+| ----------------------------------------------------------- | ----------------- |
+| appKey <div className="label basic required">必需</div>     | string            |
+| component <div className="label basic required">必需</div>  | ComponentProvider |
 
 ---
 
@@ -205,14 +205,14 @@ static registerSection(
 static runApplication(appKey: string, appParameters: any): void;
 ```
 
-Loads the JavaScript bundle and runs the app.
+加载 JavaScript bundle 并运行应用。
 
-**Parameters:**
+**参数：**
 
-| Name                                                               | Type   |
-| ------------------------------------------------------------------ | ------ |
-| appKey <div className="label basic required">Required</div>        | string |
-| appParameters <div className="label basic required">Required</div> | any    |
+| 名称                                                          | 类型   |
+| ------------------------------------------------------------- | ------ |
+| appKey <div className="label basic required">必需</div>       | string |
+| appParameters <div className="label basic required">必需</div> | any    |
 
 ---
 
@@ -224,20 +224,20 @@ static setComponentProviderInstrumentationHook(
 );
 ```
 
-**Parameters:**
+**参数：**
 
-| Name                                                      | Type     |
-| --------------------------------------------------------- | -------- |
-| hook <div className="label basic required">Required</div> | function |
+| 名称                                                       | 类型     |
+| ---------------------------------------------------------- | -------- |
+| hook <div className="label basic required">必需</div>      | function |
 
-A valid `hook` function accepts the following as arguments:
+一个有效的 `hook` 函数应接受以下参数：
 
-| Name                                                                         | Type               |
-| ---------------------------------------------------------------------------- | ------------------ |
-| component <div className="label basic required">Required</div>               | ComponentProvider  |
-| scopedPerformanceLogger <div className="label basic required">Required</div> | IPerformanceLogger |
+| 名称                                                               | 类型               |
+| ------------------------------------------------------------------ | ------------------ |
+| component <div className="label basic required">必需</div>        | ComponentProvider  |
+| scopedPerformanceLogger <div className="label basic required">必需</div> | IPerformanceLogger |
 
-The function must also return a React Component.
+该函数还必须返回一个 React 组件。
 
 ---
 
@@ -249,11 +249,11 @@ static setWrapperComponentProvider(
 );
 ```
 
-**Parameters:**
+**参数：**
 
-| Name                                                          | Type              |
+| 名称                                                          | 类型              |
 | ------------------------------------------------------------- | ----------------- |
-| provider <div className="label basic required">Required</div> | ComponentProvider |
+| provider <div className="label basic required">必需</div>     | ComponentProvider |
 
 ---
 
@@ -267,15 +267,15 @@ static startHeadlessTask(
 );
 ```
 
-Only called from native code. Starts a headless task.
+仅由原生代码调用。启动一个无界面任务。
 
-**Parameters:**
+**参数：**
 
-| Name                                                         | Type   | Description                                                          |
-| ------------------------------------------------------------ | ------ | -------------------------------------------------------------------- |
-| taskId <div className="label basic required">Required</div>  | number | The native id for this task instance to keep track of its execution. |
-| taskKey <div className="label basic required">Required</div> | string | The key for the task to start.                                       |
-| data <div className="label basic required">Required</div>    | any    | The data to pass to the task.                                        |
+| 名称                                                           | 类型     | 说明                                           |
+| -------------------------------------------------------------- | -------- | ---------------------------------------------- |
+| taskId <div className="label basic required">必需</div>        | number   | 用于跟踪该任务执行的原生实例 ID。              |
+| taskKey <div className="label basic required">必需</div>       | string   | 要启动的任务的键名。                            |
+| data <div className="label basic required">必需</div>          | any      | 传递给任务的数据。                              |
 
 ---
 
@@ -285,99 +285,99 @@ Only called from native code. Starts a headless task.
 static unmountApplicationComponentAtRootTag(rootTag: number);
 ```
 
-Stops an application when a view should be destroyed.
+当视图需要销毁时停止应用。
 
-**Parameters:**
+**参数：**
 
-| Name                                                         | Type   |
-| ------------------------------------------------------------ | ------ |
-| rootTag <div className="label basic required">Required</div> | number |
+| 名称                                                           | 类型     |
+| -------------------------------------------------------------- | -------- |
+| rootTag <div className="label basic required">必需</div>       | number   |
 
-## Type Definitions
+## 类型定义
 
 ### AppConfig
 
-Application configuration for the `registerConfig` method.
+`registerConfig` 方法所使用的应用配置。
 
-| Type   |
+| 类型   |
 | ------ |
 | object |
 
-**Properties:**
+**属性：**
 
-| Name                                                        | Type              |
-| ----------------------------------------------------------- | ----------------- |
-| appKey <div className="label basic required">Required</div> | string            |
+| 名称                                                         | 类型              |
+| ------------------------------------------------------------ | ----------------- |
+| appKey <div className="label basic required">必需</div>      | string            |
 | component                                                   | ComponentProvider |
 | run                                                         | function          |
 | section                                                     | boolean           |
 
 :::note
-Every config is expected to set either `component` or `run` function.
+每个配置都应设置 `component` 或 `run` 函数中的一个。
 :::
 
 ### Registry
 
-| Type   |
+| 类型   |
 | ------ |
 | object |
 
-**Properties:**
+**属性：**
 
-| Name      | Type                                       |
-| --------- | ------------------------------------------ |
-| runnables | array of [Runnables](appregistry#runnable) |
-| sections  | array of strings                           |
+| 名称       | 类型                                        |
+| ---------- | ------------------------------------------- |
+| runnables  | [Runnable](appregistry#runnable) 数组       |
+| sections   | 字符串数组                                 |
 
 ### Runnable
 
-| Type   |
+| 类型   |
 | ------ |
 | object |
 
-**Properties:**
+**属性：**
 
-| Name      | Type              |
-| --------- | ----------------- |
-| component | ComponentProvider |
-| run       | function          |
+| 名称        | 类型              |
+| ----------- | ----------------- |
+| component   | ComponentProvider |
+| run         | function          |
 
 ### Runnables
 
-An object with key of `appKey` and value of type of [`Runnable`](appregistry#runnable).
+一个键名为 `appKey`，键值类型为 [`Runnable`](appregistry#runnable) 的对象。
 
-| Type   |
+| 类型   |
 | ------ |
 | object |
 
 ### Task
 
-A `Task` is a function that accepts any data as argument and returns a Promise that resolves to `undefined`.
+一个函数，接受任意数据作为参数，返回 Promise 并最终解析为 `undefined`。
 
-| Type     |
+| 类型     |
 | -------- |
 | function |
 
 ### TaskCanceller
 
-A `TaskCanceller` is a function that accepts no argument and returns void.
+一个无参数、无返回值的函数。
 
-| Type     |
+| 类型     |
 | -------- |
 | function |
 
 ### TaskCancelProvider
 
-A valid `TaskCancelProvider` is a function that returns a [`TaskCanceller`](appregistry#taskcanceller).
+一个函数，返回一个 [`TaskCanceller`](appregistry#taskcanceller)。
 
-| Type     |
+| 类型     |
 | -------- |
 | function |
 
 ### TaskProvider
 
-A valid `TaskProvider` is a function that returns a [`Task`](appregistry#task).
+一个函数，返回一个 [`Task`](appregistry#task)。
 
-| Type     |
+| 类型     |
 | -------- |
 | function |

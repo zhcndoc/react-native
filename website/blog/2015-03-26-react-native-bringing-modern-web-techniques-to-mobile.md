@@ -1,7 +1,7 @@
 ---
-title: 'React Native: Bringing modern web techniques to mobile'
+title: 'React Native：将现代网页技术引入移动端'
 author: Tom Occhino
-authorTitle: Engineering Manager at Facebook
+authorTitle: Facebook 工程经理
 authorURL: 'https://github.com/tomocchino'
 authorImageURL: 'https://avatars0.githubusercontent.com/u/13947?v=3&s=460'
 authorTwitter: tomocchino
@@ -9,16 +9,16 @@ hero: '/blog/assets/dark-hero.png'
 tags: [announcement]
 ---
 
-We introduced [React](https://code.facebook.com/projects/176988925806765/react/) to the world two years ago, and since then it's seen impressive growth, both inside and outside of Facebook. Today, even though no one is forced to use it, new web projects at Facebook are commonly built using React in one form or another, and it's being broadly adopted across the industry. Engineers are choosing to use React every day because it enables them to spend more time focusing on their products and less time fighting with their framework. It wasn't until we'd been building with React for a while, though, that we started to understand what makes it so powerful.
+我们在两年前向世界介绍了[React](https://code.facebook.com/projects/176988925806765/react/)，此后它在 Facebook 内外都取得了令人瞩目的增长。如今，虽然没人被强制使用它，但 Facebook 上的新网页项目通常会以某种形式使用 React，并且它正在业界被广泛采用。工程师们每天选择使用 React，是因为它让他们能更多地专注于产品，而不是花费大量时间与框架“斗争”。不过，直到我们使用 React 开发了一段时间之后，才真正理解它为何如此强大。
 
-React forces us to break our applications down into discrete components, each representing a single view. These components make it easier to iterate on our products, since we don't need to keep the entire system in our head in order to make changes to one part of it. More important, though, React wraps the DOM's mutative, imperative API with a declarative one, which raises the level of abstraction and simplifies the programming model. What we've found is that when we build with React, our code is a lot more predictable. This predictability makes it so we can iterate more quickly with confidence, and our applications are a lot more reliable as a result. Additionally, it's not only easier to scale our applications when they're built with React, but we've found it's also easier to scale the size of our teams themselves.
+React 强制我们将应用拆分为离散的组件，每个组件表示一个单独的视图。这些组件让我们更容易迭代产品，因为修改某一部分时无需在脑中保持整个系统的全貌。但更重要的是，React 用声明式的方式包装了 DOM 的变异式、命令式 API，这提升了抽象层次，简化了编程模型。我们的发现是，使用 React 开发时，代码更加可预测。这种可预测性让我们能更有信心快速迭代，也让应用变得更加可靠。此外，使用 React 构建应用不仅更易于扩展，我们还发现团队规模的扩展也更为便捷。
 
-Together with the rapid iteration cycle of the web, we've been able to build some awesome products with React, including many components of Facebook.com. Additionally, we've built amazing frameworks in JavaScript on top of React, like [Relay](https://reactjs.org/blog/2015/02/20/introducing-relay-and-graphql.html), which allows us to greatly simplify our data fetching at scale. Of course, web is only part of the story. Facebook also has widely used Android and iOS apps, which are built on top of disjointed, proprietary technology stacks. Having to build our apps on top of multiple platforms has bifurcated our engineering organization, but that's only one of the things that makes native mobile application development hard.
+结合网页的快速迭代周期，我们用 React 构建了一些很棒的产品，包括 Facebook.com 的许多组件。此外，我们基于 React 构建了强大的 JavaScript 框架，比如 [Relay](https://reactjs.org/blog/2015/02/20/introducing-relay-and-graphql.html)，它能够大幅简化大规模数据获取。当然，网页只是故事的一部分。Facebook 还有广泛使用的 Android 和 iOS 应用，它们基于彼此独立且封闭的技术栈构建。在多个平台之上进行应用开发，使我们的工程组织分裂开来，但这只是移动原生应用开发难点之一。
 
 <footer>
   <a
     href="https://code.facebook.com/posts/1014532261909640/react-native-bringing-modern-web-techniques-to-mobile/"
-    className="btn">Read more</a>
+    className="btn">阅读全文</a>
 </footer>
 
-> This is an excerpt. Read the rest of the post on [Facebook Code](https://code.facebook.com/posts/1014532261909640/react-native-bringing-modern-web-techniques-to-mobile/).
+> 以上为节选。请在[Facebook Code](https://code.facebook.com/posts/1014532261909640/react-native-bringing-modern-web-techniques-to-mobile/)阅读完整文章。

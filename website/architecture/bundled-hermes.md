@@ -1,50 +1,50 @@
 ---
 id: bundled-hermes
-title: Bundled Hermes
+title: 内置 Hermes
 ---
 
-This page gives an overview of **how** Hermes and React Native **are built**.
+本页面概述了 **Hermes 和 React Native 的构建方式**。
 
-If you're looking into instructions on how to use Hermes in your app, you can find instructions on this other page: [using Hermes](/docs/hermes)
+如果你想了解如何在应用中使用 Hermes 的说明，请查看此页面：[使用 Hermes](/docs/hermes)
 
 :::caution
-Please note that this page serves as a technical deep dive and is targeted for users which are building extensions on top of Hermes or React Native. General users of React Native should not need to know in-depth information on how React Native and Hermes interact.
+请注意，本页面是技术深度解析，面向在 Hermes 或 React Native 顶层开发扩展的用户。普通 React Native 用户无需深入了解 React Native 和 Hermes 如何交互。
 :::
 
-## What is 'Bundled Hermes'
+## 什么是“内置 Hermes”（Bundled Hermes）
 
-Starting with React Native 0.69.0, every version of React Native will be **built alongside** to a Hermes version. We call this distribution model **Bundled Hermes**.
+从 React Native 0.69.0 开始，每个 React Native 版本都将 **与** 一个 Hermes 版本**一同构建**。我们称这种分发模式为 **内置 Hermes**。
 
-From 0.69 on, you will always have a JS engine that has been built and tested alongside each React Native version that you can use.
+从 0.69 版本起，你总是可以使用一个与 React Native 版本一同构建和测试过的 JS 引擎。
 
-## Why we moved to 'Bundled Hermes'
+## 我们为何转向“内置 Hermes”
 
-Historically, React Native and Hermes followed two **distinct release processes** with distinct versioning. Having distinct releases with distinct numbers created confusion in the OSS ecosystem, where it was not clear if a specific version of Hermes was compatible with a specific version of React Native (i.e. you needed to know that Hermes 0.11.0 was compatible only with React Native 0.68.0, etc.)
+历史上，React Native 和 Hermes 有两个 **独立的发布流程** 和不同的版本号。不同的发布版本及版本号引起了社区混淆，因为不清楚某个 Hermes 版本是否兼容某个 React Native 版本（例如你需要知道 Hermes 0.11.0 只兼容 React Native 0.68.0 等）。
 
-Both Hermes and React Native, share the JSI code ([Hermes here](https://github.com/facebook/hermes/tree/main/API/jsi/jsi) and [React Native here](https://github.com/facebook/react-native/tree/main/packages/react-native/ReactCommon/jsi/jsi)). If the two JSI copies of JSI get out of sync, a build of Hermes won't be compatible with a build of React Native. You can read more about this [ABI incompatibility problem here](https://github.com/react-native-community/discussions-and-proposals/issues/257).
+Hermes 和 React Native 共享 JSI 代码（[Hermes 代码位置](https://github.com/facebook/hermes/tree/main/API/jsi/jsi) 和 [React Native 代码位置](https://github.com/facebook/react-native/tree/main/packages/react-native/ReactCommon/jsi/jsi)）。如果两个仓库中的 JSI 版本不同步，Hermes 构建版本将无法兼容 React Native 构建版本。你可查阅更多关于此 [ABI 不兼容问题](https://github.com/react-native-community/discussions-and-proposals/issues/257)。
 
-To overcome this problem, we've extended the React Native release process to download and build Hermes and made sure only one copy of JSI is used when building Hermes.
+为了解决这个问题，我们扩展了 React Native 的发布流程以下载和构建 Hermes，确保构建 Hermes 时只使用一份 JSI 代码。
 
-Thanks to this, we can release a version of Hermes whenever we release a version of React Native, and be sure that the Hermes engine we built is **fully compatible** with the React Native version we're releasing. We're shipping this version of Hermes alongside the React Native version we're doing, hence the name _Bundled Hermes_.
+因此，我们能在发布 React Native 版本时，发布与之完全兼容的 Hermes 版本。我们把这个 Hermes 版本与 React Native 版本一起发布，所以称为 _内置 Hermes_。
 
-## How this will impact app developers
+## 这对应用开发者的影响
 
-As mentioned in the introduction, if you're an app developer, this change **should not affect** you directly.
+如前言所述，应用开发者不会直接受此变更影响。
 
-The following paragraphs describe which changes we did under the hood and explains some of the rationales, for the sake of transparency.
+以下内容描述了底层变更以及背后的考量，以便透明介绍。
 
-### iOS Users
+### iOS 用户
 
-On iOS, we've moved the `hermes-engine` you're using.
+在 iOS 平台上，我们移动了 `hermes-engine` 的使用方式。
 
-Prior to React Native 0.69, users would download a pod (here you can find the [podspec](https://github.com/CocoaPods/Specs/blob/master/Specs/5/d/0/hermes-engine/0.11.0/hermes-engine.podspec.json)).
+在 React Native 0.69 之前，用户会下载一个 pod（这里是对应的 [podspec](https://github.com/CocoaPods/Specs/blob/master/Specs/5/d/0/hermes-engine/0.11.0/hermes-engine.podspec.json)）。
 
-On React Native 0.69, users would instead use a podspec that is defined inside the `sdks/hermes-engine/hermes-engine.podspec` file in the `react-native` NPM package.
-That podspec relies on a pre-built tarball of Hermes that we upload to Maven and to the React Native GitHub Release, as part of the React Native release process (i.e. [see the assets of this release](https://github.com/facebook/react-native/releases/tag/v0.70.4)).
+从 React Native 0.69 开始，用户将使用定义在 `react-native` NPM 包中 `sdks/hermes-engine/hermes-engine.podspec` 文件内的 podspec。
+该 podspec 依赖我们在 React Native 发布流程中上传到 Maven 和 React Native GitHub Releases 的 Hermes 预构建包（见 [本次发布的资源](https://github.com/facebook/react-native/releases/tag/v0.70.4)）。
 
-### Android Users
+### Android 用户
 
-On Android, we're going to update the [`android/app/build.gradle`](https://github.com/facebook/react-native/blob/main/template/android/app/build.gradle) file in the default template the following way:
+在 Android 上，我们将以如下方式更新默认模板中的 [`android/app/build.gradle`](https://github.com/facebook/react-native/blob/main/template/android/app/build.gradle) 文件：
 
 ```diff
 dependencies {
@@ -63,107 +63,110 @@ dependencies {
 }
 ```
 
-Prior to React Native 0.69, users will be consuming `hermes-debug.aar` and `hermes-release.aar` from the `hermes-engine` NPM package.
+在 React Native 0.69 之前，用户会从 `hermes-engine` NPM 包使用 `hermes-debug.aar` 和 `hermes-release.aar`。
 
-On React Native 0.69, users will be consuming the Android multi-variant artifacts available inside the `android/com/facebook/react/hermes-engine/` folder in the `react-native` NPM package.
-Please also note that we're going to [remove the dependency](https://github.com/facebook/react-native/blob/c418bf4c8fe8bf97273e3a64211eaa38d836e0a0/package.json#L105) on `hermes-engine` entirely in one of the future version of React Native.
+在 React Native 0.69 中，用户将使用包含在 `react-native` NPM 包 `android/com/facebook/react/hermes-engine/` 文件夹中的 Android 多变体工件。
+请注意，我们计划在未来某个版本中[完全移除对 `hermes-engine` 依赖](https://github.com/facebook/react-native/blob/c418bf4c8fe8bf97273e3a64211eaa38d836e0a0/package.json#L105)。
 
-#### Android Users on New Architecture
+#### 新架构下的 Android 用户
 
-Due to the nature of our native code build setup (i.e. how we use the NDK), users on the New Architecture will be **building Hermes from source**.
+由于原生代码构建方式（即 NDK 的使用），新架构下的用户将**从源码构建 Hermes**。
 
-This aligns the build mechanism of React Native and Hermes for users on the New Architecture (they will build both framework from source).
-This means that such Android users might experience a performance hit at build time on their first build.
+这使新架构用户的 React Native 与 Hermes 都采用源码方式构建。
+这意味着首次构建可能会遇到构建时间性能下降。
 
-You can find instructions to optimize your build time and reduce the impact on your build on this page: [Speeding up your Build phase](/docs/next/build-speed).
+你可以查看此页面了解优化构建时间的说明：[提升构建速度](/docs/next/build-speed)。
 
-#### Android Users on New Architecture building on Windows
+#### 在 Windows 上使用新架构的 Android 用户
 
-Users building React Native App, with the New Architecture, on Windows machines need to follow those extra steps to let the build work correctly:
+在 Windows 机器上使用新架构构建 React Native 应用的用户，需要执行以下额外步骤以确保构建正常：
 
-- Make sure the [environment is configured properly](https://reactnative.dev/docs/environment-setup), with Android SDK & node.
-- Install [cmake](https://community.chocolatey.org/packages/cmake) with Chocolatey
-- Install either:
-  - [Build Tools for Visual Studio 2022](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022).
-  - [Visual Studio 22 Community Edition](https://visualstudio.microsoft.com/vs/community/) - Picking only the C++ desktop development is sufficient.
-- Make sure the [Visual Studio Command Prompt](https://docs.microsoft.com/en-us/visualstudio/ide/reference/command-prompt-powershell?view=vs-2022) is configured correctly. This is required as the proper C++ compiler environment variable is configured in those command prompt.
-- Run the app with `npx react-native run-android` inside a Visual Studio Command Prompt.
+- 确认[环境配置正确](https://reactnative.dev/docs/environment-setup)，包含 Android SDK 和 node。
+- 使用 Chocolatey 安装 [cmake](https://community.chocolatey.org/packages/cmake)
+- 安装下列其一：
+  - [Visual Studio 2022 构建工具](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022)
+  - [Visual Studio 2022 社区版](https://visualstudio.microsoft.com/vs/community/) —— 只需勾选 C++ 桌面开发部分。
+- 确保 [Visual Studio 命令提示符](https://docs.microsoft.com/en-us/visualstudio/ide/reference/command-prompt-powershell?view=vs-2022) 配置正确（该命令提示符会配置正确的 C++ 编译器环境变量）。
+- 在 Visual Studio 命令提示符中运行 `npx react-native run-android` 启动应用。
 
-### Can users still use another engine?
+### 用户还能使用其他引擎吗？
 
-Yes, users are free to enable/disable Hermes (with the `enableHermes` variable on Android, `hermes_enabled` on iOS).
-The 'Bundled Hermes' change will impact only **how Hermes is built and bundled** for you.
+可以，用户可自由启用/禁用 Hermes（Android 上通过 `enableHermes` 变量，iOS 上通过 `hermes_enabled`）。
+“内置 Hermes”改变的仅是 **Hermes 的构建与内置方式**。
 
-Starting with React Native 0.70, the default for `enableHermes`/`hermes_enabled` is `true`.
+从 React Native 0.70 起，`enableHermes`/`hermes_enabled` 的默认值为 `true`。
 
-## How this will impact contributor and extension developers
+## 这对贡献者及扩展开发者的影响
 
-If you're a React Native contributor or you're building an extension on top of React Native or Hermes, please read further as we explain how Bundled Hermes works.
+如果你是 React Native 贡献者，或者基于 React Native 或 Hermes 开发扩展，请继续阅读，以下介绍内置 Hermes 的工作原理。
 
-### How is Bundled Hermes working under the hood?
+### 内置 Hermes 如何工作？
 
-This mechanism relies on **downloading a tarball** with the Hermes source code from the `facebook/hermes` repository inside the `facebook/react-native` repository. We have a similar mechanism in place for other native dependencies (Folly, Glog, etc.) and we aligned Hermes to follow the same setup.
+该机制依赖于从 `facebook/hermes` 仓库下载 Hermes 源码 tarball，放置到 `facebook/react-native` 仓库中。
+对此类其他原生依赖（如 Folly，Glog 等）我们也有类似机制，Hermes 现已采用同样的方案。
 
-When building React Native from `main`, we will be fetching a tarball of `main` of facebook/hermes and building it as part of the build process of React Native.
+从 React Native `main` 分支构建时，我们会拉取 `facebook/hermes` 仓库 `main` 分支的 tarball，并作为 React Native 构建流程一部分进行构建。
 
-When building React Native from a release branch (say `0.69-stable`), we will instead use a **tag** on the Hermes repo to **synchronize the code** between the two repos. The specific tag name used will then be stored inside the `sdks/.hermesversion` file inside React Native in the release branch (e.g. [this is the file](https://github.com/facebook/react-native/blob/0.69-stable/sdks/.hermesversion) on the 0.69 release branch).
+从 React Native 发布分支（如 `0.69-stable`）构建时，我们使用 Hermes 仓库上的 **tag** 来 **同步两个仓库的代码**。具体 tag 名称存放于 React Native 发布分支的 `sdks/.hermesversion` 文件中（例如 [0.69 分支的该文件](https://github.com/facebook/react-native/blob/0.69-stable/sdks/.hermesversion)）。
 
-In a sense, you can think of this approach similarly to a **git submodule**.
+在某种程度上，你可以把这个方法看作是 **git 子模块**。
 
-If you're building on top of Hermes, you can rely on those tags to understand which version of Hermes was used when building React Native, as the version of React Native is specified in the tag name (e.g. `hermes-2022-05-20-RNv0.69.0-ee8941b8874132b8f83e4486b63ed5c19fc3f111`).
+如果你基于 Hermes 开发，可通过这些 tag 来了解 React Native 构建时用的是哪个 Hermes 版本，版本信息包含于 tag 名称内（如 `hermes-2022-05-20-RNv0.69.0-ee8941b8874132b8f83e4486b63ed5c19fc3f111`）。
 
-#### Android implementation details
+#### 安卓端实现细节
 
-To implement this on Android, we've added a new build inside the `/ReactAndroid/hermes-engine` of React Native that will take care of building Hermes and packaging for consumption ([See here for more context](https://github.com/facebook/react-native/pull/33396)).
+安卓端实现位于 React Native 的 `/ReactAndroid/hermes-engine` 目录，负责构建 Hermes 并打包使用（[详见 PR #33396](https://github.com/facebook/react-native/pull/33396)）。
 
-You can now trigger a build of Hermes engine by invoking:
+你可通过如下命令触发 Hermes 构建：
 
 ```bash
-// Build a debug version of Hermes
+// 构建 Hermes 的调试版本
 ./gradlew :ReactAndroid:hermes-engine:assembleDebug
-// Build a release version of Hermes
+// 构建 Hermes 的发行版本
 ./gradlew :ReactAndroid:hermes-engine:assembleRelease
 ```
 
-from the React Native `main` branch.
+命令需在 React Native `main` 分支执行。
 
-You won't need to install extra tools (such as `cmake`, `ninja` or `python3`) in your machine as we configured the build to use the NDK versions of those tools.
+不需要你在机器上额外安装（如 `cmake`、`ninja` 或 `python3`），构建使用了 NDK 自带版本的这些工具。
 
-On the Gradle consumer side, we also shipped a small improvement on the consumer side: we moved from `releaseImplementation` & `debugImplementation` to `implementation`. This is possible because the newer `hermes-engine` Android artifact is **variant aware** and will properly match a debug build of the engine with a debug build of your app. You don't need any custom configuration here (even if you use `staging` or other build types/flavors).
+在 Gradle 依赖方面，我们对消费者侧进行了优化：由原先的 `releaseImplementation` 和 `debugImplementation` 改为 `implementation`。这是因为新版 `hermes-engine` 的 Android 工件**支持变体感知**，能正确匹配调试构建的引擎和调试构建的应用，使用 `staging` 或其他类型/风味都适用，无需自定义配置。
 
-However, this made this line necessary in the template:
+但是这导致模板中必须加上：
 
 ```
 exclude group:'com.facebook.fbjni'
 ```
 
-This is needed as React Native is consuming `fbjni` using the non-prefab approach (i.e. unzipping the `.aar` and extracting `.so` files). Hermes-engine, and other libraries, are using prefab instead to consume fbjni. We're looking into [addressing this issue](https://github.com/facebook/react-native/pull/33397) in the future so the Hermes import will be a oneliner.
+此配置是因为 React Native 使用非 prefab 方式消费 fbjni（即解压 `.aar` 并提取 `.so`），而 hermes-engine 等库使用的是 prefab 消费方式。我们计划在未来[解决此问题](https://github.com/facebook/react-native/pull/33397)，使 Hermes 导入可以简洁一行。
 
-#### iOS implementation details
+#### iOS 端实现细节
 
-The iOS implementation relies on a series of scripts that lives in the following locations:
+iOS 端实现依赖一系列脚本，存于：
 
-- [`/scripts/hermes`](https://github.com/facebook/react-native/tree/main/scripts/hermes). Those scripts contain logic to download the Hermes tarball, unzip it, and configure the iOS build. They're invoked at `pod install` time if you have the `hermes_enabled` field set to `true`.
-- [`/sdks/hermes-engine`](https://github.com/facebook/react-native/tree/main/sdks/hermes-engine). Those scripts contain the build logic that is effectively building Hermes. They were copied and adapted from the `facebook/hermes` repo to properly work within React Native. Specifically, the scripts inside the `utils` folder are responsible of building Hermes for all the Mac platforms.
+- [`/scripts/hermes`](https://github.com/facebook/react-native/tree/main/scripts/hermes)：包含下载 Hermes tarball、解压和配置 iOS 构建的逻辑。`pod install` 时会在 `hermes_enabled` 为 true 时执行。
+- [`/sdks/hermes-engine`](https://github.com/facebook/react-native/tree/main/sdks/hermes-engine)：包含实际构建 Hermes 的逻辑，从 `facebook/hermes` 仓库复制并修改以适配 React Native。`utils` 文件夹中的脚本负责为所有 Mac 平台构建 Hermes。
 
-Hermes is built as part of the `build_hermes_macos` Job on CircleCI. The job will produce as artifact a tarball which will be downloaded by the `hermes-engine` podspec when using a published React Native release ([here is an example of the artifacts created for React Native 0.69 in `build_hermes_macos`](https://app.circleci.com/pipelines/github/facebook/react-native/13679/workflows/5172f8e4-6b02-4ccb-ab97-7cb954911fae/jobs/258701/artifacts)).
+Hermes 构建工作在 CircleCI 的 `build_hermes_macos` 任务中完成。该任务会产出一个 tarball，`hermes-engine` 的 podspec 在使用已发布的 React Native 版本时会下载该 tarball（[这里是 React Native 0.69 的构件实例](https://app.circleci.com/pipelines/github/facebook/react-native/13679/workflows/5172f8e4-6b02-4ccb-ab97-7cb954911fae/jobs/258701/artifacts)）。
 
-##### Prebuilt Hermes
+##### 预构建 Hermes
 
-If there are no prebuilt artifacts for the React Native version that is being used (i.e. you may be working with React Native from the `main` branch), then Hermes will need to be built from source. First, the Hermes compiler, `hermesc`, will be built for macOS during `pod install`, then Hermes itself will be built as part of the Xcode build pipeline using the `build-hermes-xcode.sh` script.
+如果没有符合当前 React Native 版本的预构建工件（例如使用的是 React Native `main` 分支），则 Hermes 需要从源码构建。
+首先，`hermesc` 编译器会在 `pod install` 期间为 macOS 构建，然后 Hermes 会在 Xcode 构建流程中通过 `build-hermes-xcode.sh` 脚本构建。
 
-##### Building Hermes from source
+##### 从源码构建 Hermes
 
-Hermes is always built from source when using React Native from the `main` branch. If you are using a stable React Native version, you can force Hermes to be built from source by setting the `CI` envvar to `true` when using CocoaPods: `CI=true pod install`.
+当使用 React Native `main` 分支时，Hermes 始终从源码构建。如果使用稳定版本的 React Native，可以通过设置环境变量 `CI=true pod install` 强制通过 CocoaPods 从源码构建 Hermes。
 
-##### Debug symbols
+##### 调试符号
 
-The prebuilt artifacts for Hermes do not contain debug symbols (dSYMs) by default. We're planning on distributing these debug symbols for each release in the future. Until then, if you need the debug symbols for Hermes, you will need to build Hermes from source. A `hermes.framework.dSYM` will be created in the build directory alongside each of the Hermes frameworks.
+预构建的 Hermes 工件默认不包含调试符号（dSYM）。我们计划未来为每个版本发布调试符号包。
+现在，如果需要调试符号，需从源码构建 Hermes，在构建目录中会生成对应的 `hermes.framework.dSYM`。
 
-### I'm afraid this change is impacting me
+### 我担心这次改动对我有影响
 
-We'd like to stress that this is essentially an organizational change on _where_ Hermes is built and _how_ the code is synchronized between the two repositories. The change should be fully transparent to our users.
+我们强调这本质是 Hermes 构建位置以及两个仓库代码同步方式的组织变更，上层用户体验应该是完全透明的。
 
-Historically, we used to cut a release of Hermes for a specific version of React Native (e.g. [`v0.11.0 for RN0.68.x`](https://github.com/facebook/hermes/releases/tag/v0.11.0)).
+历史上，我们会为特定 React Native 版本切分 Hermes 发布版本（例如 [`v0.11.0 用于 RN0.68.x`](https://github.com/facebook/hermes/releases/tag/v0.11.0)）。
 
-With 'Bundled Hermes', you can instead rely on a tag that will represent the version used when a specific version of React Native was cut.
+采用“内置 Hermes”后，你可以依赖一个 tag，代表某个 React Native 版本对应的 Hermes 版本。

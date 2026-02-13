@@ -19,14 +19,13 @@ function Framework() {
   return (
     <Section>
       <SectionTitle
-        title="Get a head start with a framework"
+        title="使用框架快速入门"
         description={
           <>
-            React Native brings the React programming paradigm to platforms like
-            Android and iOS. It doesn’t prescribe how to do routing, or how to
-            access each of the numerous platform APIs. To build a new app with
-            React Native, we recommend a framework like{' '}
-            <a href="https://expo.dev">Expo</a>.
+            React Native 将 React 编程范式带到了 Android 和 iOS
+            等平台。它并不规定如何进行路由，或如何访问众多平台 API。要使用 React
+            Native 构建新应用，我们推荐使用像{' '}
+            <a href="https://expo.dev">Expo</a> 这样的框架。
           </>
         }
       />
@@ -41,10 +40,9 @@ function Framework() {
             alt="File system with folders and files representing screens and navigation"
           />
           <div className={styles.cardContent}>
-            <h4 className={styles.cardTitle}>File-based routing</h4>
+            <h4 className={styles.cardTitle}>基于文件的路由</h4>
             <p className={styles.cardDescription}>
-              Create stack, modal, drawer, and tab screens with minimal
-              boilerplate using your filesystem.
+              使用文件系统创建堆栈、模态、抽屉和标签屏幕，最小化样板代码。
             </p>
           </div>
         </div>
@@ -58,12 +56,10 @@ function Framework() {
             className={styles.cardImage}
           />
           <div className={styles.cardContent}>
-            <h4 className={styles.cardTitle}>
-              Use any library, SDK, or native code
-            </h4>
+            <h4 className={styles.cardTitle}>使用任何 SDK 或原生代码</h4>
             <p className={styles.cardDescription}>
-              Generate native changes or write your own native code. Use over 50
-              modules to create your app.
+              生成原生更改或编写自己的原生代码。使用超过 50
+              个模块来创建您的应用。
             </p>
           </div>
         </div>
@@ -77,11 +73,10 @@ function Framework() {
             alt="List of developer tool toggles for debugging, performance, and more"
           />
           <div className={styles.cardContent}>
-            <h4 className={styles.cardTitle}>Developer tools</h4>
+            <h4 className={styles.cardTitle}>开发者工具</h4>
             <p className={styles.cardDescription}>
-              Get started quickly with Expo Go, then continue with
-              expo-dev-client: a module that adds Expo’s tools to apps that
-              require native changes.
+              使用 Expo Go 快速入门，然后继续使用 expo-dev-client：一个将 Expo
+              工具添加到需要原生更改的应用中的模块。
             </p>
           </div>
         </div>

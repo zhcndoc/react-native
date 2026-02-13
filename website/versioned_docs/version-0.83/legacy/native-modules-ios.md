@@ -1,54 +1,53 @@
 ---
 id: native-modules-ios
-title: iOS Native Modules
+title: iOS 原生模块
 ---
 
-import NativeDeprecated from '../the-new-architecture/\_markdown_native_deprecation.mdx'
+import NativeDeprecated from '../the-new-architecture/_markdown_native_deprecation.mdx'
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 <NativeDeprecated />
 
-Welcome to Native Modules for iOS. Please start by reading the [Native Modules Intro](native-modules-intro) for an intro to what native modules are.
+欢迎来到 iOS 原生模块。请先阅读[原生模块介绍](native-modules-intro)，了解什么是原生模块。
 
-## Create a Calendar Native Module
+## 创建一个日历原生模块
 
-In the following guide you will create a native module, `CalendarModule`, that will allow you to access Apple's calendar APIs from JavaScript. By the end you will be able to call `CalendarModule.createCalendarEvent('Dinner Party', 'My House');` from JavaScript, invoking a native method that creates a calendar event.
+在下面的指南中，你将创建一个原生模块 `CalendarModule`，该模块允许你从 JavaScript 访问苹果的日历 API。最终你可以在 JavaScript 中调用 `CalendarModule.createCalendarEvent('Dinner Party', 'My House');`，这会触发一个在原生端创建日历事件的方法。
 
-### Setup
+### 设置
 
-To get started, open up the iOS project within your React Native application in Xcode. You can find your iOS project here within a React Native app:
-
-<figure>
-  <img src="/docs/assets/native-modules-ios-open-project.png" width="500" alt="Image of opening up an iOS project within a React Native app inside of Xcode." />
-  <figcaption>Image of where you can find your iOS project</figcaption>
-</figure>
-
-We recommend using Xcode to write your native code. Xcode is built for iOS development, and using it will help you to quickly resolve smaller errors like code syntax.
-
-### Create Custom Native Module Files
-
-The first step is to create our main custom native module header and implementation files. Create a new file called `RCTCalendarModule.h`
+首先，使用 Xcode 打开 React Native 应用中的 iOS 项目。你可以在 React Native 应用中找到 iOS 项目：
 
 <figure>
-  <img src="/docs/assets/native-modules-ios-add-class.png" width="500" alt="Image of creating a class called  RCTCalendarModule.h." />
-  <figcaption>Image of creating a custom native module file within the same folder as AppDelegate</figcaption>
+  <img src="/docs/assets/native-modules-ios-open-project.png" width="500" alt="在 Xcode 中打开 React Native 应用内 iOS 项目的截图。" />
+  <figcaption>iOS 项目所在位置示意图</figcaption>
 </figure>
 
-and add the following to it:
+我们推荐使用 Xcode 来编写原生代码。Xcode 专为 iOS 开发设计，可以帮助你快速解决诸如代码语法错误等小问题。
+
+### 创建自定义原生模块文件
+
+第一步是创建主要的自定义原生模块的头文件和实现文件。新建一个名为 `RCTCalendarModule.h` 的文件：
+
+<figure>
+  <img src="/docs/assets/native-modules-ios-add-class.png" width="500" alt="新建类 RCTCalendarModule.h 的截图。" />
+  <figcaption>将自定义原生模块文件创建在与 AppDelegate 相同的文件夹内</figcaption>
+</figure>
+
+并添加如下内容：
 
 ```objectivec
 //  RCTCalendarModule.h
 #import <React/RCTBridgeModule.h>
 @interface RCTCalendarModule : NSObject <RCTBridgeModule>
 @end
-
 ```
 
-You can use any name that fits the native module you are building. Name the class `RCTCalendarModule` since you are creating a calendar native module. Since ObjC does not have language-level support for namespaces like Java or C++, convention is to prepend the class name with a substring. This could be an abbreviation of your application name or your infra name. RCT, in this example, refers to React.
+你可以使用任何适合你构建的原生模块的类名。这里之所以命名为 `RCTCalendarModule`，是因为你正在创建一个日历功能的原生模块。由于 Objective-C 不像 Java 或 C++ 那样支持语言级的命名空间，通常约定在类名前添加一个子字符串作为前缀。这个前缀可以是应用名称的缩写或者基础设施名，比如这里的 RCT 代表 React。
 
-As you can see below, the CalendarModule class implements the `RCTBridgeModule` protocol. A native module is an Objective-C class that implements the `RCTBridgeModule` protocol.
+正如下面所示，CalendarModule 类实现了 `RCTBridgeModule` 协议。原生模块就是实现 `RCTBridgeModule` 协议的 Objective-C 类。
 
-Next up, let’s start implementing the native module. Create the corresponding implementation file using cocoa touch class in xcode, `RCTCalendarModule.m`, in the same folder and include the following content:
+接下来，开始实现原生模块。在 Xcode 中使用 Cocoa Touch Class 创建对应的实现文件 `RCTCalendarModule.m`，与头文件同目录，并添加以下代码：
 
 ```objectivec
 // RCTCalendarModule.m
@@ -56,48 +55,47 @@ Next up, let’s start implementing the native module. Create the corresponding 
 
 @implementation RCTCalendarModule
 
-// To export a module named RCTCalendarModule
+// 导出名为 RCTCalendarModule 的模块
 RCT_EXPORT_MODULE();
 
 @end
-
 ```
 
-### Module Name
+### 模块名称
 
-For now, your `RCTCalendarModule.m` native module only includes a `RCT_EXPORT_MODULE` macro, which exports and registers the native module class with React Native. The `RCT_EXPORT_MODULE` macro also takes an optional argument that specifies the name that the module will be accessible as in your JavaScript code.
+目前你的 `RCTCalendarModule.m` 原生模块只有一个 `RCT_EXPORT_MODULE` 宏，它负责将模块导出并注册到 React Native。该宏还可以接受一个可选参数，指定模块在 JavaScript 端的访问名称。
 
-This argument is not a string literal. In the example below `RCT_EXPORT_MODULE(CalendarModuleFoo)` is passed, not `RCT_EXPORT_MODULE("CalendarModuleFoo")`.
+该参数不是字符串字面量。例如：
 
 ```objectivec
-// To export a module named CalendarModuleFoo
+// 导出名为 CalendarModuleFoo 的模块
 RCT_EXPORT_MODULE(CalendarModuleFoo);
 ```
 
-The native module can then be accessed in JS like this:
+然后你可以在 JS 侧这样访问：
 
 ```tsx
 const {CalendarModuleFoo} = ReactNative.NativeModules;
 ```
 
-If you do not specify a name, the JavaScript module name will match the Objective-C class name, with any "RCT" or "RK" prefixes removed.
+如果你不指定名称，JavaScript 模块名将匹配 Objective-C 类名，去掉任何 `RCT` 或 `RK` 前缀。
 
-Let's follow the example below and call `RCT_EXPORT_MODULE` without any arguments. As a result, the module will be exposed to React Native using the name `CalendarModule`, since that is the Objective-C class name, with RCT removed.
+下面示例中调用 `RCT_EXPORT_MODULE` 而不带参数，这时模块将以 `CalendarModule` 暴露给 React Native，因为这是去掉 RCT 前缀后的 Objective-C 类名。
 
 ```objectivec
-// Without passing in a name this will export the native module name as the Objective-C class name with “RCT” removed
+// 不传参，模块名为类名去除 RCT 前缀
 RCT_EXPORT_MODULE();
 ```
 
-The native module can then be accessed in JS like this:
+此时 JS 中访问模块方式为：
 
 ```tsx
 const {CalendarModule} = ReactNative.NativeModules;
 ```
 
-### Export a Native Method to JavaScript
+### 向 JavaScript 导出原生方法
 
-React Native will not expose any methods in a native module to JavaScript unless explicitly told to. This can be done using the `RCT_EXPORT_METHOD` macro. Methods written in the `RCT_EXPORT_METHOD` macro are asynchronous and the return type is therefore always void. In order to pass a result from a `RCT_EXPORT_METHOD` method to JavaScript you can use callbacks or emit events (covered below). Let’s go ahead and set up a native method for our `CalendarModule` native module using the `RCT_EXPORT_METHOD` macro. Call it `createCalendarEvent()` and for now have it take in name and location arguments as strings. Argument type options will be covered shortly.
+React Native 不会自动将原生模块内的方法暴露给 JavaScript，除非显式声明。可以使用 `RCT_EXPORT_METHOD` 宏实现这个功能。用 `RCT_EXPORT_METHOD` 宏声明的方法都是异步的，其返回类型始终为 void。若需从 `RCT_EXPORT_METHOD` 返回结果给 JS，需使用回调或事件（随后介绍）。我们来为 `CalendarModule` 设置一个名为 `createCalendarEvent()` 的原生方法，它接收两个字符串类型的参数 name 和 location。参数类型选项稍后介绍。
 
 ```objectivec
 RCT_EXPORT_METHOD(createCalendarEvent:(NSString *)name location:(NSString *)location)
@@ -106,10 +104,10 @@ RCT_EXPORT_METHOD(createCalendarEvent:(NSString *)name location:(NSString *)loca
 ```
 
 :::note
-Please note that the `RCT_EXPORT_METHOD` macro will not be necessary with TurboModules unless your method relies on RCT argument conversion (see argument types below). Ultimately, React Native will remove `RCT_EXPORT_MACRO,` so we discourage people from using `RCTConvert`. Instead, you can do the argument conversion within the method body.
+请注意，在使用 TurboModules 时，除非方法依赖于 RCT 参数转换（详情见下面参数类型部分），否则不必使用 `RCT_EXPORT_METHOD` 宏。未来 React Native 会移除该宏，因此我们建议避免使用 `RCTConvert`，而改为在方法体内自行完成参数转换。
 :::
 
-Before you build out the `createCalendarEvent()` method’s functionality, add a console log in the method so you can confirm it has been invoked from JavaScript in your React Native application. Use the `RCTLog` APIs from React. Let’s import that header at the top of your file and then add the log call.
+在实现 `createCalendarEvent()` 方法前，先加入一条日志输出，以确保该方法能从 JavaScript 被调用。使用 React 提供的 `RCTLog` API。先在文件顶部导入对应头文件，然后添加日志调用：
 
 ```objectivec
 #import <React/RCTLog.h>
@@ -119,26 +117,26 @@ RCT_EXPORT_METHOD(createCalendarEvent:(NSString *)name location:(NSString *)loca
 }
 ```
 
-### Synchronous Methods
+### 同步方法
 
-You can use the `RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD` to create a synchronous native method.
+你可以使用 `RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD` 宏创建同步原生方法：
 
 ```objectivec
 RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(getName)
 {
-return [[UIDevice currentDevice] name];
+  return [[UIDevice currentDevice] name];
 }
 ```
 
-The return type of this method must be of object type (id) and should be serializable to JSON. This means that the hook can only return nil or JSON values (e.g. NSNumber, NSString, NSArray, NSDictionary).
+该方法必须返回对象类型（id），且必须可以序列化为 JSON。也就是说，只能返回 nil 或 JSON 支持的类型（如 NSNumber、NSString、NSArray、NSDictionary）。
 
-At the moment, we do not recommend using synchronous methods, since calling methods synchronously can have strong performance penalties and introduce threading-related bugs to your native modules. Additionally, please note that if you choose to use `RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD`, your app can no longer use the Google Chrome debugger. This is because synchronous methods require the JS VM to share memory with the app. For the Google Chrome debugger, React Native runs inside the JS VM in Google Chrome, and communicates asynchronously with the mobile devices via WebSockets.
+目前我们不推荐使用同步方法，因为同步调用会带来严重性能开销，并可能引入线程相关的错误。此外，如果使用 `RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD`，你将无法使用 Google Chrome 调试器。原因是同步方法要求 JS VM 与应用共享内存，而 Chrome 调试器中的 React Native 运行在 Chrome 的 JS VM 中，其与移动设备间的通信是异步的，通过 WebSocket 实现。
 
-### Test What You Have Built
+### 测试已实现功能
 
-At this point you have set up the basic scaffolding for your native module in iOS. Test that out by accessing the native module and invoking it’s exported method in JavaScript.
+不用实现完整功能，仅设置好基础架构即可，现在测试一下。在你的应用中选择一个合适的位置调用原生模块并调用导出的方法。
 
-Find a place in your application where you would like to add a call to the native module’s `createCalendarEvent()` method. Below is an example of a component, `NewModuleButton` you can add in your app. You can invoke the native module inside `NewModuleButton`'s `onPress()` function.
+下面是一个例子组件 `NewModuleButton`，你可以放入你的应用。你可以在它的 `onPress()` 函数中调用原生模块：
 
 ```tsx
 import React from 'react';
@@ -161,19 +159,19 @@ const NewModuleButton = () => {
 export default NewModuleButton;
 ```
 
-In order to access your native module from JavaScript you need to first import `NativeModules` from React Native:
+要访问原生模块，需先导入 `NativeModules`：
 
 ```tsx
 import {NativeModules} from 'react-native';
 ```
 
-You can then access the `CalendarModule` native module off of `NativeModules`.
+随后可从 `NativeModules` 中访问 `CalendarModule`：
 
 ```tsx
 const {CalendarModule} = NativeModules;
 ```
 
-Now that you have the CalendarModule native module available, you can invoke your native method `createCalendarEvent()`. Below it is added to the `onPress()` method in `NewModuleButton`:
+现在已有 `CalendarModule`，就可以调用其中的 `createCalendarEvent()` 方法了，示例如下，添加到 `NewModuleButton` 的 `onPress()`：
 
 ```tsx
 const onPress = () => {
@@ -181,7 +179,7 @@ const onPress = () => {
 };
 ```
 
-The final step is to rebuild the React Native app so that you can have the latest native code (with your new native module!) available. In your command line, where the react native application is located, run the following :
+最后一步是重建 React Native 应用，以使用最新的原生代码（包括新增模块）。在命令行中，进入 React Native 应用目录，执行以下命令：
 
 <Tabs groupId="package-manager" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>
 <TabItem value="npm">
@@ -200,51 +198,49 @@ yarn ios
 </TabItem>
 </Tabs>
 
-### Building as You Iterate
+### 迭代开发时的构建
 
-As you work through these guides and iterate on your native module, you will need to do a native rebuild of your application to access your most recent changes from JavaScript. This is because the code that you are writing sits within the native part of your application. While React Native’s metro bundler can watch for changes in JavaScript and rebuild JS bundle on the fly for you, it will not do so for native code. So if you want to test your latest native changes you need to rebuild by using the above command.
+当你跟随教程反复修改原生模块时，每次修改均需对应用进行原生重建，才能让最新改动在 JS 端可用。其原因在于你编写的代码属于原生层面。React Native 的 Metro bundler 可以监听 JS 文件改动并自动更新 JS 包，但不会对原生代码如此处理。如需测试最新原生模块功能，必须使用上文的命令重建应用。
 
-### Recap✨
+### 总结✨
 
-You should now be able to invoke your `createCalendarEvent()` method on your native module in JavaScript. Since you are using `RCTLog` in the function, you can confirm your native method is being invoked by [enabling debug mode in your app](https://reactnative.dev/docs/debugging#chrome-developer-tools) and looking at the JS console in Chrome or the mobile app debugger Flipper. You should see your `RCTLogInfo(@"Pretending to create an event %@ at %@", name, location);` message each time you invoke the native module method.
+至此，你可以在 JavaScript 中调用 `createCalendarEvent()` 方法了。并且由于函数内已包含 `RCTLog`，你可通过[开启应用调试模式](https://reactnative.dev/docs/debugging#chrome-developer-tools)，在 Chrome JS 控制台或 Flipper 移动端调试器中查看调用日志，确定该方法已被调用。
 
 <figure>
-  <img src="/docs/assets/native-modules-ios-logs.png" width="1000" alt="Image of logs." />
-  <figcaption>Image of iOS logs in Flipper</figcaption>
+  <img src="/docs/assets/native-modules-ios-logs.png" width="1000" alt="日志截图" />
+  <figcaption>Flipper 中的 iOS 日志示例</figcaption>
 </figure>
 
-At this point you have created an iOS native module and invoked a method on it from JavaScript in your React Native application. You can read on to learn more about things like what argument types your native module method takes and how to setup callbacks and promises within your native module.
+现在你已经成功创建了一个 iOS 原生模块，可以在 React Native 应用中从 JavaScript 调用其方法。你可以继续阅读，了解原生模块方法的参数类型、如何设置回调与 Promise 等内容。
 
-## Beyond a Calendar Native Module
+## 超越日历原生模块
 
-### Better Native Module Export
+### 更优的原生模块导出方式
 
-Importing your native module by pulling it off of `NativeModules` like above is a bit clunky.
+每次想用原生模块都从 `NativeModules` 中取出模块的写法比较繁琐。
 
-To save consumers of your native module from needing to do that each time they want to access your native module, you can create a JavaScript wrapper for the module. Create a new JavaScript file named NativeCalendarModule.js with the following content:
+为简化调用体验，你可以为原生模块创建一个 JavaScript 封装模块。新建一个 JavaScript 文件，命名为 `NativeCalendarModule.js`，添加如下内容：
 
 ```tsx
 /**
-* This exposes the native CalendarModule module as a JS module. This has a
-* function 'createCalendarEvent' which takes the following parameters:
+* 该文件将原生的 CalendarModule 模块映射为 JS 模块。它提供了方法 createCalendarEvent，参数如下：
 
-* 1. String name: A string representing the name of the event
-* 2. String location: A string representing the location of the event
+* 1. String name: 活动名称字符串
+* 2. String location: 活动地点字符串
 */
 import {NativeModules} from 'react-native';
 const {CalendarModule} = NativeModules;
 export default CalendarModule;
 ```
 
-This JavaScript file also becomes a good location for you to add any JavaScript side functionality. For example, if you use a type system like TypeScript you can add type annotations for your native module here. While React Native does not yet support Native to JS type safety, with these type annotations, all your JS code will be type safe. These annotations will also make it easier for you to switch to type-safe native modules down the line. Below is an example of adding type safety to the Calendar Module:
+该 JS 文件也是添加 JS 端功能的好地方。例如，如果你使用 TypeScript，可以在此为原生模块添加类型注解。虽然 React Native 还未支持从原生到 JS 的类型安全，但这样你的 JS 代码会是类型安全的。以后切换到类型安全的原生模块也更方便。以下是为 Calendar Module 添加类型约束的示例：
 
 ```tsx
 /**
- * This exposes the native CalendarModule module as a JS module. This has a
- * function 'createCalendarEvent' which takes the following parameters:
+ * 该文件映射原生 CalendarModule 模块为 JS 模块。其函数 createCalendarEvent 参数如下：
  *
- * 1. String name: A string representing the name of the event
- * 2. String location: A string representing the location of the event
+ * 1. String name: 活动名称字符串
+ * 2. String location: 活动地点字符串
  */
 import {NativeModules} from 'react-native';
 const {CalendarModule} = NativeModules;
@@ -254,7 +250,7 @@ interface CalendarInterface {
 export default CalendarModule as CalendarInterface;
 ```
 
-In your other JavaScript files you can access the native module and invoke its method like this:
+在其他 JavaScript 文件中，就可以这样使用该原生模块及其方法：
 
 ```tsx
 import NativeCalendarModule from './NativeCalendarModule';
@@ -262,12 +258,14 @@ NativeCalendarModule.createCalendarEvent('foo', 'bar');
 ```
 
 :::note
-This assumes that the place you are importing `CalendarModule` is in the same hierarchy as `NativeCalendarModule.js`. Please update the relative import as necessary.
+这里假设你导入 `CalendarModule` 的文件与 `NativeCalendarModule.js` 在同一目录下。请按实际情况调整相对导入路径。
 :::
 
-### Argument Types
+### 参数类型
 
-When a native module method is invoked in JavaScript, React Native converts the arguments from JS objects to their Objective-C/Swift object analogues. So for example, if your Objective-C Native Module method accepts a NSNumber, in JS you need to call the method with a number. React Native will handle the conversion for you. Below is a list of the argument types supported for native module methods and the JavaScript equivalents they map to.
+调用原生模块方法时，React Native 会自动将 JavaScript 参数转换成 Objective-C / Swift 相应的对象。
+
+例如，如果 Objective-C 方法接受 NSNumber，JS 端调用时应传递 number，React Native 会完成转换。下表列出支持的参数类型及其 JS 对应类型。
 
 | Objective-C                                   | JavaScript         |
 | --------------------------------------------- | ------------------ |
@@ -277,24 +275,24 @@ When a native module method is invoked in JavaScript, React Native converts the 
 | NSNumber                                      | ?number            |
 | NSArray                                       | Array, ?Array      |
 | NSDictionary                                  | Object, ?Object    |
-| RCTResponseSenderBlock                        | Function (success) |
-| RCTResponseSenderBlock, RCTResponseErrorBlock | Function (failure) |
+| RCTResponseSenderBlock                        | Function（成功回调）|
+| RCTResponseSenderBlock, RCTResponseErrorBlock | Function（失败回调）|
 | RCTPromiseResolveBlock, RCTPromiseRejectBlock | Promise            |
 
 :::info
-The following types are currently supported but will not be supported in TurboModules. Please avoid using them.
+以下类型当前支持，但将在 TurboModules 中不再支持，请避免使用：
 
-- Function (failure) -> RCTResponseErrorBlock
+- Function（失败回调）-> RCTResponseErrorBlock
 - Number -> NSInteger
 - Number -> CGFloat
 - Number -> float
-  :::
+:::
 
-For iOS, you can also write native module methods with any argument type that is supported by the `RCTConvert` class (see [RCTConvert](https://github.com/facebook/react-native/blob/main/packages/react-native/React/Base/RCTConvert.h) for details about what is supported). The RCTConvert helper functions all accept a JSON value as input and map it to a native Objective-C type or class.
+对于 iOS 端，原生模块方法的参数还可以使用 `RCTConvert` 类支持的任意类型（详见 [RCTConvert](https://github.com/facebook/react-native/blob/main/packages/react-native/React/Base/RCTConvert.h) 了解支持范围）。RCTConvert 辅助函数接受 JSON 作为输入，将其映射为本地 Objective-C 类型或类。
 
-### Exporting Constants
+### 导出常量
 
-A native module can export constants by overriding the native method `constantsToExport()`. Below `constantsToExport()` is overridden, and returns a Dictionary that contains a default event name property you can access in JavaScript like so:
+原生模块可通过重写 `constantsToExport()` 方法导出常量。下面重写了 `constantsToExport()`，返回一个包含默认事件名称的字典，可在 JS 端这样访问：
 
 ```objectivec
 - (NSDictionary *)constantsToExport
@@ -303,38 +301,37 @@ A native module can export constants by overriding the native method `constantsT
 }
 ```
 
-The constant can then be accessed by invoking `getConstants()` on the native module in JS like so:
+JS 调用示例：
 
 ```tsx
 const {DEFAULT_EVENT_NAME} = CalendarModule.getConstants();
 console.log(DEFAULT_EVENT_NAME);
 ```
 
-Technically, it is possible to access constants exported in `constantsToExport()` directly off the `NativeModule` object. This will no longer be supported with TurboModules, so we encourage the community to switch to the above approach to avoid necessary migration down the line.
+技术上讲，可以直接从 `NativeModule` 对象访问 `constantsToExport()` 导出的常量。但此做法在 TurboModules 中将不被支持，我们建议社区改用上述方法，以避免后续升级带来麻烦。
 
 :::note
-The constants are exported only at initialization time, so if you change `constantsToExport()` values at runtime it won't affect the JavaScript environment.
+常量仅在模块初始化时导出，运行时修改 `constantsToExport()` 的返回值不会影响 JS 端。
 :::
 
-For iOS, if you override `constantsToExport()` then you should also implement `+ requiresMainQueueSetup` to let React Native know if your module needs to be initialized on the main thread, before any JavaScript code executes. Otherwise you will see a warning that in the future your module may be initialized on a background thread unless you explicitly opt out with `+ requiresMainQueueSetup:`. If your module does not require access to UIKit, then you should respond to `+ requiresMainQueueSetup` with NO.
+若你在 iOS 端实现了 `constantsToExport()`，应当同时实现 `+ requiresMainQueueSetup` 方法，告知 React Native 是否需在主线程（JS 代码运行前）初始化模块。否则会出现警告：将来模块可能在线程池线程初始化，除非显式返回值表明不需要主线程。若模块不涉及 UIKit，则应返回 NO。
 
-### Callbacks
+### 回调
 
-Native modules also support a unique kind of argument - a callback. Callbacks are used to pass data from Objective-C to JavaScript for asynchronous methods. They can also be used to asynchronously execute JS from the native side.
+原生模块支持特殊的回调参数类型，用于异步向 JavaScript 传递数据，也可用于原生端异步执行 JS。
 
-For iOS, callbacks are implemented using the type `RCTResponseSenderBlock`. Below the callback parameter `myCallBack` is added to the `createCalendarEventMethod()`:
+iOS 端使用 `RCTResponseSenderBlock` 类型存放回调。下面为 `createCalendarEventMethod()` 添加了回调参数 `myCallback`：
 
 ```objectivec
 RCT_EXPORT_METHOD(createCalendarEvent:(NSString *)title
                 location:(NSString *)location
                 myCallback:(RCTResponseSenderBlock)callback)
-
 ```
 
-You can then invoke the callback in your native function, providing whatever result you want to pass to JavaScript in an array. Note that `RCTResponseSenderBlock` accepts only one argument - an array of parameters to pass to the JavaScript callback. Below you will pass back the ID of an event created in an earlier call.
+然后你可以在原生方法体内调用回调，将想传递给 JS 的结果数组作为参数传入。注意，`RCTResponseSenderBlock` 只接受一个参数——即传递给 JS 回调的参数数组。如下示例中返回提前创建事件的 ID。
 
 :::info
-It is important to highlight that the callback is not invoked immediately after the native function completes—remember the communication is asynchronous.
+重要提示：回调不会在原生函数执行结束后立刻调用，通信是异步的。
 :::
 
 ```objectivec
@@ -345,10 +342,9 @@ RCT_EXPORT_METHOD(createCalendarEvent:(NSString *)title location:(NSString *)loc
 
  RCTLogInfo(@"Pretending to create an event %@ at %@", title, location);
 }
-
 ```
 
-This method could then be accessed in JavaScript using the following:
+对应 JS 调用示例：
 
 ```tsx
 const onSubmit = () => {
@@ -362,9 +358,9 @@ const onSubmit = () => {
 };
 ```
 
-A native module is supposed to invoke its callback only once. It can, however, store the callback and invoke it later. This pattern is often used to wrap iOS APIs that require delegates— see [`RCTAlertManager`](https://github.com/facebook/react-native/blob/main/packages/react-native/React/CoreModules/RCTAlertManager.mm) for an example. If the callback is never invoked, some memory is leaked.
+原生模块应当只调用回调一次，但可以把回调保留起来稍后调用。该模式常用于封装带有委托的 iOS API，可参考 [`RCTAlertManager`](https://github.com/facebook/react-native/blob/main/packages/react-native/React/CoreModules/RCTAlertManager.mm)。若不调用回调，可能会造成内存泄漏。
 
-There are two approaches to error handling with callbacks. The first is to follow Node’s convention and treat the first argument passed to the callback array as an error object.
+回调错误处理有两种方案。第一种遵循 Node 风格约定，传入回调数组的第一个参数作为错误对象：
 
 ```objectivec
 RCT_EXPORT_METHOD(createCalendarEventCallback:(NSString *)title location:(NSString *)location callback: (RCTResponseSenderBlock)callback)
@@ -374,7 +370,7 @@ RCT_EXPORT_METHOD(createCalendarEventCallback:(NSString *)title location:(NSStri
 }
 ```
 
-In JavaScript, you can then check the first argument to see if an error was passed through:
+在 JS 中检查第一个参数是否为错误：
 
 ```tsx
 const onPress = () => {
@@ -391,7 +387,7 @@ const onPress = () => {
 };
 ```
 
-Another option is to use two separate callbacks: onFailure and onSuccess.
+另一种方案是使用两个回调参数：onFailure 和 onSuccess。
 
 ```objectivec
 RCT_EXPORT_METHOD(createCalendarEventCallback:(NSString *)title
@@ -410,7 +406,7 @@ RCT_EXPORT_METHOD(createCalendarEventCallback:(NSString *)title
 }
 ```
 
-Then in JavaScript you can add a separate callback for error and success responses:
+JS 代码使用示例：
 
 ```tsx
 const onPress = () => {
@@ -427,13 +423,13 @@ const onPress = () => {
 };
 ```
 
-If you want to pass error-like objects to JavaScript, use `RCTMakeError` from [`RCTUtils.h.`](https://github.com/facebook/react-native/blob/main/packages/react-native/React/Base/RCTUtils.h) Right now this only passes an Error-shaped dictionary to JavaScript, but React Native aims to automatically generate real JavaScript Error objects in the future. You can also provide a `RCTResponseErrorBlock` argument, which is used for error callbacks and accepts an `NSError \* object`. Please note that this argument type will not be supported with TurboModules.
+想传递错误对象到 JS，建议使用 [`RCTUtils.h`](https://github.com/facebook/react-native/blob/main/packages/react-native/React/Base/RCTUtils.h) 中的 `RCTMakeError`。目前它仅传递一个形如 Error 的字典，未来计划自动生成 JS 原生 Error 对象。你也可以使用 `RCTResponseErrorBlock` 类型参数，它用于错误回调，接收 `NSError *` 对象。但该参数类型在 TurboModules 中将不被支持。
 
-### Promises
+### Promise
 
-Native modules can also fulfill a promise, which can simplify your JavaScript, especially when using ES2016's `async/await` syntax. When the last parameter of a native module method is a `RCTPromiseResolveBlock` and `RCTPromiseRejectBlock`, its corresponding JS method will return a JS Promise object.
+原生模块还支持返回 Promise，这极大简化 JS 编写，特别是配合 ES2016 的 `async/await`。当原生模块方法最后有两个参数，`RCTPromiseResolveBlock` 和 `RCTPromiseRejectBlock`，对应 JS 方法会返回 Promise。
 
-Refactoring the above code to use a promise instead of callbacks looks like this:
+将上述回调方式改成 Promise 写法示例：
 
 ```objectivec
 RCT_EXPORT_METHOD(createCalendarEvent:(NSString *)title
@@ -448,10 +444,9 @@ RCT_EXPORT_METHOD(createCalendarEvent:(NSString *)title
     reject(@"event_failure", @"no event id returned", nil);
   }
 }
-
 ```
 
-The JavaScript counterpart of this method returns a Promise. This means you can use the `await` keyword within an async function to call it and wait for its result:
+对应 JS 方法返回 Promise，因此可以用 `await` 等待结果：
 
 ```tsx
 const onSubmit = async () => {
@@ -467,11 +462,11 @@ const onSubmit = async () => {
 };
 ```
 
-### Sending Events to JavaScript
+### 向 JavaScript 发送事件
 
-Native modules can signal events to JavaScript without being invoked directly. For example, you might want to signal to JavaScript a reminder that a calendar event from the native iOS calendar app will occur soon. The preferred way to do this is to subclass `RCTEventEmitter`, implement `supportedEvents` and call self `sendEventWithName`:
+原生模块能主动向 JS 发送事件，无需 JS 触发调用。例如，你可能想通知 JS 原生 iOS 日历即将发生某事件提醒。推荐方式是继承 `RCTEventEmitter`，实现 `supportedEvents`，并调用自身的 `sendEventWithName` 方法发送事件。
 
-Update your header class to import `RCTEventEmitter` and subclass `RCTEventEmitter`:
+更新头文件，导入 `RCTEventEmitter` 并继承：
 
 ```objectivec
 //  CalendarModule.h
@@ -481,12 +476,11 @@ Update your header class to import `RCTEventEmitter` and subclass `RCTEventEmitt
 
 @interface CalendarModule : RCTEventEmitter <RCTBridgeModule>
 @end
-
 ```
 
-JavaScript code can subscribe to these events by creating a new `NativeEventEmitter` instance around your module.
+JS 侧通过创建 `NativeEventEmitter` 实例来订阅事件。
 
-You will receive a warning if you expend resources unnecessarily by emitting an event while there are no listeners. To avoid this, and to optimize your module's workload (e.g. by unsubscribing from upstream notifications or pausing background tasks), you can override `startObserving` and `stopObserving` in your `RCTEventEmitter` subclass.
+为避免在无监听者时发送事件耗费资源，并优化模块负载（如取消订阅上游通知或暂停后台任务），可在 `RCTEventEmitter` 子类中重写 `startObserving` 和 `stopObserving`：
 
 ```objectivec
 @implementation CalendarModule
@@ -494,31 +488,32 @@ You will receive a warning if you expend resources unnecessarily by emitting an 
   bool hasListeners;
 }
 
-// Will be called when this module's first listener is added.
+// 当模块第一个监听者添加时调用。
 -(void)startObserving {
     hasListeners = YES;
-    // Set up any upstream listeners or background tasks as necessary
+    // 这里可以设置上游监听或启动后台任务
 }
 
-// Will be called when this module's last listener is removed, or on dealloc.
+// 当模块最后一个监听者移除或模块销毁时调用。
 -(void)stopObserving {
     hasListeners = NO;
-    // Remove upstream listeners, stop unnecessary background tasks
+    // 取消上游监听，停止后台任务
 }
 
 - (void)calendarEventReminderReceived:(NSNotification *)notification
 {
   NSString *eventName = notification.userInfo[@"name"];
-  if (hasListeners) {// Only send events if anyone is listening
+  if (hasListeners) {// 只有有人监听时发送事件
     [self sendEventWithName:@"EventReminder" body:@{@"name": eventName}];
   }
 }
-
 ```
 
-### Threading
+### 线程
 
-Unless the native module provides its own method queue, it shouldn't make any assumptions about what thread it's being called on. Currently, if a native module doesn't provide a method queue, React Native will create a separate GCD queue for it and invoke its methods there. Please note that this is an implementation detail and might change. If you want to explicitly provide a method queue for a native module, override the `(dispatch_queue_t) methodQueue` method in the native module. For example, if it needs to use a main-thread-only iOS API, it should specify this via:
+除非原生模块明确提供自己的调度队列（method queue），否则不应对调用线程作任何假设。目前，如果模块未提供自己的队列，React Native 会为其创建专用 GCD 队列并在其上调用方法。但这一实现细节未来可能改变。
+
+若需明确指定队列，重写模块中的 `(dispatch_queue_t)methodQueue` 方法。例如，某些只允许在主线程调用的 iOS API，应指定主队列：
 
 ```objectivec
 - (dispatch_queue_t)methodQueue
@@ -527,7 +522,9 @@ Unless the native module provides its own method queue, it shouldn't make any as
 }
 ```
 
-Similarly, if an operation may take a long time to complete, the native module can specify its own queue to run operations on. Again, currently React Native will provide a separate method queue for your native module, but this is an implementation detail you should not rely on. If you don't provide your own method queue, in the future, your native module's long running operations may end up blocking async calls being executed on other unrelated native modules. The `RCTAsyncLocalStorage` module here, for example, creates its own queue so the React queue isn't blocked waiting on potentially slow disk access.
+同理，若某操作可能耗时较长，模块可指定自己的队列运行，避免阻塞默认队列。当前，React Native 会为模块提供独立队列，但这不是保证。若不自行定义，后续更新可能导致长耗时任务阻塞其它模块的异步调用。
+
+如 `RCTAsyncLocalStorage` 模块创建单独队列，防止磁盘访问等待阻塞 React 队列：
 
 ```objectivec
 - (dispatch_queue_t)methodQueue
@@ -536,30 +533,29 @@ Similarly, if an operation may take a long time to complete, the native module c
 }
 ```
 
-The specified `methodQueue` will be shared by all of the methods in your module. If only one of your methods is long-running (or needs to be run on a different queue than the others for some reason), you can use `dispatch_async` inside the method to perform that particular method's code on another queue, without affecting the others:
+该 `methodQueue` 对所有模块方法共享。如果某一方法需单独队列，可在方法内使用 `dispatch_async` 调度至其他队列，不影响其他方法：
 
 ```objectivec
 RCT_EXPORT_METHOD(doSomethingExpensive:(NSString *)param callback:(RCTResponseSenderBlock)callback)
 {
  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-   // Call long-running code on background thread
+   // 在后台线程执行耗时代码
    ...
-   // You can invoke callback from any thread/queue
+   // 回调可在任意线程调用
    callback(@[...]);
  });
 }
-
 ```
 
-:::info Sharing dispatch queues between modules
-The `methodQueue` method will be called once when the module is initialized, and then retained by React Native, so there is no need to keep a reference to the queue yourself, unless you wish to make use of it within your module. However, if you wish to share the same queue between multiple modules then you will need to ensure that you retain and return the same queue instance for each of them.
+:::info 共享 dispatch 队列提示
+`methodQueue` 函数只会在模块初始化时被调用一次，返回的队列会被 React Native 保持引用。因此，一般不必自行保存队列引用，除非想自身调用队列。但若想共享同一队列给多个模块，需要确保每个模块返回同一个队列实例。
 :::
 
-### Dependency Injection
+### 依赖注入
 
-React Native will create and initialize any registered native modules automatically. However, you may wish to create and initialize your own module instances to, for example, inject dependencies.
+React Native 会自动创建和初始化注册的原生模块。但你可能希望自行创建并初始化模块实例，进行例如依赖注入等操作。
 
-You can do this by creating a class that implements the `RCTBridgeDelegate` Protocol, initializing an `RCTBridge` with the delegate as an argument and initialising a `RCTRootView` with the initialized bridge.
+这可以通过创建一个实现了 `RCTBridgeDelegate` 协议的类，利用该委托初始化 `RCTBridge` 并用该桥初始化 `RCTRootView` 来实现：
 
 ```objectivec
 id<RCTBridgeDelegate> moduleInitialiser = [[classThatImplementsRCTBridgeDelegate alloc] init];
@@ -572,9 +568,9 @@ RCTRootView *rootView = [[RCTRootView alloc]
                      initialProperties:nil];
 ```
 
-### Exporting Swift
+### 导出 Swift
 
-Swift doesn't have support for macros, so exposing native modules and their methods to JavaScript inside React Native requires a bit more setup. However, it works relatively the same. Let's say you have the same `CalendarModule` but as a Swift class:
+Swift 不支持宏，因此在 React Native 中导出 Swift 原生模块和方法需要更多配置，但原理类似。假设你有一个 Swift 类 `CalendarModule`：
 
 ```swift
 // CalendarModule.swift
@@ -584,7 +580,7 @@ class CalendarModule: NSObject {
 
  @objc(addEvent:location:date:)
  func addEvent(_ name: String, location: String, date: NSNumber) -> Void {
-   // Date is ready to use!
+   // date 参数已可使用
  }
 
  @objc
@@ -596,10 +592,10 @@ class CalendarModule: NSObject {
 ```
 
 :::note
-It is important to use the `@objc` modifiers to ensure the class and functions are exported properly to the Objective-C runtime.
+必须加上 `@objc` 标记，确保类和方法被正确导出到 Objective-C 运行时。
 :::
 
-Then create a private implementation file that will register the required information with React Native:
+然后创建一个私有实现文件，向 React Native 注册模块信息：
 
 ```objectivec
 // CalendarModuleBridge.m
@@ -612,21 +608,21 @@ RCT_EXTERN_METHOD(addEvent:(NSString *)name location:(NSString *)location date:(
 @end
 ```
 
-For those of you new to Swift and Objective-C, whenever you [mix the two languages in an iOS project](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html), you will also need an additional bridging file, known as a bridging header, to expose the Objective-C files to Swift. Xcode will offer to create this header file for you if you add your Swift file to your app through the Xcode `File>New File` menu option. You will need to import `RCTBridgeModule.h` in this header file.
+对于刚接触 Swift 和 Objective-C 混合的开发者，项目中混合使用两者时，还需要建立一个桥接头文件，暴露 Objective-C 头文件给 Swift 调用。Xcode 在你通过 `File > New File` 添加 Swift 文件时会提醒你创建此文件。桥接头中导入 `RCTBridgeModule.h` 即可。
 
 ```objectivec
 // CalendarModule-Bridging-Header.h
 #import <React/RCTBridgeModule.h>
 ```
 
-You can also use `RCT_EXTERN_REMAP_MODULE` and `_RCT_EXTERN_REMAP_METHOD` to alter the JavaScript name of the module or methods you are exporting. For more information see [`RCTBridgeModule`](https://github.com/facebook/react-native/blob/main/packages/react-native/React/Base/RCTBridgeModule.h).
+你也可以使用 `RCT_EXTERN_REMAP_MODULE` 和 `_RCT_EXTERN_REMAP_METHOD` 来改变导出模块或方法在 JS 侧的名称。详见 [`RCTBridgeModule`](https://github.com/facebook/react-native/blob/main/packages/react-native/React/Base/RCTBridgeModule.h)。
 
 :::note
-Important when making third party modules: Static libraries with Swift are only supported in Xcode 9 and later. In order for the Xcode project to build when you use Swift in the iOS static library you include in the module, your main app project must contain Swift code and a bridging header itself. If your app project does not contain any Swift code, a workaround can be a single empty .swift file and an empty bridging header.
+第三方模块发布重要提示：Swift 静态库仅在 Xcode 9 及更高版本支持。如你在模块中包含的 iOS 静态库用 Swift，主应用项目也必须包含 Swift 代码和桥接头文件。若无 Swift 代码，可新建一个空的 .swift 文件和空桥接头作为权宜之计。
 :::
 
-### Reserved Method Names
+### 保留方法名
 
 #### invalidate()
 
-Native modules can conform to the [RCTInvalidating](https://github.com/facebook/react-native/blob/main/packages/react-native/React/Base/RCTInvalidating.h) protocol on iOS by implementing the `invalidate()` method. This method [can be invoked](https://github.com/facebook/react-native/blob/0.62-stable/ReactCommon/turbomodule/core/platform/ios/RCTTurboModuleManager.mm#L456) when the native bridge is invalidated (i.e.: on devmode reload). Please use this mechanism as necessary to do the required cleanup for your native module.
+在 iOS 上，原生模块可实现 [RCTInvalidating](https://github.com/facebook/react-native/blob/main/packages/react-native/React/Base/RCTInvalidating.h) 协议，通过实现 `invalidate()` 方法处理模块无效化时的清理。该方法会在原生桥无效（例如开发模式重新加载）时调用。请根据需要使用此机制完成模块清理工作。

@@ -1,28 +1,28 @@
 ---
-title: Introducing Hot Reloading
+title: 介绍热重载
 author: Martín Bigio
-authorTitle: Software Engineer at Instagram
+authorTitle: Instagram 软件工程师
 authorURL: 'https://twitter.com/martinbigio'
 authorImageURL: 'https://avatars3.githubusercontent.com/u/535661?v=3&s=128'
 authorTwitter: martinbigio
 tags: [engineering]
 ---
 
-React Native's goal is to give you the best possible developer experience. A big part of it is the time it takes between you save a file and be able to see the changes. Our goal is to get this feedback loop to be under 1 second, even as your app grows.
+React Native 的目标是为你提供最佳的开发者体验。重要的一部分是从你保存文件到能够看到更改之间所花费的时间。我们的目标是把这个反馈循环控制在 1 秒以内，即使你的应用日益庞大。
 
-We got close to this ideal via three main features:
+我们通过三个主要特性接近了这个理想：
 
-- Use JavaScript as the language doesn't have a long compilation cycle time.
-- Implement a tool called Packager that transforms es6/flow/jsx files into normal JavaScript that the VM can understand. It was designed as a server that keeps intermediate state in memory to enable fast incremental changes and uses multiple cores.
-- Build a feature called Live Reload that reloads the app on save.
+- 使用 JavaScript 作为语言，它没有漫长的编译周期。
+- 实现了一个名为 Packager 的工具，将 es6/flow/jsx 文件转换成虚拟机可以理解的普通 JavaScript。它设计成一个服务器，在内存中保持中间状态以实现快速的增量更改，并利用多核 CPU。
+- 构建了一个叫做 Live Reload 的功能，在保存时重新加载应用。
 
-At this point, the bottleneck for developers is no longer the time it takes to reload the app but losing the state of your app. A common scenario is to work on a feature that is multiple screens away from the launch screen. Every time you reload, you've got to click on the same path again and again to get back to your feature, making the cycle multiple-seconds long.
+此时，开发者的瓶颈不再是应用加载时间，而是丢失应用状态。一个常见场景是你正在开发一个多屏幕外的功能。每次重载，你都必须反复点击同一路径返回功能界面，使得循环花费数秒。
 
-## Hot Reloading
+## 热重载
 
-The idea behind hot reloading is to keep the app running and to inject new versions of the files that you edited at runtime. This way, you don't lose any of your state which is especially useful if you are tweaking the UI.
+热重载的理念是在保持应用运行的同时，在运行时注入你编辑的文件的新版本。这样你就不会丢失任何状态，特别适合调整 UI 时使用。
 
-A video is worth a thousand words. Check out the difference between Live Reload (current) and Hot Reload (new).
+一张图胜千言。看看 Live Reload（当前）和 Hot Reload（新）的区别。
 
 <iframe
   width="100%"
@@ -31,26 +31,26 @@ A video is worth a thousand words. Check out the difference between Live Reload 
   frameborder="0"
   allowfullscreen></iframe>
 
-If you look closely, you can notice that it is possible to recover from a red box and you can also start importing modules that were not previously there without having to do a full reload.
+仔细看，你会发现它可以从红色错误界面恢复，也可以开始导入之前不存在的模块，无需完整重载。
 
-**Word of warning:** because JavaScript is a very stateful language, hot reloading cannot be perfectly implemented. In practice, we found out that the current setup is working well for a large amount of usual use cases and a full reload is always available in case something gets messed up.
+**警告：** 由于 JavaScript 是一个高度状态化的语言，热重载无法完美实现。实际上，我们发现当前的方案已能较好地应对大多数常用场景，且如若发生错误总可以进行完整重载。
 
-Hot reloading is available as of 0.22, you can enable it:
+热重载自 0.22 版本起可用，你可以这样开启：
 
-- Open the developer menu
-- Tap on "Enable Hot Reloading"
+- 打开开发者菜单
+- 点击“Enable Hot Reloading”
 
-## Implementation in a nutshell
+## 实现简述
 
-Now that we've seen why we want it and how to use it, the fun part begins: how it actually works.
+了解了为什么要用以及如何使用后，趣味部分来了：它实际上是如何工作的。
 
-Hot Reloading is built on top of a feature [Hot Module Replacement](https://webpack.js.org/guides/hot-module-replacement/), or HMR. It was first introduced by webpack and we implemented it inside of React Native Packager. HMR makes the Packager watch for file changes and send HMR updates to a thin HMR runtime included on the app.
+热重载基于一种名为 [Hot Module Replacement](https://webpack.js.org/guides/hot-module-replacement/)（简称 HMR）的功能。这最初由 webpack 引入，我们在 React Native Packager 中实现了它。HMR 使 Packager 监听文件变更，并向应用中包含的轻量 HMR 运行时发送更新。
 
-In a nutshell, the HMR update contains the new code of the JS modules that changed. When the runtime receives them, it replaces the old modules' code with the new one:
+简言之，HMR 更新包含了修改后 JS 模块的新代码。运行时收到后，会用新代码替换旧代码：
 
 ![](/blog/assets/hmr-architecture.png)
 
-The HMR update contains a bit more than just the module's code we want to change because replacing it, it's not enough for the runtime to pick up the changes. The problem is that the module system may have already cached the _exports_ of the module we want to update. For instance, say you have an app composed of these two modules:
+HMR 更新不仅仅包含要更改模块的代码，因为光替换代码还不足以让运行时认知变更。问题在于模块系统可能已缓存了想要更新模块的 _exports_。举例说明，假设应用由以下两个模块组成：
 
 ```
 // log.js
@@ -71,19 +71,19 @@ function time() {
 module.exports = time;
 ```
 
-The module `log`, prints out the provided message including the current date provided by the module `time`.
+模块 `log` 会输出一条包含当前日期（由模块 `time` 提供）的消息。
 
-When the app is bundled, React Native registers each module on the module system using the `__d` function. For this app, among many `__d` definitions, there will one for `log`:
+打包后，React Native 使用 `__d` 函数注册每个模块到模块系统。对于该应用，`log` 模块会有如下定义：
 
 ```
 __d('log', function() {
-  ... // module's code
+  ... // 模块代码
 });
 ```
 
-This invocation wraps each module's code into an anonymous function which we generally refer to as the factory function. The module system runtime keeps track of each module's factory function, whether it has already been executed, and the result of such execution (exports). When a module is required, the module system either provides the already cached exports or executes the module's factory function for the first time and saves the result.
+该调用将每个模块代码包裹在匿名函数中，通常称之为工厂函数。模块系统运行时跟踪每个模块的工厂函数，是否已执行过，以及执行结果（exports）。当某模块被引用，模块系统会返回缓存的 exports，或者首次执行工厂函数并缓存结果。
 
-So say you start your app and require `log`. At this point, neither `log` nor `time`'s factory functions have been executed so no exports have been cached. Then, the user modifies `time` to return the date in `MM/DD`:
+假设启动应用并引用 `log` 模块，此时 `log` 和 `time` 的工厂函数都未执行，exports 还未缓存。之后用户修改 `time` 函数让它返回 `MM/DD` 格式的日期：
 
 ```js
 // time.js
@@ -95,14 +95,14 @@ function bar() {
 module.exports = bar;
 ```
 
-The Packager will send time's new code to the runtime (step 1), and when `log` gets eventually required the exported function gets executed it will do so with `time`'s changes (step 2):
+Packager 会发送 `time` 模块的新代码到运行时（步骤 1），当 `log` 模块最终被引用并执行时，会使用修改后的 `time`（步骤 2）：
 
 ![](/blog/assets/hmr-step.png)
 
-Now say the code of `log` requires `time` as a top level require:
+如果 `log` 模块中的 `require('time')` 是顶级调用：
 
 ```
-const time = require('./time'); // top level require
+const time = require('./time'); // 顶级 require
 
 // log.js
 function log(message) {
@@ -112,20 +112,20 @@ function log(message) {
 module.exports = log;
 ```
 
-When `log` is required, the runtime will cache its exports and `time`'s one. (step 1). Then, when `time` is modified, the HMR process cannot simply finish after replacing `time`'s code. If it did, when `log` gets executed, it would do so with a cached copy of `time` (old code).
+当 `log` 被引用时，运行时会缓存它和 `time` 的 exports（步骤 1）。之后 `time` 变更时，HMR 进程不能只替换 `time` 的代码直接结束，否则 `log` 执行时仍会使用缓存的旧 `time` 代码。
 
-For `log` to pick up `time` changes, we'll need to clear its cached exports because one of the modules it depends on was hot swapped (step 3). Finally, when `log` gets required again, its factory function will get executed requiring `time` and getting its new code.
+为了让 `log` 拥抱 `time` 的改变，必须清除 `log` 的缓存 exports，因为它依赖的模块被热替换了（步骤 3）。最后，下一次 `log` 被引用时，工厂函数会被重新执行，进而使用新 `time` 代码。
 
 ![](/blog/assets/hmr-log.png)
 
 ## HMR API
 
-HMR in React Native extends the module system by introducing the `hot` object. This API is based on [webpack](https://webpack.github.io/hot-module-replacement.md)'s one. The `hot` object exposes a function called `accept` which allows you to define a callback that will be executed when the module needs to be hot swapped. For instance, if we would change `time`'s code as follows, every time we save time, we'll see “time changed” in the console:
+React Native 中的 HMR 扩展了模块系统，新增了 `hot` 对象。该 API 基于 [webpack](https://webpack.github.io/hot-module-replacement.md) 的实现。`hot` 对象暴露了 `accept` 函数，允许你定义模块被热替换时调用的回调。例如，如果我们修改 `time`，每次保存时，控制台都会输出 “time changed”：
 
 ```
 // time.js
 function time() {
-  ... // new code
+  ... // 新代码
 }
 
 module.hot.accept(() => {
@@ -135,26 +135,27 @@ module.hot.accept(() => {
 module.exports = time;
 ```
 
-Note that only in rare cases you would need to use this API manually. Hot Reloading should work out of the box for the most common use cases.
+注意手动使用该 API 的情况很少见。热重载默认对大多数场景开箱即用。
 
-## HMR Runtime
+## HMR 运行时
 
-As we've seen before, sometimes it's not enough only accepting the HMR update because a module that uses the one being hot swapped may have been already executed and its imports cached. For instance, suppose the dependency tree for the movies app example had a top-level `MovieRouter` that depended on the `MovieSearch` and `MovieScreen` views, which depended on the `log` and `time` modules from the previous examples:
+如前所述，仅仅接受 HMR 更新有时不够，因为使用该模块的上层模块可能已执行且导入被缓存。举例来说，假设电影示例应用的依赖树顶层有个 `MovieRouter`，其依赖 `MovieSearch` 和 `MovieScreen` 视图，这些视图又依赖前面示例中的 `log` 和 `time` 模块：
 
 ![](/blog/assets/hmr-diamond.png)
 
-If the user accesses the movies' search view but not the other one, all the modules except for `MovieScreen` would have cached exports. If a change is made to module `time`, the runtime will have to clear the exports of `log` for it to pick up `time`'s changes. The process wouldn't finish there: the runtime will repeat this process recursively up until all the parents have been accepted. So, it'll grab the modules that depend on `log` and try to accept them. For `MovieScreen` it can bail, as it hasn't been required yet. For `MovieSearch`, it will have to clear its exports and process its parents recursively. Finally, it will do the same thing for `MovieRouter` and finish there as no modules depends on it.
+用户访问了电影搜索视图，但未访问另一个视图，除 `MovieScreen` 外，其他模块都缓存了 exports。如果修改了 `time`，运行时会清除 `log` 的缓存 exports 以反映 `time` 的变更。这个过程还会递归上溯所有父模块并尝试接受它们的更新。对于未被引用的 `MovieScreen`，会跳过；对 `MovieSearch`，清除缓存后递归处理其父级；最终对 `MovieRouter` 采用相同处理，之后结束，因为没有父模块依赖它。
 
-In order to walk the dependency tree, the runtime receives the inverse dependency tree from the Packager on the HMR update. For this example the runtime will receive a JSON object like this one:
+运行时为进行依赖树递归，会从 Packager 那里在 HMR 更新中获得逆向依赖树。对于此例，运行时会收到了如下类型的 JSON 对象：
 
 ```
 {
   modules: [
     {
       name: 'time',
-      code: /* time's new code */
+      code: /* time 的新代码 */
     }
   ],
+
   inverseDependencies: {
     MovieRouter: [],
     MovieScreen: ['MovieRouter'],
@@ -165,19 +166,19 @@ In order to walk the dependency tree, the runtime receives the inverse dependenc
 }
 ```
 
-## React Components
+## React 组件
 
-React components are a bit harder to get to work with Hot Reloading. The problem is that we can't simply replace the old code with the new one as we'd loose the component's state. For React web applications, [Dan Abramov](https://twitter.com/dan_abramov) implemented a babel [transform](https://gaearon.github.io/react-hot-loader/) that uses webpack's HMR API to solve this issue. In a nutshell, his solution works by creating a proxy for every single React component on _transform time_. The proxies hold the component's state and delegate the lifecycle methods to the actual components, which are the ones we hot reload:
+React 组件更难支持热重载，因为不能简单替换旧代码否则会丢失组件状态。对于 React Web 应用，[Dan Abramov](https://twitter.com/dan_abramov) 实现了 babel [transform](https://gaearon.github.io/react-hot-loader/)，结合 webpack 的 HMR API 解决了这个问题。简而言之，他的方案是在 _transform 阶段_ 为每个 React 组件创建一个代理。这些代理持有组件状态，并将生命周期方法委托给实际组件，后者是被热重载的目标：
 
 ![](/blog/assets/hmr-proxy.png)
 
-Besides creating the proxy component, the transform also defines the `accept` function with a piece of code to force React to re-render the component. This way, we can hot reload rendering code without losing any of the app's state.
+除了创建代理组件，该 transform 还定义了 `accept` 函数，代码强制 React 重新渲染组件。这样，我们就能在不丢失任何应用状态的前提下热重载渲染代码。
 
-The default [transformer](https://github.com/facebook/react-native/blob/master/packager/transformer.js#L92-L95) that comes with React Native uses the `babel-preset-react-native`, which is [configured](https://github.com/facebook/react-native/blob/master/babel-preset/configs/hmr.js#L24-L31) to use `react-transform` the same way you'd use it on a React web project that uses webpack.
+React Native 默认的 [transformer](https://github.com/facebook/react-native/blob/master/packager/transformer.js#L92-L95) 使用 `babel-preset-react-native`，其中 [配置](https://github.com/facebook/react-native/blob/master/babel-preset/configs/hmr.js#L24-L31) 了 `react-transform`，用法与 React Web + webpack 项目相同。
 
-## Redux Stores
+## Redux Store
 
-To enable Hot Reloading on [Redux](https://redux.js.org/) stores you will just need to use the HMR API similarly to what you'd do on a web project that uses webpack:
+要为 [Redux](https://redux.js.org/) store 启用热重载，只需像在 webpack Web 项目中一样使用 HMR API：
 
 ```
 // configureStore.js
@@ -203,10 +204,10 @@ export default function configureStore(initialState) {
 };
 ```
 
-When you change a reducer, the code to accept that reducer will be sent to the client. Then the client will realize that the reducer doesn't know how to accept itself, so it will look for all the modules that refer it and try to accept them. Eventually, the flow will get to the single store, the `configureStore` module, which will accept the HMR update.
+修改 reducer 后，接受该 reducer 的代码会被发送到客户端，然后客户端会意识到 reducer 自身无法接受热替换，因此会查找引用它的所有模块并尝试接受。最终，这个流程会到达单一的 store —— `configureStore` 模块，在那里接受 HMR 更新。
 
-## Conclusion
+## 总结
 
-If you are interested in helping making hot reloading better, I encourage you to read [Dan Abramov's post around the future of hot reloading](https://medium.com/@dan_abramov/hot-reloading-in-react-1140438583bf#.jmivpvmz4) and to contribute. For example, Johny Days is going to [make it work with multiple connected clients](https://github.com/facebook/react-native/pull/6179). We're relying on you all to maintain and improve this feature.
+如果你有兴趣帮助改进热重载，建议阅读 [Dan Abramov 关于热重载未来的文章](https://medium.com/@dan_abramov/hot-reloading-in-react-1140438583bf#.jmivpvmz4) 并参与贡献。例如，Johny Days 正在 [实现支持多客户端连接](https://github.com/facebook/react-native/pull/6179)。我们期待大家一起维护和改进这项功能。
 
-With React Native, we have the opportunity to rethink the way we build apps in order to make it a great developer experience. Hot reloading is only one piece of the puzzle, what other crazy hacks can we do to make it better?
+React Native 给了我们机会重新思考构建应用的方式，以打造极佳的开发体验。热重载只是拼图中的一片，还有哪些疯狂的黑科技，我们能让开发体验更好呢？

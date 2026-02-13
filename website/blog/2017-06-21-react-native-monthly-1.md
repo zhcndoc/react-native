@@ -1,22 +1,22 @@
 ---
-title: 'React Native Monthly #1'
+title: 'React Native 月刊 #1'
 author: Tomislav Tenodi
-authorTitle: Product Manager at Shoutem
+authorTitle: Shoutem 产品经理
 authorURL: 'https://github.com/tenodi'
 authorImageURL: 'https://pbs.twimg.com/profile_images/877237660225609729/bKFDwfAq.jpg'
 authorTwitter: TomislavTenodi
 tags: [engineering]
 ---
 
-At [Shoutem](https://shoutem.github.io/), we've been fortunate enough to work with React Native from its very beginnings. We decided we wanted to be part of the amazing community from day one. Soon enough, we realized it's almost impossible to keep up with the pace the community was growing and improving. That's why we decided to organize a monthly meeting where all major React Native contributors can briefly present what their efforts and plans are.
+在 [Shoutem](https://shoutem.github.io/) ，我们很幸运能够从 React Native 诞生之初就开始使用它。我们决定从第一天起就成为这个了不起社区的一部分。不久后，我们意识到几乎不可能跟上社区日益增长和改进的速度。正因如此，我们决定组织一个月度会议，让所有主要的 React Native 贡献者简短地介绍他们的工作和计划。
 
-## Monthly meetings
+## 月度会议
 
-We had our first session of the monthly meeting on June 14, 2017. The mission for React Native Monthly is simple and straightforward: **improve the React Native community**. Presenting teams' efforts eases collaboration between teams done offline.
+我们在 2017 年 6 月 14 日举办了第一次月度会议。React Native 月刊的使命简单明了：**提升 React Native 社区**。团队的工作展示促进了线下团队之间的协作。
 
-## Teams
+## 团队
 
-On the first meeting, we had 8 teams join us:
+在第一次会议上，共有 8 个团队参加了会议：
 
 - [Airbnb](https://github.com/airbnb)
 - [Callstack](https://github.com/callstack-io)
@@ -27,68 +27,68 @@ On the first meeting, we had 8 teams join us:
 - [Shoutem](https://github.com/shoutem)
 - [Wix](https://github.com/wix)
 
-We hope to have more core contributors join the upcoming sessions!
+我们希望未来有更多核心贡献者参加接下来的会议！
 
-## Notes
+## 会议纪要
 
-As teams' plans might be of interest to a broader audience, we'll be sharing them here, on the React Native blog. So, here they are:
+鉴于团队的计划可能对更广泛的受众感兴趣，我们会在这里，即 React Native 博客上分享它们。以下是内容：
 
 ### Airbnb
 
-- Plans to add some A11y (accessibility) APIs to `View` and the `AccessibilityInfo` native module.
-- Will be investigating adding some APIs to native modules on Android to allow for specifying threads for them to run on.
-- Have been investigating potential initialization performance improvements.
-- Have been investigating some more sophisticated bundling strategies to use on top of "unbundle".
+- 计划向 `View` 组件和 `AccessibilityInfo` 原生模块添加一些 A11y（无障碍）API。
+- 将调查在 Android 原生模块中添加 API，以便指定它们运行的线程。
+- 正在研究潜在的初始化性能改进。
+- 正在研究一些更复杂的打包策略，以配合“拆包”（unbundle）使用。
 
 ### Callstack
 
-- Looking into improving the release process by using [Detox](https://github.com/wix/detox) for E2E testing. Pull request should land soon.
-- Blob pull request they have been working on has been merged, subsequent pull requests coming up.
-- Increasing [Haul](https://github.com/callstack-io/haul) adoption across internal projects to see how it performs compared to [Metro Bundler](https://github.com/facebook/metro-bundler). Working on better multi-threaded performance with the webpack team.
-- Internally, they have implemented a better infrastructure to manage open source projects. Plans to be getting more stuff out in upcoming weeks.
-- The React Native Europe conference is coming along, nothing interesting yet, but y'all invited!
-- Stepped back from [react-navigation](https://github.com/react-community/react-navigation) for a while to investigate alternatives (especially native navigations).
+- 正在尝试通过使用 [Detox](https://github.com/wix/detox) 进行端到端测试来改进发布流程，相关拉取请求即将提交。
+- 一直在开发的 Blob 功能的拉取请求已合并，后续的拉取请求也在进行中。
+- 在内部项目中推广使用 [Haul](https://github.com/callstack-io/haul) ，以观察其相较于 [Metro Bundler](https://github.com/facebook/metro-bundler) 的性能表现。正在与 webpack 团队合作提升多线程性能。
+- 内部已实现更完善的开源项目管理基础设施，未来几周将发布更多相关内容。
+- React Native 欧洲会议正在筹备中，目前暂无特别内容，但大家均被邀请参加！
+- 暂时从 [react-navigation](https://github.com/react-community/react-navigation) 退后，探索其他替代方案（尤其是原生导航）。
 
 ### Expo
 
-- Working on making it possible to install npm modules in [Snack](https://snack.expo.io/), will be useful for libraries to add examples to documentation.
-- Working with [Krzysztof](https://github.com/kmagiera) and other people at [Software Mansion](https://github.com/software-mansion) on a JSC update on Android and a gesture handling library.
-- [Adam Miskiewicz](https://github.com/skevy) is transitioning his focus towards [react-navigation](https://github.com/react-community/react-navigation).
-- [Create React Native App](https://github.com/react-community/create-react-native-app) is in the [Getting Started guide](/docs/getting-started) in the docs. Expo wants to encourage library authors to explain clearly whether their lib works with CRNA or not, and if so, explain how to set it up.
+- 正在实现可以在 [Snack](https://snack.expo.io/) 中安装 npm 模块的功能，这对库作者在文档中添加示例非常有用。
+- 与 [Krzysztof](https://github.com/kmagiera) 及 [Software Mansion](https://github.com/software-mansion) 的其他成员合作，推进 Android 上 JSC 的更新和手势处理库开发。
+- [Adam Miskiewicz](https://github.com/skevy) 正在逐渐将精力转向 [react-navigation](https://github.com/react-community/react-navigation)。
+- [Create React Native App](https://github.com/react-community/create-react-native-app) 已纳入文档中的 [入门指南](/docs/getting-started) 。Expo 希望鼓励库作者明确说明他们的库是否支持 CRNA，并说明如何配置。
 
 ### Facebook
 
-- React Native's packager is now [Metro Bundler](https://github.com/facebook/metro), in an independent repo. The Metro Bundler team in London is excited to address the needs of the community, improve modularity for additional use-cases beyond React Native, and increase responsiveness on issues and PRs.
-- In the coming months, the React Native team will work on refining the APIs of primitive components. Expect improvements in layout quirks, accessibility, and flow typing.
-- The React Native team also plans on improving core modularity this year, by refactoring to fully support 3rd party platforms such as Windows and macOS.
+- React Native 的打包工具现已变更为独立仓库的 [Metro Bundler](https://github.com/facebook/metro)。伦敦的 Metro Bundler 团队非常期待响应社区需求，提升模块化以支持 React Native 以外的更多用例，并加快对问题和 PR 的响应速度。
+- 接下来几个月，React Native 团队将致力于优化基础组件的 API。期待在布局细节、无障碍以及 Flow 类型方面的改进。
+- 今年团队还计划通过重构改善核心模块化，以全面支持第三方平台如 Windows 和 macOS。
 
 ### GeekyAnts
 
-- The team is working on a UI/UX design app (codename: Builder) which directly works with `.js` files. Right now, it supports only React Native. It’s similar to Adobe XD and Sketch.
-- The team is working hard so that you can load up an existing React Native app in the editor, make changes (visually, as a designer) and save the changes directly to the JS file.
-- Folks are trying to bridge the gap between Designers and Developers and bring them on the same repo.
-- Also, [NativeBase](https://github.com/GeekyAnts/NativeBase) recently reached 5,000 GitHub stars.
+- 团队正在开发一款 UI/UX 设计应用（代号：Builder），能够直接操作 `.js` 文件。目前仅支持 React Native。这类似于 Adobe XD 和 Sketch。
+- 团队正在努力实现：你可以在编辑器中加载已有的 React Native 应用，进行视觉化修改（设计师操作），然后将更改直接保存到 JS 文件中。
+- 致力于缩小设计师与开发者之间的差距，让他们共用同一个代码仓库。
+- 此外，[NativeBase](https://github.com/GeekyAnts/NativeBase) 最近已获得了 5,000 个 GitHub 星标。
 
 ### Microsoft
 
-- [CodePush](https://github.com/Microsoft/code-push) has now been integrated into [Mobile Center](https://mobile.azure.com/). This is the first step in providing a much more integrated experience with distribution, analytics and other services. See their announcement [here](https://microsoft.github.io/code-push/articles/CodePushOnMobileCenter.html).
-- [VS Code](https://github.com/Microsoft/vscode) has a bug with debugging, they are working on fixing that right now and will have a new build.
-- Investigating [Detox](https://github.com/wix/detox) for Integration testing, looking at JSC Context to get variables alongside crash reports.
+- [CodePush](https://github.com/Microsoft/code-push) 现已整合进 [Mobile Center](https://mobile.azure.com/)，这是实现分发、分析和其他服务更紧密集成体验的第一步。相关公告见 [这里](https://microsoft.github.io/code-push/articles/CodePushOnMobileCenter.html)。
+- [VS Code](https://github.com/Microsoft/vscode) 存在调试相关的一个 Bug，目前团队正在修复，并会发布新版本。
+- 正在调研使用 [Detox](https://github.com/wix/detox) 进行集成测试，研究 JSC 上下文以获取变量和崩溃报告。
 
 ### Shoutem
 
-- Making it easier to work on Shoutem apps with tools from the React Native community. You will be able to use all the React Native commands to run the apps created on [Shoutem](https://shoutem.github.io/).
-- Investigating profiling tools for React Native. They had a lot of problems setting it up and they will write some of the insights they discovered along the way.
-- Shoutem is working on making it easier to integrate React Native with existing native apps. They will document the concept that they developed internally in the company, in order to get the feedback from the community.
+- 正在利用 React Native 社区的工具简化 Shoutem 应用的开发。你将可以使用所有 React Native 命令来运行在 [Shoutem](https://shoutem.github.io/) 上创建的应用。
+- 正在调研 React Native 的性能分析工具，期间遇到不少问题，将会记录下这些经验分享给社区。
+- Shoutem 正在努力简化 React Native 与现有原生应用的集成，计划公开分享公司内部开发的方案，以便获得社区反馈。
 
 ### Wix
 
-- Working internally to adopt [Detox](https://github.com/wix/detox) to move significant parts of the Wix app to "zero manual QA". As a result, Detox is being used heavily in a production setting by dozens of developers and maturing rapidly.
-- Working to add support to the [Metro Bundler](https://github.com/facebook/metro) for overriding any file extension during the build. Instead of just "ios" and "android", it would support any custom extension like "e2e" or "detox". Plans to use this for E2E mocking. There's already a library out called [react-native-repackager](https://github.com/wix/react-native-repackager), now working on a PR.
-- Investigating automation of performance tests. This is a new repo called [DetoxInstruments](https://github.com/wix/DetoxInstruments). You can take a look, it's being developed open source.
-- Working with a contributor from KPN on Detox for Android and supporting real devices.
-- Thinking about "Detox as a platform" to allow building other tools that need to automate the simulator/device. An example is [Storybook](https://github.com/storybooks/react-native-storybook) for React Native or Ram's idea for integration testing.
+- 内部推广使用 [Detox](https://github.com/wix/detox) ，目标是实现 Wix 应用的“零手动测试”流程。目前 Detox 已被几十位开发者在生产环境广泛使用，并在快速成熟。
+- 正在为 [Metro Bundler](https://github.com/facebook/metro) 添加支持，允许在构建过程中覆盖任意文件扩展名。除了“ios”和“android”，将支持诸如“e2e”或“detox”等自定义扩展，计划用于端到端模拟测试。目前已有一个叫 [react-native-repackager](https://github.com/wix/react-native-repackager) 的库，正在推进相关拉取请求。
+- 研究性能测试的自动化，开发了一个新仓库 [DetoxInstruments](https://github.com/wix/DetoxInstruments)，欢迎查看，开源开发中。
+- 与 KPN 的贡献者合作，优化 Detox 在 Android 上的表现，并支持真实设备。
+- 构思“Detox 作为平台”的模式，支持搭建其他需要自动化模拟器或设备的工具。例如 React Native 的 [Storybook](https://github.com/storybooks/react-native-storybook) 或 Ram 提出的集成测试方案。
 
-## Next session
+## 下一次会议
 
-Meetings will be held every four weeks. The next session is scheduled for July 12, 2017. As we just started with this meeting, we'd like to know how do these notes benefit the React Native community. Feel free to ping me [on Twitter](https://twitter.com/TomislavTenodi) if you have any suggestion on what we should cover in the following sessions, or how we should improve the output of the meeting.
+会议每四周举行一次。下一次会议定于 2017 年 7 月 12 日召开。鉴于我们刚刚开始举办此会议，希望了解这些纪要对 React Native 社区有哪些帮助。如果你有针对未来会议内容的建议，或者对会议产出如何改进有想法，欢迎随时在[Twitter](https://twitter.com/TomislavTenodi)上联系我。

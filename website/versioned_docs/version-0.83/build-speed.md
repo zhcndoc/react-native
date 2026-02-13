@@ -1,28 +1,27 @@
 ---
 id: build-speed
-title: Speeding up your Build phase
+title: 加快构建阶段速度
 ---
 
-Building your React Native app could be **expensive** and take several minutes of developers time.
-This can be problematic as your project grows and generally in bigger organizations with multiple React Native developers.
+构建你的 React Native 应用可能会非常**耗时**，需要占用开发者几分钟的时间。这在项目逐渐变大，或者在拥有多个 React Native 开发者的大型组织中，可能会带来问题。
 
-To mitigate this performance hit, this page shares some suggestions on how to **improve your build time**.
+为了减轻这种性能负担，本文分享了一些**提升构建速度**的建议。
 
 :::info
 
-Please note that those suggestions are advanced feature that requires some amount of understanding of how the native build tools work.
+请注意，这些建议属于高级功能，需要一定程度地理解本地构建工具的工作原理。
 
 :::
 
-## Build only one ABI during development (Android-only)
+## 开发时只构建一个 ABI （仅限 Android）
 
-When building your android app locally, by default you build all the 4 [Application Binary Interfaces (ABIs)](https://developer.android.com/ndk/guides/abis) : `armeabi-v7a`, `arm64-v8a`, `x86` & `x86_64`.
+在本地构建你的 Android 应用时，默认会构建所有 4 个 [应用二进制接口 (ABI)](https://developer.android.com/ndk/guides/abis) ：`armeabi-v7a`，`arm64-v8a`，`x86` 和 `x86_64`。
 
-However, you probably don't need to build all of them if you're building locally and testing your emulator or on a physical device.
+然而，如果你只是本地构建并在模拟器或物理设备上测试，你可能不需要构建全部这些 ABI。
 
-This should reduce your **native build time** by a ~75% factor.
+这样可以将你的**本地构建时间**缩短约 75%。
 
-If you're using the React Native CLI, you can add the `--active-arch-only` flag to the `run-android` command. This flag will make sure the correct ABI is picked up from either the running emulator or the plugged in phone. To confirm that this approach is working fine, you'll see a message like `info Detected architectures arm64-v8a` on console.
+如果你使用 React Native CLI，可以在 `run-android` 命令中添加 `--active-arch-only` 标志。此标志会确保从正在运行的模拟器或连接的手机中识别出正确的 ABI。确认方法是在控制台看到类似 `info Detected architectures arm64-v8a` 的消息。
 
 ```
 $ yarn react-native run-android --active-arch-only
@@ -35,95 +34,95 @@ info Detected architectures arm64-v8a
 info Installing the app...
 ```
 
-This mechanism relies on the `reactNativeArchitectures` Gradle property.
+该机制依赖于 `reactNativeArchitectures` Gradle 属性。
 
-Therefore, if you're building directly with Gradle from the command line and without the CLI, you can specify the ABI you want to build as follows:
+因此，如果你直接用 Gradle 命令行构建且不通过 CLI，可以如下指定你要构建的 ABI：
 
 ```
 $ ./gradlew :app:assembleDebug -PreactNativeArchitectures=x86,x86_64
 ```
 
-This can be useful if you wish to build your Android App on a CI and use a matrix to parallelize the build of the different architectures.
+如果你希望在 CI 中构建 Android App 并用一个矩阵方式并行构建不同架构，这会非常有用。
 
-If you wish, you can also override this value locally, using the `gradle.properties` file you have in the [top-level folder](https://github.com/facebook/react-native/blob/19cf70266eb8ca151aa0cc46ac4c09cb987b2ceb/template/android/gradle.properties#L30-L33) of your project:
+你也可以在本地通过项目[顶层文件夹](https://github.com/facebook/react-native/blob/19cf70266eb8ca151aa0cc46ac4c09cb987b2ceb/template/android/gradle.properties#L30-L33)的 `gradle.properties` 文件覆盖这个值：
 
 ```
-# Use this property to specify which architecture you want to build.
-# You can also override it from the CLI using
+# 使用该属性指定你想要构建的架构。
+# 你也可以通过 CLI 用以下命令覆盖它：
 # ./gradlew <task> -PreactNativeArchitectures=x86_64
 reactNativeArchitectures=armeabi-v7a,arm64-v8a,x86,x86_64
 ```
 
-Once you build a **release version** of your app, don't forget to remove those flags as you want to build an apk/app bundle that works for all the ABIs and not only for the one you're using in your daily development workflow.
+一旦你构建了**发布版本**的应用，别忘了移除这些标志，因为你想构建的是适用于所有 ABI 的 apk/app bundle，而不仅是你日常开发使用的那个。
 
-## Enable Configuration Caching (Android-only)
+## 启用配置缓存（仅限 Android）
 
-Since React Native 0.79, you can also enable Gradle Configuration Caching.
+从 React Native 0.79 开始，你可以启用 Gradle 配置缓存。
 
-When you’re running an Android build with `yarn android`, you will be executing a Gradle build that is composed by two steps ([source](https://docs.gradle.org/current/userguide/build_lifecycle.html)):
+当你用 `yarn android` 运行 Android 构建时，会执行一个包含两个步骤的 Gradle 构建（[来源](https://docs.gradle.org/current/userguide/build_lifecycle.html)）：
 
-- Configuration phase, when all the `.gradle` files are evaluated.
-- Execution phase, when the tasks are actually executed so the Java/Kotlin code is compiled and so on.
+- 配置阶段，评估所有 `.gradle` 文件。
+- 执行阶段，实际执行任务，比如编译 Java/Kotlin 代码等。
 
-You will now be able to enable Configuration Caching, which will allow you to skip the Configuration phase on subsequent builds.
+你现在可以启用配置缓存，允许跳过后续构建中的配置阶段。
 
-This is beneficial when making frequent changes to the native code as it improves build times.
+这对于频繁修改本地代码时尤其有益，有助于提升构建速度。
 
-For example here you can see how rebuilding faster it is to rebuild RN-Tester after a change in the native code:
+例如，下图展示了 RN-Tester 在修改本地代码后快速重建的效果：
 
-![gradle config caching](/docs/assets/gradle-config-caching.gif)
+![gradle 配置缓存](/docs/assets/gradle-config-caching.gif)
 
-You can enable Gradle Configuration Caching by adding the following line in your `android/gradle.properties` file:
+你可以在 `android/gradle.properties` 文件中添加以下内容启用 Gradle 配置缓存：
 
 ```
 org.gradle.configuration-cache=true
 ```
 
-Please refer to the [official Gradle documentation](https://docs.gradle.org/current/userguide/configuration_cache.html) for more resources on Configuration Caching.
+详情请参考 [官方 Gradle 文档](https://docs.gradle.org/current/userguide/configuration_cache.html) 获取更多配置缓存相关资源。
 
-## Using a Maven Mirror (Android-only)
+## 使用 Maven 镜像（仅限 Android）
 
-When building Android apps, your Gradle builds will need to download the necessary dependencies from Maven Central and other repositories from the internet.
+构建 Android 应用时，Gradle 需要从 Maven Central 及其他远程仓库下载依赖。
 
-If your organization is running a Maven repository mirror, you should consider using it as it will speed up your build, by downloading the artifacts from the mirror rather than from the internet.
+如果你的组织运行了 Maven 仓库镜像，建议使用它，这样可以加快构建速度，通过从镜像下载构件而不是网络下载。
 
-You can configure a mirror by specifying the `exclusiveEnterpriseRepository` property in your `android/gradle.properties` file:
+你可以通过在 `android/gradle.properties` 文件中指定 `exclusiveEnterpriseRepository` 属性来配置镜像：
 
 ```diff
-# Use this property to enable or disable the Hermes JS engine.
-# If set to false, you will be using JSC instead.
+# 用于启用或禁用 Hermes JS 引擎。
+# 如果设为 false，则使用 JSC。
 hermesEnabled=true
 
-# Use this property to configure a Maven enterprise repository
-# that will be used exclusively to fetch all of your dependencies.
+# 配置专门的 Maven 企业仓库
+# 所有依赖将只从这里获取。
 +exclusiveEnterpriseRepository=https://my.internal.proxy.net/
 ```
 
-By setting this property, your build will fetch dependencies **exclusively** from your specified repository and not from others.
+设置该属性后，构建会**仅**从指定仓库获取依赖，不会从其他仓库下载。
 
-## Use a compiler cache
+## 使用编译器缓存
 
-If you're running frequent native builds (either C++ or Objective-C), you might benefit from using a **compiler cache**.
+如果你频繁进行本地构建（无论是 C++ 还是 Objective-C），使用**编译器缓存**可能带来好处。
 
-Specifically you can use two type of caches: local compiler caches and distributed compiler caches.
+具体可以使用两种缓存：本地编译器缓存和分布式编译器缓存。
 
-### Local caches
+### 本地缓存
 
 :::info
-The following instructions will work for **both Android & iOS**.
-If you're building only Android apps, you should be good to go.
-If you're building also iOS apps, please follow the instructions in the [Xcode Specific Setup](#xcode-specific-setup) section below.
+以下操作适用于**Android 和 iOS**。
+如果你只构建 Android，直接使用即可。
+如果你也构建 iOS，请参阅以下的 [Xcode 特定设置](#xcode-specific-setup) 部分。
 :::
 
-We suggest to use [**ccache**](https://ccache.dev/) to cache the compilation of your native builds.
-Ccache works by wrapping the C++ compilers, storing the compilation results, and skipping the compilation
-if an intermediate compilation result was originally stored.
+我们建议使用 [**ccache**](https://ccache.dev/) 来缓存本地构建的编译过程。
+ccache 通过包装 C++ 编译器，保存编译结果，如果曾经保存过中间编译结果则跳过编译。
 
-Ccache is available in the package manager for most operating systems. On macOS, we can install ccache with `brew install ccache`.
-Or you can follow the [official installation instructions](https://github.com/ccache/ccache/blob/master/doc/install.md) to install from source.
+ccache 在多数操作系统的软件包管理器中都有提供。在 macOS 上，你可以用 `brew install ccache` 安装。
+或者可参阅 [官方安装说明](https://github.com/ccache/ccache/blob/master/doc/install.md) 从源码安装。
 
-You can then do two clean builds (e.g. on Android you can first run `yarn react-native run-android`, delete the `android/app/build` folder and run the first command once more). You will notice that the second build was way faster than the first one (it should take seconds rather than minutes).
-While building, you can verify that `ccache` works correctly and check the cache hits/miss rate `ccache -s`
+你可以先做两次干净构建（例如在 Android 上，先运行 `yarn react-native run-android`，删除 `android/app/build` 文件夹，再运行一次该命令），你会发现第二次构建比第一次快得多（应该是秒级别，而非分钟）。
+
+构建时可以通过 `ccache -s` 查看缓存命中与未命中率，从而确认其工作正常。
 
 ```
 $ ccache -s
@@ -141,15 +140,15 @@ Primary storage:
   Cache size (GB): 0.60 / 20.00 (3.00 %)
 ```
 
-Note that `ccache` aggregates the stats over all builds. You can use `ccache --zero-stats` to reset them before a build to verify the cache-hit ratio.
+注意 `ccache` 汇总所有构建的统计。你可以用 `ccache --zero-stats` 在构建前重置统计数据，验证缓存命中率。
 
-Should you need to wipe your cache, you can do so with `ccache --clear`
+如需清空缓存，可执行 `ccache --clear`
 
-#### Xcode Specific Setup
+#### Xcode 特定设置
 
-To make sure `ccache` works correctly with iOS and Xcode, you need to enable React Native support for ccache in `ios/Podfile`.
+为了确保 `ccache` 正常支持 iOS 和 Xcode，你需要在 `ios/Podfile` 中启用 React Native 对 ccache 的支持。
 
-Open `ios/Podfile` in your editor and uncomment the `ccache_enabled` line.
+用编辑器打开 `ios/Podfile`，取消注释 `ccache_enabled` 这一行。
 
 ```ruby
   post_install do |installer|
@@ -158,27 +157,30 @@ Open `ios/Podfile` in your editor and uncomment the `ccache_enabled` line.
       installer,
       config[:reactNativePath],
       :mac_catalyst_enabled => false,
-      # TODO: Uncomment the line below
+      # TODO: 取消注释下面这一行
       :ccache_enabled => true
     )
   end
 ```
 
-#### Using this approach on a CI
+#### 在 CI 中使用此方法
 
-Ccache uses the `/Users/$USER/Library/Caches/ccache` folder on macOS to store the cache.
-Therefore you could save & restore the corresponding folder also on CI to speedup your builds.
+ccache 在 macOS 上默认使用 `/Users/$USER/Library/Caches/ccache` 文件夹存储缓存。
 
-However, there are a couple of things to be aware:
+因此你也可以在 CI 环境中保存并恢复该文件夹，以加速构建。
 
-1. On CI, we recommend to do a full clean build, to avoid poisoned cache problems. If you follow the approach mentioned in the previous paragraph, you should be able to parallelize the native build on 4 different ABIs and you will most likely not need `ccache` on CI.
+但需要注意几点：
 
-2. `ccache` relies on timestamps to compute a cache hit. This doesn't work well on CI as files are re-downloaded at every CI run. To overcome this, you'll need to use the `compiler_check content` option which relies instead on [hashing the content of the file](https://ccache.dev/manual/4.3.html).
+1. 在 CI 中，我们建议执行完全干净构建以避免缓存污染问题。如果你遵循之前的 ABI 并行构建方案，通常不需要在 CI 上使用 `ccache`。
 
-### Distributed caches
+2. `ccache` 依赖文件时间戳判断缓存命中。CI 环境中每次运行都会重新下载文件，时间戳不稳定。对此，你需使用 `compiler_check content` 选项，改用[文件内容哈希](https://ccache.dev/manual/4.3.html) 的方式判断。
 
-Similar to local caches, you might want to consider using a distributed cache for your native builds.
-This could be specifically useful in bigger organizations that are doing frequent native builds.
+### 分布式缓存
 
-We recommend to use [sccache](https://github.com/mozilla/sccache) to achieve this.
-We defer to the sccache [distributed compilation quickstart](https://github.com/mozilla/sccache/blob/main/docs/DistributedQuickstart.md) for instructions on how to setup and use this tool.
+类似于本地缓存，你可能希望使用分布式缓存来加速本地构建。
+
+这在大型组织中频繁本地构建时尤为有用。
+
+我们推荐使用 [sccache](https://github.com/mozilla/sccache) 来实现。
+
+关于如何设置和使用该工具，请参照 sccache 的[分布式编译快速入门](https://github.com/mozilla/sccache/blob/main/docs/DistributedQuickstart.md)。

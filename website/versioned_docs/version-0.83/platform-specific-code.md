@@ -1,20 +1,20 @@
 ---
 id: platform-specific-code
-title: Platform-Specific Code
+title: 平台特定代码
 ---
 
-When building a cross-platform app, you'll want to re-use as much code as possible. Scenarios may arise where it makes sense for the code to be different, for example you may want to implement separate visual components for Android and iOS.
+在构建跨平台应用时，您会希望尽可能重用代码。但有些情况下，代码需要有所不同，例如您可能想为 Android 和 iOS 实现不同的视觉组件。
 
-React Native provides two ways to organize your code and separate it by platform:
+React Native 提供了两种方式来组织代码并按平台区分：
 
-- Using the [`Platform` module](platform-specific-code.md#platform-module).
-- Using [platform-specific file extensions](platform-specific-code.md#platform-specific-extensions).
+- 使用 [`Platform` 模块](platform-specific-code.md#platform-module)。
+- 使用 [平台特定文件扩展名](platform-specific-code.md#platform-specific-extensions)。
 
-Certain components may have properties that work on one platform only. All of these props are annotated with `@platform` and have a small badge next to them on the website.
+某些组件的属性仅在某个平台上有效。所有这些属性都带有 `@platform` 注释，并且在官网页面旁边带有小徽章标识。
 
-## Platform module
+## Platform 模块
 
-React Native provides a module that detects the platform in which the app is running. You can use the detection logic to implement platform-specific code. Use this option when only small parts of a component are platform-specific.
+React Native 提供了一个模块，用以检测应用运行的平台。您可以利用这个检测逻辑来实现平台特定代码。当组件中只有少部分内容是平台特定时，推荐使用此方法。
 
 ```tsx
 import {Platform, StyleSheet} from 'react-native';
@@ -24,9 +24,9 @@ const styles = StyleSheet.create({
 });
 ```
 
-`Platform.OS` will be `ios` when running on iOS and `android` when running on Android.
+`Platform.OS` 在 iOS 运行时为 `ios`，在 Android 运行时为 `android`。
 
-There is also a `Platform.select` method available that, given an object where keys can be one of `'ios' | 'android' | 'native' | 'default'`, returns the most fitting value for the platform you are currently running on. That is, if you're running on a phone, `ios` and `android` keys will take preference. If those are not specified, `native` key will be used and then the `default` key.
+此外，还有一个 `Platform.select` 方法，它接受一个对象，对象的键可以是 `'ios' | 'android' | 'native' | 'default'`，并返回当前平台最合适的值。也就是说，如果您当前在手机上运行，优先使用 `ios` 和 `android` 键对应的值；如果没有定义，则使用 `native` 键对应的值；再没有则使用 `default` 键。
 
 ```tsx
 import {Platform, StyleSheet} from 'react-native';
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'green',
       },
       default: {
-        // other platforms, web for example
+        // 其他平台，例如 Web
         backgroundColor: 'blue',
       },
     }),
@@ -50,9 +50,9 @@ const styles = StyleSheet.create({
 });
 ```
 
-This will result in a container having `flex: 1` on all platforms, a red background color on iOS, a green background color on Android, and a blue background color on other platforms.
+这样，`container` 在所有平台上都有 `flex: 1`，iOS 平台背景色为红色，Android 平台为绿色，其他平台为蓝色。
 
-Since it accepts `any` value, you can also use it to return platform-specific components, like below:
+因为它接受 `any` 类型值，您也可以用它来返回平台特定组件，如下：
 
 ```tsx
 const Component = Platform.select({
@@ -72,67 +72,67 @@ const Component = Platform.select({
 <Component />;
 ```
 
-### Detecting the Android version <div className="label android" title="This section is related to Android platform">Android</div>
+### 检测 Android 版本 <div className="label android" title="This section is related to Android platform">Android</div>
 
-On Android, the `Platform` module can also be used to detect the version of the Android Platform in which the app is running:
+在 Android 上，`Platform` 模块还能用于检测运行应用的 Android 平台版本：
 
 ```tsx
 import {Platform} from 'react-native';
 
 if (Platform.Version === 25) {
-  console.log('Running on Nougat!');
+  console.log('运行在 Nougat 系统！');
 }
 ```
 
-**Note**: `Version` is set to the Android API version not the Android OS version. To find a mapping please refer to [Android Version History](https://en.wikipedia.org/wiki/Android_version_history#Overview).
+**注意**：`Version` 表示的是 Android API 版本，而非 Android 操作系统版本。想查看对应关系，请参考 [Android 版本历史](https://zh.wikipedia.org/wiki/Android版本历史#概览)。
 
-### Detecting the iOS version <div className="label ios" title="This section is related to iOS platform">iOS</div>
+### 检测 iOS 版本 <div className="label ios" title="This section is related to iOS platform">iOS</div>
 
-On iOS, the `Version` is a result of `-[UIDevice systemVersion]`, which is a string with the current version of the operating system. An example of the system version is "10.3". For example, to detect the major version number on iOS:
+在 iOS 上，`Version` 来源于 `-[UIDevice systemVersion]`，是一个表示当前操作系统版本的字符串。例如 "10.3"。比如要检测 iOS 的主版本号：
 
 ```tsx
 import {Platform} from 'react-native';
 
 const majorVersionIOS = parseInt(Platform.Version, 10);
 if (majorVersionIOS <= 9) {
-  console.log('Work around a change in behavior');
+  console.log('处理行为变化的兼容逻辑');
 }
 ```
 
-## Platform-specific extensions
+## 平台特定扩展名
 
-When your platform-specific code is more complex, you should consider splitting the code out into separate files. React Native will detect when a file has a `.ios.` or `.android.` extension and load the relevant platform file when required from other components.
+当您的平台特定代码较为复杂时，应考虑拆分成不同文件。React Native 会识别以 `.ios.` 或 `.android.` 作为扩展名的文件，并在其他组件导入时自动加载对应的平台文件。
 
-For example, say you have the following files in your project:
+例如，假设项目中有以下文件：
 
 ```shell
 BigButton.ios.js
 BigButton.android.js
 ```
 
-You can then import the component as follows:
+您可以这样导入组件：
 
 ```tsx
 import BigButton from './BigButton';
 ```
 
-React Native will automatically pick up the right file based on the running platform.
+React Native 会根据运行平台自动选择正确的文件。
 
-## Native-specific extensions (i.e. sharing code with NodeJS and Web)
+## 原生特定扩展名（即与 NodeJS 和 Web 共享代码）
 
-You can also use the `.native.js` extension when a module needs to be shared between NodeJS/Web and React Native but it has no Android/iOS differences. This is especially useful for projects that have common code shared among React Native and ReactJS.
+当一个模块需在 NodeJS/Web 和 React Native 中共享，且不含 Android/iOS 差异时，可以使用 `.native.js` 扩展名。这对于 React Native 和 ReactJS 共享通用代码的项目特别有用。
 
-For example, say you have the following files in your project:
+例如，项目中有如下文件：
 
 ```shell
-Container.js # picked up by webpack, Rollup or any other Web bundler
-Container.native.js # picked up by the React Native bundler for both Android and iOS (Metro)
+Container.js # 由 webpack、Rollup 或其他 Web 打包器处理
+Container.native.js # 由 React Native 打包器（Metro）处理（适用于 Android 和 iOS）
 ```
 
-You can still import it without the `.native` extension, as follows:
+导入时仍然不需带 `.native` 后缀，如下：
 
 ```tsx
 import Container from './Container';
 ```
 
-**Pro tip:** Configure your Web bundler to ignore `.native.js` extensions in order to avoid having unused code in your production bundle, thus reducing the final bundle size.
+**专业提示：** 配置您的 Web 打包器忽略 `.native.js` 扩展名，以避免生产环境包中包含未使用代码，从而减小最终包体积。

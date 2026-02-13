@@ -1,53 +1,53 @@
 ---
-title: Using TypeScript with React Native
+title: 在 React Native 中使用 TypeScript
 author: Ash Furrow
-authorTitle: Software Engineer at Artsy
+authorTitle: Artsy 软件工程师
 authorURL: 'https://github.com/ashfurrow'
 authorImageURL: 'https://avatars2.githubusercontent.com/u/498212?s=460&v=4'
 authorTwitter: ashfurrow
 tags: [engineering]
 ---
 
-JavaScript! We all love it. But some of us also love [types](https://en.wikipedia.org/wiki/Data_type). Luckily, options exist to add stronger types to JavaScript. My favourite is [TypeScript](https://www.typescriptlang.org), but React Native supports [Flow](https://flow.org) out of the box. Which you prefer is a matter of preference, they each have their own approach on how to add the magic of types to JavaScript. Today, we're going to look at how to use TypeScript in React Native apps.
+JavaScript！我们都喜欢它。但我们中的一些人也喜欢[类型](https://en.wikipedia.org/wiki/Data_type)。幸运的是，有办法为 JavaScript 增加更强的类型。我最喜欢的是[TypeScript](https://www.typescriptlang.org)，但 React Native 开箱即用地支持[Flow](https://flow.org)。你喜欢哪个完全是个人偏好，它们各自有自己将类型魔力赋予 JavaScript 的方法。今天，我们来看看如何在 React Native 应用中使用 TypeScript。
 
-This post uses Microsoft's [TypeScript-React-Native-Starter](https://github.com/Microsoft/TypeScript-React-Native-Starter) repo as a guide.
+本文借助微软的[TypeScript-React-Native-Starter](https://github.com/Microsoft/TypeScript-React-Native-Starter) 仓库作为指南。
 
-**Update**: Since this blog post was written, things have gotten even easier. You can replace all the set up described in this blog post by running just one command:
+**更新**：自从这篇博客文章写成以来，事情变得更简单了。你只需运行一条命令即可替代本博客中所有的设置步骤：
 
 ```sh
 npx react-native init MyAwesomeProject --template react-native-template-typescript
 ```
 
-However, there _are_ some limitations to Babel's TypeScript support, which the blog post above goes into in detail. The steps outlined in _this_ post still work, and Artsy is still using [react-native-typescript-transformer](https://github.com/ds300/react-native-typescript-transformer) in production, but the fastest way to get up and running with React Native and TypeScript is using the above command. You can always switch later if you have to.
+不过，Babel 对 TypeScript 的支持仍存在一些限制，上述博客文章对此有详细说明。本文中介绍的步骤依然有效，Artsy 仍在生产中使用 [react-native-typescript-transformer](https://github.com/ds300/react-native-typescript-transformer)，但最快启动 React Native 和 TypeScript 的方式是使用上述命令。如果需要，之后你也可以随时切换。
 
-In any case, have fun! The original blog post continues below.
+无论如何，玩得开心！原始博客内容如下。
 
-## Prerequisites
+## 前提条件
 
-Because you might be developing on one of several different platforms, targeting several different types of devices, basic setup can be involved. You should first ensure that you can run a plain React Native app without TypeScript. Follow [the instructions on the React Native website to get started](/docs/getting-started). When you've managed to deploy to a device or emulator, you'll be ready to start a TypeScript React Native app.
+因为你可能在多种不同平台开发，针对多类型设备，基本设置可能比较繁琐。你应首先确保能运行一个不带 TypeScript 的普通 React Native 应用。请按照[React Native 官网的指南开始](/docs/getting-started)。当你成功部署到设备或模拟器后，就可以开始开发 TypeScript React Native 应用了。
 
-You will also need [Node.js](https://nodejs.org/en/), [npm](https://www.npmjs.com), and [Yarn](https://yarnpkg.com/lang/en).
+你还需要安装 [Node.js](https://nodejs.org/en/)、[npm](https://www.npmjs.com) 和 [Yarn](https://yarnpkg.com/lang/en)。
 
-## Initializing
+## 初始化
 
-Once you've tried scaffolding out an ordinary React Native project, you'll be ready to start adding TypeScript. Let's go ahead and do that.
+当你尝试搭建了一个普通的 React Native 项目后，便可以开始添加 TypeScript。我们现在动手操作。
 
 ```sh
 react-native init MyAwesomeProject
 cd MyAwesomeProject
 ```
 
-## Adding TypeScript
+## 添加 TypeScript
 
-The next step is to add TypeScript to your project. The following commands will:
+下一步为项目添加 TypeScript。以下命令将会：
 
-- add TypeScript to your project
-- add [React Native TypeScript Transformer](https://github.com/ds300/react-native-typescript-transformer) to your project
-- initialize an empty TypeScript config file, which we'll configure next
-- add an empty React Native TypeScript Transformer config file, which we'll configure next
-- adds [typings](https://github.com/DefinitelyTyped/DefinitelyTyped) for React and React Native
+- 向项目添加 TypeScript
+- 添加 [React Native TypeScript Transformer](https://github.com/ds300/react-native-typescript-transformer)
+- 初始化一个空的 TypeScript 配置文件，我们接下来会配置它
+- 添加一个空的 React Native TypeScript Transformer 配置文件，我们也会配置它
+- 添加 React 和 React Native 的 [类型定义](https://github.com/DefinitelyTyped/DefinitelyTyped)
 
-Okay, let's go ahead and run these.
+好，开始运行它们。
 
 ```sh
 yarn add --dev typescript
@@ -57,16 +57,16 @@ touch rn-cli.config.js
 yarn add --dev @types/react @types/react-native
 ```
 
-The `tsconfig.json` file contains all the settings for the TypeScript compiler. The defaults created by the command above are mostly fine, but open the file and uncomment the following line:
+`tsconfig.json` 文件包含所有 TypeScript 编译器的设置。上述命令创建的默认配置大多合适，但打开文件并取消注释以下行：
 
 ```js
 {
-  /* Search the config file for the following line and uncomment it. */
-  // "allowSyntheticDefaultImports": true,  /* Allow default imports from modules with no default export. This does not affect code emit, just typechecking. */
+  /* 找到配置文件中的以下行并取消注释。 */
+  // "allowSyntheticDefaultImports": true,  /* 允许从无默认导出的模块中默认导入。不会影响代码生成，仅用于类型检查。 */
 }
 ```
 
-The `rn-cli.config.js` contains the settings for the React Native TypeScript Transformer. Open it and add the following:
+`rn-cli.config.js` 包含 React Native TypeScript Transformer 的设置。打开它并添加以下内容：
 
 ```js
 module.exports = {
@@ -79,11 +79,11 @@ module.exports = {
 };
 ```
 
-## Migrating to TypeScript
+## 迁移到 TypeScript
 
-Rename the generated `App.js` and `__tests_/App.js` files to `App.tsx`. `index.js` needs to use the `.js` extension. All new files should use the `.tsx` extension (or `.ts` if the file doesn't contain any JSX).
+将生成的 `App.js` 和 `__tests__/App.js` 文件重命名为 `App.tsx`。`index.js` 仍须使用 `.js` 扩展名。所有新文件应使用 `.tsx` （如果文件含 JSX）或 `.ts` （不含 JSX）。
 
-If you tried to run the app now, you'd get an error like `object prototype may only be an object or null`. This is caused by a failure to import the default export from React as well as a named export on the same line. Open `App.tsx` and modify the import at the top of the file:
+如果现在尝试运行应用，会出现类似 `object prototype may only be an object or null` 的错误。这是因为在同一行既试图导入 React 的默认导出也导入具名导出失败。打开 `App.tsx`，修改文件顶部的导入：
 
 ```diff
 -import React, { Component } from 'react';
@@ -91,19 +91,19 @@ If you tried to run the app now, you'd get an error like `object prototype may o
 +import { Component } from 'react';
 ```
 
-Some of this has to do with differences in how Babel and TypeScript interoperate with CommonJS modules. In the future, the two will stabilize on the same behaviour.
+部分原因是 Babel 和 TypeScript 在处理 CommonJS 模块时的互操作差异。未来两者将逐渐统一行为。
 
-At this point, you should be able to run the React Native app.
+此时，你应该能运行 React Native 应用了。
 
-## Adding TypeScript Testing Infrastructure
+## 添加 TypeScript 测试基础设施
 
-React Native ships with [Jest](https://github.com/facebook/jest), so for testing a React Native app with TypeScript, we'll want to add [ts-jest](https://www.npmjs.com/package/ts-jest) to our `devDependencies`.
+React Native 默认附带 [Jest](https://github.com/facebook/jest)，所以要用 TypeScript 测试 React Native 应用，我们需要向 `devDependencies` 添加 [ts-jest](https://www.npmjs.com/package/ts-jest)。
 
 ```sh
 yarn add --dev ts-jest
 ```
 
-Then, we'll open up our `package.json` and replace the `jest` field with the following:
+接着打开项目的 `package.json`，替换 `jest` 字段为：
 
 ```js
 {
@@ -128,25 +128,25 @@ Then, we'll open up our `package.json` and replace the `jest` field with the fol
 }
 ```
 
-This will configure Jest to run `.ts` and `.tsx` files with `ts-jest`.
+这样 Jest 就配置为用 `ts-jest` 运行 `.ts` 和 `.tsx` 文件。
 
-## Installing Dependency Type Declarations
+## 安装依赖的类型声明
 
-To get the best experience in TypeScript, we want the type-checker to understand the shape and API of our dependencies. Some libraries will publish their packages with `.d.ts` files (type declaration/type definition files), which can describe the shape of the underlying JavaScript. For other libraries, we'll need to explicitly install the appropriate package in the `@types/` npm scope.
+为了在 TypeScript 中获得最佳体验，希望类型检查器能够理解我们依赖库的结构和 API。有些库会自带 `.d.ts` 类型声明文件，能够描述其 JavaScript 形态。其他库则需要我们显式安装 npm `@types/` 范围内的对应包。
 
-For example, here we'll need types for Jest, React, and React Native, and React Test Renderer.
+例如，这里我们需要为 Jest、React、React Native 和 React Test Renderer 安装类型：
 
 ```ts
 yarn add --dev @types/jest @types/react @types/react-native @types/react-test-renderer
 ```
 
-We saved these declaration file packages to our _dev_ dependencies because this is a React Native _app_ that only uses these dependencies during development and not during runtime. If we were publishing a library to NPM, we might have to add some of these type dependencies as regular dependencies.
+我们把这些声明文件包放在了 _开发依赖_ 中，因为这是一个 React Native _应用_，这些依赖只在开发阶段使用，而非运行时。如果你发布一个库到 NPM，可能需要将某些类型依赖放入正常依赖。
 
-You can read more [here about getting `.d.ts` files](https://www.typescriptlang.org/docs/handbook/declaration-files/consumption.html).
+你可以在[这里了解更多关于 `.d.ts` 文件的信息](https://www.typescriptlang.org/docs/handbook/declaration-files/consumption.html)。
 
-## Ignoring More Files
+## 忽略更多文件
 
-For your source control, you'll want to start ignoring the `.jest` folder. If you're using git, we can just add entries to our `.gitignore` file.
+为了你的源代码管理，你会想开始忽略 `.jest` 文件夹。如果你使用 git，直接向 `.gitignore` 添加条目即可。
 
 ```config
 # Jest
@@ -154,20 +154,20 @@ For your source control, you'll want to start ignoring the `.jest` folder. If yo
 .jest/
 ```
 
-As a checkpoint, consider committing your files into version control.
+作为一个检查点，考虑将这些文件提交到版本控制。
 
 ```sh
 git init
-git add .gitignore # import to do this first, to ignore our files
+git add .gitignore # 先添加这个很重要，这样才能忽略其他文件
 git add .
 git commit -am "Initial commit."
 ```
 
-## Adding a Component
+## 添加一个组件
 
-Let's add a component to our app. Let's go ahead and create a `Hello.tsx` component. It's a pedagogical component, not something that you'd actually write in an app, but something nontrivial that shows off how to use TypeScript in React Native.
+我们来给应用添加一个组件。创建一个 `Hello.tsx` 组件。它是一个教学用途的组件，不是你在生产中必写的东西，但能展示如何在 React Native 中使用 TypeScript。
 
-Create a `components` directory and add the following example.
+创建一个 `components` 目录，添加以下示例：
 
 ```ts
 // components/Hello.tsx
@@ -242,7 +242,7 @@ export class Hello extends React.Component<Props, State> {
   }
 }
 
-// styles
+// 样式
 const styles = StyleSheet.create({
   root: {
     alignItems: 'center',
@@ -266,22 +266,22 @@ const styles = StyleSheet.create({
 });
 ```
 
-Whoa! That's a lot, but let's break it down:
+哇！代码挺多，但我们来拆解一下：
 
-- Instead of rendering HTML elements like `div`, `span`, `h1`, etc., we're rendering components like `View` and `Button`. These are native components that work across different platforms.
-- Styling is specified using the `StyleSheet.create` function that React Native gives us. React's stylesheets allow us to control our layout using Flexbox, and style using other constructs similar to those in CSS.
+- 我们不是渲染 HTML 元素比如 `div`、`span`、`h1`，而是渲染比如 `View` 和 `Button` 这样的组件。这些是跨平台的原生组件。
+- 样式通过 React Native 提供的 `StyleSheet.create` 函数指定。React 的样式表允许我们用 Flexbox 控制布局，使用类似 CSS 的构造进行样式设计。
 
-## Adding a Component Test
+## 添加组件测试
 
-Now that we've got a component, let's try testing it.
+既然有了组件，我们就来尝试测试它。
 
-We already have Jest installed as a test runner. We're going to write snapshot tests for our components, let's add the required add-on for snapshot tests:
+我们已经安装了 Jest 作为测试运行器。要对组件编写快照测试，还需要安装用于快照测试的附加库：
 
 ```sh
 yarn add --dev react-addons-test-utils
 ```
 
-Now let's create a `__tests__` folder in the `components` directory and add a test for `Hello.tsx`:
+接着在 `components` 目录下创建 `__tests__` 文件夹，并添加 `Hello.tsx` 的测试：
 
 ```ts
 // components/__tests__/Hello.tsx
@@ -298,10 +298,10 @@ it('renders correctly with defaults', () => {
 });
 ```
 
-The first time the test is run, it will create a snapshot of the rendered component and store it in the `components/__tests__/__snapshots__/Hello.tsx.snap` file. When you modify your component, you'll need to update the snapshots and review the update for inadvertent changes. You can read more about testing React Native components [here](https://facebook.github.io/jest/docs/en/tutorial-react-native.html).
+首次运行测试时，会生成组件渲染的快照并存储于 `components/__tests__/__snapshots__/Hello.tsx.snap` 文件。当你修改组件时，需要更新快照并审查改动，避免不经意的变更。你可以在[这里了解更多关于测试 React Native 组件的信息](https://facebook.github.io/jest/docs/en/tutorial-react-native.html)。
 
-## Next Steps
+## 下一步
 
-Check out the official [React tutorial](https://reactjs.org/tutorial/tutorial.html) and state-management library [Redux](https://redux.js.org). These resources can be helpful when writing React Native apps. Additionally, you may want to look at [ReactXP](https://microsoft.github.io/reactxp/), a component library written entirely in TypeScript that supports both React on the web as well as React Native.
+查看官方的[React 教程](https://reactjs.org/tutorial/tutorial.html) 和状态管理库 [Redux](https://redux.js.org)。这些资源在编写 React Native 应用时很有帮助。另外，你还可以看看 [ReactXP](https://microsoft.github.io/reactxp/)，它是一个完全用 TypeScript 编写的组件库，同时支持网页上的 React 和 React Native。
 
-Have fun in a more type-safe React Native development environment!
+祝你在更类型安全的 React Native 开发环境中玩得愉快！

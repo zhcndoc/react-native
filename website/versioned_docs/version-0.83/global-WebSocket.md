@@ -4,7 +4,7 @@ title: WebSocket
 ---
 
 :::warning
-🚧 This page is work in progress, so please refer to the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket) for more information.
+🚧 本页面正在建设中，如需更多信息，请参阅 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket)。
 :::
 
-The global `WebSocket` class, as defined in Web specifications.
+全局的 `WebSocket` 类，如 Web 规范中定义的。

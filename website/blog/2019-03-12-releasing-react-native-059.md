@@ -1,82 +1,82 @@
 ---
-title: Releasing React Native 0.59
+title: 发布 React Native 0.59
 author: Ryan Turner
-authorTitle: Core Maintainer & React Native Developer
+authorTitle: 核心维护者 & React Native 开发者
 authorURL: 'https://twitter.com/turnrye'
 authorImageURL: 'https://avatars0.githubusercontent.com/u/701035?s=460&v=4'
 authorTwitter: turnrye
-tags: [announcement, release]
+tags: [公告, 发布]
 ---
 
-Welcome to the 0.59 release of React Native! This is another big release with 644 commits by 88 contributors. Contributions also come in other forms, so _thank you_ for maintaining issues, fostering communities, and teaching people about React Native. This month brings a number of highly anticipated changes, and we hope you enjoy them.
+欢迎来到 React Native 0.59 版本！这是又一个重磅发布，包含了 88 位贡献者提交的 644 个提交。贡献的形式多种多样，因此 _感谢你们_ 维护问题、培育社区，以及教授大家 React Native。本月带来了一些备受期待的变更，希望你会喜欢。
 
-## 🎣 Hooks are here
+## 🎣 Hooks 来了
 
-React Hooks are part of this release, which let you reuse stateful logic across components. There is a lot of buzz about hooks, but if you haven't heard, take a look at some of the wonderful resources below:
+React Hooks 是本次发布的重要内容，它们让你可以跨组件重用有状态的逻辑。关于 hooks 话题非常热，如果你还没听说过，可以看看下面这些精彩资源：
 
-> - [Introducing Hooks](https://reactjs.org/docs/hooks-intro.html) explains why we’re adding Hooks to React.
-> - [Hooks at a Glance](https://reactjs.org/docs/hooks-overview.html) is a fast-paced overview of the built-in Hooks.
-> - [Building Your Own Hooks](https://reactjs.org/docs/hooks-custom.html) demonstrates code reuse with custom Hooks.
-> - [Making Sense of React Hooks](https://medium.com/@dan_abramov/making-sense-of-react-hooks-fdbde8803889) explores the new possibilities unlocked by Hooks.
-> - [useHooks.com](https://usehooks.com/) showcases community-maintained Hooks recipes and demos.
+> - [引入 Hooks](https://reactjs.org/docs/hooks-intro.html) 讲解了为什么我们要在 React 中引入 Hooks。
+> - [Hooks 概览](https://reactjs.org/docs/hooks-overview.html) 是对内置 Hooks 的快速介绍。
+> - [创建你自己的 Hooks](https://reactjs.org/docs/hooks-custom.html) 展示了如何用自定义 Hooks 复用代码。
+> - [理解 React Hooks](https://medium.com/@dan_abramov/making-sense-of-react-hooks-fdbde8803889) 探索了 Hooks 带来的新可能性。
+> - [useHooks.com](https://usehooks.com/) 展示社区维护的 Hooks 配方和演示。
 
-Be sure to give this a try in your apps. We hope that you find the reuse as exciting as we do.
+务必在你的应用中尝试使用。我们希望你能像我们一样为这种复用感到振奋。
 
-## 📱 Updated JSC means performance gains and 64-bit support on Android
+## 📱 更新的 JSC 带来性能提升和 Android 64 位支持
 
-React Native uses JSC ([JavaScriptCore](https://webkit.org/)) to power your application. JSC on Android was a few years old, which meant that a lot of modern JavaScript features weren't supported. Even worse, it performed poorly compared iOS's modern JSC. With this release, that all changes.
+React Native 使用 JSC（[JavaScriptCore](https://webkit.org/)）来驱动应用。Android 上的 JSC 版本较旧，很多现代 JavaScript 特性不支持。更糟的是，它的性能远不及 iOS 上的现代 JSC。随着本次版本发布，情况有了改变。
 
-Thanks to some awesome work by [@DanielZlotin](https://github.com/danielzlotin), [@dulmandakh](https://github.com/dulmandakh), [@gengjiawen](https://github.com/gengjiawen), [@kmagiera](https://github.com/kmagiera), and [@kudo](https://github.com/kudo) JSC has caught up with the past few years. This brings with it 64-bit support, modern JavaScript support, and [big performance improvements](https://github.com/react-native-community/jsc-android-buildscripts/tree/master/measure). Kudos for also making this a maintainable process now so that we can take advantage of future WebKit improvements without so much legwork, and thank you Software Mansion and Expo for making this work possible.
+感谢 [@DanielZlotin](https://github.com/danielzlotin), [@dulmandakh](https://github.com/dulmandakh), [@gengjiawen](https://github.com/gengjiawen), [@kmagiera](https://github.com/kmagiera) 和 [@kudo](https://github.com/kudo) 的精彩工作，JSC 赶上了近年来的进展。这带来了 64 位支持、现代 JavaScript 支持以及[显著的性能提升](https://github.com/react-native-community/jsc-android-buildscripts/tree/master/measure)。同时，也感谢他们让这个过程变得可维护，这样我们未来能够轻松利用 WebKit 的改进。感谢 Software Mansion 和 Expo 让这项工作成为可能。
 
-## 💨 Faster app launches with inline requires
+## 💨 使用内联 require 加快应用启动速度
 
-We want to help people have performant React Native apps by default and are working to bring Facebook's optimizations to the community. Applications load resources as needed rather than slowing down launch. This feature is called "inline requires", as it lets Metro identify components to be lazy loaded. Apps with a deep and varied component architecture will see the most improvement.
+我们想帮助大家让 React Native 应用默认性能更好，并正努力将 Facebook 的优化带给社区。应用按需加载资源，避免启动时变慢。该功能称为“内联 require”，它让 Metro 可以识别可延迟加载的组件。组件层级复杂且多样的应用将会体验到最大的改进。
 
-![source of the `metro.config.js` file in the 0.59 template, demonstrating where to enable `inlineRequires`](/blog/assets/inline-requires.png)
+![0.59 模板中的 `metro.config.js` 文件示例，展示了如何启用 `inlineRequires`](/blog/assets/inline-requires.png)
 
-We need the community to let us know how it works before we turn it on by default. When you upgrade to 0.59, there will be a new `metro.config.js` file; flip the options to true and give us [your feedback](https://twitter.com/hashtag/inline-requires)! Read more about inline requires [in the performance docs](/docs/performance#inline-requires) to benchmark your app.
+我们需要社区反馈效果如何，再决定是否默认启用。当你升级到 0.59 后，会看到一个新的 `metro.config.js` 文件；将选项切换为 true 并给我们[反馈](https://twitter.com/hashtag/inline-requires)吧！更多关于内联 require，请查看[性能文档](/docs/performance#inline-requires)并对你的应用进行基准测试。
 
-## 🚅 Lean core is underway
+## 🚅 精简核心正在进行中
 
-React Native is a large and complex project with a complicated repository. This makes the codebase less approachable to contributors, difficult to test, and bloated as a dev dependency. [Lean Core](https://github.com/react-native-community/discussions-and-proposals/issues/6) is our effort to address these issues by migrating code to separate libraries for better management. The past few releases have seen the first steps of this, but [let's get serious](https://www.youtube.com/watch?v=FMLKb4or8yg).
+React Native 是一个庞大且复杂的项目，代码库也很复杂。这使得代码不易接近贡献者，测试困难，且作为开发依赖显得臃肿。[精简核心](https://github.com/react-native-community/discussions-and-proposals/issues/6) 是我们为解决这些问题，将代码迁移到独立库以便更好管理的努力。过去几个版本已经开始了这一步伐，[让我们认真起来](https://www.youtube.com/watch?v=FMLKb4or8yg)。
 
-You may notice that additional components are now officially deprecated. This is great news, as there are now owners for these features actively maintaining them. Heed the warning messages and migrate to the new libraries for these features, because they will be removed in a future release. Below is a table indicating the component, its status, and where you may migrate your use to.
+你可能会注意到，更多组件已正式弃用。这是好消息，这些功能现在都有了活跃维护的负责人。请注意警告信息并迁移到新的库中，因为这些组件未来版本会被移除。下面表格列出了组件、弃用状态及迁移去处。
 
-| Component            | Deprecated? | New home                                                                                                                                                 |
+| 组件                  | 是否弃用？  | 新归宿                                                                                                                                                 |
 | -------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **AsyncStorage**     | 0.59        | [@react-native-community/react-native-async-storage](https://github.com/react-native-community/react-native-async-storage)                               |
-| **ImageStore**       | 0.59        | [expo-file-system](https://github.com/expo/expo/tree/master/packages/expo-file-system) or [react-native-fs](https://github.com/itinance/react-native-fs) |
+| **ImageStore**       | 0.59        | [expo-file-system](https://github.com/expo/expo/tree/master/packages/expo-file-system) 或 [react-native-fs](https://github.com/itinance/react-native-fs) |
 | **MaskedViewIOS**    | 0.59        | [@react-native-community/react-native-masked-view](https://github.com/react-native-community/react-native-masked-view)                                   |
 | **NetInfo**          | 0.59        | [@react-native-community/react-native-netinfo](https://github.com/react-native-community/react-native-netinfo)                                           |
 | **Slider**           | 0.59        | [@react-native-community/react-native-slider](https://github.com/react-native-community/react-native-slider)                                             |
 | **ViewPagerAndroid** | 0.59        | [@react-native-community/react-native-viewpager](https://github.com/react-native-community/react-native-viewpager)                                       |
 
-Over the coming months, there will be many more components following this path to a leaner core. We're looking for help with this &mdash; head over to the [lean core umbrella](https://github.com/facebook/react-native/issues/23313) to pitch in.
+未来几个月，还会有更多组件沿着这条路走向更精简的核心。我们正在寻求帮助——欢迎前往[精简核心专题](https://github.com/facebook/react-native/issues/23313)参与。
 
-## 👩🏽‍💻 CLI improvements
+## 👩🏽‍💻 CLI 改进
 
-React Native's command line tools are developer's entry point to the ecosystem, but they had long-standing issues and lacked official support. The CLI tools have been moved to a [new repository](https://github.com/react-native-community/react-native-cli), and a [dedicated group of maintainers](https://blog.callstack.io/the-react-native-cli-has-a-new-home-79b63838f0e6) have already made some exciting improvements.
+React Native 的命令行工具是开发者进入生态的入口，但长期存在问题且无官方支持。CLI 工具已迁移到[新仓库](https://github.com/react-native-community/react-native-cli)，一支[专注的维护团队](https://blog.callstack.io/the-react-native-cli-has-a-new-home-79b63838f0e6)已做出令人兴奋的改进。
 
-Logs are formatted much better now. Commands now run nearly instantly &mdash; you'll immediately notice a difference:
+日志格式更好，命令几乎瞬间执行——你会立即感受到差异：
 
-![0.58's CLI is slow to start](/blog/assets/0.58-cli-speed.png)![0.58's CLI is nearly instantaneous](/blog/assets/0.59-cli-speed.png)
+![0.58 版本中 CLI 启动较慢](/blog/assets/0.58-cli-speed.png) ![0.59 版本中 CLI 几乎瞬间响应](/blog/assets/0.59-cli-speed.png)
 
-## 🚀 Upgrading to 0.59
+## 🚀 升级到 0.59
 
-We heard your feedback regarding the [React Native upgrade process](https://github.com/react-native-community/discussions-and-proposals/issues/68) and we are taking steps to improve the experience in [future releases](https://github.com/react-native-community/discussions-and-proposals/issues/64#issuecomment-444775432). To upgrade to 0.59, we recommend using [`rn-diff-purge`](https://github.com/react-native-community/rn-diff-purge) to determine what has changed between your current React Native version and 0.59, then applying those changes manually. Once you've upgraded your project to 0.59, you will be able to use the newly improved `react-native upgrade` command (based on `rn-diff-purge`!) to upgrade to 0.60 and beyond as newer releases become available.
+我们听到了大家对 [React Native 升级流程](https://github.com/react-native-community/discussions-and-proposals/issues/68)的反馈，正在采取措施在[未来版本](https://github.com/react-native-community/discussions-and-proposals/issues/64#issuecomment-444775432)中提升体验。升级到 0.59 推荐使用 [`rn-diff-purge`](https://github.com/react-native-community/rn-diff-purge) 来确定你当前版本与 0.59 之间的差异，然后手动应用这些更改。升级完成后，便可使用改进后的 `react-native upgrade` 命令（基于 `rn-diff-purge`）来升级到 0.60 及后续版本。
 
-## 🔨 Breaking Changes
+## 🔨 重大变更
 
-Android support in 0.59 has been cleaned up following Google's latest recommendations, which may result in potential breakage of existing apps. This issue might present as a runtime crash and a message, "You need to use a Theme.AppCompat theme (or descendant) with this activity". We recommend updating your project's `AndroidManifest.xml` file, making sure that the `android:theme` value is an `AppCompat` theme (such as `@style/Theme.AppCompat.Light.NoActionBar`).
+0.59 对 Android 支持进行了整理，遵循 Google 最新推荐，可能导致已有应用出现问题。问题表现为运行时崩溃，并提示“你需要为该 Activity 使用 Theme.AppCompat 主题（或其派生）”。建议更新项目的 `AndroidManifest.xml` 文件，确保 `android:theme` 值为 AppCompat 主题（如 `@style/Theme.AppCompat.Light.NoActionBar`）。
 
-The `react-native-git-upgrade` command has been removed in 0.59, in favor of the newly improved `react-native upgrade` command.
+`react-native-git-upgrade` 命令在 0.59 中被移除，建议使用新改进的 `react-native upgrade` 命令替代。
 
-## 🤗 Thanks
+## 🤗 致谢
 
-Lots of new contributors helped with [enabling generation of native code from flow types](https://github.com/facebook/react-native/issues/22990) and [resolving Xcode warnings](https://github.com/facebook/react-native/issues/22609) - these are a great way to learn how React Native works and contributing to the greater good. Thank you! Look out for similar issues in the future.
+许多新贡献者帮助[启用从 flow 类型生成原生代码](https://github.com/facebook/react-native/issues/22990)和[解决 Xcode 警告](https://github.com/facebook/react-native/issues/22609)——这是学习 React Native 工作原理和为社区做贡献的好方式。谢谢大家！期待未来出现类似的议题。
 
-While these are the highlights that we noted, there are many others to be excited about. To see all of the updates, take a look at the [changelog](https://github.com/react-native-community/react-native-releases/blob/master/CHANGELOG.md). 0.59 is a huge release – we can't wait for you to try it out.
+以上是我们重点标注的内容，还有很多令人激动的更新。查看完整更新请阅读[更新日志](https://github.com/react-native-community/react-native-releases/blob/master/CHANGELOG.md)。0.59 是一个巨大版本——迫不及待想让你试用。
 
-We have even more improvements coming throughout the rest of the year. Stay tuned!
+今年剩余时间还有更多改进，敬请期待！
 
-[Ryan](https://github.com/turnrye) and the whole [React Native core team](https://twitter.com/reactnative)
+[Ryan](https://github.com/turnrye) 和整个 [React Native 核心团队](https://twitter.com/reactnative)

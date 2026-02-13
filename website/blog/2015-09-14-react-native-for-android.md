@@ -1,21 +1,21 @@
 ---
-title: 'React Native for Android: How we built the first cross-platform React Native app'
+title: 'Android 版 React Native：我们如何构建第一个跨平台的 React Native 应用'
 author: Daniel Witte
-authorTitle: Software Engineer at Facebook
+authorTitle: Facebook 软件工程师
 authorURL: 'https://www.facebook.com/drwitte'
 authorFBID: 210064
 hero: '/blog/assets/blue-hero.png'
 tags: [announcement]
 ---
 
-Earlier this year, we introduced [React Native for iOS](https://code.facebook.com/posts/1014532261909640/react-native-bringing-modern-web-techniques-to-mobile/). React Native brings what developers are used to from React on the web — declarative self-contained UI components and fast development cycles — to the mobile platform, while retaining the speed, fidelity, and feel of native applications. Today, we're happy to release React Native for Android.
+今年早些时候，我们推出了[iOS 版 React Native](https://code.facebook.com/posts/1014532261909640/react-native-bringing-modern-web-techniques-to-mobile/)。React Native 将开发者在网页端使用 React 时所熟悉的声明式自包含 UI 组件和快速开发周期带到了移动平台，同时保持了原生应用的速度、逼真度和使用感受。今天，我们很高兴地发布了 Android 版 React Native。
 
-At Facebook we've been using React Native in production for over a year now. Almost exactly a year ago, our team set out to develop the [Ads Manager app](https://www.facebook.com/business/news/ads-manager-app). Our goal was to create a new app to let the millions of people who advertise on Facebook manage their accounts and create new ads on the go. It ended up being not only Facebook's first fully React Native app but also the first cross-platform one. In this post, we'd like to share with you how we built this app, how React Native enabled us to move faster, and the lessons we learned.
+在 Facebook，我们已经在生产环境中使用 React Native 超过一年。几乎正好一年前，我们团队开始开发[广告管理器应用](https://www.facebook.com/business/news/ads-manager-app)。我们的目标是创建一款新应用，让数百万在 Facebook 上投放广告的用户能够随时管理账户并创建新广告。最终，这不仅是 Facebook 第一个完全基于 React Native 的应用，也是第一个跨平台应用。在这篇文章中，我们想与大家分享我们如何构建这款应用，React Native 如何帮助我们提速，以及我们所学到的经验教训。
 
 <footer>
   <a
     href="https://code.facebook.com/posts/1189117404435352/react-native-for-android-how-we-built-the-first-cross-platform-react-native-app/"
-    className="btn">Read more</a>
+    className="btn">阅读更多</a>
 </footer>
 
-> This is an excerpt. Read the rest of the post on [Facebook Code](https://code.facebook.com/posts/1189117404435352/react-native-for-android-how-we-built-the-first-cross-platform-react-native-app/).
+> 以上为节选内容。请在[Facebook Code](https://code.facebook.com/posts/1189117404435352/react-native-for-android-how-we-built-the-first-cross-platform-react-native-app/)阅读全文。

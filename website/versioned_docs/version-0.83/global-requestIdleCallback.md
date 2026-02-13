@@ -4,7 +4,7 @@ title: requestIdleCallback
 ---
 
 :::warning
-🚧 This page is work in progress, so please refer to the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback) for more information.
+🚧 本页面正在建设中，更多信息请参阅 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback)。
 :::
 
-The global `requestIdleCallback` function, as defined in Web specifications.
+全局的 `requestIdleCallback` 函数，如 Web 规范中定义。

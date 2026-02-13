@@ -1,48 +1,48 @@
 ---
 id: native-modules-android
-title: Android Native Modules
+title: Android 原生模块
 ---
 
-import NativeDeprecated from '../the-new-architecture/\_markdown_native_deprecation.mdx'
+import NativeDeprecated from '../the-new-architecture/_markdown_native_deprecation.mdx'
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 <NativeDeprecated />
 
-Welcome to Native Modules for Android. Please start by reading the [Native Modules Intro](native-modules-intro) for an intro to what native modules are.
+欢迎使用 Android 原生模块指南。请先阅读 [原生模块介绍](native-modules-intro) 来了解什么是原生模块。
 
-## Create a Calendar Native Module
+## 创建一个日历原生模块
 
-In the following guide you will create a native module, `CalendarModule`, that will allow you to access Android’s calendar APIs from JavaScript. By the end, you will be able to call `CalendarModule.createCalendarEvent('Dinner Party', 'My House');` from JavaScript, invoking a Java/Kotlin method that creates a calendar event.
+在接下来的指南中，您将创建一个名为 `CalendarModule` 的原生模块，允许您从 JavaScript 访问 Android 的日历 API。完成后，您可以在 JavaScript 中调用 `CalendarModule.createCalendarEvent('Dinner Party', 'My House');`，该调用会触发一个 Java/Kotlin 方法，创建一个日历事件。
 
-### Setup
+### 设置
 
-To get started, open up the Android project within your React Native application in Android Studio. You can find your Android project here within a React Native app:
-
-<figure>
-  <img src="/docs/assets/native-modules-android-open-project.png" width="500" alt="Image of opening up an Android project within a React Native app inside of Android Studio." />
-  <figcaption>Image of where you can find your Android project</figcaption>
-</figure>
-
-We recommend using Android Studio to write your native code. Android Studio is an IDE built for Android development and using it will help you resolve minor issues like code syntax errors quickly.
-
-We also recommend enabling [Gradle Daemon](https://docs.gradle.org/2.9/userguide/gradle_daemon.html) to speed up builds as you iterate on Java/Kotlin code.
-
-### Create A Custom Native Module File
-
-The first step is to create the (`CalendarModule.java` or `CalendarModule.kt`) Java/Kotlin file inside `android/app/src/main/java/com/your-app-name/` folder (the folder is the same for both Kotlin and Java). This Java/Kotlin file will contain your native module Java/Kotlin class.
+首先，在 Android Studio 中打开您的 React Native 应用中的 Android 项目。Android 项目路径通常在 React Native 应用中的：
 
 <figure>
-  <img src="/docs/assets/native-modules-android-add-class.png" width="700" alt="Image of adding a class called CalendarModule.java within the Android Studio." />
-  <figcaption>Image of how to add the CalendarModuleClass</figcaption>
+  <img src="/docs/assets/native-modules-android-open-project.png" width="500" alt="在 Android Studio 内打开 React Native 应用中的 Android 项目示意图" />
+  <figcaption>Android 项目所在位置示意图</figcaption>
 </figure>
 
-Then add the following content:
+我们推荐使用 Android Studio 编写原生代码，因为它是专为 Android 开发构建的 IDE，有助于快速解决语法错误等小问题。
+
+建议启用 [Gradle Daemon](https://docs.gradle.org/2.9/userguide/gradle_daemon.html) 以加快您多次迭代 Java/Kotlin 代码时的构建速度。
+
+### 创建自定义原生模块文件
+
+第一步是在 `android/app/src/main/java/com/your-app-name/` 目录下创建一个名为 `CalendarModule.java` 或 `CalendarModule.kt` 的 Java/Kotlin 文件（两个语言共用此文件夹）。该文件中将包含您的原生模块 Java/Kotlin 类。
+
+<figure>
+  <img src="/docs/assets/native-modules-android-add-class.png" width="700" alt="在 Android Studio 中添加名为 CalendarModule.java 的类的示意图" />
+  <figcaption>添加 CalendarModule 类示意</figcaption>
+</figure>
+
+然后添加如下内容：
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
 
 ```java
-package com.your-apps-package-name; // replace your-apps-package-name with your app’s package name
+package com.your-apps-package-name; // 将 your-apps-package-name 替换为您的应用包名
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
@@ -62,7 +62,7 @@ public class CalendarModule extends ReactContextBaseJavaModule {
 <TabItem value="kotlin">
 
 ```kotlin
-package com.your-apps-package-name; // replace your-apps-package-name with your app’s package name
+package com.your-apps-package-name // 将 your-apps-package-name 替换为您的应用包名
 import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContext
@@ -75,23 +75,23 @@ class CalendarModule(reactContext: ReactApplicationContext) : ReactContextBaseJa
 </TabItem>
 </Tabs>
 
-As you can see, your `CalendarModule` class extends the `ReactContextBaseJavaModule` class. For Android, Java/Kotlin native modules are written as classes that extend `ReactContextBaseJavaModule` and implement the functionality required by JavaScript.
+如您所见，您的 `CalendarModule` 类继承了 `ReactContextBaseJavaModule`。在 Android 中，Java/Kotlin 的原生模块通过继承 `ReactContextBaseJavaModule` 类实现，并实现被 JavaScript 调用所需的功能。
 
 :::note
-It is worth noting that technically Java/Kotlin classes only need to extend the `BaseJavaModule` class or implement the `NativeModule` interface to be considered a Native Module by React Native.
+实际上，Java/Kotlin 类只需继承 `BaseJavaModule` 类或实现 `NativeModule` 接口即可被视为 React Native 原生模块。
 
-However we recommend that you use `ReactContextBaseJavaModule`, as shown above. `ReactContextBaseJavaModule` gives access to the `ReactApplicationContext` (RAC), which is useful for Native Modules that need to hook into activity lifecycle methods. Using `ReactContextBaseJavaModule` will also make it easier to make your native module type-safe in the future. For native module type-safety, which is coming in future releases, React Native looks at each native module's JavaScript spec and generates an abstract base class that extends `ReactContextBaseJavaModule`.
+但建议您如上所示使用 `ReactContextBaseJavaModule`，该类提供对 `ReactApplicationContext`（RAC）的访问，对于需要监听 Activity 生命周期方法的原生模块非常有用。未来如果原生模块支持类型安全，React Native 将查看每个原生模块的 JavaScript 规格，并生成继承自 `ReactContextBaseJavaModule` 的抽象基类，从而更易实现类型安全。
 :::
 
-### Module Name
+### 模块名称
 
-All Java/Kotlin native modules in Android need to implement the `getName()` method. This method returns a string, which represents the name of the native module. The native module can then be accessed in JavaScript using its name. For example, in the below code snippet, `getName()` returns `"CalendarModule"`.
+所有 Android 上的 Java/Kotlin 原生模块都必须实现 `getName()` 方法。该方法返回字符串，代表模块名，JavaScript 端便可用该名称访问相应模块。例如下文 `getName()` 返回 `"CalendarModule"`：
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
 
 ```java
-// add to CalendarModule.java
+// 添加到 CalendarModule.java
 @Override
 public String getName() {
    return "CalendarModule";
@@ -102,24 +102,24 @@ public String getName() {
 <TabItem value="kotlin">
 
 ```kotlin
-// add to CalendarModule.kt
+// 添加到 CalendarModule.kt
 override fun getName() = "CalendarModule"
 ```
 
 </TabItem>
 </Tabs>
 
-The native module can then be accessed in JS like this:
+JavaScript 中可这样访问该模块：
 
 ```tsx
 const {CalendarModule} = ReactNative.NativeModules;
 ```
 
-### Export a Native Method to JavaScript
+### 导出原生方法给 JavaScript 调用
 
-Next you will need to add a method to your native module that will create calendar events and can be invoked in JavaScript. All native module methods meant to be invoked from JavaScript must be annotated with `@ReactMethod`.
+接下来需要为原生模块新增一个方法，用于创建日历事件并可被 JavaScript 调用。所有可被 JavaScript 调用的原生模块方法必须标注 `@ReactMethod`。
 
-Set up a method `createCalendarEvent()` for `CalendarModule` that can be invoked in JS through `CalendarModule.createCalendarEvent()`. For now, the method will take in a name and location as strings. Argument type options will be covered shortly.
+请为 `CalendarModule` 设置一个 `createCalendarEvent()` 方法，可通过 `CalendarModule.createCalendarEvent()` 在 JS 端调用。现阶段，方法接受两个字符串参数，分别是活动名称和地点。参数类型后文会详细介绍。
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
@@ -140,7 +140,7 @@ public void createCalendarEvent(String name, String location) {
 </TabItem>
 </Tabs>
 
-Add a debug log in the method to confirm it has been invoked when you call it from your application. Below is an example of how you can import and use the [Log](https://developer.android.com/reference/android/util/Log) class from the Android util package:
+在方法内添加调试日志，确认调用已生效。以下展示如何导入并使用 Android util 包中的 [Log](https://developer.android.com/reference/android/util/Log) 类：
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
@@ -170,11 +170,11 @@ fun createCalendarEvent(name: String, location: String) {
 </TabItem>
 </Tabs>
 
-Once you finish implementing the native module and hook it up in JavaScript, you can follow [these steps](https://developer.android.com/studio/debug/am-logcat.html) to view the logs from your app.
+完成实现并在 JavaScript 中连接后，可以参考[此步骤](https://developer.android.com/studio/debug/am-logcat.html) 查看应用日志。
 
-### Synchronous Methods
+### 同步方法
 
-You can pass `isBlockingSynchronousMethod = true` to a native method to mark it as a synchronous method.
+可以在原生方法上添加 `isBlockingSynchronousMethod = true`，将其标记为同步方法。
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
@@ -193,23 +193,23 @@ You can pass `isBlockingSynchronousMethod = true` to a native method to mark it 
 </TabItem>
 </Tabs>
 
-At the moment, we do not recommend this, since calling methods synchronously can have strong performance penalties and introduce threading-related bugs to your native modules. Additionally, please note that if you choose to enable `isBlockingSynchronousMethod`, your app can no longer use the Google Chrome debugger. This is because synchronous methods require the JS VM to share memory with the app. For the Google Chrome debugger, React Native runs inside the JS VM in Google Chrome, and communicates asynchronously with the mobile devices via WebSockets.
+目前不推荐这样做，因为同步调用可能会带来较大的性能开销及线程相关的错误。此外启用同步方法时，应用将无法使用 Google Chrome 调试器，因为同步方法要求 JS VM 与应用共享内存，而 Chrome 调试器中的 React Native 运行在 Chrome 的 JS VM 中，通过 WebSocket 异步通信。
 
-### Register the Module (Android Specific)
+### 注册模块（仅 Android）
 
-Once a native module is written, it needs to be registered with React Native. In order to do so, you need to add your native module to a `ReactPackage` and register the `ReactPackage` with React Native. During initialization, React Native will loop over all packages, and for each `ReactPackage`, register each native module within.
+编写原生模块后，需将其注册到 React Native。为此，须将模块添加至 `ReactPackage` 并在 React Native 中注册该包。初始化时，React Native 会遍历所有包，并对每个 `ReactPackage` 注册其中的原生模块。
 
-React Native invokes the method `createNativeModules()` on a `ReactPackage` in order to get the list of native modules to register. For Android, if a module is not instantiated and returned in createNativeModules it will not be available from JavaScript.
+React Native 调用 `ReactPackage` 的 `createNativeModules()` 方法以获取待注册原生模块列表。Android 中若模块未在 `createNativeModules` 中实例化并返回，则无法在 JavaScript 中访问。
 
-To add your Native Module to `ReactPackage`, first create a new Java/Kotlin Class named (`MyAppPackage.java` or `MyAppPackage.kt`) that implements `ReactPackage` inside the `android/app/src/main/java/com/your-app-name/` folder:
+首先创建一个新的 Java/Kotlin 类（`MyAppPackage.java` 或 `MyAppPackage.kt`），实现 `ReactPackage`，放在 `android/app/src/main/java/com/your-app-name/` 目录：
 
-Then add the following content:
+添加以下内容：
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
 
 ```java
-package com.your-app-name; // replace your-app-name with your app’s name
+package com.your-app-name; // 将 your-app-name 替换为应用名
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -243,7 +243,7 @@ public class MyAppPackage implements ReactPackage {
 <TabItem value="kotlin">
 
 ```kotlin
-package com.your-app-name // replace your-app-name with your app’s name
+package com.your-app-name // 将 your-app-name 替换为应用名
 
 import android.view.View
 import com.facebook.react.ReactPackage
@@ -267,15 +267,13 @@ class MyAppPackage : ReactPackage {
 </TabItem>
 </Tabs>
 
-This file imports the native module you created, `CalendarModule`. It then instantiates `CalendarModule` within the `createNativeModules()` function and returns it as a list of `NativeModules` to register. If you add more native modules down the line, you can also instantiate them and add them to the list returned here.
+该文件导入您创建的原生模块 `CalendarModule`，然后在 `createNativeModules()` 中进行实例化并以列表形式返回注册。如果日后添加更多模块，也可在此处实例化并添加至列表。
 
 :::note
-It is worth noting that this way of registering native modules eagerly initializes all native modules when the application starts, which adds to the startup time of an application. You can use [TurboReactPackage](https://github.com/facebook/react-native/blob/main/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/TurboReactPackage.kt) as an alternative. Instead of `createNativeModules`, which return a list of instantiated native module objects, TurboReactPackage implements a `getModule(String name, ReactApplicationContext rac)` method that creates the native module object, when required. TurboReactPackage is a bit more complicated to implement at the moment. In addition to implementing a `getModule()` method, you have to implement a `getReactModuleInfoProvider()` method, which returns a list of all the native modules the package can instantiate along with a function that instantiates them, example [here](https://github.com/facebook/react-native/blob/8ac467c51b94c82d81930b4802b2978c85539925/ReactAndroid/src/main/java/com/facebook/react/CoreModulesPackage.java#L86-L165). Again, using TurboReactPackage will allow your application to have a faster startup time, but it is currently a bit cumbersome to write. So proceed with caution if you choose to use TurboReactPackages.
+这种注册原生模块的方式会在应用启动时立即初始化所有模块，可能增加启动时间。可考虑使用 [TurboReactPackage](https://github.com/facebook/react-native/blob/main/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/TurboReactPackage.kt) 替代。TurboReactPackage 通过实现 `getModule(String name, ReactApplicationContext rac)` 方法按需实例化模块，从而加快启动速度。不过目前实现略复杂，还需实现 `getReactModuleInfoProvider()` 方法，返回包含所有可实例化原生模块及其构造函数的列表，示例参见 [这里](https://github.com/facebook/react-native/blob/8ac467c51b94c82d81930b4802b2978c85539925/ReactAndroid/src/main/java/com/facebook/react/CoreModulesPackage.java#L86-L165)。若选择该方式，请谨慎操作。
 :::
 
-To register the `CalendarModule` package, you must add `MyAppPackage` to the list of packages returned in ReactNativeHost's `getPackages()` method. Open up your `MainApplication.java` or `MainApplication.kt` file, which can be found in the following path: `android/app/src/main/java/com/your-app-name/`.
-
-Locate ReactNativeHost’s `getPackages()` method and add your package to the packages list `getPackages()` returns:
+在 `MainApplication.java` 或 `MainApplication.kt`（路径为 `android/app/src/main/java/com/your-app-name/`）中找到 ReactNativeHost 的 `getPackages()` 方法，将 `MyAppPackage` 添加到返回列表：
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
@@ -284,7 +282,7 @@ Locate ReactNativeHost’s `getPackages()` method and add your package to the pa
 @Override
 protected List<ReactPackage> getPackages() {
     List<ReactPackage> packages = new PackageList(this).getPackages();
-    // Packages that cannot be autolinked yet can be added manually here, for example:
+    // 此处可手动添加尚不支持自动链接的包，例如:
     // packages.add(new MyReactNativePackage());
     packages.add(new MyAppPackage());
     return packages;
@@ -297,7 +295,7 @@ protected List<ReactPackage> getPackages() {
 ```kotlin
 override fun getPackages(): List<ReactPackage> =
     PackageList(this).packages.apply {
-        // Packages that cannot be autolinked yet can be added manually here, for example:
+        // 此处可手动添加尚不支持自动链接的包，例如：
         // add(MyReactNativePackage())
         add(MyAppPackage())
     }
@@ -306,13 +304,13 @@ override fun getPackages(): List<ReactPackage> =
 </TabItem>
 </Tabs>
 
-You have now successfully registered your native module for Android!
+至此，您已成功为 Android 注册了原生模块！
 
-### Test What You Have Built
+### 测试您的成果
 
-At this point, you have set up the basic scaffolding for your native module in Android. Test that out by accessing the native module and invoking its exported method in JavaScript.
+此时，您已搭建好 Android 端原生模块的基本结构。通过在 JavaScript 中访问并调用其方法，进行测试。
 
-Find a place in your application where you would like to add a call to the native module’s `createCalendarEvent()` method. Below is an example of a component, `NewModuleButton` you can add in your app. You can invoke the native module inside `NewModuleButton`'s `onPress()` function.
+找一个合适位置调用原生模块的 `createCalendarEvent()` 方法。以下示例显示了一个组件 `NewModuleButton`，您可以在它的 `onPress()` 函数内部调用原生模块。
 
 ```tsx
 import React from 'react';
@@ -335,19 +333,19 @@ const NewModuleButton = () => {
 export default NewModuleButton;
 ```
 
-In order to access your native module from JavaScript you need to first import `NativeModules` from React Native:
+在 JS 中要访问原生模块，需先导入 React Native 的 `NativeModules`：
 
 ```tsx
 import {NativeModules} from 'react-native';
 ```
 
-You can then access the `CalendarModule` native module off of `NativeModules`.
+然后从 `NativeModules` 中获取 `CalendarModule`：
 
 ```tsx
 const {CalendarModule} = NativeModules;
 ```
 
-Now that you have the CalendarModule native module available, you can invoke your native method `createCalendarEvent()`. Below it is added to the `onPress()` method in `NewModuleButton`:
+既然有了 `CalendarModule`，即可调用其导出方法 `createCalendarEvent()`。示例中加入了该调用至 `NewModuleButton` 的 `onPress()`：
 
 ```tsx
 const onPress = () => {
@@ -355,7 +353,7 @@ const onPress = () => {
 };
 ```
 
-The final step is to rebuild the React Native app so that you can have the latest native code (with your new native module!) available. In your command line, where the react native application is located, run the following:
+最后重建 React Native 应用，以确保最新原生代码（包含新模块）生效。打开命令行，切换到 React Native 项目的根目录，运行：
 
 <Tabs groupId="package-manager" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>
 <TabItem value="npm">
@@ -374,51 +372,49 @@ yarn android
 </TabItem>
 </Tabs>
 
-### Building as You Iterate
+### 开发迭代中的构建
 
-As you work through these guides and iterate on your native module, you will need to do a native rebuild of your application to access your most recent changes from JavaScript. This is because the code that you are writing sits within the native part of your application. While React Native’s metro bundler can watch for changes in JavaScript and rebuild on the fly for you, it will not do so for native code. So if you want to test your latest native changes you need to rebuild by using the above command.
+当您在开发过程中反复修改原生模块，需要执行原生重建以让最新的改动在 JS 端可用。原因在于原生代码属于应用原生部分，不同于 React Native 的 Metro bundler 会自动监听 JS 代码变更并热更新，原生代码改动必须手动构建。
 
-### Recap✨
+### 总结✨
 
-You should now be able to invoke your `createCalendarEvent()` method on your native module in the app. In our example this occurs by pressing the `NewModuleButton`. You can confirm this by viewing the log you set up in your `createCalendarEvent()` method. You can follow [these steps](https://developer.android.com/studio/debug/am-logcat.html) to view ADB logs in your app. You should then be able to search for your `Log.d` message (in our example “Create event called with name: testName and location: testLocation”) and see your message logged each time you invoke your native module method.
+此时您应该可以通过点击 `NewModuleButton` 来调用原生模块的 `createCalendarEvent()` 方法，并可通过之前添加的日志确认方法是否被调用。您可以参考[此文档](https://developer.android.com/studio/debug/am-logcat.html)查看 Android Studio 中的 ADB 日志，搜索 `Log.d` 中打印的信息（示例中为 “Create event called with name: testName and location: testLocation”），确认调用成功。
 
 <figure>
-  <img src="/docs/assets/native-modules-android-logs.png" width="1000" alt="Image of logs." />
-  <figcaption>Image of ADB logs in Android Studio</figcaption>
+  <img src="/docs/assets/native-modules-android-logs.png" width="1000" alt="日志截图" />
+  <figcaption>Android Studio 中的 ADB 日志示意</figcaption>
 </figure>
 
-At this point you have created an Android native module and invoked its native method from JavaScript in your React Native application. You can read on to learn more about things like argument types available to a native module method and how to setup callbacks and promises.
+至此，您已创建了一个 Android 原生模块，并在 React Native 应用中成功调用其原生方法。接下来您可以继续了解更多内容，如原生模块方法带参类型、如何设置回调和 Promise 等。
 
-## Beyond a Calendar Native Module
+## 超越日历原生模块
 
-### Better Native Module Export
+### 更优雅的原生模块导出
 
-Importing your native module by pulling it off of `NativeModules` like above is a bit clunky.
+直接从 `NativeModules` 取模块使用并不方便。
 
-To save consumers of your native module from needing to do that each time they want to access your native module, you can create a JavaScript wrapper for the module. Create a new JavaScript file named `CalendarModule.js` with the following content:
+为简化模块消费者的调用，每次访问都通过 `NativeModules` 拉取很繁琐。可以为模块创建一个 JS 包装文件，例如命名为 `CalendarModule.js`，内容如下：
 
 ```tsx
 /**
-* This exposes the native CalendarModule module as a JS module. This has a
-* function 'createCalendarEvent' which takes the following parameters:
+* 这个文件将原生的 CalendarModule 模块暴露为 JS 模块，包含一个函数 'createCalendarEvent'，参数如下：
 
-* 1. String name: A string representing the name of the event
-* 2. String location: A string representing the location of the event
+* 1. String name: 活动名称字符串
+* 2. String location: 活动地点字符串
 */
 import {NativeModules} from 'react-native';
 const {CalendarModule} = NativeModules;
 export default CalendarModule;
 ```
 
-This JavaScript file also becomes a good location for you to add any JavaScript side functionality. For example, if you use a type system like TypeScript you can add type annotations for your native module here. While React Native does not yet support Native to JS type safety, all your JS code will be type safe. Doing so will also make it easier for you to switch to type-safe native modules down the line. Below is an example of adding type safety to the CalendarModule:
+这个 JS 文件也适合放置任何 JS 端功能。如您使用 TypeScript，可在此添加类型注解。虽然目前 React Native 尚不支持原生到 JS 的类型安全，但您写的 JS 代码会是类型安全的。这样也利于后续迁移到类型安全的原生模块。以下示例为 CalendarModule 增加类型安全：
 
 ```tsx
 /**
- * This exposes the native CalendarModule module as a JS module. This has a
- * function 'createCalendarEvent' which takes the following parameters:
+ * 这个文件将原生的 CalendarModule 模块暴露为 JS 模块，包含一个函数 'createCalendarEvent'，参数如下：
  *
- * 1. String name: A string representing the name of the event
- * 2. String location: A string representing the location of the event
+ * 1. String name: 活动名称字符串
+ * 2. String location: 活动地点字符串
  */
 import {NativeModules} from 'react-native';
 const {CalendarModule} = NativeModules;
@@ -428,7 +424,7 @@ interface CalendarInterface {
 export default CalendarModule as CalendarInterface;
 ```
 
-In your other JavaScript files you can access the native module and invoke its method like this:
+其他 JS 文件可如下导入使用：
 
 ```tsx
 import CalendarModule from './CalendarModule';
@@ -436,12 +432,12 @@ CalendarModule.createCalendarEvent('foo', 'bar');
 ```
 
 :::note
-This assumes that the place you are importing `CalendarModule` is in the same hierarchy as `CalendarModule.js`. Please update the relative import as necessary.
+这里假设您导入 `CalendarModule` 的文件路径与 `CalendarModule.js` 在同一层级，需根据实际情况调整相对路径。
 :::
 
-### Argument Types
+### 参数类型
 
-When a native module method is invoked in JavaScript, React Native converts the arguments from JS objects to their Java/Kotlin object analogues. So for example, if your Java Native Module method accepts a double, in JS you need to call the method with a number. React Native will handle the conversion for you. Below is a list of the argument types supported for native module methods and the JavaScript equivalents they map to.
+当从 JavaScript 调用原生模块方法时，React Native 会自动将 JS 对象参数转换为相应的 Java/Kotlin 对象类型。比如 Java 原生方法接收 `double`，则需在 JS 使用数字调用，调用时转换自动完成。以下为常用参数类型及其 JS 对应类型映射表：
 
 | Java          | Kotlin        | JavaScript |
 | ------------- | ------------- | ---------- |
@@ -456,15 +452,15 @@ When a native module method is invoked in JavaScript, React Native converts the 
 | ReadableArray | ReadableArray | Array      |
 
 :::info
-The following types are currently supported but will not be supported in TurboModules. Please avoid using them:
+以下类型当前支持，但不支持 TurboModules，请避免使用：
 
 - Integer Java/Kotlin -> ?number
 - Float Java/Kotlin -> ?number
 - int Java -> number
 - float Java -> number
-  :::
+:::
 
-For argument types not listed above, you will need to handle the conversion yourself. For example, in Android, `Date` conversion is not supported out of the box. You can handle the conversion to the `Date` type within the native method yourself like so:
+对于上述未列出的参数类型，您需要自行进行转换。例如 Android 默认不支持 `Date` 转换，您需在原生方法中手动转换：
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
@@ -496,9 +492,9 @@ For argument types not listed above, you will need to handle the conversion your
 </TabItem>
 </Tabs>
 
-### Exporting Constants
+### 导出常量
 
-A native module can export constants by implementing the native method `getConstants()`, which is available in JS. Below you will implement `getConstants()` and return a Map that contains a `DEFAULT_EVENT_NAME` constant you can access in JavaScript:
+原生模块可通过实现 `getConstants()` 方法导出常量供 JS 使用，示例如下，导出名为 `DEFAULT_EVENT_NAME` 的常量：
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
@@ -523,24 +519,24 @@ override fun getConstants(): MutableMap<String, Any> =
 </TabItem>
 </Tabs>
 
-The constant can then be accessed by invoking `getConstants` on the native module in JS:
+在 JS 中通过调用 `getConstants()` 访问：
 
 ```tsx
 const {DEFAULT_EVENT_NAME} = CalendarModule.getConstants();
 console.log(DEFAULT_EVENT_NAME);
 ```
 
-Technically it is possible to access constants exported in `getConstants()` directly off the native module object. This will no longer be supported with TurboModules, so we encourage the community to switch to the above approach to avoid necessary migration down the line.
+理论上也可以直接通过 native module 对象属性访问常量，但 TurboModules 不再支持该方式，建议尽早改用前述方式以方便未来迁移。
 
 :::note
-That currently constants are exported only at initialization time, so if you change getConstants values at runtime it won't affect the JavaScript environment. This will change with Turbomodules. With Turbomodules, `getConstants()` will become a regular native module method, and each invocation will hit the native side.
+目前 `getConstants()` 方法只在初始化时调用一次，运行时修改不会影响 JS 环境。以后 TurboModules 会将其视为普通原生方法，调用时将交互 Native 端。
 :::
 
-### Callbacks
+### 回调（Callbacks）
 
-Native modules also support a unique kind of argument: a callback. Callbacks are used to pass data from Java/Kotlin to JavaScript for asynchronous methods. They can also be used to asynchronously execute JavaScript from the native side.
+原生模块支持特殊的参数类型：回调，用于异步方法中 JS 和 Java/Kotlin 之间传递数据，也可在原生端异步调用 JS。
 
-In order to create a native module method with a callback, first import the `Callback` interface, and then add a new parameter to your native module method of type `Callback`. There are a couple of nuances with callback arguments that will soon be lifted with TurboModules. First off, you can only have two callbacks in your function arguments- a successCallback and a failureCallback. In addition, the last argument to a native module method call, if it's a function, is treated as the successCallback, and the second to last argument to a native module method call, if it's a function, is treated as the failure callback.
+创建回调方法时需先导入 `Callback` 接口，方法参数增加一个类型为 `Callback` 的参数。当前回调函数只能有两个：一个是 successCallback，一个是 failureCallback。且方法调用时，若最后一个参数是函数，则为 successCallback，倒数第二个函数参数为 failureCallback。
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
@@ -565,7 +561,7 @@ import com.facebook.react.bridge.Callback
 </TabItem>
 </Tabs>
 
-You can invoke the callback in your Java/Kotlin method, providing whatever data you want to pass to JavaScript. Please note that you can only pass serializable data from native code to JavaScript. If you need to pass back a native object you can use `WriteableMaps`, if you need to use a collection use `WritableArrays`. It is also important to highlight that the callback is not invoked immediately after the native function completes. Below the ID of an event created in an earlier call is passed to the callback.
+您可以在 Java/Kotlin 方法中调用回调并传递参数，但只能传递可序列化数据；若需传递复杂对象，可使用 `WritableMap`，集合可用 `WritableArray`。需要注意，回调不会在函数执行完马上调用。例如下方示例将事件 ID 传给回调：
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
@@ -592,7 +588,7 @@ You can invoke the callback in your Java/Kotlin method, providing whatever data 
 </TabItem>
 </Tabs>
 
-This method could then be accessed in JavaScript using:
+JavaScript 可这样调用：
 
 ```tsx
 const onPress = () => {
@@ -606,9 +602,9 @@ const onPress = () => {
 };
 ```
 
-Another important detail to note is that a native module method can only invoke one callback, one time. This means that you can either call a success callback or a failure callback, but not both, and each callback can only be invoked at most one time. A native module can, however, store the callback and invoke it later.
+原生方法只能调用一次回调，即只能调用成功或者失败回调，且仅能调用一次。但原生模块可以保存回调以后调用。
 
-There are two approaches to error handling with callbacks. The first is to follow Node’s convention and treat the first argument passed to the callback as an error object.
+错误处理有两种方式，第一种是借鉴 Node 习惯，将回调第一个参数视为 error 对象。
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
@@ -635,7 +631,7 @@ There are two approaches to error handling with callbacks. The first is to follo
 </TabItem>
 </Tabs>
 
-In JavaScript, you can then check the first argument to see if an error was passed through:
+JS 端通过第一个参数判断是否有错误：
 
 ```tsx
 const onPress = () => {
@@ -652,7 +648,7 @@ const onPress = () => {
 };
 ```
 
-Another option is to use an onSuccess and onFailure callback:
+另一种方式是分别设置 onSuccess 和 onFailure 回调：
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
@@ -679,7 +675,7 @@ public void createCalendarEvent(String name, String location, Callback myFailure
 </TabItem>
 </Tabs>
 
-Then in JavaScript you can add a separate callback for error and success responses:
+JS 调用时分别传入两个回调：
 
 ```tsx
 const onPress = () => {
@@ -696,11 +692,11 @@ const onPress = () => {
 };
 ```
 
-### Promises
+### Promise
 
-Native modules can also fulfill a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), which can simplify your JavaScript, especially when using ES2016's [async/await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) syntax. When the last parameter of a native module Java/Kotlin method is a Promise, its corresponding JS method will return a JS Promise object.
+原生模块还支持返回 [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)，可以简化 JS 代码，特别是配合 ES2016 的 [async/await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) 使用。当原生方法最后一个参数为 Promise，调用 JS 方法时会返回 JS Promise 对象。
 
-Refactoring the above code to use a promise instead of callbacks looks like this:
+将上面代码重构为使用 Promise 示例：
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
@@ -740,10 +736,10 @@ fun createCalendarEvent(name: String, location: String, promise: Promise) {
 </Tabs>
 
 :::note
-Similar to callbacks, a native module method can either reject or resolve a promise (but not both) and can do so at most once. This means that you can either call a success callback or a failure callback, but not both, and each callback can only be invoked at most one time. A native module can, however, store the callback and invoke it later.
+与回调类似，原生方法只能调用一次 Promise 的 resolve 或 reject。意味着只能成功或失败调用一次，但可以缓存回调稍后触发。
 :::
 
-The JavaScript counterpart of this method returns a Promise. This means you can use the `await` keyword within an async function to call it and wait for its result:
+JS 端该方法返回 Promise，可用 async/await 使用：
 
 ```tsx
 const onSubmit = async () => {
@@ -759,7 +755,7 @@ const onSubmit = async () => {
 };
 ```
 
-The reject method takes different combinations of the following arguments:
+reject 方法支持以下参数组合：
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
@@ -778,9 +774,9 @@ code: String, message: String, userInfo: WritableMap, throwable: Throwable
 </TabItem>
 </Tabs>
 
-For more detail, you can find the `Promise.java` interface [here](https://github.com/facebook/react-native/blob/main/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/bridge/Promise.kt). If `userInfo` is not provided, ReactNative will set it to null. For the rest of the parameters React Native will use a default value. The `message` argument provides the error `message` shown at the top of an error call stack. Below is an example of the error message shown in JavaScript from the following reject call in Java/Kotlin.
+详情请查看 [Promise.java 接口](https://github.com/facebook/react-native/blob/main/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/bridge/Promise.kt)。若未提供 `userInfo`，React Native 会设其为 null。`message` 字段会作为错误调用堆栈顶部的错误信息。下面是 Java/Kotlin 代码中调用 reject 的示例，和对应在 React Native 应用中显示的错误信息。
 
-Java/Kotlin reject call:
+Java/Kotlin reject 调用：
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
@@ -799,16 +795,16 @@ promise.reject("Create Event error", "Error parsing date", e)
 </TabItem>
 </Tabs>
 
-Error message in React Native App when promise is rejected:
+React Native 应用中拒绝时的错误消息：
 
 <figure>
-  <img src="/docs/assets/native-modules-android-errorscreen.png" width="200" alt="Image of error message in React Native app." />
-  <figcaption>Image of error message</figcaption>
+  <img src="/docs/assets/native-modules-android-errorscreen.png" width="200" alt="React Native 应用中的错误消息示意图" />
+  <figcaption>错误消息示意</figcaption>
 </figure>
 
-### Sending Events to JavaScript
+### 向 JavaScript 发送事件
 
-Native modules can signal events to JavaScript without being invoked directly. For example, you might want to signal to JavaScript a reminder that a calendar event from the native Android calendar app will occur soon. The easiest way to do this is to use the `RCTDeviceEventEmitter` which can be obtained from the `ReactContext` as in the code snippet below.
+原生模块可在未被调用时主动向 JavaScript 发送事件，例如您可能想通知 JS 原生 Android 日历事件即将开始。最简便的做法是使用 `RCTDeviceEventEmitter`，可通过 `ReactContext` 获取，示例如下：
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
@@ -832,7 +828,7 @@ private int listenerCount = 0;
 @ReactMethod
 public void addListener(String eventName) {
   if (listenerCount == 0) {
-    // Set up any upstream listeners or background tasks as necessary
+    // 需要时设置上游监听或后台任务
   }
 
   listenerCount += 1;
@@ -842,7 +838,7 @@ public void addListener(String eventName) {
 public void removeListeners(Integer count) {
   listenerCount -= count;
   if (listenerCount == 0) {
-    // Remove upstream listeners, stop unnecessary background tasks
+    // 移除上游监听，停止后台任务
   }
 }
 ...
@@ -873,7 +869,7 @@ private var listenerCount = 0
 @ReactMethod
 fun addListener(eventName: String) {
   if (listenerCount == 0) {
-    // Set up any upstream listeners or background tasks as necessary
+    // 需要时设置上游监听或后台任务
   }
 
   listenerCount += 1
@@ -883,7 +879,7 @@ fun addListener(eventName: String) {
 fun removeListeners(count: Int) {
   listenerCount -= count
   if (listenerCount == 0) {
-    // Remove upstream listeners, stop unnecessary background tasks
+    // 移除上游监听，停止后台任务
   }
 }
 ...
@@ -897,7 +893,7 @@ sendEvent(reactContext, "EventReminder", params)
 </TabItem>
 </Tabs>
 
-JavaScript modules can then register to receive events by `addListener` on the [NativeEventEmitter](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/EventEmitter/NativeEventEmitter.js) class.
+JavaScript 模块可通过 [NativeEventEmitter](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/EventEmitter/NativeEventEmitter.js) 类的 `addListener` 注册监听事件：
 
 ```tsx
 import {NativeEventEmitter, NativeModules} from 'react-native';
@@ -908,16 +904,16 @@ useEffect(() => {
       console.log(event.eventProperty) // "someValue"
     });
 
-    // Removes the listener once unmounted
+    // 组件卸载时移除监听
     return () => {
       eventListener.remove();
     };
   }, []);
 ```
 
-### Getting Activity Result from startActivityForResult
+### 获取 startActivityForResult 返回结果
 
-You'll need to listen to `onActivityResult` if you want to get results from an activity you started with `startActivityForResult`. To do this, you must extend `BaseActivityEventListener` or implement `ActivityEventListener`. The former is preferred as it is more resilient to API changes. Then, you need to register the listener in the module's constructor like so:
+如您想获取通过 `startActivityForResult` 启动的 Activity 结果，需监听 `onActivityResult`。实现方式是继承 `BaseActivityEventListener` 或实现 `ActivityEventListener`（推荐前者，因为它对 API 变更更具适应性）。然后在模块构造函数中注册，如下：
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
@@ -936,7 +932,7 @@ reactContext.addActivityEventListener(mActivityResultListener);
 </TabItem>
 </Tabs>
 
-Now you can listen to `onActivityResult` by implementing the following method:
+通过实现下方方法，监听 `onActivityResult`：
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
@@ -948,7 +944,7 @@ public void onActivityResult(
  final int requestCode,
  final int resultCode,
  final Intent intent) {
- // Your logic here
+ // 您的逻辑
 }
 ```
 
@@ -962,14 +958,14 @@ override fun onActivityResult(
     resultCode: Int,
     intent: Intent?
 ) {
-    // Your logic here
+    // 您的逻辑
 }
 ```
 
 </TabItem>
 </Tabs>
 
-Let's implement a basic image picker to demonstrate this. The image picker will expose the method `pickImage` to JavaScript, which will return the path of the image when called.
+下面实现一个简单的图片选择器，用于演示。该模块向 JS 暴露 `pickImage` 方法，调用后返回图片路径。
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
@@ -1012,7 +1008,7 @@ public class ImagePickerModule extends ReactContextBaseJavaModule {
   ImagePickerModule(ReactApplicationContext reactContext) {
     super(reactContext);
 
-    // Add the listener for `onActivityResult`
+    // 注册 onActivityResult 监听器
     reactContext.addActivityEventListener(mActivityEventListener);
   }
 
@@ -1030,7 +1026,7 @@ public class ImagePickerModule extends ReactContextBaseJavaModule {
       return;
     }
 
-    // Store the promise to resolve/reject when picker returns data
+    // 存储 Promise 以便选择器返回数据时 resolve/reject
     mPickerPromise = promise;
 
     try {
@@ -1127,9 +1123,9 @@ class ImagePickerModule(reactContext: ReactApplicationContext) :
 </TabItem>
 </Tabs>
 
-### Listening to Lifecycle Events
+### 监听生命周期事件
 
-Listening to the activity's LifeCycle events such as `onResume`, `onPause` etc. is very similar to how `ActivityEventListener` was implemented. The module must implement `LifecycleEventListener`. Then, you need to register a listener in the module's constructor like so:
+监听 Activity 的生命周期事件如 `onResume`、`onPause` 等，与实现 `ActivityEventListener` 类似。模块需实现 `LifecycleEventListener` 接口，然后在构造函数中注册监听：
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
@@ -1148,7 +1144,7 @@ reactContext.addLifecycleEventListener(this)
 </TabItem>
 </Tabs>
 
-Now you can listen to the activity's LifeCycle events by implementing the following methods:
+实现以下方法监听生命周期事件：
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
@@ -1188,6 +1184,6 @@ override fun onHostDestroy() {
 </TabItem>
 </Tabs>
 
-### Threading
+### 线程处理
 
-To date, on Android, all native module async methods execute on one thread. Native modules should not have any assumptions about what thread they are being called on, as the current assignment is subject to change in the future. If a blocking call is required, the heavy work should be dispatched to an internally managed worker thread, and any callbacks distributed from there.
+截至目前，Android 上所有原生模块异步方法都在同一线程执行。原生模块不应对调用线程做假设，未来线程分配方案可能变化。若需阻塞调用，应将耗时工作分发到内部管理的工作线程，并在回调时分发结果。

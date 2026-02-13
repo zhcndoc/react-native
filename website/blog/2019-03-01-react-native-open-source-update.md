@@ -1,54 +1,54 @@
 ---
-title: React Native Open Source Update March 2019
+title: React Native 开源更新 — 2019年3月
 authors: [cpojer]
 tags: [announcement]
 ---
 
-We announced our [React Native Open Source roadmap](/blog/2018/11/01/oss-roadmap) in Q4 2018 after deciding to invest more in the React Native open source community.
+我们于2018年第四季度公布了我们的 [React Native 开源路线图](/blog/2018/11/01/oss-roadmap)，决定加大对 React Native 开源社区的投入。
 
-For our first milestone, we focused on identifying and improving the most visible aspects of our community. Our goals were to reduce outstanding pull requests, reduce the project's surface area, identify leading user problems, and establish guidelines for community management.
+在第一个里程碑中，我们重点关注识别和改进社区中最显眼的方面。我们的目标是减少未合并的拉取请求，缩减项目的表面面积，确定主要用户问题，并建立社区管理的指导方针。
 
-In the past two months, we made more progress than we expected. Read on for more details:
+在过去两个月里，我们取得了超过预期的进展。详情请继续阅读：
 
-### Pull Requests
+### 拉取请求
 
-In order to build a healthy community, we must respond quickly to code contributions. In past years, we de-prioritized reviewing community contributions and accumulated 280 pull requests (December 2018). In the first milestone, we reduced the number of open pull requests to ~65. Simultaneously, the average number of pull requests opened per day increased from 3.5 to 7 which means we have handled about [600 pull requests](https://github.com/facebook/react-native/pulls?page=24&q=is%3Apr+closed%3A%3E2018-12-01&utf8=%E2%9C%93) in the last three months.
+为了构建一个健康的社区，我们必须快速响应代码贡献。过去几年里，我们不太重视社区贡献的审查，积压了280个拉取请求（2018年12月）。在第一个里程碑里，我们将未处理的拉取请求数量减少到约65个。同时，每天新开的拉取请求平均数量从3.5个增长到了7个，这意味着我们在过去三个月处理了大约 [600个拉取请求](https://github.com/facebook/react-native/pulls?page=24&q=is%3Apr+closed%3A%3E2018-12-01&utf8=%E2%9C%93)。
 
-We merged [almost two-thirds](https://github.com/facebook/react-native/pulls?utf8=%E2%9C%93&q=is%3Apr+closed%3A%3E2018-12-01+label%3A%22Merged%22+) and closed one-third of the pull requests. They were closed without being merged if they are obsolete or low quality, or if they unnecessarily increase the project's surface area. Most of the merged pull requests fixed bugs, improved cross-platform parity, or introduced new features. Notable contributions include improving type safety and the ongoing work to support AndroidX.
+我们合并了 [近三分之二](https://github.com/facebook/react-native/pulls?utf8=%E2%9C%93&q=is%3Apr+closed%3A%3E2018-12-01+label%3A%22Merged%22+) 的拉取请求，关闭了三分之一。关闭的拉取请求没有被合并，原因是它们已经过时或者质量较低，或者不必要地增加了项目表面面积。大部分合并的拉取请求修复了错误，提升了跨平台一致性，或者引入了新功能。其中值得一提的贡献包括提升类型安全和支持 AndroidX 的持续工作。
 
-At Facebook, we run React Native from master, so we test all changes first before they make it into a React Native Release. Out of all the merged pull requests, only six caused issues: four only affected internal development and two were caught in the release candidate state.
+在 Facebook，我们直接运行 React Native 的主分支，因此所有更改都会先经过测试，确保发布版本的质量。在所有合并的拉取请求中，只有6个引发了问题：4个只影响了内部开发，2个是在发布候选版本阶段被发现。
 
-One of the more visible community contributions was [the updated “RedBox” screen](https://github.com/facebook/react-native/pull/22242). It's a good example of how the community is making the developer experience friendlier.
+社区中较为显眼的贡献之一是 [更新后的“RedBox”屏幕](https://github.com/facebook/react-native/pull/22242)。这是社区如何改善开发者体验的一个良好范例。
 
-### Lean Core
+### 精简核心（Lean Core）
 
-React Native currently has a very wide surface area with many unmaintained abstractions that we do not use a lot at Facebook. We are working on reducing the surface area in order to make React Native smaller and allow the community to take better care of abstractions that are mostly unused at Facebook.
+当前 React Native 的表面面积非常广泛，包含许多已经不维护的抽象层，这些在 Facebook 内部使用较少。我们正在努力缩减表面面积，以使 React Native 更加精简，并让社区更好地维护那些 Facebook 内部较少使用的抽象层。
 
-In the first milestone, [we asked the community for help on the Lean Core project](https://twitter.com/reactnative/status/1093171521114247171). The response was overwhelming and we could barely keep up with all the progress. [Check out all the work completed in less than a month](https://github.com/facebook/react-native/issues/23313)!
+在第一个里程碑中， [我们向社区寻求 Lean Core 项目的帮助](https://twitter.com/reactnative/status/1093171521114247171)。社区反响热烈，我们几乎应接不暇。 [看看不到一个月内完成的所有工作](https://github.com/facebook/react-native/issues/23313)！
 
-What we are most excited about is that maintainers have jumped in fixing long standing issues, adding tests, and supporting long requested features. These modules are getting more support than they ever did within React Native, showing that this is a great step for the community. Examples of such projects are [WebView](https://github.com/react-native-community/react-native-webview) that has [received many pull requests](https://twitter.com/titozzz/status/1101283928026034176) since their extraction and the CLI that is now [maintained by members of the community](https://blog.callstack.io/the-react-native-cli-has-a-new-home-79b63838f0e6) and received much needed improvements and fixes.
+最让我们兴奋的是，维护者们积极投入，修复了长期存在的问题，增加了测试，并支持了很多长期以来请求的功能。这些模块获得的支持超过了 React Native 以往任何时候，说明这对社区来说是一个巨大进步。示例项目包括自抽取以来收到大量拉取请求的 [WebView](https://github.com/react-native-community/react-native-webview)，以及由社区成员维护的 CLI，如今已收获了急需的改进和修复，详情见 [React Native CLI 新家园](https://blog.callstack.io/the-react-native-cli-has-a-new-home-79b63838f0e6)。
 
-### Leading User Problems
+### 主要用户问题
 
-In December, we asked the community what they [disliked about React Native](https://github.com/react-native-community/discussions-and-proposals/issues/64). We aggregated the responses and [replied to each and every problem](https://github.com/react-native-community/discussions-and-proposals/issues/104). Fortunately, many of the issues that our community faces are also problems at Facebook. In our next milestone, we plan to address some of the main problems.
+2018年12月，我们向社区征询了他们关于 [React Native 不满意的地方](https://github.com/react-native-community/discussions-and-proposals/issues/64)。我们汇总了反馈，并对每个问题进行了 [回复](https://github.com/react-native-community/discussions-and-proposals/issues/104)。幸运的是，我们社区面临的许多问题，Facebook 内部同样存在。下一里程碑中，我们计划解决一些主要问题。
 
-One of the highest voted problems was the developer experience of upgrading to newer versions of React Native. Unfortunately, this is not something that we experience ourselves because we run React Native from master. Thankfully, members from the community already stepped up to address this problem:
+其中投票最高的问题之一是升级到 React Native 新版本时的开发体验。遗憾的是，我们在 Facebook 内部并不经历这一问题，因为我们直接使用主分支。值得庆幸的是，社区成员已开始着手改进这一问题：
 
-- [Michał Pierzchała](https://github.com/thymikee) from Callstack [improved react-native upgrade](https://github.com/react-native-community/react-native-cli/pull/176/files) by using [rn-diff-purge](https://github.com/react-native-community/rn-diff-purge) under the hood. We also updated the website to remove outdated upgrade instructions.
-- [We plan on recommending CocoaPods by default for iOS projects](https://github.com/facebook/react-native/pull/23563) which will reduce churn in project files when upgrading React Native. This will make it easier for people to install and link third-party modules which is even more important in the context of Lean Core as we expect projects to link more modules by default.
+- 来自 Callstack 的 [Michał Pierzchała](https://github.com/thymikee) 通过在底层使用 [rn-diff-purge](https://github.com/react-native-community/rn-diff-purge)，提升了 react-native upgrade 功能，见 [相关拉取请求](https://github.com/react-native-community/react-native-cli/pull/176/files)。我们同时更新了官网，移除过时的升级说明。
+- [计划默认推荐 iOS 项目使用 CocoaPods](https://github.com/facebook/react-native/pull/23563)，这将减少升级 React Native 时工程文件的频繁变动。这也使得安装和链接第三方模块更简单，在 Lean Core 语境下尤为重要，因为预计项目默认将链接更多模块。
 
-### 0.59 Release
+### 0.59 版本发布
 
-Without the help of the React Native community, especially [Mike Grabowski](https://github.com/grabbou) and [Lorenzo Sciandra](https://github.com/kelset), we would not be able to ship releases. We want to improve the release management process and plan to be more involved from now on:
+没有 React Native 社区，特别是 [Mike Grabowski](https://github.com/grabbou) 和 [Lorenzo Sciandra](https://github.com/kelset) 的帮助，我们无法顺利发布版本。我们希望改进发布管理流程，并计划从现在起更加积极参与：
 
-- We will work with community members to create a blog post for each major release.
-- We will show breaking changes directly in the CLI when people upgrade to new versions.
-- We will reduce the time it takes to make a release. We are exploring ways to increase automated testing and also creating an improved manual test plan.
+- 将与社区成员协作，为每个主要版本撰写博客文章。
+- 在升级新版本时，在 CLI 中直接显示重大破坏性变更。
+- 缩短发布所需时间。我们正在探索增加自动化测试并创建更完善的手动测试计划的方案。
 
-Many of these plans will be incorporated in the upcoming [React Native 0.59 release](https://github.com/facebook/react-native/releases/tag/v0.59.0-rc.3). 0.59 will ship with React Hooks, a new 64-bit version of JavaScriptCore for Android, and many performance and functionality improvements. It is currently published as a release candidate and is expected to be stable within the next two weeks.
+许多计划将体现在即将发布的 [React Native 0.59 版本](https://github.com/facebook/react-native/releases/tag/v0.59.0-rc.3) 中。0.59 将带来 React Hooks、针对 Android 的新 64 位 JavaScriptCore 版本以及许多性能和功能提升。目前它已经作为候选版本发布，预计两周内稳定。
 
-### Next Steps
+### 后续计划
 
-For the next two months, we will continue managing pull requests [to stay on track](https://k03lwm00zo.codesandbox.io/) while also starting to reduce the number of outstanding GitHub issues. We will continue reducing the surface area of React Native through the Lean Core project. We plan to address 5 of the top community problems. As we finalize the community guidelines, we will turn attention to our website and documentation.
+接下来的两个月里，我们将继续管理拉取请求， [保持进度](https://k03lwm00zo.codesandbox.io/)，同时开始减少未处理的 GitHub 问题数。我们将通过 Lean Core 项目持续缩减 React Native 表面面积。计划解决社区排名前5的主要问题。在完善社区指南后，我们将关注网站和文档。
 
-We are very excited to host over ten contributors from our community at Facebook London in March to help drive several of these efforts. We are glad that you are using React Native and hope that you'll see and feel the improvements we are working on in 2019. We'll be back with another update in a few months and _will be merging your pull requests in the meantime!_ ⚛️✌️
+我们非常高兴能在3月于 Facebook 伦敦接待来自社区的十多位贡献者，共同推进多项工作。感谢你们使用 React Native，希望你们能感受到我们在2019年努力带来的改进。数月后我们将带来新更新，_届时也会持续合并你们的拉取请求！_ ⚛️✌️

@@ -15,17 +15,19 @@ import Home from '../components/Home';
 const Index = () => {
   return (
     <Layout
-      description="A framework for building native apps for Android, iOS, and more using React"
+      description="一个使用 React 构建 Android、iOS 等原生应用的框架"
       wrapperClassName="homepage">
       <Head>
-        <title>React Native · Learn once, write anywhere</title>
+        <title>
+          React Native 中文文档 - 使用 React 构建 Android、iOS 等原生应用
+        </title>
         <meta
           property="og:title"
-          content="React Native · Learn once, write anywhere"
+          content="React Native 中文文档 - 使用 React 构建 Android、iOS 等原生应用"
         />
         <meta
           property="twitter:title"
-          content="React Native · Learn once, write anywhere"
+          content="React Native 中文文档 - 使用 React 构建 Android、iOS 等原生应用"
         />
       </Head>
       <Home />

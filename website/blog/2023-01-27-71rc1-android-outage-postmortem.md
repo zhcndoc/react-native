@@ -1,103 +1,104 @@
 ---
-title: 'React Native 0.71-RC0 Android outage postmortem'
+title: 'React Native 0.71-RC0 安卓故障事后分析'
 authors: [cortinico, kelset]
 tags: [engineering]
 date: 2023-01-27
 ---
 
-Now that 0.71 is [available](/blog/2023/01/12/version-071), we want to share some key information about the incident that broke Android builds for all React Native versions while releasing the first 0.71 release candidate for React Native & Expo Android builds on November 4th, 2022.
+现在 0.71 版本已经[发布](/blog/2023/01/12/version-071)，我们想分享一些关于 2022 年 11 月 4 日发布首个 0.71 候选版本时，导致所有 React Native 版本安卓构建失败的关键事件信息。
 
-The contributors who helped tackle the incident recently attended a post-mortem meeting to discuss in detail what happened, what we all learned from it, and what actions we are going to take to avoid similar outages in the future.
+帮助处理此次事件的贡献者们近日参加了一个事后分析会议，详细讨论了事件的经过、我们从中学到了什么，以及未来将采取哪些措施来避免类似的故障。
 
 <!--truncate-->
 
-## What happened
+## 事件经过
 
-On November 4th 2022, we published the version `0.71.0-rc0` of React Native, the first release candidate for 0.71, on several public repositories.
+2022 年 11 月 4 日，我们发布了 React Native 版本 `0.71.0-rc0`，这是 0.71 的首个候选版本，发布到了多个公共仓库。
 
-A major change made in this release candidate helped to improve build times by publishing artifacts to Maven Central, instead of building them from source. More details on how this was done are available in [RFC#508](https://github.com/react-native-community/discussions-and-proposals/pull/508) and [related discussions](https://github.com/reactwg/react-native-new-architecture/discussions/105).
+该版本候选发布了一个关键变更，通过将构建产物发布到 Maven Central，而不是从源码构建，从而提升了构建速度。关于这一做法的更多细节可以参见 [RFC#508](https://github.com/react-native-community/discussions-and-proposals/pull/508) 以及[相关讨论](https://github.com/reactwg/react-native-new-architecture/discussions/105)。
 
-Unfortunately, because of the way we scaffolded new projects from the template, this caused build failures for any Android user on older versions because they would start downloading new artifacts for `0.71.0-rc0` instead of the version they were using in their project (like `0.68.0`).
+不幸的是，由于我们从模板搭建新项目的方式，导致旧版本安卓用户构建失败，因为构建时开始下载 `0.71.0-rc0` 版本的新工件，而不是项目中使用的版本（例如 `0.68.0`）。
 
-## Why this happened
+## 事件原因
 
-The React Native template provides a `build.gradle` file to build Android apps. This file contains a dependency on the React Native Android library as follows:
-`implementation("com.facebook.react:react-native:+")`.
+React Native 模板提供了一个 `build.gradle` 文件用于构建安卓应用。该文件包含对 React Native 安卓库的依赖：
 
-Importantly, the `+` part of this dependency (a [Gradle Dynamic version](https://docs.gradle.org/current/userguide/dynamic_versions.html)) tells Gradle to pick the highest available version of React Native. Using Gradle Dynamic versions is considered an antipattern as it exposes users to less-reproducible builds.
+`implementation("com.facebook.react:react-native:+")`。
 
-We were aware of the issues dynamic versions could cause, so in `0.71` we cleaned up the new app template and removed all the `+` dependencies. However, users on older versions of React Native were still using a `+` version.
+这里的 `+` 部分是一个 [Gradle 动态版本](https://docs.gradle.org/current/userguide/dynamic_versions.html)，它指示 Gradle 选取可用的最高版本。使用动态版本被认为是不良实践，因为它会导致构建结果难以复现。
 
-This caused builds with React Native versions before `0.71.0-rc.0` to query all the repositories for the highest available versions of the React Native. Because the newly pushed 0.71.0-rc.0 on Maven Central became the highest version available, builds with React Native versions before 0.71.0-rc.0 started using artifacts from 0.71.0-rc.0. The React Native version mismatch between the local build (e.g `0.68.0`) and artifacts from Maven Central (`0.71.0-rc.0`) caused these builds to fail.
+我们意识到动态版本可能带来的问题，因此在 `0.71` 版本中清理了新的应用模板，移除了所有 `+` 依赖。然而，旧版本的 React Native 用户依然在使用 `+` 版本。
 
-Further technical details on this event area are also available [on this GitHub issue](https://github.com/facebook/react-native/issues/35210).
+这导致 `0.71.0-rc0` 之前的 React Native 版本构建时，会在所有仓库查询最高可用的 React Native 版本。由于新推送到 Maven Central 的 `0.71.0-rc0` 是最高版本，使用早期版本的构建开始下载并使用了 `0.71.0-rc0` 的工件。本地构建版本（如 `0.68.0`）与 Maven Central 拿到的工件版本不匹配，导致构建失败。
 
-## How we mitigated & resolved
+此事件的更多技术细节可见于[该 GitHub 问题](https://github.com/facebook/react-native/issues/35210)。
 
-As soon as we identified the issue on November 4th, the community found and shared a manual workaround to fix the issue which would pin React Native to a specific, correcting the mistake.
+## 我们如何缓解和解决
 
-Then, over the weekend of November 5th and 6th, the release crew shipped patch releases for all previous React Native versions down to 0.63 which automatically applied the patch, so that users could update to a fixed version of React Native.
+2022 年 11 月 4 日问题确认后，社区迅速发现并分享了一个手动的临时解决方法，固定 React Native 版本以纠正错误。
 
-At the same time, we [reached out to Sonatype](https://issues.sonatype.org/browse/OSSRH-86006) to ask for the removal of the offending artifacts.
+随后，在 11 月 5 日和 6 日的周末，发布团队为所有旧版本直至 0.63 进行了补丁发布，自动应用修复，使用户可升级到修复后的版本。
 
-The issue was fully resolved on November 8th when the artifacts were fully removed from Maven Central.
+同时，我们[联系了 Sonatype](https://issues.sonatype.org/browse/OSSRH-86006)，请求移除相关有问题的工件。
 
-## Timeline of events
+该问题于 11 月 8 日彻底解决，当时相关工件从 Maven Central 被完全移除。
 
-_This section contains a brief timeline of the events. All times are GMT/UTC +0_
+## 事件时间线
 
-- Nov 4th - 5:06 PM: [0.71-RC0 is released](https://github.com/facebook/react-native/releases/tag/v0.71.0-rc.0).
-- Nov 4th - 6:20 PM: [First report of build issue is opened](https://github.com/facebook/react-native/issues/35204).
-- Nov 4th - 7:45 PM: [Issue is identified by community](https://github.com/facebook/react-native/issues/35204#issuecomment-1304090948).
-- Nov 4th - 9:39 PM: [Workarounds are communicated, Expo ](https://github.com/facebook/react-native/issues/35204#issuecomment-1304281740)deploys fix to all their users.
-- Nov 5th - 03:04 AM: [New issue is open to communicate status and workarounds](https://github.com/facebook/react-native/issues/35210).
-- Nov 6th - 04:11 PM: [Ticket to SonaType](https://issues.sonatype.org/browse/OSSRH-86006?focusedCommentId=1216303&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#comment-1216303) asking for removal of the artifacts is open.
-- Nov 6th - 04:40 PM: [First tweet](https://twitter.com/reactnative/status/1589296764678705155) from @reactnative with ack + link to issue.
-- Nov 6th - 07:05 PM: Decision to patch React Native versions back to 0.63.
-- Nov 7th - 12:47 AM: Last patched release is released: [0.63.5](https://github.com/facebook/react-native/releases/tag/v0.63.5).
-- Nov 8th - 08:04 PM: Artifacts on Maven Central are [fully removed](https://issues.sonatype.org/browse/OSSRH-86006?focusedCommentId=1216303&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#comment-1216303).
-- Nov 10th - 11:51 AM: Issue about the [incident is closed](https://github.com/facebook/react-native/issues/35210#issuecomment-1310170361).
+_本节为事件简要时间线，所有时间均为 GMT/UTC +0_
 
-## Lessons Learned
+- 11 月 4 日 - 17:06：[发布 0.71-RC0](https://github.com/facebook/react-native/releases/tag/v0.71.0-rc.0)。
+- 11 月 4 日 - 18:20：[首次构建问题报告](https://github.com/facebook/react-native/issues/35204)。
+- 11 月 4 日 - 19:45：[社区定位问题](https://github.com/facebook/react-native/issues/35204#issuecomment-1304090948)。
+- 11 月 4 日 - 21:39：[共享解决方案，Expo](https://github.com/facebook/react-native/issues/35204#issuecomment-1304281740)向所有用户部署修复。
+- 11 月 5 日 - 03:04：[新问题单开启，通报状态及解决方案](https://github.com/facebook/react-native/issues/35210)。
+- 11 月 6 日 - 16:11：[给 Sonatype 开启移除工件请求](https://issues.sonatype.org/browse/OSSRH-86006?focusedCommentId=1216303&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#comment-1216303)。
+- 11 月 6 日 - 16:40：[@reactnative 发布首条推特](https://twitter.com/reactnative/status/1589296764678705155)，附带问题链接与确认。
+- 11 月 6 日 - 19:05：决定为 React Native 版本回补至 0.63。
+- 11 月 7 日 - 00:47：发布最后一个补丁版本：[0.63.5](https://github.com/facebook/react-native/releases/tag/v0.63.5)。
+- 11 月 8 日 - 20:04：Maven Central 上的工件被[完全移除](https://issues.sonatype.org/browse/OSSRH-86006?focusedCommentId=1216303&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#comment-1216303)。
+- 11 月 10 日 - 11:51：关于本事件的[问题关闭](https://github.com/facebook/react-native/issues/35210#issuecomment-1310170361)。
 
-While in many ways the conditions to trigger this incident has existed since React Native 0.12.0, we want to ensure that the foundations on which we develop and release React Native moving forward are stronger. Here are some of the lessons learned and the actionables on how we’ll adapt our processes and infrastructure to respond faster and stronger in the future.
+## 学到的教训
 
-### Incident response strategy
+虽然触发该事件的条件在 React Native 0.12.0 就存在，我们希望确保未来开发与发布 React Native 的基础更加稳固。以下是我们总结的经验教训和行动方案，用以改进流程和基础设施，以便未来能更快速且更强有力地响应类似事件。
 
-This incident highlighted gaps in our incident response strategy for open-source issues related to React Native.
+### 事件响应策略
 
-The community quickly found a workaround in less than 2 hours. Due to our lack of visibility on the scope of the impact of this issue, as well as the complexity required to fix it for old versions, we relied on impacted people discovering the workaround on the GitHub issue.
+此次事件暴露了我们在应对开源 React Native 相关问题时事件响应策略的不足。
 
-It took us 48 hours to recognize the larger scope of this issue and that we couldn’t rely on everyone finding the GitHub issue. We needed to prioritize more complex active mitigations to automatically fix people’s projects.
+社区在不到 2 小时内迅速找到临时解决方案。由于缺乏对问题影响范围的清晰了解，且修复旧版本较为复杂，我们只能依赖受影响用户在 GitHub 问题中发现解决方法。
 
-We will be revisiting our processes for when to rely on developer-applied-workarounds vs fixes that we can deploy automatically. We will also take a look at our options for getting a better live pulse on the health of our ecosystem.
+我们花了 48 小时才意识到问题影响范围远大，且不能依赖所有用户自行发现 GitHub 上的问题。必须优先考虑更加复杂的主动缓解措施，自动修复用户项目。
 
-### Release Support Policy
+未来，我们将重新审视哪些情况可依赖开发者自行采取解决方案，哪些需要我们自动部署修复。同时，我们也会探索更好的手段实时监控生态健康状况。
 
-As visualized in the [rn-versions tool](https://rn-versions.github.io/), to cover more than 90% of the developer base of React Native at the time of the incident, we had to release patches all the way down to version 0.63.
+### 发布支持策略
 
-We believe this is caused by the React Native upgrade experience which has historically been full of frictions. We are currently looking into ways to improve the upgrade experience to make it smoother and faster to mitigate this fragmentation of the ecosystem.
+如在 [rn-versions 工具](https://rn-versions.github.io/)中可见，这次为覆盖当时超过 90% 的 React Native 开发者用户，我们不得不为最低至 0.63 版本发布补丁。
 
-Releasing a newer version of React Native should never have an impact on users on older versions, and we want to apologize for the disruption we caused to your workflow.
+我们认为这主要是由于 React Native 升级体验历来存在诸多摩擦造成的。我们正着手改进升级流程，期望未来升级能更加平滑快速，降低生态割裂的情况。
 
-Similarly, we want to also stress the importance of being up to date with the latest version of your dependencies and React Native to benefit from the improvements and the safeguards we introduced. This incident happened during a time in which an official [release support policy](https://github.com/reactwg/react-native-releases#releases-support-policy) was getting defined and wasn’t broadcasted or enforced yet.
+新版本 React Native 发布时绝不应该影响旧版本用户，针对工作流程的中断，我们深感抱歉。
 
-In the future, we will communicate our support policy over our communication channels and we will consider [deprecating older versions of React Native on npm](https://docs.npmjs.com/deprecating-and-undeprecating-packages-or-package-versions).
+同时，我们也希望强调，保持依赖和 React Native 的版本最新非常重要，以享受到改进和我们引入的安全措施。本事件发生时官方的[发布支持政策](https://github.com/reactwg/react-native-releases#releases-support-policy)仍在制定，尚未公布或强制执行。
 
-### Improved testing and best practices for 3rd party libraries
+未来，我们会通过沟通渠道传达支持政策，并考虑[在 npm 上废弃旧版本 React Native](https://docs.npmjs.com/deprecating-and-undeprecating-packages-or-package-versions)。
 
-This incident highlighted the importance of having better release testing and better guidance to 3rd party libraries.
+### 改进测试及对第三方库的最佳实践指导
 
-On the testing side, releasing versions down to `0.63.x` proved to be challenging due to the lack of automation and testing we now have in place for stable releases. We recognize the importance of our release and testing infrastructure and we’re going to invest further in it in the future.
+此次事件凸显了加强发布测试和为第三方库提供更好指导的重要性。
 
-Specifically, we are now encouraging and supporting 3rd party library testing as part of the [release of react native](https://github.com/reactwg/react-native-releases/discussions/41). We’re also adding some new channels and roles in the [Core Contributors Discord Server](https://github.com/facebook/react-native/blob/main/ECOSYSTEM.md#core-contributors).
+测试方面，向 `0.63.x` 版本回补补丁困难重重，原因在于我们现有稳定发布缺乏充足的自动化测试基础设施。我们认识到发布和测试基础设施的重要性，未来将加大投入。
 
-On top of this, we started a closer collaboration with Callstack, the maintainers of [create-react-native-library](https://github.com/callstack/react-native-builder-bob/tree/main/packages/create-react-native-library), to improve the library template and make sure it follows all the necessary best practices to integrate with React Native projects. The newer version of `create-react-native-library` is now fully compatible with 0.71 projects while still offering backward compatibility.
+具体而言，我们现在鼓励并支持第三方库在[React Native 发布流程](https://github.com/reactwg/react-native-releases/discussions/41)中进行测试。同时，也在[核心贡献者 Discord 服务器](https://github.com/facebook/react-native/blob/main/ECOSYSTEM.md#core-contributors)增加了新的渠道和角色支持。
 
-## Conclusions
+此外，我们开始与 Callstack（[create-react-native-library](https://github.com/callstack/react-native-builder-bob/tree/main/packages/create-react-native-library)的维护者）展开更紧密合作，改进库模板，确保符合 React Native 项目集成的最佳实践。更新后的 `create-react-native-library` 版本与 0.71 版本完全兼容且依旧支持向后兼容。
 
-We want to apologize for the disruption this caused to the workflows of developers all around the world. As highlighted above, we have already started taking action to strengthen our foundation - and more work is due.
+## 结论
 
-We hope that sharing these insights will help you all better understand this incident, and that you can leverage our learnings to apply better practices in your own tools and projects.
+我们对此次事件对全球开发者工作流造成的干扰深表歉意。如前所述，我们已经开始采取措施强化基础——但仍有许多工作要做。
 
-In closing, we want once again to thank Sonatype for helping us remove the artifacts, our community, and the release crew that worked tirelessly to address this as soon as possible.
+我们希望通过分享这些洞见，帮助大家更好地理解本次事件，并能借鉴我们的经验，在自己的工具和项目中实施更好的实践。
+
+最后，我们再次感谢 Sonatype 协助我们移除有问题工件，感谢社区的贡献，以及发布团队不懈努力，争取尽快解决此事件。

@@ -3,6 +3,6 @@ id: global-global
 title: global
 ---
 
-[`global`](https://nodejs.org/api/globals.html#global) is a legacy alias for [`globalThis`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/globalThis), as defined in Node.js.
+[`global`](https://nodejs.org/api/globals.html#global) 是 Node.js 中定义的 [`globalThis`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/globalThis) 的旧别名。
 
-The use of `globalThis` is recommended over `global`.
+推荐使用 `globalThis` 代替 `global`。

@@ -1,6 +1,6 @@
 ---
 id: getting-started-without-a-framework
-title: Get Started Without a Framework
+title: 无需框架快速开始
 hide_table_of_contents: true
 ---
 
@@ -13,45 +13,45 @@ import RemoveGlobalCLI from './\_remove-global-cli.md';
 
 <PlatformSupport platforms={['android', 'ios', 'macOS', 'tv', 'watchOS', 'web', 'windows', 'visionOS']} />
 
-If you have constraints that are not served well by a [Framework](/architecture/glossary#react-native-framework), or you prefer to write your own Framework, you can create a React Native app without using a Framework.
+如果你有一些[框架](/architecture/glossary#react-native-framework)无法良好支持的限制，或者你更喜欢自己编写框架，也可以不用框架直接创建 React Native 应用。
 
-To do so, you'll first need to [set up your environment](set-up-your-environment). Once you're set up, continue with the steps below to create an application and start developing.
+要实现这一点，你首先需要[设置你的开发环境](set-up-your-environment)。准备好环境后，继续按照下面的步骤创建应用并开始开发。
 
-### Step 1: Creating a new application
+### 第一步：创建新应用
 
 <RemoveGlobalCLI />
 
-You can use [React Native Community CLI](https://github.com/react-native-community/cli) to generate a new project. Let's create a new React Native project called "AwesomeProject":
+你可以使用[React Native Community CLI](https://github.com/react-native-community/cli)来生成一个新项目。 现在创建一个叫做“AwesomeProject”的 React Native 项目：
 
 ```shell
 npx @react-native-community/cli@latest init AwesomeProject
 ```
 
-This is not necessary if you are integrating React Native into an existing application, or if you've installed [Expo](https://docs.expo.dev/bare/installing-expo-modules/) in your project, or if you're adding Android support to an existing React Native project (see [Integration with Existing Apps](integration-with-existing-apps.md)). You can also use a third-party CLI to set up your React Native app, such as [Ignite CLI](https://github.com/infinitered/ignite).
+如果你是将 React Native 集成到已有应用中，或者已经在项目中安装了[Expo](https://docs.expo.dev/bare/installing-expo-modules/)，或者你是在为已有 React Native 项目添加 Android 支持（请参阅[与现有应用集成](integration-with-existing-apps.md)），这一步不是必须的。你也可以使用第三方 CLI 来搭建 React Native 应用，比如[Ignite CLI](https://github.com/infinitered/ignite)。
 
 :::info
 
-If you are having trouble with iOS, try to reinstall the dependencies by running:
+如果你在 iOS 上遇到问题，尝试重新安装依赖，步骤如下：
 
-1. `cd ios` to navigate to the `ios` folder.
-2. `bundle install` to install [Bundler](https://bundler.io/)
-3. `bundle exec pod install` to install the iOS dependencies managed by CocoaPods.
+1. 进入 `ios` 文件夹，运行 `cd ios`
+2. 安装 [Bundler](https://bundler.io/)，运行 `bundle install`
+3. 安装 CocoaPods 管理的 iOS 依赖，运行 `bundle exec pod install`
 
 :::
 
-#### [Optional] Using a specific version or template
+#### [可选] 使用特定版本或模板
 
-If you want to start a new project with a specific React Native version, you can use the `--version` argument:
+如果你想用特定版本的 React Native 创建新项目，可以使用 `--version` 参数：
 
 ```shell
 npx @react-native-community/cli@X.XX.X init AwesomeProject --version X.XX.X
 ```
 
-You can also start a project with a custom React Native template with the `--template` argument, read more [here](https://github.com/react-native-community/cli/blob/main/docs/init.md#initializing-project-with-custom-template).
+你也可以使用自定义的 React Native 模板，使用 `--template` 参数，详细信息请参阅[这里](https://github.com/react-native-community/cli/blob/main/docs/init.md#initializing-project-with-custom-template)。
 
-### Step 2: Start Metro
+### 第二步：启动 Metro
 
-[**Metro**](https://metrobundler.dev/) is the JavaScript build tool for React Native. To start the Metro development server, run the following from your project folder:
+[**Metro**](https://metrobundler.dev/) 是 React Native 的 JavaScript 构建工具。要启动 Metro 开发服务器，在项目目录中运行：
 
 <Tabs groupId="package-manager" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>
 <TabItem value="npm">
@@ -71,12 +71,12 @@ yarn start
 </Tabs>
 
 :::note
-If you're familiar with web development, Metro is similar to bundlers such as Vite and webpack, but is designed end-to-end for React Native. For instance, Metro uses [Babel](https://babel.dev/) to transform syntax such as JSX into executable JavaScript.
+如果你熟悉网页开发，Metro 类似于 Vite 和 webpack 这样的打包工具，但它是为 React Native 端到端设计的。例如，Metro 使用 [Babel](https://babel.dev/) 将 JSX 等语法转换成可执行的 JavaScript。
 :::
 
-### Step 3: Start your application
+### 第三步：启动你的应用
 
-Let Metro Bundler run in its own terminal. Open a new terminal inside your React Native project folder. Run the following:
+让 Metro Bundler 在它自己的终端中运行。打开一个新的终端，进入你的 React Native 项目文件夹。运行以下命令：
 
 <Tabs groupId="package-manager" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>
 <TabItem value="npm">
@@ -95,28 +95,28 @@ yarn android
 </TabItem>
 </Tabs>
 
-If everything is set up correctly, you should see your new app running in your Android emulator shortly.
+如果一切设置正确，你应该很快能在 Android 模拟器中看到运行中的新应用。
 
-This is one way to run your app - you can also run it directly from within Android Studio.
+这是运行应用的一种方式 —— 你也可以直接从 Android Studio 内运行。
 
 :::tip
-If you can't get this to work, see the [Troubleshooting](troubleshooting.md) page.
+如果你无法成功运行，请参阅[故障排除](troubleshooting.md)页面。
 :::
 
-### Step 4: Modifying your app
+### 第四步：修改你的应用
 
-Now that you have successfully run the app, let's modify it.
+成功运行应用后，来修改它吧。
 
-- Open `App.tsx` in your text editor of choice and edit some lines.
-- Press the <kbd>R</kbd> key twice or select `Reload` from the Dev Menu (<kbd>Ctrl</kbd> + <kbd>M</kbd>) to see your changes!
+- 用你喜欢的文本编辑器打开 `App.tsx`，修改几行代码。
+- 连续按两次 <kbd>R</kbd> 键，或者从开发者菜单（<kbd>Ctrl</kbd> + <kbd>M</kbd>）中选择 `Reload`，即可看到你的改动！
 
-### That's it!
+### 就这样！
 
-Congratulations! You've successfully run and modified your first barebone React Native app.
+恭喜你！你已成功运行并修改了你的第一个基础 React Native 应用。
 
 <center><img src="/docs/assets/GettingStartedCongratulations.png" width="150"></img></center>
 
-### Now what?
+### 接下来呢？
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](integration-with-existing-apps.md).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](getting-started).
+- 如果你想把这个新建的 React Native 代码加入已有应用中，查看[集成指南](integration-with-existing-apps.md)。
+- 如果你想深入了解 React Native，看看[React Native 入门](getting-started)。

@@ -1,27 +1,27 @@
 ---
-title: Using AWS with React Native
+title: 在 React Native 中使用 AWS
 author: Richard Threlkeld
-authorTitle: Senior Technical Product Manager at AWS Mobile
+authorTitle: AWS Mobile 高级技术产品经理
 authorURL: 'https://twitter.com/undef_obj'
 authorImageURL: 'https://pbs.twimg.com/profile_images/811239086581227520/APX1eZwF_400x400.jpg'
 authorTwitter: undef_obj
 tags: [engineering]
 ---
 
-AWS is well known in the technology industry as a provider of cloud services. These include compute, storage, and database technologies, as well as fully managed serverless offerings. The AWS Mobile team has been working closely with customers and members of the JavaScript ecosystem to make cloud-connected mobile and web applications more secure, scalable, and easier to develop and deploy. We began with a [complete starter kit](https://github.com/awslabs/aws-mobile-react-native-starter), but have a few more recent developments.
+AWS 在技术行业中以提供云服务著称。这些服务包括计算、存储和数据库技术，以及全托管的无服务器产品。AWS Mobile 团队一直与客户和 JavaScript 生态系统的成员紧密合作，致力于使云连接的移动和 Web 应用更安全、可扩展，并且更易于开发和部署。我们一开始提供了一个[完整的入门套件](https://github.com/awslabs/aws-mobile-react-native-starter)，随后又推出了一些新的发展。
 
-This blog post talks about some interesting things for React and React Native developers:
+本文介绍了 React 和 React Native 开发者可能感兴趣的一些内容：
 
-- [**AWS Amplify**](https://github.com/aws/aws-amplify), a declarative library for JavaScript applications using cloud services
-- [**AWS AppSync**](https://aws.amazon.com/appsync/), a fully managed GraphQL service with offline and real-time features
+- [**AWS Amplify**](https://github.com/aws/aws-amplify)：一个为使用云服务的 JavaScript 应用设计的声明式库
+- [**AWS AppSync**](https://aws.amazon.com/appsync/)：一个具备离线和实时功能的全托管 GraphQL 服务
 
 ## AWS Amplify
 
-React Native applications are very easy to bootstrap using tools like Create React Native App and Expo. However, connecting them to the cloud can be challenging to navigate when you try to match a use case to infrastructure services. For example, your React Native app might need to upload photos. Should these be protected per user? That probably means you need some sort of registration or sign-in process. Do you want your own user directory or are you using a social media provider? Maybe your app also needs to call an API with custom business logic after users log in.
+使用 Create React Native App 和 Expo 等工具，启动 React Native 应用非常简单。然而，将其连接到云端时，尝试将具体用例映射到基础设施服务可能会较为复杂。例如，您的 React Native 应用可能需要上传照片。这些照片是否需要按用户保护？那很可能意味着您需要某种注册或登录流程。您是想使用自己的用户目录，还是使用社交媒体提供商？可能您的应用还需要在用户登录后调用带有自定义业务逻辑的 API。
 
-To help JavaScript developers with these problems, we released a library named AWS Amplify. The design is broken into "categories" of tasks, instead of AWS-specific implementations. For example, if you wanted users to register, log in, and then upload private photos, you would simply pull in `Auth` and `Storage` categories to your application:
+为帮助 JavaScript 开发者解决这些问题，我们发布了名为 AWS Amplify 的库。其设计被划分为“类别”，而非 AWS 特定实现。例如，如果您希望用户注册、登录然后上传私有照片，只需将 `Auth` 和 `Storage` 类别引入到应用中：
 
-```
+```js
 import { Auth } from 'aws-amplify';
 
 Auth.signIn(username, password)
@@ -33,36 +33,36 @@ Auth.confirmSignIn(user, code)
     .catch(err => console.log(err));
 ```
 
-In the code above, you can see an example of some of the common tasks that Amplify helps you with, such as using multi-factor authentication (MFA) codes with either email or SMS. The supported categories today are:
+上面的代码展示了 Amplify 在一些常见任务上的帮助，比如使用多因素认证 (MFA) 码（通过电子邮件或短信）。目前支持的类别包括：
 
-- **Auth**: Provides credential automation. Out-of-the-box implementation uses AWS credentials for signing, and OIDC JWT tokens from [Amazon Cognito](https://aws.amazon.com/cognito/). Common functionality, such as MFA features, is supported.
-- **Analytics**: With a single line of code, get tracking for authenticated or unauthenticated users in [Amazon Pinpoint](https://aws.amazon.com/pinpoint/). Extend this for custom metrics or attributes, as you prefer.
-- **API**: Provides interaction with RESTful APIs in a secure manner, leveraging [AWS Signature Version 4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html). The API module is great on serverless infrastructures with [Amazon API Gateway](https://aws.amazon.com/api-gateway/).
-- **Storage**: Simplified commands to upload, download, and list content in [Amazon S3](https://aws.amazon.com/s3/). You can also easily group data into public or private content on a per-user basis.
-- **Caching**: An LRU cache interface across web apps and React Native that uses implementation-specific persistence.
-- **i18n and Logging**: Provides internationalization and localization capabilities, as well as debugging and logging capabilities.
+- **Auth**：提供凭证自动化。开箱即用实现使用 AWS 凭证进行签名，并通过 [Amazon Cognito](https://aws.amazon.com/cognito/) 的 OIDC JWT 令牌。支持诸如 MFA 之类的常用功能。
+- **Analytics**：只需一行代码，即可在 [Amazon Pinpoint](https://aws.amazon.com/pinpoint/) 跟踪已认证或未认证的用户。可根据需求扩展自定义指标或属性。
+- **API**：以安全方式提供与 RESTful API 的交互，利用 [AWS Signature Version 4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)。该模块非常适合使用 [Amazon API Gateway](https://aws.amazon.com/api-gateway/) 的无服务器基础设施。
+- **Storage**：简化命令上传、下载和列出 [Amazon S3](https://aws.amazon.com/s3/) 中的内容。还可根据用户将数据分组为公共或私有内容。
+- **Caching**：跨 Web 应用和 React Native 的 LRU 缓存接口，使用特定实现的持久化。
+- **i18n 和 Logging**：提供国际化和本地化功能，以及调试和日志功能。
 
-One of the nice things about Amplify is that it encodes "best practices" in the design for your specific programming environment. For example, one thing we found working with customers and React Native developers is that shortcuts taken during development to get things working quickly would make it through to production stacks. These can compromise either scalability or security, and force infrastructure rearchitecture and code refactoring.
+Amplify 的一个优点是，它在设计中为您的特定编程环境编码了“最佳实践”。例如，我们与客户及 React Native 开发者合作时发现，开发阶段为快速实现功能所选的捷径往往会最终进入生产环境。这可能会影响扩展性或安全性，并迫使进行基础设施重构和代码重写。
 
-One example of how we help developers avoid this is the [Serverless Reference Architectures with AWS Lambda](https://www.allthingsdistributed.com/2016/06/aws-lambda-serverless-reference-architectures.html). These show you best practices around using Amazon API Gateway and AWS Lambda together when building your backend. This pattern is encoded into the `API` category of Amplify. You can use this pattern to interact with several different REST endpoints, and pass headers all the way through to your Lambda function for custom business logic. We’ve also released an [AWS Mobile CLI](https://docs.aws.amazon.com/aws-mobile/latest/developerguide/react-native-getting-started.html) for bootstrapping new or existing React Native projects with these features. To get started, just install via **npm**, and follow the configuration prompts:
+帮助开发者避免此类问题的一个例子是 [基于 AWS Lambda 的无服务器参考架构](https://www.allthingsdistributed.com/2016/06/aws-lambda-serverless-reference-architectures.html)。它展示了结合使用 Amazon API Gateway 和 AWS Lambda 构建后端的最佳实践模式。该模式被编码进 Amplify 的 `API` 类别中。您可以使用这一模式与多个 REST 端点交互，并将请求头传递给 Lambda 函数以实现自定义业务逻辑。我们还发布了一个 [AWS Mobile CLI](https://docs.aws.amazon.com/aws-mobile/latest/developerguide/react-native-getting-started.html)，方便快速为新的或现有的 React Native 项目引入这些功能。入门只需通过 **npm** 安装并按照配置提示进行：
 
-```
+```bash
 npm install --global awsmobile-cli
 awsmobile configure
 ```
 
-Another example of encoded best practices that is specific to the mobile ecosystem is password security. The default `Auth` category implementation leverages Amazon Cognito user pools for user registration and sign-in. This service implements [Secure Remote Password protocol](https://srp.stanford.edu) as a way of protecting users during authentication attempts. If you're inclined to read through the [mathematics of the protocol](https://srp.stanford.edu/ndss.html#SECTION00032200000000000000), you'll notice that you must use a large prime number when calculating the password verifier over a primitive root to generate a Group. In React Native environments, [JIT is disabled](/docs/javascript-environment). This makes BigInteger calculations for security operations such as this less performant. To account for this, we've released native bridges in Android and iOS that you can link inside your project:
+另一个与移动生态系统相关的最佳实践示例是密码安全。默认的 `Auth` 类别实现利用 Amazon Cognito 用户池进行用户注册和登录。该服务采用[安全远程密码协议](https://srp.stanford.edu) 来保护用户身份验证过程。如果您有兴趣阅读该[协议的数学原理](https://srp.stanford.edu/ndss.html#SECTION00032200000000000000)，您会发现计算密码验证器时必须使用一个大素数来生成一个群。在 React Native 环境中，[JIT 被禁用](/docs/javascript-environment)，这使得进行类似安全操作所需的大整数计算性能较低。为此，我们发布了适用于 Android 和 iOS 的本地桥接，您可在项目中链接：
 
-```
+```bash
 npm install --save aws-amplify-react-native
 react-native link amazon-cognito-identity-js
 ```
 
-We're also excited to see that the Expo team has included this [in their latest SDK](https://blog.expo.io/expo-sdk-v25-0-0-is-now-available-714d10a8c3f7) so that you can use Amplify without ejecting.
+此外，我们很高兴看到 Expo 团队已在其[最新 SDK](https://blog.expo.io/expo-sdk-v25-0-0-is-now-available-714d10a8c3f7)中包含了这点，您可以无需弹出（eject）即可使用 Amplify。
 
-Finally, specific to React Native (and React) development, Amplify contains [higher order components (HOCs)](https://reactjs.org/docs/higher-order-components.html) for easily wrapping functionality, such as for sign-up and sign-in to your app:
+最后，针对 React Native（及 React）开发，Amplify 提供了 [高阶组件 (HOCs)](https://reactjs.org/docs/higher-order-components.html)，方便包裹功能，例如对应用进行注册和登录：
 
-```
+```js
 import Amplify, { withAuthenticator } from 'aws-amplify-react-native';
 import aws_exports from './aws-exports';
 
@@ -75,42 +75,42 @@ class App extends React.Component {
 export default withAuthenticator(App);
 ```
 
-The underlying component is also provided as `<Authenticator />`, which gives you full control to customize the UI. It also gives you some properties around managing the state of the user, such as if they've signed in or are waiting for MFA confirmation, and callbacks that you can fire when state changes.
+底层组件也提供为 `<Authenticator />`，允许您完全自定义 UI。它还提供了用于管理用户状态（如是否已登录或等待 MFA 确认）以及状态变化时可触发回调的属性。
 
-Similarly, you'll find general React components that you can use for different use cases. You can customize these to your needs, for example, to show all private images from Amazon S3 in the `Storage` module:
+同样，您还会找到通用的 React 组件，可用于各种用例。您可以根据需求自定义，例如展示来自 `Storage` 模块中 Amazon S3 的所有私有图片：
 
-```
+```jsx
 <S3Album
   level="private"
   path={path}
-  filter={(item) => /jpg/i.test(item.path)}/>
+  filter={(item) => /jpg/i.test(item.path)} />
 ```
 
-You can control many of the component features via props, as shown earlier, with public or private storage options. There are even capabilities to automatically gather analytics when users interact with certain UI components:
+如前所示，您可通过属性控制组件的许多功能，包括公共或私有存储选项。甚至提供了用户与某些 UI 组件交互时自动收集分析数据的能力：
 
-```
+```jsx
 return <S3Album track/>
 ```
 
-AWS Amplify favors a convention over configuration style of development, with a global initialization routine or initialization at the category level. The quickest way to get started is with an [aws-exports file](https://aws.amazon.com/blogs/mobile/enhanced-javascript-development-with-aws-mobile-hub/). However, developers can also use the library independently with existing resources.
+AWS Amplify 推崇约定优于配置的开发风格，支持全局初始化或按类别级别初始化。最快速的入门方式是使用一个 [aws-exports 文件](https://aws.amazon.com/blogs/mobile/enhanced-javascript-development-with-aws-mobile-hub/)。不过开发者也可以独立地使用该库与已有资源协作。
 
-For a deep dive into the philosophy and to see a full demo, check out the video from [AWS re\:Invent](https://www.youtube.com/watch?v=vAjf3lyjf8c).
+想深入了解其设计理念及完整演示，请参阅 [AWS re:Invent 的相关视频](https://www.youtube.com/watch?v=vAjf3lyjf8c)。
 
 ## AWS AppSync
 
-Shortly after the launch of AWS Amplify, we also released [AWS AppSync](https://aws.amazon.com/appsync/). This is a fully managed GraphQL service that has both offline and real-time capabilities. Although you can use GraphQL in different client programming languages (including native Android and iOS), it's quite popular among React Native developers. This is because the data model fits nicely into a unidirectional data flow and component hierarchy.
+在 AWS Amplify 发布不久后，我们还推出了 [AWS AppSync](https://aws.amazon.com/appsync/)。这是一项具备离线和实时能力的全托管 GraphQL 服务。虽然 GraphQL 可用于多种客户端语言（包括原生 Android 和 iOS），但它在 React Native 开发者中非常受欢迎，因为数据模型非常符合单向数据流和组件层次结构。
 
-AWS AppSync enables you to connect to resources in your own AWS account, meaning you own and control your data. This is done by using data sources, and the service supports [Amazon DynamoDB](https://aws.amazon.com/dynamodb/), [Amazon Elasticsearch](https://aws.amazon.com/elasticsearch-service/), and [AWS Lambda](https://aws.amazon.com/lambda/). This enables you to combine functionality (such as NoSQL and full-text search) in a single GraphQL API as a schema. This enables you to mix and match data sources. The AppSync service can also [provision from a schema](https://docs.aws.amazon.com/appsync/latest/devguide/provision-from-schema.html), so if you aren't familiar with AWS services, you can write GraphQL SDL, click a button, and you're automatically up and running.
+AWS AppSync 使您能够连接到自己 AWS 账户中的资源，意味着数据归您所有且您能完全控制。这通过使用数据源实现，服务支持 [Amazon DynamoDB](https://aws.amazon.com/dynamodb/)、[Amazon Elasticsearch](https://aws.amazon.com/elasticsearch-service/) 和 [AWS Lambda](https://aws.amazon.com/lambda/)。这使得您可以在单一 GraphQL API 模式下结合使用多种功能（如 NoSQL 和全文搜索）。AppSync 还[支持从模式自动配置资源](https://docs.aws.amazon.com/appsync/latest/devguide/provision-from-schema.html)，如果您不熟悉 AWS 服务，只需编写 GraphQL SDL，点击按钮即可自动完成构建。
 
-The real-time functionality in AWS AppSync is controlled via [GraphQL subscriptions with a well-known, event-based pattern](https://graphql.org/blog/subscriptions-in-graphql-and-relay/). Because subscriptions in AWS AppSync are [controlled on the schema](https://docs.aws.amazon.com/appsync/latest/devguide/real-time-data.html) with a GraphQL directive, and a schema can use any data source, this means you can trigger notifications from database operations with Amazon DynamoDB and Amazon Elasticsearch Service, or from other parts of your infrastructure with AWS Lambda.
+AWS AppSync 的实时功能通过[使用熟知的事件驱动模式的 GraphQL 订阅](https://graphql.org/blog/subscriptions-in-graphql-and-relay/)实现。由于 AWS AppSync 的订阅[受 GraphQL 模式中的指令控制](https://docs.aws.amazon.com/appsync/latest/devguide/real-time-data.html)，且模式可以使用任意数据源，这意味着您可以基于 Amazon DynamoDB 和 Amazon Elasticsearch 服务的数据库操作，或基于 AWS Lambda 的其他基础设施触发通知。
 
-In a way similar to AWS Amplify, you can use [enterprise security features](https://docs.aws.amazon.com/appsync/latest/devguide/security.html) on your GraphQL API with AWS AppSync. The service lets you get started quickly with API keys. However, as you roll to production it can transition to using AWS Identity and Access Management (IAM) or OIDC tokens from Amazon Cognito user pools. You can control access at the resolver level with policies on types. You can even use logical checks for [fine-grained access control](https://docs.aws.amazon.com/appsync/latest/devguide/security.html#fine-grained-access-control) checks at run time, such as detecting if a user is the owner of a specific database resource. There are also capabilities around checking group membership for executing resolvers or individual database record access.
+类似于 AWS Amplify，您可以在 AWS AppSync 的 GraphQL API 上使用[企业级安全功能](https://docs.aws.amazon.com/appsync/latest/devguide/security.html)。该服务允许通过 API 密钥快速启动，但生产环境下可以转而使用 AWS 身份和访问管理 (IAM) 或来自 Amazon Cognito 用户池的 OIDC 令牌。您可以通过类型策略在解析器层级控制访问，甚至可以在运行时进行逻辑检查，实现[细粒度访问控制](https://docs.aws.amazon.com/appsync/latest/devguide/security.html#fine-grained-access-control)（例如检测用户是否为特定数据库资源的所有者）。此外，还支持基于组成员资格来执行解析器或访问单个数据库记录的权限控制。
 
-To help React Native developers learn more about these technologies, there is a [built-in GraphQL sample schema](https://docs.aws.amazon.com/appsync/latest/devguide/quickstart.html) that you can launch on the AWS AppSync console homepage. This sample deploys a GraphQL schema, provisions database tables, and connects queries, mutations, and subscriptions automatically for you. There is also a functioning [React Native example for AWS AppSync](https://github.com/aws-samples/aws-mobile-appsync-events-starter-react-native) which leverages this built in schema (as well as a [React example](https://github.com/aws-samples/aws-mobile-appsync-events-starter-react)), which enable you to get both your client and cloud components running in minutes.
+为了帮助 React Native 开发者更好地了解这些技术，AWS AppSync 控制台首页内置了一个[GraphQL 示例模式](https://docs.aws.amazon.com/appsync/latest/devguide/quickstart.html)。该示例会自动部署 GraphQL 模式，配置数据库表，并连接查询、变更和订阅。另有一个基于此内置模式的功能齐全的[AWS AppSync React Native 示例](https://github.com/aws-samples/aws-mobile-appsync-events-starter-react-native)（以及[React 示例](https://github.com/aws-samples/aws-mobile-appsync-events-starter-react)），可助您在数分钟内启动客户端和云端组件。
 
-Getting started is simple when you use the `AWSAppSyncClient`, which plugs in to the [Apollo Client](https://github.com/apollographql/apollo-client). The `AWSAppSyncClient` handles security and signing for your GraphQL API, offline functionality, and the subscription handshake and negotiation process:
+使用 `AWSAppSyncClient` 启动十分简单，它集成于 [Apollo Client](https://github.com/apollographql/apollo-client)。`AWSAppSyncClient` 负责 GraphQL API 的安全性和签名、离线功能，以及订阅的握手和协商过程：
 
-```
+```js
 import AWSAppSyncClient from "aws-appsync";
 import { Rehydrated } from 'aws-appsync-react';
 import { AUTH_TYPE } from "aws-appsync/lib/link/auth-link";
@@ -122,9 +122,9 @@ const client = new AWSAppSyncClient({
 });
 ```
 
-The AppSync console provides a configuration file for download, which contains your GraphQL endpoint, AWS Region, and API key. You can then use the client with [React Apollo](https://github.com/apollographql/react-apollo):
+AppSync 控制台提供可下载的配置文件，包含您的 GraphQL 端点、AWS 区域和 API 密钥。您接着可以将客户端与[React Apollo](https://github.com/apollographql/react-apollo)一同使用：
 
-```
+```jsx
 const WithProvider = () => (
   <ApolloProvider client={client}>
       <Rehydrated>
@@ -134,9 +134,9 @@ const WithProvider = () => (
 );
 ```
 
-At this point, you can use standard GraphQL queries:
+此时，您可以使用标准 GraphQL 查询：
 
-```
+```graphql
 query ListEvents {
     listEvents{
       items{
@@ -162,9 +162,9 @@ query ListEvents {
 }
 ```
 
-The example above shows a query with the sample app schema provisioned by AppSync. It not only showcases interaction with DynamoDB, but also includes pagination of data (including encrypted tokens) and type relations between `Events` and `Comments`. Because the app is configured with the `AWSAppSyncClient`, data is automatically persisted offline and will synchronize when devices reconnect.
+上例展示了 AppSync 提供的示例应用模式中的查询。它不仅展示了与 DynamoDB 的交互，还包含了数据分页（包括加密令牌）以及 `Events` 和 `Comments` 之间的类型关系。由于应用已配置 `AWSAppSyncClient`，数据会自动离线持久化，并在设备重新连接时同步。
 
-You can see a deep dive of the [client technology behind this and a React Native demo in this video](https://www.youtube.com/watch?v=FtkVlIal_m0).
+您可以观看[此视频，深入了解其客户端技术及 React Native 演示](https://www.youtube.com/watch?v=FtkVlIal_m0)。
 
 <iframe
   width="560"
@@ -174,6 +174,6 @@ You can see a deep dive of the [client technology behind this and a React Native
   allow="autoplay; encrypted-media"
   allowfullscreen></iframe>
 
-## Feedback
+## 反馈
 
-The team behind the libraries is eager to hear how these libraries and services work for you. They also want to hear what else we can do to make React and React Native development with cloud services easier for you. Reach out to the AWS Mobile team on GitHub for [AWS Amplify](https://github.com/aws/aws-amplify) or [AWS AppSync](https://github.com/aws-samples/aws-mobile-appsync-events-starter-react-native).
+这些库背后的团队期待听到您对它们的使用体验反馈。他们也希望了解还能做些什么，以便让使用云服务的 React 和 React Native 开发更简单。请通过 GitHub 联系 AWS Mobile 团队，相关项目为 [AWS Amplify](https://github.com/aws/aws-amplify) 和 [AWS AppSync](https://github.com/aws-samples/aws-mobile-appsync-events-starter-react-native)。

@@ -1,19 +1,19 @@
 ---
 id: animated
-title: Animated
+title: 动画（Animated）
 ---
 
-The `Animated` library is designed to make animations fluid, powerful, and painless to build and maintain. `Animated` focuses on declarative relationships between inputs and outputs, configurable transforms in between, and `start`/`stop` methods to control time-based animation execution.
+`Animated` 库旨在使动画构建流畅、高效且轻松维护。`Animated` 关注输入与输出之间的声明式关系，中间可配置的变换，以及用于控制基于时间的动画执行的 `start`/`stop` 方法。
 
-The core workflow for creating an animation is to create an `Animated.Value`, hook it up to one or more style attributes of an animated component, and then drive updates via animations using `Animated.timing()`.
+创建动画的核心流程是创建一个 `Animated.Value`，将其连接到动画组件的一个或多个样式属性上，然后通过使用 `Animated.timing()` 来驱动动画更新。
 
 :::note
-Don't modify the animated value directly. You can use the [`useRef` Hook](https://react.dev/reference/react/useRef) to return a mutable ref object. This ref object's `current` property is initialized as the given argument and persists throughout the component lifecycle.
+不要直接修改动画值。你可以使用 [`useRef` Hook](https://react.dev/reference/react/useRef) 返回一个可变的 ref 对象，该对象的 `current` 属性会被初始化为给定参数并在组件整个生命周期内保持不变。
 :::
 
-## Example
+## 示例
 
-The following example contains a `View` which will fade in and fade out based on the animated value `fadeAnim`
+下面的示例包含一个 `View`，它将基于动画值 `fadeAnim` 进行淡入和淡出。
 
 ```SnackPlayer name=Animated%20Example
 import React, {useRef} from 'react';
@@ -21,11 +21,11 @@ import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 import {Animated, Text, View, StyleSheet, Button} from 'react-native';
 
 const App = () => {
-  // fadeAnim will be used as the value for opacity. Initial Value: 0
+  // fadeAnim 将用作透明度的值。初始值：0
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
   const fadeIn = () => {
-    // Will change fadeAnim value to 1 in 5 seconds
+    // 在5秒内将 fadeAnim 的值变为 1
     Animated.timing(fadeAnim, {
       toValue: 1,
       duration: 5000,
@@ -34,7 +34,7 @@ const App = () => {
   };
 
   const fadeOut = () => {
-    // Will change fadeAnim value to 0 in 3 seconds
+    // 在3秒内将 fadeAnim 的值变为 0
     Animated.timing(fadeAnim, {
       toValue: 0,
       duration: 3000,
@@ -49,15 +49,15 @@ const App = () => {
           style={[
             styles.fadingContainer,
             {
-              // Bind opacity to animated value
+              // 绑定透明度到动画值
               opacity: fadeAnim,
             },
           ]}>
-          <Text style={styles.fadingText}>Fading View!</Text>
+          <Text style={styles.fadingText}>淡出视图！</Text>
         </Animated.View>
         <View style={styles.buttonRow}>
-          <Button title="Fade In View" onPress={fadeIn} />
-          <Button title="Fade Out View" onPress={fadeOut} />
+          <Button title="淡入视图" onPress={fadeIn} />
+          <Button title="淡出视图" onPress={fadeOut} />
         </View>
       </SafeAreaView>
     </SafeAreaProvider>
@@ -87,50 +87,50 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-Refer to the [Animations](animations#animated-api) guide to see additional examples of `Animated` in action.
+请参阅 [动画](animations#animated-api) 指南，查看更多 `Animated` 的应用示例。
 
-## Overview
+## 概述
 
-There are two value types you can use with `Animated`:
+你可以使用 `Animated` 的两种值类型：
 
-- [`Animated.Value()`](animated#value) for single values
-- [`Animated.ValueXY()`](animated#valuexy) for vectors
+- [`Animated.Value()`](animated#value) 用于单个值
+- [`Animated.ValueXY()`](animated#valuexy) 用于二维向量
 
-`Animated.Value` can bind to style properties or other props, and can be interpolated as well. A single `Animated.Value` can drive any number of properties.
+`Animated.Value` 可以绑定到样式属性或其他属性，并且可以进行插值。一个单一的 `Animated.Value` 可以驱动任意数量的属性。
 
-### Configuring animations
+### 配置动画
 
-`Animated` provides three types of animation types. Each animation type provides a particular animation curve that controls how your values animate from their initial value to the final value:
+`Animated` 提供三种动画类型。每种动画类型提供特定的动画曲线，控制值从初始值到最终值的动画变化：
 
-- [`Animated.decay()`](animated#decay) starts with an initial velocity and gradually slows to a stop.
-- [`Animated.spring()`](animated#spring) provides a basic spring physics model.
-- [`Animated.timing()`](animated#timing) animates a value over time using [easing functions](easing).
+- [`Animated.decay()`](animated#decay) 从初速度开始，逐渐减速至停止。
+- [`Animated.spring()`](animated#spring) 提供基本的弹簧物理模型。
+- [`Animated.timing()`](animated#timing) 使用[缓动函数](easing)随时间对值进行动画。
 
-In most cases, you will be using `timing()`. By default, it uses a symmetric easeInOut curve that conveys the gradual acceleration of an object to full speed and concludes by gradually decelerating to a stop.
+在大多数情况下，你会使用 `timing()`。默认情况下，它使用对称的 easeInOut 曲线，模拟物体逐渐加速到最大速度，然后逐渐减速停止的过程。
 
-### Working with animations
+### 使用动画
 
-Animations are started by calling `start()` on your animation. `start()` takes a completion callback that will be called when the animation is done. If the animation finished running normally, the completion callback will be invoked with `{finished: true}`. If the animation is done because `stop()` was called on it before it could finish (e.g. because it was interrupted by a gesture or another animation), then it will receive `{finished: false}`.
+动画通过调用动画对象的 `start()` 启动。`start()` 接受一个完成回调函数，当动画执行完毕时调用。如果动画正常结束，回调会接收到 `{finished: true}`。如果动画是因为调用了 `stop()`（例如被手势或另一个动画中断）而提前结束，回调会接收到 `{finished: false}`。
 
 ```tsx
 Animated.timing({}).start(({finished}) => {
-  /* completion callback */
+  /* 完成回调 */
 });
 ```
 
-### Using the native driver
+### 使用原生驱动
 
-By using the native driver, we send everything about the animation to native before starting the animation, allowing native code to perform the animation on the UI thread without having to go through the bridge on every frame. Once the animation has started, the JS thread can be blocked without affecting the animation.
+使用原生驱动时，动画的所有信息会先发送到原生层，然后由原生代码在 UI 线程执行动画，无需在每一帧都通过桥接调用 JS线程。这样动画启动后，即使 JS 线程被阻塞，也不会影响动画表现。
 
-You can use the native driver by specifying `useNativeDriver: true` in your animation configuration. See the [Animations](animations#using-the-native-driver) guide to learn more.
+你可以通过在动画配置中指定 `useNativeDriver: true` 来使用原生驱动。更多信息可见 [动画](animations#using-the-native-driver) 指南。
 
-### Animatable components
+### 可动画组件
 
-Only animatable components can be animated. These unique components do the magic of binding the animated values to the properties, and do targeted native updates to avoid the cost of the React render and reconciliation process on every frame. They also handle cleanup on unmount so they are safe by default.
+只有可动画组件才能被动画化。这些组件负责将动画值绑定到属性，并进行针对性的原生更新，避免每帧都进行 React 的渲染和协调过程。它们还会在卸载时进行清理，默认情况下是安全的。
 
-- [`createAnimatedComponent()`](animated#createanimatedcomponent) can be used to make a component animatable.
+- [`createAnimatedComponent()`](animated#createanimatedcomponent) 可用于使组件支持动画。
 
-`Animated` exports the following animatable components using the above wrapper:
+`Animated` 通过上述包装导出以下可动画组件：
 
 - `Animated.Image`
 - `Animated.ScrollView`
@@ -139,22 +139,22 @@ Only animatable components can be animated. These unique components do the magic
 - `Animated.FlatList`
 - `Animated.SectionList`
 
-### Composing animations
+### 组合动画
 
-Animations can also be combined in complex ways using composition functions:
+动画也可以通过组合函数以复杂的方式组合：
 
-- [`Animated.delay()`](animated#delay) starts an animation after a given delay.
-- [`Animated.parallel()`](animated#parallel) starts a number of animations at the same time.
-- [`Animated.sequence()`](animated#sequence) starts the animations in order, waiting for each to complete before starting the next.
-- [`Animated.stagger()`](animated#stagger) starts animations in order and in parallel, but with successive delays.
+- [`Animated.delay()`](animated#delay) 延迟一段时间后启动动画。
+- [`Animated.parallel()`](animated#parallel) 同时启动多个动画。
+- [`Animated.sequence()`](animated#sequence) 按顺序启动动画，等待一个完成后再启动下一个。
+- [`Animated.stagger()`](animated#stagger) 按顺序启动动画，且各动画间有延迟，实现错落效果。
 
-Animations can also be chained together by setting the `toValue` of one animation to be another `Animated.Value`. See [Tracking dynamic values](animations#tracking-dynamic-values) in the Animations guide.
+动画还可以通过将一个动画的 `toValue` 设置为另一个 `Animated.Value` 实现链式动画。更多请参见动画指南中 [动态值跟踪](animations#tracking-dynamic-values)。
 
-By default, if one animation is stopped or interrupted, then all other animations in the group are also stopped.
+默认情况下，如果其中一个动画被停止或中断，组内所有动画都会停止。
 
-### Combining animated values
+### 组合动画值
 
-You can combine two animated values via addition, subtraction, multiplication, division, or modulo to make a new animated value:
+你可以通过加、减、乘、除或取模操作将两个动画值组合成为新的动画值：
 
 - [`Animated.add()`](animated#add)
 - [`Animated.subtract()`](animated#subtract)
@@ -162,21 +162,21 @@ You can combine two animated values via addition, subtraction, multiplication, d
 - [`Animated.modulo()`](animated#modulo)
 - [`Animated.multiply()`](animated#multiply)
 
-### Interpolation
+### 插值
 
-The `interpolate()` function allows input ranges to map to different output ranges. By default, it will extrapolate the curve beyond the ranges given, but you can also have it clamp the output value. It uses linear interpolation by default but also supports easing functions.
+`interpolate()` 函数允许将输入范围映射到不同的输出范围。默认情况下，会对超出范围的值进行外推，也可以设置为限制输出值。默认使用线性插值，也支持缓动函数。
 
 - [`interpolate()`](animatedvalue#interpolate)
 
-Read more about interpolation in the [Animation](animations#interpolation) guide.
+更多插值内容请见 [动画](animations#interpolation) 指南。
 
-### Handling gestures and other events
+### 处理手势和其他事件
 
-Gestures, like panning or scrolling, and other events can map directly to animated values using `Animated.event()`. This is done with a structured map syntax so that values can be extracted from complex event objects. The first level is an array to allow mapping across multiple args, and that array contains nested objects.
+手势（如平移或滚动）和其他事件可通过 `Animated.event()` 直接映射到动画值。该方法使用结构化映射语法，从复杂事件对象中提取值。第一层是数组，支持映射多个参数，数组中包含嵌套对象。
 
 - [`Animated.event()`](animated#event)
 
-For example, when working with horizontal scrolling gestures, you would do the following in order to map `event.nativeEvent.contentOffset.x` to `scrollX` (an `Animated.Value`):
+例如，处理横向滚动手势时，可以将 `event.nativeEvent.contentOffset.x` 映射给 `scrollX`（一个 `Animated.Value`）：
 
 ```tsx
  onScroll={Animated.event(
@@ -192,11 +192,11 @@ For example, when working with horizontal scrolling gestures, you would do the f
 
 ---
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
-When the given value is a ValueXY instead of a Value, each config option may be a vector of the form `{x: ..., y: ...}` instead of a scalar.
+当传入的是 ValueXY 而非 Value 时，每个配置选项可为形式为 `{x: ..., y: ...}` 的向量，而非标量。
 
 ### `decay()`
 
@@ -204,14 +204,14 @@ When the given value is a ValueXY instead of a Value, each config option may be 
 static decay(value, config): CompositeAnimation;
 ```
 
-Animates a value from an initial velocity to zero based on a decay coefficient.
+根据衰减系数，从初始速度开始使值动画到零。
 
-Config is an object that may have the following options:
+配置对象可用选项：
 
-- `velocity`: Initial velocity. Required.
-- `deceleration`: Rate of decay. Default 0.997.
-- `isInteraction`: Whether or not this animation creates an "interaction handle" on the `InteractionManager`. Default true.
-- `useNativeDriver`: Uses the native driver when true. Required.
+- `velocity`：初速度。必填。
+- `deceleration`：衰减率。默认 0.997。
+- `isInteraction`：此动画是否创建 `InteractionManager` 的“交互句柄”。默认 true。
+- `useNativeDriver`：是否使用原生驱动。必填。
 
 ---
 
@@ -221,15 +221,15 @@ Config is an object that may have the following options:
 static timing(value, config): CompositeAnimation;
 ```
 
-Animates a value along a timed easing curve. The [`Easing`](easing) module has tons of predefined curves, or you can use your own function.
+沿定时缓动曲线对值进行动画。[`Easing`](easing) 模块内置大量预设的曲线，也可自定义函数。
 
-Config is an object that may have the following options:
+配置对象可用选项：
 
-- `duration`: Length of animation (milliseconds). Default 500.
-- `easing`: Easing function to define curve. Default is `Easing.inOut(Easing.ease)`.
-- `delay`: Start the animation after delay (milliseconds). Default 0.
-- `isInteraction`: Whether or not this animation creates an "interaction handle" on the `InteractionManager`. Default true.
-- `useNativeDriver`: Uses the native driver when true. Required.
+- `duration`：动画时长（毫秒）。默认 500。
+- `easing`：缓动函数定义曲线。默认是 `Easing.inOut(Easing.ease)`。
+- `delay`：动画开始前延迟（毫秒）。默认 0。
+- `isInteraction`：此动画是否创建 `InteractionManager` 的“交互句柄”。默认 true。
+- `useNativeDriver`：是否使用原生驱动。必填。
 
 ---
 
@@ -239,34 +239,38 @@ Config is an object that may have the following options:
 static spring(value, config): CompositeAnimation;
 ```
 
-Animates a value according to an analytical spring model based on [damped harmonic oscillation](https://en.wikipedia.org/wiki/Harmonic_oscillator#Damped_harmonic_oscillator). Tracks velocity state to create fluid motions as the `toValue` updates, and can be chained together.
+基于 [阻尼谐振动](https://en.wikipedia.org/wiki/Harmonic_oscillator#Damped_harmonic_oscillator) 的解析弹簧模型，使值动画。追踪速度状态，以支持平滑运动和对 `toValue` 更新的连续响应，并可链式调用。
 
-Config is an object that may have the following options.
+配置对象可用选项说明：
 
-Note that you can only define one of bounciness/speed, tension/friction, or stiffness/damping/mass, but not more than one:
+你只能定义以下三组参数中的一组，不能多组同时定义：
 
-The friction/tension or bounciness/speed options match the spring model in [`Facebook Pop`](https://github.com/facebook/pop), [Rebound](https://github.com/facebookarchive/rebound), and [Origami](https://origami.design/).
+- 弹性/速度（bounciness/speed）
+- 张力/摩擦（tension/friction）
+- 刚度/阻尼/质量（stiffness/damping/mass）
 
-- `friction`: Controls "bounciness"/overshoot. Default 7.
-- `tension`: Controls speed. Default 40.
-- `speed`: Controls speed of the animation. Default 12.
-- `bounciness`: Controls bounciness. Default 8.
+张力/摩擦或弹性/速度选项对应于 [`Facebook Pop`](https://github.com/facebook/pop)、[Rebound](https://github.com/facebookarchive/rebound)、[Origami](https://origami.design/) 中的弹簧模型。
 
-Specifying stiffness/damping/mass as parameters makes `Animated.spring` use an analytical spring model based on the motion equations of a [damped harmonic oscillator](https://en.wikipedia.org/wiki/Harmonic_oscillator#Damped_harmonic_oscillator). This behavior is slightly more precise and faithful to the physics behind spring dynamics, and closely mimics the implementation in iOS's CASpringAnimation.
+- `friction`: 控制反弹/超越量。默认 7。
+- `tension`: 控制速度。默认 40。
+- `speed`: 控制动画速度。默认 12。
+- `bounciness`: 控制弹性。默认 8。
 
-- `stiffness`: The spring stiffness coefficient. Default 100.
-- `damping`: Defines how the spring’s motion should be damped due to the forces of friction. Default 10.
-- `mass`: The mass of the object attached to the end of the spring. Default 1.
+指定刚度/阻尼/质量参数时，`Animated.spring` 使用基于阻尼谐振动运动方程的解析弹簧模型。此行为更精确，物理表现更逼真，类似 iOS 的 CASpringAnimation 实现。
 
-Other configuration options are as follows:
+- `stiffness`: 弹簧刚度系数。默认 100。
+- `damping`: 弹簧运动的摩擦阻尼。默认 10。
+- `mass`: 附着弹簧末端物体的质量。默认 1。
 
-- `velocity`: The initial velocity of the object attached to the spring. Default 0 (object is at rest).
-- `overshootClamping`: Boolean indicating whether the spring should be clamped and not bounce. Default false.
-- `restDisplacementThreshold`: The threshold of displacement from rest below which the spring should be considered at rest. Default 0.001.
-- `restSpeedThreshold`: The speed at which the spring should be considered at rest in pixels per second. Default 0.001.
-- `delay`: Start the animation after delay (milliseconds). Default 0.
-- `isInteraction`: Whether or not this animation creates an "interaction handle" on the `InteractionManager`. Default true.
-- `useNativeDriver`: Uses the native driver when true. Required.
+其他配置选项：
+
+- `velocity`: 物体的初始速度。默认 0（静止）。
+- `overshootClamping`: 是否禁止反弹。默认 false。
+- `restDisplacementThreshold`: 定义弹簧被视为静止时的位移阈值。默认 0.001。
+- `restSpeedThreshold`: 弹簧被视为静止时的速度阈值（单位：像素/秒）。默认 0.001。
+- `delay`: 动画开始延迟（毫秒）。默认 0。
+- `isInteraction`: 是否创建 `InteractionManager` 的“交互句柄”。默认 true。
+- `useNativeDriver`: 是否使用原生驱动。必填。
 
 ---
 
@@ -276,7 +280,7 @@ Other configuration options are as follows:
 static add(a: Animated, b: Animated): AnimatedAddition;
 ```
 
-Creates a new Animated value composed from two Animated values added together.
+创建一个新的动画值，由两个动画值相加组成。
 
 ---
 
@@ -286,7 +290,7 @@ Creates a new Animated value composed from two Animated values added together.
 static subtract(a: Animated, b: Animated): AnimatedSubtraction;
 ```
 
-Creates a new Animated value composed by subtracting the second Animated value from the first Animated value.
+创建一个新的动画值，由第一个动画值减去第二个动画值组成。
 
 ---
 
@@ -296,7 +300,7 @@ Creates a new Animated value composed by subtracting the second Animated value f
 static divide(a: Animated, b: Animated): AnimatedDivision;
 ```
 
-Creates a new Animated value composed by dividing the first Animated value by the second Animated value.
+创建一个新的动画值，由第一个动画值除以第二个动画值组成。
 
 ---
 
@@ -306,7 +310,7 @@ Creates a new Animated value composed by dividing the first Animated value by th
 static multiply(a: Animated, b: Animated): AnimatedMultiplication;
 ```
 
-Creates a new Animated value composed from two Animated values multiplied together.
+创建一个新的动画值，由两个动画值相乘组成。
 
 ---
 
@@ -316,7 +320,7 @@ Creates a new Animated value composed from two Animated values multiplied togeth
 static modulo(a: Animated, modulus: number): AnimatedModulo;
 ```
 
-Creates a new Animated value that is the (non-negative) modulo of the provided Animated value
+创建一个新的动画值，为提供的动画值的（非负）取模值。
 
 ---
 
@@ -326,9 +330,9 @@ Creates a new Animated value that is the (non-negative) modulo of the provided A
 static diffClamp(a: Animated, min: number, max: number): AnimatedDiffClamp;
 ```
 
-Create a new Animated value that is limited between 2 values. It uses the difference between the last value so even if the value is far from the bounds it will start changing when the value starts getting closer again. (`value = clamp(value + diff, min, max)`).
+创建一个新的动画值，限制在两个值之间。它使用上一个值的差分，即使当前值远离边界，也会在值开始靠近边界时才改变。（`value = clamp(value + diff, min, max)`）
 
-This is useful with scroll events, for example, to show the navbar when scrolling up and to hide it when scrolling down.
+此方法在滚动事件中非常有用，例如，向上滚动显示导航栏，向下滚动隐藏导航栏。
 
 ---
 
@@ -338,7 +342,7 @@ This is useful with scroll events, for example, to show the navbar when scrollin
 static delay(time: number): CompositeAnimation;
 ```
 
-Starts an animation after the given delay.
+延迟指定时间后启动动画。
 
 ---
 
@@ -348,7 +352,7 @@ Starts an animation after the given delay.
 static sequence(animations: CompositeAnimation[]): CompositeAnimation;
 ```
 
-Starts an array of animations in order, waiting for each to complete before starting the next. If the current running animation is stopped, no following animations will be started.
+顺序启动一组动画，等待上一个完成后再启动下一个。如果当前运行的动画被停止，则后续动画不再启动。
 
 ---
 
@@ -361,7 +365,7 @@ static parallel(
 ): CompositeAnimation;
 ```
 
-Starts an array of animations all at the same time. By default, if one of the animations is stopped, they will all be stopped. You can override this with the `stopTogether` flag.
+同时启动一组动画。默认情况下，若其中一个动画停止，所有动画都会停止。可以通过 `stopTogether` 标志覆盖此行为。
 
 ---
 
@@ -374,7 +378,7 @@ static stagger(
 ): CompositeAnimation;
 ```
 
-Array of animations may run in parallel (overlap), but are started in sequence with successive delays. Nice for doing trailing effects.
+组内动画可以重叠执行，但依次启动且启动时间有间隔。适合实现拖尾效果。
 
 ---
 
@@ -387,11 +391,11 @@ static loop(
 ): CompositeAnimation;
 ```
 
-Loops a given animation continuously, so that each time it reaches the end, it resets and begins again from the start. Will loop without blocking the JS thread if the child animation is set to `useNativeDriver: true`. In addition, loops can prevent `VirtualizedList`-based components from rendering more rows while the animation is running. You can pass `isInteraction: false` in the child animation config to fix this.
+无限循环给定的动画，每次结束后重置并重新开始。如果子动画设置为 `useNativeDriver: true`，循环将不会阻塞 JS 线程。此外，循环动画可防止基于 `VirtualizedList` 的组件在动画运行时渲染更多行。你可以在子动画配置中传入 `isInteraction: false` 来避免该问题。
 
-Config is an object that may have the following options:
+配置对象可用选项：
 
-- `iterations`: Number of times the animation should loop. Default `-1` (infinite).
+- `iterations`: 动画循环次数。默认 `-1`（无限循环）。
 
 ---
 
@@ -404,32 +408,32 @@ static event(
 ): (...args: any[]) => void;
 ```
 
-Takes an array of mappings and extracts values from each arg accordingly, then calls `setValue` on the mapped outputs. e.g.
+接收映射数组，根据映射从每个参数中提取值，并调用映射输出的 `setValue`。例如：
 
 ```tsx
 onScroll={Animated.event(
   [{nativeEvent: {contentOffset: {x: this._scrollX}}}],
-  {listener: (event: ScrollEvent) => console.log(event)}, // Optional async listener
+  {listener: (event: ScrollEvent) => console.log(event)}, // 可选异步监听器
 )}
- ...
+...
 onPanResponderMove: Animated.event(
   [
-    null, // raw event arg ignored
+    null, // 忽略原始事件参数
     {dx: this._panX},
-  ], // gestureState arg
+  ], // gestureState 参数
   {
     listener: (
       event: GestureResponderEvent,
       gestureState: PanResponderGestureState
     ) => console.log(event, gestureState),
-  } // Optional async listener
+  } // 可选异步监听器
 );
 ```
 
-Config is an object that may have the following options:
+配置对象可用选项：
 
-- `listener`: Optional async listener.
-- `useNativeDriver`: Uses the native driver when true. Required.
+- `listener`: 可选异步监听器。
+- `useNativeDriver`: 是否使用原生驱动。必填。
 
 ---
 
@@ -439,7 +443,7 @@ Config is an object that may have the following options:
 static forkEvent(event: AnimatedEvent, listener: Function): AnimatedEvent;
 ```
 
-Advanced imperative API for snooping on animated events that are passed in through props. It permits to add a new javascript listener to an existing `AnimatedEvent`. If `animatedEvent` is a javascript listener, it will merge the 2 listeners into a single one, and if `animatedEvent` is null/undefined, it will assign the javascript listener directly. Use values directly where possible.
+高级命令式 API，用于在通过属性传入的动画事件上侦查。允许向已存在的 `AnimatedEvent` 添加新的 JS 监听器。如果 `animatedEvent` 本身就是 JS 监听器，将两个监听器合并为一个；如果 `animatedEvent` 为 null/undefined，直接赋值为 JS 监听器。建议尽可能直接使用值。
 
 ---
 
@@ -457,19 +461,19 @@ static unforkEvent(event: AnimatedEvent, listener: Function);
 static start(callback?: (result: {finished: boolean}) => void);
 ```
 
-Animations are started by calling start() on your animation. start() takes a completion callback that will be called when the animation is done or when the animation is done because stop() was called on it before it could finish.
+通过调用 `start()` 启动动画。`start()` 接受一个完成回调，该回调会在动画结束时调用，或在动画被调用 `stop()` 而提前终止时调用。
 
-**Parameters:**
+**参数：**
 
-| Name     | Type                                    | Required | Description                                                                                                                                                     |
-| -------- | --------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| callback | `(result: {finished: boolean}) => void` | No       | Function that will be called after the animation finished running normally or when the animation is done because stop() was called on it before it could finish |
+| 名称      | 类型                                    | 必填 | 说明                                                                                      |
+| --------- | --------------------------------------- | ---- | ----------------------------------------------------------------------------------------- |
+| callback  | `(result: {finished: boolean}) => void` | 否   | 动画正常完成或因调用 `stop()` 而提前结束时调用的函数                                     |
 
-Start example with callback:
+包含回调的启动示例：
 
 ```tsx
 Animated.timing({}).start(({finished}) => {
-  /* completion callback */
+  /* 完成回调 */
 });
 ```
 
@@ -481,7 +485,7 @@ Animated.timing({}).start(({finished}) => {
 static stop();
 ```
 
-Stops any running animation.
+停止正在运行的动画。
 
 ---
 
@@ -491,44 +495,44 @@ Stops any running animation.
 static reset();
 ```
 
-Stops any running animation and resets the value to its original.
+停止正在运行的动画，并将值重置为初始值。
 
-## Properties
+## 属性
 
 ### `Value`
 
-Standard value class for driving animations. Typically initialized with `useAnimatedValue(0);` or `new Animated.Value(0);` in class components.
+用于驱动动画的标准值类。通常使用 `useAnimatedValue(0);` 或在类组件中使用 `new Animated.Value(0);` 初始化。
 
-You can read more about `Animated.Value` API on the separate [page](animatedvalue).
+你可以在单独的[页面](animatedvalue)了解更多关于 `Animated.Value` 的 API。
 
 ---
 
 ### `ValueXY`
 
-2D value class for driving 2D animations, such as pan gestures.
+用于驱动二维动画（如平移手势）的值类。
 
-You can read more about `Animated.ValueXY` API on the separate [page](animatedvaluexy).
+你可以在单独的[页面](animatedvaluexy)了解更多关于 `Animated.ValueXY` 的 API。
 
 ---
 
 ### `Interpolation`
 
-Exported to use the Interpolation type in flow.
+导出以用于 Flow 中的 Interpolation 类型。
 
 ---
 
 ### `Node`
 
-Exported for ease of type checking. All animated values derive from this class.
+导出用于类型检查。所有动画值均继承自此类。
 
 ---
 
 ### `createAnimatedComponent`
 
-Make any React component Animatable. Used to create `Animated.View`, etc.
+使任意 React 组件变得可动画。用于创建 `Animated.View` 等。
 
 ---
 
 ### `attachNativeEvent`
 
-Imperative API to attach an animated value to an event on a view. Prefer using `Animated.event` with `useNativeDriver: true` if possible.
+命令式 API，用于将动画值绑定到视图的事件。尽可能优先使用带 `useNativeDriver: true` 的 `Animated.event`。

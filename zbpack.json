@@ -1,0 +1,6 @@
+{
+  "app_dir": "/",
+  "build_command": "cd website && yarn build",
+  "install_command": "yarn install",
+  "output_dir": "website/build"
+}

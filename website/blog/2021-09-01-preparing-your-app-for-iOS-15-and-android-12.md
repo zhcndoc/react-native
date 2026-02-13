@@ -1,33 +1,33 @@
 ---
-title: Preparing Your App for iOS 15 and Android 12
+title: 为 iOS 15 和 Android 12 准备您的应用
 authors: [SamuelSusla]
 tags: [engineering]
 ---
 
-Hello everyone!
+大家好！
 
-With new mobile OS versions releasing late this year, we recommend preparing your React Native apps beforehand to avoid regressions when the releases become generally available.
+随着新的移动操作系统版本将在今年晚些时候发布，我们建议提前准备您的 React Native 应用，以避免发布后出现回归问题。
 
 <!--truncate-->
 
 ## iOS 15
 
-The release date of iOS 15 hasn’t been announced yet, but based on previous iOS releases, it will likely be around September 16th. Please also account for App Store review time if any changes are required to prepare your app for iOS 15.
+iOS 15 的发布日期尚未宣布，但根据以往 iOS 发布的惯例，预计将在9月16日左右。同时如果需要对应用进行修改以适配 iOS 15，请预留 App Store 审核时间。
 
-### What to watch out for
+### 需要注意的事项
 
-#### QuickType Bar
+#### QuickType 输入建议栏
 
-The way to disable _QuickType_ bar in _[TextInput](/docs/textinput)_ has changed. _QuickType_ bar is the bar above keyboard with three suggested words. In case your UI needs to have the bar hidden, setting [autoCorrect](/docs/textinput#autocorrect) to `false` no longer disables _QuickType_ bar in iOS 15 like earlier versions. In order to hide the _QuickType_ bar, you need to also set [spellCheck](/docs/textinput#spellcheck-ios) to `false`. This will disable spell check, the red underlines, in your _TextInput_. Disabling QuickType bar with spell check enabled is no longer an option.
+禁用 _QuickType_ 输入建议栏（即键盘上方带有三个推荐词的栏）的方法在 _[TextInput](/docs/textinput)_ 中发生了变化。如果您的界面需要隐藏该栏，之前通过设置 [autoCorrect](/docs/textinput#autocorrect) 为 `false` 来禁用 _QuickType_ 的做法，在 iOS 15 中已经不再有效。现在要隐藏 QuickType 输入建议栏，您还需要将 [spellCheck](/docs/textinput#spellcheck-ios) 设置为 `false`。这会禁用拼写检查功能，即红色下划线。开启拼写检查时无法仅禁用 QuickType 输入建议栏。
 
 <figure>
-  <img src="/blog/assets/ios-15-quicktype-bar.png" alt="Screenshot of QuickType bar" />
+  <img src="/blog/assets/ios-15-quicktype-bar.png" alt="QuickType 输入建议栏截图" />
   <figcaption>
-    QuickType bar with three suggested words
+    带有三个建议词的 QuickType 输入建议栏
   </figcaption>
 </figure>
 
-To disable QuickType bar in iOS 15, set prop [spellCheck](/docs/textinput#spellcheck-ios) and [autoCorrect](/docs/textinput#autocorrect) to `false`.
+要在 iOS 15 里禁用 QuickType 输入建议栏，请将 [spellCheck](/docs/textinput#spellcheck-ios) 和 [autoCorrect](/docs/textinput#autocorrect) 属性同时设置为 `false`。
 
 ```jsx
 <TextInput
@@ -37,44 +37,44 @@ To disable QuickType bar in iOS 15, set prop [spellCheck](/docs/textinput#spellc
 />
 ```
 
-#### Transparent Navigation Bar
+#### 透明导航栏
 
-iOS 15 changes the default behaviour of the navigation bar. Unlike in iOS 14, the navigation bar becomes transparent when the content is scrolled all the way up. Make sure to watch out for this as it can make content difficult to read. For tips on how to work around this issue, check out [this thread](https://developer.apple.com/forums/thread/682420).
+iOS 15 改变了导航栏的默认行为。不同于 iOS 14，当内容滚动到最顶部时，导航栏会变得透明。请注意这一点，因为可能会导致内容阅读困难。关于如何解决该问题的建议，请参阅[这条帖子](https://developer.apple.com/forums/thread/682420)。
 
-![Screenshot of navigation bar on iOS 14 and iOS 15](/blog/assets/ios-15-navigation-bar.jpg)
+![iOS 14 与 iOS 15 导航栏截图](/blog/assets/ios-15-navigation-bar.jpg)
 
-### How to install iOS 15
+### 如何安装 iOS 15
 
-#### Device
+#### 设备
 
-If you have a spare device, you can join the [beta program](https://beta.apple.com/sp/betaprogram/) and install iOS 15. At this point, beta releases are generally stable, but keep in mind that **the upgrade to iOS 15 is irreversible**.
+如果您有备用设备，可以加入[测试计划](https://beta.apple.com/sp/betaprogram/)并安装 iOS 15。目前测试版已较为稳定，但请注意**升级到 iOS 15 是不可逆的**。
 
-#### Simulator
+#### 模拟器
 
-To test your app on a simulator with iOS 15, you will need to download Xcode 13. You can find Xcode 13 [here](https://developer.apple.com/xcode/).
+如果想在模拟器上测试 iOS 15，需要下载 Xcode 13，下载地址见 [这里](https://developer.apple.com/xcode/)。
 
 ## Android 12
 
-Android 12 will be released this autumn and it introduces some changes which can potentially affect your app experience. Traditionally, Google Play requires target SDK of your app to be upgraded before November of the following year. (see requirements for previous release [here](https://developer.android.com/distribute/best-practices/develop/target-sdk)).
+Android 12 将于今年秋季发布，带来一些可能影响应用体验的变化。按照惯例，Google Play 要求在次年 11 月前升级应用的目标 SDK 版本。（参见以往版本的要求：[这里](https://developer.android.com/distribute/best-practices/develop/target-sdk)）
 
-### What to watch out for
+### 需要注意的事项
 
-#### Overscroll Effect
+#### 过滚动效果
 
-Android 12 introduces new [overscroll effect](https://developer.android.com/about/versions/12/overscroll) which affects all scroll containers. As React Native scroll views are based on the native views, we recommend to check your scrollable containers to ensure the effect is applied correctly. You can opt-out from it by setting [`overScrollMode`](/docs/scrollview#overscrollmode-android) prop to `never`.
+Android 12 引入了新的[过滚动效果](https://developer.android.com/about/versions/12/overscroll)，影响所有滚动容器。由于 React Native 的滚动视图基于原生视图，建议检查您的滚动容器是否正确应用了该效果。您可以通过将 [`overScrollMode`](/docs/scrollview#overscrollmode-android) 属性设置为 `never` 来选择关闭它。
 
-#### Permission Updates
+#### 权限更新
 
-Android 12 allows users of your app to only provide access to the approximate location if you request it with **`ACCESS_FINE_LOCATION`** permission. Learn more about it [here](https://developer.android.com/about/versions/12/approximate-location).
+Android 12 允许用户仅为位置访问提供大致位置信息（Approximate Location）权限，即使您请求的是 **`ACCESS_FINE_LOCATION`** 权限。详情请见[这里](https://developer.android.com/about/versions/12/approximate-location)。
 
-Check out Google’s [detailed behavior changes](https://developer.android.com/about/versions/12/behavior-changes-all) for all apps running on Android 12.
+Google 提供了关于 Android 12 上所有应用行为变更的[详细说明](https://developer.android.com/about/versions/12/behavior-changes-all)。
 
-### How to install Android 12
+### 如何安装 Android 12
 
-#### Device
+#### 设备
 
-If you have a spare Android device, check if you’re able to install Android 12 Beta via [instructions here.](https://developer.android.com/about/versions/12/get)
+如果您有备用 Android 设备，请参考[这篇指南](https://developer.android.com/about/versions/12/get)查看是否可以安装 Android 12 Beta。
 
-#### Emulator
+#### 模拟器
 
-If you don’t have a device available, you can set up an emulator following [instructions here](https://developer.android.com/about/versions/12/get#on_emulator).
+如果没有设备可用，您可以按照[这篇指南](https://developer.android.com/about/versions/12/get#on_emulator)设置模拟器。

@@ -1,28 +1,28 @@
 ---
 id: libraries
-title: Using Libraries
+title: 使用库
 author: Brent Vatne
 authorURL: 'https://twitter.com/notbrent'
-description: This guide introduces React Native developers to finding, installing, and using third-party libraries in their apps.
+description: 本指南介绍 React Native 开发者如何在应用中查找、安装和使用第三方库。
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-React Native provides a set of built-in [Core Components and APIs](./components-and-apis) ready to use in your app. You're not limited to the components and APIs bundled with React Native. React Native has a community of thousands of developers. If the Core Components and APIs don't have what you are looking for, you may be able to find and install a library from the community to add the functionality to your app.
+React Native 提供了一套内置的 [核心组件和 API](./components-and-apis)，可以直接在你的应用中使用。但你并不局限于 React Native 自带的组件和 API。React Native 拥有数千名开发者组成的社区。如果核心组件和 API 中没有你需要的功能，你或许可以在社区里找到并安装相应的库，为你的应用添加该功能。
 
-## Selecting a Package Manager
+## 选择包管理器
 
-React Native libraries are typically installed from the [npm registry](https://www.npmjs.com/) using a Node.js package manager such as [npm CLI](https://docs.npmjs.com/cli/npm) or [Yarn Classic](https://classic.yarnpkg.com/en/).
+React Native 库通常通过 Node.js 包管理器从 [npm 注册表](https://www.npmjs.com/) 安装，比如使用 [npm CLI](https://docs.npmjs.com/cli/npm) 或 [Yarn Classic](https://classic.yarnpkg.com/en/)。
 
-If you have Node.js installed on your computer then you already have the npm CLI installed. Some developers prefer to use Yarn Classic for slightly faster install times and additional advanced features like Workspaces. Both tools work great with React Native. We will assume npm for the rest of this guide for simplicity of explanation.
+如果你的电脑上已经安装了 Node.js，那么 npm CLI 也已经安装好了。一些开发者偏好使用 Yarn Classic，因其安装速度稍快，同时还提供了如工作区（Workspaces）等高级功能。两者都非常适合用于 React Native。为了简化说明，本文后续将默认使用 npm。
 
 :::note
-The terms "library" and "package" are used interchangeably in the JavaScript community.
+在 JavaScript 社区中，“library”（库）和“package”（包）两个术语通常可以互换使用。
 :::
 
-## Installing a Library
+## 安装库
 
-To install a library in your project, navigate to your project directory in your terminal and run the installation command. Let's try this with `react-native-webview`:
+要在项目中安装库，请在终端进入你的项目目录，并运行安装命令。这里以 `react-native-webview` 为例：
 
 <Tabs groupId="package-manager" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>
 <TabItem value="npm">
@@ -41,19 +41,19 @@ yarn add react-native-webview
 </TabItem>
 </Tabs>
 
-The library that we installed includes native code, and we need to link to our app before we use it.
+我们安装的这个库包含了原生代码，使用前需要先与应用进行链接。
 
-## Linking Native Code on iOS
+## 在 iOS 上链接原生代码
 
-React Native uses CocoaPods to manage iOS project dependencies and most React Native libraries follow this same convention. If a library you are using does not, then please refer to their README for additional instruction. In most cases, the following instructions will apply.
+React Native 使用 CocoaPods 来管理 iOS 项目依赖，大多数 React Native 库都遵循这一约定。如果你使用的库不支持，请参考该库的 README 获取更多说明。大多数情况下，以下操作适用。
 
-Run `pod install` in our `ios` directory in order to link it to our native iOS project. A shortcut for doing this without switching to the `ios` directory is to run `npx pod-install`.
+在 `ios` 目录下运行 `pod install`，以链接该库到原生 iOS 项目中。无需切换目录的快捷方式是运行 `npx pod-install`。
 
 ```bash
 npx pod-install
 ```
 
-Once this is complete, re-build the app binary to start using your new library:
+完成后，重新构建应用二进制文件，即可开始使用新库：
 
 <Tabs groupId="package-manager" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>
 <TabItem value="npm">
@@ -72,9 +72,9 @@ yarn ios
 </TabItem>
 </Tabs>
 
-## Linking Native Code on Android
+## 在 Android 上链接原生代码
 
-React Native uses Gradle to manage Android project dependencies. After you install a library with native dependencies, you will need to re-build the app binary to use your new library:
+React Native 使用 Gradle 来管理 Android 项目依赖。安装包含原生依赖的库后，需要重新构建应用二进制文件来使用新库：
 
 <Tabs groupId="package-manager" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>
 <TabItem value="npm">
@@ -93,28 +93,28 @@ yarn android
 </TabItem>
 </Tabs>
 
-## Finding Libraries
+## 查找库
 
-[React Native Directory](https://reactnative.directory) is a searchable database of libraries built specifically for React Native. This is the first place to look for a library for your React Native app.
+[React Native Directory](https://reactnative.directory) 是一个为 React Native 专门打造的可搜索库数据库。这里是你寻找 React Native 库的首选之地。
 
-Many of the libraries you will find on the directory are from [React Native Community](https://github.com/react-native-community/) or [Expo](https://docs.expo.dev/versions/latest/).
+目录中的许多库都来自 [React Native Community](https://github.com/react-native-community/) 或 [Expo](https://docs.expo.dev/versions/latest/)。
 
-Libraries built by the React Native Community are driven by volunteers and individuals at companies that depend on React Native. They often support iOS, tvOS, Android, Windows, but this varies across projects. Many of the libraries in this organization were once React Native Core Components and APIs.
+React Native Community 由志愿者和依赖 React Native 的公司个人推动，库通常支持 iOS、tvOS、Android、Windows，但不同项目支持的具体平台会有所不同。很多库曾是 React Native 核心组件和 API。
 
-Libraries built by Expo are all written in TypeScript and support iOS, Android, and `react-native-web` wherever possible.
+Expo 构建的库均使用 TypeScript 编写，尽可能支持 iOS、Android 和 `react-native-web`。
 
-After React Native Directory, the [npm registry](https://www.npmjs.com/) is the next best place if you can't find a library specifically for React Native on the directory. The npm registry is the definitive source for JavaScript libraries, but the libraries that it lists may not all be compatible with React Native. React Native is one of many JavaScript programming environments, including Node.js, web browsers, Electron, and more, and npm includes libraries that work for all of these environments.
+如果在 React Native Directory 未能找到合适库，接下来推荐在 [npm 注册表](https://www.npmjs.com/) 中搜索。npm 注册表是 JavaScript 库的权威来源，但其列出的库不一定都兼容 React Native。React Native 是众多 JavaScript 运行环境中的一种，包括 Node.js、网页浏览器、Electron 等，npm 包含适用于所有这些环境的库。
 
-## Determining Library Compatibility
+## 判断库的兼容性
 
-### Does it work with React Native?
+### 它能在 React Native 上运行吗？
 
-Usually libraries built _specifically for other platforms_ will not work with React Native. Examples include `react-select` which is built for the web and specifically targets `react-dom`, and `rimraf` which is built for Node.js and interacts with your computer file system. Other libraries like `lodash` use only JavaScript language features and work in any environment. You will gain a sense for this over time, but until then the easiest way to find out is to try it yourself. You can remove packages using `npm uninstall` if it turns out that it does not work in React Native.
+通常专为其他平台构建的库不会兼容 React Native。例如，`react-select` 是为网页构建的，专门针对 `react-dom`；`rimraf` 是为 Node.js 构建，与计算机文件系统打交道。还有像 `lodash` 这类只使用 JavaScript 语言特性的库，可以在任何环境运行。随着经验积累，你会更擅长判断，暂时不确定时，最简单的办法是亲自尝试。如果发现不兼容 React Native，可以使用 `npm uninstall` 移除包。
 
-### Does it work for the platforms that my app supports?
+### 它支持我的应用目标平台吗？
 
-[React Native Directory](https://reactnative.directory) allows you to filter by platform compatibility, such as iOS, Android, Web, and Windows. If the library you would like to use is not currently listed there, refer to the README for the library to learn more.
+[React Native Directory](https://reactnative.directory) 允许你按平台兼容性筛选，比如 iOS、Android、Web 和 Windows。如果你想用的库未列在目录中，请参考该库的 README 了解更多信息。
 
-### Does it work with my app version of React Native?
+### 它支持我当前使用的 React Native 版本吗？
 
-The latest version of a library is typically compatible with the latest version of React Native. If you are using an older version, you should refer to the README to know which version of the library you should install. You can install a particular version of the library by running `npm install <library-name>@<version-number>`, for example: `npm install @react-native-community/netinfo@^2.0.0`.
+库的最新版本通常兼容 React Native 的最新版本。如果你使用的是旧版本，应查阅 README 了解该库对应的 React Native 版本。你可以安装指定版本的库，例如：运行 `npm install <库名>@<版本号>`，示例：`npm install @react-native-community/netinfo@^2.0.0`。

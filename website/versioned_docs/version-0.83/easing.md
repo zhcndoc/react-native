@@ -1,49 +1,49 @@
 ---
 id: easing
-title: Easing
+title: 缓动（Easing）
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-The `Easing` module implements common easing functions. This module is used by [`Animated.timing()`](animated.md#timing) to convey physically believable motion in animations.
+`Easing` 模块实现了常用的缓动函数。该模块被 [`Animated.timing()`](animated.md#timing) 使用，以传递动画中物理上可信的运动效果。
 
-You can find a visualization of some common easing functions at https://easings.net/
+你可以在 https://easings.net/ 查看一些常见缓动函数的可视化演示。
 
-### Predefined animations
+### 预定义动画
 
-The `Easing` module provides several predefined animations through the following methods:
+`Easing` 模块通过以下方法提供几个预定义动画：
 
-- [`back`](easing.md#back) provides a basic animation where the object goes slightly back before moving forward
-- [`bounce`](easing.md#bounce) provides a bouncing animation
-- [`ease`](easing.md#ease) provides a basic inertial animation
-- [`elastic`](easing.md#elastic) provides a basic spring interaction
+- [`back`](easing.md#back) 提供一个基本动画，物体在向前移动前稍微往后移
+- [`bounce`](easing.md#bounce) 提供一个弹跳动画
+- [`ease`](easing.md#ease) 提供一个基本的惯性动画
+- [`elastic`](easing.md#elastic) 提供一个基本的弹簧效果
 
-### Standard functions
+### 标准函数
 
-Three standard easing functions are provided:
+提供三种标准缓动函数：
 
 - [`linear`](easing.md#linear)
 - [`quad`](easing.md#quad)
 - [`cubic`](easing.md#cubic)
 
-The [`poly`](easing.md#poly) function can be used to implement quartic, quintic, and other higher power functions.
+[`poly`](easing.md#poly) 函数用于实现四次、五次及其他更高次幂的函数。
 
-### Additional functions
+### 额外函数
 
-Additional mathematical functions are provided by the following methods:
+通过以下方法提供更多数学函数：
 
-- [`bezier`](easing.md#bezier) provides a cubic bezier curve
-- [`circle`](easing.md#circle) provides a circular function
-- [`sin`](easing.md#sin) provides a sinusoidal function
-- [`exp`](easing.md#exp) provides an exponential function
+- [`bezier`](easing.md#bezier) 提供三次贝塞尔曲线
+- [`circle`](easing.md#circle) 提供圆形函数
+- [`sin`](easing.md#sin) 提供正弦函数
+- [`exp`](easing.md#exp) 提供指数函数
 
-The following helpers are used to modify other easing functions.
+以下辅助函数用于修饰其它缓动函数：
 
-- [`in`](easing.md#in) runs an easing function forwards
-- [`inOut`](easing.md#inout) makes any easing function symmetrical
-- [`out`](easing.md#out) runs an easing function backwards
+- [`in`](easing.md#in) 让缓动函数正向运行
+- [`inOut`](easing.md#inout) 让任意缓动函数对称运行
+- [`out`](easing.md#out) 让缓动函数反向运行
 
-## Example
+## 示例
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -94,7 +94,7 @@ const App = () => {
       <SafeAreaView style={styles.container} edges={['right', 'top', 'left']}>
         <StatusBar hidden={true} />
         <Text style={styles.title}>
-          Press rows below to preview the Easing!
+          点击下面的行以预览缓动效果！
         </Text>
         <View style={styles.boxContainer}>
           <Animated.View style={animatedStyles} />
@@ -121,35 +121,35 @@ const App = () => {
 
 const SECTIONS = [
   {
-    title: 'Predefined animations',
+    title: '预定义动画',
     data: [
-      {title: 'Bounce', easing: Easing.bounce},
-      {title: 'Ease', easing: Easing.ease},
-      {title: 'Elastic', easing: Easing.elastic(4)},
+      {title: 'Bounce 弹跳', easing: Easing.bounce},
+      {title: 'Ease 缓动', easing: Easing.ease},
+      {title: 'Elastic 弹性', easing: Easing.elastic(4)},
     ],
   },
   {
-    title: 'Standard functions',
+    title: '标准函数',
     data: [
-      {title: 'Linear', easing: Easing.linear},
-      {title: 'Quad', easing: Easing.quad},
-      {title: 'Cubic', easing: Easing.cubic},
+      {title: 'Linear 线性', easing: Easing.linear},
+      {title: 'Quad 二次方', easing: Easing.quad},
+      {title: 'Cubic 三次方', easing: Easing.cubic},
     ],
   },
   {
-    title: 'Additional functions',
+    title: '额外函数',
     data: [
       {
-        title: 'Bezier',
+        title: 'Bezier 贝塞尔',
         easing: Easing.bezier(0, 2, 1, -1),
       },
-      {title: 'Circle', easing: Easing.circle},
-      {title: 'Sin', easing: Easing.sin},
-      {title: 'Exp', easing: Easing.exp},
+      {title: 'Circle 圆形', easing: Easing.circle},
+      {title: 'Sin 正弦', easing: Easing.sin},
+      {title: 'Exp 指数', easing: Easing.exp},
     ],
   },
   {
-    title: 'Combinations',
+    title: '组合使用',
     data: [
       {
         title: 'In + Bounce',
@@ -255,7 +255,7 @@ const App = () => {
       <SafeAreaView style={styles.container} edges={['right', 'top', 'left']}>
         <StatusBar hidden={true} />
         <Text style={styles.title}>
-          Press rows below to preview the Easing!
+          点击下面的行以预览缓动效果！
         </Text>
         <View style={styles.boxContainer}>
           <Animated.View style={animatedStyles} />
@@ -282,35 +282,35 @@ const App = () => {
 
 const SECTIONS = [
   {
-    title: 'Predefined animations',
+    title: '预定义动画',
     data: [
-      {title: 'Bounce', easing: Easing.bounce},
-      {title: 'Ease', easing: Easing.ease},
-      {title: 'Elastic', easing: Easing.elastic(4)},
+      {title: 'Bounce 弹跳', easing: Easing.bounce},
+      {title: 'Ease 缓动', easing: Easing.ease},
+      {title: 'Elastic 弹性', easing: Easing.elastic(4)},
     ],
   },
   {
-    title: 'Standard functions',
+    title: '标准函数',
     data: [
-      {title: 'Linear', easing: Easing.linear},
-      {title: 'Quad', easing: Easing.quad},
-      {title: 'Cubic', easing: Easing.cubic},
+      {title: 'Linear 线性', easing: Easing.linear},
+      {title: 'Quad 二次方', easing: Easing.quad},
+      {title: 'Cubic 三次方', easing: Easing.cubic},
     ],
   },
   {
-    title: 'Additional functions',
+    title: '额外函数',
     data: [
       {
-        title: 'Bezier',
+        title: 'Bezier 贝塞尔',
         easing: Easing.bezier(0, 2, 1, -1),
       },
-      {title: 'Circle', easing: Easing.circle},
-      {title: 'Sin', easing: Easing.sin},
-      {title: 'Exp', easing: Easing.exp},
+      {title: 'Circle 圆形', easing: Easing.circle},
+      {title: 'Sin 正弦', easing: Easing.sin},
+      {title: 'Exp 指数', easing: Easing.exp},
     ],
   },
   {
-    title: 'Combinations',
+    title: '组合使用',
     data: [
       {
         title: 'In + Bounce',
@@ -371,9 +371,9 @@ export default App;
 
 ---
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `step0()`
 
@@ -381,7 +381,7 @@ export default App;
 static step0(n: number);
 ```
 
-A stepping function, returns 1 for any positive value of `n`.
+阶跃函数，当 `n` 为正数时返回 1。
 
 ---
 
@@ -391,7 +391,7 @@ A stepping function, returns 1 for any positive value of `n`.
 static step1(n: number);
 ```
 
-A stepping function, returns 1 if `n` is greater than or equal to 1.
+阶跃函数，当 `n` 大于或等于 1 时返回 1。
 
 ---
 
@@ -401,7 +401,7 @@ A stepping function, returns 1 if `n` is greater than or equal to 1.
 static linear(t: number);
 ```
 
-A linear function, `f(t) = t`. Position correlates to elapsed time one to one.
+线性函数，`f(t) = t`。位置与经过时间一一对应。
 
 https://cubic-bezier.com/#0,0,1,1
 
@@ -413,7 +413,7 @@ https://cubic-bezier.com/#0,0,1,1
 static ease(t: number);
 ```
 
-A basic inertial interaction, similar to an object slowly accelerating to speed.
+基本惯性交互，类似物体慢慢加速到速度。
 
 https://cubic-bezier.com/#.42,0,1,1
 
@@ -425,7 +425,7 @@ https://cubic-bezier.com/#.42,0,1,1
 static quad(t: number);
 ```
 
-A quadratic function, `f(t) = t * t`. Position equals the square of elapsed time.
+二次函数，`f(t) = t * t`。位置等于经过时间的平方。
 
 https://easings.net/#easeInQuad
 
@@ -437,7 +437,7 @@ https://easings.net/#easeInQuad
 static cubic(t: number);
 ```
 
-A cubic function, `f(t) = t * t * t`. Position equals the cube of elapsed time.
+三次函数，`f(t) = t * t * t`。位置等于经过时间的立方。
 
 https://easings.net/#easeInCubic
 
@@ -449,9 +449,9 @@ https://easings.net/#easeInCubic
 static poly(n: number);
 ```
 
-A power function. Position is equal to the Nth power of elapsed time.
+幂函数。位置等于经过时间的 n 次幂。
 
-n = 4: https://easings.net/#easeInQuart n = 5: https://easings.net/#easeInQuint
+n = 4: https://easings.net/#easeInQuart  n = 5: https://easings.net/#easeInQuint
 
 ---
 
@@ -461,7 +461,7 @@ n = 4: https://easings.net/#easeInQuart n = 5: https://easings.net/#easeInQuint
 static sin(t: number);
 ```
 
-A sinusoidal function.
+正弦函数。
 
 https://easings.net/#easeInSine
 
@@ -473,7 +473,7 @@ https://easings.net/#easeInSine
 static circle(t: number);
 ```
 
-A circular function.
+圆形函数。
 
 https://easings.net/#easeInCirc
 
@@ -485,7 +485,7 @@ https://easings.net/#easeInCirc
 static exp(t: number);
 ```
 
-An exponential function.
+指数函数。
 
 https://easings.net/#easeInExpo
 
@@ -497,9 +497,9 @@ https://easings.net/#easeInExpo
 static elastic(bounciness: number);
 ```
 
-A basic elastic interaction, similar to a spring oscillating back and forth.
+基本弹性交互，类似弹簧往复振荡的效果。
 
-Default bounciness is 1, which overshoots a little bit once. 0 bounciness doesn't overshoot at all, and bounciness of N > 1 will overshoot about N times.
+默认弹性系数为 1，会有一次轻微的超出。弹性系数为 0 不会超出，大于 1 的弹性系数会超出约 N 次。
 
 https://easings.net/#easeInElastic
 
@@ -511,7 +511,7 @@ https://easings.net/#easeInElastic
 static back(s)
 ```
 
-Use with `Animated.parallel()` to create a basic effect where the object animates back slightly as the animation starts.
+配合 `Animated.parallel()` 使用，创建一个动画开始时物体稍微向后移动的效果。
 
 ---
 
@@ -521,7 +521,7 @@ Use with `Animated.parallel()` to create a basic effect where the object animate
 static bounce(t: number);
 ```
 
-Provides a basic bouncing effect.
+提供基本的弹跳效果。
 
 https://easings.net/#easeInBounce
 
@@ -533,9 +533,9 @@ https://easings.net/#easeInBounce
 static bezier(x1: number, y1: number, x2: number, y2: number);
 ```
 
-Provides a cubic bezier curve, equivalent to CSS Transitions' `transition-timing-function`.
+提供三次贝塞尔曲线，等价于 CSS 过渡中的 `transition-timing-function`。
 
-A useful tool to visualize cubic bezier curves can be found at https://cubic-bezier.com/
+一个很有用的贝塞尔曲线可视化工具在 https://cubic-bezier.com/
 
 ---
 
@@ -545,7 +545,7 @@ A useful tool to visualize cubic bezier curves can be found at https://cubic-bez
 static in(easing: number);
 ```
 
-Runs an easing function forwards.
+正向运行一个缓动函数。
 
 ---
 
@@ -555,7 +555,7 @@ Runs an easing function forwards.
 static out(easing: number);
 ```
 
-Runs an easing function backwards.
+反向运行一个缓动函数。
 
 ---
 
@@ -565,4 +565,4 @@ Runs an easing function backwards.
 static inOut(easing: number);
 ```
 
-Makes any easing function symmetrical. The easing function will run forwards for half of the duration, then backwards for the rest of the duration.
+使任何缓动函数对称运行。缓动函数在持续时间的前半段正向运行，后半段反向运行。

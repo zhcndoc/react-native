@@ -1,35 +1,35 @@
 ---
-title: Better List Views in React Native
+title: React Native 中更好的列表视图
 author: Spencer Ahrens
-authorTitle: Software Engineer at Facebook
+authorTitle: Facebook 软件工程师
 authorURL: 'https://github.com/sahrens'
 authorImageURL: 'https://avatars1.githubusercontent.com/u/1509831'
 authorTwitter: sahrens2012
 tags: [engineering]
 ---
 
-Many of you have started playing with some of our new List components already after our [teaser announcement in the community group](https://www.facebook.com/groups/react.native.community/permalink/921378591331053), but we are officially announcing them today! No more `ListView`s or `DataSource`s, stale rows, ignored bugs, or excessive memory consumption - with the latest React Native March 2017 release candidate (`0.43-rc.1`) you can pick from the new suite of components what best fits your use-case, with great perf and feature sets out of the box:
+很多人已经开始尝试我们的新列表组件了，这要归功于我们之前在[社区群组中的预告公告](https://www.facebook.com/groups/react.native.community/permalink/921378591331053)，今天我们正式发布它们！不再需要 `ListView` 或 `DataSource`，告别死板的行、被忽略的 Bug 和过度的内存消耗 —— 使用最新的 React Native 2017 年 3 月发布候选版（`0.43-rc.1`），你可以从新推出的一系列组件中选择最符合你使用场景的，开箱即用，性能和功能兼备：
 
 ### [`<FlatList>`](/docs/flatlist)
 
-This is the workhorse component for simple, performant lists. Provide an array of data and a `renderItem` function and you're good to go:
+这是用于简单且高性能列表的主力组件。只需提供一个数据数组和一个 `renderItem` 函数即可：
 
 ```
 <FlatList
-  data={[{title: 'Title Text', key: 'item1'}, ...]}
+  data={[{title: '标题文本', key: 'item1'}, ...]}
   renderItem={({item}) => <ListItem title={item.title} />}
 />
 ```
 
 ### [`<SectionList>`](/docs/sectionlist)
 
-If you want to render a set of data broken into logical sections, maybe with section headers (e.g. in an alphabetical address book), and potentially with heterogeneous data and rendering (such as a profile view with some buttons followed by a composer, then a photo grid, then a friend grid, and finally a list of stories), this is the way to go.
+如果你想渲染一组按逻辑分段的数据，带有分区头部（例如按字母排序的通讯录），或者数据和渲染异构（例如一个配置文件视图，包含一些按钮、接着是一个编写器、然后是图片网格、好友网格，最后是故事列表），这就是你要用的组件。
 
 ```
 <SectionList
   renderItem={({item}) => <ListItem title={item.title} />}
   renderSectionHeader={({section}) => <H1 title={section.key} />}
-  sections={[ // homogeneous rendering between sections
+  sections={[ // 各分区渲染均匀
     {data: [...], key: ...},
     {data: [...], key: ...},
     {data: [...], key: ...},
@@ -37,7 +37,7 @@ If you want to render a set of data broken into logical sections, maybe with sec
 />
 
 <SectionList
-  sections={[ // heterogeneous rendering between sections
+  sections={[ // 各分区渲染异构
     {data: [...], key: ..., renderItem: ...},
     {data: [...], key: ..., renderItem: ...},
     {data: [...], key: ..., renderItem: ...},
@@ -47,26 +47,26 @@ If you want to render a set of data broken into logical sections, maybe with sec
 
 ### [`<VirtualizedList>`](/docs/virtualizedlist)
 
-The implementation behind the scenes with a more flexible API. Especially handy if your data is not in a plain array (e.g. an immutable list).
+这是后台实现的组件，提供了更灵活的 API。尤其适合你的数据不是普通数组的情况（例如不可变列表）。
 
-## Features
+## 功能
 
-Lists are used in many contexts, so we packed the new components full of features to handle the majority of use cases out of the box:
+列表在许多场景中都会用到，因此我们给新组件添加了丰富的功能以覆盖大多数使用案例：
 
-- Scroll loading (`onEndReached`).
-- Pull to refresh (`onRefresh` / `refreshing`).
-- [Configurable](https://github.com/facebook/react-native/blob/master/Libraries/CustomComponents/Lists/ViewabilityHelper.js) viewability (VPV) callbacks (`onViewableItemsChanged` / `viewabilityConfig`).
-- Horizontal mode (`horizontal`).
-- Intelligent item and section separators.
-- Multi-column support (`numColumns`)
-- `scrollToEnd`, `scrollToIndex`, and `scrollToItem`
-- Better Flow typing.
+- 滚动加载（`onEndReached`）。
+- 下拉刷新（`onRefresh` / `refreshing`）。
+- [可配置的](https://github.com/facebook/react-native/blob/master/Libraries/CustomComponents/Lists/ViewabilityHelper.js) 可视回调（VPV）（`onViewableItemsChanged` / `viewabilityConfig`）。
+- 横向模式（`horizontal`）。
+- 智能的行与分区分割线。
+- 多列支持（`numColumns`）。
+- `scrollToEnd`，`scrollToIndex`，和 `scrollToItem`。
+- 更完善的 Flow 类型支持。
 
-### Some Caveats
+### 一些注意事项
 
-- The internal state of item subtrees is not preserved when content scrolls out of the render window. Make sure all your data is captured in the item data or external stores like Flux, Redux, or Relay.
+- 当内容滚动出渲染窗口时，项目子树的内部状态不会被保留。请确保所有数据都被包含在项目数据中，或存储在 Flux、Redux、Relay 等外部存储中。
 
-- These components are based on `PureComponent` which means that they will not re-render if `props` remains shallow-equal. Make sure that everything your `renderItem` function depends on directly is passed as a prop that is not `===` after updates, otherwise your UI may not update on changes. This includes the `data` prop and parent component state. For example:
+- 这些组件基于 `PureComponent`，意味着如果 `props` 浅比较相等，不会重新渲染。确保你的 `renderItem` 函数直接依赖的所有内容，都作为非 `===` 相等的 prop 传递，否则 UI 可能不会实时更新。这包括 `data` 属性和父组件的状态。例如：
 
   ```jsx
   <FlatList
@@ -77,50 +77,50 @@ Lists are used in many contexts, so we packed the new components full of feature
         onPress={() =>
           this.setState(oldState => ({
             selected: {
-              // New instance breaks `===`
-              ...oldState.selected, // copy old data
-              [item.key]: !oldState.selected[item.key], // toggle
+              // 新实例打破了 `===`
+              ...oldState.selected, // 复制旧数据
+              [item.key]: !oldState.selected[item.key], // 切换选中状态
             },
           }))
         }
         selected={
-          !!this.state.selected[item.key] // renderItem depends on state
+          !!this.state.selected[item.key] // renderItem 依赖于state
         }
       />
     )}
     selected={
-      // Can be any prop that doesn't collide with existing props
-      this.state.selected // A change to selected should re-render FlatList
+      // 可以是任何不冲突的 prop
+      this.state.selected // selected 变化应触发 FlatList 重新渲染
     }
   />
   ```
 
-- In order to constrain memory and enable smooth scrolling, content is rendered asynchronously offscreen. This means it's possible to scroll faster than the fill rate and momentarily see blank content. This is a tradeoff that can be adjusted to suit the needs of each application, and we are working on improving it behind the scenes.
+- 为限制内存并支持流畅滚动，内容是异步离屏渲染的。这意味着可能会滚动速度快于填充速度，短暂看到空白内容。这是一个折中，可以根据应用需求调整，我们也在后台持续改进。
 
-- By default, these new lists look for a `key` prop on each item and use that for the React key. Alternatively, you can provide a custom `keyExtractor` prop.
+- 默认情况下，这些新列表会查找每个项目上的 `key` 属性作为 React key。你也可以提供自定义的 `keyExtractor` 属性。
 
-## Performance
+## 性能
 
-Besides simplifying the API, the new list components also have significant performance enhancements, the main one being nearly constant memory usage for any number of rows. This is done by 'virtualizing' elements that are outside of the render window by completely unmounting them from the component hierarchy and reclaiming the JS memory from the react components, along with the native memory from the shadow tree and the UI views. This has a catch which is that internal component state will not be preserved, so **make sure you track any important state outside of the components themselves, e.g. in Relay or Redux or Flux store.**
+除了简化 API，新列表组件还带来了显著的性能提升，最主要的是对任意行数几乎保持恒定的内存使用。实现方式是对渲染窗口外的元素进行“虚拟化”，即将它们完全从组件树卸载，回收 React 组件的 JS 内存，以及 Shadow 树和 UI 视图的原生内存。但这意味着组件内部状态不会被保留，因此**请确保你把重要状态存储在组件外部，比如 Relay、Redux 或 Flux 存储。**
 
-Limiting the render window also reduces the amount of work that needs to be done by React and the native platform, e.g from view traversals. Even if you are rendering the last of a million elements, with these new lists there is no need to iterate through all those elements in order to render. You can even jump to the middle with `scrollToIndex` without excessive rendering.
+限制渲染窗口还减少了 React 和原生层需要处理的工作量，例如视图遍历。即使是在渲染数百万元素的末尾，也无需遍历所有元素。你甚至可以用 `scrollToIndex` 直接跳转到列表中间，无需额外渲染。
 
-We've also made some improvements with scheduling which should help with application responsiveness. Items at the edge of the render window are rendered infrequently and at a lower priority after any active gestures or animations or other interactions have completed.
+我们还对调度做了改进，提升应用响应速度。渲染窗口边缘的项目会在任何活动的手势、动画或其它交互完成后，以较低优先级和较少频率渲染。
 
-## Advanced Usage
+## 高级用法
 
-Unlike `ListView`, all items in the render window are re-rendered any time any props change. Often this is fine because the windowing reduces the number of items to a constant number, but if your items are on the complex side, you should make sure to follow React best practices for performance and use `React.PureComponent` and/or `shouldComponentUpdate` as appropriate within your components to limit re-renders of the recursive subtree.
+与 `ListView` 不同，渲染窗口中的所有项目只要任何 prop 变化都会重新渲染。通常这没问题，因为窗口大小限制了项目数量，但如果你的项目非常复杂，应遵循 React 性能优化最佳实践，使用 `React.PureComponent` 和/或 `shouldComponentUpdate` 来限制递归子树的重渲染。
 
-If you can calculate the height of your rows without rendering them, you can improve the user experience by providing the `getItemLayout` prop. This makes it much smoother to scroll to specific items with e.g. `scrollToIndex`, and will improve the scroll indicator UI because the height of the content can be determined without rendering it.
+如果你能在不渲染的情况下计算行高，可以通过提供 `getItemLayout` 属性来提升用户体验。这使得用 `scrollToIndex` 等方法滚动到指定项目更平滑，也能提升滚动条 UI，因为内容高度不用渲染就能确定。
 
-If you have an alternative data type, like an immutable list, `<VirtualizedList>` is the way to go. It takes a `getItem` prop that lets you return the item data for any given index and has looser flow typing.
+如果你使用其他类型数据，比如不可变列表，`<VirtualizedList>` 是更好的选择。它接受一个 `getItem` 属性，可返回任意索引的项目数据，Flow 类型也更宽松。
 
-There are also a bunch of parameters you can tweak if you have an unusual use case. For example, you can use `windowSize` to trade off memory usage vs. user experience, `maxToRenderPerBatch` to adjust fill rate vs. responsiveness, `onEndReachedThreshold` to control when scroll loading happens, and more.
+对于特殊需求，还可以调整多个参数，例如用 `windowSize` 在内存使用和用户体验之间权衡，`maxToRenderPerBatch` 调整填充率和响应速度，`onEndReachedThreshold` 控制滚动加载触发门槛等。
 
-## Future Work
+## 未来工作
 
-- Migration of existing surfaces (ultimately deprecation of `ListView`).
-- More features as we see/hear the need (let us know!).
-- Sticky section header support.
-- More performance optimizations.
-- Support functional item components with state.
+- 迁移现有界面（最终废弃 `ListView`）。
+- 根据反馈添加更多功能（欢迎告诉我们！）。
+- 支持固定分区头。
+- 更多性能优化。
+- 支持带状态的函数式项目组件。

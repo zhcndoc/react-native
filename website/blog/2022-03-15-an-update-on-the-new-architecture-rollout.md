@@ -1,115 +1,115 @@
 ---
-title: An update on the New Architecture Rollout
+title: 新架构推广的最新进展
 authors: [cortinico]
-tags: [announcement]
+tags: [公告]
 date: 2022-03-15
 ---
 
-Hi everyone,
-[As previously announced](/blog/2022/01/21/react-native-h2-2021-recap#the-new-architecture-rollout-and-releases):
+大家好，  
+[正如之前所公布](/blog/2022/01/21/react-native-h2-2021-recap#the-new-architecture-rollout-and-releases):
 
 :::info
-2022 is going to be the year of the New Architecture in open source.
+2022 年将成为开源领域新架构的大年。
 :::
 
-If you still haven’t had the time to look into the New React Native Architecture (the Fabric Renderer and the TurboModule system), there is no better time to do it **than now**!
+如果你还没有时间深入了解新的 React Native 架构（Fabric 渲染器和 TurboModule 系统），现在正是**最好的时机**！
 
-We would like to share with the community some initiatives and material we prepared to make sure everyone is onboard on this endeavor.
+我们想与社区分享一些我们准备的举措和资料，确保每个人都能一起参与这项工作。
 
 <!--truncate-->
 
-### The Working Group
+### 工作组
 
-Recently, we launched the [React Native New Architecture Working Group](https://github.com/reactwg/react-native-new-architecture) on GitHub, a _discussion only_ repository to coordinate and support the rollout of the New Architecture across the ecosystem.
+最近，我们在 GitHub 上推出了 [React Native 新架构工作组](https://github.com/reactwg/react-native-new-architecture)，这是一个**仅用于讨论**的仓库，用于协调和支持新架构在生态系统中的推广。
 
-We envision this working group as a space where the community can **meet**, share **ideas**, and **discuss** challenges during the adoption of the New Architecture. Moreover, we're going to use this working group to **share** information and updates with the wider community for the sake of transparency.
+我们希望该工作组成为社区的一个空间，大家可以在这里**相互交流**、分享**想法**，并**讨论**在采用新架构过程中遇到的挑战。此外，我们也会通过该工作组向更广泛的社区**共享**信息和更新，以确保透明度。
 
-To keep the discussion focused, we decided to have this working group **open to read** publicly and **restricted to write** only for approved users.
+为了保持讨论的针对性，我们决定该工作组**公开阅读**，但**写入权限仅限于获批用户**。
 
-If you wish to join the conversation, you can [fill in this form](https://forms.gle/8emgdwFZXuzEpyyn9) to either **apply or nominate** someone that you think would be a valuable addition to the discussion.
+如果你希望参与讨论，可以通过[此表单](https://forms.gle/8emgdwFZXuzEpyyn9)填写申请，或者**提名你认为能为讨论带来价值的人**加入。
 
-**Everyone is welcome** to apply to join the conversation.
+**欢迎所有人申请加入讨论。**
 
-As every discussion forum, we would like to stress once more the importance of being **respectful** and welcoming towards others’ opinions. Please take the chance to read our [**code of conduct**](https://github.com/reactwg/react-native-new-architecture/blob/main/CODE_OF_CONDUCT.md) if you haven’t yet done it.
+和任何讨论社区一样，我们再次强调对他人观点的**尊重**和包容的重要性。如果你还没看过，请务必阅读我们的[**行为准则**](https://github.com/reactwg/react-native-new-architecture/blob/main/CODE_OF_CONDUCT.md)。
 
-### The Migration Guide
+### 迁移指南
 
-After several rounds of review & feedback, we finally merged **the Migration Guide** (f.k.a. _the Playbook_). You can find it [on the New Architecture working group.](https://github.com/reactwg/react-native-new-architecture#guides)
+经过多轮评审和反馈，我们终于合并了**迁移指南**（前称为 _实战手册_）。你可以在[新架构工作组](https://github.com/reactwg/react-native-new-architecture#guides)找到它。
 
-This Migration Guide will show you **how to create a custom Fabric component or a TurboModule** with a step-by-step approach. The guide will also show you how to **adapt your existing app or library** to use the New Architecture.
+该迁移指南将通过逐步指导展示如何**创建自定义 Fabric 组件或 TurboModule**。同时，指南还会告诉你如何**适配现有应用或库**以使用新架构。
 
-Moreover, we would like to remind you the brand-new [Architecture section](/architecture/overview) of our website. There you can find several in-depth articles and explanation of the React Native internals. Specifically, [the Fabric section](/architecture/fabric-renderer) can help you understand the rendering pipeline in the New Architecture world.
+此外，我们还想提醒大家访问我们网站上的全新[架构栏目](/architecture/overview)。那里有多篇深入文章，详细解释了 React Native 的内部机制。特别是[Fabric 专区](/architecture/fabric-renderer)，可以帮助你了解新架构中的渲染管线。
 
-Finally, please consider **sharing your feedback** to this documentation material [on the working group](https://github.com/reactwg/react-native-new-architecture/discussions/7). We’re constantly looking for developer’s opinion, and we want to make sure we’re delivering the content that you find most useful.
+最后，请考虑**在工作组中分享你对该文档的反馈**，[点此查看讨论](https://github.com/reactwg/react-native-new-architecture/discussions/7)。我们一直在寻求开发者的意见，确保提供你们觉得最有用的内容。
 
-Over the next months, we will look into refining and adding more documentation to help you further.
+未来几个月，我们会继续完善并增加更多文档来帮助大家。
 
-### The New Architecture Template
+### 新架构模版
 
-React Native **0.68.0** is close to release. This version of React Native marks a crucial milestone in the New Architecture Rollout as it’s the first version to include an **opt-in switch** in the **new app template.**
+React Native **0.68.0** 即将发布。这个版本是新架构推广的一个重要里程碑，因为它是首个在**新建应用模版中**包含**可选择开启新架构开关**的版本。
 
-This means that you will be able to try the New Architecture **by changing one line** in the template. We also added extensive **comments and documentation** to the template to make sure you don’t need extra reading to use it out of the box. We hope this will help you adopt the New Architecture by **reducing the amount of code** your have to write.
+这意味着你只需在模版中**修改一行代码**即可尝试新架构。我们还在模版中添加了详尽的**注释和文档**，确保你无需额外阅读材料即可直接使用。希望这能通过**减少代码量**帮助你更轻松地采用新架构。
 
 <!-- alex ignore simple -->
 
-In the next releases, we will keep on updating the template to make it even more streamlined and simple to use.
+在后续版本中，我们将继续更新模版，使其更加简洁易用。
 
-To enable the New Architecture on either platform, you can:
+要在任一平台启用新架构，你可以：
 
-- On iOS, run `RCT_NEW_ARCH_ENABLED=1 bundle exec pod install` inside the `ios` folder.
-- On Android, set the `newArchEnabled` property to `true` by **either**:
-  - Changing the corresponding line inside the `android/gradle.properties` file.
-  - Set an environment variable `ORG_GRADLE_PROJECT_newArchEnabled=true`
-  - Invoke Gradle with `-PnewArchEnabled=true`
+- iOS 平台，在 `ios` 文件夹内运行 `RCT_NEW_ARCH_ENABLED=1 bundle exec pod install`。
+- Android 平台，将 `newArchEnabled` 属性设置为 `true`，方法有**以下三种任选其一**：
+  - 修改 `android/gradle.properties` 文件中的相应行。
+  - 设置环境变量 `ORG_GRADLE_PROJECT_newArchEnabled=true`
+  - 通过 Gradle 参数 `-PnewArchEnabled=true` 运行
 
-Then you can **run your app** with `yarn react-native run-android` or `run-ios` and you’ll be running using Fabric and TurboModules enabled.
+然后你就可以通过 `yarn react-native run-android` 或 `run-ios` 命令**运行你的应用**，此时会启用 Fabric 和 TurboModules。
 
-Please consider trying this new template, and [report any bug or unexpected behavior](https://github.com/reactwg/react-native-new-architecture/discussions/5) that you might face. Over the last months we worked hard to fix bugs and build failures that would have been **hard to catch** without the constant community feedback and testing.
+请考虑尝试这个新模版，并且[报告任何你遇到的 Bug 或异常行为](https://github.com/reactwg/react-native-new-architecture/discussions/5)。过去几个月，我们辛苦修复了许多难以发现的 Bug 和构建失败，这些都得益于社区的持续反馈和测试。
 
-### The 3rd-party Libraries Ecosystem
+### 第三方库生态
 
-The community won't be able to migrate to the New Architecture without the full support of **3rd-party libraries author & maintainers**.
+没有**第三方库作者和维护者**的全面支持，社区无法顺利迁移到新架构。
 
-We understand how this can be a tedious process, and we understand the importance of supporting users on **both** old and New Architecture. Over the next months, we will focus on supporting our library developers to help them migrate over.
+我们理解这可能是一个复杂且繁琐的过程，也理解支持用户在**旧架构和新架构之间**过渡的重要性。接下来的几个月，我们会重点支持库开发者，帮助他们完成迁移。
 
-If you’re a **library developer**, [we invite you to post an update](https://github.com/reactwg/react-native-new-architecture/discussions/categories/libraries) in the New Architecture working group with the **status of your libraries**. This will help you attract early adopters and us to understand if any library is facing a blocker.
+如果你是**库开发者**，[欢迎你在新架构工作组中发布更新](https://github.com/reactwg/react-native-new-architecture/discussions/categories/libraries)，说明你的库的**迁移状态**。这不仅能吸引早期采用者，也帮助我们了解是否存在阻碍迁移的问题。
 
-If instead you’re a **library user**, you can [post a message here](https://github.com/reactwg/react-native-new-architecture/discussions/6) to request a migration of a library. If we identify a library that becomes a blocker for a number of users, we will try to reach out to the maintainer and understand why they haven’t migrated yet.
+如果你是**库使用者**，可以[在这里留言](https://github.com/reactwg/react-native-new-architecture/discussions/6)请求某个库的迁移。如果我们发现某个库成为了多个用户的阻碍，我们会尝试联系维护者，了解为何尚未完成迁移。
 
-Finally, we would like to give a shout out to Software Mansion for releasing a new version of [`react-native-screens`](https://github.com/software-mansion/react-native-screens), which has support for both architectures. Moreover, they published a blog-post ([Introducing Fabric to react-native-screens](https://blog.swmansion.com/introducing-fabric-to-react-native-screens-fd17bf18858e)) where they **tell their migration story**. We hope you will find this story inspiring and useful to tackle your migration.
+最后，我们要特别感谢 Software Mansion 发布了支持两种架构版本的 [`react-native-screens`](https://github.com/software-mansion/react-native-screens) 新版本。此外，他们还发布了一篇博客文章([为 react-native-screens 引入 Fabric](https://blog.swmansion.com/introducing-fabric-to-react-native-screens-fd17bf18858e))，分享了他们的迁移经历。希望这篇分享能为你的迁移提供启发和帮助。
 
-### Releases
+### 版本发布
 
-Work on the 0.68 pre-release has realized much of [the improved release process we had defined last half](/blog/2022/01/19/version-067#improvements-to-release-process).
+0.68 预发布版本推动了[去年下半年我们定义的发布流程改进](/blog/2022/01/19/version-067#improvements-to-release-process)的落实。
 
-We’re happy to share that with 0.68 we were able to:
+我们很高兴地分享，0.68 版本实现了：
 
-- Successfully onboard release work to an internal rotation. Much of this is supported by [improved documentation](/contributing/overview) on the release process which will reduce the bus factor of the release process.
-- Initiated discussions with partners to support a [Copilot rotation](https://github.com/reactwg/react-native-releases/blob/main/docs/roles-and-responsibilities.md). We hope this effort will improve transparency of the process and inform our partners where to invest to support React Native releases and eco-system.
-- [Onboarded several Release Supporters and Testers from the community](https://github.com/reactwg/react-native-releases/discussions/11). We had put a call-out for help last half and so many folks stepped up! The feedback from our testers and supporters have **helped us fix crucial bugs** and regressions, especially around the new architecture, for the upcoming release. Thank you to everyone who signed up and tested out the release!
+- 成功将发布工作引入了内部轮值机制。大量依赖于[更完善的发布流程文档](/contributing/overview)，能够减少“关键人物依赖”问题，降低风险。
+- 启动了与合作伙伴的讨论，支持[Copilot 轮值](https://github.com/reactwg/react-native-releases/blob/main/docs/roles-and-responsibilities.md)。我们希望此举提升流程透明度，也告知合作伙伴在哪里投入资源以支持 React Native 及其生态系统。
+- [吸纳了多位社区的发布支持者和测试者](https://github.com/reactwg/react-native-releases/discussions/11)。半年多前我们呼吁社区帮忙，很多朋友积极响应！测试者和支持者的反馈帮助我们修复了关键 Bug 和回归问题，特别是围绕新架构，为即将发布的版本做好准备。谢谢所有报名并测试发布的朋友！
 
-With React Native 0.69 we will continue refining this process, ideally getting partners to provide earlier release signal and onboarding co-pilots. As always, [any feedback is more than welcome](https://github.com/reactwg/react-native-releases/discussions). If you’d like to join as a release tester or supporter, [please sign up here](https://forms.gle/fPuPE1MZRDGWNqpd6).
+随着 React Native 0.69 的发布，我们将继续完善该流程，理想情况下让合作伙伴在更早阶段发出发布信号，并引入更多协助人员。正如以往，[欢迎任何反馈](https://github.com/reactwg/react-native-releases/discussions)。如果你想成为发布测试者或支持者，[请在此报名](https://forms.gle/fPuPE1MZRDGWNqpd6)。
 
-### Towards Hermes as Default engine
+### 向 Hermes 作为默认引擎迈进
 
-One of the crucial point of the New Architecture Rollout is the adoption of the new JavaScript engine: **Hermes.**
+新架构推广的关键点之一是：采用新的 JavaScript 引擎 —— **Hermes**。
 
-With the New React Native Architecture, we’re going to **set Hermes as default engine**. This means that all the new documentation and templates will have Hermes enabled.
+基于新架构，我们将**把 Hermes 设为默认引擎**，所有新文档和模版都会启用 Hermes。
 
-Please note that we'll continue working with the community to make sure **other engines**, such as JSC (JavaScript Core), **are supported**. You can still use the engine you wish, but you’ll have to **explicitly disable Hermes**.
+请注意，我们会继续与社区合作，确保**其它引擎**如 JSC（JavaScript Core）**依然受支持**。你仍可选择使用你喜爱的引擎，但需要**显式关闭 Hermes**。
 
-To improve the stability of Hermes, we’re working towards changing the **distribution model** of Hermes. Specifically, we envision the Hermes release process **to be closer** to the React Native release process.
+为了提升 Hermes 的稳定性，我们正努力改变 Hermes 的**发行模式**。具体来说，希望使 Hermes 的发布流程**更贴近** React Native 的发布流程。
 
-This will allow us to ship a version of React Native, with a bundled JS engine that is **fully compatible**. You won’t have to deal with run-time crashes and Hermes incompatibilities that are really hard to debug and understand.
+这样可以让我们发布一个包含**完全兼容**的内嵌 JS 引擎的 React Native 版本。你无需再面对难以调试和理解的运行时崩溃和 Hermes 兼容性问题。
 
-Moreover, this will **shorten the cycle** for picking up **improvements** and bug fixes in Hermes, which will allow us to be more **responsive** to the needs of React Native users.
+此外，这也会**缩短** Hermes 改进和 Bug 修复的周期，使我们更**快速响应** React Native 用户需求。
 
-We will be sharing more on this matter in the coming months. In the meanwhile, feel free to [join the discussion](https://github.com/reactwg/react-native-new-architecture/discussions/4) about it on the Working Group.
+未来几个月我们会持续分享更多相关内容。与此同时，欢迎在工作组中[加入该话题讨论](https://github.com/reactwg/react-native-new-architecture/discussions/4)。
 
-If you haven’t tried Hermes yet, now is the time to give it a go. And please make sure to flag any issues or blockers you might face.
+如果你还没用过 Hermes，现在正是尝试的好时机。遇到任何问题或阻碍，请务必反馈。
 
-With this, that’s a wrap.
+至此，内容结束。
 
-I’d like to thank Andrei, Aleksandar, Dmitry, Eli, Luna, Héctor & Neil for reviewing this blog-post and providing valuable contributions to those efforts.
+感谢 Andrei、Aleksandar、Dmitry、Eli、Luna、Héctor 和 Neil 审阅本文并为相关工作提供宝贵贡献。
 
-And looking forward to **reading your migration stories**.
+期待**阅读你们的迁移故事**。

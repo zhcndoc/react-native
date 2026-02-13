@@ -51,13 +51,15 @@ function Hero() {
       <div className={styles.content}>
         <Logo />
         <h1 className={styles.title}>React Native</h1>
-        <h2 className={styles.subtitle}>Learn once, write anywhere.</h2>
+        <h2 className={styles.subtitle}>
+          使用 React 构建 Android、iOS 等原生应用
+        </h2>
         <div className={styles.buttonContainer}>
           <a href="/docs/environment-setup" className={styles.primaryButton}>
-            Get Started
+            开始使用
           </a>
           <a href="/docs/getting-started" className={styles.secondaryButton}>
-            Learn the Basics
+            学习基础知识
           </a>
         </div>
       </div>

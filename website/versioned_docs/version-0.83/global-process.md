@@ -1,10 +1,10 @@
 ---
 id: global-process
-title: process
+title: 进程
 ---
 
 :::warning
-🚧 This page is work in progress.
+🚧 本页面正在建设中。
 :::
 
-The global `process` object, as defined in Node.js.
+全局的 `process` 对象，如 Node.js 中所定义。

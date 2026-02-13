@@ -1,32 +1,32 @@
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-# Native Modules Lifecycle
+# 原生模块生命周期
 
-In React Native, Native Modules are singleton. The Native Module infrastructure lazily creates a Native Module the first time it is accessed and it keeps it around whenever the app requires it. This is a performance optimization that allows us to avoid the overhead of creating Native Modules eagerly, at app start, and it ensure faster startup times.
+在 React Native 中，原生模块是单例的。原生模块基础设施会在首次访问时懒加载创建原生模块，并在应用需要时保留它。这是一种性能优化，避免了在应用启动时就急切地创建原生模块，从而保证启动速度更快。
 
-In a pure React Native app, the Native Modules are created once and they are never destroyed. However, in more complex apps, there might be use cases where the Native Modules are destroyed and recreated. Imagine, for example, a brownfield app that mixes some native views with some React Native surfaces, as presented in the [Integrating with Existing App guide](/docs/integration-with-existing-apps). In that case it might make sense to destroy a React Native instance when the user navigates away from a React Native surface and recreate it when the user navigates back to that surface.
+在纯 React Native 应用中，原生模块只创建一次，并且永远不会被销毁。然而，在更复杂的应用中，可能存在销毁并重新创建原生模块的用例。举例来说，设想一个混合型应用，将一些原生视图和 React Native 界面混合使用，如[整合现有应用指南](/docs/integration-with-existing-apps)中所述。在这种情况下，当用户离开 React Native 界面时销毁 React Native 实例，用户返回该界面时重新创建它是合理的。
 
-When this happens, Native Modules that are stateless won't cause any issues. However, for stateful Native Modules it might be necessary to properly invalidate the Native Module to ensure that the state is reset and the resources released.
+当发生这种情况时，无状态的原生模块不会引起问题。然而，对于有状态的原生模块，正确地使原生模块失效以确保重置状态和释放资源可能是必要的。
 
-In this guide, you will explore how to initialize and invalidate a Native Module properly. This guide assumes that you are familiar with how to write a Native Modules and you are comfortable writing native code. If you are not familiar with Native Modules, please read the [Native Modules guide](/docs/next/turbo-native-modules-introduction) first.
+本指南将介绍如何正确初始化和失效一个原生模块。假设你已经熟悉如何编写原生模块，并且能够编写原生代码。如果你还不熟悉原生模块，请先阅读[原生模块指南](/docs/next/turbo-native-modules-introduction)。
 
 ## Android
 
-When it comes to Android, all the Native Modules already implements a [TurboModule](https://github.com/facebook/react-native/blob/main/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/turbomodule/core/interfaces/TurboModule.kt) interface that defines two methods: `initialize()` and `invalidate()`.
+在 Android 上，所有原生模块都实现了[TurboModule](https://github.com/facebook/react-native/blob/main/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/turbomodule/core/interfaces/TurboModule.kt)接口，该接口定义了两个方法：`initialize()` 和 `invalidate()`。
 
-The `initialize()` method is called by the Native Module infrastructure when the Native Module is created. This is the best place to put all the initialization code that needs access to the ReactApplicationContext, for example. These are some Native Modules from core that implements the `initialize()` method: [BlobModule](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/blob/BlobModule.java#L155-L157), [NetworkingModule](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/network/NetworkingModule.java#L193-L197).
+`initialize()` 方法由原生模块基础设施在创建原生模块时调用。这是放置需要访问 ReactApplicationContext 的初始化代码的最佳位置。例如，核心中的一些实现了 `initialize()` 方法的原生模块有：[BlobModule](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/blob/BlobModule.java#L155-L157)、[NetworkingModule](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/network/NetworkingModule.java#L193-L197)。
 
-The `invalidate()` method is called by the Native Module infrastructure when the Native Module is destroyed. This is the best place to put all the cleanup code, resetting the Native Module state and release resources that are no longer needed, such as memory and files. These are some Native Modules from core that implements the `invalidate()` method: [DeviceInfoModule](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/deviceinfo/DeviceInfoModule.kt#L72-L76), [NetworkModule](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/network/NetworkingModule.java#L200-L212)
+`invalidate()` 方法由原生模块基础设施在销毁原生模块时调用。这是放置清理代码的最佳位置，用来重置原生模块状态和释放不再需要的资源，如内存和文件。核心中实现了 `invalidate()` 方法的一些原生模块有：[DeviceInfoModule](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/deviceinfo/DeviceInfoModule.kt#L72-L76)、[NetworkModule](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/network/NetworkingModule.java#L200-L212)。
 
 ## iOS
 
-On iOS, Native Modules conforms to the [`RCTTurboModule`](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/ReactCommon/react/nativemodule/core/platform/ios/ReactCommon/RCTTurboModule.h#L196-L200) protocol. However, this protocol does not expose the `initialize` and `invalidate` method that are exposed by the Android's `TurboModule` class.
+在 iOS 上，原生模块遵循 [`RCTTurboModule`](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/ReactCommon/react/nativemodule/core/platform/ios/ReactCommon/RCTTurboModule.h#L196-L200) 协议。然而，该协议并不暴露 Android 的 `TurboModule` 类所提供的 `initialize` 和 `invalidate` 方法。
 
-Instead, on iOS, there are two additional protocols: [`RCTInitializing`](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/React/Base/RCTInitializing.h) and [`RCTInvalidating`](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/React/Base/RCTInvalidating.h). These protocols are used to define the `initialize` and `invalidate` methods, respectively.
+相反，在 iOS 上，有两个附加协议：[`RCTInitializing`](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/React/Base/RCTInitializing.h) 和 [`RCTInvalidating`](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/React/Base/RCTInvalidating.h)。这两个协议分别用于定义 `initialize` 和 `invalidate` 方法。
 
-If your module needs to run some initialization code, then you can conform to the `RCTInitializing` protocol and implement the `initialize` method. To do so, you have to:
+如果你的模块需要执行初始化代码，可以遵循 `RCTInitializing` 协议并实现 `initialize` 方法。为此，你需要：
 
-1. Modify the `NativeModule.h` file by adding the following lines:
+1. 修改 `NativeModule.h` 文件，添加以下内容：
 
 ```diff title="NativeModule.h"
 + #import <React/RCTInitializing.h>
@@ -39,7 +39,7 @@ If your module needs to run some initialization code, then you can conform to th
 @end
 ```
 
-2. Implement the `initialize` method in the `NativeModule.mm` file:
+2. 在 `NativeModule.mm` 文件中实现 `initialize` 方法：
 
 ```diff title="NativeModule.mm"
 // ...
@@ -47,17 +47,17 @@ If your module needs to run some initialization code, then you can conform to th
 @implementation NativeModule
 
 +- (void)initialize {
-+ // add the initialization code here
++ // 在这里添加初始化代码
 +}
 
 @end
 ```
 
-These are some Native Modules from core that implements the `initialize` method: [RCTBlobManager](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/Libraries/Blob/RCTBlobManager.mm#L58-L68), [RCTTiming](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/React/CoreModules/RCTTiming.mm#L121-L124).
+核心中的一些实现了 `initialize` 方法的原生模块有：[RCTBlobManager](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/Libraries/Blob/RCTBlobManager.mm#L58-L68)、[RCTTiming](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/React/CoreModules/RCTTiming.mm#L121-L124)。
 
-If your module needs to run some cleanup code, then you can conform to the `RCTInvalidating` protocol and implement the `invalidate` method. To do so, you have to:
+如果你的模块需要执行清理代码，则可以遵循 `RCTInvalidating` 协议并实现 `invalidate` 方法。为此，你需要：
 
-1. Moduify the `NativeModule.h` file by adding the following lines:
+1. 修改 `NativeModule.h` 文件，添加以下内容：
 
 ```diff title="NativeModule.h"
 + #import <React/RCTInvalidating.h>
@@ -72,7 +72,7 @@ If your module needs to run some cleanup code, then you can conform to the `RCTI
 @end
 ```
 
-2. Implement the `invalidate` method in the `NativeModule.mm` file:
+2. 在 `NativeModule.mm` 文件中实现 `invalidate` 方法：
 
 ```diff title="NativeModule.mm"
 
@@ -81,10 +81,10 @@ If your module needs to run some cleanup code, then you can conform to the `RCTI
 @implementation NativeModule
 
 +- (void)invalidate {
-+ // add the cleanup code here
++ // 在这里添加清理代码
 +}
 
 @end
 ```
 
-These are some Native Modules from core that implements the `invalidate` method: [RCTAppearance](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/React/CoreModules/RCTAppearance.mm#L151-L155), [RCTDeviceInfo](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/React/CoreModules/RCTDeviceInfo.mm#L127-L133).
+核心中实现了 `invalidate` 方法的一些原生模块有：[RCTAppearance](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/React/CoreModules/RCTAppearance.mm#L151-L155)、[RCTDeviceInfo](https://github.com/facebook/react-native/blob/0617accecdcb11159ba15c34885f294bc206aa89/packages/react-native/React/CoreModules/RCTDeviceInfo.mm#L127-L133)。

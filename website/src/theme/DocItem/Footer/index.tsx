@@ -12,7 +12,7 @@ import TagsListInline, {
 
 import type {EditUrlButton} from '../../../../docusaurus.config';
 import styles from './styles.module.css';
-import DocsRating from '../../../../core/DocsRating';
+// import DocsRating from '../../../../core/DocsRating';
 
 function TagsRow(props: TagsListInlineProps) {
   return (
@@ -78,7 +78,15 @@ export default function DocItemFooter() {
 
   return (
     <>
-      <DocsRating label={metadata.id} />
+      {/* <DocsRating label={metadata.id} /> */}
+      <div
+        className="wwads-cn wwads-horizontal"
+        data-id="354"
+        style={{
+          width: '100%',
+          marginBottom: '16px',
+          marginTop: '16px',
+        }}></div>
       <footer
         className={clsx(ThemeClassNames.docs.docFooter, 'docusaurus-mt-lg')}>
         {canDisplayTagsRow && <TagsRow tags={tags} />}

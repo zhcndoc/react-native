@@ -18,14 +18,13 @@ function Native() {
   return (
     <Section>
       <SectionTitle
-        title="Native development for everyone"
+        title="为每个人提供原生开发"
         description={
           <>
-            React Native lets you create truly native apps and doesn't
-            compromise your users' experiences. It provides a core set of
-            platform agnostic native components like <code>View</code>,{' '}
-            <code>Text</code>, and <code>Image</code> that map directly to the
-            platform's native UI building blocks.
+            React Native
+            让你能够创建真正的原生应用，并且不会影响用户体验。它提供了一组核心的、与平台无关的原生组件，比如{' '}
+            <code>View</code>、<code>Text</code> 和 <code>Image</code>
+            ，这些组件可以直接映射到平台的原生 UI 构建模块。
           </>
         }
       />

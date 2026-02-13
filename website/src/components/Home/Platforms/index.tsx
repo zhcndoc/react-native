@@ -20,14 +20,12 @@ function Platforms() {
   return (
     <Section>
       <SectionTitle
-        title="Create native apps for Android, iOS, and more using React"
+        title="使用 React 为 Android、iOS 等平台创建原生应用"
         description={
           <>
-            React Native brings the best parts of developing with React to
-            native development.
+            React Native将使用React进行开发的最佳部分带到原生开发中。
             <br />
-            It's a best-in-class JavaScript library for building user
-            interfaces.
+            这是一个用于构建用户界面的顶级 JavaScript 库。
           </>
         }
       />
@@ -78,9 +76,9 @@ function Platforms() {
       <div className={styles.foxFactContainer}>
         <FoxFact className={styles.fox} />
         <p>
-          <strong>Written in JavaScript, rendered with native code.</strong>{' '}
-          React primitives render to native platform UI, meaning your app uses
-          the same native platform APIs other apps do.
+          <strong>用 JavaScript 编写，以原生代码渲染。</strong> React
+          原语渲染为原生平台 UI，这意味着你的应用程序使用
+          与其他应用程序相同的原生平台 API。
         </p>
       </div>
     </Section>

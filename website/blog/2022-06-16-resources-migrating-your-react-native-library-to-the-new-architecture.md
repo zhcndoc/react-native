@@ -1,114 +1,114 @@
 ---
-title: Helping migrate React Native libraries to the New Architecture
+title: 帮助迁移 React Native 库到新架构
 authors: [cipolleschi]
-tags: [announcement]
+tags: [公告]
 date: 2022-06-16
 ---
 
-**tl; dr**: We are working on improving the resources supporting the React Native New Architecture. We have already released a repository to help migrate your app ([RNNewArchitectureApp](https://github.com/react-native-community/RNNewArchitectureApp)) and one for your libraries ([RNNewArchitectureLibraries](https://github.com/react-native-community/RNNewArchitectureLibraries)). We are also revamping the [New Architecture guide](https://github.com/facebook/react-native-website/pull/3037) on the Website and we created a [GitHub Working Group](https://github.com/reactwg/react-native-new-architecture/discussions) to answer questions related to the New Architecture.
+**简短摘要**：我们正在改进支持 React Native 新架构的资源。我们已经发布了一个帮助迁移您的应用的仓库（[RNNewArchitectureApp](https://github.com/react-native-community/RNNewArchitectureApp)）以及一个针对库的仓库（[RNNewArchitectureLibraries](https://github.com/react-native-community/RNNewArchitectureLibraries)）。我们还在改造网站上的[新架构指南](https://github.com/facebook/react-native-website/pull/3037)，并创建了一个[GitHub 工作组](https://github.com/reactwg/react-native-new-architecture/discussions)，以解答与新架构相关的问题。
 
 <!--truncate-->
 
-## Introduction
+## 介绍
 
-In this post we are sharing an update on tools and resources to help you migrate your **Native Modules** and **Native Components** to their **New Architecture** equivalents, **TurboModule** and **Fabric Components**.
+在本文中，我们将分享一些用于帮助您将**本地模块**和**本地组件**迁移到它们的**新架构**等价物——**TurboModule**和**Fabric 组件**的工具和资源更新。
 
-React Native users leverage vast number of open source libraries for building apps. For a complete and consistent ecosystem, it is necessary that these libraries migrate such that everyone can benefit from the unlocked capabilities and performance improvements of the New Architecture.
+React Native 用户依赖大量的开源库来构建应用。为了实现完整且一致的生态系统，这些库有必要迁移，以便所有人都能受益于新架构解锁的功能和性能提升。
 
-Here is what we’re working on to support library developers in migrating to the New Architecture:
+以下是我们正在进行的支持库开发者迁移到新架构的工作：
 
-- **Documentation:** We are expanding the [New Architecture guide](https://github.com/facebook/react-native-website/pull/3037) on the website to cover more concepts of the New Architecture and how to develop your components.
-- **Example Migrations:** We’ve set up two repositories to demonstrate how to migrate a React Native app to the New Architecture ([RNNewArchitectureApp](https://github.com/react-native-community/RNNewArchitectureApp)) and how to create a **Fabric Component** and a **TurboModule** that work with both architectures ([RNNewArchitectureLibraries](https://github.com/react-native-community/RNNewArchitectureLibraries)).
-- **Support:** Earlier this year, we created a [GitHub Working Group](https://github.com/reactwg/react-native-new-architecture/discussions) dedicated to discussion and questions around the New Architecture.
+- **文档**：我们正在扩展网站上的[新架构指南](https://github.com/facebook/react-native-website/pull/3037)，涵盖更多新架构的概念以及如何开发您的组件。
+- **示例迁移**：我们搭建了两个仓库，演示如何将 React Native 应用迁移到新架构（[RNNewArchitectureApp](https://github.com/react-native-community/RNNewArchitectureApp)），以及如何创建同时兼容两种架构的**Fabric 组件**和**TurboModule**（[RNNewArchitectureLibraries](https://github.com/react-native-community/RNNewArchitectureLibraries)）。
+- **支持**：今年早些时候，我们建立了一个专门的[GitHub 工作组](https://github.com/reactwg/react-native-new-architecture/discussions)，用于讨论和解答有关新架构的问题。
 
-In this post, we will dig deeper into these resources and explain in more detail how you can use them most efficiently. Finally, we will provide a snapshot of the current migration state for the most used React Native libraries.
+本文将深入介绍这些资源，并详细说明如何高效地使用它们。最后，我们将提供目前最常用 React Native 库的迁移状态快照。
 
-### Documentation
+### 文档
 
-In the past 6 months, we’ve added a [guide on adopting the New Architecture](https://github.com/reactwg/react-native-new-architecture#guides) and an [architecture deep-dive](/architecture/overview) on Fabric. We plan to expand this to include more guides and documentation around creating TurboModules, understanding Codegen, and more. We plan to have updates to share by the 0.70 release.
+在过去六个月里，我们添加了一个[采用新架构的指南](https://github.com/reactwg/react-native-new-architecture#guides)以及关于 Fabric 的[架构深入解析](/architecture/overview)。我们计划扩展内容，包含更多关于创建 TurboModules、理解 Codegen 等的指南和文档，并预计在 0.70 版本发布时提供更新。
 
-Currently, the **New Architecture** guide covers how to [migrate your app](https://github.com/reactwg/react-native-new-architecture/blob/main/docs/enable-apps.md) and [your libraries](https://github.com/reactwg/react-native-new-architecture/blob/main/docs/enable-libraries-prerequisites.md) to support the New Architecture properly.
+目前，**新架构**指南涵盖了如何[迁移您的应用](https://github.com/reactwg/react-native-new-architecture/blob/main/docs/enable-apps.md)和[迁移您的库](https://github.com/reactwg/react-native-new-architecture/blob/main/docs/enable-libraries-prerequisites.md)，以正确支持新架构。
 
-If you are interested in the evolution of this guide, or have feedback, you can follow along on [this](https://github.com/facebook/react-native-website/pull/3037) pull request.
+如果您对该指南的演进感兴趣或有反馈，欢迎关注[此](https://github.com/facebook/react-native-website/pull/3037)拉取请求。
 
-### Example Migrations
+### 示例迁移
 
-For developers who may want to follow along in code, we’ve prepared two example repositories.
+对于希望通过代码跟进的开发者，我们准备了两个示例仓库。
 
 #### RNNewArchitectureApp
 
-[This repo](https://github.com/react-native-community/RNNewArchitectureApp) was created to demonstrate how to migrate an app, the native modules and the native components from the legacy architecture on the React Native version 0.67 to the New Architecture and the most recent version of React Native. Each commit corresponds to an isolated migration step.
+[此仓库](https://github.com/react-native-community/RNNewArchitectureApp)用于演示如何将应用、本地模块和本地组件从 React Native 0.67 版本的旧架构迁移到新架构及最新版本的 React Native。每个提交对应一个独立的迁移步骤。
 
 <figure>
-    <img src="/blog/assets/new-arch-example-steps-to-migrate-an-app.png" alt="Example steps to migrate an app" />
-    <figcaption>Commit list for a migration in the RNNewArchitectureApp repository</figcaption>
+    <img src="/blog/assets/new-arch-example-steps-to-migrate-an-app.png" alt="迁移应用的示例步骤" />
+    <figcaption>RNNewArchitectureApp 仓库中的迁移提交列表</figcaption>
 </figure>
 
-The repo is organized as follows:
+仓库结构如下：
 
-- A **main** branch has no code but a README.md which advertises other branches.
-- Several migration branches which show a migration from a specific version of RN to another.
+- **main** 分支无代码，仅有 README.md 介绍其他分支。
+- 多个迁移分支，展示从特定 React Native 版本迁移到另一个版本的过程。
 
-Some of the migration branches also have a **RUN.md** file which describes in a more human-readable fashion the exact steps that have been applied in every commit.
+一些迁移分支包含一个 **RUN.md** 文件，用更易读的方式描述了每个提交所执行的具体步骤。
 
-We plan to keep this example up to date with the most recent stable releases, adding migrations to any minor release of React Native we are going to release. If you notice issue with any of the steps, please file an issue in the repository. This will hold until we have the reasonable feeling that most of the React Native users have migrated to the New Architecture.
+我们计划保持该示例随着最新的稳定版本持续更新，新增对任何即将发布的 React Native 次版本的迁移支持。如果您发现在任何步骤中有问题，请在仓库中提交 Issue。我们将一直维护此仓库，直到大多数 React Native 用户迁移完成。
 
 #### RNNewArchitectureLibraries
 
-Similarly, [this repo](https://github.com/react-native-community/RNNewArchitectureLibraries) provides a step-by-step guide on how to create a **TurboModule** and a **Fabric Component**. It has a focus on ensuring backward compatibility between the New Architecture and the legacy one.
+类似地，[此仓库](https://github.com/react-native-community/RNNewArchitectureLibraries)提供了一步步创建**TurboModule**和**Fabric 组件**的指南，重点确保新旧架构间的向下兼容性。
 
-The repository is organized in a similar way to the previous one:
+仓库组织方式与前一个类似：
 
-- A **main** branch has no code but a README.md which advertises other branches.
-- Other branches to show how to develop **TurboModules** and **Fabric Components**.
+- **main** 分支无代码，仅有 README.md 介绍其他分支。
+- 其他分支展示如何开发**TurboModules**和**Fabric 组件**。
 
-We plan to keep this example updated onto new releases of React Native, especially releases that affect library development, as well as add more examples on how to use advanced features (for example: implementing commands, event emitters, custom state). If you notice errors, please file an issue in the example repository.
+我们计划根据 React Native 的新版本持续更新该示例，特别是那些影响库开发的版本，同时添加更多使用高级特性（如实现命令、事件发射器、自定义状态）的示例。如果发现错误，请在示例仓库提交 issue。
 
-### Support
+### 支持
 
-We’ve created a dedicated [working group](https://github.com/reactwg/react-native-new-architecture) to give the community space to ask questions and get updates on the New Architecture. If you are a library maintainer, this is a valuable resource to find answers to your questions, and for us to know about your requirements. To join, please follow [these instructions](https://github.com/reactwg/react-native-new-architecture#how-to-join-the-working-group). Everyone is welcome.
+我们已创建一个专门的[工作组](https://github.com/reactwg/react-native-new-architecture)，为社区提供提问、新架构相关更新的空间。如果您是库维护者，这是一个寻找问题答案和反馈需求的重要渠道。加入请参照[此说明](https://github.com/reactwg/react-native-new-architecture#how-to-join-the-working-group)。欢迎所有人参与。
 
-The working group is organized into several sections:
+工作组分为多个板块：
 
-- [Announcements](https://github.com/reactwg/react-native-new-architecture/discussions/categories/announcements): A place to share milestones and significant updates on the RN New Architecture Rollout
-- [Deep Dive](https://github.com/reactwg/react-native-new-architecture/discussions/categories/deep-dive): A place to chat about deep dives and technical-specific topics
-- [Documentation](https://github.com/reactwg/react-native-new-architecture/discussions/categories/documentation): A place to chat about the New Architecture documentation and migration material
-- [Libraries](https://github.com/reactwg/react-native-new-architecture/discussions/categories/libraries): A place to chat about 3rd party libraries and their migration story to the New Architecture
-- [Q&A](https://github.com/reactwg/react-native-new-architecture/discussions/categories/q-a): A place to ask the community for help on the New Architecture topics
-- [Releases](https://github.com/reactwg/react-native-new-architecture/discussions/categories/releases): A place to chat about release specific bugs & build problems
+- [公告](https://github.com/reactwg/react-native-new-architecture/discussions/categories/announcements)：分享 React Native 新架构推广的重要里程碑和更新。
+- [深入解析](https://github.com/reactwg/react-native-new-architecture/discussions/categories/deep-dive)：讨论深入技术专题。
+- [文档](https://github.com/reactwg/react-native-new-architecture/discussions/categories/documentation)：交流新架构文档和迁移资料。
+- [库](https://github.com/reactwg/react-native-new-architecture/discussions/categories/libraries)：讨论第三方库及其迁移新架构的进展。
+- [问答](https://github.com/reactwg/react-native-new-architecture/discussions/categories/q-a)：向社区提问获取新架构相关帮助。
+- [版本发布](https://github.com/reactwg/react-native-new-architecture/discussions/categories/releases)：聊发布版本特定的 bug 和构建问题。
 
-To use this group effectively:
+有效利用该群组的方法：
 
-- **Make sure your library is listed inside the [Libraries](https://github.com/reactwg/react-native-new-architecture/discussions/categories/libraries) section**. This will help us share a status update on the migration of your library and will help us understand which struggles library authors are facing to support you better.
-- **Leverage the Q&A [section](https://github.com/reactwg/react-native-new-architecture/discussions/categories/q-a) if you face a blocker and need support**. Our team and community experts are monitoring and will support at our best effort.
-- **Keep an eye on the other sections for topics that may affect you**. A new release may introduce exactly the API that you were looking for. You can subscribe to particular discussions via GitHub.
+- **确保您的库已列在[库](https://github.com/reactwg/react-native-new-architecture/discussions/categories/libraries)板块**。这样我们能分享您库的迁移状态，也有助于了解库作者面临的难题，更好地支持您。
+- **遇到阻碍时，充分利用[问答](https://github.com/reactwg/react-native-new-architecture/discussions/categories/q-a)板块求助**。团队和社区专家会尽力支持。
+- **关注其他板块，留意可能影响您的话题**。新版本可能带来您期待的 API。您可以通过 GitHub 订阅相关讨论。
 
-We plan to support this group until the **New Architecture** is enabled by default and all the major libraries have been migrated to it.
+我们计划持续支持该群组，直至**新架构默认启用且所有主要库均已迁移完成**。
 
-### Migration Status of Popular Libraries
+### 热门库迁移状态
 
-Libraries maintainers have been sharing with us [in the working group](https://github.com/reactwg/react-native-new-architecture/discussions/categories/libraries) the status of their migration effort, and we wanted to provide you with a quick overview:
+库的维护者们在[工作组](https://github.com/reactwg/react-native-new-architecture/discussions/categories/libraries)分享了各自的迁移进度，我们这里提供简要概览：
 
-- [react-native-gesture-handler](https://github.com/reactwg/react-native-new-architecture/discussions/15): ✅ Migrated
-- [react-native-navigation](https://github.com/reactwg/react-native-new-architecture/discussions/17): 🏃‍♂️ Ongoing
-- [react-native-pager-view](https://github.com/reactwg/react-native-new-architecture/discussions/16): 🏃‍♂️ Ongoing
-- [react-native-reanimated](https://github.com/reactwg/react-native-new-architecture/discussions/14): ✅ Migrated. In the process of testing and profiling for performances
-- [react-native-screens](https://github.com/reactwg/react-native-new-architecture/discussions/13): 🏃‍♂️ Ongoing
-- [react-native-slider](https://github.com/reactwg/react-native-new-architecture/discussions/38): 🎬 Started
-- [react-native-template-new-architecture](https://github.com/reactwg/react-native-new-architecture/discussions/21): ✅ Migrated. Gradually adopting/testing more companion Libraries
-- [react-native-template-typescript](https://github.com/reactwg/react-native-new-architecture/discussions/22): ✅ Migrated
-- [react-native-webview](https://github.com/reactwg/react-native-new-architecture/discussions/19): 🎬 Started
+- [react-native-gesture-handler](https://github.com/reactwg/react-native-new-architecture/discussions/15)：✅ 已迁移
+- [react-native-navigation](https://github.com/reactwg/react-native-new-architecture/discussions/17)：🏃‍♂️ 正在进行中
+- [react-native-pager-view](https://github.com/reactwg/react-native-new-architecture/discussions/16)：🏃‍♂️ 正在进行中
+- [react-native-reanimated](https://github.com/reactwg/react-native-new-architecture/discussions/14)：✅ 已迁移，正在测试和性能分析
+- [react-native-screens](https://github.com/reactwg/react-native-new-architecture/discussions/13)：🏃‍♂️ 正在进行中
+- [react-native-slider](https://github.com/reactwg/react-native-new-architecture/discussions/38)：🎬 已启动
+- [react-native-template-new-architecture](https://github.com/reactwg/react-native-new-architecture/discussions/21)：✅ 已迁移，正在逐步采用/测试更多配套库
+- [react-native-template-typescript](https://github.com/reactwg/react-native-new-architecture/discussions/22)：✅ 已迁移
+- [react-native-webview](https://github.com/reactwg/react-native-new-architecture/discussions/19)：🎬 已启动
 
-## Next Steps
+## 后续计划
 
-We are invested in supporting the React Native community’s adoption of the New Architecture. Concretely, we will continue to:
+我们致力于支持 React Native 社区采用新架构。具体来说，我们将继续：
 
-- Offer best-effort support in the **Working Group.**
-- Provide more examples about how to achieve amazing results with the New Architecture in the **RNNewArchitecture** repositories.
-- Provide clear and up-to-date documentation on the **New Architecture**.
-- Track the migration status of essential React Native libraries in the **Working Group**.
-- Simplify the migration path for developers
+- 在**工作组**中提供尽力支持。
+- 在 **RNNewArchitecture** 仓库中提供更多示例，展示新架构的强大能力。
+- 提供清晰且最新的**新架构**文档。
+- 跟踪重要 React Native 库的迁移状态。
+- 简化开发者的迁移路径。
 
-In addition, React Native 0.69 will ship with improved devX for app and library developers for New Architecture adoption. You can find more information about the 0.69.0 release [here](https://github.com/reactwg/react-native-releases/discussions/21).
+此外，React Native 0.69 版本将提升新架构的开发体验，包含应用和库开发者的改进信息。您可以在[这里](https://github.com/reactwg/react-native-releases/discussions/21)了解 0.69.0 版本的更多内容。
 
-We are excited about what we will build together with the **New Architecture**!
+我们对与大家一起用**新架构**创造的未来充满期待！

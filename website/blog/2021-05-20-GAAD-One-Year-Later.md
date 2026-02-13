@@ -1,40 +1,40 @@
 ---
-title: The GAAD Pledge - One Year Later
+title: GAAD 承诺 — 一年后的回顾
 authors: [alexmarlette]
-tags: [announcement]
+tags: [公告]
 ---
 
-It has been one year since Facebook took the [GAAD Pledge](https://diamond.la/GAADPledge/) to make React Native accessible and the project has exceeded our expectations. We are excited to announce that this project will continue throughout 2021 and want to update everyone on our progress so far. Following a thorough analysis of the accessibility gaps in React Native last year, work began on filling these gaps.
+距 Facebook 承诺加入 [GAAD Pledge](https://diamond.la/GAADPledge/) 以提升 React Native 无障碍功能已有一年，该项目超出了我们的预期。我们很高兴宣布，这个项目将在 2021 年持续推进，并希望向大家更新迄今为止的进展情况。在去年对 React Native 无障碍差距进行全面分析后，填补这些差距的工作已经开始。
 
-We started with 90 outstanding gap analysis issues and from March 2021, when the project launched on GitHub, until now:
+我们从 90 个未解决的差距分析问题入手，自 2021 年 3 月该项目在 GitHub 启动以来，到现在为止：
 
-- 11 issues have been closed by the community.
+- 社区关闭了 11 个问题。
 
-- 19 issues were evaluated and closed by the React Native team.
+- React Native 团队评估并关闭了 19 个问题。
 
-- 9 pull requests were merged.
+- 9 个拉取请求被合并。
 
-- 1 pull request was merged into the React Native docs.
+- 1 个拉取请求被合并到 React Native 文档中。
 
-We want to recognize and thank the React Native community for the significant progress towards a more accessible React Native over the past year. Every contributor's effort has counted in making progress on improving React Native Accessibility.
+我们要感谢 React Native 社区在过去一年里为打造更无障碍的 React Native 所做的重大努力。每位贡献者的付出都促进了 React Native 无障碍性的提升。
 
 <!--truncate-->
 
-## Fixes
+## 修复内容
 
-Two types of issues have been fixed in multiple components and one new functionality has been added to the API by the 9 pull requests.
+通过 9 个拉取请求，多组件中修复了两类问题，并向 API 添加了一项新功能。
 
-- An issue with Disabled state has been addressed in seven components
+- 解决了七个组件中的禁用（Disabled）状态问题
 
-- An issue with Selected state was addressed in two components
+- 解决了两个组件中的选中（Selected）状态问题
 
-- A new addition to the React Native API added the ability to query AccessibilityManager.getRecommendedTimeoutMillis().
+- React Native API 新增了查询 `AccessibilityManager.getRecommendedTimeoutMillis()` 的能力。
 
-### Disabled State Announcement and Disable function
+### 禁用状态的语音提示与禁用功能
 
-One of the most prevalent issues found during the gap analysis was that some components do not announce or disable functionality. Now seven components announce their disabled state or disable click functionality.
+差距分析中最常见的问题之一是某些组件没有宣布或禁用其功能。现在七个组件支持在禁用状态时进行语音提示或禁用点击功能。
 
-Announces when Disabled
+禁用时的语音提示
 
 - `Button` - [#31001](https://github.com/facebook/react-native/pull/31001)
 
@@ -42,13 +42,13 @@ Announces when Disabled
 
 - `ImageBackground` - [#31252](https://github.com/facebook/react-native/pull/31252)
 
-Disables click functionality when the component has a disabled prop
+当组件具有 disabled 属性时禁用点击功能
 
 - `Button` - [#31001](https://github.com/facebook/react-native/pull/31001)
 
-- `Text` - [React Native Team commit](https://github.com/facebook/react-native/commit/33ff4445dcf858cd5e6ba899163fd2a76774b641)
+- `Text` - [React Native 团队提交](https://github.com/facebook/react-native/commit/33ff4445dcf858cd5e6ba899163fd2a76774b641)
 
-- `Pressable` - [React Native Team commit](https://github.com/facebook/react-native/commit/1c7d9c8046099eab8db4a460bedc0b2c07ed06df)
+- `Pressable` - [React Native 团队提交](https://github.com/facebook/react-native/commit/1c7d9c8046099eab8db4a460bedc0b2c07ed06df)
 
 - `TouchableHighlight` - [#31135](https://github.com/facebook/react-native/pull/31135)
 
@@ -58,58 +58,58 @@ Disables click functionality when the component has a disabled prop
 
 - `TouchableWithoutFeedback` - [#31297](https://github.com/facebook/react-native/pull/31297)
 
-### Selected State Announcement
+### 选中状态的语音提示
 
-There were some components that did not announce their selection when in focus. This behavior has now been fixed when the component is in focus and the AccessibilityState is set to selected or the component is changed to selected.
+部分组件在焦点时未宣布选中状态。现在，当组件获得焦点且 AccessibilityState 设置为 selected，或者组件被切换为选中时，此行为已修复。
 
-Announces when Selected
+选中时的语音提示
 
 - `Button` - [#31001](https://github.com/facebook/react-native/pull/31001)
 
 - `TextInput` - [#31144](https://github.com/facebook/react-native/pull/31144)
 
-### Accessibility Timeout Setting
+### 无障碍超时设置
 
-There was previously no way to query the accessibility timeout setting on Android. The fix added the ability to query `AccessibilityManager.getRecommendedTimeoutMillis()`. This queries the "Time to take action" before the UI elements auto-dismisses or auto-progresses.
+此前无法在 Android 上查询无障碍超时设置。此次修复新增了查询 `AccessibilityManager.getRecommendedTimeoutMillis()` 的能力。此方法可查询“采取操作的时间”，即 UI 元素自动消失或自动推进前的等待时间。
 
-## Documentation Additions
+## 文档更新
 
-The React Native documentation must be updated to reflect each addition or change to the available APIs. The [new addition to the React Native documentation](https://reactnative.dev/docs/next/accessibilityinfo#getrecommendedtimeoutmillis-android) covered the addition of `getRecommendedTimeoutMillis()` to AccessibilityInfo.
+React Native 文档必须同步反映每项 API 新增或更改。本次新增的 [React Native 文档内容](https://reactnative.dev/docs/next/accessibilityinfo#getrecommendedtimeoutmillis-android) 涵盖了 `getRecommendedTimeoutMillis()` 被添加到 AccessibilityInfo 的信息。
 
-## Community Involvement
+## 社区参与
 
-We want to thank all the contributors mentioned below who have submitted and merged pull requests as well as those who have reviewed and commented on issues.
+感谢所有提交并合并拉取请求的贡献者，以及评论和审查 issue 的朋友们。
 
-### Merged Pull Requests
+### 合并的拉取请求
 
-- [@huzaifaaak](https://twitter.com/huzaifaaak) closed 3 issues with:
-  - [Added talkback support for button accessibility: disabled prop #31001](https://github.com/facebook/react-native/pull/31001)
-  - [Accessibility/button test #31189](https://github.com/facebook/react-native/pull/31189)
-- [@natural_clar](https://twitter.com/natural_clar) closed 1 issue with:
-  - [feat: set disabled accessibilityState when `TouchableHighlight` is disabled #31135](https://github.com/facebook/react-native/pull/31135)
-- [fabriziobertoglio1987](https://github.com/fabriziobertoglio1987) closed 2 issues with:
-  - [[Android] Selected State does not announce when `TextInput` Component selected #31144](https://github.com/facebook/react-native/pull/31144)
-  - [Accessibility Fix Image does not announce "disabled" #31252](https://github.com/facebook/react-native/pull/31252)
-- [@kyamashiro73](https://twitter.com/kyamashiro73) closed 1 issue with:
-  - [Added talkback support for `TouchableNativeFeedback` accessibility: disabled prop #31224](https://github.com/facebook/react-native/pull/31224)
-- [@grgr-dkrk](https://twitter.com/dkrk0901) closed 1 issue and added to the React Native documentation with:
-  - [add `getRecommendedTimeoutMillis` to AccessibilityInfo #31063](https://github.com/facebook/react-native/pull/31063)
-  - [feat: add `getRecommendedTimeoutMillis` section on accessibilityInfo #2581](https://github.com/facebook/react-native-website/pull/2581)
-- [@crloscuesta](https://twitter.com/crloscuesta) closed 1 issue with:
-  - [Disable accessibilityState when `TouchableWithoutFeedback` is disabled #31297](https://github.com/facebook/react-native/pull/31297)
-- [@chakrihacker](https://twitter.com/chakrihacker) closed 1 issue with:
-  - [Disable `TouchableOpacity` when accessibility disabled is set #31108](https://github.com/facebook/react-native/pull/31108)
+- [@huzaifaaak](https://twitter.com/huzaifaaak) 关闭了 3 个问题：
+  - [为按钮可访问性添加 talkback 支持：disabled 属性 #31001](https://github.com/facebook/react-native/pull/31001)
+  - [可访问性/按钮测试 #31189](https://github.com/facebook/react-native/pull/31189)
+- [@natural_clar](https://twitter.com/natural_clar) 关闭了 1 个问题：
+  - [feat: `TouchableHighlight` 禁用时设置 disabled accessibilityState #31135](https://github.com/facebook/react-native/pull/31135)
+- [fabriziobertoglio1987](https://github.com/fabriziobertoglio1987) 关闭了 2 个问题：
+  - [[Android] `TextInput` 组件选中时未语音提示选中状态 #31144](https://github.com/facebook/react-native/pull/31144)
+  - [修复图片未语音提示“禁用”状态 #31252](https://github.com/facebook/react-native/pull/31252)
+- [@kyamashiro73](https://twitter.com/kyamashiro73) 关闭了 1 个问题：
+  - [为 `TouchableNativeFeedback` 添加 talkback 支持：disabled 属性 #31224](https://github.com/facebook/react-native/pull/31224)
+- [@grgr-dkrk](https://twitter.com/dkrk0901) 关闭了 1 个问题并更新了 React Native 文档：
+  - [将 `getRecommendedTimeoutMillis` 添加到 AccessibilityInfo #31063](https://github.com/facebook/react-native/pull/31063)
+  - [feat: 在 accessibilityInfo 中添加 `getRecommendedTimeoutMillis` 部分 #2581](https://github.com/facebook/react-native-website/pull/2581)
+- [@crloscuesta](https://twitter.com/crloscuesta) 关闭了 1 个问题：
+  - [禁用 `TouchableWithoutFeedback` 时禁用 accessibilityState #31297](https://github.com/facebook/react-native/pull/31297)
+- [@chakrihacker](https://twitter.com/chakrihacker) 关闭了 1 个问题：
+  - [当设置了无障碍禁用时禁用 `TouchableOpacity` #31108](https://github.com/facebook/react-native/pull/31108)
 
-Thank you to the community members who gave their time in other ways!
+感谢以下社区成员以其他方式贡献时间：
 
-[Simek](https://github.com/Simek), [saurabhkacholiya](https://github.com/saurabhkacholiya), [meehawk](https://github.com/meehawk), [intergalacticspacehighway](https://github.com/intergalacticspacehighway), [chrisglein](https://github.com/chrisglein), [jychiao](https://github.com/jychiao) and [Waltari10](https://github.com/Waltari10)
+[Simek](https://github.com/Simek), [saurabhkacholiya](https://github.com/saurabhkacholiya), [meehawk](https://github.com/meehawk), [intergalacticspacehighway](https://github.com/intergalacticspacehighway), [chrisglein](https://github.com/chrisglein), [jychiao](https://github.com/jychiao) 和 [Waltari10](https://github.com/Waltari10)
 
-## Get Involved!
+## 参与进来！
 
-We've come a long way but we're not done yet. We need your support to reach the finish line. Facebook's React Native team has committed to supporting contributors working on gap analysis issues. They will continue to respond to comments on Accessibility issues and triage pull requests. The React Native team is also tackling some of the toughest gap analysis issues. This work includes the correct translation of accessibilityRoles to other languages and specifying error text for specific components.
+我们已经取得了长足进步，但仍未完成。我们需要你的支持一起冲刺终点。Facebook 的 React Native 团队承诺支持致力于差距分析问题的贡献者。他们将继续回应无障碍问题的评论并筛选拉取请求。React Native 团队还在解决一些最棘手的差距分析问题。这些工作包括无障碍角色向其他语言的正确转换以及为特定组件指定错误文本。
 
-Join us in tackling the rest. There are still open accessibility issues on the [Improved React Native Accessibility project board](https://github.com/facebook/react-native/projects/15). Issues with [Checked/Unchecked State](https://github.com/facebook/react-native/issues/30843), [Entrance/exit from Collection](https://github.com/facebook/react-native/issues/30861), and [Position in Collection](https://github.com/facebook/react-native/issues/30977) are great opportunities for current and new contributors to contribute to a more accessible React Native.
+欢迎加入我们，共同解决剩余的问题。仍有未关闭的无障碍问题可在 [改进 React Native 无障碍项目板](https://github.com/facebook/react-native/projects/15) 查阅。涉及 [选中/未选中状态](https://github.com/facebook/react-native/issues/30843)、[进入/退出集合](https://github.com/facebook/react-native/issues/30861) 以及 [集合中的位置](https://github.com/facebook/react-native/issues/30977) 的问题，都是当前和新贡献者参与提升 React Native 无障碍性的绝佳机会。
 
-### Learn More
+### 了解更多
 
-Read about how the gap analysis was conducted on the [Facebook Tech blog](https://tech.fb.com/react-native-accessibility/) or about the launch of the GitHub issues on the [React Native Blog](https://reactnative.dev/blog/2021/03/08/GAAD-React-Native-Accessibility).
+阅读关于差距分析如何进行的内容，请参阅 [Facebook 技术博客](https://tech.fb.com/react-native-accessibility/)；了解 GitHub 议题启动的详情，请访问 [React Native 博客](https://reactnative.dev/blog/2021/03/08/GAAD-React-Native-Accessibility)。

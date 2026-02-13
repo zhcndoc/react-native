@@ -1,125 +1,125 @@
 ---
-title: React Native Core Contributor Summit 2022
+title: React Native 核心贡献者峰会 2022
 authors: [thymikee, cortinico]
 tags: [announcement]
 date: 2022-11-22
 ---
 
-# React Native Core Contributor Summit 2022
+# React Native 核心贡献者峰会 2022
 
-After years of pandemic and online-only events, we really felt it was time to bring the Core Contributors of React Native together!
+经过多年疫情和线上活动，我们真的觉得是时候让 React Native 的核心贡献者聚在一起了！
 
-That’s why at the beginning of September, we gathered some of the active core contributors of React Native, library maintainers, and the Meta’s React Native and Metro teams to the **Core Contributor Summit 2022**. [Callstack](https://www.callstack.com/) hosted the Summit in their HQ in Wrocław, Poland, as a part of the [React Native EU](https://www.react-native.eu/) conference happening at the same time.
+因此，在九月初，我们聚集了一些活跃的 React Native 核心贡献者、库维护者，以及 Meta 的 React Native 和 Metro 团队，举办了**核心贡献者峰会 2022**。本次峰会由 [Callstack](https://www.callstack.com/) 在其位于波兰弗罗茨瓦夫的总部举办，作为同期举行的 [React Native EU](https://www.react-native.eu/) 会议的一部分。
 
-Together with the React Native core team, we devised a series of **workshops** in which the attendees could participate. The topics were:
+我们与 React Native 核心团队一起设计了一系列**工作坊**，供参会者参与。议题包括：
 
-- ​​React Native Codegen & TypeScript Support
-- ​​React Native New Architecture Library Migration
-- ​​React Native Monorepo
-- Metro Web and Ecosystem Alignment
-- Metro Simplified Release Workflow
+- React Native 代码生成器（Codegen）及 TypeScript 支持
+- React Native 新架构库迁移
+- React Native 多包仓库（Monorepo）
+- Metro Web 及生态系统对齐
+- Metro 简化发布流程
 
-We were impressed by the amount of knowledge-sharing and collaboration over those two days. In this blog post, we’d like to give you a sneak peek of the results of this gathering.
+这两天里我们对丰富的知识分享和协作印象深刻。在这篇博文中，我们想带你提前了解这次聚会的成果。
 
 <!--truncate-->
 
-### React Native Codegen & TypeScript Support
+### React Native 代码生成器（Codegen）及 TypeScript 支持
 
-[React Native’s Codegen](https://github.com/reactwg/react-native-new-architecture/blob/main/docs/codegen.md) is a fundamental part of the New Architecture of React Native. Supporting and improving it is among our top priorities for the future of React Native. For instance, earlier this year, we added support for generic code starting from TypeScript specs rather than Flow.
+[React Native 的 Codegen](https://github.com/reactwg/react-native-new-architecture/blob/main/docs/codegen.md) 是 React Native 新架构的基础组成部分。支持并改进它是我们未来 React Native 的首要任务之一。例如，今年早些时候，我们添加了对基于 TypeScript 规范而非 Flow 的泛型代码的支持。
 
-In this session, we took the opportunity to onboard new contributors to Codegen, by explaining its core concept and describing how it works. We then focused on two major areas:
+在此环节中，我们借机为新的贡献者介绍 Codegen，讲解其核心概念和工作原理。随后我们重点关注两个主要方面：
 
-#### 1. Supporting **new types** that are currently unsupported by Codegen. One of the highly requested ones was the [string union types in TypeScript](https://github.com/Titozzz/react-native/tree/codegen-string-union).
+#### 1. 支持 Codegen 目前不支持的**新类型**。其中备受期待的是 [TypeScript 中的字符串联合类型](https://github.com/Titozzz/react-native/tree/codegen-string-union)。
 
-A team of a few people moved into a meeting room to tackle this task. They encountered and overcame some difficulties along the way, like how to run unit tests for Codegen. They spent quite some time understanding the code execution flow before starting to deal with the code. After some hours of collaborative work, they ended up with the first prototype that was able to recognize string unions. This experience was extremely useful in discussing design patterns and the ideal architecture we may want in the future.
+几位成员组成了一个小组，在会议室集中攻克此任务。期间遇到并克服了一些难题，比如如何为 Codegen 运行单元测试。他们花费不少时间搞懂代码执行流程，才开始动手写代码。经过数小时的协作，最终实现了第一个能够识别字符串联合类型的原型。此次经验对讨论设计模式及未来理想架构极有帮助。
 
-#### 2. Improving **[auto-linking for iOS](https://github.com/facebook/react-native/pull/34580)**, which was missing a use case.
+#### 2. 改进**[iOS 自动链接功能](https://github.com/facebook/react-native/pull/34580)**，此前缺少一个用例支持。
 
-Specifically, auto-linking could not work well in scenarios where libraries and the app were living together in a monorepo. Android already supported this use case but it was missing for iOS.
+具体来说，自动链接在库和应用共存于多包仓库（monorepo）中时表现不佳。Android 已支持此用例，但 iOS 缺失。
 
-Working with the contributors on Codegen helped us realize that it wasn’t trivial to work in its codebase. For example, adding the support for one type required to copy-and-paste the same code in four different places: modules with specs written in Flow, modules with specs written in TypeScript, components with specs written in Flow, and components with specs written in TypeScript.
+与 Codegen 贡献者的合作让我们意识到其代码库并不简单。例如，支持某一类型需要在四个不同位置复制粘贴相同代码：Flow 编写规范的模块、TypeScript 编写规范的模块、Flow 编写规范的组件、TypeScript 编写规范的组件。
 
-This realization pushed us to create an [umbrella task](https://github.com/facebook/react-native/issues/34872) to reach out for help to the community in order to improve the status of the codebase toward a more maintainable one.
+这一发现促使我们建立了[统筹任务](https://github.com/facebook/react-native/issues/34872)，向社区寻求帮助，改善代码库状态，使其更具可维护性。
 
-The participation was outstanding: we managed to quickly assign the first **40 tasks in 5 days**. At the end of October, the community completed **47 tasks** and many others are ready and waiting to be merged.
+参与度极高：我们在 5 天内迅速分配了首批 **40 个任务**。到了十月底，社区完成了 **47 任务**，还有许多待合并。
 
-This initiative also contributed to the [Hacktoberfest](https://hacktoberfest.com/) for all the people who contributed to these improvements!
+这项举措也为参与改进的开发者贡献了 [Hacktoberfest](https://hacktoberfest.com/) 奖励！
 
-### ​​React Native New Architecture Library Migration
+### React Native 新架构库迁移
 
-The hot topic in the React Native space is the New Architecture. Having **libraries** that support the New Architecture is a crucial point in the [migration for the whole ecosystem](/blog/2022/06/16/resources-migrating-your-react-native-library-to-the-new-architecture). Therefore, we want to support library maintainers in migrating to the New Architectures.
+React Native 领域的热门话题是新架构。拥有支持新架构的**库**对于[整个生态系统的迁移](/blog/2022/06/16/resources-migrating-your-react-native-library-to-the-new-architecture)至关重要。因此，我们希望支持库维护者进行新架构迁移。
 
-Initially, this session started as a brainstorming, where the core contributors had the opportunity to ask the React Native team all the questions they had related to the New Architecture. This in-person feedback loop was crucial for both the core contributors to bring clarity and for the React Native team to collect feedback. Some of the shared feedback and concerns will end up being implemented in React Native 0.71.
+本环节最初以头脑风暴开始，核心贡献者有机会向 React Native 团队提出关于新架构的各种疑问。这一线下反馈环对核心贡献者厘清思路和 React Native 团队收集反馈均至关重要。部分反馈和关切将会在 React Native 0.71 中实现。
 
-We then moved to practically migrating as many libraries to the new architecture as possible. During this session, we kicked off the migration process for several community packages, such as `react-native-document-picker`, `react-native-store-review`, and `react-native-orientation`.
+随后，我们实际开始迁移多个社区包至新架构，包括 `react-native-document-picker`、`react-native-store-review` 和 `react-native-orientation`。
 
-As a reminder, if you’re also migrating a library and need support in doing so, please reach out to our [New Architecture Working Group](https://github.com/reactwg/react-native-new-architecture) on GitHub.
+提醒一下，如果你也在迁移库且需要帮助，请联系我们的 [新架构工作组](https://github.com/reactwg/react-native-new-architecture)（GitHub）。
 
-### ​​React Native Monorepo
+### React Native 多包仓库（Monorepo）
 
-Releasing a new version of React Native is not trivial today. React Native is one of the most downloaded packages on NPM, and we want to make sure that our release process is smooth.
+如今发布 React Native 新版本并非易事。React Native 是 NPM 上下载量最大的包之一，我们希望确保发布过程顺畅。
 
-That’s why we want to refactor the `react-native` repository and implement the **Monorepo RFC** ([#480](https://github.com/react-native-community/discussions-and-proposals/pull/480)).
+因此，我们想重构 `react-native` 仓库并实施 **多包仓库 RFC**（[#480](https://github.com/react-native-community/discussions-and-proposals/pull/480)）。
 
-In this session, we initially brainstormed and collected opinions from every contributor, as it’s crucial that we evolve our repository to reduce the breaking changes for our downstream dependencies.
+此次会议我们先进行头脑风暴，并收集了每位贡献者的观点，因为降低下游依赖的破坏性变更有赖于仓库的演进。
 
-We then started working on two fronts. First, we had to expand our Continuous Integration infrastructure to support our monorepo, adding [Verdaccio](https://verdaccio.org/) to our testing infrastructure. We then started renaming & adding scopes to several of our packages, resulting in 6 distinct contributions.
+接着，我们并行推动两项工作。首先，为支持多包仓库，我们扩展了持续集成基础设施，将 [Verdaccio](https://verdaccio.org/) 加入测试体系。然后开始对多个包进行重命名及添加 scope，共产生 6 条贡献。
 
-You can track the status of this effort under this [umbrella issue](https://github.com/facebook/react-native/issues/34692) and we hope to share more on this effort in the near future.
+你可通过此[统筹 Issue](https://github.com/facebook/react-native/issues/34692)跟踪进展，我们也将尽快分享更多信息。
 
-### Metro Web and Ecosystem Alignment
+### Metro Web 及生态系统对齐
 
-[Metro](https://github.com/facebook/metro), our JavaScript Bundler, is a foundational and integrated part of the React Native development experience and we want to make sure it works with the latest standards in the JS ecosystem.
+[Metro](https://github.com/facebook/metro) 是我们的 JavaScript 打包器，是 React Native 开发体验的重要组成部分。我们希望 Metro 与 JS 生态中的最新标准保持兼容。
 
-The focus of this session was to discuss improving Metro's feature set to work better for web use cases and with the npm and bundler ecosystem. Two major areas of discussion:
+本环节重点讨论提升 Metro 特性，以更好支持 Web 用例及 npm 和打包器生态。两大讨论点：
 
-#### 1. Adopting the `"exports"` ([package entry points](https://nodejs.org/api/packages.html#package-entry-points)) specification
+#### 1. 采纳 `"exports"` 规范（[包入口点](https://nodejs.org/api/packages.html#package-entry-points)）
 
-From the [Node.js documentation](https://nodejs.org/api/packages.html#package-entry-points):
+根据 [Node.js 文档](https://nodejs.org/api/packages.html#package-entry-points)：
 
 <!-- alex ignore clearly -->
 
 :::info
-The ["exports"](https://nodejs.org/api/packages.html#exports) provides a modern alternative to ["main"](https://nodejs.org/api/packages.html#main) allowing multiple entry points to be defined, conditional entry resolution support between environments, and **preventing any other entry points besides those defined in ["exports"](https://nodejs.org/api/packages.html#exports)**. This encapsulation allows module authors to define the public interface for their package clearly.
+`"exports"` 提供了一个现代替代方案给 `"main"`，允许定义多个入口点，支持环境间条件入口解析，且**阻止除了 `"exports"` 中定义的其他入口点**。这种封装让模块作者能清楚定义包的公共接口。
 :::
 
-Adopting the `"exports"` specification has a lot of potential. In this session, we debated on how to handle [Platform Specific Code](/docs/platform-specific-code#platform-specific-extensions) with `"exports"`. Considering many factors, we came up with a fairly non-breaking rollout plan for `"exports"`, by adding a `"strict"` and `"non-strict"` mode to Metro resolver. We discussed how leveraging [builder-bob](https://github.com/callstack/react-native-builder-bob) would help library creators adopt the strict mode without friction.
+采纳 `"exports"` 规范潜力巨大。在会议中，我们讨论了如何用 `"exports"` 处理[平台特定代码](/docs/platform-specific-code#platform-specific-extensions)。综合多种因素后，提出了一个较为不破坏兼容性的分阶段计划，通过为 Metro 解析器增加 `"strict"` 和 `"non-strict"` 模式。我们也讨论了如何利用 [builder-bob](https://github.com/callstack/react-native-builder-bob) 帮助库开发者无障碍采用严格模式。
 
-This discussion resulted in:
+这次讨论产出了：
 
-1. An [RFC](https://github.com/react-native-community/discussions-and-proposals/pull/534) for Metro on how package exports would work with React Native.
-2. An [RFC](https://github.com/nodejs/node/pull/45367) for Node.js to include “react-native” as a Community Condition.
+1. 一份 Metro 的 [RFC](https://github.com/react-native-community/discussions-and-proposals/pull/534)，介绍包 exports 在 React Native 中的工作方式。
+2. 一份针对 Node.js 的 [RFC](https://github.com/nodejs/node/pull/45367)，将 `react-native` 作为社区条件。
 
-#### 2. Web and bundler ecosystem
+#### 2. Web 与打包器生态
 
-The Metro team shared progress from their partnership with Expo and the intent to continue this working model for upcoming bundle splitting and tree-shaking support. We touched again on ES module support and considered potential future features such as Yarn PnP and output optimization on the web. We discussed how Metro’s core shares logic and data structures with Jest and opportunities for more reuse.
+Metro 团队分享了与 Expo 合作进展及其继续采用该工作模式支持未来打包拆分和摇树优化的计划。我们重新讨论了 ES 模块支持以及未来可能支持 Yarn PnP 和 Web 端输出优化的功能。探讨了 Metro 核心与 Jest 共用逻辑和数据结构的机会及可复用性。
 
-Developers surfaced insightful use cases for bundle splitting and interoperability with third-party tooling. This led us to discuss potential extension points in Metro and improving current documentation.
+开发者提出了对打包拆分和与第三方工具互操作的实际用例，促使我们探讨 Metro 潜在的扩展点及文档改进方案。
 
-This discussion provided us with good grounding for the next day's session on simplifying the release workflow.
+这些讨论为次日简化发布流程会议打下了坚实基础。
 
-### Metro Simplified Release Workflow
+### Metro 简化发布流程
 
-As mentioned, releasing React Native is not trivial.
+正如前述，发布 React Native 并非易事。
 
-Things get harder as we need to release React Native, the React Native CLI, and Metro. Those tools are connected to each other as React Native and the CLI both depend on Metro. This creates some friction when any of the packages releases a new version.
+情况更复杂的是，我们需同时发布 React Native、React Native CLI 和 Metro。这些工具相互依赖，React Native 和 CLI 都依赖 Metro，任一包发布新版会带来协调困难。
 
-Currently, we manage this through direct communication and synchronized releases, but there is space for improvement.
+目前我们通过直接沟通和同步发布来管理，但仍有提升空间。
 
-In this session, we reconsidered the **dependencies** between React Native, Metro, and the CLI. We uncovered how some design decisions during the [“Lean Core” effort](https://github.com/react-native-community/discussions-and-proposals/issues/6), when we extracted the CLI from React Native, made these two projects codependent with some functionalities duplicated among efforts. The decisions back then made sense and allowed the CLI team to iterate faster than ever.
+本环节重新考量了 React Native、Metro 和 CLI 三者的**依赖关系**。回顾了 [“Lean Core” 工作](https://github.com/react-native-community/discussions-and-proposals/issues/6)中，将 CLI 从 React Native 中抽离时做出的一些设计决策，这些决策让两个项目产生了代码依赖且部分功能重复。当年决定有其合理性，让 CLI 团队迭代更快。
 
-It was about time to revisit them and take the experience of both teams to figure out the way through. As a result, the Metro team will take over the [`@react-native-community/cli-plugin-metro`](https://github.com/react-native-community/cli/tree/main/packages/cli-plugin-metro) development, temporarily moving it back to the core of React Native, and then most likely to the Metro monorepo.
+现在是重新审视这些决策、汇聚两团队经验探索前行路的时候了。最终 Metro 团队将接管 [`@react-native-community/cli-plugin-metro`](https://github.com/react-native-community/cli/tree/main/packages/cli-plugin-metro) 的开发，项目暂时回归 React Native 核心，随后很可能迁移到 Metro 多包仓库中。
 
 ![](/blog/assets/core-contributor-summit-2022.jpg)
 
-The biggest takeaway, apart from three hours of drawing dependencies between the packages on the whiteboard, was for the CLI and Metro team to exchange their issues, experiences, and plans, resulting in a better understanding of each other.
+最大的收获，除去三小时在白板上梳理包间依赖外，是 CLI 和 Metro 团队相互交流彼此的问题、经验和规划，增进了相互理解。
 
-We wouldn’t be able to achieve this level of cooperation without actually meeting each other.
+没有面对面交流，我们达不到如此协作水平。
 
 ---
 
-We’re still impressed by how spending several hours together for a couple of days resulted in so much knowledge-sharing and cross-pollination of ideas. During this summit, we planted the seeds for initiatives that will help us improve and re-shape the React Native ecosystem.
+我们仍对几天数小时的共聚带来的丰富知识分享和观点交融感到震撼。此次峰会为改进和重塑 React Native 生态系统播下了种子。
 
-We want to say thank you again to [Callstack](https://www.callstack.com/) for hosting us and to all the participants for joining us at the Core Contributor Summit 2022.
+我们再次感谢 [Callstack](https://www.callstack.com/) 的主办及所有参与者加入核心贡献者峰会 2022。
 
-If you’re interested in joining the development of React Native, make sure you join our open initiatives and read the [contribution guide](https://reactnative.dev/contributing/overview) we have on our website. We hope to meet you in person as well in the future!
+如果你有兴趣参与 React Native 开发，务必加入我们的开放计划，并阅读我们网站上的[贡献指南](https://reactnative.dev/contributing/overview)。期待未来与你的亲自相会！

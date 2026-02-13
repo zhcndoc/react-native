@@ -1,25 +1,25 @@
 ---
 id: typescript
-title: Using TypeScript
+title: 使用 TypeScript
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-[TypeScript][ts] is a language which extends JavaScript by adding type definitions. New React Native projects target TypeScript by default, but also support JavaScript and Flow.
+[TypeScript][ts] 是一种通过添加类型定义扩展 JavaScript 的语言。新的 React Native 项目默认以 TypeScript 为目标，但也支持 JavaScript 和 Flow。
 
-## Getting Started with TypeScript
+## 入门 TypeScript
 
-New projects created by the [React Native CLI](getting-started-without-a-framework#step-1-creating-a-new-application) or popular templates like [Ignite][ignite] will use TypeScript by default.
+由 [React Native CLI](getting-started-without-a-framework#step-1-creating-a-new-application) 或类似 [Ignite][ignite] 的流行模板创建的新项目默认使用 TypeScript。
 
-TypeScript may also be used with [Expo][expo], which maintains TypeScript templates, or will prompt you to automatically install and configure TypeScript when a `.ts` or `.tsx` file is added to your project.
+TypeScript 也可以与 [Expo][expo] 一起使用，Expo 提供了 TypeScript 模板，或者当您的项目添加 `.ts` 或 `.tsx` 文件时，会提示自动安装和配置 TypeScript。
 
 ```shell
 npx create-expo-app --template
 ```
 
-## Adding TypeScript to an Existing Project
+## 向现有项目添加 TypeScript
 
-1. Add TypeScript, types, and ESLint plugins to your project.
+1. 向项目添加 TypeScript、类型以及 ESLint 插件。
 
 <Tabs groupId="package-manager" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>
 <TabItem value="npm">
@@ -39,10 +39,10 @@ yarn add --dev typescript @react-native/typescript-config @types/jest @types/rea
 </Tabs>
 
 :::note
-This command adds the latest version of every dependency. The versions may need to be changed to match the existing packages used by your project. You can use a tool like [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) to see the versions shipped by React Native.
+该命令会安装所有依赖的最新版本。您可能需要根据项目中已有的包来调整版本。您可以使用类似 [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) 的工具查看 React Native 自带的版本。
 :::
 
-2. Add a TypeScript config file. Create a `tsconfig.json` in the root of your project:
+2. 添加 TypeScript 配置文件。在项目根目录下创建 `tsconfig.json`：
 
 ```json title="tsconfig.json"
 {
@@ -50,13 +50,13 @@ This command adds the latest version of every dependency. The versions may need 
 }
 ```
 
-3. Rename a JavaScript file to be `*.tsx`
+3. 将一个 JavaScript 文件重命名为 `*.tsx`
 
 :::warning
-You should leave the `./index.js` entrypoint file as it is otherwise you may run into an issue when it comes to bundling a production build.
+应保留 `./index.js` 作为入口文件，否则在打包生产版本时可能会遇到问题。
 :::
 
-4. Run `tsc` to type-check your new TypeScript files.
+4. 运行 `tsc` 来静态检查您的新 TypeScript 文件。
 
 <Tabs groupId="package-manager" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>
 <TabItem value="npm">
@@ -75,17 +75,17 @@ yarn tsc
 </TabItem>
 </Tabs>
 
-## Using JavaScript Instead of TypeScript
+## 使用 JavaScript 而非 TypeScript
 
-React Native defaults new applications to TypeScript, but JavaScript may still be used. Files with a `.jsx` extension are treated as JavaScript instead of TypeScript, and will not be typechecked. JavaScript modules may still be imported by TypeScript modules, along with the reverse.
+React Native 默认使用 TypeScript 创建新应用，但仍可使用 JavaScript。带有 `.jsx` 扩展名的文件会被视为 JavaScript 而非 TypeScript，不会进行类型检查。TypeScript 模块仍然可以导入 JavaScript 模块，反之亦然。
 
-## How TypeScript and React Native works
+## TypeScript 与 React Native 的工作原理
 
-Out of the box, TypeScript sources are transformed by [Babel][babel] during bundling. We recommend that you use the TypeScript compiler only for type checking. This is the default behavior of `tsc` for newly created applications. If you have existing TypeScript code being ported to React Native, there are [one or two caveats][babel-7-caveats] to using Babel instead of TypeScript.
+默认情况下，TypeScript 源代码会在打包时由 [Babel][babel] 转换。我们建议只用 TypeScript 编译器做类型检查。这是 `tsc` 新创建应用的默认行为。如果您将现有的 TypeScript 代码迁移至 React Native，使用 Babel 而非 TypeScript 编译器存在[一两个注意事项][babel-7-caveats]。
 
-## What does React Native + TypeScript look like
+## React Native + TypeScript 样例
 
-You can provide an interface for a React Component's [Props](props) and [State](state) via `React.Component<Props, State>` which will provide type-checking and editor auto-completing when working with that component in JSX.
+您可以通过 `React.Component<Props, State>` 为 React 组件的 [Props](props) 和 [State](state) 提供接口，这样在 JSX 中使用该组件时就可以获得类型检查和编辑器自动补全。
 
 ```tsx title="components/Hello.tsx"
 import {useState} from 'react';
@@ -151,19 +151,19 @@ const styles = StyleSheet.create({
 export default Hello;
 ```
 
-You can explore the syntax more in the [TypeScript playground][tsplay].
+您可以在 [TypeScript playground][tsplay] 中进一步学习语法。
 
-## Where to Find Useful Advice
+## 哪里可以找到有用的建议
 
-- [TypeScript Handbook][ts-handbook]
-- [React's documentation on TypeScript][react-ts]
-- [React + TypeScript Cheatsheets][cheat] has a good overview on how to use React with TypeScript
+- [TypeScript 手册][ts-handbook]
+- [React 官方文档中的 TypeScript 部分][react-ts]
+- [React + TypeScript 备忘单][cheat] 提供了 React 与 TypeScript 的使用概览
 
-## Using Custom Path Aliases with TypeScript
+## 在 TypeScript 中使用自定义路径别名
 
-To use custom path aliases with TypeScript, you need to set the path aliases to work from both Babel and TypeScript. Here's how:
+如果想在 TypeScript 中使用自定义路径别名，需让别名同时被 Babel 和 TypeScript 识别。具体步骤：
 
-1. Edit your `tsconfig.json` to have your [custom path mappings][path-map]. Set anything in the root of `src` to be available with no preceding path reference, and allow any test file to be accessed by using `tests/File.tsx`:
+1. 编辑 `tsconfig.json` 以增加您的[自定义路径映射][path-map]。设置 src 根目录下的路径无需前置路径引用，并允许以 `tests/File.tsx` 访问任何测试文件：
 
 ```diff
 {
@@ -180,7 +180,7 @@ To use custom path aliases with TypeScript, you need to set the path aliases to 
 }
 ```
 
-2. Add [`babel-plugin-module-resolver`][bpmr] as a development package to your project:
+2. 将 [`babel-plugin-module-resolver`][bpmr] 作为开发依赖添加到项目中：
 
 <Tabs groupId="package-manager" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>
 <TabItem value="npm">
@@ -199,7 +199,7 @@ yarn add --dev babel-plugin-module-resolver
 </TabItem>
 </Tabs>
 
-3. Finally, configure your `babel.config.js` (note that the syntax for your `babel.config.js` is different from your `tsconfig.json`):
+3. 最后，配置 `babel.config.js`（注意它的语法与 `tsconfig.json` 不同）：
 
 ```diff
 {

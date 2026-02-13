@@ -1,55 +1,55 @@
 ---
 id: backhandler
-title: BackHandler
+title: 返回按钮处理器（BackHandler）
 ---
 
-The Backhandler API detects hardware button presses for back navigation, lets you register event listeners for the system's back action, and lets you control how your application responds. It is Android-only.
+BackHandler API 用于检测硬件返回按钮的按下事件，允许你为系统的返回操作注册事件监听器，并控制应用的响应方式。该功能仅限于 Android 平台。
 
-The event subscriptions are called in reverse order (i.e. the last registered subscription is called first).
+事件订阅按逆序调用（即最后注册的订阅最先被调用）。
 
-- **If one subscription returns true,** then subscriptions registered earlier will not be called.
-- **If no subscription returns true or none are registered,** it programmatically invokes the default back button functionality to exit the app.
+- **如果某个订阅返回 true，** 则先前注册的订阅将不被调用。
+- **如果没有订阅返回 true 或根本没有注册订阅，** 则会程序化地调用默认的返回按钮功能来退出应用。
 
-:::warning Warning for modal users
-If your app shows an opened `Modal`, `BackHandler` will not publish any events ([see `Modal` docs](modal#onrequestclose)).
+:::warning 针对模态框用户的警告
+如果你的应用显示了一个打开的 `Modal`，`BackHandler` 不会发布任何事件（[参见 `Modal` 文档](modal#onrequestclose)）。
 :::
 
-## Pattern
+## 使用示例
 
 ```tsx
 const subscription = BackHandler.addEventListener(
   'hardwareBackPress',
   function () {
     /**
-     * this.onMainScreen and this.goBack are just examples,
-     * you need to use your own implementation here.
+     * this.onMainScreen 和 this.goBack 只是示例，
+     * 你需要根据自己的实现调整这里的逻辑。
      *
-     * Typically you would use the navigator here to go to the last state.
+     * 通常情况下，你会使用导航器返回到上一个状态。
      */
 
     if (!this.onMainScreen()) {
       this.goBack();
       /**
-       * When true is returned the event will not be bubbled up
-       * & no other back action will execute
+       * 返回 true 表示事件不会被冒泡，
+       * 且不会执行其他的返回操作。
        */
       return true;
     }
     /**
-     * Returning false will let the event to bubble up & let other event listeners
-     * or the system's default back action to be executed.
+     * 返回 false 会允许事件冒泡，
+     * 并执行其他事件监听器或系统默认的返回操作。
      */
     return false;
   },
 );
 
-// Unsubscribe the listener on unmount
+// 在组件卸载时取消订阅监听
 subscription.remove();
 ```
 
-## Example
+## 示例
 
-The following example implements a scenario where you confirm if the user wants to exit the app:
+下面的示例展示了一个场景：当用户按返回键时，确认是否退出应用：
 
 ```SnackPlayer name=BackHandler&supportedPlatforms=android
 import React, {useEffect} from 'react';
@@ -59,13 +59,13 @@ import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 const App = () => {
   useEffect(() => {
     const backAction = () => {
-      Alert.alert('Hold on!', 'Are you sure you want to go back?', [
+      Alert.alert('请稍等！', '你确定要返回吗？', [
         {
-          text: 'Cancel',
+          text: '取消',
           onPress: () => null,
           style: 'cancel',
         },
-        {text: 'YES', onPress: () => BackHandler.exitApp()},
+        {text: '确定', onPress: () => BackHandler.exitApp()},
       ]);
       return true;
     };
@@ -81,7 +81,7 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <Text style={styles.text}>Click Back button!</Text>
+        <Text style={styles.text}>点击返回按钮！</Text>
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -102,21 +102,21 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-`BackHandler.addEventListener` creates an event listener & returns a `NativeEventSubscription` object which should be cleared using `NativeEventSubscription.remove` method.
+`BackHandler.addEventListener` 会创建一个事件监听器并返回一个 `NativeEventSubscription` 对象，该对象应通过调用其 `NativeEventSubscription.remove` 方法进行取消订阅。
 
-## Usage with React Navigation
+## 与 React Navigation 一起使用
 
-If you are using React Navigation to navigate across different screens, you can follow their guide on [Custom Android back button behaviour](https://reactnavigation.org/docs/custom-android-back-button-handling/)
+如果你使用 React Navigation 在不同屏幕间导航，可以参考他们的指南：[自定义安卓返回按钮行为](https://reactnavigation.org/docs/custom-android-back-button-handling/)
 
-## Backhandler hook
+## BackHandler Hook
 
-[React Native Hooks](https://github.com/react-native-community/hooks#usebackhandler) has a nice `useBackHandler` hook which will simplify the process of setting up event listeners.
+[React Native Hooks](https://github.com/react-native-community/hooks#usebackhandler) 提供了一个非常方便的 `useBackHandler` Hook，使设置事件监听更简单。
 
 ---
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `addEventListener()`
 

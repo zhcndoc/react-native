@@ -1,75 +1,75 @@
 ---
 id: threading-model
-title: Threading Model
+title: 线程模型
 ---
 
 import FabricWarning from './\_fabric-warning.mdx';
 
 <FabricWarning />
 
-#### The React Native renderer distributes the work of the [render pipeline](render-pipeline) across multiple threads.
+#### React Native 渲染器将[渲染管线](render-pipeline)的工作分散到多个线程中。
 
-Here we define the threading model and provide some examples to illustrate thread usage of the render pipeline.
+在这里，我们定义线程模型，并通过一些示例说明渲染管线的线程使用情况。
 
-React Native renderer is designed to be thread safe. At a high level thread safety is guaranteed by using immutable data structures in the internals of the framework (enforced by C++ “const correctness” feature). This means that every update in React creates or clones new objects in the renderer instead of updating data structures. This allows the framework to expose thread safe and synchronous APIs to React.
+React Native 渲染器设计为线程安全。从高层次来看，线程安全通过在框架内部使用不可变数据结构来保证（由 C++ 的“const correctnes”特性强制执行）。这意味着 React 中的每次更新都会在渲染器中创建或克隆新的对象，而不是更新已有的数据结构。这使得框架能够向 React 暴露线程安全且同步的 API。
 
-The renderer uses two different threads:
+渲染器使用两种不同的线程：
 
-- **UI thread** (often called main): The only thread that can manipulate host views.
-- **JavaScript thread**: This is where React’s render phase, as well as layout, are executed.
+- **UI 线程**（常称为主线程）：唯一能操作宿主视图的线程。
+- **JavaScript 线程**：执行 React 的渲染阶段以及布局。
 
-Let’s review the supported scenarios of execution for each phase:
+让我们回顾每个阶段支持的执行场景：
 
 <figure>
-  <img src="/docs/assets/Architecture/threading-model/symbols.png" alt="Threading model symbols" />
+  <img src="/docs/assets/Architecture/threading-model/symbols.png" alt="线程模型符号" />
 </figure>
 
-## Render Scenarios
+## 渲染场景
 
-### Render in a JS Thread
+### 在 JS 线程中渲染
 
-This is the most common scenario where most of the render pipeline happens on JavaScript thread.
-
-<figure>
-	<img src="/docs/assets/Architecture/threading-model/case-1.jpg" alt="Threading model use case one" />
-</figure>
-
----
-
-### Render in the UI Thread
-
-When there is a high priority event on the UI Thread, the renderer is able to execute all the render pipeline synchronously on the UI thread.
+这是最常见的场景，大部分渲染管线在 JavaScript 线程上执行。
 
 <figure>
-	<img src="/docs/assets/Architecture/threading-model/case-2.jpg" alt="Threading model use case two" />
+	<img src="/docs/assets/Architecture/threading-model/case-1.jpg" alt="线程模型使用场景一" />
 </figure>
 
 ---
 
-### Default or continuous event interruption
+### 在 UI 线程中渲染
 
-This scenario shows the interruption of the render phase by a low priority event in the UI thread. React and the React Native renderer are able to interrupt the render phase and merge its state with a low priority event that is executed on the UI thread. In this case the render process continues executing in the JS thread.
+当 UI 线程上有一个高优先级事件时，渲染器能够在 UI 线程上同步执行整个渲染管线。
 
 <figure>
-	<img src="/docs/assets/Architecture/threading-model/case-3.jpg" alt="Threading model use case three" />
+	<img src="/docs/assets/Architecture/threading-model/case-2.jpg" alt="线程模型使用场景二" />
 </figure>
 
 ---
 
-### Discrete event interruption
+### 默认或连续事件中断
 
-The render phase is interruptible. This scenario shows the interruption of the render phase by a high priority event in the UI thread. React and the renderer are able to interrupt the render phase and merge its state with a high priority event that was executed on the UI thread. The render phase executes synchronously on the UI thread.
+该场景展示了 UI 线程上的低优先级事件中断渲染阶段的情况。React 和 React Native 渲染器能够中断渲染阶段，并将其状态与在 UI 线程上执行的低优先级事件合并。在这种情况下，渲染过程继续在 JS 线程上执行。
 
 <figure>
-	<img src="/docs/assets/Architecture/threading-model/case-4.jpg" alt="Threading model use case four" />
+	<img src="/docs/assets/Architecture/threading-model/case-3.jpg" alt="线程模型使用场景三" />
 </figure>
 
 ---
 
-### C++ State update
+### 离散事件中断
 
-Update originating on UI thread and skips rendering phase. See [React Native Renderer State Updates](render-pipeline#react-native-renderer-state-updates) for more details.
+渲染阶段是可中断的。该场景展示了 UI 线程上高优先级事件中断渲染阶段的情况。React 和渲染器能够中断渲染阶段，并将其状态与已经在 UI 线程执行的高优先级事件合并。渲染阶段在 UI 线程上同步执行。
 
 <figure>
-	<img src="/docs/assets/Architecture/threading-model/case-6.jpg" alt="Threading model use case six" />
+	<img src="/docs/assets/Architecture/threading-model/case-4.jpg" alt="线程模型使用场景四" />
+</figure>
+
+---
+
+### C++ 状态更新
+
+更新起源于 UI 线程且跳过渲染阶段。更多详情请参见[React Native 渲染器状态更新](render-pipeline#react-native-renderer-state-updates)。
+
+<figure>
+	<img src="/docs/assets/Architecture/threading-model/case-6.jpg" alt="线程模型使用场景六" />
 </figure>

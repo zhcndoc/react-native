@@ -1,6 +1,6 @@
 ---
 id: set-up-your-environment
-title: Set Up Your Environment
+title: 设置你的开发环境
 hide_table_of_contents: true
 ---
 
@@ -13,27 +13,27 @@ import GuideMacOSAndroid from './\_getting-started-macos-android.md';
 import GuideWindowsAndroid from './\_getting-started-windows-android.md';
 import GuideMacOSIOS from './\_getting-started-macos-ios.md';
 
-In this guide, you'll learn how to set up your environment, so that you can run your project with Android Studio and Xcode. This will allow you to develop with Android emulators and iOS simulators, build your app locally, and more.
+在本指南中，你将学习如何设置开发环境，以便使用 Android Studio 和 Xcode 运行你的项目。这将允许你使用 Android 模拟器和 iOS 模拟器进行开发，本地构建你的应用等等。
 
 :::info
-This guide requires Android Studio or Xcode. If you already have one of these programs installed, you should be able to get up and running within a few minutes. If they are not installed, you should expect to spend about an hour installing and configuring them.
+本指南需要安装 Android Studio 或 Xcode。如果你已经安装了其中一个程序，你应该能在几分钟内完成准备工作。如果尚未安装，你需要花约一小时进行安装和配置。
 
 <details>
-<summary>Is setting up my environment required?</summary>
+<summary>是否必须设置环境？</summary>
 
-Setting up your environment is not required if you're using a [Framework](/architecture/glossary#react-native-framework). With a React Native Framework, you don't need to set up Android Studio or Xcode as it will take care of building the native app for you
+如果你使用的是 [Framework](/architecture/glossary#react-native-framework)，则不必设置环境。使用 React Native Framework 时，无需安装 Android Studio 或 Xcode，框架会帮你构建原生应用。
 
-If you have constraints that prevent you from using a Framework, or you'd like to write your own Framework, then setting up your local environment is a requirement. After your environment is set up, learn how to [get started without a framework](getting-started-without-a-framework).
+如果你受限而不能使用 Framework，或者希望自己编写 Framework，那么设置本地环境就是必需的。环境搭建完成后，可以学习如何[不使用框架开始开发](getting-started-without-a-framework)。
 
 </details>
 :::
 
-#### Development OS
+#### 开发操作系统
 
 <Tabs groupId="os" queryString defaultValue={constants.defaultOs} values={constants.oses} className="pill-tabs">
 <TabItem value="macos">
 
-#### Target OS
+#### 目标操作系统
 
 <Tabs groupId="platform" queryString defaultValue={constants.defaultPlatform} values={constants.platforms} className="pill-tabs">
 <TabItem value="android">
@@ -55,7 +55,7 @@ If you have constraints that prevent you from using a Framework, or you'd like t
 </TabItem>
 <TabItem value="windows">
 
-#### Target OS
+#### 目标操作系统
 
 <Tabs groupId="platform" queryString defaultValue={constants.defaultPlatform} values={constants.platforms} className="pill-tabs">
 <TabItem value="android">
@@ -69,10 +69,10 @@ If you have constraints that prevent you from using a Framework, or you'd like t
 
 [//]: # 'Windows, iOS'
 
-## Unsupported
+## 不支持
 
 :::info
-A Mac is required to build projects with native code for iOS. You can use [Expo Go](https://expo.dev/go) from [Expo](environment-setup#start-a-new-react-native-project-with-expo) to develop your app on your iOS device.
+构建带有原生代码的 iOS 项目需要 Mac 电脑。你可以使用 [Expo Go](https://expo.dev/go) （来自 [Expo](environment-setup#start-a-new-react-native-project-with-expo)）在你的 iOS 设备上开发应用。
 :::
 
 </TabItem>
@@ -81,7 +81,7 @@ A Mac is required to build projects with native code for iOS. You can use [Expo 
 </TabItem>
 <TabItem value="linux">
 
-#### Target OS
+#### 目标操作系统
 
 <Tabs groupId="platform" queryString defaultValue={constants.defaultPlatform} values={constants.platforms} className="pill-tabs">
 <TabItem value="android">
@@ -95,10 +95,10 @@ A Mac is required to build projects with native code for iOS. You can use [Expo 
 
 [//]: # 'Linux, iOS'
 
-## Unsupported
+## 不支持
 
 :::info
-A Mac is required to build projects with native code for iOS. You can use [Expo Go](https://expo.dev/go) from [Expo](environment-setup#start-a-new-react-native-project-with-expo) to develop your app on your iOS device.
+构建带有原生代码的 iOS 项目需要 Mac 电脑。你可以使用 [Expo Go](https://expo.dev/go) （来自 [Expo](environment-setup#start-a-new-react-native-project-with-expo)）在你的 iOS 设备上开发应用。
 :::
 
 </TabItem>

@@ -1,10 +1,10 @@
 ---
 id: global-alert
-title: alert
+title: alert 警告
 ---
 
 :::warning
-🚧 This page is work in progress, so please refer to the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) for more information.
+🚧 本页面正在建设中，请参阅 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) 获取更多信息。
 :::
 
-The global `alert` function, as defined in Web specifications.
+全局的 `alert` 函数，按照 Web 规范定义。

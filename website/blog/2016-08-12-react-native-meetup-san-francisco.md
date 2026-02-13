@@ -1,108 +1,108 @@
 ---
-title: San Francisco Meetup Recap
+title: 旧金山聚会回顾
 authors: [hectorramos]
 hero: '/blog/img/rnmsf-august-2016-hero.jpg'
 tags: [events]
 ---
 
-Last week I had the opportunity to attend the [React Native Meetup](https://www.meetup.com/React-Native-San-Francisco/photos/27168649/#452793854) at Zynga’s San Francisco office. With around 200 people in attendance, it served as a great place to meet other developers near me that are also interested in React Native.
+上周我有机会参加了在 Zynga 旧金山办公室举办的 [React Native Meetup](https://www.meetup.com/React-Native-San-Francisco/photos/27168649/#452793854)。大约有200人出席，这里是个结识我附近同样对 React Native 感兴趣的开发者的绝佳场所。
 
 ![](/blog/assets/rnmsf-august-2016-hero.jpg)
 
-I was particularly interested in learning more about how React and React Native are used at companies like Zynga, Netflix, and Airbnb. The agenda for the night would be as follows:
+我尤其感兴趣的是了解像 Zynga、Netflix 和 Airbnb 这样的公司是如何使用 React 和 React Native 的。当晚的议程如下：
 
-- Rapid Prototyping in React
-- Designing APIs for React Native
-- Bridging the Gap: Using React Native in Existing Codebases
+- React 中的快速原型开发
+- 为 React Native 设计 API
+- 弥合鸿沟：在现有代码库中使用 React Native
 
-But first, the event started off with a quick introduction and a brief recap of recent news:
+但首先，活动以快速介绍和近期新闻回顾开始：
 
-- Did you know that React Native is now the [top Java repository on GitHub](https://twitter.com/jamespearce/status/759637111880359937)?
-- [rnpm](https://github.com/rnpm/rnpm) is now part of React Native core! You can now use `react-native link` in place of `rnpm link` to [install libraries with native dependencies](/docs/linking-libraries-ios).
-- The React Native Meetup community is growing fast! There are now over 4,800 developers across a variety of React Native meetup groups all over the globe.
+- 你知道吗，React Native 现已成为 [GitHub 上排名第一的 Java 仓库](https://twitter.com/jamespearce/status/759637111880359937)？
+- [rnpm](https://github.com/rnpm/rnpm) 现已成为 React Native 核心的一部分！你现在可以用 `react-native link` 替代 `rnpm link` 来[安装带有原生依赖的库](/docs/linking-libraries-ios)。
+- React Native Meetup 社区正在快速增长！目前全球各地的 React Native Meetup 组已有超过4,800名开发者。
 
-If [one of these meetups](https://www.meetup.com/find/?allMeetups=false&keywords=react+native&radius=Infinity&userFreeform=San+Francisco%2C+CA&mcId=z94105&mcName=San+Francisco%2C+CA&sort=recommended&eventFilter=mysugg) is held near you, I highly recommend attending!
+如果你附近有[这样的聚会](https://www.meetup.com/find/?allMeetups=false&keywords=react+native&radius=Infinity&userFreeform=San+Francisco%2C+CA&mcId=z94105&mcName=San+Francisco%2C+CA&sort=recommended&eventFilter=mysugg)，我强烈推荐你参加！
 
-## Rapid Prototyping in React at Zynga
+## Zynga 的 React 快速原型开发
 
-The first round of news was followed by a quick introduction by Zynga, our hosts for the evening. Abhishek Chadha talked about how they use React to quickly prototype new experiences on mobile, demoing a quick prototype of a Draw Something-like app. They use a similar approach as React Native, providing access to native APIs via a bridge. This was demonstrated when Abhishek used the device's camera to snap a photo of the audience and then drew a hat on someone's head.
+第一轮新闻之后，Zynga——我们当晚的主办方——做了简短介绍。Abhishek Chadha 讲述了他们如何使用 React 快速原型开发移动新体验，演示了类似 Draw Something 的快速原型应用。他们采用了与 React Native 类似的方式，通过桥接访问原生 API。当 Abhishek 用设备摄像头拍摄了观众照片后，还在一个人的头上画了顶帽子，演示效果十分生动。
 
-## Designing APIs for React Native at Netflix
+## Netflix 的 React Native API 设计
 
-Up next, the first featured talk of the evening. [Clarence Leung](https://twitter.com/clarler), Senior Software Engineer at Netflix, presented his talk on Designing APIs for React Native. First he noted the two main types of libraries one may work on: components such as tab bars and date pickers, and libraries that provide access to native services such as the camera roll or in-app payments. There are two ways one may approach when building a library for use in React Native:
+接下来，是当晚的第一个主题演讲。Netflix 的高级软件工程师 [Clarence Leung](https://twitter.com/clarler) 带来关于为 React Native 设计 API 的分享。首先他指出可能开发的两类库：一类是组件，如标签栏和日期选择器，另一类是提供访问原生服务的库，如相册或应用内支付。构建 React Native 库时可以有两种设计思路：
 
-- Provide platform-specific components
-- A cross-platform library with a similar API for both Android and iOS
+- 提供平台特定的组件
+- 提供跨平台、为 Android 和 iOS 设计相似 API 的库
 
-Each approach has its own considerations, and it’s up to you to determine what works best for your needs.
+每种方法都有其考虑点，需按需选择最合适的方案。
 
-**Approach #1**
+**方案一**
 
-As an example of platform-specific components, Clarence talked about the DatePickerIOS and DatePickerAndroid from core React Native. On iOS, date pickers are rendered as part of the UI and can be easily embedded in an existing view, while date pickers on Android are presented modally. It makes sense to provide separate components in this case.
+以平台特定组件为例，Clarence 提到 React Native 核心的 DatePickerIOS 和 DatePickerAndroid。iOS 上日期选择器作为 UI 一部分渲染，可轻松嵌入现有视图；而 Android 上是以模态呈现，因此分别提供组件是合理的。
 
-**Approach #2**
+**方案二**
 
-Photo pickers, on the other hand, are treated similarly on Android and iOS. There are some slight differences — Android does not group photos into folders like iOS does with Selfies, for example — but those are easily handled using `if` statements and the `Platform` component.
+相反，相册选择器在 Android 和 iOS 上的表现较为相似。虽然有些小差异——比如 Android 不像 iOS 那样将照片分组（如自拍）——这些均可用 `if` 语句和 `Platform` 组件轻松处理。
 
-Regardless of which approach you settle on, it’s a good idea to minimize the API surface and build app-specific libraries. For example, iOS’s In-App Purchase framework supports one-time, consumable purchases, as well as renewable subscriptions. If your app will only need to support consumable purchases, you may get away with dropping support for subscriptions in your cross-platform library.
+无论选择哪种方式，建议尽量缩减 API 设计范围，构建针对应用的专用库。例如，iOS 的应用内购买支持一次性消耗和可续订订阅。如果应用仅需支持消耗型购买，可以剔除跨平台库中的订阅支持。
 
 ![](/blog/assets/rnmsf-august-2016-netflix.jpg)
 
-There was a brief Q&A session at the end of Clarence’s talk. One of the interesting tid bits that came out of it was that around 80% of the React Native code written for these libraries at Netflix is shared across both Android and iOS.
+Clarence 演讲结束后有简短问答环节。一个有趣的点是，Netflix 这些库中写的 React Native 代码约有80%能在 Android 和 iOS 上共享。
 
-## Bridging the Gap, Using React Native in Existing Codebases
+## 弥合鸿沟：在现有代码库中使用 React Native
 
-The final talk of the night was by [Leland Richardson](https://twitter.com/intelligibabble) from Airbnb. The talk was focused on the use of React Native in existing codebases. I already know how easy it is to write a new app from scratch using React Native, so I was very interested to hear about Airbnb’s experience adopting React Native in their existing native apps.
+当晚最后一场演讲由 Airbnb 的 [Leland Richardson](https://twitter.com/intelligibabble) 带来，主题聚焦在如何在已有代码库中使用 React Native。我很熟悉从零开始用 React Native 编写新应用的便利，非常期待听听 Airbnb 在现有原生应用中采用 React Native 的经验。
 
-Leland started off by talking about greenfield apps versus brownfield apps. Greenfield means to start a project without the need to consider any prior work. This is in contrast to brownfield projects where you need to take into account the existing project’s requirements, development processes, and all of the teams various needs.
+Leland 先介绍了“绿地”（Greenfield）与“棕地”（Brownfield）应用。绿地指不考虑任何既有工作的新项目，而棕地则要考虑已有项目的需求、开发流程和团队各种要求。
 
-When you’re working on a greenfield app, the React Native CLI sets up a single repository for both Android and iOS and everything just works. The first challenge against using React Native at Airbnb was the fact that the Android and iOS app each had their own repository. Multi-repo companies have some hurdles to get past before they can adopt React Native.
+对于绿地应用，React Native CLI 会为 Android 和 iOS 建立单一仓库，一切运作顺畅。但 Airbnb 面临的首要挑战是 Android 和 iOS 各自拥有独立仓库。多仓库结构的公司在采用 React Native 之前需克服一定障碍。
 
-To get around this, Airbnb first set up a new repo for the React Native codebase. They used their continuous integration servers to mirror the Android and iOS repos into this new repo. After tests are run and the bundle is built, the build artifacts are synced back to the Android and iOS repos. This allows the mobile engineers to work on native code without altering their development environment. Mobile engineers don't need to install npm, run the packager, or remember to build the JavaScript bundle. The engineers writing actual React Native code do not have to worry about syncing their code across Android and iOS, as they work on the React Native repository directly.
+为此，Airbnb 首先为 React Native 代码库建立了新仓库。他们用 CI 服务器将 Android 和 iOS 仓库镜像到这个新仓库。测试运行并打包后，构建产物同步回原仓库。这样移动端工程师可以在不改变开发环境的情况下开发原生代码，无需安装 npm、运行打包器或记得构建 JavaScript 包。负责编写 React Native 代码的工程师直接在 React Native 仓库工作，无需担心代码同步问题。
 
-This does come with some drawbacks, mainly they could not ship atomic updates. Changes that require a combination of native and JavaScript code would require three separate pull requests, all of which had to be carefully landed. In order to avoid conflicts, CI will fail to land changes back to the Android and iOS repos if master has changed since the build started. This would cause long delays during high commit frequency days (such as when new releases are cut).
+不过，这也带来一些弊端，主要是无法发布原子更新。需要同时修改原生和 JavaScript 代码的改动需提交三份独立 PR，且必须小心合并。为避免冲突，若主分支自构建开始后有变动，CI 会阻止变动同步回 Android 和 iOS 仓库，导致高频提交时延迟增加（如新版本发布期间）。
 
-Airbnb has since moved to a mono repo approach. Fortunately this was already under consideration, and once the Android and iOS teams became comfortable with using React Native they were happy to accelerate the move towards the mono repo.
+Airbnb 后来转向了单体仓库（mono repo）方式。幸运的是，这已有所考虑，且 Android 和 iOS 团队适应 React Native 后乐于加快合并进程。
 
-This has solved most of the issues they had with the split repo approach. Leland did note that this does cause a higher strain on the version control servers, which may be an issue for smaller companies.
+这解决了采用多仓库方案时的大多数问题。Leland 提到，这会增加版本控制服务器负担，可能对小型公司造成困扰。
 
 ![](/blog/assets/rnmsf-august-2016-airbnb.jpg)
 
-### The Navigation Problem
+### 导航问题
 
-The second half of Leland's talk focused on a topic that is dear to me: the Navigation problem in React Native. He talked about the abundance of navigation libraries in React Native, both first party and third party. NavigationExperimental was mentioned as something that seemed promising, but ended up not being well suited for their use case.
+演讲下半场集中讨论一个我非常关心的话题：React Native 中的导航问题。Leland 介绍了丰富的导航库资源，包括官方和第三方。NavigationExperimental 曾被认为是有潜力的，但实际用起来不适合他们的场景。
 
-In fact, none of the existing navigation libraries seem to work well for brownfield apps. A brownfield app requires that the navigation state be fully owned by the native app. For example, if a user’s session expires while a React Native view is being presented, the native app should be able to take over and present a login screen as needed.
+事实上，现有导航库很难满足棕地应用需求。棕地应用要求导航状态完全由原生应用掌控。例如用户会话过期时，在呈现 React Native 视图期间，原生应用应能接管并根据需要展示登录界面。
 
-Airbnb also wanted to avoid replacing native navigation bars with JavaScript versions as part of a transition, as the effect could be jarring. Initially they limited themselves to modally presented views, but this obviously presented a problem when it came to adopting React Native more widely within their apps.
+Airbnb 也希望避免在过渡期间用 JavaScript 版本替换原生导航栏，因为会带来突兀感。最初他们限制为模态视图，这显然限制了 React Native 在其应用中的广泛采用。
 
-They decided that they needed their own library. The library is called `airbnb-navigation`. The library has not yet being open sourced as it is strongly tied to Airbnb’s codebase, but it is something they’d like to release by the end of the year.
+因此他们决定开发自有导航库：`airbnb-navigation`。目前尚未开源，因为紧耦合 Airbnb 代码库，但计划年底前发布。
 
-I won’t go into much detail into the library’s API, but here are some of the key takeaways:
+我不会详细介绍其 API，以下是主要要点：
 
-- One must preregister scenes ahead of time
-- Each scene is displayed within its own `RCTRootView`. They are presented natively on each platform (e.g. `UINavigationController`s are used on iOS).
-- The main `ScrollView` in a scene should be wrapped in a `ScrollScene` component. Doing so allows you to take advantage of native behaviors such as tapping on the status bar to scroll to the top on iOS.
-- Transitions between scenes are handled natively, no need to worry about performance.
-- The Android back button is automatically supported.
-- They can take advantage of View Controller based navigation bar styling via a Navigator.Config UI-less component.
+- 必须预先注册场景
+- 每个场景都在独立的 `RCTRootView` 中显示，在各平台以原生方式呈现（如 iOS 通过 `UINavigationController`）
+- 场景中的主 `ScrollView` 应包装在 `ScrollScene` 组件内，这样可以利用原生行为，如 iOS 点击状态栏自动滚动到顶部
+- 场景切换由原生处理，无需担心性能
+- Android 返回键自动支持
+- 可以通过 Navigator.Config UI-less 组件利用基于视图控制器的导航栏样式
 
-There’s also some considerations to keep in mind:
+同时也需注意：
 
-- The navigation bar is not easily customized in JavaScript, as it is a native component. This is intentional, as using native navigation bars is a hard requirement for this type of library.
-- ScreenProps must be serialized/de-serialized whenever they're sent through the bridge, so care must be taken if sending too much data here.
-- Navigation state is owned by the native app (also a hard requirement for the library), so things like Redux cannot manipulate navigation state.
+- 导航栏为原生组件，不易在 JavaScript 端自定义，这是设计所需，因该库硬性规定必须使用原生导航栏
+- 传递给场景的 ScreenProps 需进行序列化/反序列化，传输大量数据时需谨慎
+- 导航状态由原生应用持有（库的硬性需求），因此 Redux 等不能直接操作导航状态
 
-Leland's talk was also followed by a Q&A session. Overall, Airbnb is satisfied with React Native. They’re interested in using Code Push to fix any issues without going through the App Store, and their engineers love Live Reload, as they don't have to wait for the native app to be rebuilt after every minor change.
+Leland 演讲后也进行了问答环节。总的来说，Airbnb 对 React Native 很满意。他们对使用 Code Push 来修复问题、绕过 App Store 流程感兴趣，且工程师非常喜欢 Live Reload，因为不必每次小改都等待原生应用重建。
 
-## Closing Remarks
+## 结语
 
-The event ended with some additional React Native news:
+活动最后分享了更多 React Native 新闻：
 
-- Deco announced their [React Native Showcase](https://www.decosoftware.com/showcase), and invited everyone to add their app to the list.
-- The recent [documentation overhaul](/blog/2016/07/06/toward-better-documentation) got a shoutout!
-- Devin Abbott, one of the creators of Deco IDE, will be teaching an introductory [React Native course](https://www.decosoftware.com/course).
+- Deco 宣布了他们的 [React Native Showcase](https://www.decosoftware.com/showcase)，并邀请大家将自己的应用加入列表
+- 最近的 [文档大改版](/blog/2016/07/06/toward-better-documentation) 受到赞誉！
+- Deco IDE 联合创始人 Devin Abbott 将开设入门级 [React Native 课程](https://www.decosoftware.com/course)
 
 ![](/blog/assets/rnmsf-august-2016-docs.jpg)
 
-Meetups provide a good opportunity to meet and learn from other developers in the community. I'm looking forward to attending more React Native meetups in the future. If you make it up to one of these, please look out for me and let me know how we can make React Native work better for you!
+聚会是与社区其他开发者交流学习的好机会。我期待未来参加更多 React Native 聚会。如果你也参加了，请认出我，并告诉我怎样才能让 React Native 更好地为你服务！
