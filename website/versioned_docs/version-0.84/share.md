@@ -1,11 +1,11 @@
 ---
 id: share
-title: Share
+title: 分享
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-## Example
+## 示例
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -20,16 +20,16 @@ const ShareExample = () => {
     try {
       const result = await Share.share({
         message:
-          'React Native | A framework for building native apps using React',
+          'React Native | 一个使用 React 构建原生应用的框架',
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
-          // shared with activity type of result.activityType
+          // 已通过 result.activityType 活动类型分享
         } else {
-          // shared
+          // 已分享
         }
       } else if (result.action === Share.dismissedAction) {
-        // dismissed
+        // 已取消
       }
     } catch (error) {
       Alert.alert(error.message);
@@ -38,7 +38,7 @@ const ShareExample = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView>
-        <Button onPress={onShare} title="Share" />
+        <Button onPress={onShare} title="分享" />
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -60,16 +60,16 @@ const ShareExample = () => {
     try {
       const result = await Share.share({
         message:
-          'React Native | A framework for building native apps using React',
+          'React Native | 一个使用 React 构建原生应用的框架',
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
-          // shared with activity type of result.activityType
+          // 已通过 result.activityType 活动类型分享
         } else {
-          // shared
+          // 已分享
         }
       } else if (result.action === Share.dismissedAction) {
-        // dismissed
+        // 已取消
       }
     } catch (error: any) {
       Alert.alert(error.message);
@@ -78,7 +78,7 @@ const ShareExample = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView>
-        <Button onPress={onShare} title="Share" />
+        <Button onPress={onShare} title="分享" />
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -90,9 +90,9 @@ export default ShareExample;
 </TabItem>
 </Tabs>
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `share()`
 
@@ -100,22 +100,22 @@ export default ShareExample;
 static share(content: ShareContent, options?: ShareOptions);
 ```
 
-Open a dialog to share text content.
+打开一个对话框以分享文本内容。
 
-In iOS, returns a Promise which will be invoked with an object containing `action` and `activityType`. If the user dismissed the dialog, the Promise will still be resolved with action being `Share.dismissedAction` and all the other keys being undefined. Note that some share options will not appear or work on the iOS simulator.
+在 iOS 上，返回一个 Promise，该 Promise 会被调用并返回包含 `action` 和 `activityType` 的对象。如果用户关闭了对话框，Promise 仍将以 action 为 `Share.dismissedAction` 并且其他所有键值为 undefined 的对象解析。请注意，在 iOS 模拟器上，某些分享选项可能不会出现或不起作用。
 
-In Android, returns a Promise which will always be resolved with action being `Share.sharedAction`.
+在 Android 上，返回一个 Promise，始终以 action 为 `Share.sharedAction` 的值解析。
 
-**Properties:**
+**属性:**
 
-| Name                                                         | Type   | Description                                                                                                                                                                                                                                                                                                                                                                                  |
-| ------------------------------------------------------------ | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| content <div className="label basic required">Required</div> | object | `message` - a message to share<br/>`url` - a URL to share <div className="label ios">iOS</div><br/>`title` - title of the message <div className="label android">Android</div><hr/>At least one of `url` and `message` is required.                                                                                                                                                          |
-| options                                                      | object | `dialogTitle` <div className="label android">Android</div><br/>`excludedActivityTypes` <div className="label ios">iOS</div><br/>`subject` - a subject to share via email <div className="label ios">iOS</div><br/>`tintColor` <div className="label ios">iOS</div><br/>`anchor` - the node to which the action sheet should be anchored (used for iPad) <div className="label ios">iOS</div> |
+| 名称                                                         | 类型   | 描述                                                                                                                                                                                                                                                                                                                                                                                  |
+| ------------------------------------------------------------ | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| content <div className="label basic required">必填</div>    | object | `message` - 要分享的信息<br/>`url` - 要分享的网址 <div className="label ios">iOS</div><br/>`title` - 信息的标题 <div className="label android">Android</div><hr/>`url` 和 `message` 至少填写一个。                                                                                                                                                                                        |
+| options                                                      | object | `dialogTitle` <div className="label android">Android</div><br/>`excludedActivityTypes` <div className="label ios">iOS</div><br/>`subject` - 用于通过邮件分享的主题 <div className="label ios">iOS</div><br/>`tintColor` <div className="label ios">iOS</div><br/>`anchor` - 用于定位动作表的节点（用于 iPad） <div className="label ios">iOS</div> |
 
 ---
 
-## Properties
+## 属性
 
 ### `sharedAction`
 
@@ -123,7 +123,7 @@ In Android, returns a Promise which will always be resolved with action being `S
 static sharedAction: 'sharedAction';
 ```
 
-The content was successfully shared.
+内容已成功分享。
 
 ---
 
@@ -133,4 +133,4 @@ The content was successfully shared.
 static dismissedAction: 'dismissedAction';
 ```
 
-The dialog has been dismissed.
+对话框已被关闭。

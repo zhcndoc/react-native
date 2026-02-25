@@ -3,6 +3,6 @@ id: global-__DEV__
 title: ✨ __DEV__
 ---
 
-You can use the `__DEV__` pseudo-global variable in the codebase to guard development-only blocks of code.
+你可以在代码库中使用 `__DEV__` 伪全局变量来保护仅在开发环境下执行的代码块。
 
-It is inlined during compilation and gets completely stripped out with the `if` blocks it guards in the minified build.
+它会在编译过程中被内联，并且在压缩构建中会连同它所保护的 `if` 代码块一起被完全剥离。

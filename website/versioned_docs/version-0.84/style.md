@@ -1,13 +1,13 @@
 ---
 id: style
-title: Style
+title: 样式
 ---
 
-With React Native, you style your application using JavaScript. All of the core components accept a prop named `style`. The style names and [values](colors.md) usually match how CSS works on the web, except names are written using camel casing, e.g. `backgroundColor` rather than `background-color`.
+在 React Native 中，你使用 JavaScript 来为应用程序设置样式。所有核心组件都接受一个名为 `style` 的属性。样式名称和[取值](colors.md)通常与网页上的 CSS 用法相匹配，不过名称采用驼峰命名法，例如 `backgroundColor` 而不是 `background-color`。
 
-The `style` prop can be a plain old JavaScript object. That's what we usually use for example code. You can also pass an array of styles - the last style in the array has precedence, so you can use this to inherit styles.
+`style` 属性可以是普通的 JavaScript 对象。这也是我们通常在示例代码中使用的。你也可以传入一个样式数组——数组中最后一个样式优先级最高，所以你可以用它来实现样式继承。
 
-As a component grows in complexity, it is often cleaner to use `StyleSheet.create` to define several styles in one place. Here's an example:
+当组件变得越来越复杂时，通常使用 `StyleSheet.create` 在一个地方定义多个样式会更清晰。下面是一个示例：
 
 ```SnackPlayer name=Style
 import React from 'react';
@@ -41,12 +41,12 @@ const styles = StyleSheet.create({
 export default LotsOfStyles;
 ```
 
-One common pattern is to make your component accept a `style` prop which in turn is used to style subcomponents. You can use this to make styles "cascade" the way they do in CSS.
+一种常见的做法是让你的组件接受一个 `style` 属性，进而用它来为子组件设置样式。你可以利用这种方式让样式实现类似 CSS 的“层叠”效果。
 
-There are a lot more ways to customize the text style. Check out the [Text component reference](text.md) for a complete list.
+还有许多自定义文本样式的方式。请查看 [Text 组件参考](text.md) 以获取完整列表。
 
-Now you can make your text beautiful. The next step in becoming a style expert is to [learn how to control component size](height-and-width.md).
+现在你可以让文本更美观了。成为样式专家的下一步是[学习如何控制组件尺寸](height-and-width.md)。
 
-## Known issues
+## 已知问题
 
-- [react-native#29308](https://github.com/facebook/react-native/issues/29308#issuecomment-792864162): In some cases React Native does not match how CSS works on the web, for example the touch area never extends past the parent view bounds and on Android negative margin is not supported.
+- [react-native#29308](https://github.com/facebook/react-native/issues/29308#issuecomment-792864162)：在某些情况下，React Native 的行为与网页上的 CSS 不一致，例如触摸区域不会超出父视图范围，且在 Android 上不支持负边距。

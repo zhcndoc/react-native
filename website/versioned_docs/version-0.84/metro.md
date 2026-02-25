@@ -3,29 +3,29 @@ id: metro
 title: Metro
 ---
 
-React Native uses [Metro](https://metrobundler.dev/) to build your JavaScript code and assets.
+React Native 使用 [Metro](https://metrobundler.dev/) 来构建你的 JavaScript 代码和资源。
 
-## Configuring Metro
+## 配置 Metro
 
-Configuration options for Metro can be customized in your project's `metro.config.js` file. This can export either:
+Metro 的配置选项可以在你项目的 `metro.config.js` 文件中定制。该文件可以导出以下两种之一：
 
-- **An object (recommended)** that will be merged on top of Metro's internal config defaults.
-- [**A function**](#advanced-using-a-config-function) that will be called with Metro's internal config defaults and should return a final config object.
+- **一个对象（推荐）**，该对象会覆盖 Metro 的内部配置默认值。
+- [**一个函数**](#advanced-using-a-config-function)，该函数接收 Metro 的内部配置默认值作为参数，并应返回最终的配置对象。
 
 :::tip
-Please see [**Configuring Metro**](https://metrobundler.dev/docs/configuration) on the Metro website for documentation on all available config options.
+请参阅 Metro 官网的[**配置 Metro**](https://metrobundler.dev/docs/configuration)文档，了解所有可用的配置选项。
 :::
 
-In React Native, your Metro config should extend either [`@react-native/metro-config`](https://www.npmjs.com/package/@react-native/metro-config) or [`@expo/metro-config`](https://www.npmjs.com/package/@expo/metro-config). These packages contain essential defaults necessary to build and run React Native apps.
+在 React Native 中，你的 Metro 配置应继承自 [`@react-native/metro-config`](https://www.npmjs.com/package/@react-native/metro-config) 或 [`@expo/metro-config`](https://www.npmjs.com/package/@expo/metro-config)。这些包包含了构建和运行 React Native 应用程序所必需的重要默认配置。
 
-Below is the default `metro.config.js` file in a React Native template project:
+下面是 React Native 模板项目中默认的 `metro.config.js` 文件示例：
 
 <!-- prettier-ignore -->
 ```js
 const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
 
 /**
- * Metro configuration
+ * Metro 配置
  * https://metrobundler.dev/docs/configuration
  *
  * @type {import('metro-config').MetroConfig}
@@ -35,14 +35,14 @@ const config = {};
 module.exports = mergeConfig(getDefaultConfig(__dirname), config);
 ```
 
-Metro options you wish to customize can be done so within the `config` object.
+你想自定义的 Metro 选项可以写在 `config` 对象内。
 
-### Advanced: Using a config function
+### 高级用法：使用配置函数
 
-Exporting a config function is an opt-in to managing the final config yourself — **Metro will not apply any internal defaults**. This pattern can be useful when needing to read the base default config object from Metro or to set options dynamically.
+导出一个配置函数相当于你自己管理最终的配置 —— **Metro 不会应用任何内部默认值**。当你需要读取 Metro 提供的基础默认配置对象或动态设置选项时，这种方式非常有用。
 
 :::info
-**From `@react-native/metro-config` 0.72.1**, it is no longer necessary to use a config function to access the complete default config. See the **Tip** section below.
+**从 `@react-native/metro-config` 0.72.1 版本开始**，不再需要通过配置函数来访问完整的默认配置。请看下方的 **提示** 部分。
 :::
 
 <!-- prettier-ignore -->
@@ -66,9 +66,9 @@ module.exports = function (baseConfig) {
 ```
 
 :::tip
-Using a config function is for advanced use cases. A simpler method than the above, e.g. for customising `sourceExts`, would be to read these defaults from `@react-native/metro-config`.
+使用配置函数适合高级用例。一个更简单的方法，比如自定义 `sourceExts`，是直接从 `@react-native/metro-config` 读取默认值。
 
-**Alternative**
+**替代方案**
 
 <!-- prettier-ignore -->
 ```js
@@ -83,9 +83,9 @@ const config = {
 module.exports = mergeConfig(defaultConfig, config);
 ```
 
-**However!**, we recommend copying and editing when overriding these config values — placing the source of truth in your config file.
+**但是！** 我们推荐在覆盖这些配置值时先复制一份并编辑 —— 将配置源头放在你的配置文件中。
 
-✅ **Recommended**
+✅ **推荐做法**
 
 <!-- prettier-ignore -->
 ```js
@@ -98,7 +98,7 @@ const config = {
 
 :::
 
-## Learn more about Metro
+## 了解更多关于 Metro
 
-- [Metro website](https://metrobundler.dev/)
-- [Video: "Metro & React Native DevX" talk at App.js 2023](https://www.youtube.com/watch?v=c9D4pg0y9cI)
+- [Metro 官网](https://metrobundler.dev/)
+- [视频：“Metro 和 React Native 开发体验” — App.js 2023 讲座](https://www.youtube.com/watch?v=c9D4pg0y9cI)

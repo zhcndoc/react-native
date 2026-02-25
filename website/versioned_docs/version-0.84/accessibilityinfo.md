@@ -1,11 +1,11 @@
 ---
 id: accessibilityinfo
-title: AccessibilityInfo
+title: AccessibilityInfo（辅助功能信息）
 ---
 
-Sometimes it's useful to know whether or not the device has a screen reader that is currently active. The `AccessibilityInfo` API is designed for this purpose. You can use it to query the current state of the screen reader as well as to register to be notified when the state of the screen reader changes.
+有时候，了解设备当前是否启用了屏幕阅读器是很有用的。`AccessibilityInfo` API 就是为此设计的。您可以使用它查询屏幕阅读器的当前状态，以及注册监听屏幕阅读器状态变化的通知。
 
-## Example
+## 示例
 
 ```SnackPlayer name=AccessibilityInfo%20Example&supportedPlatforms=android,ios
 import React, {useState, useEffect} from 'react';
@@ -47,10 +47,10 @@ const App = () => {
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <Text style={styles.status}>
-          The reduce motion is {reduceMotionEnabled ? 'enabled' : 'disabled'}.
+          减少动画功能当前{reduceMotionEnabled ? '已启用' : '已禁用'}。
         </Text>
         <Text style={styles.status}>
-          The screen reader is {screenReaderEnabled ? 'enabled' : 'disabled'}.
+          屏幕阅读器当前{screenReaderEnabled ? '已启用' : '已禁用'}。
         </Text>
       </SafeAreaView>
     </SafeAreaProvider>
@@ -73,9 +73,9 @@ export default App;
 
 ---
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `addEventListener()`
 
@@ -88,18 +88,18 @@ static addEventListener(
 ): EmitterSubscription;
 ```
 
-Add an event handler. Supported events:
+添加事件处理程序。支持的事件：
 
-| Event name                                                                               | Description                                                                                                                                                                                                                                                                                              |
-| ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `accessibilityServiceChanged`<br/><div className="label two-lines android">Android</div> | Fires when some services such as TalkBack, other Android assistive technologies, and third-party accessibility services are enabled. The argument to the event handler is a boolean. The boolean is `true` when a some accessibility services is enabled and `false` otherwise.                          |
-| `announcementFinished`<br/><div className="label two-lines ios">iOS</div>                | Fires when the screen reader has finished making an announcement. The argument to the event handler is a dictionary with these keys:<ul><li>`announcement`: The string announced by the screen reader.</li><li>`success`: A boolean indicating whether the announcement was successfully made.</li></ul> |
-| `boldTextChanged`<br/><div className="label two-lines ios">iOS</div>                     | Fires when the state of the bold text toggle changes. The argument to the event handler is a boolean. The boolean is `true` when bold text is enabled and `false` otherwise.                                                                                                                             |
-| `grayscaleChanged`<br/><div className="label two-lines ios">iOS</div>                    | Fires when the state of the gray scale toggle changes. The argument to the event handler is a boolean. The boolean is `true` when a gray scale is enabled and `false` otherwise.                                                                                                                         |
-| `invertColorsChanged`<br/><div className="label two-lines ios">iOS</div>                 | Fires when the state of the invert colors toggle changes. The argument to the event handler is a boolean. The boolean is `true` when invert colors is enabled and `false` otherwise.                                                                                                                     |
-| `reduceMotionChanged`                                                                    | Fires when the state of the reduce motion toggle changes. The argument to the event handler is a boolean. The boolean is `true` when a reduce motion is enabled (or when "Transition Animation Scale" in "Developer options" is "Animation off") and `false` otherwise.                                  |
-| `reduceTransparencyChanged`<br/><div className="label two-lines ios">iOS</div>           | Fires when the state of the reduce transparency toggle changes. The argument to the event handler is a boolean. The boolean is `true` when reduce transparency is enabled and `false` otherwise.                                                                                                         |
-| `screenReaderChanged`                                                                    | Fires when the state of the screen reader changes. The argument to the event handler is a boolean. The boolean is `true` when a screen reader is enabled and `false` otherwise.                                                                                                                          |
+| 事件名                                                                                  | 描述                                                                                                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `accessibilityServiceChanged`<br/><div className="label two-lines android">Android</div> | 当某些服务（如 TalkBack、其他 Android 辅助技术以及第三方辅助服务）启用时触发。传递给事件处理程序的参数是布尔值。当某些辅助服务启用时，该布尔值为 `true`，否则为 `false`。                                                                                                                        |
+| `announcementFinished`<br/><div className="label two-lines ios">iOS</div>                | 当屏幕阅读器完成一次播报时触发。传递给事件处理程序的参数是一个包含以下键的字典：<ul><li>`announcement`：屏幕阅读器播报的字符串。</li><li>`success`：一个表示播报是否成功的布尔值。</li></ul>                                                                                                         |
+| `boldTextChanged`<br/><div className="label two-lines ios">iOS</div>                     | 当粗体文本开关的状态变化时触发。传递给事件处理程序的参数是布尔值。开启粗体文本时为 `true`，关闭时为 `false`。                                                                                                                                                                                        |
+| `grayscaleChanged`<br/><div className="label two-lines ios">iOS</div>                    | 当灰度开关的状态变化时触发。传递给事件处理程序的参数是布尔值。开启灰度时为 `true`，关闭时为 `false`。                                                                                                                                                                                              |
+| `invertColorsChanged`<br/><div className="label two-lines ios">iOS</div>                 | 当颜色反转开关的状态变化时触发。传递给事件处理程序的参数是布尔值。开启颜色反转时为 `true`，关闭时为 `false`。                                                                                                                                                                                        |
+| `reduceMotionChanged`                                                                    | 当减少动画开关状态变化时触发。传递给事件处理程序的参数是布尔值。开启减少动画时（或者“开发者选项”中的“过渡动画比例”被设置为“动画关闭”）为 `true`，否则为 `false`。                                                                                                                               |
+| `reduceTransparencyChanged`<br/><div className="label two-lines ios">iOS</div>           | 当减少透明度开关状态变化时触发。传递给事件处理程序的参数是布尔值。开启减少透明度时为 `true`，关闭时为 `false`。                                                                                                                                                                                        |
+| `screenReaderChanged`                                                                    | 当屏幕阅读器的状态变化时触发。传递给事件处理程序的参数是布尔值。开启屏幕阅读器时为 `true`，关闭时为 `false`。                                                                                                                                                                                        |
 
 ---
 
@@ -109,7 +109,7 @@ Add an event handler. Supported events:
 static announceForAccessibility(announcement: string);
 ```
 
-Post a string to be announced by the screen reader.
+发布一个字符串，由屏幕阅读器进行播报。
 
 ---
 
@@ -122,14 +122,14 @@ static announceForAccessibilityWithOptions(
 );
 ```
 
-Post a string to be announced by the screen reader with modification options. By default announcements will interrupt any existing speech, but on iOS they can be queued behind existing speech by setting `queue` to `true` in the options object.
+发布一个字符串，由屏幕阅读器播报，并可带有修改选项。默认情况下，新的播报将打断当前的播报；但在 iOS 上，通过设置 `options` 对象中的 `queue` 为 `true`，可将播报排队在现有播报之后。
 
-**Parameters:**
+**参数:**
 
-| Name                                                              | Type   | Description                                                                                  |
-| ----------------------------------------------------------------- | ------ | -------------------------------------------------------------------------------------------- |
-| announcement <div className="label basic required">Required</div> | string | The string to be announced                                                                   |
-| options <div className="label basic required">Required</div>      | object | `queue` - queue the announcement behind existing speech <div className="label ios">iOS</div> |
+| 名称                                                              | 类型    | 描述                                                                                       |
+| ----------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------ |
+| announcement <div className="label basic required">必填</div>       | string  | 要播报的字符串                                                                             |
+| options <div className="label basic required">必填</div>            | object  | `queue` - 将播报排队在现有语音播报之后 <div className="label ios">iOS</div>                |
 
 ---
 
@@ -139,14 +139,14 @@ Post a string to be announced by the screen reader with modification options. By
 static getRecommendedTimeoutMillis(originalTimeout: number): Promise<number>;
 ```
 
-Gets the timeout in millisecond that the user needs.
-This value is set in "Time to take action (Accessibility timeout)" of "Accessibility" settings.
+获取用户所需的超时毫秒数。
+该值是在“辅助功能”设置中的“采取行动的时间（辅助功能超时）”中设置的。
 
-**Parameters:**
+**参数：**
 
-| Name                                                                 | Type   | Description                                                                           |
-| -------------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------- |
-| originalTimeout <div className="label basic required">Required</div> | number | The timeout to return if "Accessibility timeout" is not set. Specify in milliseconds. |
+| 名称                                                                | 类型     | 描述                                                                         |
+| ------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------- |
+| originalTimeout <div className="label basic required">必填</div>      | number   | 如果“辅助功能超时”未设置，返回的超时时间，以毫秒为单位。                     |
 
 ---
 
@@ -156,10 +156,10 @@ This value is set in "Time to take action (Accessibility timeout)" of "Accessibi
 static isAccessibilityServiceEnabled(): Promise<boolean>;
 ```
 
-Check whether any accessibility service is enabled. This includes TalkBack but also any third-party accessibility app that may be installed. To only check whether TalkBack is enabled, use [isScreenReaderEnabled](#isscreenreaderenabled). Returns a promise which resolves to a boolean. The result is `true` when some accessibility services is enabled and `false` otherwise.
+检查是否启用了任何辅助功能服务。这包括 TalkBack 以及任何已安装的第三方辅助应用。若只想检查 TalkBack 是否启用，请使用 [isScreenReaderEnabled](#isscreenreaderenabled)。返回一个 Promise，解析为布尔值。若启用了某些辅助服务，结果为 `true`，否则为 `false`。
 
 :::note
-Please use [`isScreenReaderEnabled`](#isscreenreaderenabled) if you only want to check the status of TalkBack.
+如果您只想检查 TalkBack 状态，请使用 [`isScreenReaderEnabled`](#isscreenreaderenabled)。
 :::
 
 ---
@@ -167,10 +167,10 @@ Please use [`isScreenReaderEnabled`](#isscreenreaderenabled) if you only want to
 ### `isBoldTextEnabled()` <div className="label ios">iOS</div>
 
 ```tsx
-static isBoldTextEnabled(): Promise<boolean>:
+static isBoldTextEnabled(): Promise<boolean>;
 ```
 
-Query whether a bold text is currently enabled. Returns a promise which resolves to a boolean. The result is `true` when bold text is enabled and `false` otherwise.
+查询当前是否启用了粗体文本。返回一个 Promise，解析为布尔值。启用粗体文本时结果为 `true`，否则为 `false`。
 
 ---
 
@@ -180,7 +180,7 @@ Query whether a bold text is currently enabled. Returns a promise which resolves
 static isGrayscaleEnabled(): Promise<boolean>;
 ```
 
-Query whether grayscale is currently enabled. Returns a promise which resolves to a boolean. The result is `true` when grayscale is enabled and `false` otherwise.
+查询当前是否启用了灰度模式。返回一个 Promise，解析为布尔值。启用灰度时结果为 `true`，否则为 `false`。
 
 ---
 
@@ -190,7 +190,7 @@ Query whether grayscale is currently enabled. Returns a promise which resolves t
 static isInvertColorsEnabled(): Promise<boolean>;
 ```
 
-Query whether invert colors is currently enabled. Returns a promise which resolves to a boolean. The result is `true` when invert colors is enabled and `false` otherwise.
+查询当前是否启用了颜色反转。返回一个 Promise，解析为布尔值。启用颜色反转时结果为 `true`，否则为 `false`。
 
 ---
 
@@ -200,7 +200,7 @@ Query whether invert colors is currently enabled. Returns a promise which resolv
 static isReduceMotionEnabled(): Promise<boolean>;
 ```
 
-Query whether reduce motion is currently enabled. Returns a promise which resolves to a boolean. The result is `true` when reduce motion is enabled and `false` otherwise.
+查询当前是否启用了减少动画。返回一个 Promise，解析为布尔值。启用减少动画时结果为 `true`，否则为 `false`。
 
 ---
 
@@ -210,7 +210,7 @@ Query whether reduce motion is currently enabled. Returns a promise which resolv
 static isReduceTransparencyEnabled(): Promise<boolean>;
 ```
 
-Query whether reduce transparency is currently enabled. Returns a promise which resolves to a boolean. The result is `true` when a reduce transparency is enabled and `false` otherwise.
+查询当前是否启用了减少透明度。返回一个 Promise，解析为布尔值。启用减少透明度时结果为 `true`，否则为 `false`。
 
 ---
 
@@ -220,7 +220,7 @@ Query whether reduce transparency is currently enabled. Returns a promise which 
 static isScreenReaderEnabled(): Promise<boolean>;
 ```
 
-Query whether a screen reader is currently enabled. Returns a promise which resolves to a boolean. The result is `true` when a screen reader is enabled and `false` otherwise.
+查询当前是否启用了屏幕阅读器。返回一个 Promise，解析为布尔值。启用屏幕阅读器时结果为 `true`，否则为 `false`。
 
 ---
 
@@ -230,26 +230,26 @@ Query whether a screen reader is currently enabled. Returns a promise which reso
 static prefersCrossFadeTransitions(): Promise<boolean>;
 ```
 
-Query whether reduce motion and prefer cross-fade transitions settings are currently enabled. Returns a promise which resolves to a boolean. The result is `true` when prefer cross-fade transitions is enabled and `false` otherwise.
+查询减少动画和偏好交叉淡入淡出转场设置是否启用。返回一个 Promise，解析为布尔值。启用偏好交叉淡入淡出转场时结果为 `true`，否则为 `false`。
 
 ---
 
 ### 🗑️ `setAccessibilityFocus()`
 
-:::warning Deprecated
-Prefer using `sendAccessibilityEvent` with eventType `focus` instead.
+:::warning 已废弃
+推荐使用事件类型为 `focus` 的 `sendAccessibilityEvent` 代替。
 :::
 
 ```tsx
 static setAccessibilityFocus(reactTag: number);
 ```
 
-Set accessibility focus to a React component.
+将无障碍焦点设置到某个 React 组件上。
 
-On Android, this calls `UIManager.sendAccessibilityEvent` method with passed `reactTag` and `UIManager.AccessibilityEventTypes.typeViewFocused` arguments.
+在 Android 上，此方法调用 `UIManager.sendAccessibilityEvent`，传入指定的 `reactTag` 以及 `UIManager.AccessibilityEventTypes.typeViewFocused`。
 
 :::note
-Make sure that any `View` you want to receive the accessibility focus has `accessible={true}`.
+确保任何你希望接收辅助焦点的 `View` 具有属性 `accessible={true}`。
 :::
 
 ---
@@ -260,13 +260,13 @@ Make sure that any `View` you want to receive the accessibility focus has `acces
 static sendAccessibilityEvent(host: HostInstance, eventType: AccessibilityEventTypes);
 ```
 
-Imperatively trigger an accessibility event on a React component, like changing the focused element for a screen reader.
+对某个 React 组件主动触发辅助功能事件，比如更改屏幕阅读器的焦点元素。
 
 :::note
-Make sure that any `View` you want to receive the accessibility focus has `accessible={true}`.
+确保任何你希望接收辅助焦点的 `View` 具有属性 `accessible={true}`。
 :::
 
-| Name                                                           | Type                    | Description                                                                                                            |
-| -------------------------------------------------------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| host <div className="label basic required">Required</div>      | HostInstance            | The component ref to send the event to.                                                                                |
-| eventType <div className="label basic required">Required</div> | AccessibilityEventTypes | One of `'click'` (Android only), `'focus'`, `'viewHoverEnter'` (Android only), or `'windowStateChange'` (Android only) |
+| 名称                                                              | 类型                         | 描述                                                                                      |
+| ----------------------------------------------------------------- | ---------------------------- | ----------------------------------------------------------------------------------------- |
+| host <div className="label basic required">必填</div>              | HostInstance                 | 发送事件的组件引用                                                                        |
+| eventType <div className="label basic required">必填</div>         | AccessibilityEventTypes      | 事件类型之一，`'click'`（仅 Android），`'focus'`，`'viewHoverEnter'`（仅 Android），或`'windowStateChange'`（仅 Android） |

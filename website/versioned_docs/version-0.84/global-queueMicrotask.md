@@ -4,7 +4,7 @@ title: queueMicrotask
 ---
 
 :::warning
-🚧 This page is work in progress, so please refer to the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/Window/queueMicrotask) for more information.
+🚧 本页面正在建设中，请查阅 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/Window/queueMicrotask) 以获取更多信息。
 :::
 
-The global `queueMicrotask` function, as defined in Web specifications.
+全局的 `queueMicrotask` 函数，定义于 Web 规范中。

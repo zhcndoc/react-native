@@ -1,35 +1,35 @@
 ---
 id: upgrading
-title: Upgrading to new versions
+title: 升级到新版本
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-Upgrading to new versions of React Native will give you access to more APIs, views, developer tools and other goodies. Upgrading requires a small amount of effort, but we try to make it straightforward for you.
+升级到新的 React Native 版本将让您使用更多的 API、视图、开发工具及其他好东西。升级需要一些努力，但我们尽力让它对您来说简单明了。
 
-## Expo projects
+## Expo 项目
 
-Upgrading your Expo project to a new version of React Native requires updating the `react-native`, `react`, and `expo` package versions in your `package.json` file. Expo recommends upgrading SDK versions incrementally, one at a time. Doing so will help you pinpoint breakages and issues that arise during the upgrade process. See the [Upgrading Expo SDK Walkthrough](https://docs.expo.dev/workflow/upgrading-expo-sdk-walkthrough/) for up-to-date information about upgrading your project.
+将您的 Expo 项目升级到新版本的 React Native 需要更新 `package.json` 文件中的 `react-native`、`react` 和 `expo` 包版本。Expo 推荐逐步升级 SDK 版本，一次升级一个版本。这样做有助于您定位升级过程中出现的破坏和问题。有关升级项目的最新信息，请参阅[升级 Expo SDK 操作指南](https://docs.expo.dev/workflow/upgrading-expo-sdk-walkthrough/)。
 
-## React Native projects
+## React Native 项目
 
-Because typical React Native projects are essentially made up of an Android project, an iOS project, and a JavaScript project, upgrading can be rather tricky. The [Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) is a web tool to help you out when upgrading your apps by providing the full set of changes happening between any two versions. It also shows comments on specific files to help understanding why that change is needed.
+由于典型的 React Native 项目实质上由 Android 项目、iOS 项目和 JavaScript 项目组成，升级可能相当棘手。[Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) 是一个网页工具，可以帮助您升级应用，提供任意两个版本之间的全部变更内容。它还会针对特定文件显示注释，帮助理解为何需要这些变更。
 
-### 1. Select the versions
+### 1. 选择版本
 
-You first need to select from and to which version you wish to upgrade, by default the latest major versions are selected. After selecting you can click the button "Show me how to upgrade".
+您首先需要选择要从哪个版本升级到哪个版本，默认选择的是最新的主版本。选择后，您可以点击“Show me how to upgrade”按钮。
 
-💡 Major updates will show a "useful content" section on the top with links to help you out when upgrading.
+💡 主要更新会在顶部显示“有用内容”部分，附有帮助您升级的链接。
 
-### 2. Upgrade dependencies
+### 2. 升级依赖
 
-The first file that is shown is the `package.json`, it's good to update the dependencies that are showing in there. For example, if `react-native` and `react` appears as changes then you can install it in your project by running following commands:
+第一个显示的文件是 `package.json`，建议更新其中显示的依赖。例如，如果 `react-native` 和 `react` 出现在变更中，则可以通过运行以下命令在项目中安装它们：
 
 <Tabs groupId="package-manager" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>
 <TabItem value="npm">
 
 ```shell
-# {{VERSION}} and {{REACT_VERSION}} are the release versions showing in the diff
+# {{VERSION}} 和 {{REACT_VERSION}} 是差异中显示的发布版本
 npm install react-native@{{VERSION}}
 npm install react@{{REACT_VERSION}}
 ```
@@ -38,7 +38,7 @@ npm install react@{{REACT_VERSION}}
 <TabItem value="yarn">
 
 ```shell
-# {{VERSION}} and {{REACT_VERSION}} are the release versions showing in the diff
+# {{VERSION}} 和 {{REACT_VERSION}} 是差异中显示的发布版本
 yarn add react-native@{{VERSION}}
 yarn add react@{{REACT_VERSION}}
 ```
@@ -46,12 +46,12 @@ yarn add react@{{REACT_VERSION}}
 </TabItem>
 </Tabs>
 
-### 3. Upgrade your project files
+### 3. 升级项目文件
 
-The new release may contain updates to other files that are generated when you run `npx react-native init`, those files are listed after the `package.json` in the [Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) page. If there aren't other changes then you only need to rebuild the project to continue developing. In case there are changes you need to manually apply them into your project.
+新版本可能包含对通过运行 `npx react-native init` 生成的其他文件的更新，这些文件在 [Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) 页面中位于 `package.json` 之后列出。如果没有其他变更，您只需重新构建项目即可继续开发。如果有变更，则需要手动将它们应用到您的项目中。
 
-### Troubleshooting
+### 故障排除
 
-#### I have done all the changes but my app is still using an old version
+#### 我已经做了所有更改，但我的应用依然使用旧版本
 
-These sort of errors are usually related to caching, it's recommended to install [react-native-clean-project](https://github.com/pmadruga/react-native-clean-project) to clear all your project's cache and then you can run it again.
+此类错误通常与缓存有关，建议安装 [react-native-clean-project](https://github.com/pmadruga/react-native-clean-project) 来清除您项目的全部缓存，然后再重新运行。

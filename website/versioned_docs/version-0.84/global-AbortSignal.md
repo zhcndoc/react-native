@@ -4,7 +4,7 @@ title: AbortSignal
 ---
 
 :::warning
-🚧 This page is work in progress, so please refer to the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) for more information.
+🚧 本页面正在建设中，如需更多信息请参阅 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal)。
 :::
 
-The global `AbortSignal` class, as defined in Web specifications.
+全局的 `AbortSignal` 类，定义于 Web 规范中。

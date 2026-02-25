@@ -1,8 +1,8 @@
 ---
 id: checkbox
-title: '❌ CheckBox'
+title: '❌ 复选框（CheckBox）'
 ---
 
-:::danger Removed from React Native
-Use one of the [community packages](https://reactnative.directory/?search=checkbox) instead.
+:::danger 从 React Native 中移除
+请改用以下[社区包](https://reactnative.directory/?search=checkbox)之一。
 :::

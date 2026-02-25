@@ -1,57 +1,57 @@
 ---
 id: running-on-device
-title: Running On Device
+title: 设备上运行
 hide_table_of_contents: true
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-It's always a good idea to test your app on an actual device before releasing it to your users. This document will guide you through the necessary steps to run your React Native app on a device and to get it ready for production.
+在发布应用给用户之前，在真实设备上测试你的应用总是一个好主意。本文档将指导你完成在设备上运行 React Native 应用并准备生产环境的必要步骤。
 
 :::tip
-If you used `create-expo-app` to set up your project, you can run your app on a device in Expo Go by scanning the QR code that is displayed when you run `npm start`. Refer to the Expo guide for [running your project on your device](https://docs.expo.dev/get-started/expo-go/) for more information.
+如果你使用 `create-expo-app` 创建了项目，可以通过扫描运行 `npm start` 时显示的二维码，在 Expo Go 中在设备上运行你的应用。详细信息请参阅 Expo 指南：[在设备上运行你的项目](https://docs.expo.dev/get-started/expo-go/)。
 :::
 
 <Tabs groupId="platform" queryString defaultValue={constants.defaultPlatform} values={constants.platforms} className="pill-tabs">
 <TabItem value="android">
 
-## Running your app on Android devices
+## 在 Android 设备上运行你的应用
 
-#### Development OS
+#### 开发操作系统
 
 <Tabs groupId="os" queryString defaultValue={constants.defaultOs} values={constants.oses} className="pill-tabs">
 <TabItem value="macos">
 
 [//]: # 'macOS, Android'
 
-### 1. Enable Debugging over USB
+### 1. 启用 USB 调试
 
-Most Android devices can only install and run apps downloaded from Google Play, by default. You will need to enable USB Debugging on your device in order to install your app during development.
+大多数 Android 设备默认只允许安装和运行从 Google Play 下载的应用。你需要在设备上启用 USB 调试，才能在开发过程中安装你的应用。
 
-To enable USB debugging on your device, you will first need to enable the "Developer options" menu by going to **Settings** → **About phone** → **Software information** and then tapping the `Build number` row at the bottom seven times. You can then go back to **Settings** → **Developer options** to enable "USB debugging".
+启用 USB 调试之前，需先启用“开发者选项”菜单：进入 **设置** → **关于手机** → **软件信息**，然后连续点击底部的 `版本号` 七次。之后返回 **设置** → **开发者选项**，开启“USB 调试”。
 
-### 2. Plug in your device via USB
+### 2. 使用 USB 连接设备
 
-Let's now set up an Android device to run our React Native projects. Go ahead and plug in your device via USB to your development machine.
+现在来设置 Android 设备以运行我们的 React Native 项目。将设备通过 USB 连接到开发机器。
 
-Now check that your device is properly connecting to ADB, the Android Debug Bridge, by running `adb devices`.
+然后运行 `adb devices` 检查设备是否正确连接到 ADB（Android 调试桥）。
 
 ```shell
 $ adb devices
 List of devices attached
-emulator-5554 offline   # Google emulator
-14ed2fcc device         # Physical device
+emulator-5554 offline   # 谷歌模拟器
+14ed2fcc device         # 物理设备
 ```
 
-Seeing `device` in the right column means the device is connected. You must have **only one device connected** at a time.
+右侧显示 `device` 表示设备已连接。**一次只能连接一个设备**。
 
 :::note
-If you see `unauthorized` in the list you will need to run `adb reverse tcp:8081 tcp:8081` and press allow USB debugging on the device.
+如果设备列表显示 `unauthorized`，你需要运行 `adb reverse tcp:8081 tcp:8081`，并在设备上允许 USB 调试。
 :::
 
-### 3. Run your app
+### 3. 运行你的应用
 
-From the root of your project; type the following in your command prompt to install and launch your app on the device:
+在项目根目录，在命令行输入以下命令以安装并启动应用：
 
 <Tabs groupId="package-manager" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>
 <TabItem value="npm">
@@ -71,84 +71,84 @@ yarn android
 </Tabs>
 
 :::note
-If you get a "bridge configuration isn't available" error, see [Using adb reverse](running-on-device.md#method-1-using-adb-reverse-recommended).
+如果出现 “bridge configuration isn't available” 错误，请参考 [使用 adb reverse](running-on-device.md#method-1-using-adb-reverse-recommended)。
 :::
 
 :::tip
-You can also use the `React Native CLI` to generate and run a `release` build (e.g. from the root of your project: `yarn android --mode release`).
+你也可以使用 `React Native CLI` 生成并运行 `release` 版本（例如，在项目根目录输入：`yarn android --mode release`）。
 :::
 
-<h2>Connecting to the development server</h2>
+<h2>连接开发服务器</h2>
 
-You can also iterate quickly on a device by connecting to the development server running on your development machine. There are several ways of accomplishing this, depending on whether you have access to a USB cable or a Wi-Fi network.
+你还可以通过连接开发服务器来快速迭代设备上的应用。这有多种方式，取决于你是否使用 USB 线或使用 Wi-Fi 网络。
 
-### Method 1: Using adb reverse (recommended)
+### 方法 1：使用 adb reverse（推荐）
 
-You can use this method if your device is running Android 5.0 (Lollipop) or newer, it has USB debugging enabled, and it is connected via USB to your development machine.
+如果你的设备运行 Android 5.0（Lollipop）或以上版本，已开启 USB 调试，并通过 USB 连接到开发机器，你可以使用此方法。
 
-Run the following in a command prompt:
+在命令行运行：
 
 ```shell
-$ adb -s <device name> reverse tcp:8081 tcp:8081
+$ adb -s <设备名称> reverse tcp:8081 tcp:8081
 ```
 
-To find the device name, run the following adb command:
+使用以下命令查询设备名称：
 
 ```shell
 $ adb devices
 ```
 
-You can now enable Fast Refresh from the [Dev Menu](debugging.md#opening-the-dev-menu). Your app will reload whenever your JavaScript code has changed.
+现在你可以在 [开发菜单](debugging.md#opening-the-dev-menu) 中启用快速刷新。每当 JavaScript 代码变更时，应用会自动重新加载。
 
-### Method 2: Connect via Wi-Fi
+### 方法 2：通过 Wi-Fi 连接
 
-You can also connect to the development server over Wi-Fi. You'll first need to install the app on your device using a USB cable, but once that has been done you can debug wirelessly by following these instructions. You'll need your development machine's current IP address before proceeding.
+你也可以通过 Wi-Fi 连接开发服务器。先使用 USB 线安装应用，完成后即可无线调试。需要先获得开发机器当前 IP 地址。
 
-You can find the IP address in **System Settings (or System Preferences)** → **Network**.
+你可在 **系统设置（或系统偏好设置）** → **网络** 中查看 IP 地址。
 
-1. Make sure your laptop and your phone are on the **same** Wi-Fi network.
-2. Open your React Native app on your device.
-3. You'll see a [red screen with an error](debugging.md#logbox). This is OK. The following steps will fix that.
-4. Open the in-app [Dev Menu](debugging.md#opening-the-dev-menu).
-5. Go to **Dev Settings** → **Debug server host & port for device**.
-6. Type in your machine's IP address and the port of the local dev server (e.g. `10.0.1.1:8081`).
-7. Go back to the **Dev Menu** and select **Reload JS**.
+1. 确保笔记本和手机处于**同一 Wi-Fi 网络**。
+2. 在设备上打开 React Native 应用。
+3. 你会看到一个带错误信息的[红屏](debugging.md#logbox)，这是正常的，后续步骤会解决。
+4. 打开应用内的 [开发菜单](debugging.md#opening-the-dev-menu)。
+5. 进入 **开发设置** → **设备的调试服务器主机与端口**。
+6. 输入你的开发机器 IP 与本地服务器端口（如 `10.0.1.1:8081`）。
+7. 返回 **开发菜单**，选择 **重新加载 JS**。
 
-You can now enable Fast Refresh from the [Dev Menu](debugging.md#opening-the-dev-menu). Your app will reload whenever your JavaScript code has changed.
+现在你可以从 [开发菜单](debugging.md#opening-the-dev-menu) 启用快速刷新。每当 JavaScript 代码更新时，应用会自动重新加载。
 
-## Building your app for production
+## 为生产构建你的应用
 
-You have built a great app using React Native, and you are now itching to release it in the Play Store. The process is the same as any other native Android app, with some additional considerations to take into account. Follow the guide for [generating a signed APK](signed-apk-android.md) to learn more.
+你已用 React Native 构建了一个优秀的应用，迫不及待想发布到 Play 商店。其流程与其他本地 Android 应用相同，但有一些额外注意事项。请参阅 [生成签名 APK](signed-apk-android.md) 指南了解详情。
 
 </TabItem>
 <TabItem value="windows">
 
 [//]: # 'Windows, Android'
 
-### 1. Enable Debugging over USB
+### 1. 启用 USB 调试
 
-Most Android devices can only install and run apps downloaded from Google Play, by default. You will need to enable USB Debugging on your device in order to install your app during development.
+大多数 Android 设备默认只允许安装和运行从 Google Play 下载的应用。你需要在设备上启用 USB 调试，才能在开发过程中安装你的应用。
 
-To enable USB debugging on your device, you will first need to enable the "Developer options" menu by going to **Settings** → **About phone** → **Software information** and then tapping the `Build number` row at the bottom seven times. You can then go back to **Settings** → **Developer options** to enable "USB debugging".
+启用 USB 调试之前，需先启用“开发者选项”菜单：进入 **设置** → **关于手机** → **软件信息**，然后连续点击底部的 `版本号` 七次。之后返回 **设置** → **开发者选项**，开启“USB 调试”。
 
-### 2. Plug in your device via USB
+### 2. 使用 USB 连接设备
 
-Let's now set up an Android device to run our React Native projects. Go ahead and plug in your device via USB to your development machine.
+现在来设置 Android 设备以运行我们的 React Native 项目。将设备通过 USB 连接到开发机器。
 
-Now check that your device is properly connecting to ADB, the Android Debug Bridge, by running `adb devices`.
+然后运行 `adb devices` 检查设备是否正确连接到 ADB（Android 调试桥）。
 
 ```shell
 $ adb devices
 List of devices attached
-emulator-5554 offline   # Google emulator
-14ed2fcc device         # Physical device
+emulator-5554 offline   # 谷歌模拟器
+14ed2fcc device         # 物理设备
 ```
 
-Seeing `device` in the right column means the device is connected. You must have **only one device connected** at a time.
+右侧显示 `device` 表示设备已连接。**一次只能连接一个设备**。
 
-### 3. Run your app
+### 3. 运行你的应用
 
-From the root of your project, run the following in your command prompt to install and launch your app on the device:
+在项目根目录，在命令行输入以下命令以安装并启动应用：
 
 <Tabs groupId="package-manager" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>
 <TabItem value="npm">
@@ -168,67 +168,67 @@ yarn android
 </Tabs>
 
 :::tip
-You can also use the `React Native CLI` to generate and run a `release` build (e.g. from the root of your project: `yarn android --mode release`).
+你也可以使用 `React Native CLI` 生成并运行 `release` 版本（例如，在项目根目录输入：`yarn android --mode release`）。
 :::
 
-<h2>Connecting to the development server</h2>
+<h2>连接开发服务器</h2>
 
-You can also iterate quickly on a device by connecting to the development server running on your development machine. There are several ways of accomplishing this, depending on whether you have access to a USB cable or a Wi-Fi network.
+你还可以通过连接开发服务器来快速迭代设备上的应用。这有多种方式，取决于你是否使用 USB 线或使用 Wi-Fi 网络。
 
-### Method 1: Using adb reverse (recommended)
+### 方法 1：使用 adb reverse（推荐）
 
-You can use this method if your device is running Android 5.0 (Lollipop) or newer, it has USB debugging enabled, and it is connected via USB to your development machine.
+如果你的设备运行 Android 5.0（Lollipop）或以上版本，已开启 USB 调试，并通过 USB 连接到开发机器，你可以使用此方法。
 
-Run the following in a command prompt:
+在命令行运行：
 
 ```shell
-$ adb -s <device name> reverse tcp:8081 tcp:8081
+$ adb -s <设备名称> reverse tcp:8081 tcp:8081
 ```
 
-To find the device name, run the following adb command:
+使用以下命令查询设备名称：
 
 ```shell
 $ adb devices
 ```
 
-You can now enable Fast Refresh from the [Dev Menu](debugging.md#opening-the-dev-menu). Your app will reload whenever your JavaScript code has changed.
+现在你可以在 [开发菜单](debugging.md#opening-the-dev-menu) 中启用快速刷新。每当 JavaScript 代码变更时，应用会自动重新加载。
 
-### Method 2: Connect via Wi-Fi
+### 方法 2：通过 Wi-Fi 连接
 
-You can also connect to the development server over Wi-Fi. You'll first need to install the app on your device using a USB cable, but once that has been done you can debug wirelessly by following these instructions. You'll need your development machine's current IP address before proceeding.
+你也可以通过 Wi-Fi 连接开发服务器。先使用 USB 线安装应用，完成后即可无线调试。需要先获得开发机器当前 IP 地址。
 
-Open the command prompt and type `ipconfig` to find your machine's IP address ([more info](https://windows.microsoft.com/en-us/windows/using-command-line-tools-networking-information)).
+打开命令提示符并输入 `ipconfig` 获取机器 IP 地址（[更多信息](https://windows.microsoft.com/en-us/windows/using-command-line-tools-networking-information)）。
 
-1. Make sure your laptop and your phone are on the **same** Wi-Fi network.
-2. Open your React Native app on your device.
-3. You'll see a [red screen with an error](debugging.md#logbox). This is OK. The following steps will fix that.
-4. Open the in-app [Dev Menu](debugging.md#opening-the-dev-menu).
-5. Go to **Dev Settings** → **Debug server host & port for device**.
-6. Type in your machine's IP address and the port of the local dev server (e.g. `10.0.1.1:8081`).
-7. Go back to the **Dev Menu** and select **Reload JS**.
+1. 确保笔记本和手机处于**同一 Wi-Fi 网络**。
+2. 在设备上打开 React Native 应用。
+3. 你会看到一个带错误信息的[红屏](debugging.md#logbox)，这是正常的，后续步骤会解决。
+4. 打开应用内的 [开发菜单](debugging.md#opening-the-dev-menu)。
+5. 进入 **开发设置** → **设备的调试服务器主机与端口**。
+6. 输入你的开发机器 IP 与本地服务器端口（如 `10.0.1.1:8081`）。
+7. 返回 **开发菜单**，选择 **重新加载 JS**。
 
-You can now enable Fast Refresh from the [Dev Menu](debugging.md#opening-the-dev-menu). Your app will reload whenever your JavaScript code has changed.
+现在你可以从 [开发菜单](debugging.md#opening-the-dev-menu) 启用快速刷新。每当 JavaScript 代码更新时，应用会自动重新加载。
 
-## Building your app for production
+## 为生产构建你的应用
 
-You have built a great app using React Native, and you are now itching to release it in the Play Store. The process is the same as any other native Android app, with some additional considerations to take into account. Follow the guide for [generating a signed APK](signed-apk-android.md) to learn more.
+你已用 React Native 构建了一个优秀的应用，迫不及待想发布到 Play 商店。其流程与其他本地 Android 应用相同，但有一些额外注意事项。请参阅 [生成签名 APK](signed-apk-android.md) 指南了解详情。
 
 </TabItem>
 <TabItem value="linux">
 
 [//]: # 'Linux, Android'
 
-### 1. Enable Debugging over USB
+### 1. 启用 USB 调试
 
-Most Android devices can only install and run apps downloaded from Google Play, by default. You will need to enable USB Debugging on your device in order to install your app during development.
+大多数 Android 设备默认只允许安装和运行从 Google Play 下载的应用。你需要在设备上启用 USB 调试，才能在开发过程中安装你的应用。
 
-To enable USB debugging on your device, you will first need to enable the "Developer options" menu by going to **Settings** → **About phone** → **Software information** and then tapping the `Build number` row at the bottom seven times. You can then go back to **Settings** → **Developer options** to enable "USB debugging".
+启用 USB 调试之前，需先启用“开发者选项”菜单：进入 **设置** → **关于手机** → **软件信息**，然后连续点击底部的 `版本号` 七次。之后返回 **设置** → **开发者选项**，开启“USB 调试”。
 
-### 2. Plug in your device via USB
+### 2. 使用 USB 连接设备
 
-Let's now set up an Android device to run our React Native projects. Go ahead and plug in your device via USB to your development machine.
+现在来设置 Android 设备以运行我们的 React Native 项目。将设备通过 USB 连接到开发机器。
 
-Next, check the manufacturer code by using `lsusb` (on mac, you must first [install lsusb](https://github.com/jlhonora/lsusb)). `lsusb` should output something like this:
+接下来，使用 `lsusb` 检查厂商代码（Mac 需先[安装 lsusb](https://github.com/jlhonora/lsusb)）。`lsusb` 返回类似：
 
 ```bash
 $ lsusb
@@ -241,9 +241,9 @@ Bus 004 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
 Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 ```
 
-These lines represent the USB devices currently connected to your machine.
+这些是当前连接设备的 USB 信息。
 
-You want the line that represents your phone. If you're in doubt, try unplugging your phone and running the command again:
+找到代表你的手机的那一行。若不确定，拔掉手机后重试：
 
 ```bash
 $ lsusb
@@ -255,38 +255,34 @@ Bus 004 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
 Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 ```
 
-You'll see that after removing the phone, the line which has the phone model ("Motorola PCS" in this case) disappeared from the list. This is the line that we care about.
+可见带手机型号（此例中为 “Motorola PCS”）那一行已消失，即为关注对象。
 
 `Bus 001 Device 003: ID 22b8:2e76 Motorola PCS`
 
-From the above line, you want to grab the first four digits from the device ID:
+从上述信息取设备 ID 的前四位：`22b8:2e76`，即取 `22b8`，代表 Motorola。
 
-`22b8:2e76`
-
-In this case, it's `22b8`. That's the identifier for Motorola.
-
-You'll need to input this into your udev rules in order to get up and running:
+将其写入 udev 规则以使用设备：
 
 ```shell
 echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="22b8", MODE="0666", GROUP="plugdev"' | sudo tee /etc/udev/rules.d/51-android-usb.rules
 ```
 
-Make sure that you replace `22b8` with the identifier you get in the above command.
+注意替换 `22b8` 为你设备对应的 ID。
 
-Now check that your device is properly connecting to ADB, the Android Debug Bridge, by running `adb devices`.
+然后运行 `adb devices` 检查设备是否正确连接到 ADB。
 
 ```shell
 $ adb devices
 List of devices attached
-emulator-5554 offline   # Google emulator
-14ed2fcc device         # Physical device
+emulator-5554 offline   # 谷歌模拟器
+14ed2fcc device         # 物理设备
 ```
 
-Seeing `device` in the right column means the device is connected. You must have **only one device connected** at a time.
+右侧显示 `device` 表示设备已连接。**一次只能连接一个设备**。
 
-### 3. Run your app
+### 3. 运行你的应用
 
-From the root of your project, type the following in your command prompt to install and launch your app on the device:
+在项目根目录，输入以下命令以安装并启动应用：
 
 <Tabs groupId="package-manager" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>
 <TabItem value="npm">
@@ -306,54 +302,54 @@ yarn android
 </Tabs>
 
 :::note
-If you get a "bridge configuration isn't available" error, see [Using adb reverse](running-on-device.md#method-1-using-adb-reverse-recommended).
+如果出现 “bridge configuration isn't available” 错误，请参考 [使用 adb reverse](running-on-device.md#method-1-using-adb-reverse-recommended)。
 :::
 
 :::tip
-You can also use the `React Native CLI` to generate and run a `release` build (e.g. from the root of your project: `yarn android --mode release`).
+你也可以使用 `React Native CLI` 生成并运行 `release` 版本（例如，在项目根目录输入：`yarn android --mode release`）。
 :::
 
-<h2>Connecting to the development server</h2>
+<h2>连接开发服务器</h2>
 
-You can also iterate quickly on a device by connecting to the development server running on your development machine. There are several ways of accomplishing this, depending on whether you have access to a USB cable or a Wi-Fi network.
+你还可以通过连接开发服务器来快速迭代设备上的应用。这有多种方式，取决于你是否使用 USB 线或使用 Wi-Fi 网络。
 
-### Method 1: Using adb reverse (recommended)
+### 方法 1：使用 adb reverse（推荐）
 
-You can use this method if your device is running Android 5.0 (Lollipop) or newer, it has USB debugging enabled, and it is connected via USB to your development machine.
+如果你的设备运行 Android 5.0（Lollipop）或以上版本，已开启 USB 调试，并通过 USB 连接到开发机器，你可以使用此方法。
 
-Run the following in a command prompt:
+在命令行运行：
 
 ```shell
-$ adb -s <device name> reverse tcp:8081 tcp:8081
+$ adb -s <设备名称> reverse tcp:8081 tcp:8081
 ```
 
-To find the device name, run the following adb command:
+使用以下命令查询设备名称：
 
 ```shell
 $ adb devices
 ```
 
-You can now enable Fast Refresh from the [Dev Menu](debugging.md#opening-the-dev-menu). Your app will reload whenever your JavaScript code has changed.
+现在你可以在 [开发菜单](debugging.md#opening-the-dev-menu) 中启用快速刷新。每当 JavaScript 代码变更时，应用会自动重新加载。
 
-### Method 2: Connect via Wi-Fi
+### 方法 2：通过 Wi-Fi 连接
 
-You can also connect to the development server over Wi-Fi. You'll first need to install the app on your device using a USB cable, but once that has been done you can debug wirelessly by following these instructions. You'll need your development machine's current IP address before proceeding.
+你也可以通过 Wi-Fi 连接开发服务器。先使用 USB 线安装应用，完成后即可无线调试。需要先获得开发机器当前 IP 地址。
 
-Open a terminal and type `/sbin/ifconfig` to find your machine's IP address.
+打开终端，输入 `/sbin/ifconfig` 查找本机 IP。
 
-1. Make sure your laptop and your phone are on the **same** Wi-Fi network.
-2. Open your React Native app on your device.
-3. You'll see a [red screen with an error](debugging.md#logbox). This is OK. The following steps will fix that.
-4. Open the in-app [Dev Menu](debugging.md#opening-the-dev-menu).
-5. Go to **Dev Settings** → **Debug server host & port for device**.
-6. Type in your machine's IP address and the port of the local dev server (e.g. `10.0.1.1:8081`).
-7. Go back to the **Dev Menu** and select **Reload JS**.
+1. 确保笔记本和手机处于**同一 Wi-Fi 网络**。
+2. 在设备上打开 React Native 应用。
+3. 你会看到一个带错误信息的[红屏](debugging.md#logbox)，这是正常的，后续步骤会解决。
+4. 打开应用内的 [开发菜单](debugging.md#opening-the-dev-menu)。
+5. 进入 **开发设置** → **设备的调试服务器主机与端口**。
+6. 输入你的开发机器 IP 与本地服务器端口（如 `10.0.1.1:8081`）。
+7. 返回 **开发菜单**，选择 **重新加载 JS**。
 
-You can now enable Fast Refresh from the [Dev Menu](debugging.md#opening-the-dev-menu). Your app will reload whenever your JavaScript code has changed.
+现在你可以从 [开发菜单](debugging.md#opening-the-dev-menu) 启用快速刷新。每当 JavaScript 代码更新时，应用会自动重新加载。
 
-## Building your app for production
+## 为生产构建你的应用
 
-You have built a great app using React Native, and you are now itching to release it in the Play Store. The process is the same as any other native Android app, with some additional considerations to take into account. Follow the guide for [generating a signed APK](signed-apk-android.md) to learn more.
+你已用 React Native 构建了一个优秀的应用，迫不及待想发布到 Play 商店。其流程与其他本地 Android 应用相同，但有一些额外注意事项。请参阅 [生成签名 APK](signed-apk-android.md) 指南了解详情。
 
 </TabItem>
 </Tabs>
@@ -361,76 +357,76 @@ You have built a great app using React Native, and you are now itching to releas
 </TabItem>
 <TabItem value="ios">
 
-## Running your app on iOS devices
+## 在 iOS 设备上运行你的应用
 
-#### Development OS
+#### 开发操作系统
 
 <Tabs groupId="os" queryString defaultValue={constants.defaultOs} values={constants.oses} className="pill-tabs">
 <TabItem value="macos">
 
 [//]: # 'macOS, iOS'
 
-### 1. Plug in your device via USB
+### 1. 使用 USB 连接设备
 
-Connect your iOS device to your Mac using a USB to Lightning or USB-C cable. Navigate to the `ios` folder in your project, then open the `.xcodeproj` file, or if you are using CocoaPods open `.xcworkspace`, within it using Xcode.
+使用 USB 转 Lightning 或 USB-C 线将 iOS 设备连接到 Mac。进入项目中的 `ios` 文件夹，用 Xcode 打开 `.xcodeproj` 文件，或者如果使用 CocoaPods，打开 `.xcworkspace`。
 
-If this is your first time running an app on your iOS device, you may need to register your device for development. Open the **Product** menu from Xcode's menubar, then go to **Destination**. Look for and select your device from the list. Xcode will then register your device for development.
+如果是第一次在该 iOS 设备运行应用，可能需要注册设备。点击 Xcode 菜单栏的 **Product**，然后选择 **Destination**，在列表中找到并选择你的设备，Xcode 会注册设备用于开发。
 
-### 2. Configure code signing
+### 2. 配置代码签名
 
-Register for an [Apple Developer account](https://developer.apple.com/) if you don't have one yet.
+如果尚未注册，[注册 Apple 开发者账户](https://developer.apple.com/)。
 
-Select your project in the Xcode Project Navigator, then select your main target (it should share the same name as your project). Look for the "General" tab. Go to "Signing" and make sure your Apple Developer account or team is selected under the Team dropdown. Do the same for the tests target (it ends with Tests, and is below your main target).
+在 Xcode 项目导航中选择你的项目，再选择主 Target（与项目名称相同）。进入 “General” 标签页，找到 “Signing” 部分，确保在 Team 下拉列表中选择了你的 Apple 开发者账号或团队。测试 Target 也同样设置（名字以 Tests 结尾，位于主 Target 下方）。
 
-**Repeat** this step for the **Tests** target in your project.
+**重复**上述步骤，针对项目中的**测试 Targets**。
 
 ![](/docs/assets/RunningOnDeviceCodeSigning.png)
 
-### 3. Build and Run your app
+### 3. 构建并运行应用
 
-If everything is set up correctly, your device will be listed as the build target in the Xcode toolbar, and it will also appear in the Devices pane (<kbd>Shift ⇧</kbd> + <kbd>Cmd ⌘</kbd> + <kbd>2</kbd>). You can now press the **Build and run** button (<kbd>Cmd ⌘</kbd> + <kbd>R</kbd>) or select **Run** from the **Product** menu. Your app will launch on your device shortly.
+若设置正确，Xcode 工具栏会显示你的设备作为构建目标，设备也会显示在设备面板中（快捷键 <kbd>Shift ⇧</kbd> + <kbd>Cmd ⌘</kbd> + <kbd>2</kbd>）。点击 **构建并运行** 按钮（快捷键 <kbd>Cmd ⌘</kbd> + <kbd>R</kbd>）或从 **Product** 菜单选择 **Run**，应用很快会在设备上启动。
 
 ![](/docs/assets/RunningOnDeviceReady.png)
 
 :::note
-If you run into any issues, please take a look at Apple's [Launching Your App on a Device](https://developer.apple.com/library/content/documentation/IDEs/Conceptual/AppDistributionGuide/LaunchingYourApponDevices/LaunchingYourApponDevices.html#//apple_ref/doc/uid/TP40012582-CH27-SW4) docs.
+如有问题，请参阅苹果官方文档 [在设备上启动你的应用](https://developer.apple.com/library/content/documentation/IDEs/Conceptual/AppDistributionGuide/LaunchingYourApponDevices/LaunchingYourApponDevices.html#//apple_ref/doc/uid/TP40012582-CH27-SW4)。
 :::
 
-<h2>Connecting to the development server</h2>
+<h2>连接开发服务器</h2>
 
-You can also iterate quickly on a device using the development server. You only have to be on the same Wi-Fi network as your computer. Shake your device to open the [Dev Menu](debugging.md#opening-the-dev-menu), then enable Fast Refresh. Your app will reload whenever your JavaScript code has changed.
+你也可以在设备上通过连接开发服务器快速迭代。只需保证设备和电脑处于同一 Wi-Fi 网络。摇晃设备打开[开发菜单](debugging.md#opening-the-dev-menu)，然后启用快速刷新。每当 JavaScript 变更时，应用会自动重新加载。
 
 ![](/docs/assets/debugging-dev-menu-083.jpg)
 
-### Troubleshooting
+### 故障排除
 
 :::tip
-If you have any issues, ensure that your Mac and device are on the same network and can reach each other. Many open wireless networks with captive portals are configured to prevent devices from reaching other devices on the network. You may use your device's Personal Hotspot feature in this case. You may also share your internet (Wi-Fi/Ethernet) connection from your Mac to your device via USB and connect to the bundler through this tunnel for very high transfer speeds.
+如遇问题，请确认 Mac 和设备处于同一网络且互通。许多公共无线网络带有认证门户，会阻止设备相互访问。此时你可以开启手机的个人热点功能。也可以通过 USB 从 Mac 共享网络连接给设备，从而通过该通道连接到打包工具，传输速度极快。
 :::
 
-When trying to connect to the development server you might get a [red screen with an error](debugging.md#logbox) saying:
+如果连接开发服务器时出现[红屏错误](debugging.md#logbox)如：
 
 :::note
-Connection to `http://localhost:8081/debugger-proxy?role=client` timed out. Are you running node proxy? If you are running on the device, check if you have the right IP address in `RCTWebSocketExecutor.m`.
+连接 `http://localhost:8081/debugger-proxy?role=client` 超时。请确认你是否运行了节点代理？如果是在设备上运行，请检查 `RCTWebSocketExecutor.m` 中 IP 地址是否正确。
 :::
 
-To solve this issue check the following points.
+请检查以下项：
 
-#### 1. Wi-Fi network.
+#### 1. Wi-Fi 网络
 
-Make sure your laptop and your phone are on the **same** Wi-Fi network.
+确保你的笔记本和手机处于**同一 Wi-Fi 网络**。
 
-#### 2. IP address
+#### 2. IP 地址
 
-Make sure that the build script detected the IP address of your machine correctly (e.g. `10.0.1.123`).
+确认构建脚本正确检测到你的机器 IP（如 `10.0.1.123`）。
 
 ![](/docs/assets/XcodeBuildIP.png)
 
-Open the **Report navigator** tab, select the last **Build** and search for `IP=` followed by an IP address. The IP address which gets embedded in the app should match your machines IP address.
+打开 **报告导航器**，选择最后一次 **构建**，搜索 `IP=` 后跟的 IP 地址。内嵌在应用中的 IP 地址应与机器 IP 一致。
 
-## Building your app for production
+## 为生产构建你的应用
 
-You have built a great app using React Native, and you are now itching to release it in the App Store. The process is the same as any other native iOS app, with some additional considerations to take into account. Follow the guide for [publishing to the Apple App Store](publishing-to-app-store.md) to learn more.
+你已用 React Native 构建了一个优秀的应用，迫不及待想发布到 App Store。其流程与其他本地 iOS 应用相同，但有一些额外注意事项。请参阅 [发布到 Apple App Store](publishing-to-app-store.md) 指南了解详情。
 
 </TabItem>
 <TabItem value="windows">
@@ -438,7 +434,7 @@ You have built a great app using React Native, and you are now itching to releas
 [//]: # 'Windows, iOS'
 
 :::info
-A Mac is required in order to build your app for iOS devices. Alternatively, you can refer to our [environment setup guide](environment-setup) to learn how to build your app using Expo CLI, which will allow you to run your app using the Expo client app.
+构建 iOS 应用需要使用 Mac。或者，你可以参考我们的 [环境搭建指南](environment-setup)，了解如何使用 Expo CLI 构建应用，这样可以使用 Expo 客户端运行应用。
 :::
 
 </TabItem>
@@ -447,7 +443,7 @@ A Mac is required in order to build your app for iOS devices. Alternatively, you
 [//]: # 'Linux, iOS'
 
 :::info
-A Mac is required in order to build your app for iOS devices. Alternatively, you can refer to our [environment setup guide](environment-setup) to learn how to build your app using Expo CLI, which will allow you to run your app using the Expo client app.
+构建 iOS 应用需要使用 Mac。或者，你可以参考我们的 [环境搭建指南](environment-setup)，了解如何使用 Expo CLI 构建应用，这样可以使用 Expo 客户端运行应用。
 :::
 
 </TabItem>

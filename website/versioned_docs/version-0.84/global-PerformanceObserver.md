@@ -3,24 +3,24 @@ id: global-PerformanceObserver
 title: PerformanceObserver
 ---
 
-The global [`PerformanceObserver`](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver) class, as defined in Web specifications.
+全局的 [`PerformanceObserver`](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver) 类，定义于 Web 规范中。
 
-## Example
+## 示例
 
 ```ts
 const observer = new PerformanceObserver(
   (list, observer, options) => {
     for (const entry of list.getEntries()) {
       console.log(
-        'Received entry with type',
+        '接收到的条目类型',
         entry.entryType,
-        'and name',
+        '名称为',
         entry.name,
-        'that started at',
+        '开始时间为',
         entry.startTime,
-        'and took',
+        '耗时',
         entry.duration,
-        'ms',
+        '毫秒',
       );
     }
   },
@@ -31,28 +31,28 @@ observer.observe({entryTypes: ['mark', 'measure']});
 
 ---
 
-# Reference
+# 参考
 
-## Constructor
+## 构造函数
 
 ### `PerformanceObserver()`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver/PerformanceObserver).
+参见 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver/PerformanceObserver)。
 
-## Static properties
+## 静态属性
 
 ### `supportedEntryTypes`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver/supportedEntryTypes).
+参见 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver/supportedEntryTypes)。
 
-Returns `['mark', 'measure', 'event', 'longtask', 'resource']`.
+返回 `['mark', 'measure', 'event', 'longtask', 'resource']`。
 
-## Instance methods
+## 实例方法
 
 ### `observe()`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver/observe).
+参见 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver/observe)。
 
 ### `disconnect()`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver/disconnect).
+参见 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver/disconnect)。

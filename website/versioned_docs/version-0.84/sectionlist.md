@@ -3,22 +3,22 @@ id: sectionlist
 title: SectionList
 ---
 
-A performant interface for rendering sectioned lists, supporting the most handy features:
+一个高性能的分段列表渲染接口，支持最实用的功能：
 
-- Fully cross-platform.
-- Configurable viewability callbacks.
-- List header support.
-- List footer support.
-- Item separator support.
-- Section header support.
-- Section separator support.
-- Heterogeneous data and item rendering support.
-- Pull to Refresh.
-- Scroll loading.
+- 完全跨平台。
+- 可配置的视图可见性回调。
+- 列表头支持。
+- 列表尾支持。
+- 项目分隔符支持。
+- 分段头支持。
+- 分段分隔符支持。
+- 支持异构数据和项目渲染。
+- 下拉刷新。
+- 滚动加载。
 
-If you don't need section support and want a simpler interface, use [`<FlatList>`](flatlist.md).
+如果你不需要分段支持且想要一个更简单的接口，使用 [`<FlatList>`](flatlist.md)。
 
-## Example
+## 示例
 
 ```SnackPlayer name=SectionList%20Example
 import React from 'react';
@@ -27,20 +27,20 @@ import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const DATA = [
   {
-    title: 'Main dishes',
-    data: ['Pizza', 'Burger', 'Risotto'],
+    title: '主菜',
+    data: ['披萨', '汉堡', '烩饭'],
   },
   {
-    title: 'Sides',
-    data: ['French Fries', 'Onion Rings', 'Fried Shrimps'],
+    title: '配菜',
+    data: ['薯条', '洋葱圈', '炸虾'],
   },
   {
-    title: 'Drinks',
-    data: ['Water', 'Coke', 'Beer'],
+    title: '饮料',
+    data: ['水', '可乐', '啤酒'],
   },
   {
-    title: 'Desserts',
-    data: ['Cheese Cake', 'Ice Cream'],
+    title: '甜点',
+    data: ['芝士蛋糕', '冰淇淋'],
   },
 ];
 
@@ -86,62 +86,62 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-This is a convenience wrapper around [`<VirtualizedList>`](virtualizedlist.md), and thus inherits its props (as well as those of [`<ScrollView>`](scrollview.md)) that aren't explicitly listed here, along with the following caveats:
+这是 [`<VirtualizedList>`](virtualizedlist.md) 的一个便捷包装，因此继承了其属性（以及 [`<ScrollView>`](scrollview.md) 的属性），未在此处显式列出的属性仍然可用，同时需注意以下事项：
 
-- Internal state is not preserved when content scrolls out of the render window. Make sure all your data is captured in the item data or external stores like Flux, Redux, or Relay.
-- This is a `PureComponent` which means that it will not re-render if `props` remain shallow-equal. Make sure that everything your `renderItem` function depends on is passed as a prop (e.g. `extraData`) that is not `===` after updates, otherwise your UI may not update on changes. This includes the `data` prop and parent component state.
-- In order to constrain memory and enable smooth scrolling, content is rendered asynchronously offscreen. This means it's possible to scroll faster than the fill rate and momentarily see blank content. This is a tradeoff that can be adjusted to suit the needs of each application, and we are working on improving it behind the scenes.
-- By default, the list looks for a `key` prop on each item and uses that for the React key. Alternatively, you can provide a custom `keyExtractor` prop.
-
----
-
-# Reference
-
-## Props
-
-### [VirtualizedList Props](virtualizedlist.md#props)
-
-Inherits [VirtualizedList Props](virtualizedlist.md#props).
+- 当内容滚动出渲染窗口时，内部状态不会被保留。确保所有数据都存储在项目数据或外部存储（如 Flux、Redux 或 Relay）中。
+- 这是一个 `PureComponent`，意味着如果 `props` 浅比较相等则不会重新渲染。确保你 `renderItem` 函数依赖的一切都通过 props 传递（例如 `extraData`），且更新后不能是浅相等，否则 UI 可能不会更新。这包括 `data` 属性和父组件状态。
+- 为了限制内存并实现流畅滚动，内容异步在屏幕外渲染。可能会出现滚动速度超过渲染速度，暂时看到空白内容的情况。这是可以调节的折中方案，我们正在后台改进。
+- 默认情况下，列表会查找每个项目的 `key` 属性作为 React 的 key。你也可以提供自定义的 `keyExtractor` 属性。
 
 ---
 
-### <div className="label required basic">Required</div>**`renderItem`**
+# 参考
 
-Default renderer for every item in every section. Can be over-ridden on a per-section basis. Should return a React element.
+## 属性
 
-| Type     |
+### [VirtualizedList 属性](virtualizedlist.md#props)
+
+继承 [VirtualizedList 属性](virtualizedlist.md#props)。
+
+---
+
+### <div className="label required basic">必需</div>**`renderItem`**
+
+每个分段中的每个项目的默认渲染器。可针对每个分段单独覆盖。应返回一个 React 元素。
+
+| 类型     |
 | -------- |
 | function |
 
-The render function will be passed an object with the following keys:
+渲染函数将接收一个带有以下键的对象：
 
-- 'item' (object) - the item object as specified in this section's `data` key
-- 'index' (number) - Item's index within the section.
-- 'section' (object) - The full section object as specified in `sections`.
-- 'separators' (object) - An object with the following keys:
-  - 'highlight' (function) - `() => void`
-  - 'unhighlight' (function) - `() => void`
-  - 'updateProps' (function) - `(select, newProps) => void`
-    - 'select' (enum) - possible values are 'leading', 'trailing'
-    - 'newProps' (object)
+- 'item' (对象) - 此分段 `data` 中指定的项目对象
+- 'index' (数字) - 项目在分段内的索引。
+- 'section' (对象) - 指定的完整分段对象。
+- 'separators' (对象) - 包含以下键的对象：
+  - 'highlight' (函数) - `() => void`
+  - 'unhighlight' (函数) - `() => void`
+  - 'updateProps' (函数) - `(select, newProps) => void`
+    - 'select' (枚举) - 可能值为 'leading' 或 'trailing'
+    - 'newProps' (对象)
 
 ---
 
-### <div className="label required basic">Required</div>**`sections`**
+### <div className="label required basic">必需</div>**`sections`**
 
-The actual data to render, akin to the `data` prop in [`FlatList`](flatlist.md).
+实际要渲染的数据，类似于 [`FlatList`](flatlist.md) 中的 `data` 属性。
 
-| Type                                        |
+| 类型                                        |
 | ------------------------------------------- |
-| array of [Section](sectionlist.md#section)s |
+| [Section](sectionlist.md#section) 数组      |
 
 ---
 
 ### `extraData`
 
-A marker property for telling the list to re-render (since it implements `PureComponent`). If any of your `renderItem`, Header, Footer, etc. functions depend on anything outside of the `data` prop, stick it here and treat it immutably.
+用于通知列表重新渲染的标记属性（因为它实现了 `PureComponent`）。如果你的 `renderItem`、Header、Footer 等函数依赖于 `data` 属性之外的任何东西，请将它放在这里且保持不可变。
 
-| Type |
+| 类型 |
 | ---- |
 | any  |
 
@@ -149,9 +149,9 @@ A marker property for telling the list to re-render (since it implements `PureCo
 
 ### `initialNumToRender`
 
-How many items to render in the initial batch. This should be enough to fill the screen but not much more. Note these items will never be unmounted as part of the windowed rendering in order to improve perceived performance of scroll-to-top actions.
+初始批量渲染的项目数量。应足够填满屏幕，但不要过多。注意，这些项目不会随窗口渲染被卸载，以提升滚动到顶部动作的感知性能。
 
-| Type   | Default |
+| 类型   | 默认值 |
 | ------ | ------- |
 | number | `10`    |
 
@@ -159,9 +159,9 @@ How many items to render in the initial batch. This should be enough to fill the
 
 ### `inverted`
 
-Reverses the direction of scroll. Uses scale transforms of -1.
+反转滚动方向。使用 -1 的缩放变换。
 
-| Type    | Default |
+| 类型    | 默认值 |
 | ------- | ------- |
 | boolean | `false` |
 
@@ -169,19 +169,19 @@ Reverses the direction of scroll. Uses scale transforms of -1.
 
 ### `ItemSeparatorComponent`
 
-Rendered in between each item, but not at the top or bottom. By default, `highlighted`, `section`, and `[leading/trailing][Item/Section]` props are provided. `renderItem` provides `separators.highlight`/`unhighlight` which will update the `highlighted` prop, but you can also add custom props with `separators.updateProps`. Can be a React Component (e.g. `SomeComponent`), or a React element (e.g. `<SomeComponent />`).
+渲染在每个项目之间，但不在顶部或底部。默认会提供 `highlighted`、`section` 和 `[leading/trailing][Item/Section]` 属性。`renderItem` 提供 `separators.highlight` / `unhighlight` 来更新 `highlighted` 属性，也可以通过 `separators.updateProps` 添加自定义属性。可为 React 组件（例如 `SomeComponent`）或 React 元素（例如 `<SomeComponent />`）。
 
-| Type                         |
+| 类型                         |
 | ---------------------------- |
-| component, function, element |
+| 组件，函数，元素             |
 
 ---
 
 ### `keyExtractor`
 
-Used to extract a unique key for a given item at the specified index. Key is used for caching and as the React key to track item re-ordering. The default extractor checks `item.key`, then `item.id`, and then falls back to using the index, like React does. Note that this sets keys for each item, but each overall section still needs its own key.
+用于从指定索引的给定项目中提取唯一键。键用于缓存以及作为 React key 用于跟踪项目重新排序。默认提取器检查 `item.key`，然后是 `item.id`，最后使用索引，类似 React。注意，这设置的是每个项目的键，每个整体分段仍需自己的 key。
 
-| Type                                    |
+| 类型                                    |
 | --------------------------------------- |
 | (item: object, index: number) => string |
 
@@ -189,49 +189,49 @@ Used to extract a unique key for a given item at the specified index. Key is use
 
 ### `ListEmptyComponent`
 
-Rendered when the list is empty. Can be a React Component (e.g. `SomeComponent`), or a React element (e.g. `<SomeComponent />`).
+列表为空时渲染。可为 React 组件（例如 `SomeComponent`）或 React 元素（例如 `<SomeComponent />`）。
 
-| Type               |
+| 类型               |
 | ------------------ |
-| component, element |
+| 组件，元素         |
 
 ---
 
 ### `ListFooterComponent`
 
-Rendered at the very end of the list. Can be a React Component (e.g. `SomeComponent`), or a React element (e.g. `<SomeComponent />`).
+渲染在列表的最末端。可为 React 组件（例如 `SomeComponent`）或 React 元素（例如 `<SomeComponent />`）。
 
-| Type               |
+| 类型               |
 | ------------------ |
-| component, element |
+| 组件，元素         |
 
 ---
 
 ### `ListHeaderComponent`
 
-Rendered at the very beginning of the list. Can be a React Component (e.g. `SomeComponent`), or a React element (e.g. `<SomeComponent />`).
+渲染在列表的最开头。可为 React 组件（例如 `SomeComponent`）或 React 元素（例如 `<SomeComponent />`）。
 
-| Type               |
+| 类型               |
 | ------------------ |
-| component, element |
+| 组件，元素         |
 
 ---
 
 ### `onRefresh`
 
-If provided, a standard RefreshControl will be added for "Pull to Refresh" functionality. Make sure to also set the `refreshing` prop correctly. To offset the RefreshControl from the top (e.g. by 100 pts), use `progressViewOffset={100}`.
+如果提供，将添加标准的 RefreshControl 用于“下拉刷新”功能。确保正确设置 `refreshing` 属性。若需向下偏移 RefreshControl（例如 100 点），使用 `progressViewOffset={100}`。
 
-| Type     |
+| 类型     |
 | -------- |
-| function |
+| 函数      |
 
 ---
 
 ### `onViewableItemsChanged`
 
-Called when the viewability of rows changes, as defined by the `viewabilityConfig` prop.
+当行的视图可见性发生变化时调用，依据 `viewabilityConfig` 属性定义。
 
-| Type                                                                                                  |
+| 类型                                                                                                  |
 | ----------------------------------------------------------------------------------------------------- |
 | `md (callback: {changed: [ViewToken](viewtoken)[], viewableItems: [ViewToken](viewtoken)[]}) => void` |
 
@@ -239,9 +239,9 @@ Called when the viewability of rows changes, as defined by the `viewabilityConfi
 
 ### `refreshing`
 
-Set this true while waiting for new data from a refresh.
+设置为 true 表示等待新数据刷新中。
 
-| Type    | Default |
+| 类型    | 默认值  |
 | ------- | ------- |
 | boolean | `false` |
 
@@ -250,12 +250,12 @@ Set this true while waiting for new data from a refresh.
 ### `removeClippedSubviews`
 
 :::warning
-Using this property may lead to bugs (missing content) in some circumstances - use at your own risk.
+使用此属性在某些情况下可能导致 BUG（内容缺失）——请自行谨慎使用。
 :::
 
-When `true`, offscreen child views are removed from their native backing superview when offscreen. This may improve scroll performance for large lists. On Android the default value is `true`.
+为 `true` 时，屏幕外的子视图会从其原生视图树中移除，可能提升大列表的滚动性能。在 Android 上默认值为 `true`。
 
-| Type    |
+| 类型    |
 | ------- |
 | boolean |
 
@@ -263,43 +263,43 @@ When `true`, offscreen child views are removed from their native backing supervi
 
 ### `renderSectionFooter`
 
-Rendered at the bottom of each section.
+渲染在每个分段的底部。
 
-| Type                                                                      |
-| ------------------------------------------------------------------------- |
-| `md (info: {section: [Section](sectionlist#section)}) => element ｜ null` |
+| 类型                                                                                 |
+| ------------------------------------------------------------------------------------ |
+| `md (info: {section: [Section](sectionlist#section)}) => element ｜ null`           |
 
 ---
 
 ### `renderSectionHeader`
 
-Rendered at the top of each section. These stick to the top of the `ScrollView` by default on iOS. See `stickySectionHeadersEnabled`.
+渲染在每个分段的顶部。这些头部默认在 iOS 的 `ScrollView` 中会固定至顶部。详见 `stickySectionHeadersEnabled`。
 
-| Type                                                                      |
-| ------------------------------------------------------------------------- |
-| `md (info: {section: [Section](sectionlist#section)}) => element ｜ null` |
+| 类型                                                                                 |
+| ------------------------------------------------------------------------------------ |
+| `md (info: {section: [Section](sectionlist#section)}) => element ｜ null`           |
 
 ---
 
 ### `SectionSeparatorComponent`
 
-Rendered at the top and bottom of each section (note this is different from `ItemSeparatorComponent` which is only rendered between items). These are intended to separate sections from the headers above and below and typically have the same highlight response as `ItemSeparatorComponent`. Also receives `highlighted`, `[leading/trailing][Item/Section]`, and any custom props from `separators.updateProps`.
+渲染在每个分段的顶部和底部（注意这与仅渲染在项目之间的 `ItemSeparatorComponent` 不同）。此组件用于将分段与上下的头部分隔开，通常与 `ItemSeparatorComponent` 具有相同的高亮响应。也接收 `highlighted`、`[leading/trailing][Item/Section]` 和通过 `separators.updateProps` 传递的任何自定义属性。
 
-| Type               |
+| 类型               |
 | ------------------ |
-| component, element |
+| 组件，元素         |
 
 ---
 
 ### `stickySectionHeadersEnabled`
 
-Makes section headers stick to the top of the screen until the next one pushes it off. Only enabled by default on iOS because that is the platform standard there.
+使分段头部粘贴在屏幕顶部，直到被下一个分段头推开。在 iOS 默认启用，因为这是平台标准。
 
-| Type    | Default                                                                                              |
+| 类型    | 默认值                                                                                              |
 | ------- | ---------------------------------------------------------------------------------------------------- |
 | boolean | `false` <div className="label android">Android</div><hr/>`true` <div className="label ios">iOS</div> |
 
-## Methods
+## 方法
 
 ### `flashScrollIndicators()` <div className="label ios">iOS</div>
 
@@ -307,7 +307,7 @@ Makes section headers stick to the top of the screen until the next one pushes i
 flashScrollIndicators();
 ```
 
-Displays the scroll indicators momentarily.
+瞬间显示滚动指示器。
 
 ---
 
@@ -317,7 +317,7 @@ Displays the scroll indicators momentarily.
 recordInteraction();
 ```
 
-Tells the list an interaction has occurred, which should trigger viewability calculations, e.g. if `waitForInteractions` is true and the user has not scrolled. This is typically called by taps on items or by navigation actions.
+告知列表发生了交互，触发视图可见性检测，例如当 `waitForInteractions` 为真且用户未滚动时。通常由项目点击或导航操作调用。
 
 ---
 
@@ -327,42 +327,42 @@ Tells the list an interaction has occurred, which should trigger viewability cal
 scrollToLocation(params: SectionListScrollParams);
 ```
 
-Scrolls to the item at the specified `sectionIndex` and `itemIndex` (within the section) positioned in the viewable area such that `viewPosition` set to `0` places it at the top (and may be covered by a sticky header), `1` at the bottom, and `0.5` centered in the middle.
+滚动至指定 `sectionIndex` 和该分段中指定的 `itemIndex` 所在项的位置，其中 `viewPosition` 设置为 `0` 表示将该项置于顶部（可能被粘性头覆盖），`1` 表示置于底部，`0.5` 表示居中。
 
 :::note
-You cannot scroll to locations outside the render window without specifying the `getItemLayout` or `onScrollToIndexFailed` prop.
+如果未指定 `getItemLayout` 或 `onScrollToIndexFailed` 属性，无法滚动到渲染窗口外的位置。
 :::
 
-**Parameters:**
+**参数：**
 
-| Name                                                        | Type   |
+| 名称                                                        | 类型   |
 | ----------------------------------------------------------- | ------ |
-| params <div className="label basic required">Required</div> | object |
+| params <div className="label basic required">必需</div>     | 对象   |
 
-Valid `params` keys are:
+有效的 `params` 键包括：
 
-- 'animated' (boolean) - Whether the list should do an animation while scrolling. Defaults to `true`.
-- 'itemIndex' (number) - Index within section for the item to scroll to. Required.
-- 'sectionIndex' (number) - Index for section that contains the item to scroll to. Required.
-- 'viewOffset' (number) - A fixed number of pixels to offset the final target position, e.g. to compensate for sticky headers.
-- 'viewPosition' (number) - A value of `0` places the item specified by index at the top, `1` at the bottom, and `0.5` centered in the middle.
+- 'animated' (boolean) - 是否以动画滚动，默认 `true`。
+- 'itemIndex' (number) - 要滚动到的项在分段中的索引。必需。
+- 'sectionIndex' (number) - 包含该项的分段索引。必需。
+- 'viewOffset' (number) - 在最终目标位置的固定像素偏移，用于补偿粘性头等。
+- 'viewPosition' (number) - 值为 `0` 时将指定项放置顶部，`1` 放置底部，`0.5` 居中。
 
-## Type Definitions
+## 类型定义
 
 ### Section
 
-An object that identifies the data to be rendered for a given section.
+标识给定分段所渲染数据的对象。
 
-| Type |
+| 类型 |
 | ---- |
 | any  |
 
-**Properties:**
+**属性：**
 
-| Name                                                      | Type               | Description                                                                                                                                                         |
-| --------------------------------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| data <div className="label basic required">Required</div> | array              | The data for rendering items in this section. Array of objects, much like [`FlatList`'s data prop](flatlist#required-data).                                         |
-| key                                                       | string             | Optional key to keep track of section re-ordering. If you don't plan on re-ordering sections, the array index will be used by default.                              |
-| renderItem                                                | function           | Optionally define an arbitrary item renderer for this section, overriding the default [`renderItem`](sectionlist#renderitem) for the list.                          |
-| ItemSeparatorComponent                                    | component, element | Optionally define an arbitrary item separator for this section, overriding the default [`ItemSeparatorComponent`](sectionlist#itemseparatorcomponent) for the list. |
-| keyExtractor                                              | function           | Optionally define an arbitrary key extractor for this section, overriding the default [`keyExtractor`](sectionlist#keyextractor).                                   |
+| 名称                                                      | 类型               | 说明                                                                                                                    |
+| --------------------------------------------------------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| data <div className="label basic required">必需</div>     | 数组               | 本分段渲染项目的数据。对象数组，类似于 [`FlatList` 的 data 属性](flatlist#required-data)。                              |
+| key                                                       | 字符串             | 可选，用于追踪分段重新排序的键。如果不打算重新排序分段，默认使用数组索引。                                              |
+| renderItem                                                | 函数               | 可选，为此分段自定义项目渲染，覆盖列表的默认 [`renderItem`](sectionlist#renderitem)。                                   |
+| ItemSeparatorComponent                                    | 组件，元素         | 可选，为此分段自定义项目分隔符，覆盖列表的默认 [`ItemSeparatorComponent`](sectionlist#itemseparatorcomponent)。        |
+| keyExtractor                                              | 函数               | 可选，为此分段自定义键提取器，覆盖列表的默认 [`keyExtractor`](sectionlist#keyextractor)。                              |

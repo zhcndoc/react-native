@@ -4,7 +4,7 @@ title: requestAnimationFrame
 ---
 
 :::warning
-🚧 This page is work in progress, so please refer to the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame) for more information.
+🚧 本页面正在建设中，如需更多信息，请参阅 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame)。
 :::
 
-The global `requestAnimationFrame` function, as defined in Web specifications.
+全局的 `requestAnimationFrame` 函数，根据 Web 规范定义。

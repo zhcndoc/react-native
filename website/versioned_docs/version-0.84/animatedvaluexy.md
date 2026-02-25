@@ -3,9 +3,9 @@ id: animatedvaluexy
 title: Animated.ValueXY
 ---
 
-2D Value for driving 2D animations, such as pan gestures. Almost identical API to normal [`Animated.Value`](animatedvalue), but multiplexed. Contains two regular `Animated.Value`s under the hood.
+用于驱动二维动画（例如拖拽手势）的二维值。API 与普通的 [`Animated.Value`](animatedvalue) 几乎相同，但进行了复用。内部包含两个常规的 `Animated.Value`。
 
-## Example
+## 示例
 
 ```SnackPlayer name=Animated.ValueXY%20Example
 import React, {useRef} from 'react';
@@ -20,14 +20,14 @@ const DraggableView = () => {
     onPanResponderMove: Animated.event([
       null,
       {
-        dx: pan.x, // x,y are Animated.Value
+        dx: pan.x, // x,y 是 Animated.Value
         dy: pan.y,
       },
     ]),
     onPanResponderRelease: () => {
       Animated.spring(
-        pan, // Auto-multiplexed
-        {toValue: {x: 0, y: 0}, useNativeDriver: true}, // Back to zero
+        pan, // 自动复用
+        {toValue: {x: 0, y: 0}, useNativeDriver: true}, // 回到初始位置
       ).start();
     },
   });
@@ -63,9 +63,9 @@ export default DraggableView;
 
 ---
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `setValue()`
 
@@ -73,13 +73,13 @@ export default DraggableView;
 setValue(value: {x: number; y: number});
 ```
 
-Directly set the value. This will stop any animations running on the value and update all the bound properties.
+直接设置值。此操作会停止正在运行的任何动画并更新所有绑定属性。
 
-**Parameters:**
+**参数：**
 
-| Name  | Type                     | Required | Description |
-| ----- | ------------------------ | -------- | ----------- |
-| value | `{x: number; y: number}` | Yes      | Value       |
+| 名称  | 类型                     | 必填 | 说明       |
+| ----- | ------------------------ | ---- | ---------- |
+| value | `{x: number; y: number}` | 是   | 值         |
 
 ---
 
@@ -89,13 +89,13 @@ Directly set the value. This will stop any animations running on the value and u
 setOffset(offset: {x: number; y: number});
 ```
 
-Sets an offset that is applied on top of whatever value is set, whether via `setValue`, an animation, or `Animated.event`. Useful for compensating things like the start of a pan gesture.
+设置一个偏移值，会叠加在通过 `setValue`、动画或 `Animated.event` 设置的值之上。用于补偿诸如拖拽手势开始时的位置。
 
-**Parameters:**
+**参数：**
 
-| Name   | Type                     | Required | Description  |
-| ------ | ------------------------ | -------- | ------------ |
-| offset | `{x: number; y: number}` | Yes      | Offset value |
+| 名称   | 类型                     | 必填 | 说明       |
+| ------ | ------------------------ | ---- | ---------- |
+| offset | `{x: number; y: number}` | 是   | 偏移值     |
 
 ---
 
@@ -105,7 +105,7 @@ Sets an offset that is applied on top of whatever value is set, whether via `set
 flattenOffset();
 ```
 
-Merges the offset value into the base value and resets the offset to zero. The final output of the value is unchanged.
+将偏移值合并到基础值中，并将偏移重置为零。最终输出值保持不变。
 
 ---
 
@@ -115,7 +115,7 @@ Merges the offset value into the base value and resets the offset to zero. The f
 extractOffset();
 ```
 
-Sets the offset value to the base value, and resets the base value to zero. The final output of the value is unchanged.
+将偏移值设置为当前基础值，并重置基础值为零。最终输出值保持不变。
 
 ---
 
@@ -125,15 +125,15 @@ Sets the offset value to the base value, and resets the base value to zero. The 
 addListener(callback: (value: {x: number; y: number}) => void);
 ```
 
-Adds an asynchronous listener to the value so you can observe updates from animations. This is useful because there is no way to synchronously read the value because it might be driven natively.
+添加一个异步监听器，可用于观察动画更新。由于值可能由原生驱动，无法同步读取，因此该方法很有用。
 
-Returns a string that serves as an identifier for the listener.
+返回一个用于标识监听器的字符串。
 
-**Parameters:**
+**参数：**
 
-| Name     | Type     | Required | Description                                                                                 |
-| -------- | -------- | -------- | ------------------------------------------------------------------------------------------- |
-| callback | function | Yes      | The callback function which will receive an object with a `value` key set to the new value. |
+| 名称     | 类型     | 必填 | 说明                                                       |
+| -------- | -------- | ---- | ---------------------------------------------------------- |
+| callback | function | 是   | 回调函数，将接收一个包含新值的对象，该对象含有 `value` 键。 |
 
 ---
 
@@ -143,13 +143,13 @@ Returns a string that serves as an identifier for the listener.
 removeListener(id: string);
 ```
 
-Unregister a listener. The `id` param shall match the identifier previously returned by `addListener()`.
+注销一个监听器。`id` 参数应与之前由 `addListener()` 返回的标识符匹配。
 
-**Parameters:**
+**参数：**
 
-| Name | Type   | Required | Description                        |
-| ---- | ------ | -------- | ---------------------------------- |
-| id   | string | Yes      | Id for the listener being removed. |
+| 名称 | 类型   | 必填 | 说明               |
+| ---- | ------ | ---- | ------------------ |
+| id   | string | 是   | 要移除的监听器 ID。 |
 
 ---
 
@@ -159,7 +159,7 @@ Unregister a listener. The `id` param shall match the identifier previously retu
 removeAllListeners();
 ```
 
-Remove all registered listeners.
+移除所有注册的监听器。
 
 ---
 
@@ -169,13 +169,13 @@ Remove all registered listeners.
 stopAnimation(callback?: (value: {x: number; y: number}) => void);
 ```
 
-Stops any running animation or tracking. `callback` is invoked with the final value after stopping the animation, which is useful for updating state to match the animation position with layout.
+停止任何正在运行的动画或跟踪。动画停止后会调用 `callback`，参数为最终值，方便更新状态与动画位置同步。
 
-**Parameters:**
+**参数：**
 
-| Name     | Type     | Required | Description                                   |
-| -------- | -------- | -------- | --------------------------------------------- |
-| callback | function | No       | A function that will receive the final value. |
+| 名称     | 类型     | 必填 | 说明                  |
+| -------- | -------- | ---- | --------------------- |
+| callback | function | 否   | 接收最终值的回调函数。 |
 
 ---
 
@@ -185,13 +185,13 @@ Stops any running animation or tracking. `callback` is invoked with the final va
 resetAnimation(callback?: (value: {x: number; y: number}) => void);
 ```
 
-Stops any animation and resets the value to its original.
+停止所有动画并重置值为初始值。
 
-**Parameters:**
+**参数：**
 
-| Name     | Type     | Required | Description                                      |
-| -------- | -------- | -------- | ------------------------------------------------ |
-| callback | function | No       | A function that will receive the original value. |
+| 名称     | 类型     | 必填 | 说明                    |
+| -------- | -------- | ---- | ----------------------- |
+| callback | function | 否   | 接收初始值的回调函数。   |
 
 ---
 
@@ -201,7 +201,7 @@ Stops any animation and resets the value to its original.
 getLayout(): {left: Animated.Value, top: Animated.Value};
 ```
 
-Converts `{x, y}` into `{left, top}` for use in style, e.g.
+将 `{x, y}` 转换为 `{left, top}`，方便用于样式中，例如：
 
 ```tsx
 style={this.state.anim.getLayout()}
@@ -218,7 +218,7 @@ getTranslateTransform(): [
 ];
 ```
 
-Converts `{x, y}` into a useable translation transform, e.g.
+将 `{x, y}` 转换为可用的平移变换，例如：
 
 ```tsx
 style={{

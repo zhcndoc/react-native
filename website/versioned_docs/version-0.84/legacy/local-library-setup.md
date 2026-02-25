@@ -1,19 +1,19 @@
 ---
 id: local-library-setup
-title: Local libraries setup
+title: 本地库设置
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-A local library is a library containing views or modules that's local to your app and not published to a registry. This is different from the traditional setup for view and modules in the sense that a local library is decoupled from your app's native code.
+本地库是包含视图或模块且位于你的应用本地的库，未发布到任何注册中心。这与传统的视图和模块设置不同，因为本地库与应用的原生代码是解耦的。
 
-The local library is created outside of the `android/` and `ios/` folders and makes use of autolinking to integrate with your app. The structure with a local library may look like this:
+本地库创建在 `android/` 和 `ios/` 文件夹之外，并利用自动链接（autolinking）与应用集成。使用本地库的结构可能如下：
 
 ```plaintext
 MyApp
 ├── node_modules
-├── modules <-- folder for your local libraries
-│ └── awesome-module <-- your local library
+├── modules <-- 你的本地库文件夹
+│ └── awesome-module <-- 你的本地库
 ├── android
 ├── ios
 ├── src
@@ -21,23 +21,23 @@ MyApp
 └── package.json
 ```
 
-Since a local library's code exists outside of `android/` and `ios/` folders, it makes it easier to upgrade React Native versions in the future, copy to other projects etc.
+由于本地库代码存在于 `android/` 和 `ios/` 文件夹之外，这使得未来升级 React Native 版本、复制到其他项目等操作更加容易。
 
-To create local library we will use [create-react-native-library](https://callstack.github.io/react-native-builder-bob/create). This tool contains all the necessary templates.
+要创建本地库，我们将使用 [create-react-native-library](https://callstack.github.io/react-native-builder-bob/create) 工具。该工具包含了所有必要的模板。
 
-### Getting Started
+### 开始使用
 
-Inside your React Native application's root folder, run the following command:
+在你的 React Native 应用根目录下，运行以下命令：
 
 ```shell
 npx create-react-native-library@latest awesome-module
 ```
 
-Where `awesome-module` is the name you would like for the new module. After going through the prompts, you will have a new folder called `modules` in your project's root directory which contains the new module.
+其中 `awesome-module` 是你想为新模块取的名称。完成提示后，在项目根目录下会生成一个名为 `modules` 的新文件夹，里面包含新模块。
 
-### Linking
+### 链接
 
-By default, the generated library is automatically linked to the project using `link:` protocol when using Yarn and `file:` when using npm:
+默认情况下，生成的库会自动使用 Yarn 时的 `link:` 协议或 npm 时的 `file:` 协议链接到项目：
 
 <Tabs groupId="package-manager" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>
 
@@ -61,11 +61,11 @@ By default, the generated library is automatically linked to the project using `
 </TabItem>
 </Tabs>
 
-This creates a symlink to the library under `node_modules` which makes autolinking work.
+这会在 `node_modules` 下创建指向该库的符号链接，从而使自动链接生效。
 
-### Installing dependencies
+### 安装依赖
 
-To link the module you need to install dependencies:
+要链接模块，你需要安装依赖：
 
 <Tabs groupId="package-manager" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>
 
@@ -85,9 +85,9 @@ yarn install
 </TabItem>
 </Tabs>
 
-### Using module inside your app
+### 在应用内使用模块
 
-To use the module inside your app, you can import it by its name:
+要在应用中使用该模块，你可以通过名称导入它：
 
 ```js
 import {multiply} from 'awesome-module';

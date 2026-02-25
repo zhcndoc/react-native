@@ -7,68 +7,68 @@ import CanaryAPIWarning from './\_canary-channel-api-warning.mdx';
 
 <CanaryAPIWarning />
 
-The [`IntersectionObserverEntry`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry) interface, as defined in Web specifications. It describes the intersection between the target element and its root container at a specific moment of transition.
+[`IntersectionObserverEntry`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry) 接口，按照 Web 规范定义。它描述了目标元素与其根容器在某个特定过渡时刻的交集情况。
 
-Instances of `IntersectionObserverEntry` are delivered to an [`IntersectionObserver`](global-intersectionobserver) callback in its `entries` parameter.
+`IntersectionObserverEntry` 的实例会通过 `entries` 参数传递给 [`IntersectionObserver`](global-intersectionobserver) 的回调函数。
 
 ---
 
-# Reference
+# 参考
 
-## Instance properties
+## 实例属性
 
 ### `boundingClientRect`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry/boundingClientRect).
+参见 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry/boundingClientRect)。
 
-Returns the bounds rectangle of the target element as a `DOMRectReadOnly`.
+返回目标元素的边界矩形，类型为 `DOMRectReadOnly`。
 
 ### `intersectionRatio`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry/intersectionRatio).
+参见 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry/intersectionRatio)。
 
-Returns the ratio of the `intersectionRect` to the `boundingClientRect`.
+返回 `intersectionRect` 与 `boundingClientRect` 的比例。
 
 ### `intersectionRect`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry/intersectionRect).
+参见 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry/intersectionRect)。
 
-Returns a `DOMRectReadOnly` representing the target's visible area.
+返回一个表示目标可见区域的 `DOMRectReadOnly`。
 
 ### `isIntersecting`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry/isIntersecting).
+参见 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry/isIntersecting)。
 
-A Boolean value which is `true` if the target element intersects with the intersection observer's root. If this is `true`, then the `IntersectionObserverEntry` describes a transition into a state of intersection; if it's `false`, then you know the transition is from intersecting to not-intersecting.
+布尔值，如果目标元素与交叉观察者的根容器相交，则为 `true`。如果为 `true`，表示 `IntersectionObserverEntry` 描述的是进入交集状态的过渡；如果为 `false`，则表示从相交状态过渡到非相交状态。
 
 ### `rnRootIntersectionRatio` ⚠️
 
-:::warning Non-standard
-This is a React Native specific extension.
+:::warning 非标准
+这是 React Native 特定的扩展。
 :::
 
-Returns the ratio of the `intersectionRect` to the `rootBounds`.
+返回 `intersectionRect` 与 `rootBounds` 的比例。
 
 ```ts
 get rnRootIntersectionRatio(): number;
 ```
 
-This is analogous to `intersectionRatio`, but computed relative to the root's bounding box instead of the target's bounding box. This corresponds to the `rnRootThreshold` option and allows you to determine what percentage of the root area is covered by the target element.
+这个属性类似于 `intersectionRatio`，但它是相对于根元素的边界盒计算的，而不是目标元素的边界盒。它对应于 `rnRootThreshold` 选项，允许你确定目标元素覆盖根区域的百分比。
 
 ### `rootBounds`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry/rootBounds).
+参见 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry/rootBounds)。
 
-Returns a `DOMRectReadOnly` for the intersection observer's root.
+返回交叉观察者根元素的 `DOMRectReadOnly`。
 
 ### `target`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry/target).
+参见 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry/target)。
 
-The `Element` whose intersection with the root changed.
+发生交集变化的 `Element`。
 
 ### `time`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry/time).
+参见 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry/time)。
 
-A `DOMHighResTimeStamp` indicating the time at which the intersection was recorded, relative to the `IntersectionObserver`'s time origin.
+一个 `DOMHighResTimeStamp`，指示记录交集时的时间，相对于 `IntersectionObserver` 的时间起点。

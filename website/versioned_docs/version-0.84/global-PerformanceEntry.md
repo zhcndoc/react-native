@@ -3,4 +3,4 @@ id: global-PerformanceEntry
 title: PerformanceEntry
 ---
 
-The global [`PerformanceEntry`](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEntry) class, as defined in Web specifications.
+全局 [`PerformanceEntry`](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEntry) 类，定义于 Web 规范中。

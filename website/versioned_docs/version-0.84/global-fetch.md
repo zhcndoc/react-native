@@ -4,7 +4,7 @@ title: fetch
 ---
 
 :::warning
-🚧 This page is work in progress, so please refer to the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch) for more information.
+🚧 本页面正在建设中，更多信息请参阅 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch)。
 :::
 
-The global `fetch` function, as defined in Web specifications.
+全局的 `fetch` 函数，依照 Web 规范定义。

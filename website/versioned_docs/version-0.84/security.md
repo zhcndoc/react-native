@@ -1,136 +1,136 @@
 ---
 id: security
-title: Security
+title: 安全
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-Security is often overlooked when building apps. It is true that it is impossible to build software that is completely impenetrable—we’ve yet to invent a completely impenetrable lock (bank vaults do, after all, still get broken into). However, the probability of falling victim to a malicious attack or being exposed for a security vulnerability is inversely proportional to the effort you’re willing to put in to protecting your application against any such eventuality. Although an ordinary padlock is pickable, it is still much harder to get past than a cabinet hook!
+在构建应用时，安全性往往被忽视。确实，不可能构建完全固若金汤的软件——我们尚未发明出完全无法攻破的锁（毕竟，银行金库仍然会被偷袭）。然而，遭受恶意攻击或因安全漏洞暴露的概率，与您为保护应用而付出的努力成反比。虽然普通的挂锁易被撬开，但它仍然比柜钩难以突破！
 
 <img src="/docs/assets/d_security_chart.svg" width={283} alt=" " style={{float: 'right'}} />
 
-In this guide, you will learn about best practices for storing sensitive information, authentication, network security, and tools that will help you secure your app. This is not a preflight checklist—it is a catalogue of options, each of which will help further protect your app and users.
+在本指南中，您将学习存储敏感信息、身份认证、网络安全以及帮助您保护应用的工具的最佳实践。这不是一个预检清单——而是一个选项目录，每个选项都将进一步保护您的应用和用户。
 
-## Storing Sensitive Info
+## 存储敏感信息
 
-Never store sensitive API keys in your app code. Anything included in your code could be accessed in plain text by anyone inspecting the app bundle. Tools like [react-native-dotenv](https://github.com/goatandsheep/react-native-dotenv) and [react-native-config](https://github.com/luggit/react-native-config/) are great for adding environment-specific variables like API endpoints, but they should not be confused with server-side environment variables, which can often contain secrets and API keys.
+切勿将敏感的 API 密钥存储在应用代码中。任何包含在代码中的东西，任何查看应用包的人都可以以明文访问。像 [react-native-dotenv](https://github.com/goatandsheep/react-native-dotenv) 和 [react-native-config](https://github.com/luggit/react-native-config/) 这样的工具非常适合添加特定环境的变量（如 API 端点），但它们不应与服务器端环境变量混淆，后者通常包含秘密和 API 密钥。
 
-If you must have an API key or a secret to access some resource from your app, the most secure way to handle this would be to build an orchestration layer between your app and the resource. This could be a serverless function (e.g. using AWS Lambda or Google Cloud Functions) which can forward the request with the required API key or secret. Secrets in server side code cannot be accessed by the API consumers the same way secrets in your app code can.
+如果必须在应用中使用某个 API 密钥或密秘来访问资源，最安全的做法是构建一个在应用和资源之间的编排层。这个层可以是无服务器函数（例如使用 AWS Lambda 或 Google Cloud Functions），它可以携带所需的 API 密钥或密秘转发请求。服务器端代码中的秘密无法被 API 使用者像应用代码中的秘密那样访问。
 
-**For persisted user data, choose the right type of storage based on its sensitivity.** As your app is used, you’ll often find the need to save data on the device, whether to support your app being used offline, cut down on network requests or save your user’s access token between sessions so they wouldn’t have to re-authenticate each time they use the app.
+**对于持久化的用户数据，应根据敏感性选择合适的存储类型。** 随着应用的使用，您经常会发现需要在设备上保存数据，可能是为了支持离线使用、减少网络请求，或在会话间保存用户的访问令牌，以免用户每次使用应用时都需重新认证。
 
 :::info
-**Persisted vs unpersisted** — persisted data is written to the device’s disk, which lets the data be read by your app across application launches without having to do another network request to fetch it or asking the user to re-enter it. But this also can make that data more vulnerable to being accessed by attackers. Unpersisted data is never written to disk—so there's no data to access!
+**持久化与非持久化** — 持久化数据写入设备磁盘，这使得应用在启动后能读取该数据，无需再次发送网络请求或要求用户重新输入。但这也可能使数据更容易被攻击者访问。非持久化数据从不写入磁盘，因此不存在可访问的数据！
 :::
 
 ### Async Storage
 
-[Async Storage](https://github.com/react-native-async-storage/async-storage) is a community-maintained module for React Native that provides an asynchronous, unencrypted, key-value store. Async Storage is not shared between apps: every app has its own sandbox environment and has no access to data from other apps.
+[Async Storage](https://github.com/react-native-async-storage/async-storage) 是 React Native 的社区维护模块，提供异步、不加密的键值存储。Async Storage 不会在应用之间共享：每个应用有自己的沙盒环境，无法访问其他应用的数据。
 
-| **Do** use async storage when...              | **Don't** use async storage for... |
-| --------------------------------------------- | ---------------------------------- |
-| Persisting non-sensitive data across app runs | Token storage                      |
-| Persisting Redux state                        | Secrets                            |
-| Persisting GraphQL state                      |                                    |
-| Storing global app-wide variables             |                                    |
+| **建议使用 Async Storage 的情况**             | **不建议用于 Async Storage 的情况** |
+| -------------------------------------------- | ---------------------------------- |
+| 跨应用运行存储非敏感数据                      | 令牌存储                         |
+| 持久化 Redux 状态                             | 秘密信息                         |
+| 持久化 GraphQL 状态                           |                                    |
+| 存储全局应用范围变量                          |                                    |
 
-#### Developer Notes
+#### 开发者说明
 
 <Tabs groupId="guide" queryString defaultValue="web" values={constants.getDevNotesTabs(["web"])}>
 
 <TabItem value="web">
 
 :::note
-Async Storage is the React Native equivalent of Local Storage from the web
+Async Storage 是 React Native 中 Local Storage 的对应方案
 :::
 
 </TabItem>
 </Tabs>
 
-### Secure Storage
+### 安全存储
 
-React Native does not come bundled with any way of storing sensitive data. However, there are pre-existing solutions for Android and iOS platforms.
+React Native 本身不带有存储敏感数据的功能。不过，Android 和 iOS 平台上已有现成解决方案。
 
-#### iOS - Keychain Services
+#### iOS - 钥匙串服务 (Keychain Services)
 
-[Keychain Services](https://developer.apple.com/documentation/security/keychain_services) allows you to securely store small chunks of sensitive info for the user. This is an ideal place to store certificates, tokens, passwords, and any other sensitive information that doesn’t belong in Async Storage.
+[钥匙串服务](https://developer.apple.com/documentation/security/keychain_services) 允许您为用户安全地存储小块敏感信息。这里是存储证书、令牌、密码及任何不适合放在 Async Storage 中的敏感信息的理想场所。
 
-#### Android - Secure Shared Preferences
+#### Android - 安全共享偏好设置 (Secure Shared Preferences)
 
-[Shared Preferences](https://developer.android.com/reference/android/content/SharedPreferences) is the Android equivalent for a persistent key-value data store. **Data in Shared Preferences is not encrypted by default**, but [Encrypted Shared Preferences](https://developer.android.com/topic/security/data) wraps the Shared Preferences class for Android, and automatically encrypts keys and values.
+[共享偏好设置](https://developer.android.com/reference/android/content/SharedPreferences) 是 Android 平台上持久化键值数据存储的对应方案。**共享偏好设置中的数据默认不加密**，而 [加密共享偏好设置](https://developer.android.com/topic/security/data) 封装了 Android 的 Shared Preferences 类，自动对键和值进行加密。
 
-#### Android - Keystore
+#### Android - 密钥库 (Keystore)
 
-The [Android Keystore](https://developer.android.com/training/articles/keystore) system lets you store cryptographic keys in a container to make it more difficult to extract from the device.
+[Android 密钥库](https://developer.android.com/training/articles/keystore) 系统允许您将加密密钥存储在一个容器中，以使其更难从设备中提取。
 
-In order to use iOS Keychain services or Android Secure Shared Preferences, you can either write a bridge yourself or use a library which wraps them for you and provides a unified API at your own risk. Some libraries to consider:
+要使用 iOS 钥匙串服务或 Android 安全共享偏好设置，您可以自行编写桥接代码，或者使用封装它们并提供统一 API 的库，风险自负。可考虑的库有：
 
 - [expo-secure-store](https://docs.expo.dev/versions/latest/sdk/securestore/)
 - [react-native-keychain](https://github.com/oblador/react-native-keychain)
 
-:::warning Caution
-**Be mindful of unintentionally storing or exposing sensitive info.** This could happen accidentally, for example saving sensitive form data in redux state and persisting the whole state tree in Async Storage. Or sending user tokens and personal info to an application monitoring service such as Sentry or Crashlytics.
+:::warning 警告
+**注意避免无意中存储或暴露敏感信息。** 比如意外将敏感表单数据保存于 redux 状态，并将整个状态树持久化到 Async Storage，或者将用户令牌及个人信息发送到诸如 Sentry 或 Crashlytics 之类的应用监控服务。
 :::
 
-## Authentication and Deep Linking
+## 身份认证与深度链接
 
 <img src="/docs/assets/d_security_deep-linking.svg" width={225} alt=" " style={{float: 'right', margin: '0 0 1em 1em'}} />
 
-Mobile apps have a unique vulnerability that is non-existent in the web: **deep linking**. Deep linking is a way of sending data directly to a native application from an outside source. A deep link looks like `app://` where `app` is your app scheme and anything following the // could be used internally to handle the request.
+移动应用存在一种网页上不存在的独特安全隐患：**深度链接**。深度链接是指从外部来源直接发送数据给原生应用的方式。深度链接形式如 `app://`，其中 `app` 是您的应用方案，`//` 之后的内容可用来内部处理请求。
 
-For example, if you were building an ecommerce app, you could use `app://products/1` to deep link to your app and open the product detail page for a product with id 1. You can think of these kind of like URLs on the web, but with one crucial distinction:
+举例来说，如果您正在开发一个电商应用，使用 `app://products/1` 可深度链接到应用并打开 ID 为 1 的产品详情页。您可以把它类比为网页上的 URL，但有一个关键区别：
 
-Deep links are not secure and you should never send any sensitive information in them.
+深度链接不安全，切勿在其中传递任何敏感信息。
 
-The reason deep links are not secure is because there is no centralized method of registering URL schemes. As an application developer, you can use almost any url scheme you choose by [configuring it in Xcode](https://developer.apple.com/documentation/uikit/inter-process_communication/allowing_apps_and_websites_to_link_to_your_content/defining_a_custom_url_scheme_for_your_app) for iOS or [adding an intent on Android](https://developer.android.com/training/app-links/deep-linking).
+深度链接不安全的原因是：没有集中式注册 URL 方案的方法。作为应用开发者，您几乎可以通过在 iOS 的 [Xcode 中配置](https://developer.apple.com/documentation/uikit/inter-process_communication/allowing_apps_and_websites_to_link_to_your_content/defining_a_custom_url_scheme_for_your_app) 或在 Android 中 [添加 intent](https://developer.android.com/training/app-links/deep-linking) 使用任何 URL 方案。
 
-There is nothing stopping a malicious application from hijacking your deep link by also registering to the same scheme and then obtaining access to the data your link contains. Sending something like `app://products/1` is not harmful, but sending tokens is a security concern.
+这意味着恶意应用可以通过注册相同的方案来劫持您的深度链接，进而访问链接中包含的数据。像 `app://products/1` 这样的链接不会有害，但发送令牌则存在安全隐患。
 
-When the operating system has two or more applications to choose from when opening a link, Android will show the user a [Disambiguation dialog](https://developer.android.com/training/basics/intents/sending#disambiguation-dialog) and ask them to choose which application to use to open the link. On iOS however, the operating system will make the choice for you, so the user will be blissfully unaware. Apple has made steps to address this issue in later iOS versions (iOS 11) where they instituted a first-come-first-served principle, although this vulnerability could still be exploited in different ways which you can read more about [here](https://thehackernews.com/2019/07/ios-custom-url-scheme.html). Using [universal links](https://developer.apple.com/ios/universal-links/) will allow linking to content within your app securely in iOS.
+当操作系统面临两个或更多应用可供选择来打开链接时，Android 会显示 [选择对话框](https://developer.android.com/training/basics/intents/sending#disambiguation-dialog) 让用户选择打开链接的应用。iOS 则由操作系统决定，用户则无法感知。Apple 在 iOS 11 及以后版本中引入了“先注册先获得”的原则缓解此问题，但该漏洞仍可能被利用，详情可参见 [此处](https://thehackernews.com/2019/07/ios-custom-url-scheme.html)。使用 [通用链接（Universal Links）](https://developer.apple.com/ios/universal-links/) 可在 iOS 中安全地链接至应用内容。
 
-### OAuth2 and Redirects
+### OAuth2 和重定向
 
-The OAuth2 authentication protocol is incredibly popular nowadays, prided as the most complete and secure protocol around. The OpenID Connect protocol is also based on this. In OAuth2, the user is asked to authenticate via a third party. On successful completion, this third party redirects back to the requesting application with a verification code which can be exchanged for a JWT — a [JSON Web Token](https://jwt.io/introduction/). JWT is an open standard for securely transmitting information between parties on the web.
+OAuth2 认证协议现今非常流行，被誉为最全面且安全的协议。OpenID Connect 协议也是基于它。在 OAuth2 中，用户通过第三方进行认证。认证成功后，该第三方重定向回请求的应用，并附带一个可交换 JWT 的验证代码 —— 即 [JSON Web Token](https://jwt.io/introduction/)。JWT 是一种在互联网各方间安全传输信息的开放标准。
 
-On the web, this redirect step is secure, because URLs on the web are guaranteed to be unique. This is not true for apps because, as mentioned earlier, there is no centralized method of registering URL schemes! In order to address this security concern, an additional check must be added in the form of PKCE.
+在网页端，这一重定向步骤是安全的，因为网页端的 URL 是唯一的。但应用中情况则非如此，正如前面提到的，没有集中式注册 URL 方案的方法！为解决这一安全问题，需要加入额外的检查机制，称为 PKCE。
 
-[PKCE](https://oauth.net/2/pkce/), pronounced “Pixy” stands for Proof of Key Code Exchange, and is an extension to the OAuth 2 spec. This involves adding an additional layer of security which verifies that the authentication and token exchange requests come from the same client. PKCE uses the [SHA 256](https://www.movable-type.co.uk/scripts/sha256.html) Cryptographic Hash Algorithm. SHA 256 creates a unique “signature” for a text or file of any size, but it is:
+[PKCE](https://oauth.net/2/pkce/)（发音「Pixy」）代表 Proof of Key Code Exchange，是 OAuth2 规范的扩展。它引入了额外的安全层，验证认证及令牌交换请求是否来自同一客户端。PKCE 使用了 [SHA 256](https://www.movable-type.co.uk/scripts/sha256.html) 加密哈希算法。SHA 256 为任意大小的文本或文件创建独特“签名”，且：
 
-- Always the same length regardless of the input file
-- Guaranteed to always produce the same result for the same input
-- One way (that is, you can’t reverse engineer it to reveal the original input)
+- 不论输入文件大小，结果长度始终相同
+- 同一输入总产生相同结果
+- 单向算法（无法逆向推出原始输入）
 
-Now you have two values:
+于是您获得两个值：
 
-- **code_verifier** - a large random string generated by the client
-- **code_challenge** - the SHA 256 of the code_verifier
+- **code_verifier** - 客户端生成的随机长字符串
+- **code_challenge** - code_verifier 的 SHA 256 结果
 
-During the initial `/authorize` request, the client also sends the `code_challenge` for the `code_verifier` it keeps in memory. After the authorize request has returned correctly, the client also sends the `code_verifier` that was used to generate the `code_challenge`. The IDP will then calculate the `code_challenge`, see if it matches what was set on the very first `/authorize` request, and only send the access token if the values match.
+在初始 `/authorize` 请求中，客户端一并发送了对应 `code_verifier` 的 `code_challenge`。认证成功后，客户端会发送用来生成 `code_challenge` 的 `code_verifier`。身份提供者会计算 `code_challenge`，核对是否与最初请求时的一致，且仅当匹配时才返回访问令牌。
 
-This guarantees that only the application that triggered the initial authorization flow would be able to successfully exchange the verification code for a JWT. So even if a malicious application gets access to the verification code, it will be useless on its own. To see this in action, check out [this example](https://aaronparecki.com/oauth-2-simplified/#mobile-apps).
+这保证了只有触发最初认证流程的应用才能成功用验证代码换取 JWT。即便恶意应用截获了验证代码，单凭此代码也无用武之地。想看实例可参见 [此例子](https://aaronparecki.com/oauth-2-simplified/#mobile-apps)。
 
-A library to consider for native OAuth is [react-native-app-auth](https://github.com/FormidableLabs/react-native-app-auth). React-native-app-auth is an SDK for communicating with OAuth2 providers. It wraps the native [AppAuth-iOS](https://github.com/openid/AppAuth-iOS) and [AppAuth-Android](https://github.com/openid/AppAuth-Android) libraries and can support PKCE.
+一个适合本地 OAuth 的库是 [react-native-app-auth](https://github.com/FormidableLabs/react-native-app-auth)。react-native-app-auth 是一个与 OAuth2 供应商交流的 SDK，封装了原生的 [AppAuth-iOS](https://github.com/openid/AppAuth-iOS) 和 [AppAuth-Android](https://github.com/openid/AppAuth-Android) 库，支持 PKCE。
 
 :::note
-`react-native-app-auth` can support PKCE only if your Identity Provider supports it.
+只有当您的身份提供者支持时，`react-native-app-auth` 才能支持 PKCE。
 :::
 
 ![OAuth2 with PKCE](/docs/assets/diagram_pkce.svg)
 
-## Network Security
+## 网络安全
 
-Your APIs should always use [SSL encryption](https://www.ssl.com/faqs/faq-what-is-ssl/). SSL encryption protects against the requested data being read in plain text between when it leaves the server and before it reaches the client. You’ll know the endpoint is secure, because it starts with `https://` instead of `http://`.
+您的 API 应始终使用 [SSL 加密](https://www.ssl.com/faqs/faq-what-is-ssl/)。SSL 加密防止请求数据在从服务器发出至客户端接收前被明文读取。您可以通过端点以 `https://`（而非 `http://`）开头来判断其是否安全。
 
-### SSL Pinning
+### SSL 固定（SSL Pinning）
 
-Using https endpoints could still leave your data vulnerable to interception. With https, the client will only trust the server if it can provide a valid certificate that is signed by a trusted Certificate Authority that is pre-installed on the client. An attacker could take advantage of this by installing a malicious root CA certificate to the user’s device, so the client would trust all certificates that are signed by the attacker. Thus, relying on certificates alone could still leave you vulnerable to a [man-in-the-middle attack](https://en.wikipedia.org/wiki/Man-in-the-middle_attack).
+使用 https 端点仍可能使数据易遭截取。在 https 中，客户端只有在服务器提供由预装在客户端的受信任证书颁发机构签名的有效证书时才会信任服务器。攻击者可能通过在用户设备安装恶意根 CA 证书，使客户端信任攻击者签署的所有证书。这意味着仅凭证书仍可能遭受[中间人攻击](https://en.wikipedia.org/wiki/Man-in-the-middle_attack)。
 
-**SSL pinning** is a technique that can be used on the client side to avoid this attack. It works by embedding (or pinning) a list of trusted certificates to the client during development, so that only the requests signed with one of the trusted certificates will be accepted, and any self-signed certificates will not be.
+**SSL 固定** 是客户端采用的一种避免此攻击的技术。它通过在开发阶段将一组受信任的证书嵌入（固定）到客户端，只接受带有受信任证书签名的请求，拒绝自签证书。
 
-:::warning Caution
-When using SSL pinning, you should be mindful of certificate expiry. Certificates expire every 1-2 years and when one does, it’ll need to be updated in the app as well as on the server. As soon as the certificate on the server has been updated, any apps with the old certificate embedded in them will cease to work.
+:::warning 警告
+使用 SSL 固定时，需关注证书过期问题。证书通常每 1-2 年过期一次，过期后必须在应用和服务器端同时更新。服务器端证书一旦更新，内嵌旧证书的应用将无法工作。
 :::
 
-## Summary
+## 总结
 
-There is no bulletproof way to handle security, but with conscious effort and diligence, it is possible to significantly reduce the likelihood of a security breach in your application. Invest in security proportional to the sensitivity of the data stored in your application, the number of users, and the damage a hacker could do when gaining access to their account. And remember: it’s significantly harder to access information that was never requested in the first place.
+没有万无一失的安全方案，但通过有意识的努力和严谨态度，可以大幅降低应用遭受安全攻击的可能性。安全投入应与应用中存储数据的敏感性、用户数量及黑客取得账户访问权限可能造成的损害成比例。请记住：根本不请求的数据，最难被访问。

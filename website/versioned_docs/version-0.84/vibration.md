@@ -1,11 +1,11 @@
 ---
 id: vibration
-title: Vibration
+title: 振动
 ---
 
-Vibrates the device.
+使设备振动。
 
-## Example
+## 示例
 
 ```SnackPlayer name=Vibration%20Example&supportedPlatforms=ios,android
 import React from 'react';
@@ -34,41 +34,41 @@ const App = () => {
 
   const PATTERN_DESC =
     Platform.OS === 'android'
-      ? 'wait 1s, vibrate 2s, wait 3s'
-      : 'wait 1s, vibrate, wait 2s, vibrate, wait 3s';
+      ? '等待 1 秒，振动 2 秒，等待 3 秒'
+      : '等待 1 秒，振动，等待 2 秒，振动，等待 3 秒';
 
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <Text style={[styles.header, styles.paragraph]}>Vibration API</Text>
+        <Text style={[styles.header, styles.paragraph]}>振动 API</Text>
         <View>
-          <Button title="Vibrate once" onPress={() => Vibration.vibrate()} />
+          <Button title="振动一次" onPress={() => Vibration.vibrate()} />
         </View>
         <Separator />
         {Platform.OS === 'android'
           ? [
               <View>
                 <Button
-                  title="Vibrate for 10 seconds"
+                  title="振动 10 秒"
                   onPress={() => Vibration.vibrate(10 * ONE_SECOND_IN_MS)}
                 />
               </View>,
               <Separator />,
             ]
           : null}
-        <Text style={styles.paragraph}>Pattern: {PATTERN_DESC}</Text>
+        <Text style={styles.paragraph}>模式: {PATTERN_DESC}</Text>
         <Button
-          title="Vibrate with pattern"
+          title="按模式振动"
           onPress={() => Vibration.vibrate(PATTERN)}
         />
         <Separator />
         <Button
-          title="Vibrate with pattern until cancelled"
+          title="按模式重复振动直到取消"
           onPress={() => Vibration.vibrate(PATTERN, true)}
         />
         <Separator />
         <Button
-          title="Stop vibration pattern"
+          title="停止振动模式"
           onPress={() => Vibration.cancel()}
           color="#FF0000"
         />
@@ -104,18 +104,18 @@ export default App;
 ```
 
 :::info
-Android apps should request the `android.permission.VIBRATE` permission by adding `<uses-permission android:name="android.permission.VIBRATE"/>` to `AndroidManifest.xml`.
+Android 应用应通过在 `AndroidManifest.xml` 中添加 `<uses-permission android:name="android.permission.VIBRATE"/>` 来请求 `android.permission.VIBRATE` 权限。
 :::
 
 :::note
-The Vibration API is implemented as a `AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)` call on iOS.
+振动 API 在 iOS 上的实现是调用 `AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)`。
 :::
 
 ---
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `cancel()`
 
@@ -123,7 +123,7 @@ The Vibration API is implemented as a `AudioServicesPlaySystemSound(kSystemSound
 static cancel();
 ```
 
-Call this to stop vibrating after having invoked `vibrate()` with repetition enabled.
+调用此方法可在启用重复振动后停止振动。
 
 ---
 
@@ -136,17 +136,17 @@ static vibrate(
 );
 ```
 
-Triggers a vibration with a fixed duration.
+触发一个固定时长的振动。
 
-**On Android,** the vibration duration defaults to 400 milliseconds, and an arbitrary vibration duration can be specified by passing a number as the value for the `pattern` argument. **On iOS,** the vibration duration is fixed at roughly 400 milliseconds.
+**在 Android 上，**振动持续时间默认为 400 毫秒，可以通过传递数字作为 `pattern` 参数来指定任意振动时长。**在 iOS 上，**振动时长固定大约为 400 毫秒。
 
-The `vibrate()` method can take a `pattern` argument with an array of numbers that represent time in milliseconds. You may set `repeat` to true to run through the vibration pattern in a loop until `cancel()` is called.
+`vibrate()` 方法可以接收一个 `pattern` 参数，该参数是表示毫秒数的数字数组。你可以将 `repeat` 设置为 true，使振动模式循环执行，直到调用 `cancel()`。
 
-**On Android,** the odd indices of the `pattern` array represent the vibration duration, while the even ones represent the separation time. **On iOS,** the numbers in the `pattern` array represent the separation time, as the vibration duration is fixed.
+**在 Android 上，**`pattern` 数组中奇数索引代表振动时长，偶数索引代表等待时间。**在 iOS 上，**`pattern` 数组中的数字代表等待时间，因为振动时长是固定的。
 
-**Parameters:**
+**参数：**
 
-| Name    | Type                                                                     | Default | Description                                                                                       |
-| ------- | ------------------------------------------------------------------------ | ------- | ------------------------------------------------------------------------------------------------- |
-| pattern | number <div className="label android">Android</div><hr/>array of numbers | `400`   | Vibration duration in milliseconds.<hr/>Vibration pattern as an array of numbers in milliseconds. |
-| repeat  | boolean                                                                  | `false` | Repeat vibration pattern until `cancel()`.                                                        |
+| 名称     | 类型                                                                     | 默认值  | 描述                                                                                                   |
+| -------- | ------------------------------------------------------------------------ | ------- | ------------------------------------------------------------------------------------------------------ |
+| pattern  | number <div className="label android">Android</div><hr/>数字数组          | `400`   | 振动时长（毫秒）。<hr/>以毫秒为单位的振动模式数组。                                                      |
+| repeat   | boolean                                                                  | `false` | 是否重复振动模式，直到调用 `cancel()`。                                                                  |

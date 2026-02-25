@@ -1,11 +1,11 @@
 ---
 id: element-nodes
-title: Element nodes
+title: 元素节点
 ---
 
-Element nodes represent native components in the native view tree (similar to [Element](https://developer.mozilla.org/en-US/docs/Web/API/Element) nodes on Web).
+元素节点代表原生视图树中的原生组件（类似于 Web 上的 [Element](https://developer.mozilla.org/en-US/docs/Web/API/Element) 节点）。
 
-They are provided by all native components, and by many built-in components, via refs:
+它们由所有原生组件以及许多内置组件通过 refs 提供：
 
 ```SnackPlayer ext=js&name=Element%20instances%20example
 import * as React from 'react';
@@ -16,18 +16,18 @@ const ViewWithRefs = () => {
   const [viewInfo, setViewInfo] = React.useState('');
 
   React.useEffect(() => {
-    // `element` is an object implementing the interface described here.
+    // `element` 是一个实现了这里描述接口的对象。
     const element = ref.current;
     const rect = JSON.stringify(element.getBoundingClientRect());
     setViewInfo(
-      `Bounding rect is: ${rect}.\nText content is: ${element.textContent}`,
+      `边界矩形为：${rect}。\n文本内容为：${element.textContent}`,
     );
   }, []);
 
   return (
     <SafeAreaView style={styles.container}>
       <View ref={ref} style={styles.content}>
-        <Text>Hello world!</Text>
+        <Text>你好，世界！</Text>
       </View>
       <Text>{viewInfo}</Text>
     </SafeAreaView>
@@ -48,31 +48,31 @@ export default ViewWithRefs;
 ```
 
 :::info
-Note that some built-in components are only a container for other components (including native components). For example, `ScrollView` internally renders a native scroll view and a native view, which are accessible through the ref it provides using methods like `getNativeScrollRef()` and `getInnerViewRef()`.
+请注意，一些内置组件仅是其他组件（包括原生组件）的容器。例如，`ScrollView` 内部渲染了一个原生滚动视图和一个原生视图，这些视图可以通过它提供的 ref 使用如 `getNativeScrollRef()` 和 `getInnerViewRef()` 等方法访问。
 :::
 
 ---
 
-## Reference
+## 参考
 
-### Web-compatible API
+### Web 兼容 API
 
-From [`HTMLElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement):
+来自 [`HTMLElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement)：
 
-- Properties
+- 属性
   - [`offsetHeight`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetHeight)
   - [`offsetLeft`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetLeft)
   - [`offsetParent`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetParent)
   - [`offsetTop`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetTop)
   - [`offsetWidth`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetWidth)
-- Methods
-  - [`blur()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/blur).
-  - [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus).
-    - ⚠️ The `options` parameter is not supported.
+- 方法
+  - [`blur()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/blur)
+  - [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus)
+    - ⚠️ 不支持 `options` 参数。
 
-From [`Element`](https://developer.mozilla.org/en-US/docs/Web/API/Element):
+来自 [`Element`](https://developer.mozilla.org/en-US/docs/Web/API/Element)：
 
-- Properties
+- 属性
   - [`childElementCount`](https://developer.mozilla.org/en-US/docs/Web/API/Element/childElementCount)
   - [`children`](https://developer.mozilla.org/en-US/docs/Web/API/Element/children)
   - [`clientHeight`](https://developer.mozilla.org/en-US/docs/Web/API/Element/clientHeight)
@@ -81,7 +81,7 @@ From [`Element`](https://developer.mozilla.org/en-US/docs/Web/API/Element):
   - [`clientWidth`](https://developer.mozilla.org/en-US/docs/Web/API/Element/clientWidth)
   - [`firstElementChild`](https://developer.mozilla.org/en-US/docs/Web/API/Element/firstElementChild)
   - [`id`](https://developer.mozilla.org/en-US/docs/Web/API/Element/id)
-    - ℹ️ Returns the value of the `id` or `nativeID` props.
+    - ℹ️ 返回 `id` 或 `nativeID` 属性的值。
   - [`lastElementChild`](https://developer.mozilla.org/en-US/docs/Web/API/Element/lastElementChild)
   - [`nextElementSibling`](https://developer.mozilla.org/en-US/docs/Web/API/Element/nextElementSibling)
   - [`nodeName`](https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeName)
@@ -90,22 +90,22 @@ From [`Element`](https://developer.mozilla.org/en-US/docs/Web/API/Element):
   - [`previousElementSibling`](https://developer.mozilla.org/en-US/docs/Web/API/Element/previousElementSibling)
   - [`scrollHeight`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight)
   - [`scrollLeft`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollLeft)
-    - ⚠️ For built-in components, only `ScrollView` instances can return a value other than zero.
+    - ⚠️ 对于内置组件，只有 `ScrollView` 实例可以返回非零值。
   - [`scrollTop`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTop)
-    - ⚠️ For built-in components, only `ScrollView` instances can return a value other than zero.
+    - ⚠️ 对于内置组件，只有 `ScrollView` 实例可以返回非零值。
   - [`scrollWidth`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollWidth)
   - [`tagName`](https://developer.mozilla.org/en-US/docs/Web/API/Element/tagName)
-    - ℹ️ Returns a normalized native component name prefixed with `RN:`, like `RN:View`.
+    - ℹ️ 返回带有 `RN:` 前缀的规范化原生组件名称，如 `RN:View`。
   - [`textContent`](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent)
-- Methods
+- 方法
   - [`getBoundingClientRect()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect)
   - [`hasPointerCapture()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/hasPointerCapture)
   - [`setPointerCapture()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/setPointerCapture)
   - [`releasePointerCapture()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/releasePointerCapture)
 
-From [`Node`](https://developer.mozilla.org/en-US/docs/Web/API/Node):
+来自 [`Node`](https://developer.mozilla.org/en-US/docs/Web/API/Node)：
 
-- Properties
+- 属性
   - [`childNodes`](https://developer.mozilla.org/en-US/docs/Web/API/Node/childNodes)
   - [`firstChild`](https://developer.mozilla.org/en-US/docs/Web/API/Node/firstChild)
   - [`isConnected`](https://developer.mozilla.org/en-US/docs/Web/API/Node/isConnected)
@@ -115,19 +115,19 @@ From [`Node`](https://developer.mozilla.org/en-US/docs/Web/API/Node):
   - [`nodeType`](https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType)
   - [`nodeValue`](https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeValue)
   - [`ownerDocument`](https://developer.mozilla.org/en-US/docs/Web/API/Node/ownerDocument)
-    - ℹ️ Will return the [document instance](/docs/next/document-instances) where this component was rendered.
+    - ℹ️ 返回该组件渲染所在的 [document 实例](/docs/next/document-instances)。
   - [`parentElement`](https://developer.mozilla.org/en-US/docs/Web/API/Node/parentElement)
   - [`parentNode`](https://developer.mozilla.org/en-US/docs/Web/API/Node/parentNode)
   - [`previousSibling`](https://developer.mozilla.org/en-US/docs/Web/API/Node/previousSibling)
   - [`textContent`](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent)
-- Methods
+- 方法
   - [`compareDocumentPosition()`](https://developer.mozilla.org/en-US/docs/Web/API/Node/compareDocumentPosition)
   - [`contains()`](https://developer.mozilla.org/en-US/docs/Web/API/Node/contains)
   - [`getRootNode()`](https://developer.mozilla.org/en-US/docs/Web/API/Node/getRootNode)
-    - ℹ️ Will return a reference to itself if the component is not mounted.
+    - ℹ️ 如果组件未挂载，则返回自身引用。
   - [`hasChildNodes()`](https://developer.mozilla.org/en-US/docs/Web/API/Node/hasChildNodes)
 
-### Legacy API
+### 旧版 API
 
 - [`measure()`](/docs/next/legacy/direct-manipulation#measurecallback)
 - [`measureInWindow()`](/docs/next/legacy/direct-manipulation#measureinwindowcallback)

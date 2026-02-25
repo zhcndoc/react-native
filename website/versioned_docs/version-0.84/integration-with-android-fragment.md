@@ -1,23 +1,23 @@
 ---
 id: integration-with-android-fragment
-title: Integration with an Android Fragment
+title: 与 Android Fragment 集成
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-The guide for [Integration with Existing Apps](/docs/integration-with-existing-apps) details how to integrate a full-screen React Native app into an existing Android app as an **Activity**.
+[与现有应用集成](/docs/integration-with-existing-apps) 指南详细介绍了如何将全屏 React Native 应用作为 **Activity** 集成到现有 Android 应用中。
 
-To use React Native components within **Fragments** in an existing app requires some additional setup.
+要在现有应用中的 **Fragments** 内使用 React Native 组件，则需要一些额外配置。
 
-### 1. Add React Native to your app
+### 1. 将 React Native 添加到你的应用中
 
-Follow the guide for [Integration with Existing Apps](/docs/integration-with-existing-apps) until the end to make sure you can safely run your React Native app in a full screen Activity.
+请按照[与现有应用集成](/docs/integration-with-existing-apps)的指南一直执行到最后，确保你能在全屏 Activity 中安全运行你的 React Native 应用。
 
-### 2. Add a FrameLayout for the React Native Fragment
+### 2. 为 React Native Fragment 添加 FrameLayout
 
-In this example, we're going to use a `FrameLayout` to add a React Native Fragment to an Activity. This approach is flexible enough and can be adapted to use React Native in other layouts such as Bottom Sheets or Tab Layouts.
+在这个示例中，我们将使用 `FrameLayout` 将 React Native Fragment 添加到 Activity 中。此方法足够灵活，也可以适配在其它布局中使用 React Native，比如底部弹出层（Bottom Sheets）或标签布局（Tab Layouts）。
 
-First add a `<FrameLayout>` with an id, width and height to your Activity's layout (e.g. `main_activity.xml` in the `res/layouts` folder). This is the layout you will find to render your React Native Fragment.
+首先，在你的 Activity 布局中（例如 `res/layouts` 文件夹下的 `main_activity.xml`）添加一个带有 id、宽度和高度的 `<FrameLayout>`。这个布局将用于渲染你的 React Native Fragment。
 
 ```xml
 <FrameLayout
@@ -26,15 +26,15 @@ First add a `<FrameLayout>` with an id, width and height to your Activity's layo
     android:layout_height="match_parent" />
 ```
 
-### 3. Make your host Activity implement `DefaultHardwareBackBtnHandler`
+### 3. 让宿主 Activity 实现 `DefaultHardwareBackBtnHandler`
 
-As your host activity is not a `ReactActivity`, you need to implement the `DefaultHardwareBackBtnHandler` interface to handle the back button press event.
-This is required by React Native to handle the back button press event.
+由于你的宿主 Activity 不是 `ReactActivity`，你需要实现 `DefaultHardwareBackBtnHandler` 接口来处理返回键事件。
+React Native 需要这样来处理返回键事件。
 
-Go into your host activity and make sure it implements the `DefaultHardwareBackBtnHandler` interface:
+进入你的宿主 Activity，确保它实现了 `DefaultHardwareBackBtnHandler` 接口：
 
-:::warning Deprecated
-`Activity.onBackPressed()` has been [deprecated](<https://developer.android.com/reference/android/app/Activity#onBackPressed()>) since API level 33. Android 16 devices with apps targeting API level 36 this will [no longer be called](https://developer.android.com/about/versions/16/behavior-changes-16#predictive-back) and [OnBackPressedDispatcher](https://developer.android.com/reference/androidx/activity/OnBackPressedDispatcher) should be used instead.
+:::warning 已废弃
+`Activity.onBackPressed()` 自 API 级别 33 起已被[废弃](<https://developer.android.com/reference/android/app/Activity#onBackPressed()>)。在 Android 16 设备上的应用如果目标 API 级别为 36，将[不再调用](https://developer.android.com/about/versions/16/behavior-changes-16#predictive-back)它，应改用 [OnBackPressedDispatcher](https://developer.android.com/reference/androidx/activity/OnBackPressedDispatcher)。
 :::
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
@@ -55,7 +55,7 @@ import androidx.appcompat.app.AppCompatActivity
         setContentView(R.layout.main_activity)
 
         findViewById<Button>(R.id.sample_button).setOnClickListener {
-            // Handle button click
+            // 处理按钮点击事件
         }
     }
 
@@ -84,7 +84,7 @@ import androidx.appcompat.app.AppCompatActivity;
         setContentView(R.layout.main_activity);
 
         findViewById(R.id.button_appcompose).setOnClickListener(button -> {
-            // Handle button click
+            // 处理按钮点击事件
         });
     }
 
@@ -98,12 +98,12 @@ import androidx.appcompat.app.AppCompatActivity;
 </TabItem>
 </Tabs>
 
-### 4. Add a React Native Fragment to the FrameLayout
+### 4. 向 FrameLayout 添加 React Native Fragment
 
-Finally, we can update the Activity to add a React Native Fragment to the FrameLayout.
-In this specific example, we're going to assume that your Activity has a button with id `sample_button` that when clicked will render a React Native Fragment into the FrameLayout.
+最后，我们可以更新 Activity，向 FrameLayout 添加 React Native Fragment。
+在这个具体示例中，假设你的 Activity 有一个 id 为 `sample_button` 的按钮，点击它时会在 FrameLayout 中渲染 React Native Fragment。
 
-Update your Activity's `onCreate` method as follows:
+将 Activity 的 `onCreate` 方法更新如下：
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="kotlin">
@@ -183,19 +183,19 @@ public class MainActivity extends AppCompatActivity implements DefaultHardwareBa
 </TabItem>
 </Tabs>
 
-Let's look at the code above.
+我们来看看上面的代码。
 
-The `ReactFragment.Builder()` is used to create a new `ReactFragment` and then we use the `supportFragmentManager` to add that Fragment to the `FrameLayout`.
+`ReactFragment.Builder()` 用于创建一个新的 `ReactFragment`，然后我们使用 `supportFragmentManager` 将该 Fragment 添加到 `FrameLayout` 中。
 
-Inside the builder you can customize how the fragment is created:
+在构造器中可以自定义 Fragment 的创建方式：
 
-- `setComponentName` is the name of the component you want to render. It's the same string specified in your `index.js` inside the `registerComponent` method.
-- `setLaunchOptions` is an optional method to pass initial props to your component. This is optional and you can remove it if you don't use it.
+- `setComponentName` 是你要渲染的组件名称，它是你在 `index.js` 中调用 `registerComponent` 时指定的相同字符串。
+- `setLaunchOptions` 是一个可选方法，用于向组件传递初始属性。这个是可选的，如果不需要可以删除。
 
-### 5. Test your integration
+### 5. 测试你的集成
 
-Make sure you run `yarn start` to run the bundler and then run your android app in Android Studio. The app should load the JavaScript/TypeScript code from the development server and display it in your React Native Fragment in the Activity.
+确保你运行了 `yarn start` 启动打包服务，然后在 Android Studio 中运行你的 Android 应用。应用应能从开发服务器加载 JavaScript/TypeScript 代码，并在 Activity 的 React Native Fragment 中显示它。
 
-Your app should look like this one:
+你的应用应该看起来像这样：
 
-![Screenshot](/docs/assets/EmbeddedAppAndroidFragmentVideo.gif)
+![截图](/docs/assets/EmbeddedAppAndroidFragmentVideo.gif)

@@ -3,51 +3,51 @@ id: pushnotificationios
 title: '🗑️ PushNotificationIOS'
 ---
 
-:::warning Deprecated
-Use one of the [community packages](https://reactnative.directory/?search=notification) instead.
+:::warning 已废弃
+请使用其他[社区包](https://reactnative.directory/?search=notification)。
 :::
 
 <div className="banner-native-code-required">
-  <h3>Projects with Native Code Only</h3>
-  <p>The following section only applies to projects with native code exposed. If you are using the managed Expo workflow, see the guide on <a href="https://docs.expo.dev/versions/latest/sdk/notifications/">Notifications</a> in the Expo documentation for the appropriate alternative.</p>
+  <h3>仅适用于包含原生代码的项目</h3>
+  <p>以下内容仅适用于暴露原生代码的项目。如果您使用的是托管的 Expo 工作流，请参阅 Expo 文档中关于 <a href="https://docs.expo.dev/versions/latest/sdk/notifications/">通知</a> 的指南，了解相应的替代方案。</p>
 </div>
 
-Handle notifications for your app, including scheduling and permissions.
+处理您应用的通知，包括调度和权限管理。
 
 ---
 
-## Getting Started
+## 入门
 
-To enable push notifications, [configure your notifications with Apple](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server) and your server-side system.
+启用推送通知，请先[在 Apple 上配置您的通知](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server)和服务器端系统。
 
-Then, [enable remote notifications](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app#2980038) in your project. This will automatically enable the required settings.
+然后，在您的项目中[启用远程通知](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app#2980038)。这将自动启用所需设置。
 
-### Enable support for `register` events
+### 启用对 `register` 事件的支持
 
-In your `AppDelegate.m`, add:
+在您的 `AppDelegate.m` 文件中，添加：
 
 ```objectivec
 #import <React/RCTPushNotificationManager.h>
 ```
 
-Then implement the following in order to handle remote notification registration events:
+然后实现以下方法，以处理远程通知注册事件：
 
 ```objectivec
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
- // This will trigger 'register' events on PushNotificationIOS
+ // 这将触发 PushNotificationIOS 的 'register' 事件
  [RCTPushNotificationManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
- // This will trigger 'registrationError' events on PushNotificationIOS
+ // 这将触发 PushNotificationIOS 的 'registrationError' 事件
  [RCTPushNotificationManager didFailToRegisterForRemoteNotificationsWithError:error];
 }
 ```
 
-### Handle notifications
+### 处理通知
 
-You'll need to implement `UNUserNotificationCenterDelegate` in your `AppDelegate`:
+您需要在 `AppDelegate` 中实现 `UNUserNotificationCenterDelegate`：
 
 ```objectivec
 #import <UserNotifications/UserNotifications.h>
@@ -56,7 +56,7 @@ You'll need to implement `UNUserNotificationCenterDelegate` in your `AppDelegate
 @end
 ```
 
-Set the delegate on app launch:
+在应用启动时设置代理：
 
 ```objectivec
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -69,40 +69,40 @@ Set the delegate on app launch:
 }
 ```
 
-#### Foreground notifications
+#### 前台通知
 
-Implement `userNotificationCenter:willPresentNotification:withCompletionHandler:` to handle notifications that arrive when the app is in the foreground. Use the completionHandler to determine if the notification will be shown to the user and notify `RCTPushNotificationManager` accordingly:
+实现 `userNotificationCenter:willPresentNotification:withCompletionHandler:` 以处理应用处于前台时收到的通知。使用 completionHandler 决定是否显示通知给用户，并相应通知 `RCTPushNotificationManager`：
 
 ```objectivec
-// Called when a notification is delivered to a foreground app.
+// 当前台应用接收到通知时调用。
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center
        willPresentNotification:(UNNotification *)notification
          withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler
 {
-  // This will trigger 'notification' and 'localNotification' events on PushNotificationIOS
+  // 这将触发 PushNotificationIOS 的 'notification' 和 'localNotification' 事件
   [RCTPushNotificationManager didReceiveNotification:notification];
-  // Decide if and how the notification will be shown to the user
+  // 决定是否以及如何向用户展示通知
   completionHandler(UNNotificationPresentationOptionNone);
 }
 ```
 
-#### Background notifications
+#### 后台通知
 
-Implement `userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:` to handle when a notification is tapped, typically called for background notifications which the user taps to open the app. However, if you had set foreground notifications to be shown in `userNotificationCenter:willPresentNotification:withCompletionHandler:`, this method will also be invoked on foreground notifications when tapped. In this case, you should only notify `RCTPushNotificationManager` in one of these callbacks.
+实现 `userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:` 来处理通知被点击时的情况，通常用于用户点击打开应用的后台通知。但是，如果您在 `userNotificationCenter:willPresentNotification:withCompletionHandler:` 中设置了前台通知显示，则该方法在前台通知被点击时也会被调用。在这种情况下，您应确保只在这两个回调中的一个中通知 `RCTPushNotificationManager`。
 
-If the tapped notification resulted in app launch, call `setInitialNotification:`. If the notification was not previously handled by `userNotificationCenter:willPresentNotification:withCompletionHandler:`, call `didReceiveNotification:` as well:
+如果被点击的通知导致应用启动，应调用 `setInitialNotification:`。如果通知之前未被 `userNotificationCenter:willPresentNotification:withCompletionHandler:` 处理，则也应调用 `didReceiveNotification:`：
 
 ```objectivec
 - (void)  userNotificationCenter:(UNUserNotificationCenter *)center
   didReceiveNotificationResponse:(UNNotificationResponse *)response
            withCompletionHandler:(void (^)(void))completionHandler
 {
-  // This condition passes if the notification was tapped to launch the app
+  // 如果通知是通过点击启动应用时触发此条件
   if ([response.actionIdentifier isEqualToString:UNNotificationDefaultActionIdentifier]) {
-    // Allow the notification to be retrieved on the JS side using getInitialNotification()
+    // 允许通过 JS 层的 getInitialNotification() 获取此通知
     [RCTPushNotificationManager setInitialNotification:response.notification];
   }
-  // This will trigger 'notification' and 'localNotification' events on PushNotificationIOS
+  // 这将触发 PushNotificationIOS 的 'notification' 和 'localNotification' 事件
   [RCTPushNotificationManager didReceiveNotification:response.notification];
   completionHandler();
 }
@@ -110,9 +110,9 @@ If the tapped notification resulted in app launch, call `setInitialNotification:
 
 ---
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `presentLocalNotification()`
 
@@ -120,24 +120,24 @@ If the tapped notification resulted in app launch, call `setInitialNotification:
 static presentLocalNotification(details: PresentLocalNotificationDetails);
 ```
 
-Schedules a local notification for immediate presentation.
+调度一个立即显示的本地通知。
 
-**Parameters:**
+**参数：**
 
-| Name    | Type   | Required | Description |
-| ------- | ------ | -------- | ----------- |
-| details | object | Yes      | See below.  |
+| 名称    | 类型   | 必填 | 描述       |
+| ------- | ------ | ---- | ---------- |
+| details | 对象   | 是   | 见下文说明 |
 
-`details` is an object containing:
+`details` 是一个对象，包含：
 
-- `alertTitle` : The text displayed as the title of the notification alert.
-- `alertBody` : The message displayed in the notification alert.
-- `userInfo` : An object containing additional notification data (optional).
-- `category` : The category of this notification, required for actionable notifications (optional). e.g. notifications with additional actions such as Reply or Like.
-- `applicationIconBadgeNumber` The number to display as the app's icon badge. The default value of this property is 0, which means that no badge is displayed (optional).
-- `isSilent` : If true, the notification will appear without sound (optional).
-- `soundName` : The sound played when the notification is fired (optional).
-- `alertAction` : DEPRECATED. This was used for iOS's legacy UILocalNotification.
+- `alertTitle` ：通知提示框中显示的标题文本。
+- `alertBody` ：通知提示框中显示的消息内容。
+- `userInfo` ：包含额外通知数据的对象（可选）。
+- `category` ：该通知的类别，针对可触发操作的通知必需（可选）。例如，带有“回复”或“点赞”等额外操作的通知。
+- `applicationIconBadgeNumber` ：应用图标上显示的徽章数字。该属性默认值为 0，表示不显示徽章（可选）。
+- `isSilent` ：如果为 true，通知显示时无声音（可选）。
+- `soundName` ：通知触发时播放的声音（可选）。
+- `alertAction` ：已废弃。过去用于 iOS 的 UILocalNotification。
 
 ---
 
@@ -147,27 +147,27 @@ Schedules a local notification for immediate presentation.
 static scheduleLocalNotification(details: ScheduleLocalNotificationDetails);
 ```
 
-Schedules a local notification for future presentation.
+调度一个未来显示的本地通知。
 
-**Parameters:**
+**参数：**
 
-| Name    | Type   | Required | Description |
-| ------- | ------ | -------- | ----------- |
-| details | object | Yes      | See below.  |
+| 名称    | 类型   | 必填 | 描述       |
+| ------- | ------ | ---- | ---------- |
+| details | 对象   | 是   | 见下文说明 |
 
-`details` is an object containing:
+`details` 是一个对象，包含：
 
-- `alertTitle` : The text displayed as the title of the notification alert.
-- `alertBody` : The message displayed in the notification alert.
-- `fireDate` : When the notification will be fired. Schedule notifications using either `fireDate` or `fireIntervalSeconds`, with `fireDate` taking precedence.
-- `fireIntervalSeconds` : Seconds from now to display the notification.
-- `userInfo` : An object containing additional notification data (optional).
-- `category` : The category of this notification, required for actionable notifications (optional). e.g. notifications with additional actions such as Reply or Like.
-- `applicationIconBadgeNumber` The number to display as the app's icon badge. The default value of this property is 0, which means that no badge is displayed (optional).
-- `isSilent` : If true, the notification will appear without sound (optional).
-- `soundName` : The sound played when the notification is fired (optional).
-- `alertAction` : DEPRECATED. This was used for iOS's legacy UILocalNotification.
-- `repeatInterval` : DEPRECATED. Use `fireDate` or `fireIntervalSeconds` instead.
+- `alertTitle` ：通知提示框中显示的标题文本。
+- `alertBody` ：通知提示框中显示的消息内容。
+- `fireDate` ：通知触发的时间。调度通知时可以使用 `fireDate` 或 `fireIntervalSeconds`，以 `fireDate` 优先。
+- `fireIntervalSeconds` ：从当前时间起经过多少秒触发通知。
+- `userInfo` ：包含额外通知数据的对象（可选）。
+- `category` ：该通知的类别，针对可触发操作的通知必需（可选）。如带有“回复”或“点赞”等额外操作的通知。
+- `applicationIconBadgeNumber` ：应用图标上显示的徽章数字。该属性默认值为 0，表示不显示徽章（可选）。
+- `isSilent` ：如果为 true，通知显示时无声音（可选）。
+- `soundName` ：通知触发时播放的声音（可选）。
+- `alertAction` ：已废弃。过去用于 iOS 的 UILocalNotification。
+- `repeatInterval` ：已废弃。请改用 `fireDate` 或 `fireIntervalSeconds`。
 
 ---
 
@@ -177,7 +177,7 @@ Schedules a local notification for future presentation.
 static cancelAllLocalNotifications();
 ```
 
-Cancels all scheduled local notifications.
+取消所有已调度的本地通知。
 
 ---
 
@@ -187,7 +187,7 @@ Cancels all scheduled local notifications.
 static removeAllDeliveredNotifications();
 ```
 
-Removes all delivered notifications from Notification Center.
+移除通知中心的所有已送达通知。
 
 ---
 
@@ -197,22 +197,22 @@ Removes all delivered notifications from Notification Center.
 static getDeliveredNotifications(callback: (notifications: Object[]) => void);
 ```
 
-Provides a list of the app’s notifications that are currently displayed in Notification Center.
+获取当前在通知中心显示的应用通知列表。
 
-**Parameters:**
+**参数：**
 
-| Name     | Type     | Required | Description                                                  |
-| -------- | -------- | -------- | ------------------------------------------------------------ |
-| callback | function | Yes      | Function which receives an array of delivered notifications. |
+| 名称     | 类型     | 必填 | 描述                  |
+| -------- | -------- | ---- | --------------------- |
+| callback | 函数     | 是   | 接收一个已送达通知数组的函数 |
 
-A delivered notification is an object containing:
+已送达通知对象包含：
 
-- `identifier` : The identifier of this notification.
-- `title` : The title of this notification.
-- `body` : The body of this notification.
-- `category` : The category of this notification (optional).
-- `userInfo` : An object containing additional notification data (optional).
-- `thread-id` : The thread identifier of this notification, if it has one.
+- `identifier` ：该通知的标识符。
+- `title` ：该通知的标题。
+- `body` ：该通知的正文内容。
+- `category` ：该通知的类别（可选）。
+- `userInfo` ：包含额外通知数据的对象（可选）。
+- `thread-id` ：如果有，该通知的线程标识符。
 
 ---
 
@@ -222,13 +222,13 @@ A delivered notification is an object containing:
 static removeDeliveredNotifications(identifiers: string[]);
 ```
 
-Removes the specified notifications from Notification Center.
+从通知中心移除指定的通知。
 
-**Parameters:**
+**参数：**
 
-| Name        | Type  | Required | Description                        |
-| ----------- | ----- | -------- | ---------------------------------- |
-| identifiers | array | Yes      | Array of notification identifiers. |
+| 名称        | 类型   | 必填 | 描述             |
+| ----------- | ------ | ---- | ---------------- |
+| identifiers | 数组   | 是   | 通知标识符数组。 |
 
 ---
 
@@ -238,13 +238,13 @@ Removes the specified notifications from Notification Center.
 static setApplicationIconBadgeNumber(num: number);
 ```
 
-Sets the badge number for the app icon on the Home Screen.
+设置应用图标在主屏上的徽章数字。
 
-**Parameters:**
+**参数：**
 
-| Name   | Type   | Required | Description                    |
-| ------ | ------ | -------- | ------------------------------ |
-| number | number | Yes      | Badge number for the app icon. |
+| 名称   | 类型   | 必填 | 描述              |
+| ------ | ------ | ---- | ----------------- |
+| number | 数字   | 是   | 应用图标的徽章数字 |
 
 ---
 
@@ -254,13 +254,13 @@ Sets the badge number for the app icon on the Home Screen.
 static getApplicationIconBadgeNumber(callback: (num: number) => void);
 ```
 
-Gets the current badge number for the app icon on the Home Screen.
+获取当前应用图标在主屏上的徽章数字。
 
-**Parameters:**
+**参数：**
 
-| Name     | Type     | Required | Description                                        |
-| -------- | -------- | -------- | -------------------------------------------------- |
-| callback | function | Yes      | Function which processes the current badge number. |
+| 名称     | 类型     | 必填 | 描述                    |
+| -------- | -------- | ---- | ----------------------- |
+| callback | 函数     | 是   | 处理当前徽章数字的函数。 |
 
 ---
 
@@ -270,13 +270,13 @@ Gets the current badge number for the app icon on the Home Screen.
 static cancelLocalNotifications(userInfo: Object);
 ```
 
-Cancels any scheduled local notifications which match the fields in the provided `userInfo`.
+取消任何符合提供的 `userInfo` 字段的已调度本地通知。
 
-**Parameters:**
+**参数：**
 
-| Name     | Type   | Required | Description |
-| -------- | ------ | -------- | ----------- |
-| userInfo | object | No       |             |
+| 名称     | 类型   | 必填 | 描述       |
+| -------- | ------ | ---- | ---------- |
+| userInfo | 对象   | 否   |            |
 
 ---
 
@@ -288,13 +288,13 @@ static getScheduledLocalNotifications(
 );
 ```
 
-Gets the list of local notifications that are currently scheduled.
+获取当前所有已调度的本地通知列表。
 
-**Parameters:**
+**参数：**
 
-| Name     | Type     | Required | Description                                                                  |
-| -------- | -------- | -------- | ---------------------------------------------------------------------------- |
-| callback | function | Yes      | Function which processes an array of objects describing local notifications. |
+| 名称     | 类型     | 必填 | 描述                                   |
+| -------- | -------- | ---- | ------------------------------------ |
+| callback | 函数     | 是   | 处理本地通知对象数组的函数。        |
 
 ---
 
@@ -310,21 +310,21 @@ static addEventListener(
 );
 ```
 
-Attaches a listener to notification events including local notifications, remote notifications, and notification registration results.
+添加监听器，监听本地通知、远程通知以及通知注册结果等事件。
 
-**Parameters:**
+**参数：**
 
-| Name    | Type     | Required | Description                         |
-| ------- | -------- | -------- | ----------------------------------- |
-| type    | string   | Yes      | Event type to listen to. See below. |
-| handler | function | Yes      | Listener.                           |
+| 名称    | 类型     | 必填 | 描述                |
+| ------- | -------- | ---- | ------------------- |
+| type    | 字符串   | 是   | 监听的事件类型。见下。 |
+| handler | 函数     | 是   | 事件处理函数。       |
 
-Valid events types include:
+有效的事件类型包括：
 
-- `notification` : Fired when a remote notification is received. The handler will be invoked with an instance of `PushNotificationIOS`. This will handle notifications that arrive in the foreground or were tapped to open the app from the background.
-- `localNotification` : Fired when a local notification is received. The handler will be invoked with an instance of `PushNotificationIOS`. This will handle notifications that arrive in the foreground or were tapped to open the app from the background.
-- `register`: Fired when the user registers successfully for remote notifications. The handler will be invoked with a hex string representing the deviceToken.
-- `registrationError`: Fired when the user fails to register for remote notifications. Typically occurs due to APNS issues or if the device is a simulator. The handler will be invoked with `{message: string, code: number, details: any}`.
+- `notification` ：当收到远程通知时触发。处理函数会收到一个 `PushNotificationIOS` 实例。该事件处理前台收到的通知，也处理背景通知被点击打开应用的情况。
+- `localNotification` ：当收到本地通知时触发。处理函数会收到一个 `PushNotificationIOS` 实例。该事件处理前台收到的通知，也处理背景通知被点击打开应用的情况。
+- `register` ：当用户成功注册远程通知时触发。处理函数接收表示设备令牌的十六进制字符串。
+- `registrationError` ：当注册远程通知失败时触发。通常由于 APNS 问题或设备为模拟器时出现。处理函数接收一个包含 `{message: string, code: number, details: any}` 的错误对象。
 
 ---
 
@@ -336,13 +336,13 @@ static removeEventListener(
 );
 ```
 
-Removes the event listener. Do this in `componentWillUnmount` to prevent memory leaks.
+移除事件监听器。建议在 `componentWillUnmount` 中调用，以防止内存泄漏。
 
-**Parameters:**
+**参数：**
 
-| Name | Type   | Required | Description                                       |
-| ---- | ------ | -------- | ------------------------------------------------- |
-| type | string | Yes      | Event type. See `addEventListener()` for options. |
+| 名称 | 类型   | 必填 | 描述                  |
+| ---- | ------ | ---- | --------------------- |
+| type | 字符串 | 是   | 事件类型。见 `addEventListener()`。 |
 
 ---
 
@@ -352,21 +352,21 @@ Removes the event listener. Do this in `componentWillUnmount` to prevent memory 
 static requestPermissions(permissions?: PushNotificationPermissions[]);
 ```
 
-Requests notification permissions from iOS, prompting the user with a dialog box. By default, this will request all notification permissions, but you can optionally specify which permissions to request. The following permissions are supported:
+请求 iOS 的通知权限，会弹出提示框让用户允许或拒绝。默认请求所有通知权限，但也可以选择请求特定权限。支持的权限包括：
 
 - `alert`
 - `badge`
 - `sound`
 
-If a map is provided to the method, only the permissions with truthy values will be requested.
+如果传入参数，则只请求对应为真值的权限。
 
-This method returns a promise that will resolve when the user accepts or rejects the request, or if the permissions were previously rejected. The promise resolves to the state of the permissions after the request has been completed.
+该方法返回一个 Promise，当用户接受或拒绝请求，或权限之前已被拒绝时解析。Promise 解析为请求完成后的权限状态。
 
-**Parameters:**
+**参数：**
 
-| Name        | Type  | Required | Description            |
-| ----------- | ----- | -------- | ---------------------- |
-| permissions | array | No       | alert, badge, or sound |
+| 名称        | 类型  | 必填 | 描述             |
+| ----------- | ----- | ---- | ---------------- |
+| permissions | 数组  | 否   | alert、badge 或 sound |
 
 ---
 
@@ -376,9 +376,9 @@ This method returns a promise that will resolve when the user accepts or rejects
 static abandonPermissions();
 ```
 
-Unregister for all remote notifications received via Apple Push Notification service.
+注销所有 Apple 推送通知服务的远程通知。
 
-You should call this method in rare circumstances only, such as when a new version of the app removes support for all types of remote notifications. Users can temporarily prevent apps from receiving remote notifications through the Settings app. Apps unregistered through this method can always re-register.
+一般只应在极少数情况下调用，例如新版本应用取消所有远程通知支持时。用户可以通过系统设置临时阻止应用接收远程通知。通过此方法注销的应用仍可随时重新注册。
 
 ---
 
@@ -390,15 +390,15 @@ static checkPermissions(
 );
 ```
 
-Check which push permissions are currently enabled.
+检查当前推送权限的开启状态。
 
-**Parameters:**
+**参数：**
 
-| Name     | Type     | Required | Description |
-| -------- | -------- | -------- | ----------- |
-| callback | function | Yes      | See below.  |
+| 名称     | 类型     | 必填 | 描述      |
+| -------- | -------- | ---- | --------- |
+| callback | 函数     | 是   | 详见下文。 |
 
-`callback` will be invoked with a `permissions` object:
+`callback` 会接收一个权限对象：
 
 - `alert: boolean`
 - `badge: boolean`
@@ -412,7 +412,7 @@ Check which push permissions are currently enabled.
 static getInitialNotification(): Promise<PushNotification | null>;
 ```
 
-This method returns a promise. If the app was launched by a push notification, this promise resolves to an object of type `PushNotificationIOS` for the notification that was tapped. Otherwise, it resolves to `null`.
+此方法返回一个 Promise。如果应用是被推送通知启动的，则该 Promise 解析为表示被点击通知的 `PushNotificationIOS` 对象，否则解析为 `null`。
 
 ---
 
@@ -422,7 +422,7 @@ This method returns a promise. If the app was launched by a push notification, t
 static getAuthorizationStatus(): Promise<number>;
 ```
 
-This method returns a promise that resolves to the current notification authorization status. See [UNAuthorizationStatus](https://developer.apple.com/documentation/usernotifications/unauthorizationstatus?language=objc) for possible values.
+此方法返回一个 Promise，解析为当前通知授权状态。具体值参见 [UNAuthorizationStatus](https://developer.apple.com/documentation/usernotifications/unauthorizationstatus?language=objc)。
 
 ---
 
@@ -432,9 +432,9 @@ This method returns a promise that resolves to the current notification authoriz
 finish(result: string);
 ```
 
-This method is available for remote notifications that have been received via [`application:didReceiveRemoteNotification:fetchCompletionHandler:`](https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1623013-application?language=objc). However, this is superseded by `UNUserNotificationCenterDelegate` and will no longer be invoked if both `application:didReceiveRemoteNotification:fetchCompletionHandler:` and the newer handlers from `UNUserNotificationCenterDelegate` are implemented.
+此方法适用于通过 [`application:didReceiveRemoteNotification:fetchCompletionHandler:`](https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1623013-application?language=objc) 接收到的远程通知。但该方法已被 `UNUserNotificationCenterDelegate` 新的处理方式取代，如果同时实现了两者，旧方法将不再调用。
 
-If for some reason you're still relying on `application:didReceiveRemoteNotification:fetchCompletionHandler:`, you'll need to set up event handling on the iOS side:
+如果您仍然依赖 `application:didReceiveRemoteNotification:fetchCompletionHandler:`，您需要在 iOS 端设置事件处理：
 
 ```objectivec
 - (void)           application:(UIApplication *)application
@@ -445,9 +445,9 @@ If for some reason you're still relying on `application:didReceiveRemoteNotifica
 }
 ```
 
-Call `finish()` to execute the native completion handlers once you're done handling the notification on the JS side. When calling this block, pass in the fetch result value that best describes the results of your operation. For a list of possible values, see `PushNotificationIOS.FetchResult`.
+完成 JS 侧通知处理后，调用 `finish()` 来执行原生完成处理程序。调用时传入一个描述操作结果的 fetch 结果值，具体值见 `PushNotificationIOS.FetchResult`。
 
-If you're using `application:didReceiveRemoteNotification:fetchCompletionHandler:`, you _must_ call this handler and should do so as soon as possible. See the [official documentation](https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1623013-application?language=objc) for more details.
+如果使用 `application:didReceiveRemoteNotification:fetchCompletionHandler:`，您 _必须_ 及时调用该 handler。详情见 [官方文档](https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1623013-application?language=objc)。
 
 ---
 
@@ -457,7 +457,7 @@ If you're using `application:didReceiveRemoteNotification:fetchCompletionHandler
 getMessage(): string | Object;
 ```
 
-An alias for `getAlert` to get the notification's main message string.
+`getAlert` 方法的别名，用于获取通知的主要消息字符串。
 
 ---
 
@@ -467,7 +467,7 @@ An alias for `getAlert` to get the notification's main message string.
 getSound(): string;
 ```
 
-Gets the sound string from the `aps` object. This will be `null` for local notifications.
+从 `aps` 对象中获取声音字符串。本地通知返回 `null`。
 
 ---
 
@@ -477,7 +477,7 @@ Gets the sound string from the `aps` object. This will be `null` for local notif
 getCategory(): string;
 ```
 
-Gets the category string from the `aps` object.
+从 `aps` 对象中获取类别字符串。
 
 ---
 
@@ -487,7 +487,7 @@ Gets the category string from the `aps` object.
 getAlert(): string | Object;
 ```
 
-Gets the notification's main message from the `aps` object. Also see the alias: `getMessage()`.
+从 `aps` 对象中获取通知主要消息。也见别名：`getMessage()`。
 
 ---
 
@@ -497,7 +497,7 @@ Gets the notification's main message from the `aps` object. Also see the alias: 
 getContentAvailable(): number;
 ```
 
-Gets the content-available number from the `aps` object.
+从 `aps` 对象中获取 `content-available` 数值。
 
 ---
 
@@ -507,7 +507,7 @@ Gets the content-available number from the `aps` object.
 getBadgeCount(): number;
 ```
 
-Gets the badge count number from the `aps` object.
+从 `aps` 对象中获取徽章计数数字。
 
 ---
 
@@ -517,7 +517,7 @@ Gets the badge count number from the `aps` object.
 getData(): Object;
 ```
 
-Gets the data object on the notification.
+获取通知中的数据对象。
 
 ---
 
@@ -527,4 +527,4 @@ Gets the data object on the notification.
 getThreadID();
 ```
 
-Gets the thread ID on the notification.
+获取通知中的线程 ID。

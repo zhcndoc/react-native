@@ -1,21 +1,21 @@
 ---
 id: animations
-title: Animations
+title: 动画
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-Animations are very important to create a great user experience. Stationary objects must overcome inertia as they start moving. Objects in motion have momentum and rarely come to a stop immediately. Animations allow you to convey physically believable motion in your interface.
+动画对于创建出色的用户体验非常重要。静止的物体在开始移动时必须克服惯性。运动中的物体具有动量，通常不会立即停止。动画使您能够在界面中传达物理上可信的运动。
 
-React Native provides two complementary animation systems: [`Animated`](animations#animated-api) for granular and interactive control of specific values, and [`LayoutAnimation`](animations#layoutanimation-api) for animated global layout transactions.
+React Native 提供了两种互补的动画系统：用于精细且交互式控制特定数值的 [`Animated`](animations#animated-api)，以及用于全局布局变更动画的 [`LayoutAnimation`](animations#layoutanimation-api)。
 
 ## `Animated` API
 
-The [`Animated`](animated) API is designed to concisely express a wide variety of interesting animation and interaction patterns in a very performant way. `Animated` focuses on declarative relationships between inputs and outputs, with configurable transforms in between, and `start`/`stop` methods to control time-based animation execution.
+[`Animated`](animated) API 旨在以高性能的方式简洁地表达各种有趣的动画和交互模式。`Animated` 关注输入和输出之间的声明式关系，中间配有可配置的变换，以及用于控制基于时间的动画执行的 `start`/`stop` 方法。
 
-`Animated` exports six animatable component types: `View`, `Text`, `Image`, `ScrollView`, `FlatList` and `SectionList`, but you can also create your own using `Animated.createAnimatedComponent()`.
+`Animated` 导出六种可动画化的组件类型：`View`、`Text`、`Image`、`ScrollView`、`FlatList` 和 `SectionList`，但您也可以使用 `Animated.createAnimatedComponent()` 创建自己的动画组件。
 
-For example, a container view that fades in when it is mounted may look like this:
+例如，一个在挂载时淡入的容器视图可能如下所示：
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -25,7 +25,7 @@ import React, {useEffect, useRef} from 'react';
 import {Animated, Text, View} from 'react-native';
 
 const FadeInView = props => {
-  const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
+  const fadeAnim = useRef(new Animated.Value(0)).current; // 初始不透明度值为 0
 
   useEffect(() => {
     Animated.timing(fadeAnim, {
@@ -36,17 +36,17 @@ const FadeInView = props => {
   }, [fadeAnim]);
 
   return (
-    <Animated.View // Special animatable View
+    <Animated.View // 特殊的可动画视图
       style={{
         ...props.style,
-        opacity: fadeAnim, // Bind opacity to animated value
+        opacity: fadeAnim, // 将不透明度绑定到动画值
       }}>
       {props.children}
     </Animated.View>
   );
 };
 
-// You can then use your `FadeInView` in place of a `View` in your components:
+// 您可以在组件中用 `FadeInView` 替代 `View`：
 export default () => {
   return (
     <View
@@ -80,7 +80,7 @@ import {Animated, Text, View, type ViewStyle} from 'react-native';
 type FadeInViewProps = PropsWithChildren<{style: ViewStyle}>;
 
 const FadeInView: React.FC<FadeInViewProps> = props => {
-  const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
+  const fadeAnim = useRef(new Animated.Value(0)).current; // 初始不透明度值为 0
 
   useEffect(() => {
     Animated.timing(fadeAnim, {
@@ -91,17 +91,17 @@ const FadeInView: React.FC<FadeInViewProps> = props => {
   }, [fadeAnim]);
 
   return (
-    <Animated.View // Special animatable View
+    <Animated.View // 特殊的可动画视图
       style={{
         ...props.style,
-        opacity: fadeAnim, // Bind opacity to animated value
+        opacity: fadeAnim, // 将不透明度绑定到动画值
       }}>
       {props.children}
     </Animated.View>
   );
 };
 
-// You can then use your `FadeInView` in place of a `View` in your components:
+// 您可以在组件中用 `FadeInView` 替代 `View`：
 export default () => {
   return (
     <View
@@ -128,21 +128,21 @@ export default () => {
 </TabItem>
 </Tabs>
 
-Let's break down what's happening here. In the `FadeInView` render method, a new `Animated.Value` called `fadeAnim` is initialized with `useRef`. The opacity property on the `View` is mapped to this animated value. Behind the scenes, the numeric value is extracted and used to set opacity.
+让我们拆解这里发生的事情。在 `FadeInView` 的渲染方法中，通过 `useRef` 初始化了一个新的 `Animated.Value`，称为 `fadeAnim`。该视图的 `opacity` 属性映射到这个动画值。幕后会提取数值并用于设置不透明度。
 
-When the component mounts, the opacity is set to 0. Then, an easing animation is started on the `fadeAnim` animated value, which will update all of its dependent mappings (in this case, only the opacity) on each frame as the value animates to the final value of 1.
+组件挂载时，不透明度设为 0。随后，在 `fadeAnim` 动画值上启动了一个缓动动画，它会在每一帧更新所有依赖映射（在此例中只有不透明度），直至动画值达到最终的 1。
 
-This is done in an optimized way that is faster than calling `setState` and re-rendering. Because the entire configuration is declarative, we will be able to implement further optimizations that serialize the configuration and runs the animation on a high-priority thread.
+这是以一种比调用 `setState` 并重新渲染更快且经过优化的方式完成的。由于整个配置是以声明式编写的，我们可以实现进一步的优化，将配置序列化，并在高优先级线程上运行动画。
 
-### Configuring animations
+### 配置动画
 
-Animations are heavily configurable. Custom and predefined easing functions, delays, durations, decay factors, spring constants, and more can all be tweaked depending on the type of animation.
+动画高度可配置。可根据动画类型调整自定义或预定义缓动函数、延迟、持续时间、衰减因子、弹簧常量等等。
 
-`Animated` provides several animation types, the most commonly used one being [`Animated.timing()`](animated#timing). It supports animating a value over time using one of various predefined easing functions, or you can use your own. Easing functions are typically used in animation to convey gradual acceleration and deceleration of objects.
+`Animated` 提供了多种动画类型，最常用的是 [`Animated.timing()`](animated#timing)。它支持使用多种预定义缓动函数之一（也可以使用自定义）在一段时间内对数值进行动画。缓动函数通常用于动画中，表达物体的渐进加速和减速。
 
-By default, `timing` will use an easeInOut curve that conveys gradual acceleration to full speed and concludes by gradually decelerating to a stop. You can specify a different easing function by passing an `easing` parameter. Custom `duration` or even a `delay` before the animation starts is also supported.
+默认情况下，`timing` 将使用 easeInOut 曲线，体现渐进加速至最大速度，最终渐进减速至停止。您可以通过传入 `easing` 参数指定不同的缓动函数。还支持自定义 `duration` 或动画开始前的 `delay`。
 
-For example, if we want to create a 2-second long animation of an object that slightly backs up before moving to its final position:
+例如，如果我们想创建一个 2 秒的动画，让物体在移动到最终位置之前稍稍后退：
 
 ```tsx
 Animated.timing(this.state.xPosition, {
@@ -153,47 +153,47 @@ Animated.timing(this.state.xPosition, {
 }).start();
 ```
 
-Take a look at the [Configuring animations](animated#configuring-animations) section of the `Animated` API reference to learn more about all the config parameters supported by the built-in animations.
+欲了解所有内置动画支持的配置参数，请参见 [`Animated` API 参考](animated#configuring-animations) 的“配置动画”章节。
 
-### Composing animations
+### 组合动画
 
-Animations can be combined and played in sequence or in parallel. Sequential animations can play immediately after the previous animation has finished, or they can start after a specified delay. The `Animated` API provides several methods, such as `sequence()` and `delay()`, each of which take an array of animations to execute and automatically calls `start()`/`stop()` as needed.
+动画可以组合并顺序或并行播放。顺序动画可紧接前一个动画完成后播放，也可在指定延迟后开始。`Animated` API 提供了多种方法，如 `sequence()` 和 `delay()`，它们接受动画数组并自动调用所需的 `start()`/`stop()`。
 
-For example, the following animation coasts to a stop, then it springs back while twirling in parallel:
+例如，下面的动画先缓慢停止，然后弹回同时旋转（并行）：
 
 ```tsx
 Animated.sequence([
-  // decay, then spring to start and twirl
+  // 衰减后，弹回到起始位置并旋转
   Animated.decay(position, {
-    // coast to a stop
-    velocity: {x: gestureState.vx, y: gestureState.vy}, // velocity from gesture release
+    // 缓慢停止
+    velocity: {x: gestureState.vx, y: gestureState.vy}, // 手势释放时的速度
     deceleration: 0.997,
     useNativeDriver: true,
   }),
   Animated.parallel([
-    // after decay, in parallel:
+    // 衰减后并行执行：
     Animated.spring(position, {
-      toValue: {x: 0, y: 0}, // return to start
+      toValue: {x: 0, y: 0}, // 返回起点
       useNativeDriver: true,
     }),
     Animated.timing(twirl, {
-      // and twirl
+      // 并旋转
       toValue: 360,
       useNativeDriver: true,
     }),
   ]),
-]).start(); // start the sequence group
+]).start(); // 启动序列组
 ```
 
-If one animation is stopped or interrupted, then all other animations in the group are also stopped. `Animated.parallel` has a `stopTogether` option that can be set to `false` to disable this.
+如果某个动画被停止或中断，则组内其他动画也会停止。`Animated.parallel` 的 `stopTogether` 选项可设为 `false` 以禁用此行为。
 
-You can find a full list of composition methods in the [Composing animations](animated#composing-animations) section of the `Animated` API reference.
+完整版的组合方法列表请参见 [`Animated` API 参考](animated#composing-animations) 的“组合动画”章节。
 
-### Combining animated values
+### 组合动画值
 
-You can [combine two animated values](animated#combining-animated-values) via addition, multiplication, division, or modulo to make a new animated value.
+您可以通过加法、乘法、除法或取模将两个动画值[组合成新的动画值](animated#combining-animated-values)。
 
-There are some cases where an animated value needs to invert another animated value for calculation. An example is inverting a scale (2x --> 0.5x):
+在某些场景下，需要反转某个动画值以进行计算。例如反转缩放（2倍 --> 0.5倍）：
 
 ```tsx
 const a = new Animated.Value(1);
@@ -205,11 +205,11 @@ Animated.spring(a, {
 }).start();
 ```
 
-### Interpolation
+### 插值
 
-Each property can be run through an interpolation first. An interpolation maps input ranges to output ranges, typically using a linear interpolation but also supports easing functions. By default, it will extrapolate the curve beyond the ranges given, but you can also have it clamp the output value.
+每个属性都可以先经过插值处理。插值是将输入范围映射到输出范围，通常采用线性插值，也支持缓动函数。默认情况下，它会在给定范围之外外推，但你也可以设置为钳制输出值。
 
-A basic mapping to convert a 0-1 range to a 0-100 range would be:
+一个将 0-1 范围映射到 0-100 范围的基本插值示例如下：
 
 ```tsx
 value.interpolate({
@@ -218,11 +218,11 @@ value.interpolate({
 });
 ```
 
-For example, you may want to think about your `Animated.Value` as going from 0 to 1, but animate the position from 150px to 0px and the opacity from 0 to 1. This can be done by modifying `style` from the example above like so:
+例如，您可以将 `Animated.Value` 视为从 0 到 1，但将位置动画从 150px 变到 0px，且将不透明度从 0 变到 1。做法是修改上述例子中的 `style`：
 
 ```tsx
   style={{
-    opacity: this.state.fadeAnim, // Binds directly
+    opacity: this.state.fadeAnim, // 直接绑定
     transform: [{
       translateY: this.state.fadeAnim.interpolate({
         inputRange: [0, 1],
@@ -232,7 +232,7 @@ For example, you may want to think about your `Animated.Value` as going from 0 t
   }}
 ```
 
-[`interpolate()`](animated#interpolate) supports multiple range segments as well, which is handy for defining dead zones and other handy tricks. For example, to get a negation relationship at -300 that goes to 0 at -100, then back up to 1 at 0, and then back down to zero at 100 followed by a dead-zone that remains at 0 for everything beyond that, you could do:
+[`interpolate()`](animated#interpolate) 也支持多段范围，非常适合定义死区和其他小技巧。例如，要实现一个在 -300 时取负值、-100 时变为 0、0 时变为 1、100 时再回落到 0，且之后的值保持死区 0 的映射，可以这样做：
 
 ```tsx
 value.interpolate({
@@ -241,24 +241,24 @@ value.interpolate({
 });
 ```
 
-Which would map like so:
+映射关系如下：
 
 ```
-Input | Output
+输入  | 输出
 ------|-------
-  -400|    450
-  -300|    300
-  -200|    150
-  -100|      0
-   -50|    0.5
-     0|      1
-    50|    0.5
-   100|      0
-   101|      0
-   200|      0
+ -400 |  450
+ -300 |  300
+ -200 |  150
+ -100 |    0
+  -50 |  0.5
+    0 |    1
+   50 |  0.5
+  100 |    0
+  101 |    0
+  200 |    0
 ```
 
-`interpolate()` also supports mapping to strings, allowing you to animate colors as well as values with units. For example, if you wanted to animate a rotation you could do:
+`interpolate()` 还支持映射到字符串，使你可以动画颜色或带单位的数值。例如，动画旋转时，你可以这样写：
 
 ```tsx
 value.interpolate({
@@ -267,11 +267,11 @@ value.interpolate({
 });
 ```
 
-`interpolate()` also supports arbitrary easing functions, many of which are already implemented in the [`Easing`](easing) module. `interpolate()` also has configurable behavior for extrapolating the `outputRange`. You can set the extrapolation by setting the `extrapolate`, `extrapolateLeft`, or `extrapolateRight` options. The default value is `extend` but you can use `clamp` to prevent the output value from exceeding `outputRange`.
+`interpolate()` 还支持任意缓动函数，许多已经在 [`Easing`](easing) 模块中实现。此外，`interpolate()` 具有对输出范围外推的配置，可以通过设置 `extrapolate`、`extrapolateLeft`、`extrapolateRight` 选项控制。默认值为 `extend`，但可以用 `clamp` 限制输出值不超出 `outputRange`。
 
-### Tracking dynamic values
+### 跟踪动态数值
 
-Animated values can also track other values by setting the `toValue` of an animation to another animated value instead of a plain number. For example, a "Chat Heads" animation like the one used by Messenger on Android could be implemented with a `spring()` pinned on another animated value, or with `timing()` and a `duration` of 0 for rigid tracking. They can also be composed with interpolations:
+动画值可以通过将动画的 `toValue` 设为另一个动画值（而不是普通数字）来跟踪其他值。例如，Messenger 安卓版的“聊天头”动画可以用一个以另一个动画值为目标的 `spring()` 实现，或者用 `timing()`（duration 为 0）实现刚性跟踪，也可与插值组合：
 
 ```tsx
 Animated.spring(follower, {toValue: leader}).start();
@@ -284,13 +284,13 @@ Animated.timing(opacity, {
 }).start();
 ```
 
-The `leader` and `follower` animated values would be implemented using `Animated.ValueXY()`. `ValueXY` is a handy way to deal with 2D interactions, such as panning or dragging. It is a basic wrapper that contains two `Animated.Value` instances and some helper functions that call through to them, making `ValueXY` a drop-in replacement for `Value` in many cases. It allows us to track both x and y values in the example above.
+`leader` 和 `follower` 动画值可以用 `Animated.ValueXY()` 实现。`ValueXY` 是处理二维交互（如平移或拖动）的便捷包装，内部包含两个 `Animated.Value` 和部分辅助函数，使 `ValueXY` 在诸多场景下可以替代单独的动画值，用于同时跟踪 x 和 y。
 
-### Tracking gestures
+### 跟踪手势
 
-Gestures, like panning or scrolling, and other events can map directly to animated values using [`Animated.event`](animated#event). This is done with a structured map syntax so that values can be extracted from complex event objects. The first level is an array to allow mapping across multiple args, and that array contains nested objects.
+手势（如平移或滚动）和其他事件可以利用 [`Animated.event`](animated#event) 直接映射到动画值。通过结构化映射，从复杂事件对象中抽取值。第一层是数组以支持多参数映射，数组内含嵌套对象。
 
-For example, when working with horizontal scrolling gestures, you would do the following in order to map `event.nativeEvent.contentOffset.x` to `scrollX` (an `Animated.Value`):
+例如处理横向滚动手势时，您可以将 `event.nativeEvent.contentOffset.x` 映射到 `scrollX`（一个 `Animated.Value`）：
 
 ```tsx
  onScroll={Animated.event(
@@ -304,9 +304,9 @@ For example, when working with horizontal scrolling gestures, you would do the f
  )}
 ```
 
-The following example implements a horizontal scrolling carousel where the scroll position indicators are animated using the `Animated.event` used in the `ScrollView`
+下面的示例实现了一个横向滚动的走马灯，其中滚动位置指示器由 `ScrollView` 中的 `Animated.event` 动画驱动。
 
-#### ScrollView with Animated Event Example
+#### ScrollView 与 Animated Event 示例
 
 ```SnackPlayer name=Animated&supportedPlatforms=ios,android
 import React from 'react';
@@ -438,18 +438,18 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-When using `PanResponder`, you could use the following code to extract the x and y positions from `gestureState.dx` and `gestureState.dy`. We use a `null` in the first position of the array, as we are only interested in the second argument passed to the `PanResponder` handler, which is the `gestureState`.
+当使用 `PanResponder` 时，可以用如下代码将 `gestureState.dx` 和 `gestureState.dy` 中的 x、y 位置提取出来。第一个数组元素为 `null`，因为我们只对传给 `PanResponder` 处理函数的第二个参数（`gestureState`）感兴趣。
 
 ```tsx
 onPanResponderMove={Animated.event(
-  [null, // ignore the native event
-  // extract dx and dy from gestureState
-  // like 'pan.x = gestureState.dx, pan.y = gestureState.dy'
+  [null, // 忽略原生事件
+  // 从 gestureState 中提取 dx 和 dy
+  // 相当于 'pan.x = gestureState.dx, pan.y = gestureState.dy'
   {dx: pan.x, dy: pan.y}
 ])}
 ```
 
-#### PanResponder with Animated Event Example
+#### 带 Animated Event 的 PanResponder 示例
 
 ```SnackPlayer name=Animated
 import React, {useRef} from 'react';
@@ -472,7 +472,7 @@ const App = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titleText}>Drag & Release this box!</Text>
+      <Text style={styles.titleText}>拖拽 & 松开此方块！</Text>
       <Animated.View
         style={{
           transform: [{translateX: pan.x}, {translateY: pan.y}],
@@ -506,35 +506,35 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-### Responding to the current animation value
+### 响应当前动画值
 
-You may notice that there is no clear way to read the current value while animating. This is because the value may only be known in the native runtime due to optimizations. If you need to run JavaScript in response to the current value, there are two approaches:
+您可能注意到动画进行中没有明确方式读取当前值。这是由于优化，当前值可能只存在于原生运行环境中。如果需要在动画值改变时执行 JS 代码，有两种方法：
 
-- `spring.stopAnimation(callback)` will stop the animation and invoke `callback` with the final value. This is useful when making gesture transitions.
-- `spring.addListener(callback)` will invoke `callback` asynchronously while the animation is running, providing a recent value. This is useful for triggering state changes, for example snapping a bobble to a new option as the user drags it closer, because these larger state changes are less sensitive to a few frames of lag compared to continuous gestures like panning which need to run at 60 fps.
+- `spring.stopAnimation(callback)` 在动画停止时调用 `callback` 并传入最终值，适用于手势转换时。
+- `spring.addListener(callback)` 在动画进行中异步地调用 `callback`，提供最新值，适用于触发状态更改（比如当用户拖动时让控件“吸附”到新选项），这些大规模状态变更比连续手势（如平移）对少许帧延迟的容忍度更高。
 
-`Animated` is designed to be fully serializable so that animations can be run in a high performance way, independent of the normal JavaScript event loop. This does influence the API, so keep that in mind when it seems a little trickier to do something compared to a fully synchronous system. Check out `Animated.Value.addListener` as a way to work around some of these limitations, but use it sparingly since it might have performance implications in the future.
+`Animated` 设计为可序列化，因此动画能高性能运行且独立于常规 JS 事件循环。这影响了 API 设计，有时完成某些目标略显复杂。您可以考虑用 `Animated.Value.addListener` 解决部分限制，但应谨慎使用以避免对性能的潜在影响。
 
-### Using the native driver
+### 使用原生驱动
 
-The `Animated` API is designed to be serializable. By using the [native driver](/blog/2017/02/14/using-native-driver-for-animated), we send everything about the animation to native before starting the animation, allowing native code to perform the animation on the UI thread without having to go through the bridge on every frame. Once the animation has started, the JS thread can be blocked without affecting the animation.
+`Animated` API 设计为可序列化。采用 [原生驱动](/blog/2017/02/14/using-native-driver-for-animated) 时，动画所有信息在启动前发送至原生端，允许原生代码在 UI 线程运行动画，免去每一帧都需过桥通信。一旦动画启动，JS 线程阻塞也不会影响动画效果。
 
-Using the native driver for normal animations can be accomplished by setting `useNativeDriver: true` in animation config when starting it. Animations without a `useNativeDriver` property will default to false for legacy reasons, but emit a warning (and typechecking error in TypeScript).
+普通动画使用原生驱动，只需在启动动画时设置 `useNativeDriver: true`。未设置该属性的动画默认使用 false（为兼容旧版），但会发出警告（在 TypeScript 里还有类型错误）。
 
 ```tsx
 Animated.timing(this.state.animatedValue, {
   toValue: 1,
   duration: 500,
-  useNativeDriver: true, // <-- Set this to true
+  useNativeDriver: true, // <-- 设为 true
 }).start();
 ```
 
-Animated values are only compatible with one driver so if you use native driver when starting an animation on a value, make sure every animation on that value also uses the native driver.
+动画值只兼容单一驱动器，若对某个值启动动画时使用原生驱动，请确保所有相关动画都使用原生驱动。
 
-The native driver also works with `Animated.event`. This is especially useful for animations that follow the scroll position as without the native driver, the animation will always run a frame behind the gesture due to the async nature of React Native.
+原生驱动同样适用于 `Animated.event`，尤其适合跟随滚动位置的动画，否则由于 React Native 的异步特性，动画将总是滞后于手势一帧。
 
 ```tsx
-<Animated.ScrollView // <-- Use the Animated ScrollView wrapper
+<Animated.ScrollView // <-- 使用 Animated ScrollView 包装
   onScroll={Animated.event(
     [
       {
@@ -543,23 +543,23 @@ The native driver also works with `Animated.event`. This is especially useful fo
         },
       },
     ],
-    {useNativeDriver: true}, // <-- Set this to true
+    {useNativeDriver: true}, // <-- 设为 true
   )}>
   {content}
 </Animated.ScrollView>
 ```
 
-You can see the native driver in action by running the [RNTester app](https://github.com/facebook/react-native/blob/main/packages/rn-tester/), then loading the Native Animated Example. You can also take a look at the [source code](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/NativeAnimation/NativeAnimationsExample.js) to learn how these examples were produced.
+您可以通过运行 [RNTester 应用](https://github.com/facebook/react-native/blob/main/packages/rn-tester/)，加载 Native Animated 示例来体验原生驱动动画。也可以查看[源码](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/NativeAnimation/NativeAnimationsExample.js)了解示例实现。
 
-#### Caveats
+#### 注意事项
 
-Not everything you can do with `Animated` is currently supported by the native driver. The main limitation is that you can only animate non-layout properties: things like `transform` and `opacity` will work, but Flexbox and position properties will not. When using `Animated.event`, it will only work with direct events and not bubbling events. This means it does not work with `PanResponder` but does work with things like `ScrollView#onScroll`.
+并非 `Animated` 的所有功能目前都支持原生驱动。主要限制是只能动画非布局属性：如 `transform` 和 `opacity` 有效，而 Flexbox 和位置属性无效。使用 `Animated.event` 时只支持直接事件，不支持冒泡事件。这意味着它不支持 `PanResponder`，但适用于诸如 `ScrollView#onScroll`。
 
-When an animation is running, it can prevent `VirtualizedList` components from rendering more rows. If you need to run a long or looping animation while the user is scrolling through a list, you can use `isInteraction: false` in your animation's config to prevent this issue.
+运行动画时，可能阻止 `VirtualizedList` 组件渲染更多行。若需要在列表滚动时运行长时间或循环动画，可在动画配置中设置 `isInteraction: false` 以避免该问题。
 
-### Bear in mind
+### 注意事项
 
-While using transform styles such as `rotateY`, `rotateX`, and others ensure the transform style `perspective` is in place. At this time some animations may not render on Android without it. Example below.
+使用 `rotateY`、`rotateX` 等变换样式时，确保加上变换样式中的 `perspective`。目前部分动画在 Android 上若缺少它，可能无法正常渲染（而在 iOS 上正常）。示例如下：
 
 ```tsx
 <Animated.View
@@ -567,26 +567,26 @@ While using transform styles such as `rotateY`, `rotateX`, and others ensure the
     transform: [
       {scale: this.state.scale},
       {rotateY: this.state.rotateY},
-      {perspective: 1000}, // without this line this Animation will not render on Android while working fine on iOS
+      {perspective: 1000}, // 缺少这行时，此动画在 Android 不会渲染，但 iOS 正常
     ],
   }}
 />
 ```
 
-### Additional examples
+### 更多示例
 
-The RNTester app has various examples of `Animated` in use:
+RNTester 应用包含多种 `Animated` 使用示例：
 
 - [AnimatedGratuitousApp](https://github.com/facebook/react-native/tree/main/packages/rn-tester/js/examples/AnimatedGratuitousApp)
 - [NativeAnimationsExample](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/NativeAnimation/NativeAnimationsExample.js)
 
 ## `LayoutAnimation` API
 
-`LayoutAnimation` allows you to globally configure `create` and `update` animations that will be used for all views in the next render/layout cycle. This is useful for doing Flexbox layout updates without bothering to measure or calculate specific properties in order to animate them directly, and is especially useful when layout changes may affect ancestors, for example a "see more" expansion that also increases the size of the parent and pushes down the row below which would otherwise require explicit coordination between the components in order to animate them all in sync.
+`LayoutAnimation` 允许您全局配置渲染/布局周期内所有视图使用的 `create` 和 `update` 动画。这对于 Flexbox 布局更新非常实用，无需显式测量或计算特定属性进行直接动画。当布局更改可能影响父组件时特别有用，比如“查看更多”展开操作同时增加父组件大小并推动下面的行，这通常需要多个组件间显式协调才能同步动画。
 
-Note that although `LayoutAnimation` is very powerful and can be quite useful, it provides much less control than `Animated` and other animation libraries, so you may need to use another approach if you can't get `LayoutAnimation` to do what you want.
+请注意，尽管 `LayoutAnimation` 非常强大且实用，但其控制能力远小于 `Animated` 及其他动画库。如果 `LayoutAnimation` 无法满足需求，您可能需要采用其他方法。
 
-Note that in order to get this to work on **Android** you need to set the following flags via `UIManager`:
+**在 Android 上使其工作，您需要通过 `UIManager` 设置以下标志：**
 
 ```tsx
 UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -615,7 +615,7 @@ export default function App() {
   });
 
   const onPress = () => {
-    // Animate the update
+    // 执行动画更新
     LayoutAnimation.spring();
     setState({w: state.w + 15, h: state.h + 15});
   };
@@ -625,7 +625,7 @@ export default function App() {
       <View style={[styles.box, {width: state.w, height: state.h}]} />
       <TouchableOpacity onPress={onPress}>
         <View style={styles.button}>
-          <Text style={styles.buttonText}>Press me!</Text>
+          <Text style={styles.buttonText}>点我！</Text>
         </View>
       </TouchableOpacity>
     </View>
@@ -656,18 +656,18 @@ const styles = StyleSheet.create({
 });
 ```
 
-This example uses a preset value, you can customize the animations as you need, see [LayoutAnimation.js](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/LayoutAnimation/LayoutAnimation.js) for more information.
+这个示例使用了预设值，您可以根据需要自定义动画。更多信息请参阅 [LayoutAnimation.js](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/LayoutAnimation/LayoutAnimation.js)。
 
-## Additional notes
+## 其他注意事项
 
 ### `requestAnimationFrame`
 
-`requestAnimationFrame` is a polyfill from the browser that you might be familiar with. It accepts a function as its only argument and calls that function before the next repaint. It is an essential building block for animations that underlies all of the JavaScript-based animation APIs. In general, you shouldn't need to call this yourself - the animation APIs will manage frame updates for you.
+`requestAnimationFrame` 是浏览器的 polyfill，您可能很熟悉。它只接受一个函数作为参数，并在下次重绘前调用该函数。它是 JavaScript 动画的基础构件之一。通常您无需手动调用，它会被动画 API 管理帧更新。
 
 ### `setNativeProps`
 
-As mentioned [in the Direct Manipulation section](legacy/direct-manipulation), `setNativeProps` allows us to modify properties of native-backed components (components that are actually backed by native views, unlike composite components) directly, without having to `setState` and re-render the component hierarchy.
+如[直接操作章节](legacy/direct-manipulation)所述，`setNativeProps` 允许我们直接修改原生支持组件（即真正由原生视图支撑的组件，区别于复合组件）的属性，无需调用 `setState` 并重新渲染组件树。
 
-We could use this in the Rebound example to update the scale - this might be helpful if the component that we are updating is deeply nested and hasn't been optimized with `shouldComponentUpdate`.
+我们可以在 Rebound 示例中用它来更新缩放。如果被更新的组件深度嵌套且未通过 `shouldComponentUpdate` 优化，使用它会很有帮助。
 
-If you find your animations with dropping frames (performing below 60 frames per second), look into using `setNativeProps` or `shouldComponentUpdate` to optimize them. Or you could run the animations on the UI thread rather than the JavaScript thread [with the useNativeDriver option](/blog/2017/02/14/using-native-driver-for-animated). You may also want to defer any computationally intensive work until after animations are complete, using the [InteractionManager](interactionmanager). You can monitor the frame rate by using the In-App Dev Menu "FPS Monitor" tool.
+如果遇到动画丢帧（低于 60fps）问题，可以考虑用 `setNativeProps` 或 `shouldComponentUpdate` 优化，或用 [useNativeDriver 选项](/blog/2017/02/14/using-native-driver-for-animated) 让动画在 UI 线程运行。还可以使用 [InteractionManager](interactionmanager) 推迟计算密集型工作至动画完成后。您可以用应用内开发菜单的 “FPS Monitor” 工具监控帧率。

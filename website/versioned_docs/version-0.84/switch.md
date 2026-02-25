@@ -1,13 +1,13 @@
 ---
 id: switch
-title: Switch
+title: 开关
 ---
 
-Renders a boolean input.
+渲染一个布尔输入。
 
-This is a controlled component that requires an `onValueChange` callback that updates the `value` prop in order for the component to reflect user actions. If the `value` prop is not updated, the component will continue to render the supplied `value` prop instead of the expected result of any user actions.
+这是一个受控组件，需要一个 `onValueChange` 回调来更新 `value` 属性，以使组件反映用户操作。如果 `value` 属性没有被更新，组件将继续渲染提供的 `value` 属性，而不是任何用户操作的预期结果。
 
-## Example
+## 示例
 
 ```SnackPlayer name=Switch&supportedPlatforms=android,ios
 import React, {useState} from 'react';
@@ -46,21 +46,21 @@ export default App;
 
 ---
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
-### [View Props](view.md#props)
+### [视图属性](view.md#props)
 
-Inherits [View Props](view.md#props).
+继承自 [视图属性](view.md#props)。
 
 ---
 
 ### `disabled`
 
-If true the user won't be able to toggle the switch.
+如果为 true，用户将无法切换开关。
 
-| Type | Default |
+| 类型 | 默认值  |
 | ---- | ------- |
 | bool | `false` |
 
@@ -68,66 +68,66 @@ If true the user won't be able to toggle the switch.
 
 ### `ios_backgroundColor` <div className="label ios">iOS</div>
 
-On iOS, custom color for the background. This background color can be seen either when the switch value is `false` or when the switch is disabled (and the switch is translucent).
+在 iOS 上，开关背景的自定义颜色。该背景颜色可以在开关值为 `false` 或开关被禁用（并且开关半透明）时看到。
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `onChange`
 
-Invoked when the user tries to change the value of the switch. Receives the change event as an argument. If you want to only receive the new value, use `onValueChange` instead.
+当用户尝试更改开关的值时调用。接收变更事件作为参数。如果你只想接收新值，请改用 `onValueChange`。
 
-| Type     |
+| 类型     |
 | -------- |
-| function |
+| 函数     |
 
 ---
 
 ### `onValueChange`
 
-Invoked when the user tries to change the value of the switch. Receives the new value as an argument. If you want to instead receive an event, use `onChange`.
+当用户尝试更改开关的值时调用。接收新的值作为参数。如果你想接收事件，请改用 `onChange`。
 
-| Type     |
+| 类型     |
 | -------- |
-| function |
+| 函数     |
 
 ---
 
 ### `ref`
 
-A ref setter that will be assigned an [element node](element-nodes) when mounted.
+一个 ref 设置器，在挂载时将被赋值为一个 [元素节点](element-nodes)。
 
 ---
 
 ### `thumbColor`
 
-Color of the foreground switch grip. If this is set on iOS, the switch grip will lose its drop shadow.
+开关手柄的前景色。如果在 iOS 上设置该颜色，开关手柄将不再有阴影。
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `trackColor`
 
-Custom colors for the switch track.
+开关轨道的自定义颜色。
 
-_iOS_: When the switch value is `false`, the track shrinks into the border. If you want to change the color of the background exposed by the shrunken track, use [`ios_backgroundColor`](switch.md#ios_backgroundColor).
+_iOS_: 当开关值为 `false` 时，轨道会收缩成边框。如果你想更改被收缩轨道暴露的背景色，请使用 [`ios_backgroundColor`](switch.md#ios_backgroundColor)。
 
-| Type                                                         |
-| ------------------------------------------------------------ |
-| `md object: {false: [color](colors), true: [color](colors)}` |
+| 类型                                                             |
+| ---------------------------------------------------------------- |
+| `md 对象: {false: [颜色](colors), true: [颜色](colors)}`         |
 
 ---
 
 ### `value`
 
-The value of the switch. If true the switch will be turned on. Default value is false.
+开关的值。如果为 true，开关将打开。默认值为 false。
 
-| Type |
+| 类型 |
 | ---- |
 | bool |

@@ -1,66 +1,66 @@
 ---
 id: gesture-responder-system
-title: Gesture Responder System
+title: 手势响应系统
 ---
 
-The gesture responder system manages the lifecycle of gestures in your app. A touch can go through several phases as the app determines what the user's intention is. For example, the app needs to determine if the touch is scrolling, sliding on a widget, or tapping. This can even change during the duration of a touch. There can also be multiple simultaneous touches.
+手势响应系统管理应用中手势的生命周期。一次触摸可以经历多个阶段，应用需要判断用户的意图。例如，应用需要确定触摸是在滚动、在控件上滑动还是点击。这种意图甚至可能在触摸的持续过程中发生变化。触摸也可能是多点同时发生的。
 
-The touch responder system is needed to allow components to negotiate these touch interactions without any additional knowledge about their parent or child components.
+触摸响应系统的存在使组件能够协商这些触摸交互，而无需了解其父组件或子组件的额外信息。
 
-### Best Practices
+### 最佳实践
 
-To make your app feel great, every action should have the following attributes:
+为了让你的应用体验良好，每个操作应具备以下属性：
 
-- Feedback/highlighting- show the user what is handling their touch, and what will happen when they release the gesture
-- Cancel-ability- when making an action, the user should be able to abort it mid-touch by dragging their finger away
+- 反馈/高亮 — 向用户显示是谁在处理他们的触摸，以及当他们释放手势时会发生什么
+- 可取消性 — 触发操作时，用户应该能够通过将手指拖离来中止操作
 
-These features make users more comfortable while using an app, because it allows people to experiment and interact without fear of making mistakes.
+这些特性让用户在使用应用时更加安心，因为它允许人们进行尝试与交互，而无需担心犯错。
 
-### TouchableHighlight and Touchable\*
+### TouchableHighlight 和 Touchable\*
 
-The responder system can be complicated to use. So we have provided an abstract `Touchable` implementation for things that should be "tappable". This uses the responder system and allows you to configure tap interactions declaratively. Use `TouchableHighlight` anywhere where you would use a button or link on web.
+响应系统使用起来比较复杂。因此，我们提供了一个抽象的 `Touchable` 实现，用于那些应该“可点击”的元素。它使用响应系统，并允许你声明式地配置点击交互。在任何需要按钮或链接的地方，都可以使用 `TouchableHighlight`。
 
-## Responder Lifecycle
+## 响应者生命周期
 
-A view can become the touch responder by implementing the correct negotiation methods. There are two methods to ask the view if it wants to become responder:
+一个视图可以通过实现正确的协商方法来成为触摸响应者。有两个方法用于询问视图是否想要成为响应者：
 
-- `View.props.onStartShouldSetResponder: evt => true,` - Does this view want to become responder on the start of a touch?
-- `View.props.onMoveShouldSetResponder: evt => true,` - Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
+- `View.props.onStartShouldSetResponder: evt => true,` — 视图是否想在触摸开始时成为响应者？
+- `View.props.onMoveShouldSetResponder: evt => true,` — 在视图不是响应者时，每次触摸移动都会调用此方法：视图是否想“声明”触摸响应权？
 
-If the View returns true and attempts to become the responder, one of the following will happen:
+如果视图返回 true 并尝试成为响应者，将发生以下情况之一：
 
-- `View.props.onResponderGrant: evt => {}` - The View is now responding for touch events. This is the time to highlight and show the user what is happening
-- `View.props.onResponderReject: evt => {}` - Something else is the responder right now and will not release it
+- `View.props.onResponderGrant: evt => {}` — 视图现在开始响应触摸事件。此时可以高亮显示并告诉用户发生了什么
+- `View.props.onResponderReject: evt => {}` — 其他组件当前是响应者且不会释放权利
 
-If the view is responding, the following handlers can be called:
+如果视图正在响应，可以调用以下处理函数：
 
-- `View.props.onResponderMove: evt => {}` - The user is moving their finger
-- `View.props.onResponderRelease: evt => {}` - Fired at the end of the touch, ie "touchUp"
-- `View.props.onResponderTerminationRequest: evt => true` - Something else wants to become responder. Should this view release the responder? Returning true allows release
-- `View.props.onResponderTerminate: evt => {}` - The responder has been taken from the View. Might be taken by other views after a call to `onResponderTerminationRequest`, or might be taken by the OS without asking (happens with control center/ notification center on iOS)
+- `View.props.onResponderMove: evt => {}` — 用户正在移动手指
+- `View.props.onResponderRelease: evt => {}` — 触摸结束时触发，即“松开触摸”
+- `View.props.onResponderTerminationRequest: evt => true` — 其他组件想成为响应者。此视图是否应释放响应权？返回 true 允许释放
+- `View.props.onResponderTerminate: evt => {}` — 响应权已被从视图中夺走。可能是在调用 `onResponderTerminationRequest` 后被其他视图夺走，或者被操作系统强制夺走（如 iOS 的控制中心/通知中心）
 
-`evt` is a synthetic touch event with the following form:
+`evt` 是一个合成触摸事件，格式如下：
 
 - `nativeEvent`
-  - `changedTouches` - Array of all touch events that have changed since the last event
-  - `identifier` - The ID of the touch
-  - `locationX` - The X position of the touch, relative to the element
-  - `locationY` - The Y position of the touch, relative to the element
-  - `pageX` - The X position of the touch, relative to the root element
-  - `pageY` - The Y position of the touch, relative to the root element
-  - `target` - The node id of the element receiving the touch event
-  - `timestamp` - A time identifier for the touch, useful for velocity calculation
-  - `touches` - Array of all current touches on the screen
+  - `changedTouches` — 自上次事件以来发生变化的所有触摸事件数组
+  - `identifier` — 触摸的 ID
+  - `locationX` — 触摸在元素内的 X 位置
+  - `locationY` — 触摸在元素内的 Y 位置
+  - `pageX` — 触摸相对于根元素的 X 位置
+  - `pageY` — 触摸相对于根元素的 Y 位置
+  - `target` — 接收触摸事件的元素节点 ID
+  - `timestamp` — 触摸的时间标识，有助于速度计算
+  - `touches` — 当前屏幕上所有触摸的数组
 
-### Capture ShouldSet Handlers
+### 捕获 ShouldSet 处理函数
 
-`onStartShouldSetResponder` and `onMoveShouldSetResponder` are called with a bubbling pattern, where the deepest node is called first. That means that the deepest component will become responder when multiple Views return true for `*ShouldSetResponder` handlers. This is desirable in most cases, because it makes sure all controls and buttons are usable.
+`onStartShouldSetResponder` 和 `onMoveShouldSetResponder` 以冒泡模式被调用，最深的节点最先被调用。这意味着当多个视图对应的 `*ShouldSetResponder` 处理函数返回 true 时，最深层的组件会成为响应者。这在大多数情况下是期望的，因为可以确保所有控件和按钮都能正常使用。
 
-However, sometimes a parent will want to make sure that it becomes responder. This can be handled by using the capture phase. Before the responder system bubbles up from the deepest component, it will do a capture phase, firing `on*ShouldSetResponderCapture`. So if a parent View wants to prevent the child from becoming responder on a touch start, it should have a `onStartShouldSetResponderCapture` handler which returns true.
+但有时父组件希望确保自己成为响应者。这可以通过捕获阶段处理。在响应系统从最深组件冒泡之前，会先执行捕获阶段，触发 `on*ShouldSetResponderCapture`。因此，如果父视图想阻止子视图在触摸开始时成为响应者，它应实现返回 true 的 `onStartShouldSetResponderCapture` 处理函数。
 
 - `View.props.onStartShouldSetResponderCapture: evt => true,`
 - `View.props.onMoveShouldSetResponderCapture: evt => true,`
 
 ### PanResponder
 
-For higher-level gesture interpretation, check out [PanResponder](panresponder.md).
+对于更高级的手势识别，请参考 [PanResponder](panresponder.md)。

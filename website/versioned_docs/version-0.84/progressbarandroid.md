@@ -3,13 +3,13 @@ id: progressbarandroid
 title: '🗑️ ProgressBarAndroid'
 ---
 
-:::warning Deprecated
-Use one of the [community packages](https://reactnative.directory/?search=progressbar) instead.
+:::warning 已废弃
+请改用 [社区包](https://reactnative.directory/?search=progressbar) 中的组件。
 :::
 
-Android-only React component used to indicate that the app is loading or there is some activity in the app.
+仅限 Android 的 React 组件，用于指示应用正在加载或有活动进行中。
 
-### Example
+### 示例
 
 ```SnackPlayer name=ProgressBarAndroid&supportedPlatforms=android
 import React from 'react';
@@ -19,19 +19,19 @@ const App = () => {
   return (
     <View style={styles.container}>
       <View style={styles.example}>
-        <Text>Circle Progress Indicator</Text>
+        <Text>圆形进度指示器</Text>
         <ProgressBarAndroid />
       </View>
       <View style={styles.example}>
-        <Text>Horizontal Progress Indicator</Text>
+        <Text>水平进度指示器</Text>
         <ProgressBarAndroid styleAttr="Horizontal" />
       </View>
       <View style={styles.example}>
-        <Text>Colored Progress Indicator</Text>
+        <Text>彩色进度指示器</Text>
         <ProgressBarAndroid styleAttr="Horizontal" color="#2196F3" />
       </View>
       <View style={styles.example}>
-        <Text>Fixed Progress Value</Text>
+        <Text>固定进度值</Text>
         <ProgressBarAndroid
           styleAttr="Horizontal"
           indeterminate={false}
@@ -58,74 +58,74 @@ export default App;
 
 ---
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
-Inherits [View Props](view.md#props).
+继承自 [View Props](view.md#props)。
 
 ### `animating`
 
-Whether to show the ProgressBar (true, the default) or hide it (false).
+是否显示进度条（true，默认）或隐藏（false）。
 
-| Type | Required |
-| ---- | -------- |
-| bool | No       |
+| 类型   | 必填 |
+| ------ | ---- |
+| bool   | 否   |
 
 ---
 
 ### `color`
 
-Color of the progress bar.
+进度条的颜色。
 
-| Type               | Required |
-| ------------------ | -------- |
-| [color](colors.md) | No       |
+| 类型           | 必填 |
+| -------------- | ---- |
+| [color](colors.md) | 否   |
 
 ---
 
 ### `indeterminate`
 
-If the progress bar will show indeterminate progress. Note that this can only be false if styleAttr is Horizontal, and requires a `progress` value.
+进度条是否显示不确定进度。注意，只有当 styleAttr 为 Horizontal 时此属性可设为 false，且需要一个 `progress` 值。
 
-| Type              | Required |
-| ----------------- | -------- |
-| indeterminateType | No       |
+| 类型               | 必填 |
+| ------------------ | ---- |
+| indeterminateType  | 否   |
 
 ---
 
 ### `progress`
 
-The progress value (between 0 and 1).
+进度值（介于 0 和 1 之间）。
 
-| Type   | Required |
-| ------ | -------- |
-| number | No       |
+| 类型     | 必填 |
+| -------- | ---- |
+| number   | 否   |
 
 ---
 
 ### `styleAttr`
 
-Style of the ProgressBar. One of:
+进度条的样式。可选值：
 
-- Horizontal
-- Normal (default)
-- Small
-- Large
-- Inverse
-- SmallInverse
-- LargeInverse
+- Horizontal（水平方向）
+- Normal（默认）
+- Small（小号）
+- Large（大号）
+- Inverse（反向）
+- SmallInverse（小号反向）
+- LargeInverse（大号反向）
 
-| Type                                                                                      | Required |
-| ----------------------------------------------------------------------------------------- | -------- |
-| enum('Horizontal', 'Normal', 'Small', 'Large', 'Inverse', 'SmallInverse', 'LargeInverse') | No       |
+| 类型                                                                                        | 必填 |
+| ------------------------------------------------------------------------------------------- | ---- |
+| enum('Horizontal', 'Normal', 'Small', 'Large', 'Inverse', 'SmallInverse', 'LargeInverse')   | 否   |
 
 ---
 
 ### `testID`
 
-Used to locate this view in end-to-end tests.
+用于在端对端测试中定位此视图。
 
-| Type   | Required |
-| ------ | -------- |
-| string | No       |
+| 类型   | 必填 |
+| ------ | ---- |
+| string | 否   |

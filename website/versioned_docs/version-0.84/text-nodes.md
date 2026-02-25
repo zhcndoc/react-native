@@ -1,9 +1,9 @@
 ---
 id: text-nodes
-title: Text nodes
+title: 文本节点
 ---
 
-Text nodes represent raw text content on the tree (similar to [`Text`](https://developer.mozilla.org/en-US/docs/Web/API/Text) nodes on Web). They are not directly accessible via `refs`, but can be accessed using methods like [`childNodes`](https://developer.mozilla.org/en-US/docs/Web/API/Node/childNodes) on element refs.
+文本节点表示树中的原始文本内容（类似于 Web 上的 [`Text`](https://developer.mozilla.org/en-US/docs/Web/API/Text) 节点）。它们不能通过 `refs` 直接访问，但可以通过元素引用（ref）上的 [`childNodes`](https://developer.mozilla.org/en-US/docs/Web/API/Node/childNodes) 等方法访问。
 
 ```SnackPlayer ext=js&name=Text%20instances%20example
 import * as React from 'react';
@@ -14,11 +14,11 @@ const TextWithRefs = () => {
   const [viewInfo, setViewInfo] = React.useState('');
 
   React.useEffect(() => {
-    // `textElement` is an object implementing the interface described here.
+    // `textElement` 是一个实现了此处描述接口的对象
     const textElement = ref.current;
     const textNode = textElement.childNodes[0];
     setViewInfo(
-      `Text content is: ${textNode.nodeValue}`,
+      `文本内容是: ${textNode.nodeValue}`,
     );
   }, []);
 
@@ -47,23 +47,23 @@ export default TextWithRefs;
 
 ---
 
-## Reference
+## 参考
 
-### Web-compatible API
+### Web 兼容 API
 
-From [`CharacterData`](https://developer.mozilla.org/en-US/docs/Web/API/CharacterData):
+来自 [`CharacterData`](https://developer.mozilla.org/en-US/docs/Web/API/CharacterData)：
 
-- Properties
+- 属性
   - [`data`](https://developer.mozilla.org/en-US/docs/Web/API/CharacterData/data)
   - [`length`](https://developer.mozilla.org/en-US/docs/Web/API/CharacterData/length)
   - [`nextElementSibling`](https://developer.mozilla.org/en-US/docs/Web/API/CharacterData/nextElementSibling)
   - [`previousElementSibling`](https://developer.mozilla.org/en-US/docs/Web/API/CharacterData/previousElementSibling)
-- Methods
+- 方法
   - [`substringData()`](https://developer.mozilla.org/en-US/docs/Web/API/CharacterData/substringData)
 
-From [`Node`](https://developer.mozilla.org/en-US/docs/Web/API/Node):
+来自 [`Node`](https://developer.mozilla.org/en-US/docs/Web/API/Node)：
 
-- Properties
+- 属性
   - [`childNodes`](https://developer.mozilla.org/en-US/docs/Web/API/Node/childNodes)
   - [`firstChild`](https://developer.mozilla.org/en-US/docs/Web/API/Node/firstChild)
   - [`isConnected`](https://developer.mozilla.org/en-US/docs/Web/API/Node/isConnected)
@@ -73,14 +73,14 @@ From [`Node`](https://developer.mozilla.org/en-US/docs/Web/API/Node):
   - [`nodeType`](https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType)
   - [`nodeValue`](https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeValue)
   - [`ownerDocument`](https://developer.mozilla.org/en-US/docs/Web/API/Node/ownerDocument)
-    - ℹ️ Will return the [document instance](/docs/next/document-instances) where this component was rendered.
+    - ℹ️ 会返回该组件被渲染的[文档实例](/docs/next/document-instances)。
   - [`parentElement`](https://developer.mozilla.org/en-US/docs/Web/API/Node/parentElement)
   - [`parentNode`](https://developer.mozilla.org/en-US/docs/Web/API/Node/parentNode)
   - [`previousSibling`](https://developer.mozilla.org/en-US/docs/Web/API/Node/previousSibling)
   - [`textContent`](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent)
-- Methods
+- 方法
   - [`compareDocumentPosition()`](https://developer.mozilla.org/en-US/docs/Web/API/Node/compareDocumentPosition)
   - [`contains()`](https://developer.mozilla.org/en-US/docs/Web/API/Node/contains)
   - [`getRootNode()`](https://developer.mozilla.org/en-US/docs/Web/API/Node/getRootNode)
-    - ℹ️ Will return a reference to itself if the component is not mounted.
+    - ℹ️ 如果组件未挂载，将返回其自身的引用。
   - [`hasChildNodes()`](https://developer.mozilla.org/en-US/docs/Web/API/Node/hasChildNodes)

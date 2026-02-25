@@ -4,7 +4,7 @@ title: navigator
 ---
 
 :::warning
-🚧 This page is work in progress, so please refer to the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/Window/navigator) for more information.
+🚧 此页面正在建设中，请参考 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/Window/navigator) 获取更多信息。
 :::
 
-The global `navigator` object, as defined in Web specifications.
+全局的 `navigator` 对象，按照 Web 规范定义。

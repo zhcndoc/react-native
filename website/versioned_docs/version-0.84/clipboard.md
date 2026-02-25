@@ -1,8 +1,8 @@
 ---
 id: clipboard
-title: '❌ Clipboard'
+title: '❌ 剪贴板'
 ---
 
-:::danger Removed from React Native
-Use one of the [community packages](https://reactnative.directory/?search=clipboard) instead.
+:::danger 从 React Native 移除
+请改用其中一个[社区包](https://reactnative.directory/?search=clipboard)。
 :::

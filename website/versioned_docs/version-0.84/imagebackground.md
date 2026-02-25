@@ -3,13 +3,13 @@ id: imagebackground
 title: ImageBackground
 ---
 
-A common feature request from developers familiar with the web is `background-image`. To handle this use case, you can use the `<ImageBackground>` component, which has the same props as `<Image>`, and add whatever children to it you would like to layer on top of it.
+熟悉网页开发的开发者常常会请求类似 `background-image` 的功能。为满足此需求，你可以使用 `<ImageBackground>` 组件，它拥有和 `<Image>` 相同的属性，并且可以在其上叠加任意你想添加的子元素。
 
-You might not want to use `<ImageBackground>` in some cases, since the implementation is basic. Refer to `<ImageBackground>`'s [source code](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Image/ImageBackground.js) for more insight, and create your own custom component when needed.
+在某些情况下，你可能不想使用 `<ImageBackground>` ，因为其实现较为基础。你可以参考 `<ImageBackground>` 的[源码](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Image/ImageBackground.js) 以获得更多了解，必要时可以创建你自己的自定义组件。
 
-Note that you must specify some width and height style attributes.
+请注意，你必须指定一定的宽度和高度样式属性。
 
-## Example
+## 示例
 
 ```SnackPlayer name=ImageBackground
 import React from 'react';
@@ -51,32 +51,32 @@ export default App;
 
 ---
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
-### [Image Props](image.md#props)
+### [Image 属性](image.md#props)
 
-Inherits [Image Props](image.md#props).
+继承自 [Image 属性](image.md#props)。
 
 ---
 
 ### `imageStyle`
 
-| Type                                |
-| ----------------------------------- |
-| [Image Style](image-style-props.md) |
+| 类型                               |
+| ---------------------------------- |
+| [图片样式](image-style-props.md)  |
 
 ---
 
 ### `imageRef`
 
-A ref setter that will be assigned the [element node](element-nodes) of the inner `Image` component when mounted.
+一个 ref 设置器，在内部 `Image` 组件挂载时会被赋值为该元素节点的引用。
 
 ---
 
 ### `style`
 
-| Type                              |
-| --------------------------------- |
-| [View Style](view-style-props.md) |
+| 类型                             |
+| -------------------------------- |
+| [视图样式](view-style-props.md)  |

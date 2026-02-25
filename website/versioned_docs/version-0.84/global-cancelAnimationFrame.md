@@ -4,7 +4,7 @@ title: cancelAnimationFrame
 ---
 
 :::warning
-🚧 This page is work in progress, so please refer to the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelAnimationFrame) for more information.
+🚧 本页面正在建设中，更多信息请参考 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelAnimationFrame)。
 :::
 
-The global `cancelAnimationFrame` function, as defined in Web specifications.
+全局的 `cancelAnimationFrame` 函数，按照 Web 规范定义。

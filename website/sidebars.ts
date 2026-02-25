@@ -2,7 +2,7 @@ import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 
 export default {
   docs: {
-    'The Basics': [
+    基础知识: [
       'getting-started',
       'intro-react-native-components',
       'intro-react',
@@ -13,7 +13,7 @@ export default {
       'platform-specific-code',
       'more-resources',
     ],
-    'Environment setup': [
+    环境设置: [
       'environment-setup',
       'set-up-your-environment',
       'integration-with-existing-apps',
@@ -21,7 +21,7 @@ export default {
       'building-for-tv',
       'out-of-tree-platforms',
     ],
-    Workflow: [
+    工作流: [
       'running-on-device',
       'fast-refresh',
       'metro',
@@ -30,7 +30,7 @@ export default {
       'strict-typescript-api',
       'upgrading',
     ],
-    'UI & Interaction': [
+    'UI 与交互': [
       'style',
       'height-and-width',
       'flexbox',
@@ -38,7 +38,7 @@ export default {
       'colors',
       {
         type: 'category',
-        label: 'Interaction',
+        label: '交互',
         collapsible: false,
         collapsed: false,
         items: [
@@ -50,100 +50,111 @@ export default {
       },
       {
         type: 'category',
-        label: 'Connectivity',
+        label: '连接性',
         collapsible: false,
         collapsed: false,
         items: ['network', 'security'],
       },
       {
         type: 'category',
-        label: 'Inclusion',
+        label: '包容性',
         collapsible: false,
         collapsed: false,
         items: ['accessibility'],
       },
     ],
-    Releases: [
+    发布: [
       'releases/releases',
       'releases/release-levels',
       'releases/versioning-policy',
     ],
-    Debugging: [
+    调试: [
       'debugging',
       'react-native-devtools',
       'debugging-native-code',
       'debugging-release-builds',
       'other-debugging-methods',
     ],
-    Testing: ['testing-overview'],
-    Performance: [
+    测试: ['testing-overview'],
+    性能: [
       'performance',
       'build-speed',
       'optimizing-flatlist-configuration',
       'optimizing-javascript-loading',
       'profiling',
     ],
-    'JavaScript Runtime': ['javascript-environment', 'timers', 'hermes'],
-    Codegen: [
+    'JavaScript 运行时': ['javascript-environment', 'timers', 'hermes'],
+    代码生成: [
       'the-new-architecture/what-is-codegen',
       'the-new-architecture/using-codegen',
       'the-new-architecture/codegen-cli',
     ],
-    'Native Development': [
-      {type: 'doc', id: 'native-platform', label: 'Introduction'},
+    原生开发: [
+      {
+        type: 'doc',
+        id: 'native-platform',
+        label: '介绍',
+      },
       {
         type: 'category',
-        label: 'Modules',
+        label: '模块',
         collapsible: false,
         collapsed: false,
         items: [
           {
             type: 'doc',
             id: 'turbo-native-modules-introduction',
-            label: 'Android and iOS',
+            label: 'Android 和 iOS',
           },
           {
             type: 'doc',
             id: 'the-new-architecture/pure-cxx-modules',
-            label: 'Cross-Platform with C++',
+            label: '跨平台 C++',
           },
           {
             type: 'doc',
             id: 'the-new-architecture/advanced-topics-modules',
-            label: 'Advanced Topics',
+            label: '高级主题',
           },
         ],
       },
       {
         type: 'category',
-        label: 'Components',
+        label: '组件',
         collapsible: false,
         collapsed: false,
         items: [
           {
             type: 'doc',
             id: 'fabric-native-components-introduction',
-            label: 'Android & iOS',
+            label: 'Android 和 iOS',
           },
           {
             type: 'doc',
             id: 'the-new-architecture/advanced-topics-components',
-            label: 'Advanced Topics',
+            label: '高级主题',
           },
         ],
       },
       {
         type: 'category',
-        label: 'Miscellaneous',
+        label: '其他',
         collapsible: true,
         collapsed: true,
         items: [
-          {type: 'doc', id: 'appendix', label: 'Appendix'},
-          {type: 'doc', id: 'the-new-architecture/create-module-library'},
+          {
+            type: 'doc',
+            id: 'appendix',
+            label: '附录',
+          },
+          {
+            type: 'doc',
+            id: 'the-new-architecture/create-module-library',
+          },
         ],
       },
     ],
-    'Android and iOS guides': [
+    'Android 和 iOS 指南': [
       {
         type: 'category',
         label: 'Android',
@@ -170,10 +181,10 @@ export default {
         ],
       },
     ],
-    'Legacy Architecture': [
+    遗留架构: [
       {
         type: 'category',
-        label: 'Native Modules',
+        label: '原生模块',
         collapsible: true,
         collapsed: true,
         items: [
@@ -186,7 +197,7 @@ export default {
       },
       {
         type: 'category',
-        label: 'Native Components',
+        label: '原生组件',
         collapsible: true,
         collapsed: true,
         items: [
@@ -198,7 +209,7 @@ export default {
     ],
   },
   api: {
-    APIs: [
+    'API 参考': [
       'accessibilityinfo',
       'alert',
       'animated',
@@ -227,7 +238,7 @@ export default {
       'vibration',
       {
         type: 'category',
-        label: 'Globals',
+        label: '全局',
         collapsed: true,
         items: [
           'global-__DEV__',
@@ -282,20 +293,20 @@ export default {
       },
       {
         type: 'category',
-        label: 'Android APIs',
+        label: 'Android API',
         collapsed: false,
         items: ['backhandler', 'permissionsandroid', 'toastandroid'],
       },
       {
         type: 'category',
-        label: 'iOS APIs',
+        label: 'iOS API',
         collapsed: false,
         items: ['actionsheetios', 'dynamiccolorios', 'settings'],
       },
     ],
   },
   components: {
-    'Core Components': [
+    核心组件: [
       'components-and-apis',
       'activityindicator',
       'button',
@@ -319,13 +330,13 @@ export default {
       'virtualizedlist',
       {
         type: 'category',
-        label: 'Android Components',
+        label: 'Android 组件',
         collapsed: false,
         items: ['drawerlayoutandroid', 'touchablenativefeedback'],
       },
       {
         type: 'category',
-        label: 'iOS Components',
+        label: 'iOS 组件',
         collapsed: false,
         items: ['inputaccessoryview', 'safeareaview'],
       },
@@ -338,7 +349,7 @@ export default {
       'text-style-props',
       'view-style-props',
     ],
-    'Object Types': [
+    对象类型: [
       'boxshadowvalue',
       'dropshadowvalue',
       'layoutevent',

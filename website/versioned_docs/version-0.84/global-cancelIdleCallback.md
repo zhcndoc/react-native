@@ -4,7 +4,7 @@ title: cancelIdleCallback
 ---
 
 :::warning
-🚧 This page is work in progress, so please refer to the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelIdleCallback) for more information.
+🚧 本页面正在建设中，请参阅 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelIdleCallback) 获取更多信息。
 :::
 
-The global `cancelIdleCallback` function, as defined in Web specifications.
+全局的 `cancelIdleCallback` 函数，依据 Web 规范定义。

@@ -1,11 +1,11 @@
 ---
 id: dropshadowvalue
-title: DropShadowValue Object Type
+title: DropShadowValue 对象类型
 ---
 
-The `DropShadowValue` object is taken by the [`filter`](./view-style-props.md#filter) style prop for the `dropShadow` function. It is comprised of 2 or 3 lengths and an optional color. These values collectively define the drop shadow's color, position, and blurriness.
+`DropShadowValue` 对象由 [`filter`](./view-style-props.md#filter) 样式属性的 `dropShadow` 函数使用。它由 2 或 3 个长度值和一个可选颜色组成。这些值共同定义了投影的颜色、位置和模糊程度。
 
-## Example
+## 示例
 
 ```js
 {
@@ -16,40 +16,40 @@ The `DropShadowValue` object is taken by the [`filter`](./view-style-props.md#fi
 }
 ```
 
-## Keys and values
+## 键和值
 
 ### `offsetX`
 
-The offset on the x-axis. This can be positive or negative. A positive value indicates right and negative indicates left.
+x 轴上的偏移量。可以为正或负。正值表示向右，负值表示向左。
 
-| Type             | Optional |
-| ---------------- | -------- |
-| number \| string | No       |
+| 类型              | 可选   |
+| ----------------- | ------ |
+| number \| string  | 否     |
 
 ### `offsetY`
 
-The offset on the y-axis. This can be positive or negative. A positive value indicates up and negative indicates down.
+y 轴上的偏移量。可以为正或负。正值表示向上，负值表示向下。
 
-| Type             | Optional |
-| ---------------- | -------- |
-| number \| string | No       |
+| 类型              | 可选   |
+| ----------------- | ------ |
+| number \| string  | 否     |
 
 ### `standardDeviation`
 
-Represents the standard deviation used in the [Gaussian blur](https://en.wikipedia.org/wiki/Gaussian_blur) algorithm. The larger the value the blurrier the shadow is. Only non-negative values are valid. The default is 0.
+表示在[高斯模糊](https://en.wikipedia.org/wiki/Gaussian_blur)算法中使用的标准差。值越大，阴影越模糊。仅非负值有效。默认值为 0。
 
-| Type             | Optional |
-| ---------------- | -------- |
-| number \| string | Yes      |
+| 类型              | 可选   |
+| ----------------- | ------ |
+| number \| string  | 是     |
 
 ### `color`
 
-The color of the shadow. The default is `black`.
+阴影的颜色。默认是 `black`。
 
-| Type                 | Optional |
-| -------------------- | -------- |
-| [color](./colors.md) | Yes      |
+| 类型                | 可选   |
+| ------------------- | ------ |
+| [color](./colors.md) | 是     |
 
-## Used by
+## 使用场景
 
 - [`filter`](./view-style-props.md#filter)
