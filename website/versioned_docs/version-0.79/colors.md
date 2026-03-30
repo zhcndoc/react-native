@@ -1,25 +1,25 @@
 ---
 id: colors
-title: Color Reference
+title: 颜色参考
 ---
 
-Components in React Native are [styled using JavaScript](style). Color properties usually match how [CSS works on the web](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value). General guides on the color usage on each platform could be found below:
+React Native 中的组件使用 [JavaScript 进行样式设置](style)。颜色属性通常与 [Web 上的 CSS 工作方式](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value) 匹配。可以在下面找到各平台颜色使用的通用指南：
 
 - [Android](https://material.io/design/color/color-usage.html)
 - [iOS](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color/)
 
-## Color APIs
+## 颜色 API
 
-React Native has several color APIs designed to allow you to take full advantage of your platform's design and user preferences.
+React Native 有几个颜色 API，旨在让您充分利用平台的设计和用户偏好。
 
-- [PlatformColor](platformcolor) lets you reference the platform's color system.
-- [DynamicColorIOS](dynamiccolorios) is iOS specific and allows you to specify which colors should be used in light or Dark Mode.
+- [PlatformColor](platformcolor) 允许您引用平台的颜色系统。
+- [DynamicColorIOS](dynamiccolorios) 是 iOS 特有的，允许您指定在浅色或深色模式下应使用哪些颜色。
 
-## Color representations
+## 颜色表示
 
-### Red Green Blue (RGB)
+### 红绿蓝 (RGB)
 
-React Native supports `rgb()` and `rgba()` in both hexadecimal and functional notation:
+React Native 支持十六进制和函数表示法中的 `rgb()` 和 `rgba()`：
 
 - `'#f0f'` (#rgb)
 - `'#ff00ff'` (#rrggbb)
@@ -30,49 +30,49 @@ React Native supports `rgb()` and `rgba()` in both hexadecimal and functional no
 - `'rgba(255, 0, 255, 1.0)'`
 - `'rgba(255 0 255 / 1.0)'`
 
-### Hue Saturation Lightness (HSL)
+### 色相饱和度亮度 (HSL)
 
-React Native supports `hsl()` and `hsla()` in functional notation:
+React Native 支持函数表示法中的 `hsl()` 和 `hsla()`：
 
 - `'hsl(360, 100%, 100%)'`
 - `'hsl(360 100% 100%)'`
 - `'hsla(360, 100%, 100%, 1.0)'`
 - `'hsla(360 100% 100% / 1.0)'`
 
-### Hue Whiteness Blackness (HWB)
+### 色相白度黑度 (HWB)
 
-React Native supports `hwb()` in functional notation:
+React Native 支持函数表示法中的 `hwb()`：
 
 - `'hwb(0, 0%, 100%)'`
 - `'hwb(360, 100%, 100%)'`
 - `'hwb(0 0% 0%)'`
 - `'hwb(70 50% 0%)'`
 
-### Color ints
+### 颜色整数
 
-React Native supports also colors as an `int` values (in RGB color mode):
+React Native 还支持将颜色作为 `int` 值（在 RGB 颜色模式中）：
 
 - `0xff00ff00` (0xrrggbbaa)
 
 :::caution
-This might appear similar to the Android [Color](https://developer.android.com/reference/android/graphics/Color) ints representation but on Android values are stored in SRGB color mode (0xaarrggbb).
+这可能看起来类似于 Android [Color](https://developer.android.com/reference/android/graphics/Color) 整数表示，但在 Android 上值存储在 SRGB 颜色模式 (0xaarrggbb) 中。
 :::
 
-### Named colors
+### 命名颜色
 
-In React Native you can also use color name strings as values.
+在 React Native 中，您也可以使用颜色名称字符串作为值。
 
 :::info
-React Native only supports lowercase color names. Uppercase color names are not supported.
+React Native 仅支持小写颜色名称。不支持大写颜色名称。
 :::
 
 #### `transparent`
 
-This is a shortcut for `rgba(0,0,0,0)`, same like in [CSS3](https://www.w3.org/TR/css-color-3/#transparent).
+这是 `rgba(0,0,0,0)` 的快捷方式，与 [CSS3](https://www.w3.org/TR/css-color-3/#transparent) 中相同。
 
-#### Color keywords
+#### 颜色关键字
 
-Named colors implementation follows the [CSS3/SVG specification](https://www.w3.org/TR/css-color-3/#svg-color):
+命名颜色的实现遵循 [CSS3/SVG 规范](https://www.w3.org/TR/css-color-3/#svg-color)：
 
 - <ins style={{background: '#f0f8ff'}} className="color-box" /> aliceblue (<code>#f0f8ff</code>)
 - <ins style={{background: '#faebd7'}} className="color-box" /> antiquewhite (<code>#faebd7</code>)

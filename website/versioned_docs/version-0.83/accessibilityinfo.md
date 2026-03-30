@@ -224,6 +224,26 @@ static isScreenReaderEnabled(): Promise<boolean>;
 
 ---
 
+### `isHighTextContrastEnabled()` <div className="label android">Android</div>
+
+```tsx
+static isHighTextContrastEnabled(): Promise<boolean>
+```
+
+查询当前是否启用了高文本对比度。返回一个 Promise，解析为布尔值。启用高文本对比度时结果为 `true`，否则为 `false`。
+
+---
+
+### `isDarkerSystemColorsEnabled()` <div className="label ios">iOS</div>
+
+```tsx
+static isDarkerSystemColorsEnabled(): Promise<boolean>
+```
+
+查询当前是否启用了深色系统颜色。返回一个 Promise，解析为布尔值。启用深色系统颜色时结果为 `true`，否则为 `false`。
+
+---
+
 ### `prefersCrossFadeTransitions()` <div className="label ios">iOS</div>
 
 ```tsx

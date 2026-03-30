@@ -3,7 +3,7 @@ id: colors
 title: 颜色参考
 ---
 
-React Native 中的组件是通过[使用 JavaScript 进行样式设置](style)的。颜色属性通常与[网页上的 CSS 的用法](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value)相匹配。各平台上的颜色使用总体指南可见下方链接：
+React Native 中的组件是通过 [使用 JavaScript 进行样式设置](style) 的。颜色属性通常与 [网页上的 CSS 的用法](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value) 相匹配。各平台上的颜色使用总体指南可见下方链接：
 
 - [Android](https://material.io/design/color/color-usage.html)
 - [iOS](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color/)
@@ -50,7 +50,7 @@ React Native 支持函数形式的 `hwb()`：
 
 ### 颜色整数
 
-React Native 也支持以 RGB 颜色模式的 `int` 值表示颜色：
+React Native 还支持将颜色作为 `int` 值（在 RGB 颜色模式下）：
 
 - `0xff00ff00` (0xrrggbbaa)
 

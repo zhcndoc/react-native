@@ -3,24 +3,28 @@ id: appstate
 title: AppState
 ---
 
-`AppState` can tell you if the app is in the foreground or background, and notify you when the state changes.
+`AppState` 可以告诉你应用是在前台还是后台，并在状态变化时通知你。
 
-AppState is frequently used to determine the intent and proper behavior when handling push notifications.
+AppState 常用于在处理推送通知时确定意图和适当的行为。
 
-### App States
+### 应用状态
 
-- `active` - The app is running in the foreground
-- `background` - The app is running in the background. The user is either:
-  - in another app
-  - on the home screen
-  - [Android] on another `Activity` (even if it was launched by your app)
-- [iOS] `inactive` - This is a state that occurs when transitioning between foreground & background, and during periods of inactivity such as entering the multitasking view, opening the Notification Center or in the event of an incoming call.
+- `active` - 应用正在前台运行
+- `background` - 应用正在后台运行。用户要么：
+  - 在另一个应用中
+  - 在主屏幕上
+  - [Android] 在另一个 `Activity` 上（即使是由你的应用启动的）
+- [iOS] `inactive` - 这是一个在前台和后台之间过渡时发生的状态，以及在不活动期间，例如进入多任务视图、打开通知中心或有来电时。
 
-For more information, see [Apple's documentation](https://developer.apple.com/documentation/uikit/app_and_scenes/managing_your_app_s_life_cycle)
+更多信息，请参阅 [Apple 的文档](https://developer.apple.com/documentation/uikit/app_and_scenes/managing_your_app_s_life_cycle)
 
-## Basic Usage
+## 基本用法
 
-To see the current state, you can check `AppState.currentState`, which will be kept up-to-date. However, `currentState` will be null at launch while `AppState` retrieves it over the bridge.
+要查看当前状态，你可以检查 `AppState.currentState`，它将保持最新。
+
+:::info
+如果你使用的是旧架构，`currentState` 在启动时将為 `null`，直到从原生端异步检索到它。
+:::
 
 ```SnackPlayer name=AppState%20Example
 import React, {useRef, useState, useEffect} from 'react';
@@ -70,31 +74,31 @@ const styles = StyleSheet.create({
 export default AppStateExample;
 ```
 
-This example will only ever appear to say "Current state is: active" because the app is only visible to the user when in the `active` state, and the null state will happen only momentarily. If you want to experiment with the code we recommend to use your own device instead of embedded preview.
+此示例似乎只会显示 "Current state is: active"，因为应用只有在 `active` 状态下才对用户可见。如果你想尝试这段代码，我们建议使用你自己的设备而不是嵌入式预览。
 
 ---
 
-# Reference
+# 参考
 
-## Events
+## 事件
 
 ### `change`
 
-This event is received when the app state has changed. The listener is called with one of [the current app state values](appstate#app-states).
+当应用状态发生变化时会收到此事件。监听器会使用 [当前应用状态值](appstate#app-states) 之一被调用。
 
 ### `memoryWarning` <div className="label ios">iOS</div>
 
-Fires when the app receives a memory warning from the operating system.
+当应用收到操作系统的内存警告时触发。
 
 ### `focus` <div className="label android">Android</div>
 
-Received when the app gains focus (the user is interacting with the app).
+当应用获得焦点时收到（用户正在与应用交互）。
 
 ### `blur` <div className="label android">Android</div>
 
-Received when the user is not actively interacting with the app. Useful in situations when the user pulls down the [notification drawer](https://developer.android.com/guide/topics/ui/notifiers/notifications#bar-and-drawer). `AppState` won't change but the `blur` event will get fired.
+当用户未积极与应用交互时收到。适用于用户拉下 [通知栏](https://developer.android.com/guide/topics/ui/notifiers/notifications#bar-and-drawer) 的情况。`AppState` 不会改变，但 `blur` 事件会被触发。
 
-## Methods
+## 方法
 
 ### `addEventListener()`
 
@@ -105,10 +109,9 @@ static addEventListener(
 ): NativeEventSubscription;
 ```
 
-Sets up a function that will be called whenever the specified event type on AppState occurs. Valid values for `eventType` are
-[listed above](#events). Returns the `EventSubscription`.
+设置一个函数，每当 AppState 上发生指定的事件类型时该函数将被调用。`eventType` 的有效值 [如上所列](#events)。返回 `EventSubscription`。
 
-## Properties
+## 属性
 
 ### `currentState`
 
