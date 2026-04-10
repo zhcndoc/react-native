@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 ## 准备你的 Xcode 项目
 
-我们需要使用 Xcode 准备你的 iOS 项目。完成下面**6个步骤**后，你将拥有实现了生成的 `NativeLocalStorageSpec` 接口的 `RCTNativeLocalStorage`。
+我们需要使用 Xcode 准备你的 iOS 项目。完成下面**6 个步骤**后，你将拥有实现了生成的 `NativeLocalStorageSpec` 接口的 `RCTNativeLocalStorage`。
 
 1. 打开 CocoaPods 生成的 Xcode 工作区：
 
@@ -136,7 +136,7 @@ static NSString *const RCTNativeLocalStorageKey = @"local-storage";
      "type": "modules",
      "jsSrcsDir": "specs",
      "android": {
-       "javaPackageName": "com.sampleapp.specs"
+       "javaPackageName": "com.nativelocalstorage"
      },
      // highlight-add-start
      "ios": {
@@ -155,7 +155,7 @@ static NSString *const RCTNativeLocalStorageKey = @"local-storage";
 ```bash
 # 从 ios 文件夹中执行
 bundle exec pod install
-open SampleApp.xcworkspace
+open TurboModuleExample.xcworkspace
 ```
 
 现在从 Xcode 构建你的应用应该能成功。

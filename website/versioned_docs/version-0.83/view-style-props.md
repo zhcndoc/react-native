@@ -59,7 +59,7 @@ export default App;
 
 | 类型                          |
 | ----------------------------- |
-| 枚举(`'visible'`, `'hidden'`) |
+| 枚举 (`'visible'`, `'hidden'`) |
 
 ---
 
@@ -107,7 +107,7 @@ export default App;
 
 | 类型                              |
 | --------------------------------- |
-| 数字, 字符串（百分比值） |
+| 数字，字符串（百分比值） |
 
 ---
 
@@ -115,7 +115,7 @@ export default App;
 
 | 类型                              |
 | --------------------------------- |
-| 数字, 字符串（百分比值） |
+| 数字，字符串（百分比值） |
 
 ---
 
@@ -123,7 +123,7 @@ export default App;
 
 | 类型                              |
 | --------------------------------- |
-| 数字, 字符串（百分比值） |
+| 数字，字符串（百分比值） |
 
 ---
 
@@ -131,7 +131,7 @@ export default App;
 
 | 类型                              |
 | --------------------------------- |
-| 数字, 字符串（百分比值） |
+| 数字，字符串（百分比值） |
 
 ---
 
@@ -139,7 +139,7 @@ export default App;
 
 | 类型                              |
 | --------------------------------- |
-| 数字, 字符串（百分比值） |
+| 数字，字符串（百分比值） |
 
 ---
 
@@ -147,7 +147,7 @@ export default App;
 
 | 类型                              |
 | --------------------------------- |
-| 数字, 字符串（百分比值） |
+| 数字，字符串（百分比值） |
 
 ---
 
@@ -155,7 +155,7 @@ export default App;
 
 | 类型                              |
 | --------------------------------- |
-| 数字, 字符串（百分比值） |
+| 数字，字符串（百分比值） |
 
 ---
 
@@ -163,7 +163,7 @@ export default App;
 
 | 类型                              |
 | --------------------------------- |
-| 数字, 字符串（百分比值） |
+| 数字，字符串（百分比值） |
 
 ---
 
@@ -189,7 +189,7 @@ export default App;
 
 | 类型                               |
 | ---------------------------------- |
-| 枚举(`'circular'`, `'continuous'`) |
+| 枚举 (`'circular'`, `'continuous'`) |
 
 ---
 
@@ -223,7 +223,7 @@ export default App;
 
 | 类型                              |
 | --------------------------------- |
-| 数字, 字符串（百分比值） |
+| 数字，字符串（百分比值） |
 
 ---
 
@@ -255,7 +255,7 @@ export default App;
 
 | 类型                                    |
 | --------------------------------------- |
-| 枚举(`'solid'`, `'dotted'`, `'dashed'`) |
+| 枚举 (`'solid'`, `'dotted'`, `'dashed'`) |
 
 ---
 
@@ -271,7 +271,7 @@ export default App;
 
 | 类型                              |
 | --------------------------------- |
-| 数字, 字符串（百分比值） |
+| 数字，字符串（百分比值） |
 
 ---
 
@@ -279,7 +279,7 @@ export default App;
 
 | 类型                              |
 | --------------------------------- |
-| 数字, 字符串（百分比值） |
+| 数字，字符串（百分比值） |
 
 ---
 
@@ -287,7 +287,7 @@ export default App;
 
 | 类型                              |
 | --------------------------------- |
-| 数字, 字符串（百分比值） |
+| 数字，字符串（百分比值） |
 
 ---
 
@@ -295,7 +295,7 @@ export default App;
 
 | 类型                              |
 | --------------------------------- |
-| 数字, 字符串（百分比值） |
+| 数字，字符串（百分比值） |
 
 ---
 
@@ -303,7 +303,7 @@ export default App;
 
 | 类型                              |
 | --------------------------------- |
-| 数字, 字符串（百分比值） |
+| 数字，字符串（百分比值） |
 
 ---
 
@@ -316,7 +316,7 @@ export default App;
 ### `boxShadow`
 
 :::note
-`boxShadow` 仅在[新架构](/architecture/landing-page)中可用。外部阴影仅支持 **Android 9 及以上**，内部阴影仅支持 **Android 10 及以上**。
+`boxShadow` 仅在 [新架构](/architecture/landing-page) 中可用。外部阴影仅支持 **Android 9 及以上**，内部阴影仅支持 **Android 10 及以上**。
 :::
 
 为元素添加阴影效果，可以控制阴影的位置、颜色、大小和模糊度。该阴影出现在元素边框盒子的外侧或内侧，取决于阴影是否为 _内部阴影 (inset)_。这是对 [同名 Web 样式属性](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow) 的规范兼容实现。更多参数详见 [BoxShadowValue](./boxshadowvalue) 文档。
@@ -335,7 +335,7 @@ export default App;
 
 | 类型                          |
 | ----------------------------- |
-| 枚举(`'auto'`, `'pointer'`) |
+| 枚举 (`'auto'`, `'pointer'`) |
 
 ---
 
@@ -352,7 +352,7 @@ export default App;
 ### `filter`
 
 :::note
-`filter` 仅在[新架构](/architecture/landing-page)中可用
+`filter` 仅在 [新架构](/architecture/landing-page) 中可用
 :::
 
 向 `View` 添加图形滤镜。滤镜由若干 _滤镜函数_ 组成，每一个代表对 `View` 图形组成的原子改变。完整的有效滤镜函数列表如下。`filter` 也会应用于 `View` 的子孙元素。`filter` 等同于设置了 `overflow: hidden`，所以子孙元素会被限制在 `View` 的边界内。
@@ -370,7 +370,7 @@ export default App;
 
 以下滤镜函数仅适用于 Android：
 
-- `blur`：使用 [高斯模糊](https://en.wikipedia.org/wiki/Gaussian_blur)模糊 `View`，参数代表模糊半径（无百分比，只接受非负 DIP 值）。值越大模糊越明显。
+- `blur`：使用 [高斯模糊](https://en.wikipedia.org/wiki/Gaussian_blur) 模糊 `View`，参数代表模糊半径（无百分比，只接受非负 DIP 值）。值越大模糊越明显。
 - `contrast`：改变 `View` 对比度。接受非负数或百分比。
 - `dropShadow`：在 `View` 的 alpha 遮罩周围添加阴影（仅非零 alpha 像素投射阴影）。接受可选的阴影颜色，以及 2 或 3 个长度参数。2 个参数时分别为 `offsetX` 和 `offsetY`，表示阴影在横纵轴的偏移。3 个参数时第三个为用于阴影高斯模糊的标准差，值越大阴影越模糊。详细参数见 [DropShadowValue](./dropshadowvalue.md)。
 - `grayscale`：将 `View` 转为 [灰度](https://en.wikipedia.org/wiki/Grayscale)，通过指定程度。接受非负数或百分比，1 或 100% 表示完全灰度。
@@ -394,7 +394,7 @@ export default App;
 ### `mixBlendMode`
 
 :::note
-`mixBlendMode` 仅在[新架构](/architecture/landing-page)中可用
+`mixBlendMode` 仅在 [新架构](/architecture/landing-page) 和 **Android 10 及以上** 中可用
 :::
 
 控制 `View` 如何与其 **堆叠上下文** 中的其他元素颜色混合。完整混合函数说明见 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode)。
@@ -422,7 +422,7 @@ export default App;
 
 | 类型                                                                                                                                                                                                                             |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 枚举(`'normal'`, `'multiply'`, `'screen'`, `'overlay'`, `'darken'`, `'lighten'`, `'color-dodge'`, `'color-burn'`, `'hard-light'`, `'soft-light'`, `'difference'`, `'exclusion'`, `'hue'`, `'saturation'`, `'color'`, `'luminosity'`) |
+| 枚举 (`'normal'`, `'multiply'`, `'screen'`, `'overlay'`, `'darken'`, `'lighten'`, `'color-dodge'`, `'color-burn'`, `'hard-light'`, `'soft-light'`, `'difference'`, `'exclusion'`, `'hue'`, `'saturation'`, `'color'`, `'luminosity'`) |
 
 ---
 
@@ -437,7 +437,7 @@ export default App;
 ### `outlineColor`
 
 :::note
-`outlineColor` 仅在[新架构](/architecture/landing-page)中可用
+`outlineColor` 仅在 [新架构](/architecture/landing-page) 中可用
 :::
 
 设置元素轮廓线颜色。详见 [Web 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-color)。
@@ -451,7 +451,7 @@ export default App;
 ### `outlineOffset`
 
 :::note
-`outlineOffset` 仅在[新架构](/architecture/landing-page)中可用
+`outlineOffset` 仅在 [新架构](/architecture/landing-page) 中可用
 :::
 
 设置轮廓线与元素边界之间的距离，不影响布局。详见 [Web 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-offset)。
@@ -465,21 +465,21 @@ export default App;
 ### `outlineStyle`
 
 :::note
-`outlineStyle` 仅在[新架构](/architecture/landing-page)中可用
+`outlineStyle` 仅在 [新架构](/architecture/landing-page) 中可用
 :::
 
 设置元素轮廓线样式。详见 [Web 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-style)。
 
 | 类型                                    |
 | --------------------------------------- |
-| 枚举(`'solid'`, `'dotted'`, `'dashed'`) |
+| 枚举 (`'solid'`, `'dotted'`, `'dashed'`) |
 
 ---
 
 ### `outlineWidth`
 
 :::note
-`outlineWidth` 仅在[新架构](/architecture/landing-page)中可用
+`outlineWidth` 仅在 [新架构](/architecture/landing-page) 中可用
 :::
 
 绘制元素外围的轮廓宽度，不影响布局。详见 [Web 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-width)。
@@ -501,4 +501,4 @@ export default App;
 
 | 类型                                                  |
 | ----------------------------------------------------- |
-| 枚举(`'auto'`, `'box-none'`, `'box-only'`, `'none'` ) |
+| 枚举 (`'auto'`, `'box-none'`, `'box-only'`, `'none'` ) |

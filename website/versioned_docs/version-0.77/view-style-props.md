@@ -1,9 +1,9 @@
 ---
 id: view-style-props
-title: View Style Props
+title: 视图样式属性
 ---
 
-### Example
+### 示例
 
 ```SnackPlayer name=ViewStyleProps
 import React from 'react';
@@ -51,13 +51,13 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
 ### `backfaceVisibility`
 
-| Type                          |
+| 类型                          |
 | ----------------------------- |
 | enum(`'visible'`, `'hidden'`) |
 
@@ -65,111 +65,111 @@ export default App;
 
 ### `backgroundColor`
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `borderBottomColor`
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `borderBlockColor`
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `borderBlockEndColor`
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `borderBlockStartColor`
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `borderBottomEndRadius`
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
-| number, string (percentage value) |
+| number, string (百分比值) |
 
 ---
 
 ### `borderBottomLeftRadius`
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
-| number, string (percentage value) |
+| number, string (百分比值) |
 
 ---
 
 ### `borderBottomRightRadius`
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
-| number, string (percentage value) |
+| number, string (百分比值) |
 
 ---
 
 ### `borderBottomStartRadius`
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
-| number, string (percentage value) |
+| number, string (百分比值) |
 
 ---
 
 ### `borderStartEndRadius`
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
-| number, string (percentage value) |
+| number, string (百分比值) |
 
 ---
 
 ### `borderStartStartRadius`
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
-| number, string (percentage value) |
+| number, string (百分比值) |
 
 ---
 
 ### `borderEndEndRadius`
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
-| number, string (percentage value) |
+| number, string (百分比值) |
 
 ---
 
 ### `borderEndStartRadius`
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
-| number, string (percentage value) |
+| number, string (百分比值) |
 
 ---
 
 ### `borderBottomWidth`
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -177,17 +177,17 @@ export default App;
 
 ### `borderColor`
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `borderCurve` <div className="label ios">iOS</div>
 
-On iOS 13+, it is possible to change the corner curve of borders.
+在 iOS 13+ 上，可以更改边框的角曲线。
 
-| Type                               |
+| 类型                               |
 | ---------------------------------- |
 | enum(`'circular'`, `'continuous'`) |
 
@@ -195,23 +195,23 @@ On iOS 13+, it is possible to change the corner curve of borders.
 
 ### `borderEndColor`
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `borderLeftColor`
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `borderLeftWidth`
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -219,25 +219,25 @@ On iOS 13+, it is possible to change the corner curve of borders.
 
 ### `borderRadius`
 
-If the rounded border is not visible, try applying `overflow: 'hidden'` as well.
+如果圆角边框不可见，尝试同时应用 `overflow: 'hidden'`。
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
-| number, string (percentage value) |
+| number, string (百分比值) |
 
 ---
 
 ### `borderRightColor`
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `borderRightWidth`
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -245,15 +245,15 @@ If the rounded border is not visible, try applying `overflow: 'hidden'` as well.
 
 ### `borderStartColor`
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `borderStyle`
 
-| Type                                    |
+| 类型                                    |
 | --------------------------------------- |
 | enum(`'solid'`, `'dotted'`, `'dashed'`) |
 
@@ -261,47 +261,47 @@ If the rounded border is not visible, try applying `overflow: 'hidden'` as well.
 
 ### `borderTopColor`
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `borderTopEndRadius`
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
-| number, string (percentage value) |
+| number, string (百分比值) |
 
 ---
 
 ### `borderTopLeftRadius`
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
-| number, string (percentage value) |
+| number, string (百分比值) |
 
 ---
 
 ### `borderTopRightRadius`
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
-| number, string (percentage value) |
+| number, string (百分比值) |
 
 ---
 
 ### `borderTopStartRadius`
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
-| number, string (percentage value) |
+| number, string (百分比值) |
 
 ---
 
 ### `borderTopWidth`
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -309,30 +309,30 @@ If the rounded border is not visible, try applying `overflow: 'hidden'` as well.
 
 ### `borderWidth`
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
 ### `boxShadow`
 
 :::note
-`boxShadow` is only available on the [New Architecture](/architecture/landing-page). Outset shadows are only supported on **Android 9+**. Inset shadows are only supported on **Android 10+**.
+`boxShadow` 仅在 [新架构](/architecture/landing-page) 上可用。外阴影仅在 **Android 9+** 上支持。内阴影仅在 **Android 10+** 上支持。
 :::
 
-Adds a shadow effect to an element, with the ability to control the position, color, size, and blurriness of the shadow. This shadow either appears around the outside or inside of the border box of the element, depending on whether or not the shadow is _inset_. This is a spec-compliant implementation of the [web style prop of the same name](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow). Read more about all the arguments available in the [BoxShadowValue](./boxshadowvalue) documentation.
+为元素添加阴影效果，能够控制阴影的位置、颜色、大小和模糊度。根据阴影是否为 _内阴影 (inset)_，此阴影会出现在元素边框盒的外部或内部。这是 [同名的 Web 样式属性](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow) 的符合规范的实现。有关所有可用参数的更多信息，请阅读 [BoxShadowValue](./boxshadowvalue) 文档。
 
-These shadows can be composed together so that a single `boxShadow` can be comprised of multiple different shadows.
+这些阴影可以组合在一起，因此单个 `boxShadow` 可以由多个不同的阴影组成。
 
-`boxShadow` takes either a string which mimics the [web syntax](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow#syntax) or an array of [BoxShadowValue](./boxshadowvalue) objects.
-| Type |
+`boxShadow` 接受一个模仿 [Web 语法](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow#syntax) 的字符串，或一个 [BoxShadowValue](./boxshadowvalue) 对象数组。
+| 类型 |
 | --------------------------- |
-| array of BoxShadowValue objects \| string |
+| BoxShadowValue 对象数组 \| 字符串 |
 
 ### `cursor` <div className="label ios">iOS</div>
 
-On iOS 17+, Setting to `pointer` allows hover effects when a pointer (such as a trackpad or stylus on iOS, or the users' gaze on visionOS) is over the view.
+在 iOS 17+ 上，设置为 `pointer` 允许当指针（例如 iOS 上的触控板或触控笔，或 visionOS 上的用户视线）悬停在视图上时产生悬停效果。
 
-| Type                        |
+| 类型                        |
 | --------------------------- |
 | enum(`'auto'`, `'pointer'`) |
 
@@ -340,9 +340,9 @@ On iOS 17+, Setting to `pointer` allows hover effects when a pointer (such as a 
 
 ### `elevation` <div className="label android">Android</div>
 
-Sets the elevation of a view, using Android's underlying [elevation API](https://developer.android.com/training/material/shadows-clipping.html#Elevation). This adds a drop shadow to the item and affects z-order for overlapping views. Only supported on Android 5.0+, has no effect on earlier versions.
+设置视图的海拔高度，使用 Android 底层的 [elevation API](https://developer.android.com/training/material/shadows-clipping.html#Elevation)。这会给项目添加投影并影响重叠视图的 z-order。仅在 Android 5.0+ 上支持，在早期版本上无效。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -351,74 +351,74 @@ Sets the elevation of a view, using Android's underlying [elevation API](https:/
 ### `filter`
 
 :::note
-`filter` is only available on the [New Architecture](/architecture/landing-page)
+`filter` 仅在 [新架构](/architecture/landing-page) 上可用
 :::
 
-Adds a graphical filter to the `View`. This filter is comprised of any number of _filter functions_, which each represent some atomic change to the graphical composition of the `View`. The complete list of valid filter functions is defined below. `filter` will apply to descendants of the `View` as well as the `View` itself. `filter` implies `overflow: hidden`, so descendants will be clipped to fit the bounds of the `View`.
+为 `View` 添加图形滤镜。此滤镜由任意数量的 _滤镜函数_ 组成，每个函数代表对 `View` 图形构成的某种原子变更。有效滤镜函数的完整列表定义如下。`filter` 将应用于 `View` 的后代元素以及 `View` 本身。`filter` 隐含 `overflow: hidden`，因此后代元素将被裁剪以适应 `View` 的边界。
 
-The following filter functions work across all platforms:
+以下滤镜函数在所有平台上均有效：
 
-- `brightness`: Changes the brightness of the `View`. Takes a non-negative number or percentage.
-- `opacity`: Changes the opacity, or alpha, of the `View`. Takes a non-negative number or percentage.
+- `brightness`: 更改 `View` 的亮度。接受非负数或百分比。
+- `opacity`: 更改 `View` 的透明度或 alpha 值。接受非负数或百分比。
 
 :::note
-Due to issues with performance and spec compliance, these are the only two filter functions available on iOS. There are plans to explore some potential workarounds using SwiftUI instead of UIKit for this implementation.
+由于性能和规范合规性问题，这些是 iOS 上仅有的两个可用滤镜函数。有计划探索使用 SwiftUI 代替 UIKit 来实现此功能的一些潜在变通方案。
 :::
 
 <div className="label basic android">Android</div>
 
-The following filter functions work on Android only:
+以下滤镜函数仅在 Android 上有效：
 
-- `blur`: Blurs the `View` with a [Gaussian blur](https://en.wikipedia.org/wiki/Gaussian_blur), where the specified length represents the radius used in the blurring algorithm. Any non-negative DIP value is valid (no percents). The larger the value, the blurrier the result.
-- `contrast`: Changes the contrast of the `View`. Takes a non-negative number or percentage.
-- `dropShadow`: Adds a shadow around the alpha mask of the `View` (only non-zero alpha pixels in the `View` will cast a shadow). Takes an optional color representing the shadow color, and 2 or 3 lengths. If 2 lengths are specified they are interpreted as `offsetX` and `offsetY` which will translate the shadow in the X and Y dimensions respectfully. If a 3rd length is given it is interpreted as the standard deviation of the Gaussian blur used on the shadow - so a larger value will blur the shadow more. Read more about the arguments in [DropShadowValue](./dropshadowvalue.md).
-- `grayscale`: Converts the `View` to [grayscale](https://en.wikipedia.org/wiki/Grayscale) by the specified amount. Takes a non-negative number or percentage, where `1` or `100%` represents complete grayscale.
-- `hueRotate`: Changes the [hue](https://en.wikipedia.org/wiki/Hue) of the View. The argument of this function defines the angle of a color wheel around which the hue will be rotated, so e.g., `360deg` would have no effect. This angle can have either `deg` or `rad` units.
-- `invert`: Inverts the colors in the `View`. Takes a non-negative number or percentage, where `1` or `100%` represents complete inversion.
-- `sepia`: Converts the `View` to [sepia](<https://en.wikipedia.org/wiki/Sepia_(color)>). Takes a non-negative number or percentage, where `1` or `100%` represents complete sepia.
-- `saturate`: Changes the [saturation](https://en.wikipedia.org/wiki/Colorfulness) of the `View`. Takes a non-negative number or percentage.
+- `blur`: 使用 [高斯模糊](https://en.wikipedia.org/wiki/Gaussian_blur) 模糊 `View`，其中指定的长度代表模糊算法中使用的半径。任何非负 DIP 值均有效（无百分比）。值越大，结果越模糊。
+- `contrast`: 更改 `View` 的对比度。接受非负数或百分比。
+- `dropShadow`: 在 `View` 的 alpha 遮罩周围添加阴影（仅 `View` 中非零 alpha 像素会投射阴影）。接受一个可选颜色代表阴影颜色，以及 2 或 3 个长度。如果指定了 2 个长度，它们被解释为 `offsetX` 和 `offsetY`，将分别在 X 和 Y 维度上平移阴影。如果给出第 3 个长度，它被解释为用于阴影的高斯模糊的标准差——因此较大的值会使阴影更模糊。有关参数的更多信息，请阅读 [DropShadowValue](./dropshadowvalue.md)。
+- `grayscale`: 按指定量将 `View` 转换为 [灰度](https://en.wikipedia.org/wiki/Grayscale)。接受非负数或百分比，其中 `1` 或 `100%` 代表完全灰度。
+- `hueRotate`: 更改 View 的 [色相](https://en.wikipedia.org/wiki/Hue)。此函数的参数定义色轮的角度，色相将围绕该角度旋转，例如 `360deg` 将无效。此角度可以使用 `deg` 或 `rad` 单位。
+- `invert`: 反转 `View` 中的颜色。接受非负数或百分比，其中 `1` 或 `100%` 代表完全反转。
+- `sepia`: 将 `View` 转换为 [棕褐色](<https://en.wikipedia.org/wiki/Sepia_(color)>)。接受非负数或百分比，其中 `1` 或 `100%` 代表完全棕褐色。
+- `saturate`: 更改 `View` 的 [饱和度](https://en.wikipedia.org/wiki/Colorfulness)。接受非负数或百分比。
 
 :::note
-`blur` and `dropShadow` are only supported on **Android 12+**
+`blur` 和 `dropShadow` 仅在 **Android 12+** 上支持
 :::
 
-`filter` takes either an array of objects comprising of the above filter functions or a string which mimics the [web syntax](https://developer.mozilla.org/en-US/docs/Web/CSS/filter).
-| Type |
+`filter` 接受一个由上述滤镜函数组成的对象数组，或一个模仿 [Web 语法](https://developer.mozilla.org/en-US/docs/Web/CSS/filter) 的字符串。
+| 类型 |
 | ------ |
-| array of objects: `{brightness: number\|string}`, `{opacity: number\|string}`, `{blur: number\|string}`, `{contrast: number\|string}`, `{dropShadow: DropShadowValue\|string}`, `{grayscale: number\|string}`, `{hueRotate: number\|string}`, `{invert: number\|string}`, `{sepia: number\|string}`, `{saturate: number\|string}` or string|
+| 对象数组：`{brightness: number\|string}`, `{opacity: number\|string}`, `{blur: number\|string}`, `{contrast: number\|string}`, `{dropShadow: DropShadowValue\|string}`, `{grayscale: number\|string}`, `{hueRotate: number\|string}`, `{invert: number\|string}`, `{sepia: number\|string}`, `{saturate: number\|string}` 或 字符串|
 
 ---
 
 ### `mixBlendMode`
 
 :::note
-`mixBlendMode` is only available on the [New Architecture](/architecture/landing-page)
+`mixBlendMode` 仅在 [新架构](/architecture/landing-page) 和 **Android 10+** 上可用
 :::
 
-Controls how the `View` blends its colors with the other elements in its **stacking context**. Check out the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode) for a full overview of each blending function.
+控制 `View` 如何将其颜色与其 **堆叠上下文** 中的其他元素混合。查看 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode) 以获取每个混合函数的完整概述。
 
-For more granular control over what should be blending together see [isolation](layout-props#isolation).
+对于更细粒度的控制什么应该混合在一起，请参阅 [isolation](layout-props#isolation)。
 
-##### mixBlendMode Values
+##### mixBlendMode 值
 
-- `normal`: The element is drawn on top of its background without blending.
-- `multiply`: The source color is multiplied by the destination color and replaces the destination.
-- `screen`: Multiplies the complements of the backdrop and source color values, then complements the result.
-- `overlay`: Multiplies or screens the colors, depending on the backdrop color value.
-- `darken`: Selects the darker of the backdrop and source colors.
-- `lighten`: Selects the lighter of the backdrop and source colors.
-- `color-dodge`: Brightens the backdrop color to reflect the source color. Painting with black produces no changes.
-- `color-burn`: Darkens the backdrop color to reflect the source color. Painting with white produces no change.
-- `hard-light`: Multiplies or screens the colors, depending on the source color value. The effect is similar to shining a harsh spotlight on the backdrop.
-- `soft-light`: Darkens or lightens the colors, depending on the source color value. The effect is similar to shining a diffused spotlight on the backdrop.
-- `difference`: Subtracts the darker of the two constituent colors from the lighter color.
-- `exclusion`: Produces an effect similar to that of the Difference mode but lower in contrast.
-- `hue`: Creates a color with the hue of the source color and the saturation and luminosity of the backdrop color.
-- `saturation`: Creates a color with the saturation of the source color and the hue and luminosity of the backdrop color.
-- `color`: Creates a color with the hue and saturation of the source color and the luminosity of the backdrop color. This preserves the gray levels of the backdrop and is useful for coloring monochrome images or tinting color images.
-- `luminosity`: Creates a color with the luminosity of the source color and the hue and saturation of the backdrop color. This produces an inverse effect to that of the Color mode.
+- `normal`: 元素绘制在其背景之上，不进行混合。
+- `multiply`: 源颜色乘以目标颜色并替换目标颜色。
+- `screen`: 将背景色和源颜色值的补相乘，然后对结果取补。
+- `overlay`: 根据背景颜色值，将颜色相乘或滤色。
+- `darken`: 选择背景色和源颜色中较暗的一个。
+- `lighten`: 选择背景色和源颜色中较亮的一个。
+- `color-dodge`: 提亮背景色以反映源颜色。用黑色绘制不会产生变化。
+- `color-burn`: 变暗背景色以反映源颜色。用白色绘制不会产生变化。
+- `hard-light`: 根据源颜色值，将颜色相乘或滤色。效果类似于在背景上照射强烈的聚光灯。
+- `soft-light`: 根据源颜色值，变暗或提亮颜色。效果类似于在背景上照射漫射聚光灯。
+- `difference`: 从较亮的颜色中减去两个组成颜色中较暗的一个。
+- `exclusion`: 产生类似于差异模式的效果，但对比度较低。
+- `hue`: 创建一种颜色，具有源颜色的色相以及背景颜色的饱和度和亮度。
+- `saturation`: 创建一种颜色，具有源颜色的饱和度以及背景颜色的色相和亮度。
+- `color`: 创建一种颜色，具有源颜色的色相和饱和度以及背景颜色的亮度。这保留了背景的灰度级别，对于为单色图像着色或为彩色图像添加色调很有用。
+- `luminosity`: 创建一种颜色，具有源颜色的亮度以及背景颜色的色相和饱和度。这产生与颜色模式相反的效果。
 
-| Type                                                                                                                                                                                                                                 |
+| 类型                                                                                                                                                                                                                                 |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | enum(`'normal'`, `'multiply'`, `'screen'`, `'overlay'`, `'darken'`, `'lighten'`, `'color-dodge'`, `'color-burn'`, `'hard-light'`, `'soft-light'`, `'difference'`, `'exclusion'`, `'hue'`, `'saturation'`, `'color'`, `'luminosity'`) |
 
@@ -426,7 +426,7 @@ For more granular control over what should be blending together see [isolation](
 
 ### `opacity`
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -435,26 +435,26 @@ For more granular control over what should be blending together see [isolation](
 ### `outlineColor`
 
 :::note
-`outlineColor` is only available on the [New Architecture](/architecture/landing-page)
+`outlineColor` 仅在 [新架构](/architecture/landing-page) 上可用
 :::
 
-Sets the color of an element's outline. See [web documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-color) for more details.
+设置元素轮廓的颜色。有关更多详细信息，请参阅 [Web 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-color)。
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `outlineOffset`
 
 :::note
-`outlineOffset` is only available on the [New Architecture](/architecture/landing-page)
+`outlineOffset` 仅在 [新架构](/architecture/landing-page) 上可用
 :::
 
-Sets the amount of space between an outline and the bounds of an element. Does not affect layout. See [web documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-offset) for more details.
+设置轮廓与元素边界之间的空间量。不影响布局。有关更多详细信息，请参阅 [Web 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-offset)。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -463,12 +463,12 @@ Sets the amount of space between an outline and the bounds of an element. Does n
 ### `outlineStyle`
 
 :::note
-`outlineStyle` is only available on the [New Architecture](/architecture/landing-page)
+`outlineStyle` 仅在 [新架构](/architecture/landing-page) 上可用
 :::
 
-Sets the style of an element's outline. See [web documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-style) for more details.
+设置元素轮廓的样式。有关更多详细信息，请参阅 [Web 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-style)。
 
-| Type                                    |
+| 类型                                    |
 | --------------------------------------- |
 | enum(`'solid'`, `'dotted'`, `'dashed'`) |
 
@@ -477,12 +477,12 @@ Sets the style of an element's outline. See [web documentation](https://develope
 ### `outlineWidth`
 
 :::note
-`outlineWidth` is only available on the [New Architecture](/architecture/landing-page)
+`outlineWidth` 仅在 [新架构](/architecture/landing-page) 上可用
 :::
 
-The width of an outline which is drawn around an element, outside the border. Does not affect layout. See [web documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-width) for more details.
+绘制在元素周围、边框外部的轮廓宽度。不影响布局。有关更多详细信息，请参阅 [Web 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-width)。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -490,13 +490,13 @@ The width of an outline which is drawn around an element, outside the border. Do
 
 ### `pointerEvents`
 
-Controls whether the `View` can be the target of touch events.
+控制 `View` 是否可以成为触摸事件的目标。
 
-- `'auto'`: The View can be the target of touch events.
-- `'none'`: The View is never the target of touch events.
-- `'box-none'`: The View is never the target of touch events but its subviews can be.
-- `'box-only'`: The view can be the target of touch events but its subviews cannot be.
+- `'auto'`: View 可以成为触摸事件的目标。
+- `'none'`: View 永远不会成为触摸事件的目标。
+- `'box-none'`: View 永远不会成为触摸事件的目标，但其子视图可以。
+- `'box-only'`: View 可以成为触摸事件的目标，但其子视图不可以。
 
-| Type                                                  |
+| 类型                                                  |
 | ----------------------------------------------------- |
 | enum(`'auto'`, `'box-none'`, `'box-only'`, `'none'` ) |
