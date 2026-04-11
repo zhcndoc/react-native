@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 在本例中，您将学习如何在向存储添加新键时发送事件。更改键的值不会发送事件，但添加新键会。
 
-本指南基于 [Native Module](/docs/next/turbo-native-modules-introduction) 指南开始。
+本指南基于 [原生模块](/docs/next/turbo-native-modules-introduction) 指南开始。
 在深入本指南之前，请确保熟悉该指南，并可能已经实现了其中的示例。
 
 ## 步骤 1：更新 NativeLocalStorage 的规范
@@ -84,7 +84,7 @@ export default (TurboModuleRegistry.get<Spec>(
 
 既然您已经更新了原生模块的规范，现在需要重新运行 Codegen 以生成本地代码的工件。
 
-这与 Native Modules 指南中介绍的过程相同。
+这与原生模块指南中介绍的过程相同。
 
 <Tabs groupId="platforms" queryString defaultValue={constants.defaultPlatform}>
 <TabItem value="android" label="Android">
@@ -265,7 +265,7 @@ export default App;
 <Tabs groupId="platforms" queryString defaultValue={constants.defaultPlatform}>
 <TabItem value="android" label="Android">
 
-假设您已经按照 [Native Modules 指南](/docs/turbo-native-modules-introduction?platforms=android&language=typescript#3-write-application-code-using-the-turbo-native-module) 进行了 Android 指南中的步骤，剩下要做的就是将发送事件的代码接入您的应用。
+假设您已经按照 [原生模块指南](/docs/turbo-native-modules-introduction?platforms=android&language=typescript#3-write-application-code-using-the-turbo-native-module) 进行了 Android 指南中的步骤，剩下要做的就是将发送事件的代码接入您的应用。
 
 操作步骤如下：
 
@@ -322,7 +322,7 @@ class NativeLocalStorageModule(reactContext: ReactApplicationContext) : NativeLo
 </TabItem>
 <TabItem value="ios" label="iOS">
 
-假设您已经按照 [Native Modules 指南](/docs/turbo-native-modules-introduction?platforms=ios&language=typescript#3-write-application-code-using-the-turbo-native-module) 进行了 iOS 指南中的步骤，剩余工作就是加入发送事件的代码。
+假设您已经按照 [原生模块指南](/docs/turbo-native-modules-introduction?platforms=ios&language=typescript#3-write-application-code-using-the-turbo-native-module) 进行了 iOS 指南中的步骤，剩余工作就是加入发送事件的代码。
 
 操作步骤如下：
 

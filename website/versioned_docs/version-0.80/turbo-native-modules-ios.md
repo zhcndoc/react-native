@@ -153,7 +153,7 @@ static NSString *const RCTNativeLocalStorageKey = @"local-storage";
 此时，你需要重新安装 pods 以确保 codegen 再次运行生成新文件：
 
 ```bash
-# from the ios folder
+# 来自 ios 文件夹
 bundle exec pod install
 open TurboModuleExample.xcworkspace
 ```

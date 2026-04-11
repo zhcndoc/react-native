@@ -53,7 +53,7 @@ const AppStateExample = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <Text>当前状态是: {appStateVisible}</Text>
+        <Text>当前状态是：{appStateVisible}</Text>
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
 export default AppStateExample;
 ```
 
-该示例通常只会显示“当前状态是: active”，因为应用只有在 `active` 状态时才对用户可见，且 null 状态只会出现短暂瞬间。如果你想尝试代码，建议使用你自己的设备，而非嵌入式预览。
+该示例通常只会显示“当前状态是：active"，因为应用只有在 `active` 状态时才对用户可见，且 null 状态只会出现短暂瞬间。如果你想尝试代码，建议使用你自己的设备，而非嵌入式预览。
 
 ---
 
@@ -80,7 +80,7 @@ export default AppStateExample;
 
 ### `change`
 
-当应用状态发生变化时触发该事件。监听器会接收到[当前应用状态值](appstate#app-states)之一。
+当应用状态发生变化时触发该事件。监听器会接收到 [当前应用状态值](appstate#app-states) 之一。
 
 ### `memoryWarning` <div className="label ios">iOS</div>
 
@@ -92,7 +92,7 @@ export default AppStateExample;
 
 ### `blur` <div className="label android">Android</div>
 
-当用户不再主动与应用交互时接收该事件。在用户下拉[通知抽屉](https://developer.android.com/guide/topics/ui/notifiers/notifications#bar-and-drawer)时很有用。此时 `AppState` 不会改变，但 `blur` 事件会被触发。
+当用户不再主动与应用交互时接收该事件。在用户下拉 [通知抽屉](https://developer.android.com/guide/topics/ui/notifiers/notifications#bar-and-drawer) 时很有用。此时 `AppState` 不会改变，但 `blur` 事件会被触发。
 
 ## 方法
 
@@ -105,7 +105,7 @@ static addEventListener(
 ): NativeEventSubscription;
 ```
 
-设置一个函数，当在 AppState 上发生指定事件类型时会调用该函数。`eventType` 的有效值[见上文](#events)。返回一个 `EventSubscription`。
+设置一个函数，当在 AppState 上发生指定事件类型时会调用该函数。`eventType` 的有效值 [见上文](#events)。返回一个 `EventSubscription`。
 
 ## 属性
 

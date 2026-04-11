@@ -70,7 +70,7 @@ MYAPP_UPLOAD_KEY_PASSWORD=*****
 :::
 
 :::note 关于安全性的说明
-如果您不希望以明文保存密码，且使用的是 macOS，可以[将凭据存储到“钥匙串访问”应用中](https://pilloxa.gitlab.io/posts/safer-passwords-in-gradle/)，然后可跳过 `~/.gradle/gradle.properties` 文件中的后两行配置。
+如果您不希望以明文保存密码，且使用的是 macOS，可以 [将凭据存储到“钥匙串访问”应用中](https://pilloxa.gitlab.io/posts/safer-passwords-in-gradle/)，然后可跳过 `~/.gradle/gradle.properties` 文件中的后两行配置。
 :::
 
 ## 将签名配置添加至应用的 Gradle 配置
@@ -118,7 +118,7 @@ npx react-native build-android --mode=release
 
 生成的 AAB 文件位于 `android/app/build/outputs/bundle/release/app-release.aab`，即可上传至 Google Play。
 
-为了让 Google Play 接受 AAB 格式，您的应用需在 Google Play 控制台配置 Google Play 应用签名。如果是更新一个未使用 Google Play 应用签名的已有应用，请查看我们的[迁移章节](#migrating-old-android-react-native-apps-to-use-app-signing-by-google-play)，学习如何执行该配置更改。
+为了让 Google Play 接受 AAB 格式，您的应用需在 Google Play 控制台配置 Google Play 应用签名。如果是更新一个未使用 Google Play 应用签名的已有应用，请查看我们的 [迁移章节](#migrating-old-android-react-native-apps-to-use-app-signing-by-google-play)，学习如何执行该配置更改。
 
 ## 测试发布版应用
 
@@ -168,7 +168,7 @@ android {
 
 将这些文件上传到支持设备筛选的商店（如 [Amazon AppStore](https://developer.amazon.com/docs/app-submission/device-filtering-and-compatibility.html) 或 [F-Droid](https://f-droid.org/en/)），用户即可自动下载对应设备的 APK。如果想上传到不支持多个 APK 的市场（如 [APKFiles](https://www.apkfiles.com/)），请将 `universalApk false` 改为 `true`，生成包含所有架构的通用 APK。
 
-请注意，您还需配置不同的版本号，详见官方 Android 文档中[关于配置 APK 拆分及版本号](https://developer.android.com/studio/build/configure-apk-splits#configure-APK-versions)的说明。
+请注意，您还需配置不同的版本号，详见官方 Android 文档中 [关于配置 APK 拆分及版本号](https://developer.android.com/studio/build/configure-apk-splits#configure-APK-versions) 的说明。
 
 ## 启用 Proguard 来减小 APK 大小（可选）
 
@@ -189,7 +189,7 @@ def enableProguardInReleaseBuilds = true
 
 ## 迁移旧版 Android React Native 应用以使用 Google Play 应用签名
 
-如果您从旧版 React Native 迁移，您的应用很可能未使用 Google Play 应用签名功能。我们建议开启该功能，以利用自动拆分等优势。迁移时，先[生成新的上传密钥](#generating-an-upload-key)，然后在 `android/app/build.gradle` 中将发布签名配置替换为使用上传密钥（详见[添加签名配置到 Gradle](#adding-signing-config-to-your-apps-gradle-config)部分）。完成后，请按 [Google Play 帮助网站](https://support.google.com/googleplay/android-developer/answer/7384423) 指南，将您原有的发布密钥发送给 Google Play。
+如果您从旧版 React Native 迁移，您的应用很可能未使用 Google Play 应用签名功能。我们建议开启该功能，以利用自动拆分等优势。迁移时，先 [生成新的上传密钥](#generating-an-upload-key)，然后在 `android/app/build.gradle` 中将发布签名配置替换为使用上传密钥（详见 [添加签名配置到 Gradle](#adding-signing-config-to-your-apps-gradle-config) 部分）。完成后，请按 [Google Play 帮助网站](https://support.google.com/googleplay/android-developer/answer/7384423) 指南，将您原有的发布密钥发送给 Google Play。
 
 ## 默认权限
 

@@ -1,11 +1,11 @@
 ---
 id: text-style-props
-title: Text Style Props
+title: 文本样式属性
 ---
 
-### Example
+### 示例
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
+import Tabs from '@theme/Tabs'; import TabItem from '@theme/Tabs'; import constants from '@site/core/TabsConstants';
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -169,7 +169,7 @@ const App = () => {
             <CustomPicker
               label="Text Decoration Line"
               data={textDecorationLines}
-              currentIndex={textDecorationLineIdx}
+              currentIndex={textDecorationLineIdx]
               onSelected={setTextDecorationLineIdx}
             />
             <CustomSlider
@@ -497,7 +497,7 @@ const App = () => {
             <CustomPicker
               label="Text Decoration Line"
               data={textDecorationLines}
-              currentIndex={textDecorationLineIdx}
+              currentIndex={textDecorationLineIdx]
               onSelected={setTextDecorationLineIdx}
             />
             <CustomSlider
@@ -759,39 +759,39 @@ export default App;
 </TabItem>
 </Tabs>
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
 ### `color`
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `fontFamily`
 
-| Type   |
+| 类型   |
 | ------ |
-| string |
+| 字符串 |
 
-The generic font families `system-ui`, `ui-sans-serif`, `ui-serif`, `ui-monospace`, and `ui-rounded` are supported on iOS.
+iOS 上支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monospace` 和 `ui-rounded`。
 
 ---
 
 ### `fontSize`
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `fontStyle`
 
-| Type                         |
+| 类型                         |
 | ---------------------------- |
 | enum(`'normal'`, `'italic'`) |
 
@@ -799,59 +799,59 @@ The generic font families `system-ui`, `ui-sans-serif`, `ui-serif`, `ui-monospac
 
 ### `fontWeight`
 
-Specifies font weight. The values `'normal'` and `'bold'` are supported for most fonts. Not all fonts have a variant for each of the numeric values, in that case the closest one is chosen.
+指定字体粗细。大多数字体支持值 `'normal'` 和 `'bold'`。并非所有字体都有每个数值对应的变体，在这种情况下会选择最接近的一个。
 
-| Type                                                                                                                  | Default    |
+| 类型                                                                                                                  | 默认值     |
 | --------------------------------------------------------------------------------------------------------------------- | ---------- |
-| enum(`'normal'`, `'bold'`, `'100'`, `'200'`, `'300'`, `'400'`, `'500'`, `'600'`, `'700'`, `'800'`, `'900'`) or number | `'normal'` |
+| enum(`'normal'`, `'bold'`, `'100'`, `'200'`, `'300'`, `'400'`, `'500'`, `'600'`, `'700'`, `'800'`, `'900'`) 或 数字 | `'normal'` |
 
 ---
 
 ### `includeFontPadding` <div className="label android">Android</div>
 
-Set to `false` to remove extra font padding intended to make space for certain ascenders / descenders. With some fonts, this padding can make text look slightly misaligned when centered vertically. For best results also set `textAlignVertical` to `center`.
+设置为 `false` 以移除额外的字体内边距，这些内边距旨在为某些上升部/下降部留出空间。对于某些字体，当垂直居中时，此内边距可能导致文本看起来略微未对齐。为了获得最佳结果，还将 `textAlignVertical` 设置为 `center`。
 
-| Type | Default |
+| 类型    | 默认值  |
 | ---- | ------- |
-| bool | `true`  |
+| 布尔值 | `true`  |
 
 ---
 
 ### `fontVariant`
 
-Allows you to set all the font variants for a font. Can be set by using an array of enums or a space-separated string e.g. `'small-caps common-ligatures'`.
+允许你设置字体的所有变体。可以通过使用枚举数组或空格分隔的字符串来设置，例如 `'small-caps common-ligatures'`。
 
-| Type                                                                                                                 | Default |
+| 类型                                                                                                                 | 默认值 |
 | -------------------------------------------------------------------------------------------------------------------- | ------- |
-| array of enum(`'small-caps'`, `'oldstyle-nums'`, `'lining-nums'`, `'tabular-nums'`, `'proportional-nums'`) or string | `[]`    |
+| 枚举数组 (`'small-caps'`, `'oldstyle-nums'`, `'lining-nums'`, `'tabular-nums'`, `'proportional-nums'`) 或 字符串 | `[]`    |
 
 ---
 
 ### `letterSpacing`
 
-Increase or decrease the spacing between characters. By default there is no extra letter spacing.
+增加或减少字符之间的间距。默认情况下没有额外的字母间距。
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `lineHeight`
 
-Numeric value that controls the vertical spacing between lines of text within a text element. It specifies the distance between the baselines of consecutive lines of text.
+控制文本元素内文本行之间垂直间距的数值。它指定连续文本行基线之间的距离。
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `textAlign`
 
-Specifies text alignment. On Android, the value 'justify' is only supported on Oreo (8.0) or above (API level >= 26). The value will fallback to `left` on lower Android versions.
+指定文本对齐方式。在 Android 上，值 'justify' 仅在 Oreo (8.0) 或更高版本（API 级别 >= 26）上支持。在较低版本的 Android 上，该值将回退到 `left`。
 
-| Type                                                         | Default  |
+| 类型                                                         | 默认值   |
 | ------------------------------------------------------------ | -------- |
 | enum(`'auto'`, `'left'`, `'right'`, `'center'`, `'justify'`) | `'auto'` |
 
@@ -859,7 +859,7 @@ Specifies text alignment. On Android, the value 'justify' is only supported on O
 
 ### `textAlignVertical` <div className="label android">Android</div>
 
-| Type                                            | Default  |
+| 类型                                            | 默认值   |
 | ----------------------------------------------- | -------- |
 | enum(`'auto'`, `'top'`, `'bottom'`, `'center'`) | `'auto'` |
 
@@ -867,15 +867,15 @@ Specifies text alignment. On Android, the value 'justify' is only supported on O
 
 ### `textDecorationColor` <div className="label ios">iOS</div>
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `textDecorationLine`
 
-| Type                                                                        | Default  |
+| 类型                                                                        | 默认值   |
 | --------------------------------------------------------------------------- | -------- |
 | enum(`'none'`, `'underline'`, `'line-through'`, `'underline line-through'`) | `'none'` |
 
@@ -883,7 +883,7 @@ Specifies text alignment. On Android, the value 'justify' is only supported on O
 
 ### `textDecorationStyle` <div className="label ios">iOS</div>
 
-| Type                                                | Default   |
+| 类型                                                | 默认值    |
 | --------------------------------------------------- | --------- |
 | enum(`'solid'`, `'double'`, `'dotted'`, `'dashed'`) | `'solid'` |
 
@@ -891,31 +891,31 @@ Specifies text alignment. On Android, the value 'justify' is only supported on O
 
 ### `textShadowColor`
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `textShadowOffset`
 
-| Type                                        |
+| 类型                                        |
 | ------------------------------------------- |
-| object: `{width?: number, height?: number}` |
+| 对象：`{width?: number, height?: number}` |
 
 ---
 
 ### `textShadowRadius`
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `textTransform`
 
-| Type                                                         | Default  |
+| 类型                                                         | 默认值   |
 | ------------------------------------------------------------ | -------- |
 | enum(`'none'`, `'uppercase'`, `'lowercase'`, `'capitalize'`) | `'none'` |
 
@@ -923,7 +923,7 @@ Specifies text alignment. On Android, the value 'justify' is only supported on O
 
 ### `verticalAlign` <div className="label android">Android</div>
 
-| Type                                            | Default  |
+| 类型                                            | 默认值   |
 | ----------------------------------------------- | -------- |
 | enum(`'auto'`, `'top'`, `'bottom'`, `'middle'`) | `'auto'` |
 
@@ -931,7 +931,7 @@ Specifies text alignment. On Android, the value 'justify' is only supported on O
 
 ### `writingDirection` <div className="label ios">iOS</div>
 
-| Type                             | Default  |
+| 类型                             | 默认值   |
 | -------------------------------- | -------- |
 | enum(`'auto'`, `'ltr'`, `'rtl'`) | `'auto'` |
 
@@ -939,8 +939,8 @@ Specifies text alignment. On Android, the value 'justify' is only supported on O
 
 ### `userSelect`
 
-It allows the user to select text and to use the native copy and paste functionality. Has precedence over the `selectable` prop.
+允许用户选择文本并使用原生复制和粘贴功能。优先级高于 `selectable` 属性。
 
-| Type                                                     | Default |
+| 类型                                                     | 默认值 |
 | -------------------------------------------------------- | ------- |
 | enum(`'auto'`, `'text'`, `'none'`, `'contain'`, `'all'`) | `none`  |

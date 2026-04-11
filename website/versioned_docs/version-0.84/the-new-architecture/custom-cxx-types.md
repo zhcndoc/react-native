@@ -6,7 +6,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 本指南假设你已经熟悉了 [**纯 C++ Turbo Native 模块**](pure-cxx-modules.md) 指南。本教程将在其基础上进行扩展。
 :::
 
-C++ Turbo Native 模块支持绝大多数 `std::` 标准类型的[桥接功能](https://github.com/facebook/react-native/tree/main/packages/react-native/ReactCommon/react/bridging)。你可以在模块中直接使用这些类型，无需额外编码。
+C++ Turbo Native 模块支持绝大多数 `std::` 标准类型的 [桥接功能](https://github.com/facebook/react-native/tree/main/packages/react-native/ReactCommon/react/bridging)。你可以在模块中直接使用这些类型，无需额外编码。
 
 如果你想在应用或库中新增支持自定义类型，你需要提供相应的 `bridging` 头文件。
 
@@ -353,7 +353,7 @@ bool NativeSampleModule::validateAddress(jsi::Runtime &rt, jsi::Object input) {
 - `getProperty()`：根据属性名查找对象属性
 - `asString()`：属性转换为 `jsi::String`
 - `utf8()`：`jsi::String` 转换为 `std::string`
-- `asNumber()`：属性转换为 `double` （此处隐式转换成 `int32_t`）
+- `asNumber()`：属性转换为 `double`（此处隐式转换成 `int32_t`）
 
 解析出字段后，即可实现逻辑。
 

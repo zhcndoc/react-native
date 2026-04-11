@@ -399,7 +399,7 @@ export default App;
 
 ## 增大可点击区域
 
-在手机上点击按钮时不易精准操作。请确保所有交互元素的尺寸至少为44x44。实现方法之一是给元素留出足够空间，使用 `padding`、`minWidth` 和 `minHeight` 样式属性都很有用。或者，可以使用 [`hitSlop` 属性](touchablewithoutfeedback.md#hitslop) 来扩大点击区域，同时不改变布局。下面是一个示例：
+在手机上点击按钮时不易精准操作。请确保所有交互元素的尺寸至少为 44x44。实现方法之一是给元素留出足够空间，使用 `padding`、`minWidth` 和 `minHeight` 样式属性都很有用。或者，可以使用 [`hitSlop` 属性](touchablewithoutfeedback.md#hitslop) 来扩大点击区域，同时不改变布局。下面是一个示例：
 
 ```SnackPlayer name=HitSlop%20example
 import React from 'react';
@@ -573,7 +573,7 @@ export default App;
 
 除非你使用 `Dimensions` API 并处理了屏幕旋转，否则多种屏幕方向默认应该能正常工作。如果你不希望支持多种屏幕方向，可以将屏幕方向锁定为竖屏或横屏。
 
-在 iOS 上，打开 Xcode 的“General”标签页，在“Deployment Info”部分启用你想支持的设备方向（确保修改前在设备选项中选中了 iPhone）。在 Android 上，打开 AndroidManifest.xml 文件，在 `<activity>` 元素内添加 `android:screenOrientation="portrait"` 锁定为竖屏，或 `android:screenOrientation="landscape"` 锁定为横屏。
+在 iOS 上，打开 Xcode 的"General"标签页，在"Deployment Info"部分启用你想支持的设备方向（确保修改前在设备选项中选中了 iPhone）。在 Android 上，打开 AndroidManifest.xml 文件，在 `<activity>` 元素内添加 `android:screenOrientation="portrait"` 锁定为竖屏，或 `android:screenOrientation="landscape"` 锁定为横屏。
 
 # 了解更多
 

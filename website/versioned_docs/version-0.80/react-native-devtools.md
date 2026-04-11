@@ -5,146 +5,146 @@ title: React Native DevTools
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-React Native DevTools is our modern debugging experience for React Native. Purpose-built from the ground up, it aims to be fundamentally more integrated, correct, and reliable than previous debugging methods.
+React Native DevTools 是我们为 React Native 打造的现代化调试体验。它从头开始专门构建，旨在比以前的调试方法从根本上更加集成、正确和可靠。
 
-![React Native DevTools opened to the "Welcome" pane](/docs/assets/debugging-rndt-welcome.jpg)
+![React Native DevTools 打开至“欢迎”面板](/docs/assets/debugging-rndt-welcome.jpg)
 
-React Native DevTools is designed for debugging React app concerns, and not to replace native tools. If you want to inspect React Native’s underlying platform layers (for example, while developing a Native Module), please use the debugging tools available in Android Studio and Xcode (see [Debugging Native Code](/docs/debugging-native-code)).
+React Native DevTools 专为调试 React 应用问题而设计，并非用于替代原生工具。如果您想检查 React Native 的底层平台层（例如，在开发原生模块时），请使用 Android Studio 和 Xcode 中可用的调试工具（参见 [调试原生代码](/docs/debugging-native-code)）。
 
 <details>
-<summary>**💡 Compatibility** — released in 0.76</summary>
+<summary>**💡 兼容性** — 于 0.76 版本发布</summary>
 
-React Native DevTools supports all React Native apps running Hermes. It replaces the previous Flipper, Experimental Debugger, and Hermes debugger (Chrome) frontends.
+React Native DevTools 支持所有运行 Hermes 的 React Native 应用。它取代了之前的 Flipper、Experimental Debugger 和 Hermes debugger (Chrome) 前端。
 
-It is not possible to set up React Native DevTools with any older versions of React Native.
+无法在任何旧版本的 React Native 上设置 React Native DevTools。
 
-- **Chrome Browser DevTools — unsupported**
-  - Connecting to React Native via `chrome://inspect` is no longer supported. Features may not work correctly, as the latest versions of Chrome DevTools (which are built to match the latest browser capabilities and APIs) have not been tested, and this frontend lacks our customisations. Instead, we ship a supported version with React Native DevTools.
-- **Visual Studio Code — unsupported** (pre-existing)
-  - Third party extensions such as [Expo Tools](https://github.com/expo/vscode-expo) and [Radon IDE](https://ide.swmansion.com/) may have improved compatibility, but are not directly supported by the React team.
+- **Chrome 浏览器 DevTools — 不支持**
+  - 不再支持通过 `chrome://inspect` 连接到 React Native。功能可能无法正常工作，因为最新版本的 Chrome DevTools（旨在匹配最新的浏览器功能和 API）尚未经过测试，并且此前端缺乏我们的自定义功能。相反，我们随 React Native DevTools 一起提供了受支持的版本。
+- **Visual Studio Code — 不支持**（原有）
+  - 第三方扩展（如 [Expo Tools](https://github.com/expo/vscode-expo) 和 [Radon IDE](https://ide.swmansion.com/)）可能具有改进的兼容性，但不受 React 团队的直接支持。
 
 </details>
 <details>
-<summary>**💡 Feedback & FAQs**</summary>
+<summary>**💡 反馈与常见问题**</summary>
 
-We want the tooling you use to debug React across all platforms to be reliable, familiar, simple, and cohesive. All the features described on this page are built with these principles in mind, and we also want to offer more capabilities in future.
+我们希望您用于跨平台调试 React 的工具可靠、熟悉、简单且连贯。本页面上描述的所有功能都是本着这些原则构建的，我们也希望在未来提供更多的功能。
 
-We are actively iterating on the future of React Native DevTools, and have created a centralized [GitHub discussion](https://github.com/react-native-community/discussions-and-proposals/discussions/819) to keep track of issues, frequently asked questions, and feedback.
+我们正在积极迭代 React Native DevTools 的未来，并创建了一个集中的 [GitHub 讨论区](https://github.com/react-native-community/discussions-and-proposals/discussions/819) 来跟踪问题、常见问题和反馈。
 
 </details>
 
-## Core features
+## 核心功能
 
-React Native DevTools is based on the Chrome DevTools frontend. If you have a web development background, its features should be familiar. As a starting point, we recommend browsing the [Chrome DevTools docs](https://developer.chrome.com/docs/devtools) which contain full guides as well as video resources.
+React Native DevTools 基于 Chrome DevTools 前端。如果您有 Web 开发背景，它的功能应该会很熟悉。作为起点，我们建议浏览 [Chrome DevTools 文档](https://developer.chrome.com/docs/devtools)，其中包含完整的指南以及视频资源。
 
-### Console
+### 控制台
 
-![A series of logs React Native DevTools Sources view, alongside a device](/docs/assets/debugging-rndt-console.jpg)
+![React Native DevTools 源代码视图中的一系列日志，旁边是一个设备](/docs/assets/debugging-rndt-console.jpg)
 
-The Console panel allows you to view and filter messages, evaluate JavaScript, inspect object properties, and more.
+控制台面板允许您查看和过滤消息、评估 JavaScript、检查对象属性等。
 
-[Console features reference | Chrome DevTools](https://developer.chrome.com/docs/devtools/console/reference)
+[控制台功能参考 | Chrome DevTools](https://developer.chrome.com/docs/devtools/console/reference)
 
-#### Useful tips
+#### 实用技巧
 
-- If your app has a lot of logs, use the filter box or change the log levels that are shown.
-- Watch values over time with [Live Expressions](https://developer.chrome.com/docs/devtools/console/live-expressions).
-- Persist messages across reloads with [Preserve Logs](https://developer.chrome.com/docs/devtools/console/reference#persist).
-- Use <kbd>Ctrl</kbd> + <kbd>L</kbd> to clear the console view.
+- 如果您的应用有很多日志，请使用过滤框或更改显示的日志级别。
+- 使用 [实时表达式](https://developer.chrome.com/docs/devtools/console/live-expressions) 随时间观察值。
+- 使用 [保留日志](https://developer.chrome.com/docs/devtools/console/reference#persist) 在重新加载后保留消息。
+- 使用 <kbd>Ctrl</kbd> + <kbd>L</kbd> 清除控制台视图。
 
-### Sources & breakpoints
+### 源代码与断点
 
-![A paused breakpoint in the React Native DevTools Sources view, alongside a device](/docs/assets/debugging-rndt-sources-paused-with-device.jpg)
+![React Native DevTools 源代码视图中暂停的断点，旁边是一个设备](/docs/assets/debugging-rndt-sources-paused-with-device.jpg)
 
-The Sources panel allows you to view the source files in your app and register breakpoints. Use a breakpoint to define a line of code where your app should pause — allowing you to inspect the live state of the program and incrementally step through code.
+源代码面板允许您查看应用中的源文件并注册断点。使用断点定义应用应暂停的代码行——允许您检查程序的实时状态并逐步执行代码。
 
-[Pause your code with breakpoints | Chrome DevTools](https://developer.chrome.com/docs/devtools/javascript/breakpoints)
+[使用断点暂停代码 | Chrome DevTools](https://developer.chrome.com/docs/devtools/javascript/breakpoints)
 
 :::tip
 
-#### Mini-guide
+#### 简易指南
 
-Breakpoints are a fundamental tool in your debugging toolkit!
+断点是调试工具包中的基本工具！
 
-1. Navigate to a source file using the sidebar or <kbd>Cmd ⌘</kbd>+<kbd>P</kbd> / <kbd>Ctrl</kbd>+<kbd>P</kbd>.
-2. Click in the line number column next to a line of code to add a breakpoint.
-3. Use the navigation controls at the top right to [step through code](https://developer.chrome.com/docs/devtools/javascript/reference#stepping) when paused.
+1. 使用侧边栏或 <kbd>Cmd ⌘</kbd>+<kbd>P</kbd> / <kbd>Ctrl</kbd>+<kbd>P</kbd> 导航到源文件。
+2. 点击代码行旁边的行号列以添加断点。
+3. 暂停时使用右上角的导航控件 [逐步执行代码](https://developer.chrome.com/docs/devtools/javascript/reference#stepping)。
 
 :::
 
-#### Useful tips
+#### 实用技巧
 
-- A "Paused in Debugger" overlay will appear when your app is paused. Tap it to resume.
-- Pay attention to the right hand side panels when on a breakpoint, which allow you to inspect the current scope and call stack, and set watch expressions.
-- Use a `debugger;` statement to quickly set a breakpoint from your text editor. This will reach the device immediately via Fast Refresh.
-- There are multiple kinds of breakpoints! For example, [Conditional Breakpoints and Logpoints](https://developer.chrome.com/docs/devtools/javascript/breakpoints#overview).
+- 当应用暂停时，将出现“在调试器中暂停”覆盖层。点击它以恢复。
+- 在断点处注意右侧面板，它允许您检查当前作用域和调用栈，并设置监视表达式。
+- 使用 `debugger;` 语句从文本编辑器快速设置断点。这将通过 Fast Refresh 立即到达设备。
+- 有多种类型的断点！例如，[条件断点和日志点](https://developer.chrome.com/docs/devtools/javascript/breakpoints#overview)。
 
-### Memory
+### 内存
 
-![Inspecting a heap snapshot in the Memory panel](/docs/assets/debugging-rndt-memory.jpg)
+![在内存面板中检查堆快照](/docs/assets/debugging-rndt-memory.jpg)
 
-The Memory panel allows you to take a heap snapshot and view the memory usage of your JavaScript code over time.
+内存面板允许您获取堆快照并查看 JavaScript 代码随时间的内存使用情况。
 
-[Record heap snapshots | Chrome DevTools](https://developer.chrome.com/docs/devtools/memory-problems/heap-snapshots)
+[记录堆快照 | Chrome DevTools](https://developer.chrome.com/docs/devtools/memory-problems/heap-snapshots)
 
-#### Useful tips
+#### 实用技巧
 
-- Use <kbd>Cmd ⌘</kbd>+<kbd>F</kbd> / <kbd>Ctrl</kbd>+<kbd>F</kbd> to filter for specific objects in the heap.
-- Taking an [allocation timeline report](https://developer.chrome.com/docs/devtools/memory-problems/allocation-profiler) can be useful to see memory usage over time as a graph, to identify possible memory leaks.
+- 使用 <kbd>Cmd ⌘</kbd>+<kbd>F</kbd> / <kbd>Ctrl</kbd>+<kbd>F</kbd> 过滤堆中的特定对象。
+- 获取 [分配时间线报告](https://developer.chrome.com/docs/devtools/memory-problems/allocation-profiler) 可能有助于以图形方式查看随时间的内存使用情况，以识别可能的内存泄漏。
 
-## React DevTools features
+## React DevTools 功能
 
-In the integrated Components and Profiler panels, you'll find all the features of the [React DevTools](https://react.dev/learn/react-developer-tools) browser extension. These work seamlessly in React Native DevTools.
+在集成的组件和分析器面板中，您将找到 [React DevTools](https://react.dev/learn/react-developer-tools) 浏览器扩展的所有功能。这些功能在 React Native DevTools 中无缝工作。
 
-### React Components
+### React 组件
 
-![Selecting and locating elements using the React Components panel](/docs/assets/debugging-rndt-react-components.gif)
+![使用 React 组件面板选择和定位元素](/docs/assets/debugging-rndt-react-components.gif)
 
-The React Components panel allows you to inspect and update the rendered React component tree.
+React 组件面板允许您检查和更新渲染的 React 组件树。
 
-- Hover or select an element in DevTools to highlight it on device.
-- To locate an element in DevTools, click the top-left "Select element" button, then tap any element in the app.
+- 在 DevTools 中悬停或选择一个元素以在设备上高亮显示它。
+- 要在 DevTools 中定位元素，点击左上角的“选择元素”按钮，然后点击应用中的任何元素。
 
-#### Useful tips
+#### 实用技巧
 
-- Props and state on a component can be viewed and modified at runtime using the right hand panel.
-- Components optimized with [React Compiler](https://react.dev/learn/react-compiler) will be annotated with a "Memo ✨" badge.
+- 可以使用右侧面板查看和修改组件上的 Props 和 state。
+- 使用 [React Compiler](https://react.dev/learn/react-compiler) 优化的组件将标注有 "Memo ✨" 徽章。
 
 :::tip
 
-#### Protip: Highlight re-renders
+#### 专业提示：高亮重新渲染
 
-Re-renders can be a significant contributor to performance issues in React apps. DevTools can highlight component re-renders as they happen.
+重新渲染可能是 React 应用性能问题的重要因素。DevTools 可以在组件重新渲染时高亮显示它们。
 
-- To enable, click the View Settings (`⚙︎`) icon and check "Highlight updates when components render".
+- 要启用，点击视图设置 (`⚙︎`) 图标并勾选“组件渲染时高亮更新”。
 
-![Location of the "highlight updates" setting, next to a recording of the live render overlay](/docs/assets/debugging-rndt-highlight-renders.gif)
+![“高亮更新”设置的位置，旁边是实时渲染覆盖层的录制](/docs/assets/debugging-rndt-highlight-renders.gif)
 
 :::
 
 ### React Profiler
 
-![A profile rendered as a flame graph](/docs/assets/debugging-rndt-react-profiler.jpg)
+![呈现为火焰图的性能分析](/docs/assets/debugging-rndt-react-profiler.jpg)
 
-The React Profiler panel allows you to record performance profiles to understand the timing of component renders and React commits.
+React Profiler 面板允许您记录性能配置文件，以了解组件渲染和 React 提交的时间。
 
-For more info, see the [original 2018 guide](https://legacy.reactjs.org/blog/2018/09/10/introducing-the-react-profiler.html#reading-performance-data) (note that parts of this may be outdated).
+更多信息，请参阅 [原始 2018 指南](https://legacy.reactjs.org/blog/2018/09/10/introducing-the-react-profiler.html#reading-performance-data)（请注意，其中部分内容可能已过时）。
 
-## Reconnecting DevTools
+## 重新连接 DevTools
 
-Occasionally, DevTools might disconnect from the target device. This can happen if:
+偶尔，DevTools 可能会与目标设备断开连接。如果发生以下情况，可能会出现这种情况：
 
-- The app is closed.
-- The app is rebuilt (a new native build is installed).
-- The app has crashed on the native side.
-- The dev server (Metro) is quit.
-- A physical device is disconnected.
+- 应用已关闭。
+- 应用已重新构建（安装了新的原生构建）。
+- 应用在原生侧崩溃。
+- 开发服务器 (Metro) 已退出。
+- 物理设备已断开连接。
 
-On disconnect, a dialog will be shown with the message "Debugging connection was closed".
+断开连接时，将显示一个对话框，消息为“调试连接已关闭”。
 
-![A reconnect dialog shown when a device is disconnected](/docs/assets/debugging-reconnect-menu.jpg)
+![设备断开连接时显示的重连对话框](/docs/assets/debugging-reconnect-menu.jpg)
 
-From here, you can either:
+从这里，您可以：
 
-- **Dismiss**: Select the close (`×`) icon or click outside the dialog to return to the DevTools UI in the last state before disconnection.
-- **Reconnect**: Select "Reconnect DevTools", having addressed the reason for disconnection.
+- **关闭**：选择关闭 (`×`) 图标或点击对话框外部，以返回到断开连接前的最后状态的 DevTools UI。
+- **重新连接**：选择“重新连接 DevTools"，已解决断开连接的原因。

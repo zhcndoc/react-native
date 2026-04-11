@@ -5,11 +5,11 @@ title: View
 
 import ExperimentalAPIWarning from './\_experimental-api-warning.mdx';
 
-The most fundamental component for building a UI, `View` is a container that supports layout with [flexbox](flexbox.md), [style](style.md), [some touch handling](handling-touches.md), and [accessibility](accessibility.md) controls. `View` maps directly to the native view equivalent on whatever platform React Native is running on, whether that is a `UIView`, `<div>`, `android.view`, etc.
+`View` 是构建 UI 最基本的组件，它是一个支持 [flexbox](flexbox.md) 布局、[样式](style.md)、[一些触摸处理](handling-touches.md) 和 [无障碍](accessibility.md) 控制的容器。`View` 直接映射到 React Native 运行平台上的原生视图等价物，无论是 `UIView`、`<div>`、`android.view` 等。
 
-`View` is designed to be nested inside other views and can have 0 to many children of any type.
+`View` 设计为嵌套在其他视图中，并且可以拥有 0 到多个任何类型的子元素。
 
-This example creates a `View` that wraps two boxes with color and a text component in a row with padding.
+此示例创建了一个 `View`，它将两个带有颜色的框和一个文本组件包装在一行中，并带有内边距。
 
 ```SnackPlayer name=View%20Example
 import React from 'react';
@@ -32,255 +32,255 @@ export default ViewBoxesWithColorAndText;
 ```
 
 :::note
-`View`s are designed to be used with [`StyleSheet`](style.md) for clarity and performance, although inline styles are also supported.
+`View` 设计为与 [`StyleSheet`](style.md) 一起使用以提高清晰度和性能，但也支持内联样式。
 :::
 
-### Synthetic Touch Events
+### 合成触摸事件
 
-For `View` responder props (e.g., `onResponderMove`), the synthetic touch event passed to them are in form of [PressEvent](pressevent).
+对于 `View` 响应者属性（例如 `onResponderMove`），传递给它们的合成触摸事件的形式为 [PressEvent](pressevent)。
 
 ---
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
 ---
 
 ### `accessibilityActions`
 
-Accessibility actions allow an assistive technology to programmatically invoke the actions of a component. The `accessibilityActions` property should contain a list of action objects. Each action object should contain the field name and label.
+无障碍操作允许辅助技术以编程方式调用组件的操作。`accessibilityActions` 属性应包含一个操作对象列表。每个操作对象应包含字段名称和标签。
 
-See the [Accessibility guide](accessibility.md#accessibility-actions) for more information.
+请参阅 [无障碍指南](accessibility.md#accessibility-actions) 以获取更多信息。
 
-| Type  |
+| 类型  |
 | ----- |
-| array |
+| 数组 |
 
 ---
 
 ### `accessibilityElementsHidden` <div className="label ios">iOS</div>
 
-A boolean value indicating whether the given accessibility element, and any accessibility elements it contains, are hidden. Default is `false`.
+一个布尔值，指示给定的无障碍元素及其包含的任何无障碍元素是否被隐藏。默认为 `false`。
 
-See the [Accessibility guide](accessibility.md#accessibilityelementshidden-ios) for more information.
+请参阅 [无障碍指南](accessibility.md#accessibilityelementshidden-ios) 以获取更多信息。
 
-| Type |
+| 类型 |
 | ---- |
-| bool |
+| 布尔值 |
 
 ---
 
 ### `accessibilityHint`
 
-An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not clear from the accessibility label.
+无障碍提示帮助用户理解当他们在无障碍元素上执行操作时会发生什么，尤其是当结果从无障碍标签中看不清楚时。
 
-| Type   |
+| 类型   |
 | ------ |
-| string |
+| 字符串 |
 
 ---
 
 ### `accessibilityLanguage` <div className="label ios">iOS</div>
 
-A value indicating which language should be used by the screen reader when the user interacts with the element. It should follow the [BCP 47 specification](https://www.rfc-editor.org/info/bcp47).
+一个值，指示当用户与元素交互时屏幕阅读器应使用哪种语言。它应遵循 [BCP 47 规范](https://www.rfc-editor.org/info/bcp47)。
 
-See the [iOS `accessibilityLanguage` doc](https://developer.apple.com/documentation/objectivec/nsobject/1615192-accessibilitylanguage) for more information.
+请参阅 [iOS `accessibilityLanguage` 文档](https://developer.apple.com/documentation/objectivec/nsobject/1615192-accessibilitylanguage) 以获取更多信息。
 
-| Type   |
+| 类型   |
 | ------ |
-| string |
+| 字符串 |
 
 ---
 
 ### `accessibilityIgnoresInvertColors` <div className="label ios">iOS</div>
 
-A value indicating this view should or should not be inverted when color inversion is turned on. A value of `true` will tell the view to not be inverted even if color inversion is turned on.
+一个值，指示当颜色反转开启时，此视图是否应该被反转。值为 `true` 将告诉视图即使开启了颜色反转也不要被反转。
 
-See the [Accessibility guide](accessibility.md#accessibilityignoresinvertcolors) for more information.
+请参阅 [无障碍指南](accessibility.md#accessibilityignoresinvertcolors) 以获取更多信息。
 
-| Type |
+| 类型 |
 | ---- |
-| bool |
+| 布尔值 |
 
 ---
 
 ### `accessibilityLabel`
 
-Overrides the text that's read by the screen reader when the user interacts with the element. By default, the label is constructed by traversing all the children and accumulating all the `Text` nodes separated by space.
+覆盖当用户与元素交互时屏幕阅读器读取的文本。默认情况下，标签是通过遍历所有子元素并累积所有用空格分隔的 `Text` 节点构建的。
 
-| Type   |
+| 类型   |
 | ------ |
-| string |
+| 字符串 |
 
 ---
 
 ### `accessibilityLiveRegion` <div className="label android">Android</div>
 
-Indicates to accessibility services whether the user should be notified when this view changes. Works for Android API >= 19 only. Possible values:
+向无障碍服务指示当此视图更改时是否应通知用户。仅适用于 Android API >= 19。可能的值：
 
-- `'none'` - Accessibility services should not announce changes to this view.
-- `'polite'`- Accessibility services should announce changes to this view.
-- `'assertive'` - Accessibility services should interrupt ongoing speech to immediately announce changes to this view.
+- `'none'` - 无障碍服务不应宣布对此视图的更改。
+- `'polite'`- 无障碍服务应宣布对此视图的更改。
+- `'assertive'` - 无障碍服务应中断正在进行的语音以立即宣布对此视图的更改。
 
-See the [Android `View` docs](https://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion) for reference.
+请参阅 [Android `View` 文档](https://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion) 以供参考。
 
-| Type                                |
+| 类型                                |
 | ----------------------------------- |
-| enum('none', 'polite', 'assertive') |
+| 枚举 ('none', 'polite', 'assertive') |
 
 ---
 
 ### `accessibilityRole`
 
-`accessibilityRole` communicates the purpose of a component to the user of an assistive technology.
+`accessibilityRole` 向辅助技术用户传达组件的目的。
 
-`accessibilityRole` can be one of the following:
+`accessibilityRole` 可以是以下之一：
 
-- `'none'` - Used when the element has no role.
-- `'button'` - Used when the element should be treated as a button.
-- `'link'` - Used when the element should be treated as a link.
-- `'search'` - Used when the text field element should also be treated as a search field.
-- `'image'` - Used when the element should be treated as an image. Can be combined with button or link, for example.
-- `'keyboardkey'` - Used when the element acts as a keyboard key.
-- `'text'` - Used when the element should be treated as static text that cannot change.
-- `'adjustable'` - Used when an element can be "adjusted" (e.g. a slider).
-- `'imagebutton'` - Used when the element should be treated as a button and is also an image.
-- `'header'` - Used when an element acts as a header for a content section (e.g. the title of a navigation bar).
-- `'summary'` - Used when an element can be used to provide a quick summary of current conditions in the app when the app first launches.
-- `'alert'` - Used when an element contains important text to be presented to the user.
-- `'checkbox'` - Used when an element represents a checkbox which can be checked, unchecked, or have mixed checked state.
-- `'combobox'` - Used when an element represents a combo box, which allows the user to select among several choices.
-- `'menu'` - Used when the component is a menu of choices.
-- `'menubar'` - Used when a component is a container of multiple menus.
-- `'menuitem'` - Used to represent an item within a menu.
-- `'progressbar'` - Used to represent a component which indicates progress of a task.
-- `'radio'` - Used to represent a radio button.
-- `'radiogroup'` - Used to represent a group of radio buttons.
-- `'scrollbar'` - Used to represent a scroll bar.
-- `'spinbutton'` - Used to represent a button which opens a list of choices.
-- `'switch'` - Used to represent a switch which can be turned on and off.
-- `'tab'` - Used to represent a tab.
-- `'tablist'` - Used to represent a list of tabs.
-- `'timer'` - Used to represent a timer.
-- `'toolbar'` - Used to represent a tool bar (a container of action buttons or components).
-- `'grid'` - Used with ScrollView, VirtualizedList, FlatList, or SectionList to represent a grid. Adds the in/out of grid announcements to the android GridView.
+- `'none'` - 当元素没有角色时使用。
+- `'button'` - 当元素应被视为按钮时使用。
+- `'link'` - 当元素应被视为链接时使用。
+- `'search'` - 当文本字段元素也应被视为搜索字段时使用。
+- `'image'` - 当元素应被视为图像时使用。例如，可以与按钮或链接组合使用。
+- `'keyboardkey'` - 当元素充当键盘键时使用。
+- `'text'` - 当元素应被视为无法更改的静态文本时使用。
+- `'adjustable'` - 当元素可以“调整”时使用（例如滑块）。
+- `'imagebutton'` - 当元素应被视为按钮且也是图像时使用。
+- `'header'` - 当元素充当内容部分的标题时使用（例如导航栏的标题）。
+- `'summary'` - 当元素可用于在应用首次启动时提供应用中当前条件的快速摘要时使用。
+- `'alert'` - 当元素包含要呈现给用户的重要文本时使用。
+- `'checkbox'` - 当元素代表一个可以选中、取消选中或具有混合选中状态的复选框时使用。
+- `'combobox'` - 当元素代表一个组合框时使用，允许用户在几个选项中进行选择。
+- `'menu'` - 当组件是选项菜单时使用。
+- `'menubar'` - 当组件是多个菜单的容器时使用。
+- `'menuitem'` - 用于代表菜单中的一个项目。
+- `'progressbar'` - 用于代表指示任务进度的组件。
+- `'radio'` - 用于代表单选按钮。
+- `'radiogroup'` - 用于代表一组单选按钮。
+- `'scrollbar'` - 用于代表滚动条。
+- `'spinbutton'` - 用于代表一个打开选项列表的按钮。
+- `'switch'` - 用于代表一个可以打开和关闭的开关。
+- `'tab'` - 用于代表一个标签页。
+- `'tablist'` - 用于代表一个标签页列表。
+- `'timer'` - 用于代表一个计时器。
+- `'toolbar'` - 用于代表一个工具栏（操作按钮或组件的容器）。
+- `'grid'` - 与 ScrollView、VirtualizedList、FlatList 或 SectionList 一起使用以代表网格。将进出网格的公告添加到 android GridView。
 
-| Type   |
+| 类型   |
 | ------ |
-| string |
+| 字符串 |
 
 ---
 
 ### `accessibilityState`
 
-Describes the current state of a component to the user of an assistive technology.
+向辅助技术用户描述组件的当前状态。
 
-See the [Accessibility guide](accessibility.md#accessibilitystate-ios-android) for more information.
+请参阅 [无障碍指南](accessibility.md#accessibilitystate-ios-android) 以获取更多信息。
 
-| Type                                                                                             |
+| 类型                                                                                             |
 | ------------------------------------------------------------------------------------------------ |
-| object: `{disabled: bool, selected: bool, checked: bool or 'mixed', busy: bool, expanded: bool}` |
+| 对象：`{disabled: bool, selected: bool, checked: bool or 'mixed', busy: bool, expanded: bool}` |
 
 ---
 
 ### `accessibilityValue`
 
-Represents the current value of a component. It can be a textual description of a component's value, or for range-based components, such as sliders and progress bars, it contains range information (minimum, current, and maximum).
+代表组件的当前值。它可以是组件值的文本描述，或者对于基于范围的组件（如滑块和进度条），它包含范围信息（最小值、当前值和最大值）。
 
-See the [Accessibility guide](accessibility.md#accessibilityvalue-ios-android) for more information.
+请参阅 [无障碍指南](accessibility.md#accessibilityvalue-ios-android) 以获取更多信息。
 
-| Type                                                            |
+| 类型                                                            |
 | --------------------------------------------------------------- |
-| object: `{min: number, max: number, now: number, text: string}` |
+| 对象：`{min: number, max: number, now: number, text: string}` |
 
 ---
 
 ### `accessibilityViewIsModal` <div className="label ios">iOS</div>
 
-A value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver. Default is `false`.
+一个值，指示 VoiceOver 是否应忽略接收者兄弟视图内的元素。默认为 `false`。
 
-See the [Accessibility guide](accessibility.md#accessibilityviewismodal-ios) for more information.
+请参阅 [无障碍指南](accessibility.md#accessibilityviewismodal-ios) 以获取更多信息。
 
-| Type |
+| 类型 |
 | ---- |
-| bool |
+| 布尔值 |
 
 ---
 
 ### `accessible`
 
-When `true`, indicates that the view is an accessibility element and discoverable by assistive technologies such as screen readers and hardware keyboards. By default, all the touchable elements are accessible.
+当为 `true` 时，表示该视图是一个无障碍元素，并可被屏幕阅读器和硬件键盘等辅助技术发现。默认情况下，所有可触摸元素都是可访问的。
 
-See the [Accessibility guide](accessibility.md#accessible) for more information.
+请参阅 [无障碍指南](accessibility.md#accessible) 以获取更多信息。
 
 ---
 
 ### `aria-busy`
 
-Indicates an element is being modified and that assistive technologies may want to wait until the changes are complete before informing the user about the update.
+指示元素正在被修改，辅助技术可能希望在通知用户更新之前等待更改完成。
 
-| Type    | Default |
+| 类型    | 默认值 |
 | ------- | ------- |
-| boolean | false   |
+| 布尔值 | false   |
 
 ---
 
 ### `aria-checked`
 
-Indicates the state of a checkable element. This field can either take a boolean or the "mixed" string to represent mixed checkboxes.
+指示可检查元素的状态。此字段可以采用布尔值或 "mixed" 字符串来表示混合复选框。
 
-| Type             | Default |
+| 类型             | 默认值 |
 | ---------------- | ------- |
-| boolean, 'mixed' | false   |
+| 布尔值，'mixed' | false   |
 
 ---
 
 ### `aria-disabled`
 
-Indicates that the element is perceivable but disabled, so it is not editable or otherwise operable.
+指示元素是可感知的但被禁用，因此不可编辑或以其他方式操作。
 
-| Type    | Default |
+| 类型    | 默认值 |
 | ------- | ------- |
-| boolean | false   |
+| 布尔值 | false   |
 
 ---
 
 ### `aria-expanded`
 
-Indicates whether an expandable element is currently expanded or collapsed.
+指示可展开元素当前是展开还是折叠。
 
-| Type    | Default |
+| 类型    | 默认值 |
 | ------- | ------- |
-| boolean | false   |
+| 布尔值 | false   |
 
 ---
 
 ### `aria-hidden`
 
-Indicates whether the element is hidden from assistive technologies.
+指示元素是否对辅助技术隐藏。
 
-For example, in a window that contains sibling views `A` and `B`, setting `aria-hidden` to `true` on view `B` causes VoiceOver to ignore the `B` element and its children.
+例如，在包含兄弟视图 `A` 和 `B` 的窗口中，在视图 `B` 上将 `aria-hidden` 设置为 `true` 会导致 VoiceOver 忽略 `B` 元素及其子元素。
 
-| Type    | Default |
+| 类型    | 默认值 |
 | ------- | ------- |
-| boolean | false   |
+| 布尔值 | false   |
 
 ---
 
 ### `aria-label`
 
-Defines a string value that labels an interactive element.
+定义一个标记交互式元素的字符串值。
 
-| Type   |
+| 类型   |
 | ------ |
-| string |
+| 字符串 |
 
 ---
 
 ### `aria-labelledby` <div className="label android">Android</div>
 
-Identifies the element that labels the element it is applied to. The value of `aria-labelledby` should match the [`nativeID`](view.md#nativeid) of the related element:
+标识标记它所应用元素的元素。`aria-labelledby` 的值应与相关元素的 [`nativeID`](view.md#nativeid) 匹配：
 
 ```tsx
 <View>
@@ -289,101 +289,101 @@ Identifies the element that labels the element it is applied to. The value of `a
 </View>
 ```
 
-| Type   |
+| 类型   |
 | ------ |
-| string |
+| 字符串 |
 
 ---
 
 ### `aria-live` <div className="label android">Android</div>
 
-Indicates that an element will be updated, and describes the types of updates the user agents, assistive technologies, and user can expect from the live region.
+指示元素将被更新，并描述用户代理、辅助技术和用户可以从 live region 期望的更新类型。
 
-- **off** Accessibility services should not announce changes to this view.
-- **polite** Accessibility services should announce changes to this view.
-- **assertive** Accessibility services should interrupt ongoing speech to immediately announce changes to this view.
+- **off** 无障碍服务不应宣布对此视图的更改。
+- **polite** 无障碍服务应宣布对此视图的更改。
+- **assertive** 无障碍服务应中断正在进行的语音以立即宣布对此视图的更改。
 
-| Type                                     | Default |
+| 类型                                     | 默认值 |
 | ---------------------------------------- | ------- |
-| enum(`'assertive'`, `'off'`, `'polite'`) | `'off'` |
+| 枚举 (`'assertive'`, `'off'`, `'polite'`) | `'off'` |
 
 ---
 
 ### `aria-modal` <div className="label ios">iOS</div>
 
-Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver. Has precedence over the [`accessibilityViewIsModal`](#accessibilityviewismodal-ios) prop.
+布尔值，指示 VoiceOver 是否应忽略接收者兄弟视图内的元素。优先于 [`accessibilityViewIsModal`](#accessibilityviewismodal-ios) 属性。
 
-| Type    | Default |
+| 类型    | 默认值 |
 | ------- | ------- |
-| boolean | false   |
+| 布尔值 | false   |
 
 ---
 
 ### `aria-selected`
 
-Indicates whether a selectable element is currently selected or not.
+指示可选择元素当前是否被选中。
 
-| Type    |
+| 类型    |
 | ------- |
-| boolean |
+| 布尔值 |
 
 ### `aria-valuemax`
 
-Represents the maximum value for range-based components, such as sliders and progress bars. Has precedence over the `max` value in the `accessibilityValue` prop.
+代表基于范围的组件（如滑块和进度条）的最大值。优先于 `accessibilityValue` 属性中的 `max` 值。
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `aria-valuemin`
 
-Represents the minimum value for range-based components, such as sliders and progress bars. Has precedence over the `min` value in the `accessibilityValue` prop.
+代表基于范围的组件（如滑块和进度条）的最小值。优先于 `accessibilityValue` 属性中的 `min` 值。
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `aria-valuenow`
 
-Represents the current value for range-based components, such as sliders and progress bars. Has precedence over the `now` value in the `accessibilityValue` prop.
+代表基于范围的组件（如滑块和进度条）的当前值。优先于 `accessibilityValue` 属性中的 `now` 值。
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `aria-valuetext`
 
-Represents the textual description of the component. Has precedence over the `text` value in the `accessibilityValue` prop.
+代表组件的文本描述。优先于 `accessibilityValue` 属性中的 `text` 值。
 
-| Type   |
+| 类型   |
 | ------ |
-| string |
+| 字符串 |
 
 ---
 
 ### `collapsable`
 
-Views that are only used to layout their children or otherwise don't draw anything may be automatically removed from the native hierarchy as an optimization. Set this property to `false` to disable this optimization and ensure that this `View` exists in the native view hierarchy.
+仅用于布局子元素或不绘制任何内容的视图可能会作为优化自动从原生层级中移除。将此属性设置为 `false` 以禁用此优化，并确保此 `View` 存在于原生视图层级中。
 
-| Type    | Default |
+| 类型    | 默认值 |
 | ------- | ------- |
-| boolean | true    |
+| 布尔值 | true    |
 
 ---
 
 ### `collapsableChildren`
 
-Setting to false prevents direct children of the view from being removed from the native view hierarchy, similar to the effect of setting `collapsable={false}` on each child.
+设置为 false 可防止视图的直接子元素从原生视图层级中移除，类似于在每个子元素上设置 `collapsable={false}` 的效果。
 
-| Type    | Default |
+| 类型    | 默认值 |
 | ------- | ------- |
-| boolean | true    |
+| 布尔值 | true    |
 
 ---
 
@@ -391,193 +391,193 @@ Setting to false prevents direct children of the view from being removed from th
 
 <ExperimentalAPIWarning />
 
-`experimental_accessibilityOrder` indicates the order in which an assistive technology focuses descendants of this `View`. This prop takes an array of strings where each string is a [`nativeID`](view.md#nativeid) of some descendant component whose order is being defined. This prop does not enable accessibility itself, each referenced component still needs to be accessible by setting [`accessible`](view.md#accessible) to true. This prop is both **nestable** and **exhaustive** meaning
+`experimental_accessibilityOrder` 指示辅助技术聚焦此 `View` 后代的顺序。此属性接受一个字符串数组，其中每个字符串是某个后代组件的 [`nativeID`](view.md#nativeid)，其顺序正在被定义。此属性本身不启用无障碍，每个引用的组件仍然需要通过将 [`accessible`](view.md#accessible) 设置为 true 来可访问。此属性既是 **可嵌套的** 也是 **穷尽的**，意味着
 
-- If `experimental_accessibilityOrder` contains a reference to some non-accessible component, it will focus the descendants of that component in the default order. Additionally, it can also contain a reference to other components that also have an `experimental_accessibilityOrder`.
-- If some component that is otherwise accessible is not directly referenced in `experimental_accessibilityOrder`, or nested within some container directly referenced in `experimental_accessibilityOrder`, then it will not be accessible.
+- 如果 `experimental_accessibilityOrder` 包含对某个不可访问组件的引用，它将按默认顺序聚焦该组件的后代。此外，它还可以包含对也具有 `experimental_accessibilityOrder` 的其他组件的引用。
+- 如果某个可访问的组件未在 `experimental_accessibilityOrder` 中直接引用，或未嵌套在 `experimental_accessibilityOrder` 中直接引用的某个容器内，则它将不可访问。
 
-See the [accessibility guide](accessibility.md#experimental_accessibilityorder) for more information.
+请参阅 [无障碍指南](accessibility.md#experimental_accessibilityorder) 以获取更多信息。
 
-| Type             |
+| 类型             |
 | ---------------- |
-| array of strings |
+| 字符串数组 |
 
 ---
 
 ### `focusable` <div className="label android">Android</div>
 
-Whether this `View` should be focusable with a non-touch input device, eg. receive focus with a hardware keyboard.
+此 `View` 是否应可使用非触摸输入设备聚焦，例如使用硬件键盘接收焦点。
 
-| Type    |
+| 类型    |
 | ------- |
-| boolean |
+| 布尔值 |
 
 ---
 
 ### `hitSlop`
 
-This defines how far a touch event can start away from the view. Typical interface guidelines recommend touch targets that are at least 30 - 40 points/density-independent pixels.
+这定义了触摸事件可以开始于离视图多远的地方。典型的界面指南建议触摸目标至少为 30 - 40 点/密度无关像素。
 
-For example, if a touchable view has a height of 20 the touchable height can be extended to 40 with `hitSlop={{top: 10, bottom: 10, left: 0, right: 0}}`
+例如，如果一个可触摸视图的高度为 20，则可使用 `hitSlop={{top: 10, bottom: 10, left: 0, right: 0}}` 将可触摸高度扩展到 40。
 
 :::note
-The touch area never extends past the parent view bounds, and the Z-index of sibling views always takes precedence if a touch hits two overlapping views.
+触摸区域永远不会超出父视图边界，如果触摸命中两个重叠视图，兄弟视图的 Z-index 始终优先。
 :::
 
-| Type                                                                 |
+| 类型                                                                 |
 | -------------------------------------------------------------------- |
-| object: `{top: number, left: number, bottom: number, right: number}` |
+| 对象：`{top: number, left: number, bottom: number, right: number}` |
 
 ---
 
 ### `id`
 
-Used to locate this view from native classes. Has precedence over `nativeID` prop.
+用于从原生类定位此视图。优先于 `nativeID` 属性。
 
 :::warning
-This disables the 'layout-only view removal' optimization for this view!
+这会禁用此视图的“仅布局视图移除”优化！
 :::
 
-| Type   |
+| 类型   |
 | ------ |
-| string |
+| 字符串 |
 
 ---
 
 ### `importantForAccessibility` <div className="label android">Android</div>
 
-Controls how view is important for accessibility which is if it fires accessibility events and if it is reported to accessibility services that query the screen. Works for Android only.
+控制视图对无障碍的重要性，即它是否触发无障碍事件以及是否报告给查询屏幕的无障碍服务。仅适用于 Android。
 
-Possible values:
+可能的值：
 
-- `'auto'` - The system determines whether the view is important for accessibility - default (recommended).
-- `'yes'` - The view is important for accessibility.
-- `'no'` - The view is not important for accessibility.
-- `'no-hide-descendants'` - The view is not important for accessibility, nor are any of its descendant views.
+- `'auto'` - 系统确定视图是否对无障碍重要 - 默认（推荐）。
+- `'yes'` - 视图对无障碍重要。
+- `'no'` - 视图对无障碍不重要。
+- `'no-hide-descendants'` - 视图对无障碍不重要，其任何后代视图也不重要。
 
-See the [Android `importantForAccessibility` docs](https://developer.android.com/reference/android/R.attr.html#importantForAccessibility) for reference.
+请参阅 [Android `importantForAccessibility` 文档](https://developer.android.com/reference/android/R.attr.html#importantForAccessibility) 以供参考。
 
-| Type                                             |
+| 类型                                             |
 | ------------------------------------------------ |
-| enum('auto', 'yes', 'no', 'no-hide-descendants') |
+| 枚举 ('auto', 'yes', 'no', 'no-hide-descendants') |
 
 ---
 
 ### `nativeID`
 
-Used to locate this view from native classes.
+用于从原生类定位此视图。
 
 :::warning
-This disables the 'layout-only view removal' optimization for this view!
+这会禁用此视图的“仅布局视图移除”优化！
 :::
 
-| Type   |
+| 类型   |
 | ------ |
-| string |
+| 字符串 |
 
 ---
 
 ### `needsOffscreenAlphaCompositing`
 
-Whether this `View` needs to rendered offscreen and composited with an alpha in order to preserve 100% correct colors and blending behavior. The default (`false`) falls back to drawing the component and its children with an alpha applied to the paint used to draw each element instead of rendering the full component offscreen and compositing it back with an alpha value. This default may be noticeable and undesired in the case where the `View` you are setting an opacity on has multiple overlapping elements (e.g. multiple overlapping `View`s, or text and a background).
+此 `View` 是否需要离屏渲染并与 alpha 合成，以保留 100% 正确的颜色和混合行为。默认值 (`false`) 回退到将组件及其子元素与应用于绘制每个元素的绘图的 alpha 一起绘制，而不是将整个组件离屏渲染并用 alpha 值将其合成回来。在您设置不透明度的 `View` 有多个重叠元素（例如多个重叠的 `View`，或文本和背景）的情况下，此默认值可能很明显且不理想。
 
-Rendering offscreen to preserve correct alpha behavior is extremely expensive and hard to debug for non-native developers, which is why it is not turned on by default. If you do need to enable this property for an animation, consider combining it with renderToHardwareTextureAndroid if the view **contents** are static (i.e. it doesn't need to be redrawn each frame). If that property is enabled, this View will be rendered off-screen once, saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
+离屏渲染以保留正确的 alpha 行为对于非原生开发者来说非常昂贵且难以调试，这就是为什么它默认不开启的原因。如果您确实需要为动画启用此属性，请考虑将其与 renderToHardwareTextureAndroid 结合使用，如果视图 **内容** 是静态的（即不需要每帧重绘）。如果启用了该属性，此视图将离屏渲染一次，保存在硬件纹理中，然后每帧与 alpha 合成到屏幕上，而无需在 GPU 上切换渲染目标。
 
-| Type |
+| 类型 |
 | ---- |
-| bool |
+| 布尔值 |
 
 ---
 
 ### `nextFocusDown` <div className="label android">Android</div>
 
-Designates the next view to receive focus when the user navigates down. See the [Android documentation](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusDown).
+指定当用户向下导航时接收焦点的下一个视图。请参阅 [Android 文档](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusDown)。
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `nextFocusForward` <div className="label android">Android</div>
 
-Designates the next view to receive focus when the user navigates forward. See the [Android documentation](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusForward).
+指定当用户向前导航时接收焦点的下一个视图。请参阅 [Android 文档](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusForward)。
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `nextFocusLeft` <div className="label android">Android</div>
 
-Designates the next view to receive focus when the user navigates left. See the [Android documentation](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusLeft).
+指定当用户向左导航时接收焦点的下一个视图。请参阅 [Android 文档](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusLeft)。
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `nextFocusRight` <div className="label android">Android</div>
 
-Designates the next view to receive focus when the user navigates right. See the [Android documentation](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusRight).
+指定当用户向右导航时接收焦点的下一个视图。请参阅 [Android 文档](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusRight)。
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `nextFocusUp` <div className="label android">Android</div>
 
-Designates the next view to receive focus when the user navigates up. See the [Android documentation](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusUp).
+指定当用户向上导航时接收焦点的下一个视图。请参阅 [Android 文档](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusUp)。
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `onAccessibilityAction`
 
-Invoked when the user performs the accessibility actions. The only argument to this function is an event containing the name of the action to perform.
+当用户执行无障碍操作时调用。此函数的唯一参数是包含要执行的操作名称的事件。
 
-See the [Accessibility guide](accessibility.md#accessibility-actions) for more information.
+请参阅 [无障碍指南](accessibility.md#accessibility-actions) 以获取更多信息。
 
-| Type     |
+| 类型     |
 | -------- |
-| function |
+| 函数 |
 
 ---
 
 ### `onAccessibilityEscape` <div className="label ios">iOS</div>
 
-When `accessible` is `true`, the system will invoke this function when the user performs the escape gesture.
+当 `accessible` 为 `true` 时，当用户执行 escape 手势时，系统将调用此函数。
 
-| Type     |
+| 类型     |
 | -------- |
-| function |
+| 函数 |
 
 ---
 
 ### `onAccessibilityTap` <div className="label ios">iOS</div>
 
-When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
+当 `accessible` 为 true 时，当用户执行无障碍点击手势时，系统将尝试调用此函数。
 
-| Type     |
+| 类型     |
 | -------- |
-| function |
+| 函数 |
 
 ---
 
 ### `onLayout`
 
-Invoked on mount and on layout changes.
+在挂载和布局更改时调用。
 
-This event is fired immediately once the layout has been calculated, but the new layout may not yet be reflected on the screen at the time the event is received, especially if a layout animation is in progress.
+一旦布局计算完成，此事件会立即触发，但在收到事件时，新布局可能尚未反映在屏幕上，特别是如果布局动画正在进行中。
 
-| Type                                                     |
+| 类型                                                     |
 | -------------------------------------------------------- |
 | `md ({nativeEvent: [LayoutEvent](layoutevent)}) => void` |
 
@@ -585,19 +585,19 @@ This event is fired immediately once the layout has been calculated, but the new
 
 ### `onMagicTap` <div className="label ios">iOS</div>
 
-When `accessible` is `true`, the system will invoke this function when the user performs the magic tap gesture.
+当 `accessible` 为 `true` 时，当用户执行 magic tap 手势时，系统将调用此函数。
 
-| Type     |
+| 类型     |
 | -------- |
-| function |
+| 函数 |
 
 ---
 
 ### `onMoveShouldSetResponder`
 
-Does this view want to "claim" touch responsiveness? This is called for every touch move on the `View` when it is not the responder.
+此视图是否想要“声明”触摸响应权？当 `View` 不是响应者时，每次在 `View` 上触摸移动时都会调用此函数。
 
-| Type                                                      |
+| 类型                                                      |
 | --------------------------------------------------------- |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => boolean` |
 
@@ -605,9 +605,9 @@ Does this view want to "claim" touch responsiveness? This is called for every to
 
 ### `onMoveShouldSetResponderCapture`
 
-If a parent `View` wants to prevent a child `View` from becoming responder on a move, it should have this handler which returns `true`.
+如果父 `View` 想要防止子 `View` 在移动时成为响应者，它应该具有此处理程序并返回 `true`。
 
-| Type                                                      |
+| 类型                                                      |
 | --------------------------------------------------------- |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => boolean` |
 
@@ -615,11 +615,11 @@ If a parent `View` wants to prevent a child `View` from becoming responder on a 
 
 ### `onResponderGrant`
 
-The View is now responding for touch events. This is the time to highlight and show the user what is happening.
+视图现在正在响应触摸事件。这是高亮并向用户显示正在发生什么的时候。
 
-On Android, return true from this callback to prevent any other native components from becoming responder until this responder terminates.
+在 Android 上，从此回调返回 true 以防止任何其他原生组件在此响应者终止之前成为响应者。
 
-| Type                                                              |
+| 类型                                                              |
 | ----------------------------------------------------------------- |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => void ｜ boolean` |
 
@@ -627,9 +627,9 @@ On Android, return true from this callback to prevent any other native component
 
 ### `onResponderMove`
 
-The user is moving their finger.
+用户正在移动他们的手指。
 
-| Type                                                   |
+| 类型                                                   |
 | ------------------------------------------------------ |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => void` |
 
@@ -637,9 +637,9 @@ The user is moving their finger.
 
 ### `onResponderReject`
 
-Another responder is already active and will not release it to that `View` asking to be the responder.
+另一个响应者已经处于活动状态，并且不会将其释放给请求成为响应者的该 `View`。
 
-| Type                                                   |
+| 类型                                                   |
 | ------------------------------------------------------ |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => void` |
 
@@ -647,9 +647,9 @@ Another responder is already active and will not release it to that `View` askin
 
 ### `onResponderRelease`
 
-Fired at the end of the touch.
+在触摸结束时触发。
 
-| Type                                                   |
+| 类型                                                   |
 | ------------------------------------------------------ |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => void` |
 
@@ -657,9 +657,9 @@ Fired at the end of the touch.
 
 ### `onResponderTerminate`
 
-The responder has been taken from the `View`. Might be taken by other views after a call to `onResponderTerminationRequest`, or might be taken by the OS without asking (e.g., happens with control center/ notification center on iOS)
+响应者已从 `View` 中被拿走。可能在调用 `onResponderTerminationRequest` 后被其他视图拿走，或者可能被操作系统未经询问而拿走（例如，在 iOS 上发生在控制中心/通知中心）
 
-| Type                                                   |
+| 类型                                                   |
 | ------------------------------------------------------ |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => void` |
 
@@ -667,9 +667,9 @@ The responder has been taken from the `View`. Might be taken by other views afte
 
 ### `onResponderTerminationRequest`
 
-Some other `View` wants to become responder and is asking this `View` to release its responder. Returning `true` allows its release.
+其他一些 `View` 想要成为响应者，并要求此 `View` 释放其响应者。返回 `true` 允许其释放。
 
-| Type                                                   |
+| 类型                                                   |
 | ------------------------------------------------------ |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => void` |
 
@@ -677,9 +677,9 @@ Some other `View` wants to become responder and is asking this `View` to release
 
 ### `onStartShouldSetResponder`
 
-Does this view want to become responder on the start of a touch?
+此视图是否想在触摸开始时成为响应者？
 
-| Type                                                      |
+| 类型                                                      |
 | --------------------------------------------------------- |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => boolean` |
 
@@ -687,9 +687,9 @@ Does this view want to become responder on the start of a touch?
 
 ### `onStartShouldSetResponderCapture`
 
-If a parent `View` wants to prevent a child `View` from becoming responder on a touch start, it should have this handler which returns `true`.
+如果父 `View` 想要防止子 `View` 在触摸开始时成为响应者，它应该具有此处理程序并返回 `true`。
 
-| Type                                                      |
+| 类型                                                      |
 | --------------------------------------------------------- |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => boolean` |
 
@@ -697,11 +697,11 @@ If a parent `View` wants to prevent a child `View` from becoming responder on a 
 
 ### `pointerEvents`
 
-Controls whether the `View` can be the target of touch events.
+控制 `View` 是否可以成为触摸事件的目标。
 
-- `'auto'`: The View can be the target of touch events.
-- `'none'`: The View is never the target of touch events.
-- `'box-none'`: The View is never the target of touch events but its subviews can be. It behaves like if the view had the following classes in CSS:
+- `'auto'`: View 可以成为触摸事件的目标。
+- `'none'`: View 永远不会成为触摸事件的目标。
+- `'box-none'`: View 永远不会成为触摸事件的目标，但其子视图可以。它的行为就像视图在 CSS 中具有以下类：
 
 ```css
 .box-none {
@@ -712,7 +712,7 @@ Controls whether the `View` can be the target of touch events.
 }
 ```
 
-- `'box-only'`: The view can be the target of touch events but its subviews cannot be. It behaves like if the view had the following classes in CSS:
+- `'box-only'`: 视图可以成为触摸事件的目标，但其子视图不能。它的行为就像视图在 CSS 中具有以下类：
 
 ```css
 .box-only {
@@ -723,45 +723,45 @@ Controls whether the `View` can be the target of touch events.
 }
 ```
 
-| Type                                         |
+| 类型                                         |
 | -------------------------------------------- |
-| enum('box-none', 'none', 'box-only', 'auto') |
+| 枚举 ('box-none', 'none', 'box-only', 'auto') |
 
 ---
 
 ### `ref`
 
-A ref setter that will be assigned an [element node](element-nodes) when mounted.
+一个 ref 设置器，当挂载时将被分配一个 [元素节点](element-nodes)。
 
 ---
 
 ### `removeClippedSubviews`
 
-This is a reserved performance property exposed by `RCTView` and is useful for scrolling content when there are many subviews, most of which are offscreen. For this property to be effective, it must be applied to a view that contains many subviews that extend outside its bound. The subviews must also have `overflow: hidden`, as should the containing view (or one of its superviews).
+这是 `RCTView` 暴露的保留性能属性，当有许多子视图（其中大多数在屏幕外）时，对于滚动内容很有用。为了使此属性有效，它必须应用于包含许多超出其边界的子视图的视图。子视图还必须具有 `overflow: hidden`，包含视图（或其父视图之一）也应如此。
 
-| Type |
+| 类型 |
 | ---- |
-| bool |
+| 布尔值 |
 
 ---
 
 ### `renderToHardwareTextureAndroid` <div className="label android">Android</div>
 
-Whether this `View` should render itself (and all of its children) into a single hardware texture on the GPU.
+此 `View` 是否应将其自身（及其所有子元素）渲染到 GPU 上的单个硬件纹理中。
 
-On Android, this is useful for animations and interactions that only modify opacity, rotation, translation, and/or scale: in those cases, the view doesn't have to be redrawn and display lists don't need to be re-executed. The texture can be re-used and re-composited with different parameters. The downside is that this can use up limited video memory, so this prop should be set back to false at the end of the interaction/animation.
+在 Android 上，这对于仅修改不透明度、旋转、平移和/或缩放的动画和交互很有用：在这些情况下，视图不必重绘，显示列表也不必重新执行。纹理可以重用并使用不同的参数重新合成。缺点是这样会占用有限的显存，因此此属性应在交互/动画结束时设置回 false。
 
-| Type |
+| 类型 |
 | ---- |
-| bool |
+| 布尔值 |
 
 ---
 
 ### `role`
 
-`role` communicates the purpose of a component to the user of an assistive technology. Has precedence over the [`accessibilityRole`](view#accessibilityrole) prop.
+`role` 向辅助技术用户传达组件的目的。优先于 [`accessibilityRole`](view#accessibilityrole) 属性。
 
-| Type                       |
+| 类型                       |
 | -------------------------- |
 | [Role](accessibility#role) |
 
@@ -769,48 +769,48 @@ On Android, this is useful for animations and interactions that only modify opac
 
 ### `shouldRasterizeIOS` <div className="label ios">iOS</div>
 
-Whether this `View` should be rendered as a bitmap before compositing.
+此 `View` 是否应在合成前渲染为位图。
 
-On iOS, this is useful for animations and interactions that do not modify this component's dimensions nor its children; for example, when translating the position of a static view, rasterization allows the renderer to reuse a cached bitmap of a static view and quickly composite it during each frame.
+在 iOS 上，这对于不修改此组件尺寸及其子元素的动画和交互很有用；例如，当平移静态视图的位置时，光栅化允许渲染器重用静态视图的缓存位图，并在每帧期间快速合成它。
 
-Rasterization incurs an off-screen drawing pass and the bitmap consumes memory. Test and measure when using this property.
+光栅化会产生离屏绘制过程，并且位图会消耗内存。使用此属性时请测试和衡量。
 
-| Type |
+| 类型 |
 | ---- |
-| bool |
+| 布尔值 |
 
 ---
 
 ### `style`
 
-| Type                           |
+| 类型                           |
 | ------------------------------ |
-| [View Style](view-style-props) |
+| [View 样式](view-style-props) |
 
 ---
 
 ### `tabIndex` <div className="label android">Android</div>
 
-Whether this `View` should be focusable with a non-touch input device, eg. receive focus with a hardware keyboard.
-Supports the following values:
+此 `View` 是否应可使用非触摸输入设备聚焦，例如使用硬件键盘接收焦点。
+支持以下值：
 
-- `0` - View is focusable
-- `-1` - View is not focusable
+- `0` - 视图可聚焦
+- `-1` - 视图不可聚焦
 
-| Type        |
+| 类型        |
 | ----------- |
-| enum(0, -1) |
+| 枚举 (0, -1) |
 
 ---
 
 ### `testID`
 
-Used to locate this view in end-to-end tests.
+用于在端到端测试中定位此视图。
 
 :::warning
-This disables the 'layout-only view removal' optimization for this view!
+这会禁用此视图的“仅布局视图移除”优化！
 :::
 
-| Type   |
+| 类型   |
 | ------ |
-| string |
+| 字符串 |

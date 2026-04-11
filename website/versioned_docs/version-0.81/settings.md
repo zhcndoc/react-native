@@ -1,11 +1,11 @@
 ---
 id: settings
-title: Settings
+title: 设置
 ---
 
-`Settings` serves as a wrapper for [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults), a persistent key-value store available only on iOS.
+`Settings` 作为 [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults) 的包装器，这是一个仅在 iOS 上可用的持久化键值存储。
 
-## Example
+## 示例
 
 ```SnackPlayer name=Settings%20Example&supportedPlatforms=ios
 import React, {useState} from 'react';
@@ -56,9 +56,9 @@ export default App;
 
 ---
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `clearWatch()`
 
@@ -66,7 +66,7 @@ export default App;
 static clearWatch(watchId: number);
 ```
 
-`watchId` is the number returned by `watchKeys()` when the subscription was originally configured.
+`watchId` 是最初配置订阅时 `watchKeys()` 返回的数字。
 
 ---
 
@@ -76,7 +76,7 @@ static clearWatch(watchId: number);
 static get(key: string): any;
 ```
 
-Get the current value for a given `key` in `NSUserDefaults`.
+获取 `NSUserDefaults` 中给定 `key` 的当前值。
 
 ---
 
@@ -86,7 +86,7 @@ Get the current value for a given `key` in `NSUserDefaults`.
 static set(settings: Record<string, any>);
 ```
 
-Set one or more values in `NSUserDefaults`.
+在 `NSUserDefaults` 中设置一个或多个值。
 
 ---
 
@@ -96,6 +96,6 @@ Set one or more values in `NSUserDefaults`.
 static watchKeys(keys: string | array<string>, callback: () => void): number;
 ```
 
-Subscribe to be notified when the value for any of the keys specified by the `keys` parameter has been changed in `NSUserDefaults`. Returns a `watchId` number that may be used with `clearWatch()` to unsubscribe.
+订阅通知，以便在 `NSUserDefaults` 中由 `keys` 参数指定的任何键的值发生更改时收到通知。返回一个 `watchId` 数字，可与 `clearWatch()` 一起使用以取消订阅。
 
-> **Note:** `watchKeys()` by design ignores internal `set()` calls and fires callback only on changes preformed outside of React Native code.
+> **注意：** `watchKeys()` 设计上忽略内部 `set()` 调用，仅在 React Native 代码外部执行的更改时触发回调。

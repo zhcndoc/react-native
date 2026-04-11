@@ -60,4 +60,4 @@ ScrollView 可以通过 `pagingEnabled` 属性配置为允许通过滑动手势�
 
 在 iOS 上，带有单个子项的 ScrollView 可以用来允许用户缩放内容。设置 `maximumZoomScale` 和 `minimumZoomScale` 属性后，用户即可通过捏合和扩展手势进行放大和缩小。
 
-ScrollView 最适合展示数量较少且尺寸有限的内容。`ScrollView` 中的所有元素和视图都会被渲染，即使它们当前未显示在屏幕上。如果你有一个无法全部显示在屏幕上的长列表，应该使用 `FlatList`。所以接下来我们来[了解列表视图](using-a-listview.md)吧。
+ScrollView 最适合展示数量较少且尺寸有限的内容。`ScrollView` 中的所有元素和视图都会被渲染，即使它们当前未显示在屏幕上。如果你有一个无法全部显示在屏幕上的长列表，应该使用 `FlatList`。所以接下来我们来 [了解列表视图](using-a-listview.md) 吧。

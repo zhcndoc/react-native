@@ -3,21 +3,21 @@ id: timepickerandroid
 title: '❌ TimePickerAndroid'
 ---
 
-> **Removed.** Use one of the [community packages](https://reactnative.directory/?search=timepicker) instead.
+> **已移除。** 请改用 [社区包](https://reactnative.directory/?search=timepicker) 之一。
 
-Opens the standard Android time picker dialog.
+打开标准的 Android 时间选择器对话框。
 
-### Example
+### 示例
 
 ```jsx
 try {
   const {action, hour, minute} = await TimePickerAndroid.open({
     hour: 14,
     minute: 0,
-    is24Hour: false, // Will display '2 PM'
+    is24Hour: false, // 将显示 '2 PM'
   });
   if (action !== TimePickerAndroid.dismissedAction) {
-    // Selected hour (0-23), minute (0-59)
+    // 选中的小时 (0-23), 分钟 (0-59)
   }
 } catch ({code, message}) {
   console.warn('Cannot open time picker', message);
@@ -26,9 +26,9 @@ try {
 
 ---
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `open()`
 
@@ -36,19 +36,19 @@ try {
 static open(options)
 ```
 
-Opens the standard Android time picker dialog.
+打开标准的 Android 时间选择器对话框。
 
-The available keys for the `options` object are:
+`options` 对象可用的键有：
 
-- `hour` (0-23) - the hour to show, defaults to the current time
-- `minute` (0-59) - the minute to show, defaults to the current time
-- `is24Hour` (boolean) - If `true`, the picker uses the 24-hour format. If `false`, the picker shows an AM/PM chooser. If undefined, the default for the current locale is used.
-- `mode` (`enum('clock', 'spinner', 'default')`) - set the time picker mode
-  - 'clock': Show a time picker in clock mode.
-  - 'spinner': Show a time picker in spinner mode.
-  - 'default': Show a default time picker based on Android versions.
+- `hour` (0-23) - 要显示的小时，默认为当前时间
+- `minute` (0-59) - 要显示的分钟，默认为当前时间
+- `is24Hour` (boolean) - 如果为 `true`，选择器使用 24 小时格式。如果为 `false`，选择器显示上午/下午选择器。如果为 undefined，则使用当前区域设置的默认值。
+- `mode` (`enum('clock', 'spinner', 'default')`) - 设置时间选择器模式
+  - 'clock': 以时钟模式显示时间选择器。
+  - 'spinner': 以滚轮模式显示时间选择器。
+  - 'default': 基于 Android 版本显示默认时间选择器。
 
-Returns a Promise which will be invoked an object containing `action`, `hour` (0-23), `minute` (0-59) if the user picked a time. If the user dismissed the dialog, the Promise will still be resolved with action being `TimePickerAndroid.dismissedAction` and all the other keys being undefined. **Always** check whether the `action` before reading the values.
+返回一个 Promise，如果用户选择了时间，它将解析为一个包含 `action`、`hour` (0-23)、`minute` (0-59) 的对象。如果用户关闭了对话框，Promise 仍会被解决，action 为 `TimePickerAndroid.dismissedAction`，所有其他键为 undefined。在读取值之前，**始终**检查 `action`。
 
 ---
 
@@ -58,7 +58,7 @@ Returns a Promise which will be invoked an object containing `action`, `hour` (0
 static timeSetAction()
 ```
 
-A time has been selected.
+已选择一个时间。
 
 ---
 
@@ -68,4 +68,4 @@ A time has been selected.
 static dismissedAction()
 ```
 
-The dialog has been dismissed.
+对话框已关闭。

@@ -899,7 +899,7 @@ iOS 支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monos
 
 | 类型                                        |
 | ------------------------------------------- |
-| 对象: `{width?: number, height?: number}`  |
+| 对象：`{width?: number, height?: number}`  |
 
 ---
 

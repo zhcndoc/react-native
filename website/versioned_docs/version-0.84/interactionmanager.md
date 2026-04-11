@@ -387,7 +387,7 @@ export default App;
 static runAfterInteractions(task?: (() => any) | SimpleTask | PromiseTask);
 ```
 
-调度一个函数，在所有交互完成后运行。返回一个可取消的“promise”。
+调度一个函数，在所有交互完成后运行。返回一个可取消的"promise"。
 
 ---
 

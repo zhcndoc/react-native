@@ -38,7 +38,7 @@ y 轴上的偏移量。可以为正或负。正值表示向上，负值表示向
 
 ### `blurRadius`
 
-表示用于[高斯模糊](https://en.wikipedia.org/wiki/Gaussian_blur)算法的半径。数值越大阴影越模糊。仅非负值有效。默认值为 0。
+表示用于 [高斯模糊](https://en.wikipedia.org/wiki/Gaussian_blur) 算法的半径。数值越大阴影越模糊。仅非负值有效。默认值为 0。
 
 | 类型             | 可选 |
 | ---------------- | ---- |

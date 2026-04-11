@@ -1,25 +1,25 @@
 ---
 id: communication-android
-title: Communication between native and React Native
+title: 原生与 React Native 之间的通信
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-In [Integrating with Existing Apps guide](integration-with-existing-apps) and [Native UI Components guide](legacy/native-components-android) we learn how to embed React Native in a native component and vice versa. When we mix native and React Native components, we'll eventually find a need to communicate between these two worlds. Some ways to achieve that have been already mentioned in other guides. This article summarizes available techniques.
+在 [集成到现有应用指南](integration-with-existing-apps) 和 [原生 UI 组件指南](legacy/native-components-android) 中，我们学习了如何将 React Native 嵌入到原生组件中，反之亦然。当我们混合使用原生和 React Native 组件时，我们最终会发现需要在这两个世界之间进行通信。实现这一点的一些方法已在其他指南中提及。本文总结了可用的技术。
 
-## Introduction
+## 简介
 
-React Native is inspired by React, so the basic idea of the information flow is similar. The flow in React is one-directional. We maintain a hierarchy of components, in which each component depends only on its parent and its own internal state. We do this with properties: data is passed from a parent to its children in a top-down manner. If an ancestor component relies on the state of its descendant, one should pass down a callback to be used by the descendant to update the ancestor.
+React Native 的灵感来自 React，因此信息流的基本思想是相似的。React 中的流是单向的。我们维护一个组件层次结构，其中每个组件仅依赖于其父组件及其自身的内部状态。我们通过属性来实现这一点：数据以自上而下的方式从父组件传递给其子组件。如果祖先组件依赖于其后代的状态，则应该传递一个回调供后代使用以更新祖先。
 
-The same concept applies to React Native. As long as we are building our application purely within the framework, we can drive our app with properties and callbacks. But, when we mix React Native and native components, we need some specific, cross-language mechanisms that would allow us to pass information between them.
+同样的概念适用于 React Native。只要我们纯粹在框架内构建应用程序，我们就可以通过属性和回调来驱动我们的应用。但是，当我们混合使用 React Native 和原生组件时，我们需要一些特定的跨语言机制，以便在它们之间传递信息。
 
-## Properties
+## 属性
 
-Properties are the most straightforward way of cross-component communication. So we need a way to pass properties both from native to React Native, and from React Native to native.
+属性是最直接的跨组件通信方式。因此我们需要一种方法，既可以从原生传递属性到 React Native，也可以从 React Native 传递属性到原生。
 
-### Passing properties from native to React Native
+### 从原生传递属性到 React Native
 
-You can pass properties down to the React Native app by providing a custom implementation of `ReactActivityDelegate` in your main activity. This implementation should override `getLaunchOptions` to return a `Bundle` with the desired properties.
+你可以通过在主 Activity 中提供 `ReactActivityDelegate` 的自定义实现，将属性传递给 React Native 应用。此实现应重写 `getLaunchOptions` 以返回带有所需属性的 `Bundle`。
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 
@@ -80,7 +80,7 @@ export default class ImageBrowserApp extends React.Component {
 }
 ```
 
-`ReactRootView` provides a read-write property `appProperties`. After `appProperties` is set, the React Native app is re-rendered with new properties. The update is only performed when the new updated properties differ from the previous ones.
+`ReactRootView` 提供了一个读写属性 `appProperties`。设置 `appProperties` 后，React Native 应用将使用新属性重新渲染。仅当新更新的属性与之前的属性不同时，才会执行更新。
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 
@@ -107,43 +107,42 @@ var imageList = arrayListOf("https://dummyimage.com/600x400/ff0000/000000.png", 
 ```
 
 </TabItem>
-
 </Tabs>
 
-It is fine to update properties anytime. However, updates have to be performed on the main thread. You use the getter on any thread.
+随时更新属性是可以的。但是，更新必须在主线程上执行。你可以在任何线程上使用 getter。
 
-There is no way to update only a few properties at a time. We suggest that you build it into your own wrapper instead.
+无法一次只更新少数几个属性。我们建议你将其构建到自己的包装器中。
 
-> **_Note:_** Currently, JS function `componentWillUpdateProps` of the top level RN component will not be called after a prop update. However, you can access the new props in `componentDidMount` function.
+> **_注意:_** 目前，顶层 RN 组件的 JS 函数 `componentWillUpdateProps` 在属性更新后不会被调用。但是，你可以在 `componentDidMount` 函数中访问新属性。
 
-### Passing properties from React Native to native
+### 从 React Native 传递属性到原生
 
-The problem exposing properties of native components is covered in detail in [this article](legacy/native-components-android#3-expose-view-property-setters-using-reactprop-or-reactpropgroup-annotation). In short, properties that are to be reflected in JavaScript needs to be exposed as setter method annotated with `@ReactProp`, then use them in React Native as if the component was an ordinary React Native component.
+暴露原生组件属性的问题在 [这篇文章](legacy/native-components-android#3-expose-view-property-setters-using-reactprop-or-reactpropgroup-annotation) 中有详细说明。简而言之，需要在 JavaScript 中反映的属性需要暴露为用 `@ReactProp` 注解的 setter 方法，然后在 React Native 中使用它们，就像该组件是普通的 React Native 组件一样。
 
-### Limits of properties
+### 属性的限制
 
-The main drawback of cross-language properties is that they do not support callbacks, which would allow us to handle bottom-up data bindings. Imagine you have a small RN view that you want to be removed from the native parent view as a result of a JS action. There is no way to do that with props, as the information would need to go bottom-up.
+跨语言属性的主要缺点是不支持回调，这将允许我们处理自下而上的数据绑定。想象一下，你有一个小的 RN 视图，由于 JS 操作的结果，你希望将其从原生父视图中移除。使用属性无法做到这一点，因为信息需要自下而上地传递。
 
-Although we have a flavor of cross-language callbacks ([described here](legacy/native-modules-android#callbacks)), these callbacks are not always the thing we need. The main problem is that they are not intended to be passed as properties. Rather, this mechanism allows us to trigger a native action from JS, and handle the result of that action in JS.
+虽然我们有一种跨语言回调的风格（[此处描述](legacy/native-modules-android#callbacks)），但这些回调并不总是我们需要的。主要问题是它们不打算作为属性传递。相反，此机制允许我们从 JS 触发原生操作，并在 JS 中处理该操作的结果。
 
-## Other ways of cross-language interaction (events and native modules)
+## 其他跨语言交互方式（事件和原生模块）
 
-As stated in the previous chapter, using properties comes with some limitations. Sometimes properties are not enough to drive the logic of our app and we need a solution that gives more flexibility. This chapter covers other communication techniques available in React Native. They can be used for internal communication (between JS and native layers in RN) as well as for external communication (between RN and the 'pure native' part of your app).
+正如前一章所述，使用属性有一些限制。有时属性不足以驱动我们的应用逻辑，我们需要一个提供更灵活解决方案。本章涵盖 React Native 中可用的其他通信技术。它们可用于内部通信（RN 中 JS 和原生层之间）以及外部通信（RN 和你应用的“纯原生”部分之间）。
 
-React Native enables you to perform cross-language function calls. You can execute custom native code from JS and vice versa. Unfortunately, depending on the side we are working on, we achieve the same goal in different ways. For native - we use events mechanism to schedule an execution of a handler function in JS, while for React Native we directly call methods exported by native modules.
+React Native 使你能够执行跨语言函数调用。你可以从 JS 执行自定义原生代码，反之亦然。不幸的是，根据我们工作的一侧不同，我们通过不同的方式实现相同的目标。对于原生——我们使用事件机制来调度 JS 中处理函数的执行，而对于 React Native，我们直接调用原生模块导出的方法。
 
-### Calling React Native functions from native (events)
+### 从原生调用 React Native 函数（事件）
 
-Events are described in detail in [this article](legacy/native-components-android#events). Note that using events gives us no guarantees about execution time, as the event is handled on a separate thread.
+事件在 [这篇文章](legacy/native-components-android#events) 中有详细描述。请注意，使用事件并不能保证执行时间，因为事件是在单独的线程上处理的。
 
-Events are powerful, because they allow us to change React Native components without needing a reference to them. However, there are some pitfalls that you can fall into while using them:
+事件很强大，因为它们允许我们更改 React Native 组件而无需引用它们。但是，在使用它们时可能会遇到一些陷阱：
 
-- As events can be sent from anywhere, they can introduce spaghetti-style dependencies into your project.
-- Events share namespace, which means that you may encounter some name collisions. Collisions will not be detected statically, which makes them hard to debug.
-- If you use several instances of the same React Native component and you want to distinguish them from the perspective of your event, you'll likely need to introduce identifiers and pass them along with events (you can use the native view's `reactTag` as an identifier).
+- 由于事件可以从任何地方发送，它们可能会将面条式依赖关系引入你的项目中。
+- 事件共享命名空间，这意味着你可能会遇到一些名称冲突。冲突不会被静态检测到，这使得它们难以调试。
+- 如果你使用同一个 React Native 组件的多个实例，并且想从事件的角度区分它们，你可能需要引入标识符并随事件一起传递它们（你可以使用原生视图的 `reactTag` 作为标识符）。
 
-### Calling native functions from React Native (native modules)
+### 从 React Native 调用原生函数（原生模块）
 
-Native modules are Java/Kotlin classes that are available in JS. Typically one instance of each module is created per JS bridge. They can export arbitrary functions and constants to React Native. They have been covered in detail in [this article](legacy/native-modules-android).
+原生模块是 JS 中可用的 Java/Kotlin 类。通常每个 JS 桥接器创建每个模块的一个实例。它们可以向 React Native 导出任意函数和常量。它们在 [这篇文章](legacy/native-modules-android) 中有详细说明。
 
-> **_Warning_**: All native modules share the same namespace. Watch out for name collisions when creating new ones.
+> **_警告_**：所有原生模块共享相同的命名空间。创建新模块时要注意名称冲突。

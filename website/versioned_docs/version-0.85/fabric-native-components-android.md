@@ -384,12 +384,12 @@ public class ReactWebViewPackage extends BaseReactPackage {
       public Map<String, ReactModuleInfo> getReactModuleInfos() {
         Map<String, ReactModuleInfo> map = new HashMap<>();
         map.put(ReactWebViewManager.REACT_CLASS, new ReactModuleInfo(
-                ReactWebViewManager.REACT_CLASS, // name
-                ReactWebViewManager.REACT_CLASS, // className
-                false,                           // canOverrideExistingModule
-                false,                           // needsEagerInit
-                false,                           // isCxxModule
-                true                             // isTurboModule
+                ReactWebViewManager.REACT_CLASS, // 名称
+                ReactWebViewManager.REACT_CLASS, // 类名
+                false,                           // 是否可以覆盖现有模块
+                false,                           // 是否需要急切初始化
+                false,                           // 是否是 Cxx 模块
+                true                             // 是否是 Turbo 模块
         ));
         return map;
       }

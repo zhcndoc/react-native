@@ -27,7 +27,7 @@ module.exports = async taskData => {
 };
 ```
 
-你可以在任务中做任何事情，例如网络请求、定时器等，只要不涉及 UI。一旦任务完成（即 promise 被 resolved），React Native 将进入“暂停”模式（除非有其他任务正在运行，或者有一个前台应用）。
+你可以在任务中做任何事情，例如网络请求、定时器等，只要不涉及 UI。一旦任务完成（即 promise 已完成），React Native 将进入“暂停”模式（除非有其他任务正在运行，或者有一个前台应用）。
 
 ## 平台 API
 
@@ -136,7 +136,7 @@ applicationContext.startForegroundService(service)
 
 ## 重试
 
-默认情况下，headless JS 任务不会执行任何重试。为了做到这一点，你需要创建一个 `HeadlessJsRetryPolicy` 并抛出一个特定的 `Error`。
+默认情况下，Headless JS 任务不会执行任何重试。为了做到这一点，你需要创建一个 `HeadlessJsRetryPolicy` 并抛出一个特定的 `Error`。
 
 `LinearCountingRetryPolicy` 是 `HeadlessJsRetryPolicy` 的一个实现，它允许你指定最大重试次数以及每次尝试之间的固定延迟。如果这不符合你的需求，你可以实现自己的 `HeadlessJsRetryPolicy`。这些策略可以作为额外参数传递给 `HeadlessJsTaskConfig` 构造函数，例如：
 
@@ -174,7 +174,7 @@ return HeadlessJsTaskConfig("SomeTaskName", Arguments.fromBundle(extras), 5000, 
 </TabItem>
 </Tabs>
 
-只有在抛出特定的 `Error` 时才会进行重试尝试。在 headless JS 任务内部，你可以导入该错误并在需要重试尝试时抛出它。
+只有在抛出特定的 `Error` 时才会进行重试尝试。在 Headless JS 任务内部，你可以导入该错误并在需要重试尝试时抛出它。
 
 示例：
 
@@ -344,7 +344,7 @@ class NetworkChangeReceiver : BroadcastReceiver() {
             if (appProcess.importance == RunningAppProcessInfo.IMPORTANCE_FOREGROUND &&
                     appProcess.processName == packageName
             ) {
-                return true
+                return true;
             }
         }
         return false

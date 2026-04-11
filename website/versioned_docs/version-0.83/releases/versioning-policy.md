@@ -16,7 +16,7 @@ React Native 还提供 `nightly` 版本通道，鼓励对实验性功能的早�
 
 React Native 按照固定节奏发布稳定版本。
 
-我们遵循 0.x.y 版本号schema：
+我们遵循 0.x.y 版本号 schema：
 
 - 破坏性变更将放在新的小版本中发布，即我们将 x 数字递增（例如：0.78.0 到 0.79.0）。
 - 新功能和 API 也将在新的小版本中发布，即我们将 x 数字递增（例如：0.78.0 到 0.79.0）。
@@ -26,13 +26,13 @@ React Native 按照固定节奏发布稳定版本。
 
 同一小版本号下的一系列发布称为 **小版本系列**（例如 0.76.x 指 0.76.0、0.76.1、0.76.2 等版本）。
 
-你可以在[发布页面](./)了解我们对**稳定性的承诺**。
+你可以在 [发布页面](./) 了解我们对**稳定性的承诺**。
 
 ### 破坏性变更
 
 破坏性变更对所有人都很不便，我们尽力将它们压缩到最少。每次稳定发布中所有的破坏性变更都会在以下位置重点标注：
 
-- [React Native 更新日志](https://github.com/facebook/react-native/blob/main/CHANGELOG.md)的 _Breaking_ 和 _Removed_ 部分
+- [React Native 更新日志](https://github.com/facebook/react-native/blob/main/CHANGELOG.md) 的 _Breaking_ 和 _Removed_ 部分
 - 每个版本博客文章的 _Breaking Changes_ 部分
 
 针对每个破坏性变更，我们承诺说明其背后的原因，尽可能提供替代 API，且最大程度减少最终用户的影响。

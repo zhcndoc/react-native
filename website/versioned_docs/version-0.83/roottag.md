@@ -21,7 +21,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 ## 如果需要，如何访问 RootTag
 
-在 0.65 及更早版本中，RootTag 通过一个[遗留上下文](https://github.com/facebook/react-native/blob/v0.64.1/Libraries/ReactNative/AppContainer.js#L56)访问。为了准备 React 18 及以后的并发特性，我们在 0.66 中通过 `RootTagContext` 迁移到最新的 [Context API](https://react.dev/reference/react/createContext)。0.65 版本同时支持遗留上下文和推荐使用的 `RootTagContext`，以便开发者有时间迁移调用点。详情见破坏性变更总结。
+在 0.65 及更早版本中，RootTag 通过一个 [遗留上下文](https://github.com/facebook/react-native/blob/v0.64.1/Libraries/ReactNative/AppContainer.js#L56) 访问。为了准备 React 18 及以后的并发特性，我们在 0.66 中通过 `RootTagContext` 迁移到最新的 [Context API](https://react.dev/reference/react/createContext)。0.65 版本同时支持遗留上下文和推荐使用的 `RootTagContext`，以便开发者有时间迁移调用点。详情见破坏性变更总结。
 
 通过 `RootTagContext` 访问 `RootTag` 的方式如下：
 

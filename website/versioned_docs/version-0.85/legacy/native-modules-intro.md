@@ -1,30 +1,30 @@
 ---
 id: native-modules-intro
-title: Native Modules Intro
+title: 原生模块简介
 ---
 
 import NativeDeprecated from '../the-new-architecture/\_markdown_native_deprecation.mdx'
 
 <NativeDeprecated />
 
-Sometimes a React Native app needs to access a native platform API that is not available by default in JavaScript, for example the native APIs to access Apple or Google Pay. Maybe you want to reuse some existing Objective-C, Swift, Java or C++ libraries without having to reimplement it in JavaScript, or write some high performance, multi-threaded code for things like image processing.
+有时，React Native 应用需要访问 JavaScript 中默认不可用的原生平台 API，例如访问 Apple 或 Google Pay 的原生 API。也许你想复用一些现有的 Objective-C、Swift、Java 或 C++ 库，而不必在 JavaScript 中重新实现它们，或者为图像处理等内容编写一些高性能、多线程的代码。
 
-The NativeModule system exposes instances of Java/Objective-C/C++ (native) classes to JavaScript (JS) as JS objects, thereby allowing you to execute arbitrary native code from within JS. While we don't expect this feature to be part of the usual development process, it is essential that it exists. If React Native doesn't export a native API that your JS app needs you should be able to export it yourself!
+NativeModule 系统将 Java/Objective-C/C++（原生）类的实例作为 JS 对象暴露给 JavaScript（JS），从而允许你在 JS 内部执行任意原生代码。虽然我们不期望此功能成为常规开发过程的一部分，但它的存在至关重要。如果 React Native 没有导出你的 JS 应用所需的原生 API，你应该能够自己导出它！
 
-## Native Module Setup
+## 原生模块设置
 
-There are different ways to write a native module for your React Native application:
+为你的 React Native 应用程序编写原生模块有不同的方法：
 
-1. Creating a local library that can be imported in your React Native application. Read [Creating local libraries](local-library-setup) guide to learn more.
-2. Directly within your React Native application's iOS/Android projects
-3. As an NPM package that can be installed as a dependency by your/other React Native applications.
+1. 创建一个可以在你的 React Native 应用程序中导入的本地库。阅读 [创建本地库](local-library-setup) 指南以了解更多。
+2. 直接在你的 React Native 应用程序的 iOS/Android 项目中
+3. 作为一个 NPM 包，可以由你的/其他 React Native 应用程序作为依赖项安装。
 
-This guide will first walk you through implementing a native module directly within a React Native application. However the native module you build in the following guide can be distributed as an NPM package. Check out the [Setting Up a Native Module as an NPM Package](native-modules-setup) guide if you are interested in doing so.
+本指南将首先带你了解如何在 React Native 应用程序中直接实现原生模块。但是，你在以下指南中构建的原生模块可以作为 NPM 包分发。如果你感兴趣，请查看 [将原生模块设置为 NPM 包](native-modules-setup) 指南。
 
-## Getting Started
+## 开始使用
 
-In the following sections we will walk you through guides on how to build a native module directly within a React Native application. As a prerequisite, you will need a React Native application to work within. You can follow the steps [here](../getting-started) to setup a React Native application if you do not already have one.
+在以下部分中，我们将带你了解如何在 React Native 应用程序中直接构建原生模块的指南。作为先决条件，你需要一个供你使用的 React Native 应用程序。如果你还没有，可以按照 [此处](../getting-started) 的步骤设置一个 React Native 应用程序。
 
-Imagine that you want to access the iOS/Android native calendar APIs from JavaScript within a React Native application in order to create calendar events. React Native does not expose a JavaScript API to communicate with the native calendar libraries. However, through native modules, you can write native code that communicates with native calendar APIs. Then you can invoke that native code through JavaScript in your React Native application.
+假设你想在 React Native 应用程序中从 JavaScript 访问 iOS/Android 原生日历 API 以创建日历事件。React Native 没有暴露与原生日历库通信的 JavaScript API。但是，通过原生模块，你可以编写与原生日历 API 通信的原生代码。然后你可以在你的 React Native 应用程序中通过 JavaScript 调用该原生代码。
 
-In the following sections you will create such a Calendar native module for both [Android](native-modules-android) and [iOS](native-modules-ios).
+在以下部分中，你将为 [Android](native-modules-android) 和 [iOS](native-modules-ios) 创建这样一个日历原生模块。

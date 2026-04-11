@@ -1,11 +1,11 @@
 ---
 id: image-style-props
-title: Image Style Props
+title: 图像样式属性
 ---
 
-## Examples
+## 示例
 
-### Image Resize Mode
+### 图像调整大小模式
 
 ```SnackPlayer name=Image%20Resize%20Modes%20Example
 import React from 'react';
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
 export default DisplayAnImageWithStyle;
 ```
 
-### Image Border
+### 图像边框
 
 ```SnackPlayer name=Style%20BorderWidth%20and%20BorderColor%20Example
 import React from 'react';
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
 export default DisplayAnImageWithStyle;
 ```
 
-### Image Border Radius
+### 图像边框圆角
 
 ```SnackPlayer name=Style%20Border%20Radius%20Example
 import React from 'react';
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
 export default DisplayAnImageWithStyle;
 ```
 
-### Image Tint
+### 图像色调
 
 ```SnackPlayer name=Style%20tintColor%20Function%20Component
 import React from 'react';
@@ -216,15 +216,15 @@ const styles = StyleSheet.create({
 export default DisplayAnImageWithStyle;
 ```
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
 ### `backfaceVisibility`
 
-The property defines whether or not the back face of a rotated image should be visible.
+该属性定义旋转图像的背面是否应该可见。
 
-| Type                          | Default     |
+| 类型                          | 默认值      |
 | ----------------------------- | ----------- |
 | enum(`'visible'`, `'hidden'`) | `'visible'` |
 
@@ -232,81 +232,81 @@ The property defines whether or not the back face of a rotated image should be v
 
 ### `backgroundColor`
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `borderBottomLeftRadius`
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `borderBottomRightRadius`
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `borderColor`
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `borderRadius`
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `borderTopLeftRadius`
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `borderTopRightRadius`
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `borderWidth`
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `opacity`
 
-Set an opacity value for the image. The number should be in the range from `0.0` to `1.0`.
+为图像设置不透明度值。数字应在 `0.0` 到 `1.0` 范围内。
 
-| Type   | Default |
+| 类型   | 默认值 |
 | ------ | ------- |
-| number | `1.0`   |
+| 数字 | `1.0`   |
 
 ---
 
 ### `overflow`
 
-| Type                          | Default     |
+| 类型                          | 默认值      |
 | ----------------------------- | ----------- |
 | enum(`'visible'`, `'hidden'`) | `'visible'` |
 
@@ -314,38 +314,38 @@ Set an opacity value for the image. The number should be in the range from `0.0`
 
 ### `overlayColor` <div className="label android">Android</div>
 
-When the image has rounded corners, specifying an overlayColor will cause the remaining space in the corners to be filled with a solid color. This is useful in cases which are not supported by the Android implementation of rounded corners:
+当图像具有圆角时，指定 overlayColor 会导致角落的剩余空间填充为纯色。这在某些不受 Android 圆角实现支持的情况下很有用：
 
-- Certain resize modes, such as `'contain'`
-- Animated GIFs
+- 某些调整大小模式，例如 `'contain'`
+- 动态 GIF
 
-A typical way to use this prop is with images displayed on a solid background and setting the `overlayColor` to the same color as the background.
+使用此属性的典型方式是在纯色背景上显示的图像，并将 `overlayColor` 设置为与背景相同的颜色。
 
-For details of how this works under the hood, see [Fresco documentation](https://frescolib.org/docs/rounded-corners-and-circles.html).
+有关此如何在底层工作的详细信息，请参阅 [Fresco 文档](https://frescolib.org/docs/rounded-corners-and-circles.html)。
 
-| Type   |
+| 类型   |
 | ------ |
-| string |
+| 字符串 |
 
 ---
 
 ### `resizeMode`
 
-Determines how to resize the image when the frame doesn't match the raw image dimensions. Defaults to `cover`.
+确定当框架不匹配原始图像尺寸时如何调整图像大小。默认为 `cover`。
 
-- `cover`: Scale the image uniformly (maintain the image's aspect ratio) so that:
-  - Both dimensions (width and height) of the image will be equal to or larger than the corresponding dimension of the view (minus padding)
-  - At least one dimension of the scaled image will be equal to the corresponding dimension of the view (minus padding)
+- `cover`: 均匀缩放图像（保持图像的纵横比），以便：
+  - 图像的两个维度（宽度和高度）将等于或大于视图的相应维度（减去内边距）
+  - 缩放图像至少有一个维度将等于视图的相应维度（减去内边距）
 
-- `contain`: Scale the image uniformly (maintain the image's aspect ratio) so that both dimensions (width and height) of the image will be equal to or less than the corresponding dimension of the view (minus padding).
+- `contain`: 均匀缩放图像（保持图像的纵横比），以便图像的两个维度（宽度和高度）将等于或小于视图的相应维度（减去内边距）。
 
-- `stretch`: Scale width and height independently, This may change the aspect ratio of the src.
+- `stretch`: 独立缩放宽度和高度，这可能会改变源的纵横比。
 
-- `repeat`: Repeat the image to cover the frame of the view. The image will keep its size and aspect ratio, unless it is larger than the view, in which case it will be scaled down uniformly so that it is contained in the view.
+- `repeat`: 重复图像以覆盖视图的框架。图像将保持其大小和纵横比，除非它大于视图，在这种情况下它将均匀缩小以便包含在视图中。
 
-- `center`: Center the image in the view along both dimensions. If the image is larger than the view, scale it down uniformly so that it is contained in the view.
+- `center`: 沿两个维度将图像居中于视图中。如果图像大于视图，则均匀缩小它以便包含在视图中。
 
-| Type                                                              | Default   |
+| 类型                                                              | 默认值    |
 | ----------------------------------------------------------------- | --------- |
 | enum(`'cover'`, `'contain'`, `'stretch'`, `'repeat'`, `'center'`) | `'cover'` |
 
@@ -353,9 +353,9 @@ Determines how to resize the image when the frame doesn't match the raw image di
 
 ### `objectFit`
 
-Determines how to resize the image when the frame doesn't match the raw image dimensions.
+确定当框架不匹配原始图像尺寸时如何调整图像大小。
 
-| Type                                                   | Default   |
+| 类型                                                   | 默认值    |
 | ------------------------------------------------------ | --------- |
 | enum(`'cover'`, `'contain'`, `'fill'`, `'scale-down'`) | `'cover'` |
 
@@ -363,8 +363,8 @@ Determines how to resize the image when the frame doesn't match the raw image di
 
 ### `tintColor`
 
-Changes the color of all the non-transparent pixels to the tintColor.
+将所有非透明像素的颜色更改为 tintColor。
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |

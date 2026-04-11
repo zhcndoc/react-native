@@ -4,7 +4,7 @@ title: FileReader
 ---
 
 :::warning
-🚧 This page is work in progress, so please refer to the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/FileReader) for more information.
+🚧 此页面正在建设中，因此请参阅 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/FileReader) 以获取更多信息。
 :::
 
-The global `FileReader` class, as defined in Web specifications.
+全局 `FileReader` 类，如 Web 规范中所定义。

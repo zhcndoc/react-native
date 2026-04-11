@@ -1,9 +1,9 @@
 ---
 id: text-style-props
-title: Text Style Props
+title: 文本样式属性
 ---
 
-### Example
+### 示例
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
@@ -759,79 +759,79 @@ export default App;
 </TabItem>
 </Tabs>
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
 ### `color`
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `fontFamily`
 
-| Type   |
+| 类型   |
 | ------ |
-| string |
+| 字符串 |
 
-The generic font families `system-ui`, `ui-sans-serif`, `ui-serif`, `ui-monospace`, and `ui-rounded` are supported on iOS.
+通用字体家族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monospace` 和 `ui-rounded` 在 iOS 上受支持。
 
 ---
 
 ### `fontSize`
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `fontStyle`
 
-| Type                         |
+| 类型                         |
 | ---------------------------- |
-| enum(`'normal'`, `'italic'`) |
+| 枚举(`'normal'`, `'italic'`) |
 
 ---
 
 ### `fontWeight`
 
-Specifies font weight. The values `'normal'` and `'bold'` are supported for most fonts. Not all fonts have a variant for each of the numeric values, in that case the closest one is chosen.
+指定字体粗细。大多数字体支持 `'normal'` 和 `'bold'` 值。并非所有字体都有每个数值的变体，在这种情况下会选择最接近的一个。
 
-| Type                                                                                                                  | Default    |
+| 类型                                                                                                                  | 默认值    |
 | --------------------------------------------------------------------------------------------------------------------- | ---------- |
-| enum(`'normal'`, `'bold'`, `'100'`, `'200'`, `'300'`, `'400'`, `'500'`, `'600'`, `'700'`, `'800'`, `'900'`) or number | `'normal'` |
+| 枚举(`'normal'`, `'bold'`, `'100'`, `'200'`, `'300'`, `'400'`, `'500'`, `'600'`, `'700'`, `'800'`, `'900'`) 或 数字 | `'normal'` |
 
 ---
 
 ### `includeFontPadding` <div className="label android">Android</div>
 
-Set to `false` to remove extra font padding intended to make space for certain ascenders / descenders. With some fonts, this padding can make text look slightly misaligned when centered vertically. For best results also set `textAlignVertical` to `center`.
+设置为 `false` 以移除旨在为某些上升部/下降部留出空间的额外字体内边距。对于某些字体，当垂直居中时，此内边距会使文本看起来略微错位。为了获得最佳效果，还将 `textAlignVertical` 设置为 `center`。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
-| bool | `true`  |
+| 布尔值 | `true`  |
 
 ---
 
 ### `fontVariant`
 
-Allows you to set all the font variants for a font. Can be set by using an array of enums or a space-separated string e.g. `'small-caps common-ligatures'`.
+允许你设置字体的所有变体。可以通过使用枚举数组或空格分隔的字符串来设置，例如 `'small-caps common-ligatures'`。
 
 <table>
   <thead>
     <tr>
-      <th colspan="5">Type</th>
-      <th>Default</th>
+      <th colspan="5">类型</th>
+      <th>默认值</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td colspan="5">
-        array of enum(`'common-ligatures'`, `'contextual'`, `'discretionary-ligatures'`, `'historical-ligatures'`, `'lining-nums'`, `'no-common-ligatures'`, `'no-contextual'`, `'no-discretionary-ligatures'`, `'no-historical-ligatures'`, `'oldstyle-nums'`, `'proportional-nums'`, `'small-caps'`, `'stylistic-eight'`, `'stylistic-eighteen'`, `'stylistic-eleven'`, `'stylistic-fifteen'`, `'stylistic-five'`, `'stylistic-four'`, `'stylistic-fourteen'`, `'stylistic-nine'`, `'stylistic-nineteen'`, `'stylistic-one'`, `'stylistic-seven'`, `'stylistic-seventeen'`, `'stylistic-six'`, `'stylistic-sixteen'`, `'stylistic-ten'`, `'stylistic-thirteen'`, `'stylistic-three'`, `'stylistic-twelve'`, `'stylistic-twenty'`, `'stylistic-two'`, `'tabular-nums'`) or string
+        枚举数组(`'common-ligatures'`, `'contextual'`, `'discretionary-ligatures'`, `'historical-ligatures'`, `'lining-nums'`, `'no-common-ligatures'`, `'no-contextual'`, `'no-discretionary-ligatures'`, `'no-historical-ligatures'`, `'oldstyle-nums'`, `'proportional-nums'`, `'small-caps'`, `'stylistic-eight'`, `'stylistic-eighteen'`, `'stylistic-eleven'`, `'stylistic-fifteen'`, `'stylistic-five'`, `'stylistic-four'`, `'stylistic-fourteen'`, `'stylistic-nine'`, `'stylistic-nineteen'`, `'stylistic-one'`, `'stylistic-seven'`, `'stylistic-seventeen'`, `'stylistic-six'`, `'stylistic-sixteen'`, `'stylistic-ten'`, `'stylistic-thirteen'`, `'stylistic-three'`, `'stylistic-twelve'`, `'stylistic-twenty'`, `'stylistic-two'`, `'tabular-nums'`) 或 字符串
       </td>
       <td>`[]`</td>
     </tr>
@@ -842,118 +842,118 @@ Allows you to set all the font variants for a font. Can be set by using an array
 
 ### `letterSpacing`
 
-Increase or decrease the spacing between characters. By default there is no extra letter spacing.
+增加或减少字符之间的间距。默认情况下没有额外的字母间距。
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `lineHeight`
 
-Numeric value that controls the vertical spacing between lines of text within a text element. It specifies the distance between the baselines of consecutive lines of text.
+控制文本元素内文本行之间垂直间距的数值。它指定连续文本行基线之间的距离。
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `textAlign`
 
-Specifies text alignment. On Android, the value 'justify' is only supported on Oreo (8.0) or above (API level >= 26). The value will fallback to `left` on lower Android versions.
+指定文本对齐方式。在 Android 上，值 'justify' 仅在 Oreo (8.0) 或更高版本 (API level >= 26) 上受支持。在较低的 Android 版本上，该值将回退到 `left`。
 
-| Type                                                         | Default  |
+| 类型                                                         | 默认值  |
 | ------------------------------------------------------------ | -------- |
-| enum(`'auto'`, `'left'`, `'right'`, `'center'`, `'justify'`) | `'auto'` |
+| 枚举(`'auto'`, `'left'`, `'right'`, `'center'`, `'justify'`) | `'auto'` |
 
 ---
 
 ### `textAlignVertical` <div className="label android">Android</div>
 
-| Type                                            | Default  |
+| 类型                                            | 默认值  |
 | ----------------------------------------------- | -------- |
-| enum(`'auto'`, `'top'`, `'bottom'`, `'center'`) | `'auto'` |
+| 枚举(`'auto'`, `'top'`, `'bottom'`, `'center'`) | `'auto'` |
 
 ---
 
 ### `textDecorationColor` <div className="label ios">iOS</div>
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `textDecorationLine`
 
-| Type                                                                        | Default  |
+| 类型                                                                        | 默认值  |
 | --------------------------------------------------------------------------- | -------- |
-| enum(`'none'`, `'underline'`, `'line-through'`, `'underline line-through'`) | `'none'` |
+| 枚举(`'none'`, `'underline'`, `'line-through'`, `'underline line-through'`) | `'none'` |
 
 ---
 
 ### `textDecorationStyle` <div className="label ios">iOS</div>
 
-| Type                                                | Default   |
+| 类型                                                | 默认值   |
 | --------------------------------------------------- | --------- |
-| enum(`'solid'`, `'double'`, `'dotted'`, `'dashed'`) | `'solid'` |
+| 枚举(`'solid'`, `'double'`, `'dotted'`, `'dashed'`) | `'solid'` |
 
 ---
 
 ### `textShadowColor`
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `textShadowOffset`
 
-| Type                                        |
+| 类型                                        |
 | ------------------------------------------- |
-| object: `{width?: number, height?: number}` |
+| 对象：`{width?: 数字，height?: 数字}` |
 
 ---
 
 ### `textShadowRadius`
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `textTransform`
 
-| Type                                                         | Default  |
+| 类型                                                         | 默认值  |
 | ------------------------------------------------------------ | -------- |
-| enum(`'none'`, `'uppercase'`, `'lowercase'`, `'capitalize'`) | `'none'` |
+| 枚举(`'none'`, `'uppercase'`, `'lowercase'`, `'capitalize'`) | `'none'` |
 
 ---
 
 ### `verticalAlign` <div className="label android">Android</div>
 
-| Type                                            | Default  |
+| 类型                                            | 默认值  |
 | ----------------------------------------------- | -------- |
-| enum(`'auto'`, `'top'`, `'bottom'`, `'middle'`) | `'auto'` |
+| 枚举(`'auto'`, `'top'`, `'bottom'`, `'middle'`) | `'auto'` |
 
 ---
 
 ### `writingDirection` <div className="label ios">iOS</div>
 
-| Type                             | Default  |
+| 类型                             | 默认值  |
 | -------------------------------- | -------- |
-| enum(`'auto'`, `'ltr'`, `'rtl'`) | `'auto'` |
+| 枚举(`'auto'`, `'ltr'`, `'rtl'`) | `'auto'` |
 
 ---
 
 ### `userSelect`
 
-It allows the user to select text and to use the native copy and paste functionality. Has precedence over the `selectable` prop.
+它允许用户选择文本并使用原生复制和粘贴功能。优先级高于 `selectable` 属性。
 
-| Type                                                     | Default |
+| 类型                                                     | 默认值 |
 | -------------------------------------------------------- | ------- |
-| enum(`'auto'`, `'text'`, `'none'`, `'contain'`, `'all'`) | `none`  |
+| 枚举(`'auto'`, `'text'`, `'none'`, `'contain'`, `'all'`) | `none`  |

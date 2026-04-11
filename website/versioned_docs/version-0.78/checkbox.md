@@ -1,15 +1,15 @@
 ---
 id: checkbox
-title: '❌ CheckBox'
+title: '❌ 复选框'
 ---
 
-> **Removed.** Use one of the [community packages](https://reactnative.directory/?search=checkbox) instead.
+> **已移除。** 请改用 [社区包](https://reactnative.directory/?search=checkbox) 之一。
 
-Renders a boolean input (Android only).
+渲染一个布尔输入框（仅限 Android）。
 
-This is a controlled component that requires an `onValueChange` callback that updates the `value` prop in order for the component to reflect user actions. If the `value` prop is not updated, the component will continue to render the supplied `value` prop instead of the expected result of any user actions.
+这是一个受控组件，需要一个 `onValueChange` 回调来更新 `value` 属性，以便组件反映用户操作。如果未更新 `value` 属性，组件将继续渲染提供的 `value` 属性，而不是任何用户操作的预期结果。
 
-## Example
+## 示例
 
 ```SnackPlayer name=CheckBox%20Component%20Example&supportedPlatforms=android,web&ext=js
 import React, {useState} from 'react';
@@ -56,58 +56,58 @@ export default App;
 
 ---
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
-Inherits [View Props](view#props).
+继承 [View 属性](view#props)。
 
 ---
 
 ### `disabled`
 
-If true the user won't be able to toggle the checkbox. Default value is `false`.
+如果为 true，用户将无法切换复选框。默认值为 `false`。
 
-| Type | Required |
+| 类型 | 必需 |
 | ---- | -------- |
-| bool | No       |
+| bool | 否       |
 
 ---
 
 ### `onChange`
 
-Used in case the props change removes the component.
+用于属性更改移除组件的情况。
 
-| Type     | Required |
+| 类型     | 必需 |
 | -------- | -------- |
-| function | No       |
+| function | 否       |
 
 ---
 
 ### `onValueChange`
 
-Invoked with the new value when the value changes.
+当值变化时调用，并传入新值。
 
-| Type     | Required |
+| 类型     | 必需 |
 | -------- | -------- |
-| function | No       |
+| function | 否       |
 
 ---
 
 ### `testID`
 
-Used to locate this view in end-to-end tests.
+用于在端到端测试中定位此视图。
 
-| Type   | Required |
+| 类型   | 必需 |
 | ------ | -------- |
-| string | No       |
+| string | 否       |
 
 ---
 
 ### `value`
 
-The value of the checkbox. If true the checkbox will be turned on. Default value is `false`.
+复选框的值。如果为 true，复选框将被选中。默认值为 `false`。
 
-| Type | Required |
+| 类型 | 必需 |
 | ---- | -------- |
-| bool | No       |
+| bool | 否       |

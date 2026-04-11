@@ -12,7 +12,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 Hermes 是新建 React Native 应用的默认引擎，针对高效代码加载做了高度优化。在发布构建中，JavaScript 代码会提前完全编译成字节码。字节码按需加载到内存，不像普通 JavaScript 代码那样需要解析。
 
 :::info
-关于在 React Native 中使用 Hermes 的更多信息，请参见[这里](./hermes)。
+关于在 React Native 中使用 Hermes 的更多信息，请参见 [这里](./hermes)。
 :::
 
 ## 推荐：懒加载大型组件
@@ -206,7 +206,7 @@ project.ext.react = [
 
 在 iOS 上，RAM bundles 总是索引形式（单文件）。
 
-在 Xcode 通过编辑构建阶段 “Bundle React Native code and images” 启用 RAM 格式。在 `../node_modules/react-native/scripts/react-native-xcode.sh` 命令之前添加：
+在 Xcode 通过编辑构建阶段"Bundle React Native code and images"启用 RAM 格式。在 `../node_modules/react-native/scripts/react-native-xcode.sh` 命令之前添加：
 
 ```
 export BUNDLE_COMMAND="ram-bundle"

@@ -1,23 +1,23 @@
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-# Invoking native functions on your native component
+# 在你的原生组件上调用原生函数
 
-In the [base guide](/docs/fabric-native-components-introduction) to write a new Native Component, you have explored how to create a new component, how to pass properties from the JS side to the native side, and how to emit events from native side to JS.
+在 [基础指南](/docs/fabric-native-components-introduction) 中，你已经探索了如何创建新组件，如何从 JS 端传递属性到原生端，以及如何从原生端向 JS 发射事件。
 
-Custom components can also call some of the functions implemented in the native code imperatively, to achieve some more advanced functionalities, such as programmatically reload a web page.
+自定义组件还可以命令式地调用原生代码中实现的一些函数，以实现一些更高级的功能，例如以编程方式重新加载网页。
 
-In this guide you'll learn how to achieve this, by using a new concept: Native Commands.
+在本指南中，你将学习如何实现这一点，通过使用一个新概念：原生命令 (Native Commands)。
 
-This guide starts from the [Native Components](/docs/fabric-native-components-introduction) guide and assumes that you are familiar with it and that you are familiar with [Codegen](/docs/next/the-new-architecture/what-is-codegen).
+本指南从 [原生组件](/docs/fabric-native-components-introduction) 指南开始，并假设你熟悉该指南，并且熟悉 [Codegen](/docs/next/the-new-architecture/what-is-codegen)。
 
-## 1. Update your component specs
+## 1. 更新你的组件规范
 
-The first step is to update the component spec to declare the `NativeCommand`.
+第一步是更新组件规范以声明 `NativeCommand`。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultJavaScriptSpecLanguage} values={constants.javaScriptSpecLanguages}>
 <TabItem value="typescript">
 
-Update the `WebViewNativeComponent.ts` as it follows:
+更新 `WebViewNativeComponent.ts` 如下：
 
 ```diff title="Demo/specs/WebViewNativeComponent.ts"
 import type {HostComponent, ViewProps} from 'react-native';
@@ -50,7 +50,7 @@ export default codegenNativeComponent<NativeProps>(
 </TabItem>
 <TabItem value="flow">
 
-Update the `WebViewNativeComponent.js` as it follows:
+更新 `WebViewNativeComponent.js` 如下：
 
 ```diff title="Demo/specs/WebViewNativeComponent.js"
 // @flow strict-local
@@ -87,24 +87,24 @@ export default (codegenNativeComponent<NativeProps>(
 </TabItem>
 </Tabs>
 
-These changes requires you to:
+这些更改要求你：
 
-1. Import the `codegenNativeCommands` function from `react-native`. This instruct codegen that it has to generate the code for `NativeCommands`
-2. Define an interface that contains the methods we want to invoke in native. All the Native Commands must have a first parameter of type `React.ElementRef`.
-3. Export the `Commands` variable that is the result of the invocation of `codegenNativeCommands`, passing a list of the supported commands.
+1. 从 `react-native` 导入 `codegenNativeCommands` 函数。这指示 codegen 它必须为 `NativeCommands` 生成代码
+2. 定义一个包含我们想在原生中调用的方法的接口。所有原生命令必须有一个类型为 `React.ElementRef` 的第一个参数。
+3. 导出 `Commands` 变量，它是调用 `codegenNativeCommands` 的结果，传递支持命令的列表。
 
 :::warning
-In TypeScript, the `React.ElementRef` is deprecated. The correct type to use is actually `React.ComponentRef`. However, due to a bug in Codegen, using `ComponentRef` will crash the app. We have the fix already, but we need to release a new version of React Native to apply it.
+在 TypeScript 中，`React.ElementRef` 已弃用。正确的类型实际上是 `React.ComponentRef`。但是，由于 Codegen 中的一个 bug，使用 `ComponentRef` 会导致应用崩溃。我们已经有了修复程序，但我们需要发布一个新版本的 React Native 来应用它。
 :::
 
-## 2. Update the App code to use the new command
+## 2. 更新 App 代码以使用新命令
 
-Now you can use the command in the the app.
+现在你可以在应用中使用该命令了。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultJavaScriptSpecLanguage} values={constants.javaScriptSpecLanguages}>
 <TabItem value="typescript">
 
-Open the `App.tsx` file and modify it as it follows:
+打开 `App.tsx` 文件并按如下修改：
 
 ```diff title="App.tsx"
 import React from 'react';
@@ -183,7 +183,7 @@ export default App;
 </TabItem>
 <TabItem value="flow">
 
-Open the `App.tsx` file and modify it as it follows:
+打开 `App.tsx` 文件并按如下修改：
 
 ```diff title="App.jsx"
 import React from 'react';
@@ -262,22 +262,22 @@ export default App;
 </TabItem>
 </Tabs>
 
-The relevant changes here are the following:
+这里的相关更改如下：
 
-1. Import the `Commands` const from the spec file. The Command is an object that let us call the methods we have in native.
-2. Declare a ref to the `WebView` custom native component using `useRef`. You need to pass this ref to the native command.
-3. Implement the `refresh` function. This function checks that the WebView's ref is not null and if not, it calls the command.
-4. Add a pressable to call the command when the user taps on the button.
+1. 从规范文件导入 `Commands` 常量。Command 是一个对象，让我们可以调用原生中的方法。
+2. 使用 `useRef` 声明对 `WebView` 自定义原生组件的引用。你需要将此引用传递给原生命令。
+3. 实现 `refresh` 函数。此函数检查 WebView 的引用是否不为 null，如果不为 null，则调用命令。
+4. 添加一个可按压元素 (Pressable) 以便用户在点击按钮时调用命令。
 
-The remaining changes are regular React changes to add a `Pressable` and to style the view so it looks nicer.
+剩余的更改是常规的 React 更改，用于添加 `Pressable` 并样式化视图使其看起来更好。
 
-## 3. Rerun Codegen
+## 3. 重新运行 Codegen
 
-Now that the specs are updated and the code is ready to use the command, it is time to implement the Native code. However, before diving into writing native code, you have to rerun codegen, to let it generate the new types that are needed by the Native code.
+现在规范已更新且代码已准备好使用命令，是时候实现原生代码了。但是，在深入编写原生代码之前，你必须重新运行 codegen，以便它生成原生代码所需的新类型。
 
 <Tabs groupId="platforms" queryString defaultValue={constants.defaultPlatform}>
 <TabItem value="android" label="Android">
-Codegen is executed through the `generateCodegenArtifactsFromSchema` Gradle task:
+Codegen 通过 `generateCodegenArtifactsFromSchema` Gradle 任务执行：
 
 ```bash
 cd android
@@ -287,10 +287,10 @@ BUILD SUCCESSFUL in 837ms
 14 actionable tasks: 3 executed, 11 up-to-date
 ```
 
-This is automatically run when you build your Android application.
+这是在构建 Android 应用程序时自动运行的。
 </TabItem>
 <TabItem value="ios" label="iOS">
-Codegen is run as part of the script phases that's automatically added to the project generated by CocoaPods.
+Codegen 作为脚本阶段的一部分运行，该阶段会自动添加到由 CocoaPods 生成的项目中。
 
 ```bash
 cd ios
@@ -298,7 +298,7 @@ bundle install
 bundle exec pod install
 ```
 
-The output will look like this:
+输出将如下所示：
 
 ```shell
 ...
@@ -316,17 +316,17 @@ Framework build type is static library
 </TabItem>
 </Tabs>
 
-## 4. Implement the Native Code
+## 4. 实现原生代码
 
-Now it's time to implement the native changes that will enable your JS to directly invoke methods on your native view.
+现在是时候实现原生更改了，这将使你的 JS 能够直接调用原生视图上的方法。
 
 <Tabs groupId="platforms" queryString defaultValue={constants.defaultPlatform}>
 <TabItem value="android" label="Android">
 
-To let your view respond to the Native Command, you only have to modify the ReactWebViewManager.
+为了让你的视图响应原生命令，你只需要修改 ReactWebViewManager。
 
-If you try to build right now, the build will fail, because the current `ReactWebViewManager` does not implement the new `reload` method.
-To fix the build error, let's modify the `ReactWebViewManager` to implement it.
+如果你现在尝试构建，构建将会失败，因为当前的 `ReactWebViewManager` 没有实现新的 `reload` 方法。
+为了修复构建错误，让我们修改 `ReactWebViewManager` 来实现它。
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
@@ -378,17 +378,17 @@ To fix the build error, let's modify the `ReactWebViewManager` to implement it.
 </TabItem>
 </Tabs>
 
-In this case, it's enough to call directly the `view.reload()` method because our ReactWebView inherits from the Android's `WebView` and it has a reload method directly available. If you are implementing a custom function, that is not available in your custom view, you might also have to implement the required method in the Android's View that is managed by the React Native's `ViewManager`.
+在这种情况下，直接调用 `view.reload()` 方法就足够了，因为我们的 ReactWebView 继承自 Android 的 `WebView`，它直接有一个可用的 reload 方法。如果你正在实现一个自定义函数，而该函数在你的自定义视图中不可用，你可能还必须在由 React Native 的 `ViewManager` 管理的 Android 视图中实现所需的方法。
 
 </TabItem>
 <TabItem value="ios" label="iOS">
 
-To let your view respond to the Native Command, we need to implement a couple of methods on iOS.
+为了让你的视图响应原生命令，我们需要在 iOS 上实现几个方法。
 
-Let's open the `RCTWebView.mm` file and let's modify it as it follows:
+让我们打开 `RCTWebView.mm` 文件并按如下方式修改它：
 
 ```diff title="RCTWebView.mm"
-  // Event emitter convenience method
+  // 事件发射器便捷方法
   - (const CustomWebViewEventEmitter &)eventEmitter
   {
   return static_cast<const CustomWebViewEventEmitter &>(*_eventEmitter);
@@ -410,17 +410,17 @@ Let's open the `RCTWebView.mm` file and let's modify it as it follows:
   }
 ```
 
-To make your view respond to the Native Commands, you need to apply the following changes:
+为了让你的视图响应原生命令，你需要应用以下更改：
 
-1. Add a `handleCommand:args` function. This function is invoked by the components infrastructure to handle the commands. The function implementation is similar for every component: you need to call an `RCT<componentNameInJS>HandleCommand` function that is generated by Codegen for you. The `RCT<componentNameInJS>HandleCommand` perform a bunch of validation, verifying that the command that we need to invoke is among the supported ones and that the parameters passed matches the one expected. If all the checks pass, the `RCT<componentNameInJS>HandleCommand` will then invoke the proper native method.
-2. Implement the `reload` method. In this example, the `reload` method calls the `reloadFromOrigin` function of the WebKit's WebView.
+1. 添加一个 `handleCommand:args` 函数。此函数由组件基础设施调用以处理命令。函数实现对于每个组件都是相似的：你需要调用一个由 Codegen 为你生成的 `RCT<componentNameInJS>HandleCommand` 函数。`RCT<componentNameInJS>HandleCommand` 执行一系列验证，验证我们需要调用的命令是否在支持的命令之列，以及传递的参数是否与预期匹配。如果所有检查都通过，`RCT<componentNameInJS>HandleCommand` 将调用适当的原生方法。
+2. 实现 `reload` 方法。在此示例中，`reload` 方法调用 WebKit 的 WebView 的 `reloadFromOrigin` 函数。
 
 </TabItem>
 </Tabs>
 
-## 5. Run your app
+## 5. 运行你的应用
 
-Finally, you can run your app with the usual commands. Once the app is running, you can tap on the refresh button to see the page getting reloaded.
+最后，你可以使用通常的命令运行你的应用。一旦应用运行，你可以点击刷新按钮查看页面重新加载。
 
 | <center>Android</center>                                                                         | <center>iOS</center>                                                                         |
 | ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |

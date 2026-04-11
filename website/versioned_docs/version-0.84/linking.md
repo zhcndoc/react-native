@@ -9,9 +9,9 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 每个链接（URL）都有一个 URL 方案（URL Scheme），有些网站以 `https://` 或 `http://` 开头，其中的 `http` 就是 URL 方案。我们简称为方案（scheme）。
 
-除了 `https`，你可能也熟悉 `mailto` 方案。当你打开一个 mailto 方案的链接时，操作系统会打开已安装的邮件应用程序。同样，通话和短信也有对应的方案。更多关于[内置 URL 方案](#built-in-url-schemes) 的内容请见下文。
+除了 `https`，你可能也熟悉 `mailto` 方案。当你打开一个 mailto 方案的链接时，操作系统会打开已安装的邮件应用程序。同样，通话和短信也有对应的方案。更多关于 [内置 URL 方案](#built-in-url-schemes) 的内容请见下文。
 
-像使用 mailto 方案一样，你也可以通过自定义 URL 方案链接到其他应用。例如，当你收到 Slack 的 **Magic Link** 邮件时，**Launch Slack** 按钮是一个带 href 的锚点标签，形式类似：`slack://secret/magic-login/other-secret`。通过 Slack，系统知道你想处理一个自定义方案。当 Slack 应用打开时，会接收到打开它的 URL。这通常称为深度链接。查看更多关于如何[获取应用的深度链接](#get-the-deep-link)。
+像使用 mailto 方案一样，你也可以通过自定义 URL 方案链接到其他应用。例如，当你收到 Slack 的 **Magic Link** 邮件时，**Launch Slack** 按钮是一个带 href 的锚点标签，形式类似：`slack://secret/magic-login/other-secret`。通过 Slack，系统知道你想处理一个自定义方案。当 Slack 应用打开时，会接收到打开它的 URL。这通常称为深度链接。查看更多关于如何 [获取应用的深度链接](#get-the-deep-link)。
 
 自定义 URL 方案并不是在移动端打开应用的唯一方式。例如，如果你想给某人发送一个链接并期望在移动设备打开，使用自定义 URL 方案并不理想，因为用户可能在桌面打开邮件，此时链接无法使用。相反，你应该使用标准的 `https` 链接，如 `https://www.myapp.io/records/1234546`。这些链接在移动端可以配置为打开你的应用。Android 上，这个功能称为 **深度链接（Deep Links）**，而在 iOS 上称为 **通用链接（Universal Links）**。
 
@@ -54,7 +54,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 <TabItem value="ios">
 
 :::note
-在 iOS 上，你需要将 `LinkingIOS` 文件夹添加到头文件搜索路径中，具体步骤请见 [这里第3步](linking-libraries-ios#step-3)。如果你还想在应用执行过程中监听传入的应用链接，需要在你的 `*AppDelegate.m` 中添加以下代码：
+在 iOS 上，你需要将 `LinkingIOS` 文件夹添加到头文件搜索路径中，具体步骤请见 [这里第 3 步](linking-libraries-ios#step-3)。如果你还想在应用执行过程中监听传入的应用链接，需要在你的 `*AppDelegate.m` 中添加以下代码：
 
 <Tabs groupId="ios-language" queryString defaultValue={constants.defaultAppleLanguage} values={constants.appleLanguages}>
 <TabItem value="objc">
@@ -71,7 +71,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 }
 ```
 
-如果你的应用使用了[通用链接](https://developer.apple.com/ios/universal-links/)，还需添加以下代码：
+如果你的应用使用了 [通用链接](https://developer.apple.com/ios/universal-links/)，还需添加以下代码：
 
 ```objc title="AppDelegate.mm"
 - (BOOL)application:(UIApplication *)application continueUserActivity:(nonnull NSUserActivity *)userActivity
@@ -92,7 +92,7 @@ override func application(_ app: UIApplication, open url: URL, options: [UIAppli
 }
 ```
 
-如果你的应用使用了[通用链接](https://developer.apple.com/ios/universal-links/)，还需添加以下代码：
+如果你的应用使用了 [通用链接](https://developer.apple.com/ios/universal-links/)，还需添加以下代码：
 
 ```swift title="AppDelegate.swift"
 override func application(
@@ -353,7 +353,7 @@ const App = () => {
       <Text>
         {processing
           ? '正在处理来自深度链接的初始 URL'
-          : `深度链接为: ${initialUrl || '无'}`}
+          : `深度链接为：${initialUrl || '无'}`}
       </Text>
     </View>
   );
@@ -407,7 +407,7 @@ const App = () => {
       <Text>
         {processing
           ? '正在处理来自深度链接的初始 URL'
-          : `深度链接为: ${initialUrl || '无'}`}
+          : `深度链接为：${initialUrl || '无'}`}
       </Text>
     </View>
   );

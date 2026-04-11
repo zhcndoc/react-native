@@ -1,25 +1,25 @@
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-# Advanced: Custom C++ Types
+# 高级：自定义 C++ 类型
 
 :::note
-This guide assumes that you are familiar with the [**Pure C++ Turbo Native Modules**](pure-cxx-modules.md) guide. This will build on top of that guide.
+本指南假设你熟悉 [**纯 C++ Turbo 原生模块**](pure-cxx-modules.md) 指南。本文将在此基础上进行构建。
 :::
 
-C++ Turbo Native Modules support [bridging functionality](https://github.com/facebook/react-native/tree/main/packages/react-native/ReactCommon/react/bridging) for most `std::` standard types. You can use most of those types in your modules without any additional code required.
+C++ Turbo 原生模块支持大多数 `std::` 标准类型的 [桥接功能](https://github.com/facebook/react-native/tree/main/packages/react-native/ReactCommon/react/bridging)。你可以在模块中使用大多数这些类型，而无需任何额外的代码。
 
-If you want to add support for new and custom types in your app or library, you need to provide the necessary `bridging` header file.
+如果你想在你的应用或库中添加对新自定义类型的支持，你需要提供必要的 `bridging` 头文件。
 
-## Adding a New Custom: Int64
+## 添加新的自定义类型：Int64
 
-C++ Turbo Native Modules don't support `int64_t` numbers yet - because JavaScript doesn't support numbers greater 2^53. To represent numbers greater than 2^53, we can use a `string` type in JS and automatically convert it to `int64_t` in C++.
+C++ Turbo 原生模块尚不支持 `int64_t` 数字——因为 JavaScript 不支持大于 2^53 的数字。为了表示大于 2^53 的数字，我们可以在 JS 中使用 `string` 类型，并在 C++ 中自动将其转换为 `int64_t`。
 
-### 1. Create the Bridging Header file
+### 1. 创建桥接头文件
 
-The first step to support a new custom type is to define the bridging header that takes care of converting the type **from** the JS representation to the C++ representation, and from the C++ representation **to** the JS one.
+支持新自定义类型的第一步是定义桥接头文件，该文件负责将类型 **从** JS 表示转换为 C++ 表示，以及 **从** C++ 表示转换为 JS 表示。
 
-1. In the `shared` folder, add a new file called `Int64.h`
-2. Add the following code to that file:
+1. 在 `shared` 文件夹中，添加一个名为 `Int64.h` 的新文件
+2. 将以下代码添加到该文件中：
 
 ```cpp title="Int64.h"
 #pragma once
@@ -30,14 +30,14 @@ namespace facebook::react {
 
 template <>
 struct Bridging<int64_t> {
-  // Converts from the JS representation to the C++ representation
+  // 从 JS 表示转换为 C++ 表示
   static int64_t fromJs(jsi::Runtime &rt, const jsi::String &value) {
     try {
       size_t pos;
       auto str = value.utf8(rt);
       auto num = std::stoll(str, &pos);
       if (pos != str.size()) {
-        throw std::invalid_argument("Invalid number"); // don't support alphanumeric strings
+        throw std::invalid_argument("Invalid number"); // 不支持字母数字字符串
       }
       return num;
     } catch (const std::logic_error &e) {
@@ -45,7 +45,7 @@ struct Bridging<int64_t> {
     }
   }
 
-  // Converts from the C++ representation to the JS representation
+  // 从 C++ 表示转换为 JS 表示
   static jsi::String toJs(jsi::Runtime &rt, int64_t value) {
     return bridging::toJs(rt, std::to_string(value));
   }
@@ -54,22 +54,22 @@ struct Bridging<int64_t> {
 }
 ```
 
-The key components for your custom bridging header are:
+自定义桥接头文件的关键组件是：
 
-- Explicit specialization of the `Bridging` struct for your custom type. In this case, the template specify the `int64_t` type.
-- A `fromJs` function to convert from the JS representation to the C++ representation
-- A `toJs` function to convert from the C++ representation to the JS representation
+- 为你的自定义类型显式特化 `Bridging` 结构体。在这种情况下，模板指定了 `int64_t` 类型。
+- 一个 `fromJs` 函数，用于从 JS 表示转换为 C++ 表示
+- 一个 `toJs` 函数，用于从 C++ 表示转换为 JS 表示
 
 :::note
-On iOS, remember to add the `Int64.h` file to the Xcode project.
+在 iOS 上，记得将 `Int64.h` 文件添加到 Xcode 项目中。
 :::
 
-### 2. Modify the JS Spec
+### 2. 修改 JS 规范
 
-Now, we can modify the JS spec to add a method that uses the new type. As usual, we can use either Flow or TypeScript for our specs.
+现在，我们可以修改 JS 规范以添加使用新类型的方法。通常，我们可以使用 Flow 或 TypeScript 来编写规范。
 
-1. Open the `specs/NativeSampleTurbomodule`
-2. Modify the spec as follows:
+1. 打开 `specs/NativeSampleTurbomodule`
+2. 按如下方式修改规范：
 
 <Tabs groupId="custom-int64" queryString defaultValue={constants.defaultJavaScriptSpecLanguages} values={constants.javaScriptSpecLanguages}>
 <TabItem value="typescript">
@@ -108,13 +108,13 @@ export default (TurboModuleRegistry.getEnforcing<Spec>(
 </TabItem>
 </Tabs>
 
-In this files, we are defining the function that needs to be implemented in C++.
+在这些文件中，我们正在定义需要在 C++ 中实现的函数。
 
-### 3. Implement the Native Code
+### 3. 实现原生代码
 
-Now, we need to implement the function that we declared in the JS specification.
+现在，我们需要实现在 JS 规范中声明的函数。
 
-1. Open the `specs/NativeSampleModule.h` file and apply the following changes:
+1. 打开 `specs/NativeSampleModule.h` 文件并应用以下更改：
 
 ```diff title="NativeSampleModule.h"
 #pragma once
@@ -139,7 +139,7 @@ public:
 
 ```
 
-2. Open the `specs/NativeSampleModule.cpp` file and apply the implement the new function:
+2. 打开 `specs/NativeSampleModule.cpp` 文件并应用实现新函数：
 
 ```diff title="NativeSampleModule.cpp"
 #include "NativeSampleModule.h"
@@ -161,15 +161,15 @@ std::string NativeSampleModule::reverseString(jsi::Runtime& rt, std::string inpu
 } // namespace facebook::react
 ```
 
-The implementation imports the `<cmath>` C++ library to perform mathematical operations, then it implements the `cubicRoot` function using the `cbrt` primitive from the `<cmath>` module.
+实现导入了 `<cmath>` C++ 库以执行数学运算，然后使用 `<cmath>` 模块中的 `cbrt` 原语实现了 `cubicRoot` 函数。
 
-### 4. Test your code in Your App
+### 4. 在你的应用中测试代码
 
-Now, we can test the code in our app.
+现在，我们可以在应用中测试代码。
 
-First, we need to update the `App.tsx` file to use the new method from the TurboModule. Then, we can build our apps in Android and iOS.
+首先，我们需要更新 `App.tsx` 文件以使用 TurboModule 中的新方法。然后，我们可以构建 Android 和 iOS 应用。
 
-1. Open the `App.tsx` code apply the following changes:
+1. 打开 `App.tsx` 代码并应用以下更改：
 
 ```diff title="App.tsx"
 // ...
@@ -206,14 +206,14 @@ First, we need to update the `App.tsx` file to use the new method from the Turbo
 //...
 ```
 
-2. To test the app on Android, run `yarn android` from the root folder of your project.
-3. To test the app on iOS, run `yarn ios` from the root folder of your project.
+2. 要在 Android 上测试应用，从项目的根文件夹运行 `yarn android`。
+3. 要在 iOS 上测试应用，从项目的根文件夹运行 `yarn ios`。
 
-## Adding a New Structured Custom Type: Address
+## 添加新的结构化自定义类型：Address
 
-The approach above can be generalized to any kind of type. For structured types, React Native provides some helper functions that make it easier to bridge them from JS to C++ and vice versa.
+上述方法可以推广到任何类型的类型。对于结构化类型，React Native 提供了一些辅助函数，使它们更容易在 JS 和 C++ 之间进行桥接。
 
-Let's assume that we want to bridge a custom `Address` type with the following properties:
+假设我们想要桥接一个具有以下属性的自定义 `Address` 类型：
 
 ```ts
 interface Address {
@@ -223,11 +223,11 @@ interface Address {
 }
 ```
 
-### 1. Define the type in the specs
+### 1. 在规范中定义类型
 
-For the first step, let's define the new custom type in the JS specs, so that Codegen can output all the supporting code. In this way, we don't have to manually write the code.
+对于第一步，让我们在 JS 规范中定义新的自定义类型，以便 Codegen 可以输出所有支持代码。这样，我们就不必手动编写代码。
 
-1. Open the `specs/NativeSampleModule` file and add the following changes.
+1. 打开 `specs/NativeSampleModule` 文件并添加以下更改。
 
 <Tabs groupId="custom-int64" queryString defaultValue={constants.defaultJavaScriptSpecLanguages} values={constants.javaScriptSpecLanguages}>
 <TabItem value="typescript">
@@ -280,18 +280,18 @@ export default (TurboModuleRegistry.getEnforcing<Spec>(
 </TabItem>
 </Tabs>
 
-This code defines the new `Address` type and defines a new `validateAddress` function for the Turbo Native Module. Notice that the `validateFunction` requires an `Address` object as parameter.
+此代码定义了新的 `Address` 类型，并为 Turbo 原生模块定义了一个新的 `validateAddress` 函数。请注意，`validateFunction` 需要一个 `Address` 对象作为参数。
 
-It is also possible to have functions that return custom types.
+也可以有返回自定义类型的函数。
 
-### 2. Define the bridging code
+### 2. 定义桥接代码
 
-From the `Address` type defined in the specs, Codegen will generate two helper types: `NativeSampleModuleAddress` and `NativeSampleModuleAddressBridging`.
+根据规范中定义的 `Address` 类型，Codegen 将生成两个辅助类型：`NativeSampleModuleAddress` 和 `NativeSampleModuleAddressBridging`。
 
-The first type is the definition of the `Address`. The second type contains all the infrastructure to bridge the custom type from JS to C++ and vice versa. The only extra step we need to add is to define the `Bridging` structure that extends the `NativeSampleModuleAddressBridging` type.
+第一个类型是 `Address` 的定义。第二个类型包含将所有基础设施从 JS 桥接到 C++ 反之亦然所需的内容。我们需要添加的唯一额外步骤是定义扩展 `NativeSampleModuleAddressBridging` 类型的 `Bridging` 结构体。
 
-1. Open the `shared/NativeSampleModule.h` file
-2. Add the following code in the file:
+1. 打开 `shared/NativeSampleModule.h` 文件
+2. 在文件中添加以下代码：
 
 ```diff title="NativeSampleModule.h (Bridging the Address type)"
 #include "Int64.h"
@@ -308,22 +308,22 @@ namespace facebook::react {
 }
 ```
 
-This code defines an `Address` typealias for the generic type `NativeSampleModuleAddress`. **The order of the generics matters**: the first template argument refers to the first data type of the struct, the second refers to the second, and so forth.
+此代码为泛型类型 `NativeSampleModuleAddress` 定义了一个 `Address` 类型别名。**泛型的顺序很重要**：第一个模板参数引用结构的第一个数据类型，第二个引用第二个，依此类推。
 
-Then, the code adds the `Bridging` specialization for the new `Address` type, by extending `NativeSampleModuleAddressBridging` that is generated by Codegen.
+然后，代码通过扩展由 Codegen 生成的 `NativeSampleModuleAddressBridging` 为新的 `Address` 类型添加了 `Bridging` 特化。
 
 :::note
-There is a convention that is followed to generate this types:
+生成这些类型遵循一个约定：
 
-- The first part of the name is always the type of the module. `NativeSampleModule`, in this example.
-- The second part of the name is always the name of the JS type defined in the specs. `Address`, in this example.
+- 名称的第一部分始终是模块的类型。在本示例中为 `NativeSampleModule`。
+- 名称的第二部分始终是在规范中定义的 JS 类型的名称。在本示例中为 `Address`。
   :::
 
-### 3. Implement the Native Code
+### 3. 实现原生代码
 
-Now, we need to implement the `validateAddress` function in C++. First, we need to add the function declaration into the `.h` file, and then we can implement it in the `.cpp` file.
+现在，我们需要在 C++ 中实现 `validateAddress` 函数。首先，我们需要将函数声明添加到 `.h` 文件中，然后我们可以在 `.cpp` 文件中实现它。
 
-1. Open the `shared/NativeSampleModule.h` file and add the function definition
+1. 打开 `shared/NativeSampleModule.h` 文件并添加函数定义
 
 ```diff title="NativeSampleModule.h (validateAddress function prototype)"
   std::string reverseString(jsi::Runtime& rt, std::string input);
@@ -334,7 +334,7 @@ Now, we need to implement the `validateAddress` function in C++. First, we need 
 } // namespace facebook::react
 ```
 
-2. Open the `shared/NativeSampleModule.cpp` file and add the function implementation
+2. 打开 `shared/NativeSampleModule.cpp` 文件并添加函数实现
 
 ```c++ title="NativeSampleModule.cpp (validateAddress implementation)"
 bool NativeSampleModule::validateAddress(jsi::Runtime &rt, jsi::Object input) {
@@ -345,25 +345,25 @@ bool NativeSampleModule::validateAddress(jsi::Runtime &rt, jsi::Object input) {
 }
 ```
 
-In the implementation, the object that represents the `Address` is a `jsi::Object`. To extract the values from this object, we need to use the accessors provided by `JSI`:
+在实现中，代表 `Address` 的对象是一个 `jsi::Object`。要从该对象中提取值，我们需要使用 `JSI` 提供的访问器：
 
-- `getProperty()` retrieves the property from and object by name.
-- `asString()` converts the property to `jsi::String`.
-- `utf8()` converts the `jsi::String` to a `std::string`.
-- `asNumber()` converts the property to a `double`.
+- `getProperty()` 按名称从对象检索属性。
+- `asString()` 将属性转换为 `jsi::String`。
+- `utf8()` 将 `jsi::String` 转换为 `std::string`。
+- `asNumber()` 将属性转换为 `double`。
 
-Once we manually parsed the object, we can implement the logic that we need.
+一旦我们手动解析了对象，我们就可以实现我们需要的逻辑。
 
 :::note
-If you want to learn more about `JSI` and how it works, have a look at this [great talk](https://youtu.be/oLmGInjKU2U?feature=shared) from App.JS 2024
+如果你想了解更多关于 `JSI` 及其工作原理的信息，请看看 App.JS 2024 的这场 [精彩的演讲](https://youtu.be/oLmGInjKU2U?feature=shared)
 :::
 
-### 4. Testing the code in the app
+### 4. 在应用中测试代码
 
-To test the code in the app, we have to modify the `App.tsx` file.
+要在应用中测试代码，我们必须修改 `App.tsx` 文件。
 
-1. Open the `App.tsx` file. Remove the content of the `App()` function.
-2. Replace the body of the `App()` function with the following code:
+1. 打开 `App.tsx` 文件。删除 `App()` 函数的内容。
+2. 用以下代码替换 `App()` 函数的主体：
 
 ```ts title="App.tsx (App function body replacement)"
 const [street, setStreet] = React.useState('');
@@ -417,6 +417,6 @@ return (
 );
 ```
 
-Congratulation! 🎉
+恭喜！🎉
 
-You bridged your first types from JS to C++.
+你完成了从 JS 到 C++ 的第一个类型桥接。

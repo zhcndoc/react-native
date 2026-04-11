@@ -53,7 +53,7 @@ choco install -y nodejs-lts microsoft-openjdk17
 
 Android Studio 默认安装最新的 Android SDK。但构建含有原生代码的 React Native 应用需要特定的 `Android 15 (VanillaIceCream)` SDK。您可以通过 Android Studio 的 SDK 管理器安装额外的 Android SDK。
 
-具体操作是，打开 Android Studio，点击“更多操作”按钮，选择“SDK 管理器”。
+具体操作是，打开 Android Studio，点击“更多操作”按钮，选择"SDK 管理器”。
 
 ![Android Studio 欢迎界面](/docs/assets/GettingStartedAndroidStudioWelcomeWindows.png)
 
@@ -61,12 +61,12 @@ Android Studio 默认安装最新的 Android SDK。但构建含有原生代码�
 SDK 管理器也可在 Android Studio 的“设置”对话框中找到，路径为 **语言与框架** → **Android SDK**。
 :::
 
-在 SDK 管理器中选择“SDK 平台”标签页，然后勾选右下角的“显示包详情”。找到并展开 `Android 15 (VanillaIceCream)` 项，确保以下项目被选中：
+在 SDK 管理器中选择"SDK 平台”标签页，然后勾选右下角的“显示包详情”。找到并展开 `Android 15 (VanillaIceCream)` 项，确保以下项目被选中：
 
 - `Android SDK Platform 35`
 - `Intel x86 Atom_64 系统映像` 或 `Google APIs Intel x86 Atom 系统映像`
 
-接着，选择“SDK 工具”标签页，也勾选“显示包详情”。找到并展开 `Android SDK Build-Tools` 项，确保选中 `36.0.0` 和 `Android SDK 命令行工具 (最新)`。
+接着，选择"SDK 工具”标签页，也勾选“显示包详情”。找到并展开 `Android SDK Build-Tools` 项，确保选中 `36.0.0` 和 `Android SDK 命令行工具 (最新)`。
 
 最后点击“应用”来下载并安装 Android SDK 及相关构建工具。
 
@@ -122,14 +122,14 @@ SDK 默认安装路径为：
 
 <h3>使用虚拟设备</h3>
 
-如果您用 Android Studio 打开 `./AwesomeProject/android`，可以在 Android Studio 内打开“AVD 管理器”查看可用的 Android 虚拟设备列表。寻找类似下面的图标：
+如果您用 Android Studio 打开 `./AwesomeProject/android`，可以在 Android Studio 内打开"AVD 管理器”查看可用的 Android 虚拟设备列表。寻找类似下面的图标：
 
 <img src="/docs/assets/GettingStartedAndroidStudioAVD.svg" alt="Android Studio AVD 管理器" width="100"/>
 
-如果刚安装 Android Studio，您很可能需要[新建一个 AVD](https://developer.android.com/studio/run/managing-avds.html)。选择“创建虚拟设备...”，然后从列表中挑选任意一款手机，点击“下一步”，然后选择 **VanillaIceCream** API Level 35 镜像。
+如果刚安装 Android Studio，您很可能需要[新建一个 AVD](https://developer.android.com/studio/run/managing-avds.html)。选择“创建虚拟设备..."，然后从列表中挑选任意一款手机，点击“下一步”，然后选择 **VanillaIceCream** API Level 35 镜像。
 
 :::note
-如果您未安装 HAXM，点击“安装 HAXM”或按[这些指令](https://github.com/intel/haxm/wiki/Installation-Instructions-on-Windows)执行安装，然后回到 AVD 管理器。
+如果您未安装 HAXM，点击“安装 HAXM"或按[这些指令](https://github.com/intel/haxm/wiki/Installation-Instructions-on-Windows)执行安装，然后回到 AVD 管理器。
 :::
 
 点击“下一步”，然后点击“完成”来创建您的 AVD。此时，您可以点击虚拟设备旁的绿色三角按钮启动它。

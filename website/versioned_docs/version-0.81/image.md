@@ -1,15 +1,15 @@
 ---
 id: image
-title: Image
+title: 图片
 ---
 
-A React component for displaying different types of images, including network images, static resources, temporary local images, and images from local disk, such as the camera roll.
+一个用于显示不同类型图片的 React 组件，包括网络图片、静态资源、临时本地图片以及来自本地磁盘（如相机胶卷）的图片。
 
-This example shows fetching and displaying an image from local storage as well as one from network and even from data provided in the `'data:'` uri scheme.
+此示例展示了从本地存储获取并显示图片，以及从网络甚至从 `'data:'` uri scheme 提供的数据中显示图片。
 
-> Note that for network and data images, you will need to manually specify the dimensions of your image!
+> 注意：对于网络图片和 data 图片，你需要手动指定图片的尺寸！
 
-## Examples
+## 示例
 
 ```SnackPlayer name=Image%20Example
 import React from 'react';
@@ -56,7 +56,7 @@ const DisplayAnImage = () => (
 export default DisplayAnImage;
 ```
 
-You can also add `style` to an image:
+你也可以为图片添加 `style`：
 
 ```SnackPlayer name=Styled%20Image%20Example
 import React from 'react';
@@ -88,48 +88,48 @@ const DisplayAnImageWithStyle = () => (
 export default DisplayAnImageWithStyle;
 ```
 
-## GIF and WebP support on Android
+## Android 上的 GIF 和 WebP 支持
 
-When building your own native code, GIF and WebP are not supported by default on Android.
+当你构建自己的原生代码时，Android 默认不支持 GIF 和 WebP。
 
-You will need to add some optional modules in `android/app/build.gradle`, depending on the needs of your app.
+你需要根据应用的需求，在 `android/app/build.gradle` 中添加一些可选模块。
 
 ```groovy
 dependencies {
-  // If your app supports Android versions before Ice Cream Sandwich (API level 14)
+  // 如果你的应用支持冰淇淋三明治之前的 Android 版本（API 级别 14）
   implementation 'com.facebook.fresco:animated-base-support:1.3.0'
 
-  // For animated GIF support
+  // 用于支持 animated GIF
   implementation 'com.facebook.fresco:animated-gif:3.6.0'
 
-  // For WebP support, including animated WebP
+  // 用于支持 WebP，包括 animated WebP
   implementation 'com.facebook.fresco:animated-webp:3.6.0'
   implementation 'com.facebook.fresco:webpsupport:3.6.0'
 
-  // For WebP support, without animations
+  // 用于支持 WebP，不含动画
   implementation 'com.facebook.fresco:webpsupport:3.6.0'
 }
 ```
 
-> Note: the version listed above may not be updated in time. Please check [`packages/react-native/gradle/libs.versions.toml`](https://github.com/facebook/react-native/blob/main/packages/react-native/gradle/libs.versions.toml) in the main repo to see which fresco version is being used in a specific tagged version.
+> 注意：上面列出的版本可能未及时更新。请查看主仓库中的 [`packages/react-native/gradle/libs.versions.toml`](https://github.com/facebook/react-native/blob/main/packages/react-native/gradle/libs.versions.toml) 以查看特定标记版本中使用的 fresco 版本。
 
 ---
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
-### [View Props](view.md#props)
+### [View 属性](view.md#props)
 
-Inherits [View Props](view#props).
+继承自 [View 属性](view#props)。
 
 ---
 
 ### `accessible`
 
-When true, indicates the image is an accessibility element.
+当为 true 时，表示该图片是一个无障碍元素。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `false` |
 
@@ -137,9 +137,9 @@ When true, indicates the image is an accessibility element.
 
 ### `accessibilityLabel`
 
-The text that's read by the screen reader when the user interacts with the image.
+当用户与图片交互时，屏幕阅读器读取的文本。
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -147,9 +147,9 @@ The text that's read by the screen reader when the user interacts with the image
 
 ### `alt`
 
-A string that defines an alternative text description of the image, which will be read by the screen reader when the user interacts with it. Using this will automatically mark this element as accessible.
+一个字符串，定义图片的替代文本描述，当用户与图片交互时将由屏幕阅读器读取。使用此项将自动标记该元素为可访问。
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -157,21 +157,21 @@ A string that defines an alternative text description of the image, which will b
 
 ### `blurRadius`
 
-blurRadius: the blur radius of the blur filter added to the image.
+blurRadius：添加到图片的模糊滤镜的模糊半径。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
-> Tip: On IOS, you will need to increase `blurRadius` by more than `5`.
+> 提示：在 iOS 上，你需要将 `blurRadius` 增加到 `5` 以上。
 
 ---
 
 ### `capInsets` <div className="label ios">iOS</div>
 
-When the image is resized, the corners of the size specified by `capInsets` will stay a fixed size, but the center content and borders of the image will be stretched. This is useful for creating resizable rounded buttons, shadows, and other resizable assets. More info in the [official Apple documentation](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIImage_Class/index.html#//apple_ref/occ/instm/UIImage/resizableImageWithCapInsets).
+当图片调整大小时，由 `capInsets` 指定的大小的角落将保持固定大小，但图片的中心内容和边框将被拉伸。这对于创建可调整大小的圆角按钮、阴影和其他可调整大小的资源很有用。更多信息请参阅 [官方 Apple 文档](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIImage_Class/index.html#//apple_ref/occ/instm/UIImage/resizableImageWithCapInsets)。
 
-| Type         |
+| 类型         |
 | ------------ |
 | [Rect](rect) |
 
@@ -179,12 +179,12 @@ When the image is resized, the corners of the size specified by `capInsets` will
 
 ### `crossOrigin`
 
-A string of a keyword specifying the CORS mode to use when fetching the image resource. It works similar to crossorigin attribute in HTML.
+一个关键字字符串，指定获取图片资源时使用的 CORS 模式。其工作方式类似于 HTML 中的 crossorigin 属性。
 
-- `anonymous`: No exchange of user credentials in the image request.
-- `use-credentials`: Sets `Access-Control-Allow-Credentials` header value to `true` in the image request.
+- `anonymous`：图片请求中不交换用户凭证。
+- `use-credentials`：在图片请求中将 `Access-Control-Allow-Credentials` 头值设置为 `true`。
 
-| Type                                     | Default       |
+| 类型                                     | 默认值        |
 | ---------------------------------------- | ------------- |
 | enum(`'anonymous'`, `'use-credentials'`) | `'anonymous'` |
 
@@ -192,21 +192,21 @@ A string of a keyword specifying the CORS mode to use when fetching the image re
 
 ### `defaultSource`
 
-A static image to display while loading the image source.
+加载图片源时显示的静态图片。
 
-| Type                             |
+| 类型                             |
 | -------------------------------- |
 | [ImageSource](image#imagesource) |
 
-> **Note:** On Android, the default source prop is ignored on debug builds.
+> **注意：** 在 Android 上，默认源属性在调试构建中被忽略。
 
 ---
 
 ### `fadeDuration` <div className="label android">Android</div>
 
-Fade animation duration in milliseconds.
+淡入动画持续时间（毫秒）。
 
-| Type   | Default |
+| 类型   | 默认值 |
 | ------ | ------- |
 | number | `300`   |
 
@@ -214,9 +214,9 @@ Fade animation duration in milliseconds.
 
 ### `height`
 
-Height of the image component.
+图片组件的高度。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -224,9 +224,9 @@ Height of the image component.
 
 ### `loadingIndicatorSource`
 
-Similarly to `source`, this property represents the resource used to render the loading indicator for the image. The loading indicator is displayed until image is ready to be displayed, typically after the image is downloaded.
+类似于 `source`，此属性表示用于渲染图片加载指示器的资源。加载指示器会显示直到图片准备好显示，通常在图片下载完成后。
 
-| Type                                                  |
+| 类型                                                  |
 | ----------------------------------------------------- |
 | [ImageSource](image#imagesource) (`uri` only), number |
 
@@ -234,9 +234,9 @@ Similarly to `source`, this property represents the resource used to render the 
 
 ### `onError`
 
-Invoked on load error.
+加载错误时调用。
 
-| Type                                |
+| 类型                                |
 | ----------------------------------- |
 | (`{nativeEvent: {error} }`) => void |
 
@@ -244,9 +244,9 @@ Invoked on load error.
 
 ### `onLayout`
 
-Invoked on mount and on layout changes.
+挂载时和布局变化时调用。
 
-| Type                                                    |
+| 类型                                                    |
 | ------------------------------------------------------- |
 | `md ({nativeEvent: [LayoutEvent](layoutevent)} => void` |
 
@@ -254,11 +254,11 @@ Invoked on mount and on layout changes.
 
 ### `onLoad`
 
-Invoked when load completes successfully.
+加载成功完成时调用。
 
-**Example:** `onLoad={({nativeEvent: {source: {width, height}}}) => setImageRealSize({width, height})}`
+**示例：** `onLoad={({nativeEvent: {source: {width, height}}}) => setImageRealSize({width, height})}`
 
-| Type                                                                |
+| 类型                                                                |
 | ------------------------------------------------------------------- |
 | `md ({nativeEvent: [ImageLoadEvent](image#imageloadevent)} => void` |
 
@@ -266,9 +266,9 @@ Invoked when load completes successfully.
 
 ### `onLoadEnd`
 
-Invoked when load either succeeds or fails.
+加载成功或失败时调用。
 
-| Type       |
+| 类型       |
 | ---------- |
 | () => void |
 
@@ -276,11 +276,11 @@ Invoked when load either succeeds or fails.
 
 ### `onLoadStart`
 
-Invoked on load start.
+加载开始时调用。
 
-**Example:** `onLoadStart={() => this.setState({loading: true})}`
+**示例：** `onLoadStart={() => this.setState({loading: true})}`
 
-| Type       |
+| 类型       |
 | ---------- |
 | () => void |
 
@@ -288,9 +288,9 @@ Invoked on load start.
 
 ### `onPartialLoad` <div className="label ios">iOS</div>
 
-Invoked when a partial load of the image is complete. The definition of what constitutes a "partial load" is loader specific though this is meant for progressive JPEG loads.
+当图片部分加载完成时调用。什么是“部分加载”的定义取决于加载器，但这旨在用于渐进式 JPEG 加载。
 
-| Type       |
+| 类型       |
 | ---------- |
 | () => void |
 
@@ -298,9 +298,9 @@ Invoked when a partial load of the image is complete. The definition of what con
 
 ### `onProgress`
 
-Invoked on download progress.
+下载进度时调用。
 
-| Type                                        |
+| 类型                                        |
 | ------------------------------------------- |
 | (`{nativeEvent: {loaded, total} }`) => void |
 
@@ -308,9 +308,9 @@ Invoked on download progress.
 
 ### `progressiveRenderingEnabled` <div className="label android">Android</div>
 
-When `true`, enables progressive jpeg streaming - https://frescolib.org/docs/progressive-jpegs.
+当为 `true` 时，启用渐进式 JPEG 流式传输 - https://frescolib.org/docs/progressive-jpegs。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `false` |
 
@@ -318,9 +318,9 @@ When `true`, enables progressive jpeg streaming - https://frescolib.org/docs/pro
 
 ### `referrerPolicy`
 
-A string indicating which referrer to use when fetching the resource. Sets the value for `Referrer-Policy` header in the image request. Works similar to `referrerpolicy` attribute in HTML.
+一个字符串，指示获取资源时使用哪个引用者。设置图片请求中 `Referrer-Policy` 头的值。工作方式类似于 HTML 中的 `referrerpolicy` 属性。
 
-| Type                                                                                                                                                                                     | Default                             |
+| 类型                                                                                                                                                                                     | 默认值                              |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
 | enum(`'no-referrer'`, `'no-referrer-when-downgrade'`, `'origin'`, `'origin-when-cross-origin'`, `'same-origin'`, `'strict-origin'`, `'strict-origin-when-cross-origin'`, `'unsafe-url'`) | `'strict-origin-when-cross-origin'` |
 
@@ -328,19 +328,19 @@ A string indicating which referrer to use when fetching the resource. Sets the v
 
 ### `resizeMethod` <div className="label android">Android</div>
 
-The mechanism that should be used to resize the image when the image's dimensions differ from the image view's dimensions. Defaults to `auto`.
+当图片尺寸与图片视图尺寸不同时，用于调整图片大小的机制。默认为 `auto`。
 
-- `auto`: Use heuristics to pick between `resize` and `scale`.
+- `auto`：使用启发式方法在 `resize` 和 `scale` 之间选择。
 
-- `resize`: A software operation which changes the encoded image in memory before it gets decoded. This should be used instead of `scale` when the image is much larger than the view.
+- `resize`：一种软件操作，在解码之前更改内存中的编码图像。当图片远大于视图时，应使用此方法而不是 `scale`。
 
-- `scale`: The image gets drawn downscaled or upscaled. Compared to `resize`, `scale` is faster (usually hardware accelerated) and produces higher quality images. This should be used if the image is smaller than the view. It should also be used if the image is slightly bigger than the view.
+- `scale`：图片被绘制为缩小或放大。与 `resize` 相比，`scale` 更快（通常硬件加速）并产生更高质量的图像。如果图片小于视图，应使用此方法。如果图片略大于视图，也应使用此方法。
 
-- `none`: No sampling is performed and the image is displayed in its full resolution. This should only be used in rare circumstances because it is considered unsafe as Android will throw a runtime exception when trying to render images that consume too much memory.
+- `none`：不执行采样，图片以其完整分辨率显示。这仅在少数情况下使用，因为它被认为是不安全的，因为当尝试渲染消耗过多内存的图片时，Android 将抛出运行时异常。
 
-More details about `resize` and `scale` can be found at https://frescolib.org/docs/resizing.
+关于 `resize` 和 `scale` 的更多详情可在 https://frescolib.org/docs/resizing 找到。
 
-| Type                                            | Default  |
+| 类型                                            | 默认值   |
 | ----------------------------------------------- | -------- |
 | enum(`'auto'`, `'resize'`, `'scale'`, `'none'`) | `'auto'` |
 
@@ -348,21 +348,21 @@ More details about `resize` and `scale` can be found at https://frescolib.org/do
 
 ### `resizeMode`
 
-Determines how to resize the image when the frame doesn't match the raw image dimensions. Defaults to `cover`.
+确定当框架与原始图片尺寸不匹配时如何调整图片大小。默认为 `cover`。
 
-- `cover`: Scale the image uniformly (maintain the image's aspect ratio) so that
-  - both dimensions (width and height) of the image will be equal to or larger than the corresponding dimension of the view (minus padding)
-  - at least one dimension of the scaled image will be equal to the corresponding dimension of the view (minus padding)
+- `cover`：均匀缩放图片（保持图片的宽高比），以便
+  - 图片的两个维度（宽度和高度）将等于或大于视图的相应维度（减去内边距）
+  - 缩放后的图片至少有一个维度将等于视图的相应维度（减去内边距）
 
-- `contain`: Scale the image uniformly (maintain the image's aspect ratio) so that both dimensions (width and height) of the image will be equal to or less than the corresponding dimension of the view (minus padding).
+- `contain`：均匀缩放图片（保持图片的宽高比），以便图片的两个维度（宽度和高度）将等于或小于视图的相应维度（减去内边距）。
 
-- `stretch`: Scale width and height independently, This may change the aspect ratio of the src.
+- `stretch`：独立缩放宽度和高度，这可能会改变源的宽高比。
 
-- `repeat`: Repeat the image to cover the frame of the view. The image will keep its size and aspect ratio, unless it is larger than the view, in which case it will be scaled down uniformly so that it is contained in the view.
+- `repeat`：重复图片以覆盖视图框架。图片将保持其大小和宽高比，除非它大于视图，在这种情况下它将均匀缩小以便包含在视图中。
 
-- `center`: Center the image in the view along both dimensions. If the image is larger than the view, scale it down uniformly so that it is contained in the view.
+- `center`：沿两个维度将图片居中在视图中。如果图片大于视图，均匀缩小它以便包含在视图中。
 
-| Type                                                              | Default   |
+| 类型                                                              | 默认值    |
 | ----------------------------------------------------------------- | --------- |
 | enum(`'cover'`, `'contain'`, `'stretch'`, `'repeat'`, `'center'`) | `'cover'` |
 
@@ -370,13 +370,13 @@ Determines how to resize the image when the frame doesn't match the raw image di
 
 ### `resizeMultiplier` <div className="label android">Android</div>
 
-When the `resizeMethod` is set to `resize`, the destination dimensions are multiplied by this value. The `scale` method is used to perform the remainder of the resize. A default of `1.0` means the bitmap size is designed to fit the destination dimensions. A multiplier greater than `1.0` will set the resize options larger than that of the destination dimensions, and the resulting bitmap will be scaled down from the hardware size. Defaults to `1.0`.
+当 `resizeMethod` 设置为 `resize` 时，目标尺寸乘以此值。`scale` 方法用于执行剩余的调整大小。`1.0` 的默认值意味着位图大小设计为适合目标尺寸。大于 `1.0` 的乘数将设置比目标尺寸更大的调整大小选项，并且生成的位图将从硬件大小缩小。默认为 `1.0`。
 
-This prop is most useful in cases where the destination dimensions are quite small and the source image is significantly larger. The `resize` resize method performs downsampling and significant image quality is lost between the source and destination image sizes, often resulting in a blurry image. By using a multiplier, the decoded image is slightly larger than the target size but smaller than the source image (if the source image is large enough). This allows aliasing artifacts to produce faux quality through scaling operations on the multiplied image.
+此属性在目标尺寸相当小且源图片显著较大的情况下最有用。`resize` 调整大小方法执行下采样，源和目标图片尺寸之间会丢失大量图像质量，通常导致图片模糊。通过使用乘数，解码后的图像略大于目标尺寸但小于源图像（如果源图像足够大）。这允许混叠伪影通过缩放操作在乘数图像上产生伪质量。
 
-If you have a source image with dimensions 200x200 and destination dimensions of 24x24, a resizeMultiplier of `2.0` will tell Fresco to downsample the image to 48x48. Fresco picks the closest power of 2 (so, 50x50) and decodes the image into a bitmap of that size. Without the multiplier, the closest power of 2 would be 25x25. The resultant image is scaled down by the system.
+如果你有一个尺寸为 200x200 的源图像和目标尺寸为 24x24，`2.0` 的 resizeMultiplier 将告诉 Fresco 将图像下采样到 48x48。Fresco 选择最接近的 2 的幂（所以是 50x50）并将图像解码为该大小的位图。如果没有乘数，最接近的 2 的幂将是 25x25。结果图像由系统缩小。
 
-| Type   | Default |
+| 类型   | 默认值 |
 | ------ | ------- |
 | number | `1.0`   |
 
@@ -384,15 +384,15 @@ If you have a source image with dimensions 200x200 and destination dimensions of
 
 ### `source`
 
-The image source (either a remote URL or a local file resource).
+图片源（远程 URL 或本地文件资源）。
 
-This prop can also contain several remote URLs, specified together with their width and height and potentially with scale/other URI arguments. The native side will then choose the best `uri` to display based on the measured size of the image container. A `cache` property can be added to control how networked request interacts with the local cache. (For more information see [Cache Control for Images](images#cache-control)).
+此属性还可以包含多个远程 URL，与它们的宽度和高度一起指定，并可能带有 scale/其他 URI 参数。原生端将根据图片容器的测量大小选择最佳的 `uri` 来显示。可以添加 `cache` 属性来控制网络请求如何与本地缓存交互。（更多信息见 [图片的缓存控制](images#cache-control)）。
 
-The currently supported formats are `png`, `jpg`, `jpeg`, `bmp`, `gif`, `webp`, `psd` (iOS only). In addition, iOS supports several RAW image formats. Refer to Apple's documentation for the current list of supported camera models (for iOS 12, see https://support.apple.com/en-ca/HT208967).
+当前支持的格式有 `png`、`jpg`、`jpeg`、`bmp`、`gif`、`webp`、`psd`（仅 iOS）。此外，iOS 支持几种 RAW 图片格式。请参阅 Apple 的文档以获取当前支持的相机型号列表（对于 iOS 12，见 https://support.apple.com/en-ca/HT208967）。
 
-Please note that the `webp` format is supported on iOS **only** when bundled with the JavaScript code.
+请注意，`webp` 格式仅在 **与 JavaScript 代码捆绑时** 在 iOS 上受支持。
 
-| Type                             |
+| 类型                             |
 | -------------------------------- |
 | [ImageSource](image#imagesource) |
 
@@ -400,11 +400,11 @@ Please note that the `webp` format is supported on iOS **only** when bundled wit
 
 ### `src`
 
-A string representing the remote URL of the image. This prop has precedence over `source` prop.
+一个字符串，表示图片的远程 URL。此属性优先于 `source` 属性。
 
-**Example:** `src={'https://reactnative.dev/img/tiny_logo.png'}`
+**示例：** `src={'https://reactnative.dev/img/tiny_logo.png'}`
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -412,15 +412,15 @@ A string representing the remote URL of the image. This prop has precedence over
 
 ### `srcSet`
 
-A string representing comma separated list of possible candidate image source. Each image source contains a URL of an image and a pixel density descriptor. If no descriptor is specified, it defaults to descriptor of `1x`.
+一个字符串，表示逗号分隔的可能候选图片源列表。每个图片源包含一个图片 URL 和一个像素密度描述符。如果未指定描述符，则默认为 `1x` 描述符。
 
-If `srcSet` does not contain a `1x` descriptor, the value in `src` is used as image source with `1x` descriptor (if provided).
+如果 `srcSet` 不包含 `1x` 描述符，则 `src` 中的值用作带有 `1x` 描述符的图片源（如果提供）。
 
-This prop has precedence over both the `src` and `source` props.
+此属性优先于 `src` 和 `source` 属性。
 
-**Example:** `srcSet={'https://reactnative.dev/img/tiny_logo.png 1x, https://reactnative.dev/img/header_logo.svg 2x'}`
+**示例：** `srcSet={'https://reactnative.dev/img/tiny_logo.png 1x, https://reactnative.dev/img/header_logo.svg 2x'}`
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -428,17 +428,17 @@ This prop has precedence over both the `src` and `source` props.
 
 ### `style`
 
-| Type                                                                                                                                                 |
+| 类型                                                                                                                                                 |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Image Style Props](image-style-props#props), [Layout Props](layout-props#props), [Shadow Props](shadow-props#props), [Transforms](transforms#props) |
+| [图片样式属性](image-style-props#props), [布局属性](layout-props#props), [阴影属性](shadow-props#props), [变换](transforms#props) |
 
 ---
 
 ### `testID`
 
-A unique identifier for this element to be used in UI Automation testing scripts.
+此元素的唯一标识符，用于 UI 自动化测试脚本。
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -446,9 +446,9 @@ A unique identifier for this element to be used in UI Automation testing scripts
 
 ### `tintColor`
 
-Changes the color of all non-transparent pixels to the `tintColor`.
+将所有非透明像素的颜色更改为 `tintColor`。
 
-| Type               |
+| 类型               |
 | ------------------ |
 | [color](colors.md) |
 
@@ -456,13 +456,13 @@ Changes the color of all non-transparent pixels to the `tintColor`.
 
 ### `width`
 
-Width of the image component.
+图片组件的宽度。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
-## Methods
+## 方法
 
 ### `abortPrefetch()` <div className="label android">Android</div>
 
@@ -470,13 +470,13 @@ Width of the image component.
 static abortPrefetch(requestId: number);
 ```
 
-Abort prefetch request.
+中止预取请求。
 
-**Parameters:**
+**参数：**
 
-| Name                                                           | Type   | Description                             |
+| 名称                                                           | 类型   | 描述                             |
 | -------------------------------------------------------------- | ------ | --------------------------------------- |
-| requestId <div className="label basic required">Required</div> | number | Request id as returned by `prefetch()`. |
+| requestId <div className="label basic required">必需</div> | number | `prefetch()` 返回的请求 ID。 |
 
 ---
 
@@ -486,15 +486,15 @@ Abort prefetch request.
 static getSize(uri: string): Promise<{width: number, height: number}>;
 ```
 
-Retrieve the width and height (in pixels) of an image prior to displaying it. This method can fail if the image cannot be found, or fails to download.
+在显示图像之前检索其宽度和高度（以像素为单位）。如果找不到图像或下载失败，此方法可能会失败。
 
-In order to retrieve the image dimensions, the image may first need to be loaded or downloaded, after which it will be cached. This means that in principle you could use this method to preload images, however it is not optimized for that purpose, and may in future be implemented in a way that does not fully load/download the image data. A proper, supported way to preload images will be provided as a separate API.
+为了检索图像尺寸，图像可能需要先加载或下载，之后会被缓存。这意味着原则上你可以使用此方法预加载图像，但它并未为此目的优化，并且将来可能会以实现方式不完全加载/下载图像数据的方式实施。合适的、受支持的预加载图像方式将作为单独的 API 提供。
 
-**Parameters:**
+**参数：**
 
-| <div className="wideColumn">Name</div>                   | Type   | Description                |
+| <div className="wideColumn">名称</div>                   | 类型   | 描述                |
 | -------------------------------------------------------- | ------ | -------------------------- |
-| uri <div className="label basic required">Required</div> | string | The location of the image. |
+| uri <div className="label basic required">必需</div> | string | 图像的位置。 |
 
 ---
 
@@ -507,16 +507,16 @@ static getSizeWithHeaders(
 ): Promise<{width: number, height: number}>;
 ```
 
-Retrieve the width and height (in pixels) of an image prior to displaying it with the ability to provide the headers for the request. This method can fail if the image cannot be found, or fails to download. It also does not work for static image resources.
+在显示图像之前检索其宽度和高度（以像素为单位），并提供为请求设置请求头的能力。如果找不到图像或下载失败，此方法可能会失败。它也不适用于静态图像资源。
 
-In order to retrieve the image dimensions, the image may first need to be loaded or downloaded, after which it will be cached. This means that in principle you could use this method to preload images, however it is not optimized for that purpose, and may in future be implemented in a way that does not fully load/download the image data. A proper, supported way to preload images will be provided as a separate API.
+为了检索图像尺寸，图像可能需要先加载或下载，之后会被缓存。这意味着原则上你可以使用此方法预加载图像，但它并未为此目的优化，并且将来可能会以实现方式不完全加载/下载图像数据的方式实施。合适的、受支持的预加载图像方式将作为单独的 API 提供。
 
-**Parameters:**
+**参数：**
 
-| <div className="wideColumn">Name</div>                       | Type   | Description                  |
+| <div className="wideColumn">名称</div>                       | 类型   | 描述                  |
 | ------------------------------------------------------------ | ------ | ---------------------------- |
-| uri <div className="label basic required">Required</div>     | string | The location of the image.   |
-| headers <div className="label basic required">Required</div> | object | The headers for the request. |
+| uri <div className="label basic required">必需</div>     | string | 图像的位置。   |
+| headers <div className="label basic required">必需</div> | object | 请求的请求头。 |
 
 ---
 
@@ -526,14 +526,14 @@ In order to retrieve the image dimensions, the image may first need to be loaded
 await Image.prefetch(url);
 ```
 
-Prefetches a remote image for later use by downloading it to the disk cache. Returns a promise which resolves to a boolean.
+通过将远程图像下载到磁盘缓存以供后续使用来预取它。返回一个解析为布尔值的 Promise。
 
-**Parameters:**
+**参数：**
 
-| Name                                                     | Type                                                  | Description                                            |
+| 名称                                                     | 类型                                                  | 描述                                            |
 | -------------------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------ |
-| url <div className="label basic required">Required</div> | string                                                | The remote location of the image.                      |
-| callback                                                 | function <div className="label android">Android</div> | The function that will be called with the `requestId`. |
+| url <div className="label basic required">必需</div> | string                                                | 图像的远程位置。                      |
+| callback                                                 | function <div className="label android">Android</div> | 将使用 `requestId` 调用的函数。 |
 
 ---
 
@@ -545,13 +545,13 @@ static queryCache(
 ): Promise<Record<string, 'memory' | 'disk' | 'disk/memory'>>;
 ```
 
-Perform cache interrogation. Returns a promise which resolves to a mapping from URL to cache status, such as "disk", "memory" or "disk/memory". If a requested URL is not in the mapping, it means it's not in the cache.
+执行缓存查询。返回一个 Promise，解析为从 URL 到缓存状态的映射，例如 "disk"、"memory" 或 "disk/memory"。如果请求的 URL 不在映射中，则表示它不在缓存中。
 
-**Parameters:**
+**参数：**
 
-| Name                                                      | Type  | Description                                |
+| 名称                                                      | 类型  | 描述                                |
 | --------------------------------------------------------- | ----- | ------------------------------------------ |
-| urls <div className="label basic required">Required</div> | array | List of image URLs to check the cache for. |
+| urls <div className="label basic required">必需</div> | array | 要检查缓存的图像 URL 列表。 |
 
 ---
 
@@ -566,73 +566,73 @@ static resolveAssetSource(source: ImageSourcePropType): {
 };
 ```
 
-Resolves an asset reference into an object which has the properties `uri`, `scale`, `width`, and `height`.
+将资产引用解析为具有 `uri`、`scale`、`width` 和 `height` 属性的对象。
 
-**Parameters:**
+**参数：**
 
-| <div className="wideColumn">Name</div>                      | Type                                     | Description                                                                  |
+| <div className="wideColumn">名称</div>                      | 类型                                     | 描述                                                                  |
 | ----------------------------------------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------- |
-| source <div className="label basic required">Required</div> | [ImageSource](image#imagesource), number | A number (opaque type returned by `require('./foo.png')`) or an ImageSource. |
+| source <div className="label basic required">必需</div> | [ImageSource](image#imagesource), number | 一个数字（`require('./foo.png')` 返回的不透明类型）或一个 ImageSource。 |
 
-## Type Definitions
+## 类型定义
 
 ### ImageCacheEnum <div className="label ios">iOS</div>
 
-Enum which can be used to set the cache handling or strategy for the potentially cached responses.
+可用于为潜在缓存的响应设置缓存处理或策略的枚举。
 
-| Type                                                               | Default     |
+| 类型                                                               | 默认值     |
 | ------------------------------------------------------------------ | ----------- |
 | enum(`'default'`, `'reload'`, `'force-cache'`, `'only-if-cached'`) | `'default'` |
 
-- `default`: Use the native platforms default strategy.
-- `reload`: The data for the URL will be loaded from the originating source. No existing cache data should be used to satisfy a URL load request.
-- `force-cache`: The existing cached data will be used to satisfy the request, regardless of its age or expiration date. If there is no existing data in the cache corresponding the request, the data is loaded from the originating source.
-- `only-if-cached`: The existing cache data will be used to satisfy a request, regardless of its age or expiration date. If there is no existing data in the cache corresponding to a URL load request, no attempt is made to load the data from the originating source, and the load is considered to have failed.
+- `default`：使用 native 平台的默认策略。
+- `reload`：URL 的数据将从原始来源加载。不应使用现有的缓存数据来满足 URL 加载请求。
+- `force-cache`：现有的缓存数据将用于满足请求，无论其年龄或过期日期如何。如果缓存中没有与请求对应的现有数据，则数据从原始来源加载。
+- `only-if-cached`：现有的缓存数据将用于满足请求，无论其年龄或过期日期如何。如果缓存中没有与 URL 加载请求对应的现有数据，则不会尝试从原始来源加载数据，并且加载被视为失败。
 
 ### ImageLoadEvent
 
-Object returned in the `onLoad` callback.
+在 `onLoad` 回调中返回的对象。
 
-| Type   |
+| 类型   |
 | ------ |
 | object |
 
-**Properties:**
+**属性：**
 
-| Name   | Type   | Description                         |
+| 名称   | 类型   | 描述                         |
 | ------ | ------ | ----------------------------------- |
-| source | object | The [source object](#source-object) |
+| source | object | [source 对象](#source-object) |
 
-#### Source Object
+#### Source 对象
 
-**Properties:**
+**属性：**
 
-| Name   | Type   | Description                                                  |
+| 名称   | 类型   | 描述                                                  |
 | ------ | ------ | ------------------------------------------------------------ |
-| width  | number | The width of loaded image.                                   |
-| height | number | The height of loaded image.                                  |
-| uri    | string | A string representing the resource identifier for the image. |
+| width  | number | 加载图像的宽度。                                   |
+| height | number | 加载图像的高度。                                  |
+| uri    | string | 表示图像资源标识符的字符串。 |
 
 ### ImageSource
 
-| Type                             |
+| 类型                             |
 | -------------------------------- |
 | object, array of objects, number |
 
-**Properties (if passing as object or array of objects):**
+**属性（如果作为对象或对象数组传递）：**
 
-| <div className="wideColumn">Name</div>     | Type                                       | Description                                                                                                                                                                          |
+| <div className="wideColumn">名称</div>     | 类型                                       | 描述                                                                                                                                                                          |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| uri                                        | string                                     | A string representing the resource identifier for the image, which could be an http address, a local file path, or the name of a static image resource.                              |
-| width                                      | number                                     | Can be specified if known at build time, in which case the value will be used to set the default `<Image/>` component dimension.                                                     |
-| height                                     | number                                     | Can be specified if known at build time, in which case the value will be used to set the default `<Image/>` component dimension.                                                     |
-| scale                                      | number                                     | Used to indicate the scale factor of the image. Defaults to `1.0` if unspecified, meaning that one image pixel equates to one display point / DIP.                                   |
-| bundle<div className="label ios">iOS</div> | string                                     | The iOS asset bundle which the image is included in. This will default to `[NSBundle mainBundle]` if not set.                                                                        |
-| method                                     | string                                     | The HTTP Method to use. Defaults to `'GET'` if not specified.                                                                                                                        |
-| headers                                    | object                                     | An object representing the HTTP headers to send along with the request for a remote image.                                                                                           |
-| body                                       | string                                     | The HTTP body to send with the request. This must be a valid UTF-8 string, and will be sent exactly as specified, with no additional encoding (e.g. URL-escaping or base64) applied. |
-| cache<div className="label ios">iOS</div>  | [ImageCacheEnum](image#imagecacheenum-ios) | Determines how the requests handles potentially cached responses.                                                                                                                    |
+| uri                                        | string                                     | 表示图像资源标识符的字符串，可以是 http 地址、本地文件路径或静态图像资源的名称。                              |
+| width                                      | number                                     | 如果在构建时已知，则可以指定，在这种情况下，该值将用于设置默认 `<Image/>` 组件的尺寸。                                                     |
+| height                                     | number                                     | 如果在构建时已知，则可以指定，在这种情况下，该值将用于设置默认 `<Image/>` 组件的尺寸。                                                     |
+| scale                                      | number                                     | 用于指示图像的缩放因子。如果未指定，默认为 `1.0`，意味着一个图像像素等于一个显示点 / DIP。                                   |
+| bundle<div className="label ios">iOS</div> | string                                     | 图像包含在内的 iOS 资产包。如果未设置，这将默认为 `[NSBundle mainBundle]`。                                                                        |
+| method                                     | string                                     | 要使用的 HTTP 方法。如果未指定，默认为 `'GET'`。                                                                                                                        |
+| headers                                    | object                                     | 一个对象，表示随远程图像请求一起发送的 HTTP 请求头。                                                                                           |
+| body                                       | string                                     | 随请求一起发送的 HTTP 主体。这必须是有效的 UTF-8 字符串，并将完全按指定发送，不应用额外的编码（例如 URL 转义或 base64）。 |
+| cache<div className="label ios">iOS</div>  | [ImageCacheEnum](image#imagecacheenum-ios) | 确定请求如何处理潜在缓存的响应。                                                                                                                    |
 
-**If passing a number:**
+**如果传递数字：**
 
-- `number` - opaque type returned by something like `require('./image.jpg')`.
+- `number` - 由类似 `require('./image.jpg')` 返回的不透明类型。

@@ -1,43 +1,43 @@
 ---
 id: performance
-title: Performance Overview
+title: 性能概述
 ---
 
-A compelling reason to use React Native instead of WebView-based tools is to achieve at least 60 frames per second and provide a native look and feel to your apps. Whenever feasible, we aim for React Native to handle optimizations automatically, allowing you to focus on your app without worrying about performance. However, there are certain areas where we haven't quite reached that level yet, and others where React Native (similar to writing native code directly) cannot determine the best optimization approach for you. In such cases, manual intervention becomes necessary. We strive to deliver buttery-smooth UI performance by default, but there may be instances where that isn't possible.
+使用 React Native 而不是基于 WebView 的工具的一个令人信服的理由是达到每秒至少 60 帧，并为你的应用提供原生的外观和感觉。只要可行，我们的目标是让 React Native 自动处理优化，让你专注于你的应用而无需担心性能。然而，在某些领域我们尚未完全达到那个水平，而在其他领域，React Native（类似于直接编写原生代码）无法为你确定最佳的优化方法。在这种情况下，手动干预变得必要。我们致力于默认提供如黄油般顺滑的 UI 性能，但可能存在无法实现的情况。
 
-This guide is intended to teach you some basics to help you to [troubleshoot performance issues](profiling.md), as well as discuss [common sources of problems and their suggested solutions](performance.md#common-sources-of-performance-problems).
+本指南旨在教你一些基础知识，帮助你 [排查性能问题](profiling.md)，并讨论 [问题的常见来源及其建议的解决方案](performance.md#common-sources-of-performance-problems)。
 
-## What you need to know about frames
+## 关于帧你需要知道的事情
 
-Your grandparents' generation called movies ["moving pictures"](https://www.youtube.com/watch?v=F1i40rnpOsA) for a reason: realistic motion in video is an illusion created by quickly changing static images at a consistent speed. We refer to each of these images as frames. The number of frames that is displayed each second has a direct impact on how smooth and ultimately life-like a video (or user interface) seems to be. iOS devices display at least 60 frames per second, which gives you and the UI system at most 16.67ms to do all of the work needed to generate the static image (frame) that the user will see on the screen for that interval. If you are unable to do the work necessary to generate that frame within the allotted time slot, then you will "drop a frame" and the UI will appear unresponsive.
+你祖父母那一代人称电影为 ["移动图片"](https://www.youtube.com/watch?v=F1i40rnpOsA) 是有原因的：视频中逼真的运动是一种错觉，由以恒定速度快速变化的静态图像创建。我们将这些图像中的每一帧称为帧。每秒显示的帧数直接影响视频（或用户界面）看起来有多平滑并最终有多逼真。iOS 设备显示至少每秒 60 帧，这给你和 UI 系统最多 16.67ms 的时间来完成生成用户在该间隔内将在屏幕上看到的静态图像（帧）所需的所有工作。如果你无法在分配的时间槽内完成生成该帧所需的工作，那么你将“丢帧”，并且 UI 将显得无响应。
 
-Now to confuse the matter a little bit, open up the [Dev Menu](debugging.md#opening-the-dev-menu) in your app and toggle `Show Perf Monitor`. You will notice that there are two different frame rates.
+现在为了让事情有点混淆，在你的应用中打开 [开发菜单](debugging.md#opening-the-dev-menu) 并切换 `Show Perf Monitor`。你会注意到有两个不同的帧率。
 
 ![](/docs/assets/PerfUtil.png)
 
-### JS frame rate (JavaScript thread)
+### JS 帧率（JavaScript 线程）
 
-For most React Native applications, your business logic will run on the JavaScript thread. This is where your React application lives, API calls are made, touch events are processed, etc... Updates to native-backed views are batched and sent over to the native side at the end of each iteration of the event loop, before the frame deadline (if all goes well). If the JavaScript thread is unresponsive for a frame, it will be considered a dropped frame. For example, if you were to call `this.setState` on the root component of a complex application and it resulted in re-rendering computationally expensive component subtrees, it's conceivable that this might take 200ms and result in 12 frames being dropped. Any animations controlled by JavaScript would appear to freeze during that time. If anything takes longer than 100ms, the user will feel it.
+对于大多数 React Native 应用，你的业务逻辑将在 JavaScript 线程上运行。这是你的 React 应用所在之处，API 调用在此发出，触摸事件在此处理等等... 对原生支持视图的更新会被批处理，并在事件循环的每次迭代结束时，在帧截止日期之前（如果一切顺利）发送到原生端。如果 JavaScript 线程在一帧期间无响应，它将被视为丢帧。例如，如果你在复杂应用的根组件上调用 `this.setState` 并且它导致重新渲染计算昂贵的组件子树，这可能会花费 200ms 并导致 12 帧被丢弃。在此期间，任何由 JavaScript 控制的动画都将显得冻结。如果任何事情花费超过 100ms，用户都会感觉到。
 
-This often happens during `Navigator` transitions: when you push a new route, the JavaScript thread needs to render all of the components necessary for the scene in order to send over the proper commands to the native side to create the backing views. It's common for the work being done here to take a few frames and cause [jank](https://jankfree.org/) because the transition is controlled by the JavaScript thread. Sometimes components will do additional work on `componentDidMount`, which might result in a second stutter in the transition.
+这通常发生在 `Navigator` 过渡期间：当你推送新路由时，JavaScript 线程需要渲染场景所需的所有组件，以便向原生端发送适当的命令来创建支持视图。这里完成的工作通常会花费几帧并导致 [卡顿](https://jankfree.org/)，因为过渡是由 JavaScript 线程控制的。有时组件会在 `componentDidMount` 上做额外的工作，这可能会导致过渡中的第二次卡顿。
 
-Another example is responding to touches: if you are doing work across multiple frames on the JavaScript thread, you might notice a delay in responding to `TouchableOpacity`, for example. This is because the JavaScript thread is busy and cannot process the raw touch events sent over from the main thread. As a result, `TouchableOpacity` cannot react to the touch events and command the native view to adjust its opacity.
+另一个例子是响应触摸：如果你在 JavaScript 线程上跨多帧工作，你可能会注意到响应 `TouchableOpacity` 时有延迟，例如。这是因为 JavaScript 线程很忙，无法处理从主线程发送过来的原始触摸事件。因此，`TouchableOpacity` 无法对触摸事件做出反应并命令原生视图调整其不透明度。
 
-### UI frame rate (main thread)
+### UI 帧率（主线程）
 
-Many people have noticed that performance of `NavigatorIOS` is better out of the box than `Navigator`. The reason for this is that the animations for the transitions are done entirely on the main thread, and so they are not interrupted by frame drops on the JavaScript thread.
+许多人注意到 `NavigatorIOS` 的性能开箱即用比 `Navigator` 更好。原因是过渡的动画完全在主线程上完成，因此它们不会被 JavaScript 线程上的丢帧中断。
 
-Similarly, you can happily scroll up and down through a `ScrollView` when the JavaScript thread is locked up because the `ScrollView` lives on the main thread. The scroll events are dispatched to the JS thread, but their receipt is not necessary for the scroll to occur.
+同样，当 JavaScript 线程被锁住时，你可以愉快地在 `ScrollView` 中上下滚动，因为 `ScrollView` 位于主线程上。滚动事件被分派到 JS 线程，但它们的接收对于滚动发生不是必需的。
 
-## Common sources of performance problems
+## 性能问题的常见来源
 
-### Running in development mode (`dev=true`)
+### 在开发模式下运行（`dev=true`）
 
-JavaScript thread performance suffers greatly when running in dev mode. This is unavoidable: a lot more work needs to be done at runtime to provide you with good warnings and error messages. Always make sure to test performance in [release builds](running-on-device.md#building-your-app-for-production).
+JavaScript 线程性能遭受巨大损失当在开发模式下运行时。这是不可避免的：需要在运行时完成更多的工作以为你提供良好的警告和错误消息。务必确保在 [发布版本](running-on-device.md#building-your-app-for-production) 中测试性能。
 
-### Using `console.log` statements
+### 使用 `console.log` 语句
 
-When running a bundled app, these statements can cause a big bottleneck in the JavaScript thread. This includes calls from debugging libraries such as [redux-logger](https://github.com/evgenyrodionov/redux-logger), so make sure to remove them before bundling. You can also use this [babel plugin](https://babeljs.io/docs/plugins/transform-remove-console/) that removes all the `console.*` calls. You need to install it first with `npm i babel-plugin-transform-remove-console --save-dev`, and then edit the `.babelrc` file under your project directory like this:
+当运行打包的应用时，这些语句会导致 JavaScript 线程出现大瓶颈。这包括来自调试库的调用，例如 [redux-logger](https://github.com/evgenyrodionov/redux-logger)，所以确保在打包之前移除它们。你也可以使用这个 [babel 插件](https://babeljs.io/docs/plugins/transform-remove-console/) 来移除所有 `console.*` 调用。你需要先用 `npm i babel-plugin-transform-remove-console --save-dev` 安装它，然后像这样编辑项目目录下的 `.babelrc` 文件：
 
 ```json
 {
@@ -49,47 +49,47 @@ When running a bundled app, these statements can cause a big bottleneck in the J
 }
 ```
 
-This will automatically remove all `console.*` calls in the release (production) versions of your project.
+这将自动移除项目发布（生产）版本中的所有 `console.*` 调用。
 
-It is recommended to use the plugin even if no `console.*` calls are made in your project. A third party library could also call them.
+即使你的项目中没有进行 `console.*` 调用，也推荐使用该插件。第三方库也可能调用它们。
 
-### `ListView` initial rendering is too slow or scroll performance is bad for large lists
+### `ListView` 初始渲染太慢或大列表滚动性能差
 
-Use the new [`FlatList`](flatlist.md) or [`SectionList`](sectionlist.md) component instead. Besides simplifying the API, the new list components also have significant performance enhancements, the main one being nearly constant memory usage for any number of rows.
+使用新的 [`FlatList`](flatlist.md) 或 [`SectionList`](sectionlist.md) 组件代替。除了简化 API 外，新的列表组件还具有显著的性能增强，主要一个是对于任何数量的行几乎恒定的内存使用。
 
-If your [`FlatList`](flatlist.md) is rendering slow, be sure that you've implemented [`getItemLayout`](flatlist.md#getitemlayout) to optimize rendering speed by skipping measurement of the rendered items.
+如果你的 [`FlatList`](flatlist.md) 渲染缓慢，请确保你已实现 [`getItemLayout`](flatlist.md#getitemlayout) 以通过跳过渲染项的测量来优化渲染速度。
 
-### JS FPS plunges when re-rendering a view that hardly changes
+### 当重新渲染几乎不变的视图时 JS FPS 骤降
 
-If you are using a ListView, you must provide a `rowHasChanged` function that can reduce a lot of work by quickly determining whether or not a row needs to be re-rendered. If you are using immutable data structures, this would only need to be a reference equality check.
+如果你正在使用 ListView，你必须提供一个 `rowHasChanged` 函数，该函数可以通过快速确定是否需要重新渲染行来减少大量工作。如果你使用不可变数据结构，这只需要是一个引用相等性检查。
 
-Similarly, you can implement `shouldComponentUpdate` and indicate the exact conditions under which you would like the component to re-render. If you write pure components (where the return value of the render function is entirely dependent on props and state), you can leverage PureComponent to do this for you. Once again, immutable data structures are useful to keep this fast -- if you have to do a deep comparison of a large list of objects, it may be that re-rendering your entire component would be quicker, and it would certainly require less code.
+同样，你可以实现 `shouldComponentUpdate` 并指示你希望组件重新渲染的确切条件。如果你编写纯组件（其中渲染函数的返回值完全依赖于 props 和 state），你可以利用 PureComponent 为你完成此操作。再次强调，不可变数据结构有助于保持快速 -- 如果你必须对大型对象列表进行深度比较，可能重新渲染整个组件会更快，并且肯定需要更少的代码。
 
-### Dropping JS thread FPS because of doing a lot of work on the JavaScript thread at the same time
+### 因同时在 JavaScript 线程上做大量工作而导致 JS 线程 FPS 下降
 
-"Slow Navigator transitions" is the most common manifestation of this, but there are other times this can happen. Using InteractionManager can be a good approach, but if the user experience cost is too high to delay work during an animation, then you might want to consider LayoutAnimation.
+“缓慢的 Navigator 过渡”是这种情况最常见的表现，但还有其他时候会发生这种情况。使用 InteractionManager 可能是一个好方法，但如果动画期间延迟工作的用户体验成本太高，那么你可能想要考虑 LayoutAnimation。
 
-The Animated API currently calculates each keyframe on-demand on the JavaScript thread unless you [set `useNativeDriver: true`](/blog/2017/02/14/using-native-driver-for-animated#how-do-i-use-this-in-my-app), while LayoutAnimation leverages Core Animation and is unaffected by JS thread and main thread frame drops.
+The Animated API 目前在 JavaScript 线程上按需计算每个关键帧，除非你 [设置 `useNativeDriver: true`](/blog/2017/02/14/using-native-driver-for-animated#how-do-i-use-this-in-my-app)，而 LayoutAnimation 利用 Core Animation 并且不受 JS 线程和主线程丢帧的影响。
 
-One case where I have used this is for animating in a modal (sliding down from top and fading in a translucent overlay) while initializing and perhaps receiving responses for several network requests, rendering the contents of the modal, and updating the view where the modal was opened from. See the Animations guide for more information about how to use LayoutAnimation.
+我使用这种情况的一个案例是在初始化并可能接收几个网络请求的响应时动画化模态框（从顶部滑下并淡入半透明覆盖层），渲染模态框的内容，并更新打开模态框的视图。有关如何使用 LayoutAnimation 的更多信息，请参阅动画指南。
 
-Caveats:
+注意事项：
 
-- LayoutAnimation only works for fire-and-forget animations ("static" animations) -- if it must be interruptible, you will need to use `Animated`.
+- LayoutAnimation 仅适用于即发即弃的动画（“静态”动画）-- 如果它必须是可中断的，你将需要使用 `Animated`。
 
-### Moving a view on the screen (scrolling, translating, rotating) drops UI thread FPS
+### 在屏幕上移动视图（滚动、平移、旋转）会降低 UI 线程 FPS
 
-This is especially true when you have text with a transparent background positioned on top of an image, or any other situation where alpha compositing would be required to re-draw the view on each frame. You will find that enabling `shouldRasterizeIOS` or `renderToHardwareTextureAndroid` can help with this significantly.
+当你有透明背景的文本定位在图像顶部时，尤其是如此，或者任何需要在每一帧上重新绘制视图时需要 Alpha 合成的情况。你会发现启用 `shouldRasterizeIOS` 或 `renderToHardwareTextureAndroid` 可以显著帮助解决这个问题。
 
-Be careful not to overuse this or your memory usage could go through the roof. Profile your performance and memory usage when using these props. If you don't plan to move a view anymore, turn this property off.
+注意不要过度使用此功能，否则你的内存使用量可能会飙升。使用这些 props 时分析你的性能和内存使用情况。如果你不再计划移动视图，请关闭此属性。
 
-### Animating the size of an image drops UI thread FPS
+### 动画化图像尺寸会降低 UI 线程 FPS
 
-On iOS, each time you adjust the width or height of an Image component it is re-cropped and scaled from the original image. This can be very expensive, especially for large images. Instead, use the `transform: [{scale}]` style property to animate the size. An example of when you might do this is when you tap an image and zoom it in to full screen.
+在 iOS 上，每次你调整 Image 组件的宽度或高度时，它都会从原始图像重新裁剪和缩放。这可能非常昂贵，尤其是对于大图像。相反，使用 `transform: [{scale}]` 样式属性来动画化尺寸。你可能会这样做的一个例子是当你点击图像并将其放大到全屏时。
 
-### My TouchableX view isn't very responsive
+### 我的 TouchableX 视图响应不够灵敏
 
-Sometimes, if we do an action in the same frame that we are adjusting the opacity or highlight of a component that is responding to a touch, we won't see that effect until after the `onPress` function has returned. If `onPress` does a `setState` that results in a lot of work and a few frames dropped, this may occur. A solution to this is to wrap any action inside of your `onPress` handler in `requestAnimationFrame`:
+有时，如果我们在调整响应触摸的组件的不透明度或高亮的同一帧中执行操作，直到 `onPress` 函数返回后我们才会看到该效果。如果 `onPress` 执行 `setState` 导致大量工作和几帧丢失，这可能会发生。解决此方法是将 `onPress` 处理程序中的任何操作包装在 `requestAnimationFrame` 中：
 
 ```tsx
 handleOnPress() {
@@ -99,10 +99,10 @@ handleOnPress() {
 }
 ```
 
-### Slow navigator transitions
+### 导航器过渡缓慢
 
-As mentioned above, `Navigator` animations are controlled by the JavaScript thread. Imagine the "push from right" scene transition: each frame, the new scene is moved from the right to left, starting offscreen (let's say at an x-offset of 320) and ultimately settling when the scene sits at an x-offset of 0. Each frame during this transition, the JavaScript thread needs to send a new x-offset to the main thread. If the JavaScript thread is locked up, it cannot do this and so no update occurs on that frame and the animation stutters.
+如上所述，`Navigator` 动画由 JavaScript 线程控制。想象一下“从右侧推入”场景过渡：每一帧，新场景从右向左移动，从屏幕外开始（假设在 x-offset 为 320 处），最终当场景位于 x-offset 为 0 时稳定下来。在此过渡期间的每一帧，JavaScript 线程都需要向主线程发送新的 x-offset。如果 JavaScript 线程被锁住，它无法这样做，因此该帧上没有发生更新，动画卡顿。
 
-One solution to this is to allow for JavaScript-based animations to be offloaded to the main thread. If we were to do the same thing as in the above example with this approach, we might calculate a list of all x-offsets for the new scene when we are starting the transition and send them to the main thread to execute in an optimized way. Now that the JavaScript thread is freed of this responsibility, it's not a big deal if it drops a few frames while rendering the scene -- you probably won't even notice because you will be too distracted by the pretty transition.
+解决此问题的一种方法是允许基于 JavaScript 的动画卸载到主线程。如果我们要在上述示例中使用此方法做同样的事情，我们可能会在开始过渡时计算新场景的所有 x-offsets 列表，并将它们发送到主线程以优化方式执行。现在 JavaScript 线程从此责任中解放出来，如果在渲染场景时丢了几帧也没关系 -- 你可能甚至不会注意到，因为你会被漂亮的过渡分散注意力。
 
-Solving this is one of the main goals behind the new [React Navigation](navigation.md) library. The views in React Navigation use native components and the [`Animated`](animated.md) library to deliver at least 60 FPS animations that are run on the native thread.
+解决此问题是新的 [React Navigation](navigation.md) 库背后的主要目标之一。React Navigation 中的视图使用原生组件和 [`Animated`](animated.md) 库来提供至少在原生线程上运行的 60 FPS 动画。

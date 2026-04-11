@@ -1,46 +1,46 @@
 ---
 id: more-resources
-title: More Resources
+title: 更多资源
 ---
 
-There’s always more to learn: developer workflows, shipping to app stores, internationalization, security and more.
+总有更多东西需要学习：开发者工作流、发布到应用商店、国际化、安全性等等。
 
-## Where to go from here
+## 接下来去哪里
 
-- [Set up your environment](environment-setup)
-- [Set up your development workflow](running-on-device)
-- [Design and layout your app](flexbox)
-- [Debug your app](debugging)
-- [Make your app cross platform](platform-specific-code)
-- [Get involved in the React Native community](/community/overview)
+- [设置您的环境](environment-setup)
+- [设置您的开发工作流](running-on-device)
+- [设计和布局您的应用](flexbox)
+- [调试您的应用](debugging)
+- [使您的应用跨平台](platform-specific-code)
+- [参与 React Native 社区](/community/overview)
 
-## Dive deep
+## 深入探索
 
-- [React’s Documentation](https://react.dev/learn)
-- [MDN’s JavaScript tutorials, reference, and guides](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-- [Android](https://developer.android.com/docs) and [iOS](https://developer.apple.com/documentation/uikit) platform docs
+- [React 文档](https://react.dev/learn)
+- [MDN 的 JavaScript 教程、参考和指南](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [Android](https://developer.android.com/docs) 和 [iOS](https://developer.apple.com/documentation/uikit) 平台文档
 
-## IDEs
+## 集成开发环境
 
-We recommend using the [VS Code](https://code.visualstudio.com/) code editor and its handy [React Native tools](https://marketplace.visualstudio.com/items?itemName=msjsdiag.vscode-react-native).
+我们推荐使用 [VS Code](https://code.visualstudio.com/) 代码编辑器及其便捷的 [React Native 工具](https://marketplace.visualstudio.com/items?itemName=msjsdiag.vscode-react-native)。
 
-## Platforms to try
+## 值得尝试的平台
 
-[Expo](https://docs.expo.dev/) is a framework of tools and services for React Native that focuses on helping you build, ship, and iterate on your app, to use preview deployment workflows that are popular with web development, and to automate your development workflows. Expo also makes it possible to build React Native apps without ever touching Xcode or Android Studio, and it doesn't get in the way if you want to use those tools.
+[Expo](https://docs.expo.dev/) 是一个面向 React Native 的工具和服务框架，专注于帮助您构建、发布和迭代您的应用，使用 Web 开发中流行的预览部署工作流，并自动化您的开发工作流。Expo 还使得无需接触 Xcode 或 Android Studio 即可构建 React Native 应用成为可能，如果您想使用这些工具，它也不会造成阻碍。
 
-[Ignite](https://github.com/infinitered/ignite) is a starter kit CLI with several React Native boilerplates. The latest, Ignite Maverick, uses MobX-State-Tree for state management, React Navigation, and other common libraries. It has generators for screens, models, and more, and supports Expo out of the box. Ignite also comes with a component library that is tuned for custom designs, theming support, and testing. If you are looking for a preconfigured tech stack, Ignite could be perfect for you.
+[Ignite](https://github.com/infinitered/ignite) 是一个带有多个 React Native 样板项目的入门套件 CLI。最新的 Ignite Maverick 使用 MobX-State-Tree 进行状态管理，以及 React Navigation 和其他常用库。它具有用于屏幕、模型等的生成器，并开箱即用支持 Expo。Ignite 还附带了一个组件库，该库针对自定义设计进行了调整，支持主题和测试。如果您正在寻找预配置的技术栈，Ignite 可能非常适合您。
 
-## Example Apps
+## 示例应用
 
-Try out apps from the [Showcase](https://reactnative.dev/showcase) to see what React Native is capable of! Looking for something more hands on? Check out this [set of example apps on GitHub](https://github.com/ReactNativeNews/React-Native-Apps). You can look at their source code—try running one on a simulator or device.
+尝试 [展示案例](https://reactnative.dev/showcase) 中的应用，看看 React Native 能做什么！想要更动手的实践吗？查看这个 [GitHub 上的示例应用集](https://github.com/ReactNativeNews/React-Native-Apps)。您可以查看它们的源代码——尝试在模拟器或设备上运行其中一个。
 
-## Find, make, and share your own Native Components and TurboModules
+## 查找、制作和分享您自己的原生组件和 TurboModules
 
-React Native has a community of thousands of developers like you making content, tools, tutorials—and Native Components!
+React Native 拥有一个由数千名像您这样的开发者组成的社区，他们制作内容、工具、教程——以及原生组件！
 
-Can’t find what you’re looking for in the Core Components? Visit [React Native Directory](https://reactnative.directory) to find what the community has been creating.
+在核心组件中找不到您想要的东西？访问 [React Native Directory](https://reactnative.directory) 查找社区创建的内容。
 
 :::caution
-This documentation references a legacy set of API and needs to be updated to reflect the New Architecture
+此文档引用了一组遗留 API，需要更新以反映新架构
 :::
-Interested in making your own Native Component or Module? Making modules for your own use case and sharing them with others on NPM and GitHub helps grow the React Native ecosystem and community! Read the guides to making your own Native Modules ([Android](legacy/native-modules-android.md), [iOS](legacy/native-modules-ios.md)) and Native Components ([Android](legacy/native-components-android.md), [iOS](legacy/native-components-ios.md)).
+有兴趣制作您自己的原生组件或模块吗？为您的用例制作模块并在 NPM 和 GitHub 上与他人分享有助于增长 React Native 生态系统和社区！阅读制作您自己的原生模块 ([Android](legacy/native-modules-android.md), [iOS](legacy/native-modules-ios.md)) 和原生组件 ([Android](legacy/native-components-android.md), [iOS](legacy/native-components-ios.md)) 的指南。

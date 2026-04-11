@@ -92,5 +92,5 @@ yarn ios --mode Release
 
 ## 切换回 JavaScriptCore
 
-React Native 也支持使用 JavaScriptCore 作为[javaScript 引擎](javascript-environment)。  
-请按照[社区仓库](https://github.com/react-native-community/javascriptcore)中的说明操作，来选择不使用 Hermes。
+React Native 也支持使用 JavaScriptCore 作为 [javascript 引擎](javascript-environment)。  
+请按照 [社区仓库](https://github.com/react-native-community/javascriptcore) 中的说明操作，来选择不使用 Hermes。

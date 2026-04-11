@@ -188,7 +188,7 @@ export default App;
 </Tabs>
 
 :::info
-默认情况下，iOS 9.0 及以上版本强制执行应用传输安全性（App Transport Security，ATS）。ATS 要求所有 HTTP 连接必须使用 HTTPS。如果你需要从明文 URL（以 `http` 开头）获取数据，首先需要[添加 ATS 异常](integration-with-existing-apps.md#test-your-integration)。如果你事先知道需要访问的域名，最好只为这些域名添加异常，这样更安全；如果直到运行时才知道域名，可以[完全禁用 ATS](publishing-to-app-store.md#1-enable-app-transport-security)。不过请注意，从 2017 年 1 月起，[苹果应用商店审核将要求合理理由才能禁用 ATS](https://forums.developer.apple.com/thread/48979)。更多信息请参见[苹果官方文档](https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW33)。
+默认情况下，iOS 9.0 及以上版本强制执行应用传输安全性（App Transport Security，ATS）。ATS 要求所有 HTTP 连接必须使用 HTTPS。如果你需要从明文 URL（以 `http` 开头）获取数据，首先需要 [添加 ATS 异常](integration-with-existing-apps.md#test-your-integration)。如果你事先知道需要访问的域名，最好只为这些域名添加异常，这样更安全；如果直到运行时才知道域名，可以 [完全禁用 ATS](publishing-to-app-store.md#1-enable-app-transport-security)。不过请注意，从 2017 年 1 月起，[苹果应用商店审核将要求合理理由才能禁用 ATS](https://forums.developer.apple.com/thread/48979)。更多信息请参见 [苹果官方文档](https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW33)。
 :::
 
 :::tip

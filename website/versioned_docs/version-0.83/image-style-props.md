@@ -226,7 +226,7 @@ export default DisplayAnImageWithStyle;
 
 | 类型                            | 默认值     |
 | ----------------------------- | ---------- |
-| 枚举(`'visible'`, `'hidden'`) | `'visible'` |
+| 枚举 (`'visible'`, `'hidden'`) | `'visible'` |
 
 ---
 
@@ -308,7 +308,7 @@ export default DisplayAnImageWithStyle;
 
 | 类型                            | 默认值     |
 | ----------------------------- | ---------- |
-| 枚举(`'visible'`, `'hidden'`) | `'visible'` |
+| 枚举 (`'visible'`, `'hidden'`) | `'visible'` |
 
 ---
 
@@ -347,7 +347,7 @@ export default DisplayAnImageWithStyle;
 
 | 类型                                                               | 默认值   |
 | ------------------------------------------------------------------ | -------- |
-| 枚举(`'cover'`, `'contain'`, `'stretch'`, `'repeat'`, `'center'`) | `'cover'` |
+| 枚举 (`'cover'`, `'contain'`, `'stretch'`, `'repeat'`, `'center'`) | `'cover'` |
 
 ---
 
@@ -357,7 +357,7 @@ export default DisplayAnImageWithStyle;
 
 | 类型                                           | 默认值   |
 | ----------------------------------------------- | -------- |
-| 枚举(`'cover'`, `'contain'`, `'fill'`, `'scale-down'`) | `'cover'` |
+| 枚举 (`'cover'`, `'contain'`, `'fill'`, `'scale-down'`) | `'cover'` |
 
 ---
 

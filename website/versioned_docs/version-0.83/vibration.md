@@ -56,7 +56,7 @@ const App = () => {
               <Separator />,
             ]
           : null}
-        <Text style={styles.paragraph}>模式: {PATTERN_DESC}</Text>
+        <Text style={styles.paragraph}>模式：{PATTERN_DESC}</Text>
         <Button
           title="按模式振动"
           onPress={() => Vibration.vibrate(PATTERN)}

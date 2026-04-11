@@ -58,7 +58,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # 这会加载 nvm
 ```
 
-你还应确保 Xcode 项目中所有“shell 脚本构建阶段”都使用 `/bin/zsh` 作为 shell。  
+你还应确保 Xcode 项目中所有"shell 脚本构建阶段”都使用 `/bin/zsh` 作为 shell。  
 :::
 
 <h3>就这些！</h3>
@@ -69,5 +69,5 @@ export NVM_DIR="$HOME/.nvm"
 
 <h2>接下来？</h2>
 
-- 如果你想把这段新的 React Native 代码集成到已有应用中，请查看[集成指南](integration-with-existing-apps.md)。
-- 如果你想了解更多关于 React Native 的内容，请查看[React Native 简介](getting-started)。
+- 如果你想把这段新的 React Native 代码集成到已有应用中，请查看 [集成指南](integration-with-existing-apps.md)。
+- 如果你想了解更多关于 React Native 的内容，请查看 [React Native 简介](getting-started)。

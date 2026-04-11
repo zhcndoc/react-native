@@ -7,7 +7,7 @@ title: ActivityIndicator
 
 ## 示例
 
-```SnackPlayer name=ActivityIndicator%20示例
+```SnackPlayer name=ActivityIndicator%20 示例
 import React from 'react';
 import {ActivityIndicator, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
@@ -42,9 +42,9 @@ export default App;
 
 ## 属性
 
-### [View Props](view#props)
+### [View 属性](view#props)
 
-继承自 [View Props](view#props)。
+继承自 [View 属性](view#props)。
 
 ---
 
@@ -54,7 +54,7 @@ export default App;
 
 | 类型  | 默认值  |
 | ----- | ------- |
-| bool  | `true`  |
+| 布尔值  | `true`  |
 
 ---
 
@@ -64,7 +64,7 @@ export default App;
 
 | 类型            | 默认值                                                                                                                                                                                           |
 | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [color](colors) | `null`（系统强调色默认颜色）<div className="label android">Android</div><hr/><ins style={{background: '#999'}} className="color-box" />`'#999999'` <div className="label ios">iOS</div> |
+| [颜色](colors) | `null`（系统强调色默认颜色）<div className="label android">Android</div><hr/><ins style={{background: '#999'}} className="color-box" />`'#999999'` <div className="label ios">iOS</div> |
 
 ---
 
@@ -74,13 +74,13 @@ export default App;
 
 | 类型  | 默认值  |
 | ----- | ------- |
-| bool  | `true`  |
+| 布尔值  | `true`  |
 
 ---
 
 ### `ref`
 
-一个 ref 设置器，挂载时会被分配一个[元素节点](element-nodes)。
+一个 ref 设置器，挂载时会被分配一个 [元素节点](element-nodes)。
 
 ---
 
@@ -90,4 +90,4 @@ export default App;
 
 | 类型                                                                               | 默认值   |
 | ---------------------------------------------------------------------------------- | -------- |
-| 枚举(`'small'`, `'large'`)<hr/>数字 <div className="label android">Android</div> | `'small'` |
+| 枚举 (`'small'`, `'large'`)<hr/>数字 <div className="label android">Android</div> | `'small'` |

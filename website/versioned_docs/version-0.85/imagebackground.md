@@ -3,13 +3,13 @@ id: imagebackground
 title: ImageBackground
 ---
 
-A common feature request from developers familiar with the web is `background-image`. To handle this use case, you can use the `<ImageBackground>` component, which has the same props as `<Image>`, and add whatever children to it you would like to layer on top of it.
+熟悉 Web 的开发者常见的需求是 `background-image`。为了处理这种用例，您可以使用 `<ImageBackground>` 组件，它具有与 `<Image>` 相同的属性，并且可以在其上添加任何您想要分层叠加的子元素。
 
-You might not want to use `<ImageBackground>` in some cases, since the implementation is basic. Refer to `<ImageBackground>`'s [source code](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Image/ImageBackground.js) for more insight, and create your own custom component when needed.
+在某些情况下，您可能不想使用 `<ImageBackground>`，因为其实现比较基础。请参阅 `<ImageBackground>` 的 [源代码](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Image/ImageBackground.js) 以了解更多细节，并在需要时创建您自己的自定义组件。
 
-Note that you must specify some width and height style attributes.
+请注意，您必须指定一些宽度和高度样式属性。
 
-## Example
+## 示例
 
 ```SnackPlayer name=ImageBackground
 import React from 'react';
@@ -51,32 +51,32 @@ export default App;
 
 ---
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
-### [Image Props](image.md#props)
+### [Image 属性](image.md#props)
 
-Inherits [Image Props](image.md#props).
+继承 [Image 属性](image.md#props)。
 
 ---
 
 ### `imageStyle`
 
-| Type                                |
+| 类型                                |
 | ----------------------------------- |
-| [Image Style](image-style-props.md) |
+| [Image 样式](image-style-props.md) |
 
 ---
 
 ### `imageRef`
 
-A ref setter that will be assigned the [element node](element-nodes) of the inner `Image` component when mounted.
+一个 ref 设置器，当挂载时将被分配给内部 `Image` 组件的 [元素节点](element-nodes)。
 
 ---
 
 ### `style`
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
-| [View Style](view-style-props.md) |
+| [View 样式](view-style-props.md) |

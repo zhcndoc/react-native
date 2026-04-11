@@ -125,7 +125,7 @@ export default App;
 
 ### `automaticallyAdjustsScrollIndicatorInsets` <div class="label ios">iOS</div>
 
-控制 iOS 是否自动调整滚动条 Insets。详见苹果官方[文档](https://developer.apple.com/documentation/uikit/uiscrollview/3198043-automaticallyadjustsscrollindica)。
+控制 iOS 是否自动调整滚动条 Insets。详见苹果官方 [文档](https://developer.apple.com/documentation/uikit/uiscrollview/3198043-automaticallyadjustsscrollindica)。
 
 | 类型 | 默认值 |
 | ---- | ------ |
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
 
 | 类型                                                                 | 默认值                             |
 | ------------------------------------------------------------------ | -------------------------------- |
-| 对象: `{top: number, left: number, bottom: number, right: number}` | `{top: 0, left: 0, bottom: 0, right: 0}` |
+| 对象：`{top: number, left: number, bottom: number, right: number}` | `{top: 0, left: 0, bottom: 0, right: 0}` |
 
 ---
 
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
 
 | 类型                                                             | 默认值    |
 | -------------------------------------------------------------- | -------- |
-| 枚举(`'automatic'`, `'scrollableAxes'`, `'never'`, `'always'`) | `'never'` |
+| 枚举 (`'automatic'`, `'scrollableAxes'`, `'never'`, `'always'`) | `'never'` |
 
 ---
 
@@ -235,7 +235,7 @@ const styles = StyleSheet.create({
 
 | 类型                             | 默认值    |
 | -------------------------------- | -------- |
-| 枚举(`'fast'`, `'normal'`)，数字 | `'normal'` |
+| 枚举 (`'fast'`, `'normal'`)，数字 | `'normal'` |
 
 ---
 
@@ -287,7 +287,7 @@ const styles = StyleSheet.create({
 
 | 类型                                               | 默认值 |
 | -------------------------------------------------- | ------ |
-| 数字<hr />对象: `{start: number, end: number}`        | `0`    |
+| 数字<hr />对象：`{start: number, end: number}`        | `0`    |
 
 ---
 
@@ -311,7 +311,7 @@ const styles = StyleSheet.create({
 
 | 类型                            | 默认值     |
 | ------------------------------- | ---------- |
-| 枚举(`'default'`, `'black'`, `'white'`) | `'default'` |
+| 枚举 (`'default'`, `'black'`, `'white'`) | `'default'` |
 
 ---
 
@@ -338,7 +338,7 @@ const styles = StyleSheet.create({
 
 | 类型                                                                                                   | 默认值  |
 | ---------------------------------------------------------------------------------------------------- | ------- |
-| 枚举(`'none'`, `'on-drag'`) <div class="label android">Android</div><hr />枚举(`'none'`, `'on-drag'`, `'interactive'`) <div class="label ios">iOS</div> | `'none'` |
+| 枚举 (`'none'`, `'on-drag'`) <div class="label android">Android</div><hr />枚举 (`'none'`, `'on-drag'`, `'interactive'`) <div class="label ios">iOS</div> | `'none'` |
 
 ---
 
@@ -354,7 +354,7 @@ const styles = StyleSheet.create({
 
 | 类型                                                      | 默认值   |
 | --------------------------------------------------------- | -------- |
-| 枚举(`'always'`, `'never'`, `'handled'`, `false`, `true`) | `'never'` |
+| 枚举 (`'always'`, `'never'`, `'handled'`, `false`, `true`) | `'never'` |
 
 ---
 
@@ -371,7 +371,7 @@ const styles = StyleSheet.create({
 
 | 类型                                                                           |
 | ------------------------------------------------------------------------------ |
-| 对象: `{minIndexForVisible: number, autoscrollToTopThreshold: number}`          |
+| 对象：`{minIndexForVisible: number, autoscrollToTopThreshold: number}`          |
 
 ---
 
@@ -507,7 +507,7 @@ const styles = StyleSheet.create({
 
 | 类型                                   | 默认值  |
 | ------------------------------------ | ------- |
-| 枚举(`'auto'`, `'always'`, `'never'`) | `'auto'` |
+| 枚举 (`'auto'`, `'always'`, `'never'`) | `'auto'` |
 
 ---
 
@@ -595,7 +595,7 @@ const styles = StyleSheet.create({
 
 | 类型                                                                 | 默认值                             |
 | ------------------------------------------------------------------ | -------------------------------- |
-| 对象: `{top: number, left: number, bottom: number, right: number}` | `{top: 0, left: 0, bottom: 0, right: 0}` |
+| 对象：`{top: number, left: number, bottom: number, right: number}` | `{top: 0, left: 0, bottom: 0, right: 0}` |
 
 ---
 
@@ -661,7 +661,7 @@ const styles = StyleSheet.create({
 
 | 类型                               | 默认值   |
 | ---------------------------------- | -------- |
-| 枚举(`'start'`, `'center'`, `'end'`) | `'start'` |
+| 枚举 (`'start'`, `'center'`, `'end'`) | `'start'` |
 
 ---
 

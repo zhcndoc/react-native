@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 ## Expo 项目
 
-将您的 Expo 项目升级到新版本的 React Native 需要更新 `package.json` 文件中的 `react-native`、`react` 和 `expo` 包版本。Expo 推荐逐步升级 SDK 版本，一次升级一个版本。这样做有助于您定位升级过程中出现的破坏和问题。有关升级项目的最新信息，请参阅[升级 Expo SDK 操作指南](https://docs.expo.dev/workflow/upgrading-expo-sdk-walkthrough/)。
+将您的 Expo 项目升级到新版本的 React Native 需要更新 `package.json` 文件中的 `react-native`、`react` 和 `expo` 包版本。Expo 推荐逐步升级 SDK 版本，一次升级一个版本。这样做有助于您定位升级过程中出现的破坏和问题。有关升级项目的最新信息，请参阅 [升级 Expo SDK 操作指南](https://docs.expo.dev/workflow/upgrading-expo-sdk-walkthrough/)。
 
 ## React Native 项目
 
@@ -17,7 +17,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 ### 1. 选择版本
 
-您首先需要选择要从哪个版本升级到哪个版本，默认选择的是最新的主版本。选择后，您可以点击“Show me how to upgrade”按钮。
+您首先需要选择要从哪个版本升级到哪个版本，默认选择的是最新的主版本。选择后，您可以点击"Show me how to upgrade"按钮。
 
 💡 主要更新会在顶部显示“有用内容”部分，附有帮助您升级的链接。
 

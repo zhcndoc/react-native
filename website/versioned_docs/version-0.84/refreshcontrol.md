@@ -62,9 +62,9 @@ export default App;
 
 ## 属性
 
-### [View Props](view.md#props)
+### [View 属性](view.md#props)
 
-继承自 [View Props](view.md#props)。
+继承自 [View 属性](view.md#props)。
 
 ---
 
@@ -74,7 +74,7 @@ export default App;
 
 | 类型    |
 | ------- |
-| boolean |
+| 布尔值 |
 
 ---
 
@@ -94,7 +94,7 @@ export default App;
 
 | 类型    | 默认值  |
 | ------- | ------- |
-| boolean | `true`  |
+| 布尔值 | `true`  |
 
 ---
 
@@ -104,7 +104,7 @@ export default App;
 
 | 类型     |
 | -------- |
-| function |
+| 函数 |
 
 ---
 
@@ -124,7 +124,7 @@ export default App;
 
 | 类型   | 默认值 |
 | ------ | ------- |
-| number | `0`     |
+| 数字 | `0`     |
 
 ---
 
@@ -134,7 +134,7 @@ export default App;
 
 | 类型                         | 默认值     |
 | ---------------------------- | ----------- |
-| 枚举(`'default'`, `'large'`) | `'default'` |
+| 枚举 (`'default'`, `'large'`) | `'default'` |
 
 ---
 

@@ -4,7 +4,7 @@ title: URL
 ---
 
 :::warning
-🚧 This page is work in progress, so please refer to the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/URL) for more information.
+🚧 此页面正在建设中，因此请参考 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/URL) 以获取更多信息。
 :::
 
-The global `URL` class, as defined in Web specifications.
+Web 规范中定义的全局 `URL` 类。

@@ -220,7 +220,7 @@ export default App;
 
 React Native 中有三套阴影相关的 API：
 
-- `boxShadow`：一个 View 样式属性，是对[同名 Web 样式属性](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow)的规范实现。
+- `boxShadow`：一个 View 样式属性，是对 [同名 Web 样式属性](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow) 的规范实现。
 - `dropShadow`：View 样式属性 [`filter`](./view-style-props#filter) 的一个特定滤镜函数。
 - 各种 `shadow` 属性（`shadowColor`、`shadowOffset`、`shadowOpacity`、`shadowRadius`）：直接映射到底层平台提供的原生 API。
 

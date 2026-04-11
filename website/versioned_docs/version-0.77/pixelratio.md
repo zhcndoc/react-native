@@ -3,11 +3,11 @@ id: pixelratio
 title: PixelRatio
 ---
 
-`PixelRatio` gives you access to the device's pixel density and font scale.
+`PixelRatio` 提供对设备像素密度和字体缩放的访问。
 
-## Fetching a correctly sized image
+## 获取正确尺寸的图像
 
-You should get a higher resolution image if you are on a high pixel density device. A good rule of thumb is to multiply the size of the image you display by the pixel ratio.
+如果你在高分辨率设备上，应该获取更高分辨率的图像。经验法则是将你显示的图像大小乘以像素比率。
 
 ```tsx
 const image = getImage({
@@ -17,17 +17,17 @@ const image = getImage({
 <Image source={image} style={{width: 200, height: 100}} />;
 ```
 
-## Pixel grid snapping
+## 像素网格吸附
 
-In iOS, you can specify positions and dimensions for elements with arbitrary precision, for example 29.674825. But, ultimately the physical display only have a fixed number of pixels, for example 640×1136 for iPhone SE (1st generation) or 828×1792 for iPhone 11. iOS tries to be as faithful as possible to the user value by spreading one original pixel into multiple ones to trick the eye. The downside of this technique is that it makes the resulting element look blurry.
+在 iOS 上，你可以为元素指定任意精度的位置和尺寸，例如 29.674825。但是，物理显示最终只有固定数量的像素，例如 iPhone SE（第 1 代）为 640×1136，或 iPhone 11 为 828×1792。iOS 试图通过将一个原始像素扩展到多个像素来欺骗眼睛，从而尽可能忠实地呈现用户值。这种技术的缺点是会使生成的元素看起来模糊。
 
-In practice, we found out that developers do not want this feature and they have to work around it by doing manual rounding in order to avoid having blurry elements. In React Native, we are rounding all the pixels automatically.
+在实践中，我们发现开发者不需要这个功能，他们必须通过手动舍入来解决这个问题，以避免元素模糊。在 React Native 中，我们自动舍入所有像素。
 
-We have to be careful when to do this rounding. You never want to work with rounded and unrounded values at the same time as you're going to accumulate rounding errors. Having even one rounding error is deadly because a one pixel border may vanish or be twice as big.
+我们必须小心何时进行这种舍入。你永远不想同时使用舍入和未舍入的值，因为你会积累舍入误差。即使有一个舍入误差也是致命的，因为一像素的边框可能会消失或变大两倍。
 
-In React Native, everything in JavaScript and within the layout engine works with arbitrary precision numbers. It's only when we set the position and dimensions of the native element on the main thread that we round. Also, rounding is done relative to the root rather than the parent, again to avoid accumulating rounding errors.
+在 React Native 中，JavaScript 中和布局引擎内的所有内容都使用任意精度数字工作。只有当我们在主线程上设置原生元素的位置和尺寸时才会进行舍入。此外，舍入是相对于根节点而不是父节点进行的，再次为了避免积累舍入误差。
 
-## Example
+## 示例
 
 ```SnackPlayer name=PixelRatio%20Example
 import React from 'react';
@@ -103,9 +103,9 @@ export default App;
 
 ---
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `get()`
 
@@ -113,27 +113,27 @@ export default App;
 static get(): number;
 ```
 
-Returns the device pixel density. Some examples:
+返回设备像素密度。一些示例：
 
 - `PixelRatio.get() === 1`
-  - [mdpi Android devices](https://material.io/tools/devices/)
+  - [mdpi Android 设备](https://material.io/tools/devices/)
 - `PixelRatio.get() === 1.5`
-  - [hdpi Android devices](https://material.io/tools/devices/)
+  - [hdpi Android 设备](https://material.io/tools/devices/)
 - `PixelRatio.get() === 2`
   - iPhone SE, 6S, 7, 8
   - iPhone XR
   - iPhone 11
-  - [xhdpi Android devices](https://material.io/tools/devices/)
+  - [xhdpi Android 设备](https://material.io/tools/devices/)
 - `PixelRatio.get() === 3`
   - iPhone 6S Plus, 7 Plus, 8 Plus
   - iPhone X, XS, XS Max
   - iPhone 11 Pro, 11 Pro Max
   - Pixel, Pixel 2
-  - [xxhdpi Android devices](https://material.io/tools/devices/)
+  - [xxhdpi Android 设备](https://material.io/tools/devices/)
 - `PixelRatio.get() === 3.5`
   - Nexus 6
   - Pixel XL, Pixel 2 XL
-  - [xxxhdpi Android devices](https://material.io/tools/devices/)
+  - [xxxhdpi Android 设备](https://material.io/tools/devices/)
 
 ---
 
@@ -143,12 +143,12 @@ Returns the device pixel density. Some examples:
 static getFontScale(): number;
 ```
 
-Returns the scaling factor for font sizes. This is the ratio that is used to calculate the absolute font size, so any elements that heavily depend on that should use this to do calculations.
+返回字体大小的缩放因子。这是用于计算绝对字体大小的比率，因此任何严重依赖于此的元素都应使用此进行计算。
 
-- on Android value reflects the user preference set in **Settings > Display > Font size**
-- on iOS value reflects the user preference set in **Settings > Display & Brightness > Text Size**, value can also be updated in **Settings > Accessibility > Display & Text Size > Larger Text**
+- 在 Android 上，值反映用户在 **设置 > 显示 > 字体大小** 中设置的偏好
+- 在 iOS 上，值反映用户在 **设置 > 显示与亮度 > 文本大小** 中设置的偏好，值也可以在 **设置 > 辅助功能 > 显示与文本大小 > 更大字体** 中更新
 
-If a font scale is not set, this returns the device pixel ratio.
+如果未设置字体缩放，则返回设备像素比率。
 
 ---
 
@@ -158,9 +158,9 @@ If a font scale is not set, this returns the device pixel ratio.
 static getPixelSizeForLayoutSize(layoutSize: number): number;
 ```
 
-Converts a layout size (dp) to pixel size (px).
+将布局尺寸 (dp) 转换为像素尺寸 (px)。
 
-Guaranteed to return an integer number.
+保证返回一个整数。
 
 ---
 
@@ -170,4 +170,4 @@ Guaranteed to return an integer number.
 static roundToNearestPixel(layoutSize: number): number;
 ```
 
-Rounds a layout size (dp) to the nearest layout size that corresponds to an integer number of pixels. For example, on a device with a PixelRatio of 3, `PixelRatio.roundToNearestPixel(8.4) = 8.33`, which corresponds to exactly (8.33 \* 3) = 25 pixels.
+将布局尺寸 (dp) 舍入到最接近的布局尺寸，该尺寸对应于整数个像素。例如，在 PixelRatio 为 3 的设备上，`PixelRatio.roundToNearestPixel(8.4) = 8.33`，这正好对应 (8.33 \* 3) = 25 像素。

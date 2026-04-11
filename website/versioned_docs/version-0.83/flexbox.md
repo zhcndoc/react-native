@@ -63,7 +63,7 @@ export default Flex;
 
 - `row-reverse` 子元素从右到左排列。如果启用换行，下一行会从容器右侧第一个元素的下方开始。
 
-你可以在[这里](https://www.yogalayout.dev/docs/styling/flex-direction)了解更多。
+你可以在 [这里](https://www.yogalayout.dev/docs/styling/flex-direction) 了解更多。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -491,7 +491,7 @@ export default DirectionLayout;
 </TabItem>
 </Tabs>
 
-## Justify Content
+## 内容对齐
 
 [`justifyContent`](layout-props#justifycontent) 描述如何在容器的主轴上对齐子元素。例如，你可以用此属性在 `flexDirection` 设置为 `row` 的容器中水平居中子元素，或者在 `flexDirection` 设置为 `column` 的容器中垂直居中子元素。
 
@@ -507,7 +507,7 @@ export default DirectionLayout;
 
 - `space-evenly` 在主轴上均匀分布子元素，且相邻子元素间、首端与第一个子元素之间、末端与最后一个子元素之间的空间全部相等。
 
-你可以在[这里](https://www.yogalayout.dev/docs/styling/justify-content)了解更多。
+你可以在 [这里](https://www.yogalayout.dev/docs/styling/justify-content) 了解更多。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -732,7 +732,7 @@ export default JustifyContentBasics;
 </TabItem>
 </Tabs>
 
-## Align Items
+## 项目对齐
 
 [`alignItems`](layout-props#alignitems) 描述了如何在容器的交叉轴上对齐子元素。它与 `justifyContent` 类似，但作用于交叉轴，而非主轴。
 
@@ -750,7 +750,7 @@ export default JustifyContentBasics;
 `stretch` 需要子元素在次轴上没有固定的尺寸才会生效。在下面的示例中，设置 `alignItems: stretch` 不起作用，直到去掉子元素的 `width: 50`。
 :::
 
-你可以在[这里](https://www.yogalayout.dev/docs/styling/align-items-self)学习更多。
+你可以在 [这里](https://www.yogalayout.dev/docs/styling/align-items-self) 学习更多。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -981,7 +981,7 @@ export default AlignItemsLayout;
 </TabItem>
 </Tabs>
 
-## Align Self
+## alignSelf
 
 [`alignSelf`](layout-props#alignself) 和 `alignItems` 具有相同的选项和效果，但它不影响容器内所有子元素，而是用于单个子元素，改变其在父容器中的排列。`alignSelf` 会覆盖父容器通过 `alignItems` 设置的选项。
 
@@ -1217,7 +1217,7 @@ export default AlignSelfLayout;
 </TabItem>
 </Tabs>
 
-## Align Content
+## alignContent
 
 [`alignContent`](layout-props#aligncontent) 定义了多行内容沿交叉轴的分布。当使用 `flexWrap` 使项目换行到多行时，此属性才生效。
 
@@ -1235,7 +1235,7 @@ export default AlignSelfLayout;
 
 - `space-evenly` 在容器交叉轴上均匀分布换行行，所有空隙大小相等。
 
-你可以在[这里](https://www.yogalayout.dev/docs/styling/align-content)了解更多。
+你可以在 [这里](https://www.yogalayout.dev/docs/styling/align-content) 了解更多。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -1476,7 +1476,7 @@ export default AlignContentLayout;
 
 [`flexWrap`](layout-props#flexwrap) 属性设置在容器上，控制当子元素在主轴方向上溢出容器大小时的行为。默认情况下，子元素被强制放入一行（可能导致元素缩小）。如果允许换行，则项目会在需要时沿主轴换行成多行。
 
-当换行时，可以使用 `alignContent` 指定行在容器中的摆放方式。了解更多[这里](https://www.yogalayout.dev/docs/styling/flex-wrap)。
+当换行时，可以使用 `alignContent` 指定行在容器中的摆放方式。了解更多 [这里](https://www.yogalayout.dev/docs/styling/flex-wrap)。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -1707,7 +1707,7 @@ export default FlexWrapLayout;
 
   `flexShrink` 取任何大于等于 0 的浮点数，默认是 0（网页上默认是 1）。容器会根据子元素的 `flexShrink` 权重缩小子元素。
 
-你可以在[这里](https://www.yogalayout.dev/docs/styling/flex-basis-grow-shrink)了解更多。
+你可以在 [这里](https://www.yogalayout.dev/docs/styling/flex-basis-grow-shrink) 了解更多。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -2307,7 +2307,7 @@ export default RowGapAndColumnGap;
 
 - `pixels` 以绝对像素值定义宽度/高度。根据组件的其他样式设置，这可能是节点的最终尺寸，也可能不是。
 
-- `percentage` 以其父元素宽度或高度的百分比定义宽度或高度。
+- `percentage` 以其父元素宽度或高度的百分比定义宽度/高度。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -2577,7 +2577,7 @@ export default WidthHeightBasics;
 
 ## 定位
 
-元素的 `position` 类型定义了它如何相对于自身、父元素或[包含块](./flexbox.md#the-containing-block)定位。
+元素的 `position` 类型定义了它如何相对于自身、父元素或 [包含块](./flexbox.md#the-containing-block) 定位。
 
 - `relative`（**默认值**）默认情况下，元素采用相对定位。意味着元素按照正常布局流排列，然后根据 `top`、`right`、`bottom` 和 `left` 值进行偏移。此偏移不会影响任何兄弟或父元素的位置。
 
@@ -2861,7 +2861,7 @@ export default PositionLayout;
 ## 包含块
 
 元素的包含块是控制其位置和大小的祖先元素。
-React Native 中包含块的工作方式与[网页上的类似](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block)，但由于缺少某些网页功能，有所简化。
+React Native 中包含块的工作方式与 [网页上的类似](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block)，但由于缺少某些网页功能，有所简化。
 
 绝对定位元素的 `top`、`right`、`bottom` 和 `left` 值相对于其包含块。
 
@@ -2878,6 +2878,6 @@ React Native 中包含块的工作方式与[网页上的类似](https://develope
 
 查看交互式的 [yoga playground](https://www.yogalayout.dev/playground)，帮助你更好地理解 flexbox。
 
-我们已经覆盖了基础内容，但还有很多其他样式可用于布局。控制布局的完整属性列表，请参阅[这里](./layout-props.md)。
+我们已经覆盖了基础内容，但还有很多其他样式可用于布局。控制布局的完整属性列表，请参阅 [这里](./layout-props.md)。
 
-另外，你也可以看看 [Wix 工程师](https://medium.com/wix-engineering/the-full-react-native-layout-cheat-sheet-a4147802405c)的一些示例。
+另外，你也可以看看 [Wix 工程师](https://medium.com/wix-engineering/the-full-react-native-layout-cheat-sheet-a4147802405c) 的一些示例。

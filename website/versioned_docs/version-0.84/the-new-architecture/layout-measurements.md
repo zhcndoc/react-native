@@ -23,7 +23,7 @@ function AComponent(children) {
      {children}
     <View />
   );
-}
+};
 ```
 
 :::note

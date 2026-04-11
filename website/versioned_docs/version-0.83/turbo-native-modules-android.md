@@ -237,7 +237,7 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     public List<ReactPackage> getPackages() {
       List<ReactPackage> packages = new PackageList(this).getPackages();
-      // Packages that cannot be autolinked yet can be added manually here, for example:
+      // 尚无法自动链接的包可以手动添加到这里，例如：
       // packages.add(new MyReactNativePackage());
       // highlight-add-next-line
       packages.add(new NativeLocalStoragePackage());
@@ -307,7 +307,7 @@ class MainApplication : Application(), ReactApplication {
       object : DefaultReactNativeHost(this) {
         override fun getPackages(): List<ReactPackage> =
             PackageList(this).packages.apply {
-              // Packages that cannot be autolinked yet can be added manually here, for example:
+              // 尚无法自动链接的包可以手动添加到这里，例如：
               // add(MyReactNativePackage())
               // highlight-add-next-line
               add(NativeLocalStoragePackage())

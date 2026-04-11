@@ -73,9 +73,9 @@ export default KeyboardAvoidingComponent;
 
 ## 属性
 
-### [View Props](view.md#props)
+### [View 属性](view.md#props)
 
-继承自 [View Props](view.md#props)。
+继承自 [View 属性](view.md#props)。
 
 ---
 
@@ -109,7 +109,7 @@ Android 和 iOS 对此属性的处理方式不同。建议在 iOS 和 Android �
 
 | 类型    | 默认值 |
 | ------- | ------- |
-| boolean | `true`  |
+| 布尔值 | `true`  |
 
 ---
 
@@ -119,4 +119,4 @@ Android 和 iOS 对此属性的处理方式不同。建议在 iOS 和 Android �
 
 | 类型   | 默认值 |
 | ------ | ------- |
-| number | `0`     |
+| 数字 | `0`     |

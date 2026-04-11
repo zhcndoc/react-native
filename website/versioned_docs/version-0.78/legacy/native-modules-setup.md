@@ -1,33 +1,33 @@
 ---
 id: native-modules-setup
-title: Native Modules NPM Package Setup
+title: 原生模块 NPM 包设置
 ---
 
 import NativeDeprecated from '../the-new-architecture/\_markdown_native_deprecation.mdx'
 
 <NativeDeprecated />
 
-Native modules are usually distributed as npm packages, except that on top of the usual JavaScript they will include some native code per platform. To understand more about npm packages you may find [this guide](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry) useful.
+原生模块通常作为 npm 包分发，不同的是，在常规 JavaScript 的基础上，它们还会包含针对每个平台的一些原生代码。要了解更多关于 npm 包的信息，你可能会发现 [本指南](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry) 很有用。
 
-To get set up with the basic project structure for a native module we will use the community tool called [create-react-native-library](https://callstack.github.io/react-native-builder-bob/create). You can go ahead further and dive deep into how that library works, but for our needs we will only execute the basic script:
+为了设置原生模块的基本项目结构，我们将使用名为 [create-react-native-library](https://callstack.github.io/react-native-builder-bob/create) 的社区工具。你可以进一步深入研究该库的工作原理，但就我们的需求而言，我们只需执行基本脚本：
 
 ```shell
 npx create-react-native-library@latest react-native-awesome-module
 ```
 
-Where `react-native-awesome-module` is the name you would like for the new module. After doing this you will navigate into `react-native-awesome-module` folder and bootstrap the example project by running:
+其中 `react-native-awesome-module` 是你希望为新模块使用的名称。执行此操作后，你将进入 `react-native-awesome-module` 文件夹，并通过运行以下命令引导示例项目：
 
 ```shell
 yarn
 ```
 
-When the bootstrap is done, you will be able to start the example app by executing one of the following commands:
+引导完成后，你将能够通过执行以下命令之一来启动示例应用：
 
 ```shell
-# Android app
+# Android 应用
 yarn example android
-# iOS app
+# iOS 应用
 yarn example ios
 ```
 
-When all steps above are done, you will be able to continue with [Android Native Modules](native-modules-android) or [iOS Native Modules](native-modules-ios) guides to add in some code.
+完成上述所有步骤后，你将能够继续参考 [Android 原生模块](native-modules-android) 或 [iOS 原生模块](native-modules-ios) 指南来添加一些代码。

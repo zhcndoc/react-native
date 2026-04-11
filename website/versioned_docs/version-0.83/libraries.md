@@ -17,7 +17,7 @@ React Native 库通常通过 Node.js 包管理器从 [npm 注册表](https://www
 如果你的电脑上已经安装了 Node.js，那么 npm CLI 也已经安装好了。一些开发者偏好使用 Yarn Classic，因其安装速度稍快，同时还提供了如工作区（Workspaces）等高级功能。两者都非常适合用于 React Native。为了简化说明，本文后续将默认使用 npm。
 
 :::note
-在 JavaScript 社区中，“library”（库）和“package”（包）两个术语通常可以互换使用。
+在 JavaScript 社区中，"library"（库）和"package"（包）两个术语通常可以互换使用。
 :::
 
 ## 安装库

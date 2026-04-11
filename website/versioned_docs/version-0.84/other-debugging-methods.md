@@ -13,7 +13,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 1. **仅限实体设备**：打开「设置」应用，进入 Safari > 高级，确保“网页检查器”已开启。
 2. 在 Mac 端打开 Safari 并启用开发菜单。路径为 Safari > 设置…，然后选择「高级」标签，再勾选“显示开发者菜单”。
-3. 在「开发」菜单下找到你的设备，并从子菜单中选择“JSContext”。这将打开 Safari 的网页检查器，其中包含类似于 Chrome DevTools 的控制台和源码面板。
+3. 在「开发」菜单下找到你的设备，并从子菜单中选择"JSContext"。这将打开 Safari 的网页检查器，其中包含类似于 Chrome DevTools 的控制台和源码面板。
 
 ![打开 Safari 网页检查器](/docs/assets/debugging-safari-developer-tools.jpg)
 
@@ -28,7 +28,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 ## 远程 JavaScript 调试（已移除）
 
 :::warning 重要提示
-远程 JavaScript 调试功能自 React Native 0.79 起已被移除。详情请见原[弃用通知](https://github.com/react-native-community/discussions-and-proposals/discussions/734)。
+远程 JavaScript 调试功能自 React Native 0.79 起已被移除。详情请见原 [弃用通知](https://github.com/react-native-community/discussions-and-proposals/discussions/734)。
 
 如果你使用的是较老版本的 React Native，请访问对应版本的文档 [查看你的版本](/versions)。
 :::

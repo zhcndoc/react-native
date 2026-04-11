@@ -3,7 +3,7 @@ id: stylesheet
 title: StyleSheet
 ---
 
-A StyleSheet is an abstraction similar to CSS StyleSheets.
+StyleSheet 是一个类似于 CSS StyleSheets 的抽象。
 
 ```SnackPlayer name=StyleSheet
 import React from 'react';
@@ -41,17 +41,17 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-Code quality tips:
+代码质量提示：
 
-- By moving styles away from the render function, you're making the code easier to understand.
-- Naming the styles is a good way to add meaning to the low level components in the render function, and encourage reuse.
-- In most IDEs, using `StyleSheet.create()` will offer static type checking and suggestions to help you write valid styles.
+- 通过将样式从渲染函数中移开，可以使代码更易于理解。
+- 为样式命名是为渲染函数中的底层组件添加含义并鼓励复用的好方法。
+- 在大多数 IDE 中，使用 `StyleSheet.create()` 将提供静态类型检查和建议，帮助你编写有效的样式。
 
 ---
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `compose()`
 
@@ -59,7 +59,7 @@ Code quality tips:
 static compose(style1: Object, style2: Object): Object | Object[];
 ```
 
-Combines two styles such that `style2` will override any styles in `style1`. If either style is falsy, the other one is returned without allocating an array, saving allocations and maintaining reference equality for PureComponent checks.
+组合两种样式，使得 `style2` 将覆盖 `style1` 中的任何样式。如果任一样式为假值，则返回另一个样式而不分配数组，从而节省分配并为 PureComponent 检查保持引用相等性。
 
 ```SnackPlayer name=Compose
 import React from 'react';
@@ -110,7 +110,7 @@ export default App;
 static create(styles: Object extends Record<string, ViewStyle | ImageStyle | TextStyle>): Object;
 ```
 
-An identity function for creating styles. The main practical benefit of creating styles inside `StyleSheet.create()` is static type checking against native style properties.
+一个用于创建样式的恒等函数。在 `StyleSheet.create()` 内部创建样式的主要实际好处是针对原生样式属性的静态类型检查。
 
 ---
 
@@ -120,7 +120,7 @@ An identity function for creating styles. The main practical benefit of creating
 static flatten(style: Array<Object extends Record<string, ViewStyle | ImageStyle | TextStyle>>): Object;
 ```
 
-Flattens an array of style objects, into one aggregated style object.
+将样式对象数组扁平化为一个聚合的样式对象。
 
 ```SnackPlayer name=Flatten
 import React from 'react';
@@ -174,8 +174,8 @@ export default App;
 
 ### `setStyleAttributePreprocessor()`
 
-:::warning Experimental
-Breaking changes will probably happen a lot and will not be reliably announced. The whole thing might be deleted, who knows? Use at your own risk.
+:::warning 实验性
+破坏性变更可能会频繁发生，且不会可靠地公告。整个功能可能会被删除，谁知道呢？使用风险自负。
 :::
 
 ```tsx
@@ -185,15 +185,15 @@ static setStyleAttributePreprocessor(
 );
 ```
 
-Sets a function to use to pre-process a style property value. This is used internally to process color and transform values. You should not use this unless you really know what you are doing and have exhausted other options.
+设置一个函数用于预处理样式属性值。这在内部用于处理颜色和变换值。除非你真的知道自己在做什么并且已经耗尽了其他选项，否则不应使用此功能。
 
-## Properties
+## 属性
 
 ---
 
 ### `absoluteFill`
 
-A very common pattern is to create overlays with position absolute and zero positioning (`position: 'absolute', left: 0, right: 0, top: 0, bottom: 0`), so `absoluteFill` can be used for convenience and to reduce duplication of these repeated styles. If you want, absoluteFill can be used to create a customized entry in a StyleSheet, e.g.:
+一个非常常见的模式是使用绝对定位和零定位创建覆盖层（`position: 'absolute', left: 0, right: 0, top: 0, bottom: 0`），因此 `absoluteFill` 可用于方便地减少这些重复样式的复制。如果你愿意，absoluteFill 可用于在 StyleSheet 中创建自定义条目，例如：
 
 ```SnackPlayer name=absoluteFill
 import React from 'react';
@@ -254,7 +254,7 @@ export default App;
 
 ### `absoluteFillObject`
 
-Sometimes you may want `absoluteFill` but with a couple tweaks - `absoluteFillObject` can be used to create a customized entry in a `StyleSheet`, e.g.:
+有时你可能想要 `absoluteFill` 但需要进行一些调整 - `absoluteFillObject` 可用于在 `StyleSheet` 中创建自定义条目，例如：
 
 ```SnackPlayer name=absoluteFillObject
 import React from 'react';
@@ -318,7 +318,7 @@ export default App;
 
 ### `hairlineWidth`
 
-This is defined as the width of a thin line on the platform. It can be used as the thickness of a border or division between two elements. Example:
+这被定义为平台上细线的宽度。它可以用作边框的厚度或两个元素之间的分隔线。示例：
 
 ```SnackPlayer name=hairlineWidth
 import React from 'react';
@@ -346,6 +346,6 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-This constant will always be a round number of pixels (so a line defined by it can look crisp) and will try to match the standard width of a thin line on the underlying platform. However, you should not rely on it being a constant size, because on different platforms and screen densities its value may be calculated differently.
+此常数将始终为整数像素（因此由它定义的线看起来会很清晰），并将尝试匹配底层平台上细线的标准宽度。但是，你不应该依赖它是一个恒定大小，因为在不同的平台和屏幕密度上，其值的计算方式可能不同。
 
-A line with hairline width may not be visible if your simulator is downscaled.
+如果你的模拟器被缩小，具有发丝宽度的线可能不可见。

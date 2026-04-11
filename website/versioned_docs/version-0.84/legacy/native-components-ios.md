@@ -474,4 +474,4 @@ const styles = StyleSheet.create({
 }
 ```
 
-本指南涵盖了桥接自定义原生组件的诸多方面，但你可能还需要考虑更多，如插入和布局子视图的自定义钩子。若想深入了解，请查看一些已实现组件的[源代码](https://github.com/facebook/react-native/tree/main/packages/react-native/React/Views)。
+本指南涵盖了桥接自定义原生组件的诸多方面，但你可能还需要考虑更多，如插入和布局子视图的自定义钩子。若想深入了解，请查看一些已实现组件的 [源代码](https://github.com/facebook/react-native/tree/main/packages/react-native/React/Views)。

@@ -35,7 +35,7 @@ import ExperimentalAPIWarning from './\_experimental-api-warning.mdx';
 
 ### 阻塞主线程
 
-这是 React Native 功能集中首次允许渲染 React 组件阻塞主线程的能力。这是由[新架构](/architecture/landing-page)支持的新功能！
+这是 React Native 功能集中首次允许渲染 React 组件阻塞主线程的能力。这是由 [新架构](/architecture/landing-page) 支持的新功能！
 
 阻塞主线程可以通过防止使用类似 [`FlatList`](flatlist) 组件时偶尔出现的空白帧闪烁，提升用户体验。它还可以通过使用主线程优先级（通常运行于更高性能的核心）来提升性能。
 

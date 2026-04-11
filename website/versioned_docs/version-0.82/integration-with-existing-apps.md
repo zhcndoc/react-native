@@ -1,6 +1,6 @@
 ---
 id: integration-with-existing-apps
-title: Integration with Existing Apps
+title: 与现有应用集成
 hide_table_of_contents: true
 ---
 
@@ -9,11 +9,11 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem';
 import IntegrationApple from './\_integration-with-existing-apps-ios.md'; import
 IntegrationKotlin from './\_integration-with-existing-apps-kotlin.md';
 
-React Native is great when you are starting a new mobile app from scratch. However, it also works well for adding a single view or user flow to existing native applications. With a few steps, you can add new React Native based features, screens, views, etc.
+当你从头开始开发新的移动应用时，React Native 非常出色。然而，它也非常适用于向现有的原生应用程序添加单个视图或用户流程。只需几步，你就可以添加基于 React Native 的新功能、屏幕、视图等。
 
-The specific steps are different depending on what platform you're targeting.
+具体步骤取决于你所针对的平台。
 
-<Tabs groupId="language" queryString defaultValue="kotlin" values={[ {label: 'Android (Java & Kotlin)', value: 'kotlin'}, {label: 'iOS (Objective-C and Swift)', value: 'apple'}, ]}>
+<Tabs groupId="language" queryString defaultValue="kotlin" values={[ {label: 'Android (Java 和 Kotlin)', value: 'kotlin'}, {label: 'iOS (Objective-C 和 Swift)', value: 'apple'}, ]}>
 
 <TabItem value="kotlin">
 

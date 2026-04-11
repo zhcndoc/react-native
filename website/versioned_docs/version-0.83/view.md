@@ -5,13 +5,13 @@ title: 视图
 
 import ExperimentalAPIWarning from './\_experimental-api-warning.mdx';
 
-构建用户界面最基本的组件，`View` 是一个容器，支持使用 [flexbox](flexbox.md)、[样式](style.md)、[部分触摸处理](handling-touches.md) 以及[辅助功能](accessibility.md) 控制。`View` 直接映射到 React Native 运行的任意平台上的原生视图对应物，无论是 `UIView`、`<div>`、`android.view` 等。
+构建用户界面最基本的组件，`View` 是一个容器，支持使用 [flexbox](flexbox.md)、[样式](style.md)、[部分触摸处理](handling-touches.md) 以及 [辅助功能](accessibility.md) 控制。`View` 直接映射到 React Native 运行的任意平台上的原生视图对应物，无论是 `UIView`、`<div>`、`android.view` 等。
 
 `View` 设计为可以嵌套在其他视图内部，并且可以拥有零个或多个任意类型的子元素。
 
 以下示例创建了一个 `View`，在一行内包裹两个带颜色的盒子和一个文本组件，带有内边距。
 
-```SnackPlayer name=View%20示例
+```SnackPlayer name=View%20 示例
 import React from 'react';
 import {View, Text} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
@@ -51,7 +51,7 @@ export default ViewBoxesWithColorAndText;
 
 辅助功能操作允许辅助技术通过编程方式调用组件的操作。`accessibilityActions` 属性应包含一个操作对象列表。每个操作对象应包含名称和标签字段。
 
-更多信息请参阅[辅助功能指南](accessibility.md#accessibility-actions)。
+更多信息请参阅 [辅助功能指南](accessibility.md#accessibility-actions)。
 
 | 类型  |
 | ----- |
@@ -63,7 +63,7 @@ export default ViewBoxesWithColorAndText;
 
 布尔值，指示该辅助功能元素以及它包含的任何辅助功能元素是否被隐藏。默认值为 `false`。
 
-更多信息请参阅[辅助功能指南](accessibility.md#accessibilityelementshidden-ios)。
+更多信息请参阅 [辅助功能指南](accessibility.md#accessibilityelementshidden-ios)。
 
 | 类型  |
 | ----- |
@@ -85,7 +85,7 @@ export default ViewBoxesWithColorAndText;
 
 指示当用户与元素交互时屏幕朗读器应使用哪种语言。应遵循 [BCP 47 规范](https://www.rfc-editor.org/info/bcp47)。
 
-更多信息请参阅[iOS `accessibilityLanguage` 文档](https://developer.apple.com/documentation/objectivec/nsobject/1615192-accessibilitylanguage)。
+更多信息请参阅 [iOS `accessibilityLanguage` 文档](https://developer.apple.com/documentation/objectivec/nsobject/1615192-accessibilitylanguage)。
 
 | 类型  |
 | ----- |
@@ -97,7 +97,7 @@ export default ViewBoxesWithColorAndText;
 
 指示在启用颜色反转时，此视图是否应被反转。值为 `true` 时，即使启用了颜色反转，也将告诉视图不被反转。
 
-更多信息请参阅[辅助功能指南](accessibility.md#accessibilityignoresinvertcolors)。
+更多信息请参阅 [辅助功能指南](accessibility.md#accessibilityignoresinvertcolors)。
 
 | 类型  |
 | ----- |
@@ -176,11 +176,11 @@ export default ViewBoxesWithColorAndText;
 
 向辅助技术用户描述组件的当前状态。
 
-更多信息请参阅[辅助功能指南](accessibility.md#accessibilitystate-ios-android)。
+更多信息请参阅 [辅助功能指南](accessibility.md#accessibilitystate-ios-android)。
 
 | 类型                                                         |
 | ------------------------------------------------------------ |
-| 对象: `{disabled: bool, selected: bool, checked: bool 或 'mixed', busy: bool, expanded: bool}` |
+| 对象：`{disabled: bool, selected: bool, checked: bool 或 'mixed', busy: bool, expanded: bool}` |
 
 ---
 
@@ -188,11 +188,11 @@ export default ViewBoxesWithColorAndText;
 
 表示组件的当前值。可以是组件值的文本描述，或者对于基于范围的组件，如滑块和进度条，包含范围信息（最小值、当前值和最大值）。
 
-更多信息请参阅[辅助功能指南](accessibility.md#accessibilityvalue-ios-android)。
+更多信息请参阅 [辅助功能指南](accessibility.md#accessibilityvalue-ios-android)。
 
 | 类型                                                       |
 | ---------------------------------------------------------- |
-| 对象: `{min: number, max: number, now: number, text: string}` |
+| 对象：`{min: number, max: number, now: number, text: string}` |
 
 ---
 
@@ -200,7 +200,7 @@ export default ViewBoxesWithColorAndText;
 
 指示 VoiceOver 是否应该忽略与接收器为同级的其他视图中的元素。默认值为 `false`。
 
-更多信息请参阅[辅助功能指南](accessibility.md#accessibilityviewismodal-ios)。
+更多信息请参阅 [辅助功能指南](accessibility.md#accessibilityviewismodal-ios)。
 
 | 类型  |
 | ----- |
@@ -212,7 +212,7 @@ export default ViewBoxesWithColorAndText;
 
 当为 `true` 时，表示此视图是可被辅助技术（例如屏幕阅读器和硬件键盘）发现的辅助功能元素。默认情况下，所有可触摸元素都是可访问的。
 
-更多信息请参阅[辅助功能指南](accessibility.md#accessible)。
+更多信息请参阅 [辅助功能指南](accessibility.md#accessible)。
 
 ---
 
@@ -398,7 +398,7 @@ export default ViewBoxesWithColorAndText;
 - 如果 `experimental_accessibilityOrder` 包含对非可访问组件的引用，则默认以常规顺序聚焦该组件的后代。此外，它也可以包含对具有自身 `experimental_accessibilityOrder` 的其他组件的引用。
 - 如果某些本应可访问的组件未直接在 `experimental_accessibilityOrder` 中引用，或未嵌套在直接引用容器内，则这些组件将不可访问。
 
-详见[辅助功能指南](accessibility.md#experimental_accessibilityorder)。
+详见 [辅助功能指南](accessibility.md#experimental_accessibilityorder)。
 
 | 类型  |
 | ----- |
@@ -428,7 +428,7 @@ export default ViewBoxesWithColorAndText;
 
 | 类型                                                          |
 | ------------------------------------------------------------- |
-| 对象: `{top: number, left: number, bottom: number, right: number}` |
+| 对象：`{top: number, left: number, bottom: number, right: number}` |
 
 ---
 
@@ -545,7 +545,7 @@ export default ViewBoxesWithColorAndText;
 
 用户执行辅助功能操作时会调用此函数。函数唯一参数为事件，包含要执行操作的名称。
 
-更多信息请参阅[辅助功能指南](accessibility.md#accessibility-actions)。
+更多信息请参阅 [辅助功能指南](accessibility.md#accessibility-actions)。
 
 | 类型   |
 | ------ |
@@ -733,7 +733,7 @@ export default ViewBoxesWithColorAndText;
 
 ### `ref`
 
-一个 ref 设置函数，挂载时会被赋值为对应的[元素节点](element-nodes)。
+一个 ref 设置函数，挂载时会被赋值为对应的 [元素节点](element-nodes)。
 
 ---
 

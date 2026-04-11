@@ -1,15 +1,15 @@
 ---
 id: using-a-listview
-title: Using List Views
+title: 使用列表视图
 ---
 
-React Native provides a suite of components for presenting lists of data. Generally, you'll want to use either [FlatList](flatlist.md) or [SectionList](sectionlist.md).
+React Native 提供了一套用于展示数据列表的组件。通常，你会想要使用 [FlatList](flatlist.md) 或 [SectionList](sectionlist.md)。
 
-The `FlatList` component displays a scrolling list of changing, but similarly structured, data. `FlatList` works well for long lists of data, where the number of items might change over time. Unlike the more generic [`ScrollView`](using-a-scrollview.md), the `FlatList` only renders elements that are currently showing on the screen, not all the elements at once.
+`FlatList` 组件显示一个可滚动的列表，其中的数据是变化的，但结构相似。`FlatList` 适用于长数据列表，其中项的数量可能会随时间变化。与更通用的 [`ScrollView`](using-a-scrollview.md) 不同，`FlatList` 只渲染当前显示在屏幕上的元素，而不是一次性渲染所有元素。
 
-The `FlatList` component requires two props: `data` and `renderItem`. `data` is the source of information for the list. `renderItem` takes one item from the source and returns a formatted component to render.
+`FlatList` 组件需要两个 props：`data` 和 `renderItem`。`data` 是列表的信息源。`renderItem` 从源中获取一个项并返回一个格式化的组件进行渲染。
 
-This example creates a basic `FlatList` of hardcoded data. Each item in the `data` props is rendered as a `Text` component. The `FlatListBasics` component then renders the `FlatList` and all `Text` components.
+此示例创建了一个包含硬编码数据的基本 `FlatList`。`data` props 中的每个项都渲染为 `Text` 组件。`FlatListBasics` 组件随后渲染 `FlatList` 和所有 `Text` 组件。
 
 ```SnackPlayer name=FlatList%20Basics
 import React from 'react';
@@ -52,7 +52,7 @@ const FlatListBasics = () => {
 export default FlatListBasics;
 ```
 
-If you want to render a set of data broken into logical sections, maybe with section headers, similar to `UITableView`s on iOS, then a [SectionList](sectionlist.md) is the way to go.
+如果你想渲染一组被划分为逻辑部分的数据，可能带有部分标题，类似于 iOS 上的 `UITableView`，那么 [SectionList](sectionlist.md) 是合适的选择。
 
 ```SnackPlayer name=SectionList%20Basics
 import React from 'react';
@@ -111,4 +111,4 @@ const SectionListBasics = () => {
 export default SectionListBasics;
 ```
 
-One of the most common uses for a list view is displaying data that you fetch from a server. To do that, you will need to [learn about networking in React Native](network.md).
+列表视图最常见的用途之一是显示从服务器获取的数据。为此，你需要 [了解 React Native 中的网络知识](network.md)。

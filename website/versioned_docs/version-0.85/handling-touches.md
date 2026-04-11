@@ -22,7 +22,7 @@ title: 处理触摸
 
 ![](/docs/assets/Button.png)
 
-请使用下面的示例随意尝试 `Button` 组件。你可以通过点击右下角的切换按钮来选择你的应用预览的平台，然后点击 "Tap to Play" 来预览应用。
+请使用下面的示例随意尝试 `Button` 组件。你可以通过点击右下角的切换按钮来选择你的应用预览的平台，然后点击 "点击播放" 来预览应用。
 
 ```SnackPlayer name=Button%20Basics
 import React from 'react';

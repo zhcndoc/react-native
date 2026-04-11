@@ -4,7 +4,7 @@ title: '🗑️ PushNotificationIOS'
 ---
 
 :::warning 已废弃
-请使用其他[社区包](https://reactnative.directory/?search=notification)。
+请使用其他 [社区包](https://reactnative.directory/?search=notification)。
 :::
 
 <div className="banner-native-code-required">
@@ -18,9 +18,9 @@ title: '🗑️ PushNotificationIOS'
 
 ## 入门
 
-启用推送通知，请先[在 Apple 上配置您的通知](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server)和服务器端系统。
+启用推送通知，请先 [在 Apple 上配置您的通知](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server) 和服务器端系统。
 
-然后，在您的项目中[启用远程通知](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app#2980038)。这将自动启用所需设置。
+然后，在您的项目中 [启用远程通知](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app#2980038)。这将自动启用所需设置。
 
 ### 启用对 `register` 事件的支持
 

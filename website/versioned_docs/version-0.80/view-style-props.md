@@ -57,7 +57,7 @@ export default App;
 
 ### `backfaceVisibility`
 
-| Type                          |
+| 类型                          |
 | ----------------------------- |
 | enum(`'visible'`, `'hidden'`) |
 
@@ -65,7 +65,7 @@ export default App;
 
 ### `backgroundColor`
 
-| Type               |
+| 类型               |
 | ------------------ |
 | [颜色](colors.md) |
 
@@ -73,7 +73,7 @@ export default App;
 
 ### `borderBottomColor`
 
-| Type               |
+| 类型               |
 | ------------------ |
 | [颜色](colors.md) |
 
@@ -81,7 +81,7 @@ export default App;
 
 ### `borderBlockColor`
 
-| Type               |
+| 类型               |
 | ------------------ |
 | [颜色](colors.md) |
 
@@ -89,7 +89,7 @@ export default App;
 
 ### `borderBlockEndColor`
 
-| Type               |
+| 类型               |
 | ------------------ |
 | [颜色](colors.md) |
 
@@ -97,7 +97,7 @@ export default App;
 
 ### `borderBlockStartColor`
 
-| Type               |
+| 类型               |
 | ------------------ |
 | [颜色](colors.md) |
 
@@ -105,7 +105,7 @@ export default App;
 
 ### `borderBottomEndRadius`
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
 | number, string (百分比值) |
 
@@ -113,7 +113,7 @@ export default App;
 
 ### `borderBottomLeftRadius`
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
 | number, string (百分比值) |
 
@@ -121,7 +121,7 @@ export default App;
 
 ### `borderBottomRightRadius`
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
 | number, string (百分比值) |
 
@@ -129,7 +129,7 @@ export default App;
 
 ### `borderBottomStartRadius`
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
 | number, string (百分比值) |
 
@@ -137,7 +137,7 @@ export default App;
 
 ### `borderStartEndRadius`
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
 | number, string (百分比值) |
 
@@ -145,7 +145,7 @@ export default App;
 
 ### `borderStartStartRadius`
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
 | number, string (百分比值) |
 
@@ -153,7 +153,7 @@ export default App;
 
 ### `borderEndEndRadius`
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
 | number, string (百分比值) |
 
@@ -161,7 +161,7 @@ export default App;
 
 ### `borderEndStartRadius`
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
 | number, string (百分比值) |
 
@@ -169,7 +169,7 @@ export default App;
 
 ### `borderBottomWidth`
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -177,7 +177,7 @@ export default App;
 
 ### `borderColor`
 
-| Type               |
+| 类型               |
 | ------------------ |
 | [颜色](colors.md) |
 
@@ -187,7 +187,7 @@ export default App;
 
 在 iOS 13+ 上，可以更改边框的角曲线。
 
-| Type                               |
+| 类型                               |
 | ---------------------------------- |
 | enum(`'circular'`, `'continuous'`) |
 
@@ -195,7 +195,7 @@ export default App;
 
 ### `borderEndColor`
 
-| Type               |
+| 类型               |
 | ------------------ |
 | [颜色](colors.md) |
 
@@ -203,7 +203,7 @@ export default App;
 
 ### `borderLeftColor`
 
-| Type               |
+| 类型               |
 | ------------------ |
 | [颜色](colors.md) |
 
@@ -211,7 +211,7 @@ export default App;
 
 ### `borderLeftWidth`
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -221,7 +221,7 @@ export default App;
 
 如果圆角边框不可见，尝试同时应用 `overflow: 'hidden'`。
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
 | number, string (百分比值) |
 
@@ -229,7 +229,7 @@ export default App;
 
 ### `borderRightColor`
 
-| Type               |
+| 类型               |
 | ------------------ |
 | [颜色](colors.md) |
 
@@ -237,7 +237,7 @@ export default App;
 
 ### `borderRightWidth`
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -245,7 +245,7 @@ export default App;
 
 ### `borderStartColor`
 
-| Type               |
+| 类型               |
 | ------------------ |
 | [颜色](colors.md) |
 
@@ -253,7 +253,7 @@ export default App;
 
 ### `borderStyle`
 
-| Type                                    |
+| 类型                                    |
 | --------------------------------------- |
 | enum(`'solid'`, `'dotted'`, `'dashed'`) |
 
@@ -261,7 +261,7 @@ export default App;
 
 ### `borderTopColor`
 
-| Type               |
+| 类型               |
 | ------------------ |
 | [颜色](colors.md) |
 
@@ -269,7 +269,7 @@ export default App;
 
 ### `borderTopEndRadius`
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
 | number, string (百分比值) |
 
@@ -277,7 +277,7 @@ export default App;
 
 ### `borderTopLeftRadius`
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
 | number, string (百分比值) |
 
@@ -285,7 +285,7 @@ export default App;
 
 ### `borderTopRightRadius`
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
 | number, string (百分比值) |
 
@@ -293,7 +293,7 @@ export default App;
 
 ### `borderTopStartRadius`
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
 | number, string (百分比值) |
 
@@ -301,7 +301,7 @@ export default App;
 
 ### `borderTopWidth`
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -309,7 +309,7 @@ export default App;
 
 ### `borderWidth`
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -324,7 +324,7 @@ export default App;
 这些阴影可以组合在一起，以便单个 `boxShadow` 可以由多个不同的阴影组成。
 
 `boxShadow` 接受一个模仿 [Web 语法](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow#syntax) 的字符串，或一个 [BoxShadowValue](./boxshadowvalue) 对象数组。
-| Type |
+| 类型 |
 | --------------------------- |
 | BoxShadowValue 对象数组 \| 字符串 |
 
@@ -332,7 +332,7 @@ export default App;
 
 在 iOS 17+ 上，设置为 `pointer` 允许当指针（例如 iOS 上的触控板或手写笔，或 visionOS 上用户的视线）悬停在视图上时产生悬停效果。
 
-| Type                        |
+| 类型                        |
 | --------------------------- |
 | enum(`'auto'`, `'pointer'`) |
 
@@ -342,7 +342,7 @@ export default App;
 
 使用 Android 底层的 [elevation API](https://developer.android.com/training/material/shadows-clipping.html#Elevation) 设置视图的海拔高度。这会给项目添加投影，并影响重叠视图的 Z 轴顺序。仅支持 Android 5.0+，在更早版本上无效。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -383,7 +383,7 @@ export default App;
 :::
 
 `filter` 接受一个由上述滤镜函数组成的对象数组，或一个模仿 [Web 语法](https://developer.mozilla.org/en-US/docs/Web/CSS/filter#syntax) 的字符串。
-| Type |
+| 类型 |
 | ------ |
 | 对象数组：`{brightness: number\|string}`, `{opacity: number\|string}`, `{blur: number\|string}`, `{contrast: number\|string}`, `{dropShadow: DropShadowValue\|string}`, `{grayscale: number\|string}`, `{hueRotate: number\|string}`, `{invert: number\|string}`, `{sepia: number\|string}`, `{saturate: number\|string}` 或 字符串|
 
@@ -418,7 +418,7 @@ export default App;
 - `color`：创建一种颜色，具有源颜色的色相和饱和度以及背景颜色的亮度。这保留了背景的灰度级别，适用于为单色图像着色或为彩色图像着色。
 - `luminosity`：创建一种颜色，具有源颜色的亮度以及背景颜色的色相和饱和度。这产生与颜色模式相反的效果。
 
-| Type                                                                                                                                                                                                                                 |
+| 类型                                                                                                                                                                                                                                 |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | enum(`'normal'`, `'multiply'`, `'screen'`, `'overlay'`, `'darken'`, `'lighten'`, `'color-dodge'`, `'color-burn'`, `'hard-light'`, `'soft-light'`, `'difference'`, `'exclusion'`, `'hue'`, `'saturation'`, `'color'`, `'luminosity'`) |
 
@@ -426,7 +426,7 @@ export default App;
 
 ### `opacity`
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -440,7 +440,7 @@ export default App;
 
 设置元素轮廓的颜色。详见 [Web 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-color)。
 
-| Type               |
+| 类型               |
 | ------------------ |
 | [颜色](colors.md) |
 
@@ -454,7 +454,7 @@ export default App;
 
 设置轮廓与元素边界之间的空间量。不影响布局。详见 [Web 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-offset)。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -468,7 +468,7 @@ export default App;
 
 设置元素轮廓的样式。详见 [Web 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-style)。
 
-| Type                                    |
+| 类型                                    |
 | --------------------------------------- |
 | enum(`'solid'`, `'dotted'`, `'dashed'`) |
 
@@ -482,7 +482,7 @@ export default App;
 
 围绕元素绘制的轮廓的宽度，位于边框之外。不影响布局。详见 [Web 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-width)。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -497,6 +497,6 @@ export default App;
 - `'box-none'`：View 永远不会是触摸事件的目标，但其子视图可以。
 - `'box-only'`：View 可以是触摸事件的目标，但其子视图不能。
 
-| Type                                                  |
+| 类型                                                  |
 | ----------------------------------------------------- |
 | enum(`'auto'`, `'box-none'`, `'box-only'`, `'none'` ) |

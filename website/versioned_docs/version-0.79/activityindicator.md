@@ -3,9 +3,9 @@ id: activityindicator
 title: ActivityIndicator
 ---
 
-Displays a circular loading indicator.
+显示一个圆形加载指示器。
 
-## Example
+## 示例
 
 ```SnackPlayer name=ActivityIndicator%20Example
 import React from 'react';
@@ -38,21 +38,21 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
-### [View Props](view#props)
+### [View 属性](view#props)
 
-Inherits [View Props](view#props).
+继承 [View 属性](view#props)。
 
 ---
 
 ### `animating`
 
-Whether to show the indicator (`true`) or hide it (`false`).
+是否显示指示器 (`true`) 或隐藏它 (`false`)。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `true`  |
 
@@ -60,19 +60,19 @@ Whether to show the indicator (`true`) or hide it (`false`).
 
 ### `color`
 
-The foreground color of the spinner.
+旋转指示器的前景色。
 
-| Type            | Default                                                                                                                                                                                         |
+| 类型            | 默认值                                                                                                                                                                                         |
 | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [color](colors) | `null` (system accent default color)<div className="label android">Android</div><hr/><ins style={{background: '#999'}} className="color-box" />`'#999999'` <div className="label ios">iOS</div> |
+| [color](colors) | `null` (系统强调色默认颜色)<div className="label android">Android</div><hr/><ins style={{background: '#999'}} className="color-box" />`'#999999'` <div className="label ios">iOS</div> |
 
 ---
 
 ### `hidesWhenStopped` <div className="label ios">iOS</div>
 
-Whether the indicator should hide when not animating.
+当停止动画时是否隐藏指示器。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `true`  |
 
@@ -80,8 +80,8 @@ Whether the indicator should hide when not animating.
 
 ### `size`
 
-Size of the indicator.
+指示器的大小。
 
-| Type                                                                               | Default   |
+| 类型                                                                               | 默认值   |
 | ---------------------------------------------------------------------------------- | --------- |
 | enum(`'small'`, `'large'`)<hr/>number <div className="label android">Android</div> | `'small'` |

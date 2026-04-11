@@ -1,13 +1,13 @@
 ---
 id: react-node
-title: React Node Object Type
+title: React Node 对象类型
 ---
 
-A React Node is one of the following types:
+React Node 是以下类型之一：
 
-- Boolean (which is ignored)
-- `null` or `undefined` (which is ignored)
-- Number
-- String
-- A React element (result of JSX)
-- An array of any of the above, possibly a nested one
+- 布尔值（会被忽略）
+- `null` 或 `undefined`（会被忽略）
+- 数字
+- 字符串
+- React 元素（JSX 的结果）
+- 上述任何类型的数组，可能是嵌套的

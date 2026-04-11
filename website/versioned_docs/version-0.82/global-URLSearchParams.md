@@ -4,7 +4,7 @@ title: URLSearchParams
 ---
 
 :::warning
-🚧 This page is work in progress, so please refer to the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) for more information.\
+🚧 此页面正在建设中，因此请参阅 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) 以获取更多信息。\
 :::
 
-The global `URLSearchParams` class, as defined in Web specifications.
+Web 规范中定义的全局 `URLSearchParams` 类。

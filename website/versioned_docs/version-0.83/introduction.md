@@ -15,11 +15,11 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 ## 如何使用这些文档
 
-您可以从这里开始，像读书一样线性阅读这些文档；或者只阅读您需要的特定章节。已经熟悉 React 了吗？可以跳过[该章节](intro-react)—或者阅读它作为轻松的复习。
+您可以从这里开始，像读书一样线性阅读这些文档；或者只阅读您需要的特定章节。已经熟悉 React 了吗？可以跳过 [该章节](intro-react)—或者阅读它作为轻松的复习。
 
 ## 先决条件
 
-要使用 React Native，您需要了解 JavaScript 基础知识。如果您是 JavaScript 新手或需要复习，可以[深入学习](https://developer.mozilla.org/en-US/docs/Web/JavaScript)，或在 Mozilla Developer Network 进行[复习](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript)。
+要使用 React Native，您需要了解 JavaScript 基础知识。如果您是 JavaScript 新手或需要复习，可以 [深入学习](https://developer.mozilla.org/en-US/docs/Web/JavaScript)，或在 Mozilla Developer Network 进行 [复习](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript)。
 
 :::info
 虽然我们会尽量假设读者没有 React、Android 或 iOS 开发经验，但这些都是未来 React Native 开发者的重要知识领域。在适当情况下，我们会链接到更深入的资源和文章。
@@ -41,7 +41,7 @@ const YourApp = () => {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-      <Text>试着修改我吧！🎉</Text>
+      <Text> 试着修改我吧！🎉</Text>
     </View>
   );
 };
@@ -49,10 +49,10 @@ const YourApp = () => {
 export default YourApp;
 ```
 
-上述为 Snack Player，由 Expo 创建的方便工具，可嵌入并运行 React Native 项目，展示其在 Android 和 iOS 等平台上的渲染效果。代码是实时且可编辑的，您可以直接在浏览器中玩转。试试看把上面“试着修改我吧！”的文字改成“Hello, world!”吧！
+上述为 Snack Player，由 Expo 创建的方便工具，可嵌入并运行 React Native 项目，展示其在 Android 和 iOS 等平台上的渲染效果。代码是实时且可编辑的，您可以直接在浏览器中玩转。试试看把上面“试着修改我吧！”的文字改成"Hello, world!"吧！
 
 :::tip
-如果您想在本地搭建开发环境，[可以按照我们的本地环境搭建指南](set-up-your-environment)进行操作，并将示例代码粘贴到您的项目中。（如果您是 Web 开发者，可能已经有用于移动浏览器测试的本地环境！）
+如果您想在本地搭建开发环境，[可以按照我们的本地环境搭建指南](set-up-your-environment) 进行操作，并将示例代码粘贴到您的项目中。（如果您是 Web 开发者，可能已经有用于移动浏览器测试的本地环境！）
 :::
 
 ## 开发者说明

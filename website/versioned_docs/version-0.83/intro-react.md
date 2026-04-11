@@ -221,7 +221,7 @@ export default Cafe;
 
 ## Props
 
-**Props** 是 “属性”（properties）的缩写，允许你自定义 React 组件。例如，这里你给每个 `<Cat>` 传递不同的 `name`，让 Cat 渲染不同的名字：
+**Props** 是“属性”（properties）的缩写，允许你自定义 React 组件。例如，这里你给每个 `<Cat>` 传递不同的 `name`，让 Cat 渲染不同的名字：
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -309,7 +309,7 @@ const CatApp = () => {
 export default CatApp;
 ```
 
-`Image` 有 [许多不同的 props](image#props)，其中包括接受设计与布局相关属性-值对 JS 对象的 [`style`](image#style)。
+`Image` 有 [许多不同的 props](image#props)，其中包括接受设计与布局相关属性 - 值对 JS 对象的 [`style`](image#style)。
 
 :::note
 注意 `style` 值外面的双重大括号 `{{ }}`。在 JSX 中，JavaScript 值用 `{}` 引用。这在你传递非字符串的 props 时很方便，比如数组或数字：`<Cat food={["fish", "kibble"]} age={2} />`。然而 JS 对象本身也是用大括号表示的：`{width: 200, height: 200}`。因此，要在 JSX 中传递 JS 对象，必须用**另一对**大括号包裹它：`{{width: 200, height: 200}}`。
@@ -327,7 +327,7 @@ export default CatApp;
 
 以下示例发生在一家猫咪咖啡馆，里面有两只饥饿的猫等待喂食。它们的饥饿状态会随时间变化（不同于它们的名字），被存储为 state。喂食猫咪时点击它们的按钮，会更新它们的状态。
 
-你可以通过调用 [React 的 `useState` Hook](https://react.dev/learn/state-a-components-memory) 向组件添加 state。Hook 是一类函数，允许你“接入” React 的特性。例如，`useState` 允许你给函数组件添加 state。你可以在 [React 文档了解更多 Hook](https://react.dev/reference/react)。
+你可以通过调用 [React 的 `useState` Hook](https://react.dev/learn/state-a-components-memory) 向组件添加 state。Hook 是一类函数，允许你“接入”React 的特性。例如，`useState` 允许你给函数组件添加 state。你可以在 [React 文档了解更多 Hook](https://react.dev/reference/react)。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -433,10 +433,10 @@ const Cat = (props: CatProps) => {
 
 调用 `useState` 做了两件事：
 
-- 创建一个“state 变量”，并赋初始值——这里是 `isHungry`，初始为 `true`
+- 创建一个"state 变量”，并赋初始值——这里是 `isHungry`，初始为 `true`
 - 创建一个函数用来设置该 state 变量值——`setIsHungry`
 
-变量名自己取，不过习惯用 `[读值函数, 写值函数] = useState(初始值)` 模式。
+变量名自己取，不过习惯用 `[读值函数，写值函数] = useState(初始值)` 模式。
 
 接着你添加 [`Button`](button) 组件，并赋予 `onPress` prop：
 

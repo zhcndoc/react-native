@@ -5,7 +5,7 @@ title: 故障排除
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-以下是设置 React Native 时可能遇到的一些常见问题。如果你遇到未在此处列出的问题，可以尝试[在 GitHub 上搜索该问题](https://github.com/facebook/react-native/issues/)。
+以下是设置 React Native 时可能遇到的一些常见问题。如果你遇到未在此处列出的问题，可以尝试 [在 GitHub 上搜索该问题](https://github.com/facebook/react-native/issues/)。
 
 ### 端口已被占用
 
@@ -25,7 +25,7 @@ sudo lsof -i :8081
 kill -9 <PID>
 ```
 
-在 Windows 上，你可以使用[资源监视器](https://stackoverflow.com/questions/48198/how-can-you-find-out-which-process-is-listening-on-a-port-on-windows) 查找使用 8081 端口的进程，并使用任务管理器停止它。
+在 Windows 上，你可以使用 [资源监视器](https://stackoverflow.com/questions/48198/how-can-you-find-out-which-process-is-listening-on-a-port-on-windows) 查找使用 8081 端口的进程，并使用任务管理器停止它。
 
 #### 使用非 8081 端口
 
@@ -88,7 +88,7 @@ pod 'React', :path => '../node_modules/react-native', :subspecs => [
 
 ### 无可用传输方式
 
-React Native 实现了 WebSockets 的 polyfill。这些[polyfill](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Core/InitializeCore.js) 是作为 react-native 模块的一部分在你通过 `import React from 'react'` 导入时初始化的。如果你加载了另一个需要 WebSocket 支持的模块，比如 [Firebase](https://github.com/facebook/react-native/issues/3645)，确保在加载它之前已经加载了 react-native：
+React Native 实现了 WebSockets 的 polyfill。这些 [polyfill](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Core/InitializeCore.js) 是作为 react-native 模块的一部分在你通过 `import React from 'react'` 导入时初始化的。如果你加载了另一个需要 WebSocket 支持的模块，比如 [Firebase](https://github.com/facebook/react-native/issues/3645)，确保在加载它之前已经加载了 react-native：
 
 ```
 import React from 'react';

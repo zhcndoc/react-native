@@ -73,9 +73,9 @@ export default KeyboardAvoidingComponent;
 
 ## 属性
 
-### [View Props](view.md#props)
+### [View 属性](view.md#props)
 
-继承自 [View Props](view.md#props)。
+继承自 [View 属性](view.md#props)。
 
 ---
 

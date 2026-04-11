@@ -1,126 +1,126 @@
 ---
 id: debugging
-title: Debugging Basics
+title: 调试基础
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 :::note
-Debugging features, such as the Dev Menu, LogBox, and React Native DevTools are disabled in release (production) builds.
+调试功能（如开发菜单、LogBox 和 React Native DevTools）在发布（生产）构建中是禁用的。
 :::
 
-## Opening the Dev Menu
+## 打开开发菜单
 
-React Native provides an in-app developer menu providing access to debugging features. You can access the Dev Menu by shaking your device or via keyboard shortcuts:
+React Native 提供了一个应用内开发菜单，用于访问调试功能。你可以通过摇晃设备或使用键盘快捷键来访问开发菜单：
 
-- iOS Simulator: <kbd>Ctrl</kbd> + <kbd>Cmd ⌘</kbd> + <kbd>Z</kbd> (or Device > Shake)
-- Android emulators: <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS) or <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows and Linux)
+- iOS 模拟器：<kbd>Ctrl</kbd> + <kbd>Cmd ⌘</kbd> + <kbd>Z</kbd>（或 Device > Shake）
+- Android 模拟器：<kbd>Cmd ⌘</kbd> + <kbd>M</kbd>（macOS）或 <kbd>Ctrl</kbd> + <kbd>M</kbd>（Windows 和 Linux）
 
-Alternative (Android): `adb shell input keyevent 82`.
+替代方案 (Android)：`adb shell input keyevent 82`。
 
-![The React Native Dev Menu](/docs/assets/debugging-dev-menu-076.jpg)
+![React Native 开发菜单](/docs/assets/debugging-dev-menu-076.jpg)
 
-## Opening DevTools
+## 打开 DevTools
 
-[React Native DevTools](./react-native-devtools) is our built-in debugger for React Native. It allows you to inspect and understand how your JavaScript code is running, similar to a web browser.
+[React Native DevTools](./react-native-devtools) 是我们为 React Native 内置的调试器。它允许你检查和理解 JavaScript 代码的运行方式，类似于网页浏览器。
 
-To open DevTools, either:
+要打开 DevTools，可以：
 
-- Select "Open DevTools" in the Dev Menu.
-- Press <kbd>j</kbd> from the CLI (`npx react-native start`).
+- 在开发菜单中选择“打开 DevTools"。
+- 在 CLI 中按 <kbd>j</kbd> 键（`npx react-native start`）。
 
-On first launch, DevTools will open to a welcome panel, along with an open console drawer where you can view logs and interact with the JavaScript runtime. From the top of the window, you can navigate to other panels, including the integrated React Components Inspector and Profiler.
+首次启动时，DevTools 将打开欢迎面板，同时打开一个控制台抽屉，你可以在其中查看日志并与 JavaScript 运行时交互。从窗口顶部，你可以导航到其他面板，包括集成的 React 组件检查器和 Profiler。
 
-![React Native DevTools opened to the "Welcome" pane](/docs/assets/debugging-rndt-welcome.jpg)
+![React Native DevTools 打开到“欢迎”面板](/docs/assets/debugging-rndt-welcome.jpg)
 
-React Native DevTools is powered by a dedicated debugging architecture built into React Native and uses a customized build of the [Chrome DevTools](https://developer.chrome.com/docs/devtools) frontend. This enables us to offer familiar, browser-aligned debugging features that are deeply integrated and built for end-to-end reliability.
+React Native DevTools 由 React Native 内置的专用调试架构提供支持，并使用 [Chrome DevTools](https://developer.chrome.com/docs/devtools) 前端的定制版本。这使我们能够提供熟悉的、与浏览器一致的调试功能，这些功能深度集成且旨在实现端到端的可靠性。
 
-Learn more in our [React Native DevTools guide](./react-native-devtools).
+在我们的 [React Native DevTools 指南](./react-native-devtools) 中了解更多。
 
 :::note
-React Native DevTools is only available with the Hermes engine, and requires either Google Chrome or Microsoft Edge installed.
+React Native DevTools 仅适用于 Hermes 引擎，并且需要安装 Google Chrome 或 Microsoft Edge。
 :::
 
 :::info
 
-#### Flipper and alternative debugging tools
+#### Flipper 和替代调试工具
 
-React Native DevTools replaces the previous Flipper, Experimental Debugger, and Hermes debugger (Chrome) frontends. If you are on an older version of React Native, please go to the docs [for your version](/versions).
+React Native DevTools 取代了之前的 Flipper、Experimental Debugger 和 Hermes debugger (Chrome) 前端。如果你使用的是较旧版本的 React Native，请前往 [对应版本](/versions) 的文档。
 
-For apps using JavaScriptCore instead of Hermes, Direct JSC Debugging is still available (see [Other Debugging Methods](./other-debugging-methods)).
+对于使用 JavaScriptCore 而不是 Hermes 的应用，直接 JSC 调试仍然可用（参见 [其他调试方法](./other-debugging-methods)）。
 
-React Native DevTools is designed for debugging React app concerns, and not to replace native tools. If you want to inspect React Native’s underlying platform layers (for example, while developing a Native Module), please use the debugging tools available in Xcode and Android Studio (see [Debugging Native Code](/docs/next/debugging-native-code)).
+React Native DevTools 旨在调试 React 应用相关问题，而不是取代原生工具。如果你想检查 React Native 的底层平台层（例如，在开发原生模块时），请使用 Xcode 和 Android Studio 中可用的调试工具（参见 [调试原生代码](/docs/next/debugging-native-code)）。
 
-Other useful links:
+其他有用链接：
 
-- <a href="https://shift.infinite.red/why-you-dont-need-flipper-in-your-react-native-app-and-how-to-get-by-without-it-3af461955109" target="_blank">Why you don’t need Flipper in your React Native app … and how to get by without&nbsp;it&nbsp;↗</a>
+- <a href="https://shift.infinite.red/why-you-dont-need-flipper-in-your-react-native-app-and-how-to-get-by-without-it-3af461955109" target="_blank">为什么你在 React Native 应用中不需要 Flipper……以及如何在没有它的情况下开展工作 ↗</a>
 
 :::
 
 ## LogBox
 
-LogBox is an in-app tool that displays when warnings or errors are logged by your app.
+LogBox 是一个应用内工具，当你的应用记录警告或错误时会显示。
 
-![A LogBox warning and an expanded LogBox syntax error](/docs/assets/debugging-logbox-076.jpg)
+![LogBox 警告和展开的 LogBox 语法错误](/docs/assets/debugging-logbox-076.jpg)
 
-### Fatal Errors
+### 致命错误
 
-When an unrecoverable error occurs, such as a JavaScript syntax error, LogBox will open with the location of the error. In this state, LogBox is not dismissable since your code cannot be executed. LogBox will automatically dismiss once the syntax error is fixed — either via Fast Refresh or after a manual reload.
+当发生不可恢复的错误（例如 JavaScript 语法错误）时，LogBox 将打开并显示错误位置。在这种状态下，由于代码无法执行，LogBox 无法被关闭。一旦语法错误被修复，LogBox 将自动关闭——无论是通过快速刷新还是手动重新加载。
 
-### Console Errors and Warnings
+### 控制台错误和警告
 
-Console errors and warnings are displayed as on-screen notifications with a red or yellow badge.
+控制台错误和警告将显示为带有红色或黄色徽章的屏幕通知。
 
-- **Errors** will display with a notification count. Tap the notification to see an expanded view and to paginate through other logs.
-- **Warnings** will display a notification banner without details, prompting you to open React Native DevTools.
+- **错误**将显示通知计数。点击通知可查看展开视图并分页浏览其他日志。
+- **警告**将显示不含详情的通知横幅，提示你打开 React Native DevTools。
 
-When React Native DevTools is open, all errors except fatal errors will be hidden to LogBox. We recommend using the Console panel within React Native DevTools as a source of truth, due to various LogBox options which can hide or adjust the level of certain logs.
+当 React Native DevTools 打开时，除致命错误外的所有错误将对 LogBox 隐藏。我们建议使用 React Native DevTools 内的控制台面板作为真实来源，因为各种 LogBox 选项可能会隐藏或调整某些日志的级别。
 
 <details>
-<summary>**💡 Ignoring logs**</summary>
+<summary>**💡 忽略日志**</summary>
 
-LogBox can be configured via the `LogBox` API.
+可以通过 `LogBox` API 配置 LogBox。
 
 ```js
 import {LogBox} from 'react-native';
 ```
 
-#### Ignore all logs
+#### 忽略所有日志
 
-LogBox notifications can be disabled using `LogBox.ignoreAllLogs()`. This can be useful in situations such as giving product demos.
+可以使用 `LogBox.ignoreAllLogs()` 禁用 LogBox 通知。这在某些情况下很有用，例如进行产品演示。
 
 ```js
 LogBox.ignoreAllLogs();
 ```
 
-#### Ignore specific logs
+#### 忽略特定日志
 
-Notifications can be disabled on a per-log basis via `LogBox.ignoreLogs()`. This can be useful for noisy warnings or those that cannot be fixed, e.g. in a third-party dependency.
+可以通过 `LogBox.ignoreLogs()` 逐个日志地禁用通知。这对于嘈杂的警告或无法修复的警告（例如在第三方依赖中）很有用。
 
 ```js
 LogBox.ignoreLogs([
-  // Exact message
+  // 确切消息
   'Warning: componentWillReceiveProps has been renamed',
 
-  // Substring or regex match
+  // 子字符串或正则匹配
   /GraphQL error: .*/,
 ]);
 ```
 
 :::note
 
-LogBox will treat certain errors from React as warnings, which will mean they don't display as an in-app error notification. Advanced users can change this behaviour by customising LogBox's warning filter using [`LogBoxData.setWarningFilter()`](https://github.com/facebook/react-native/blob/d334f4d77eea538dff87fdcf2ebc090246cfdbb0/packages/react-native/Libraries/LogBox/Data/LogBoxData.js#L338).
+LogBox 会将来自 React 的某些错误视为警告，这意味着它们不会显示为应用内错误通知。高级用户可以通过使用 [`LogBoxData.setWarningFilter()`](https://github.com/facebook/react-native/blob/d334f4d77eea538dff87fdcf2ebc090246cfdbb0/packages/react-native/Libraries/LogBox/Data/LogBoxData.js#L338) 自定义 LogBox 的警告过滤器来更改此行为。
 
 :::
 
 </details>
 
-## Performance Monitor
+## 性能监视器
 
-On Android and iOS, an in-app performance overlay can be toggled during development by selecting **"Perf Monitor"** in the Dev Menu. Learn more about this feature [here](/docs/performance).
+在 Android 和 iOS 上，可以在开发期间通过在开发菜单中选择 **"Perf Monitor"** 来切换应用内性能覆盖层。在此 [处](/docs/performance) 了解更多关于此功能的信息。
 
-![The Performance Monitor overlay on iOS and Android](/docs/assets/debugging-performance-monitor.jpg)
+![iOS 和 Android 上的性能监视器覆盖层](/docs/assets/debugging-performance-monitor.jpg)
 
 :::info
-The Performance Monitor runs in-app and is a guide. We recommend investigating the native tooling under Android Studio and Xcode for accurate performance measurements.
+性能监视器在应用内运行，仅供参考。我们建议调查 Android Studio 和 Xcode 下的原生工具以获得准确的性能测量。
 :::

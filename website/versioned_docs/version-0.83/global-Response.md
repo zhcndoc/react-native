@@ -1,6 +1,6 @@
 ---
 id: global-Response
-title: Response
+title: 响应
 ---
 
 :::warning

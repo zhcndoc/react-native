@@ -266,7 +266,7 @@ export default App;
 状态栏的背景颜色。
 
 :::warning
-由于 Android 15 引入的沉浸式屏幕（edge-to-edge）规范，在 API 级别 35 中设置状态栏背景颜色已被废弃，且无效。关于沉浸式屏幕的更多建议请查看我们的[沉浸式屏幕推荐](https://github.com/react-native-community/discussions-and-proposals/discussions/827)。
+由于 Android 15 引入的沉浸式屏幕（edge-to-edge）规范，在 API 级别 35 中设置状态栏背景颜色已被废弃，且无效。关于沉浸式屏幕的更多建议请查看我们的 [沉浸式屏幕推荐](https://github.com/react-native-community/discussions-and-proposals/discussions/827)。
 :::
 
 | 类型             | 必填 | 默认值                                                |
@@ -322,7 +322,7 @@ export default App;
 状态栏是否半透明。设置为 `true` 时，应用会显示在状态栏之下，对半透明背景颜色场景很有用。
 
 :::warning
-由于 Android 15 引入的沉浸式屏幕规范，在 API 级别 35 中设置状态栏半透明已被废弃，且无效。更多沉浸式屏幕相关建议请参见[沉浸式屏幕推荐](https://github.com/react-native-community/discussions-and-proposals/discussions/827)。
+由于 Android 15 引入的沉浸式屏幕规范，在 API 级别 35 中设置状态栏半透明已被废弃，且无效。更多沉浸式屏幕相关建议请参见 [沉浸式屏幕推荐](https://github.com/react-native-community/discussions-and-proposals/discussions/827)。
 :::
 
 | 类型    | 默认值 |
@@ -392,7 +392,7 @@ static setBackgroundColor(color: ColorValue, animated?: boolean);
 设置状态栏背景颜色。
 
 :::warning
-由于 Android 15 的沉浸式屏幕规范，API 级别 35 后设置状态栏背景颜色已废弃且无效。详情见我们的[沉浸式屏幕推荐](https://github.com/react-native-community/discussions-and-proposals/discussions/827)。
+由于 Android 15 的沉浸式屏幕规范，API 级别 35 后设置状态栏背景颜色已废弃且无效。详情见我们的 [沉浸式屏幕推荐](https://github.com/react-native-community/discussions-and-proposals/discussions/827)。
 :::
 
 **参数：**
@@ -467,7 +467,7 @@ static setTranslucent(translucent: boolean);
 控制状态栏是否半透明。
 
 :::warning
-由于 Android 15 的沉浸式屏幕规范，API 级别 35 后设置状态栏半透明已废弃且无效。详情见我们的[沉浸式屏幕推荐](https://github.com/react-native-community/discussions-and-proposals/discussions/827)。
+由于 Android 15 的沉浸式屏幕规范，API 级别 35 后设置状态栏半透明已废弃且无效。详情见我们的 [沉浸式屏幕推荐](https://github.com/react-native-community/discussions-and-proposals/discussions/827)。
 :::
 
 **参数：**

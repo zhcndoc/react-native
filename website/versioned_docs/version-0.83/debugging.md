@@ -26,14 +26,14 @@ React Native 提供了一个应用内开发者菜单，可访问调试功能。�
 
 打开 DevTools 的方式有：
 
-- 在开发者菜单中选择 “打开 DevTools”。
+- 在开发者菜单中选择“打开 DevTools"。
 - 在命令行界面按下 <kbd>j</kbd>。
 
 ![React Native DevTools 打开到“欢迎”面板](/docs/assets/debugging-rndt-welcome-083.jpg)
 
 首次启动时，DevTools 会打开到欢迎面板，且打开控制台抽屉，你可以查看日志并与 JavaScript 运行时交互。你可以从窗口顶部导航到其他面板，包括集成的 React 组件检查器和性能分析器。
 
-更多信息请参阅我们的[React Native DevTools 指南](./react-native-devtools)。
+更多信息请参阅我们的 [React Native DevTools 指南](./react-native-devtools)。
 
 ## LogBox
 
@@ -95,7 +95,7 @@ LogBox 会将 React 的某些错误视为警告，因此它们不会作为应用
 
 ## 性能监控器
 
-在 Android 和 iOS 上，可以在开发时通过开发者菜单选择 **“性能监控器”（Perf Monitor）** 来切换应用内性能覆盖显示。你可以在[这里](/docs/performance)了解更多关于此功能的信息。
+在 Android 和 iOS 上，可以在开发时通过开发者菜单选择“性能监控器”（Perf Monitor）来切换应用内性能覆盖显示。你可以在 [这里](/docs/performance) 了解更多关于此功能的信息。
 
 ![iOS 和 Android 上的性能监控器覆盖层](/docs/assets/debugging-performance-monitor.jpg)
 

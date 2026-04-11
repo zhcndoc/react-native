@@ -264,7 +264,7 @@ static setAccessibilityFocus(reactTag: number);
 
 将无障碍焦点设置到 React 组件。
 
-在 Android 上，这会调用 `UIManager.sendAccessibilityEvent` 方法，并传入 `reactTag` 和 `UIManager.AccessibilityEventTypes.typeViewFocused` 参数。
+在安卓上，这会调用 `UIManager.sendAccessibilityEvent` 方法，并传入 `reactTag` 和 `UIManager.AccessibilityEventTypes.typeViewFocused` 参数。
 
 :::note
 确保任何你想要接收无障碍焦点的 `View` 都有 `accessible={true}`。
@@ -287,4 +287,4 @@ static sendAccessibilityEvent(host: HostInstance, eventType: AccessibilityEventT
 | 名称                                                           | 类型                    | 描述                                                                                                            |
 | -------------------------------------------------------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | host <div className="label basic required">必需</div>      | HostInstance            | 要发送事件的组件 ref。                                                                                |
-| eventType <div className="label basic required">必需</div> | AccessibilityEventTypes | `'click'`（仅 Android）、`'focus'`、`'viewHoverEnter'`（仅 Android）或 `'windowStateChange'`（仅 Android）之一 |
+| eventType <div className="label basic required">必需</div> | AccessibilityEventTypes | `'click'`（仅安卓）、`'focus'`、`'viewHoverEnter'`（仅安卓）或 `'windowStateChange'`（仅安卓）之一 |

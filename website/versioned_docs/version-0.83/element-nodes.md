@@ -5,9 +5,9 @@ title: 元素节点
 
 元素节点代表原生视图树中的原生组件（类似于 Web 上的 [Element](https://developer.mozilla.org/en-US/docs/Web/API/Element) 节点）。
 
-它们由所有原生组件以及许多内置组件通过 refs 提供：
+它们由所有原生组件以及许多内置组件通过 ref 提供：
 
-```SnackPlayer ext=js&name=Element%20instances%20example
+```SnackPlayer ext=js&name=元素实例示例
 import * as React from 'react';
 import { View, SafeAreaView, StyleSheet, Text } from 'react-native';
 

@@ -65,7 +65,7 @@ rootView.appProperties = @{@"images" : imageList};
 
 ### 从 React Native 传递属性到原生
 
-关于暴露原生组件属性的问题，[这篇文章](legacy/native-components-ios#properties)做了详细介绍。简而言之，在自定义的原生组件中使用 `RCT_CUSTOM_VIEW_PROPERTY` 宏导出属性，然后在 React Native 中像使用普通 React Native 组件一样使用它们。
+关于暴露原生组件属性的问题，[这篇文章](legacy/native-components-ios#properties) 做了详细介绍。简而言之，在自定义的原生组件中使用 `RCT_CUSTOM_VIEW_PROPERTY` 宏导出属性，然后在 React Native 中像使用普通 React Native 组件一样使用它们。
 
 ### 属性的局限性
 
@@ -93,13 +93,13 @@ React Native 允许跨语言函数调用。你可以从 JS 执行自定义原生
 
 ### 从 React Native 调用原生函数（原生模块）
 
-原生模块是 Objective-C 类，在 JS 端可用。通常每个 JS 桥接会创建该模块的一个实例。它们向 React Native 导出任意函数和常量。[这篇文章](legacy/native-modules-ios#content)有详细介绍。
+原生模块是 Objective-C 类，在 JS 端可用。通常每个 JS 桥接会创建该模块的一个实例。它们向 React Native 导出任意函数和常量。[这篇文章](legacy/native-modules-ios#content) 有详细介绍。
 
 原生模块是单例，这限制了嵌入场景的使用。比如，我们有个嵌入在原生视图中的 RN 组件，要更新原生父视图。通过原生模块，我们导出一个函数，不仅带预期参数，还得带父视图标识符以获取引用用于更新。为此，模块中需维护标识符到原生视图的映射。
 
 虽然该方案复杂，但在内部 React Native 类 `RCTUIManager` 中使用，用以管理所有 React Native 视图。
 
-原生模块也可用于将已有原生库暴露给 JS。[Geolocation 库](https://github.com/michalchudziak/react-native-geolocation)是一个活生生的示例。
+原生模块也可用于将已有原生库暴露给 JS。[Geolocation 库](https://github.com/michalchudziak/react-native-geolocation) 是一个活生生的示例。
 
 :::caution
 所有原生模块共享同一命名空间。创建新模块时务必注意命名冲突。

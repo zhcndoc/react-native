@@ -67,7 +67,7 @@ yarn install
 
 ### Xcode 命令行工具
 
-安装命令行工具。打开 Xcode 菜单，选择 **设置…（或偏好设置…）**，进入 Locations 面板，在 “Command Line Tools” 下拉框中选择最新版本并安装。
+安装命令行工具。打开 Xcode 菜单，选择 **设置…（或偏好设置…）**，进入 Locations 面板，在 "Command Line Tools" 下拉框中选择最新版本并安装。
 
 ![Xcode 命令行工具](/docs/assets/GettingStartedXcodeCommandLineTools.png)
 
@@ -249,7 +249,7 @@ React Native 可以通过名为 `RCTReactNativeFactory` 的类来初始化，它
 
 新建一个文件（快捷键 <kbd>⌘</kbd>+<kbd>N</kbd>），选择 Cocoa Touch Class 模板。
 
-确保 “Subclass of” 字段选择 `UIViewController`。
+确保 "Subclass of" 字段选择 `UIViewController`。
 
 <Tabs groupId="ios-language" queryString defaultValue={constants.defaultAppleLanguage} values={constants.appleLanguages}>
 <TabItem value="objc">
@@ -279,7 +279,7 @@ React Native 可以通过名为 `RCTReactNativeFactory` 的类来初始化，它
 
  - (void)viewDidLoad {
      [super viewDidLoad];
-     // Do any additional setup after loading the view.
+     // 加载视图后进行任何额外的设置。
 +    _factoryDelegate = [ReactNativeFactoryDelegate new];
 +    _factoryDelegate.dependencyProvider = [RCTAppDependencyProvider new];
 +    _factory = [[RCTReactNativeFactory alloc] initWithDelegate:_factoryDelegate];
@@ -375,7 +375,7 @@ class ReactViewController: UIViewController {
 
  - (void)viewDidLoad {
    [super viewDidLoad];
-   // Do any additional setup after loading the view.
+   // 加载视图后进行任何额外的设置。
    self.view.backgroundColor = UIColor.systemBackgroundColor;
 +  UIButton *button = [UIButton new];
 +  [button setTitle:@"Open React Native" forState:UIControlStateNormal];
@@ -416,7 +416,7 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view.
+    // 加载视图后进行任何额外的设置。
     self.view.backgroundColor = .systemBackground
 
 +    let button = UIButton()
@@ -446,7 +446,7 @@ class ViewController: UIViewController {
 </TabItem>
 </Tabs>
 
-确保禁用 Sandbox 脚本。方法是在 Xcode 中点击你的应用，进入构建设置，搜索 script，将 “User Script Sandboxing” 设置为 `NO`。此步骤是为了正确切换我们与 React Native 一起发布的 [Hermes 引擎](https://github.com/facebook/hermes/blob/main/README.md) 的调试和发布版本。
+确保禁用 Sandbox 脚本。方法是在 Xcode 中点击你的应用，进入构建设置，搜索 script，将 "User Script Sandboxing" 设置为 `NO`。此步骤是为了正确切换我们与 React Native 一起发布的 [Hermes 引擎](https://github.com/facebook/hermes/blob/main/README.md) 的调试和发布版本。
 
 ![禁用 Sandbox](/docs/assets/disable-sandboxing.png)
 
@@ -456,7 +456,7 @@ class ViewController: UIViewController {
 
 ## 6. 测试你的集成
 
-你已完成将 React Native 集成到应用的基本步骤。现在我们启动 [Metro 打包器](https://metrobundler.dev/) 将你的 TypeScript 代码打包成 bundle。Metro 的 HTTP 服务器会将 bundle 从开发环境的 `localhost` 共享到模拟器或设备，实现[热更新](https://reactnative.dev/blog/2016/03/24/introducing-hot-reloading)。
+你已完成将 React Native 集成到应用的基本步骤。现在我们启动 [Metro 打包器](https://metrobundler.dev/) 将你的 TypeScript 代码打包成 bundle。Metro 的 HTTP 服务器会将 bundle 从开发环境的 `localhost` 共享到模拟器或设备，实现 [热更新](https://reactnative.dev/blog/2016/03/24/introducing-hot-reloading)。
 
 首先，你需要在项目根目录创建一个 `metro.config.js` 文件，内容如下：
 

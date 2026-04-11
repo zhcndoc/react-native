@@ -1,24 +1,24 @@
 ---
 id: app-extensions
-title: App Extensions
+title: App 扩展
 ---
 
-App extensions let you provide custom functionality and content outside of your main app. There are different types of app extensions on iOS, and they are all covered in the [App Extension Programming Guide](https://developer.apple.com/library/content/documentation/General/Conceptual/ExtensibilityPG/index.html#//apple_ref/doc/uid/TP40014214-CH20-SW1). In this guide, we'll briefly cover how you may take advantage of app extensions on iOS.
+App 扩展允许你在主应用程序之外提供自定义功能和内容。iOS 上有不同类型的 app 扩展，它们都在 [App 扩展编程指南](https://developer.apple.com/library/content/documentation/General/Conceptual/ExtensibilityPG/index.html#//apple_ref/doc/uid/TP40014214-CH20-SW1) 中涵盖。在本指南中，我们将简要介绍如何在 iOS 上使用 app 扩展。
 
-## Memory use in extensions
+## 扩展中的内存使用
 
-As these extensions are loaded outside of the regular app sandbox, it's highly likely that several of these app extensions will be loaded simultaneously. As you might expect, these extensions have small memory usage limits. Keep these in mind when developing your app extensions. It's always highly recommended to test your application on an actual device, and more so when developing app extensions: too frequently, developers find that their extension works fine in the iOS Simulator, only to get user reports that their extension is not loading on actual devices.
+由于这些扩展是在常规应用沙盒之外加载的，因此很可能会有多个这样的 app 扩展同时加载。正如你所料，这些扩展有很小的内存使用限制。在开发你的 app 扩展时请记住这一点。始终强烈建议在真实设备上测试你的应用程序，在开发 app 扩展时更是如此：开发人员经常发现他们的扩展在 iOS 模拟器中运行良好，却收到用户报告说他们的扩展在真实设备上无法加载。
 
-### Today widget
+### Today 小组件
 
-The memory limit of a Today widget is 16 MB. As it happens, Today widget implementations using React Native may work unreliably because the memory usage tends to be too high. You can tell if your Today widget is exceeding the memory limit if it yields the message 'Unable to Load':
+Today 小组件的内存限制为 16 MB。事实上，使用 React Native 实现的 Today 小组件可能工作不可靠，因为内存使用量往往过高。如果你的 Today 小组件显示消息 'Unable to Load'，则表明它超出了内存限制：
 
 ![](/docs/assets/TodayWidgetUnableToLoad.jpg)
 
-Always make sure to test your app extensions in a real device, but be aware that this may not be sufficient, especially when dealing with Today widgets. Debug-configured builds are more likely to exceed the memory limits, while release-configured builds don't fail right away. We highly recommend that you use [Xcode's Instruments](https://developer.apple.com/library/content/documentation/DeveloperTools/Conceptual/InstrumentsUserGuide/index.html) to analyze your real world memory usage, as it's very likely that your release-configured build is very close to the 16 MB limit. In situations like these, you can quickly go over the 16 MB limit by performing common operations, such as fetching data from an API.
+务必确保在真实设备上测试你的 app 扩展，但要注意这可能还不够，尤其是在处理 Today 小组件时。Debug 构建更可能超出内存限制，而 Release 构建不会立即失败。我们强烈建议你使用 [Xcode 的 Instruments](https://developer.apple.com/library/content/documentation/DeveloperTools/Conceptual/InstrumentsUserGuide/index.html) 来分析你的实际内存使用情况，因为你的 Release 构建很可能非常接近 16 MB 限制。在这种情况下，执行常见操作（例如从 API 获取数据）可能会迅速超过 16 MB 限制。
 
-To experiment with the limits of React Native Today widget implementations, try extending the example project in [react-native-today-widget](https://github.com/matejkriz/react-native-today-widget/).
+为了尝试 React Native Today 小组件实现的限制，请尝试扩展 [react-native-today-widget](https://github.com/matejkriz/react-native-today-widget/) 中的示例项目。
 
-### Other app extensions
+### 其他 App 扩展
 
-Other types of app extensions have greater memory limits than the Today widget. For instance, Custom Keyboard extensions are limited to 48 MB, and Share extensions are limited to 120 MB. Implementing such app extensions with React Native is more viable. One proof of concept example is [react-native-ios-share-extension](https://github.com/andrewsardone/react-native-ios-share-extension).
+其他类型的 app 扩展比 Today 小组件有更大的内存限制。例如，自定义键盘扩展限制为 48 MB，共享扩展限制为 120 MB。使用 React Native 实现此类 app 扩展更为可行。一个概念验证示例是 [react-native-ios-share-extension](https://github.com/andrewsardone/react-native-ios-share-extension)。

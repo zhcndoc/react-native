@@ -13,7 +13,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 ### 1. 运行 Codegen
 
-你可以[手动运行](the-new-architecture/codegen-cli) Codegen，但更简单的方法是使用你打算演示组件的应用程序来帮你运行。
+你可以 [手动运行](the-new-architecture/codegen-cli) Codegen，但更简单的方法是使用你打算演示组件的应用程序来帮你运行。
 
 ```bash
 cd ios
@@ -210,7 +210,7 @@ Web 视图需要访问 Apple 通过 Xcode 和设备带来的框架之一 —— 
 1. 在 Xcode 中点击你的项目。
 2. 选择应用目标（app target）。
 3. 选择 General 选项卡。
-4. 向下滚动，找到 _“Frameworks, Libraries, and Embedded Contents”_ 区域，然后点击 `+` 按钮。
+4. 向下滚动，找到 _"Frameworks, Libraries, and Embedded Contents"_ 区域，然后点击 `+` 按钮。
 
 <img className="half-size" alt="给你的应用添加 WebKit 框架 1" src="/docs/assets/AddWebKitFramework1.png" />
 

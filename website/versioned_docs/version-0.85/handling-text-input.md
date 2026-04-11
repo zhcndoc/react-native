@@ -5,7 +5,7 @@ title: 处理文本输入
 
 [`TextInput`](textinput#content) 是一个 [核心组件](intro-react-native-components)，允许用户输入文本。它有一个 `onChangeText` 属性，接受一个函数，每次文本更改时都会调用该函数；还有一个 `onSubmitEditing` 属性，接受一个函数，在文本提交时调用。
 
-例如，假设当用户输入时，你将他们的单词翻译成另一种语言。在这种新语言中，每个单词的写法都一样：🍕。所以句子 "Hello there Bob" 会被翻译成 "🍕 🍕 🍕"。
+例如，假设当用户输入时，你将他们的单词翻译成另一种语言。在这种新语言中，每个单词的写法都一样：🍕。所以句子 "你好 鲍勃" 会被翻译成 "🍕 🍕 🍕"。
 
 ```SnackPlayer name=Handling%20Text%20Input
 import React, {useState} from 'react';

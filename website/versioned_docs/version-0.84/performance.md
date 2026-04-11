@@ -5,13 +5,13 @@ title: 性能概览
 
 使用 React Native 而非基于 WebView 的工具的一个有力理由是为了实现至少 60 帧每秒的流畅体验，并为你的应用提供原生的外观和感觉。我们力求让 React Native 自动处理优化，让你可以专注于应用开发而无需担心性能问题。然而，有些方面我们尚未达到理想水平，还有一些情况和直接编写原生代码类似，React Native 无法帮你决定最佳的优化方案，这时就需要手动干预。我们争取默认实现丝滑顺畅的 UI 性能，但有些情况下这可能无法做到。
 
-本指南旨在教你一些基础知识，帮助你[排查性能问题](profiling.md)，并讨论[常见性能问题的来源及建议的解决方案](performance.md#common-sources-of-performance-problems)。
+本指南旨在教你一些基础知识，帮助你 [排查性能问题](profiling.md)，并讨论 [常见性能问题的来源及建议的解决方案](performance.md#common-sources-of-performance-problems)。
 
 ## 你需要了解的关于帧的信息
 
-你祖父母那代称电影为["活动影像"](https://www.youtube.com/watch?v=F1i40rnpOsA)是有原因的：视频中的真实运动是一种由快速切换的静态图片以恒定速度产生的错觉。我们将这些图片称为帧。每秒显示的帧数直接影响视频（或用户界面）的流畅度和逼真感。iOS 和 Android 设备至少以 60 帧每秒的速度显示，这意味着你和 UI 系统最多有 16.67 毫秒的时间来完成生成用户在该时间段内看到的静态图片（帧）所需的所有工作。如果你未能在规定时间内完成该帧图像的生成，就会“丢帧”，界面看起来就会无响应。
+你祖父母那代称电影为 ["活动影像"](https://www.youtube.com/watch?v=F1i40rnpOsA) 是有原因的：视频中的真实运动是一种由快速切换的静态图片以恒定速度产生的错觉。我们将这些图片称为帧。每秒显示的帧数直接影响视频（或用户界面）的流畅度和逼真感。iOS 和 Android 设备至少以 60 帧每秒的速度显示，这意味着你和 UI 系统最多有 16.67 毫秒的时间来完成生成用户在该时间段内看到的静态图片（帧）所需的所有工作。如果你未能在规定时间内完成该帧图像的生成，就会“丢帧”，界面看起来就会无响应。
 
-为使问题更复杂一些，在你的应用中打开[开发者菜单](debugging.md#opening-the-dev-menu)并切换 `Show Perf Monitor`。你会注意到有两个不同的帧率。
+为使问题更复杂一些，在你的应用中打开 [开发者菜单](debugging.md#opening-the-dev-menu) 并切换 `Show Perf Monitor`。你会注意到有两个不同的帧率。
 
 ![性能监视器截图](/docs/assets/PerfUtil.png)
 
@@ -31,7 +31,7 @@ title: 性能概览
 
 ### 以开发模式运行（`dev=true`）
 
-JavaScript 线程性能在开发模式下大打折扣。这是不可避免的：为了给你提供良好的警告和错误信息，运行时需要做更多工作。务必在[发布版本](running-on-device.md#building-your-app-for-production)中测试性能。
+JavaScript 线程性能在开发模式下大打折扣。这是不可避免的：为了给你提供良好的警告和错误信息，运行时需要做更多工作。务必在 [发布版本](running-on-device.md#building-your-app-for-production) 中测试性能。
 
 ### 使用 `console.log` 语句
 
@@ -61,9 +61,9 @@ JavaScript 线程性能在开发模式下大打折扣。这是不可避免的：
 
 “导航器过渡缓慢”是最常见的表现，但也可能出现在其他场景。使用 [`InteractionManager`](interactionmanager.md) 是一种好方法，但如果延迟执行工作会对用户体验产生较大影响，则可能需要考虑使用 [`LayoutAnimation`](layoutanimation.md)。
 
-目前，[`Animated API`](animated.md) 会在 JavaScript 线程按需计算每一关键帧，除非你[设置 `useNativeDriver: true`](/blog/2017/02/14/using-native-driver-for-animated#how-do-i-use-this-in-my-app)，而 [`LayoutAnimation`](layoutanimation.md) 利用 Core Animation，不受 JS 和主线程丢帧影响。
+目前，[`Animated API`](animated.md) 会在 JavaScript 线程按需计算每一关键帧，除非你 [设置 `useNativeDriver: true`](/blog/2017/02/14/using-native-driver-for-animated#how-do-i-use-this-in-my-app)，而 [`LayoutAnimation`](layoutanimation.md) 利用 Core Animation，不受 JS 和主线程丢帧影响。
 
-使用 `LayoutAnimation` 的一个场景是：在弹出模态窗口（从上方滑出且淡入半透明遮罩层）时，同时初始化并可能接收多条网络请求响应，渲染模态内容并更新模态窗口打开位置的视图。有关如何使用 `LayoutAnimation`，请参阅[动画指南](animations.md)。
+使用 `LayoutAnimation` 的一个场景是：在弹出模态窗口（从上方滑出且淡入半透明遮罩层）时，同时初始化并可能接收多条网络请求响应，渲染模态内容并更新模态窗口打开位置的视图。有关如何使用 `LayoutAnimation`，请参阅 [动画指南](animations.md)。
 
 **注意事项：**
 

@@ -3,9 +3,9 @@ id: button
 title: Button
 ---
 
-A basic button component that should render nicely on any platform. Supports a minimal level of customization.
+一个基本的按钮组件，应在任何平台上都能良好渲染。支持最低程度的自定义。
 
-If this button doesn't look right for your app, you can build your own button using [Pressable](pressable). For inspiration, look at the [source code for the Button component](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Components/Button.js).
+如果此按钮不适合您的应用，您可以使用 [Pressable](pressable) 构建自己的按钮。如需灵感，请查看 [Button 组件的源代码](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Components/Button.js)。
 
 ```tsx
 <Button
@@ -16,7 +16,7 @@ If this button doesn't look right for your app, you can build your own button us
 />
 ```
 
-## Example
+## 示例
 
 ```SnackPlayer name=Button%20Example
 import React from 'react';
@@ -108,13 +108,13 @@ export default App;
 
 ---
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
-### <div className="label required basic">Required</div>**`onPress`**
+### <div className="label required basic">必需</div>**`onPress`**
 
-Handler to be called when the user taps the button.
+当用户点击按钮时调用的处理函数。
 
 | Type                                           |
 | ---------------------------------------------- |
@@ -122,9 +122,9 @@ Handler to be called when the user taps the button.
 
 ---
 
-### <div className="label required basic">Required</div>**`title`**
+### <div className="label required basic">必需</div>**`title`**
 
-Text to display inside the button. On Android the given title will be converted to the uppercased form.
+按钮内显示的文本。在 Android 上，给定的标题将被转换为大写形式。
 
 | Type   |
 | ------ |
@@ -134,7 +134,7 @@ Text to display inside the button. On Android the given title will be converted 
 
 ### `accessibilityLabel`
 
-Text to display for blindness accessibility features.
+为盲人无障碍功能显示的文本。
 
 | Type   |
 | ------ |
@@ -144,9 +144,9 @@ Text to display for blindness accessibility features.
 
 ### `accessibilityLanguage` <div className="label ios">iOS</div>
 
-A value indicating which language should be used by the screen reader when the user interacts with the element. It should follow the [BCP 47 specification](https://www.rfc-editor.org/info/bcp47).
+表示屏幕阅读器在与元素交互时应使用哪种语言的值。它应遵循 [BCP 47 规范](https://www.rfc-editor.org/info/bcp47)。
 
-See the [iOS `accessibilityLanguage` doc](https://developer.apple.com/documentation/objectivec/nsobject/1615192-accessibilitylanguage) for more information.
+请参阅 [iOS `accessibilityLanguage` 文档](https://developer.apple.com/documentation/objectivec/nsobject/1615192-accessibilitylanguage) 以获取更多信息。
 
 | Type   |
 | ------ |
@@ -156,31 +156,31 @@ See the [iOS `accessibilityLanguage` doc](https://developer.apple.com/documentat
 
 ### `accessibilityActions`
 
-Accessibility actions allow an assistive technology to programmatically invoke the actions of a component. The `accessibilityActions` property should contain a list of action objects. Each action object should contain the field name and label.
+无障碍操作允许辅助技术以编程方式调用组件的操作。`accessibilityActions` 属性应包含一个操作对象列表。每个操作对象应包含字段 name 和 label。
 
-See the [Accessibility guide](accessibility.md#accessibility-actions) for more information.
+请参阅 [无障碍指南](accessibility.md#accessibility-actions) 以获取更多信息。
 
 | Type  | Required |
 | ----- | -------- |
-| array | No       |
+| array | 否       |
 
 ---
 
 ### `onAccessibilityAction`
 
-Invoked when the user performs the accessibility actions. The only argument to this function is an event containing the name of the action to perform.
+当用户执行无障碍操作时调用。此函数的唯一参数是一个包含要执行的操作名称的事件。
 
-See the [Accessibility guide](accessibility.md#accessibility-actions) for more information.
+请参阅 [无障碍指南](accessibility.md#accessibility-actions) 以获取更多信息。
 
 | Type     | Required |
 | -------- | -------- |
-| function | No       |
+| function | 否       |
 
 ---
 
 ### `color`
 
-Color of the text (iOS), or background color of the button (Android).
+文本颜色 (iOS)，或按钮背景颜色 (Android)。
 
 ```mdx-code-block
 export function ColorDefaults() {
@@ -198,13 +198,13 @@ export function ColorDefaults() {
 
 | Type            | Default          |
 | --------------- | ---------------- |
-| [color](colors) | <ColorDefaults/> |
+| [颜色](colors) | <ColorDefaults/> |
 
 ---
 
 ### `disabled`
 
-If `true`, disable all interactions for this component.
+如果 `true`，禁用此组件的所有交互。
 
 | Type | Default |
 | ---- | ------- |
@@ -214,7 +214,7 @@ If `true`, disable all interactions for this component.
 
 ### `hasTVPreferredFocus` <div className="label tv">TV</div>
 
-TV preferred focus.
+TV 首选焦点。
 
 | Type | Default |
 | ---- | ------- |
@@ -224,7 +224,7 @@ TV preferred focus.
 
 ### `nextFocusDown` <div className="label android">Android</div><div className="label tv">TV</div>
 
-Designates the next view to receive focus when the user navigates down. See the [Android documentation](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusDown).
+指定用户向下导航时接收焦点的下一个视图。请参阅 [Android 文档](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusDown)。
 
 | Type   |
 | ------ |
@@ -234,7 +234,7 @@ Designates the next view to receive focus when the user navigates down. See the 
 
 ### `nextFocusForward` <div className="label android">Android</div><div className="label tv">TV</div>
 
-Designates the next view to receive focus when the user navigates forward. See the [Android documentation](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusForward).
+指定用户向前导航时接收焦点的下一个视图。请参阅 [Android 文档](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusForward)。
 
 | Type   |
 | ------ |
@@ -244,7 +244,7 @@ Designates the next view to receive focus when the user navigates forward. See t
 
 ### `nextFocusLeft` <div className="label android">Android</div><div className="label tv">TV</div>
 
-Designates the next view to receive focus when the user navigates left. See the [Android documentation](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusLeft).
+指定用户向左导航时接收焦点的下一个视图。请参阅 [Android 文档](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusLeft)。
 
 | Type   |
 | ------ |
@@ -254,7 +254,7 @@ Designates the next view to receive focus when the user navigates left. See the 
 
 ### `nextFocusRight` <div className="label android">Android</div><div className="label tv">TV</div>
 
-Designates the next view to receive focus when the user navigates right. See the [Android documentation](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusRight).
+指定用户向右导航时接收焦点的下一个视图。请参阅 [Android 文档](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusRight)。
 
 | Type   |
 | ------ |
@@ -264,7 +264,7 @@ Designates the next view to receive focus when the user navigates right. See the
 
 ### `nextFocusUp` <div className="label android">Android</div><div className="label tv">TV</div>
 
-Designates the next view to receive focus when the user navigates up. See the [Android documentation](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusUp).
+指定用户向上导航时接收焦点的下一个视图。请参阅 [Android 文档](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusUp)。
 
 | Type   |
 | ------ |
@@ -274,7 +274,7 @@ Designates the next view to receive focus when the user navigates up. See the [A
 
 ### `testID`
 
-Used to locate this view in end-to-end tests.
+用于在端到端测试中定位此视图。
 
 | Type   |
 | ------ |
@@ -284,7 +284,7 @@ Used to locate this view in end-to-end tests.
 
 ### `touchSoundDisabled` <div className="label android">Android</div>
 
-If `true`, doesn't play system sound on touch.
+如果 `true`，点击时不播放系统声音。
 
 | Type    | Default |
 | ------- | ------- |

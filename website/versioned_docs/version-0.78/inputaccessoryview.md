@@ -3,9 +3,9 @@ id: inputaccessoryview
 title: InputAccessoryView
 ---
 
-A component which enables customization of the keyboard input accessory view on iOS. The input accessory view is displayed above the keyboard whenever a `TextInput` has focus. This component can be used to create custom toolbars.
+一个允许自定义 iOS 键盘输入辅助视图（keyboard input accessory view）的组件。每当 `TextInput` 获得焦点时，输入辅助视图会显示在键盘上方。此组件可用于创建自定义工具栏。
 
-To use this component wrap your custom toolbar with the InputAccessoryView component, and set a `nativeID`. Then, pass that `nativeID` as the `inputAccessoryViewID` of whatever `TextInput` you desire. A basic example:
+要使用此组件，请用 InputAccessoryView 组件包裹你的自定义工具栏，并设置一个 `nativeID`。然后，将该 `nativeID` 作为你想要的任何 `TextInput` 的 `inputAccessoryViewID` 传递。一个基本示例：
 
 ```SnackPlayer name=InputAccessoryView&supportedPlatforms=ios
 import React, {useState} from 'react';
@@ -60,39 +60,39 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-This component can also be used to create sticky text inputs (text inputs which are anchored to the top of the keyboard). To do this, wrap a `TextInput` with the `InputAccessoryView` component, and don't set a `nativeID`. For an example, look at [InputAccessoryViewExample.js](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/InputAccessoryView/InputAccessoryViewExample.js).
+此组件还可用于创建粘性文本输入框（固定在键盘顶部的文本输入框）。为此，请用 `InputAccessoryView` 组件包裹一个 `TextInput`，并且不要设置 `nativeID`。例如，请参阅 [InputAccessoryViewExample.js](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/InputAccessoryView/InputAccessoryViewExample.js)。
 
 ---
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
 ### `backgroundColor`
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `nativeID`
 
-An ID which is used to associate this `InputAccessoryView` to specified TextInput(s).
+一个用于将此 `InputAccessoryView` 与指定 TextInput 关联的 ID。
 
-| Type   |
+| 类型   |
 | ------ |
-| string |
+| 字符串 |
 
 ---
 
 ### `style`
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
-| [View Style](view-style-props.md) |
+| [视图样式](view-style-props.md) |
 
-# Known issues
+# 已知问题
 
-- [react-native#18997](https://github.com/facebook/react-native/issues/18997): Doesn't support multiline `TextInput`
-- [react-native#20157](https://github.com/facebook/react-native/issues/20157): Can't use with a bottom tab bar
+- [react-native#18997](https://github.com/facebook/react-native/issues/18997): 不支持多行 `TextInput`
+- [react-native#20157](https://github.com/facebook/react-native/issues/20157): 无法与底部标签栏一起使用

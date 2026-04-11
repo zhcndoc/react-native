@@ -100,7 +100,7 @@ export default App;
 
 ### [视图属性](view.md#props)
 
-继承自[视图属性](view.md#props)。
+继承自 [视图属性](view.md#props)。
 
 ---
 
@@ -124,7 +124,7 @@ export default App;
 
 | 类型                                 | 默认值  |
 | ------------------------------------ | ------- |
-| 枚举(`'none'`, `'slide'`, `'fade'`) | `none`  |
+| 枚举 (`'none'`, `'slide'`, `'fade'`) | `none`  |
 
 ---
 
@@ -191,7 +191,7 @@ export default App;
 
 ### `ref`
 
-一个 ref 设置器，当组件挂载时将被赋予对应的[元素节点](element-nodes)。
+一个 ref 设置器，当组件挂载时将被赋予对应的 [元素节点](element-nodes)。
 
 ---
 
@@ -229,7 +229,7 @@ export default App;
 
 | 类型                                                                 | 默认值                                                                                  |
 | -------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| 枚举(`'fullScreen'`, `'pageSheet'`, `'formSheet'`, `'overFullScreen'`) | `fullScreen`（当 `transparent={false}`）<hr />`overFullScreen`（当 `transparent={true}`） |
+| 枚举 (`'fullScreen'`, `'pageSheet'`, `'formSheet'`, `'overFullScreen'`) | `fullScreen`（当 `transparent={false}`）<hr />`overFullScreen`（当 `transparent={true}`） |
 
 ---
 
@@ -253,7 +253,7 @@ export default App;
 
 | 类型                                                                                                         | 默认值         |
 | ------------------------------------------------------------------------------------------------------------ | -------------- |
-| 枚举数组(`'portrait'`, `'portrait-upside-down'`, `'landscape'`, `'landscape-left'`, `'landscape-right'`)      | `['portrait']` |
+| 枚举数组 (`'portrait'`, `'portrait-upside-down'`, `'landscape'`, `'landscape-left'`, `'landscape-right'`)      | `['portrait']` |
 
 ---
 

@@ -1,24 +1,24 @@
 ---
 id: accessibility
-title: Accessibility
-description: Create mobile apps accessible to assistive technology with React Native's suite of APIs designed to work with Android and iOS.
+title: 无障碍功能
+description: 使用 React Native 专为 Android 和 iOS 设计的一套 API，创建可通过辅助技术访问的移动应用。
 ---
 
-Both Android and iOS provide APIs for integrating apps with assistive technologies like the bundled screen readers VoiceOver (iOS) and TalkBack (Android). React Native has complementary APIs that let your app accommodate all users.
+Android 和 iOS 都提供了将应用与辅助技术（如内置的屏幕阅读器 VoiceOver (iOS) 和 TalkBack (Android)）集成的 API。React Native 拥有互补的 API，让你的应用能够容纳所有用户。
 
 :::info
-Android and iOS differ slightly in their approaches, and thus the React Native implementations may vary by platform.
+Android 和 iOS 的方法略有不同，因此 React Native 的实现可能因平台而异。
 :::
 
-## Accessibility properties
+## 无障碍属性
 
 ### `accessible`
 
-When `true`, indicates that the view is discoverable by assistive technologies such as screen readers and hardware keyboards. Note that this does not necessarily mean that the view will be focused by VoiceOver or TalkBack. There are a number of reasons for this, such as VoiceOver disallowing nested accessibility elements, or TalkBack opting to focus some parent element instead.
+当为 `true` 时，表示该视图可被屏幕阅读器和硬件键盘等辅助技术发现。请注意，这并不一定意味着该视图将被 VoiceOver 或 TalkBack 聚焦。有很多原因会导致这种情况，例如 VoiceOver 不允许嵌套的无障碍元素，或者 TalkBack 选择聚焦某些父元素 instead。
 
-By default, all touchable elements are accessible.
+默认情况下，所有可触摸元素都是可访问的。
 
-On Android, `accessible` will be translated into native [`focusable`](<https://developer.android.com/reference/android/view/View#setFocusable(boolean)>). On iOS, it translates into native [`isAccessibilityElement`](https://developer.apple.com/documentation/uikit/uiaccessibilityelement/isaccessibilityelement?language=objc).
+在 Android 上，`accessible` 将被转换为原生的 [`focusable`](<https://developer.android.com/reference/android/view/View#setFocusable(boolean)>)。在 iOS 上，它转换为原生的 [`isAccessibilityElement`](https://developer.apple.com/documentation/uikit/uiaccessibilityelement/isaccessibilityelement?language=objc)。
 
 ```tsx
 <View>
@@ -27,13 +27,13 @@ On Android, `accessible` will be translated into native [`focusable`](<https://d
 </View>
 ```
 
-In the above example, accessibility focus is only available on the first child view with the `accessible` property, and not for the parent or sibling without `accessible`.
+在上面的示例中，无障碍焦点仅适用于具有 `accessible` 属性的第一个子视图，而不适用于没有 `accessible` 的父级或兄弟元素。
 
 ### `accessibilityLabel`
 
-When a view is marked as accessible, it is a good practice to set an `accessibilityLabel` on the view, so that people who use VoiceOver or TalkBack know what element they have selected. A screen reader will verbalize this string when the associated element is selected.
+当视图被标记为可访问时，最好在视图上设置 `accessibilityLabel`，以便使用 VoiceOver 或 TalkBack 的用户知道他们选择了什么元素。当选择关联元素时，屏幕阅读器将口头表达此字符串。
 
-To use, set the `accessibilityLabel` property to a custom string on your View, Text, or Touchable:
+使用时，在 View、Text 或 Touchable 上将 `accessibilityLabel` 属性设置为自定义字符串：
 
 ```tsx
 <TouchableOpacity
@@ -46,12 +46,12 @@ To use, set the `accessibilityLabel` property to a custom string on your View, T
 </TouchableOpacity>
 ```
 
-In the above example, the `accessibilityLabel` on the TouchableOpacity element would default to "Press me!". The label is constructed by concatenating all Text node children separated by spaces.
+在上面的示例中，TouchableOpacity 元素上的 `accessibilityLabel` 默认为 "Press me!"。该标签是通过连接所有文本节点子项并以空格分隔构建的。
 
 ### `accessibilityLabelledBy` <div className="label android">Android</div>
 
-A reference to another element [nativeID](view.md#nativeid) used to build complex forms.
-The value of `accessibilityLabelledBy` should match the `nativeID` of the related element:
+引用另一个元素 [nativeID](view.md#nativeid) 用于构建复杂表单。
+`accessibilityLabelledBy` 的值应与相关元素的 `nativeID` 匹配：
 
 ```tsx
 <View>
@@ -63,13 +63,13 @@ The value of `accessibilityLabelledBy` should match the `nativeID` of the relate
 </View>
 ```
 
-In the above example, the screen reader announces `Input, Edit Box for Label for Input Field` when focusing on the TextInput.
+在上面的示例中，当聚焦于 TextInput 时，屏幕阅读器会宣布 `Input, Edit Box for Label for Input Field`。
 
 ### `accessibilityHint`
 
-An accessibility hint can be used to provide additional context to the user on the result of the action when it is not clear from the accessibility label alone.
+无障碍提示可用于在仅凭无障碍标签不清楚操作结果时，为用户提供额外的上下文。
 
-Provide the `accessibilityHint` property a custom string on your View, Text, or Touchable:
+在 View、Text 或 Touchable 上为 `accessibilityHint` 属性提供自定义字符串：
 
 ```tsx
 <TouchableOpacity
@@ -85,15 +85,15 @@ Provide the `accessibilityHint` property a custom string on your View, Text, or 
 
 <div className="label ios basic">iOS</div>
 
-In the above example, VoiceOver will read the hint after the label, if the user has hints enabled in the device's VoiceOver settings. Read more about guidelines for `accessibilityHint` in the [iOS Developer Docs](https://developer.apple.com/documentation/objectivec/nsobject/1615093-accessibilityhint)
+在上面的示例中，如果用户在设备的 VoiceOver 设置中启用了提示，VoiceOver 将在标签后读取提示。在 [iOS 开发者文档](https://developer.apple.com/documentation/objectivec/nsobject/1615093-accessibilityhint) 中阅读更多关于 `accessibilityHint` 的指南。
 
 <div className="label android basic">Android</div>
 
-In the above example, TalkBack will read the hint after the label. At this time, hints cannot be turned off on Android.
+在上面的示例中，TalkBack 将在标签后读取提示。目前，无法在 Android 上关闭提示。
 
 ### `accessibilityLanguage` <div className="label ios">iOS</div>
 
-By using the `accessibilityLanguage` property, the screen reader will understand which language to use while reading the element's **label**, **value**, and **hint**. The provided string value must follow the [BCP 47 specification](https://www.rfc-editor.org/info/bcp47).
+通过使用 `accessibilityLanguage` 属性，屏幕阅读器将理解在读取元素的 **标签**、**值** 和 **提示** 时使用哪种语言。提供的字符串值必须遵循 [BCP 47 规范](https://www.rfc-editor.org/info/bcp47)。
 
 ```tsx
 <View
@@ -106,15 +106,15 @@ By using the `accessibilityLanguage` property, the screen reader will understand
 
 ### `accessibilityIgnoresInvertColors` <div className="label ios">iOS</div>
 
-Inverting screen colors is an accessibility feature available in iOS and iPadOS for people with color blindness, low vision, or vision impairment. If there's a view you don't want to invert when this setting is on, possibly a photo, set this property to `true`.
+反转屏幕颜色是 iOS 和 iPadOS 中为色盲、低视力或视力障碍人士提供的无障碍功能。如果在此设置开启时你不希望反转某个视图（可能是照片），请将此属性设置为 `true`。
 
 ### `accessibilityLiveRegion` <div className="label android">Android</div>
 
-When components dynamically change, we want TalkBack to alert the end user. This is made possible by the `accessibilityLiveRegion` property. It can be set to `none`, `polite`, and `assertive`:
+当组件动态变化时，我们希望 TalkBack 提醒最终用户。这是通过 `accessibilityLiveRegion` 属性实现的。它可以设置为 `none`、`polite` 和 `assertive`：
 
-- **none** Accessibility services should not announce changes to this view.
-- **polite** Accessibility services should announce changes to this view.
-- **assertive** Accessibility services should interrupt ongoing speech to immediately announce changes to this view.
+- **none** 无障碍服务不应宣布对此视图的更改。
+- **polite** 无障碍服务应宣布对此视图的更改。
+- **assertive** 无障碍服务应中断正在进行的语音以立即宣布对此视图的更改。
 
 ```tsx
 <TouchableWithoutFeedback onPress={addOne}>
@@ -127,55 +127,55 @@ When components dynamically change, we want TalkBack to alert the end user. This
 </Text>
 ```
 
-In the above example method `addOne` changes the state variable `count`. When the TouchableWithoutFeedback is triggered, TalkBack reads the text in the Text view because of its `accessibilityLiveRegion="polite"` property.
+在上面的示例中，方法 `addOne` 更改状态变量 `count`。当触发 TouchableWithoutFeedback 时，TalkBack 会读取 Text 视图中的文本，因为其 `accessibilityLiveRegion="polite"` 属性。
 
 ### `accessibilityRole`
 
-`accessibilityRole` communicates the purpose of a component to the user of assistive technology.
+`accessibilityRole` 向辅助技术用户传达组件的目的。
 
-`accessibilityRole` can be one of the following:
+`accessibilityRole` 可以是以下之一：
 
-- **adjustable** Used when an element can be "adjusted" (e.g. a slider).
-- **alert** Used when an element contains important text to be presented to the user.
-- **button** Used when the element should be treated as a button.
-- **checkbox** Used when an element represents a checkbox that can be checked, unchecked, or have a mixed checked state.
-- **combobox** Used when an element represents a combo box, which allows the user to select among several choices.
-- **header** Used when an element acts as a header for a content section (e.g. the title of a navigation bar).
-- **image** Used when the element should be treated as an image. Can be combined with a button or link.
-- **imagebutton** Used when the element should be treated as a button and is also an image.
-- **keyboardkey** Used when the element acts as a keyboard key.
-- **link** Used when the element should be treated as a link.
-- **menu** Used when the component is a menu of choices.
-- **menubar** Used when a component is a container of multiple menus.
-- **menuitem** Used to represent an item within a menu.
-- **none** Used when the element has no role.
-- **progressbar** Used to represent a component that indicates the progress of a task.
-- **radio** Used to represent a radio button.
-- **radiogroup** Used to represent a group of radio buttons.
-- **scrollbar** Used to represent a scroll bar.
-- **search** Used when a text field element should also be treated as a search field.
-- **spinbutton** Used to represent a button that opens a list of choices.
-- **summary** Used when an element can be used to provide a quick summary of current conditions in the app when the app first launches.
-- **switch** Used to represent a switch that can be turned on and off.
-- **tab** Used to represent a tab.
-- **tablist** Used to represent a list of tabs.
-- **text** Used when the element should be treated as static text that cannot change.
-- **timer** Used to represent a timer.
-- **togglebutton** Used to represent a toggle button. Should be used with accessibilityState checked to indicate if the button is toggled on or off.
-- **toolbar** Used to represent a toolbar (a container of action buttons or components).
-- **grid** Used with ScrollView, VirtualizedList, FlatList, or SectionList to represent a grid. Adds the in/out of grid announcements to Android's GridView.
+- **adjustable** 当元素可以“调节”时使用（例如滑块）。
+- **alert** 当元素包含要呈现给用户的重要文本时使用。
+- **button** 当元素应被视为按钮时使用。
+- **checkbox** 当元素代表可以选中、取消选中或具有混合选中状态的复选框时使用。
+- **combobox** 当元素代表组合框时使用，允许用户在几个选项中进行选择。
+- **header** 当元素充当内容部分的标题时使用（例如导航栏的标题）。
+- **image** 当元素应被视为图像时使用。可以与按钮或链接组合。
+- **imagebutton** 当元素应被视为按钮且也是图像时使用。
+- **keyboardkey** 当元素充当键盘按键时使用。
+- **link** 当元素应被视为链接时使用。
+- **menu** 当组件是选项菜单时使用。
+- **menubar** 当组件是多个菜单的容器时使用。
+- **menuitem** 用于表示菜单中的项。
+- **none** 当元素没有角色时使用。
+- **progressbar** 用于表示指示任务进度的组件。
+- **radio** 用于表示单选按钮。
+- **radiogroup** 用于表示一组单选按钮。
+- **scrollbar** 用于表示滚动条。
+- **search** 当文本字段元素也应被视为搜索字段时使用。
+- **spinbutton** 用于表示打开选项列表的按钮。
+- **summary** 当元素可用于在应用首次启动时提供应用当前条件的快速摘要时使用。
+- **switch** 用于表示可以打开和关闭的开关。
+- **tab** 用于表示标签页。
+- **tablist** 用于表示标签页列表。
+- **text** 当元素应被视为无法更改的静态文本时使用。
+- **timer** 用于表示计时器。
+- **togglebutton** 用于表示切换按钮。应与 accessibilityState checked 一起使用以指示按钮是切换打开还是关闭。
+- **toolbar** 用于表示工具栏（操作按钮或组件的容器）。
+- **grid** 与 ScrollView、VirtualizedList、FlatList 或 SectionList 一起使用以表示网格。将进出网格的宣布添加到 Android 的 GridView。
 
 ### `accessibilityShowsLargeContentViewer` <div className="label ios">iOS</div>
 
-A boolean value that determines whether the large content viewer is shown when the user performs a long press on the element.
+一个布尔值，确定当用户对元素执行长按时是否显示大内容查看器。
 
-Available in iOS 13.0 and later.
+适用于 iOS 13.0 及更高版本。
 
 ### `accessibilityLargeContentTitle` <div className="label ios">iOS</div>
 
-A string that will be used as the title of the large content viewer when it is shown.
+当显示大内容查看器时，将用作其标题的字符串。
 
-Requires `accessibilityShowsLargeContentViewer` to be set to `true`.
+需要将 `accessibilityShowsLargeContentViewer` 设置为 `true`。
 
 ```tsx
 <View
@@ -187,64 +187,64 @@ Requires `accessibilityShowsLargeContentViewer` to be set to `true`.
 
 ### `accessibilityState`
 
-Describes the current state of a component to the assistive technology user.
+向辅助技术用户描述组件的当前状态。
 
-`accessibilityState` is an object. It contains the following fields:
+`accessibilityState` 是一个对象。它包含以下字段：
 
 | Name     | Description                                                                                                                           | Type               | Required |
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------ | -------- |
-| disabled | Indicates whether the element is disabled or not.                                                                                     | boolean            | No       |
-| selected | Indicates whether a selectable element is currently selected or not.                                                                  | boolean            | No       |
-| checked  | Indicates the state of a checkable element. This field can either take a boolean or the "mixed" string to represent mixed checkboxes. | boolean or 'mixed' | No       |
-| busy     | Indicates whether an element is currently busy or not.                                                                                | boolean            | No       |
-| expanded | Indicates whether an expandable element is currently expanded or collapsed.                                                           | boolean            | No       |
+| disabled | 指示元素是否禁用。                                                                                     | boolean            | No       |
+| selected | 指示可选元素当前是否被选中。                                                                  | boolean            | No       |
+| checked  | 指示可检查元素的状态。此字段可以采用布尔值或 "mixed" 字符串来表示混合复选框。 | boolean or 'mixed' | No       |
+| busy     | 指示元素当前是否忙碌。                                                                                | boolean            | No       |
+| expanded | 指示可展开元素当前是展开还是折叠。                                                           | boolean            | No       |
 
-To use, set the `accessibilityState` to an object with a specific definition.
+使用时，将 `accessibilityState` 设置为具有特定定义的对象。
 
 ### `accessibilityValue`
 
-Represents the current value of a component. It can be a textual description of a component's value, or for range-based components, such as sliders and progress bars, it contains range information (minimum, current, and maximum).
+表示组件的当前值。它可以是组件值的文本描述，或者对于基于范围的组件（如滑块和进度条），它包含范围信息（最小值、当前值和最大值）。
 
-`accessibilityValue` is an object. It contains the following fields:
+`accessibilityValue` 是一个对象。它包含以下字段：
 
 | Name | Description                                                                                    | Type    | Required                  |
 | ---- | ---------------------------------------------------------------------------------------------- | ------- | ------------------------- |
-| min  | The minimum value of this component's range.                                                   | integer | Required if `now` is set. |
-| max  | The maximum value of this component's range.                                                   | integer | Required if `now` is set. |
-| now  | The current value of this component's range.                                                   | integer | No                        |
-| text | A textual description of this component's value. Will override `min`, `now`, and `max` if set. | string  | No                        |
+| min  | 此组件范围的最小值。                                                   | integer | 如果设置了 `now` 则为必填。 |
+| max  | 此组件范围的最大值。                                                   | integer | 如果设置了 `now` 则为必填。 |
+| now  | 此组件范围的当前值。                                                   | integer | No                        |
+| text | 此组件值的文本描述。如果设置，将覆盖 `min`、`now` 和 `max`。 | string  | No                        |
 
 ### `accessibilityViewIsModal` <div className="label ios">iOS</div>
 
-A boolean value that indicates whether VoiceOver should ignore the elements within views that are siblings of the receiver.
+一个布尔值，指示 VoiceOver 是否应忽略接收器兄弟视图内的元素。
 
-For example, in a window that contains sibling views `A` and `B`, setting `accessibilityViewIsModal` to `true` on view `B` causes VoiceOver to ignore the elements in view `A`. On the other hand, if view `B` contains a child view `C` and you set `accessibilityViewIsModal` to `true` on view `C`, VoiceOver does not ignore the elements in view `A`.
+例如，在包含兄弟视图 `A` 和 `B` 的窗口中，在视图 `B` 上将 `accessibilityViewIsModal` 设置为 `true` 会导致 VoiceOver 忽略视图 `A` 中的元素。另一方面，如果视图 `B` 包含子视图 `C` 并且你在视图 `C` 上将 `accessibilityViewIsModal` 设置为 `true`，VoiceOver 不会忽略视图 `A` 中的元素。
 
 ### `accessibilityElementsHidden` <div className="label ios">iOS</div>
 
-A boolean value indicating whether the given accessibility element, and any accessibility elements it contains, are hidden.
+一个布尔值，指示给定的无障碍元素及其包含的任何无障碍元素是否隐藏。
 
-For example, in a window that contains sibling views `A` and `B`, setting `accessibilityElementsHidden` to `true` on view `B` causes VoiceOver to ignore the `B` view and any elements it contains. This is similar to the Android property `importantForAccessibility="no-hide-descendants"`.
+例如，在包含兄弟视图 `A` 和 `B` 的窗口中，在视图 `B` 上将 `accessibilityElementsHidden` 设置为 `true` 会导致 VoiceOver 忽略 `B` 视图及其包含的任何元素。这类似于 Android 属性 `importantForAccessibility="no-hide-descendants"`。
 
 ### `aria-valuemax`
 
-Represents the maximum value for range-based components, such as sliders and progress bars.
+表示基于范围的组件（如滑块和进度条）的最大值。
 
 ### `aria-valuemin`
 
-Represents the minimum value for range-based components, such as sliders and progress bars.
+表示基于范围的组件（如滑块和进度条）的最小值。
 
 ### `aria-valuenow`
 
-Represents the current value for range-based components, such as sliders and progress bars.
+表示基于范围的组件（如滑块和进度条）的当前值。
 
 ### `aria-valuetext`
 
-Represents the textual description of the component.
+表示组件的文本描述。
 
 ### `aria-busy`
 
-Indicates an element is being modified and that assistive technologies may want to wait until the changes are complete before informing the user about the update.
+指示元素正在被修改，辅助技术可能希望等待更改完成后再告知用户更新。
 
 | Type    | Default |
 | ------- | ------- |
@@ -252,7 +252,7 @@ Indicates an element is being modified and that assistive technologies may want 
 
 ### `aria-checked`
 
-Indicates the state of a checkable element. This field can either take a boolean or the "mixed" string to represent mixed checkboxes.
+指示可检查元素的状态。此字段可以采用布尔值或 "mixed" 字符串来表示混合复选框。
 
 | Type             | Default |
 | ---------------- | ------- |
@@ -260,7 +260,7 @@ Indicates the state of a checkable element. This field can either take a boolean
 
 ### `aria-disabled`
 
-Indicates that the element is perceivable but disabled, so it is not editable or otherwise operable.
+指示元素是可感知但禁用的，因此不可编辑或以其他方式操作。
 
 | Type    | Default |
 | ------- | ------- |
@@ -268,7 +268,7 @@ Indicates that the element is perceivable but disabled, so it is not editable or
 
 ### `aria-expanded`
 
-Indicates whether an expandable element is currently expanded or collapsed.
+指示可展开元素当前是展开还是折叠。
 
 | Type    | Default |
 | ------- | ------- |
@@ -276,9 +276,9 @@ Indicates whether an expandable element is currently expanded or collapsed.
 
 ### `aria-hidden`
 
-Indicates whether the element is hidden from assistive technologies.
+指示元素是否对辅助技术隐藏。
 
-For example, in a window that contains sibling views `A` and `B`, setting `aria-hidden` to `true` on view `B` causes VoiceOver to ignore the `B` element and its children.
+例如，在包含兄弟视图 `A` 和 `B` 的窗口中，在视图 `B` 上将 `aria-hidden` 设置为 `true` 会导致 VoiceOver 忽略 `B` 元素及其子项。
 
 | Type    | Default |
 | ------- | ------- |
@@ -286,7 +286,7 @@ For example, in a window that contains sibling views `A` and `B`, setting `aria-
 
 ### `aria-label`
 
-Defines a string value that labels an interactive element.
+定义标记交互元素的字符串值。
 
 | Type   |
 | ------ |
@@ -294,7 +294,7 @@ Defines a string value that labels an interactive element.
 
 ### `aria-labelledby` <div className="label android">Android</div>
 
-Identifies the element that labels the element it is applied to. The value of `aria-labelledby` should match the [`nativeID`](view.md#nativeid) of the related element:
+标识标记它所应用到的元素的元素。`aria-labelledby` 的值应与相关元素的 [`nativeID`](view.md#nativeid) 匹配：
 
 ```tsx
 <View>
@@ -309,11 +309,11 @@ Identifies the element that labels the element it is applied to. The value of `a
 
 ### `aria-live` <div className="label android">Android</div>
 
-Indicates that an element will be updated and describes the types of updates the user agents, assistive technologies, and user can expect from the live region.
+指示元素将被更新，并描述用户代理、辅助技术和用户可以从实时区域期望的更新类型。
 
-- **off** Accessibility services should not announce changes to this view.
-- **polite** Accessibility services should announce changes to this view.
-- **assertive** Accessibility services should interrupt ongoing speech to immediately announce changes to this view.
+- **off** 无障碍服务不应宣布对此视图的更改。
+- **polite** 无障碍服务应宣布对此视图的更改。
+- **assertive** 无障碍服务应中断正在进行的语音以立即宣布对此视图的更改。
 
 | Type                                     | Default |
 | ---------------------------------------- | ------- |
@@ -323,7 +323,7 @@ Indicates that an element will be updated and describes the types of updates the
 
 ### `aria-modal` <div className="label ios">iOS</div>
 
-Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
+布尔值，指示 VoiceOver 是否应忽略接收器兄弟视图内的元素。
 
 | Type    | Default |
 | ------- | ------- |
@@ -331,7 +331,7 @@ Boolean value indicating whether VoiceOver should ignore the elements within vie
 
 ### `aria-selected`
 
-Indicates whether a selectable element is currently selected or not.
+指示可选元素当前是否被选中。
 
 | Type    |
 | ------- |
@@ -339,7 +339,7 @@ Indicates whether a selectable element is currently selected or not.
 
 ### `importantForAccessibility` <div className="label android">Android</div>
 
-In the case of two overlapping UI components with the same parent, default accessibility focus can have unpredictable behavior. The `importantForAccessibility` property will resolve this by controlling if a view fires accessibility events and if it is reported to accessibility services. It can be set to `auto`, `yes`, `no` and `no-hide-descendants` (the last value will force accessibility services to ignore the component and all of its children).
+在两个具有相同父级的重叠 UI 组件的情况下，默认无障碍焦点可能具有不可预测的行为。`importantForAccessibility` 属性将通过控制视图是否触发无障碍事件以及是否报告给无障碍服务来解决此问题。它可以设置为 `auto`、`yes`、`no` 和 `no-hide-descendants`（最后一个值将强制无障碍服务忽略组件及其所有子项）。
 
 ```tsx
 <View style={styles.container}>
@@ -356,85 +356,85 @@ In the case of two overlapping UI components with the same parent, default acces
 </View>
 ```
 
-In the above example, the `yellow` layout and its descendants are completely invisible to TalkBack and all other accessibility services. So we can use overlapping views with the same parent without confusing TalkBack.
+在上面的示例中，`yellow` 布局及其后代对 TalkBack 和所有其他无障碍服务完全不可见。因此我们可以使用具有相同父级的重叠视图而不会混淆 TalkBack。
 
 ### `onAccessibilityEscape` <div className="label ios">iOS</div>
 
-Assign this property to a custom function which will be called when someone performs the "escape" gesture, which is a two finger Z shaped gesture. An escape function should move back hierarchically in the user interface. This can mean moving up or back in a navigation hierarchy or dismissing a modal user interface. If the selected element does not have an `onAccessibilityEscape` function, the system will attempt to traverse up the view hierarchy until it finds a view that does or bonk to indicate it was unable to find one.
+将此属性分配给自定义函数，当有人执行“逃逸”手势（即双指 Z 形手势）时将调用该函数。逃逸函数应在用户界面中分层向后移动。这可能意味着在导航层次结构中向上或向后移动，或关闭模态用户界面。如果所选元素没有 `onAccessibilityEscape` 函数，系统将尝试遍历视图层次结构，直到找到具有该函数的视图，或发出提示表示无法找到。
 
 ### `onAccessibilityTap` <div className="label ios">iOS</div>
 
-Use this property to assign a custom function to be called when someone activates an accessible element by double tapping on it while it's selected.
+使用此属性分配自定义函数，当有人选中可访问元素并通过双击激活它时将调用该函数。
 
 ### `onMagicTap` <div className="label ios">iOS</div>
 
-Assign this property to a custom function which will be called when someone performs the "magic tap" gesture, which is a double-tap with two fingers. A magic tap function should perform the most relevant action a user could take on a component. In the Phone app on iPhone, a magic tap answers a phone call or ends the current one. If the selected element does not have an `onMagicTap` function, the system will traverse up the view hierarchy until it finds a view that does.
+将此属性分配给自定义函数，当有人执行“魔术点击”手势（即双指双击）时将调用该函数。魔术点击函数应执行用户可以在组件上采取的最相关操作。在 iPhone 上的电话应用中，魔术点击可接听电话或结束当前通话。如果所选元素没有 `onMagicTap` 函数，系统将遍历视图层次结构直到找到具有该函数的视图。
 
 ### `role`
 
-`role` communicates the purpose of a component and has precedence over the [`accessibilityRole`](accessibility#accessibilityrole) prop.
+`role` 传达组件的目的，并且优先于 [`accessibilityRole`](accessibility#accessibilityrole) 属性。
 
-`role` can be one of the following:
+`role` 可以是以下之一：
 
-- **alert** Used when an element contains important text to be presented to the user.
-- **button** Used when the element should be treated as a button.
-- **checkbox** Used when an element represents a checkbox that can be checked, unchecked, or have a mixed checked state.
-- **combobox** Used when an element represents a combo box, which allows the user to select among several choices.
-- **grid** Used with ScrollView, VirtualizedList, FlatList, or SectionList to represent a grid. Adds the in/out of grid announcements to the android GridView.
-- **heading** Used when an element acts as a header for a content section (e.g. the title of a navigation bar).
-- **img** Used when the element should be treated as an image. Can be combined with a button or link, for example.
-- **link** Used when the element should be treated as a link.
-- **list** Used to identify a list of items.
-- **listitem** Used to itentify an item in a list.
-- **menu** Used when the component is a menu of choices.
-- **menubar** Used when a component is a container of multiple menus.
-- **menuitem** Used to represent an item within a menu.
-- **none** Used when the element has no role.
-- **presentation** Used when the element has no role.
-- **progressbar** Used to represent a component that indicates the progress of a task.
-- **radio** Used to represent a radio button.
-- **radiogroup** Used to represent a group of radio buttons.
-- **scrollbar** Used to represent a scroll bar.
-- **searchbox** Used when the text field element should also be treated as a search field.
-- **slider** Used when an element can be "adjusted" (e.g. a slider).
-- **spinbutton** Used to represent a button that opens a list of choices.
-- **summary** Used when an element can be used to provide a quick summary of current conditions in the app when the app first launches.
-- **switch** Used to represent a switch that can be turned on and off.
-- **tab** Used to represent a tab.
-- **tablist** Used to represent a list of tabs.
-- **timer** Used to represent a timer.
-- **toolbar** Used to represent a toolbar (a container of action buttons or components).
+- **alert** 当元素包含要呈现给用户的重要文本时使用。
+- **button** 当元素应被视为按钮时使用。
+- **checkbox** 当元素代表可以选中、取消选中或具有混合选中状态的复选框时使用。
+- **combobox** 当元素代表组合框时使用，允许用户在几个选项中进行选择。
+- **grid** 与 ScrollView、VirtualizedList、FlatList 或 SectionList 一起使用以表示网格。将进出网格的宣布添加到 Android 的 GridView。
+- **heading** 当元素充当内容部分的标题时使用（例如导航栏的标题）。
+- **img** 当元素应被视为图像时使用。例如，可以与按钮或链接组合。
+- **link** 当元素应被视为链接时使用。
+- **list** 用于标识项目列表。
+- **listitem** 用于标识列表中的项。
+- **menu** 当组件是选项菜单时使用。
+- **menubar** 当组件是多个菜单的容器时使用。
+- **menuitem** 用于表示菜单中的项。
+- **none** 当元素没有角色时使用。
+- **presentation** 当元素没有角色时使用。
+- **progressbar** 用于表示指示任务进度的组件。
+- **radio** 用于表示单选按钮。
+- **radiogroup** 用于表示一组单选按钮。
+- **scrollbar** 用于表示滚动条。
+- **searchbox** 当文本字段元素也应被视为搜索字段时使用。
+- **slider** 当元素可以“调节”时使用（例如滑块）。
+- **spinbutton** 用于表示打开选项列表的按钮。
+- **summary** 当元素可用于在应用首次启动时提供应用当前条件的快速摘要时使用。
+- **switch** 用于表示可以打开和关闭的开关。
+- **tab** 用于表示标签页。
+- **tablist** 用于表示标签页列表。
+- **timer** 用于表示计时器。
+- **toolbar** 用于表示工具栏（操作按钮或组件的容器）。
 
-## Accessibility Actions
+## 无障碍操作
 
-Accessibility actions allow assistive technology to programmatically invoke the action(s) of a component. To support accessibility actions, a component must do two things:
+无障碍操作允许辅助技术以编程方式调用组件的操作。要支持无障碍操作，组件必须做两件事：
 
-- Define the list of actions it supports via the `accessibilityActions` property.
-- Implement an `onAccessibilityAction` function to handle action requests.
+- 通过 `accessibilityActions` 属性定义它支持的操作列表。
+- 实现 `onAccessibilityAction` 函数以处理操作请求。
 
-The `accessibilityActions` property should contain a list of action objects. Each action object should contain the following fields:
+`accessibilityActions` 属性应包含一个操作对象列表。每个操作对象应包含以下字段：
 
-| Name  | Type   | Required |
+| 名称  | 类型   | 必填 |
 | ----- | ------ | -------- |
-| name  | string | Yes      |
-| label | string | No       |
+| name  | string | 是      |
+| label | string | 否       |
 
-Actions either represent standard actions, such as clicking a button or adjusting a slider, or custom actions specific to a given component such as deleting an email message. The `name` field is required for both standard and custom actions, but `label` is optional for standard actions.
+操作要么代表标准操作，例如点击按钮或调整滑块，要么代表特定于给定组件的自定义操作，例如删除电子邮件消息。`name` 字段对于标准和自定义操作都是必填的，但 `label` 对于标准操作是可选的。
 
-When adding support for standard actions, `name` must be one of the following:
+添加对标准操作的支持时，`name` 必须是以下之一：
 
-- `'magicTap'` - iOS only - While VoiceOver focus is on or inside the component, the user double tapped with two fingers.
-- `'escape'` - iOS only - While VoiceOver focus is on or inside the component, the user performed a two-finger scrub gesture (left, right, left).
-- `'activate'` - Activate the component. This should perform the same action with, or without, assistive technology. Engaged when a screen reader user double taps the component.
-- `'increment'` - Increment an adjustable component. On iOS, VoiceOver generates this action when the component has a role of `'adjustable'` and the user places focus on it and swipes upward. On Android, TalkBack generates this action when the user places accessibility focus on the component and presses the volume-up button.
-- `'decrement'` - Decrement an adjustable component. On iOS, VoiceOver generates this action when the component has a role of `'adjustable'` and the user places focus on it and swipes downward. On Android, TalkBack generates this action when the user places accessibility focus on the component and presses the volume-down button.
-- `'longpress'` - Android only - This action is generated when the user places accessibility focus on the component, then double-taps and holds one finger on the screen. This should perform the same action with, or without, assistive technology.
-- `'expand'` - Android only - This action "expands" the component so that TalkBack will announce an "expanded" hint.
-- `'collapse'` - Android only - This action "collapses" the component so that TalkBack will announce a "collapsed" hint.
+- `'magicTap'` - 仅限 iOS - 当 VoiceOver 焦点在组件上或组件内时，用户用两根手指双击。
+- `'escape'` - 仅限 iOS - 当 VoiceOver 焦点在组件上或组件内时，用户执行了两指擦除手势（左、右、左）。
+- `'activate'` - 激活组件。无论是否有辅助技术，这都应执行相同的操作。当屏幕阅读器用户双击组件时触发。
+- `'increment'` - 增加可调节组件的值。在 iOS 上，当组件角色为 `'adjustable'` 且用户将焦点放在其上并向上滑动时，VoiceOver 会生成此操作。在 Android 上，当用户将无障碍焦点放在组件上并按下音量增加按钮时，TalkBack 会生成此操作。
+- `'decrement'` - 减少可调节组件的值。在 iOS 上，当组件角色为 `'adjustable'` 且用户将焦点放在其上并向下滑动时，VoiceOver 会生成此操作。在 Android 上，当用户将无障碍焦点放在组件上并按下音量减少按钮时，TalkBack 会生成此操作。
+- `'longpress'` - 仅限 Android - 当用户将无障碍焦点放在组件上，然后双击并按住一根手指在屏幕上时生成此操作。无论是否有辅助技术，这都应执行相同的操作。
+- `'expand'` - 仅限 Android - 此操作“展开”组件，以便 TalkBack 宣布“已展开”提示。
+- `'collapse'` - 仅限 Android - 此操作“折叠”组件，以便 TalkBack 宣布“已折叠”提示。
 
-The `label` field is optional for standard actions and is often unused by assistive technologies. For custom actions, it is a localized string containing a description of the action to be presented to the user.
+对于标准操作，`label` 字段是可选的，辅助技术通常不使用它。对于自定义操作，它是一个本地化字符串，包含要向用户展示的操作描述。
 
-To handle action requests, a component must implement an `onAccessibilityAction` function. The only argument to this function is an event containing the name of the action to perform. The below example from RNTester shows how to create a component that defines and handles several custom actions.
+要处理操作请求，组件必须实现 `onAccessibilityAction` 函数。此函数的唯一参数是一个事件，包含要执行的操作名称。下面来自 RNTester 的示例展示了如何创建定义和处理几个自定义操作的组件。
 
 ```tsx
 <View
@@ -460,13 +460,13 @@ To handle action requests, a component must implement an `onAccessibilityAction`
 />
 ```
 
-## Checking if a Screen Reader is Enabled
+## 检查是否启用了屏幕阅读器
 
-The `AccessibilityInfo` API allows you to determine whether or not a screen reader is currently active. See the [AccessibilityInfo documentation](accessibilityinfo) for details.
+`AccessibilityInfo` API 允许你确定屏幕阅读器当前是否处于活动状态。详见 [AccessibilityInfo 文档](accessibilityinfo)。
 
-## Sending Accessibility Events <div className="label android">Android</div>
+## 发送无障碍事件 <div className="label android">Android</div>
 
-Sometimes it is useful to trigger an accessibility event on a UI component (i.e. when a custom view appears on a screen or set accessibility focus to a view). Native UIManager module exposes a method ‘sendAccessibilityEvent’ for this purpose. It takes two arguments: a view tag and a type of event. The supported event types are `typeWindowStateChanged`, `typeViewFocused`, and `typeViewClicked`.
+有时触发 UI 组件上的无障碍事件很有用（即当自定义视图出现在屏幕上或将无障碍焦点设置到视图时）。原生 UIManager 模块为此公开了一个方法 'sendAccessibilityEvent'。它接受两个参数：一个视图标签和一个事件类型。支持的事件类型是 `typeWindowStateChanged`、`typeViewFocused` 和 `typeViewClicked`。
 
 ```tsx
 import {Platform, UIManager, findNodeHandle} from 'react-native';
@@ -479,34 +479,34 @@ if (Platform.OS === 'android') {
 }
 ```
 
-## Testing TalkBack Support <div className="label android">Android</div>
+## 测试 TalkBack 支持 <div className="label android">Android</div>
 
-To enable TalkBack, go to the Settings app on your Android device or emulator. Tap Accessibility, then TalkBack. Toggle the "Use service" switch to enable or disable it.
+要启用 TalkBack，请转到 Android 设备或模拟器上的设置应用。点击无障碍，然后点击 TalkBack。切换“使用服务”开关以启用或禁用它。
 
-Android emulators don't have TalkBack installed by default. You can install TalkBack on your emulator via the Google Play Store. Make sure to choose an emulator with the Google Play store installed. These are available in Android Studio.
+Android 模拟器默认未安装 TalkBack。你可以通过 Google Play 商店在模拟器上安装 TalkBack。确保选择安装了 Google Play 商店的模拟器。这些可在 Android Studio 中找到。
 
-You can use the volume key shortcut to toggle TalkBack. To turn on the volume key shortcut, go to the Settings app, then Accessibility. At the top, turn on the volume key shortcut.
+你可以使用音量键快捷方式来切换 TalkBack。要开启音量键快捷方式，请转到设置应用，然后是无障碍。在顶部，开启音量键快捷方式。
 
-To use the volume key shortcut, press both volume keys for 3 seconds to start an accessibility tool.
+要使用音量键快捷方式，同时按下两个音量键 3 秒钟以启动无障碍工具。
 
-Additionally, if you prefer, you can toggle TalkBack via the command line with:
+此外，如果你愿意，可以通过命令行使用以下命令切换 TalkBack：
 
 ```shell
-# disable
+# 禁用
 adb shell settings put secure enabled_accessibility_services com.android.talkback/com.google.android.marvin.talkback.TalkBackService
 
-# enable
+# 启用
 adb shell settings put secure enabled_accessibility_services com.google.android.marvin.talkback/com.google.android.marvin.talkback.TalkBackService
 ```
 
-## Testing VoiceOver Support <div className="label ios">iOS</div>
+## 测试 VoiceOver 支持 <div className="label ios">iOS</div>
 
-To enable VoiceOver on your iOS or iPadOS device, go to the Settings app, tap General, then Accessibility. There you will find many tools available for people to enable their devices to be more usable, including VoiceOver. To enable VoiceOver, tap on VoiceOver under "Vision" and toggle the switch that appears at the top.
+要在 iOS 或 iPadOS 设备上启用 VoiceOver，请转到设置应用，点击通用，然后是无障碍。在那里你会发现许多工具可供人们启用他们的设备以更可用，包括 VoiceOver。要启用 VoiceOver，点击“视觉”下的 VoiceOver，并切换顶部出现的开关。
 
-At the very bottom of the Accessibility settings, there is an "Accessibility Shortcut". You can use this to toggle VoiceOver by triple-clicking the Home button.
+在无障碍设置的最底部，有一个“无障碍快捷方式”。你可以使用它通过三次点击 Home 按钮来切换 VoiceOver。
 
-VoiceOver isn't available via the simulator, but you can use Accessibility Inspector from Xcode to use the macOS VoiceOver through an application. Note it's always best to test with a device as macOS's VoiceOver may result in varied experiences.
+VoiceOver 无法通过模拟器使用，但你可以使用 Xcode 的 Accessibility Inspector 通过应用程序使用 macOS VoiceOver。注意，最好始终使用设备进行测试，因为 macOS 的 VoiceOver 可能会导致不同的体验。
 
-## Additional Resources
+## 其他资源
 
-- [Making React Native Apps Accessible](https://engineering.fb.com/ios/making-react-native-apps-accessible/)
+- [使 React Native 应用支持无障碍功能](https://engineering.fb.com/ios/making-react-native-apps-accessible/)

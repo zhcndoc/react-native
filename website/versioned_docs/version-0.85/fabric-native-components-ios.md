@@ -210,13 +210,13 @@ Web 视图需要访问 Apple 通过 Xcode 和设备附带的一个框架提供�
 
 1. 在 Xcode 中，点击你的项目
 2. 选择 app target
-3. 选择 General 标签页
-4. 向下滚动直到找到 _"Frameworks, Libraries, and Embedded Contents"_ 部分，然后点击 `+` 按钮
+3. 选择“通用”标签页
+4. 向下滚动直到找到 _"框架、库和嵌入内容"_ 部分，然后点击 `+` 按钮
 
 <img className="half-size" alt="向你的应用添加 webkit 框架 1" src="/docs/assets/AddWebKitFramework1.png" />
 
 5. 在搜索栏中，过滤 WebKit
 6. 选择 WebKit 框架
-7. 点击 Add。
+7. 点击添加。
 
 <img className="half-size" alt="向你的应用添加 webkit 框架 2" src="/docs/assets/AddWebKitFramework2.png" />

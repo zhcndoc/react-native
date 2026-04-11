@@ -1,46 +1,46 @@
 ---
 id: linking
-title: Linking
+title: 链接
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-`Linking` gives you a general interface to interact with both incoming and outgoing app links.
+`Linking` 为你提供了一个通用接口，用于与传入和传出的应用链接进行交互。
 
-Every Link (URL) has a URL Scheme, some websites are prefixed with `https://` or `http://` and the `http` is the URL Scheme. Let's call it scheme for short.
+每个链接 (URL) 都有一个 URL Scheme，有些网站以 `https://` 或 `http://` 为前缀，这里的 `http` 就是 URL Scheme。我们简称为 scheme。
 
-In addition to `https`, you're likely also familiar with the `mailto` scheme. When you open a link with the mailto scheme, your operating system will open an installed mail application. Similarly, there are schemes for making phone calls and sending SMS. Read more about [built-in URL](#built-in-url-schemes) schemes below.
+除了 `https`，你可能还熟悉 `mailto` scheme。当你打开一个带有 mailto scheme 的链接时，你的操作系统将打开一个已安装的邮件应用程序。同样，也有用于拨打电话和发送短信的 scheme。请在下方阅读更多关于 [内置 URL](#built-in-url-schemes) scheme 的信息。
 
-Like using the mailto scheme, it's possible to link to other applications by using custom url schemes. For example, when you get a **Magic Link** email from Slack, the **Launch Slack** button is an anchor tag with an href that looks something like: `slack://secret/magic-login/other-secret`. Like with Slack, you can tell the operating system that you want to handle a custom scheme. When the Slack app opens, it receives the URL that was used to open it. This is often referred to as deep linking. Read more about how to [get the deep link](#get-the-deep-link) into your app.
+就像使用 mailto scheme 一样，可以通过使用自定义 url scheme 链接到其他应用程序。例如，当你收到来自 Slack 的 **Magic Link** 电子邮件时，**Launch Slack** 按钮是一个锚标签，其 href 看起来像这样：`slack://secret/magic-login/other-secret`。像 Slack 一样，你可以告诉操作系统你想要处理一个自定义 scheme。当 Slack 应用打开时，它会收到用于打开它的 URL。这通常被称为深链接。阅读更多关于如何 [获取深链接](#get-the-deep-link) 到你的应用的信息。
 
-A custom URL scheme isn't the only way to open your application on mobile. For example, if you want to email someone a link to be opened on mobile, using a custom URL scheme isn't ideal because the user might open the email on a desktop, where the link wouldn't work. Instead, you should use standard `https` links, such as `https://www.myapp.io/records/1234546`. On mobile, these links can be configured to open your app. On Android, this feature is called **Deep Links**, while on iOS, it is known as **Universal Links**.
+自定义 URL scheme 并不是在移动端打开你的应用的唯一方式。例如，如果你想通过电子邮件发送一个在移动端打开的链接，使用自定义 URL scheme 并不理想，因为用户可能在桌面上打开电子邮件，那里链接将无法工作。相反，你应该使用标准的 `https` 链接，例如 `https://www.myapp.io/records/1234546`。在移动端，这些链接可以配置为打开你的应用。在 Android 上，此功能称为 **深链接**，而在 iOS 上，它被称为 **通用链接**。
 
-### Built-in URL Schemes
+### 内置 URL Scheme
 
-As mentioned in the introduction, there are some URL schemes for core functionality that exist on every platform. The following is a non-exhaustive list, but covers the most commonly used schemes.
+正如引言中提到的，每个平台上都存在一些用于核心功能的 URL scheme。以下是一个非详尽的列表，但涵盖了最常用的 scheme。
 
-| Scheme           | Description                                | iOS | Android |
+| Scheme           | 描述                                | iOS | Android |
 | ---------------- | ------------------------------------------ | --- | ------- |
-| `mailto`         | Open mail app, eg: mailto: hello@world.dev | ✅  | ✅      |
-| `tel`            | Open phone app, eg: tel:+123456789         | ✅  | ✅      |
-| `sms`            | Open SMS app, eg: sms:+123456789           | ✅  | ✅      |
-| `https` / `http` | Open web browser app, eg: https://expo.dev | ✅  | ✅      |
+| `mailto`         | 打开邮件应用，例如：mailto: hello@world.dev | ✅  | ✅      |
+| `tel`            | 打开电话应用，例如：tel:+123456789         | ✅  | ✅      |
+| `sms`            | 打开短信应用，例如：sms:+123456789           | ✅  | ✅      |
+| `https` / `http` | 打开 Web 浏览器应用，例如：https://expo.dev | ✅  | ✅      |
 
-### Enabling Deep Links
+### 启用深链接
 
 <div className="banner-native-code-required">
-  <h3>Projects with Native Code Only</h3>
-  <p>The following section only applies to projects with native code exposed. If you are using the managed Expo workflow, see the guide on <a href="https://docs.expo.dev/guides/linking/">Linking</a> in the Expo documentation for the appropriate alternative.</p>
+  <h3>仅适用于包含原生代码的项目</h3>
+  <p>以下部分仅适用于暴露了原生代码的项目。如果你使用的是托管的 Expo 工作流，请参阅 Expo 文档中的 <a href="https://docs.expo.dev/guides/linking/">链接</a> 指南以获取适当的替代方案。</p>
 </div>
 
-If you want to enable deep links in your app, please read the below guide:
+如果你想在应用中启用深链接，请阅读以下指南：
 
 <Tabs groupId="syntax" queryString defaultValue={constants.defaultPlatform} values={constants.platforms}>
 <TabItem value="android">
 
-> For instructions on how to add support for deep linking on Android, refer to [Enabling Deep Links for App Content - Add Intent Filters for Your Deep Links](https://developer.android.com/training/app-indexing/deep-linking.html#adding-filters).
+> 有关如何在 Android 上添加深链接支持的说明，请参阅 [为应用内容启用深链接 - 为你的深链接添加 Intent 过滤器](https://developer.android.com/training/app-indexing/deep-linking.html#adding-filters)。
 
-If you wish to receive the intent in an existing instance of MainActivity, you may set the `launchMode` of MainActivity to `singleTask` in `AndroidManifest.xml`. See [`<activity>`](https://developer.android.com/guide/topics/manifest/activity-element.html) documentation for more information.
+如果你希望在现有的 MainActivity 实例中接收 intent，你可以在 `AndroidManifest.xml` 中将 MainActivity 的 `launchMode` 设置为 `singleTask`。请参阅 [`<activity>`](https://developer.android.com/guide/topics/manifest/activity-element.html) 文档以获取更多信息。
 
 ```xml
 <activity
@@ -51,10 +51,10 @@ If you wish to receive the intent in an existing instance of MainActivity, you m
 </TabItem>
 <TabItem value="ios">
 
-> **NOTE:** On iOS, you'll need to add the `LinkingIOS` folder into your header search paths as described in step 3 [here](linking-libraries-ios#step-3). If you also want to listen to incoming app links during your app's execution, you'll need to add the following lines to your `*AppDelegate.m`:
+> **注意：** 在 iOS 上，你需要将 `LinkingIOS` 文件夹添加到你的头文件搜索路径中，如 [这里](linking-libraries-ios#step-3) 的第 3 步所述。如果你还想在应用执行期间监听传入的应用链接，你需要将以下行添加到你的 `*AppDelegate.m` 中：
 
 ```objectivec
-// iOS 9.x or newer
+// iOS 9.x 或更新版本
 #import <React/RCTLinkingManager.h>
 
 - (BOOL)application:(UIApplication *)application
@@ -65,10 +65,10 @@ If you wish to receive the intent in an existing instance of MainActivity, you m
 }
 ```
 
-If you're targeting iOS 8.x or older, you can use the following code instead:
+如果你的目标是 iOS 8.x 或更早版本，你可以使用以下代码代替：
 
 ```objectivec
-// iOS 8.x or older
+// iOS 8.x 或更早版本
 #import <React/RCTLinkingManager.h>
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
@@ -79,7 +79,7 @@ If you're targeting iOS 8.x or older, you can use the following code instead:
 }
 ```
 
-If your app is using [Universal Links](https://developer.apple.com/ios/universal-links/), you'll need to add the following code as well:
+如果你的应用使用的是 [通用链接](https://developer.apple.com/ios/universal-links/)，你还需要添加以下代码：
 
 ```objectivec
 - (BOOL)application:(UIApplication *)application continueUserActivity:(nonnull NSUserActivity *)userActivity
@@ -94,23 +94,23 @@ If your app is using [Universal Links](https://developer.apple.com/ios/universal
 </TabItem>
 </Tabs>
 
-### Handling Deep Links
+### 处理深链接
 
-There are two ways to handle URLs that open your app.
+有两种方法可以处理打开你应用的 URL。
 
-#### 1. If the app is already open, the app is foregrounded and a Linking 'url' event is fired
+#### 1. 如果应用已经打开，应用会被置于前台并触发 Linking 'url' 事件
 
-You can handle these events with `Linking.addEventListener('url', callback)` - it calls `callback({url})` with the linked URL
+你可以使用 `Linking.addEventListener('url', callback)` 来处理这些事件 - 它会使用链接的 URL 调用 `callback({url})`
 
-#### 2. If the app is not already open, it is opened and the url is passed in as the initialURL
+#### 2. 如果应用尚未打开，它会被打开并且 url 会作为 initialURL 传入
 
-You can handle these events with `Linking.getInitialURL()` - it returns a Promise that resolves to the URL, if there is one.
+你可以使用 `Linking.getInitialURL()` 来处理这些事件 - 它返回一个 Promise，如果有的话，该 Promise 会解析为 URL。
 
 ---
 
-## Example
+## 示例
 
-### Open Links and Deep Links (Universal Links)
+### 打开链接和深链接（通用链接）
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -125,12 +125,12 @@ const unsupportedURL = 'slack://open?team=123456';
 
 const OpenURLButton = ({url, children}) => {
   const handlePress = useCallback(async () => {
-    // Checking if the link is supported for links with custom URL scheme.
+    // 检查是否支持带有自定义 URL scheme 的链接。
     const supported = await Linking.canOpenURL(url);
 
     if (supported) {
-      // Opening the link with some app, if the URL scheme is "http" the web link should be opened
-      // by some browser in the mobile
+      // 用某个应用打开链接，如果 URL scheme 是 "http"，网页链接应该被打开
+      // 由手机上的某个浏览器
       await Linking.openURL(url);
     } else {
       Alert.alert(`Don't know how to open this URL: ${url}`);
@@ -178,12 +178,12 @@ type OpenURLButtonProps = {
 
 const OpenURLButton = ({url, children}: OpenURLButtonProps) => {
   const handlePress = useCallback(async () => {
-    // Checking if the link is supported for links with custom URL scheme.
+    // 检查是否支持带有自定义 URL scheme 的链接。
     const supported = await Linking.canOpenURL(url);
 
     if (supported) {
-      // Opening the link with some app, if the URL scheme is "http" the web link should be opened
-      // by some browser in the mobile
+      // 用某个应用打开链接，如果 URL scheme 是 "http"，网页链接应该被打开
+      // 由手机上的某个浏览器
       await Linking.openURL(url);
     } else {
       Alert.alert(`Don't know how to open this URL: ${url}`);
@@ -216,7 +216,7 @@ export default App;
 </TabItem>
 </Tabs>
 
-### Open Custom Settings
+### 打开自定义设置
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -227,7 +227,7 @@ import {Button, Linking, StyleSheet, View} from 'react-native';
 
 const OpenSettingsButton = ({children}) => {
   const handlePress = useCallback(async () => {
-    // Open the custom settings if the app has one
+    // 如果应用有自定义设置则打开它
     await Linking.openSettings();
   }, []);
 
@@ -266,7 +266,7 @@ type OpenSettingsButtonProps = {
 
 const OpenSettingsButton = ({children}: OpenSettingsButtonProps) => {
   const handlePress = useCallback(async () => {
-    // Open the custom settings if the app has one
+    // 如果应用有自定义设置则打开它
     await Linking.openSettings();
   }, []);
 
@@ -295,7 +295,7 @@ export default App;
 </TabItem>
 </Tabs>
 
-### Get the Deep Link
+### 获取深链接
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -310,10 +310,10 @@ const useInitialURL = () => {
 
   useEffect(() => {
     const getUrlAsync = async () => {
-      // Get the deep link used to open the app
+      // 获取用于打开应用的深链接
       const initialUrl = await Linking.getInitialURL();
 
-      // The setTimeout is just for testing purpose
+      // setTimeout 仅用于测试目的
       setTimeout(() => {
         setUrl(initialUrl);
         setProcessing(false);
@@ -364,10 +364,10 @@ const useInitialURL = () => {
 
   useEffect(() => {
     const getUrlAsync = async () => {
-      // Get the deep link used to open the app
+      // 获取用于打开应用的深链接
       const initialUrl = await Linking.getInitialURL();
 
-      // The setTimeout is just for testing purpose
+      // setTimeout 仅用于测试目的
       setTimeout(() => {
         setUrl(initialUrl);
         setProcessing(false);
@@ -408,7 +408,7 @@ export default App;
 </TabItem>
 </Tabs>
 
-### Send Intents (Android)
+### 发送 Intents (Android)
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -526,9 +526,9 @@ export default App;
 </TabItem>
 </Tabs>
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `addEventListener()`
 
@@ -539,7 +539,7 @@ static addEventListener(
 ): EmitterSubscription;
 ```
 
-Add a handler to Linking changes by listening to the `url` event type and providing the handler.
+通过监听 `url` 事件类型并提供处理程序来添加 Linking 变更的处理程序。
 
 ---
 
@@ -549,29 +549,29 @@ Add a handler to Linking changes by listening to the `url` event type and provid
 static canOpenURL(url: string): Promise<boolean>;
 ```
 
-Determine whether or not an installed app can handle a given URL.
+确定已安装的应用是否可以处理给定的 URL。
 
-The method returns a `Promise` object. When it is determined whether or not the given URL can be handled, the promise is resolved and the first parameter is whether or not it can be opened.
+该方法返回一个 `Promise` 对象。当确定给定的 URL 是否可以被处理时，promise 会被 resolve，第一个参数表示是否可以打开。
 
-The `Promise` will reject on Android if it was impossible to check if the URL can be opened or when targeting Android 11 (SDK 30) if you didn't specify the relevant intent queries in `AndroidManifest.xml`. Similarly on iOS, the promise will reject if you didn't add the specific scheme in the `LSApplicationQueriesSchemes` key inside `Info.plist` (see bellow).
+如果在 Android 上无法检查 URL 是否可以打开，或者当针对 Android 11 (SDK 30) 时未在 `AndroidManifest.xml` 中指定相关的 intent queries，`Promise` 将 reject。类似地，在 iOS 上，如果未在 `Info.plist` 内的 `LSApplicationQueriesSchemes` 键中添加特定的 scheme，promise 将 reject（见下文）。
 
-**Parameters:**
+**参数：**
 
-| Name                                                     | Type   | Description      |
+| 名称                                                     | 类型   | 描述      |
 | -------------------------------------------------------- | ------ | ---------------- |
-| url <div className="label basic required">Required</div> | string | The URL to open. |
+| url <div className="label basic required">必需</div> | string | 要打开的 URL。 |
 
-> For web URLs, the protocol (`"http://"`, `"https://"`) must be set accordingly!
+> 对于 Web URL，必须相应地设置协议（`"http://"`, `"https://"`）！
 
-> This method has limitations on iOS 9+. From [the official Apple documentation](https://developer.apple.com/documentation/uikit/uiapplication/1622952-canopenurl):
+> 此方法在 iOS 9+ 上有限制。来自 [官方 Apple 文档](https://developer.apple.com/documentation/uikit/uiapplication/1622952-canopenurl)：
 >
-> - If your app is linked against an earlier version of iOS but is running in iOS 9.0 or later, you can call this method up to 50 times. After reaching that limit, subsequent calls always resolve to `false`. If the user reinstalls or upgrades the app, iOS resets the limit.
+> - 如果您的应用链接的是较早版本的 iOS 但在 iOS 9.0 或更高版本上运行，您最多可以调用此方法 50 次。达到该限制后，后续调用始终 resolve 为 `false`。如果用户重新安装或升级应用，iOS 会重置限制。
 >
-> As of iOS 9, your app also needs to provide the `LSApplicationQueriesSchemes` key inside `Info.plist` or `canOpenURL()` will always resolve to `false`.
+> 自 iOS 9 起，您的应用还需要在 `Info.plist` 内提供 `LSApplicationQueriesSchemes` 键，否则 `canOpenURL()` 将始终 resolve 为 `false`。
 
-> When targeting Android 11 (SDK 30) you must specify the intents for the schemes you want to handle in `AndroidManifest.xml`. A list of common intents can be found [here](https://developer.android.com/guide/components/intents-common).
+> 当针对 Android 11 (SDK 30) 时，您必须在 `AndroidManifest.xml` 中指定要处理的 scheme 的 intents。常见 intents 列表可以在 [这里](https://developer.android.com/guide/components/intents-common) 找到。
 >
-> For example to handle `https` schemes the following needs to be added to your manifest:
+> 例如，要处理 `https` schemes，需要将以下内容添加到您的 manifest 中：
 >
 > ```
 > <manifest ...>
@@ -592,11 +592,11 @@ The `Promise` will reject on Android if it was impossible to check if the URL ca
 static getInitialURL(): Promise<string | null>;
 ```
 
-If the app launch was triggered by an app link, it will give the link url, otherwise it will give `null`.
+如果应用启动是由应用链接触发的，它将提供链接 url，否则将提供 `null`。
 
-> To support deep linking on Android, refer https://developer.android.com/training/app-indexing/deep-linking.html#handling-intents
+> 要在 Android 上支持深链接，请参考 https://developer.android.com/training/app-indexing/deep-linking.html#handling-intents
 
-> getInitialURL may return `null` when Remote JS Debugging is active. Disable the debugger to ensure it gets passed.
+> 当远程 JS 调试处于活动状态时，getInitialURL 可能返回 `null`。禁用调试器以确保它能被传递。
 
 ---
 
@@ -606,7 +606,7 @@ If the app launch was triggered by an app link, it will give the link url, other
 static openSettings(): Promise<void>;
 ```
 
-Open the Settings app and displays the app’s custom settings, if it has any.
+打开设置应用并显示应用的自定义设置（如果有的话）。
 
 ---
 
@@ -616,23 +616,23 @@ Open the Settings app and displays the app’s custom settings, if it has any.
 static openURL(url: string): Promise<any>;
 ```
 
-Try to open the given `url` with any of the installed apps.
+尝试使用任何已安装的应用打开给定的 `url`。
 
-You can use other URLs, like a location (e.g. "geo:37.484847,-122.148386" on Android or "https://maps.apple.com/?ll=37.484847,-122.148386" on iOS), a contact, or any other URL that can be opened with the installed apps.
+您可以使用其他 URL，例如位置（例如 Android 上的 "geo:37.484847,-122.148386" 或 iOS 上的 "https://maps.apple.com/?ll=37.484847,-122.148386"）、联系人，或任何可以使用已安装应用打开的其他 URL。
 
-The method returns a `Promise` object. If the user confirms the open dialog or the url automatically opens, the promise is resolved. If the user cancels the open dialog or there are no registered applications for the url, the promise is rejected.
+该方法返回一个 `Promise` 对象。如果用户确认打开对话框或 url 自动打开，promise 会被 resolve。如果用户取消打开对话框或没有为该 url 注册的应用，promise 会被 reject。
 
-**Parameters:**
+**参数：**
 
-| Name                                                     | Type   | Description      |
+| 名称                                                     | 类型   | 描述      |
 | -------------------------------------------------------- | ------ | ---------------- |
-| url <div className="label basic required">Required</div> | string | The URL to open. |
+| url <div className="label basic required">必需</div> | string | 要打开的 URL。 |
 
-> This method will fail if the system doesn't know how to open the specified URL. If you're passing in a non-http(s) URL, it's best to check `canOpenURL()` first.
+> 如果系统不知道如何打开指定的 URL，此方法将失败。如果您传递的是非 http(s) URL，最好先检查 `canOpenURL()`。
 
-> For web URLs, the protocol (`"http://"`, `"https://"`) must be set accordingly!
+> 对于 Web URL，必须相应地设置协议（`"http://"`, `"https://"`）！
 
-> This method may behave differently in a simulator e.g. `"tel:"` links are not able to be handled in the iOS simulator as there's no access to the dialer app.
+> 此方法在模拟器中的行为可能不同，例如 `"tel:"` 链接无法在 iOS 模拟器中处理，因为无法访问拨号器应用。
 
 ---
 
@@ -645,11 +645,11 @@ static sendIntent(
 ): Promise<void>;
 ```
 
-Launch an Android intent with extras.
+启动带有 extras 的 Android intent。
 
-**Parameters:**
+**参数：**
 
-| Name                                                        | Type                                                       |
+| 名称                                                        | 类型                                                       |
 | ----------------------------------------------------------- | ---------------------------------------------------------- |
-| action <div className="label basic required">Required</div> | string                                                     |
+| action <div className="label basic required">必需</div> | string                                                     |
 | extras                                                      | `Array<{key: string, value: string ｜ number ｜ boolean}>` |

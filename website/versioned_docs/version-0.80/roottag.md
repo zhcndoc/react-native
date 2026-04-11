@@ -5,25 +5,25 @@ title: RootTag
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-`RootTag` is an opaque identifier assigned to the native root view of your React Native surface — i.e. the `ReactRootView` or `RCTRootView` instance for Android or iOS respectively. In short, it is a surface identifier.
+`RootTag` 是一个不透明的标识符，分配给你的 React Native 表面的原生根视图 —— 即分别是 Android 或 iOS 的 `ReactRootView` 或 `RCTRootView` 实例。简而言之，它是一个表面标识符。
 
-## When to use a RootTag?
+## 何时使用 RootTag？
 
-For most React Native developers, you likely won’t need to deal with `RootTag`s.
+对于大多数 React Native 开发者来说，你可能不需要处理 `RootTag`。
 
-`RootTag`s are useful for when an app renders **multiple React Native root views** and you need to handle native API calls differently depending on the surface. An example of this is when an app is using native navigation and each screen is a separate React Native root view.
+`RootTag` 在应用渲染 **多个 React Native 根视图** 且你需要根据不同表面处理原生 API 调用时很有用。一个例子是应用使用原生导航且每个屏幕是一个单独的 React Native 根视图。
 
-In native navigation, every React Native root view is rendered in a platform’s navigation view (e.g., `Activity` for Android, `UINavigationViewController` for iOS). By this, you are able to leverage the navigation paradigms of the platform such as native look and feel and navigation transitions. The functionality to interact with the native navigation APIs can be exposed to React Native via a [native module](https://reactnative.dev/docs/next/native-modules-intro).
+在原生导航中，每个 React Native 根视图都渲染在平台的导航视图中（例如，Android 的 `Activity`，iOS 的 `UINavigationViewController`）。通过这种方式，你可以利用平台的导航范式，如原生外观和感觉以及导航过渡。与原生导航 API 交互的功能可以通过 [原生模块](https://reactnative.dev/docs/next/native-modules-intro) 暴露给 React Native。
 
-For example, to update the title bar of a screen, you would call the navigation module’s API `setTitle("Updated Title")`, but it would need to know which screen in the stack to update. A `RootTag` is necessary here to identify the root view and its hosting container.
+例如，要更新屏幕的标题栏，你将调用导航模块的 API `setTitle("Updated Title")`，但它需要知道要更新堆栈中的哪个屏幕。此处需要 `RootTag` 来识别根视图及其宿主容器。
 
-Another use case for `RootTag` is when your app needs to attribute a certain JavaScript call to native based on its originating root view. A `RootTag` is necessary to differentiate the source of the call from different surfaces.
+`RootTag` 的另一个用例是当你的应用需要根据其来源根视图将某些 JavaScript 调用归因于原生时。需要 `RootTag` 来区分不同表面的调用来源。
 
-## How to access the RootTag... if you need it
+## 如何访问 RootTag... 如果你需要的话
 
-In versions 0.65 and below, RootTag is accessed via a [legacy context](https://github.com/facebook/react-native/blob/v0.64.1/Libraries/ReactNative/AppContainer.js#L56). To prepare React Native for Concurrent features coming in React 18 and beyond, we are migrating to the latest [Context API](https://react.dev/reference/react/createContext) via `RootTagContext` in 0.66. Version 0.65 supports both the legacy context and the recommended `RootTagContext` to allow developers time to migrate their call-sites. See the breaking changes summary.
+在 0.65 及以下版本中，RootTag 通过 [遗留上下文](https://github.com/facebook/react-native/blob/v0.64.1/Libraries/ReactNative/AppContainer.js#L56) 访问。为了让 React Native 为 React 18 及更高版本中即将到来的 Concurrent 特性做好准备，我们在 0.66 中通过 `RootTagContext` 迁移到最新的 [Context API](https://react.dev/reference/react/createContext)。版本 0.65 支持遗留上下文和推荐的 `RootTagContext`，以便开发者有时间迁移他们的调用点。请参阅破坏性变更摘要。
 
-How to access `RootTag` via the `RootTagContext`.
+如何通过 `RootTagContext` 访问 `RootTag`。
 
 ```js
 import {RootTagContext} from 'react-native';
@@ -59,16 +59,16 @@ class ScreenB extends React.Component {
 }
 ```
 
-Learn more about the Context API for [classes](https://react.dev/reference/react/Component#static-contexttype) and [hooks](https://react.dev/reference/react/useContext) from the React docs.
+从 React 文档中了解更多关于 [类](https://react.dev/reference/react/Component#static-contexttype) 和 [hooks](https://react.dev/reference/react/useContext) 的 Context API。
 
-### Breaking Change in 0.65
+### 0.65 中的破坏性变更
 
-`RootTagContext` was formerly named `unstable_RootTagContext` and changed to `RootTagContext` in 0.65. Please update any usages of `unstable_RootTagContext` in your codebase.
+`RootTagContext` 以前名为 `unstable_RootTagContext`，在 0.65 中改为 `RootTagContext`。请更新代码库中任何 `unstable_RootTagContext` 的用法。
 
-### Breaking Change in 0.66
+### 0.66 中的破坏性变更
 
-The legacy context access to `RootTag` will be removed and replaced by `RootTagContext`. Beginning in 0.65, we encourage developers to proactively migrate `RootTag` accesses to `RootTagContext`.
+对 `RootTag` 的遗留上下文访问将被移除并替换为 `RootTagContext`。从 0.65 开始，我们鼓励开发者主动将 `RootTag` 访问迁移到 `RootTagContext`。
 
-## Future Plans
+## 未来计划
 
-With the new React Native architecture progressing, there will be future iterations to `RootTag`, with the intention to keep the `RootTag` type opaque and prevent thrash in React Native codebases. Please do not rely on the fact that RootTag currently aliases to a number! If your app relies on RootTags, keep an eye on our version change logs, which you can find [here](https://github.com/facebook/react-native/blob/main/CHANGELOG.md).
+随着新的 React Native 架构的推进，`RootTag` 将会有未来的迭代，目的是保持 `RootTag` 类型不透明并防止 React Native 代码库中的变动。请不要依赖 RootTag 当前别名为数字的事实！如果你的应用依赖 RootTags，请密切关注我们的版本变更日志，你可以在 [这里](https://github.com/facebook/react-native/blob/main/CHANGELOG.md) 找到。

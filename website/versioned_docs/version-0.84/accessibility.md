@@ -48,7 +48,7 @@ Android 和 iOS 在实现方式上略有不同，因此 React Native 的实现�
 </TouchableOpacity>
 ```
 
-在上述示例中，TouchableOpacity 元素的 `accessibilityLabel` 默认为 “按我！”。标签是所有 Text 节点子元素的内容用空格连接而成。
+在上述示例中，TouchableOpacity 元素的 `accessibilityLabel` 默认为“按我！”。标签是所有 Text 节点子元素的内容用空格连接而成。
 
 ### `accessibilityLabelledBy` <div className="label android">Android</div>
 
@@ -64,7 +64,7 @@ Android 和 iOS 在实现方式上略有不同，因此 React Native 的实现�
 </View>
 ```
 
-上述例子中，屏幕阅读器在聚焦 TextInput 时会朗读 “输入框，编辑框，输入框标签”。
+上述例子中，屏幕阅读器在聚焦 TextInput 时会朗读“输入框，编辑框，输入框标签”。
 
 ### `accessibilityHint`
 

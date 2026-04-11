@@ -23,7 +23,7 @@ import GuideMacOSIOS from './\_getting-started-macos-ios.md';
 
 如果你使用的是 [Framework](/architecture/glossary#react-native-framework)，则不必设置环境。使用 React Native Framework 时，无需安装 Android Studio 或 Xcode，框架会帮你构建原生应用。
 
-如果你受限而不能使用 Framework，或者希望自己编写 Framework，那么设置本地环境就是必需的。环境搭建完成后，可以学习如何[不使用框架开始开发](getting-started-without-a-framework)。
+如果你受限而不能使用 Framework，或者希望自己编写 Framework，那么设置本地环境就是必需的。环境搭建完成后，可以学习如何 [不使用框架开始开发](getting-started-without-a-framework)。
 
 </details>
 :::

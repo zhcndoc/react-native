@@ -1,8 +1,8 @@
-# The Codegen CLI
+# Codegen CLI
 
-Calling Gradle or manually calling a script might be hard to remember and it requires a lot of ceremony.
+调用 Gradle 或手动调用脚本可能很难记住，而且需要很多繁琐的操作。
 
-To simplify it, we created a CLI tool that can help you running those tasks: the **Codegen** cli. This command runs [@react-native/codegen](https://www.npmjs.com/package/@react-native/codegen) for your project. The following options are available:
+为了简化它，我们创建了一个 CLI 工具来帮助你运行这些任务：**Codegen** CLI。此命令为你的项目运行 [@react-native/codegen](https://www.npmjs.com/package/@react-native/codegen)。以下选项可用：
 
 ```sh
 npx @react-native-community/cli codegen --help
@@ -16,21 +16,21 @@ Options:
   -h, --help           display help for command
 ```
 
-## Examples
+## 示例
 
-- Read `package.json` from the current working directory, generate code based on its codegenConfig.
+- 从当前工作目录读取 `package.json`，根据其 codegenConfig 生成代码。
 
 ```shell
 npx @react-native-community/cli codegen
 ```
 
-- Read `package.json` from the current working directory, generate iOS code in the location defined in the codegenConfig.
+- 从当前工作目录读取 `package.json`，在 codegenConfig 定义的位置生成 iOS 代码。
 
 ```shell
 npx @react-native-community/cli codegen --platform ios
 ```
 
-- Read `package.json` from `third-party/some-library`, generate Android code in `third-party/some-library/android/generated`.
+- 从 `third-party/some-library` 读取 `package.json`，在 `third-party/some-library/android/generated` 生成 Android 代码。
 
 ```shell
 npx @react-native-community/cli codegen \
@@ -39,31 +39,31 @@ npx @react-native-community/cli codegen \
     --outputPath third-party/some-library/android/generated
 ```
 
-# Including Generated Code into Libraries
+# 将生成的代码包含到库中
 
-The Codegen CLI is a great tool for library developers. It can be used to take a sneak-peek at the generated code to see which interfaces you need to implement.
+Codegen CLI 是库开发者的绝佳工具。它可以用来预览生成的代码，查看你需要实现哪些接口。
 
-Normally the generated code is not included in the library, and the app that uses the library is responsible for running the Codegen at build time.
-This is a good setup for most cases, but Codegen also offers a mechanism to include the generated code in the library itself via the `includesGeneratedCode` property.
+通常生成的代码不包含在库中，使用该库的应用负责在构建时运行 Codegen。
+这对于大多数情况来说是一个好的设置，但 Codegen 也提供了一种机制，通过 `includesGeneratedCode` 属性将生成的代码包含在库本身中。
 
-It's important to understand what are the implications of using `includesGeneratedCode = true`. Including the generated code comes with several benefits such as:
+理解使用 `includesGeneratedCode = true` 的影响很重要。包含生成的代码带来几个好处，例如：
 
-- No need to rely on the app to run **Codegen** for you, the generated code is always there.
-- The implementation files are always consistent with the generated interfaces (this makes your library code more resilient against API changes in codegen).
-- No need to include two sets of files to support both architectures on Android. You can only keep the New Architecture one, and it is guaranteed to be backwards compatible.
-- Since all native code is there, it is possible to ship the native part of the library as a prebuild.
+- 无需依赖应用为你运行 **Codegen**，生成的代码始终存在。
+- 实现文件始终与生成的接口保持一致（这使得你的库代码对 codegen 中的 API 变更更具弹性）。
+- 无需包含两组文件来支持 Android 上的两种架构。你可以只保留新架构的那一组，并且保证向后兼容。
+- 由于所有原生代码都在那里，可以将库的原生部分作为预构建（prebuild）发布。
 
-On the other hand, you also need to be aware of one drawback:
+另一方面，你也需要意识到一个缺点：
 
-- The generated code will use the React Native version defined inside your library. So if your library is shipping with React Native 0.76, the generated code will be based on that version. This could mean that the generated code is not compatible with apps using **previous** React Native version used by the app (e.g. an App running on React Native 0.75).
+- 生成的代码将使用库内部定义的 React Native 版本。因此，如果你的库发布时带有 React Native 0.76，生成的代码将基于该版本。这可能意味着生成的代码与使用**之前** React Native 版本的应用不兼容（例如，运行在 React Native 0.75 上的应用）。
 
-## Enabling `includesGeneratedCode`
+## 启用 `includesGeneratedCode`
 
-To enable this setup:
+要启用此设置：
 
-- Add the `includesGeneratedCode` property into your library's `codegenConfig` field in the `package.json` file. Set its value to `true`.
-- Run **Codegen** locally with the codegen CLI.
-- Update your `package.json` to include the generated code.
-- Update your `podspec` to include the generated code.
-- Update your `build.Gradle` file to include the generated code.
-- Update `cmakeListsPath` in `react-native.config.js` so that Gradle doesn't look for CMakeLists file in the build directory but instead in your outputDir.
+- 在 `package.json` 文件的库的 `codegenConfig` 字段中添加 `includesGeneratedCode` 属性。将其值设置为 `true`。
+- 使用 codegen CLI 在本地运行 **Codegen**。
+- 更新你的 `package.json` 以包含生成的代码。
+- 更新你的 `podspec` 以包含生成的代码。
+- 更新你的 `build.Gradle` 文件以包含生成的代码。
+- 更新 `react-native.config.js` 中的 `cmakeListsPath`，以便 Gradle 不在构建目录中查找 CMakeLists 文件，而是在你的 outputDir 中查找。

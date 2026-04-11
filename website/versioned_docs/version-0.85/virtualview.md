@@ -7,9 +7,9 @@ import ExperimentalAPIWarning from './\_experimental-api-warning.mdx';
 
 <ExperimentalAPIWarning />
 
-`VirtualView` is a core component that behaves similar to [`View`](view).
+`VirtualView` 是一个核心组件，其行为类似于 [`View`](view)。
 
-When it is the descendent of a [`ScrollView`](scrollview), it gains additional virtualization capabilities to reduce its memory footprint when obscured by the scroll viewport.
+当它是 [`ScrollView`](scrollview) 的后代时，它会获得额外的虚拟化能力，以便在被滚动视口遮挡时减少其内存占用。
 
 ```tsx
 <ScrollView>
@@ -19,53 +19,53 @@ When it is the descendent of a [`ScrollView`](scrollview), it gains additional v
 </ScrollView>
 ```
 
-A `VirtualView` without an ancestor[`ScrollView`](scrollview) does not have any virtualization capabilities.
+没有祖先 [`ScrollView`](scrollview) 的 `VirtualView` 不具备任何虚拟化能力。
 
-## Virtualization
+## 虚拟化
 
-When a `VirtualView` leaves the visible region of a [`ScrollView`](scrollview), it becomes hidden. When hidden, a `VirtualView` will cache its most recent layout and may unmount its children — a process called virtualization.
+当 `VirtualView` 离开 [`ScrollView`](scrollview) 的可见区域时，它会变为隐藏。当隐藏时，`VirtualView` 将缓存其最近的布局，并可能卸载其子组件——这个过程称为虚拟化。
 
-When a `VirtualView` returns to the visible region of a [`ScrollView`](scrollview), it becomes visible. When visible, its children are _guaranteed_ to be rendered. This guarantee is maintained by blocking the main thread from rendering the next frame that would reveal the `VirtualView` until its children can be rendered.
+当 `VirtualView` 返回 [`ScrollView`](scrollview) 的可见区域时，它会变为可见。当可见时，其子组件 _保证_ 会被渲染。此保证通过阻塞主线程渲染下一帧来维持，直到其子组件可以被渲染为止，否则会显示 `VirtualView`。
 
-<img src="/docs/assets/d_virtualview_modes.svg" width="700" alt="Diagram of VirtualView modes and thresholds." />
+<img src="/docs/assets/d_virtualview_modes.svg" width="700" alt="VirtualView 模式和阈值的示意图。" />
 
 :::note
-In future developments, a hidden `VirtualView` may instead render its children in an [`<Activity mode="hidden">`](https://react.dev/reference/react/Activity) to preserve state for as long as possible while balancing memory overhead.
+在未来的发展中，隐藏的 `VirtualView` 可能会改为在 [`<Activity mode="hidden">`](https://react.dev/reference/react/Activity) 中渲染其子组件，以尽可能保留状态，同时平衡内存开销。
 :::
 
-### Blocking the Main Thread
+### 阻塞主线程
 
-This is the first time in React Native’s feature set where rendering a React component can block the main thread. This is a new capability enabled by the [New Architecture](/architecture/landing-page)!
+这是 React Native 功能集中第一次出现渲染 React 组件可以阻塞主线程的情况。这是 [新架构](/architecture/landing-page) 启用的一项新功能！
 
-Blocking the main thread can provide a better user experience by preventing flashes of blank frames that sometimes occur when using components like [`FlatList`](flatlist). It can also enable better performance by using main thread priority, which is also typically run on higher performance cores.
+阻塞主线程可以通过防止有时在使用像 [`FlatList`](flatlist) 这样的组件时发生的白屏闪烁，来提供更好的用户体验。它还可以通过使用主线程优先级来启用更好的性能，这通常也运行在更高性能的核心上。
 
-However, blocking the main thread also comes with tradeoffs. If an update operation, such as mounting the children of a `VirtualView`, takes too long to finish, it can now drop frames. Dropping more than a couple frames can lead to a worse user experience by making the app feel sluggish and non-responsive. Dropping too many frames may cause the operating system to display a modal indicating the app is not responsive, or it may even terminate your app!
+然而，阻塞主线程也带有权衡。如果更新操作（例如挂载 `VirtualView` 的子组件）花费太长时间完成，现在可能会导致丢帧。丢失超过几帧会导致用户体验变差，使应用感觉卡顿且无响应。丢失太多帧可能会导致操作系统显示模态框指示应用无响应，甚至可能终止你的应用！
 
 :::warning
-DevTools does not currently support debugging JavaScript on the main thread. This means if you are using breakpoints to debug code called from `onModeChange`, that is executed on the main thread, your debugger may freeze.
+DevTools 目前不支持在主线程上调试 JavaScript。这意味着如果你使用断点调试从 `onModeChange` 调用的代码（在主线程上执行），你的调试器可能会冻结。
 
-Debugging all other parts of your JavaScript code should work as expected. We are working on closing this gap before releasing `VirtualView` to stable channels of React Native.
+调试所有其他部分的 JavaScript 代码应该按预期工作。我们正在努力在将 `VirtualView` 发布到 React Native 稳定渠道之前弥补这一差距。
 :::
 
-### Prerendering
+### 预渲染
 
-`VirtualView` enables you to benefit from main thread rendering while mitigating the disadvantages of dropped frames by rendering earlier before it is needed. This is called “prerendering”.
+`VirtualView` 使你能够通过更早渲染（在需要之前）来受益于主线程渲染，同时减轻丢帧的缺点。这称为“预渲染”。
 
-By default, each `VirtualView` will prerender its children when it approaches the visible region of a [`ScrollView`](scrollview). When this happens, its children will be rendered on a background thread at a lower priority (using a [transition](https://react.dev/reference/react/startTransition)). This ensures that the main thread and React are available to handle other critical user interactions at a higher priority.
+默认情况下，每个 `VirtualView` 将在接近 [`ScrollView`](scrollview) 的可见区域时预渲染其子组件。当这种情况发生时，其子组件将在后台线程上以较低优先级渲染（使用 [transition](https://react.dev/reference/react/startTransition)）。这确保主线程和 React 可用于以更高优先级处理其他关键用户交互。
 
 :::note
-`VirtualView`'s prerender logic is not currently configurable. The algorithm for determining this is undergoing active design iteration and is likely to change in a future release.
+`VirtualView` 的预渲染逻辑目前不可配置。确定此内容的算法正在进行积极的设计迭代，很可能在未来版本中更改。
 :::
 
 ---
 
-## Props
+## 属性
 
 ### `children`
 
-Content to render inside this `VirtualView`.
+在此 `VirtualView` 内渲染的内容。
 
-| Type                     |
+| 类型                     |
 | ------------------------ |
 | [React Node](react-node) |
 
@@ -73,16 +73,16 @@ Content to render inside this `VirtualView`.
 
 ### `onModeChange`
 
-Invoked when the `VirtualView` changes how it renders its children.
+当 `VirtualView` 更改其子组件的渲染方式时调用。
 
-If a callback is supplied, it may be invoked from different threads and priorities depending on the internal state change. This can be detected by checking the `mode` property on the event:
+如果提供了回调，根据内部状态变更，它可能会从不同的线程和优先级被调用。这可以通过检查事件上的 `mode` 属性来检测：
 
-- If `mode` is [`VirtualViewMode.Visible`](#virtualviewmode), the callback is being invoked from the main thread with immediate priority.
-- If `mode` is [`VirtualViewMode.Prerender`](#virtualviewmode) or [`VirtualViewMode.Hidden`](#virtualviewmode), the callback is being invoked from a background thread with transition priority.
+- 如果 `mode` 是 [`VirtualViewMode.Visible`](#virtualviewmode)，则回调从主线程以即时优先级调用。
+- 如果 `mode` 是 [`VirtualViewMode.Prerender`](#virtualviewmode) 或 [`VirtualViewMode.Hidden`](#virtualviewmode)，则回调从后台线程以过渡优先级调用。
 
-The callback will never be invoked consecutively with the same `mode` value. However, there are few guarantees about sequencing of events. Also, the callback may never be invoked with [`VirtualViewMode.Visible`](#virtualviewmode) even if it becomes visible, if the children were successfully prerendered.
+回调永远不会连续使用相同的 `mode` 值调用。但是，关于事件顺序的保证很少。此外，即使子组件变得可见，如果子组件成功预渲染，回调也可能永远不会使用 [`VirtualViewMode.Visible`](#virtualviewmode) 调用。
 
-| Type                                               |
+| 类型                                               |
 | -------------------------------------------------- |
 | `md ([ModeChangeEvent](#modechangeevent)) => void` |
 
@@ -90,9 +90,9 @@ The callback will never be invoked consecutively with the same `mode` value. How
 
 ### `nativeID`
 
-An identifier for locating this view from native classes.
+用于从原生类定位此视图的标识符。
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -100,53 +100,53 @@ An identifier for locating this view from native classes.
 
 ### `style`
 
-| Type                           |
+| 类型                           |
 | ------------------------------ |
 | [View Style](view-style-props) |
 
 ---
 
-## Type Definitions
+## 类型定义
 
 ### `ModeChangeEvent`
 
-Argument supplied to [`onModeChange`](#onmodechange).
+提供给 [`onModeChange`](#onmodechange) 的参数。
 
-| Type   |
+| 类型   |
 | ------ |
 | object |
 
-**Properties:**
+**属性：**
 
-| Name          | Type                                | Description                                                                                       |
-| ------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------- |
-| mode          | [VirtualViewMode](#virtualviewmode) | New mode of the `VirtualView`.                                                                    |
-| target        | element                             | `VirtualView` emitting this event.                                                                |
-| targetRect    | [Rect](rect)                        | Layout of `target` relative to the nearest ancestor `ScrollView`.                                 |
-| thresholdRect | [Rect](rect)                        | Layout of the threshold that triggered this event, relative to the nearest ancestor `ScrollView`. |
+| 名称          | 类型                                | 描述                                                                                       |
+| ------------- | ----------------------------------- | ----------------------------------------------------------------------------------------- |
+| mode          | [VirtualViewMode](#virtualviewmode) | `VirtualView` 的新模式。                                                                    |
+| target        | element                             | 发出此事件的 `VirtualView`。                                                                |
+| targetRect    | [Rect](rect)                        | `target` 相对于最近的祖先 `ScrollView` 的布局。                                 |
+| thresholdRect | [Rect](rect)                        | 触发此事件的阈值相对于最近的祖先 `ScrollView` 的布局。 |
 
 :::note
-For example, if a `VirtualView` enters the visible region of a [`ScrollView`](scrollview)...
+例如，如果 `VirtualView` 进入 [`ScrollView`](scrollview) 的可见区域...
 
-- `mode` would be [`VirtualViewMode.Visible`](#virtualviewmode)
-- `thresholdRect` would describe the visible viewport of the nearest ancestor [`ScrollView`](scrollview)
-- `targetRect` would be the layout of `target` that overlaps with `thresholdRect` (i.e. it is within the visible region of the [`ScrollView`](scrollview))
+- `mode` 将是 [`VirtualViewMode.Visible`](#virtualviewmode)
+- `thresholdRect` 将描述最近的祖先 [`ScrollView`](scrollview) 的可见视口
+- `targetRect` 将是 `target` 与 `thresholdRect` 重叠的布局（即它位于 [`ScrollView`](scrollview) 的可见区域内）
 
 :::
 
 ### `VirtualViewMode`
 
-Possible modes of a `VirtualView`.
+`VirtualView` 的可能模式。
 
-| Name      | Value | Description                                    |
-| --------- | ----- | ---------------------------------------------- |
-| Visible   | `0`   | Target view is visible.                        |
-| Prerender | `1`   | Target view is hidden, but can be prerendered. |
-| Hidden    | `2`   | Target view is hidden.                         |
+| 名称      | 值  | 描述                                    |
+| --------- | --- | --------------------------------------- |
+| Visible   | `0` | 目标视图可见。                        |
+| Prerender | `1` | 目标视图隐藏，但可以预渲染。 |
+| Hidden    | `2` | 目标视图隐藏。                         |
 
 ---
 
-## Static Methods
+## 静态方法
 
 ### `createHiddenVirtualView()`
 
@@ -154,9 +154,9 @@ Possible modes of a `VirtualView`.
 static createHiddenVirtualView(height: number): typeof VirtualView;
 ```
 
-`VirtualView` initially renders its children as visible, even if it is initially obscured by an ancestor [`ScrollView`](scrollview). This is because when a component is initially rendered, the presence of an ancestor [`ScrollView`](scrollview) — let alone its size and scroll position — are unknown.
+`VirtualView` 初始时将子组件渲染为可见，即使它最初被祖先 [`ScrollView`](scrollview) 遮挡。这是因为当组件初始渲染时，祖先 [`ScrollView`](scrollview) 的存在——更不用说其大小和滚动位置——是未知的。
 
-For advanced use cases, `createHiddenVirtualView()` creates a component that renders an initially hidden `VirtualView` with the supplied estimated layout.
+对于高级用例，`createHiddenVirtualView()` 创建一个组件，渲染一个初始隐藏的 `VirtualView`，并使用提供的估计布局。
 
 ```tsx
 const HiddenVirtualView = createHiddenVirtualView(100);
@@ -168,8 +168,8 @@ const HiddenVirtualView = createHiddenVirtualView(100);
 </ScrollView>;
 ```
 
-**Parameters:**
+**参数：**
 
-| Name                                                        | Type   | Description                                            |
-| ----------------------------------------------------------- | ------ | ------------------------------------------------------ |
-| height <div className="label basic required">Required</div> | number | Estimated height of initially rendering `VirtualView`. |
+| 名称                                                        | 类型   | 描述                                            |
+| ----------------------------------------------------------- | ------ | ---------------------------------------------- |
+| height <div className="label basic required">必需</div> | number | 初始渲染 `VirtualView` 的估计高度。 |

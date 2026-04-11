@@ -1,11 +1,11 @@
 ---
 id: layoutevent
-title: LayoutEvent Object Type
+title: LayoutEvent 对象类型
 ---
 
-`LayoutEvent` object is returned in the callback as a result of component layout change, for example `onLayout` in [View](view) component.
+`LayoutEvent` 对象作为组件布局变化的结果在回调中返回，例如 [View](view) 组件中的 `onLayout`。
 
-## Example
+## 示例
 
 ```js
 {
@@ -19,49 +19,49 @@ title: LayoutEvent Object Type
 }
 ```
 
-## Keys and values
+## 键和值
 
 ### `height`
 
-Height of the component after the layout changes.
+布局变化后组件的高度。
 
-| Type   | Optional |
+| 类型   | 可选 |
 | ------ | -------- |
-| number | No       |
+| number | 否       |
 
 ### `width`
 
-Width of the component after the layout changes.
+布局变化后组件的宽度。
 
-| Type   | Optional |
+| 类型   | 可选 |
 | ------ | -------- |
-| number | No       |
+| number | 否       |
 
 ### `x`
 
-Component X coordinate inside the parent component.
+组件在父组件内的 X 坐标。
 
-| Type   | Optional |
+| 类型   | 可选 |
 | ------ | -------- |
-| number | No       |
+| number | 否       |
 
 ### `y`
 
-Component Y coordinate inside the parent component.
+组件在父组件内的 Y 坐标。
 
-| Type   | Optional |
+| 类型   | 可选 |
 | ------ | -------- |
-| number | No       |
+| number | 否       |
 
 ### `target`
 
-The node id of the element receiving the PressEvent.
+接收 PressEvent 的元素的节点 id。
 
-| Type                        | Optional |
+| 类型                        | 可选 |
 | --------------------------- | -------- |
-| number, `null`, `undefined` | No       |
+| number, `null`, `undefined` | 否       |
 
-## Used by
+## 用于
 
 - [`Image`](image)
 - [`Pressable`](pressable)

@@ -173,7 +173,7 @@ static prompt: (
 | ---------------------------------------------------------- | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | title <div className="label basic required">必填</div> | string                                          | 对话框的标题。                                                                                                                                                                                   |
 | message                                                    | string                                          | 出现在文本输入框上方的可选消息。                                                                                                                                                |
-| callbackOrButtons                                          | function<hr/>[AlertButton](alert#alertButton)[] | 如果传入函数，当用户点击 'OK' 时，它将使用提示框的值被调用<br/>`(text: string) => void`。<hr/>如果传入数组，按钮将根据数组内容进行配置。 |
+| callbackOrButtons                                          | 函数<hr/>[AlertButton](alert#alertButton)[] | 如果传入函数，当用户点击 'OK' 时，它将使用提示框的值被调用<br/>`(text: string) => void`。<hr/>如果传入数组，按钮将根据数组内容进行配置。 |
 | type                                                       | [AlertType](alert#alerttype-ios)                | 配置文本输入框。                                                                                                                                                                       |
 | defaultValue                                               | string                                          | 文本输入框中的默认文本。                                                                                                                                                                       |
 | keyboardType                                               | string                                          | 第一个文本字段（如果存在）的键盘类型。TextInput [keyboardTypes](textinput#keyboardtype) 之一。                                                                                          |
@@ -189,7 +189,7 @@ static prompt: (
 
 | 类型 |
 | ---- |
-| enum |
+| 枚举 |
 
 **常量：**
 
@@ -207,7 +207,7 @@ static prompt: (
 
 | 类型 |
 | ---- |
-| enum |
+| 枚举 |
 
 **常量：**
 
@@ -233,7 +233,7 @@ static prompt: (
 | 名称                                             | 类型                                           | 描述                                                                    |
 | ------------------------------------------------ | ---------------------------------------------- | ------------------------------------------------------------------------------ |
 | text                                             | string                                         | 按钮标签。                                                                  |
-| onPress                                          | function                                       | 按钮被按下时的回调函数。                                      |
+| onPress                                          | 函数                                       | 按钮被按下时的回调函数。                                      |
 | style <div className="label ios">iOS</div>       | [AlertButtonStyle](alert#alertbuttonstyle-ios) | 按钮样式，在 Android 上此属性将被忽略。                        |
 | isPreferred <div className="label ios">iOS</div> | boolean                                        | 按钮是否应被强调，在 Android 上此属性将被忽略。 |
 
@@ -243,7 +243,7 @@ static prompt: (
 
 | 类型   |
 | ------ |
-| object |
+| 对象 |
 
 **属性：**
 
@@ -251,4 +251,4 @@ static prompt: (
 | ------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
 | cancelable <div className="label android">Android</div> | boolean  | 定义是否可以通过点击警告框外部来关闭警告框。                                                    |
 | userInterfaceStyle <div className="label ios">iOS</div> | string   | 用于警告框的界面样式，可以设置为 `light` 或 `dark`，否则将使用默认系统样式。 |
-| onDismiss <div className="label android">Android</div>  | function | 警告框被关闭时触发的回调函数。                                                                    |
+| onDismiss <div className="label android">Android</div>  | 函数 | 警告框被关闭时触发的回调函数。                                                                    |

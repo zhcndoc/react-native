@@ -3,17 +3,17 @@ id: safeareaview
 title: '🗑️ SafeAreaView'
 ---
 
-:::warning Deprecated
-Use [react-native-safe-area-context](https://github.com/AppAndFlow/react-native-safe-area-context) instead.
+:::warning 已弃用
+请改用 [react-native-safe-area-context](https://github.com/AppAndFlow/react-native-safe-area-context)。
 :::
 
-The purpose of `SafeAreaView` is to render content within the safe area boundaries of a device. It is currently only applicable to iOS devices with iOS version 11 or later.
+`SafeAreaView` 的目的是在设备的安全区域边界内渲染内容。它目前仅适用于 iOS 版本 11 或更高版本的 iOS 设备。
 
-`SafeAreaView` renders nested content and automatically applies padding to reflect the portion of the view that is not covered by navigation bars, tab bars, toolbars, and other ancestor views. Moreover, and most importantly, Safe Area's paddings reflect the physical limitation of the screen, such as rounded corners or camera notches (i.e. the sensor housing area on iPhone 13).
+`SafeAreaView` 渲染嵌套内容，并自动应用内边距，以反映视图中未被导航栏、标签栏、工具栏和其他祖先视图覆盖的部分。此外，最重要的是，安全区域的内边距反映了屏幕的物理限制，例如圆角或摄像头凹槽（即 iPhone 13 上的传感器外壳区域）。
 
-## Example
+## 示例
 
-To use, wrap your top level view with a `SafeAreaView` with a `flex: 1` style applied to it. You may also want to use a background color that matches your application's design.
+使用时，请用 `SafeAreaView` 包裹你的顶层视图，并为其应用 `flex: 1` 样式。你可能还希望使用与应用设计相匹配的背景颜色。
 
 ```SnackPlayer name=SafeAreaView&supportedPlatforms=ios
 import React from 'react';
@@ -42,14 +42,14 @@ export default App;
 
 ---
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
-### [View Props](view.md#props)
+### [View 属性](view.md#props)
 
-Inherits [View Props](view.md#props).
+继承 [View 属性](view.md#props)。
 
 :::note
-As padding is used to implement the behavior of the component, padding rules in styles applied to a `SafeAreaView` will be ignored and can cause different results depending on the platform. See [#22211](https://github.com/facebook/react-native/issues/22211) for details.
+由于内边距用于实现组件的行为，应用于 `SafeAreaView` 的样式中的内边距规则将被忽略，并且可能导致根据不同平台产生不同的结果。详见 [#22211](https://github.com/facebook/react-native/issues/22211)。
 :::

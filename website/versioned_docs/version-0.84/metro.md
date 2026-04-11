@@ -13,7 +13,7 @@ Metro 的配置选项可以在你项目的 `metro.config.js` 文件中定制。�
 - [**一个函数**](#advanced-using-a-config-function)，该函数接收 Metro 的内部配置默认值作为参数，并应返回最终的配置对象。
 
 :::tip
-请参阅 Metro 官网的[**配置 Metro**](https://metrobundler.dev/docs/configuration)文档，了解所有可用的配置选项。
+请参阅 Metro 官网的 [**配置 Metro**](https://metrobundler.dev/docs/configuration) 文档，了解所有可用的配置选项。
 :::
 
 在 React Native 中，你的 Metro 配置应继承自 [`@react-native/metro-config`](https://www.npmjs.com/package/@react-native/metro-config) 或 [`@expo/metro-config`](https://www.npmjs.com/package/@expo/metro-config)。这些包包含了构建和运行 React Native 应用程序所必需的重要默认配置。
@@ -101,4 +101,4 @@ const config = {
 ## 了解更多关于 Metro
 
 - [Metro 官网](https://metrobundler.dev/)
-- [视频：“Metro 和 React Native 开发体验” — App.js 2023 讲座](https://www.youtube.com/watch?v=c9D4pg0y9cI)
+- [视频："Metro 和 React Native 开发体验” — App.js 2023 讲座](https://www.youtube.com/watch?v=c9D4pg0y9cI)

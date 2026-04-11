@@ -173,7 +173,7 @@ cmake_minimum_required(VERSION 3.13)
 # 定义库名称
 project(appmodules)
 
-# 包含React Native构建所需内容
+# 包含 React Native 构建所需内容
 include(${REACT_ANDROID_DIR}/cmake-utils/ReactNative-application.cmake)
 
 # 指定额外源码位置。需往上回溯多层目录以访问 shared 文件夹
@@ -306,15 +306,15 @@ open SampleApp.xcworkspace
 
 2. 左侧选择 `SampleApp` 项目，点击菜单中的 `Add files to "Sample App"...`。
 
-![Add Files to Sample App...](/docs/assets/AddFilesToXcode1.png)
+![向 "Sample App" 添加文件...](/docs/assets/AddFilesToXcode1.png)
 
 3. 选择 `shared` 文件夹后点击 `Add`。
 
-![Add Files to Sample App...](/docs/assets/AddFilesToXcode2.png)
+![向 "Sample App" 添加文件...](/docs/assets/AddFilesToXcode2.png)
 
 若操作成功，左侧项目结构应如图所示：
 
-![Xcode Project](/docs/assets/CxxTMGuideXcodeProject.png)
+![Xcode 项目](/docs/assets/CxxTMGuideXcodeProject.png)
 
 #### 3. 在应用中注册 Cxx Turbo 原生模块
 
@@ -329,7 +329,7 @@ ModuleProvider 是一个 Objective-C++ 类，桥接纯 C++ 模块与 iOS 应用�
 
 1. 在 Xcode 中选择 `SampleApp` 项目，按下 <kbd>⌘</kbd> + <kbd>N</kbd> 新建文件。  
 2. 选择 `Cocoa Touch Class` 模板。  
-3. 命名为 `NativeSampleModuleProvider`（保持“Subclass of”为 `NSObject`，“Language”为 `Objective-C`）。  
+3. 命名为 `NativeSampleModuleProvider`（保持"Subclass of"为 `NSObject`，"Language"为 `Objective-C`）。  
 4. 点击 Next 生成文件。  
 5. 将 `NativeSampleModuleProvider.m` 重命名为 `NativeSampleModuleProvider.mm`（标明为 Objective-C++ 文件）。  
 6. 用以下代码替换 `NativeSampleModuleProvider.h` 文件内容：
@@ -464,7 +464,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 18,
+    fontSize:18,
     marginBottom: 20,
   },
   textInput: {
@@ -493,4 +493,4 @@ export default App;
 
 | <center>Android</center>                                                                             | <center>iOS</center>                                                                          |
 | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| <center><img src="/docs/assets/CxxGuideAndroidVideo.gif" alt="Android Video" height="600"/></center> | <center><img src="/docs/assets/CxxGuideIOSVideo.gif" alt="iOS video" height="600" /></center> |
+| <center><img src="/docs/assets/CxxGuideAndroidVideo.gif" alt="Android 视频" height="600"/></center> | <center><img src="/docs/assets/CxxGuideIOSVideo.gif" alt="iOS 视频" height="600" /></center> |

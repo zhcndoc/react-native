@@ -11,7 +11,7 @@ React Native 就像 React，但它使用原生组件而不是网页组件作为�
 
 ## Hello World
 
-遵循我们祖先的古老传统，我们必须先构建一个除了显示 “Hello, world!” 外什么都不做的应用。代码如下：
+遵循我们祖先的古老传统，我们必须先构建一个除了显示"Hello, world!"外什么都不做的应用。代码如下：
 
 ```SnackPlayer name=Hello%20World
 import React from 'react';
@@ -39,7 +39,7 @@ export default HelloWorldApp;
 1. 首先，我们需要导入 `React`，以便能使用 `JSX`，它随后会被转换为各个平台的原生组件。
 2. 在第二行，我们从 `react-native` 中导入了 `Text` 和 `View` 组件。
 
-接着我们定义了 `HelloWorldApp` 函数，这是一个[函数组件](https://react.dev/reference/react/Component)，行为和网页上的 React 一样。该函数返回一个带有样式的 `View` 组件，里面包含一个 `Text` 作为子组件。
+接着我们定义了 `HelloWorldApp` 函数，这是一个 [函数组件](https://react.dev/reference/react/Component)，行为和网页上的 React 一样。该函数返回一个带有样式的 `View` 组件，里面包含一个 `Text` 作为子组件。
 
 `Text` 组件用于渲染文本，而 `View` 组件渲染一个容器。这个容器被应用了几种样式，让我们来分析每一项的作用。
 
@@ -51,7 +51,7 @@ export default HelloWorldApp;
 
 首先，ES2015（又名 ES6）是一组对 JavaScript 的改进，现在已成为官方标准，但还未被所有浏览器支持，所以通常 web 开发还未完全使用。React Native 内置支持 ES2015，因此你可以放心使用这些新特性。示例中的 `import`、`export`、`const` 和 `from` 都是 ES2015 特性。如果你不熟悉 ES2015，可以通过阅读本教程中的示例代码来学习这部分内容。如果想要系统了解，[这个页面](https://babeljs.io/learn-es2015/) 提供了 ES2015 特性的良好概览。
 
-另一个代码中不寻常的部分是 `<View><Text>Hello world!</Text></View>`。这是 JSX —— 一种允许你在 JavaScript 中嵌入 XML 的语法。许多框架使用专门的模板语言，允许你在标记语言中嵌入代码。而 React 则相反，JSX 允许你在代码中写标记语言。看起来类似网页上的 HTML，但不是用 `<div>` 或 `<span>` 这些网页元素，而是用 React 组件。这里 `<Text>` 是一个[核心组件](intro-react-native-components)，用于显示文本，`View` 则类似 `<div>` 或 `<span>`。
+另一个代码中不寻常的部分是 `<View><Text>Hello world!</Text></View>`。这是 JSX —— 一种允许你在 JavaScript 中嵌入 XML 的语法。许多框架使用专门的模板语言，允许你在标记语言中嵌入代码。而 React 则相反，JSX 允许你在代码中写标记语言。看起来类似网页上的 HTML，但不是用 `<div>` 或 `<span>` 这些网页元素，而是用 React 组件。这里 `<Text>` 是一个 [核心组件](intro-react-native-components)，用于显示文本，`View` 则类似 `<div>` 或 `<span>`。
 
 ## 组件
 
@@ -142,7 +142,7 @@ export default LotsOfGreetings;
 
 这里的另一个新玩意是 [`View`](view.md) 组件。[`View`](view.md) 主要用作其他组件的容器，帮助控制样式和布局。
 
-通过 `props` 和基本的 [`Text`](text.md)、[`Image`](image.md) 与 [`View`](view.md) 组件，你可以构建各种静态界面。想要让你的应用随时间变化，接下来你需要[了解 State](#state)。
+通过 `props` 和基本的 [`Text`](text.md)、[`Image`](image.md) 与 [`View`](view.md) 组件，你可以构建各种静态界面。想要让你的应用随时间变化，接下来你需要 [了解 State](#state)。
 
 ## State
 
@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
 
 </div>
 
-如上所示，React（[React 状态介绍](https://react.dev/learn/state-a-components-memory)）和 React Native 之间在处理 `state` 上没有区别。你可以使用类组件的 state，也可以通过[hooks](https://react.dev/reference/react/useState) 在函数组件中使用 state！
+如上所示，React（[React 状态介绍](https://react.dev/learn/state-a-components-memory)）和 React Native 之间在处理 `state` 上没有区别。你可以使用类组件的 state，也可以通过 [hooks](https://react.dev/reference/react/useState) 在函数组件中使用 state！
 
 下面的示例展示了同样的计数器，使用类组件实现。
 

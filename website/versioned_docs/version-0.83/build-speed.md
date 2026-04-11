@@ -13,7 +13,7 @@ title: 加快构建阶段速度
 
 :::
 
-## 开发时只构建一个 ABI （仅限 Android）
+## 开发时只构建一个 ABI（仅限 Android）
 
 在本地构建你的 Android 应用时，默认会构建所有 4 个 [应用二进制接口 (ABI)](https://developer.android.com/ndk/guides/abis) ：`armeabi-v7a`，`arm64-v8a`，`x86` 和 `x86_64`。
 
@@ -44,7 +44,7 @@ $ ./gradlew :app:assembleDebug -PreactNativeArchitectures=x86,x86_64
 
 如果你希望在 CI 中构建 Android App 并用一个矩阵方式并行构建不同架构，这会非常有用。
 
-你也可以在本地通过项目[顶层文件夹](https://github.com/facebook/react-native/blob/19cf70266eb8ca151aa0cc46ac4c09cb987b2ceb/template/android/gradle.properties#L30-L33)的 `gradle.properties` 文件覆盖这个值：
+你也可以在本地通过项目 [顶层文件夹](https://github.com/facebook/react-native/blob/19cf70266eb8ca151aa0cc46ac4c09cb987b2ceb/template/android/gradle.properties#L30-L33) 的 `gradle.properties` 文件覆盖这个值：
 
 ```
 # 使用该属性指定你想要构建的架构。
@@ -173,7 +173,7 @@ ccache 在 macOS 上默认使用 `/Users/$USER/Library/Caches/ccache` 文件夹�
 
 1. 在 CI 中，我们建议执行完全干净构建以避免缓存污染问题。如果你遵循之前的 ABI 并行构建方案，通常不需要在 CI 上使用 `ccache`。
 
-2. `ccache` 依赖文件时间戳判断缓存命中。CI 环境中每次运行都会重新下载文件，时间戳不稳定。对此，你需使用 `compiler_check content` 选项，改用[文件内容哈希](https://ccache.dev/manual/4.3.html) 的方式判断。
+2. `ccache` 依赖文件时间戳判断缓存命中。CI 环境中每次运行都会重新下载文件，时间戳不稳定。对此，你需使用 `compiler_check content` 选项，改用 [文件内容哈希](https://ccache.dev/manual/4.3.html) 的方式判断。
 
 ### 分布式缓存
 
@@ -183,4 +183,4 @@ ccache 在 macOS 上默认使用 `/Users/$USER/Library/Caches/ccache` 文件夹�
 
 我们推荐使用 [sccache](https://github.com/mozilla/sccache) 来实现。
 
-关于如何设置和使用该工具，请参照 sccache 的[分布式编译快速入门](https://github.com/mozilla/sccache/blob/main/docs/DistributedQuickstart.md)。
+关于如何设置和使用该工具，请参照 sccache 的 [分布式编译快速入门](https://github.com/mozilla/sccache/blob/main/docs/DistributedQuickstart.md)。

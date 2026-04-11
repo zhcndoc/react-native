@@ -1,13 +1,13 @@
 ---
 id: keyboard
-title: Keyboard
+title: 键盘
 ---
 
-`Keyboard` module to control keyboard events.
+`Keyboard` 模块用于控制键盘事件。
 
-### Usage
+### 用法
 
-The Keyboard module allows you to listen for native events and react to them, as well as make changes to the keyboard, like dismissing it.
+Keyboard 模块允许你监听原生事件并做出反应，以及对键盘进行更改，例如收起键盘。
 
 ```SnackPlayer name=Keyboard%20Example&supportedPlatforms=ios,android
 import React, {useState, useEffect} from 'react';
@@ -66,9 +66,9 @@ export default Example;
 
 ---
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `addListener()`
 
@@ -79,20 +79,20 @@ static addListener: (
 ) => EmitterSubscription;
 ```
 
-The `addListener` function connects a JavaScript function to an identified native keyboard notification event.
+`addListener` 函数将 JavaScript 函数连接到已识别的原生键盘通知事件。
 
-This function then returns the reference to the listener.
+此函数随后返回对监听器的引用。
 
-**Parameters:**
+**参数：**
 
-| Name                                                                     | Type     | Description                                                                    |
+| 名称                                                                     | 类型     | 描述                                                                    |
 | ------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------ |
-| eventName <div className="label basic two-lines required">Required</div> | string   | The string that identifies the event you're listening for. See the list below. |
-| callback <div className="label basic two-lines required">Required</div>  | function | The function to be called when the event fires                                 |
+| eventName <div className="label basic two-lines required">必需</div> | string   | 标识你正在监听的事件的字符串。见下方列表。 |
+| callback <div className="label basic two-lines required">必需</div>  | function | 当事件触发时要调用的函数                                 |
 
 **`eventName`**
 
-This can be any of the following:
+可以是以下任意值：
 
 - `keyboardWillShow`
 - `keyboardDidShow`
@@ -101,7 +101,7 @@ This can be any of the following:
 - `keyboardWillChangeFrame`
 - `keyboardDidChangeFrame`
 
-> Note that only `keyboardDidShow` and `keyboardDidHide` events are available on Android. The events will not be fired when using Android 10 and under if your activity has `android:windowSoftInputMode` set to `adjustNothing`.
+> 注意，只有 `keyboardDidShow` 和 `keyboardDidHide` 事件在 Android 上可用。如果你的 activity 将 `android:windowSoftInputMode` 设置为 `adjustNothing`，则在使用 Android 10 及以下版本时不会触发这些事件。
 
 ---
 
@@ -111,7 +111,7 @@ This can be any of the following:
 static dismiss();
 ```
 
-Dismisses the active keyboard and removes focus.
+收起活动键盘并移除焦点。
 
 ---
 
@@ -121,7 +121,7 @@ Dismisses the active keyboard and removes focus.
 static scheduleLayoutAnimation(event: KeyboardEvent);
 ```
 
-Useful for syncing TextInput (or other keyboard accessory view) size of position changes with keyboard movements.
+用于同步 TextInput（或其他键盘辅助视图）的大小或位置变化与键盘移动。
 
 ---
 
@@ -131,7 +131,7 @@ Useful for syncing TextInput (or other keyboard accessory view) size of position
 static isVisible(): boolean;
 ```
 
-Whether the keyboard is last known to be visible.
+键盘上次已知是否可见。
 
 ---
 
@@ -141,4 +141,4 @@ Whether the keyboard is last known to be visible.
 static metrics(): KeyboardMetrics | undefined;
 ```
 
-Return the metrics of the soft-keyboard if visible.
+如果可见，返回软键盘的度量信息。

@@ -24,7 +24,7 @@ React Native 社区花了多年时间完善导航、访问原生 API、处理原
 
 没有框架的话，你要么自己写方案来实现这些核心功能，要么拼凑现有的库来搭建一个框架骨架。这需要大量工作，不仅在开始开发时如此，后续维护也是如此。
 
-如果你的应用有些特殊限制，框架不能很好满足你的需求，或者你更喜欢自己解决这些问题，你可以用 Android Studio、Xcode 不依赖框架制作 React Native 应用。如果你对这条路径感兴趣，可以学习如何[设置你的开发环境](set-up-your-environment)以及如何[开始无框架开发](getting-started-without-a-framework)。
+如果你的应用有些特殊限制，框架不能很好满足你的需求，或者你更喜欢自己解决这些问题，你可以用 Android Studio、Xcode 不依赖框架制作 React Native 应用。如果你对这条路径感兴趣，可以学习如何 [设置你的开发环境](set-up-your-environment) 以及如何 [开始无框架开发](getting-started-without-a-framework)。
 
 </details>
 

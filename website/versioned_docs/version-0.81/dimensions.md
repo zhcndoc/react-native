@@ -3,24 +3,24 @@ id: dimensions
 title: Dimensions
 ---
 
-> [`useWindowDimensions`](usewindowdimensions) is the preferred API for React components. Unlike `Dimensions`, it updates as the window's dimensions update. This works nicely with the React paradigm.
+> [`useWindowDimensions`](usewindowdimensions) 是 React 组件的首选 API。与 `Dimensions` 不同，它会随着窗口尺寸的变化而更新。这与 React 范式很好地配合。
 
 ```tsx
 import {Dimensions} from 'react-native';
 ```
 
-You can get the application window's width and height using the following code:
+你可以使用以下代码获取应用窗口的宽度和高度：
 
 ```tsx
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 ```
 
-> Although dimensions are available immediately, they may change (e.g due to device rotation, foldable devices etc) so any rendering logic or styles that depend on these constants should try to call this function on every render, rather than caching the value (for example, using inline styles rather than setting a value in a `StyleSheet`).
+> 虽然尺寸立即可用，但它们可能会发生变化（例如由于设备旋转、折叠设备等），因此任何依赖于这些常数的渲染逻辑或样式都应尝试在每次渲染时调用此函数，而不是缓存该值（例如，使用内联样式而不是在 `StyleSheet` 中设置值）。
 
-If you are targeting foldable devices or devices which can change the screen size or app window size, you can use the event listener available in the Dimensions module as shown in the below example.
+如果你针对的是折叠设备或可以更改屏幕尺寸或应用窗口尺寸的设备，你可以使用 Dimensions 模块中可用的事件监听器，如下例所示。
 
-## Example
+## 示例
 
 ```SnackPlayer name=Dimensions%20Example
 import React, {useState, useEffect} from 'react';
@@ -81,9 +81,9 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `addEventListener()`
 
@@ -97,9 +97,9 @@ static addEventListener(
 ): EmitterSubscription;
 ```
 
-Add an event handler. Supported events:
+添加一个事件处理器。支持的事件：
 
-- `change`: Fires when a property within the `Dimensions` object changes. The argument to the event handler is a [`DimensionsValue`](#dimensionsvalue) type object.
+- `change`: 当 `Dimensions` 对象内的属性发生变化时触发。事件处理器的参数是一个 [`DimensionsValue`](#dimensionsvalue) 类型的对象。
 
 ---
 
@@ -109,40 +109,40 @@ Add an event handler. Supported events:
 static get(dim: 'window' | 'screen'): ScaledSize;
 ```
 
-Initial dimensions are set before `runApplication` is called so they should be available before any other require's are run, but may be updated later.
+初始尺寸在调用 `runApplication` 之前设置，因此它们在任何其他 require 运行之前应该可用，但可能会稍后更新。
 
-Example: `const {height, width} = Dimensions.get('window');`
+示例：`const {height, width} = Dimensions.get('window');`
 
-**Parameters:**
+**参数：**
 
-| Name                                                               | Type   | Description                                                                       |
-| ------------------------------------------------------------------ | ------ | --------------------------------------------------------------------------------- |
-| dim <div className="label basic required two-lines">Required</div> | string | Name of dimension as defined when calling `set`. Returns value for the dimension. |
+| 名称                                                               | 类型   | 描述                                                                       |
+| ------------------------------------------------------------------ | ------ | ------------------------------------------------------------------------- |
+| dim <div className="label basic required two-lines">必需</div> | string | 调用 `set` 时定义的维度名称。返回该维度的值。 |
 
-> For Android the `window` dimension will exclude the size used by the `status bar` (if not translucent) and `bottom navigation bar`
+> 对于 Android，`window` 尺寸将排除 `状态栏`（如果不透明）和 `底部导航栏` 所占用的大小
 
 ---
 
-## Type Definitions
+## 类型定义
 
 ### DimensionsValue
 
-**Properties:**
+**属性：**
 
-| Name   | Type                                | Description                             |
-| ------ | ----------------------------------- | --------------------------------------- |
-| window | [ScaledSize](dimensions#scaledsize) | Size of the visible Application window. |
-| screen | [ScaledSize](dimensions#scaledsize) | Size of the device's screen.            |
+| 名称   | 类型                                | 描述                             |
+| ------ | ----------------------------------- | ------------------------------- |
+| window | [ScaledSize](dimensions#scaledsize) | 可见应用窗口的大小。 |
+| screen | [ScaledSize](dimensions#scaledsize) | 设备屏幕的大小。            |
 
 ### ScaledSize
 
-| Type   |
+| 类型   |
 | ------ |
 | object |
 
-**Properties:**
+**属性：**
 
-| Name      | Type   |
+| 名称      | 类型   |
 | --------- | ------ |
 | width     | number |
 | height    | number |

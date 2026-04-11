@@ -170,7 +170,7 @@ fun createCalendarEvent(name: String, location: String) {
 </TabItem>
 </Tabs>
 
-完成实现并在 JavaScript 中连接后，可以参考[此步骤](https://developer.android.com/studio/debug/am-logcat.html) 查看应用日志。
+完成实现并在 JavaScript 中连接后，可以参考 [此步骤](https://developer.android.com/studio/debug/am-logcat.html) 查看应用日志。
 
 ### 同步方法
 
@@ -378,7 +378,7 @@ yarn android
 
 ### 总结✨
 
-此时您应该可以通过点击 `NewModuleButton` 来调用原生模块的 `createCalendarEvent()` 方法，并可通过之前添加的日志确认方法是否被调用。您可以参考[此文档](https://developer.android.com/studio/debug/am-logcat.html)查看 Android Studio 中的 ADB 日志，搜索 `Log.d` 中打印的信息（示例中为 “Create event called with name: testName and location: testLocation”），确认调用成功。
+此时您应该可以通过点击 `NewModuleButton` 来调用原生模块的 `createCalendarEvent()` 方法，并可通过之前添加的日志确认方法是否被调用。您可以参考 [此文档](https://developer.android.com/studio/debug/am-logcat.html) 查看 Android Studio 中的 ADB 日志，搜索 `Log.d` 中打印的信息（示例中为 "Create event called with name: testName and location: testLocation"），确认调用成功。
 
 <figure>
   <img src="/docs/assets/native-modules-android-logs.png" width="1000" alt="日志截图" />

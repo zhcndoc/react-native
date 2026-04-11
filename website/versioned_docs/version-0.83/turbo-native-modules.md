@@ -50,7 +50,7 @@ React Native 提供了一个名为 [Codegen](/docs/the-new-architecture/what-is-
 :::
 
 :::info
-如果您想更改模块名称及相关的规范文件，请确保始终使用 “Native” 作为前缀（例如 `NativeStorage` 或 `NativeUsersDefault`）。
+如果您想更改模块名称及相关的规范文件，请确保始终使用 "Native" 作为前缀（例如 `NativeStorage` 或 `NativeUsersDefault`）。
 :::
 
 以下是 `localStorage` 规范的一个实现：
@@ -247,7 +247,7 @@ export default App;
 准备就绪后，我们开始编写原生平台代码。这里分两部分进行：
 
 :::note
-本指南展示如何创建仅适用于新架构（New Architecture）的 Turbo Native 模块。如果您需要同时支持新架构和旧架构（Legacy Architecture），请参考我们的[向后兼容指南](https://github.com/reactwg/react-native-new-architecture/blob/main/docs/backwards-compat.md)。
+本指南展示如何创建仅适用于新架构（New Architecture）的 Turbo Native 模块。如果您需要同时支持新架构和旧架构（Legacy Architecture），请参考我们的 [向后兼容指南](https://github.com/reactwg/react-native-new-architecture/blob/main/docs/backwards-compat.md)。
 :::
 
 <Tabs groupId="platforms" queryString defaultValue={constants.defaultPlatform}>

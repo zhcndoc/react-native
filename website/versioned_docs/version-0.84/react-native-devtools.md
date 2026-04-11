@@ -96,7 +96,7 @@ Network 面板允许您查看和检查应用发出的网络请求。记录的请
 
 **Expo 网络差异**
 
-因此，使用 Expo 的应用仍会看到“Expo Network”面板 —— 这是 Expo 框架的独立实现，会记录额外请求源，但功能略有限制：
+因此，使用 Expo 的应用仍会看到"Expo Network"面板 —— 这是 Expo 框架的独立实现，会记录额外请求源，但功能略有限制：
 
 - 覆盖 Expo 专用的网络事件。
 - 不支持请求发起者显示。
@@ -134,7 +134,7 @@ Network 面板允许您查看和检查应用发出的网络请求。记录的请
 
 #### 实用小贴士
 
-- 使用 [注释](https://developer.chrome.com/docs/devtools/performance/annotations)（Shift 拖动）标注性能追踪，方便[保存和共享](https://developer.chrome.com/docs/devtools/performance/save-trace)给团队成员。注释还能快速查看时间跨度（单位为秒）。
+- 使用 [注释](https://developer.chrome.com/docs/devtools/performance/annotations)（Shift 拖动）标注性能追踪，方便 [保存和共享](https://developer.chrome.com/docs/devtools/performance/save-trace) 给团队成员。注释还能快速查看时间跨度（单位为秒）。
 - 在应用中使用 [`PerformanceObserver` API](./global-PerformanceObserver.md) 监听性能事件，便于捕获运行时性能遥测。
 
 #### 了解更多
@@ -172,7 +172,7 @@ React Components 面板允许您检查和更新渲染的 React 组件树。
 #### 实用小贴士
 
 - 组件的 Props 和 State 可在右侧面板实时查看和修改。
-- 优化过的组件（使用 [React Compiler](https://react.dev/learn/react-compiler)）会带有“Memo ✨”徽章。
+- 优化过的组件（使用 [React Compiler](https://react.dev/learn/react-compiler)）会带有"Memo ✨"徽章。
 
 :::tip
 

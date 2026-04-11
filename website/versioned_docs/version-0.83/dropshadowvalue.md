@@ -36,7 +36,7 @@ y 轴上的偏移量。可以为正或负。正值表示向上，负值表示向
 
 ### `standardDeviation`
 
-表示在[高斯模糊](https://en.wikipedia.org/wiki/Gaussian_blur)算法中使用的标准差。值越大，阴影越模糊。仅非负值有效。默认值为 0。
+表示在 [高斯模糊](https://en.wikipedia.org/wiki/Gaussian_blur) 算法中使用的标准差。值越大，阴影越模糊。仅非负值有效。默认值为 0。
 
 | 类型              | 可选   |
 | ----------------- | ------ |

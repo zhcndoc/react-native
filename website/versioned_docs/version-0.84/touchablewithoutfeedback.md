@@ -45,7 +45,7 @@ const TouchableWithoutFeedbackExample = () => {
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <View style={styles.countContainer}>
-          <Text style={styles.countText}>计数: {count}</Text>
+          <Text style={styles.countText}>计数：{count}</Text>
         </View>
         <TouchableWithoutFeedback onPress={onPress}>
           <View style={styles.button}>
@@ -94,7 +94,7 @@ export default TouchableWithoutFeedbackExample;
 
 | 类型    |
 | ------- |
-| Boolean |
+| 布尔值 |
 
 ---
 
@@ -102,9 +102,9 @@ export default TouchableWithoutFeedbackExample;
 
 为 `true` 时，表示该视图是一个辅助功能元素。默认情况下，所有可触摸元素都是可访问的。
 
-| 类型 |
-| ---- |
-| bool |
+| 类型    |
+| ----    |
+| 布尔值  |
 
 ---
 
@@ -112,21 +112,21 @@ export default TouchableWithoutFeedbackExample;
 
 覆盖屏幕阅读器与用户交互时朗读的文本。默认标签通过遍历所有子元素并累积所有的 `Text` 节点，用空格分隔构成。
 
-| 类型   |
-| ------ |
-| string |
+| 类型    |
+| ------  |
+| 字符串  |
 
 ---
 
 ### `accessibilityLanguage` <div className="label ios">iOS</div>
 
-指定屏幕阅读器应使用的语言，遵循 [BCP 47规范](https://www.rfc-editor.org/info/bcp47)。
+指定屏幕阅读器应使用的语言，遵循 [BCP 47 规范](https://www.rfc-editor.org/info/bcp47)。
 
 更多信息请参阅 [iOS `accessibilityLanguage` 文档](https://developer.apple.com/documentation/objectivec/nsobject/1615192-accessibilitylanguage)。
 
-| 类型   |
-| ------ |
-| string |
+| 类型    |
+| ------  |
+| 字符串  |
 
 ---
 
@@ -134,9 +134,9 @@ export default TouchableWithoutFeedbackExample;
 
 辅助功能提示，用于帮助用户理解执行操作后会发生什么，当该结果无法从辅助功能标签明确看出时使用。
 
-| 类型   |
-| ------ |
-| string |
+| 类型    |
+| ------  |
+| 字符串  |
 
 ---
 
@@ -174,9 +174,9 @@ export default TouchableWithoutFeedbackExample;
 - `'timer'` - 元素表示计时器。
 - `'toolbar'` - 元素表示工具栏（动作按钮或组件的容器）。
 
-| 类型   |
-| ------ |
-| string |
+| 类型    |
+| ------  |
+| 字符串  |
 
 ---
 
@@ -188,7 +188,7 @@ export default TouchableWithoutFeedbackExample;
 
 | 类型                                                                                             |
 | ------------------------------------------------------------------------------------------------ |
-| 对象: `{disabled: bool, selected: bool, checked: bool 或 'mixed', busy: bool, expanded: bool}` |
+| 对象：`{disabled: bool, selected: bool, checked: bool 或 'mixed', busy: bool, expanded: bool}` |
 
 ---
 
@@ -200,7 +200,7 @@ export default TouchableWithoutFeedbackExample;
 
 | 类型  |
 | ----- |
-| 数组 |
+| 数组  |
 
 ---
 
@@ -210,7 +210,7 @@ export default TouchableWithoutFeedbackExample;
 
 | 类型    | 默认值 |
 | ------- | ------- |
-| boolean | false   |
+| 布尔值  | false   |
 
 ---
 
@@ -220,7 +220,7 @@ export default TouchableWithoutFeedbackExample;
 
 | 类型             | 默认值 |
 | ---------------- | ------- |
-| boolean，'mixed' | false   |
+| 布尔值，'mixed'  | false   |
 
 ---
 
@@ -230,7 +230,7 @@ export default TouchableWithoutFeedbackExample;
 
 | 类型    | 默认值 |
 | ------- | ------- |
-| boolean | false   |
+| 布尔值  | false   |
 
 ---
 
@@ -240,7 +240,7 @@ export default TouchableWithoutFeedbackExample;
 
 | 类型    | 默认值 |
 | ------- | ------- |
-| boolean | false   |
+| 布尔值  | false   |
 
 ---
 
@@ -252,7 +252,7 @@ export default TouchableWithoutFeedbackExample;
 
 | 类型    | 默认值 |
 | ------- | ------- |
-| boolean | false   |
+| 布尔值  | false   |
 
 ---
 
@@ -260,9 +260,9 @@ export default TouchableWithoutFeedbackExample;
 
 定义交互元素的文本标签。
 
-| 类型   |
-| ------ |
-| string |
+| 类型    |
+| ------  |
+| 字符串  |
 
 ---
 
@@ -276,7 +276,7 @@ export default TouchableWithoutFeedbackExample;
 
 | 类型                                     | 默认值 |
 | ---------------------------------------- | ------- |
-| 枚举(`'assertive'`, `'off'`, `'polite'`) | `'off'` |
+| 枚举 (`'assertive'`, `'off'`, `'polite'`) | `'off'` |
 
 ---
 
@@ -286,7 +286,7 @@ export default TouchableWithoutFeedbackExample;
 
 | 类型    | 默认值 |
 | ------- | ------- |
-| boolean | false   |
+| 布尔值  | false   |
 
 ---
 
@@ -296,7 +296,7 @@ export default TouchableWithoutFeedbackExample;
 
 | 类型    |
 | ------- |
-| boolean |
+| 布尔值  |
 
 ### `onAccessibilityAction`
 
@@ -318,7 +318,7 @@ export default TouchableWithoutFeedbackExample;
 
 | 类型                                                            |
 | --------------------------------------------------------------- |
-| 对象: `{min: number, max: number, now: number, text: string}` |
+| 对象：`{min: number, max: number, now: number, text: string}` |
 
 ---
 
@@ -326,9 +326,9 @@ export default TouchableWithoutFeedbackExample;
 
 表示基于范围的组件（如滑块和进度条）的最大值。优先于 `accessibilityValue` 中的 `max`。
 
-| 类型   |
-| ------ |
-| number |
+| 类型    |
+| ------  |
+| 数字    |
 
 ---
 
@@ -336,9 +336,9 @@ export default TouchableWithoutFeedbackExample;
 
 表示基于范围的组件（如滑块和进度条）的最小值。优先于 `accessibilityValue` 中的 `min`。
 
-| 类型   |
-| ------ |
-| number |
+| 类型    |
+| ------  |
+| 数字    |
 
 ---
 
@@ -346,9 +346,9 @@ export default TouchableWithoutFeedbackExample;
 
 表示基于范围的组件（如滑块和进度条）的当前值。优先于 `accessibilityValue` 中的 `now`。
 
-| 类型   |
-| ------ |
-| number |
+| 类型    |
+| ------  |
+| 数字    |
 
 ---
 
@@ -356,9 +356,9 @@ export default TouchableWithoutFeedbackExample;
 
 表示组件的文本描述。优先于 `accessibilityValue` 中的 `text`。
 
-| 类型   |
-| ------ |
-| string |
+| 类型    |
+| ------  |
+| 字符串  |
 
 ---
 
@@ -366,9 +366,9 @@ export default TouchableWithoutFeedbackExample;
 
 从 `onPressIn` 开始，到调用 `onLongPress` 的延迟时间（毫秒）。
 
-| 类型   |
-| ------ |
-| number |
+| 类型    |
+| ------  |
+| 数字    |
 
 ---
 
@@ -376,9 +376,9 @@ export default TouchableWithoutFeedbackExample;
 
 触摸开始到调用 `onPressIn` 的延迟时间（毫秒）。
 
-| 类型   |
-| ------ |
-| number |
+| 类型    |
+| ------  |
+| 数字    |
 
 ---
 
@@ -386,9 +386,9 @@ export default TouchableWithoutFeedbackExample;
 
 触摸释放到调用 `onPressOut` 的延迟时间（毫秒）。
 
-| 类型   |
-| ------ |
-| number |
+| 类型    |
+| ------  |
+| 数字    |
 
 ---
 
@@ -396,9 +396,9 @@ export default TouchableWithoutFeedbackExample;
 
 为 `true` 时，禁用该组件的所有交互。
 
-| 类型 |
-| ---- |
-| bool |
+| 类型    |
+| ----    |
+| 布尔值  |
 
 ---
 
@@ -418,9 +418,9 @@ export default TouchableWithoutFeedbackExample;
 
 用于从原生代码定位此视图。优先于 `nativeID`。
 
-| 类型   |
-| ------ |
-| string |
+| 类型    |
+| ------  |
+| 字符串  |
 
 ---
 
@@ -506,9 +506,9 @@ export default TouchableWithoutFeedbackExample;
 
 ### `nativeID`
 
-| 类型   |
-| ------ |
-| string |
+| 类型    |
+| ------  |
+| 字符串  |
 
 ---
 
@@ -516,9 +516,9 @@ export default TouchableWithoutFeedbackExample;
 
 用于在端到端测试中定位该视图。
 
-| 类型   |
-| ------ |
-| string |
+| 类型    |
+| ------  |
+| 字符串  |
 
 ---
 
@@ -528,4 +528,4 @@ export default TouchableWithoutFeedbackExample;
 
 | 类型    |
 | ------- |
-| Boolean |
+| 布尔值  |

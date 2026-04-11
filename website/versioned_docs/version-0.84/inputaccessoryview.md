@@ -66,7 +66,7 @@ export default App;
 
 # 参考
 
-## Props
+## 属性
 
 ### `backgroundColor`
 

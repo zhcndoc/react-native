@@ -13,21 +13,21 @@ import RemoveGlobalCLI from './\_remove-global-cli.md';
 
 <PlatformSupport platforms={['android', 'ios', 'macOS', 'tv', 'watchOS', 'web', 'windows', 'visionOS']} />
 
-如果你有一些[框架](/architecture/glossary#react-native-framework)无法良好支持的限制，或者你更喜欢自己编写框架，也可以不用框架直接创建 React Native 应用。
+如果你有一些 [框架](/architecture/glossary#react-native-framework) 无法良好支持的限制，或者你更喜欢自己编写框架，也可以不用框架直接创建 React Native 应用。
 
-要实现这一点，你首先需要[设置你的开发环境](set-up-your-environment)。准备好环境后，继续按照下面的步骤创建应用并开始开发。
+要实现这一点，你首先需要 [设置你的开发环境](set-up-your-environment)。准备好环境后，继续按照下面的步骤创建应用并开始开发。
 
 ### 第一步：创建新应用
 
 <RemoveGlobalCLI />
 
-你可以使用[React Native Community CLI](https://github.com/react-native-community/cli)来生成一个新项目。 现在创建一个叫做“AwesomeProject”的 React Native 项目：
+你可以使用 [React Native Community CLI](https://github.com/react-native-community/cli) 来生成一个新项目。现在创建一个叫做"AwesomeProject"的 React Native 项目：
 
 ```shell
 npx @react-native-community/cli@latest init AwesomeProject
 ```
 
-如果你是将 React Native 集成到已有应用中，或者已经在项目中安装了[Expo](https://docs.expo.dev/bare/installing-expo-modules/)，或者你是在为已有 React Native 项目添加 Android 支持（请参阅[与现有应用集成](integration-with-existing-apps.md)），这一步不是必须的。你也可以使用第三方 CLI 来搭建 React Native 应用，比如[Ignite CLI](https://github.com/infinitered/ignite)。
+如果你是将 React Native 集成到已有应用中，或者已经在项目中安装了 [Expo](https://docs.expo.dev/bare/installing-expo-modules/)，或者你是在为已有 React Native 项目添加 Android 支持（请参阅 [与现有应用集成](integration-with-existing-apps.md)），这一步不是必须的。你也可以使用第三方 CLI 来搭建 React Native 应用，比如 [Ignite CLI](https://github.com/infinitered/ignite)。
 
 :::info
 
@@ -47,7 +47,7 @@ npx @react-native-community/cli@latest init AwesomeProject
 npx @react-native-community/cli@X.XX.X init AwesomeProject --version X.XX.X
 ```
 
-你也可以使用自定义的 React Native 模板，使用 `--template` 参数，详细信息请参阅[这里](https://github.com/react-native-community/cli/blob/main/docs/init.md#initializing-project-with-custom-template)。
+你也可以使用自定义的 React Native 模板，使用 `--template` 参数，详细信息请参阅 [这里](https://github.com/react-native-community/cli/blob/main/docs/init.md#initializing-project-with-custom-template)。
 
 ### 第二步：启动 Metro
 
@@ -100,7 +100,7 @@ yarn android
 这是运行应用的一种方式 —— 你也可以直接从 Android Studio 内运行。
 
 :::tip
-如果你无法成功运行，请参阅[故障排除](troubleshooting.md)页面。
+如果你无法成功运行，请参阅 [故障排除](troubleshooting.md) 页面。
 :::
 
 ### 第四步：修改你的应用
@@ -118,5 +118,5 @@ yarn android
 
 ### 接下来呢？
 
-- 如果你想把这个新建的 React Native 代码加入已有应用中，查看[集成指南](integration-with-existing-apps.md)。
-- 如果你想深入了解 React Native，看看[React Native 入门](getting-started)。
+- 如果你想把这个新建的 React Native 代码加入已有应用中，查看 [集成指南](integration-with-existing-apps.md)。
+- 如果你想深入了解 React Native，看看 [React Native 入门](getting-started)。

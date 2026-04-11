@@ -14,7 +14,7 @@ import {getTemplateBranchNameForCurrentVersion} from '@site/src/getTemplateBranc
 3. 将 React Native 添加到你的 Gradle 配置中。
 4. 为你的第一个 React Native 屏幕编写 TypeScript 代码。
 5. 使用 ReactActivity 将 React Native 与你的 Android 代码集成。
-6. 通过运行 bundler 并查看你的应用程序运行来测试你的集成。
+6. 通过运行打包器并查看你的应用程序运行来测试你的集成。
 
 ## 使用社区模板
 
@@ -23,7 +23,7 @@ import {getTemplateBranchNameForCurrentVersion} from '@site/src/getTemplateBranc
 ## 前提条件
 
 遵循 [设置你的开发环境](set-up-your-environment) 指南并使用 [无需框架的 React Native](getting-started-without-a-framework) 来配置你的开发环境以构建适用于 Android 的 React Native 应用。
-本指南还假设你熟悉 Android 开发的基础知识，例如创建 Activities 和编辑 `AndroidManifest.xml` 文件。
+本指南还假设你熟悉 Android 开发的基础知识，例如创建 Activity 和编辑 `AndroidManifest.xml` 文件。
 
 ## 1. 设置目录结构
 
@@ -33,7 +33,7 @@ import {getTemplateBranchNameForCurrentVersion} from '@site/src/getTemplateBranc
 
 进入根目录并运行以下命令：
 
-<CodeBlock language="bash" title="shell">
+<CodeBlock language="bash" title="命令行">
 {`curl -O https://raw.githubusercontent.com/react-native-community/template/refs/heads/${getTemplateBranchNameForCurrentVersion()}/template/package.json`}
 </CodeBlock>
 
@@ -146,7 +146,7 @@ dependencies {
 </manifest>
 ```
 
-然后你需要在你的 **debug** `AndroidManifest.xml` 中启用 [cleartext traffic](https://developer.android.com/training/articles/security-config#CleartextTrafficPermitted)：
+然后你需要在你的 **调试** `AndroidManifest.xml` 中启用 [明文流量](https://developer.android.com/training/articles/security-config#CleartextTrafficPermitted)：
 
 ```diff
 <?xml version="1.0" encoding="utf-8"?>
@@ -160,11 +160,11 @@ dependencies {
 </manifest>
 ```
 
-通常，这里是社区模板中的 AndroidManifest.xml 文件以供参考：<RNTemplateRepoLink href="template/android/app/src/main/AndroidManifest.xml">main</RNTemplateRepoLink> 和 <RNTemplateRepoLink href="template/android/app/src/debug/AndroidManifest.xml">debug</RNTemplateRepoLink>。
+通常，这里是社区模板中的 AndroidManifest.xml 文件以供参考：<RNTemplateRepoLink href="template/android/app/src/main/AndroidManifest.xml">主</RNTemplateRepoLink> 和 <RNTemplateRepoLink href="template/android/app/src/debug/AndroidManifest.xml">调试</RNTemplateRepoLink>。
 
-这是必需的，因为你的应用程序将通过 HTTP 与你的本地 bundler [Metro](https://metrobundler.dev/) 通信。
+这是必需的，因为你的应用程序将通过 HTTP 与你的本地打包器 [Metro](https://metrobundler.dev/) 通信。
 
-确保你只将此添加到你的 **debug** manifest 中。
+确保你只将此添加到你的 **调试** manifest 中。
 
 ## 4. 编写 TypeScript 代码
 
@@ -377,7 +377,7 @@ import android.app.Application
 
 #### 创建一个 `ReactActivity`
 
-最后，我们需要创建一个新的 `Activity`，它将扩展 `ReactActivity` 并托管 React Native 代码。此 activity 将负责启动 React Native 运行时并渲染 React 组件。
+最后，我们需要创建一个新的 `Activity`，它将扩展 `ReactActivity` 并托管 React Native 代码。此 Activity 将负责启动 React Native 运行时并渲染 React 组件。
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 
@@ -450,7 +450,7 @@ class MyReactActivity : ReactActivity() {
 </manifest>
 ```
 
-现在你的 activity 已准备好运行一些 JavaScript 代码。
+现在你的 Activity 已准备好运行一些 JavaScript 代码。
 
 ## 6. 测试你的集成
 

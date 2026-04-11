@@ -1,143 +1,143 @@
 ---
 id: profiling
-title: Profiling
+title: 性能分析
 ---
 
-Profiling is the process of analyzing an app's performance, resource usage, and behavior to identify potential bottlenecks or inefficiencies. It's worth making use of profiling tools to ensure your app works smoothly across different devices and conditions.
+性能分析是分析应用程序的性能、资源使用情况和行为以识别潜在瓶颈或低效之处的过程。值得利用性能分析工具来确保你的应用在不同设备和条件下都能顺畅运行。
 
-For iOS, Instruments is an invaluable tool, and on Android you should learn to use the [Android Studio Profiler](profiling.md#profiling-android-ui-performance-with-system-tracing).
+对于 iOS，Instruments 是一个宝贵的工具，而在 Android 上，你应该学习使用 [Android Studio Profiler](profiling.md#profiling-android-ui-performance-with-system-tracing)。
 
-But first, [**make sure that Development Mode is OFF!**](performance.md#running-in-development-mode-devtrue).
+但首先，[**确保开发模式已关闭！**](performance.md#running-in-development-mode-devtrue)。
 
-## Profiling Android UI Performance with System Tracing
+## 使用系统追踪分析 Android UI 性能
 
-Android supports 10k+ different phones and is generalized to support software rendering: the framework architecture and need to generalize across many hardware targets unfortunately means you get less for free relative to iOS. But sometimes, there are things you can improve -- and many times it's not native code's fault at all!
+Android 支持 10000+ 种不同的手机，并且普遍支持软件渲染：框架架构和需要在许多硬件目标上进行泛化，不幸意味着与 iOS 相比，你免费获得的东西更少。但有时，有些事情是可以改进的——而且很多时候根本不是原生代码的错！
 
-The first step for debugging this jank is to answer the fundamental question of where your time is being spent during each 16ms frame. For that, we'll be using the [built-in System Tracing profiler in the Android Studio](https://developer.android.com/studio/profile).
+调试这种卡顿的第一步是回答一个基本问题：在每个 16ms 帧期间，你的时间花在哪里了。为此，我们将使用 [Android Studio 中内置的系统追踪性能分析器](https://developer.android.com/studio/profile)。
 
 :::note
-The standalone `systrace` tool has been removed from Android platform-tools. Use the Android Studio Profiler instead, which provides the same functionality with a better user interface.
+独立的 `systrace` 工具已从 Android platform-tools 中移除。请改用 Android Studio Profiler，它提供了相同的功能且具有更好的用户界面。
 :::
 
-### 1. Collecting a trace
+### 1. 收集追踪记录
 
-First, connect a device that exhibits the stuttering you want to investigate to your computer via USB. Open your project's `android` folder in Android Studio, select your device in the top right pane, and [run your project as profileable](https://developer.android.com/studio/profile#build-and-run).
+首先，通过 USB 将表现出你想要调查的卡顿现象的设备连接到电脑。在 Android Studio 中打开项目的 `android` 文件夹，在右上角窗格中选择你的设备，并 [作为可分析项目运行你的项目](https://developer.android.com/studio/profile#build-and-run)。
 
-When your app is built as profileable and is running on the device, get your app to the point right before the navigation/animation you want to profile and start the ["Capture System Activities" task](https://developer.android.com/studio/profile#start-profiling) in the Android Studio Profiler pane.
+当你的应用构建为可分析状态并在设备上运行时，将应用引导至你想要分析的自然导航/动画之前的状态，然后在 Android Studio Profiler 窗格中启动 ["捕获系统活动" 任务](https://developer.android.com/studio/profile#start-profiling)。
 
-Once the trace starts collecting, perform the animation or interaction you care about. Then press "Stop recording". You can now [inspect the trace directly in the Android Studio](https://developer.android.com/studio/profile/jank-detection). Alternatively, you can select it in the "Past Recordings" pane, press "Export recording", and open it in a tool like [Perfetto](https://perfetto.dev/).
+一旦追踪开始收集，执行你关心的动画或交互。然后按 "停止记录"。你现在可以 [直接在 Android Studio 中检查追踪记录](https://developer.android.com/studio/profile/jank-detection)。或者，你可以在 "Past Recordings" 窗格中选择它，按 "Export recording"，然后在 [Perfetto](https://perfetto.dev/) 等工具中打开它。
 
-### 2. Reading the trace
+### 2. 阅读追踪记录
 
-After opening the trace in Android Studio or Perfetto, you should see something like this:
+在 Android Studio 或 Perfetto 中打开追踪记录后，你应该看到类似这样的内容：
 
-![Example](/docs/assets/SystraceExample.png)
+![示例](/docs/assets/SystraceExample.png)
 
-:::note Hint
-Use the WASD keys to strafe and zoom.
+:::note 提示
+使用 WASD 键进行平移和缩放。
 :::
 
-The exact UI might be different but the instructions below will apply regardless of the tool you're using.
+确切的 UI 可能不同，但下面的说明无论你使用什么工具都适用。
 
-:::info Enable VSync highlighting
-Check this checkbox at the top right of the screen to highlight the 16ms frame boundaries:
+:::info 启用 VSync 高亮
+选中屏幕右上角的此复选框以高亮显示 16ms 帧边界：
 
-![Enable VSync Highlighting](/docs/assets/SystraceHighlightVSync.png)
+![启用 VSync 高亮](/docs/assets/SystraceHighlightVSync.png)
 
-You should see zebra stripes as in the screenshot above. If you don't, try profiling on a different device: Samsung has been known to have issues displaying vsyncs while the Nexus series is generally pretty reliable.
+你应该看到如上图所示的斑马纹。如果没有，尝试在不同的设备上进行分析：众所周知，三星在显示 vsync 方面存在问题，而 Nexus 系列通常非常可靠。
 :::
 
-### 3. Find your process
+### 3. 查找你的进程
 
-Scroll until you see (part of) the name of your package. In this case, I was profiling `com.facebook.adsmanager`, which shows up as `book.adsmanager` because of silly thread name limits in the kernel.
+滚动直到看到你的包名（的一部分）。在本例中，我正在分析 `com.facebook.adsmanager`，由于内核中愚蠢的线程名称限制，它显示为 `book.adsmanager`。
 
-On the left side, you'll see a set of threads which correspond to the timeline rows on the right. There are a few threads we care about for our purposes: the UI thread (which has your package name or the name UI Thread), `mqt_js`, and `mqt_native_modules`. If you're running on Android 5+, we also care about the Render Thread.
+在左侧，你将看到一组对应于右侧时间轴行的线程。出于我们的目的，有几个线程是我们关心的：UI 线程（具有你的包名或名称 UI Thread）、`mqt_js` 和 `mqt_native_modules`。如果你在 Android 5+ 上运行，我们还关心 Render Thread。
 
-- **UI Thread.** This is where standard android measure/layout/draw happens. The thread name on the right will be your package name (in my case book.adsmanager) or UI Thread. The events that you see on this thread should look something like this and have to do with `Choreographer`, `traversals`, and `DispatchUI`:
+- **UI 线程。** 这是标准 android measure/layout/draw 发生的地方。右侧的线程名称将是你的包名（在我的例子中是 book.adsmanager）或 UI Thread。你在此线程上看到的事件应该看起来像这样，并与 `Choreographer`、`traversals` 和 `DispatchUI` 有关：
 
-  ![UI Thread Example](/docs/assets/SystraceUIThreadExample.png)
+  ![UI 线程示例](/docs/assets/SystraceUIThreadExample.png)
 
-- **JS Thread.** This is where JavaScript is executed. The thread name will be either `mqt_js` or `<...>` depending on how cooperative the kernel on your device is being. To identify it if it doesn't have a name, look for things like `JSCall`, `Bridge.executeJSCall`, etc:
+- **JS 线程。** 这是执行 JavaScript 的地方。线程名称将是 `mqt_js` 或 `<...>`，具体取决于你设备上的内核配合程度。如果它没有名称，请查找诸如 `JSCall`、`Bridge.executeJSCall` 等内容来识别它：
 
-  ![JS Thread Example](/docs/assets/SystraceJSThreadExample.png)
+  ![JS 线程示例](/docs/assets/SystraceJSThreadExample.png)
 
-- **Native Modules Thread.** This is where native module calls (e.g. the `UIManager`) are executed. The thread name will be either `mqt_native_modules` or `<...>`. To identify it in the latter case, look for things like `NativeCall`, `callJavaModuleMethod`, and `onBatchComplete`:
+- **原生模块线程。** 这是执行原生模块调用（例如 `UIManager`）的地方。线程名称将是 `mqt_native_modules` 或 `<...>`。在后一种情况下识别它，请查找诸如 `NativeCall`、`callJavaModuleMethod` 和 `onBatchComplete` 等内容：
 
-  ![Native Modules Thread Example](/docs/assets/SystraceNativeModulesThreadExample.png)
+  ![原生模块线程示例](/docs/assets/SystraceNativeModulesThreadExample.png)
 
-- **Bonus: Render Thread.** If you're using Android L (5.0) and up, you will also have a render thread in your application. This thread generates the actual OpenGL commands used to draw your UI. The thread name will be either `RenderThread` or `<...>`. To identify it in the latter case, look for things like `DrawFrame` and `queueBuffer`:
+- **Bonus：Render Thread。** 如果你使用 Android L (5.0) 及更高版本，你的应用中还将有一个 render thread。此线程生成用于绘制 UI 的实际 OpenGL 命令。线程名称将是 `RenderThread` 或 `<...>`。在后一种情况下识别它，请查找诸如 `DrawFrame` 和 `queueBuffer` 等内容：
 
-  ![Render Thread Example](/docs/assets/SystraceRenderThreadExample.png)
+  ![Render Thread 示例](/docs/assets/SystraceRenderThreadExample.png)
 
-## Identifying a culprit
+## 识别罪魁祸首
 
-A smooth animation should look something like the following:
+流畅的动画应该看起来像下面这样：
 
-![Smooth Animation](/docs/assets/SystraceWellBehaved.png)
+![流畅的动画](/docs/assets/SystraceWellBehaved.png)
 
-Each change in color is a frame -- remember that in order to display a frame, all our UI work needs to be done by the end of that 16ms period. Notice that no thread is working close to the frame boundary. An application rendering like this is rendering at 60 FPS.
+每种颜色的变化都是一帧——请记住，为了显示一帧，我们所有的 UI 工作都需要在该 16ms 周期结束前完成。注意没有线程工作在接近帧边界的地方。像这样渲染的应用程序是以 60 FPS 渲染的。
 
-If you noticed chop, however, you might see something like this:
+但是，如果你注意到卡顿，你可能会看到类似这样的内容：
 
-![Choppy Animation from JS](/docs/assets/SystraceBadJS.png)
+![来自 JS 的卡顿动画](/docs/assets/SystraceBadJS.png)
 
-Notice that the JS thread is executing almost all the time, and across frame boundaries! This app is not rendering at 60 FPS. In this case, **the problem lies in JS**.
+注意 JS 线程几乎一直在执行，并且跨过了帧边界！此应用的渲染速度不是 60 FPS。在这种情况下，**问题在于 JS**。
 
-You might also see something like this:
+你也可能会看到类似这样的内容：
 
-![Choppy Animation from UI](/docs/assets/SystraceBadUI.png)
+![来自 UI 的卡顿动画](/docs/assets/SystraceBadUI.png)
 
-In this case, the UI and render threads are the ones that have work crossing frame boundaries. The UI that we're trying to render on each frame is requiring too much work to be done. In this case, **the problem lies in the native views being rendered**.
+在这种情况下，UI 和 render 线程是工作跨过帧边界的线程。我们试图在每一帧上渲染的 UI 需要完成太多的工作。在这种情况下，**问题在于正在渲染的原生视图**。
 
-At this point, you'll have some very helpful information to inform your next steps.
+此时，你将拥有一些非常有用的信息来指导你的下一步。
 
-## Resolving JavaScript issues
+## 解决 JavaScript 问题
 
-If you identified a JS problem, look for clues in the specific JS that you're executing. In the scenario above, we see `RCTEventEmitter` being called multiple times per frame. Here's a zoom-in of the JS thread from the trace above:
+如果你识别出 JS 问题，请在你执行的具体 JS 中寻找线索。在上述场景中，我们看到 `RCTEventEmitter` 每帧被调用多次。这是上面追踪记录中 JS 线程的放大图：
 
-![Too much JS](/docs/assets/SystraceBadJS2.png)
+![过多的 JS](/docs/assets/SystraceBadJS2.png)
 
-This doesn't seem right. Why is it being called so often? Are they actually different events? The answers to these questions will probably depend on your product code. And many times, you'll want to look into [shouldComponentUpdate](https://react.dev/reference/react/Component#shouldcomponentupdate).
+这似乎不对。为什么这么频繁地调用它？它们实际上是不同的事件吗？这些问题的答案可能取决于你的产品代码。很多时候，你想要查看 [shouldComponentUpdate](https://react.dev/reference/react/Component#shouldcomponentupdate)。
 
-## Resolving native UI Issues
+## 解决原生 UI 问题
 
-If you identified a native UI problem, there are usually two scenarios:
+如果你识别出原生 UI 问题，通常有两种情况：
 
-1. the UI you're trying to draw each frame involves too much work on the GPU, or
-2. You're constructing new UI during the animation/interaction (e.g. loading in new content during a scroll).
+1. 你试图每帧绘制的 UI 涉及太多的 GPU 工作，或
+2. 你在动画/交互期间构建新的 UI（例如在滚动期间加载新内容）。
 
-### Too much GPU work
+### 过多的 GPU 工作
 
-In the first scenario, you'll see a trace that has the UI thread and/or Render Thread looking like this:
+在第一种场景中，你将看到 UI 线程和/或 Render 线程看起来像这样的追踪记录：
 
-![Overloaded GPU](/docs/assets/SystraceBadUI.png)
+![GPU 过载](/docs/assets/SystraceBadUI.png)
 
-Notice the long amount of time spent in `DrawFrame` that crosses frame boundaries. This is time spent waiting for the GPU to drain its command buffer from the previous frame.
+注意在 `DrawFrame` 中花费了大量时间并跨过了帧边界。这是等待 GPU 排空上一帧命令缓冲区所花费的时间。
 
-To mitigate this, you should:
+为了缓解这种情况，你应该：
 
-- investigate using `renderToHardwareTextureAndroid` for complex, static content that is being animated/transformed (e.g. the `Navigator` slide/alpha animations)
-- make sure that you are **not** using `needsOffscreenAlphaCompositing`, which is disabled by default, as it greatly increases the per-frame load on the GPU in most cases.
+- 调查使用 `renderToHardwareTextureAndroid` 来处理正在动画/变换的复杂静态内容（例如 `Navigator` 滑动/透明度动画）
+- 确保你**没有**使用 `needsOffscreenAlphaCompositing`，默认情况下它是禁用的，因为在大多数情况下它会大大增加每帧的 GPU 负载。
 
-### Creating new views on the UI thread
+### 在 UI 线程上创建新视图
 
-In the second scenario, you'll see something more like this:
+在第二种场景中，你将看到更像这样的内容：
 
-![Creating Views](/docs/assets/SystraceBadCreateUI.png)
+![创建视图](/docs/assets/SystraceBadCreateUI.png)
 
-Notice that first the JS thread thinks for a bit, then you see some work done on the native modules thread, followed by an expensive traversal on the UI thread.
+注意首先 JS 线程思考了一会儿，然后你看到原生模块线程上做了一些工作，随后是 UI 线程上一次昂贵的遍历。
 
-There isn't a quick way to mitigate this unless you're able to postpone creating new UI until after the interaction, or you are able to simplify the UI you're creating. The react native team is working on an infrastructure level solution for this that will allow new UI to be created and configured off the main thread, allowing the interaction to continue smoothly.
+除非你能够将创建新 UI 推迟到交互之后，或者能够简化你创建的 UI，否则没有快速的方法来缓解这种情况。React Native 团队正在为此努力一个基础设施级别的解决方案，这将允许在主线程之外创建和配置新 UI，从而使交互继续流畅进行。
 
-### Finding native CPU hotspots
+### 查找原生 CPU 热点
 
-If the problem seems to be on the native side, you can use the [CPU hotspot profiler](https://developer.android.com/studio/profile/record-java-kotlin-methods) to get more details on what's happening. Open the Android Studio Profiler panel and select "Find CPU Hotspots (Java/Kotlin Method Recording)".
+如果问题似乎出在原生方面，你可以使用 [CPU 热点性能分析器](https://developer.android.com/studio/profile/record-java-kotlin-methods) 来获取有关发生情况的更多详细信息。打开 Android Studio Profiler 面板并选择 "Find CPU Hotspots (Java/Kotlin Method Recording)"。
 
-:::info Choose the Java/Kotlin recording
+:::info 选择 Java/Kotlin 记录
 
-Make sure you select "Find CPU Hotspots **(Java/Kotlin Recording)**" rather than "Find CPU Hotspots (Callstack Sample)". They have similar icons but do different things.
+确保你选择 "Find CPU Hotspots **(Java/Kotlin Recording)**" 而不是 "Find CPU Hotspots (Callstack Sample)"。它们有相似的图标但做不同的事情。
 :::
 
-Perform the interactions and press "Stop recording". Recording is resource-intensive, so keep the interaction short. You can then either inspect the resulting trace in the Android Studio or export it and open it in an online tool like [Firefox Profiler](https://profiler.firefox.com/).
+执行交互并按 "停止记录"。记录是资源密集型的，所以保持交互简短。然后你可以在 Android Studio 中检查结果追踪记录，或者导出它并在在线工具如 [Firefox Profiler](https://profiler.firefox.com/) 中打开它。
 
-Unlike System Trace, CPU hotspot profiling is slow so it won't give you accurate measurements. However, it should give you an idea of what native methods are being called, and where the time is being spent proportionally during each frame.
+与系统追踪不同，CPU 热点性能分析很慢，所以它不会给你准确的测量值。但是，它应该让你了解调用了哪些原生方法，以及在每一帧期间时间按比例花在哪里。

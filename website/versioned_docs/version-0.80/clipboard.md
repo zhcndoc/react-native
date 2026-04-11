@@ -1,15 +1,15 @@
 ---
 id: clipboard
-title: '❌ Clipboard'
+title: '❌ 剪贴板'
 ---
 
-> **Removed.** Use one of the [community packages](https://reactnative.directory/?search=clipboard) instead.
+> **已移除。** 请改用 [社区包](https://reactnative.directory/?search=clipboard) 之一。
 
-`Clipboard` gives you an interface for setting and getting content from Clipboard on both Android and iOS
+`Clipboard` 为您提供了一个接口，用于在 Android 和 iOS 上设置和获取剪贴板内容
 
 ---
 
-## Example
+## 示例
 
 ```SnackPlayer name=Clipboard%20API%20Example&supportedPlatforms=ios,android
 import React, {useState} from 'react';
@@ -64,9 +64,9 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `getString()`
 
@@ -74,7 +74,7 @@ export default App;
 static getString()
 ```
 
-Get content of string type, this method returns a `Promise`, so you can use following code to get clipboard content
+获取字符串类型的内容，此方法返回一个 `Promise`，因此您可以使用以下代码获取剪贴板内容
 
 ```jsx
 async _getContent() {
@@ -90,7 +90,7 @@ async _getContent() {
 static setString(content)
 ```
 
-Set content of string type. You can use following code to set clipboard content
+设置字符串类型的内容。您可以使用以下代码设置剪贴板内容
 
 ```jsx
 _setContent() {
@@ -98,12 +98,12 @@ _setContent() {
 }
 ```
 
-**Parameters:**
+**参数：**
 
-| Name    | Type   | Required | Description                               |
+| 名称    | 类型   | 是否必填 | 描述                               |
 | ------- | ------ | -------- | ----------------------------------------- |
-| content | string | Yes      | The content to be stored in the clipboard |
+| content | string | 是      | 要存储在剪贴板中的内容 |
 
-_Notice_
+_注意_
 
-Be careful when you're trying to copy to clipboard any data except `string` and `number`, some data need additional stringification. For example, if you will try to copy array - Android will raise an exception, but iOS will not.
+当您尝试复制 `string` 和 `number` 以外的任何数据到剪贴板时要小心，某些数据需要额外的字符串化。例如，如果您尝试复制数组 - Android 将抛出异常，但 iOS 不会。

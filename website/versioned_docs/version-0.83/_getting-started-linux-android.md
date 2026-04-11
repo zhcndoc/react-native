@@ -36,20 +36,20 @@ React Native 当前推荐使用 Java SE 开发工具包（JDK）版本 17。使�
 
 Android Studio 默认安装最新 Android SDK。但是，构建带原生代码的 React Native 应用需要特定版本的 `Android 15 (VanillaIceCream)` SDK。你可以通过 Android Studio 中的 SDK 管理器安装额外的 Android SDK。
 
-操作方法：打开 Android Studio，点击“Configure”按钮，选择“SDK Manager”。
+操作方法：打开 Android Studio，点击"Configure"按钮，选择"SDK Manager"。
 
 :::tip
-SDK 管理器也可以在 Android Studio “设置”对话框中找到，路径是 **Languages & Frameworks** → **Android SDK**。
+SDK 管理器也可以在 Android Studio“设置”对话框中找到，路径是 **Languages & Frameworks** → **Android SDK**。
 :::
 
-在 SDK 管理器中选择“SDK Platforms”标签，然后在右下角勾选“Show Package Details”。找到并展开 `Android 15 (VanillaIceCream)` 条目，确保选中以下项目：
+在 SDK 管理器中选择"SDK Platforms"标签，然后在右下角勾选"Show Package Details"。找到并展开 `Android 15 (VanillaIceCream)` 条目，确保选中以下项目：
 
 - `Android SDK Platform 35`
 - `Intel x86 Atom_64 System Image` 或 `Google APIs Intel x86 Atom System Image`
 
-接着选择“SDK Tools”标签，同样勾选“Show Package Details”。找到并展开“Android SDK Build-Tools”，确保选择了 `36.0.0` 和 `Android SDK Command-line Tools (latest)`。
+接着选择"SDK Tools"标签，同样勾选"Show Package Details"。找到并展开"Android SDK Build-Tools"，确保选择了 `36.0.0` 和 `Android SDK Command-line Tools (latest)`。
 
-最后点击“Apply”下载并安装安卓 SDK 及相关构建工具。
+最后点击"Apply"下载并安装安卓 SDK 及相关构建工具。
 
 <h4>3. 配置 ANDROID_HOME 环境变量</h4>
 
@@ -70,7 +70,7 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 输入 `source $HOME/.bash_profile`（bash），或 `source $HOME/.zprofile` 加载配置到当前 shell。运行 `echo $ANDROID_HOME` 验证 ANDROID_HOME 是否设置成功，运行 `echo $PATH` 确认相关目录已加入路径。
 
 :::note
-请确保使用了正确的 Android SDK 路径。你可以在 Android Studio “设置”对话框中查看实际路径，路径是 **Languages & Frameworks** → **Android SDK**。
+请确保使用了正确的 Android SDK 路径。你可以在 Android Studio“设置”对话框中查看实际路径，路径是 **Languages & Frameworks** → **Android SDK**。
 :::
 
 <h3>Watchman</h3>
@@ -93,17 +93,17 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 <h3>使用虚拟设备</h3>
 
-如果你使用 Android Studio 打开 `./AwesomeProject/android`，可以通过 Android Studio 中的 “AVD Manager” 查看已有的安卓虚拟设备列表。找到下图所示的图标：
+如果你使用 Android Studio 打开 `./AwesomeProject/android`，可以通过 Android Studio 中的"AVD Manager"查看已有的安卓虚拟设备列表。找到下图所示的图标：
 
 <img src="/docs/assets/GettingStartedAndroidStudioAVD.svg" alt="Android Studio AVD Manager" width="100"/>
 
-如果刚安装完 Android Studio，可能需要 [创建新的 AVD](https://developer.android.com/studio/run/managing-avds.html)。点击“Create Virtual Device...”，选择任一手机型号，点击“Next”，选择 **VanillaIceCream** API 级别 35 的镜像。
+如果刚安装完 Android Studio，可能需要 [创建新的 AVD](https://developer.android.com/studio/run/managing-avds.html)。点击"Create Virtual Device..."，选择任一手机型号，点击"Next"，选择 **VanillaIceCream** API 级别 35 的镜像。
 
 :::tip
 推荐配置 [虚拟机加速](https://developer.android.com/studio/run/emulator-acceleration.html#vm-linux) 以提升性能。完成配置后，返回 AVD 管理器继续操作。
 :::
 
-点击“Next”然后“Finish”完成 AVD 创建。此时你应该能点击 AVD 旁的绿色三角按钮启动虚拟设备。
+点击"Next"然后"Finish"完成 AVD 创建。此时你应该能点击 AVD 旁的绿色三角按钮启动虚拟设备。
 
 <h3>完成了！</h3>
 
@@ -113,5 +113,5 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 <h2>接下来？</h2>
 
-- 如果你想将此新 React Native 代码添加到已有应用中，可查看[集成指南](integration-with-existing-apps.md)。
-- 如果你想深入了解 React Native，可查看[React Native 入门介绍](getting-started)。
+- 如果你想将此新 React Native 代码添加到已有应用中，可查看 [集成指南](integration-with-existing-apps.md)。
+- 如果你想深入了解 React Native，可查看 [React Native 入门介绍](getting-started)。

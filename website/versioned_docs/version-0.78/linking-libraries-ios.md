@@ -1,57 +1,57 @@
 ---
 id: linking-libraries-ios
-title: Linking Libraries
+title: 链接库
 ---
 
-Not every app uses all the native capabilities, and including the code to support all those features would impact the binary size... But we still want to support adding these features whenever you need them.
+并非每个应用都会使用所有的原生能力，包含支持所有这些功能的代码会影响二进制文件的大小……但我们仍然希望在需要时能够添加这些功能。
 
-With that in mind we exposed many of these features as independent static libraries.
+考虑到这一点，我们将许多这些功能作为独立的静态库暴露出来。
 
-For most of the libs it will be as quick as dragging two files, sometimes a third step will be necessary, but no more than that.
+对于大多数库来说，只需拖拽两个文件即可，有时需要第三步，但不会超过这一步。
 
 :::note
-All the libraries we ship with React Native live in the `Libraries` folder in the root of the repository. Some of them are pure JavaScript, and you only need to `require` it.
-Other libraries also rely on some native code, in that case you'll have to add these files to your app, otherwise the app will throw an error as soon as you try to use the library.
+我们随 React Native 提供的所有库都位于仓库根目录的 `Libraries` 文件夹中。其中一些是纯 JavaScript 的，你只需要 `require` 它。
+其他库还依赖一些原生代码，在这种情况下，你必须将这些文件添加到你的应用中，否则一旦你尝试使用该库，应用就会抛出错误。
 :::
 
-## Here are the few steps to link your libraries that contain native code
+## 以下是链接包含原生代码的库的几个步骤
 
-### Automatic linking
+### 自动链接
 
-Install a library with native dependencies:
+安装带有原生依赖的库：
 
 ```shell
 npm install <library-with-native-dependencies> --save
 ```
 
 :::info
-`--save` or `--save-dev` flag is very important for this step. React Native will link your libs based on `dependencies` and `devDependencies` in your `package.json` file.
+此步骤中 `--save` 或 `--save-dev` 标志非常重要。React Native 将根据 `package.json` 文件中的 `dependencies` 和 `devDependencies` 来链接你的库。
 :::
 
-That's it! Next time you build your app the native code will be linked thanks to the [autolinking](https://github.com/react-native-community/cli/blob/main/docs/autolinking.md) mechanism.
+就是这样！下次构建应用时，得益于 [自动链接](https://github.com/react-native-community/cli/blob/main/docs/autolinking.md) 机制，原生代码将被链接。
 
-### Manual linking
+### 手动链接
 
-#### Step 1
+#### 步骤 1
 
-If the library has native code, there must be an `.xcodeproj` file inside its folder. Drag this file to your project on Xcode (usually under the `Libraries` group on Xcode);
+如果库包含原生代码，其文件夹内必须有一个 `.xcodeproj` 文件。将此文件拖拽到 Xcode 中的项目里（通常在 Xcode 的 `Libraries` 组下）；
 
 ![](/docs/assets/AddToLibraries.png)
 
-#### Step 2
+#### 步骤 2
 
-Click on your main project file (the one that represents the `.xcodeproj`) select `Build Phases` and drag the static library from the `Products` folder inside the Library you are importing to `Link Binary With Libraries`
+点击你的主项目文件（代表 `.xcodeproj` 的那个文件），选择 `Build Phases`，然后将你导入的库内部 `Products` 文件夹中的静态库拖拽到 `Link Binary With Libraries`
 
 ![](/docs/assets/AddToBuildPhases.png)
 
-#### Step 3
+#### 步骤 3
 
-Not every library will need this step, what you need to consider is:
+并非每个库都需要这一步，你需要考虑的是：
 
-_Do I need to know the contents of the library at compile time?_
+_我需要在编译时知道库的内容吗？_
 
-What that means is, are you using this library on the native side or only in JavaScript? If you are only using it in JavaScript, you are good to go!
+这意味着，你是在原生侧使用这个库还是仅在 JavaScript 中使用？如果你仅在 JavaScript 中使用它，那就没问题了！
 
-If you do need to call it from native, then we need to know the library's headers. To achieve that you have to go to your project's file, select `Build Settings` and search for `Header Search Paths`. There you should include the path to your library. (This documentation used to recommend using `recursive`, but this is no longer recommended, as it can cause subtle build failures, especially with CocoaPods.)
+如果你确实需要从原生侧调用它，那么我们需要知道库的头文件。为此，你必须进入项目文件，选择 `Build Settings` 并搜索 `Header Search Paths`。在那里你应该包含指向你的库的路径。（此文档曾经建议使用 `recursive`，但不再推荐这样做，因为它可能导致细微的构建失败，尤其是使用 CocoaPods 时。）
 
 ![](/docs/assets/AddToSearchPaths.png)

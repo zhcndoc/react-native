@@ -1,4 +1,4 @@
-# Codegen CLI
+# Codegen 命令行工具
 
 调用 Gradle 或手动运行脚本可能难以记住且需要很多步骤。
 
@@ -64,5 +64,5 @@ Codegen CLI 是库开发者的好帮手。它可以用来预览生成的代码�
 - 使用 Codegen CLI 本地运行 Codegen。
 - 更新你的 `package.json` 文件，将生成的代码包含进去。
 - 更新你的 podspec 文件，将生成的代码包含进去。
-- 更新你的 `build.Gradle` 文件，将生成的代码包含进去。
+- 更新你的 `build.gradle` 文件，将生成的代码包含进去。
 - 更新 `react-native.config.js` 中的 `cmakeListsPath`，使 Gradle 不再在构建目录寻找到 CMakeLists 文件，而是去你指定的 outputDir 路径。

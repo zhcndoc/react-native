@@ -1,19 +1,19 @@
 ---
 id: fabric-native-components-ios
-title: 'Fabric Native Components: iOS'
+title: 'Fabric 原生组件：iOS'
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-Now it's time to write some iOS platform code to be able to render the web view. The steps you need to follow are:
+现在是时候编写一些 iOS 平台代码以便能够渲染 web 视图了。你需要遵循的步骤如下：
 
-- Run Codegen.
-- Write the code for the `RCTWebView`
-- Register the `RCTWebView` in the application
+- 运行 Codegen。
+- 编写 `RCTWebView` 的代码
+- 在应用程序中注册 `RCTWebView`
 
-### 1. Run Codegen
+### 1. 运行 Codegen
 
-You can [manually run](the-new-architecture/codegen-cli) the Codegen, however it's simpler to use the application you're going to demo the component in to do this for you.
+你可以 [手动运行](the-new-architecture/codegen-cli) Codegen，然而更简单的方法是使用你将要演示该组件的应用程序来为你完成此操作。
 
 ```bash
 cd ios
@@ -21,40 +21,40 @@ bundle install
 bundle exec pod install
 ```
 
-Importantly you will see logging output from Codegen, which we're going to use in Xcode to build our WebView native component.
+重要的是，你将看到来自 Codegen 的日志输出，我们将在 Xcode 中使用它来构建我们的 WebView 原生组件。
 
 :::warning
-You should be careful about committing generated code to your repository. Generated code is specific to each version of React Native. Use npm [peerDependencies](https://nodejs.org/en/blog/npm/peer-dependencies) to restrict compatibility with version of React Native.
+你应该小心地将生成的代码提交到你的仓库。生成的代码特定于每个版本的 React Native。使用 npm [peerDependencies](https://nodejs.org/en/blog/npm/peer-dependencies) 来限制与 React Native 版本的兼容性。
 :::
 
-### 3. Write the `RCTWebView`
+### 3. 编写 `RCTWebView`
 
-We need to prepare your iOS project using Xcode by completing these **5 steps**:
+我们需要通过使用 Xcode 完成以下 **5 个步骤** 来准备你的 iOS 项目：
 
-1. Open the CocoaPods generated Xcode Workspace:
+1. 打开 CocoaPods 生成的 Xcode Workspace：
 
 ```bash
 cd ios
 open Demo.xcworkspace
 ```
 
-<img className="half-size" alt="Open Xcode Workspace" src="/docs/assets/fabric-native-components/1.webp" />
+<img className="half-size" alt="打开 Xcode Workspace" src="/docs/assets/fabric-native-components/1.webp" />
 
-2. Right click on app and select <code>New Group</code>, call the new group `WebView`.
+2. 右键点击 app 并选择 <code>新建组</code>，将新组命名为 `WebView`。
 
-<img className="half-size" alt="Right click on app and select New Group" src="/docs/assets/fabric-native-components/2.webp" />
+<img className="half-size" alt="右键点击 app 并选择新建组" src="/docs/assets/fabric-native-components/2.webp" />
 
-3. In the `WebView` group, create <code>New</code>→<code>File from Template</code>.
+3. 在 `WebView` 组中，创建 <code>新建</code>→<code>来自模板的文件</code>。
 
-<img className="half-size" alt="Create a new file using the Cocoa Touch Class template" src="/docs/assets/fabric-native-components/3.webp" />
+<img className="half-size" alt="使用 Cocoa Touch Class 模板创建新文件" src="/docs/assets/fabric-native-components/3.webp" />
 
-4. Use the <code>Objective-C File</code> template, and name it <code>RCTWebView</code>.
+4. 使用 <code>Objective-C 文件</code> 模板，并将其命名为 <code>RCTWebView</code>。
 
-<img className="half-size" alt="Create an Objective-C RCTWebView class" src="/docs/assets/fabric-native-components/4.webp" />
+<img className="half-size" alt="创建 Objective-C RCTWebView 类" src="/docs/assets/fabric-native-components/4.webp" />
 
-5. Repeat step 4 and create a header file named `RCTWebView.h`.
+5. 重复步骤 4 并创建一个名为 `RCTWebView.h` 的头文件。
 
-6. Rename <code>RCTWebView.m</code> → <code>RCTWebView.mm</code> making it an Objective-C++ file.
+6. 重命名 <code>RCTWebView.m</code> → <code>RCTWebView.mm</code> 使其成为 Objective-C++ 文件。
 
 ```text title="Demo/ios"
 Podfile
@@ -68,9 +68,9 @@ Demo
 // highlight-end
 ```
 
-After creating the header file and the implementation file, you can start implementing them.
+创建头文件和实现文件后，你可以开始实现它们。
 
-This is the code for the `RCTWebView.h` file, which declares the component interface.
+这是 `RCTWebView.h` 文件的代码，它声明了组件接口。
 
 ```objc title="Demo/RCTWebView/RCTWebView.h"
 #import <React/RCTViewComponentView.h>
@@ -80,16 +80,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RCTWebView : RCTViewComponentView
 
-// You would declare native methods you'd want to access from the view here
+// 你将在此处声明想要从视图访问的原生方法
 
 @end
 
 NS_ASSUME_NONNULL_END
 ```
 
-This class defines an `RCTWebView` which extends the `RCTViewComponentView` class. This is the base class for all the native components and it is provided by React Native.
+此类定义了一个 `RCTWebView`，它扩展了 `RCTViewComponentView` 类。这是所有原生组件的基类，由 React Native 提供。
 
-The code for the implementation file (`RCTWebView.mm`) is the following:
+实现文件 (`RCTWebView.mm`) 的代码如下：
 
 ```objc title="Demo/RCTWebView/RCTWebView.mm"
 #import "RCTWebView.h"
@@ -128,7 +128,7 @@ using namespace facebook::react;
   const auto &oldViewProps = *std::static_pointer_cast<CustomWebViewProps const>(_props);
   const auto &newViewProps = *std::static_pointer_cast<CustomWebViewProps const>(props);
 
-  // Handle your props here
+  // 在此处处理你的 props
   if (oldViewProps.sourceURL != newViewProps.sourceURL) {
     NSString *urlString = [NSString stringWithCString:newViewProps.sourceURL.c_str() encoding:NSUTF8StringEncoding];
     _sourceURL = [NSURL URLWithString:urlString];
@@ -169,7 +169,7 @@ using namespace facebook::react;
   return YES;
 }
 
-// Event emitter convenience method
+// 事件发射器便捷方法
 - (const CustomWebViewEventEmitter &)eventEmitter
 {
   return static_cast<const CustomWebViewEventEmitter &>(*_eventEmitter);
@@ -184,39 +184,39 @@ using namespace facebook::react;
 @end
 ```
 
-This code is written in Objective-C++ and contains various details:
+这段代码是用 Objective-C++ 编写的，包含各种细节：
 
-- the `@interface` implements two protocols:
-  - `RCTCustomWebViewViewProtocol`, generated by Codegen;
-  - `WKNavigationDelegate`, provided by the WebKit framework to handle the web view navigation events;
-- the `init` method that instantiates the `WKWebView`, adds it to the subviews and that sets the `navigationDelegate`;
-- the `updateProps` method that is called by React Native when the component's props change;
-- the `layoutSubviews` method that describes how the custom view needs to be laid out;
-- the `webView:didFinishNavigation:` method that lets you handle what to do when the `WKWebView` finishes loading the page;
-- the `urlIsValid:(std::string)propString` method that checks whether the URL received as prop is valid;
-- the `eventEmitter` method which is a utility to retrieve a strongly typed `eventEmitter` instance
-- the `componentDescriptorProvider` which returns the `ComponentDescriptor` generated by Codegen;
+- `@interface` 实现了两个协议：
+  - `RCTCustomWebViewViewProtocol`，由 Codegen 生成；
+  - `WKNavigationDelegate`，由 WebKit 框架提供，用于处理 web 视图导航事件；
+- `init` 方法，实例化 `WKWebView`，将其添加到子视图并设置 `navigationDelegate`；
+- `updateProps` 方法，当组件的 props 更改时由 React Native 调用；
+- `layoutSubviews` 方法，描述自定义视图需要如何布局；
+- `webView:didFinishNavigation:` 方法，让你处理 `WKWebView` 完成页面加载后的操作；
+- `urlIsValid:(std::string)propString` 方法，检查作为 prop 接收的 URL 是否有效；
+- `eventEmitter` 方法，这是一个用于检索强类型 `eventEmitter` 实例的工具
+- `componentDescriptorProvider`，返回由 Codegen 生成的 `ComponentDescriptor`；
 
-#### Add WebKit framework
+#### 添加 WebKit 框架
 
 :::note
-This step is only required because we are creating a Web view. Web components on iOS needs to be linked against the WebKit framework provided by Apple. If your component doesn't need to access web-specific features, you can skip this step.
+此步骤仅因为我们要创建 Web 视图才需要。iOS 上的 Web 组件需要链接到 Apple 提供的 WebKit 框架。如果你的组件不需要访问 Web 特定功能，你可以跳过此步骤。
 :::
 
-A web view requires access to some features that Apple provides through one of the frameworks shipped with Xcode and the devices: WebKit.
-You can see it in the native code by the `#import <WebKit/WebKit.h>` line added in the `RCTWebView.mm`.
+Web 视图需要访问 Apple 通过随 Xcode 和设备一起提供的框架之一提供的某些功能：WebKit。
+你可以在原生代码中看到它，即在 `RCTWebView.mm` 中添加的 `#import <WebKit/WebKit.h>` 行。
 
-To link the WebKit framework in your app, follow these steps:
+要在你的应用中链接 WebKit 框架，请遵循以下步骤：
 
-1. In Xcode, Click on your project
-2. Select the app target
-3. Select the General tab
-4. Scroll down until you find the _"Frameworks, Libraries, and Embedded Contents"_ section, and press the `+` button
+1. 在 Xcode 中，点击你的项目
+2. 选择 app target
+3. 选择 General 标签页
+4. 向下滚动直到找到 _"Frameworks, Libraries, and Embedded Contents"_ 部分，然后点击 `+` 按钮
 
-<img className="half-size" alt="Add webkit framework to your app 1" src="/docs/assets/AddWebKitFramework1.png" />
+<img className="half-size" alt="将 webkit 框架添加到你的应用 1" src="/docs/assets/AddWebKitFramework1.png" />
 
-5. In the search bar, filter for WebKit
-6. Select the WebKit framework
-7. Click on Add.
+5. 在搜索栏中，过滤 WebKit
+6. 选择 WebKit 框架
+7. 点击 Add。
 
-<img className="half-size" alt="Add webkit framework to your app 2" src="/docs/assets/AddWebKitFramework2.png" />
+<img className="half-size" alt="将 webkit 框架添加到你的应用 2" src="/docs/assets/AddWebKitFramework2.png" />

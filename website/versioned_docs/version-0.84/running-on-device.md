@@ -28,7 +28,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 大多数 Android 设备默认只允许安装和运行从 Google Play 下载的应用。你需要在设备上启用 USB 调试，才能在开发过程中安装你的应用。
 
-启用 USB 调试之前，需先启用“开发者选项”菜单：进入 **设置** → **关于手机** → **软件信息**，然后连续点击底部的 `版本号` 七次。之后返回 **设置** → **开发者选项**，开启“USB 调试”。
+启用 USB 调试之前，需先启用“开发者选项”菜单：进入 **设置** → **关于手机** → **软件信息**，然后连续点击底部的 `版本号` 七次。之后返回 **设置** → **开发者选项**，开启"USB 调试”。
 
 ### 2. 使用 USB 连接设备
 
@@ -71,7 +71,7 @@ yarn android
 </Tabs>
 
 :::note
-如果出现 “bridge configuration isn't available” 错误，请参考 [使用 adb reverse](running-on-device.md#method-1-using-adb-reverse-recommended)。
+如果出现"bridge configuration isn't available"错误，请参考 [使用 adb reverse](running-on-device.md#method-1-using-adb-reverse-recommended)。
 :::
 
 :::tip
@@ -108,7 +108,7 @@ $ adb devices
 
 1. 确保笔记本和手机处于**同一 Wi-Fi 网络**。
 2. 在设备上打开 React Native 应用。
-3. 你会看到一个带错误信息的[红屏](debugging.md#logbox)，这是正常的，后续步骤会解决。
+3. 你会看到一个带错误信息的 [红屏](debugging.md#logbox)，这是正常的，后续步骤会解决。
 4. 打开应用内的 [开发菜单](debugging.md#opening-the-dev-menu)。
 5. 进入 **开发设置** → **设备的调试服务器主机与端口**。
 6. 输入你的开发机器 IP 与本地服务器端口（如 `10.0.1.1:8081`）。
@@ -129,7 +129,7 @@ $ adb devices
 
 大多数 Android 设备默认只允许安装和运行从 Google Play 下载的应用。你需要在设备上启用 USB 调试，才能在开发过程中安装你的应用。
 
-启用 USB 调试之前，需先启用“开发者选项”菜单：进入 **设置** → **关于手机** → **软件信息**，然后连续点击底部的 `版本号` 七次。之后返回 **设置** → **开发者选项**，开启“USB 调试”。
+启用 USB 调试之前，需先启用“开发者选项”菜单：进入 **设置** → **关于手机** → **软件信息**，然后连续点击底部的 `版本号` 七次。之后返回 **设置** → **开发者选项**，开启"USB 调试”。
 
 ### 2. 使用 USB 连接设备
 
@@ -201,7 +201,7 @@ $ adb devices
 
 1. 确保笔记本和手机处于**同一 Wi-Fi 网络**。
 2. 在设备上打开 React Native 应用。
-3. 你会看到一个带错误信息的[红屏](debugging.md#logbox)，这是正常的，后续步骤会解决。
+3. 你会看到一个带错误信息的 [红屏](debugging.md#logbox)，这是正常的，后续步骤会解决。
 4. 打开应用内的 [开发菜单](debugging.md#opening-the-dev-menu)。
 5. 进入 **开发设置** → **设备的调试服务器主机与端口**。
 6. 输入你的开发机器 IP 与本地服务器端口（如 `10.0.1.1:8081`）。
@@ -222,13 +222,13 @@ $ adb devices
 
 大多数 Android 设备默认只允许安装和运行从 Google Play 下载的应用。你需要在设备上启用 USB 调试，才能在开发过程中安装你的应用。
 
-启用 USB 调试之前，需先启用“开发者选项”菜单：进入 **设置** → **关于手机** → **软件信息**，然后连续点击底部的 `版本号` 七次。之后返回 **设置** → **开发者选项**，开启“USB 调试”。
+启用 USB 调试之前，需先启用“开发者选项”菜单：进入 **设置** → **关于手机** → **软件信息**，然后连续点击底部的 `版本号` 七次。之后返回 **设置** → **开发者选项**，开启"USB 调试”。
 
 ### 2. 使用 USB 连接设备
 
 现在来设置 Android 设备以运行我们的 React Native 项目。将设备通过 USB 连接到开发机器。
 
-接下来，使用 `lsusb` 检查厂商代码（Mac 需先[安装 lsusb](https://github.com/jlhonora/lsusb)）。`lsusb` 返回类似：
+接下来，使用 `lsusb` 检查厂商代码（Mac 需先 [安装 lsusb](https://github.com/jlhonora/lsusb)）。`lsusb` 返回类似：
 
 ```bash
 $ lsusb
@@ -255,7 +255,7 @@ Bus 004 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
 Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 ```
 
-可见带手机型号（此例中为 “Motorola PCS”）那一行已消失，即为关注对象。
+可见带手机型号（此例中为"Motorola PCS"）那一行已消失，即为关注对象。
 
 `Bus 001 Device 003: ID 22b8:2e76 Motorola PCS`
 
@@ -302,7 +302,7 @@ yarn android
 </Tabs>
 
 :::note
-如果出现 “bridge configuration isn't available” 错误，请参考 [使用 adb reverse](running-on-device.md#method-1-using-adb-reverse-recommended)。
+如果出现"bridge configuration isn't available"错误，请参考 [使用 adb reverse](running-on-device.md#method-1-using-adb-reverse-recommended)。
 :::
 
 :::tip
@@ -339,7 +339,7 @@ $ adb devices
 
 1. 确保笔记本和手机处于**同一 Wi-Fi 网络**。
 2. 在设备上打开 React Native 应用。
-3. 你会看到一个带错误信息的[红屏](debugging.md#logbox)，这是正常的，后续步骤会解决。
+3. 你会看到一个带错误信息的 [红屏](debugging.md#logbox)，这是正常的，后续步骤会解决。
 4. 打开应用内的 [开发菜单](debugging.md#opening-the-dev-menu)。
 5. 进入 **开发设置** → **设备的调试服务器主机与端口**。
 6. 输入你的开发机器 IP 与本地服务器端口（如 `10.0.1.1:8081`）。
@@ -376,7 +376,7 @@ $ adb devices
 
 如果尚未注册，[注册 Apple 开发者账户](https://developer.apple.com/)。
 
-在 Xcode 项目导航中选择你的项目，再选择主 Target（与项目名称相同）。进入 “General” 标签页，找到 “Signing” 部分，确保在 Team 下拉列表中选择了你的 Apple 开发者账号或团队。测试 Target 也同样设置（名字以 Tests 结尾，位于主 Target 下方）。
+在 Xcode 项目导航中选择你的项目，再选择主 Target（与项目名称相同）。进入"General"标签页，找到"Signing"部分，确保在 Team 下拉列表中选择了你的 Apple 开发者账号或团队。测试 Target 也同样设置（名字以 Tests 结尾，位于主 Target 下方）。
 
 **重复**上述步骤，针对项目中的**测试 Targets**。
 
@@ -394,7 +394,7 @@ $ adb devices
 
 <h2>连接开发服务器</h2>
 
-你也可以在设备上通过连接开发服务器快速迭代。只需保证设备和电脑处于同一 Wi-Fi 网络。摇晃设备打开[开发菜单](debugging.md#opening-the-dev-menu)，然后启用快速刷新。每当 JavaScript 变更时，应用会自动重新加载。
+你也可以在设备上通过连接开发服务器快速迭代。只需保证设备和电脑处于同一 Wi-Fi 网络。摇晃设备打开 [开发菜单](debugging.md#opening-the-dev-menu)，然后启用快速刷新。每当 JavaScript 变更时，应用会自动重新加载。
 
 ![](/docs/assets/debugging-dev-menu-083.jpg)
 
@@ -404,7 +404,7 @@ $ adb devices
 如遇问题，请确认 Mac 和设备处于同一网络且互通。许多公共无线网络带有认证门户，会阻止设备相互访问。此时你可以开启手机的个人热点功能。也可以通过 USB 从 Mac 共享网络连接给设备，从而通过该通道连接到打包工具，传输速度极快。
 :::
 
-如果连接开发服务器时出现[红屏错误](debugging.md#logbox)如：
+如果连接开发服务器时出现 [红屏错误](debugging.md#logbox) 如：
 
 :::note
 连接 `http://localhost:8081/debugger-proxy?role=client` 超时。请确认你是否运行了节点代理？如果是在设备上运行，请检查 `RCTWebSocketExecutor.m` 中 IP 地址是否正确。
@@ -423,6 +423,12 @@ $ adb devices
 ![](/docs/assets/XcodeBuildIP.png)
 
 打开 **报告导航器**，选择最后一次 **构建**，搜索 `IP=` 后跟的 IP 地址。内嵌在应用中的 IP 地址应与机器 IP 一致。
+
+</TabItem>
+</Tabs>
+
+</TabItem>
+</Tabs>
 
 ## 为生产构建你的应用
 

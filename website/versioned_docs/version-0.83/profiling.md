@@ -21,11 +21,11 @@ Android 支持超过 1 万种不同的手机，并且为了支持软件渲染而
 
 ### 1. 收集跟踪数据
 
-首先，通过 USB 将出现卡顿现象的设备连接到计算机。在 Android Studio 中打开项目的 `android` 文件夹，右上角选择你的设备，并[以可分析（profileable）模式运行项目](https://developer.android.com/studio/profile#build-and-run)。
+首先，通过 USB 将出现卡顿现象的设备连接到计算机。在 Android Studio 中打开项目的 `android` 文件夹，右上角选择你的设备，并 [以可分析（profileable）模式运行项目](https://developer.android.com/studio/profile#build-and-run)。
 
 当你的应用以可分析形式构建并运行在设备上时，将应用操作到想要分析的导航/动画前的位置，在 Android Studio Profiler 面板中启动 ["捕获系统活动" 任务](https://developer.android.com/studio/profile#start-profiling)。
 
-开始收集跟踪数据后，执行你关心的动画或交互。然后按“停止录制”。你现在可以[直接在 Android Studio 中查看跟踪](https://developer.android.com/studio/profile/jank-detection)。或者，也可以在“过去录制”面板中选择该文件，点击“导出录制”，并在诸如 [Perfetto](https://perfetto.dev/) 之类的工具中打开。
+开始收集跟踪数据后，执行你关心的动画或交互。然后按“停止录制”。你现在可以 [直接在 Android Studio 中查看跟踪](https://developer.android.com/studio/profile/jank-detection)。或者，也可以在“过去录制”面板中选择该文件，点击“导出录制”，并在诸如 [Perfetto](https://perfetto.dev/) 之类的工具中打开。
 
 ### 2. 读取跟踪数据
 
@@ -53,7 +53,7 @@ Android 支持超过 1 万种不同的手机，并且为了支持软件渲染而
 
 左侧显示一组线程，右侧对应时间线排布。我们关注几个线程：UI 线程（显示包名或 UI Thread）、`mqt_js` 和 `mqt_native_modules`。如果你用的是 Android 5 及以上版本，还要关注 Render 线程。
 
-- **UI 线程。** 标准的 Android 测量/布局/绘制都在这里执行。右侧线程名是你的包名（例中为 book.adsmanager）或“UI Thread”。该线程上的事件一般与 `Choreographer`、`traversals` 和 `DispatchUI` 相关：
+- **UI 线程。** 标准的 Android 测量/布局/绘制都在这里执行。右侧线程名是你的包名（例中为 book.adsmanager）或"UI Thread"。该线程上的事件一般与 `Choreographer`、`traversals` 和 `DispatchUI` 相关：
 
   ![UI 线程示例](/docs/assets/SystraceUIThreadExample.png)
 
@@ -103,7 +103,7 @@ Android 支持超过 1 万种不同的手机，并且为了支持软件渲染而
 
 如果问题在原生 UI，一般有两种情况：
 
-1. 每帧渲染的 UI 需要Gpu过多工作，或者
+1. 每帧渲染的 UI 需要 Gpu 过多工作，或者
 2. 在动画/交互过程中创建了新 UI（例如滚动时加载新内容）。
 
 ### Gpu 工作过量
@@ -131,11 +131,11 @@ Android 支持超过 1 万种不同的手机，并且为了支持软件渲染而
 
 ### 查找原生 CPU 热点
 
-如果问题疑似出在原生端，可使用[CPU 热点分析器](https://developer.android.com/studio/profile/record-java-kotlin-methods)获得更详细信息。打开 Android Studio Profiler 面板，选择“查找 CPU 热点（Java/Kotlin 方法记录）”。
+如果问题疑似出在原生端，可使用 [CPU 热点分析器](https://developer.android.com/studio/profile/record-java-kotlin-methods) 获得更详细信息。打开 Android Studio Profiler 面板，选择“查找 CPU 热点（Java/Kotlin 方法记录）”。
 
 :::info 选择 Java/Kotlin 记录
 
-请确保选择“查找 CPU 热点 **（Java/Kotlin 记录）**”而非“查找 CPU 热点（调用栈采样）”。它们图标相似，但实现不同。
+请确保选择“查找 CPU 热点 **（Java/Kotlin 记录）**"而非“查找 CPU 热点（调用栈采样）”。它们图标相似，但实现不同。
 :::
 
 执行交互后点击“停止录制”。录制过程资源消耗较大，交互尽量保持简短。录制结束后，你可以直接在 Android Studio 检查结果，或导出并用在线工具如 [Firefox Profiler](https://profiler.firefox.com/) 查看。

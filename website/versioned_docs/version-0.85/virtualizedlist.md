@@ -5,11 +5,11 @@ title: VirtualizedList
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-Base implementation for the more convenient [`<FlatList>`](flatlist.md) and [`<SectionList>`](sectionlist.md) components, which are also better documented. In general, this should only really be used if you need more flexibility than [`FlatList`](flatlist.md) provides, e.g. for use with immutable data instead of plain arrays.
+更便捷的 [`<FlatList>`](flatlist.md) 和 [`<SectionList>`](sectionlist.md) 组件的基础实现，这两个组件的文档也更完善。一般来说，只有当你需要比 [`FlatList`](flatlist.md) 提供的更灵活的用法时才应该使用它，例如与不可变数据一起使用而不是普通数组。
 
-Virtualization massively improves memory consumption and performance of large lists by maintaining a finite render window of active items and replacing all items outside of the render window with appropriately sized blank space. The window adapts to scrolling behavior, and items are rendered incrementally with low-pri (after any running interactions) if they are far from the visible area, or with hi-pri otherwise to minimize the potential of seeing blank space.
+虚拟化通过维护一个有限的活动项渲染窗口，并用适当大小的空白空间替换渲染窗口外的所有项，从而极大地提高了大型列表的内存消耗和性能。窗口会适应滚动行为，如果项远离可见区域，则会以低优先级（在任何运行的交互之后）增量渲染它们，否则以高优先级渲染，以最大限度地减少看到空白空间的可能性。
 
-## Example
+## 示例
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -137,82 +137,82 @@ export default App;
 
 ---
 
-Some caveats:
+一些注意事项：
 
-- Internal state is not preserved when content scrolls out of the render window. Make sure all your data is captured in the item data or external stores like Flux, Redux, or Relay.
-- This is a `PureComponent` which means that it will not re-render if `props` are shallow-equal. Make sure that everything your `renderItem` function depends on is passed as a prop (e.g. `extraData`) that is not `===` after updates, otherwise your UI may not update on changes. This includes the `data` prop and parent component state.
-- In order to constrain memory and enable smooth scrolling, content is rendered asynchronously offscreen. This means it's possible to scroll faster than the fill rate and momentarily see blank content. This is a tradeoff that can be adjusted to suit the needs of each application, and we are working on improving it behind the scenes.
-- By default, the list looks for a `key` prop on each item and uses that for the React key. Alternatively, you can provide a custom `keyExtractor` prop.
+- 当内容滚动出渲染窗口时，内部状态不会保留。确保所有数据都捕获在项数据或外部存储中，如 Flux、Redux 或 Relay。
+- 这是一个 `PureComponent`，这意味着如果 `props` 浅相等，它将不会重新渲染。确保你的 `renderItem` 函数依赖的所有内容都作为 prop 传递（例如 `extraData`），并且在更新后不 `===`，否则你的 UI 可能不会随变化更新。这包括 `data` prop 和父组件状态。
+- 为了限制内存并实现平滑滚动，内容是在屏幕外异步渲染的。这意味着有可能滚动速度快于填充率，从而暂时看到空白内容。这是一个可以根据每个应用的需求进行调整的权衡，我们正在幕后改进它。
+- 默认情况下，列表会在每个项上查找 `key` prop 并将其用作 React key。或者，你可以提供自定义的 `keyExtractor` prop。
 
 ---
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
-### [ScrollView Props](scrollview.md#props)
+### [ScrollView 属性](scrollview.md#props)
 
-Inherits [ScrollView Props](scrollview.md#props).
+继承 [ScrollView 属性](scrollview.md#props)。
 
 ---
 
 ### `data`
 
-Opaque data type passed to `getItem` and `getItemCount` to retrieve items.
+传递给 `getItem` 和 `getItemCount` 以检索项的不透明数据类型。
 
-| Type |
+| 类型 |
 | ---- |
-| any  |
+| 任意  |
 
 ---
 
-### <div className="label required basic">Required</div> **`getItem`**
+### <div className="label required basic">必需</div> **`getItem`**
 
 ```tsx
 (data: any, index: number) => any;
 ```
 
-A generic accessor for extracting an item from any sort of data blob.
+用于从任何类型的数据块中提取项的通用访问器。
 
-| Type     |
+| 类型     |
 | -------- |
-| function |
+| 函数 |
 
 ---
 
-### <div className="label required basic">Required</div> **`getItemCount`**
+### <div className="label required basic">必需</div> **`getItemCount`**
 
 ```tsx
 (data: any) => number;
 ```
 
-Determines how many items are in the data blob.
+确定数据块中有多少项。
 
-| Type     |
+| 类型     |
 | -------- |
-| function |
+| 函数 |
 
 ---
 
-### <div className="label required basic">Required</div> **`renderItem`**
+### <div className="label required basic">必需</div> **`renderItem`**
 
 ```tsx
 (info: any) => ?React.Element<any>
 ```
 
-Takes an item from `data` and renders it into the list
+从 `data` 中获取一个项并将其渲染到列表中。
 
-| Type     |
+| 类型     |
 | -------- |
-| function |
+| 函数 |
 
 ---
 
 ### `CellRendererComponent`
 
-CellRendererComponent allows customizing how cells rendered by `renderItem`/`ListItemComponent` are wrapped when placed into the underlying ScrollView. This component must accept event handlers which notify VirtualizedList of changes within the cell.
+CellRendererComponent 允许自定义由 `renderItem`/`ListItemComponent` 渲染的单元格在放入底层 ScrollView 时如何包装。此组件必须接受事件处理程序，以通知 VirtualizedList 单元格内的变化。
 
-| Type                                     |
+| 类型                                     |
 | ---------------------------------------- |
 | `React.ComponentType<CellRendererProps>` |
 
@@ -220,103 +220,103 @@ CellRendererComponent allows customizing how cells rendered by `renderItem`/`Lis
 
 ### `ItemSeparatorComponent`
 
-Rendered in between each item, but not at the top or bottom. By default, `highlighted` and `leadingItem` props are provided. `renderItem` provides `separators.highlight`/`unhighlight` which will update the `highlighted` prop, but you can also add custom props with `separators.updateProps`. Can be a React Component (e.g. `SomeComponent`), or a React element (e.g. `<SomeComponent />`).
+渲染在每项之间，但不在顶部或底部。默认情况下，提供 `highlighted` 和 `leadingItem` props。`renderItem` 提供 `separators.highlight`/`unhighlight` 将更新 `highlighted` prop，但你也可以使用 `separators.updateProps` 添加自定义 props。可以是 React 组件（例如 `SomeComponent`），或 React 元素（例如 `<SomeComponent />`）。
 
-| Type                         |
+| 类型                         |
 | ---------------------------- |
-| component, function, element |
+| 组件，函数，元素 |
 
 ---
 
 ### `ListEmptyComponent`
 
-Rendered when the list is empty. Can be a React Component (e.g. `SomeComponent`), or a React element (e.g. `<SomeComponent />`).
+当列表为空时渲染。可以是 React 组件（例如 `SomeComponent`），或 React 元素（例如 `<SomeComponent />`）。
 
-| Type               |
+| 类型               |
 | ------------------ |
-| component, element |
+| 组件，元素 |
 
 ---
 
 ### `ListItemComponent`
 
-Each data item is rendered using this element. Can be a React Component Class, or a render function.
+每个数据项都使用此元素渲染。可以是 React 组件类，或渲染函数。
 
-| Type                |
+| 类型                |
 | ------------------- |
-| component, function |
+| 组件，函数 |
 
 ---
 
 ### `ListFooterComponent`
 
-Rendered at the bottom of all the items. Can be a React Component (e.g. `SomeComponent`), or a React element (e.g. `<SomeComponent />`).
+渲染在所有项的底部。可以是 React 组件（例如 `SomeComponent`），或 React 元素（例如 `<SomeComponent />`）。
 
-| Type               |
+| 类型               |
 | ------------------ |
-| component, element |
+| 组件，元素 |
 
 ---
 
 ### `ListFooterComponentStyle`
 
-Styling for internal View for `ListFooterComponent`.
+`ListFooterComponent` 内部 View 的样式。
 
-| Type          | Required |
+| 类型          | 是否必需 |
 | ------------- | -------- |
-| ViewStyleProp | No       |
+| ViewStyleProp | 否       |
 
 ---
 
 ### `ListHeaderComponent`
 
-Rendered at the top of all the items. Can be a React Component (e.g. `SomeComponent`), or a React element (e.g. `<SomeComponent />`).
+渲染在所有项的顶部。可以是 React 组件（例如 `SomeComponent`），或 React 元素（例如 `<SomeComponent />`）。
 
-| Type               |
+| 类型               |
 | ------------------ |
-| component, element |
+| 组件，元素 |
 
 ---
 
 ### `ListHeaderComponentStyle`
 
-Styling for internal View for `ListHeaderComponent`.
+`ListHeaderComponent` 内部 View 的样式。
 
-| Type                           |
+| 类型                           |
 | ------------------------------ |
-| [View Style](view-style-props) |
+| [View 样式](view-style-props) |
 
 ---
 
 ### `debug`
 
-`debug` will turn on extra logging and visual overlays to aid with debugging both usage and implementation, but with a significant perf hit.
+`debug` 将开启额外的日志记录和视觉覆盖，以帮助调试用法和实现，但会显著影响性能。
 
-| Type    |
+| 类型    |
 | ------- |
-| boolean |
+| 布尔值 |
 
 ---
 
 ### 🗑️ `disableVirtualization`
 
-:::warning Deprecated
-Virtualization provides significant performance and memory optimizations, but fully unmounts react instances that are outside of the render window. You should only need to disable this for debugging purposes.
+:::warning 已弃用
+虚拟化提供了显著的性能和内存优化，但会完全卸载渲染窗口外的 react 实例。你应该只为了调试目的才需要禁用它。
 :::
 
-| Type    |
+| 类型    |
 | ------- |
-| boolean |
+| 布尔值 |
 
 ---
 
 ### `extraData`
 
-A marker property for telling the list to re-render (since it implements `PureComponent`). If any of your `renderItem`, Header, Footer, etc. functions depend on anything outside of the `data` prop, stick it here and treat it immutably.
+一个标记属性，用于告诉列表重新渲染（因为它实现了 `PureComponent`）。如果你的任何 `renderItem`、Header、Footer 等函数依赖于 `data` prop 之外的任何内容，将其放在这里并将其视为不可变的。
 
-| Type |
+| 类型 |
 | ---- |
-| any  |
+| 任意  |
 
 ---
 
@@ -329,49 +329,49 @@ A marker property for telling the list to re-render (since it implements `PureCo
 ) => {length: number, offset: number, index: number}
 ```
 
-| Type     |
+| 类型     |
 | -------- |
-| function |
+| 函数 |
 
 ---
 
 ### `horizontal`
 
-If `true`, renders items next to each other horizontally instead of stacked vertically.
+如果为 `true`，则将项水平并排渲染，而不是垂直堆叠。
 
-| Type    |
+| 类型    |
 | ------- |
-| boolean |
+| 布尔值 |
 
 ---
 
 ### `initialNumToRender`
 
-How many items to render in the initial batch. This should be enough to fill the screen but not much more. Note these items will never be unmounted as part of the windowed rendering in order to improve perceived performance of scroll-to-top actions.
+初始批次中要渲染多少项。这应该足以填充屏幕，但不要太多。注意，作为窗口化渲染的一部分，这些项永远不会被卸载，以提高滚动到顶部操作的感知性能。
 
-| Type   | Default |
+| 类型   | 默认值 |
 | ------ | ------- |
-| number | `10`    |
+| 数字 | `10`    |
 
 ---
 
 ### `initialScrollIndex`
 
-Instead of starting at the top with the first item, start at `initialScrollIndex`. This disables the "scroll to top" optimization that keeps the first `initialNumToRender` items always rendered and immediately renders the items starting at this initial index. Requires `getItemLayout` to be implemented.
+不是从第一项的顶部开始，而是从 `initialScrollIndex` 开始。这会禁用“滚动到顶部”优化（该优化保持前 `initialNumToRender` 项始终渲染），并立即渲染从此初始索引开始的项。需要实现 `getItemLayout`。
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `inverted`
 
-Reverses the direction of scroll. Uses scale transforms of `-1`.
+反转滚动方向。使用 `-1` 的缩放变换。
 
-| Type    |
+| 类型    |
 | ------- |
-| boolean |
+| 布尔值 |
 
 ---
 
@@ -381,29 +381,29 @@ Reverses the direction of scroll. Uses scale transforms of `-1`.
 (item: any, index: number) => string;
 ```
 
-Used to extract a unique key for a given item at the specified index. Key is used for caching and as the react key to track item re-ordering. The default extractor checks `item.key`, then `item.id`, and then falls back to using the index, like React does.
+用于提取给定项在指定索引处的唯一键。键用于缓存并作为 react key 跟踪项重新排序。默认提取器检查 `item.key`，然后 `item.id`，然后回退到使用索引，就像 React 所做的那样。
 
-| Type     |
+| 类型     |
 | -------- |
-| function |
+| 函数 |
 
 ---
 
 ### `maxToRenderPerBatch`
 
-The maximum number of items to render in each incremental render batch. The more rendered at once, the better the fill rate, but responsiveness may suffer because rendering content may interfere with responding to button taps or other interactions.
+每个增量渲染批次中要渲染的最大项数。一次渲染的越多，填充率越好，但响应能力可能会受到影响，因为渲染内容可能会干扰响应按钮点击或其他交互。
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `onEndReached`
 
-Called once when the scroll position gets within `onEndReachedThreshold` from the logical end of the list.
+当滚动位置进入列表逻辑末端的 `onEndReachedThreshold` 范围内时调用一次。
 
-| Type                                        |
+| 类型                                        |
 | ------------------------------------------- |
 | `(info: {distanceFromEnd: number}) => void` |
 
@@ -411,11 +411,11 @@ Called once when the scroll position gets within `onEndReachedThreshold` from th
 
 ### `onEndReachedThreshold`
 
-How far from the end (in units of visible length of the list) the trailing edge of the list must be from the end of the content to trigger the `onEndReached` callback. Thus, a value of 0.5 will trigger `onEndReached` when the end of the content is within half the visible length of the list.
+列表的尾边缘必须距离内容末端多远（以列表可见长度的单位）才能触发 `onEndReached` 回调。因此，值 0.5 将在内容末端位于列表可见长度的一半以内时触发 `onEndReached`。
 
-| Type   | Default |
+| 类型   | 默认值 |
 | ------ | ------- |
-| number | `2`     |
+| 数字 | `2`     |
 
 ---
 
@@ -425,11 +425,11 @@ How far from the end (in units of visible length of the list) the trailing edge 
 () => void;
 ```
 
-If provided, a standard `RefreshControl` will be added for "Pull to Refresh" functionality. Make sure to also set the `refreshing` prop correctly.
+如果提供，将添加标准的 `RefreshControl` 以实现“下拉刷新”功能。确保也正确设置 `refreshing` prop。
 
-| Type     |
+| 类型     |
 | -------- |
-| function |
+| 函数 |
 
 ---
 
@@ -443,19 +443,19 @@ If provided, a standard `RefreshControl` will be added for "Pull to Refresh" fun
 }) => void;
 ```
 
-Used to handle failures when scrolling to an index that has not been measured yet. Recommended action is to either compute your own offset and `scrollTo` it, or scroll as far as possible and then try again after more items have been rendered.
+用于处理滚动到尚未测量的索引时的失败。建议的操作是要么计算你自己的偏移量并 `scrollTo` 它，要么尽可能滚动，然后在渲染更多项后重试。
 
-| Type     |
+| 类型     |
 | -------- |
-| function |
+| 函数 |
 
 ---
 
 ### `onStartReached`
 
-Called once when the scroll position gets within `onStartReachedThreshold` from the logical start of the list.
+当滚动位置进入列表逻辑起点的 `onStartReachedThreshold` 范围内时调用一次。
 
-| Type                                          |
+| 类型                                          |
 | --------------------------------------------- |
 | `(info: {distanceFromStart: number}) => void` |
 
@@ -463,19 +463,19 @@ Called once when the scroll position gets within `onStartReachedThreshold` from 
 
 ### `onStartReachedThreshold`
 
-How far from the start (in units of visible length of the list) the leading edge of the list must be from the start of the content to trigger the `onStartReached` callback. Thus, a value of 0.5 will trigger `onStartReached` when the start of the content is within half the visible length of the list.
+列表的前边缘必须距离内容起点多远（以列表可见长度的单位）才能触发 `onStartReached` 回调。因此，值 0.5 将在内容起点位于列表可见长度的一半以内时触发 `onStartReached`。
 
-| Type   | Default |
+| 类型   | 默认值 |
 | ------ | ------- |
-| number | `2`     |
+| 数字 | `2`     |
 
 ---
 
 ### `onViewableItemsChanged`
 
-Called when the viewability of rows changes, as defined by the `viewabilityConfig` prop.
+当行的可见性发生变化时调用，由 `viewabilityConfig` prop 定义。
 
-| Type                                                                                                  |
+| 类型                                                                                                  |
 | ----------------------------------------------------------------------------------------------------- |
 | `md (callback: {changed: [ViewToken](viewtoken)[], viewableItems: [ViewToken](viewtoken)[]}) => void` |
 
@@ -483,53 +483,53 @@ Called when the viewability of rows changes, as defined by the `viewabilityConfi
 
 ### `persistentScrollbar`
 
-| Type |
+| 类型 |
 | ---- |
-| bool |
+| 布尔值 |
 
 ---
 
 ### `progressViewOffset`
 
-Set this when offset is needed for the loading indicator to show correctly.
+当需要偏移量以使加载指示器正确显示时设置此项。
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `refreshControl`
 
-A custom refresh control element. When set, it overrides the default `<RefreshControl>` component built internally. The onRefresh and refreshing props are also ignored. Only works for vertical VirtualizedList.
+自定义刷新控制元素。设置后，它将覆盖内部构建的默认 `<RefreshControl>` 组件。onRefresh 和 refreshing props 也会被忽略。仅适用于垂直 VirtualizedList。
 
-| Type    |
+| 类型    |
 | ------- |
-| element |
+| 元素 |
 
 ---
 
 ### `refreshing`
 
-Set this true while waiting for new data from a refresh.
+等待刷新新数据时设置为 true。
 
-| Type    |
+| 类型    |
 | ------- |
-| boolean |
+| 布尔值 |
 
 ---
 
 ### `removeClippedSubviews`
 
 :::warning
-Using this property may lead to bugs (missing content) in some circumstances - use at your own risk.
+在某些情况下使用此属性可能会导致错误（内容丢失）- 使用风险自负。
 :::
 
-When `true`, offscreen child views are removed from their native backing superview when offscreen. This may improve scroll performance for large lists. On Android the default value is `true`.
+当为 `true` 时，当子视图离屏时，它们会从其原生备份父视图中移除。这可能会提高大型列表的滚动性能。在 Android 上，默认值为 `true`。
 
-| Type    |
+| 类型    |
 | ------- |
-| boolean |
+| 布尔值 |
 
 ---
 
@@ -539,19 +539,19 @@ When `true`, offscreen child views are removed from their native backing supervi
 (props: object) => element;
 ```
 
-Render a custom scroll component, e.g. with a differently styled `RefreshControl`.
+渲染自定义滚动组件，例如具有不同样式的 `RefreshControl`。
 
-| Type     |
+| 类型     |
 | -------- |
-| function |
+| 函数 |
 
 ---
 
 ### `viewabilityConfig`
 
-See `ViewabilityHelper.js` for flow type and further documentation.
+请参阅 `ViewabilityHelper.js` 了解 flow 类型和进一步文档。
 
-| Type              |
+| 类型              |
 | ----------------- |
 | ViewabilityConfig |
 
@@ -559,33 +559,33 @@ See `ViewabilityHelper.js` for flow type and further documentation.
 
 ### `viewabilityConfigCallbackPairs`
 
-List of `ViewabilityConfig`/`onViewableItemsChanged` pairs. A specific `onViewableItemsChanged` will be called when its corresponding `ViewabilityConfig`'s conditions are met. See `ViewabilityHelper.js` for flow type and further documentation.
+`ViewabilityConfig`/`onViewableItemsChanged` 对的列表。当对应的 `ViewabilityConfig` 条件满足时，将调用特定的 `onViewableItemsChanged`。请参阅 `ViewabilityHelper.js` 了解 flow 类型和进一步文档。
 
-| Type                                   |
+| 类型                                   |
 | -------------------------------------- |
-| array of ViewabilityConfigCallbackPair |
+| ViewabilityConfigCallbackPair 数组 |
 
 ---
 
 ### `updateCellsBatchingPeriod`
 
-Amount of time between low-pri item render batches, e.g. for rendering items quite a ways off screen. Similar fill rate/responsiveness tradeoff as `maxToRenderPerBatch`.
+低优先级项渲染批次之间的时间量，例如用于渲染远离屏幕的项。与 `maxToRenderPerBatch` 类似的填充率/响应能力权衡。
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `windowSize`
 
-Determines the maximum number of items rendered outside of the visible area, in units of visible lengths. So if your list fills the screen, then `windowSize={21}` (the default) will render the visible screen area plus up to 10 screens above and 10 below the viewport. Reducing this number will reduce memory consumption and may improve performance, but will increase the chance that fast scrolling may reveal momentary blank areas of unrendered content.
+确定可见区域外渲染的最大项数，以可见长度为单位。因此，如果你的列表填充了屏幕，那么 `windowSize={21}`（默认值）将渲染可见屏幕区域以及视口上方最多 10 个屏幕和下方 10 个屏幕。减少此数字将减少内存消耗并可能提高性能，但会增加快速滚动可能揭示未渲染内容的暂时空白区域的机会。
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
-## Methods
+## 方法
 
 ### `flashScrollIndicators()`
 
@@ -620,7 +620,7 @@ getScrollRef():
 getScrollResponder () => ScrollResponderMixin | null;
 ```
 
-Provides a handle to the underlying scroll responder. Note that `this._scrollRef` might not be a `ScrollView`, so we need to check that it responds to `getScrollResponder` before calling it.
+提供对底层 scroll responder 的句柄。注意 `this._scrollRef` 可能不是一个 `ScrollView`，所以我们在调用之前需要检查它是否响应 `getScrollResponder`。
 
 ---
 
@@ -630,17 +630,17 @@ Provides a handle to the underlying scroll responder. Note that `this._scrollRef
 scrollToEnd(params?: {animated?: boolean});
 ```
 
-Scrolls to the end of the content. May be janky without `getItemLayout` prop.
+滚动到内容的末尾。如果没有 `getItemLayout` 属性，可能会卡顿。
 
-**Parameters:**
+**参数：**
 
-| Name   | Type   |
+| 名称   | 类型   |
 | ------ | ------ |
 | params | object |
 
-Valid `params` keys are:
+有效的 `params` 键包括：
 
-- `'animated'` (boolean) - Whether the list should do an animation while scrolling. Defaults to `true`.
+- `'animated'` (boolean) - 列表在滚动时是否应该执行动画。默认为 `true`。
 
 ---
 
@@ -655,12 +655,12 @@ scrollToIndex(params: {
 });
 ```
 
-Valid `params` consist of:
+有效的 `params` 包括：
 
-- 'index' (number). Required.
-- 'animated' (boolean). Optional.
-- 'viewOffset' (number). Optional.
-- 'viewPosition' (number). Optional.
+- 'index' (number)。必需。
+- 'animated' (boolean)。可选。
+- 'viewOffset' (number)。可选。
+- 'viewPosition' (number)。可选。
 
 ---
 
@@ -675,12 +675,12 @@ scrollToItem(params: {
 );
 ```
 
-Valid `params` consist of:
+有效的 `params` 包括：
 
-- 'item' (Item). Required.
-- 'animated' (boolean). Optional.
-- 'viewOffset' (number). Optional.
-- 'viewPosition' (number). Optional.
+- 'item' (Item)。必需。
+- 'animated' (boolean)。可选。
+- 'viewOffset' (number)。可选。
+- 'viewPosition' (number)。可选。
 
 ---
 
@@ -693,8 +693,8 @@ scrollToOffset(params: {
 });
 ```
 
-Scroll to a specific content pixel offset in the list.
+滚动到列表中特定的内容像素偏移量。
 
-Param `offset` expects the offset to scroll to. In case of `horizontal` is true, the offset is the x-value, in any other case the offset is the y-value.
+参数 `offset` 期望要滚动到的偏移量。如果 `horizontal` 为 true，则偏移量是 x 值，在其他任何情况下，偏移量是 y 值。
 
-Param `animated` (`true` by default) defines whether the list should do an animation while scrolling.
+参数 `animated`（默认为 `true`）定义列表在滚动时是否应该执行动画。

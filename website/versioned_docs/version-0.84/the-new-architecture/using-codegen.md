@@ -67,7 +67,7 @@ import {getCurrentVersion} from '@site/src/getCurrentVersion';
   - `.javaPackageName`: 配置 Android Java 代码生成结果的包名。
 - `ios`: iOS 端的 Codegen 配置（均为可选）：
   - `.modules[moduleName]:`
-    - `.className`: 此模块对应的 ObjC 类，或（若是[C++ 纯模块](/docs/next/the-new-architecture/pure-cxx-modules)）其 `RCTModuleProvider` 类。
+    - `.className`: 此模块对应的 ObjC 类，或（若是 [C++ 纯模块](/docs/next/the-new-architecture/pure-cxx-modules)）其 `RCTModuleProvider` 类。
     - `.unstableRequiresMainQueueSetup`: 是否需要在 UI 线程上初始化此模块，且在运行任何 JavaScript 之前执行。
     - `.conformsToProtocols`: 指明此模块符合以下任一协议：[`RCTImageURLLoader`](https://github.com/facebook/react-native/blob/00d5caee9921b6c10be8f7d5b3903c6afe8dbefa/packages/react-native/Libraries/Image/RCTImageURLLoader.h#L26-L81)、[`RCTURLRequestHandler`](https://github.com/facebook/react-native/blob/00d5caee9921b6c10be8f7d5b3903c6afe8dbefa/packages/react-native/React/Base/RCTURLRequestHandler.h#L11-L52)、[`RCTImageDataDecoder`](https://github.com/facebook/react-native/blob/00d5caee9921b6c10be8f7d5b3903c6afe8dbefa/packages/react-native/Libraries/Image/RCTImageDataDecoder.h#L15-L53)。
   - `.components[componentName]`:

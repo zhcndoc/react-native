@@ -3,15 +3,15 @@ id: segmentedcontrolios
 title: '❌ SegmentedControlIOS'
 ---
 
-> **Removed from React Native.** Use one of the [community packages](https://reactnative.directory/?search=segmentedcontrol) instead.
+> **已从 React Native 中移除。** 请改用 [社区包](https://reactnative.directory/?search=segmentedcontrol) 之一。
 
-Uses `SegmentedControlIOS` to render a UISegmentedControl iOS.
+使用 `SegmentedControlIOS` 来渲染 iOS 的 UISegmentedControl。
 
-#### Programmatically changing selected index
+#### 以编程方式更改选中索引
 
-The selected index can be changed on the fly by assigning the selectedIndex prop to a state variable, then changing that variable. Note that the state variable would need to be updated as the user selects a value and changes the index, as shown in the example below.
+可以通过将 selectedIndex prop 赋值给状态变量，然后更改该变量来动态更改选中索引。请注意，当用户选择一个值并更改索引时，需要更新状态变量，如下例所示。
 
-## Example
+## 示例
 
 ```SnackPlayer name=SegmentedControlIOS%20Example&supportedPlatforms=ios&ext=js
 import React, {useState} from 'react';
@@ -49,78 +49,78 @@ export default App;
 
 ---
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
-Inherits [View Props](view.md#props).
+继承 [View 属性](view.md#props)。
 
 ### `enabled`
 
-If false the user won't be able to interact with the control. Default value is true.
+如果为 false，用户将无法与控制交互。默认值为 true。
 
-| Type | Required |
+| 类型 | 必填 |
 | ---- | -------- |
-| bool | No       |
+| bool | 否       |
 
 ---
 
 ### `momentary`
 
-If true, then selecting a segment won't persist visually. The `onValueChange` callback will still work as expected.
+如果为 true，则选择段不会在视觉上持久化。`onValueChange` 回调仍将按预期工作。
 
-| Type | Required |
+| 类型 | 必填 |
 | ---- | -------- |
-| bool | No       |
+| bool | 否       |
 
 ---
 
 ### `onChange`
 
-Callback that is called when the user taps a segment; passes the event as an argument
+当用户点击段时调用的回调；将事件作为参数传递
 
-| Type     | Required |
+| 类型     | 必填 |
 | -------- | -------- |
-| function | No       |
+| function | 否       |
 
 ---
 
 ### `onValueChange`
 
-Callback that is called when the user taps a segment; passes the segment's value as an argument
+当用户点击段时调用的回调；将段的值作为参数传递
 
-| Type     | Required |
+| 类型     | 必填 |
 | -------- | -------- |
-| function | No       |
+| function | 否       |
 
 ---
 
 ### `selectedIndex`
 
-The index in `props.values` of the segment to be (pre)selected.
+要被（预）选中的段在 `props.values` 中的索引。
 
-| Type   | Required |
+| 类型   | 必填 |
 | ------ | -------- |
-| number | No       |
+| number | 否       |
 
 ---
 
 ### `tintColor`
 
-> **Note:** `tintColor` is not supported on the iOS 13+.
+> **注意：** `tintColor` 在 iOS 13+ 上不受支持。
 
-Accent color of the control.
+控件的强调色。
 
-| Type   | Required |
+| 类型   | 必填 |
 | ------ | -------- |
-| string | No       |
+| string | 否       |
 
 ---
 
 ### `values`
 
-The labels for the control's segment buttons, in order.
+控件段按钮的标签，按顺序排列。
 
-| Type            | Required |
+| 类型            | 必填 |
 | --------------- | -------- |
-| array of string | No       |
+| array of string | 否       |

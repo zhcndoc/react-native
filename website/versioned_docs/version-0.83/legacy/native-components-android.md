@@ -13,7 +13,7 @@ import NativeDeprecated from '../the-new-architecture/_markdown_native_deprecati
 和原生模块指南类似，本指南也是为有一定 Android SDK 编程经验的开发者准备的进阶内容。本文将带你一步步实现一个原生 UI 组件，过程中会演示如何实现 React Native 核心库中已有的 `ImageView` 组件的一个子集。
 
 :::info
-你也可以使用一条命令快速搭建包含原生组件的本地库。详细信息请参阅[本地库搭建指南](local-library-setup)。
+你也可以使用一条命令快速搭建包含原生组件的本地库。详细信息请参阅 [本地库搭建指南](local-library-setup)。
 :::
 
 ## ImageView 示例
@@ -155,7 +155,7 @@ public class ReactImageManager extends SimpleViewManager<ReactImageView> {
 
 ### 4. 注册 `ViewManager`
 
-最后一步是在应用中注册这个 ViewManager，方式和[原生模块](native-modules-android.md)一样，通过应用包的成员函数 `createViewManagers` 完成。
+最后一步是在应用中注册这个 ViewManager，方式和 [原生模块](native-modules-android.md) 一样，通过应用包的成员函数 `createViewManagers` 完成。
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="kotlin">
@@ -312,7 +312,7 @@ export default function MyCustomView(props: {
 
 ## 与 Android Fragment 集成示例
 
-为了将已有的原生 UI 元素集成到 React Native 应用中，你可能需要使用 Android Fragment，这样比从 `ViewManager` 返回一个 `View` 能获得更细粒度的原生组件控制。如果想依赖[生命周期方法](https://developer.android.com/guide/fragments/lifecycle)（如 `onViewCreated`、`onPause`、`onResume`）加入自定义逻辑，就需要这样做。以下步骤详细说明了如何实现：
+为了将已有的原生 UI 元素集成到 React Native 应用中，你可能需要使用 Android Fragment，这样比从 `ViewManager` 返回一个 `View` 能获得更细粒度的原生组件控制。如果想依赖 [生命周期方法](https://developer.android.com/guide/fragments/lifecycle)（如 `onViewCreated`、`onPause`、`onResume`）加入自定义逻辑，就需要这样做。以下步骤详细说明了如何实现：
 
 ### 1. 创建一个示例自定义视图
 
@@ -868,4 +868,4 @@ export const MyView = () => {
 };
 ```
 
-如果你想通过 `@ReactProp`（或 `@ReactPropGroup`）注解暴露属性 setter，请参考上面的[ImageView 示例](#imageview-example)。
+如果你想通过 `@ReactProp`（或 `@ReactPropGroup`）注解暴露属性 setter，请参考上面的 [ImageView 示例](#imageview-example)。

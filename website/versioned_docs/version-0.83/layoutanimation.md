@@ -114,8 +114,8 @@ static configureNext(
 
 传入到 `create`、`update` 或 `delete` 的配置具有以下键：
 
-- `type`，使用的[动画类型](layoutanimation.md#types)
-- `property`，动画的[布局属性](layoutanimation.md#properties)（可选，但推荐用于 `create` 和 `delete`）
+- `type`，使用的 [动画类型](layoutanimation.md#types)
+- `property`，动画的 [布局属性](layoutanimation.md#properties)（可选，但推荐用于 `create` 和 `delete`）
 - `springDamping`（数字，可选，仅用于 `type: Type.spring`）
 - `initialVelocity`（数字，可选）
 - `delay`（数字，可选）
@@ -129,7 +129,7 @@ static configureNext(
 static create(duration, type, creationProp)
 ```
 
-帮助方法，创建一个包含 `create`、`update` 和 `delete` 字段的对象以传入 [`configureNext`](layoutanimation.md#configurenext)。`type` 参数是一个[动画类型](layoutanimation.md#types)，`creationProp` 参数是一个布局属性(layoutanimation.md#properties)。
+帮助方法，创建一个包含 `create`、`update` 和 `delete` 字段的对象以传入 [`configureNext`](layoutanimation.md#configurenext)。`type` 参数是一个 [动画类型](layoutanimation.md#types)，`creationProp` 参数是一个布局属性 (layoutanimation.md#properties)。
 
 **示例：**
 

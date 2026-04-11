@@ -3,8 +3,8 @@ id: statusbarios
 title: '❌ StatusBarIOS'
 ---
 
-:::danger Removed from React Native
-Use [`StatusBar`](statusbar.md) for mutating the status bar.
+:::danger 已从 React Native 中移除
+请使用 [`StatusBar`](statusbar.md) 来修改状态栏。
 :::
 
 ---

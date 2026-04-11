@@ -111,7 +111,7 @@ export default App;
 
 | 类型     |
 | -------- |
-| function |
+| 函数 |
 
 渲染函数将接收一个带有以下键的对象：
 
@@ -139,11 +139,11 @@ export default App;
 
 ### `extraData`
 
-用于通知列表重新渲染的标记属性（因为它实现了 `PureComponent`）。如果你的 `renderItem`、Header、Footer 等函数依赖于 `data` 属性之外的任何东西，请将它放在这里且保持不可变。
+用于通知列表重新渲染的标记属性（因为它实现了 `PureComponent`）。如果你的 `renderItem`、头部、尾部 等函数依赖于 `data` 属性之外的任何东西，请将它放在这里且保持不可变。
 
 | 类型 |
 | ---- |
-| any  |
+| 任意  |
 
 ---
 
@@ -153,7 +153,7 @@ export default App;
 
 | 类型   | 默认值 |
 | ------ | ------- |
-| number | `10`    |
+| 数字 | `10`    |
 
 ---
 
@@ -163,7 +163,7 @@ export default App;
 
 | 类型    | 默认值 |
 | ------- | ------- |
-| boolean | `false` |
+| 布尔值 | `false` |
 
 ---
 
@@ -243,7 +243,7 @@ export default App;
 
 | 类型    | 默认值  |
 | ------- | ------- |
-| boolean | `false` |
+| 布尔值 | `false` |
 
 ---
 
@@ -257,7 +257,7 @@ export default App;
 
 | 类型    |
 | ------- |
-| boolean |
+| 布尔值 |
 
 ---
 
@@ -267,7 +267,7 @@ export default App;
 
 | 类型                                                                                 |
 | ------------------------------------------------------------------------------------ |
-| `md (info: {section: [Section](sectionlist#section)}) => element ｜ null`           |
+| `md (info: {section: [Section](sectionlist#section)}) => 元素 ｜ null`           |
 
 ---
 
@@ -277,7 +277,7 @@ export default App;
 
 | 类型                                                                                 |
 | ------------------------------------------------------------------------------------ |
-| `md (info: {section: [Section](sectionlist#section)}) => element ｜ null`           |
+| `md (info: {section: [Section](sectionlist#section)}) => 元素 ｜ null`           |
 
 ---
 
@@ -297,7 +297,7 @@ export default App;
 
 | 类型    | 默认值                                                                                              |
 | ------- | ---------------------------------------------------------------------------------------------------- |
-| boolean | `false` <div className="label android">Android</div><hr/>`true` <div className="label ios">iOS</div> |
+| 布尔值 | `false` <div className="label android">Android</div><hr/>`true` <div className="label ios">iOS</div> |
 
 ## 方法
 
@@ -355,7 +355,7 @@ scrollToLocation(params: SectionListScrollParams);
 
 | 类型 |
 | ---- |
-| any  |
+| 任意  |
 
 **属性：**
 

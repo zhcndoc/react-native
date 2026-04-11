@@ -5,7 +5,7 @@ title: 优化 FlatList 配置
 
 ## 术语
 
-- **VirtualizedList：** `FlatList` 背后的组件（React Native 对[`虚拟列表`](https://bvaughn.github.io/react-virtualized/#/components/List)概念的实现。）
+- **VirtualizedList：** `FlatList` 背后的组件（React Native 对 [`虚拟列表`](https://bvaughn.github.io/react-virtualized/#/components/List) 概念的实现。）
 
 - **内存消耗：** 关于列表的信息被储存在内存中的多少，这可能导致应用崩溃。
 

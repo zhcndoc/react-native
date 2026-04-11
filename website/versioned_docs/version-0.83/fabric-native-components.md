@@ -145,7 +145,7 @@ export default (codegenNativeComponent<NativeProps>(
 
 配置完成后，我们需要准备原生代码，以挂钩生成的代码。
 
-注意，iOS 端我们声明性地映射了规范导出的 JS 组件名(`CustomWebView`)与将实现原生组件的 iOS 类名(`RCTWebView`)。
+注意，iOS 端我们声明性地映射了规范导出的 JS 组件名 (`CustomWebView`) 与将实现原生组件的 iOS 类名 (`RCTWebView`)。
 
 ## 2. 编写你的原生代码
 

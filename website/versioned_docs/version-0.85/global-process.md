@@ -4,7 +4,7 @@ title: process
 ---
 
 :::warning
-🚧 This page is work in progress.
+🚧 此页面正在编写中。
 :::
 
-The global `process` object, as defined in Node.js.
+Node.js 中定义的全局 `process` 对象。

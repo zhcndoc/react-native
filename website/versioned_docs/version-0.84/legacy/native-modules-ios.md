@@ -8,7 +8,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 <NativeDeprecated />
 
-欢迎来到 iOS 原生模块。请先阅读[原生模块介绍](native-modules-intro)，了解什么是原生模块。
+欢迎来到 iOS 原生模块。请先阅读 [原生模块介绍](native-modules-intro)，了解什么是原生模块。
 
 ## 创建一个日历原生模块
 
@@ -204,7 +204,7 @@ yarn ios
 
 ### 总结✨
 
-至此，你可以在 JavaScript 中调用 `createCalendarEvent()` 方法了。并且由于函数内已包含 `RCTLog`，你可通过[开启应用调试模式](https://reactnative.dev/docs/debugging#chrome-developer-tools)，在 Chrome JS 控制台或 Flipper 移动端调试器中查看调用日志，确定该方法已被调用。
+至此，你可以在 JavaScript 中调用 `createCalendarEvent()` 方法了。并且由于函数内已包含 `RCTLog`，你可通过 [开启应用调试模式](https://reactnative.dev/docs/debugging#chrome-developer-tools)，在 Chrome JS 控制台或 Flipper 移动端调试器中查看调用日志，确定该方法已被调用。
 
 <figure>
   <img src="/docs/assets/native-modules-ios-logs.png" width="1000" alt="日志截图" />

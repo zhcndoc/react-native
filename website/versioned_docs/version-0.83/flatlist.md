@@ -384,7 +384,7 @@ renderItem({
   - `highlight` (函数)
   - `unhighlight` (函数)
   - `updateProps` (函数)
-    - `select` (枚举: 'leading' | 'trailing')
+    - `select` (枚举：'leading' | 'trailing')
     - `newProps` (对象)
 
 示例用法：
@@ -667,7 +667,7 @@ renderItem({
 | itemVisiblePercentThreshold       | 数字     |
 | waitForInteraction                | 布尔值   |
 
-至少需要设置 `viewAreaCoveragePercentThreshold` 或 `itemVisiblePercentThreshold` 其中一项。必须在构造函数中配置，否则会出现如下错误（参见[链接](https://github.com/facebook/react-native/issues/17408)）：
+至少需要设置 `viewAreaCoveragePercentThreshold` 或 `itemVisiblePercentThreshold` 其中一项。必须在构造函数中配置，否则会出现如下错误（参见 [链接](https://github.com/facebook/react-native/issues/17408)）：
 
 ```
   Error: Changing viewabilityConfig on the fly is not supported

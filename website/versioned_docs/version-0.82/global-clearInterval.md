@@ -4,7 +4,7 @@ title: clearInterval
 ---
 
 :::warning
-🚧 This page is work in progress, so please refer to the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/Window/clearInterval) for more information.
+🚧 此页面正在建设中，因此请参阅 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/Window/clearInterval) 以获取更多信息。
 :::
 
-The global `clearInterval` function, as defined in Web specifications.
+Web 规范中定义的全局 `clearInterval` 函数。

@@ -78,7 +78,7 @@ const FlexDimensionsBasics = () => {
 export default FlexDimensionsBasics;
 ```
 
-掌握如何控制组件尺寸后，下一步是[学习如何在屏幕上布局](flexbox.md)。
+掌握如何控制组件尺寸后，下一步是 [学习如何在屏幕上布局](flexbox.md)。
 
 ## 百分比尺寸
 

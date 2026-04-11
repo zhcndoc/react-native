@@ -4,14 +4,14 @@ title: TouchableOpacity
 ---
 
 :::tip
-If you're looking for a more extensive and future-proof way to handle touch-based input, check out the [Pressable](pressable.md) API.
+如果你正在寻找一种更广泛且面向未来的处理触摸输入的方法，请查看 [Pressable](pressable.md) API。
 :::
 
-A wrapper for making views respond properly to touches. On press down, the opacity of the wrapped view is decreased, dimming it.
+一个用于使视图正确响应触摸的包装器。按下时，被包装视图的不透明度会降低，使其变暗。
 
-Opacity is controlled by wrapping the children in an `Animated.View`, which is added to the view hierarchy. Be aware that this can affect layout.
+不透明度是通过将子元素包装在 `Animated.View` 中来控制的，该视图被添加到视图层次结构中。请注意，这可能会影响布局。
 
-## Example
+## 示例
 
 ```SnackPlayer name=TouchableOpacity%20Example
 import React, {useState} from 'react';
@@ -58,19 +58,19 @@ export default App;
 
 ---
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
-### [TouchableWithoutFeedback Props](touchablewithoutfeedback.md#props)
+### [TouchableWithoutFeedback 属性](touchablewithoutfeedback.md#props)
 
-Inherits [TouchableWithoutFeedback Props](touchablewithoutfeedback.md#props).
+继承 [TouchableWithoutFeedback 属性](touchablewithoutfeedback.md#props)。
 
 ---
 
 ### `style`
 
-| Type                           |
+| 类型                           |
 | ------------------------------ |
 | [View.style](view-style-props) |
 
@@ -78,9 +78,9 @@ Inherits [TouchableWithoutFeedback Props](touchablewithoutfeedback.md#props).
 
 ### `activeOpacity`
 
-Determines what the opacity of the wrapped view should be when touch is active. Defaults to `0.2`.
+确定当触摸激活时，被包装视图的不透明度应为多少。默认为 `0.2`。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -88,9 +88,9 @@ Determines what the opacity of the wrapped view should be when touch is active. 
 
 ### `hasTVPreferredFocus` <div className="label ios">iOS</div>
 
-_(Apple TV only)_ TV preferred focus (see documentation for the View component).
+_(仅限 Apple TV)_ TV 首选焦点（参见 View 组件文档）。
 
-| Type |
+| 类型 |
 | ---- |
 | bool |
 
@@ -98,9 +98,9 @@ _(Apple TV only)_ TV preferred focus (see documentation for the View component).
 
 ### `nextFocusDown` <div className="label android">Android</div>
 
-TV next focus down (see documentation for the View component).
+TV 下一个向下焦点（参见 View 组件文档）。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -108,9 +108,9 @@ TV next focus down (see documentation for the View component).
 
 ### `nextFocusForward` <div className="label android">Android</div>
 
-TV next focus forward (see documentation for the View component).
+TV 下一个向前焦点（参见 View 组件文档）。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -118,9 +118,9 @@ TV next focus forward (see documentation for the View component).
 
 ### `nextFocusLeft` <div className="label android">Android</div>
 
-TV next focus left (see documentation for the View component).
+TV 下一个向左焦点（参见 View 组件文档）。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -128,9 +128,9 @@ TV next focus left (see documentation for the View component).
 
 ### `nextFocusRight` <div className="label android">Android</div>
 
-TV next focus right (see documentation for the View component).
+TV 下一个向右焦点（参见 View 组件文档）。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -138,9 +138,9 @@ TV next focus right (see documentation for the View component).
 
 ### `nextFocusUp` <div className="label android">Android</div>
 
-TV next focus up (see documentation for the View component).
+TV 下一个向上焦点（参见 View 组件文档）。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -148,4 +148,4 @@ TV next focus up (see documentation for the View component).
 
 ### `ref`
 
-A ref setter that will be assigned an [element node](element-nodes) when mounted.
+一个 ref 设置器，挂载时将被分配一个 [元素节点](element-nodes)。

@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
 export default AppStateExample;
 ```
 
-此示例似乎只会显示"Current state is: active"，因为应用只有在 `active` 状态下才对用户可见。如果你想尝试这段代码，我们建议使用你自己的设备而不是嵌入式预览。
+此示例似乎只会显示“当前状态是：active"，因为应用只有在 `active` 状态下才对用户可见。如果你想尝试这段代码，我们建议使用你自己的设备而不是嵌入式预览。
 
 ---
 

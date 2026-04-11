@@ -7,17 +7,17 @@ title: useColorScheme
 import {useColorScheme} from 'react-native';
 ```
 
-The `useColorScheme` React hook provides and subscribes to color scheme updates from the [`Appearance`](appearance) module. The return value indicates the current user preferred color scheme. The value may be updated later, either through direct user action (e.g. theme selection in device settings) or on a schedule (e.g. light and dark themes that follow the day/night cycle).
+`useColorScheme` React hook 提供并订阅来自 [`Appearance`](appearance) 模块的颜色方案更新。返回值表示当前用户首选的颜色方案。该值可能会稍后更新，要么通过直接的用户操作（例如设备设置中的主题选择），要么按计划更新（例如遵循昼夜循环的浅色和深色主题）。
 
-### Supported color schemes
+### 支持的颜色方案
 
-- `"light"`: The user prefers a light color theme.
-- `"dark"`: The user prefers a dark color theme.
-- `null`: The user has not indicated a preferred color theme.
+- `"light"`：用户首选浅色主题。
+- `"dark"`：用户首选深色主题。
+- `null`：用户未指示首选颜色主题。
 
 ---
 
-## Example
+## 示例
 
 ```SnackPlayer
 import React from 'react';
@@ -46,4 +46,4 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-You can find a complete example that demonstrates the use of this hook alongside a React context to add support for light and dark themes to your application in [`AppearanceExample.js`](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/Appearance/AppearanceExample.js).
+你可以在 [`AppearanceExample.js`](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/Appearance/AppearanceExample.js) 中找到一个完整的示例，该示例演示了如何将此 hook 与 React 上下文一起使用，以为你的应用程序添加浅色和深色主题支持。

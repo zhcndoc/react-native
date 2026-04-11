@@ -7,9 +7,9 @@ import CanaryAPIWarning from './\_canary-channel-api-warning.mdx';
 
 <CanaryAPIWarning />
 
-The global [`PerformanceObserver`](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver) class, as defined in Web specifications.
+Web 规范中定义的全局 [`PerformanceObserver`](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver) 类。
 
-## Example
+## 示例
 
 ```ts
 const observer = new PerformanceObserver(
@@ -35,28 +35,28 @@ observer.observe({entryTypes: ['mark', 'measure']});
 
 ---
 
-# Reference
+# 参考
 
-## Constructor
+## 构造函数
 
 ### `PerformanceObserver()`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver/PerformanceObserver).
+参见 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver/PerformanceObserver)。
 
-## Static properties
+## 静态属性
 
 ### `supportedEntryTypes`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver/supportedEntryTypes).
+参见 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver/supportedEntryTypes)。
 
-Returns `['mark', 'measure', 'event', 'longtask']`.
+返回 `['mark', 'measure', 'event', 'longtask']`。
 
-## Instance methods
+## 实例方法
 
 ### `observe()`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver/observe).
+参见 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver/observe)。
 
 ### `disconnect()`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver/disconnect).
+参见 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver/disconnect)。

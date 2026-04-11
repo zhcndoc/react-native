@@ -22,7 +22,7 @@ open TurboModuleExample.xcworkspace
 
 2. 右键点击 app 并选择 <code>New Group</code>，将新组命名为 `NativeLocalStorage`。
 
-<img className="half-size" alt="右键点击 app 并选择 New Group" src="/docs/assets/turbo-native-modules/xcode/2.webp" />
+<img className="half-size" alt="右键点击 app 并选择新建组" src="/docs/assets/turbo-native-modules/xcode/2.webp" />
 
 3. 在 `NativeLocalStorage` 组中，创建 <code>New</code>→<code>File from Template</code>。
 

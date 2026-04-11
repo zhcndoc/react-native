@@ -50,7 +50,7 @@ React Native 提供了一个名为 [Codegen](/docs/the-new-architecture/what-is-
 :::
 
 :::info
-如果您想更改模块名称及相关的规范文件，请确保始终使用 “Native” 作为前缀（例如 `NativeStorage` 或 `NativeUsersDefault`）。
+如果您想更改模块名称及相关的规范文件，请确保始终使用 "Native" 作为前缀（例如 `NativeStorage` 或 `NativeUsersDefault`）。
 :::
 
 以下是 `localStorage` 规范的一个实现：

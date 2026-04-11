@@ -3,9 +3,9 @@ id: refreshcontrol
 title: RefreshControl
 ---
 
-This component is used inside a ScrollView or ListView to add pull to refresh functionality. When the ScrollView is at `scrollY: 0`, swiping down triggers an `onRefresh` event.
+此组件用于 ScrollView 或 ListView 内部，以添加下拉刷新功能。当 ScrollView 处于 `scrollY: 0` 时，向下滑动会触发 `onRefresh` 事件。
 
-## Example
+## 示例
 
 ```SnackPlayer name=RefreshControl&supportedPlatforms=ios,android
 import React from 'react';
@@ -53,26 +53,26 @@ export default App;
 ```
 
 :::note
-`refreshing` is a controlled prop, this is why it needs to be set to `true` in the `onRefresh` function otherwise the refresh indicator will stop immediately.
+`refreshing` 是一个受控属性，这就是为什么它需要在 `onRefresh` 函数中被设置为 `true`，否则刷新指示器会立即停止。
 :::
 
 ---
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
-### [View Props](view.md#props)
+### [View 属性](view.md#props)
 
-Inherits [View Props](view.md#props).
+继承 [View 属性](view.md#props)。
 
 ---
 
-### <div className="label required basic">Required</div>**`refreshing`**
+### <div className="label required basic">必填</div>**`refreshing`**
 
-Whether the view should be indicating an active refresh.
+视图是否应指示活动刷新状态。
 
-| Type    |
+| 类型    |
 | ------- |
 | boolean |
 
@@ -80,19 +80,19 @@ Whether the view should be indicating an active refresh.
 
 ### `colors` <div className="label android">Android</div>
 
-The colors (at least one) that will be used to draw the refresh indicator.
+用于绘制刷新指示器的颜色（至少一个）。
 
-| Type                         |
+| 类型                         |
 | ---------------------------- |
-| array of [colors](colors.md) |
+| [colors](colors.md) 数组 |
 
 ---
 
 ### `enabled` <div className="label android">Android</div>
 
-Whether the pull to refresh functionality is enabled.
+是否启用下拉刷新功能。
 
-| Type    | Default |
+| 类型    | 默认值 |
 | ------- | ------- |
 | boolean | `true`  |
 
@@ -100,9 +100,9 @@ Whether the pull to refresh functionality is enabled.
 
 ### `onRefresh`
 
-Called when the view starts refreshing.
+当视图开始刷新时调用。
 
-| Type     |
+| 类型     |
 | -------- |
 | function |
 
@@ -110,9 +110,9 @@ Called when the view starts refreshing.
 
 ### `progressBackgroundColor` <div className="label android">Android</div>
 
-The background color of the refresh indicator.
+刷新指示器的背景颜色。
 
-| Type               |
+| 类型               |
 | ------------------ |
 | [color](colors.md) |
 
@@ -120,9 +120,9 @@ The background color of the refresh indicator.
 
 ### `progressViewOffset`
 
-Progress view top offset.
+进度视图顶部偏移量。
 
-| Type   | Default |
+| 类型   | 默认值 |
 | ------ | ------- |
 | number | `0`     |
 
@@ -130,9 +130,9 @@ Progress view top offset.
 
 ### `size` <div className="label android">Android</div>
 
-Size of the refresh indicator.
+刷新指示器的大小。
 
-| Type                         | Default     |
+| 类型                         | 默认值     |
 | ---------------------------- | ----------- |
 | enum(`'default'`, `'large'`) | `'default'` |
 
@@ -140,9 +140,9 @@ Size of the refresh indicator.
 
 ### `tintColor` <div className="label ios">iOS</div>
 
-The color of the refresh indicator.
+刷新指示器的颜色。
 
-| Type               |
+| 类型               |
 | ------------------ |
 | [color](colors.md) |
 
@@ -150,9 +150,9 @@ The color of the refresh indicator.
 
 ### `title` <div className="label ios">iOS</div>
 
-The title displayed under the refresh indicator.
+显示在刷新指示器下方的标题。
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -160,8 +160,8 @@ The title displayed under the refresh indicator.
 
 ### `titleColor` <div className="label ios">iOS</div>
 
-The color of the refresh indicator title.
+刷新指示器标题的颜色。
 
-| Type               |
+| 类型               |
 | ------------------ |
 | [color](colors.md) |

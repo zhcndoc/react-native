@@ -187,7 +187,7 @@ Animated.timing({}).start(({finished}) => {
 
 ```tsx
  onScroll={Animated.event(
-   // scrollX = e.nativeEvent.contentOffset.x
+   // scrollX 等于 e.nativeEvent.contentOffset.x
    [{nativeEvent: {
         contentOffset: {
           x: scrollX
@@ -213,7 +213,7 @@ static decay(value, config): CompositeAnimation;
 
 根据衰减系数将值从初始速度动画化为零。
 
-Config 是一个对象，可能包含以下选项：
+配置是一个对象，可能包含以下选项：
 
 - `velocity`: 初始速度。必需。
 - `deceleration`: 衰减率。默认 0.997。
@@ -230,7 +230,7 @@ static timing(value, config): CompositeAnimation;
 
 沿定时缓动曲线动画化值。[`Easing`](easing) 模块有很多预定义的曲线，或者您可以使用自己的函数。
 
-Config 是一个对象，可能包含以下选项：
+配置是一个对象，可能包含以下选项：
 
 - `duration`: 动画长度（毫秒）。默认 500。
 - `easing`: 定义曲线的缓动函数。默认是 `Easing.inOut(Easing.ease)`。
@@ -248,7 +248,7 @@ static spring(value, config): CompositeAnimation;
 
 根据基于 [阻尼谐波振荡](https://en.wikipedia.org/wiki/Harmonic_oscillator#Damped_harmonic_oscillator) 的分析弹簧模型动画化值。跟踪速度状态以在 `toValue` 更新时创建流畅运动，并且可以链接在一起。
 
-Config 是一个对象，可能包含以下选项。
+配置是一个对象，可能包含以下选项。
 
 请注意，您只能定义 bounciness/speed、tension/friction 或 stiffness/damping/mass 中的一组，而不能定义多组：
 
@@ -396,7 +396,7 @@ static loop(
 
 连续循环给定动画，以便每次到达结束时，它重置并从头开始。如果子动画设置为 `useNativeDriver: true`，循环将不会阻塞 JS 线程。此外，循环可以防止基于 `VirtualizedList` 的组件在动画运行时渲染更多行。您可以在子动画配置中传递 `isInteraction: false` 来修复此问题。
 
-Config 是一个对象，可能包含以下选项：
+配置是一个对象，可能包含以下选项：
 
 - `iterations`: 动画应循环的次数。默认 `-1`（无限）。
 
@@ -433,7 +433,7 @@ onPanResponderMove: Animated.event(
 );
 ```
 
-Config 是一个对象，可能包含以下选项：
+配置是一个对象，可能包含以下选项：
 
 - `listener`: 可选异步监听器。
 - `useNativeDriver`: 为 true 时使用原生驱动。必需。

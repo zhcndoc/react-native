@@ -107,25 +107,25 @@ export default BoldAndBeautiful;
   <Text>second part</Text>
 </Text>
 // Text 容器：文本会行内显示，如果空间允许的话
-// |First part and second part|
+// |第一部分和第二部分|
 
 // 否则，文本将像一个整体流式显示
-// |First part |
-// |and second |
-// |part       |
+// |第一部分 |
+// |和第二部分 |
+// |部分       |
 
 <View>
   <Text>First part and </Text>
   <Text>second part</Text>
 </View>
 // View 容器：每个文本是独立块
-// |First part and|
-// |second part   |
+// |第一部分和|
+// |第二部分   |
 
 // 否则，文本会各自流式显示在块内
-// |First part |
-// |and        |
-// |second part|
+// |第一部分 |
+// |和        |
+// |第二部分|
 ```
 
 ## 有限的样式继承
@@ -219,7 +219,7 @@ React Native 仍然存在样式继承的概念，但仅限于文本子树。在�
 
 指示屏幕阅读器在用户与元素交互时应使用哪种语言。应遵循 [BCP 47 规范](https://www.rfc-editor.org/info/bcp47)。
 
-详情见[iOS 的 `accessibilityLanguage` 文档](https://developer.apple.com/documentation/objectivec/nsobject/1615192-accessibilitylanguage)。
+详情见 [iOS 的 `accessibilityLanguage` 文档](https://developer.apple.com/documentation/objectivec/nsobject/1615192-accessibilitylanguage)。
 
 | 类型   |
 | ------ |
@@ -241,7 +241,7 @@ React Native 仍然存在样式继承的概念，但仅限于文本子树。在�
 
 告知屏幕阅读器当前聚焦元素的特定角色。
 
-iOS 上，这些角色映射成对应的辅助功能特征。图像按钮的功能相当于同时设置了 'image' 和 'button' 特征。详见[辅助功能指南](accessibility.md#accessibilitytraits-ios)。
+iOS 上，这些角色映射成对应的辅助功能特征。图像按钮的功能相当于同时设置了 'image' 和 'button' 特征。详见 [辅助功能指南](accessibility.md#accessibilitytraits-ios)。
 
 Android 上，这些角色在 TalkBack 中的功能类似于在 iOS VoiceOver 中添加辅助功能特征。
 
@@ -267,7 +267,7 @@ Android 上，这些角色在 TalkBack 中的功能类似于在 iOS VoiceOver �
 
 辅助功能动作允许辅助技术以编程方式调用组件动作。`accessibilityActions` 属性应包含动作对象列表。每个动作对象应包含名称和标签字段。
 
-详情见[辅助功能指南](accessibility.md#accessibility-actions)。
+详情见 [辅助功能指南](accessibility.md#accessibility-actions)。
 
 | 类型  | 必填   |
 | ----- | ------ |
@@ -279,7 +279,7 @@ Android 上，这些角色在 TalkBack 中的功能类似于在 iOS VoiceOver �
 
 用户执行辅助操作时调用。该函数的唯一参数是一个包含动作名称的事件。
 
-详情见[辅助功能指南](accessibility.md#accessibility-actions)。
+详情见 [辅助功能指南](accessibility.md#accessibility-actions)。
 
 | 类型     | 必填   |
 | -------- | ------ |
@@ -291,7 +291,7 @@ Android 上，这些角色在 TalkBack 中的功能类似于在 iOS VoiceOver �
 
 设置为 `true` 表示该视图是一个辅助功能元素。
 
-详情见[辅助功能指南](accessibility#accessible-ios-android)。
+详情见 [辅助功能指南](accessibility#accessible-ios-android)。
 
 | 类型    | 默认   |
 | ------- | ------ |
@@ -325,7 +325,7 @@ Android 上，这些角色在 TalkBack 中的功能类似于在 iOS VoiceOver �
 
 | 类型                                | 默认    |
 | ----------------------------------- | ------- |
-| 枚举(`'none'`, `'normal'`,`'full'`) | `'none'` |
+| 枚举 (`'none'`, `'normal'`,`'full'`) | `'none'` |
 
 ---
 
@@ -395,7 +395,7 @@ Android 上，这些角色在 TalkBack 中的功能类似于在 iOS VoiceOver �
 
 | 类型                                                          | 默认    |
 | ------------------------------------------------------------- | ------- |
-| 枚举(`'phoneNumber'`, `'link'`, `'email'`, `'none'`, `'all'`) | `'none'` |
+| 枚举 (`'phoneNumber'`, `'link'`, `'email'`, `'none'`, `'all'`) | `'none'` |
 
 ---
 
@@ -411,11 +411,11 @@ Android 上，这些角色在 TalkBack 中的功能类似于在 iOS VoiceOver �
 
 ### `dynamicTypeRamp` <div className="label ios">iOS</div>
 
-应用于 iOS 上的[动态字体](https://developer.apple.com/documentation/uikit/uifont/scaling_fonts_automatically)级别。
+应用于 iOS 上的 [动态字体](https://developer.apple.com/documentation/uikit/uifont/scaling_fonts_automatically) 级别。
 
 | 类型                                                                                         | 默认    |
 | -------------------------------------------------------------------------------------------- | ------- |
-| 枚举(`'caption2'`, `'caption1'`, `'footnote'`, `'subheadline'`, `'callout'`, `'body'`, `'headline'`, `'title3'`, `'title2'`, `'title1'`, `'largeTitle'`) | `'body'` |
+| 枚举 (`'caption2'`, `'caption1'`, `'footnote'`, `'subheadline'`, `'callout'`, `'body'`, `'headline'`, `'title3'`, `'title2'`, `'title1'`, `'largeTitle'`) | `'body'` |
 
 ---
 
@@ -436,7 +436,7 @@ Android 上，这些角色在 TalkBack 中的功能类似于在 iOS VoiceOver �
 
 | 类型                                           | 默认    |
 | ---------------------------------------------- | ------- |
-| 枚举(`'head'`, `'middle'`, `'tail'`, `'clip'`) | `tail`  |
+| 枚举 (`'head'`, `'middle'`, `'tail'`, `'clip'`) | `tail`  |
 
 ---
 
@@ -640,7 +640,7 @@ Android 上，这些角色在 TalkBack 中的功能类似于在 iOS VoiceOver �
 
 ### `ref`
 
-一个 Ref 设置器，挂载时赋值为一个[元素节点](element-nodes)。
+一个 Ref 设置器，挂载时赋值为一个 [元素节点](element-nodes)。
 
 注意，`Text` 组件不提供文本节点，就像 Web 上的段落元素 (`<p>`) 是元素节点而非文本节点一样。文本节点可在其子节点中找到。
 
@@ -710,7 +710,7 @@ Android 上，这些角色在 TalkBack 中的功能类似于在 iOS VoiceOver �
 
 | 类型                                           | 默认         |
 | ---------------------------------------------- | ------------ |
-| 枚举(`'simple'`, `'highQuality'`, `'balanced'`) | `highQuality` |
+| 枚举 (`'simple'`, `'highQuality'`, `'balanced'`) | `highQuality` |
 
 ---
 
@@ -720,7 +720,7 @@ iOS 14+ 上设置换行策略。可选值为 `none`、`standard`、`hangul-word`
 
 | 类型                                                         | 默认    |
 | ------------------------------------------------------------ | ------- |
-| 枚举(`'none'`, `'standard'`, `'hangul-word'`, `'push-out'`)  | `'none'` |
+| 枚举 (`'none'`, `'standard'`, `'hangul-word'`, `'push-out'`)  | `'none'` |
 
 ## 类型定义
 

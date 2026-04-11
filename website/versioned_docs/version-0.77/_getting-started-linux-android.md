@@ -1,57 +1,57 @@
-## Installing dependencies
+## 安装依赖
 
-You will need Node, the React Native command line interface, a JDK, and Android Studio.
+你将需要 Node、React Native 命令行界面、JDK 和 Android Studio。
 
-While you can use any editor of your choice to develop your app, you will need to install Android Studio in order to set up the necessary tooling to build your React Native app for Android.
+虽然你可以使用任何编辑器来开发你的应用，但你需要安装 Android Studio 以便设置构建 Android React Native 应用所需的必要工具。
 
 <h3>Node</h3>
 
-Follow the [installation instructions for your Linux distribution](https://nodejs.org/en/download/package-manager/) to install Node 18.18 or newer.
+遵循 [你的 Linux 发行版的安装说明](https://nodejs.org/en/download/package-manager/) 来安装 Node 18.18 或更高版本。
 
-<h3>Java Development Kit</h3>
+<h3>Java 开发工具包</h3>
 
-React Native currently recommends version 17 of the Java SE Development Kit (JDK). You may encounter problems using higher JDK versions. You may download and install [OpenJDK](https://openjdk.java.net) from [AdoptOpenJDK](https://adoptopenjdk.net/) or your system packager.
+React Native 目前推荐使用 Java SE Development Kit (JDK) 版本 17。使用更高版本的 JDK 可能会遇到问题。你可以从 [AdoptOpenJDK](https://adoptopenjdk.net/) 或你的系统包管理器下载并安装 [OpenJDK](https://openjdk.java.net)。
 
-<h3>Android development environment</h3>
+<h3>Android 开发环境</h3>
 
-Setting up your development environment can be somewhat tedious if you're new to Android development. If you're already familiar with Android development, there are a few things you may need to configure. In either case, please make sure to carefully follow the next few steps.
+如果你是 Android 开发的新手，设置开发环境可能会有些繁琐。如果你已经熟悉 Android 开发，可能有一些东西需要配置。无论哪种情况，请确保仔细遵循以下步骤。
 
-<h4 id="android-studio">1. Install Android Studio</h4>
+<h4 id="android-studio">1. 安装 Android Studio</h4>
 
-[Download and install Android Studio](https://developer.android.com/studio/index.html). While on Android Studio installation wizard, make sure the boxes next to all of the following items are checked:
+[下载并安装 Android Studio](https://developer.android.com/studio/index.html)。在 Android Studio 安装向导中，确保以下所有项目旁边的复选框都被勾选：
 
 - `Android SDK`
 - `Android SDK Platform`
 - `Android Virtual Device`
 
-Then, click "Next" to install all of these components.
+然后，点击 "Next" 安装所有这些组件。
 
-> If the checkboxes are grayed out, you will have a chance to install these components later on.
+> 如果复选框是灰色的，你稍后会有机会安装这些组件。
 
-Once setup has finalized and you're presented with the Welcome screen, proceed to the next step.
+一旦设置完成并且你看到欢迎屏幕，继续下一步。
 
-<h4 id="android-sdk">2. Install the Android SDK</h4>
+<h4 id="android-sdk">2. 安装 Android SDK</h4>
 
-Android Studio installs the latest Android SDK by default. Building a React Native app with native code, however, requires the `Android 15 (VanillaIceCream)` SDK in particular. Additional Android SDKs can be installed through the SDK Manager in Android Studio.
+Android Studio 默认安装最新的 Android SDK。然而，构建带有原生代码的 React Native 应用特别需要 `Android 15 (VanillaIceCream)` SDK。额外的 Android SDK 可以通过 Android Studio 中的 SDK Manager 安装。
 
-To do that, open Android Studio, click on "Configure" button and select "SDK Manager".
+为此，打开 Android Studio，点击 "Configure" 按钮并选择 "SDK Manager"。
 
-> The SDK Manager can also be found within the Android Studio "Settings" dialog, under **Languages & Frameworks** → **Android SDK**.
+> SDK Manager 也可以在 Android Studio "Settings" 对话框中找到，位于 **Languages & Frameworks** → **Android SDK** 下。
 
-Select the "SDK Platforms" tab from within the SDK Manager, then check the box next to "Show Package Details" in the bottom right corner. Look for and expand the `Android 15 (VanillaIceCream)` entry, then make sure the following items are checked:
+在 SDK Manager 中选择 "SDK Platforms" 选项卡，然后勾选右下角 "Show Package Details" 旁边的复选框。查找并展开 `Android 15 (VanillaIceCream)` 条目，然后确保以下项目被勾选：
 
 - `Android SDK Platform 35`
-- `Intel x86 Atom_64 System Image` or `Google APIs Intel x86 Atom System Image`
+- `Intel x86 Atom_64 System Image` 或 `Google APIs Intel x86 Atom System Image`
 
-Next, select the "SDK Tools" tab and check the box next to "Show Package Details" here as well. Look for and expand the "Android SDK Build-Tools" entry, then make sure that `35.0.0` and `Android SDK Command-line Tools (latest)` are selected.
+接下来，选择 "SDK Tools" 选项卡，并在此处也勾选 "Show Package Details" 旁边的复选框。查找并展开 "Android SDK Build-Tools" 条目，然后确保选择了 `35.0.0` 和 `Android SDK Command-line Tools (latest)`。
 
-Finally, click "Apply" to download and install the Android SDK and related build tools.
+最后，点击 "Apply" 下载并安装 Android SDK 及相关构建工具。
 
-<h4>3. Configure the ANDROID_HOME environment variable</h4>
+<h4>3. 配置 ANDROID_HOME 环境变量</h4>
 
-The React Native tools require some environment variables to be set up in order to build apps with native code.
+React Native 工具需要设置一些环境变量才能构建带有原生代码的应用。
 
-Add the following lines to your `$HOME/.bash_profile` or `$HOME/.bashrc` (if you are using `zsh` then `~/.zprofile` or `~/.zshrc`) config file:
+将以下行添加到你的 `$HOME/.bash_profile` 或 `$HOME/.bashrc`（如果你使用的是 `zsh`，则是 `~/.zprofile` 或 `~/.zshrc`）配置文件中：
 
 ```shell
 export ANDROID_HOME=$HOME/Android/Sdk
@@ -59,47 +59,47 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 ```
 
-> `.bash_profile` is specific to `bash`. If you're using another shell, you will need to edit the appropriate shell-specific config file.
+> `.bash_profile` 是 `bash` 特有的。如果你使用的是另一个 shell，你需要编辑相应的特定于 shell 的配置文件。
 
-Type `source $HOME/.bash_profile` for `bash` or `source $HOME/.zprofile` to load the config into your current shell. Verify that ANDROID_HOME has been set by running `echo $ANDROID_HOME` and the appropriate directories have been added to your path by running `echo $PATH`.
+对于 `bash` 输入 `source $HOME/.bash_profile` 或对于 `zsh` 输入 `source $HOME/.zprofile` 将配置加载到当前 shell 中。通过运行 `echo $ANDROID_HOME` 验证 ANDROID_HOME 是否已设置，并通过运行 `echo $PATH` 验证适当的目录是否已添加到你的路径中。
 
-> Please make sure you use the correct Android SDK path. You can find the actual location of the SDK in the Android Studio "Settings" dialog, under **Languages & Frameworks** → **Android SDK**.
+> 请确保你使用正确的 Android SDK 路径。你可以在 Android Studio "Settings" 对话框中找到 SDK 的实际位置，位于 **Languages & Frameworks** → **Android SDK** 下。
 
 <h3>Watchman</h3>
 
-Follow the [Watchman installation guide](https://facebook.github.io/watchman/docs/install#buildinstall) to compile and install Watchman from source.
+遵循 [Watchman 安装指南](https://facebook.github.io/watchman/docs/install#buildinstall) 从源代码编译并安装 Watchman。
 
-> [Watchman](https://facebook.github.io/watchman/docs/install) is a tool by Facebook for watching changes in the filesystem. It is highly recommended you install it for better performance and increased compatibility in certain edge cases (translation: you may be able to get by without installing this, but your mileage may vary; installing this now may save you from a headache later).
+> [Watchman](https://facebook.github.io/watchman/docs/install) 是 Facebook 提供的一个用于监视文件系统变化的工具。强烈建议你安装它以获得更好的性能并在某些边缘情况下增加兼容性（翻译：你可能可以不安装这个也能凑合用，但效果因人而异；现在安装这个可能会让你以后省去麻烦）。
 
-<h2>Preparing the Android device</h2>
+<h2>准备 Android 设备</h2>
 
-You will need an Android device to run your React Native Android app. This can be either a physical Android device, or more commonly, you can use an Android Virtual Device which allows you to emulate an Android device on your computer.
+你将需要一个 Android 设备来运行你的 React Native Android 应用。这可以是一个物理 Android 设备，或者更常见的是，你可以使用 Android 虚拟设备，它允许你在计算机上模拟一个 Android 设备。
 
-Either way, you will need to prepare the device to run Android apps for development.
+无论哪种方式，你都需要准备设备以运行用于开发的 Android 应用。
 
-<h3>Using a physical device</h3>
+<h3>使用物理设备</h3>
 
-If you have a physical Android device, you can use it for development in place of an AVD by plugging it in to your computer using a USB cable and following the instructions [here](running-on-device.md).
+如果你有一个物理 Android 设备，你可以通过 USB 线将其连接到计算机并按照 [此处](running-on-device.md) 的说明，用它来代替 AVD 进行开发。
 
-<h3>Using a virtual device</h3>
+<h3>使用虚拟设备</h3>
 
-If you use Android Studio to open `./AwesomeProject/android`, you can see the list of available Android Virtual Devices (AVDs) by opening the "AVD Manager" from within Android Studio. Look for an icon that looks like this:
+如果你使用 Android Studio 打开 `./AwesomeProject/android`，你可以通过打开 Android Studio 中的 "AVD Manager" 看到可用的 Android 虚拟设备 (AVDs) 列表。寻找一个看起来像这样的图标：
 
-<img src="/docs/assets/GettingStartedAndroidStudioAVD.svg" alt="Android Studio AVD Manager" width="100"/>
+<img src="/docs/assets/GettingStartedAndroidStudioAVD.svg" alt="Android Studio AVD 管理器" width="100"/>
 
-If you have recently installed Android Studio, you will likely need to [create a new AVD](https://developer.android.com/studio/run/managing-avds.html). Select "Create Virtual Device...", then pick any Phone from the list and click "Next", then select the **VanillaIceCream** API Level 35 image.
+如果你最近安装了 Android Studio，你可能需要 [创建一个新的 AVD](https://developer.android.com/studio/run/managing-avds.html)。选择 "Create Virtual Device..."，然后从列表中选择任意手机并点击 "Next"，然后选择 **VanillaIceCream** API Level 35 镜像。
 
-> We recommend configuring [VM acceleration](https://developer.android.com/studio/run/emulator-acceleration.html#vm-linux) on your system to improve performance. Once you've followed those instructions, go back to the AVD Manager.
+> 我们建议在系统上配置 [VM 加速](https://developer.android.com/studio/run/emulator-acceleration.html#vm-linux) 以提高性能。遵循这些说明后，返回 AVD Manager。
 
-Click "Next" then "Finish" to create your AVD. At this point you should be able to click on the green triangle button next to your AVD to launch it.
+点击 "Next" 然后点击 "Finish" 创建你的 AVD。此时你应该能够点击 AVD 旁边的绿色三角形按钮来启动它。
 
-<h3>That's it!</h3>
+<h3>就是这样！</h3>
 
-Congratulations! You successfully set up your development environment.
+恭喜！你成功设置了开发环境。
 
 <center><img src="/docs/assets/GettingStartedCongratulations.png" width="150"></img></center>
 
-<h2>Now what?</h2>
+<h2>接下来做什么？</h2>
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](integration-with-existing-apps.md).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](getting-started).
+- 如果你想将此新的 React Native 代码添加到现有应用中，请查看 [集成指南](integration-with-existing-apps.md)。
+- 如果你好奇想了解更多关于 React Native 的信息，请查看 [React Native 介绍](getting-started)。

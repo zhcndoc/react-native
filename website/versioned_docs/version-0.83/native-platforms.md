@@ -3,7 +3,7 @@ id: native-platform
 title: 原生平台
 ---
 
-您的应用可能需要访问 react-native 或社区维护的数百个[第三方库](https://reactnative.directory/)中没有直接提供的平台功能。也许您想从 JavaScript 运行时重用一些现有的 Objective-C、Swift、Java、Kotlin 或 C++ 代码。无论出于什么原因，React Native 都提供了一套强大的 API，帮助您将原生代码连接到 JavaScript 应用代码中。
+您的应用可能需要访问 react-native 或社区维护的数百个 [第三方库](https://reactnative.directory/) 中没有直接提供的平台功能。也许您想从 JavaScript 运行时重用一些现有的 Objective-C、Swift、Java、Kotlin 或 C++ 代码。无论出于什么原因，React Native 都提供了一套强大的 API，帮助您将原生代码连接到 JavaScript 应用代码中。
 
 本指南介绍：
 

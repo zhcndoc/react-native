@@ -25,14 +25,14 @@ import {Appearance} from 'react-native';
 <TabItem value="android">
 
 :::info
-配色方案偏好会映射到 Android 10（API 级别 29）及以上设备上的用户亮色或[暗色主题](https://developer.android.com/guide/topics/ui/look-and-feel/darktheme)偏好。
+配色方案偏好会映射到 Android 10（API 级别 29）及以上设备上的用户亮色或 [暗色主题](https://developer.android.com/guide/topics/ui/look-and-feel/darktheme) 偏好。
 :::
 
 </TabItem>
 <TabItem value="ios">
 
 :::info
-配色方案偏好会映射到 iOS 13 及以上设备上的用户亮色或[暗黑模式](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/dark-mode/)偏好。
+配色方案偏好会映射到 iOS 13 及以上设备上的用户亮色或 [暗黑模式](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/dark-mode/) 偏好。
 :::
 
 :::note

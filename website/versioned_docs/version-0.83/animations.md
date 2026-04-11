@@ -191,9 +191,9 @@ Animated.sequence([
 
 ### 组合动画值
 
-您可以通过加法、乘法、除法或取模将两个动画值[组合成新的动画值](animated#combining-animated-values)。
+您可以通过加法、乘法、除法或取模将两个动画值 [组合成新的动画值](animated#combining-animated-values)。
 
-在某些场景下，需要反转某个动画值以进行计算。例如反转缩放（2倍 --> 0.5倍）：
+在某些场景下，需要反转某个动画值以进行计算。例如反转缩放（2 倍 --> 0.5 倍）：
 
 ```tsx
 const a = new Animated.Value(1);
@@ -549,7 +549,7 @@ Animated.timing(this.state.animatedValue, {
 </Animated.ScrollView>
 ```
 
-您可以通过运行 [RNTester 应用](https://github.com/facebook/react-native/blob/main/packages/rn-tester/)，加载 Native Animated 示例来体验原生驱动动画。也可以查看[源码](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/NativeAnimation/NativeAnimationsExample.js)了解示例实现。
+您可以通过运行 [RNTester 应用](https://github.com/facebook/react-native/blob/main/packages/rn-tester/)，加载 Native Animated 示例来体验原生驱动动画。也可以查看 [源码](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/NativeAnimation/NativeAnimationsExample.js) 了解示例实现。
 
 #### 注意事项
 
@@ -666,8 +666,8 @@ const styles = StyleSheet.create({
 
 ### `setNativeProps`
 
-如[直接操作章节](legacy/direct-manipulation)所述，`setNativeProps` 允许我们直接修改原生支持组件（即真正由原生视图支撑的组件，区别于复合组件）的属性，无需调用 `setState` 并重新渲染组件树。
+如 [直接操作章节](legacy/direct-manipulation) 所述，`setNativeProps` 允许我们直接修改原生支持组件（即真正由原生视图支撑的组件，区别于复合组件）的属性，无需调用 `setState` 并重新渲染组件树。
 
 我们可以在 Rebound 示例中用它来更新缩放。如果被更新的组件深度嵌套且未通过 `shouldComponentUpdate` 优化，使用它会很有帮助。
 
-如果遇到动画丢帧（低于 60fps）问题，可以考虑用 `setNativeProps` 或 `shouldComponentUpdate` 优化，或用 [useNativeDriver 选项](/blog/2017/02/14/using-native-driver-for-animated) 让动画在 UI 线程运行。还可以使用 [InteractionManager](interactionmanager) 推迟计算密集型工作至动画完成后。您可以用应用内开发菜单的 “FPS Monitor” 工具监控帧率。
+如果遇到动画丢帧（低于 60fps）问题，可以考虑用 `setNativeProps` 或 `shouldComponentUpdate` 优化，或用 [useNativeDriver 选项](/blog/2017/02/14/using-native-driver-for-animated) 让动画在 UI 线程运行。还可以使用 [InteractionManager](interactionmanager) 推迟计算密集型工作至动画完成后。您可以用应用内开发菜单的 "FPS Monitor" 工具监控帧率。

@@ -21,7 +21,7 @@ Pressable 是一个核心组件的包装器，可以检测其定义的任何子�
 在触发 [`onPressIn`](#onpressin) 后，会发生以下两种情况之一：
 
 1. 用户移开手指，触发 [`onPressOut`](#onpressout)，随后触发 [`onPress`](#onpress)。
-2. 如果用户手指停留超过 500 毫秒后才移开，触发 [`onLongPress`](#onlongpress)。 （用户移开手指时仍然会触发 [`onPressOut`](#onpressout)）
+2. 如果用户手指停留超过 500 毫秒后才移开，触发 [`onLongPress`](#onlongpress)。（用户移开手指时仍然会触发 [`onPressOut`](#onpressout)）
 
 <img src="/docs/assets/d_pressable_pressing.svg" width="1000" alt="按压事件顺序示意图。" />
 

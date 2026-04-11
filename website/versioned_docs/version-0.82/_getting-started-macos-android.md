@@ -1,102 +1,102 @@
-## Installing dependencies
+## 安装依赖
 
-You will need Node, Watchman, the React Native command line interface, a JDK, and Android Studio.
+你需要 Node、Watchman、React Native 命令行界面、JDK 和 Android Studio。
 
-While you can use any editor of your choice to develop your app, you will need to install Android Studio in order to set up the necessary tooling to build your React Native app for Android.
+虽然你可以使用任何编辑器来开发应用，但你需要安装 Android Studio 以便设置必要的工具来构建你的 React Native Android 应用。
 
-<h3>Node &amp; Watchman</h3>
+<h3>Node 和 Watchman</h3>
 
-We recommend installing Node and Watchman using [Homebrew](https://brew.sh/). Run the following commands in a Terminal after installing Homebrew:
+我们建议使用 [Homebrew](https://brew.sh/) 安装 Node 和 Watchman。安装 Homebrew 后，在终端中运行以下命令：
 
 ```shell
 brew install node
 brew install watchman
 ```
 
-If you have already installed Node on your system, make sure it is Node 20.19.4 or newer.
+如果你已经在系统上安装了 Node，请确保它是 Node 20.19.4 或更新版本。
 
-[Watchman](https://facebook.github.io/watchman) is a tool by Facebook for watching changes in the filesystem. It is highly recommended you install it for better performance.
+[Watchman](https://facebook.github.io/watchman) 是 Facebook 提供的一个用于监视文件系统变化的工具。强烈建议安装它以获得更好的性能。
 
 <h3>Java Development Kit</h3>
 
-We recommend installing the OpenJDK distribution called Azul **Zulu** using [Homebrew](https://brew.sh/). Run the following commands in a Terminal after installing Homebrew:
+我们建议使用 [Homebrew](https://brew.sh/) 安装名为 Azul **Zulu** 的 OpenJDK 发行版。安装 Homebrew 后，在终端中运行以下命令：
 
 ```shell
 brew install --cask zulu@17
 
-# Get path to where cask was installed to find the JDK installer
+# 获取 cask 安装位置以找到 JDK 安装程序
 brew info --cask zulu@17
 
-# ==> zulu@17: <version number>
+# ==> zulu@17: <版本号>
 # https://www.azul.com/downloads/
-# Installed
-# /opt/homebrew/Caskroom/zulu@17/<version number> (185.8MB) (note that the path is /usr/local/Caskroom on non-Apple Silicon Macs)
-# Installed using the formulae.brew.sh API on 2024-06-06 at 10:00:00
+# 已安装
+# /opt/homebrew/Caskroom/zulu@17/<版本号> (185.8MB)（注意，在非 Apple Silicon Mac 上路径为 /usr/local/Caskroom）
+# 使用 formulae.brew.sh API 安装于 2024-06-06 10:00:00
 
-# Navigate to the folder
-open /opt/homebrew/Caskroom/zulu@17/<version number> # or /usr/local/Caskroom/zulu@17/<version number>
+# 导航到该文件夹
+open /opt/homebrew/Caskroom/zulu@17/<版本号> # 或 /usr/local/Caskroom/zulu@17/<版本号>
 ```
 
-After opening Finder, double click the `Double-Click to Install Azul Zulu JDK 17.pkg` package to install the JDK.
+打开 Finder 后，双击 `Double-Click to Install Azul Zulu JDK 17.pkg` 包以安装 JDK。
 
-After the JDK installation, add or update your `JAVA_HOME` environment variable in `~/.zshrc` (or in `~/.bash_profile`).
+JDK 安装后，在 `~/.zshrc`（或 `~/.bash_profile`）中添加或更新你的 `JAVA_HOME` 环境变量。
 
-If you used above steps, JDK will likely be located at `/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home`:
+如果你使用了上述步骤，JDK 可能位于 `/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home`：
 
 ```shell
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
 ```
 
-The Zulu OpenJDK distribution offers JDKs for **both Intel and M1 Macs**. This will make sure your builds are faster on M1 Macs compared to using an Intel-based JDK.
+Zulu OpenJDK 发行版为 **Intel 和 M1 Mac** 都提供了 JDK。这将确保你的构建在 M1 Mac 上比使用基于 Intel 的 JDK 更快。
 
-If you have already installed JDK on your system, we recommend JDK 17. You may encounter problems using higher JDK versions.
+如果你已经在系统上安装了 JDK，我们推荐 JDK 17。使用更高版本的 JDK 可能会遇到问题。
 
-<h3>Android development environment</h3>
+<h3>Android 开发环境</h3>
 
-Setting up your development environment can be somewhat tedious if you're new to Android development. If you're already familiar with Android development, there are a few things you may need to configure. In either case, please make sure to carefully follow the next few steps.
+如果你是 Android 开发新手，设置开发环境可能会有些繁琐。如果你已经熟悉 Android 开发，可能有一些东西需要配置。无论哪种情况，请务必仔细遵循以下步骤。
 
-<h4 id="android-studio">1. Install Android Studio</h4>
+<h4 id="android-studio">1. 安装 Android Studio</h4>
 
-[Download and install Android Studio](https://developer.android.com/studio). While on Android Studio installation wizard, make sure the boxes next to all of the following items are checked:
+[下载并安装 Android Studio](https://developer.android.com/studio)。在 Android Studio 安装向导中，确保以下所有项目旁边的复选框都被勾选：
 
 - `Android SDK`
 - `Android SDK Platform`
 - `Android Virtual Device`
 
-Then, click "Next" to install all of these components.
+然后，点击"Next"安装所有这些组件。
 
 :::note
-If the checkboxes are grayed out, you will have a chance to install these components later on.
+如果复选框是灰色的，你稍后还有机会安装这些组件。
 :::
 
-Once setup has finalized and you're presented with the Welcome screen, proceed to the next step.
+设置完成后，当你看到欢迎屏幕时，继续下一步。
 
-<h4 id="android-sdk">2. Install the Android SDK</h4>
+<h4 id="android-sdk">2. 安装 Android SDK</h4>
 
-Android Studio installs the latest Android SDK by default. Building a React Native app with native code, however, requires the `Android 15 (VanillaIceCream)` SDK in particular. Additional Android SDKs can be installed through the SDK Manager in Android Studio.
+Android Studio 默认安装最新的 Android SDK。但是，构建带有原生代码的 React Native 应用特别需要 `Android 15 (VanillaIceCream)` SDK。额外的 Android SDK 可以通过 Android Studio 中的 SDK Manager 安装。
 
-To do that, open Android Studio, click on "More Actions" button and select "SDK Manager".
+为此，打开 Android Studio，点击"More Actions"按钮并选择"SDK Manager"。
 
-![Android Studio Welcome](/docs/assets/GettingStartedAndroidStudioWelcomeMacOS.png)
+![Android Studio 欢迎界面](/docs/assets/GettingStartedAndroidStudioWelcomeMacOS.png)
 
 :::tip
-The SDK Manager can also be found within the Android Studio "Settings" dialog, under **Languages & Frameworks** → **Android SDK**.
+SDK Manager 也可以在 Android Studio 的"Settings"对话框中找到，位于 **Languages & Frameworks** → **Android SDK** 下。
 :::
 
-Select the "SDK Platforms" tab from within the SDK Manager, then check the box next to "Show Package Details" in the bottom right corner. Look for and expand the `Android 15 (VanillaIceCream)` entry, then make sure the following items are checked:
+在 SDK Manager 中选择"SDK Platforms"标签页，然后勾选右下角"Show Package Details"旁边的复选框。查找并展开 `Android 15 (VanillaIceCream)` 条目，然后确保勾选了以下项目：
 
 - `Android SDK Platform 35`
-- `Intel x86 Atom_64 System Image` or `Google APIs Intel x86 Atom System Image` or (for Apple M1 Silicon) `Google APIs ARM 64 v8a System Image`
+- `Intel x86 Atom_64 System Image` 或 `Google APIs Intel x86 Atom System Image` 或（对于 Apple M1 Silicon）`Google APIs ARM 64 v8a System Image`
 
-Next, select the "SDK Tools" tab and check the box next to "Show Package Details" here as well. Look for and expand the "Android SDK Build-Tools" entry, then make sure that `36.0.0` and `Android SDK Command-line Tools (latest)` are selected.
+接下来，选择"SDK Tools"标签页，并同样勾选这里的"Show Package Details"旁边的复选框。查找并展开"Android SDK Build-Tools"条目，然后确保选择了 `36.0.0` 和 `Android SDK Command-line Tools (latest)`。
 
-Finally, click "Apply" to download and install the Android SDK and related build tools.
+最后，点击"Apply"下载并安装 Android SDK 及相关构建工具。
 
-<h4>3. Configure the ANDROID_HOME environment variable</h4>
+<h4>3. 配置 ANDROID_HOME 环境变量</h4>
 
-The React Native tools require some environment variables to be set up in order to build apps with native code.
+React Native 工具需要设置一些环境变量才能构建带有原生代码的应用。
 
-Add the following lines to your `~/.zprofile` or `~/.zshrc` (if you are using `bash`, then `~/.bash_profile` or `~/.bashrc`) config file:
+将以下行添加到你的 `~/.zprofile` 或 `~/.zshrc`（如果你使用 `bash`，则是 `~/.bash_profile` 或 `~/.bashrc`）配置文件中：
 
 ```shell
 export ANDROID_HOME=$HOME/Library/Android/sdk
@@ -104,39 +104,39 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 ```
 
-Run `source ~/.zprofile` (or `source ~/.bash_profile` for `bash`) to load the config into your current shell. Verify that ANDROID_HOME has been set by running `echo $ANDROID_HOME` and the appropriate directories have been added to your path by running `echo $PATH`.
+运行 `source ~/.zprofile`（对于 `bash` 则是 `source ~/.bash_profile`）将配置加载到当前 shell 中。通过运行 `echo $ANDROID_HOME` 验证 ANDROID_HOME 是否已设置，并通过运行 `echo $PATH` 验证适当的目录是否已添加到你的路径中。
 
 :::note
-Please make sure you use the correct Android SDK path. You can find the actual location of the SDK in the Android Studio "Settings" dialog, under **Languages & Frameworks** → **Android SDK**.
+请确保你使用了正确的 Android SDK 路径。你可以在 Android Studio 的"Settings"对话框中找到 SDK 的实际位置，位于 **Languages & Frameworks** → **Android SDK** 下。
 :::
 
-<h2>Preparing the Android device</h2>
+<h2>准备 Android 设备</h2>
 
-You will need an Android device to run your React Native Android app. This can be either a physical Android device, or more commonly, you can use an Android Virtual Device which allows you to emulate an Android device on your computer.
+你需要一个 Android 设备来运行你的 React Native Android 应用。这可以是物理 Android 设备，或者更常见的是，你可以使用 Android 虚拟设备（AVD），它允许你在电脑上模拟一个 Android 设备。
 
-Either way, you will need to prepare the device to run Android apps for development.
+无论哪种方式，你都需要准备设备以运行用于开发的 Android 应用。
 
-<h3>Using a physical device</h3>
+<h3>使用物理设备</h3>
 
-If you have a physical Android device, you can use it for development in place of an AVD by plugging it in to your computer using a USB cable and following the instructions [here](running-on-device.md).
+如果你有物理 Android 设备，你可以使用它代替 AVD 进行开发，只需使用 USB 电缆将其连接到电脑，并按照 [此处](running-on-device.md) 的说明操作。
 
-<h3>Using a virtual device</h3>
+<h3>使用虚拟设备</h3>
 
-If you use Android Studio to open `./AwesomeProject/android`, you can see the list of available Android Virtual Devices (AVDs) by opening the "AVD Manager" from within Android Studio. Look for an icon that looks like this:
+如果你使用 Android Studio 打开 `./AwesomeProject/android`，可以通过打开 Android Studio 内的"AVD Manager"查看可用的 Android 虚拟设备（AVD）列表。查找看起来像这样的图标：
 
-<img src="/docs/assets/GettingStartedAndroidStudioAVD.svg" alt="Android Studio AVD Manager" width="100"/>
+<img src="/docs/assets/GettingStartedAndroidStudioAVD.svg" alt="Android Studio AVD 管理器" width="100"/>
 
-If you have recently installed Android Studio, you will likely need to [create a new AVD](https://developer.android.com/studio/run/managing-avds.html). Select "Create Virtual Device...", then pick any Phone from the list and click "Next", then select the **VanillaIceCream** API Level 35 image.
+如果你最近安装了 Android Studio，可能需要 [创建一个新的 AVD](https://developer.android.com/studio/run/managing-avds.html)。选择"Create Virtual Device..."，然后从列表中选择任意手机并点击"Next"，接着选择 **VanillaIceCream** API Level 35 镜像。
 
-Click "Next" then "Finish" to create your AVD. At this point you should be able to click on the green triangle button next to your AVD to launch it.
+点击"Next"然后点击"Finish"创建你的 AVD。此时你应该能够点击 AVD 旁边的绿色三角形按钮来启动它。
 
-<h3>That's it!</h3>
+<h3>就是这样！</h3>
 
-Congratulations! You successfully set up your development environment.
+恭喜！你成功设置了开发环境。
 
 <center><img src="/docs/assets/GettingStartedCongratulations.png" width="150"></img></center>
 
-<h2>Now what?</h2>
+<h2>接下来做什么？</h2>
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](integration-with-existing-apps.md).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](getting-started).
+- 如果你想将此新的 React Native 代码添加到现有应用中，请查看 [集成指南](integration-with-existing-apps.md)。
+- 如果你好奇想了解更多关于 React Native 的信息，请查看 [React Native 介绍](getting-started)。

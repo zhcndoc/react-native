@@ -68,7 +68,7 @@ npx create-react-native-library@latest <你的库名称>
 
 ### 2. 从你的应用复制代码
 
-本指南后续部分假设你在应用中已有本地 Turbo Native Module，按照网站其他教程（平台特定 Turbo Native Modules，或[跨平台 Turbo Native Modules](./pure-cxx-modules)）创建。但它也适用于组件及传统架构的模块和组件。你需要根据实际情况调整要复制的文件并更新。
+本指南后续部分假设你在应用中已有本地 Turbo Native Module，按照网站其他教程（平台特定 Turbo Native Modules，或 [跨平台 Turbo Native Modules](./pure-cxx-modules)）创建。但它也适用于组件及传统架构的模块和组件。你需要根据实际情况调整要复制的文件并更新。
 
 <!-- TODO: 添加 Turbo Native Modules 的相关链接 -->
 

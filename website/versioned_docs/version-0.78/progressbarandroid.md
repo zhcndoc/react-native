@@ -3,11 +3,11 @@ id: progressbarandroid
 title: '🗑️ ProgressBarAndroid'
 ---
 
-> **Deprecated.** Use one of the [community packages](https://reactnative.directory/?search=progressbar) instead.
+> **已弃用。** 请改用 [社区包](https://reactnative.directory/?search=progressbar) 之一。
 
-Android-only React component used to indicate that the app is loading or there is some activity in the app.
+仅适用于 Android 的 React 组件，用于指示应用正在加载或应用中存在一些活动。
 
-### Example
+### 示例
 
 ```SnackPlayer name=ProgressBarAndroid&supportedPlatforms=android
 import React from 'react';
@@ -56,55 +56,55 @@ export default App;
 
 ---
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
-Inherits [View Props](view.md#props).
+继承 [View 属性](view.md#props)。
 
 ### `animating`
 
-Whether to show the ProgressBar (true, the default) or hide it (false).
+是否显示 ProgressBar（true，默认值）或隐藏它（false）。
 
-| Type | Required |
+| 类型 | 必需 |
 | ---- | -------- |
-| bool | No       |
+| bool | 否       |
 
 ---
 
 ### `color`
 
-Color of the progress bar.
+进度条的颜色。
 
-| Type               | Required |
+| 类型               | 必需 |
 | ------------------ | -------- |
-| [color](colors.md) | No       |
+| [color](colors.md) | 否       |
 
 ---
 
 ### `indeterminate`
 
-If the progress bar will show indeterminate progress. Note that this can only be false if styleAttr is Horizontal, and requires a `progress` value.
+如果进度条将显示不确定进度。请注意，仅当 styleAttr 为 Horizontal 时，此项才可为 false，并且需要 `progress` 值。
 
-| Type              | Required |
+| 类型              | 必需 |
 | ----------------- | -------- |
-| indeterminateType | No       |
+| indeterminateType | 否       |
 
 ---
 
 ### `progress`
 
-The progress value (between 0 and 1).
+进度值（介于 0 和 1 之间）。
 
-| Type   | Required |
+| 类型   | 必需 |
 | ------ | -------- |
-| number | No       |
+| number | 否       |
 
 ---
 
 ### `styleAttr`
 
-Style of the ProgressBar. One of:
+ProgressBar 的样式。其中之一：
 
 - Horizontal
 - Normal (default)
@@ -114,16 +114,16 @@ Style of the ProgressBar. One of:
 - SmallInverse
 - LargeInverse
 
-| Type                                                                                      | Required |
+| 类型                                                                                      | 必需 |
 | ----------------------------------------------------------------------------------------- | -------- |
-| enum('Horizontal', 'Normal', 'Small', 'Large', 'Inverse', 'SmallInverse', 'LargeInverse') | No       |
+| enum('Horizontal', 'Normal', 'Small', 'Large', 'Inverse', 'SmallInverse', 'LargeInverse') | 否       |
 
 ---
 
 ### `testID`
 
-Used to locate this view in end-to-end tests.
+用于在端到端测试中定位此视图。
 
-| Type   | Required |
+| 类型   | 必需 |
 | ------ | -------- |
-| string | No       |
+| string | 否       |

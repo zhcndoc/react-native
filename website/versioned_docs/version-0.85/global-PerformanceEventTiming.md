@@ -3,8 +3,8 @@ id: global-PerformanceEventTiming
 title: PerformanceEventTiming
 ---
 
-The global [`PerformanceEventTiming`](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEventTiming) class, as defined in Web specifications.
+Web 规范中定义的全局 [`PerformanceEventTiming`](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEventTiming) 类。
 
-:::warning Partial support
-The `cancelable` and `target` properties are not supported yet.
+:::warning 部分支持
+`cancelable` 和 `target` 属性尚不支持。
 :::

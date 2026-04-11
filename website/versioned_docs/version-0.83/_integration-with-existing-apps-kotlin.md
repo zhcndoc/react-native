@@ -147,7 +147,7 @@ dependencies {
 </manifest>
 ```
 
-然后，在**debug** 版本的 `AndroidManifest.xml` 中启用[明文流量](https://developer.android.com/training/articles/security-config#CleartextTrafficPermitted)：
+然后，在**debug** 版本的 `AndroidManifest.xml` 中启用 [明文流量](https://developer.android.com/training/articles/security-config#CleartextTrafficPermitted)：
 
 ```diff
 <?xml version="1.0" encoding="utf-8"?>
@@ -454,7 +454,7 @@ class MyReactActivity : ReactActivity() {
 
 ## 6. 测试集成效果
 
-您已经完成了所有基本步骤，将 React Native 集成到应用中。现在启动 [Metro bundler](https://metrobundler.dev/) 来构建您的 TypeScript 应用代码并打包。Metro 在开发环境的 `localhost` 通过 HTTP 向模拟器或设备共享 bundle，从而支持[热重载](https://reactnative.dev/blog/2016/03/24/introducing-hot-reloading)。
+您已经完成了所有基本步骤，将 React Native 集成到应用中。现在启动 [Metro bundler](https://metrobundler.dev/) 来构建您的 TypeScript 应用代码并打包。Metro 在开发环境的 `localhost` 通过 HTTP 向模拟器或设备共享 bundle，从而支持 [热重载](https://reactnative.dev/blog/2016/03/24/introducing-hot-reloading)。
 
 首先，在项目根目录创建一个 `metro.config.js` 文件，内容如下：
 
@@ -508,4 +508,4 @@ cd android
 
 ### 接下来做什么？
 
-此时，您可以照常继续开发应用。请参考我们的[调试](debugging)和[部署](running-on-device)文档，了解更多 React Native 的使用方法。
+此时，您可以照常继续开发应用。请参考我们的 [调试](debugging) 和 [部署](running-on-device) 文档，了解更多 React Native 的使用方法。

@@ -5,22 +5,22 @@ title: FlatList
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-A performant interface for rendering basic, flat lists, supporting the most handy features:
+一个用于渲染基本扁平列表的高性能接口，支持以下最实用的功能：
 
-- Fully cross-platform.
-- Optional horizontal mode.
-- Configurable viewability callbacks.
-- Header support.
-- Footer support.
-- Separator support.
-- Pull to Refresh.
-- Scroll loading.
-- ScrollToIndex support.
-- Multiple column support.
+- 完全跨平台。
+- 可选的水平模式。
+- 可配置的可见性回调。
+- 支持头部。
+- 支持底部。
+- 支持分隔符。
+- 下拉刷新。
+- 滚动加载。
+- 支持 ScrollToIndex。
+- 支持多列。
 
-If you need section support, use [`<SectionList>`](sectionlist.md).
+如果你需要分区支持，请使用 [`<SectionList>`](sectionlist.md)。
 
-## Example
+## 示例
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -147,12 +147,12 @@ export default App;
 </TabItem>
 </Tabs>
 
-To render multiple columns, use the [`numColumns`](flatlist.md#numcolumns) prop. Using this approach instead of a `flexWrap` layout can prevent conflicts with the item height logic.
+要渲染多列，请使用 [`numColumns`](flatlist.md#numcolumns) 属性。使用此方法而不是 `flexWrap` 布局可以防止与项目高度逻辑发生冲突。
 
-More complex, selectable example below.
+下面是一个更复杂的可选择示例。
 
-- By passing `extraData={selectedId}` to `FlatList` we make sure `FlatList` itself will re-render when the state changes. Without setting this prop, `FlatList` would not know it needs to re-render any items because it is a `PureComponent` and the prop comparison will not show any changes.
-- `keyExtractor` tells the list to use the `id`s for the react keys instead of the default `key` property.
+- 通过传递 `extraData={selectedId}` 给 `FlatList`，我们确保当状态改变时 `FlatList` 本身会重新渲染。如果不设置此属性，`FlatList` 将不知道它需要重新渲染任何项目，因为它是一个 `PureComponent` 并且属性比较不会显示任何变化。
+- `keyExtractor` 告诉列表使用 `id` 作为 react 键，而不是默认的 `key` 属性。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -337,26 +337,26 @@ export default App;
 </TabItem>
 </Tabs>
 
-This is a convenience wrapper around [`<VirtualizedList>`](virtualizedlist.md), and thus inherits its props (as well as those of [`<ScrollView>`](scrollview.md)) that aren't explicitly listed here, along with the following caveats:
+这是 [`<VirtualizedList>`](virtualizedlist.md) 的便捷包装器，因此继承了其属性（以及 [`<ScrollView>`](scrollview.md) 的属性），除非此处明确列出，并注意以下注意事项：
 
-- Internal state is not preserved when content scrolls out of the render window. Make sure all your data is captured in the item data or external stores like Flux, Redux, or Relay.
-- This is a `PureComponent` which means that it will not re-render if `props` remain shallow-equal. Make sure that everything your `renderItem` function depends on is passed as a prop (e.g. `extraData`) that is not `===` after updates, otherwise your UI may not update on changes. This includes the `data` prop and parent component state.
-- In order to constrain memory and enable smooth scrolling, content is rendered asynchronously offscreen. This means it's possible to scroll faster than the fill rate and momentarily see blank content. This is a tradeoff that can be adjusted to suit the needs of each application, and we are working on improving it behind the scenes.
-- By default, the list looks for a `key` prop on each item and uses that for the React key. Alternatively, you can provide a custom `keyExtractor` prop.
-
----
-
-# Reference
-
-## Props
-
-### [VirtualizedList Props](virtualizedlist.md#props)
-
-Inherits [VirtualizedList Props](virtualizedlist.md#props).
+- 当内容滚动出渲染窗口时，内部状态不会保留。确保所有数据都捕获在项目数据或外部存储中，如 Flux、Redux 或 Relay。
+- 这是一个 `PureComponent`，这意味着如果 `props` 保持浅相等，它将不会重新渲染。确保你的 `renderItem` 函数依赖的所有内容都作为属性传递（例如 `extraData`），并且在更新后不 `===`，否则你的 UI 可能不会随变化更新。这包括 `data` 属性和父组件状态。
+- 为了限制内存并实现平滑滚动，内容在屏幕外异步渲染。这意味着有可能滚动速度快于填充率，并暂时看到空白内容。这是一个可以根据每个应用程序的需求进行调整的权衡，我们正在幕后改进它。
+- 默认情况下，列表查找每个项目上的 `key` 属性并将其用作 React 键。或者，你可以提供自定义 `keyExtractor` 属性。
 
 ---
 
-### <div className="label required basic">Required</div> **`renderItem`**
+# 参考
+
+## 属性
+
+### [VirtualizedList 属性](virtualizedlist.md#props)
+
+继承 [VirtualizedList 属性](virtualizedlist.md#props)。
+
+---
+
+### <div className="label required basic">必需</div> **`renderItem`**
 
 ```tsx
 renderItem({
@@ -370,24 +370,24 @@ renderItem({
 }): JSX.Element;
 ```
 
-Takes an item from `data` and renders it into the list.
+从 `data` 中获取一项并将其渲染到列表中。
 
-Provides additional metadata like `index` if you need it, as well as a more generic `separators.updateProps` function which let you set whatever props you want to change the rendering of either the leading separator or trailing separator in case the more common `highlight` and `unhighlight` (which set the `highlighted: boolean` prop) are insufficient for your use case.
+提供额外的元数据，如 `index`（如果你需要），以及更通用的 `separators.updateProps` 函数，它允许你设置任何想要更改的属性，以改变前导分隔符或尾随分隔符的渲染，以防更常见的 `highlight` 和 `unhighlight`（它们设置 `highlighted: boolean` 属性）不足以满足你的用例。
 
-| Type     |
+| 类型     |
 | -------- |
-| function |
+| 函数 |
 
-- `item` (Object): The item from `data` being rendered.
-- `index` (number): The index corresponding to this item in the `data` array.
-- `separators` (Object)
-  - `highlight` (Function)
-  - `unhighlight` (Function)
-  - `updateProps` (Function)
-    - `select` (enum('leading', 'trailing'))
-    - `newProps` (Object)
+- `item` (对象): 正在渲染的来自 `data` 的项目。
+- `index` (数字): 该项目在 `data` 数组中对应的索引。
+- `separators` (对象)
+  - `highlight` (函数)
+  - `unhighlight` (函数)
+  - `updateProps` (函数)
+    - `select` (枚举('leading', 'trailing'))
+    - `newProps` (对象)
 
-Example usage:
+示例用法：
 
 ```tsx
 <FlatList
@@ -416,93 +416,93 @@ Example usage:
 
 ---
 
-### <div className="label required basic">Required</div> **`data`**
+### <div className="label required basic">必需</div> **`data`**
 
-An array (or array-like list) of items to render. Other data types can be used by targeting [`VirtualizedList`](virtualizedlist.md) directly.
+要渲染的项目数组（或类数组列表）。其他数据类型可以通过直接针对 [`VirtualizedList`](virtualizedlist.md) 来使用。
 
-| Type      |
+| 类型      |
 | --------- |
-| ArrayLike |
+| 类数组 |
 
 ---
 
 ### `ItemSeparatorComponent`
 
-Rendered in between each item, but not at the top or bottom. By default, `highlighted` and `leadingItem` props are provided. `renderItem` provides `separators.highlight`/`unhighlight` which will update the `highlighted` prop, but you can also add custom props with `separators.updateProps`. Can be a React Component (e.g. `SomeComponent`), or a React element (e.g. `<SomeComponent />`).
+渲染在每项之间，但不在顶部或底部。默认情况下，提供 `highlighted` 和 `leadingItem` 属性。`renderItem` 提供 `separators.highlight`/`unhighlight` 将更新 `highlighted` 属性，但你也可以使用 `separators.updateProps` 添加自定义属性。可以是 React 组件（例如 `SomeComponent`），或 React 元素（例如 `<SomeComponent />`）。
 
-| Type                         |
+| 类型                         |
 | ---------------------------- |
-| component, function, element |
+| 组件，函数，元素 |
 
 ---
 
 ### `ListEmptyComponent`
 
-Rendered when the list is empty. Can be a React Component (e.g. `SomeComponent`), or a React element (e.g. `<SomeComponent />`).
+当列表为空时渲染。可以是 React 组件（例如 `SomeComponent`），或 React 元素（例如 `<SomeComponent />`）。
 
-| Type               |
+| 类型               |
 | ------------------ |
-| component, element |
+| 组件，元素 |
 
 ---
 
 ### `ListFooterComponent`
 
-Rendered at the bottom of all the items. Can be a React Component (e.g. `SomeComponent`), or a React element (e.g. `<SomeComponent />`).
+渲染在所有项目的底部。可以是 React 组件（例如 `SomeComponent`），或 React 元素（例如 `<SomeComponent />`）。
 
-| Type               |
+| 类型               |
 | ------------------ |
-| component, element |
+| 组件，元素 |
 
 ---
 
 ### `ListFooterComponentStyle`
 
-Styling for internal View for `ListFooterComponent`.
+`ListFooterComponent` 内部 View 的样式。
 
-| Type                           |
+| 类型                           |
 | ------------------------------ |
-| [View Style](view-style-props) |
+| [View 样式](view-style-props) |
 
 ---
 
 ### `ListHeaderComponent`
 
-Rendered at the top of all the items. Can be a React Component (e.g. `SomeComponent`), or a React element (e.g. `<SomeComponent />`).
+渲染在所有项目的顶部。可以是 React 组件（例如 `SomeComponent`），或 React 元素（例如 `<SomeComponent />`）。
 
-| Type               |
+| 类型               |
 | ------------------ |
-| component, element |
+| 组件，元素 |
 
 ---
 
 ### `ListHeaderComponentStyle`
 
-Styling for internal View for `ListHeaderComponent`.
+`ListHeaderComponent` 内部 View 的样式。
 
-| Type                           |
+| 类型                           |
 | ------------------------------ |
-| [View Style](view-style-props) |
+| [View 样式](view-style-props) |
 
 ---
 
 ### `columnWrapperStyle`
 
-Optional custom style for multi-item rows generated when `numColumns > 1`.
+当 `numColumns > 1` 时，为生成的多项目行可选的自定义样式。
 
-| Type                           |
+| 类型                           |
 | ------------------------------ |
-| [View Style](view-style-props) |
+| [View 样式](view-style-props) |
 
 ---
 
 ### `extraData`
 
-A marker property for telling the list to re-render (since it implements `PureComponent`). If any of your `renderItem`, Header, Footer, etc. functions depend on anything outside of the `data` prop, stick it here and treat it immutably.
+用于告诉列表重新渲染的标记属性（因为它实现了 `PureComponent`）。如果你的任何 `renderItem`、Header、Footer 等函数依赖于 `data` 属性之外的任何内容，请将其放在这里并将其视为不可变。
 
-| Type |
+| 类型 |
 | ---- |
-| any  |
+| 任意  |
 
 ---
 
@@ -512,7 +512,7 @@ A marker property for telling the list to re-render (since it implements `PureCo
 (data, index) => {length: number, offset: number, index: number}
 ```
 
-`getItemLayout` is an optional optimization that allows skipping the measurement of dynamic content if you know the size (height or width) of items ahead of time. `getItemLayout` is efficient if you have fixed size items, for example:
+`getItemLayout` 是一个可选的优化，如果你提前知道项目的大小（高度或宽度），它可以跳过动态内容的测量。如果你有固定大小的项目，`getItemLayout` 非常高效，例如：
 
 ```tsx
   getItemLayout={(data, index) => (
@@ -520,51 +520,51 @@ A marker property for telling the list to re-render (since it implements `PureCo
   )}
 ```
 
-Adding `getItemLayout` can be a great performance boost for lists of several hundred items. Remember to include separator length (height or width) in your offset calculation if you specify `ItemSeparatorComponent`.
+添加 `getItemLayout` 可以大大提高数百个项目列表的性能。如果你指定了 `ItemSeparatorComponent`，请记住在偏移计算中包含分隔符长度（高度或宽度）。
 
-| Type     |
+| 类型     |
 | -------- |
-| function |
+| 函数 |
 
 ---
 
 ### `horizontal`
 
-If `true`, renders items next to each other horizontally instead of stacked vertically.
+如果为 `true`，则水平相邻渲染项目，而不是垂直堆叠。
 
-| Type    |
+| 类型    |
 | ------- |
-| boolean |
+| 布尔值 |
 
 ---
 
 ### `initialNumToRender`
 
-How many items to render in the initial batch. This should be enough to fill the screen but not much more. Note these items will never be unmounted as part of the windowed rendering in order to improve perceived performance of scroll-to-top actions.
+初始批次中要渲染多少项目。这应该足以填充屏幕，但不要太多。注意，作为窗口化渲染的一部分，这些项目永远不会被卸载，以提高滚动到顶部操作的感知性能。
 
-| Type   | Default |
+| 类型   | 默认值 |
 | ------ | ------- |
-| number | `10`    |
+| 数字 | `10`    |
 
 ---
 
 ### `initialScrollIndex`
 
-Instead of starting at the top with the first item, start at `initialScrollIndex`. This disables the "scroll to top" optimization that keeps the first `initialNumToRender` items always rendered and immediately renders the items starting at this initial index. Requires `getItemLayout` to be implemented.
+不从第一项的顶部开始，而是从 `initialScrollIndex` 开始。这会禁用“滚动到顶部”优化（该优化保持前 `initialNumToRender` 个项目始终渲染），并立即渲染从此初始索引开始的项目。需要实现 `getItemLayout`。
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `inverted`
 
-Reverses the direction of scroll. Uses scale transforms of `-1`.
+反转滚动方向。使用 `-1` 的缩放变换。
 
-| Type    |
+| 类型    |
 | ------- |
-| boolean |
+| 布尔值 |
 
 ---
 
@@ -574,21 +574,21 @@ Reverses the direction of scroll. Uses scale transforms of `-1`.
 (item: ItemT, index: number) => string;
 ```
 
-Used to extract a unique key for a given item at the specified index. Key is used for caching and as the react key to track item re-ordering. The default extractor checks `item.key`, then `item.id`, and then falls back to using the index, like React does.
+用于提取指定索引处给定项目的唯一键。键用于缓存并作为 react 键来跟踪项目重新排序。默认提取器检查 `item.key`，然后 `item.id`，然后回退到使用索引，就像 React 所做的那样。
 
-| Type     |
+| 类型     |
 | -------- |
-| function |
+| 函数 |
 
 ---
 
 ### `numColumns`
 
-Multiple columns can only be rendered with `horizontal={false}` and will zig-zag like a `flexWrap` layout. Items should all be the same height - masonry layouts are not supported.
+多列只能在 `horizontal={false}` 时渲染，并将像 `flexWrap` 布局一样曲折排列。项目应该都具有相同的高度 - 不支持砌体布局。
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
@@ -598,19 +598,19 @@ Multiple columns can only be rendered with `horizontal={false}` and will zig-zag
 () => void;
 ```
 
-If provided, a standard RefreshControl will be added for "Pull to Refresh" functionality. Make sure to also set the `refreshing` prop correctly.
+如果提供，将为“下拉刷新”功能添加标准的 RefreshControl。确保也正确设置 `refreshing` 属性。
 
-| Type     |
+| 类型     |
 | -------- |
-| function |
+| 函数 |
 
 ---
 
 ### `onViewableItemsChanged`
 
-Called when the viewability of rows changes, as defined by the `viewabilityConfig` prop.
+当行的可见性发生变化时调用，由 `viewabilityConfig` 属性定义。
 
-| Type                                                                                                  |
+| 类型                                                                                                  |
 | ----------------------------------------------------------------------------------------------------- |
 | `md (callback: {changed: [ViewToken](viewtoken)[], viewableItems: [ViewToken](viewtoken)[]} => void;` |
 
@@ -618,54 +618,54 @@ Called when the viewability of rows changes, as defined by the `viewabilityConfi
 
 ### `progressViewOffset`
 
-Set this when offset is needed for the loading indicator to show correctly.
+当需要偏移量以使加载指示器正确显示时设置此项。
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `refreshing`
 
-Set this true while waiting for new data from a refresh.
+在等待刷新新数据时将其设置为 true。
 
-| Type    |
+| 类型    |
 | ------- |
-| boolean |
+| 布尔值 |
 
 ---
 
 ### `removeClippedSubviews`
 
-This may improve scroll performance for large lists. On Android the default value is `true`.
+这可以提高大列表的滚动性能。在 Android 上默认值为 `true`。
 
-> Note: May have bugs (missing content) in some circumstances - use at your own risk.
+> 注意：在某些情况下可能有 bug（内容缺失）- 使用风险自负。
 
-| Type    |
+| 类型    |
 | ------- |
-| boolean |
+| 布尔值 |
 
 ---
 
 ### `viewabilityConfig`
 
-See [`ViewabilityHelper.js`](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Lists/ViewabilityHelper.js) for flow type and further documentation.
+参见 [`ViewabilityHelper.js`](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Lists/ViewabilityHelper.js) 了解 flow 类型和更多文档。
 
-| Type              |
+| 类型              |
 | ----------------- |
 | ViewabilityConfig |
 
-`viewabilityConfig` takes a type `ViewabilityConfig` an object with following properties
+`viewabilityConfig` 接受一个类型为 `ViewabilityConfig` 的对象，包含以下属性
 
-| Property                         | Type    |
+| 属性                         | 类型    |
 | -------------------------------- | ------- |
-| minimumViewTime                  | number  |
-| viewAreaCoveragePercentThreshold | number  |
-| itemVisiblePercentThreshold      | number  |
-| waitForInteraction               | boolean |
+| minimumViewTime                  | 数字  |
+| viewAreaCoveragePercentThreshold | 数字  |
+| itemVisiblePercentThreshold      | 数字  |
+| waitForInteraction               | 布尔值 |
 
-At least one of the `viewAreaCoveragePercentThreshold` or `itemVisiblePercentThreshold` is required. This needs to be done in the `constructor` to avoid following error ([ref](https://github.com/facebook/react-native/issues/17408)):
+至少需要 `viewAreaCoveragePercentThreshold` 或 `itemVisiblePercentThreshold` 中的一个。这需要在 `constructor` 中完成，以避免以下错误 ([参考](https://github.com/facebook/react-native/issues/17408))：
 
 ```
   Error: Changing viewabilityConfig on the fly is not supported
@@ -690,31 +690,31 @@ constructor (props) {
 
 #### minimumViewTime
 
-Minimum amount of time (in milliseconds) that an item must be physically viewable before the viewability callback will be fired. A high number means that scrolling through content without stopping will not mark the content as viewable.
+在项目物理可见后触发可见性回调之前所需的最短时间（毫秒）。数字较高意味着不停止地滚动内容不会将内容标记为可见。
 
 #### viewAreaCoveragePercentThreshold
 
-Percent of viewport that must be covered for a partially occluded item to count as "viewable", 0-100. Fully visible items are always considered viewable. A value of 0 means that a single pixel in the viewport makes the item viewable, and a value of 100 means that an item must be either entirely visible or cover the entire viewport to count as viewable.
+部分遮挡的项目被视为“可见”所需的视口覆盖百分比，0-100。完全可见的项目始终被视为可见。值为 0 意味着视口中的单个像素使项目可见，值为 100 意味着项目必须完全可见或覆盖整个视口才算作可见。
 
 #### itemVisiblePercentThreshold
 
-Similar to `viewAreaCoveragePercentThreshold`, but considers the percent of the item that is visible, rather than the fraction of the viewable area it covers.
+类似于 `viewAreaCoveragePercentThreshold`，但考虑的是项目可见的百分比，而不是其覆盖的可见区域的比例。
 
 #### waitForInteraction
 
-Nothing is considered viewable until the user scrolls or `recordInteraction` is called after render.
+在用户滚动或渲染后调用 `recordInteraction` 之前，没有任何内容被视为可见。
 
 ---
 
 ### `viewabilityConfigCallbackPairs`
 
-List of `ViewabilityConfig`/`onViewableItemsChanged` pairs. A specific `onViewableItemsChanged` will be called when its corresponding `ViewabilityConfig`'s conditions are met. See `ViewabilityHelper.js` for flow type and further documentation.
+`ViewabilityConfig`/`onViewableItemsChanged` 对的列表。当特定的 `onViewableItemsChanged` 对应的 `ViewabilityConfig` 条件满足时，它将被调用。参见 `ViewabilityHelper.js` 了解 flow 类型和更多文档。
 
-| Type                                   |
+| 类型                                   |
 | -------------------------------------- |
-| array of ViewabilityConfigCallbackPair |
+| ViewabilityConfigCallbackPair 数组 |
 
-## Methods
+## 方法
 
 ### `flashScrollIndicators()`
 
@@ -722,7 +722,7 @@ List of `ViewabilityConfig`/`onViewableItemsChanged` pairs. A specific `onViewab
 flashScrollIndicators();
 ```
 
-Displays the scroll indicators momentarily.
+短暂显示滚动指示器。
 
 ---
 
@@ -732,7 +732,7 @@ Displays the scroll indicators momentarily.
 getNativeScrollRef(): React.ElementRef<typeof ScrollViewComponent>;
 ```
 
-Provides a reference to the underlying scroll component
+提供对底层滚动组件的引用
 
 ---
 
@@ -742,7 +742,7 @@ Provides a reference to the underlying scroll component
 getScrollResponder(): ScrollResponderMixin;
 ```
 
-Provides a handle to the underlying scroll responder.
+提供对底层滚动响应器的句柄。
 
 ---
 
@@ -752,7 +752,7 @@ Provides a handle to the underlying scroll responder.
 getScrollableNode(): any;
 ```
 
-Provides a handle to the underlying scroll node.
+提供对底层滚动节点的句柄。
 
 ### `scrollToEnd()`
 
@@ -760,17 +760,17 @@ Provides a handle to the underlying scroll node.
 scrollToEnd(params?: {animated?: boolean});
 ```
 
-Scrolls to the end of the content. May be janky without `getItemLayout` prop.
+滚动到内容末尾。如果没有 `getItemLayout` 属性，可能会卡顿。
 
-**Parameters:**
+**参数：**
 
-| Name   | Type   |
+| 名称   | 类型   |
 | ------ | ------ |
 | params | object |
 
-Valid `params` keys are:
+有效的 `params` 键包括：
 
-- 'animated' (boolean) - Whether the list should do an animation while scrolling. Defaults to `true`.
+- 'animated' (boolean) - 列表滚动时是否执行动画。默认为 `true`。
 
 ---
 
@@ -785,22 +785,22 @@ scrollToIndex: (params: {
 });
 ```
 
-Scrolls to the item at the specified index such that it is positioned in the viewable area such that `viewPosition` 0 places it at the top, 1 at the bottom, and 0.5 centered in the middle.
+滚动到指定索引的项，使其位于可见区域内，其中 `viewPosition` 0 将其置于顶部，1 置于底部，0.5 居中。
 
-> Note: Cannot scroll to locations outside the render window without specifying the `getItemLayout` prop.
+> 注意：如果不指定 `getItemLayout` 属性，无法滚动到渲染窗口之外的位置。
 
-**Parameters:**
+**参数：**
 
-| Name                                                        | Type   |
+| 名称                                                        | 类型   |
 | ----------------------------------------------------------- | ------ |
-| params <div className="label basic required">Required</div> | object |
+| params <div className="label basic required">必需</div> | object |
 
-Valid `params` keys are:
+有效的 `params` 键包括：
 
-- 'animated' (boolean) - Whether the list should do an animation while scrolling. Defaults to `true`.
-- 'index' (number) - The index to scroll to. Required.
-- 'viewOffset' (number) - A fixed number of pixels to offset the final target position.
-- 'viewPosition' (number) - A value of `0` places the item specified by index at the top, `1` at the bottom, and `0.5` centered in the middle.
+- 'animated' (boolean) - 列表滚动时是否执行动画。默认为 `true`。
+- 'index' (number) - 要滚动到的索引。必需。
+- 'viewOffset' (number) - 偏移最终目标位置的固定像素数。
+- 'viewPosition' (number) - 值为 `0` 时将索引指定的项置于顶部，`1` 置于底部，`0.5` 置于中间。
 
 ---
 
@@ -814,20 +814,20 @@ scrollToItem(params: {
 });
 ```
 
-Requires linear scan through data - use `scrollToIndex` instead if possible.
+需要线性扫描数据 - 如果可能，请改用 `scrollToIndex`。
 
-> Note: Cannot scroll to locations outside the render window without specifying the `getItemLayout` prop.
+> 注意：如果不指定 `getItemLayout` 属性，无法滚动到渲染窗口之外的位置。
 
-**Parameters:**
+**参数：**
 
-| Name                                                        | Type   |
+| 名称                                                        | 类型   |
 | ----------------------------------------------------------- | ------ |
-| params <div className="label basic required">Required</div> | object |
+| params <div className="label basic required">必需</div> | object |
 
-Valid `params` keys are:
+有效的 `params` 键包括：
 
-- 'animated' (boolean) - Whether the list should do an animation while scrolling. Defaults to `true`.
-- 'item' (object) - The item to scroll to. Required.
+- 'animated' (boolean) - 列表滚动时是否执行动画。默认为 `true`。
+- 'item' (object) - 要滚动到的项。必需。
 - 'viewPosition' (number)
 
 ---
@@ -841,15 +841,15 @@ scrollToOffset(params: {
 });
 ```
 
-Scroll to a specific content pixel offset in the list.
+滚动到列表中特定的内容像素偏移量。
 
-**Parameters:**
+**参数：**
 
-| Name                                                        | Type   |
+| 名称                                                        | 类型   |
 | ----------------------------------------------------------- | ------ |
-| params <div className="label basic required">Required</div> | object |
+| params <div className="label basic required">必需</div> | object |
 
-Valid `params` keys are:
+有效的 `params` 键包括：
 
-- 'offset' (number) - The offset to scroll to. In case of `horizontal` being true, the offset is the x-value, in any other case the offset is the y-value. Required.
-- 'animated' (boolean) - Whether the list should do an animation while scrolling. Defaults to `true`.
+- 'offset' (number) - 要滚动到的偏移量。如果 `horizontal` 为 true，则偏移量为 x 值，其他情况下偏移量为 y 值。必需。
+- 'animated' (boolean) - 列表滚动时是否执行动画。默认为 `true`。

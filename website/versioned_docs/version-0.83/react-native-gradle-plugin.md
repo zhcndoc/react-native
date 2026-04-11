@@ -76,7 +76,7 @@ cliFile = file("../node_modules/react-native/cli.js")
 
 ### `debuggableVariants`
 
-这是可调试的变体列表（关于变体的更多信息，请参见[使用变体](#using-variants)）。
+这是可调试的变体列表（关于变体的更多信息，请参见 [使用变体](#using-variants)）。
 
 默认情况下，插件仅把 `debug` 视为 `debuggableVariants`，`release` 则不属于。如果你有其他变体（例如 `staging`、`lite` 等），需要相应调整。
 

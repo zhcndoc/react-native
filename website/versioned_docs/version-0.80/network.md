@@ -1,25 +1,25 @@
 ---
 id: network
-title: Networking
+title: 网络
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-Many mobile apps need to load resources from a remote URL. You may want to make a POST request to a REST API, or you may need to fetch a chunk of static content from another server.
+许多移动应用需要从远程 URL 加载资源。你可能想要向 REST API 发起 POST 请求，或者可能需要从另一个服务器获取一块静态内容。
 
-## Using Fetch
+## 使用 Fetch
 
-React Native provides the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) for your networking needs. Fetch will seem familiar if you have used `XMLHttpRequest` or other networking APIs before. You may refer to MDN's guide on [Using Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) for additional information.
+React Native 为你的网络需求提供了 [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)。如果你以前使用过 `XMLHttpRequest` 或其他网络 API，Fetch 看起来很熟悉。你可以参考 MDN 关于 [使用 Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) 的指南以获取更多信息。
 
-### Making requests
+### 发起请求
 
-In order to fetch content from an arbitrary URL, you can pass the URL to fetch:
+为了从任意 URL 获取内容，你可以将 URL 传递给 fetch：
 
 ```tsx
 fetch('https://mywebsite.com/mydata.json');
 ```
 
-Fetch also takes an optional second argument that allows you to customize the HTTP request. You may want to specify additional headers, or make a POST request:
+Fetch 还接受一个可选的第二个参数，允许你自定义 HTTP 请求。你可能想要指定额外的头部，或发起 POST 请求：
 
 ```tsx
 fetch('https://mywebsite.com/endpoint/', {
@@ -35,13 +35,13 @@ fetch('https://mywebsite.com/endpoint/', {
 });
 ```
 
-Take a look at the [Fetch Request docs](https://developer.mozilla.org/en-US/docs/Web/API/Request) for a full list of properties.
+查看 [Fetch Request 文档](https://developer.mozilla.org/en-US/docs/Web/API/Request) 以获取完整的属性列表。
 
-### Handling the response
+### 处理响应
 
-The above examples show how you can make a request. In many cases, you will want to do something with the response.
+上面的示例展示了如何发起请求。在许多情况下，你会想要对响应做一些处理。
 
-Networking is an inherently asynchronous operation. Fetch method will return a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) that makes it straightforward to write code that works in an asynchronous manner:
+网络操作本质上是异步的。Fetch 方法将返回一个 [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)，这使得编写异步工作的代码变得简单：
 
 ```tsx
 const getMoviesFromApi = () => {
@@ -56,7 +56,7 @@ const getMoviesFromApi = () => {
 };
 ```
 
-You can also use the `async` / `await` syntax in a React Native app:
+你也可以在 React Native 应用中使用 `async` / `await` 语法：
 
 ```tsx
 const getMoviesFromApiAsync = async () => {
@@ -72,7 +72,7 @@ const getMoviesFromApiAsync = async () => {
 };
 ```
 
-Don't forget to catch any errors that may be thrown by `fetch`, otherwise they will be dropped silently.
+别忘了捕获 `fetch` 可能抛出的任何错误，否则它们将被静默丢弃。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -181,13 +181,13 @@ export default App;
 </TabItem>
 </Tabs>
 
-> By default, iOS 9.0 or later enforce App Transport Security (ATS). ATS requires any HTTP connection to use HTTPS. If you need to fetch from a cleartext URL (one that begins with `http`) you will first need to [add an ATS exception](integration-with-existing-apps.md#test-your-integration). If you know ahead of time what domains you will need access to, it is more secure to add exceptions only for those domains; if the domains are not known until runtime you can [disable ATS completely](publishing-to-app-store.md#1-enable-app-transport-security). Note however that from January 2017, [Apple's App Store review will require reasonable justification for disabling ATS](https://forums.developer.apple.com/thread/48979). See [Apple's documentation](https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW33) for more information.
+> 默认情况下，iOS 9.0 或更高版本强制实施 App Transport Security (ATS)。ATS 要求任何 HTTP 连接使用 HTTPS。如果你需要从明文 URL（以 `http` 开头）获取内容，你首先需要 [添加 ATS 例外](integration-with-existing-apps.md#test-your-integration)。如果你提前知道需要访问哪些域名，只为这些域名添加例外会更安全；如果域名直到运行时才知道，你可以 [完全禁用 ATS](publishing-to-app-store.md#1-enable-app-transport-security)。但请注意，从 2017 年 1 月起，[Apple 的 App Store 审核将要求提供禁用 ATS 的合理理由](https://forums.developer.apple.com/thread/48979)。请参阅 [Apple 的文档](https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW33) 以获取更多信息。
 
-> On Android, as of API Level 28, clear text traffic is also blocked by default. This behaviour can be overridden by setting [`android:usesCleartextTraffic`](https://developer.android.com/guide/topics/manifest/application-element#usesCleartextTraffic) in the app manifest file.
+> 在 Android 上，从 API 级别 28 开始，明文流量默认也被阻止。可以通过在应用清单文件中设置 [`android:usesCleartextTraffic`](https://developer.android.com/guide/topics/manifest/application-element#usesCleartextTraffic) 来覆盖此行为。
 
-## Using Other Networking Libraries
+## 使用其他网络库
 
-The [XMLHttpRequest API](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) is built into React Native. This means that you can use third party libraries such as [frisbee](https://github.com/niftylettuce/frisbee) or [axios](https://github.com/axios/axios) that depend on it, or you can use the XMLHttpRequest API directly if you prefer.
+[XMLHttpRequest API](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) 已内置于 React Native 中。这意味着你可以使用依赖它的第三方库，例如 [frisbee](https://github.com/niftylettuce/frisbee) 或 [axios](https://github.com/axios/axios)，或者如果你愿意，可以直接使用 XMLHttpRequest API。
 
 ```tsx
 const request = new XMLHttpRequest();
@@ -207,68 +207,68 @@ request.open('GET', 'https://mywebsite.com/endpoint/');
 request.send();
 ```
 
-> The security model for XMLHttpRequest is different than on web as there is no concept of [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) in native apps.
+> XMLHttpRequest 的安全模型与 Web 不同，因为原生应用中没有 [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) 的概念。
 
-## WebSocket Support
+## WebSocket 支持
 
-React Native also supports [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket), a protocol which provides full-duplex communication channels over a single TCP connection.
+React Native 还支持 [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket)，这是一种通过单个 TCP 连接提供全双工信道的协议。
 
 ```tsx
 const ws = new WebSocket('ws://host.com/path');
 
 ws.onopen = () => {
-  // connection opened
-  ws.send('something'); // send a message
+  // 连接已打开
+  ws.send('something'); // 发送消息
 };
 
 ws.onmessage = e => {
-  // a message was received
+  // 收到消息
   console.log(e.data);
 };
 
 ws.onerror = e => {
-  // an error occurred
+  // 发生错误
   console.log(e.message);
 };
 
 ws.onclose = e => {
-  // connection closed
+  // 连接已关闭
   console.log(e.code, e.reason);
 };
 ```
 
-## Known Issues with `fetch` and cookie based authentication
+## `fetch` 和基于 Cookie 的身份验证的已知问题
 
-The following options are currently not working with `fetch`
+以下选项目前无法与 `fetch` 一起使用
 
 - `redirect:manual`
 - `credentials:omit`
 
-* Having same name headers on Android will result in only the latest one being present. A temporary solution can be found here: https://github.com/facebook/react-native/issues/18837#issuecomment-398779994.
-* Cookie based authentication is currently unstable. You can view some of the issues raised here: https://github.com/facebook/react-native/issues/23185
-* As a minimum on iOS, when redirected through a `302`, if a `Set-Cookie` header is present, the cookie is not set properly. Since the redirect cannot be handled manually this might cause a scenario where infinite requests occur if the redirect is the result of an expired session.
+* 在 Android 上具有相同名称的头部将导致只存在最后一个。临时解决方案可以在这里找到：https://github.com/facebook/react-native/issues/18837#issuecomment-398779994。
+* 基于 Cookie 的身份验证目前不稳定。你可以查看这里提出的一些问题：https://github.com/facebook/react-native/issues/23185
+* 至少在 iOS 上，当通过 `302` 重定向时，如果存在 `Set-Cookie` 头部，Cookie 将无法正确设置。由于无法手动处理重定向，如果重定向是会话过期的结果，这可能会导致发生无限请求的情况。
 
-## Configuring NSURLSession on iOS
+## 在 iOS 上配置 NSURLSession
 
-For some applications it may be appropriate to provide a custom `NSURLSessionConfiguration` for the underlying `NSURLSession` that is used for network requests in a React Native application running on iOS. For instance, one may need to set a custom user agent string for all network requests coming from the app or supply `NSURLSession` with an ephemeral `NSURLSessionConfiguration`. The function `RCTSetCustomNSURLSessionConfigurationProvider` allows for such customization. Remember to add the following import to the file in which `RCTSetCustomNSURLSessionConfigurationProvider` will be called:
+对于某些应用，可能需要为底层 `NSURLSession` 提供自定义的 `NSURLSessionConfiguration`，该 `NSURLSession` 用于在 iOS 上运行的 React Native 应用中的网络请求。例如，可能需要为来自应用的所有网络请求设置自定义用户代理字符串，或为 `NSURLSession` 提供临时的 `NSURLSessionConfiguration`。函数 `RCTSetCustomNSURLSessionConfigurationProvider` 允许进行此类自定义。记得将以下导入添加到调用 `RCTSetCustomNSURLSessionConfigurationProvider` 的文件中：
 
 ```objectivec
 #import <React/RCTHTTPRequestHandler.h>
 ```
 
-`RCTSetCustomNSURLSessionConfigurationProvider` should be called early in the application life cycle such that it is readily available when needed by React, for instance:
+`RCTSetCustomNSURLSessionConfigurationProvider` 应该在应用生命周期的早期调用，以便在 React 需要时立即可用，例如：
 
 ```objectivec
 -(void)application:(__unused UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-  // set RCTSetCustomNSURLSessionConfigurationProvider
+  // 设置 RCTSetCustomNSURLSessionConfigurationProvider
   RCTSetCustomNSURLSessionConfigurationProvider(^NSURLSessionConfiguration *{
      NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-     // configure the session
+     // 配置 session
      return configuration;
   });
 
-  // set up React
+  // 设置 React
   _bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
 }
 ```

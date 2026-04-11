@@ -11,7 +11,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 ### 1. 将 React Native 添加到你的应用中
 
-请按照[与现有应用集成](/docs/integration-with-existing-apps)的指南一直执行到最后，确保你能在全屏 Activity 中安全运行你的 React Native 应用。
+请按照 [与现有应用集成](/docs/integration-with-existing-apps) 的指南一直执行到最后，确保你能在全屏 Activity 中安全运行你的 React Native 应用。
 
 ### 2. 为 React Native Fragment 添加 FrameLayout
 
@@ -34,7 +34,7 @@ React Native 需要这样来处理返回键事件。
 进入你的宿主 Activity，确保它实现了 `DefaultHardwareBackBtnHandler` 接口：
 
 :::warning 已废弃
-`Activity.onBackPressed()` 自 API 级别 33 起已被[废弃](<https://developer.android.com/reference/android/app/Activity#onBackPressed()>)。在 Android 16 设备上的应用如果目标 API 级别为 36，将[不再调用](https://developer.android.com/about/versions/16/behavior-changes-16#predictive-back)它，应改用 [OnBackPressedDispatcher](https://developer.android.com/reference/androidx/activity/OnBackPressedDispatcher)。
+`Activity.onBackPressed()` 自 API 级别 33 起已被 [废弃](<https://developer.android.com/reference/android/app/Activity#onBackPressed()>)。在 Android 16 设备上的应用如果目标 API 级别为 36，将 [不再调用](https://developer.android.com/about/versions/16/behavior-changes-16#predictive-back) 它，应改用 [OnBackPressedDispatcher](https://developer.android.com/reference/androidx/activity/OnBackPressedDispatcher)。
 :::
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>

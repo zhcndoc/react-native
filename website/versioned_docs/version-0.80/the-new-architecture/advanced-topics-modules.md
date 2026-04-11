@@ -1,10 +1,10 @@
-# Advanced Topics on Native Modules Development
+# 原生模块开发的高级主题
 
-This document contains a set of advanced topics to implement more complex functionalities of Native Modules. It is recommended to first read the [Codegen](/docs/the-new-architecture/what-is-codegen) section and the guides on [Native Modules](/docs/turbo-native-modules-introduction).
+本文档包含一系列高级主题，用于实现原生模块更复杂的功能。建议先阅读 [Codegen](/docs/the-new-architecture/what-is-codegen) 部分和关于 [原生模块](/docs/turbo-native-modules-introduction) 的指南。
 
-This guide will cover the following topics:
+本指南将涵盖以下主题：
 
-- [Add custom C++ types to your C++ modules](/docs/the-new-architecture/custom-cxx-types)
-- [Use Swift in your Module](/docs/next/the-new-architecture/turbo-modules-with-swift)
-- [Emit custom events from your Native Modules](/docs/next/the-new-architecture/native-modules-custom-events)
-- [Native Modules Lifecycle](/docs/next/the-new-architecture/native-modules-lifecycle)
+- [向你的 C++ 模块添加自定义 C++ 类型](/docs/the-new-architecture/custom-cxx-types)
+- [在你的模块中使用 Swift](/docs/next/the-new-architecture/turbo-modules-with-swift)
+- [从你的原生模块发出自定义事件](/docs/next/the-new-architecture/native-modules-custom-events)
+- [原生模块生命周期](/docs/next/the-new-architecture/native-modules-lifecycle)

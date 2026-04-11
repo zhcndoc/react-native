@@ -84,11 +84,11 @@ export default TouchableHighlightExample;
 
 # 参考资料
 
-## Props
+## 属性
 
-### [TouchableWithoutFeedback Props](touchablewithoutfeedback.md#props)
+### [TouchableWithoutFeedback 属性](touchablewithoutfeedback.md#props)
 
-继承自 [TouchableWithoutFeedback Props](touchablewithoutfeedback.md#props)。
+继承自 [TouchableWithoutFeedback 属性](touchablewithoutfeedback.md#props)。
 
 ---
 
@@ -98,7 +98,7 @@ export default TouchableHighlightExample;
 
 | 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
@@ -108,7 +108,7 @@ export default TouchableHighlightExample;
 
 | 类型     |
 | -------- |
-| function |
+| 函数 |
 
 ---
 
@@ -118,13 +118,13 @@ export default TouchableHighlightExample;
 
 | 类型     |
 | -------- |
-| function |
+| 函数 |
 
 ---
 
 ### `ref`
 
-一个 ref 设置器，组件挂载后会被赋值为一个 [element node](element-nodes)。
+一个 ref 设置器，组件挂载后会被赋值为一个 [元素节点](element-nodes)。
 
 ---
 
@@ -142,7 +142,7 @@ export default TouchableHighlightExample;
 
 | 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
@@ -152,7 +152,7 @@ _（仅限 Apple TV）_ TV 首选焦点（参见 View 组件文档）。
 
 | 类型 |
 | ---- |
-| bool |
+| 布尔值 |
 
 ---
 
@@ -162,7 +162,7 @@ TV 向下的下一个焦点（参见 View 组件文档）。
 
 | 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
@@ -172,7 +172,7 @@ TV 向前的下一个焦点（参见 View 组件文档）。
 
 | 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
@@ -182,7 +182,7 @@ TV 向左的下一个焦点（参见 View 组件文档）。
 
 | 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
@@ -192,7 +192,7 @@ TV 向右的下一个焦点（参见 View 组件文档）。
 
 | 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
@@ -202,7 +202,7 @@ TV 向上的下一个焦点（参见 View 组件文档）。
 
 | 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
@@ -212,4 +212,4 @@ TV 向上的下一个焦点（参见 View 组件文档）。
 
 | 类型 |
 | ---- |
-| bool |
+| 布尔值 |

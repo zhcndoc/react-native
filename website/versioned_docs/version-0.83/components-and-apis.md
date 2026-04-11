@@ -3,7 +3,7 @@ id: components-and-apis
 title: 核心组件和 API
 ---
 
-React Native 提供了许多内置的[核心组件](intro-react-native-components)，可供您在应用中直接使用。您可以在左侧边栏（如果屏幕较窄，则在上方菜单）中找到它们全部内容。如果您不确定从哪里开始，请浏览以下分类：
+React Native 提供了许多内置的 [核心组件](intro-react-native-components)，可供您在应用中直接使用。您可以在左侧边栏（如果屏幕较窄，则在上方菜单）中找到它们全部内容。如果您不确定从哪里开始，请浏览以下分类：
 
 - [基础组件](components-and-apis#basic-components)
 - [用户界面](components-and-apis#user-interface)
@@ -12,7 +12,7 @@ React Native 提供了许多内置的[核心组件](intro-react-native-component
 - [iOS 专用](components-and-apis#ios-components-and-apis)
 - [其他](components-and-apis#others)
 
-您并不局限于 React Native 自带的组件和 API。React Native 拥有一个由数千名开发者组成的社区。如果您在寻找某个特定功能的库，请参考[关于寻找库的指南](libraries#finding-libraries)。
+您并不局限于 React Native 自带的组件和 API。React Native 拥有一个由数千名开发者组成的社区。如果您在寻找某个特定功能的库，请参考 [关于寻找库的指南](libraries#finding-libraries)。
 
 ## 基础组件
 

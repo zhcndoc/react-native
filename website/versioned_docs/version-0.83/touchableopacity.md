@@ -148,4 +148,4 @@ TV 向上下一个聚焦元素（详见 View 组件文档）。
 
 ### `ref`
 
-一个 ref 设置器，组件挂载时会被赋值为一个 [element node](element-nodes)。
+一个 ref 设置器，组件挂载时会被赋值为一个 [元素节点](element-nodes)。

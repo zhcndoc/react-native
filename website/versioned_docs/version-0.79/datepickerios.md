@@ -3,11 +3,11 @@ id: datepickerios
 title: '❌ DatePickerIOS'
 ---
 
-> **Removed.** Use one of the [community packages](https://reactnative.directory/?search=datepicker) instead.
+> **已移除。** 请改用 [社区包](https://reactnative.directory/?search=datepicker) 之一。
 
-Use `DatePickerIOS` to render a date/time picker (selector) on iOS. This is a controlled component, so you must hook in to the `onDateChange` callback and update the `date` prop in order for the component to update, otherwise the user's change will be reverted immediately to reflect `props.date` as the source of truth.
+使用 `DatePickerIOS` 在 iOS 上渲染日期/时间选择器（选择器）。这是一个受控组件，因此你必须挂钩到 `onDateChange` 回调并更新 `date` 属性以便组件更新，否则用户的更改将立即还原，以反映 `props.date` 作为真实来源。
 
-### Example
+### 示例
 
 ```SnackPlayer name=DatePickerIOS&supportedPlatforms=ios&disableLinting=true
 import React, {useState} from 'react';
@@ -35,57 +35,57 @@ export default App;
 
 ---
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
-Inherits [View Props](view.md#props).
+继承 [View 属性](view.md#props)。
 
 ### `date`
 
-The currently selected date.
+当前选中的日期。
 
-| Type | Required |
+| 类型 | 必填 |
 | ---- | -------- |
-| Date | Yes      |
+| Date | 是      |
 
 ---
 
 ### `onChange`
 
-Date change handler.
+日期更改处理程序。
 
-This is called when the user changes the date or time in the UI. The first and only argument is an Event. For getting the date the picker was changed to, use onDateChange instead.
+当用户在 UI 中更改日期或时间时调用此方法。第一个且唯一的参数是一个 Event。要获取选择器更改后的日期，请改用 onDateChange。
 
-| Type     | Required |
+| 类型     | 必填 |
 | -------- | -------- |
-| function | No       |
+| function | 否       |
 
 ---
 
 ### `onDateChange`
 
-Date change handler.
+日期更改处理程序。
 
-This is called when the user changes the date or time in the UI. The first and only argument is a Date object representing the new date and time.
+当用户在 UI 中更改日期或时间时调用此方法。第一个且唯一的参数是一个表示新日期和时间的 Date 对象。
 
-| Type     | Required |
+| 类型     | 必填 |
 | -------- | -------- |
-| function | Yes      |
+| function | 是      |
 
 ---
 
 ### `maximumDate`
 
-Maximum date.
+最大日期。
 
-Restricts the range of possible date/time values.
+限制可能的日期/时间值范围。
 
-| Type | Required |
+| 类型 | 必填 |
 | ---- | -------- |
-| Date | No       |
+| Date | 否       |
 
-Example with `maximumDate` set to December 31, 2017:
+设置 `maximumDate` 为 2017 年 12 月 31 日的示例：
 
 <center><img src="/docs/assets/DatePickerIOS/maximumDate.gif" width="360"></img></center>
 
@@ -93,27 +93,27 @@ Example with `maximumDate` set to December 31, 2017:
 
 ### `minimumDate`
 
-Minimum date.
+最小日期。
 
-Restricts the range of possible date/time values.
+限制可能的日期/时间值范围。
 
-| Type | Required |
+| 类型 | 必填 |
 | ---- | -------- |
-| Date | No       |
+| Date | 否       |
 
-See [`maximumDate`](#maximumdate) for an example image.
+参见 [`maximumDate`](#maximumdate) 获取示例图片。
 
 ---
 
 ### `minuteInterval`
 
-The interval at which minutes can be selected.
+可选择分钟的间隔。
 
-| Type                                       | Required |
+| 类型                                       | 必填 |
 | ------------------------------------------ | -------- |
-| enum(1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30) | No       |
+| enum(1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30) | 否       |
 
-Example with `minuteInterval` set to `10`:
+设置 `minuteInterval` 为 `10` 的示例：
 
 <center><img src="/docs/assets/DatePickerIOS/minuteInterval.png" width="360"></img></center>
 
@@ -121,42 +121,42 @@ Example with `minuteInterval` set to `10`:
 
 ### `mode`
 
-The date picker mode.
+日期选择器模式。
 
-| Type                                          | Required |
+| 类型                                          | 必填 |
 | --------------------------------------------- | -------- |
-| enum('date', 'time', 'datetime', 'countdown') | No       |
+| enum('date', 'time', 'datetime', 'countdown') | 否       |
 
-Example with `mode` set to `date`, `time`, and `datetime`: ![](/docs/assets/DatePickerIOS/mode.png)
+设置 `mode` 为 `date`、`time` 和 `datetime` 的示例：![](/docs/assets/DatePickerIOS/mode.png)
 
 ---
 
 ### `locale`
 
-The locale for the date picker. Value needs to be a [Locale ID](https://developer.apple.com/library/content/documentation/MacOSX/Conceptual/BPInternational/LanguageandLocaleIDs/LanguageandLocaleIDs.html).
+日期选择器的区域设置。值需要是一个 [区域设置 ID](https://developer.apple.com/library/content/documentation/MacOSX/Conceptual/BPInternational/LanguageandLocaleIDs/LanguageandLocaleIDs.html)。
 
-| Type   | Required |
+| 类型   | 必填 |
 | ------ | -------- |
-| String | No       |
+| String | 否       |
 
 ---
 
 ### `timeZoneOffsetInMinutes`
 
-Timezone offset in minutes.
+时区偏移量（分钟）。
 
-By default, the date picker will use the device's timezone. With this parameter, it is possible to force a certain timezone offset. For instance, to show times in Pacific Standard Time, pass -7 \* 60.
+默认情况下，日期选择器将使用设备的时区。使用此参数，可以强制特定的时区偏移量。例如，要显示太平洋标准时间，传递 -7 \* 60。
 
-| Type   | Required |
+| 类型   | 必填 |
 | ------ | -------- |
-| number | No       |
+| number | 否       |
 
 ---
 
 ### `initialDate`
 
-Provides an initial value that will change when the user starts selecting a date. It is useful for use-cases where you do not want to deal with listening to events and updating the date prop to keep the controlled state in sync. The controlled state has known bugs which causes it to go out of sync with native. The initialDate prop is intended to allow you to have native be source of truth.
+提供一个初始值，当用户开始选择日期时该值会更改。它适用于你不想处理监听事件和更新 date 属性以保持受控状态同步的用例。受控状态存在已知缺陷，会导致其与原生不同步。initialDate 属性旨在允许你将原生作为真实来源。
 
-| Type | Required |
+| 类型 | 必填 |
 | ---- | -------- |
-| Date | No       |
+| Date | 否       |

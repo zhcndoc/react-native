@@ -152,7 +152,7 @@ import Foundation
 
 ```diff title="SampleApp-Bridging-Header.h"
 //
-//  Use this file to import your target's public headers that you would like to expose to Swift.
+//  使用此文件导入你希望暴露给 Swift 的目标公共头文件。
 //
 
 + #import <React-RCTAppDelegate/RCTDefaultReactNativeFactoryDelegate.h>

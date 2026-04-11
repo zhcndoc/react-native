@@ -75,12 +75,12 @@ static showActionSheetWithOptions: (
 
 - `options`（字符串数组）- 按钮标题列表（必填）
 - `cancelButtonIndex`（整数）- `options` 中取消按钮的索引
-- `cancelButtonTintColor`（字符串）- 用于更改取消按钮文本颜色的[颜色](colors)
+- `cancelButtonTintColor`（字符串）- 用于更改取消按钮文本颜色的 [颜色](colors)
 - `destructiveButtonIndex`（整数或整数数组）- `options` 中破坏性按钮的索引
 - `title`（字符串）- 显示在操作表上方的标题
 - `message`（字符串）- 显示在标题下方的消息
 - `anchor`（数字）- 操作表应锚定的节点（用于 iPad）
-- `tintColor`（字符串）- 用于非破坏性按钮标题的[颜色](colors)
+- `tintColor`（字符串）- 用于非破坏性按钮标题的 [颜色](colors)
 - `disabledButtonIndices`（数字数组）- 需禁用的按钮索引列表
 - `userInterfaceStyle`（字符串）- 操作表的界面样式，可设置为 `light` 或 `dark`，否则使用默认系统样式
 

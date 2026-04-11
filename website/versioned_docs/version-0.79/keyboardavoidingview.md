@@ -3,9 +3,9 @@ id: keyboardavoidingview
 title: KeyboardAvoidingView
 ---
 
-This component will automatically adjust its height, position, or bottom padding based on the keyboard height to remain visible while the virtual keyboard is displayed.
+此组件会根据键盘高度自动调整其高度、位置或底部内边距，以便在显示虚拟键盘时保持可见。
 
-## Example
+## 示例
 
 ```SnackPlayer name=KeyboardAvoidingView&supportedPlatforms=android,ios
 import React from 'react';
@@ -69,23 +69,23 @@ export default KeyboardAvoidingComponent;
 
 ---
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
-### [View Props](view.md#props)
+### [View 属性](view.md#props)
 
-Inherits [View Props](view.md#props).
+继承 [View 属性](view.md#props)。
 
 ---
 
 ### `behavior`
 
-Specify how to react to the presence of the keyboard.
+指定如何响应键盘的存在。
 
-> Android and iOS both interact with this prop differently. On both iOS and Android, setting `behavior` is recommended.
+> Android 和 iOS 与此属性的交互方式不同。在 iOS 和 Android 上，都建议设置 `behavior`。
 
-| Type                                        |
+| 类型                                        |
 | ------------------------------------------- |
 | enum(`'height'`, `'position'`, `'padding'`) |
 
@@ -93,19 +93,19 @@ Specify how to react to the presence of the keyboard.
 
 ### `contentContainerStyle`
 
-The style of the content container (View) when behavior is `'position'`.
+当 behavior 为 `'position'` 时内容容器（View）的样式。
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
-| [View Style](view-style-props.md) |
+| [View 样式](view-style-props.md) |
 
 ---
 
 ### `enabled`
 
-Enabled or disabled KeyboardAvoidingView.
+启用或禁用 KeyboardAvoidingView。
 
-| Type    | Default |
+| 类型    | 默认值 |
 | ------- | ------- |
 | boolean | `true`  |
 
@@ -113,8 +113,8 @@ Enabled or disabled KeyboardAvoidingView.
 
 ### `keyboardVerticalOffset`
 
-This is the distance between the top of the user screen and the react native view, may be non-zero in some use cases.
+这是用户屏幕顶部与 React Native 视图之间的距离，在某些使用情况下可能不为零。
 
-| Type   | Default |
+| 类型   | 默认值 |
 | ------ | ------- |
 | number | `0`     |

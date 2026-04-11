@@ -128,7 +128,7 @@ export default () => {
 </TabItem>
 </Tabs>
 
-让我们分解一下这里发生的事情。在 `FadeInView` 的渲染方法中，一个新的 `Animated.Value`  called `fadeAnim` 使用 `useRef` 初始化。`View` 的 opacity 属性映射到这个动画值。在幕后，提取数值并用于设置不透明度。
+让我们分解一下这里发生的事情。在 `FadeInView` 的渲染方法中，一个新的 `Animated.Value` 名为 `fadeAnim` 使用 `useRef` 初始化。`View` 的 opacity 属性映射到这个动画值。在幕后，提取数值并用于设置不透明度。
 
 当组件挂载时，不透明度设置为 0。然后，在 `fadeAnim` 动画值上启动缓动动画，随着值动画化为最终值 1，它将在每一帧更新其所有依赖的映射（在本例中仅为不透明度）。
 

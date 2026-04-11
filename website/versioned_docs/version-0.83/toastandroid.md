@@ -13,7 +13,7 @@ React Native 的 ToastAndroid API 将 Android 平台的 ToastAndroid 模块作�
 `showWithGravityAndOffset(message, duration, gravity, xOffset, yOffset)` 方法可以进一步指定像素偏移量。
 
 :::note
-从 Android 11（API 级别 30）开始，设置重力（gravity）不会对文本 toast 有效。详见[这里](https://developer.android.com/about/versions/11/behavior-changes-11#text-toast-api-changes)。
+从 Android 11（API 级别 30）开始，设置重力（gravity）不会对文本 toast 有效。详见 [这里](https://developer.android.com/about/versions/11/behavior-changes-11#text-toast-api-changes)。
 :::
 
 ```SnackPlayer name=Toast%20Android%20API%20Example&supportedPlatforms=android

@@ -1,9 +1,9 @@
 ---
 id: platform
-title: Platform
+title: 平台
 ---
 
-## Example
+## 示例
 
 ```SnackPlayer name=Platform%20API%20Example&supportedPlatforms=ios,android
 import React from 'react';
@@ -58,9 +58,9 @@ export default App;
 
 ---
 
-# Reference
+# 参考
 
-## Properties
+## 属性
 
 ### `constants`
 
@@ -68,27 +68,27 @@ export default App;
 static constants: PlatformConstants;
 ```
 
-Returns an object which contains all available common and specific constants related to the platform.
+返回一个对象，其中包含与平台相关的所有可用的通用和特定常量。
 
-**Properties:**
+**属性：**
 
-| <div className="widerColumn">Name</div>                   | Type    | Optional | Description                                                                                                                                                                                       |
+| <div className="widerColumn">名称</div>                   | 类型    | 可选 | 描述                                                                                                                                                                                       |
 | --------------------------------------------------------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| isTesting                                                 | boolean | No       |                                                                                                                                                                                                   |
-| reactNativeVersion                                        | object  | No       | Information about React Native version. Keys are `major`, `minor`, `patch` with optional `prerelease` and values are `number`s.                                                                   |
-| Version <div className="label android">Android</div>      | number  | No       | OS version constant specific to Android.                                                                                                                                                          |
-| Release <div className="label android">Android</div>      | string  | No       |                                                                                                                                                                                                   |
-| Serial <div className="label android">Android</div>       | string  | No       | Hardware serial number of an Android device.                                                                                                                                                      |
-| Fingerprint <div className="label android">Android</div>  | string  | No       | A string that uniquely identifies the build.                                                                                                                                                      |
-| Model <div className="label android">Android</div>        | string  | No       | The end-user-visible name for the Android device.                                                                                                                                                 |
-| Brand <div className="label android">Android</div>        | string  | No       | The consumer-visible brand with which the product/hardware will be associated.                                                                                                                    |
-| Manufacturer <div className="label android">Android</div> | string  | No       | The manufacturer of the Android device.                                                                                                                                                           |
-| ServerHost <div className="label android">Android</div>   | string  | Yes      |                                                                                                                                                                                                   |
-| uiMode <div className="label android">Android</div>       | string  | No       | Possible values are: `'car'`, `'desk'`, `'normal'`,`'tv'`, `'watch'` and `'unknown'`. Read more about [Android ModeType](https://developer.android.com/reference/android/app/UiModeManager.html). |
-| forceTouchAvailable <div className="label ios">iOS</div>  | boolean | No       | Indicate the availability of 3D Touch on a device.                                                                                                                                                |
-| interfaceIdiom <div className="label ios">iOS</div>       | string  | No       | The interface type for the device. Read more about [UIUserInterfaceIdiom](https://developer.apple.com/documentation/uikit/uiuserinterfaceidiom).                                                  |
-| osVersion <div className="label ios">iOS</div>            | string  | No       | OS version constant specific to iOS.                                                                                                                                                              |
-| systemName <div className="label ios">iOS</div>           | string  | No       | OS name constant specific to iOS.                                                                                                                                                                 |
+| isTesting                                                 | boolean | 否       |                                                                                                                                                                                                   |
+| reactNativeVersion                                        | object  | 否       | 关于 React Native 版本的信息。键为 `major`、`minor`、`patch`，可选的 `prerelease`，值为 `number`。                                                                   |
+| Version <div className="label android">Android</div>      | number  | 否       | Android 特定的 OS 版本常量。                                                                                                                                                          |
+| Release <div className="label android">Android</div>      | string  | 否       |                                                                                                                                                                                                   |
+| Serial <div className="label android">Android</div>       | string  | 否       | Android 设备的硬件序列号。                                                                                                                                                      |
+| Fingerprint <div className="label android">Android</div>  | string  | 否       | 唯一标识构建的字符串。                                                                                                                                                      |
+| Model <div className="label android">Android</div>        | string  | 否       | Android 设备的最终用户可见名称。                                                                                                                                                 |
+| Brand <div className="label android">Android</div>        | string  | 否       | 与产品/硬件关联的消费者可见品牌。                                                                                                                    |
+| Manufacturer <div className="label android">Android</div> | string  | 否       | Android 设备的制造商。                                                                                                                                                           |
+| ServerHost <div className="label android">Android</div>   | string  | 是      |                                                                                                                                                                                                   |
+| uiMode <div className="label android">Android</div>       | string  | 否       | 可能的值为：`'car'`、`'desk'`、`'normal'`、`'tv'`、`'watch'` 和 `'unknown'`。了解更多关于 [Android 模式类型](https://developer.android.com/reference/android/app/UiModeManager.html)。 |
+| forceTouchAvailable <div className="label ios">iOS</div>  | boolean | 否       | 指示设备上 3D Touch 的可用性。                                                                                                                                                |
+| interfaceIdiom <div className="label ios">iOS</div>       | string  | 否       | 设备的界面类型。了解更多关于 [UIUserInterfaceIdiom](https://developer.apple.com/documentation/uikit/uiuserinterfaceidiom)。                                                  |
+| osVersion <div className="label ios">iOS</div>            | string  | 否       | iOS 特定的 OS 版本常量。                                                                                                                                                              |
+| systemName <div className="label ios">iOS</div>           | string  | 否       | iOS 特定的 OS 名称常量。                                                                                                                                                                 |
 
 ---
 
@@ -98,9 +98,9 @@ Returns an object which contains all available common and specific constants rel
 static isPad: boolean;
 ```
 
-Returns a boolean which defines if device is an iPad.
+返回一个布尔值，定义设备是否为 iPad。
 
-| Type    |
+| 类型    |
 | ------- |
 | boolean |
 
@@ -112,9 +112,9 @@ Returns a boolean which defines if device is an iPad.
 static isTV: boolean;
 ```
 
-Returns a boolean which defines if device is a TV.
+返回一个布尔值，定义设备是否为电视。
 
-| Type    |
+| 类型    |
 | ------- |
 | boolean |
 
@@ -126,9 +126,9 @@ Returns a boolean which defines if device is a TV.
 static isVision: boolean;
 ```
 
-Returns a boolean which defines if device is an Apple Vision. _If you are using [Apple Vision Pro (Designed for iPad)](https://developer.apple.com/documentation/visionos/checking-whether-your-app-is-compatible-with-visionos) `isVision` will be `false` but `isPad` will be `true`_
+返回一个布尔值，定义设备是否为 Apple Vision。_如果您使用的是 [Apple Vision Pro (Designed for iPad)](https://developer.apple.com/documentation/visionos/checking-whether-your-app-is-compatible-with-visionos) `isVision` 将为 `false` 但 `isPad` 将为 `true`_
 
-| Type    |
+| 类型    |
 | ------- |
 | boolean |
 
@@ -140,9 +140,9 @@ Returns a boolean which defines if device is an Apple Vision. _If you are using 
 static isTesting: boolean;
 ```
 
-Returns a boolean which defines if application is running in Developer Mode with testing flag set.
+返回一个布尔值，定义应用程序是否在设置了测试标志的开发者模式下运行。
 
-| Type    |
+| 类型    |
 | ------- |
 | boolean |
 
@@ -154,9 +154,9 @@ Returns a boolean which defines if application is running in Developer Mode with
 static OS: 'android' | 'ios';
 ```
 
-Returns string value representing the current OS.
+返回表示当前操作系统的字符串值。
 
-| Type                       |
+| 类型                       |
 | -------------------------- |
 | enum(`'android'`, `'ios'`) |
 
@@ -168,13 +168,13 @@ Returns string value representing the current OS.
 static Version: 'number' | 'string';
 ```
 
-Returns the version of the OS.
+返回操作系统的版本。
 
-| Type                                                                                                 |
+| 类型                                                                                                 |
 | ---------------------------------------------------------------------------------------------------- |
 | number <div className="label android">Android</div><hr />string <div className="label ios">iOS</div> |
 
-## Methods
+## 方法
 
 ### `select()`
 
@@ -182,24 +182,24 @@ Returns the version of the OS.
 static select(config: Record<string, T>): T;
 ```
 
-Returns the most fitting value for the platform you are currently running on.
+返回最适合您当前运行平台的值。
 
-#### Parameters:
+#### 参数：
 
-| Name   | Type   | Required | Description                   |
+| 名称   | 类型   | 必填 | 描述                   |
 | ------ | ------ | -------- | ----------------------------- |
-| config | object | Yes      | See config description below. |
+| config | object | 是      | 见下方的配置描述。 |
 
-Select method returns the most fitting value for the platform you are currently running on. That is, if you're running on a phone, `android` and `ios` keys will take preference. If those are not specified, `native` key will be used and then the `default` key.
+select 方法返回最适合您当前运行平台的值。也就是说，如果您在手机上运行，`android` 和 `ios` 键将优先。如果未指定这些，将使用 `native` 键，然后是 `default` 键。
 
-The `config` parameter is an object with the following keys:
+`config` 参数是一个具有以下键的对象：
 
 - `android` (any)
 - `ios` (any)
 - `native` (any)
 - `default` (any)
 
-**Example usage:**
+**示例用法：**
 
 ```tsx
 import {Platform, StyleSheet} from 'react-native';
@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'red',
       },
       default: {
-        // other platforms, web for example
+        // 其他平台，例如 web
         backgroundColor: 'blue',
       },
     }),
@@ -223,9 +223,9 @@ const styles = StyleSheet.create({
 });
 ```
 
-This will result in a container having `flex: 1` on all platforms, a green background color on Android, a red background color on iOS, and a blue background color on other platforms.
+这将导致容器在所有平台上具有 `flex: 1`，在 Android 上具有绿色背景色，在 iOS 上具有红色背景色，在其他平台上具有蓝色背景色。
 
-Since the value of the corresponding platform key can be of type `any`, [`select`](platform.md#select) method can also be used to return platform-specific components, like below:
+由于相应平台键的值可以是 `any` 类型，[`select`](platform.md#select) 方法也可用于返回特定于平台的组件，如下所示：
 
 ```tsx
 const Component = Platform.select({

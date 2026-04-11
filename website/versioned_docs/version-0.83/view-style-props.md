@@ -355,7 +355,7 @@ export default App;
 `filter` 仅在 [新架构](/architecture/landing-page) 中可用
 :::
 
-向 `View` 添加图形滤镜。滤镜由若干 _滤镜函数_ 组成，每一个代表对 `View` 图形组成的原子改变。完整的有效滤镜函数列表如下。`filter` 也会应用于 `View` 的子孙元素。`filter` 等同于设置了 `overflow: hidden`，所以子孙元素会被限制在 `View` 的边界内。
+向 `View` 添加图形滤镜。滤镜由若干 _滤镜函数_ 组成，每一个代表对 `View` 图形组成的原子改变。完整的有效滤镜函数列表如下。`filter` 也会应用于 `View` 的子孙元素。`filter` 等同于设置了 `overflow: 'hidden'`，所以子孙元素会被限制在 `View` 的边界内。
 
 以下滤镜函数适用于所有平台：
 

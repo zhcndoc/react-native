@@ -3,9 +3,9 @@ id: textinput
 title: TextInput
 ---
 
-A foundational component for inputting text into the app via a keyboard. Props provide configurability for several features, such as auto-correction, auto-capitalization, placeholder text, and different keyboard types, such as a numeric keypad.
+通过键盘向应用输入文本的基础组件。Props 提供了几种功能的可配置性，例如自动纠正、自动大写、占位符文本以及不同的键盘类型，例如数字键盘。
 
-The most basic use case is to plop down a `TextInput` and subscribe to the `onChangeText` events to read the user input. There are also other events, such as `onSubmitEditing` and `onFocus` that can be subscribed to. A minimal example:
+最基本的用例是放置一个 `TextInput` 并订阅 `onChangeText` 事件以读取用户输入。还有其他事件，例如 `onSubmitEditing` 和 `onFocus` 也可以被订阅。一个最小的示例：
 
 ```SnackPlayer name=TextInput%20Example
 import React from 'react';
@@ -48,9 +48,9 @@ const styles = StyleSheet.create({
 export default TextInputExample;
 ```
 
-Two methods exposed via the native element are `.focus()` and `.blur()` that will focus or blur the TextInput programmatically.
+通过原生元素暴露的两个方法是 `.focus()` 和 `.blur()`，它们将以编程方式聚焦或取消聚焦 TextInput。
 
-Note that some props are only available with `multiline={true/false}`. Additionally, border styles that apply to only one side of the element (e.g., `borderBottomColor`, `borderLeftWidth`, etc.) will not be applied if `multiline=true`. To achieve the same effect, you can wrap your `TextInput` in a `View`:
+请注意，某些 props 仅在 `multiline={true/false}` 时可用。此外，仅应用于元素一侧的边框样式（例如 `borderBottomColor`、`borderLeftWidth` 等）在 `multiline=true` 时将不会应用。要实现相同的效果，你可以将 `TextInput` 包裹在 `View` 中：
 
 ```SnackPlayer name=Multiline%20TextInput%20Example
 import React from 'react';
@@ -60,8 +60,8 @@ import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 const MultilineTextInputExample = () => {
   const [value, onChangeText] = React.useState('Useless Multiline Placeholder');
 
-  // If you type something in the text box that is a color,
-  // the background will change to that color.
+  // 如果你在文本框中输入的是颜色，
+  // 背景将会变成该颜色。
   return (
     <SafeAreaProvider>
       <SafeAreaView
@@ -95,27 +95,27 @@ const styles = StyleSheet.create({
 export default MultilineTextInputExample;
 ```
 
-`TextInput` has a border at the bottom of its view by default. This border has its padding set by the background image provided by the system, and it cannot be changed. Solutions to avoid this are to either not set height explicitly, in which case the system will take care of displaying the border in the correct position, or to not display the border by setting `underlineColorAndroid` to transparent.
+`TextInput` 默认在其视图底部有一个边框。该边框的内边距由系统提供的背景图像设置，无法更改。避免这种情况的解决方案是 either 不显式设置高度，在这种情况下系统将负责在正确位置显示边框，或者通过将 `underlineColorAndroid` 设置为 transparent 来不显示边框。
 
-Note that on Android performing text selection in an input can change the app's activity `windowSoftInputMode` param to `adjustResize`. This may cause issues with components that have position: 'absolute' while the keyboard is active. To avoid this behavior either specify `windowSoftInputMode` in AndroidManifest.xml ( https://developer.android.com/guide/topics/manifest/activity-element.html ) or control this param programmatically with native code.
+请注意，在 Android 上，在输入框中执行文本选择可能会将应用的 activity `windowSoftInputMode` 参数更改为 `adjustResize`。这可能会导致具有 position: 'absolute' 的组件在键盘活动时出现问题。要避免此行为，请在 AndroidManifest.xml 中指定 `windowSoftInputMode` ( https://developer.android.com/guide/topics/manifest/activity-element.html ) 或通过原生代码以编程方式控制此参数。
 
 ---
 
-# Reference
+# 参考
 
-## Props
+## 属性 (Props)
 
-### [View Props](view.md#props)
+### [View 属性](view.md#props)
 
-Inherits [View Props](view.md#props).
+继承 [View 属性](view.md#props)。
 
 ---
 
 ### `allowFontScaling`
 
-Specifies whether fonts should scale to respect Text Size accessibility settings. The default is `true`.
+指定字体是否应该缩放以尊重文本大小无障碍设置。默认值为 `true`。
 
-| Type |
+| 类型 |
 | ---- |
 | bool |
 
@@ -123,14 +123,14 @@ Specifies whether fonts should scale to respect Text Size accessibility settings
 
 ### `autoCapitalize`
 
-Tells `TextInput` to automatically capitalize certain characters. This property is not supported by some keyboard types such as `name-phone-pad`.
+告诉 `TextInput` 自动大写某些字符。此属性不受某些键盘类型支持，例如 `name-phone-pad`。
 
-- `characters`: all characters.
-- `words`: first letter of each word.
-- `sentences`: first letter of each sentence (_default_).
-- `none`: don't auto capitalize anything.
+- `characters`: 所有字符。
+- `words`: 每个单词的首字母。
+- `sentences`: 每个句子的首字母 (_默认_)。
+- `none`: 不自动大写任何内容。
 
-| Type                                             |
+| 类型                                             |
 | ------------------------------------------------ |
 | enum('none', 'sentences', 'words', 'characters') |
 
@@ -138,9 +138,9 @@ Tells `TextInput` to automatically capitalize certain characters. This property 
 
 ### `autoComplete`
 
-Specifies autocomplete hints for the system, so it can provide autofill. On Android, the system will always attempt to offer autofill by using heuristics to identify the type of content. To disable autocomplete, set `autoComplete` to `off`.
+为系统指定自动完成提示，以便它可以提供自动填充。在 Android 上，系统将始终尝试使用启发式方法识别内容类型来提供自动填充。要禁用自动完成，请将 `autoComplete` 设置为 `off`。
 
-The following values work across platforms:
+以下值适用于所有平台：
 
 - `additional-name`
 - `address-line1`
@@ -173,7 +173,7 @@ The following values work across platforms:
 
 <div className="label basic ios">iOS</div>
 
-The following values work on iOS only:
+以下值仅适用于 iOS：
 
 - `cc-family-name` (iOS 17+)
 - `cc-given-name` (iOS 17+)
@@ -187,7 +187,7 @@ The following values work on iOS only:
 
 <div className="label basic android">Android</div>
 
-The following values work on Android only:
+以下值仅适用于 Android：
 
 - `gender`
 - `name-family`
@@ -210,7 +210,7 @@ The following values work on Android only:
 - `tel-national`
 - `username-new`
 
-| Type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 类型                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | enum('additional-name', 'address-line1', 'address-line2', 'birthdate-day', 'birthdate-full', 'birthdate-month', 'birthdate-year', 'cc-csc', 'cc-exp', 'cc-exp-day', 'cc-exp-month', 'cc-exp-year', 'cc-number', 'country', 'current-password', 'email', 'family-name', 'given-name', 'honorific-prefix', 'honorific-suffix', 'name', 'new-password', 'off', 'one-time-code', 'postal-code', 'street-address', 'tel', 'username', 'cc-family-name', 'cc-given-name', 'cc-middle-name', 'cc-name', 'cc-type', 'nickname', 'organization', 'organization-title', 'url', 'gender', 'name-family', 'name-given', 'name-middle', 'name-middle-initial', 'name-prefix', 'name-suffix', 'password', 'password-new', 'postal-address', 'postal-address-country', 'postal-address-extended', 'postal-address-extended-postal-code', 'postal-address-locality', 'postal-address-region', 'sms-otp', 'tel-country-code', 'tel-device', 'tel-national', 'username-new') |
 
@@ -218,9 +218,9 @@ The following values work on Android only:
 
 ### `autoCorrect`
 
-If `false`, disables auto-correct. The default value is `true`.
+如果为 `false`，禁用自动纠正。默认值为 `true`。
 
-| Type |
+| 类型 |
 | ---- |
 | bool |
 
@@ -228,9 +228,9 @@ If `false`, disables auto-correct. The default value is `true`.
 
 ### `autoFocus`
 
-If `true`, focuses the input. The default value is `false`.
+如果为 `true`，聚焦输入框。默认值为 `false`。
 
-| Type |
+| 类型 |
 | ---- |
 | bool |
 
@@ -238,13 +238,13 @@ If `true`, focuses the input. The default value is `false`.
 
 ### 🗑️ `blurOnSubmit`
 
-:::warning Deprecated
-Note that `submitBehavior` now takes the place of `blurOnSubmit` and will override any behavior defined by `blurOnSubmit`. See [submitBehavior](textinput#submitbehavior).
+:::warning 已弃用
+请注意 `submitBehavior` 现在取代了 `blurOnSubmit` 并将覆盖 `blurOnSubmit` 定义的任何行为。参见 [submitBehavior](textinput#submitbehavior)。
 :::
 
-If `true`, the text field will blur when submitted. The default value is true for single-line fields and false for multiline fields. Note that for multiline fields, setting `blurOnSubmit` to `true` means that pressing return will blur the field and trigger the `onSubmitEditing` event instead of inserting a newline into the field.
+如果为 `true`，文本框在提交时将失焦。对于单行字段，默认值为 true；对于多行字段，默认值为 false。请注意，对于多行字段，将 `blurOnSubmit` 设置为 `true` 意味着按下 return 键将使字段失焦并触发 `onSubmitEditing` 事件，而不是在字段中插入换行符。
 
-| Type |
+| 类型 |
 | ---- |
 | bool |
 
@@ -252,9 +252,9 @@ If `true`, the text field will blur when submitted. The default value is true fo
 
 ### `caretHidden`
 
-If `true`, caret is hidden. The default value is `false`.
+如果为 `true`，隐藏光标。默认值为 `false`。
 
-| Type |
+| 类型 |
 | ---- |
 | bool |
 
@@ -262,9 +262,9 @@ If `true`, caret is hidden. The default value is `false`.
 
 ### `clearButtonMode` <div className="label ios">iOS</div>
 
-When the clear button should appear on the right side of the text view. This property is supported only for single-line TextInput component. The default value is `never`.
+清除按钮何时应出现在文本视图的右侧。此属性仅支持单行 TextInput 组件。默认值为 `never`。
 
-| Type                                                       |
+| 类型                                                       |
 | ---------------------------------------------------------- |
 | enum('never', 'while-editing', 'unless-editing', 'always') |
 
@@ -272,9 +272,9 @@ When the clear button should appear on the right side of the text view. This pro
 
 ### `clearTextOnFocus` <div className="label ios">iOS</div>
 
-If `true`, clears the text field automatically when editing begins.
+如果为 `true`，在开始编辑时自动清除文本字段。
 
-| Type |
+| 类型 |
 | ---- |
 | bool |
 
@@ -282,9 +282,9 @@ If `true`, clears the text field automatically when editing begins.
 
 ### `contextMenuHidden`
 
-If `true`, context menu is hidden. The default value is `false`.
+如果为 `true`，隐藏上下文菜单。默认值为 `false`。
 
-| Type |
+| 类型 |
 | ---- |
 | bool |
 
@@ -292,11 +292,11 @@ If `true`, context menu is hidden. The default value is `false`.
 
 ### `dataDetectorTypes` <div className="label ios">iOS</div>
 
-Determines the types of data converted to clickable URLs in the text input. Only valid if `multiline={true}` and `editable={false}`. By default no data types are detected.
+确定文本输入中转换为可点击 URL 的数据类型。仅在 `multiline={true}` 和 `editable={false}` 时有效。默认情况下不检测任何数据类型。
 
-You can provide one type or an array of many types.
+你可以提供一种类型或多种类型的数组。
 
-Possible values for `dataDetectorTypes` are:
+`dataDetectorTypes` 的可能值为：
 
 - `'phoneNumber'`
 - `'link'`
@@ -305,7 +305,7 @@ Possible values for `dataDetectorTypes` are:
 - `'none'`
 - `'all'`
 
-| Type                                                                                                                                                     |
+| 类型                                                                                                                                                     |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | enum('phoneNumber', 'link', 'address', 'calendarEvent', 'none', 'all'), ,array of enum('phoneNumber', 'link', 'address', 'calendarEvent', 'none', 'all') |
 
@@ -313,9 +313,9 @@ Possible values for `dataDetectorTypes` are:
 
 ### `defaultValue`
 
-Provides an initial value that will change when the user starts typing. Useful for use-cases where you do not want to deal with listening to events and updating the value prop to keep the controlled state in sync.
+提供一个初始值，当用户开始输入时该值 will change。适用于你不想处理监听事件和更新 value 属性以保持受控状态同步的用例。
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -323,9 +323,9 @@ Provides an initial value that will change when the user starts typing. Useful f
 
 ### `disableKeyboardShortcuts` <div className="label ios">iOS</div>
 
-If `true`, the keyboard shortcuts (undo/redo and copy buttons) are disabled.
+如果为 `true`，禁用键盘快捷键（撤销/重做和复制按钮）。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `false` |
 
@@ -333,19 +333,19 @@ If `true`, the keyboard shortcuts (undo/redo and copy buttons) are disabled.
 
 ### `cursorColor` <div className="label android">Android</div>
 
-When provided it will set the color of the cursor (or "caret") in the component. Unlike the behavior of `selectionColor` the cursor color will be set independently from the color of the text selection box.
+当提供时，它将设置组件中光标（或 "caret"）的颜色。与 `selectionColor` 的行为不同，光标颜色将独立于文本选择框的颜色进行设置。
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `disableFullscreenUI` <div className="label android">Android</div>
 
-When `false`, if there is a small amount of space available around a text input (e.g. landscape orientation on a phone), the OS may choose to have the user edit the text inside of a full screen text input mode. When `true`, this feature is disabled and users will always edit the text directly inside of the text input. Defaults to `false`.
+当为 `false` 时，如果文本输入周围有少量可用空间（例如手机上的横向方向），OS 可能会选择让用户在全屏文本输入模式下编辑文本。当为 `true` 时，此功能被禁用，用户将始终直接在文本输入内编辑文本。默认值为 `false`。
 
-| Type |
+| 类型 |
 | ---- |
 | bool |
 
@@ -353,9 +353,9 @@ When `false`, if there is a small amount of space available around a text input 
 
 ### `editable`
 
-If `false`, text is not editable. The default value is `true`.
+如果为 `false`，文本不可编辑。默认值为 `true`。
 
-| Type |
+| 类型 |
 | ---- |
 | bool |
 
@@ -363,9 +363,9 @@ If `false`, text is not editable. The default value is `true`.
 
 ### `enablesReturnKeyAutomatically` <div className="label ios">iOS</div>
 
-If `true`, the keyboard disables the return key when there is no text and automatically enables it when there is text. The default value is `false`.
+如果为 `true`，当没有文本时键盘禁用 return 键，当有文本时自动启用它。默认值为 `false`。
 
-| Type |
+| 类型 |
 | ---- |
 | bool |
 
@@ -373,9 +373,9 @@ If `true`, the keyboard disables the return key when there is no text and automa
 
 ### `enterKeyHint`
 
-Determines what text should be shown to the return key. Has precedence over the `returnKeyType` prop.
+确定 return 键上应显示什么文本。优先于 `returnKeyType` 属性。
 
-The following values work across platforms:
+以下值适用于所有平台：
 
 - `done`
 - `next`
@@ -383,19 +383,19 @@ The following values work across platforms:
 - `send`
 - `go`
 
-_Android Only_
+_仅 Android_
 
-The following values work on Android only:
+以下值仅适用于 Android：
 
 - `previous`
 
-_iOS Only_
+_仅 iOS_
 
-The following values work on iOS only:
+以下值仅适用于 iOS：
 
 - `enter`
 
-| Type                                                              |
+| 类型                                                              |
 | ----------------------------------------------------------------- |
 | enum('enter', 'done', 'next', 'previous', 'search', 'send', 'go') |
 
@@ -403,15 +403,15 @@ The following values work on iOS only:
 
 ### `importantForAutofill` <div className="label android">Android</div>
 
-Tells the operating system whether the individual fields in your app should be included in a view structure for autofill purposes on Android API Level 26+. Possible values are `auto`, `no`, `noExcludeDescendants`, `yes`, and `yesExcludeDescendants`. The default value is `auto`.
+告诉操作系统你的应用中的各个字段是否应包含在 Android API Level 26+ 的自动填充视图结构中。可能的值为 `auto`、`no`、`noExcludeDescendants`、`yes` 和 `yesExcludeDescendants`。默认值为 `auto`。
 
-- `auto`: Let the Android System use its heuristics to determine if the view is important for autofill.
-- `no`: This view isn't important for autofill.
-- `noExcludeDescendants`: This view and its children aren't important for autofill.
-- `yes`: This view is important for autofill.
-- `yesExcludeDescendants`: This view is important for autofill, but its children aren't important for autofill.
+- `auto`: 让 Android 系统使用其启发式方法确定视图是否对自动填充重要。
+- `no`: 此视图对自动填充不重要。
+- `noExcludeDescendants`: 此视图及其子项对自动填充不重要。
+- `yes`: 此视图对自动填充重要。
+- `yesExcludeDescendants`: 此视图对自动填充重要，但其子项对自动填充不重要。
 
-| Type                                                                       |
+| 类型                                                                       |
 | -------------------------------------------------------------------------- |
 | enum('auto', 'no', 'noExcludeDescendants', 'yes', 'yesExcludeDescendants') |
 
@@ -419,7 +419,7 @@ Tells the operating system whether the individual fields in your app should be i
 
 ### `inlineImageLeft` <div className="label android">Android</div>
 
-If defined, the provided image resource will be rendered on the left. The image resource must be inside `/android/app/src/main/res/drawable` and referenced like
+如果定义，提供的图像资源将渲染在左侧。图像资源必须在 `/android/app/src/main/res/drawable` 内并引用如下
 
 ```
 <TextInput
@@ -427,7 +427,7 @@ If defined, the provided image resource will be rendered on the left. The image 
 />
 ```
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -435,9 +435,9 @@ If defined, the provided image resource will be rendered on the left. The image 
 
 ### `inlineImagePadding` <div className="label android">Android</div>
 
-Padding between the inline image, if any, and the text input itself.
+内联图像（如果有）与文本输入本身之间的内边距。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -445,9 +445,9 @@ Padding between the inline image, if any, and the text input itself.
 
 ### `inputAccessoryViewID` <div className="label ios">iOS</div>
 
-An optional identifier which links a custom [InputAccessoryView](inputaccessoryview.md) to this text input. The InputAccessoryView is rendered above the keyboard when this text input is focused.
+一个可选标识符，将自定义 [InputAccessoryView](inputaccessoryview.md) 链接到此文本输入。当此文本输入聚焦时，InputAccessoryView 将渲染在键盘上方。
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -455,11 +455,11 @@ An optional identifier which links a custom [InputAccessoryView](inputaccessoryv
 
 ### `inputAccessoryViewButtonLabel` <div className="label ios">iOS</div>
 
-An optional label that overrides the default [InputAccessoryView](inputaccessoryview.md) button label.
+一个可选标签，覆盖默认 [InputAccessoryView](inputaccessoryview.md) 按钮标签。
 
-By default, the default button label is not localized. Use this property to provide a localized version.
+默认情况下，默认按钮标签未本地化。使用此属性提供本地化版本。
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -467,9 +467,9 @@ By default, the default button label is not localized. Use this property to prov
 
 ### `inputMode`
 
-Works like the `inputmode` attribute in HTML, it determines which keyboard to open, e.g. `numeric` and has precedence over `keyboardType`.
+工作原理类似于 HTML 中的 `inputmode` 属性，它确定打开哪个键盘，例如 `numeric`，并且优先于 `keyboardType`。
 
-Support the following values:
+支持以下值：
 
 - `none`
 - `text`
@@ -480,7 +480,7 @@ Support the following values:
 - `email`
 - `url`
 
-| Type                                                                        |
+| 类型                                                                        |
 | --------------------------------------------------------------------------- |
 | enum('decimal', 'email', 'none', 'numeric', 'search', 'tel', 'text', 'url') |
 
@@ -488,9 +488,9 @@ Support the following values:
 
 ### `keyboardAppearance` <div className="label ios">iOS</div>
 
-Determines the color of the keyboard.
+确定键盘的颜色。
 
-| Type                             |
+| 类型                             |
 | -------------------------------- |
 | enum('default', 'light', 'dark') |
 
@@ -498,11 +498,11 @@ Determines the color of the keyboard.
 
 ### `keyboardType`
 
-Determines which keyboard to open, e.g.`numeric`.
+确定打开哪个键盘，例如 `numeric`。
 
-See screenshots of all the types [here](https://davidl.fr/blog/keyboard-react-native-ios-android#all-react-native-keyboard-type-examples-i-os-on-the-left-android-on-the-right).
+在此处 [查看](https://davidl.fr/blog/keyboard-react-native-ios-android#all-react-native-keyboard-type-examples-i-os-on-the-left-android-on-the-right) 所有类型的截图。
 
-The following values work across platforms:
+以下值适用于所有平台：
 
 - `default`
 - `number-pad`
@@ -512,9 +512,9 @@ The following values work across platforms:
 - `phone-pad`
 - `url`
 
-_iOS Only_
+_仅 iOS_
 
-The following values work on iOS only:
+以下值仅适用于 iOS：
 
 - `ascii-capable`
 - `numbers-and-punctuation`
@@ -522,13 +522,13 @@ The following values work on iOS only:
 - `twitter`
 - `web-search`
 
-_Android Only_
+_仅 Android_
 
-The following values work on Android only:
+以下值仅适用于 Android：
 
 - `visible-password`
 
-| Type                                                                                                                                                                                                    |
+| 类型                                                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | enum('default', 'email-address', 'numeric', 'phone-pad', 'ascii-capable', 'numbers-and-punctuation', 'url', 'number-pad', 'name-phone-pad', 'decimal-pad', 'twitter', 'web-search', 'visible-password') |
 
@@ -536,9 +536,9 @@ The following values work on Android only:
 
 ### `lineBreakStrategyIOS` <div className="label ios">iOS</div>
 
-Set line break strategy on iOS 14+. Possible values are `none`, `standard`, `hangul-word` and `push-out`.
+在 iOS 14+ 上设置换行策略。可能的值为 `none`、`standard`、`hangul-word` 和 `push-out`。
 
-| Type                                                        | Default  |
+| 类型                                                        | 默认值   |
 | ----------------------------------------------------------- | -------- |
 | enum(`'none'`, `'standard'`, `'hangul-word'`, `'push-out'`) | `'none'` |
 
@@ -546,9 +546,9 @@ Set line break strategy on iOS 14+. Possible values are `none`, `standard`, `han
 
 ### `lineBreakModeIOS` <div className="label ios">iOS</div>
 
-Set line break mode on iOS. Possible values are `wordWrapping`, `char`, `clip`, `head`, `middle` and `tail`.
+在 iOS 上设置换行模式。可能的值为 `wordWrapping`、`char`、`clip`、`head`、`middle` 和 `tail`。
 
-| Type                                                                       | Default          |
+| 类型                                                                       | 默认值           |
 | -------------------------------------------------------------------------- | ---------------- |
 | enum(`'wordWrapping'`, `'char'`, `'clip'`, `'head'`, `'middle'`, `'tail'`) | `'wordWrapping'` |
 
@@ -556,13 +556,13 @@ Set line break mode on iOS. Possible values are `wordWrapping`, `char`, `clip`, 
 
 ### `maxFontSizeMultiplier`
 
-Specifies largest possible scale a font can reach when `allowFontScaling` is enabled. Possible values:
+指定当 `allowFontScaling` 启用时字体可以达到的最大缩放比例。可能的值：
 
-- `null/undefined` (default): inherit from the parent node or the global default (0)
-- `0`: no max, ignore parent/global default
-- `>= 1`: sets the `maxFontSizeMultiplier` of this node to this value
+- `null/undefined` (默认): 继承自父节点或全局默认值 (0)
+- `0`: 无最大值，忽略父节点/全局默认值
+- `>= 1`: 将此节点的 `maxFontSizeMultiplier` 设置为此值
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -570,9 +570,9 @@ Specifies largest possible scale a font can reach when `allowFontScaling` is ena
 
 ### `maxLength`
 
-Limits the maximum number of characters that can be entered. Use this instead of implementing the logic in JS to avoid flicker.
+限制可以输入的最大字符数。使用此属性代替在 JS 中实现逻辑以避免闪烁。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -580,13 +580,13 @@ Limits the maximum number of characters that can be entered. Use this instead of
 
 ### `multiline`
 
-If `true`, the text input can be multiple lines. The default value is `false`.
+如果为 `true`，文本输入可以是多行。默认值为 `false`。
 
 :::note
-It is important to note that this aligns the text to the top on iOS, and centers it on Android. Use with `textAlignVertical` set to `top` for the same behavior in both platforms.
+重要的是要注意，这在 iOS 上将文本对齐到顶部，而在 Android 上居中对齐。在两个平台上获得相同行为，请配合使用 `textAlignVertical` 设置为 `top`。
 :::
 
-| Type |
+| 类型 |
 | ---- |
 | bool |
 
@@ -595,12 +595,12 @@ It is important to note that this aligns the text to the top on iOS, and centers
 ### `numberOfLines`
 
 :::note
-`numberOfLines` on iOS is only available on the [New Architecture](/architecture/landing-page)
+`numberOfLines` 在 iOS 上仅适用于 [新架构](/architecture/landing-page)
 :::
 
-Sets the maximum number of lines for a `TextInput`. Use it with multiline set to `true` to be able to fill the lines.
+设置 `TextInput` 的最大行数。配合 multiline 设置为 `true` 使用以能够填充行。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -608,13 +608,13 @@ Sets the maximum number of lines for a `TextInput`. Use it with multiline set to
 
 ### `onBlur`
 
-Callback that is called when the text input is blurred.
+当文本输入失焦时调用的回调。
 
 :::note
-If you are attempting to access the `text` value from `nativeEvent` keep in mind that the resulting value you get can be `undefined` which can cause unintended errors. If you are trying to find the last value of TextInput, you can use the [`onEndEditing`](textinput#onendediting) event, which is fired upon completion of editing.
+如果你试图从 `nativeEvent` 访问 `text` 值，请记住你得到的结果值可能是 `undefined`，这可能导致意外错误。如果你试图找到 TextInput 的最后一个值，可以使用 [`onEndEditing`](textinput#onendediting) 事件，它在编辑完成时触发。
 :::
 
-| Type                                                     |
+| 类型                                                     |
 | -------------------------------------------------------- |
 | `md ({nativeEvent: [TargetEvent](targetevent)}) => void` |
 
@@ -622,9 +622,9 @@ If you are attempting to access the `text` value from `nativeEvent` keep in mind
 
 ### `onChange`
 
-Callback that is called when the text input's text changes.
+当文本输入的文本变化时调用的回调。
 
-| Type                                                  |
+| 类型                                                  |
 | ----------------------------------------------------- |
 | (`{nativeEvent: {eventCount, target, text}}`) => void |
 
@@ -632,9 +632,9 @@ Callback that is called when the text input's text changes.
 
 ### `onChangeText`
 
-Callback that is called when the text input's text changes. Changed text is passed as a single string argument to the callback handler.
+当文本输入的文本变化时调用的回调。变化的文本作为单个字符串参数传递给回调处理程序。
 
-| Type     |
+| 类型     |
 | -------- |
 | function |
 
@@ -642,11 +642,11 @@ Callback that is called when the text input's text changes. Changed text is pass
 
 ### `onContentSizeChange`
 
-Callback that is called when the text input's content size changes.
+当文本输入的内容大小变化时调用的回调。
 
-Only called for multiline text inputs.
+仅针对多行文本输入调用。
 
-| Type                                                       |
+| 类型                                                       |
 | ---------------------------------------------------------- |
 | (`{nativeEvent: {contentSize: {width, height} }}`) => void |
 
@@ -654,9 +654,9 @@ Only called for multiline text inputs.
 
 ### `onEndEditing`
 
-Callback that is called when text input ends.
+当文本输入结束时调用的回调。
 
-| Type     |
+| 类型     |
 | -------- |
 | function |
 
@@ -664,9 +664,9 @@ Callback that is called when text input ends.
 
 ### `onPressIn`
 
-Callback that is called when a touch is engaged.
+当触摸 engaged 时调用的回调。
 
-| Type                                                   |
+| 类型                                                   |
 | ------------------------------------------------------ |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => void` |
 
@@ -674,9 +674,9 @@ Callback that is called when a touch is engaged.
 
 ### `onPressOut`
 
-Callback that is called when a touch is released.
+当触摸 released 时调用的回调。
 
-| Type                                                   |
+| 类型                                                   |
 | ------------------------------------------------------ |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => void` |
 
@@ -684,9 +684,9 @@ Callback that is called when a touch is released.
 
 ### `onFocus`
 
-Callback that is called when the text input is focused.
+当文本输入聚焦时调用的回调。
 
-| Type                                                     |
+| 类型                                                     |
 | -------------------------------------------------------- |
 | `md ({nativeEvent: [TargetEvent](targetevent)}) => void` |
 
@@ -694,9 +694,9 @@ Callback that is called when the text input is focused.
 
 ### `onKeyPress`
 
-Callback that is called when a key is pressed. This will be called with object where `keyValue` is `'Enter'` or `'Backspace'` for respective keys and the typed-in character otherwise including `' '` for space. Fires before `onChange` callbacks. Note: on Android only the inputs from soft keyboard are handled, not the hardware keyboard inputs.
+当按下键时调用的回调。这将使用对象调用，其中 `keyValue` 对于 respective 键为 `'Enter'` 或 `'Backspace'`，否则为输入的字符，包括 `' '` 表示空格。在 `onChange` 回调之前触发。注意：在 Android 上仅处理软键盘的输入，不处理硬件键盘输入。
 
-| Type                                        |
+| 类型                                        |
 | ------------------------------------------- |
 | (`{nativeEvent: {key: keyValue} }`) => void |
 
@@ -704,9 +704,9 @@ Callback that is called when a key is pressed. This will be called with object w
 
 ### `onLayout`
 
-Invoked on mount and on layout changes.
+在挂载和布局变化时调用。
 
-| Type                                                     |
+| 类型                                                     |
 | -------------------------------------------------------- |
 | `md ({nativeEvent: [LayoutEvent](layoutevent)}) => void` |
 
@@ -714,9 +714,9 @@ Invoked on mount and on layout changes.
 
 ### `onScroll`
 
-Invoked on content scroll. May also contain other properties from `ScrollEvent` but on Android `contentSize` is not provided for performance reasons.
+在内容滚动时调用。也可能包含来自 `ScrollEvent` 的其他属性，但在 Android 上出于性能原因不提供 `contentSize`。
 
-| Type                                                |
+| 类型                                                |
 | --------------------------------------------------- |
 | (`{nativeEvent: {contentOffset: {x, y} }}`) => void |
 
@@ -724,9 +724,9 @@ Invoked on content scroll. May also contain other properties from `ScrollEvent` 
 
 ### `onSelectionChange`
 
-Callback that is called when the text input selection is changed.
+当文本输入选择变化时调用的回调。
 
-| Type                                                  |
+| 类型                                                  |
 | ----------------------------------------------------- |
 | (`{nativeEvent: {selection: {start, end} }}`) => void |
 
@@ -734,21 +734,21 @@ Callback that is called when the text input selection is changed.
 
 ### `onSubmitEditing`
 
-Callback that is called when the text input's submit button is pressed.
+当文本输入的提交按钮被按下时调用的回调。
 
-| Type                                                  |
+| 类型                                                  |
 | ----------------------------------------------------- |
 | (`{nativeEvent: {text, eventCount, target}}`) => void |
 
-Note that on iOS this method isn't called when using `keyboardType="phone-pad"`.
+请注意，在 iOS 上，当使用 `keyboardType="phone-pad"` 时，此方法不会被调用。
 
 ---
 
 ### `placeholder`
 
-The string that will be rendered before text input has been entered.
+在文本输入输入之前将渲染的字符串。
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -756,19 +756,19 @@ The string that will be rendered before text input has been entered.
 
 ### `placeholderTextColor`
 
-The text color of the placeholder string.
+占位符字符串的文本颜色。
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `readOnly`
 
-If `true`, text is not editable. The default value is `false`.
+如果为 `true`，文本不可编辑。默认值为 `false`。
 
-| Type |
+| 类型 |
 | ---- |
 | bool |
 
@@ -776,9 +776,9 @@ If `true`, text is not editable. The default value is `false`.
 
 ### `returnKeyLabel` <div className="label android">Android</div>
 
-Sets the return key to the label. Use it instead of `returnKeyType`.
+将 return 键设置为标签。使用它代替 `returnKeyType`。
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -786,11 +786,11 @@ Sets the return key to the label. Use it instead of `returnKeyType`.
 
 ### `returnKeyType`
 
-Determines how the return key should look. On Android you can also use `returnKeyLabel`.
+确定 return 键应该看起来如何。在 Android 上你也可以使用 `returnKeyLabel`。
 
-_Cross platform_
+_跨平台_
 
-The following values work across platforms:
+以下值适用于所有平台：
 
 - `done`
 - `go`
@@ -798,16 +798,16 @@ The following values work across platforms:
 - `search`
 - `send`
 
-_Android Only_
+_仅 Android_
 
-The following values work on Android only:
+以下值仅适用于 Android：
 
 - `none`
 - `previous`
 
-_iOS Only_
+_仅 iOS_
 
-The following values work on iOS only:
+以下值仅适用于 iOS：
 
 - `default`
 - `emergency-call`
@@ -816,15 +816,15 @@ The following values work on iOS only:
 - `route`
 - `yahoo`
 
-| Type                                                                                                                              |
+| 类型                                                                                                                              |
 | --------------------------------------------------------------------------------------------------------------------------------- |
 | enum('done', 'go', 'next', 'search', 'send', 'none', 'previous', 'default', 'emergency-call', 'google', 'join', 'route', 'yahoo') |
 
 ### `rejectResponderTermination` <div className="label ios">iOS</div>
 
-If `true`, allows TextInput to pass touch events to the parent component. This allows components such as SwipeableListView to be swipeable from the TextInput on iOS, as is the case on Android by default. If `false`, TextInput always asks to handle the input (except when disabled). The default value is `true`.
+如果为 `true`，允许 TextInput 将触摸事件传递给父组件。这允许诸如 SwipeableListView 之类的组件在 iOS 上从 TextInput 滑动，就像 Android 上默认情况一样。如果为 `false`，TextInput 始终请求处理输入（除非禁用）。默认值为 `true`。
 
-| Type |
+| 类型 |
 | ---- |
 | bool |
 
@@ -832,9 +832,9 @@ If `true`, allows TextInput to pass touch events to the parent component. This a
 
 ### `rows` <div className="label android">Android</div>
 
-Sets the number of lines for a `TextInput`. Use it with multiline set to `true` to be able to fill the lines.
+设置 `TextInput` 的行数。配合 multiline 设置为 `true` 使用以能够填充行。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -842,9 +842,9 @@ Sets the number of lines for a `TextInput`. Use it with multiline set to `true` 
 
 ### `scrollEnabled` <div className="label ios">iOS</div>
 
-If `false`, scrolling of the text view will be disabled. The default value is `true`. Only works with `multiline={true}`.
+如果为 `false`，文本视图的滚动将被禁用。默认值为 `true`。仅与 `multiline={true}` 一起工作。
 
-| Type |
+| 类型 |
 | ---- |
 | bool |
 
@@ -852,9 +852,9 @@ If `false`, scrolling of the text view will be disabled. The default value is `t
 
 ### `secureTextEntry`
 
-If `true`, the text input obscures the text entered so that sensitive text like passwords stay secure. The default value is `false`. Does not work with `multiline={true}`.
+如果为 `true`，文本输入会模糊输入的文本，以便密码等敏感文本保持安全。默认值为 `false`。不适用于 `multiline={true}`。
 
-| Type |
+| 类型 |
 | ---- |
 | bool |
 
@@ -862,9 +862,9 @@ If `true`, the text input obscures the text entered so that sensitive text like 
 
 ### `selection`
 
-The start and end of the text input's selection. Set start and end to the same value to position the cursor.
+文本输入选择的开始和结束。将 start 和 end 设置为相同的值以定位光标。
 
-| Type                                  |
+| 类型                                  |
 | ------------------------------------- |
 | object: `{start: number,end: number}` |
 
@@ -872,29 +872,29 @@ The start and end of the text input's selection. Set start and end to the same v
 
 ### `selectionColor`
 
-The highlight, selection handle and cursor color of the text input.
+文本输入的高亮、选择手柄和光标颜色。
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `selectionHandleColor` <div className="label android">Android</div>
 
-Sets the color of the selection handle. Unlike `selectionColor`, it allows the selection handle color to be customized independently of the selection's color.
+设置选择手柄的颜色。与 `selectionColor` 不同，它允许独立于选择颜色自定义选择手柄颜色。
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `selectTextOnFocus`
 
-If `true`, all text will automatically be selected on focus.
+如果为 `true`，所有文本将在聚焦时自动被选中。
 
-| Type |
+| 类型 |
 | ---- |
 | bool |
 
@@ -902,9 +902,9 @@ If `true`, all text will automatically be selected on focus.
 
 ### `showSoftInputOnFocus`
 
-When `false`, it will prevent the soft keyboard from showing when the field is focused. The default value is `true`.
+当为 `false` 时，它将防止字段聚焦时显示软键盘。默认值为 `true`。
 
-| Type |
+| 类型 |
 | ---- |
 | bool |
 
@@ -912,9 +912,9 @@ When `false`, it will prevent the soft keyboard from showing when the field is f
 
 ### `smartInsertDelete` <div className="label ios">iOS</div>
 
-If `false`, the iOS system will not insert an extra space after a paste operation neither delete one or two spaces after a cut or delete operation.
+如果为 `false`，iOS 系统在粘贴操作后不会插入额外空格，也不会在剪切或删除操作后删除一个或两个空格。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `true`  |
 
@@ -922,9 +922,9 @@ If `false`, the iOS system will not insert an extra space after a paste operatio
 
 ### `spellCheck` <div className="label ios">iOS</div>
 
-If `false`, disables spell-check style (i.e. red underlines). The default value is inherited from `autoCorrect`.
+如果为 `false`，禁用拼写检查样式（即红色下划线）。默认值继承自 `autoCorrect`。
 
-| Type |
+| 类型 |
 | ---- |
 | bool |
 
@@ -932,24 +932,24 @@ If `false`, disables spell-check style (i.e. red underlines). The default value 
 
 ### `submitBehavior`
 
-When the return key is pressed,
+当按下 return 键时，
 
-For single line inputs:
+对于单行输入：
 
-- `'newline'` defaults to `'blurAndSubmit'`
-- `undefined` defaults to `'blurAndSubmit'`
+- `'newline'` 默认为 `'blurAndSubmit'`
+- `undefined` 默认为 `'blurAndSubmit'`
 
-For multiline inputs:
+对于多行输入：
 
-- `'newline'` adds a newline
-- `undefined` defaults to `'newline'`
+- `'newline'` 添加换行符
+- `undefined` 默认为 `'newline'`
 
-For both single line and multiline inputs:
+对于单行和多行输入：
 
-- `'submit'` will only send a submit event and not blur the input
-- `'blurAndSubmit`' will both blur the input and send a submit event
+- `'submit'` 将仅发送提交事件而不使输入失焦
+- `'blurAndSubmit`' 将使输入失焦并发送提交事件
 
-| Type                                       |
+| 类型                                       |
 | ------------------------------------------ |
 | enum('submit', 'blurAndSubmit', 'newline') |
 
@@ -957,15 +957,15 @@ For both single line and multiline inputs:
 
 ### `textAlign`
 
-Align the input text to the left, center, or right sides of the input field.
+将输入文本对齐到输入字段的左侧、中心或右侧。
 
-Possible values for `textAlign` are:
+`textAlign` 的可能值为：
 
 - `left`
 - `center`
 - `right`
 
-| Type                            |
+| 类型                            |
 | ------------------------------- |
 | enum('left', 'center', 'right') |
 
@@ -973,21 +973,21 @@ Possible values for `textAlign` are:
 
 ### `textContentType` <div className="label ios">iOS</div>
 
-Give the keyboard and the system information about the expected semantic meaning for the content that users enter.
+向键盘和系统提供关于用户输入内容的预期语义含义的信息。
 
 :::note
-[`autoComplete`](#autocomplete), provides the same functionality and is available for all platforms. You can use [`Platform.select`](/docs/next/platform#select) for differing platform behaviors.
+[`autoComplete`](#autocomplete) 提供相同的功能并适用于所有平台。你可以使用 [`Platform.select`](/docs/next/platform#select) 来处理不同的平台行为。
 
-Avoid using both `textContentType` and `autoComplete`. For backwards compatibility, `textContentType` takes precedence when both properties are set.
+避免同时使用 `textContentType` 和 `autoComplete`。为了向后兼容，当两个属性都设置时，`textContentType` 优先。
 :::
 
-You can set `textContentType` to `username` or `password` to enable autofill of login details from the device keychain.
+你可以将 `textContentType` 设置为 `username` 或 `password` 以启用来自设备钥匙串的登录详细信息自动填充。
 
-`newPassword` can be used to indicate a new password input the user may want to save in the keychain, and `oneTimeCode` can be used to indicate that a field can be autofilled by a code arriving in an SMS.
+`newPassword` 可用于指示用户可能想要保存在钥匙串中的新密码输入，`oneTimeCode` 可用于指示字段可以通过 SMS 到达的代码自动填充。
 
-To disable autofill, set `textContentType` to `none`.
+要禁用自动填充，将 `textContentType` 设置为 `none`。
 
-Possible values for `textContentType` are:
+`textContentType` 的可能值为：
 
 - `none`
 - `addressCity`
@@ -1031,7 +1031,7 @@ Possible values for `textContentType` are:
 - `URL`
 - `username`
 
-| Type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| 类型                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | enum('none', 'addressCity', 'addressCityAndState', 'addressState', 'birthdate', 'birthdateDay', 'birthdateMonth', 'birthdateYear', 'countryName', 'creditCardExpiration', 'creditCardExpirationMonth', 'creditCardExpirationYear', 'creditCardFamilyName', 'creditCardGivenName', 'creditCardMiddleName', 'creditCardName', 'creditCardNumber', 'creditCardSecurityCode', 'creditCardType', 'emailAddress', 'familyName', 'fullStreetAddress', 'givenName', 'jobTitle', 'location', 'middleName', 'name', 'namePrefix', 'nameSuffix', 'newPassword', 'nickname', 'oneTimeCode', 'organizationName', 'password', 'postalCode', 'streetAddressLine1', 'streetAddressLine2', 'sublocality', 'telephoneNumber', 'URL', 'username') |
 
@@ -1039,16 +1039,16 @@ Possible values for `textContentType` are:
 
 ### `passwordRules` <div className="label ios">iOS</div>
 
-When using `textContentType` as `newPassword` on iOS we can let the OS know the minimum requirements of the password so that it can generate one that will satisfy them. In order to create a valid string for `PasswordRules` take a look to the [Apple Docs](https://developer.apple.com/password-rules/).
+当在 iOS 上使用 `textContentType` 作为 `newPassword` 时，我们可以让 OS 知道密码的最低要求，以便它可以生成一个满足这些要求的密码。为了创建有效的 `PasswordRules` 字符串，请查看 [Apple 文档](https://developer.apple.com/password-rules/)。
 
 :::tip
-If passwords generation dialog doesn't appear please make sure that:
+如果密码生成对话框没有出现，请确保：
 
-- AutoFill is enabled: **Settings** → **Passwords & Accounts** → toggle "On" the **AutoFill Passwords**,
-- iCloud Keychain is used: **Settings** → **Apple ID** → **iCloud** → **Keychain** → toggle "On" the **iCloud Keychain**.
+- 自动填充已启用：**设置** → **密码与账户** → 切换 "On" **自动填充密码**，
+- 使用 iCloud 钥匙串：**设置** → **Apple ID** → **iCloud** → **钥匙串** → 切换 "On" **iCloud 钥匙串**。
   :::
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -1056,7 +1056,7 @@ If passwords generation dialog doesn't appear please make sure that:
 
 ### `style`
 
-Note that not all Text styles are supported, an incomplete list of what is not supported includes:
+请注意，并非所有 Text 样式都受支持，不支持的不完整列表包括：
 
 - `borderLeftWidth`
 - `borderTopWidth`
@@ -1067,9 +1067,9 @@ Note that not all Text styles are supported, an incomplete list of what is not s
 - `borderBottomRightRadius`
 - `borderBottomLeftRadius`
 
-[Styles](style.md)
+[样式](style.md)
 
-| Type                  |
+| 类型                  |
 | --------------------- |
 | [Text](text.md#style) |
 
@@ -1077,9 +1077,9 @@ Note that not all Text styles are supported, an incomplete list of what is not s
 
 ### `textBreakStrategy` <div className="label android">Android</div>
 
-Set text break strategy on Android API Level 23+, possible values are `simple`, `highQuality`, `balanced` The default value is `highQuality`.
+在 Android API Level 23+ 上设置文本换行策略，可能的值为 `simple`、`highQuality`、`balanced`。默认值为 `highQuality`。
 
-| Type                                      |
+| 类型                                      |
 | ----------------------------------------- |
 | enum('simple', 'highQuality', 'balanced') |
 
@@ -1087,23 +1087,23 @@ Set text break strategy on Android API Level 23+, possible values are `simple`, 
 
 ### `underlineColorAndroid` <div className="label android">Android</div>
 
-The color of the `TextInput` underline.
+`TextInput` 下划线的颜色。
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `value`
 
-The value to show for the text input. `TextInput` is a controlled component, which means the native value will be forced to match this value prop if provided. For most uses, this works great, but in some cases this may cause flickering - one common cause is preventing edits by keeping value the same. In addition to setting the same value, either set `editable={false}`, or set/update `maxLength` to prevent unwanted edits without flicker.
+要为文本输入显示的值。`TextInput` 是一个受控组件，这意味着如果提供，原生值将被强制匹配此 value 属性。对于大多数用途，这效果很好，但在某些情况下这可能导致闪烁 - 一个常见的原因是通过保持值相同来防止编辑。除了设置相同的值外，要么设置 `editable={false}`，要么设置/更新 `maxLength` 以防止不必要的编辑而不闪烁。
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
-## Methods
+## 方法
 
 ### `.focus()`
 
@@ -1111,7 +1111,7 @@ The value to show for the text input. `TextInput` is a controlled component, whi
 focus();
 ```
 
-Makes the native input request focus.
+使原生输入请求聚焦。
 
 ### `.blur()`
 
@@ -1119,7 +1119,7 @@ Makes the native input request focus.
 blur();
 ```
 
-Makes the native input lose focus.
+使原生输入失去聚焦。
 
 ### `clear()`
 
@@ -1127,7 +1127,7 @@ Makes the native input lose focus.
 clear();
 ```
 
-Removes all text from the `TextInput`.
+从 `TextInput` 中移除所有文本。
 
 ---
 
@@ -1137,10 +1137,10 @@ Removes all text from the `TextInput`.
 isFocused(): boolean;
 ```
 
-Returns `true` if the input is currently focused; `false` otherwise.
+如果输入当前聚焦则返回 `true`；否则返回 `false`。
 
-# Known issues
+# 已知问题
 
-- [react-native#19096](https://github.com/facebook/react-native/issues/19096): Doesn't support Android's `onKeyPreIme`.
-- [react-native#19366](https://github.com/facebook/react-native/issues/19366): Calling .focus() after closing Android's keyboard via back button doesn't bring keyboard up again.
-- [react-native#26799](https://github.com/facebook/react-native/issues/26799): Doesn't support Android's `secureTextEntry` when `keyboardType="email-address"` or `keyboardType="phone-pad"`.
+- [react-native#19096](https://github.com/facebook/react-native/issues/19096): 不支持 Android 的 `onKeyPreIme`。
+- [react-native#19366](https://github.com/facebook/react-native/issues/19366): 通过返回键关闭 Android 键盘后调用 .focus() 不会再次 bring 键盘 up。
+- [react-native#26799](https://github.com/facebook/react-native/issues/26799): 当 `keyboardType="email-address"` 或 `keyboardType="phone-pad"` 时不支持 Android 的 `secureTextEntry`。

@@ -32,7 +32,7 @@ function MyComponent(props: MyComponentProps) {
 
 ## 示例
 
-```SnackPlayer name=TouchableHighlight%20Example
+```SnackPlayer name=TouchableHighlight%20示例
 import React, {useState} from 'react';
 import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
@@ -84,11 +84,11 @@ export default TouchableHighlightExample;
 
 # 参考资料
 
-## Props
+## 属性
 
-### [TouchableWithoutFeedback Props](touchablewithoutfeedback.md#props)
+### [TouchableWithoutFeedback 属性](touchablewithoutfeedback.md#props)
 
-继承自 [TouchableWithoutFeedback Props](touchablewithoutfeedback.md#props)。
+继承自 [TouchableWithoutFeedback 属性](touchablewithoutfeedback.md#props)。
 
 ---
 
@@ -124,7 +124,7 @@ export default TouchableHighlightExample;
 
 ### `ref`
 
-一个 ref 设置器，组件挂载后会被赋值为一个 [element node](element-nodes)。
+一个 ref 设置器，组件挂载后会被赋值为一个 [元素节点](element-nodes)。
 
 ---
 

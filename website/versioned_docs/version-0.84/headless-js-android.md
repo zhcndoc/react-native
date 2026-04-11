@@ -99,7 +99,7 @@ class MyTaskService : HeadlessJsTaskService() {
 <service android:name="com.example.MyTaskService" />
 ```
 
-现在，每当你[启动服务][0]，例如作为定期任务或响应某些系统事件 / 广播时，JS 将启动，运行你的任务，然后关闭。
+现在，每当你 [启动服务][0]，例如作为定期任务或响应某些系统事件 / 广播时，JS 将启动，运行你的任务，然后关闭。
 
 示例：
 

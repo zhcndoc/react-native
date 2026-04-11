@@ -3,6 +3,6 @@ id: statusbarios
 title: '❌ StatusBarIOS'
 ---
 
-> **Deleted.** Use [`StatusBar`](statusbar.md) for mutating the status bar.
+> **已删除。** 使用 [`StatusBar`](statusbar.md) 来修改状态栏。
 
 ---

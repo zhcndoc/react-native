@@ -16,7 +16,7 @@ Android 和 iOS 的方法略有不同，因此 React Native 的实现可能因�
 
 ### `accessible`
 
-当为 `true` 时，表示该视图可被屏幕阅读器和硬件键盘等辅助技术发现。请注意，这并不一定意味着该视图会被 VoiceOver 或 TalkBack 聚焦。有很多原因会导致这种情况，例如 VoiceOver 不允许嵌套的无障碍元素，或者 TalkBack 选择聚焦某些父元素 instead。
+当为 `true` 时，表示该视图可被屏幕阅读器和硬件键盘等辅助技术发现。请注意，这并不一定意味着该视图会被 VoiceOver 或 TalkBack 聚焦。有很多原因会导致这种情况，例如 VoiceOver 不允许嵌套的无障碍元素，或者 TalkBack 选择聚焦某些父元素取而代之。
 
 默认情况下，所有可触摸元素都是可访问的。
 

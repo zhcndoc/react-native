@@ -47,7 +47,7 @@ React Native 默认配置了两种此类工具：[ESLint](https://eslint.org/) �
 
 ## 编写测试
 
-编写了可测试的代码后，就可以编写实际的测试了！React Native 的默认模板自带 [Jest](https://jestjs.io) 测试框架，其中包括针对该环境定制的预设配置，让你无需立即调试配置和 Mock 就能高效开发——稍后会详细介绍[模拟 Mock](#mocking)。你可以用 Jest 来编写本指南所涉及的所有类型的测试。
+编写了可测试的代码后，就可以编写实际的测试了！React Native 的默认模板自带 [Jest](https://jestjs.io) 测试框架，其中包括针对该环境定制的预设配置，让你无需立即调试配置和 Mock 就能高效开发——稍后会详细介绍 [模拟 Mock](#mocking)。你可以用 Jest 来编写本指南所涉及的所有类型的测试。
 
 :::note
 如果你采用测试驱动开发（TDD），实际上是先编写测试！这样会自然而然地保证代码的可测试性。
@@ -104,7 +104,7 @@ Jest 提供 [`describe`](https://jestjs.io/docs/en/api#describename-fn) 函数�
 所以，可使用一个模拟实现，替代成千上万行代码和联网设备！
 
 :::note
-Jest 支持从函数级别到模块级别的[丰富模拟功能](https://jestjs.io/docs/en/mock-functions#mocking-modules)。
+Jest 支持从函数级别到模块级别的 [丰富模拟功能](https://jestjs.io/docs/en/mock-functions#mocking-modules)。
 :::
 
 ## 集成测试
@@ -183,7 +183,7 @@ function GroceryShoppingList() {
 
 经验法则是，优先使用用户能看到或听到的内容：
 
-- 使用渲染文本或[无障碍辅助工具](https://reactnative.dev/docs/accessibility#accessibility-properties)做断言
+- 使用渲染文本或 [无障碍辅助工具](https://reactnative.dev/docs/accessibility#accessibility-properties) 做断言
 
 不推荐：
 
@@ -211,7 +211,7 @@ test('给定空的 GroceryShoppingList，用户可添加项目', () => {
   fireEvent.press(getByText('Add the item to list'));
 
   const bananaElements = getAllByText('banana');
-  expect(bananaElements).toHaveLength(1); // 期望列表中有“banana”
+  expect(bananaElements).toHaveLength(1); // 期望列表中有"banana"
 });
 ```
 

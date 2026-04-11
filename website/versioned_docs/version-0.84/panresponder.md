@@ -20,10 +20,10 @@ onPanResponderMove: (event, gestureState) => {}
 `gestureState` 对象包含以下字段：
 
 - `stateID` - 手势状态的 ID — 只要屏幕上至少有一个触点，该 ID 即持续有效
-- `moveX` - 最近移动的触点的最新屏幕坐标X
-- `moveY` - 最近移动的触点的最新屏幕坐标Y
-- `x0` - 响应者授权时的屏幕坐标X
-- `y0` - 响应者授权时的屏幕坐标Y
+- `moveX` - 最近移动的触点的最新屏幕坐标 X
+- `moveY` - 最近移动的触点的最新屏幕坐标 Y
+- `x0` - 响应者授权时的屏幕坐标 X
+- `y0` - 响应者授权时的屏幕坐标 Y
 - `dx` - 手势自触摸开始以来累计的水平移动距离
 - `dy` - 手势自触摸开始以来累计的垂直移动距离
 - `vx` - 当前手势的水平速度
@@ -151,7 +151,7 @@ static create(config: PanResponderCallbacks): PanResponderInstance;
 | ----------------------------------------------------------- | ------ | ---------- |
 | config <div className="label basic required">必需</div>      | object | 详见下文   |
 
-`config` 对象提供了所有响应者回调的增强版本，这些版本不仅提供 [`PressEvent`](pressevent)，还包含 `PanResponder` 的手势状态，通过将典型的 `onResponder*` 回调中的 “Responder” 替换为 “PanResponder”。例如，该 `config` 对象形式如下：
+`config` 对象提供了所有响应者回调的增强版本，这些版本不仅提供 [`PressEvent`](pressevent)，还包含 `PanResponder` 的手势状态，通过将典型的 `onResponder*` 回调中的"Responder"替换为"PanResponder"。例如，该 `config` 对象形式如下：
 
 - `onMoveShouldSetPanResponder: (e, gestureState) => {...}`
 - `onMoveShouldSetPanResponderCapture: (e, gestureState) => {...}`

@@ -110,7 +110,7 @@ export default App;
 </TabItem>
 </Tabs>
 
-运行后会看到错误：`Touchable child must either be native or forward setNativeProps to a native component`。这是因为 `MyButton` 并非直接对应一个应被设置不透明度的原生视图。你可以这样理解：如果用 `createReactClass` 创建一个组件，你不会希望直接设置样式属性生效——你需要将样式属性传递给其子组件，除非你包裹了一个原生组件。同理，我们要将 `setNativeProps` 传递给一个原生支持的子组件。
+运行后会看到错误：`Touchable 子组件必须是原生组件，或者将 setNativeProps 转发给原生组件`。这是因为 `MyButton` 并非直接对应一个应被设置不透明度的原生视图。你可以这样理解：如果用 `createReactClass` 创建一个组件，你不会希望直接设置样式属性生效——你需要将样式属性传递给其子组件，除非你包裹了一个原生组件。同理，我们要将 `setNativeProps` 传递给一个原生支持的子组件。
 
 #### 将 setNativeProps 转发给子组件
 
@@ -165,7 +165,7 @@ export default App;
 
 这样你就可以在 `TouchableOpacity` 内使用 `MyButton` 了！
 
-你可能注意到我们使用 `{...props}` 将所有属性传递给了子视图。这是因为 `TouchableOpacity` 实际上是一个复合组件，除了依赖子组件的 `setNativeProps`，它还要求子组件能够处理触摸事件。为此，它会传递[各种属性](view.md#onmoveshouldsetresponder)回调到 `TouchableOpacity`。相比之下，`TouchableHighlight` 是由原生视图支持的，仅需实现 `setNativeProps`。
+你可能注意到我们使用 `{...props}` 将所有属性传递给了子视图。这是因为 `TouchableOpacity` 实际上是一个复合组件，除了依赖子组件的 `setNativeProps`，它还要求子组件能够处理触摸事件。为此，它会传递 [各种属性](view.md#onmoveshouldsetresponder) 回调到 `TouchableOpacity`。相比之下，`TouchableHighlight` 是由原生视图支持的，仅需实现 `setNativeProps`。
 
 ## 使用 setNativeProps 编辑 TextInput 的值
 
@@ -278,7 +278,7 @@ export default App;
 
 ## setNativeProps 与 shouldComponentUpdate
 
-通过[智能地应用 `shouldComponentUpdate`](https://react.dev/reference/react/Component#shouldcomponentupdate)，你可以避免对未改变的组件子树进行不必要的协调开销，甚至可以使使用 `setState` 代替 `setNativeProps` 变得性能足够良好。
+通过 [智能地应用 `shouldComponentUpdate`](https://react.dev/reference/react/Component#shouldcomponentupdate)，你可以避免对未改变的组件子树进行不必要的协调开销，甚至可以使使用 `setState` 代替 `setNativeProps` 变得性能足够良好。
 
 ## 其他原生方法
 

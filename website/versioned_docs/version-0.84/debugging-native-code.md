@@ -21,7 +21,7 @@ npx react-native log-android
 npx react-native log-ios
 ```
 
-您也可以通过 iOS 模拟器上的 Debug > Open System Log… 来访问，或者在 Android 设备或模拟器上运行应用时，在终端运行 `adb logcat "*:S" ReactNative:V ReactNativeJS:V`。
+您也可以通过 iOS 模拟器上的 调试 > 打开系统日志… 来访问，或者在 Android 设备或模拟器上运行应用时，在终端运行 `adb logcat "*:S" ReactNative:V ReactNativeJS:V`。
 
 <details>
 <summary>**💡 自定义原生日志**</summary>
@@ -72,8 +72,8 @@ print("YourModuleName: \(message)")
 
 ### Android Studio
 
-在 Android Studio 中，您可以通过点击菜单栏的“Run”选项，选择“Attach to Process...”，然后选择正在运行的 React Native 应用来实现。
+在 Android Studio 中，您可以通过点击菜单栏的“运行”选项，选择“附加到进程..."，然后选择正在运行的 React Native 应用来实现。
 
 ### Xcode
 
-在 Xcode 中，点击顶部菜单栏的“Debug”，选择“Attach to process”选项，然后在“Likely Targets”列表中选择您的应用程序。
+在 Xcode 中，点击顶部菜单栏的“调试”，选择“附加到进程”选项，然后在“可能的目标”列表中选择您的应用程序。

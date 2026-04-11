@@ -25,7 +25,7 @@ const App = () => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
   const fadeIn = () => {
-    // 在5秒内将 fadeAnim 的值变为 1
+    // 在 5 秒内将 fadeAnim 的值变为 1
     Animated.timing(fadeAnim, {
       toValue: 1,
       duration: 5000,
@@ -34,7 +34,7 @@ const App = () => {
   };
 
   const fadeOut = () => {
-    // 在3秒内将 fadeAnim 的值变为 0
+    // 在 3 秒内将 fadeAnim 的值变为 0
     Animated.timing(fadeAnim, {
       toValue: 0,
       duration: 3000,
@@ -104,7 +104,7 @@ export default App;
 
 - [`Animated.decay()`](animated#decay) 从初速度开始，逐渐减速至停止。
 - [`Animated.spring()`](animated#spring) 提供基本的弹簧物理模型。
-- [`Animated.timing()`](animated#timing) 使用[缓动函数](easing)随时间对值进行动画。
+- [`Animated.timing()`](animated#timing) 使用 [缓动函数](easing) 随时间对值进行动画。
 
 在大多数情况下，你会使用 `timing()`。默认情况下，它使用对称的 easeInOut 曲线，模拟物体逐渐加速到最大速度，然后逐渐减速停止的过程。
 
@@ -120,7 +120,7 @@ Animated.timing({}).start(({finished}) => {
 
 ### 使用原生驱动
 
-使用原生驱动时，动画的所有信息会先发送到原生层，然后由原生代码在 UI 线程执行动画，无需在每一帧都通过桥接调用 JS线程。这样动画启动后，即使 JS 线程被阻塞，也不会影响动画表现。
+使用原生驱动时，动画的所有信息会先发送到原生层，然后由原生代码在 UI 线程执行动画，无需在每一帧都通过桥接调用 JS 线程。这样动画启动后，即使 JS 线程被阻塞，也不会影响动画表现。
 
 你可以通过在动画配置中指定 `useNativeDriver: true` 来使用原生驱动。更多信息可见 [动画](animations#using-the-native-driver) 指南。
 
@@ -503,7 +503,7 @@ static reset();
 
 用于驱动动画的标准值类。通常使用 `useAnimatedValue(0);` 或在类组件中使用 `new Animated.Value(0);` 初始化。
 
-你可以在单独的[页面](animatedvalue)了解更多关于 `Animated.Value` 的 API。
+你可以在单独的 [页面](animatedvalue) 了解更多关于 `Animated.Value` 的 API。
 
 ---
 
@@ -511,7 +511,7 @@ static reset();
 
 用于驱动二维动画（如平移手势）的值类。
 
-你可以在单独的[页面](animatedvaluexy)了解更多关于 `Animated.ValueXY` 的 API。
+你可以在单独的 [页面](animatedvaluexy) 了解更多关于 `Animated.ValueXY` 的 API。
 
 ---
 

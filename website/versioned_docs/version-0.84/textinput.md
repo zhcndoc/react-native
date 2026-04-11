@@ -587,7 +587,7 @@ _Android 独有_
 ### `numberOfLines`
 
 :::note
-iOS 上的 `numberOfLines` 仅在[新架构](/architecture/landing-page)中可用。
+iOS 上的 `numberOfLines` 仅在 [新架构](/architecture/landing-page) 中可用。
 :::
 
 为 `TextInput` 设置最大行数。需要与 `multiline={true}` 一起使用才有效。

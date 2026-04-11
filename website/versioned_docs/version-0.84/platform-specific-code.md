@@ -72,7 +72,7 @@ const Component = Platform.select({
 <Component />;
 ```
 
-### 检测 Android 版本 <div className="label android" title="This section is related to Android platform">Android</div>
+### 检测 Android 版本 <div className="label android" title="本节与 Android 平台相关">Android</div>
 
 在 Android 上，`Platform` 模块还能用于检测运行应用的 Android 平台版本：
 
@@ -84,9 +84,9 @@ if (Platform.Version === 25) {
 }
 ```
 
-**注意**：`Version` 表示的是 Android API 版本，而非 Android 操作系统版本。想查看对应关系，请参考 [Android 版本历史](https://zh.wikipedia.org/wiki/Android版本历史#概览)。
+**注意**：`Version` 表示的是 Android API 版本，而非 Android 操作系统版本。想查看对应关系，请参考 [Android 版本历史](https://zh.wikipedia.org/wiki/Android 版本历史#概览)。
 
-### 检测 iOS 版本 <div className="label ios" title="This section is related to iOS platform">iOS</div>
+### 检测 iOS 版本 <div className="label ios" title="本节与 iOS 平台相关">iOS</div>
 
 在 iOS 上，`Version` 来源于 `-[UIDevice systemVersion]`，是一个表示当前操作系统版本的字符串。例如 "10.3"。比如要检测 iOS 的主版本号：
 

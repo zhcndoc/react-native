@@ -1,37 +1,37 @@
 ---
 id: out-of-tree-platforms
-title: Out-of-Tree Platforms
+title: 树外平台
 ---
 
-React Native is not only for Android and iOS devices - our partners and the community maintain projects that bring React Native to other platforms, such as:
+React Native 不仅适用于 Android 和 iOS 设备——我们的合作伙伴和社区维护着将 React Native 带到其他平台的项目，例如：
 
-**From Partners**
+**来自合作伙伴**
 
-- [React Native macOS](https://github.com/microsoft/react-native-macos) - React Native for macOS and Cocoa.
-- [React Native Windows](https://github.com/microsoft/react-native-windows) - React Native for Microsoft's Universal Windows Platform (UWP).
-- [React Native visionOS](https://github.com/callstack/react-native-visionos) - React Native for Apple's visionOS.
+- [React Native macOS](https://github.com/microsoft/react-native-macos) - 适用于 macOS 和 Cocoa 的 React Native。
+- [React Native Windows](https://github.com/microsoft/react-native-windows) - 适用于微软通用 Windows 平台 (UWP) 的 React Native。
+- [React Native visionOS](https://github.com/callstack/react-native-visionos) - 适用于 Apple visionOS 的 React Native。
 
-**From Community**
+**来自社区**
 
-- [React Native tvOS](https://github.com/react-native-tvos/react-native-tvos) - React Native for Apple TV and Android TV devices.
-- [React Native Web](https://github.com/necolas/react-native-web) - React Native on the web using React DOM.
-- [React Native Skia](https://github.com/react-native-skia/react-native-skia) - React Native using [Skia](https://skia.org/) as a renderer. Currently supports Linux and macOS.
+- [React Native tvOS](https://github.com/react-native-tvos/react-native-tvos) - 适用于 Apple TV 和 Android TV 设备的 React Native。
+- [React Native Web](https://github.com/necolas/react-native-web) - 使用 React DOM 在 Web 上运行的 React Native。
+- [React Native Skia](https://github.com/react-native-skia/react-native-skia) - 使用 [Skia](https://skia.org/) 作为渲染器的 React Native。目前支持 Linux 和 macOS。
 
-## Creating your own React Native platform
+## 创建你自己的 React Native 平台
 
-Right now the process of creating a React Native platform from scratch is not very well documented - one of the goals of the upcoming re-architecture ([Fabric](/blog/2018/06/14/state-of-react-native-2018)) is to make maintaining a platform easier.
+目前，从头创建 React Native 平台的过程文档尚不完善——即将进行的重新架构 ([Fabric](/blog/2018/06/14/state-of-react-native-2018)) 的目标之一是使维护平台变得更加容易。
 
-### Bundling
+### 打包
 
-As of React Native 0.57 you can now register your React Native platform with React Native's JavaScript bundler, [Metro](https://metrobundler.dev/). This means you can pass `--platform example` to `npx react-native bundle`, and it will look for JavaScript files with the `.example.js` suffix.
+从 React Native 0.57 开始，你现在可以将你的 React Native 平台注册到 React Native 的 JavaScript 打包器 [Metro](https://metrobundler.dev/) 中。这意味着你可以将 `--platform example` 传递给 `npx react-native bundle`，它将查找带有 `.example.js` 后缀的 JavaScript 文件。
 
-To register your platform with RNPM, your module's name must match one of these patterns:
+要将你的平台注册到 RNPM，你的模块名称必须匹配以下模式之一：
 
-- `react-native-example` - It will search all top-level modules that start with `react-native-`
-- `@org/react-native-example` - It will search for modules that start with `react-native-` under any scope
-- `@react-native-example/module` - It will search in all modules under scopes with names starting with `@react-native-`
+- `react-native-example` - 它将搜索所有以 `react-native-` 开头的顶级模块
+- `@org/react-native-example` - 它将搜索任何作用域下以 `react-native-` 开头的模块
+- `@react-native-example/module` - 它将搜索名称以 `@react-native-` 开头的作用域下的所有模块
 
-You must also have an entry in your `package.json` like this:
+你还必须在 `package.json` 中包含如下条目：
 
 ```json
 {
@@ -44,4 +44,4 @@ You must also have an entry in your `package.json` like this:
 }
 ```
 
-`"providesModuleNodeModules"` is an array of modules that will get added to the Haste module search path, and `"platforms"` is an array of platform suffixes that will be added as valid platforms.
+`"providesModuleNodeModules"` 是一个将被添加到 Haste 模块搜索路径的模块数组，而 `"platforms"` 是一个将被添加为有效平台的平台后缀数组。

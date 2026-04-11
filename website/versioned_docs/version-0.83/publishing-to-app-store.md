@@ -39,7 +39,7 @@ title: 发布到 Apple App Store
 
 - 打开终端，进入你的应用的 iOS 文件夹，输入 `open .`。
 - 双击 YOUR_APP_NAME.xcworkspace，启动 Xcode。
-- 点击 `Product` → `Archive`。确保将设备设置为 “Any iOS Device (arm64)”。
+- 点击 `Product` → `Archive`。确保将设备设置为 "Any iOS Device (arm64)"。
 
 :::note
 检查你的 Bundle Identifier，确保它与 Apple 开发者后台的标识符完全一致。

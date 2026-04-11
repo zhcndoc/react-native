@@ -26,10 +26,10 @@ const App = () => {
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <Text style={styles.header}>窗口尺寸数据</Text>
-        <Text>高度: {height}</Text>
-        <Text>宽度: {width}</Text>
-        <Text>字体缩放: {fontScale}</Text>
-        <Text>像素比: {scale}</Text>
+        <Text>高度：{height}</Text>
+        <Text>宽度：{width}</Text>
+        <Text>字体缩放：{fontScale}</Text>
+        <Text>像素比：{scale}</Text>
       </SafeAreaView>
     </SafeAreaProvider>
   );

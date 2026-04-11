@@ -1,21 +1,21 @@
 ---
 id: improvingux
-title: Improving User Experience
+title: 改善用户体验
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-## Configure text inputs
+## 配置文本输入
 
-Entering text on touch phone is a challenge - small screen, software keyboard. But based on what kind of data you need, you can make it easier by properly configuring the text inputs:
+在触屏手机上输入文本是一项挑战——屏幕小，还有软键盘。但根据你需要什么样的数据，你可以通过正确配置文本输入框来简化操作：
 
-- Focus the first field automatically
-- Use placeholder text as an example of expected data format
-- Enable or disable autocapitalization and autocorrect
-- Choose keyboard type (e.g. email, numeric)
-- Make sure the return button focuses the next field or submits the form
+- 自动聚焦第一个字段
+- 使用占位符文本作为预期数据格式的示例
+- 启用或禁用自动大写和自动纠正
+- 选择键盘类型（例如 email、numeric）
+- 确保返回键聚焦下一个字段或提交表单
 
-Check out [`TextInput` docs](textinput.md) for more configuration options.
+查看 [`TextInput` 文档](textinput.md) 了解更多配置选项。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -208,9 +208,9 @@ export default App;
 </TabItem>
 </Tabs>
 
-## Manage layout when keyboard is visible
+## 管理键盘可见时的布局
 
-Software keyboard takes almost half of the screen. If you have interactive elements that can get covered by the keyboard, make sure they are still accessible by using the [`KeyboardAvoidingView` component](keyboardavoidingview.md).
+软键盘几乎占据了屏幕的一半。如果你有可能会被键盘遮挡的交互元素，请确保通过使用 [`KeyboardAvoidingView` 组件](keyboardavoidingview.md) 使它们仍然可访问。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -409,9 +409,9 @@ export default App;
 </TabItem>
 </Tabs>
 
-## Make tappable areas larger
+## 增大可点击区域
 
-On mobile phones it's hard to be very precise when pressing buttons. Make sure all interactive elements are 44x44 or larger. One way to do this is to leave enough space for the element, `padding`, `minWidth` and `minHeight` style values can be useful for that. Alternatively, you can use [`hitSlop` prop](touchablewithoutfeedback.md#hitslop) to increase interactive area without affecting the layout. Here's a demo:
+在手机上，按压按钮时很难做到非常精确。确保所有交互元素为 44x44 或更大。实现这一点的一种方法是为元素留出足够的空间，`padding`、`minWidth` 和 `minHeight` 样式值对此很有用。或者，你可以使用 [`hitSlop` 属性](touchablewithoutfeedback.md#hitslop) 来增加交互区域而不影响布局。以下是演示：
 
 ```SnackPlayer name=HitSlop%20example
 import React from 'react';
@@ -488,9 +488,9 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-## Use Android Ripple
+## 使用 Android 涟漪效果
 
-Android API 21+ uses the material design ripple to provide user with feedback when they touch an interactable area on the screen. React Native exposes this through the [`TouchableNativeFeedback` component](touchablenativefeedback.md). Using this touchable effect instead of opacity or highlight will often make your app feel much more fitting on the platform. That said, you need to be careful when using it because it doesn't work on iOS or on Android API < 21, so you will need to fallback to using one of the other Touchable components on iOS. You can use a library like [react-native-platform-touchable](https://github.com/react-community/react-native-platform-touchable) to handle the platform differences for you.
+Android API 21+ 使用 Material Design 涟漪效果，在用户触摸屏幕上的交互区域时提供反馈。React Native 通过 [`TouchableNativeFeedback` 组件](touchablenativefeedback.md) 暴露了此功能。使用这种触摸效果而不是透明度或高亮，通常会让你的应用在平台上感觉更加原生契合。话虽如此，使用时需要小心，因为它在 iOS 或 Android API < 21 上不起作用，因此你需要在 iOS 上回退使用其他 Touchable 组件之一。你可以使用像 [react-native-platform-touchable](https://github.com/react-community/react-native-platform-touchable) 这样的库来为你处理平台差异。
 
 ```SnackPlayer name=Android%20Ripple%20example&supportedPlatforms=android
 import React from 'react';
@@ -585,12 +585,12 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-## Screen orientation lock
+## 屏幕方向锁定
 
-Multiple screen orientations should work fine by default unless you're using `Dimensions` API and don't handle orientation changes. If you don't want to support multiple screen orientations, you can lock the screen orientation to either portrait or landscape.
+默认情况下，多种屏幕方向应该能正常工作，除非你使用了 `Dimensions` API 且未处理方向变化。如果你不想支持多种屏幕方向，可以将屏幕方向锁定为纵向或横向。
 
-On iOS, in the General tab and Deployment Info section of Xcode enable the Device Orientation you want to support (ensure you have selected iPhone from the Devices menu when making the changes). For Android, open the AndroidManifest.xml file and within the activity element add `'android:screenOrientation="portrait"'` to lock to portrait or `'android:screenOrientation="landscape"'` to lock to landscape.
+在 iOS 上，在 Xcode 的 General 标签页和 Deployment Info 部分启用你想要支持的设备方向（在进行更改时确保你已从 Devices 菜单中选择了 iPhone）。对于 Android，打开 AndroidManifest.xml 文件，并在 activity 元素内添加 `'android:screenOrientation="portrait"'` 以锁定为纵向，或添加 `'android:screenOrientation="landscape"'` 以锁定为横向。
 
-# Learn more
+# 了解更多
 
-[Material Design](https://material.io/) and [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines) are great resources for learning more about designing for mobile platforms.
+[Material Design](https://material.io/) 和 [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines) 是学习更多关于移动平台设计的绝佳资源。

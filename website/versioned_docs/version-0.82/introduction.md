@@ -1,33 +1,33 @@
 ---
 id: getting-started
-title: Introduction
-description: This helpful guide lays out the prerequisites for learning React Native, using these docs, and setting up your environment.
+title: 简介
+description: 这份有益的指南列出了学习 React Native 的先决条件、如何使用本文档以及如何设置环境。
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 <div className="content-banner">
-  Welcome to the very start of your React Native journey! If you're looking for getting started instructions, they've moved to <a href="environment-setup">their own section</a>. Continue reading for an introduction to the documentation, Native Components, React, and more!
+  欢迎踏上您的 React Native 之旅的起点！如果您正在寻找入门说明，它们已移至 <a href="environment-setup">它们自己的部分</a>。继续阅读以了解文档介绍、原生组件、React 等内容！
   <img className="content-banner-img" src="/docs/assets/p_android-ios-devices.svg" alt=" " />
 </div>
 
-Many different kinds of people use React Native: from advanced iOS developers to React beginners, to people getting started programming for the first time in their career. These docs were written for all learners, no matter their experience level or background.
+许多不同类型的人都在使用 React Native：从高级 iOS 开发者到 React 初学者，再到职业生涯中第一次开始编程的人。本文档是为所有学习者编写的，无论他们的经验水平或背景如何。
 
-## How to use these docs
+## 如何使用本文档
 
-You can start here and read through these docs linearly like a book; or you can read the specific sections you need. Already familiar with React? You can skip [that section](intro-react)—or read it for a light refresher.
+您可以从这里开始，像读书一样线性地阅读本文档；或者您可以阅读您需要的特定部分。已经熟悉 React 了？您可以跳过 [该部分](intro-react)——或者阅读它以作为简单的复习。
 
-## Prerequisites
+## 先决条件
 
-To work with React Native, you will need to have an understanding of JavaScript fundamentals. If you’re new to JavaScript or need a refresher, you can [dive in](https://developer.mozilla.org/en-US/docs/Web/JavaScript) or [brush up](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript) at Mozilla Developer Network.
+要使用 React Native 工作，您需要了解 JavaScript 基础知识。如果您是 JavaScript 新手或需要复习，可以在 Mozilla Developer Network [深入学习](https://developer.mozilla.org/en-US/docs/Web/JavaScript) 或 [温习](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript)。
 
 :::info
-While we do our best to assume no prior knowledge of React, Android, or iOS development, these are valuable topics of study for the aspiring React Native developer. Where sensible, we have linked to resources and articles that go more in depth.
+虽然我们尽力假设您没有 React、Android 或 iOS 开发的先前知识，但这些是志向远大的 React Native 开发者值得学习的主题。在合适的地方，我们链接了更深入的资源和文章。
 :::
 
-## Interactive examples
+## 交互式示例
 
-This introduction lets you get started immediately in your browser with interactive examples like this one:
+本介绍让您可以在浏览器中立即开始使用交互式示例，如下所示：
 
 ```SnackPlayer name=Hello%20World
 import React from 'react';
@@ -49,45 +49,45 @@ const YourApp = () => {
 export default YourApp;
 ```
 
-The above is a Snack Player. It’s a handy tool created by Expo to embed and run React Native projects and share how they render in platforms like Android and iOS. The code is live and editable, so you can play directly with it in your browser. Go ahead and try changing the "Try editing me!" text above to "Hello, world!"
+上述是一个 Snack Player。它是 Expo 创建的一个便捷工具，用于嵌入和运行 React Native 项目，并分享它们在 Android 和 iOS 等平台上的渲染效果。代码是实时可编辑的，因此您可以直接在浏览器中对其进行操作。尽管尝试将上面的 "Try editing me!" 文本更改为 "Hello, world!"
 
 :::tip
-Optionally, if you want to set up a local development environment, [you can follow our guide to setting up your environment on your local machine](set-up-your-environment) and paste the code examples into your project. (If you are a web developer, you may already have a local environment set up for mobile browser testing!)
+或者，如果您想设置本地开发环境，[您可以遵循我们在本地机器上设置环境的指南](set-up-your-environment) 并将代码示例粘贴到您的项目中。（如果您是 Web 开发者，您可能已经设置了用于移动浏览器测试的本地环境！）
 :::
 
-## Developer Notes
+## 开发者说明
 
-People from many different development backgrounds are learning React Native. You may have experience with a range of technologies, from web to Android to iOS and more. We try to write for developers from all backgrounds. Sometimes we provide explanations specific to one platform or another like so:
+来自许多不同开发背景的人都在学习 React Native。您可能拥有从 Web 到 Android 再到 iOS 等多种技术的经验。我们尝试为所有背景的开发者编写内容。有时我们会提供特定于某个平台的解释，如下所示：
 
 <Tabs groupId="guide" queryString defaultValue="web" values={constants.getDevNotesTabs(["android","ios","web"])}>
 
 <TabItem value="android">
 
 :::info
-Android developers may be familiar with this concept.
+Android 开发者可能熟悉这个概念。
 :::
 
 </TabItem>
 <TabItem value="ios">
 
 :::info
-iOS developers may be familiar with this concept.
+iOS 开发者可能熟悉这个概念。
 :::
 
 </TabItem>
 <TabItem value="web">
 
 :::info
-Web developers may be familiar with this concept.
+Web 开发者可能熟悉这个概念。
 :::
 
 </TabItem>
 </Tabs>
 
-## Formatting
+## 格式
 
-Menu paths are written in bold and use carets to navigate submenus. Example: **Android Studio > Preferences**
+菜单路径以粗体书写，并使用插入符号导航子菜单。示例：**Android Studio > Preferences**
 
 ---
 
-Now that you know how this guide works, it's time to get to know the foundation of React Native: [Native Components](intro-react-native-components.md).
+现在您知道了本指南的工作原理，是时候了解 React Native 的基础了：[原生组件](intro-react-native-components.md)。

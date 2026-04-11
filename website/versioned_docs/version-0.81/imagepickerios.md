@@ -3,13 +3,13 @@ id: imagepickerios
 title: '❌ ImagePickerIOS'
 ---
 
-> **Removed.** Use one of the [community packages](https://reactnative.directory/?search=image+picker) instead.
+> **已移除。** 请改用 [社区包](https://reactnative.directory/?search=image+picker) 之一。
 
 ---
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `canRecordVideos()`
 
@@ -33,23 +33,23 @@ static canUseCamera(callback)
 static openCameraDialog(config, successCallback, cancelCallback)
 ```
 
-**Parameters:**
+**参数：**
 
-| Name            | Type     | Required | Description |
-| --------------- | -------- | -------- | ----------- |
-| config          | object   | No       | See below.  |
-| successCallback | function | No       | See below.  |
-| cancelCallback  | function | No       | See below.  |
+| 名称            | 类型     | 是否必填 | 描述      |
+| --------------- | -------- | -------- | --------- |
+| config          | object   | 否       | 见下文。  |
+| successCallback | function | 否       | 见下文。  |
+| cancelCallback  | function | 否       | 见下文。  |
 
-`config` is an object containing:
+`config` 是一个包含以下内容的对象：
 
-- `videoMode` : An optional boolean value that defaults to false.
+- `videoMode`：一个可选的布尔值，默认为 false。
 
-`successCallback` is an optional callback function that's invoked when the select dialog is opened successfully. It will include the following data:
+`successCallback` 是一个可选的回调函数，在选择对话框成功打开时调用。它将包含以下数据：
 
 - `[string, number, number]`
 
-`cancelCallback` is an optional callback function that's invoked when the camera dialog is canceled.
+`cancelCallback` 是一个可选的回调函数，在相机对话框被取消时调用。
 
 ---
 
@@ -59,21 +59,21 @@ static openCameraDialog(config, successCallback, cancelCallback)
 static openSelectDialog(config, successCallback, cancelCallback)
 ```
 
-**Parameters:**
+**参数：**
 
-| Name            | Type     | Required | Description |
-| --------------- | -------- | -------- | ----------- |
-| config          | object   | No       | See below.  |
-| successCallback | function | No       | See below.  |
-| cancelCallback  | function | No       | See below.  |
+| 名称            | 类型     | 是否必填 | 描述      |
+| --------------- | -------- | -------- | --------- |
+| config          | object   | 否       | 见下文。  |
+| successCallback | function | 否       | 见下文。  |
+| cancelCallback  | function | 否       | 见下文。  |
 
-`config` is an object containing:
+`config` 是一个包含以下内容的对象：
 
-- `showImages` : An optional boolean value that defaults to false.
-- `showVideos`: An optional boolean value that defaults to false.
+- `showImages`：一个可选的布尔值，默认为 false。
+- `showVideos`：一个可选的布尔值，默认为 false。
 
-`successCallback` is an optional callback function that's invoked when the select dialog is opened successfully. It will include the following data:
+`successCallback` 是一个可选的回调函数，在选择对话框成功打开时调用。它将包含以下数据：
 
 - `[string, number, number]`
 
-`cancelCallback` is an optional callback function that's invoked when the select dialog is canceled.
+`cancelCallback` 是一个可选的回调函数，在选择对话框被取消时调用。

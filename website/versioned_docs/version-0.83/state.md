@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 一般来说，你应该在构造函数中初始化 `state`，然后在想要改变它时调用 `setState`。
 
-例如，假设我们想让文本一直闪烁。文本内容本身在闪烁组件被创建时设置一次，所以文本内容本身是一个 `prop`。“文本当前是否显示” 会随着时间而变化，因此应保存在 `state` 中。
+例如，假设我们想让文本一直闪烁。文本内容本身在闪烁组件被创建时设置一次，所以文本内容本身是一个 `prop`。“文本当前是否显示”会随着时间而变化，因此应保存在 `state` 中。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">

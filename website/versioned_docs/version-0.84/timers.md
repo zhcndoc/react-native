@@ -3,7 +3,7 @@ id: timers
 title: 定时器
 ---
 
-定时器是应用程序的重要组成部分，React Native 实现了[浏览器定时器](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Timeouts_and_intervals)。
+定时器是应用程序的重要组成部分，React Native 实现了 [浏览器定时器](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Timeouts_and_intervals)。
 
 ## 定时器
 

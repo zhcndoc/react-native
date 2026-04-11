@@ -5,210 +5,210 @@ title: React Native DevTools
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-React Native DevTools is our modern debugging experience for React Native. Purpose-built from the ground up, it aims to be fundamentally more integrated, correct, and reliable than previous debugging methods.
+React Native DevTools 是我们为 React Native 打造的现代调试体验。它从头开始专门构建，旨在比以前的调试方法从根本上更加集成、正确和可靠。
 
-![React Native DevTools opened to the "Welcome" pane](/docs/assets/debugging-rndt-welcome-083.jpg)
+![React Native DevTools 打开到“欢迎”面板](/docs/assets/debugging-rndt-welcome-083.jpg)
 
-React Native DevTools is designed for debugging React app concerns, and not to replace native tools. If you want to inspect React Native’s underlying platform layers (for example, while developing a Native Module), please use the debugging tools available in Android Studio and Xcode (see [Debugging Native Code](/docs/debugging-native-code)).
+React Native DevTools 专为调试 React 应用问题而设计，并非用于替代原生工具。如果你想检查 React Native 的底层平台层（例如，在开发原生模块时），请使用 Android Studio 和 Xcode 中可用的调试工具（参见 [调试原生代码](/docs/debugging-native-code)）。
 
 <details>
-<summary>**💡 Compatibility** — released in 0.76</summary>
+<summary>**💡 兼容性** — 于 0.76 版本发布</summary>
 
-React Native DevTools supports all React Native apps running Hermes. It replaces the previous Flipper, Experimental Debugger, and Hermes debugger (Chrome) frontends.
+React Native DevTools 支持所有运行 Hermes 的 React Native 应用。它取代了之前的 Flipper、Experimental Debugger 和 Hermes debugger (Chrome) 前端。
 
-It is not possible to set up React Native DevTools with any older versions of React Native.
+无法在任何旧版本的 React Native 上设置 React Native DevTools。
 
-- **Chrome Browser DevTools — unsupported**
-  - Connecting to React Native via `chrome://inspect` is no longer supported. Features may not work correctly, as the latest versions of Chrome DevTools (which are built to match the latest browser capabilities and APIs) have not been tested, and this frontend lacks our customisations. Instead, we ship a supported version with React Native DevTools.
-- **Visual Studio Code — unsupported** (pre-existing)
-  - Third party extensions such as [Expo Tools](https://github.com/expo/vscode-expo) and [Radon IDE](https://ide.swmansion.com/) may have improved compatibility, but are not directly supported by the React team.
+- **Chrome 浏览器 DevTools — 不支持**
+  - 不再支持通过 `chrome://inspect` 连接到 React Native。功能可能无法正常工作，因为最新版本的 Chrome DevTools（构建用于匹配最新的浏览器功能和 API）未经过测试，且此外端缺少我们的自定义功能。相反，我们随 React Native DevTools 一起提供了受支持的版本。
+- **Visual Studio Code — 不支持**（预先存在）
+  - 第三方扩展（如 [Expo Tools](https://github.com/expo/vscode-expo) 和 [Radon IDE](https://ide.swmansion.com/)）可能具有改进的兼容性，但不受 React 团队的直接支持。
 
 </details>
 <details>
-<summary>**💡 Feedback & FAQs**</summary>
+<summary>**💡 反馈与常见问题**</summary>
 
-We want the tooling you use to debug React across all platforms to be reliable, familiar, simple, and cohesive. All the features described on this page are built with these principles in mind, and we also want to offer more capabilities in future.
+我们希望你在所有平台上用于调试 React 的工具是可靠、熟悉、简单且连贯的。本页面上描述的所有功能都是本着这些原则构建的，我们也希望在未来提供更多的功能。
 
-We are actively iterating on the future of React Native DevTools, and have created a centralized [GitHub discussion](https://github.com/react-native-community/discussions-and-proposals/discussions/819) to keep track of issues, frequently asked questions, and feedback.
+我们正在积极迭代 React Native DevTools 的未来，并创建了一个集中的 [GitHub 讨论区](https://github.com/react-native-community/discussions-and-proposals/discussions/819) 来跟踪问题、常见问题和反馈。
 
 </details>
 
-## Core features
+## 核心功能
 
-React Native DevTools is based on the Chrome DevTools frontend. If you have a web development background, its features should be familiar. As a starting point, we recommend browsing the [Chrome DevTools docs](https://developer.chrome.com/docs/devtools) which contain full guides as well as video resources.
+React Native DevTools 基于 Chrome DevTools 前端构建。如果你有 Web 开发背景，它的功能应该会很熟悉。作为起点，我们建议浏览 [Chrome DevTools 文档](https://developer.chrome.com/docs/devtools)，其中包含完整的指南以及视频资源。
 
-### Console
+### 控制台
 
-![A series of logs React Native DevTools Sources view, alongside a device](/docs/assets/debugging-rndt-console.jpg)
+![React Native DevTools 源代码视图中的一系列日志，旁边是一个设备](/docs/assets/debugging-rndt-console.jpg)
 
-The Console panel allows you to view and filter messages, evaluate JavaScript, inspect object properties, and more.
+控制台面板允许你查看和过滤消息、评估 JavaScript、检查对象属性等。
 
-[Console features reference | Chrome DevTools](https://developer.chrome.com/docs/devtools/console/reference)
+[控制台功能参考 | Chrome DevTools](https://developer.chrome.com/docs/devtools/console/reference)
 
-#### Useful tips
+#### 实用技巧
 
-- If your app has a lot of logs, use the filter box or change the log levels that are shown.
-- Watch values over time with [Live Expressions](https://developer.chrome.com/docs/devtools/console/live-expressions).
-- Persist messages across reloads with [Preserve Logs](https://developer.chrome.com/docs/devtools/console/reference#persist).
-- Use <kbd>Ctrl</kbd> + <kbd>L</kbd> to clear the console view.
+- 如果你的应用有很多日志，请使用过滤框或更改显示的日志级别。
+- 使用 [实时表达式](https://developer.chrome.com/docs/devtools/console/live-expressions) 随时间监视值。
+- 使用 [保留日志](https://developer.chrome.com/docs/devtools/console/reference#persist) 在重新加载后保留消息。
+- 使用 <kbd>Ctrl</kbd> + <kbd>L</kbd> 清除控制台视图。
 
-### Sources & breakpoints
+### 源代码与断点
 
-![A paused breakpoint in the React Native DevTools Sources view, alongside a device](/docs/assets/debugging-rndt-sources-paused-with-device.jpg)
+![React Native DevTools 源代码视图中暂停的断点，旁边是一个设备](/docs/assets/debugging-rndt-sources-paused-with-device.jpg)
 
-The Sources panel allows you to view the source files in your app and register breakpoints. Use a breakpoint to define a line of code where your app should pause — allowing you to inspect the live state of the program and incrementally step through code.
+源代码面板允许你查看应用中的源文件并注册断点。使用断点定义应用应暂停的代码行——允许你检查程序的实时状态并逐步执行代码。
 
-[Pause your code with breakpoints | Chrome DevTools](https://developer.chrome.com/docs/devtools/javascript/breakpoints)
+[使用断点暂停代码 | Chrome DevTools](https://developer.chrome.com/docs/devtools/javascript/breakpoints)
 
 :::tip
 
-#### Mini-guide
+#### 迷你指南
 
-Breakpoints are a fundamental tool in your debugging toolkit!
+断点是调试工具包中的基本工具！
 
-1. Navigate to a source file using the sidebar or <kbd>Cmd ⌘</kbd>+<kbd>P</kbd> / <kbd>Ctrl</kbd>+<kbd>P</kbd>.
-2. Click in the line number column next to a line of code to add a breakpoint.
-3. Use the navigation controls at the top right to [step through code](https://developer.chrome.com/docs/devtools/javascript/reference#stepping) when paused.
+1. 使用侧边栏或 <kbd>Cmd ⌘</kbd>+<kbd>P</kbd> / <kbd>Ctrl</kbd>+<kbd>P</kbd> 导航到源文件。
+2. 点击代码行旁边的行号列以添加断点。
+3. 暂停时使用右上角的导航控件 [逐步执行代码](https://developer.chrome.com/docs/devtools/javascript/reference#stepping)。
 
 :::
 
-#### Useful tips
+#### 实用技巧
 
-- A "Paused in Debugger" overlay appears when your app is paused. Tap it to resume.
-- Pay attention to the right-hand panels when on a breakpoint, which allow you to inspect the current scope and call stack, and set watch expressions.
-- Use a `debugger;` statement to quickly set a breakpoint from your text editor. This will reach the device immediately via Fast Refresh.
-- There are multiple kinds of breakpoints! For example, [Conditional Breakpoints and Logpoints](https://developer.chrome.com/docs/devtools/javascript/breakpoints#overview).
+- 当应用暂停时，会出现“调试器中已暂停”覆盖层。点击它以恢复。
+- 在断点处注意右侧面板，它允许你检查当前作用域和调用栈，并设置监视表达式。
+- 使用 `debugger;` 语句从文本编辑器快速设置断点。这将通过 Fast Refresh 立即到达设备。
+- 有多种类型的断点！例如，[条件断点和日志点](https://developer.chrome.com/docs/devtools/javascript/breakpoints#overview)。
 
-### Network <div className="label primary">Since 0.83</div>
+### 网络 <div className="label primary">自 0.83 起</div>
 
-![A network request in the React Native DevTools Network panel](/docs/assets/debugging-rndt-network.jpg)
+![React Native DevTools 网络面板中的网络请求](/docs/assets/debugging-rndt-network.jpg)
 
-The Network panel allows you to view and inspect the network requests made by your app. Logged requests provide detailed metadata such as timings and headers sent/received, as well as response previews.
+网络面板允许你查看和检查应用发出的网络请求。记录的请求提供详细的元数据，如计时和发送/接收的标头，以及响应预览。
 
-Network requests are recorded automatically when DevTools is open. We support most features from Chrome, with some exceptions. See more below.
+当 DevTools 打开时，网络请求会自动记录。我们支持来自 Chrome 的大多数功能，但有一些例外。见下文。
 
 <details>
-<summary><strong>💡 Network event coverage, Expo support</strong></summary>
+<summary><strong>💡 网络事件覆盖范围，Expo 支持</strong></summary>
 
-**Which network events are captured?**
+**捕获哪些网络事件？**
 
-Today, we record all network calls through `fetch()`, `XMLHttpRequest`, and `<Image>` — with support for custom networking libraries, such as Expo Fetch, coming later.
+今天，我们记录通过 `fetch()`、`XMLHttpRequest` 和 `<Image>` 发出的所有网络调用——对自定义网络库（如 Expo Fetch）的支持将在 later 版本中提供。
 
-**Expo Network differences**
+**Expo 网络差异**
 
-Because of this, apps using Expo will continue to see the "Expo Network" panel — a separate implementation by the Expo framework which will log these additional request sources but has slightly reduced features.
+因此，使用 Expo 的应用将继续看到"Expo 网络”面板——这是 Expo 框架的单独实现，它将记录这些额外的请求源，但功能略有减少。
 
-- Coverage for Expo-specific network events.
-- No request initiator support.
-- No Performance panel integration.
+- 覆盖 Expo 特定的网络事件。
+- 不支持请求发起者。
+- 无性能面板集成。
 
-We're working with Expo to integrate Expo Fetch and third party networking libraries with our new Network inspection pipeline in future releases.
+我们正在与 Expo 合作，在未来的版本中将 Expo Fetch 和第三方网络库集成到我们的新网络检查管道中。
 
-**Unimplemented features**
+**未实现的功能**
 
-At launch, these are the features we don't yet support in React Native:
+在发布时，以下是我们尚未在 React Native 中支持的功能：
 
-- WebSocket events
-- Network response mocking
-- Simulated network throttling
+- WebSocket 事件
+- 网络响应模拟
+- 模拟网络节流
 
 </details>
 
 <details>
-<summary><strong>💡 Response previews buffer size</strong></summary>
+<summary><strong>💡 响应预览缓冲区大小</strong></summary>
 
-If you are inspecting a large volume of response data, please note that response previews are cached in an on-device buffer with a maximum size of 100MB. This means we may evict response previews (but not metadata) if the cache becomes too large, oldest request first.
+如果你正在检查大量响应数据，请注意响应预览缓存于设备上的缓冲区中，最大大小为 100MB。这意味着如果缓存变得太大，我们可能会驱逐响应预览（但不是元数据），最早的请求优先。
 
 </details>
 
-#### Useful tips
+#### 实用技巧
 
-- Use the Initiator tab to see the call stack of where a network request was initiated in your app.
-- Network events will also be shown in the Network track in the Performance panel.
+- 使用发起者标签页查看网络请求在应用中发起的调用栈。
+- 网络事件也将显示在性能面板的网络轨道中。
 
-### Performance <div className="label primary">Since 0.83</div>
+### 性能 <div className="label primary">自 0.83 起</div>
 
-![A performance trace in the React Native DevTools Performance panel](/docs/assets/debugging-rndt-performance.jpg)
+![React Native DevTools 性能面板中的性能跟踪](/docs/assets/debugging-rndt-performance.jpg)
 
-Performance tracing allows you to record a performance session within your app to understand how your JavaScript code is running and what operations took the most time. In React Native, we show JavaScript execution, React Performance tracks, Network events, and custom [User Timings](https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/User_timing), rendered in a single performance timeline.
+性能跟踪允许你记录应用内的性能会话，以了解你的 JavaScript 代码如何运行以及哪些操作耗时最多。在 React Native 中，我们显示 JavaScript 执行、React 性能轨道、网络事件和自定义 [用户计时](https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/User_timing)，渲染在单个性能时间线中。
 
-#### Useful tips
+#### 实用技巧
 
-- Use [Annotations](https://developer.chrome.com/docs/devtools/performance/annotations) (shift-drag) to label and mark up a performance trace — useful before [downloading and sharing](https://developer.chrome.com/docs/devtools/performance/save-trace) a trace with a teammate. Annotations also provide a quick way to gauge time spans in **seconds**.
-- Use the [`PerformanceObserver` API](./global-PerformanceObserver.md) in your app to observe performance events at runtime — useful if you want to capture performance telemetry.
+- 使用 [标注](https://developer.chrome.com/docs/devtools/performance/annotations)（shift-拖动）来标记和标注性能跟踪——在 [下载和分享](https://developer.chrome.com/docs/devtools/performance/save-trace) 跟踪给队友之前很有用。标注还提供了一种快速衡量 **秒** 时间跨度的方法。
+- 在你的应用中使用 [`PerformanceObserver` API](./global-PerformanceObserver.md) 在运行时观察性能事件——如果你想捕获性能遥测数据，这很有用。
 
-#### Learn more
+#### 了解更多
 
-- [React Performance tracks](https://react.dev/reference/dev-tools/react-performance-tracks)
-- [Performance APIs > User Timings | MDN](https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/User_timing)
-- ["Debug Like a Senior — React Native Performance Panel" | Software Mansion](https://blog.swmansion.com/react-native-debugging-new-performance-panel-in-react-native-0-83-21ca90871f6d)
+- [React 性能轨道](https://react.dev/reference/dev-tools/react-performance-tracks)
+- [性能 API > 用户计时 | MDN](https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/User_timing)
+- ["像高级开发者一样调试 — React Native 性能面板" | Software Mansion](https://blog.swmansion.com/react-native-debugging-new-performance-panel-in-react-native-0-83-21ca90871f6d)
 
-### Memory
+### 内存
 
-![Inspecting a heap snapshot in the Memory panel](/docs/assets/debugging-rndt-memory.jpg)
+![在内存面板中检查堆快照](/docs/assets/debugging-rndt-memory.jpg)
 
-The Memory panel allows you to take a heap snapshot and view the memory usage of your JavaScript code over time.
+内存面板允许你获取堆快照并查看你的 JavaScript 代码随时间的内存使用情况。
 
-[Record heap snapshots | Chrome DevTools](https://developer.chrome.com/docs/devtools/memory-problems/heap-snapshots)
+[记录堆快照 | Chrome DevTools](https://developer.chrome.com/docs/devtools/memory-problems/heap-snapshots)
 
-#### Useful tips
+#### 实用技巧
 
-- Use <kbd>Cmd ⌘</kbd>+<kbd>F</kbd> / <kbd>Ctrl</kbd>+<kbd>F</kbd> to filter for specific objects in the heap.
-- Taking an [allocation timeline report](https://developer.chrome.com/docs/devtools/memory-problems/allocation-profiler) can be useful to see memory usage over time as a graph, to identify possible memory leaks.
+- 使用 <kbd>Cmd ⌘</kbd>+<kbd>F</kbd> / <kbd>Ctrl</kbd>+<kbd>F</kbd> 过滤堆中的特定对象。
+- 获取 [分配时间线报告](https://developer.chrome.com/docs/devtools/memory-problems/allocation-profiler) 可能有助于以图形方式查看随时间的内存使用情况，以识别可能的内存泄漏。
 
-## React DevTools features
+## React DevTools 功能
 
-In the integrated Components and Profiler panels, you'll find all the features of the [React DevTools](https://react.dev/learn/react-developer-tools) browser extension. These work seamlessly in React Native DevTools.
+在集成的组件和 Profiler 面板中，你将找到 [React DevTools](https://react.dev/learn/react-developer-tools) 浏览器扩展的所有功能。这些功能在 React Native DevTools 中无缝工作。
 
-### React Components
+### React 组件
 
-![Selecting and locating elements using the React Components panel](/docs/assets/debugging-rndt-react-components.gif)
+![使用 React 组件面板选择和定位元素](/docs/assets/debugging-rndt-react-components.gif)
 
-The React Components panel allows you to inspect and update the rendered React component tree.
+React 组件面板允许你检查和更新渲染的 React 组件树。
 
-- Hover or select an element in DevTools to highlight it on the device.
-- To locate an element in DevTools, click the top-left "Select element" button, then tap any element in the app.
+- 在 DevTools 中悬停或选择一个元素以在设备上高亮显示它。
+- 要在 DevTools 中定位元素，点击左上角的“选择元素”按钮，然后点击应用中的任何元素。
 
-#### Useful tips
+#### 实用技巧
 
-- Props and state on a component can be viewed and modified at runtime using the right hand panel.
-- Components optimized with [React Compiler](https://react.dev/learn/react-compiler) will be annotated with a "Memo ✨" badge.
+- 可以使用右侧面板在运行时查看和修改组件上的 props 和 state。
+- 使用 [React Compiler](https://react.dev/learn/react-compiler) 优化的组件将标注有"Memo ✨"徽章。
 
 :::tip
 
-#### Protip: Highlight re-renders
+#### 专业提示：高亮重新渲染
 
-Re-renders can be a significant contributor to performance issues in React apps. DevTools can highlight component re-renders as they happen.
+重新渲染可能是 React 应用中性能问题的重要贡献者。DevTools 可以在组件重新渲染发生时高亮显示它们。
 
-- To enable, click the View Settings (`⚙︎`) icon and check "Highlight updates when components render".
+- 要启用，点击视图设置 (`⚙︎`) 图标并勾选“组件渲染时高亮更新”。
 
-![Location of the "highlight updates" setting, next to a recording of the live render overlay](/docs/assets/debugging-rndt-highlight-renders.gif)
+![“高亮更新”设置的位置，旁边是实时渲染覆盖层的记录](/docs/assets/debugging-rndt-highlight-renders.gif)
 
 :::
 
 ### React Profiler
 
-![A profile rendered as a flame graph](/docs/assets/debugging-rndt-react-profiler.jpg)
+![渲染为火焰图的性能分析](/docs/assets/debugging-rndt-react-profiler.jpg)
 
-The React Profiler panel allows you to record performance profiles to understand the timing of component renders and React commits.
+React Profiler 面板允许你记录性能配置文件，以了解组件渲染和 React 提交的时间。
 
-For more info, see the [original 2018 guide](https://legacy.reactjs.org/blog/2018/09/10/introducing-the-react-profiler.html#reading-performance-data) (note that parts of this may be outdated).
+更多信息，请参阅 [原始 2018 指南](https://legacy.reactjs.org/blog/2018/09/10/introducing-the-react-profiler.html#reading-performance-data)（注意，其中部分内容可能已过时）。
 
-## Reconnecting DevTools
+## 重新连接 DevTools
 
-Occasionally, DevTools might disconnect from the target device. This can happen if:
+偶尔，DevTools 可能会与目标设备断开连接。如果发生以下情况，可能会出现此问题：
 
-- The app is closed.
-- The app is rebuilt (a new native build is installed).
-- The app crashes on the native side.
-- The dev server (Metro) is quit.
-- A physical device is disconnected.
+- 应用已关闭。
+- 应用已重新构建（安装了新的原生构建版本）。
+- 应用在原生端崩溃。
+- 开发服务器（Metro）已退出。
+- 物理设备已断开连接。
 
-On disconnect, a dialog will be shown with the message "Debugging connection was closed".
+断开连接时，将显示一个对话框，消息为“调试连接已关闭”。
 
-![A reconnect dialog shown when a device is disconnected](/docs/assets/debugging-reconnect-menu.jpg)
+![设备断开连接时显示的重连对话框](/docs/assets/debugging-reconnect-menu.jpg)
 
-From here, you can either:
+在此处，您可以：
 
-- **Dismiss**: Select the close (`×`) icon or click outside the dialog to return to the DevTools UI in the last state before disconnection.
-- **Reconnect**: Select "Reconnect DevTools", having addressed the reason for disconnection.
+- **忽略**：选择关闭（`×`）图标或点击对话框外部，以返回到断开连接前最后状态的 DevTools 界面。
+- **重新连接**：选择“重新连接 DevTools"，并已解决断开连接的原因。

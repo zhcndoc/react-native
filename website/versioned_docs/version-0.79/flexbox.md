@@ -1,24 +1,24 @@
 ---
 id: flexbox
-title: Layout with Flexbox
+title: 使用 Flexbox 布局
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-A component can specify the layout of its children using the Flexbox algorithm. Flexbox is designed to provide a consistent layout on different screen sizes.
+组件可以使用 Flexbox 算法指定其子元素的布局。Flexbox 旨在在不同屏幕尺寸上提供一致的布局。
 
-You will normally use a combination of `flexDirection`, `alignItems`, and `justifyContent` to achieve the right layout.
+你通常会组合使用 `flexDirection`、`alignItems` 和 `justifyContent` 来实现正确的布局。
 
 :::caution
-Flexbox works the same way in React Native as it does in CSS on the web, with a few exceptions.
-The defaults are different, with `flexDirection` defaulting to `column` instead of `row`, `alignContent` defaulting to `flex-start` instead of `stretch`, `flexShrink` defaulting to `0` instead of `1`, the `flex` parameter only supporting a single number.
+Flexbox 在 React Native 中的工作方式与 Web 上的 CSS 相同，但有一些例外。
+默认值不同，`flexDirection` 默认为 `column` 而不是 `row`，`alignContent` 默认为 `flex-start` 而不是 `stretch`，`flexShrink` 默认为 `0` 而不是 `1`，`flex` 参数仅支持单个数字。
 :::
 
 ## Flex
 
-[`flex`](layout-props#flex) will define how your items are going to **“fill”** over the available space along your main axis. Space will be divided according to each element's flex property.
+[`flex`](layout-props#flex) 将定义你的元素如何沿主轴 **“填充”** 可用空间。空间将根据每个元素的 flex 属性进行划分。
 
-In the following example, the red, orange, and green views are all children in the container view that has `flex: 1` set. The red view uses `flex: 1` , the orange view uses `flex: 2`, and the green view uses `flex: 3` . **1+2+3 = 6**, which means that the red view will get `1/6` of the space, the orange `2/6` of the space, and the green `3/6` of the space.
+在下面的示例中，红色、橙色和绿色视图都是设置了 `flex: 1` 的容器视图中的子元素。红色视图使用 `flex: 1`，橙色视图使用 `flex: 2`，绿色视图使用 `flex: 3`。**1+2+3 = 6**，这意味着红色视图将获得 `1/6` 的空间，橙色视图获得 `2/6` 的空间，绿色视图获得 `3/6` 的空间。
 
 ```SnackPlayer name=Flex%20Example
 import React from 'react';
@@ -30,7 +30,7 @@ const Flex = () => {
       style={[
         styles.container,
         {
-          // Try setting `flexDirection` to `"row"`.
+          // 尝试将 `flexDirection` 设置为 `"row"`。
           flexDirection: 'column',
         },
       ]}>
@@ -51,19 +51,19 @@ const styles = StyleSheet.create({
 export default Flex;
 ```
 
-## Flex Direction
+## Flex 方向
 
-[`flexDirection`](layout-props#flexdirection) controls the direction in which the children of a node are laid out. This is also referred to as the main axis. The cross axis is the axis perpendicular to the main axis, or the axis which the wrapping lines are laid out in.
+[`flexDirection`](layout-props#flexdirection) 控制节点子元素的布局方向。这也被称为主轴。交叉轴是垂直于主轴的轴，或者说是换行排列的轴。
 
-- `column` (**default value**) Align children from top to bottom. If wrapping is enabled, then the next line will start to the right of the first item on the top of the container.
+- `column`（**默认值**）将子元素从上到下对齐。如果启用了换行，则下一行将从容器顶部第一个元素的右侧开始。
 
-- `row` Align children from left to right. If wrapping is enabled, then the next line will start under the first item on the left of the container.
+- `row` 将子元素从左到右对齐。如果启用了换行，则下一行将从容器左侧第一个元素的下方开始。
 
-- `column-reverse` Align children from bottom to top. If wrapping is enabled, then the next line will start to the right of the first item on the bottom of the container.
+- `column-reverse` 将子元素从下到上对齐。如果启用了换行，则下一行将从容器底部第一个元素的右侧开始。
 
-- `row-reverse` Align children from right to left. If wrapping is enabled, then the next line will start under the first item on the right of the container.
+- `row-reverse` 将子元素从右到左对齐。如果启用了换行，则下一行将从容器右侧第一个元素的下方开始。
 
-You can learn more [here](https://www.yogalayout.dev/docs/styling/flex-direction).
+你可以 [这里](https://www.yogalayout.dev/docs/styling/flex-direction) 了解更多。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -274,13 +274,13 @@ export default FlexDirectionBasics;
 </TabItem>
 </Tabs>
 
-## Layout Direction
+## 布局方向
 
-Layout [`direction`](layout-props#direction) specifies the direction in which children and text in a hierarchy should be laid out. Layout direction also affects what edge `start` and `end` refer to. By default, React Native lays out with LTR layout direction. In this mode `start` refers to left and `end` refers to right.
+布局 [`direction`](layout-props#direction) 指定层级中子元素和文本的布局方向。布局方向还会影响 `start` 和 `end` 指的是哪一边。默认情况下，React Native 使用 LTR 布局方向。在此模式下，`start` 指的是左侧，`end` 指的是右侧。
 
-- `LTR` (**default value**) Text and children are laid out from left to right. Margin and padding applied to the start of an element are applied on the left side.
+- `LTR`（**默认值**）文本和子元素从左到右布局。应用于元素起始位置的 margin 和 padding 将应用于左侧。
 
-- `RTL` Text and children are laid out from right to left. Margin and padding applied to the start of an element are applied on the right side.
+- `RTL` 文本和子元素从右到左布局。应用于元素起始位置的 margin 和 padding 将应用于右侧。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -491,23 +491,23 @@ export default DirectionLayout;
 </TabItem>
 </Tabs>
 
-## Justify Content
+## 主轴对齐
 
-[`justifyContent`](layout-props#justifycontent) describes how to align children within the main axis of their container. For example, you can use this property to center a child horizontally within a container with `flexDirection` set to `row` or vertically within a container with `flexDirection` set to `column`.
+[`justifyContent`](layout-props#justifycontent) 描述如何沿容器的主轴对齐子元素。例如，您可以使用此属性在 `flexDirection` 设置为 `row` 的容器内水平居中对齐子元素，或在 `flexDirection` 设置为 `column` 的容器内垂直居中对齐子元素。
 
-- `flex-start`(**default value**) Align children of a container to the start of the container's main axis.
+- `flex-start`（**默认值**）将容器的子元素对齐到容器主轴的起始位置。
 
-- `flex-end` Align children of a container to the end of the container's main axis.
+- `flex-end` 将容器的子元素对齐到容器主轴的结束位置。
 
-- `center` Align children of a container in the center of the container's main axis.
+- `center` 将容器的子元素对齐到容器主轴的中心。
 
-- `space-between` Evenly space off children across the container's main axis, distributing the remaining space between the children.
+- `space-between` 沿容器主轴均匀分布子元素，将剩余空间分布在子元素之间。
 
-- `space-around` Evenly space off children across the container's main axis, distributing the remaining space around the children. Compared to `space-between`, using `space-around` will result in space being distributed to the beginning of the first child and end of the last child.
+- `space-around` 沿容器主轴均匀分布子元素，将剩余空间分布在子元素周围。与 `space-between` 相比，使用 `space-around` 会导致空间分布在第一个子元素的开始处和最后一个子元素的结束处。
 
-- `space-evenly` Evenly distribute children within the alignment container along the main axis. The spacing between each pair of adjacent items, the main-start edge and the first item, and the main-end edge and the last item, are all exactly the same.
+- `space-evenly` 沿主轴在对齐容器内均匀分布子元素。每对相邻项之间、主轴起始边缘与第一项之间以及主轴结束边缘与最后一项之间的间距完全相同。
 
-You can learn more [here](https://www.yogalayout.dev/docs/styling/justify-content).
+您可以在 [这里](https://www.yogalayout.dev/docs/styling/justify-content) 了解更多。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -732,25 +732,25 @@ export default JustifyContentBasics;
 </TabItem>
 </Tabs>
 
-## Align Items
+## 交叉轴对齐
 
-[`alignItems`](layout-props#alignitems) describes how to align children along the cross axis of their container. It is very similar to `justifyContent` but instead of applying to the main axis, `alignItems` applies to the cross axis.
+[`alignItems`](layout-props#alignitems) 描述如何沿容器的交叉轴对齐子元素。它与 `justifyContent` 非常相似，但 `alignItems` 应用于交叉轴，而不是主轴。
 
-- `stretch` (**default value**) Stretch children of a container to match the `height` of the container's cross axis.
+- `stretch`（**默认值**）拉伸容器的子元素以匹配容器交叉轴的 `height`。
 
-- `flex-start` Align children of a container to the start of the container's cross axis.
+- `flex-start` 将容器的子元素对齐到容器交叉轴的起始位置。
 
-- `flex-end` Align children of a container to the end of the container's cross axis.
+- `flex-end` 将容器的子元素对齐到容器交叉轴的结束位置。
 
-- `center` Align children of a container in the center of the container's cross axis.
+- `center` 将容器的子元素对齐到容器交叉轴的中心。
 
-- `baseline` Align children of a container along a common baseline. Individual children can be set to be the reference baseline for their parents.
+- `baseline` 沿公共基线对齐容器的子元素。可以将单个子元素设置为其父元素的参考基线。
 
 :::info
-For `stretch` to have an effect, children must not have a fixed dimension along the secondary axis. In the following example, setting `alignItems: stretch` does nothing until the `width: 50` is removed from the children.
+要使 `stretch` 生效，子元素在次要轴上不能有固定尺寸。在下面的示例中，设置 `alignItems: stretch` 不起作用，直到从子元素中移除 `width: 50`。
 :::
 
-You can learn more [here](https://www.yogalayout.dev/docs/styling/align-items-self).
+您可以在 [这里](https://www.yogalayout.dev/docs/styling/align-items-self) 了解更多。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -981,9 +981,9 @@ export default AlignItemsLayout;
 </TabItem>
 </Tabs>
 
-## Align Self
+## 自对齐
 
-[`alignSelf`](layout-props#alignself) has the same options and effect as `alignItems` but instead of affecting the children within a container, you can apply this property to a single child to change its alignment within its parent. `alignSelf` overrides any option set by the parent with `alignItems`.
+[`alignSelf`](layout-props#alignself) 具有与 `alignItems` 相同的选项和效果，但它不是影响容器内的子元素，而是可以将此属性应用于单个子元素以更改其在父元素内的对齐方式。`alignSelf` 会覆盖父元素通过 `alignItems` 设置的任何选项。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -1217,25 +1217,25 @@ export default AlignSelfLayout;
 </TabItem>
 </Tabs>
 
-## Align Content
+## 内容对齐
 
-[alignContent](layout-props#aligncontent) defines the distribution of lines along the cross-axis. This only has effect when items are wrapped to multiple lines using `flexWrap`.
+[alignContent](layout-props#aligncontent) 定义沿交叉轴的行分布。仅当使用 `flexWrap` 将项目换行到多行时，此属性才生效。
 
-- `flex-start` (**default value**) Align wrapped lines to the start of the container's cross axis.
+- `flex-start` (**默认值**) 将换行后的行对齐到容器交叉轴的起点。
 
-- `flex-end` Align wrapped lines to the end of the container's cross axis.
+- `flex-end` 将换行后的行对齐到容器交叉轴的终点。
 
-- `stretch` (_default value when using Yoga on the web_) Stretch wrapped lines to match the height of the container's cross axis.
+- `stretch` (_在 Web 上使用 Yoga 时的默认值_) 拉伸换行后的行以匹配容器交叉轴的高度。
 
-- `center` Align wrapped lines in the center of the container's cross axis.
+- `center` 将换行后的行对齐到容器交叉轴的中心。
 
-- `space-between` Evenly space wrapped lines across the container's cross axis, distributing the remaining space between the lines.
+- `space-between` 沿容器交叉轴均匀分布换行后的行，将剩余空间分布在这些行之间。
 
-- `space-around` Evenly space wrapped lines across the container's cross axis, distributing the remaining space around the lines. Each end of the container has a half-sized space compared to the space between items.
+- `space-around` 沿容器交叉轴均匀分布换行后的行，将剩余空间分布在这些行周围。与行之间的空间相比，容器两端的空间大小为一半。
 
-- `space-evenly` Evenly space wrapped lines across the container's cross axis, distributing the remaining space around the lines. Each space is the same size.
+- `space-evenly` 沿容器交叉轴均匀分布换行后的行，将剩余空间分布在这些行周围。每个空间的大小相同。
 
-You can learn more [here](https://www.yogalayout.dev/docs/styling/align-content).
+您可以 [在此处](https://www.yogalayout.dev/docs/styling/align-content) 了解更多信息。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -1472,11 +1472,11 @@ export default AlignContentLayout;
 </TabItem>
 </Tabs>
 
-## Flex Wrap
+## 弹性换行
 
-The [`flexWrap`](layout-props#flexwrap) property is set on containers and it controls what happens when children overflow the size of the container along the main axis. By default, children are forced into a single line (which can shrink elements). If wrapping is allowed, items are wrapped into multiple lines along the main axis if needed.
+[`flexWrap`](layout-props#flexwrap) 属性设置在容器上，它控制当子元素沿主轴溢出容器大小时会发生什么。默认情况下，子元素被强制放入单行（这可能会导致元素收缩）。如果允许换行，则在需要时沿主轴将项目包裹到多行中。
 
-When wrapping lines, `alignContent` can be used to specify how the lines are placed in the container. Learn more [here](https://www.yogalayout.dev/docs/styling/flex-wrap).
+换行时，可以使用 `alignContent` 来指定行在容器中的放置方式。在此处了解更多 [信息](https://www.yogalayout.dev/docs/styling/flex-wrap)。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -1695,19 +1695,19 @@ export default FlexWrapLayout;
 </TabItem>
 </Tabs>
 
-## Flex Basis, Grow, and Shrink
+## 弹性基准、增长和收缩
 
-- [`flexBasis`](layout-props#flexbasis) is an axis-independent way of providing the default size of an item along the main axis. Setting the `flexBasis` of a child is similar to setting the `width` of that child if its parent is a container with `flexDirection: row` or setting the `height` of a child if its parent is a container with `flexDirection: column`. The `flexBasis` of an item is the default size of that item, the size of the item before any `flexGrow` and `flexShrink` calculations are performed.
+- [`flexBasis`](layout-props#flexbasis) 是一种与轴无关的方式，用于提供项目沿主轴的默认大小。设置子元素的 `flexBasis` 类似于设置该子元素的 `width`（如果其父容器是 `flexDirection: row` 的容器），或者设置子元素的 `height`（如果其父容器是 `flexDirection: column` 的容器）。项目的 `flexBasis` 是该项目的默认大小，即在进行任何 `flexGrow` 和 `flexShrink` 计算之前的大小。
 
-- [`flexGrow`](layout-props#flexgrow) describes how much space within a container should be distributed among its children along the main axis. After laying out its children, a container will distribute any remaining space according to the flex grow values specified by its children.
+- [`flexGrow`](layout-props#flexgrow) 描述了容器内的多少空间应沿主轴分配给其子元素。在布局其子元素后，容器将根据其子元素指定的 flex grow 值分配任何剩余空间。
 
-  `flexGrow` accepts any floating point value >= 0, with 0 being the default value. A container will distribute any remaining space among its children weighted by the children’s `flexGrow` values.
+  `flexGrow` 接受任何 >= 0 的浮点数值，默认值为 0。容器将根据子元素的 `flexGrow` 值加权分配任何剩余空间给其子元素。
 
-- [`flexShrink`](layout-props#flexshrink) describes how to shrink children along the main axis in the case in which the total size of the children overflows the size of the container on the main axis. `flexShrink` is very similar to `flexGrow` and can be thought of in the same way if any overflowing size is considered to be negative remaining space. These two properties also work well together by allowing children to grow and shrink as needed.
+- [`flexShrink`](layout-props#flexshrink) 描述了当子元素的总大小沿主轴溢出容器大小时，如何沿主轴收缩子元素。`flexShrink` 与 `flexGrow` 非常相似，如果将任何溢出大小视为负剩余空间，则可以以相同的方式思考。这两个属性也可以很好地配合使用，允许子元素根据需要增长和收缩。
 
-  `flexShrink` accepts any floating point value >= 0, with 0 being the default value (on the web, the default is 1). A container will shrink its children weighted by the children’s `flexShrink` values.
+  `flexShrink` 接受任何 >= 0 的浮点数值，默认值为 0（在 Web 端，默认值为 1）。容器将根据子元素的 `flexShrink` 值加权收缩其子元素。
 
-You can learn more [here](https://www.yogalayout.dev/docs/styling/flex-basis-grow-shrink).
+您可以在此处了解更多 [信息](https://www.yogalayout.dev/docs/styling/flex-basis-grow-shrink)。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -2072,15 +2072,15 @@ export default App;
 </TabItem>
 </Tabs>
 
-## Row Gap, Column Gap and Gap
+## 行间距、列间距和间距
 
-- [`rowGap`](layout-props#rowgap) sets the size of the gap (gutter) between an element's rows.
+- [`rowGap`](layout-props#rowgap) 设置元素行之间间距（沟槽）的大小。
 
-- [`columnGap`](layout-props#columngap) sets the size of the gap (gutter) between an element's columns.
+- [`columnGap`](layout-props#columngap) 设置元素列之间间距（沟槽）的大小。
 
-- [`gap`](layout-props#gap) sets the size of the gap (gutter) between rows and columns. It is a shorthand for `rowGap` and `columnGap`.
+- [`gap`](layout-props#gap) 设置行和列之间间距（沟槽）的大小。它是 `rowGap` 和 `columnGap` 的简写。
 
-You can use `flexWrap` and `alignContent` along with `gap` to add consistent spacing between items.
+您可以配合使用 `flexWrap` 和 `alignContent` 以及 `gap` 来在项目之间添加一致的间距。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -2297,17 +2297,17 @@ export default RowGapAndColumnGap;
 </TabItem>
 </Tabs>
 
-## Width and Height
+## 宽度和高度
 
-The `width` property specifies the width of an element's content area. Similarly, the `height` property specifies the height of an element's content area.
+`width` 属性指定元素内容区域的宽度。同样，`height` 属性指定元素内容区域的高度。
 
-Both `width` and `height` can take the following values:
+`width` 和 `height` 都可以接受以下值：
 
-- `auto` (**default value**) React Native calculates the width/height for the element based on its content, whether that is other children, text, or an image.
+- `auto` (**默认值**) React Native 根据元素的内容（无论是其他子元素、文本还是图像）计算元素的宽度/高度。
 
-- `pixels` Defines the width/height in absolute pixels. Depending on other styles set on the component, this may or may not be the final dimension of the node.
+- `pixels` 以绝对像素定义宽度/高度。根据组件上设置的其他样式，这可能是也可能不是节点的最终尺寸。
 
-- `percentage` Defines the width or height in percentage of its parent's width or height, respectively.
+- `percentage` 分别以其父元素宽度或高度的百分比定义宽度或高度。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -2575,15 +2575,15 @@ export default WidthHeightBasics;
 </TabItem>
 </Tabs>
 
-## Position
+## 定位
 
-The `position` type of an element defines how it is positioned relative to either itself, its parent, or its [containing block](./flexbox.md#the-containing-block).
+元素的 `position` 类型定义了它是相对于自身、父元素还是其 [包含块](./flexbox.md#the-containing-block) 进行定位的。
 
-- `relative` (**default value**) By default, an element is positioned relatively. This means an element is positioned according to the normal flow of the layout, and then offset relative to that position based on the values of `top`, `right`, `bottom`, and `left`. The offset does not affect the position of any sibling or parent elements.
+- `relative` (**默认值**) 默认情况下，元素是相对定位的。这意味着元素根据布局的正常流进行定位，然后根据 `top`、`right`、`bottom` 和 `left` 的值相对于该位置进行偏移。该偏移不会影响任何兄弟元素或父元素的位置。
 
-- `absolute` When positioned absolutely, an element doesn't take part in the normal layout flow. It is instead laid out independent of its siblings. The position is determined based on the `top`, `right`, `bottom`, and `left` values. These values will position the element relative to its containing block.
+- `absolute` 当绝对定位时，元素不参与正常布局流。而是独立于其兄弟元素进行布局。位置由 `top`、`right`、`bottom` 和 `left` 的值决定。这些值将相对于其包含块来定位元素。
 
-- `static` When positioned statically, an element is positioned according to the normal flow of layout, and will ignore the `top`, `right`, `bottom`, and `left` values. This `position` will also cause the element to not form a containing block for absolute descendants, unless some other superceding style prop is present (e.g. `transform`). This allows `absolute` elements to be positioned to something that is not their parent. Note that **`static` is only available on the New Architecture**.
+- `static` 当静态定位时，元素根据布局的正常流进行定位，并将忽略 `top`、`right`、`bottom` 和 `left` 的值。此 `position` 还会导致该元素不为绝对定位的后代元素形成包含块，除非存在其他优先的样式 prop（例如 `transform`）。这允许 `absolute` 元素定位到非父元素的某个元素上。注意：**`static` 仅在新架构上可用**。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -2858,27 +2858,26 @@ export default PositionLayout;
 </TabItem>
 </Tabs>
 
-## The Containing Block
+## 包含块
 
-The containing block of an element is an ancestor element which controls its position and size.
-The way containing blocks work in React Native is very similar to [how they work on the web](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block), with some simplifications due to the lack of some web features.
+元素的包含块是控制其位置和大小的祖先元素。
+React Native 中包含块的工作方式与 [Web 上的工作方式](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block) 非常相似，但由于缺少某些 Web 功能而做了一些简化。
 
-The `top`, `right`, `bottom`, and `left` values of an absolutely positioned element will be
-relative to its containing block.
+绝对定位元素的 `top`、`right`、`bottom` 和 `left` 值将相对于其包含块。
 
-Percentage lengths (e.g.: `width: '50%'` or `padding: '10%'`) applied to absolutely positioned elements will be calculated relatively to the size of its containing block. For example, if the containing block is 100 points wide, then `width: 50%` on an absolutely positioned element will cause it to be 50 points wide.
+应用于绝对定位元素的百分比长度（例如：`width: '50%'` 或 `padding: '10%'`）将相对于其包含块的大小进行计算。例如，如果包含块宽 100 点，那么绝对定位元素上的 `width: 50%` 将使其宽度为 50 点。
 
-The following list will help you determine the containing block of any given element:
+以下列表将帮助你确定任何给定元素的包含块：
 
-- If that element has a `position` type of `relative` or `static`, then its containing block is its parent.
-- If that element has a `position` type of `absolute`, then its containing block is the nearest ancestor in which one of the following is true:
-  - It has a `position` type other than `static`
-  - It has a `transform`
+- 如果该元素的 `position` 类型为 `relative` 或 `static`，则其包含块是其父元素。
+- 如果该元素的 `position` 类型为 `absolute`，则其包含块是满足以下任一条件的最近祖先元素：
+  - 它具有除 `static` 以外的 `position` 类型
+  - 它具有 `transform`
 
-## Going Deeper
+## 深入探索
 
-Check out the interactive [yoga playground](https://www.yogalayout.dev/playground) that you can use to get a better understanding of flexbox.
+查看交互式 [yoga playground](https://www.yogalayout.dev/playground)，你可以用它来更好地理解 flexbox。
 
-We've covered the basics, but there are many other styles you may need for layouts. The full list of props that control layout is documented [here](./layout-props.md).
+我们已经涵盖了基础知识，但布局可能还需要许多其他样式。控制布局的 props 完整列表记录在 [这里](./layout-props.md)。
 
-Additionally, you can see some examples from [Wix Engineers](https://medium.com/wix-engineering/the-full-react-native-layout-cheat-sheet-a4147802405c).
+此外，你可以查看 [Wix Engineers](https://medium.com/wix-engineering/the-full-react-native-layout-cheat-sheet-a4147802405c) 的一些示例。

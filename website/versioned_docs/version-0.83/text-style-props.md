@@ -773,7 +773,7 @@ export default App;
 
 | 类型   |
 | ------ |
-| string |
+| 字符串 |
 
 iOS 支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monospace` 和 `ui-rounded`。
 
@@ -783,7 +783,7 @@ iOS 支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monos
 
 | 类型   |
 | ------ |
-| number |
+| 数字   |
 
 ---
 
@@ -791,7 +791,7 @@ iOS 支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monos
 
 | 类型                         |
 | ---------------------------- |
-| enum(`'normal'`, `'italic'`) |
+| 枚举(`'normal'`, `'italic'`) |
 
 ---
 
@@ -801,7 +801,7 @@ iOS 支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monos
 
 | 类型                                                                                                                  | 默认值      |
 | --------------------------------------------------------------------------------------------------------------------- | ---------- |
-| enum(`'normal'`, `'bold'`, `'100'`, `'200'`, `'300'`, `'400'`, `'500'`, `'600'`, `'700'`, `'800'`, `'900'`) 或 number | `'normal'` |
+| 枚举(`'normal'`, `'bold'`, `'100'`, `'200'`, `'300'`, `'400'`, `'500'`, `'600'`, `'700'`, `'800'`, `'900'`) 或 数字 | `'normal'` |
 
 ---
 
@@ -809,9 +809,9 @@ iOS 支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monos
 
 设置为 `false` 可移除字体用于部分字符（如升部和降部）预留的额外内边距。部分字体中，这样的内边距可能导致文本垂直居中时轻微偏移。建议配合 `textAlignVertical` 设置为 `center`。
 
-| 类型 | 默认值 |
-| ---- | ------- |
-| bool | `true`  |
+| 类型    | 默认值 |
+| ------- | ------- |
+| 布尔值  | `true`  |
 
 ---
 
@@ -831,7 +831,7 @@ iOS 支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monos
 
 | 类型   |
 | ------ |
-| number |
+| 数字   |
 
 ---
 
@@ -841,7 +841,7 @@ iOS 支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monos
 
 | 类型   |
 | ------ |
-| number |
+| 数字   |
 
 ---
 
@@ -851,7 +851,7 @@ iOS 支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monos
 
 | 类型                                                         | 默认值  |
 | ------------------------------------------------------------ | -------- |
-| enum(`'auto'`, `'left'`, `'right'`, `'center'`, `'justify'`) | `'auto'` |
+| 枚举(`'auto'`, `'left'`, `'right'`, `'center'`, `'justify'`) | `'auto'` |
 
 ---
 
@@ -859,7 +859,7 @@ iOS 支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monos
 
 | 类型                                            | 默认值  |
 | ----------------------------------------------- | -------- |
-| enum(`'auto'`, `'top'`, `'bottom'`, `'center'`) | `'auto'` |
+| 枚举(`'auto'`, `'top'`, `'bottom'`, `'center'`) | `'auto'` |
 
 ---
 
@@ -875,7 +875,7 @@ iOS 支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monos
 
 | 类型                                                                        | 默认值  |
 | --------------------------------------------------------------------------- | -------- |
-| enum(`'none'`, `'underline'`, `'line-through'`, `'underline line-through'`) | `'none'` |
+| 枚举(`'none'`, `'underline'`, `'line-through'`, `'underline line-through'`) | `'none'` |
 
 ---
 
@@ -883,7 +883,7 @@ iOS 支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monos
 
 | 类型                                                | 默认值   |
 | --------------------------------------------------- | --------- |
-| enum(`'solid'`, `'double'`, `'dotted'`, `'dashed'`) | `'solid'` |
+| 枚举(`'solid'`, `'double'`, `'dotted'`, `'dashed'`) | `'solid'` |
 
 ---
 
@@ -899,7 +899,7 @@ iOS 支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monos
 
 | 类型                                        |
 | ------------------------------------------- |
-| 对象: `{width?: number, height?: number}`  |
+| 对象：`{width?: 数字，height?: 数字}`  |
 
 ---
 
@@ -907,7 +907,7 @@ iOS 支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monos
 
 | 类型   |
 | ------ |
-| number |
+| 数字   |
 
 ---
 
@@ -915,7 +915,7 @@ iOS 支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monos
 
 | 类型                                                         | 默认值  |
 | ------------------------------------------------------------ | -------- |
-| enum(`'none'`, `'uppercase'`, `'lowercase'`, `'capitalize'`) | `'none'` |
+| 枚举(`'none'`, `'uppercase'`, `'lowercase'`, `'capitalize'`) | `'none'` |
 
 ---
 
@@ -923,7 +923,7 @@ iOS 支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monos
 
 | 类型                                            | 默认值  |
 | ----------------------------------------------- | -------- |
-| enum(`'auto'`, `'top'`, `'bottom'`, `'middle'`) | `'auto'` |
+| 枚举(`'auto'`, `'top'`, `'bottom'`, `'middle'`) | `'auto'` |
 
 ---
 
@@ -931,7 +931,7 @@ iOS 支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monos
 
 | 类型                             | 默认值  |
 | -------------------------------- | -------- |
-| enum(`'auto'`, `'ltr'`, `'rtl'`) | `'auto'` |
+| 枚举(`'auto'`, `'ltr'`, `'rtl'`) | `'auto'` |
 
 ---
 
@@ -941,4 +941,4 @@ iOS 支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monos
 
 | 类型                                                     | 默认值 |
 | -------------------------------------------------------- | ------- |
-| enum(`'auto'`, `'text'`, `'none'`, `'contain'`, `'all'`) | `none`  |
+| 枚举(`'auto'`, `'text'`, `'none'`, `'contain'`, `'all'`) | `none`  |

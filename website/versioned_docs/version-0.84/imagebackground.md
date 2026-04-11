@@ -5,7 +5,7 @@ title: ImageBackground
 
 熟悉网页开发的开发者常常会请求类似 `background-image` 的功能。为满足此需求，你可以使用 `<ImageBackground>` 组件，它拥有和 `<Image>` 相同的属性，并且可以在其上叠加任意你想添加的子元素。
 
-在某些情况下，你可能不想使用 `<ImageBackground>` ，因为其实现较为基础。你可以参考 `<ImageBackground>` 的[源码](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Image/ImageBackground.js) 以获得更多了解，必要时可以创建你自己的自定义组件。
+在某些情况下，你可能不想使用 `<ImageBackground>` ，因为其实现较为基础。你可以参考 `<ImageBackground>` 的 [源码](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Image/ImageBackground.js) 以获得更多了解，必要时可以创建你自己的自定义组件。
 
 请注意，你必须指定一定的宽度和高度样式属性。
 

@@ -57,7 +57,7 @@ Writing sourcemap output to:, android/app/build/intermediates/sourcemaps/react/r
 
 启用源码映射生成的方法：
 
-- 打开 Xcode 并编辑构建阶段“Bundle React Native code and images”。
+- 打开 Xcode 并编辑构建阶段"Bundle React Native code and images"。
 - 在其他 export 语句之前，添加一个 `SOURCEMAP_FILE` 条目，指定期望的输出路径。
 
 ```diff
@@ -86,7 +86,7 @@ npx metro-symbolicate
 # 从包含堆栈追踪的文件中读取
 npx metro-symbolicate android/app/build/generated/sourcemaps/react/release/index.android.bundle.map < stacktrace.txt
 
-# 从 adb logcat （Android）读取
+# 从 adb logcat（Android）读取
 adb logcat -d | npx metro-symbolicate android/app/build/generated/sourcemaps/react/release/index.android.bundle.map
 ```
 

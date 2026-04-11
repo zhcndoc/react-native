@@ -1,58 +1,58 @@
 ---
 id: timers
-title: Timers
+title: 计时器
 ---
 
-Timers are an important part of an application and React Native implements the [browser timers](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Timeouts_and_intervals).
+计时器是应用程序的重要组成部分，React Native 实现了 [浏览器计时器](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Timeouts_and_intervals)。
 
-## Timers
+## 计时器
 
-- `setTimeout` and `clearTimeout`
-- `setInterval` and `clearInterval`
-- `setImmediate` and `clearImmediate`
-- `requestAnimationFrame` and `cancelAnimationFrame`
+- `setTimeout` 和 `clearTimeout`
+- `setInterval` 和 `clearInterval`
+- `setImmediate` 和 `clearImmediate`
+- `requestAnimationFrame` 和 `cancelAnimationFrame`
 
-`requestAnimationFrame(fn)` is not the same as `setTimeout(fn, 0)` - the former will fire after all the frames have flushed, whereas the latter will fire as quickly as possible (over 1000x per second on a iPhone 5S).
+`requestAnimationFrame(fn)` 与 `setTimeout(fn, 0)` 不同 - 前者会在所有帧刷新后触发，而后者会尽可能快地触发（在 iPhone 5S 上每秒超过 1000 次）。
 
-`setImmediate` is executed at the end of the current JavaScript execution block, right before sending the batched response back to native. Note that if you call `setImmediate` within a `setImmediate` callback, it will be executed right away, it won't yield back to native in between.
+`setImmediate` 在当前 JavaScript 执行块结束时执行，就在将批处理响应发送回原生端之前。请注意，如果在 `setImmediate` 回调中调用 `setImmediate`，它将立即执行，中间不会交还控制权给原生端。
 
-The `Promise` implementation uses `setImmediate` as its asynchronicity implementation.
+`Promise` 实现使用 `setImmediate` 作为其异步实现。
 
 :::note
-When debugging on Android, if the times between the debugger and device have drifted; things such as animation, event behavior, etc., might not work properly or the results may not be accurate.
-Please correct this by running ``adb shell "date `date +%m%d%H%M%Y.%S%3N`"`` on your debugger machine. Root access is required for the use in real device.
+在 Android 上调试时，如果调试器和设备之间的时间发生漂移；动画、事件行为等事物可能无法正常工作或结果可能不准确。
+请在您的调试机器上运行 ``adb shell "date `date +%m%d%H%M%Y.%S%3N`"`` 来纠正此问题。在真实设备上使用需要根访问权限。
 :::
 
 ## InteractionManager
 
-:::warning Deprecated
-The `InteractionManager` behavior has been changed to be the same as `setImmediate`, which should be used instead.
+:::warning 已弃用
+`InteractionManager` 的行为已更改为与 `setImmediate` 相同，应改用后者。
 :::
 
-One reason why well-built native apps feel so smooth is by avoiding expensive operations during interactions and animations. In React Native, we currently have a limitation that there is only a single JS execution thread, but you can use `InteractionManager` to make sure long-running work is scheduled to start after any interactions/animations have completed.
+构建良好的原生应用感觉如此流畅的原因之一是在交互和动画期间避免高开销操作。在 React Native 中，我们目前有一个限制，即只有一个 JS 执行线程，但您可以使用 `InteractionManager` 确保长时间运行的工作安排在任何交互/动画完成后开始。
 
-Applications can schedule tasks to run after interactions with the following:
+应用可以使用以下方式安排在交互后运行的任务：
 
 ```tsx
 InteractionManager.runAfterInteractions(() => {
-  // ...long-running synchronous task...
+  // ...长时间运行的同步任务...
 });
 ```
 
-Compare this to other scheduling alternatives:
+将其与其他调度替代方案进行比较：
 
-- requestAnimationFrame(): for code that animates a view over time.
-- setImmediate/setTimeout/setInterval(): run code later, note this may delay animations.
-- runAfterInteractions(): run code later, without delaying active animations.
+- requestAnimationFrame()：用于随时间动画化视图的代码。
+- setImmediate/setTimeout/setInterval()：稍后运行代码，请注意这可能会延迟动画。
+- runAfterInteractions()：稍后运行代码，不会延迟活动动画。
 
-The touch handling system considers one or more active touches to be an 'interaction' and will delay `runAfterInteractions()` callbacks until all touches have ended or been cancelled.
+触摸处理系统将一个或多个活动触摸视为“交互”，并将延迟 `runAfterInteractions()` 回调，直到所有触摸结束或被取消。
 
-`InteractionManager` also allows applications to register animations by creating an interaction 'handle' on animation start, and clearing it upon completion:
+`InteractionManager` 还允许应用通过在动画开始时创建交互“句柄”并在完成时清除它来注册动画：
 
 ```tsx
 const handle = InteractionManager.createInteractionHandle();
-// run animation... (`runAfterInteractions` tasks are queued)
-// later, on animation completion:
+// 运行动画... (`runAfterInteractions` 任务已排队)
+// 稍后，在动画完成时：
 InteractionManager.clearInteractionHandle(handle);
-// queued tasks run if all handles were cleared
+// 如果所有句柄都被清除，排队的任务将运行
 ```

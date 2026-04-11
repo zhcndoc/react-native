@@ -1,11 +1,11 @@
 ---
 id: share
-title: Share
+title: 分享
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-## Example
+## 示例
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -24,12 +24,12 @@ const ShareExample = () => {
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
-          // shared with activity type of result.activityType
+          // 已分享，活动类型为 result.activityType
         } else {
-          // shared
+          // 已分享
         }
       } else if (result.action === Share.dismissedAction) {
-        // dismissed
+        // 已取消
       }
     } catch (error) {
       Alert.alert(error.message);
@@ -64,12 +64,12 @@ const ShareExample = () => {
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
-          // shared with activity type of result.activityType
+          // 已分享，活动类型为 result.activityType
         } else {
-          // shared
+          // 已分享
         }
       } else if (result.action === Share.dismissedAction) {
-        // dismissed
+        // 已取消
       }
     } catch (error: any) {
       Alert.alert(error.message);
@@ -90,9 +90,9 @@ export default ShareExample;
 </TabItem>
 </Tabs>
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `share()`
 
@@ -100,22 +100,22 @@ export default ShareExample;
 static share(content: ShareContent, options?: ShareOptions);
 ```
 
-Open a dialog to share text content.
+打开一个对话框以分享文本内容。
 
-In iOS, returns a Promise which will be invoked with an object containing `action` and `activityType`. If the user dismissed the dialog, the Promise will still be resolved with action being `Share.dismissedAction` and all the other keys being undefined. Note that some share options will not appear or work on the iOS simulator.
+在 iOS 上，返回一个 Promise，该 Promise 将以一个包含 `action` 和 `activityType` 的对象进行调用。如果用户取消了对话框，Promise 仍会被解决，其中 action 为 `Share.dismissedAction`，所有其他键为 undefined。请注意，某些分享选项可能不会出现在 iOS 模拟器上或无法正常工作。
 
-In Android, returns a Promise which will always be resolved with action being `Share.sharedAction`.
+在 Android 上，返回一个 Promise，该 Promise 将始终被解决，其中 action 为 `Share.sharedAction`。
 
-**Properties:**
+**属性：**
 
-| Name                                                         | Type   | Description                                                                                                                                                                                                                                                                                                                                                                                  |
+| 名称                                                         | 类型   | 描述                                                                                                                                                                                                                                                                                                                                                                                  |
 | ------------------------------------------------------------ | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| content <div className="label basic required">Required</div> | object | `message` - a message to share<br/>`url` - a URL to share <div className="label ios">iOS</div><br/>`title` - title of the message <div className="label android">Android</div><hr/>At least one of `url` and `message` is required.                                                                                                                                                          |
-| options                                                      | object | `dialogTitle` <div className="label android">Android</div><br/>`excludedActivityTypes` <div className="label ios">iOS</div><br/>`subject` - a subject to share via email <div className="label ios">iOS</div><br/>`tintColor` <div className="label ios">iOS</div><br/>`anchor` - the node to which the action sheet should be anchored (used for iPad) <div className="label ios">iOS</div> |
+| content <div className="label basic required">必需</div> | 对象 | `message` - 要分享的消息<br/>`url` - 要分享的 URL <div className="label ios">iOS</div><br/>`title` - 消息的标题 <div className="label android">Android</div><hr/>`url` 和 `message` 至少需要提供一个。                                                                                                                                                          |
+| options                                                      | 对象 | `dialogTitle` <div className="label android">Android</div><br/>`excludedActivityTypes` <div className="label ios">iOS</div><br/>`subject` - 通过电子邮件分享的主题 <div className="label ios">iOS</div><br/>`tintColor` <div className="label ios">iOS</div><br/>`anchor` - 操作表应锚定到的节点（用于 iPad） <div className="label ios">iOS</div> |
 
 ---
 
-## Properties
+## 属性
 
 ### `sharedAction`
 
@@ -123,7 +123,7 @@ In Android, returns a Promise which will always be resolved with action being `S
 static sharedAction: 'sharedAction';
 ```
 
-The content was successfully shared.
+内容已成功分享。
 
 ---
 
@@ -133,4 +133,4 @@ The content was successfully shared.
 static dismissedAction: 'dismissedAction';
 ```
 
-The dialog has been dismissed.
+对话框已取消。

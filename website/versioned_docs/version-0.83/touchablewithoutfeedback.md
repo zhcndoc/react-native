@@ -45,7 +45,7 @@ const TouchableWithoutFeedbackExample = () => {
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <View style={styles.countContainer}>
-          <Text style={styles.countText}>计数: {count}</Text>
+          <Text style={styles.countText}>计数：{count}</Text>
         </View>
         <TouchableWithoutFeedback onPress={onPress}>
           <View style={styles.button}>
@@ -120,7 +120,7 @@ export default TouchableWithoutFeedbackExample;
 
 ### `accessibilityLanguage` <div className="label ios">iOS</div>
 
-指定屏幕阅读器应使用的语言，遵循 [BCP 47规范](https://www.rfc-editor.org/info/bcp47)。
+指定屏幕阅读器应使用的语言，遵循 [BCP 47 规范](https://www.rfc-editor.org/info/bcp47)。
 
 更多信息请参阅 [iOS `accessibilityLanguage` 文档](https://developer.apple.com/documentation/objectivec/nsobject/1615192-accessibilitylanguage)。
 
@@ -188,7 +188,7 @@ export default TouchableWithoutFeedbackExample;
 
 | 类型                                                                                             |
 | ------------------------------------------------------------------------------------------------ |
-| 对象: `{disabled: bool, selected: bool, checked: bool 或 'mixed', busy: bool, expanded: bool}` |
+| 对象：`{disabled: bool, selected: bool, checked: bool 或 'mixed', busy: bool, expanded: bool}` |
 
 ---
 
@@ -276,7 +276,7 @@ export default TouchableWithoutFeedbackExample;
 
 | 类型                                     | 默认值 |
 | ---------------------------------------- | ------- |
-| 枚举(`'assertive'`, `'off'`, `'polite'`) | `'off'` |
+| 枚举 (`'assertive'`, `'off'`, `'polite'`) | `'off'` |
 
 ---
 
@@ -318,7 +318,7 @@ export default TouchableWithoutFeedbackExample;
 
 | 类型                                                            |
 | --------------------------------------------------------------- |
-| 对象: `{min: number, max: number, now: number, text: string}` |
+| 对象：`{min: number, max: number, now: number, text: string}` |
 
 ---
 

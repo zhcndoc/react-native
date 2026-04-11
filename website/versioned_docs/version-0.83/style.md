@@ -3,7 +3,7 @@ id: style
 title: 样式
 ---
 
-在 React Native 中，你使用 JavaScript 来为应用程序设置样式。所有核心组件都接受一个名为 `style` 的属性。样式名称和[取值](colors.md)通常与网页上的 CSS 用法相匹配，不过名称采用驼峰命名法，例如 `backgroundColor` 而不是 `background-color`。
+在 React Native 中，你使用 JavaScript 来为应用程序设置样式。所有核心组件都接受一个名为 `style` 的属性。样式名称和 [取值](colors.md) 通常与网页上的 CSS 用法相匹配，不过名称采用驼峰命名法，例如 `backgroundColor` 而不是 `background-color`。
 
 `style` 属性可以是普通的 JavaScript 对象。这也是我们通常在示例代码中使用的。你也可以传入一个样式数组——数组中最后一个样式优先级最高，所以你可以用它来实现样式继承。
 
@@ -45,7 +45,7 @@ export default LotsOfStyles;
 
 还有许多自定义文本样式的方式。请查看 [Text 组件参考](text.md) 以获取完整列表。
 
-现在你可以让文本更美观了。成为样式专家的下一步是[学习如何控制组件尺寸](height-and-width.md)。
+现在你可以让文本更美观了。成为样式专家的下一步是 [学习如何控制组件尺寸](height-and-width.md)。
 
 ## 已知问题
 

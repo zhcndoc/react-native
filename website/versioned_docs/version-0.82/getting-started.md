@@ -1,49 +1,49 @@
 ---
 id: environment-setup
-title: Get Started with React Native
+title: 开始使用 React Native
 hide_table_of_contents: true
 ---
 
 import PlatformSupport from '@site/src/theme/PlatformSupport';
 import BoxLink from '@site/src/theme/BoxLink';
 
-**React Native allows developers who know React to create native apps.** At the same time, native developers can use React Native to gain parity between native platforms by writing common features once.
+**React Native 允许了解 React 的开发者创建原生应用。** 同时，原生开发者可以使用 React Native 通过编写一次通用功能来实现原生平台之间的一致性。
 
-We believe that the best way to experience React Native is through a **Framework**, a toolbox with all the necessary APIs to let you build production ready apps.
+我们相信体验 React Native 的最佳方式是通过 **框架**，这是一个包含所有必要 API 的工具箱，让您能够构建生产就绪的应用。
 
-You can also use React Native without a Framework, however we’ve found that most developers benefit from using a React Native Framework like [Expo](https://expo.dev). Expo provides features like file-based routing, high-quality universal libraries, and the ability to write plugins that modify native code without having to manage native files.
+您也可以在不使用框架的情况下使用 React Native，但我们发现大多数开发者受益于使用像 [Expo](https://expo.dev) 这样的 React Native 框架。Expo 提供了基于文件的路由、高质量的通用库以及编写插件修改原生代码而无需管理原生文件等功能。
 
 <details>
-<summary>Can I use React Native without a Framework?</summary>
+<summary>我可以不使用框架而使用 React Native 吗？</summary>
 
-Yes. You can use React Native without a Framework. **However, if you’re building a new app with React Native, we recommend using a Framework.**
+可以。您可以不使用框架而使用 React Native。**但是，如果您正在使用 React Native 构建新应用，我们建议使用框架。**
 
-In short, you’ll be able to spend time writing your app instead of writing an entire Framework yourself in addition to your app.
+简而言之，您将能够花时间编写您的应用，而不是除了应用之外还要自己编写整个框架。
 
-The React Native community has spent years refining approaches to navigation, accessing native APIs, dealing with native dependencies, and more. Most apps need these core features. A React Native Framework provides them from the start of your app.
+React Native 社区花费了数年时间完善导航、访问原生 API、处理原生依赖等方法。大多数应用都需要这些核心功能。React Native 框架从一开始就为您提供它们。
 
-Without a Framework, you’ll either have to write your own solutions to implement core features, or you’ll have to piece together a collection of pre-existing libraries to create a skeleton of a Framework. This takes real work, both when starting your app, then later when maintaining it.
+如果没有框架，您要么必须编写自己的解决方案来实现核心功能，要么必须拼凑一组现有的库来创建框架的骨架。这需要真正的工作，无论是在启动应用时，还是在后来维护它时。
 
-If your app has unusual constraints that are not served well by a Framework, or you prefer to solve these problems yourself, you can make a React Native app without a Framework using Android Studio, Xcode. If you’re interested in this path, learn how to [set up your environment](set-up-your-environment) and how to [get started without a framework](getting-started-without-a-framework).
+如果您的应用有特殊限制，框架无法很好地满足，或者您更喜欢自己解决这些问题，您可以使用 Android Studio、Xcode 在不使用框架的情况下制作 React Native 应用。如果您对此路径感兴趣，请了解如何 [设置您的环境](set-up-your-environment) 以及如何 [不使用框架开始](getting-started-without-a-framework)。
 
 </details>
 
-## Start a new React Native project with Expo
+## 使用 Expo 启动新的 React Native 项目
 
 <PlatformSupport platforms={['android', 'ios', 'tv', 'web']} />
 
-Expo is a production-grade React Native Framework. Expo provides developer tooling that makes developing apps easier, such as file-based routing, a standard library of native modules, and much more.
+Expo 是一个生产级的 React Native 框架。Expo 提供了使应用开发更容易的开发者工具，例如基于文件的路由、原生模块的标准库等等。
 
-Expo's Framework is free and open source, with an active community on [GitHub](https://github.com/expo) and [Discord](https://chat.expo.dev). The Expo team works in close collaboration with the React Native team at Meta to bring the latest React Native features to the Expo SDK.
+Expo 的框架是免费且开源的，在 [GitHub](https://github.com/expo) 和 [Discord](https://chat.expo.dev) 上拥有活跃的社区。Expo 团队与 Meta 的 React Native 团队紧密合作，将最新的 React Native 功能带入 Expo SDK。
 
-The team at Expo also provides Expo Application Services (EAS), an optional set of services that complements Expo, the Framework, in each step of the development process.
+Expo 团队还提供 Expo Application Services (EAS)，这是一组可选服务，在开发过程的每一步补充 Expo 框架。
 
-To create a new Expo project, run the following in your terminal:
+要创建新的 Expo 项目，请在终端中运行以下命令：
 
 ```shell
 npx create-expo-app@latest
 ```
 
-Once you’ve created your app, check out the rest of Expo’s getting started guide to start developing your app.
+创建应用后，请查看 Expo 入门指南的其余部分以开始开发您的应用。
 
-<BoxLink href="https://docs.expo.dev/get-started/set-up-your-environment">Continue with Expo</BoxLink>
+<BoxLink href="https://docs.expo.dev/get-started/set-up-your-environment">继续使用 Expo</BoxLink>

@@ -5,7 +5,7 @@ title: 按钮
 
 一个基础的按钮组件，应该能在任何平台上良好渲染。支持最小程度的自定义。
 
-如果这个按钮在你的应用中看起来不合适，你可以使用 [Pressable](pressable) 来构建你自己的按钮。想要获取灵感，可以查看[按钮组件的源码](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Components/Button.js)。
+如果这个按钮在你的应用中看起来不合适，你可以使用 [Pressable](pressable) 来构建你自己的按钮。想要获取灵感，可以查看 [按钮组件的源码](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Components/Button.js)。
 
 ```tsx
 <Button
@@ -149,9 +149,9 @@ export default App;
 
 ### `accessibilityLanguage` <div className="label ios">iOS</div>
 
-指示用户与该元素交互时屏幕阅读器应使用的语言。应遵循[BCP 47 规范](https://www.rfc-editor.org/info/bcp47)。
+指示用户与该元素交互时屏幕阅读器应使用的语言。应遵循 [BCP 47 规范](https://www.rfc-editor.org/info/bcp47)。
 
-更多信息请参见[iOS `accessibilityLanguage` 文档](https://developer.apple.com/documentation/objectivec/nsobject/1615192-accessibilitylanguage)。
+更多信息请参见 [iOS `accessibilityLanguage` 文档](https://developer.apple.com/documentation/objectivec/nsobject/1615192-accessibilitylanguage)。
 
 | 类型   |
 | ------ |
@@ -163,7 +163,7 @@ export default App;
 
 辅助功能动作允许辅助技术以编程方式调用组件的动作。`accessibilityActions` 属性应包含动作对象列表。每个动作对象应包含字段 name 和 label。
 
-更多信息请参见[辅助功能指南](accessibility.md#accessibility-actions)。
+更多信息请参见 [辅助功能指南](accessibility.md#accessibility-actions)。
 
 | 类型  | 必需  |
 | ----- | ----- |
@@ -175,7 +175,7 @@ export default App;
 
 当用户执行辅助功能动作时调用。该函数唯一的参数是包含要执行动作名称的事件。
 
-更多信息请参见[辅助功能指南](accessibility.md#accessibility-actions)。
+更多信息请参见 [辅助功能指南](accessibility.md#accessibility-actions)。
 
 | 类型     | 必需  |
 | -------- | ----- |
@@ -229,7 +229,7 @@ export function ColorDefaults() {
 
 ### `nextFocusDown` <div className="label android">Android</div><div className="label tv">TV</div>
 
-指定用户向下导航时，接收焦点的下一个视图。详情请参阅[Android 文档](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusDown)。
+指定用户向下导航时，接收焦点的下一个视图。详情请参阅 [Android 文档](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusDown)。
 
 | 类型   |
 | ------ |
@@ -239,7 +239,7 @@ export function ColorDefaults() {
 
 ### `nextFocusForward` <div className="label android">Android</div><div className="label tv">TV</div>
 
-指定用户向前导航时，接收焦点的下一个视图。详情请参阅[Android 文档](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusForward)。
+指定用户向前导航时，接收焦点的下一个视图。详情请参阅 [Android 文档](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusForward)。
 
 | 类型   |
 | ------ |
@@ -249,7 +249,7 @@ export function ColorDefaults() {
 
 ### `nextFocusLeft` <div className="label android">Android</div><div className="label tv">TV</div>
 
-指定用户向左导航时，接收焦点的下一个视图。详情请参阅[Android 文档](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusLeft)。
+指定用户向左导航时，接收焦点的下一个视图。详情请参阅 [Android 文档](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusLeft)。
 
 | 类型   |
 | ------ |
@@ -259,7 +259,7 @@ export function ColorDefaults() {
 
 ### `nextFocusRight` <div className="label android">Android</div><div className="label tv">TV</div>
 
-指定用户向右导航时，接收焦点的下一个视图。详情请参阅[Android 文档](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusRight)。
+指定用户向右导航时，接收焦点的下一个视图。详情请参阅 [Android 文档](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusRight)。
 
 | 类型   |
 | ------ |
@@ -269,7 +269,7 @@ export function ColorDefaults() {
 
 ### `nextFocusUp` <div className="label android">Android</div><div className="label tv">TV</div>
 
-指定用户向上导航时，接收焦点的下一个视图。详情请参阅[Android 文档](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusUp)。
+指定用户向上导航时，接收焦点的下一个视图。详情请参阅 [Android 文档](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusUp)。
 
 | 类型   |
 | ------ |

@@ -1,11 +1,11 @@
 ---
 id: rect
-title: Rect Object Type
+title: Rect 对象类型
 ---
 
-`Rect` accepts numeric pixel values to describe how far to extend a rectangular area. These values are added to the original area's size to expand it.
+`Rect` 接受数值像素值来描述矩形区域延伸的距离。这些值会被加到原始区域的尺寸上以进行扩展。
 
-## Example
+## 示例
 
 ```js
 {
@@ -16,33 +16,33 @@ title: Rect Object Type
 }
 ```
 
-## Keys and values
+## 键和值
 
-### `bottom`
+### bottom
 
-| Type                        | Required |
+| 类型                        | 是否必需 |
 | --------------------------- | -------- |
-| number, `null`, `undefined` | No       |
+| number、`null`、`undefined` | 否       |
 
-### `left`
+### left
 
-| Type                        | Required |
+| 类型                        | 是否必需 |
 | --------------------------- | -------- |
-| number, `null`, `undefined` | No       |
+| number、`null`、`undefined` | 否       |
 
-### `right`
+### right
 
-| Type                        | Required |
+| 类型                        | 是否必需 |
 | --------------------------- | -------- |
-| number, `null`, `undefined` | No       |
+| number、`null`、`undefined` | 否       |
 
-### `top`
+### top
 
-| Type                        | Required |
+| 类型                        | 是否必需 |
 | --------------------------- | -------- |
-| number, `null`, `undefined` | No       |
+| number、`null`、`undefined` | 否       |
 
-## Used by
+## 被用于
 
 - [`Image`](image)
 - [`Pressable`](pressable)

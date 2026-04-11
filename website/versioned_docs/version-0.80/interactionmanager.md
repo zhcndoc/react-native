@@ -5,47 +5,47 @@ title: 🗑️ InteractionManager
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-:::warning Deprecated
-Avoid long-running work and use `requestIdleCallback` instead.
+:::warning 已弃用
+避免长时间运行的工作，改用 `requestIdleCallback`。
 :::
 
-InteractionManager allows long-running work to be scheduled after any interactions/animations have completed. In particular, this allows JavaScript animations to run smoothly.
+InteractionManager 允许在任何交互/动画完成后安排长时间运行的工作。特别是，这允许 JavaScript 动画流畅运行。
 
-Applications can schedule tasks to run after interactions with the following:
+应用程序可以使用以下内容安排在交互后运行的任务：
 
 ```tsx
 InteractionManager.runAfterInteractions(() => {
-  // ...long-running synchronous task...
+  // ...长时间运行的同步任务...
 });
 ```
 
-Compare this to other scheduling alternatives:
+将其与其他调度替代方案进行比较：
 
-- `requestAnimationFrame()` for code that animates a view over time.
-- `setImmediate/setTimeout()` run code later, note this may delay animations.
-- `runAfterInteractions()` run code later, without delaying active animations.
+- `requestAnimationFrame()` 用于随时间动画化视图的代码。
+- `setImmediate/setTimeout()` 稍后运行代码，注意这可能会延迟动画。
+- `runAfterInteractions()` 稍后运行代码，而不延迟活动动画。
 
-The touch handling system considers one or more active touches to be an 'interaction' and will delay `runAfterInteractions()` callbacks until all touches have ended or been cancelled.
+触摸处理系统将一个或多个活动触摸视为“交互”，并将延迟 `runAfterInteractions()` 回调，直到所有触摸结束或被取消。
 
-InteractionManager also allows applications to register animations by creating an interaction 'handle' on animation start, and clearing it upon completion:
+InteractionManager 还允许应用程序通过在动画开始时创建交互“句柄”并在完成时清除它来注册动画：
 
 ```tsx
 const handle = InteractionManager.createInteractionHandle();
-// run animation... (`runAfterInteractions` tasks are queued)
-// later, on animation completion:
+// 运行动画... (`runAfterInteractions` 任务已排队)
+// 稍后，动画完成后：
 InteractionManager.clearInteractionHandle(handle);
-// queued tasks run if all handles were cleared
+// 如果所有句柄都被清除，排队的任务将运行
 ```
 
-`runAfterInteractions` takes either a plain callback function, or a `PromiseTask` object with a `gen` method that returns a `Promise`. If a `PromiseTask` is supplied, then it is fully resolved (including asynchronous dependencies that also schedule more tasks via `runAfterInteractions`) before starting on the next task that might have been queued up synchronously earlier.
+`runAfterInteractions` 接受一个普通回调函数，或一个带有 `gen` 方法的 `PromiseTask` 对象，该方法返回一个 `Promise`。如果提供了 `PromiseTask`，那么在开始下一个可能更早同步排队任务之前，它将完全解析（包括通过 `runAfterInteractions` 调度更多任务的异步依赖项）。
 
-By default, queued tasks are executed together in a loop in one `setImmediate` batch. If `setDeadline` is called with a positive number, then tasks will only be executed until the deadline (in terms of js event loop run time) approaches, at which point execution will yield via setTimeout, allowing events such as touches to start interactions and block queued tasks from executing, making apps more responsive.
+默认情况下，排队任务在一个 `setImmediate` 批次中的循环中一起执行。如果 `setDeadline` 被调用且带有正数，那么任务将只执行到截止日期（就 js 事件循环运行时间而言）临近时，此时执行将通过 setTimeout 让出，允许诸如触摸之类的事件启动交互并阻止排队任务执行，使应用程序响应更灵敏。
 
 ---
 
-## Example
+## 示例
 
-### Basic
+### 基本
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -73,10 +73,10 @@ const instructions = Platform.select({
 const useFadeIn = (duration = 5000) => {
   const opacity = useAnimatedValue(0);
 
-  // Running the animation when the component is mounted
+  // 当组件挂载时运行动画
   useEffect(() => {
-    // Animated.timing() create a interaction handle by default, if you want to disabled that
-    // behaviour you can set isInteraction to false to disabled that.
+    // Animated.timing() 默认创建一个交互句柄，如果你想禁用该
+    // 行为，你可以将 isInteraction 设置为 false 来禁用它。
     Animated.timing(opacity, {
       toValue: 1,
       duration,
@@ -90,7 +90,7 @@ const useFadeIn = (duration = 5000) => {
 const Ball = ({onShown}) => {
   const opacity = useFadeIn();
 
-  // Running a method after the animation
+  // 在动画后运行一个方法
   useEffect(() => {
     const interactionPromise = InteractionManager.runAfterInteractions(() =>
       onShown(),
@@ -155,10 +155,10 @@ const instructions = Platform.select({
 const useFadeIn = (duration = 5000) => {
   const opacity = useAnimatedValue(0);
 
-  // Running the animation when the component is mounted
+  // 当组件挂载时运行动画
   useEffect(() => {
-    // Animated.timing() create a interaction handle by default, if you want to disabled that
-    // behaviour you can set isInteraction to false to disabled that.
+    // Animated.timing() 默认创建一个交互句柄，如果你想禁用该
+    // 行为，你可以将 isInteraction 设置为 false 来禁用它。
     Animated.timing(opacity, {
       toValue: 1,
       duration,
@@ -176,7 +176,7 @@ type BallProps = {
 const Ball = ({onShown}: BallProps) => {
   const opacity = useFadeIn();
 
-  // Running a method after the animation
+  // 在动画后运行一个方法
   useEffect(() => {
     const interactionPromise = InteractionManager.runAfterInteractions(() =>
       onShown(),
@@ -218,7 +218,7 @@ export default App;
 </TabItem>
 </Tabs>
 
-### Advanced
+### 高级
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -242,8 +242,8 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-// You can create a custom interaction/animation and add
-// support for InteractionManager
+// 你可以创建一个自定义交互/动画并添加
+// 对 InteractionManager 的支持
 const useCustomInteraction = (timeLocked = 2000) => {
   useEffect(() => {
     const handle = InteractionManager.createInteractionHandle();
@@ -260,7 +260,7 @@ const useCustomInteraction = (timeLocked = 2000) => {
 const Ball = ({onInteractionIsDone}) => {
   useCustomInteraction();
 
-  // Running a method after the interaction
+  // 在交互后运行一个方法
   useEffect(() => {
     InteractionManager.runAfterInteractions(() => onInteractionIsDone());
   }, [onInteractionIsDone]);
@@ -318,8 +318,8 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-// You can create a custom interaction/animation and add
-// support for InteractionManager
+// 你可以创建一个自定义交互/动画并添加
+// 对 InteractionManager 的支持
 const useCustomInteraction = (timeLocked = 2000) => {
   useEffect(() => {
     const handle = InteractionManager.createInteractionHandle();
@@ -340,7 +340,7 @@ type BallProps = {
 const Ball = ({onInteractionIsDone}: BallProps) => {
   useCustomInteraction();
 
-  // Running a method after the interaction
+  // 在交互后运行一个方法
   useEffect(() => {
     InteractionManager.runAfterInteractions(() => onInteractionIsDone());
   }, [onInteractionIsDone]);
@@ -379,9 +379,9 @@ export default App;
 </TabItem>
 </Tabs>
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `runAfterInteractions()`
 
@@ -389,7 +389,7 @@ export default App;
 static runAfterInteractions(task?: (() => any) | SimpleTask | PromiseTask);
 ```
 
-Schedule a function to run after all interactions have completed. Returns a cancellable "promise".
+安排一个函数在所有交互完成后运行。返回一个可取消的"promise"。
 
 ---
 
@@ -399,7 +399,7 @@ Schedule a function to run after all interactions have completed. Returns a canc
 static createInteractionHandle(): Handle;
 ```
 
-Notify manager that an interaction has started.
+通知管理器交互已开始。
 
 ---
 
@@ -409,7 +409,7 @@ Notify manager that an interaction has started.
 static clearInteractionHandle(handle: Handle);
 ```
 
-Notify manager that an interaction has completed.
+通知管理器交互已完成。
 
 ---
 
@@ -419,4 +419,4 @@ Notify manager that an interaction has completed.
 static setDeadline(deadline: number);
 ```
 
-A positive number will use setTimeout to schedule any tasks after the eventLoopRunningTime hits the deadline value, otherwise all tasks will be executed in one setImmediate batch (default).
+正数将使用 setTimeout 在 eventLoopRunningTime 达到截止值后调度任何任务，否则所有任务将在一个 setImmediate 批次中执行（默认）。

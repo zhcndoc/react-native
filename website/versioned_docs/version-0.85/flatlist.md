@@ -376,7 +376,7 @@ renderItem({
 
 | 类型     |
 | -------- |
-| function |
+| 函数     |
 
 - `item` (Object): 正在渲染的来自 `data` 的项。
 - `index` (number): 该项在 `data` 数组中对应的索引。
@@ -422,7 +422,7 @@ renderItem({
 
 | 类型      |
 | --------- |
-| ArrayLike |
+| 类数组    |
 
 ---
 
@@ -432,7 +432,7 @@ renderItem({
 
 | 类型                         |
 | ---------------------------- |
-| component, function, element |
+| 组件、函数、元素             |
 
 ---
 
@@ -442,7 +442,7 @@ renderItem({
 
 | 类型               |
 | ------------------ |
-| component, element |
+| 组件、元素         |
 
 ---
 
@@ -452,7 +452,7 @@ renderItem({
 
 | 类型               |
 | ------------------ |
-| component, element |
+| 组件、元素         |
 
 ---
 
@@ -462,7 +462,7 @@ renderItem({
 
 | 类型                           |
 | ------------------------------ |
-| [视图样式](view-style-props) |
+| [视图样式](view-style-props)   |
 
 ---
 
@@ -472,7 +472,7 @@ renderItem({
 
 | 类型               |
 | ------------------ |
-| component, element |
+| 组件、元素         |
 
 ---
 
@@ -482,7 +482,7 @@ renderItem({
 
 | 类型                           |
 | ------------------------------ |
-| [视图样式](view-style-props) |
+| [视图样式](view-style-props)   |
 
 ---
 
@@ -492,7 +492,7 @@ renderItem({
 
 | 类型                           |
 | ------------------------------ |
-| [视图样式](view-style-props) |
+| [视图样式](view-style-props)   |
 
 ---
 
@@ -502,7 +502,7 @@ renderItem({
 
 | 类型 |
 | ---- |
-| any  |
+| 任意 |
 
 ---
 
@@ -524,7 +524,7 @@ renderItem({
 
 | 类型     |
 | -------- |
-| function |
+| 函数     |
 
 ---
 
@@ -534,7 +534,7 @@ renderItem({
 
 | 类型    |
 | ------- |
-| boolean |
+| 布尔值  |
 
 ---
 
@@ -544,7 +544,7 @@ renderItem({
 
 | 类型   | 默认值 |
 | ------ | ------- |
-| number | `10`    |
+| 数字   | `10`    |
 
 ---
 
@@ -554,7 +554,7 @@ renderItem({
 
 | 类型   |
 | ------ |
-| number |
+| 数字   |
 
 ---
 
@@ -564,7 +564,7 @@ renderItem({
 
 | 类型    |
 | ------- |
-| boolean |
+| 布尔值  |
 
 ---
 
@@ -578,7 +578,7 @@ renderItem({
 
 | 类型     |
 | -------- |
-| function |
+| 函数     |
 
 ---
 
@@ -588,7 +588,7 @@ renderItem({
 
 | 类型   |
 | ------ |
-| number |
+| 数字   |
 
 ---
 
@@ -602,7 +602,7 @@ renderItem({
 
 | 类型     |
 | -------- |
-| function |
+| 函数     |
 
 ---
 
@@ -622,7 +622,7 @@ renderItem({
 
 | 类型   |
 | ------ |
-| number |
+| 数字   |
 
 ---
 
@@ -632,7 +632,7 @@ renderItem({
 
 | 类型    |
 | ------- |
-| boolean |
+| 布尔值  |
 
 ---
 
@@ -646,7 +646,7 @@ renderItem({
 
 | 类型    |
 | ------- |
-| boolean |
+| 布尔值  |
 
 ---
 
@@ -662,10 +662,10 @@ renderItem({
 
 | 属性                         | 类型    |
 | -------------------------------- | ------- |
-| minimumViewTime                  | number  |
-| viewAreaCoveragePercentThreshold | number  |
-| itemVisiblePercentThreshold      | number  |
-| waitForInteraction               | boolean |
+| minimumViewTime                  | 数字    |
+| viewAreaCoveragePercentThreshold | 数字    |
+| itemVisiblePercentThreshold      | 数字    |
+| waitForInteraction               | 布尔值  |
 
 `viewAreaCoveragePercentThreshold` 或 `itemVisiblePercentThreshold` 至少需要其中一个。这需要在 `constructor` 中完成，以避免以下错误 ([参考](https://github.com/facebook/react-native/issues/17408))：
 
@@ -714,7 +714,7 @@ constructor (props) {
 
 | 类型                                   |
 | -------------------------------------- |
-| array of ViewabilityConfigCallbackPair |
+| ViewabilityConfigCallbackPair 数组     |
 
 ## 方法
 

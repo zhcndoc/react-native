@@ -111,4 +111,4 @@ const SectionListBasics = () => {
 export default SectionListBasics;
 ```
 
-列表视图最常见的用例之一是显示从服务器获取的数据。要实现这一点，你需要[学习 React Native 中的网络相关知识](network.md)。
+列表视图最常见的用例之一是显示从服务器获取的数据。要实现这一点，你需要 [学习 React Native 中的网络相关知识](network.md)。

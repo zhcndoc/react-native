@@ -22,7 +22,7 @@ title: 处理触摸事件
 
 ![](/docs/assets/Button.png)
 
-你可以使用下面的示例尽情玩转 `Button` 组件。通过点击右下角的切换按钮选择预览的运行平台，然后点击“Tap to Play”预览应用。
+你可以使用下面的示例尽情玩转 `Button` 组件。通过点击右下角的切换按钮选择预览的运行平台，然后点击“点击播放”预览应用。
 
 ```SnackPlayer name=Button%20Basics
 import React from 'react';
@@ -69,9 +69,9 @@ export default ButtonBasics;
 
 ## 可触摸组件（Touchables）
 
-如果基础按钮不适合你的应用，你可以使用 React Native 提供的任意“Touchable”组件自己构建按钮。这些组件能捕获点击手势，并在识别手势时显示反馈。然而，它们没有默认样式，因此你需要对样式进行一些调整才能让它们在你的应用中看起来美观。
+如果基础按钮不适合你的应用，你可以使用 React Native 提供的任意"Touchable"组件自己构建按钮。这些组件能捕获点击手势，并在识别手势时显示反馈。然而，它们没有默认样式，因此你需要对样式进行一些调整才能让它们在你的应用中看起来美观。
 
-你使用哪个“Touchable”组件取决于你想提供什么样的反馈：
+你使用哪个"Touchable"组件取决于你想提供什么样的反馈：
 
 - 通常，你可以在任何用作按钮或链接的位置使用 [**TouchableHighlight**](touchablehighlight.md)。当用户按下按钮时，该视图的背景将变暗。
 
@@ -81,7 +81,7 @@ export default ButtonBasics;
 
 - 如果你需要处理点击手势但不想显示任何反馈，使用 [**TouchableWithoutFeedback**](touchablewithoutfeedback.md)。
 
-有时，你可能想检测用户按住视图一定时间的操作。这些长按事件可通过给任一“Touchable”组件的 `onLongPress` 属性传入函数来处理。
+有时，你可能想检测用户按住视图一定时间的操作。这些长按事件可通过给任一"Touchable"组件的 `onLongPress` 属性传入函数来处理。
 
 下面让我们来看这些组件的实际演示：
 

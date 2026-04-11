@@ -5,7 +5,7 @@ title: 原生与 React Native 之间的通信
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-在[与现有应用集成指南](integration-with-existing-apps)和[原生 UI 组件指南](legacy/native-components-android)中，我们学习了如何在原生组件中嵌入 React Native，反之亦然。当我们混合使用原生和 React Native 组件时，最终会发现在这两个世界之间需要通信。一些实现方式已经在其他指南中提到过。本文总结了可用的技术。
+在 [与现有应用集成指南](integration-with-existing-apps) 和 [原生 UI 组件指南](legacy/native-components-android) 中，我们学习了如何在原生组件中嵌入 React Native，反之亦然。当我们混合使用原生和 React Native 组件时，最终会发现在这两个世界之间需要通信。一些实现方式已经在其他指南中提到过。本文总结了可用的技术。
 
 ## 介绍
 
@@ -107,7 +107,6 @@ var imageList = arrayListOf("https://dummyimage.com/600x400/ff0000/000000.png", 
 ```
 
 </TabItem>
-
 </Tabs>
 
 随时更新属性是允许的，但更新必须在主线程进行。任何线程都可以使用 getter。
@@ -120,7 +119,7 @@ var imageList = arrayListOf("https://dummyimage.com/600x400/ff0000/000000.png", 
 
 ### 从 React Native 传递属性到原生
 
-原生组件属性暴露的问题在[此文](legacy/native-components-android#3-expose-view-property-setters-using-reactprop-or-reactpropgroup-annotation)中有详细说明。简而言之，需将希望映射到 JavaScript 的属性作为带有 `@ReactProp` 注解的 setter 方法暴露，然后可以像使用普通 React Native 组件那样在 React Native 中使用它们。
+原生组件属性暴露的问题在 [此文](legacy/native-components-android#3-expose-view-property-setters-using-reactprop-or-reactpropgroup-annotation) 中有详细说明。简而言之，需将希望映射到 JavaScript 的属性作为带有 `@ReactProp` 注解的 setter 方法暴露，然后可以像使用普通 React Native 组件那样在 React Native 中使用它们。
 
 ### 属性的限制
 
@@ -136,7 +135,7 @@ React Native 支持跨语言函数调用。你可以从 JS 执行自定义原生
 
 ### 从原生调用 React Native 函数（事件）
 
-事件在[此文](legacy/native-components-android#events)中有详解。注意，使用事件无法保证执行时间，因为事件在独立线程中处理。
+事件在 [此文](legacy/native-components-android#events) 中有详解。注意，使用事件无法保证执行时间，因为事件在独立线程中处理。
 
 事件很强大，因为它们允许你更改 React Native 组件而无需持有引用。但使用时可能遇到陷阱：
 
@@ -146,7 +145,7 @@ React Native 支持跨语言函数调用。你可以从 JS 执行自定义原生
 
 ### 从 React Native 调用原生函数（原生模块）
 
-原生模块是可被 JS 调用的 Java/Kotlin 类。通常每个 JS 桥接创建一个该类实例。它们能向 React Native 导出任意函数和常量。[此文](legacy/native-modules-android)对其做了详细介绍。
+原生模块是可被 JS 调用的 Java/Kotlin 类。通常每个 JS 桥接创建一个该类实例。它们能向 React Native 导出任意函数和常量。[此文](legacy/native-modules-android) 对其做了详细介绍。
 
 :::warning
 所有原生模块共享同一命名空间。创建新模块时要注意命名冲突。

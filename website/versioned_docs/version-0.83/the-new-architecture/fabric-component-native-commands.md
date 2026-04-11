@@ -2,13 +2,13 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 # 在你的原生组件上调用原生函数
 
-在编写新原生组件的[基础指南](/docs/fabric-native-components-introduction)中，你已经了解了如何创建新组件、如何从 JS 侧向原生侧传递属性，以及如何从原生侧向 JS 发射事件。
+在编写新原生组件的 [基础指南](/docs/fabric-native-components-introduction) 中，你已经了解了如何创建新组件、如何从 JS 侧向原生侧传递属性，以及如何从原生侧向 JS 发射事件。
 
 自定义组件还可以命令式地调用原生代码中实现的一些函数，以实现更高级的功能，例如编程式地重新加载网页。
 
 在本指南中，你将学习如何实现这一点，使用一个新概念：原生命令（Native Commands）。
 
-本指南基于[原生组件](/docs/fabric-native-components-introduction)指南，假设你已经熟悉它，并且熟悉[Codegen](/docs/next/the-new-architecture/what-is-codegen)。
+本指南基于 [原生组件](/docs/fabric-native-components-introduction) 指南，假设你已经熟悉它，并且熟悉 [Codegen](/docs/next/the-new-architecture/what-is-codegen)。
 
 ## 1. 更新你的组件规格说明
 
@@ -388,7 +388,7 @@ Framework build type is static library
 打开 `RCTWebView.mm` 文件，做如下修改：
 
 ```diff title="RCTWebView.mm"
-  // Event emitter convenience method
+  // 事件发射器便捷方法
   - (const CustomWebViewEventEmitter &)eventEmitter
   {
   return static_cast<const CustomWebViewEventEmitter &>(*_eventEmitter);

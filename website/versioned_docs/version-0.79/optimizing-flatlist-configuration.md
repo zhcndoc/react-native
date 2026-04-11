@@ -1,101 +1,101 @@
 ---
 id: optimizing-flatlist-configuration
-title: Optimizing Flatlist Configuration
+title: 优化 FlatList 配置
 ---
 
-## Terms
+## 术语
 
-- **VirtualizedList:** The component behind `FlatList` (React Native's implementation of the [`Virtual List`](https://bvaughn.github.io/react-virtualized/#/components/List) concept.)
+- **VirtualizedList:** `FlatList` 背后的组件（React Native 对 [`Virtual List`](https://bvaughn.github.io/react-virtualized/#/components/List) 概念的实现。）
 
-- **Memory consumption:** How much information about your list is being stored in memory, which could lead to an app crash.
+- **Memory consumption:** 关于你的列表有多少信息被存储在内存中，这可能导致应用崩溃。
 
-- **Responsiveness:** Application ability to respond to interactions. Low responsiveness, for instance, is when you touch on a component and it waits a bit to respond, instead of responding immediately as expected.
+- **Responsiveness:** 应用程序响应交互的能力。例如，低响应能力是指当你触摸一个组件时，它等待一会儿才响应，而不是像预期那样立即响应。
 
-- **Blank areas:** When `VirtualizedList` can't render your items fast enough, you may enter a part of your list with non-rendered components that appear as blank space.
+- **Blank areas:** 当 `VirtualizedList` 无法足够快地渲染你的项目时，你可能会进入列表中没有渲染组件的部分，显示为空白空间。
 
-- **Viewport:** The visible area of content that is rendered to pixels.
+- **Viewport:** 渲染到像素的可见内容区域。
 
-- **Window:** The area in which items should be mounted, which is generally much larger than the viewport.
+- **Window:** 应该挂载项目的区域，通常比视口大得多。
 
-## Props
+## 属性
 
-Here are a list of props that can help to improve `FlatList` performance:
+以下是一列可以帮助提高 `FlatList` 性能的属性：
 
 ### removeClippedSubviews
 
-| Type    | Default                              |
+| 类型    | 默认值                              |
 | ------- | ------------------------------------ |
-| Boolean | `true` on Android, otherwise `false` |
+| Boolean | Android 上为 `true`，否则为 `false` |
 
-If `true`, views that are outside of the viewport are automatically detached from the native view hierarchy.
+如果为 `true`，视口之外的视图会自动从原生视图层级中分离。
 
-**Pros:** This reduces time spent on the main thread, and thus reduces the risk of dropped frames, by excluding views outside of the viewport from the native rendering and drawing traversals.
+**优点：** 这减少了主线程上花费的时间，从而通过从原生渲染和绘制遍历中排除视口之外的视图，降低了掉帧的风险。
 
-**Cons:** Be aware that this implementation can have bugs, such as missing content (mainly observed on iOS), especially if you are doing complex things with transforms and/or absolute positioning. Also note this does not save significant memory because the views are not deallocated, only detached.
+**缺点：** 请注意，此实现可能存在错误，例如内容丢失（主要在 iOS 上观察到），尤其是当你使用复杂的变换和/或绝对定位时。还要注意，这并不能节省大量内存，因为视图不会被释放，只是分离。
 
 ### maxToRenderPerBatch
 
-| Type   | Default |
+| 类型   | 默认值 |
 | ------ | ------- |
 | Number | 10      |
 
-It is a `VirtualizedList` prop that can be passed through `FlatList`. This controls the amount of items rendered per batch, which is the next chunk of items rendered on every scroll.
+这是一个 `VirtualizedList` 属性，可以通过 `FlatList` 传递。这控制每批渲染的项目数量，即每次滚动时渲染的下一块项目。
 
-**Pros:** Setting a bigger number means less visual blank areas when scrolling (increases the fill rate).
+**优点：** 设置更大的数字意味着滚动时视觉空白区域更少（增加填充率）。
 
-**Cons:** More items per batch means longer periods of JavaScript execution potentially blocking other event processing, like presses, hurting responsiveness.
+**缺点：** 每批更多项目意味着更长的 JavaScript 执行时间，可能会阻塞其他事件处理，如点击，损害响应能力。
 
 ### updateCellsBatchingPeriod
 
-| Type   | Default |
+| 类型   | 默认值 |
 | ------ | ------- |
 | Number | 50      |
 
-While `maxToRenderPerBatch` tells the amount of items rendered per batch, setting `updateCellsBatchingPeriod` tells your `VirtualizedList` the delay in milliseconds between batch renders (how frequently your component will be rendering the windowed items).
+虽然 `maxToRenderPerBatch` 告诉每批渲染的项目数量，但设置 `updateCellsBatchingPeriod` 告诉你的 `VirtualizedList` 批渲染之间的毫秒延迟（你的组件渲染窗口化项目的频率）。
 
-**Pros:** Combining this prop with `maxToRenderPerBatch` gives you the power to, for example, render more items in a less frequent batch, or less items in a more frequent batch.
+**优点：** 将此属性与 `maxToRenderPerBatch` 结合使用，使你有能力，例如，在不太频繁的批次中渲染更多项目，或在更频繁的批次中渲染更少项目。
 
-**Cons:** Less frequent batches may cause blank areas, More frequent batches may cause responsiveness issues.
+**缺点：** 不太频繁的批次可能导致空白区域，更频繁的批次可能导致响应能力问题。
 
 ### initialNumToRender
 
-| Type   | Default |
+| 类型   | 默认值 |
 | ------ | ------- |
 | Number | 10      |
 
-The initial amount of items to render.
+初始渲染的项目数量。
 
-**Pros:** Define precise number of items that would cover the screen for every device. This can be a big performance boost for the initial render.
+**优点：** 定义覆盖每个设备屏幕的确切项目数量。这对于初始渲染可能是一个巨大的性能提升。
 
-**Cons:** Setting a low `initialNumToRender` may cause blank areas, especially if it's too small to cover the viewport on initial render.
+**缺点：** 设置较低的 `initialNumToRender` 可能导致空白区域，尤其是如果它太小而无法在初始渲染时覆盖视口。
 
 ### windowSize
 
-| Type   | Default |
+| 类型   | 默认值 |
 | ------ | ------- |
 | Number | 21      |
 
-The number passed here is a measurement unit where 1 is equivalent to your viewport height. The default value is 21 (10 viewports above, 10 below, and one in between).
+此处传递的数字是一个测量单位，1 相当于你的视口高度。默认值为 21（上方 10 个视口，下方 10 个视口，中间 1 个视口）。
 
-**Pros:** Bigger `windowSize` will result in less chance of seeing blank space while scrolling. On the other hand, smaller `windowSize` will result in fewer items mounted simultaneously, saving memory.
+**优点：** 更大的 `windowSize` 将导致滚动时看到空白空间的机会更少。另一方面，更小的 `windowSize` 将导致同时挂载的项目更少，节省内存。
 
-**Cons:** For a bigger `windowSize`, you will have more memory consumption. For a lower `windowSize`, you will have a bigger chance of seeing blank areas.
+**缺点：** 对于更大的 `windowSize`，你将会有更多的内存消耗。对于更小的 `windowSize`，你将会有更大的机会看到空白区域。
 
-## List items
+## 列表项
 
-Below are some tips about list item components. They are the core of your list, so they need to be fast.
+以下是关于列表项组件的一些提示。它们是列表的核心，所以需要快速。
 
-### Use basic components
+### 使用基础组件
 
-The more complex your components are, the slower they will render. Try to avoid a lot of logic and nesting in your list items. If you are reusing this list item component a lot in your app, create a component only for your big lists and make them with as little logic and nesting as possible.
+你的组件越复杂，渲染就越慢。尽量避免在列表项中使用大量逻辑和嵌套。如果你在应用中大量重用此列表项组件，请专门为大型列表创建一个组件，并使其逻辑和嵌套尽可能少。
 
-### Use light components
+### 使用轻量组件
 
-The heavier your components are, the slower they render. Avoid heavy images (use a cropped version or thumbnail for list items, as small as possible). Talk to your design team, use as little effects and interactions and information as possible in your list. Show them in your item's detail.
+你的组件越重，渲染就越慢。避免使用大图片（对列表项使用裁剪版本或缩略图，尽可能小）。与你的设计团队沟通，在列表中尽可能少地使用效果、交互和信息。在项目的详情中展示它们。
 
-### Use `memo()`
+### 使用 `memo()`
 
-`React.memo()` creates a memoized component that will be re-rendered only when the props passed to the component change. We can use this function to optimize the components in the FlatList.
+`React.memo()` 创建一个记忆化组件，仅当传递给组件的属性更改时才会重新渲染。我们可以使用此函数来优化 FlatList 中的组件。
 
 ```tsx
 import React, {memo} from 'react';
@@ -115,29 +115,29 @@ const MyListItem = memo(
 export default MyListItem;
 ```
 
-In this example, we have determined that MyListItem should be re-rendered only when the title changes. We passed the comparison function as the second argument to React.memo() so that the component is re-rendered only when the specified prop is changed. If the comparison function returns true, the component will not be re-rendered.
+在这个例子中，我们确定了 MyListItem 应该仅在标题更改时重新渲染。我们将比较函数作为第二个参数传递给 React.memo()，以便仅在指定的属性更改时才重新渲染组件。如果比较函数返回 true，组件将不会重新渲染。
 
-### Use cached optimized images
+### 使用缓存优化图片
 
-You can use the community packages (such as [@d11/react-native-fast-image](https://github.com/ds-horizon/react-native-fast-image) from [Dream11](https://github.com/ds-horizon)) for more performant images. Every image in your list is a `new Image()` instance. The faster it reaches the `loaded` hook, the faster your JavaScript thread will be free again.
+你可以使用社区包（例如来自 [Dream11](https://github.com/ds-horizon) 的 [@d11/react-native-fast-image](https://github.com/ds-horizon/react-native-fast-image)）来获取性能更高的图片。列表中的每张图片都是一个 `new Image()` 实例。它越快到达 `loaded` 钩子，你的 JavaScript 线程就越快再次空闲。
 
-### Use getItemLayout
+### 使用 getItemLayout
 
-If all your list item components have the same height (or width, for a horizontal list), providing the [getItemLayout](flatlist#getitemlayout) prop removes the need for your `FlatList` to manage async layout calculations. This is a very desirable optimization technique.
+如果你所有的列表项组件都有相同的高度（对于水平列表则为宽度），提供 [getItemLayout](flatlist#getitemlayout) 属性可以消除 `FlatList` 管理异步布局计算的需要。这是一个非常理想的优化技术。
 
-If your components have dynamic size and you really need performance, consider asking your design team if they may think of a redesign in order to perform better.
+如果你的组件具有动态大小且你确实需要性能，考虑询问你的设计团队他们是否可以为了更好的性能而重新设计。
 
-### Use keyExtractor or key
+### 使用 keyExtractor 或 key
 
-You can set the [`keyExtractor`](flatlist#keyextractor) to your `FlatList` component. This prop is used for caching and as the React `key` to track item re-ordering.
+你可以为 `FlatList` 组件设置 [`keyExtractor`](flatlist#keyextractor)。此属性用于缓存以及作为 React `key` 来跟踪项目重新排序。
 
-You can also use a `key` prop in your item component.
+你也可以在你的项组件中使用 `key` 属性。
 
-### Avoid anonymous function on renderItem
+### 避免在 renderItem 上使用匿名函数
 
-For functional components, move the `renderItem` function outside of the returned JSX. Also, ensure that it is wrapped in a `useCallback` hook to prevent it from being recreated each render.
+对于函数组件，将 `renderItem` 函数移到返回的 JSX 之外。此外，确保它包裹在 `useCallback` hook 中，以防止每次渲染时重新创建。
 
-For class components, move the `renderItem` function outside of the render function, so it won't recreate itself each time the render function is called.
+对于类组件，将 `renderItem` 函数移到 render 函数之外，这样它就不会在每次调用 render 函数时重新创建自己。
 
 ```tsx
 const renderItem = useCallback(({item}) => (

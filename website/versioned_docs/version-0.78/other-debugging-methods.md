@@ -1,87 +1,87 @@
 ---
 id: other-debugging-methods
-title: Other Debugging Methods
+title: 其他调试方法
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-This page covers how to use legacy JavaScript debugging methods. If you are getting started with a new React Native or Expo app, we recommend using [React Native DevTools](./react-native-devtools).
+本页介绍如何使用旧版 JavaScript 调试方法。如果你正在开始使用新的 React Native 或 Expo 应用，我们推荐使用 [React Native DevTools](./react-native-devtools)。
 
-## Safari Developer Tools (direct JSC debugging)
+## Safari 开发者工具（直接 JSC 调试）
 
-You can use Safari to debug the iOS version of your app when using [JavaScriptCore](https://trac.webkit.org/wiki/JavaScriptCore) (JSC) as your app's runtime.
+当使用 [JavaScriptCore](https://trac.webkit.org/wiki/JavaScriptCore) (JSC) 作为应用的运行时，你可以使用 Safari 来调试应用的 iOS 版本。
 
-1. **Physical devices only**: Open the Settings app, and navigate to Safari > Advanced, and make sure "Web Inspector" is turned on.
-2. On your Mac, open Safari and enable the Develop menu. This can be found under Safari > Settings..., then the Advanced tab, then selecting "Show features for web developers".
-3. Find your device under the Develop menu, and select the "JSContext" item from the submenu. This will open Safari's Web Inspector, which includes Console and Sources panels similar to Chrome DevTools.
+1. **仅限物理设备**：打开设置应用，导航到 Safari > 高级，并确保“网页检查器”已开启。
+2. 在 Mac 上，打开 Safari 并启用“开发”菜单。这可以在 Safari > 设置... 下找到，然后是“高级”标签页，接着选择“为网页开发者显示功能”。
+3. 在“开发”菜单下找到你的设备，并从子菜单中选择"JSContext"项。这将打开 Safari 的网页检查器，其中包括类似于 Chrome DevTools 的控制台和源代码面板。
 
-![Opening Safari Web Inspector](/docs/assets/debugging-safari-developer-tools.jpg)
+![打开 Safari 网页检查器](/docs/assets/debugging-safari-developer-tools.jpg)
 
 :::tip
-While source maps may not be enabled by default, you can follow [this guide](https://blog.nparashuram.com/2019/10/debugging-react-native-ios-apps-with.html) or [video](https://www.youtube.com/watch?v=GrGqIIz51k4) to enable them and set break points at the right places in the source code.
+虽然源代码映射可能默认未启用，但你可以遵循 [本指南](https://blog.nparashuram.com/2019/10/debugging-react-native-ios-apps-with.html) 或 [视频](https://www.youtube.com/watch?v=GrGqIIz51k4) 来启用它们，并在源代码中的正确位置设置断点。
 :::
 
 :::tip
-Every time the app is reloaded, a new JSContext is created. Choosing "Automatically Show Web Inspectors for JSContexts" saves you from having to select the latest JSContext manually.
+每次应用重新加载时，都会创建一个新的 JSContext。选择“自动显示 JSContext 的网页检查器”可以省去手动选择最新 JSContext 的步骤。
 :::
 
-## Remote JavaScript Debugging (deprecated)
+## 远程 JavaScript 调试（已弃用）
 
 :::warning
-Remote JavaScript Debugging is deprecated in React Native 0.73 and will be removed in a future release.
+远程 JavaScript 调试在 React Native 0.73 中已弃用，并将在未来的版本中移除。
 :::
 
-Remote JavaScript Debugging connects an external web browser (Chrome) to your app and runs your JavaScript code inside a web page. This allows you to use Chrome's debugger as you would with any web app. Note that the browser environment can be very different, and not all React Native modules will work when debugging this way.
+远程 JavaScript 调试将外部 Web 浏览器（Chrome）连接到你的应用，并在网页中运行你的 JavaScript 代码。这允许你像使用任何 Web 应用一样使用 Chrome 的调试器。请注意，浏览器环境可能非常不同，并非所有 React Native 模块在这种调试方式下都能工作。
 
-### Setup
+### 设置
 
-Since React Native 0.73, Remote JavaScript Debugging must be **manually enabled** using the `NativeDevSettings` module.
+自 React Native 0.73 起，必须使用 `NativeDevSettings` 模块**手动启用**远程 JavaScript 调试。
 
 ```js
 import NativeDevSettings from 'react-native/Libraries/NativeModules/specs/NativeDevSettings';
 
 function MyApp() {
-  // Assign this to a dev-only button or useEffect call
+  // 将其分配给仅用于开发的按钮或 useEffect 调用
   const connectToRemoteDebugger = () => {
     NativeDevSettings.setIsDebuggingRemotely(true);
   };
 }
 ```
 
-When `NativeDevSettings.setIsDebuggingRemotely(true)` is invoked, this will open a new tab at [http://localhost:8081/debugger-ui](http://localhost:8081/debugger-ui).
+当调用 `NativeDevSettings.setIsDebuggingRemotely(true)` 时，这将在 [http://localhost:8081/debugger-ui](http://localhost:8081/debugger-ui) 打开一个新标签页。
 
-From this page, open Chrome DevTools via:
+在此页面中，通过以下方式打开 Chrome DevTools：
 
-- View > Developer > Developer Tools
-- <kbd>⌥ Option</kbd> + <kbd>Cmd ⌘</kbd> + <kbd>I</kbd> (macOS) / <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd> (Windows and Linux).
+- 查看 > 开发者 > 开发者工具
+- <kbd>⌥ Option</kbd> + <kbd>Cmd ⌘</kbd> + <kbd>I</kbd> (macOS) / <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd> (Windows 和 Linux)。
 
-The Console and Sources panels will allow you to inspect your React Native code.
+控制台和源代码面板将允许你检查你的 React Native 代码。
 
-![The remote debugger window in Chrome](/docs/assets/debugging-chrome-remote-debugger.jpg)
+![Chrome 中的远程调试器窗口](/docs/assets/debugging-chrome-remote-debugger.jpg)
 
 :::info
-Under Remote JavaScript Debugging, the web version of React DevTools in Chrome will not work with React Native. See the [React Native DevTools](./react-native-devtools) guide to explore how to use React DevTools in our integrated debugger.
+在远程 JavaScript 调试下，Chrome 中的 Web 版 React DevTools 将无法与 React Native 配合使用。请参阅 [React Native DevTools](./react-native-devtools) 指南，了解如何在我们的集成调试器中使用 React DevTools。
 :::
 
 :::note
-On Android, if the times between the debugger and device have drifted, things such as animations and event behavior might not work properly. This can be fixed by running ``adb shell "date `date +%m%d%H%M%Y.%S%3N`"``. Root access is required if using a physical device.
+在 Android 上，如果调试器和设备之间的时间发生漂移，动画和事件行为等内容可能无法正常工作。这可以通过运行 ``adb shell "date `date +%m%d%H%M%Y.%S%3N`"`` 来修复。如果使用物理设备，则需要 root 权限。
 :::
 
-### Debugging on a physical device
+### 在物理设备上调试
 
 :::info
-If you're using Expo CLI, this is configured for you already.
+如果你使用的是 Expo CLI，这已经为你配置好了。
 :::
 
 <Tabs groupId="platform" defaultValue={constants.defaultPlatform} values={constants.platforms} className="pill-tabs">
 <TabItem value="ios">
 
-On iOS devices, open the file [`RCTWebSocketExecutor.mm`](https://github.com/facebook/react-native/blob/master/packages/react-native/React/CoreModules/RCTWebSocketExecutor.mm) and change "localhost" to the IP address of your computer.
+在 iOS 设备上，打开文件 [`RCTWebSocketExecutor.mm`](https://github.com/facebook/react-native/blob/master/packages/react-native/React/CoreModules/RCTWebSocketExecutor.mm) 并将 "localhost" 更改为你电脑的 IP 地址。
 
 </TabItem>
 <TabItem value="android">
 
-On Android 5.0+ devices connected via USB, you can use the [`adb` command line tool](http://developer.android.com/tools/help/adb.html) to set up port forwarding from the device to your computer:
+在通过 USB 连接的 Android 5.0+ 设备上，你可以使用 [`adb` 命令行工具](http://developer.android.com/tools/help/adb.html) 设置从设备到电脑的端口转发：
 
 ```sh
 adb reverse tcp:8081 tcp:8081
@@ -91,5 +91,5 @@ adb reverse tcp:8081 tcp:8081
 </Tabs>
 
 :::note
-If you run into any issues, it may be possible that one of your Chrome extensions is interacting in unexpected ways with the debugger. Try disabling all of your extensions and re-enabling them one-by-one until you find the problematic extension.
+如果你遇到任何问题，可能是你的某个 Chrome 扩展以意外方式与调试器交互。尝试禁用所有扩展，然后逐个重新启用，直到找到有问题的扩展。
 :::

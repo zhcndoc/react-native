@@ -81,7 +81,7 @@ React Native 默认使用 TypeScript 创建新应用，但仍可使用 JavaScrip
 
 ## TypeScript 与 React Native 的工作原理
 
-默认情况下，TypeScript 源代码会在打包时由 [Babel][babel] 转换。我们建议只用 TypeScript 编译器做类型检查。这是 `tsc` 新创建应用的默认行为。如果您将现有的 TypeScript 代码迁移至 React Native，使用 Babel 而非 TypeScript 编译器存在[一两个注意事项][babel-7-caveats]。
+默认情况下，TypeScript 源代码会在打包时由 [Babel][babel] 转换。我们建议只用 TypeScript 编译器做类型检查。这是 `tsc` 新创建应用的默认行为。如果您将现有的 TypeScript 代码迁移至 React Native，使用 Babel 而非 TypeScript 编译器存在 [一两个注意事项][babel-7-caveats]。
 
 ## React Native + TypeScript 样例
 
@@ -163,7 +163,7 @@ export default Hello;
 
 如果想在 TypeScript 中使用自定义路径别名，需让别名同时被 Babel 和 TypeScript 识别。具体步骤：
 
-1. 编辑 `tsconfig.json` 以增加您的[自定义路径映射][path-map]。设置 src 根目录下的路径无需前置路径引用，并允许以 `tests/File.tsx` 访问任何测试文件：
+1. 编辑 `tsconfig.json` 以增加您的 [自定义路径映射][path-map]。设置 src 根目录下的路径无需前置路径引用，并允许以 `tests/File.tsx` 访问任何测试文件：
 
 ```diff
 {

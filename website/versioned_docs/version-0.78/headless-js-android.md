@@ -6,11 +6,11 @@ title: Headless JS
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem';
 import constants from '@site/core/TabsConstants';
 
-Headless JS is a way to run tasks in JavaScript while your app is in the background. It can be used, for example, to sync fresh data, handle push notifications, or play music.
+Headless JS 是一种在应用处于后台时运行 JavaScript 任务的方法。例如，它可用于同步最新数据、处理推送通知或播放音乐。
 
-## The JS API
+## JS API
 
-A task is an async function that you register on `AppRegistry`, similar to registering React applications:
+任务是一个异步函数，你在 `AppRegistry` 上注册它，类似于注册 React 应用：
 
 ```tsx
 import {AppRegistry} from 'react-native';
@@ -19,19 +19,19 @@ AppRegistry.registerHeadlessTask('SomeTaskName', () =>
 );
 ```
 
-Then, in `SomeTaskName.js`:
+然后，在 `SomeTaskName.js` 中：
 
 ```tsx
 module.exports = async taskData => {
-  // do stuff
+  // 执行操作
 };
 ```
 
-You can do anything in your task such as network requests, timers and so on, as long as it doesn't touch UI. Once your task completes (i.e. the promise is resolved), React Native will go into "paused" mode (unless there are other tasks running, or there is a foreground app).
+你可以在任务中执行任何操作，例如网络请求、定时器等，只要不涉及 UI。一旦任务完成（即 promise 被解析），React Native 将进入“暂停”模式（除非有其他任务正在运行，或者有一个前台应用）。
 
-## The Platform API
+## 平台 API
 
-Yes, this does still require some native code, but it's pretty thin. You need to extend `HeadlessJsTaskService` and override `getTaskConfig`, e.g.:
+是的，这确实仍然需要一些原生代码，但它非常精简。你需要扩展 `HeadlessJsTaskService` 并重写 `getTaskConfig`，例如：
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
@@ -55,8 +55,8 @@ public class MyTaskService extends HeadlessJsTaskService {
       return new HeadlessJsTaskConfig(
           "SomeTaskName",
           Arguments.fromBundle(extras),
-          5000, // timeout in milliseconds for the task
-          false // optional: defines whether or not the task is allowed in foreground. Default is false
+          5000, // 任务超时时间（毫秒）
+          false // 可选：定义是否允许在前台运行任务。默认为 false
         );
     }
     return null;
@@ -81,9 +81,9 @@ class MyTaskService : HeadlessJsTaskService() {
             HeadlessJsTaskConfig(
                 "SomeTaskName",
                 Arguments.fromBundle(it),
-                5000, // timeout for the task
-                false // optional: defines whether or not the task is allowed in foreground.
-                // Default is false
+                5000, // 任务超时时间
+                false // 可选：定义是否允许在前台运行任务。
+                // 默认为 false
             )
         }
     }
@@ -94,15 +94,15 @@ class MyTaskService : HeadlessJsTaskService() {
 </TabItem>
 </Tabs>
 
-Then add the service to your `AndroidManifest.xml` file inside the `application` tag:
+然后将服务添加到 `AndroidManifest.xml` 文件中的 `application` 标签内：
 
 ```xml
 <service android:name="com.example.MyTaskService" />
 ```
 
-Now, whenever you [start your service][0], e.g. as a periodic task or in response to some system event / broadcast, JS will spin up, run your task, then spin down.
+现在，每当你 [启动您的服务][0] 时，例如作为定期任务或响应某些系统事件/广播，JS 将启动，运行你的任务，然后关闭。
 
-Example:
+示例：
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
@@ -134,19 +134,19 @@ applicationContext.startForegroundService(service)
 </TabItem>
 </Tabs>
 
-## Retries
+## 重试
 
-By default, the headless JS task will not perform any retries. In order to do so, you need to create a `HeadlessJsRetryPolicy` and throw a specific `Error`.
+默认情况下，headless JS 任务不会执行任何重试。为了做到这一点，你需要创建一个 `HeadlessJsRetryPolicy` 并抛出一个特定的 `Error`。
 
-`LinearCountingRetryPolicy` is an implementation of `HeadlessJsRetryPolicy` that allows you to specify a maximum number of retries with a fixed delay between each attempt. If that does not suit your needs then you can implement your own `HeadlessJsRetryPolicy`. These policies can be passed as an extra argument to the `HeadlessJsTaskConfig` constructor, e.g.
+`LinearCountingRetryPolicy` 是 `HeadlessJsRetryPolicy` 的一个实现，允许你指定最大重试次数以及每次尝试之间的固定延迟。如果这不符合你的需求，你可以实现自己的 `HeadlessJsRetryPolicy`。这些策略可以作为额外参数传递给 `HeadlessJsTaskConfig` 构造函数，例如
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
 
 ```java
 HeadlessJsRetryPolicy retryPolicy = new LinearCountingRetryPolicy(
-  3, // Max number of retry attempts
-  1000 // Delay between each retry attempt
+  3, // 最大重试次数
+  1000 // 每次重试尝试之间的延迟
 );
 
 return new HeadlessJsTaskConfig(
@@ -164,8 +164,8 @@ return new HeadlessJsTaskConfig(
 ```kotlin
 val retryPolicy: HeadlessJsTaskRetryPolicy =
     LinearCountingRetryPolicy(
-        3, // Max number of retry attempts
-        1000 // Delay between each retry attempt
+        3, // 最大重试次数
+        1000 // 每次重试尝试之间的延迟
     )
 
 return HeadlessJsTaskConfig("SomeTaskName", Arguments.fromBundle(extras), 5000, false, retryPolicy)
@@ -174,9 +174,9 @@ return HeadlessJsTaskConfig("SomeTaskName", Arguments.fromBundle(extras), 5000, 
 </TabItem>
 </Tabs>
 
-A retry attempt will only be made when a specific `Error` is thrown. Inside a headless JS task, you can import the error and throw it when a retry attempt is required.
+只有当抛出特定的 `Error` 时，才会进行重试尝试。在 headless JS 任务内部，你可以导入错误并在需要重试尝试时抛出它。
 
-Example:
+示例：
 
 ```tsx
 import {HeadlessJsTaskError} from 'HeadlessJsTask';
@@ -189,18 +189,18 @@ module.exports = async taskData => {
 };
 ```
 
-If you wish all errors to cause a retry attempt, you will need to catch them and throw the above error.
+如果你希望所有错误都导致重试尝试，你需要捕获它们并抛出上述错误。
 
-## Caveats
+## 注意事项
 
-- By default, your app will crash if you try to run a task while the app is in the foreground. This is to prevent developers from shooting themselves in the foot by doing a lot of work in a task and slowing the UI. You can pass a fourth `boolean` argument to control this behaviour.
-- If you start your service from a `BroadcastReceiver`, make sure to call `HeadlessJsTaskService.acquireWakeLockNow()` before returning from `onReceive()`.
+- 默认情况下，如果你尝试在应用处于前台时运行任务，应用将会崩溃。这是为了防止开发者因在任务中执行大量工作而减慢 UI 速度，从而搬起石头砸自己的脚。你可以传递第四个 `boolean` 参数来控制此行为。
+- 如果你从 `BroadcastReceiver` 启动服务，请确保在从 `onReceive()` 返回之前调用 `HeadlessJsTaskService.acquireWakeLockNow()`。
 
-## Example Usage
+## 示例用法
 
-Service can be started from Java API. First you need to decide when the service should be started and implement your solution accordingly. Here is an example that reacts to network connection change.
+服务可以从 Java API 启动。首先你需要决定何时应该启动服务并相应地实现你的解决方案。这是一个响应网络连接变化的示例。
 
-Following lines shows part of Android manifest file for registering broadcast receiver.
+以下几行显示了用于注册广播接收器的 Android 清单文件的一部分。
 
 ```xml
 <receiver android:name=".NetworkChangeReceiver" >
@@ -210,7 +210,7 @@ Following lines shows part of Android manifest file for registering broadcast re
 </receiver>
 ```
 
-Broadcast receiver then handles intent that was broadcasted in onReceive function. This is a great place to check whether your app is on foreground or not. If app is not on foreground we can prepare our intent to be started, with no information or additional information bundled using `putExtra` (keep in mind bundle can handle only parcelable values). In the end service is started and wakelock is acquired.
+广播接收器然后在 onReceive 函数中处理被广播的 intent。这是检查你的应用是否在前台的好地方。如果应用不在前台，我们可以准备要启动的 intent，使用 `putExtra` 捆绑无信息或额外信息（记住 bundle 只能处理可序列化的值）。最后服务被启动并且 wakelock 被获取。
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
@@ -233,13 +233,13 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, final Intent intent) {
         /**
-         This part will be called every time network connection is changed
-         e.g. Connected -> Not Connected
+         每当网络连接改变时，这部分都会被调用
+         例如：已连接 -> 未连接
          **/
         if (!isAppOnForeground((context))) {
             /**
-             We will start our service and send extra info about
-             network connections
+             我们将启动我们的服务并发送有关
+             网络连接的额外信息
              **/
             boolean hasInternet = isNetworkAvailable(context);
             Intent serviceIntent = new Intent(context, MyTaskService.class);
@@ -251,7 +251,7 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
 
     private boolean isAppOnForeground(Context context) {
         /**
-         We need to check if app is in foreground otherwise the app will crash.
+         我们需要检查应用是否在前台，否则应用会崩溃。
          https://stackoverflow.com/questions/8489993/check-android-application-is-in-foreground-or-not
          **/
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
@@ -295,7 +295,7 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
             return false;
         }
 
-        // deprecated in API level 29
+        // 在 API 级别 29 中已弃用
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         return (netInfo != null && netInfo.isConnected());
     }
@@ -319,11 +319,10 @@ import com.facebook.react.HeadlessJsTaskService
 class NetworkChangeReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent?) {
         /**
-         * This part will be called every time network connection is changed e.g. Connected -> Not
-         * Connected
+         * 每当网络连接改变时，这部分都会被调用，例如：已连接 -> 未连接
          */
         if (!isAppOnForeground(context)) {
-            /** We will start our service and send extra info about network connections */
+            /** 我们将启动我们的服务并发送有关网络连接的额外信息 */
             val hasInternet = isNetworkAvailable(context)
             val serviceIntent = Intent(context, MyTaskService::class.java)
             serviceIntent.putExtra("hasInternet", hasInternet)
@@ -334,7 +333,7 @@ class NetworkChangeReceiver : BroadcastReceiver() {
 
     private fun isAppOnForeground(context: Context): Boolean {
         /**
-         * We need to check if app is in foreground otherwise the app will crash.
+         * 我们需要检查应用是否在前台，否则应用会崩溃。
          * https://stackoverflow.com/questions/8489993/check-android-application-is-in-foreground-or-not
          */
         val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
@@ -371,7 +370,7 @@ class NetworkChangeReceiver : BroadcastReceiver() {
                 return result
             } else {
                 cm.run {
-                    // deprecated in API level 29
+                    // 在 API 级别 29 中已弃用
                     cm.activeNetworkInfo?.run {
                         result =
                             when (type) {

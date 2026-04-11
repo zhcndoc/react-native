@@ -62,7 +62,7 @@ export default App;
 
 ## 属性
 
-继承自 [View Props](view.md#props)。
+继承自 [View 属性](view.md#props)。
 
 ### `animating`
 
@@ -80,7 +80,7 @@ export default App;
 
 | 类型           | 必填 |
 | -------------- | ---- |
-| [color](colors.md) | 否   |
+| [颜色](colors.md) | 否   |
 
 ---
 

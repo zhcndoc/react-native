@@ -1,6 +1,6 @@
 ---
 id: button
-title: Button
+title: 按钮
 ---
 
 一个基本的按钮组件，应在任何平台上都能良好渲染。支持最低程度的自定义。
@@ -18,7 +18,7 @@ title: Button
 
 ## 示例
 
-```SnackPlayer name=Button%20Example&ext=js
+```SnackPlayer name=按钮%20示例&ext=js
 import React from 'react';
 import {StyleSheet, Button, View, Text, Alert, Platform} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';

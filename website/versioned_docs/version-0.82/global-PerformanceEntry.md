@@ -1,10 +1,10 @@
 ---
 id: global-PerformanceEntry
-title: PerformanceEntry 🧪
+title: PerformanceEntry 类 🧪
 ---
 
 import CanaryAPIWarning from './\_canary-channel-api-warning.mdx';
 
 <CanaryAPIWarning />
 
-The global [`PerformanceEntry`](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEntry) class, as defined in Web specifications.
+全局 [`PerformanceEntry`](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEntry) 类，如 Web 规范中所定义。

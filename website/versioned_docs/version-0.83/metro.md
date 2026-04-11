@@ -101,4 +101,4 @@ const config = {
 ## 了解更多关于 Metro
 
 - [Metro 官网](https://metrobundler.dev/)
-- [视频：“Metro 和 React Native 开发体验” — App.js 2023 讲座](https://www.youtube.com/watch?v=c9D4pg0y9cI)
+- [视频："Metro 和 React Native 开发体验" — App.js 2023 讲座](https://www.youtube.com/watch?v=c9D4pg0y9cI)

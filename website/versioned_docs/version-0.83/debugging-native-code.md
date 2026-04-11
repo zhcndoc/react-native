@@ -72,8 +72,8 @@ print("YourModuleName: \(message)")
 
 ### Android Studio
 
-在 Android Studio 中，您可以通过点击菜单栏的“Run”选项，选择“Attach to Process...”，然后选择正在运行的 React Native 应用来实现。
+在 Android Studio 中，您可以通过点击菜单栏的"Run"选项，选择"Attach to Process..."，然后选择正在运行的 React Native 应用来实现。
 
 ### Xcode
 
-在 Xcode 中，点击顶部菜单栏的“Debug”，选择“Attach to process”选项，然后在“Likely Targets”列表中选择您的应用程序。
+在 Xcode 中，点击顶部菜单栏的"Debug"，选择"Attach to process"选项，然后在"Likely Targets"列表中选择您的应用程序。

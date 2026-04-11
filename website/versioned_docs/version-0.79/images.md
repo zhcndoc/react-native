@@ -1,19 +1,19 @@
 ---
 id: images
-title: Images
+title: 图片
 ---
 
-## Static Image Resources
+## 静态图片资源
 
-React Native provides a unified way of managing images and other media assets in your Android and iOS apps. To add a static image to your app, place it somewhere in your source code tree and reference it like this:
+React Native 提供了一种统一的方式来管理 Android 和 iOS 应用中的图片和其他媒体资源。要向应用添加静态图片，请将其放在源代码树的某个位置并按如下方式引用它：
 
 ```tsx
 <Image source={require('./my-icon.png')} />
 ```
 
-The image name is resolved the same way JS modules are resolved. In the example above, the bundler will look for `my-icon.png` in the same folder as the component that requires it.
+图片名称的解析方式与 JS 模块的解析方式相同。在上面的示例中，打包器将在要求它的组件所在的文件夹中查找 `my-icon.png`。
 
-You can use the `@2x` and `@3x` suffixes to provide images for different screen densities. If you have the following file structure:
+你可以使用 `@2x` 和 `@3x` 后缀来为不同的屏幕密度提供图片。如果你有以下的文件结构：
 
 ```
 .
@@ -24,60 +24,60 @@ You can use the `@2x` and `@3x` suffixes to provide images for different screen 
     └── check@3x.png
 ```
 
-...and `button.js` code contains:
+...且 `button.js` 代码包含：
 
 ```tsx
 <Image source={require('./img/check.png')} />
 ```
 
-...the bundler will bundle and serve the image corresponding to device's screen density. For example, `check@2x.png`, will be used on an iPhone 7, while`check@3x.png` will be used on an iPhone 7 Plus or a Nexus 5. If there is no image matching the screen density, the closest best option will be selected.
+...打包器将打包并提供与设备屏幕密度相对应的图片。例如，`check@2x.png` 将用于 iPhone 7，而 `check@3x.png` 将用于 iPhone 7 Plus 或 Nexus 5。如果没有与屏幕密度匹配的图片，将选择最接近的最佳选项。
 
-On Windows, you might need to restart the bundler if you add new images to your project.
+在 Windows 上，如果你向项目添加了新图片，可能需要重启打包器。
 
-Here are some benefits that you get:
+以下是你获得的一些好处：
 
-1. Same system on Android and iOS.
-2. Images live in the same folder as your JavaScript code. Components are self-contained.
-3. No global namespace, i.e. you don't have to worry about name collisions.
-4. Only the images that are actually used will be packaged into your app.
-5. Adding and changing images doesn't require app recompilation, you can refresh the simulator as you normally do.
-6. The bundler knows the image dimensions, no need to duplicate it in the code.
-7. Images can be distributed via [npm](https://www.npmjs.com/) packages.
+1. Android 和 iOS 上的系统相同。
+2. 图片与你的 JavaScript 代码位于同一文件夹中。组件是自包含的。
+3. 没有全局命名空间，即你不必担心名称冲突。
+4. 只有实际使用的图片才会被打包到你的应用中。
+5. 添加和更改图片不需要重新编译应用，你可以像往常一样刷新模拟器。
+6. 打包器知道图片尺寸，无需在代码中重复。
+7. 图片可以通过 [npm](https://www.npmjs.com/) 包分发。
 
-In order for this to work, the image name in `require` has to be known statically.
+为了使此功能正常工作，`require` 中的图片名称必须是静态已知的。
 
 ```tsx
-// GOOD
+// 好
 <Image source={require('./my-icon.png')} />;
 
-// BAD
+// 坏
 const icon = this.props.active
   ? 'my-icon-active'
   : 'my-icon-inactive';
 <Image source={require('./' + icon + '.png')} />;
 
-// GOOD
+// 好
 const icon = this.props.active
   ? require('./my-icon-active.png')
   : require('./my-icon-inactive.png');
 <Image source={icon} />;
 ```
 
-Note that image sources required this way include size (width, height) info for the Image. If you need to scale the image dynamically (i.e. via flex), you may need to manually set `{width: undefined, height: undefined}` on the style attribute.
+请注意，以此方式要求的图片源包含图片的尺寸（宽、高）信息。如果你需要动态缩放图片（即通过 flex），可能需要在样式属性上手动设置 `{width: undefined, height: undefined}`。
 
-## Static Non-Image Resources
+## 静态非图片资源
 
-The `require` syntax described above can be used to statically include audio, video or document files in your project as well. Most common file types are supported including `.mp3`, `.wav`, `.mp4`, `.mov`, `.html` and `.pdf`. See [bundler defaults](https://github.com/facebook/metro/blob/master/packages/metro-config/src/defaults/defaults.js#L14-L44) for the full list.
+上述 `require` 语法也可用于将音频、视频或文档文件静态包含到你的项目中。支持大多数常见的文件类型，包括 `.mp3`、`.wav`、`.mp4`、`.mov`、`.html` 和 `.pdf`。完整列表请参阅 [打包器默认值](https://github.com/facebook/metro/blob/master/packages/metro-config/src/defaults/defaults.js#L14-L44)。
 
-You can add support for other types by adding an [`assetExts` resolver option](https://metrobundler.dev/docs/configuration#resolver-options) in your [Metro configuration](https://metrobundler.dev/docs/configuration).
+你可以在 [Metro 配置](https://metrobundler.dev/docs/configuration) 中添加 [`assetExts` 解析器选项](https://metrobundler.dev/docs/configuration#resolver-options) 来支持其他类型。
 
-A caveat is that videos must use absolute positioning instead of `flexGrow`, since size info is not currently passed for non-image assets. This limitation doesn't occur for videos that are linked directly into Xcode or the Assets folder for Android.
+需要注意的是，视频必须使用绝对定位而不是 `flexGrow`，因为目前非图片资源不会传递尺寸信息。直接链接到 Xcode 或 Android 的 Assets 文件夹中的视频不会出现此限制。
 
-## Images From Hybrid App's Resources
+## 来自混合应用资源的图片
 
-If you are building a hybrid app (some UIs in React Native, some UIs in platform code) you can still use images that are already bundled into the app.
+如果你正在构建混合应用（部分 UI 在 React Native 中，部分 UI 在平台代码中），你仍然可以使用已经捆绑到应用中的图片。
 
-For images included via Xcode asset catalogs or in the Android drawable folder, use the image name without the extension:
+对于通过 Xcode 资源目录包含的图片或在 Android drawable 文件夹中的图片，使用不带扩展名的图片名称：
 
 ```tsx
 <Image
@@ -86,7 +86,7 @@ For images included via Xcode asset catalogs or in the Android drawable folder, 
 />
 ```
 
-For images in the Android assets folder, use the `asset:/` scheme:
+对于 Android assets 文件夹中的图片，使用 `asset:/` scheme：
 
 ```tsx
 <Image
@@ -95,24 +95,24 @@ For images in the Android assets folder, use the `asset:/` scheme:
 />
 ```
 
-These approaches provide no safety checks. It's up to you to guarantee that those images are available in the application. Also you have to specify image dimensions manually.
+这些方法不提供安全检查。由你保证这些图片在应用中可用。此外，你必须手动指定图片尺寸。
 
-## Network Images
+## 网络图片
 
-Many of the images you will display in your app will not be available at compile time, or you will want to load some dynamically to keep the binary size down. Unlike with static resources, _you will need to manually specify the dimensions of your image_. It's highly recommended that you use https as well in order to satisfy [App Transport Security](publishing-to-app-store.md#1-enable-app-transport-security) requirements on iOS.
+你在应用中显示的许多图片在编译时不可用，或者你希望动态加载一些图片以保持二进制文件大小较低。与静态资源不同，_你需要手动指定图片的尺寸_。强烈建议你也使用 https 以满足 iOS 上的 [App Transport Security](publishing-to-app-store.md#1-enable-app-transport-security) 要求。
 
 ```tsx
-// GOOD
+// 好
 <Image source={{uri: 'https://reactjs.org/logo-og.png'}}
        style={{width: 400, height: 400}} />
 
-// BAD
+// 坏
 <Image source={{uri: 'https://reactjs.org/logo-og.png'}} />
 ```
 
-### Network Requests for Images
+### 图片的网络请求
 
-If you would like to set such things as the HTTP-Verb, Headers or a Body along with the image request, you may do this by defining these properties on the source object:
+如果你想随图片请求设置 HTTP 动词、请求头或请求体等内容，可以通过在源对象上定义这些属性来实现：
 
 ```tsx
 <Image
@@ -128,16 +128,16 @@ If you would like to set such things as the HTTP-Verb, Headers or a Body along w
 />
 ```
 
-## URI Data Images
+## URI 数据图片
 
-Sometimes, you might be getting encoded image data from a REST API call. You can use the `'data:'` URI scheme to use these images. Same as for network resources, _you will need to manually specify the dimensions of your image_.
+有时，你可能会从 REST API 调用获取编码的图片数据。你可以使用 `'data:'` URI scheme 来使用这些图片。与网络资源一样，_你需要手动指定图片的尺寸_。
 
 :::info
-This is recommended for very small and dynamic images only, like icons in a list from a DB.
+这仅推荐用于非常小且动态的图片，例如来自数据库的列表中的图标。
 :::
 
 ```tsx
-// include at least width and height!
+// 至少包含宽度和高度！
 <Image
   style={{
     width: 51,
@@ -150,14 +150,14 @@ This is recommended for very small and dynamic images only, like icons in a list
 />
 ```
 
-### Cache Control
+### 缓存控制
 
-In some cases you might only want to display an image if it is already in the local cache, i.e. a low resolution placeholder until a higher resolution is available. In other cases you do not care if the image is outdated and are willing to display an outdated image to save bandwidth. The `cache` source property gives you control over how the network layer interacts with the cache.
+在某些情况下，你可能只想在图片已在本地缓存中时才显示它，例如在高分辨率可用之前显示低分辨率占位符。在其他情况下，你不关心图片是否过时，并且愿意显示过时的图片以节省带宽。`cache` 源属性让你可以控制网络层如何与缓存交互。
 
-- `default`: Use the native platforms default strategy.
-- `reload`: The data for the URL will be loaded from the originating source. No existing cache data should be used to satisfy a URL load request.
-- `force-cache`: The existing cached data will be used to satisfy the request, regardless of its age or expiration date. If there is no existing data in the cache corresponding the request, the data is loaded from the originating source.
-- `only-if-cached`: The existing cache data will be used to satisfy a request, regardless of its age or expiration date. If there is no existing data in the cache corresponding to a URL load request, no attempt is made to load the data from the originating source, and the load is considered to have failed.
+- `default`: 使用 native 平台的默认策略。
+- `reload`: URL 的数据将从原始源加载。不应使用现有的缓存数据来满足 URL 加载请求。
+- `force-cache`: 现有的缓存数据将用于满足请求，无论其年龄或过期日期如何。如果缓存中没有与请求对应的现有数据，则从原始源加载数据。
+- `only-if-cached`: 现有的缓存数据将用于满足请求，无论其年龄或过期日期如何。如果缓存中没有与 URL 加载请求对应的现有数据，则不会尝试从原始源加载数据，并且加载被视为失败。
 
 ```tsx
 <Image
@@ -169,15 +169,15 @@ In some cases you might only want to display an image if it is already in the lo
 />
 ```
 
-## Local Filesystem Images
+## 本地文件系统图片
 
-See [CameraRoll](https://github.com/react-native-community/react-native-cameraroll) for an example of using local resources that are outside of `Images.xcassets`.
+请参阅 [CameraRoll](https://github.com/react-native-community/react-native-cameraroll) 以获取使用 `Images.xcassets` 之外的本地资源的示例。
 
-### Drawable resources
+### Drawable 资源
 
-Android supports loading [drawable resources](https://developer.android.com/guide/topics/resources/drawable-resource) via the `xml` file type. This means you can use [vector drawables](https://developer.android.com/develop/ui/views/graphics/vector-drawable-resources) for rendering icons or [shape drawables](https://developer.android.com/guide/topics/resources/drawable-resource#Shape) for, well, drawing shapes! You can import and use these resource types the same as any other [static resource](#static-image-resources) or [hybrid resource](#images-from-hybrid-apps-resources). You have to specify image dimensions manually.
+Android 支持通过 `xml` 文件类型加载 [drawable 资源](https://developer.android.com/guide/topics/resources/drawable-resource)。这意味着你可以使用 [vector drawables](https://developer.android.com/develop/ui/views/graphics/vector-drawable-resources) 来渲染图标，或使用 [shape drawables](https://developer.android.com/guide/topics/resources/drawable-resource#Shape) 来绘制形状！你可以像使用任何其他 [静态资源](#静态图片资源) 或 [混合资源](#来自混合应用资源的图片) 一样导入和使用这些资源类型。你必须手动指定图片尺寸。
 
-For static drawables that live alongside your JS code, use the `require` or `import` syntax (both work the same):
+对于与 JS 代码放在一起的静态 drawable，使用 `require` 或 `import` 语法（两者作用相同）：
 
 ```tsx
 <Image
@@ -186,7 +186,7 @@ For static drawables that live alongside your JS code, use the `require` or `imp
 />
 ```
 
-For drawables included in the Android drawable folder (i.e. `res/drawable`), use the resource name without the extension:
+对于包含在 Android drawable 文件夹（即 `res/drawable`）中的 drawable，使用不带扩展名的资源名称：
 
 ```tsx
 <Image
@@ -195,49 +195,49 @@ For drawables included in the Android drawable folder (i.e. `res/drawable`), use
 />
 ```
 
-The one key difference between drawable resources and other image types is that the asset must be referenced at compile-time of the Android application as Android needs to run the [Android Asset Packaging Tool (AAPT)](https://developer.android.com/tools/aapt2) to package the asset. Binary XML, the file format AAPT creates, cannot be loaded over the network by Metro. If you change the directory or name of an asset, you will need to rebuild the Android application each time.
+drawable 资源与其他图片类型的一个关键区别是，资产必须在 Android 应用的编译时被引用，因为 Android 需要运行 [Android Asset Packaging Tool (AAPT)](https://developer.android.com/tools/aapt2) 来打包资产。AAPT 创建的文件格式 Binary XML 无法通过 Metro 通过网络加载。如果你更改了资产的目录或名称，每次都需要重新构建 Android 应用。
 
-#### Creating XML drawable resources
+#### 创建 XML drawable 资源
 
-Android provides comprehensive documentation on each of the supported drawable resource types in its [Drawable resources](https://developer.android.com/guide/topics/resources/drawable-resource) guide, along with examples of raw XML files. You can utilize tools from Android Studio like the [Vector Asset Studio](https://developer.android.com/studio/write/vector-asset-studio) to create vector drawables from Scalable Vector Graphic (SVG) and Adobe Photoshop Document (PSD) files.
+Android 在其 [Drawable 资源](https://developer.android.com/guide/topics/resources/drawable-resource) 指南中提供了每种支持的 drawable 资源类型的综合文档，以及原始 XML 文件的示例。你可以利用 Android Studio 中的工具，如 [Vector Asset Studio](https://developer.android.com/studio/write/vector-asset-studio)，从 Scalable Vector Graphic (SVG) 和 Adobe Photoshop Document (PSD) 文件创建 vector drawables。
 
 :::info
-You should try to avoid referencing other resources in the XML file you create if you want to treat your XML file as a static image resource (i.e. with an `import` or `require` statement). If you wish to utilize references to other drawables or attributes, like [color state lists](https://developer.android.com/guide/topics/resources/color-list-resource) or [dimension resources](https://developer.android.com/guide/topics/resources/more-resources#Dimension), you should include your drawable as a [hybrid resource](#images-from-hybrid-apps-resources) and import it by name.
+如果你希望将 XML 文件视为静态图片资源（即使用 `import` 或 `require` 语句），应尽量避免在创建的 XML 文件中引用其他资源。如果你希望利用对其他 drawable 或属性的引用，如 [color state lists](https://developer.android.com/guide/topics/resources/color-list-resource) 或 [dimension resources](https://developer.android.com/guide/topics/resources/more-resources#Dimension)，你应该将 drawable 作为 [混合资源](#来自混合应用资源的图片) 包含并按名称导入它。
 :::
 
-### Best Camera Roll Image
+### 最佳 Camera Roll 图片
 
-iOS saves multiple sizes for the same image in your Camera Roll, it is very important to pick the one that's as close as possible for performance reasons. You wouldn't want to use the full quality 3264x2448 image as source when displaying a 200x200 thumbnail. If there's an exact match, React Native will pick it, otherwise it's going to use the first one that's at least 50% bigger in order to avoid blur when resizing from a close size. All of this is done by default so you don't have to worry about writing the tedious (and error prone) code to do it yourself.
+iOS 会在 Camera Roll 中为同一图片保存多个尺寸，出于性能原因，选择尽可能接近的尺寸非常重要。当显示 200x200 缩略图时，你不希望使用完整的 3264x2448 图片作为源。如果有完全匹配，React Native 将选择它，否则它将使用至少大 50% 的第一个图片，以避免在从接近尺寸调整大小时出现模糊。所有这些都是默认完成的，所以你不必担心自己编写繁琐（且容易出错）的代码。
 
-## Why Not Automatically Size Everything?
+## 为什么不自动调整所有内容的大小？
 
-_In the browser_ if you don't give a size to an image, the browser is going to render a 0x0 element, download the image, and then render the image based with the correct size. The big issue with this behavior is that your UI is going to jump all around as images load, this makes for a very bad user experience. This is called [Cumulative Layout Shift](https://web.dev/cls/).
+_在浏览器中_ 如果你不给图像指定大小，浏览器将会渲染一个 0x0 的元素，下载图像，然后根据正确的大小渲染图像。这种行为的大问题是，随着图像加载，你的 UI 会四处跳动，这会导致非常糟糕的用户体验。这被称为 [累积布局偏移](https://web.dev/cls/)。
 
-_In React Native_ this behavior is intentionally not implemented. It is more work for the developer to know the dimensions (or aspect ratio) of the remote image in advance, but we believe that it leads to a better user experience. Static images loaded from the app bundle via the `require('./my-icon.png')` syntax _can be automatically sized_ because their dimensions are available immediately at the time of mounting.
+_在 React Native 中_ 这种行为是故意不实现的。开发者需要预先知道远程图像的尺寸（或纵横比）会更麻烦一些，但我们相信这会带来更好的用户体验。通过 `require('./my-icon.png')` 语法从应用包中加载的静态图像_可以自动调整大小_，因为它们的尺寸在挂载时立即可用。
 
-For example, the result of `require('./my-icon.png')` might be:
+例如，`require('./my-icon.png')` 的结果可能是：
 
 ```tsx
 {"__packager_asset":true,"uri":"my-icon.png","width":591,"height":573}
 ```
 
-## Source as an object
+## 源作为对象
 
-In React Native, one interesting decision is that the `src` attribute is named `source` and doesn't take a string but an object with a `uri` attribute.
+在 React Native 中，一个有趣的决定是 `src` 属性被命名为 `source`，并且不接受字符串，而是接受一个带有 `uri` 属性的对象。
 
 ```tsx
 <Image source={{uri: 'something.jpg'}} />
 ```
 
-On the infrastructure side, the reason is that it allows us to attach metadata to this object. For example if you are using `require('./my-icon.png')`, then we add information about its actual location and size (don't rely on this fact, it might change in the future!). This is also future proofing, for example we may want to support sprites at some point, instead of outputting `{uri: ...}`, we can output `{uri: ..., crop: {left: 10, top: 50, width: 20, height: 40}}` and transparently support spriting on all the existing call sites.
+在基础设施方面，原因是它允许我们将元数据附加到此对象。例如，如果你使用的是 `require('./my-icon.png')`，那么我们会添加关于其实际位置和大小信息（不要依赖这个事实，它将来可能会改变！）。这也是为了面向未来，例如我们可能希望在某个时候支持雪碧图，而不是输出 `{uri: ...}`，我们可以输出 `{uri: ..., crop: {left: 10, top: 50, width: 20, height: 40}}` 并在所有现有的调用站点透明地支持雪碧图。
 
-On the user side, this lets you annotate the object with useful attributes such as the dimension of the image in order to compute the size it's going to be displayed in. Feel free to use it as your data structure to store more information about your image.
+在用户方面，这让你可以用有用的属性（例如图像的尺寸）来标注对象，以便计算它将显示的大小。随意将其用作数据结构来存储有关图像的更多信息。
 
-## Background Image via Nesting
+## 通过嵌套实现背景图像
 
-A common feature request from developers familiar with the web is `background-image`. To handle this use case, you can use the `<ImageBackground>` component, which has the same props as `<Image>`, and add whatever children to it you would like to layer on top of it.
+熟悉 Web 的开发者常见的一个功能请求是 `background-image`。要处理此用例，你可以使用 `<ImageBackground>` 组件，它具有与 `<Image>` 相同的 props，并且可以向其中添加任何你想要叠加在其上方的子元素。
 
-You might not want to use `<ImageBackground>` in some cases, since the implementation is basic. Refer to `<ImageBackground>`'s [documentation](imagebackground.md) for more insight, and create your own custom component when needed.
+在某些情况下你可能不想使用 `<ImageBackground>`，因为实现比较基础。请参阅 `<ImageBackground>` 的 [文档](imagebackground.md) 以了解更多见解，并在需要时创建你自己的自定义组件。
 
 ```tsx
 return (
@@ -247,34 +247,34 @@ return (
 );
 ```
 
-Note that you must specify some width and height style attributes.
+请注意，你必须指定一些宽度和高度样式属性。
 
-## iOS Border Radius Styles
+## iOS 边框半径样式
 
-Please note that the following corner specific, border radius style properties might be ignored by iOS's image component:
+请注意，以下特定角落的边框半径样式属性可能会被 iOS 的图像组件忽略：
 
 - `borderTopLeftRadius`
 - `borderTopRightRadius`
 - `borderBottomLeftRadius`
 - `borderBottomRightRadius`
 
-## Off-thread Decoding
+## 线程外解码
 
-Image decoding can take more than a frame-worth of time. This is one of the major sources of frame drops on the web because decoding is done in the main thread. In React Native, image decoding is done in a different thread. In practice, you already need to handle the case when the image is not downloaded yet, so displaying the placeholder for a few more frames while it is decoding does not require any code change.
+图像解码可能需要超过一帧的时间。这是 Web 上帧丢失的主要来源之一，因为解码是在主线程中完成的。在 React Native 中，图像解码是在不同的线程中完成的。在实践中，你已经需要处理图像尚未下载的情况，因此在解码时多显示几帧占位符不需要任何代码更改。
 
-## Configuring iOS Image Cache Limits
+## 配置 iOS 图像缓存限制
 
-On iOS, we expose an API to override React Native's default image cache limits. This should be called from within your native AppDelegate code (e.g. within `didFinishLaunchingWithOptions`).
+在 iOS 上，我们公开了一个 API 来覆盖 React Native 的默认图像缓存限制。这应该在你的原生 AppDelegate 代码中调用（例如在 `didFinishLaunchingWithOptions` 内）。
 
 ```objectivec
 RCTSetImageCacheLimits(4*1024*1024, 200*1024*1024);
 ```
 
-**Parameters:**
+**参数：**
 
-| Name           | Type   | Required | Description             |
+| 名称           | 类型   | 是否必需 | 描述                    |
 | -------------- | ------ | -------- | ----------------------- |
-| imageSizeLimit | number | Yes      | Image cache size limit. |
-| totalCostLimit | number | Yes      | Total cache cost limit. |
+| imageSizeLimit | number | 是       | 图像缓存大小限制。      |
+| totalCostLimit | number | 是       | 总缓存成本限制。        |
 
-In the above code example the image size limit is set to 4 MB and the total cost limit is set to 200 MB.
+在上面的代码示例中，图像大小限制设置为 4 MB，总成本限制设置为 200 MB。

@@ -6,7 +6,7 @@ title: 布局属性
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 :::info
-关于这些属性的更详细示例可以在[基于 Flexbox 的布局](flexbox)页面找到。
+关于这些属性的更详细示例可以在 [基于 Flexbox 的布局](flexbox) 页面找到。
 :::
 
 ### 示例
@@ -393,7 +393,7 @@ export default App;
 
 | 类型                                                                                                 | 必需   |
 | ---------------------------------------------------------------------------------------------------- | ------ |
-| 枚举('flex-start', 'flex-end', 'center', 'stretch', 'space-between', 'space-around', 'space-evenly') | 否     |
+| 枚举 ('flex-start', 'flex-end', 'center', 'stretch', 'space-between', 'space-around', 'space-evenly') | 否     |
 
 ---
 
@@ -405,7 +405,7 @@ export default App;
 
 | 类型                                                            | 必需   |
 | --------------------------------------------------------------- | ------ |
-| 枚举('flex-start', 'flex-end', 'center', 'stretch', 'baseline') | 否     |
+| 枚举 ('flex-start', 'flex-end', 'center', 'stretch', 'baseline') | 否     |
 
 ---
 
@@ -417,7 +417,7 @@ export default App;
 
 | 类型                                                                    | 必需   |
 | ----------------------------------------------------------------------- | ------ |
-| 枚举('auto', 'flex-start', 'flex-end', 'center', 'stretch', 'baseline') | 否     |
+| 枚举 ('auto', 'flex-start', 'flex-end', 'center', 'stretch', 'baseline') | 否     |
 
 ---
 
@@ -539,7 +539,7 @@ export default App;
 
 | 类型                              | 必需   |
 | --------------------------------- | ------ |
-| 枚举('border-box', 'content-box') | 否     |
+| 枚举 ('border-box', 'content-box') | 否     |
 
 ---
 
@@ -563,7 +563,7 @@ export default App;
 
 | 类型                          | 必需   |
 | ----------------------------- | ------ |
-| 枚举('inherit', 'ltr', 'rtl') | 否     |
+| 枚举 ('inherit', 'ltr', 'rtl') | 否     |
 
 ---
 
@@ -575,7 +575,7 @@ export default App;
 
 | 类型                             | 必需   |
 | -------------------------------- | ------ |
-| 枚举('none', 'flex', 'contents') | 否     |
+| 枚举 ('none', 'flex', 'contents') | 否     |
 
 ---
 
@@ -624,7 +624,7 @@ export default App;
 
 | 类型                                                   | 必需   |
 | ------------------------------------------------------ | ------ |
-| 枚举('row', 'row-reverse', 'column', 'column-reverse') | 否     |
+| 枚举 ('row', 'row-reverse', 'column', 'column-reverse') | 否     |
 
 ---
 
@@ -662,7 +662,7 @@ export default App;
 
 | 类型                                   | 必需   |
 | -------------------------------------- | ------ |
-| 枚举('wrap', 'nowrap', 'wrap-reverse') | 否     |
+| 枚举 ('wrap', 'nowrap', 'wrap-reverse') | 否     |
 
 ---
 
@@ -695,7 +695,7 @@ export default App;
 ### `inset`
 
 :::note
-`inset` 仅在[新架构](/architecture/landing-page)中可用
+`inset` 仅在 [新架构](/architecture/landing-page) 中可用
 :::
 
 设置 `inset` 等同于分别设置 `top`、`bottom`、`right` 和 `left`。
@@ -711,7 +711,7 @@ export default App;
 ### `insetBlock`
 
 :::note
-`insetBlock` 仅在[新架构](/architecture/landing-page)中可用
+`insetBlock` 仅在 [新架构](/architecture/landing-page) 中可用
 :::
 
 等同于 [`top`](layout-props#top) 和 [`bottom`](layout-props#bottom)。
@@ -727,7 +727,7 @@ export default App;
 ### `insetBlockEnd`
 
 :::note
-`insetBlockEnd` 仅在[新架构](/architecture/landing-page)中可用
+`insetBlockEnd` 仅在 [新架构](/architecture/landing-page) 中可用
 :::
 
 等同于 [`bottom`](layout-props#bottom)。
@@ -743,7 +743,7 @@ export default App;
 ### `insetBlockStart`
 
 :::note
-`insetBlockStart` 仅在[新架构](/architecture/landing-page)中可用
+`insetBlockStart` 仅在 [新架构](/architecture/landing-page) 中可用
 :::
 
 等同于 [`top`](layout-props#top)。
@@ -759,7 +759,7 @@ export default App;
 ### `insetInline`
 
 :::note
-`insetInline` 仅在[新架构](/architecture/landing-page)中可用
+`insetInline` 仅在 [新架构](/architecture/landing-page) 中可用
 :::
 
 等同于 [`right`](layout-props#right) 和 [`left`](layout-props#left)。
@@ -775,7 +775,7 @@ export default App;
 ### `insetInlineEnd`
 
 :::note
-`insetInlineEnd` 仅在[新架构](/architecture/landing-page)中可用
+`insetInlineEnd` 仅在 [新架构](/architecture/landing-page) 中可用
 :::
 
 当方向为 `ltr` 时，`insetInlineEnd` 等同于 [`right`](layout-props#right)；当方向为 `rtl` 时，等同于 [`left`](layout-props#left)。
@@ -791,7 +791,7 @@ export default App;
 ### `insetInlineStart`
 
 :::note
-`insetInlineStart` 仅在[新架构](/architecture/landing-page)中可用
+`insetInlineStart` 仅在 [新架构](/architecture/landing-page) 中可用
 :::
 
 当方向为 `ltr` 时，`insetInlineStart` 等同于 [`left`](layout-props#left)；当方向为 `rtl` 时，等同于 [`right`](layout-props#right)。
@@ -807,10 +807,10 @@ export default App;
 ### `isolation`
 
 :::note
-`isolation` 仅在[新架构](/architecture/landing-page)中可用
+`isolation` 仅在 [新架构](/architecture/landing-page) 中可用
 :::
 
-`isolation` 允许你创建[堆叠上下文](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_positioned_layout/Stacking_context)。
+`isolation` 允许你创建 [堆叠上下文](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_positioned_layout/Stacking_context)。
 
 有两个值：
 
@@ -819,7 +819,7 @@ export default App;
 
 | 类型                    | 必需   |
 | ----------------------- | ------ |
-| 枚举('auto', 'isolate') | 否     |
+| 枚举 ('auto', 'isolate') | 否     |
 
 ---
 
@@ -831,7 +831,7 @@ export default App;
 
 | 类型                                                                                      | 必需   |
 | ----------------------------------------------------------------------------------------- | ------ |
-| 枚举('flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly') | 否     |
+| 枚举 ('flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly') | 否     |
 
 ---
 
@@ -1081,7 +1081,7 @@ export default App;
 
 | 类型                                | 必需   |
 | ----------------------------------- | ------ |
-| 枚举('visible', 'hidden', 'scroll') | 否     |
+| 枚举 ('visible', 'hidden', 'scroll') | 否     |
 
 ---
 
@@ -1262,14 +1262,14 @@ export default App;
 React Native 中的 `position` 类似于 [标准 CSS](https://developer.mozilla.org/en-US/docs/Web/CSS/position)，但默认值都是 `relative`。
 
 - `relative` 会使元素依据正常布局流定位。内边距（`top`、`bottom`、`left`、`right`）相对该布局进行偏移。
-- `absolute` 会使元素脱离正常布局流。内边距相对其[包含块](./flexbox.md#the-containing-block)偏移。
+- `absolute` 会使元素脱离正常布局流。内边距相对其 [包含块](./flexbox.md#the-containing-block) 偏移。
 - `static` 会让元素按照正常布局流定位。内边距无效。`static` 元素不会为 `absolute` 子孙元素形成包含块。
 
 更多信息请见 [基于 Flexbox 的布局文档](./flexbox.md#position)，以及 [Yoga 文档](https://www.yogalayout.dev/docs/styling/position) 了解 React Native 与 CSS 中 `position` 的区别。
 
 | 类型                                   | 必需   |
 | -------------------------------------- | ------ |
-| 枚举('absolute', 'relative', 'static') | 否     |
+| 枚举 ('absolute', 'relative', 'static') | 否     |
 
 ---
 

@@ -3,23 +3,23 @@ id: asyncstorage
 title: '❌ AsyncStorage'
 ---
 
-> **Removed.** Use one of the [community packages](https://reactnative.directory/?search=storage) instead.
+> **已移除。** 请使用 [社区包](https://reactnative.directory/?search=storage) 之一代替。
 
-`AsyncStorage` is an unencrypted, asynchronous, persistent, key-value storage system that is global to the app. It should be used instead of LocalStorage.
+`AsyncStorage` 是一个未加密的、异步的、持久的、键值存储系统，对整个应用全局有效。它应该被用来代替 LocalStorage。
 
-It is recommended that you use an abstraction on top of `AsyncStorage` instead of `AsyncStorage` directly for anything more than light usage since it operates globally.
+建议您在 `AsyncStorage` 之上使用抽象层，而不是直接使用 `AsyncStorage`，除非只是轻度使用，因为它是全局操作的。
 
-On iOS, `AsyncStorage` is backed by native code that stores small values in a serialized dictionary and larger values in separate files. On Android, `AsyncStorage` will use either [RocksDB](https://rocksdb.org/) or SQLite based on what is available.
+在 iOS 上，`AsyncStorage` 由原生代码支持，将小值存储在序列化字典中，将大值存储在单独的文件中。在 Android 上，`AsyncStorage` 将根据可用情况使用 [RocksDB](https://rocksdb.org/) 或 SQLite。
 
-The `AsyncStorage` JavaScript code is a facade that provides a clear JavaScript API, real `Error` objects, and non-multi functions. Each method in the API returns a `Promise` object.
+`AsyncStorage` JavaScript 代码是一个外观层，提供清晰的 JavaScript API、真实的 `Error` 对象和非多重函数。API 中的每个方法都返回一个 `Promise` 对象。
 
-Importing the `AsyncStorage` library:
+导入 `AsyncStorage` 库：
 
 ```jsx
 import {AsyncStorage} from 'react-native';
 ```
 
-Persisting data:
+持久化数据：
 
 ```jsx
 _storeData = async () => {
@@ -29,32 +29,32 @@ _storeData = async () => {
       'I like to save it.',
     );
   } catch (error) {
-    // Error saving data
+    // 保存数据错误
   }
 };
 ```
 
-Fetching data:
+获取数据：
 
 ```jsx
 _retrieveData = async () => {
   try {
     const value = await AsyncStorage.getItem('TASKS');
     if (value !== null) {
-      // We have data!!
+      // 我们有数据！！
       console.log(value);
     }
   } catch (error) {
-    // Error retrieving data
+    // 获取数据错误
   }
 };
 ```
 
 ---
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `getItem()`
 
@@ -62,14 +62,14 @@ _retrieveData = async () => {
 static getItem(key: string, [callback]: ?(error: ?Error, result: ?string) => void)
 ```
 
-Fetches an item for a `key` and invokes a callback upon completion. Returns a `Promise` object.
+获取一个 `key` 对应的项，并在完成后调用回调。返回一个 `Promise` 对象。
 
-**Parameters:**
+**参数：**
 
-| Name     | Type                                        | Required | Description                                                       |
+| 名称     | 类型                                        | 必填 | 描述                                                       |
 | -------- | ------------------------------------------- | -------- | ----------------------------------------------------------------- |
-| key      | string                                      | Yes      | Key of the item to fetch.                                         |
-| callback | `?(error: ?Error, result: ?string) => void` | No       | Function that will be called with a result if found or any error. |
+| key      | string                                      | 是      | 要获取的项的键。                                         |
+| callback | `?(error: ?Error, result: ?string) => void` | 否       | 如果找到结果或发生任何错误，将调用该函数。 |
 
 ---
 
@@ -79,15 +79,15 @@ Fetches an item for a `key` and invokes a callback upon completion. Returns a `P
 static setItem(key: string, value: string, [callback]: ?(error: ?Error) => void)
 ```
 
-Sets the value for a `key` and invokes a callback upon completion. Returns a `Promise` object.
+设置 `key` 的值，并在完成后调用回调。返回一个 `Promise` 对象。
 
-**Parameters:**
+**参数：**
 
-| Name     | Type                       | Required | Description                                  |
+| 名称     | 类型                       | 必填 | 描述                                  |
 | -------- | -------------------------- | -------- | -------------------------------------------- |
-| key      | string                     | Yes      | Key of the item to set.                      |
-| value    | string                     | Yes      | Value to set for the `key`.                  |
-| callback | `?(error: ?Error) => void` | No       | Function that will be called with any error. |
+| key      | string                     | 是      | 要设置的项的键。                      |
+| value    | string                     | 是      | 为 `key` 设置的值。                  |
+| callback | `?(error: ?Error) => void` | 否       | 如果发生任何错误，将调用该函数。 |
 
 ---
 
@@ -97,14 +97,14 @@ Sets the value for a `key` and invokes a callback upon completion. Returns a `Pr
 static removeItem(key: string, [callback]: ?(error: ?Error) => void)
 ```
 
-Removes an item for a `key` and invokes a callback upon completion. Returns a `Promise` object.
+移除一个 `key` 对应的项，并在完成后调用回调。返回一个 `Promise` 对象。
 
-**Parameters:**
+**参数：**
 
-| Name     | Type                       | Required | Description                                  |
+| 名称     | 类型                       | 必填 | 描述                                  |
 | -------- | -------------------------- | -------- | -------------------------------------------- |
-| key      | string                     | Yes      | Key of the item to remove.                   |
-| callback | `?(error: ?Error) => void` | No       | Function that will be called with any error. |
+| key      | string                     | 是      | 要移除的项的键。                   |
+| callback | `?(error: ?Error) => void` | 否       | 如果发生任何错误，将调用该函数。 |
 
 ---
 
@@ -114,19 +114,19 @@ Removes an item for a `key` and invokes a callback upon completion. Returns a `P
 static mergeItem(key: string, value: string, [callback]: ?(error: ?Error) => void)
 ```
 
-Merges an existing `key` value with an input value, assuming both values are stringified JSON. Returns a `Promise` object.
+合并现有的 `key` 值与输入值，假设两个值都是字符串化的 JSON。返回一个 `Promise` 对象。
 
-**NOTE:** This is not supported by all native implementations.
+**注意：** 并非所有原生实现都支持此功能。
 
-**Parameters:**
+**参数：**
 
-| Name     | Type                       | Required | Description                                  |
+| 名称     | 类型                       | 必填 | 描述                                  |
 | -------- | -------------------------- | -------- | -------------------------------------------- |
-| key      | string                     | Yes      | Key of the item to modify.                   |
-| value    | string                     | Yes      | New value to merge for the `key`.            |
-| callback | `?(error: ?Error) => void` | No       | Function that will be called with any error. |
+| key      | string                     | 是      | 要修改的项的键。                   |
+| value    | string                     | 是      | 为 `key` 合并的新值。            |
+| callback | `?(error: ?Error) => void` | 否       | 如果发生任何错误，将调用该函数。 |
 
-Example:
+示例：
 
 ```jsx
 let UID123_object = {
@@ -134,7 +134,7 @@ let UID123_object = {
   age: 30,
   traits: {hair: 'brown', eyes: 'brown'},
 };
-// You only need to define what will be added or updated
+// 你只需要定义将要添加或更新的内容
 let UID123_delta = {
   age: 31,
   traits: {eyes: 'blue', shoe_size: 10},
@@ -156,7 +156,7 @@ AsyncStorage.setItem(
   },
 );
 
-// Console log result:
+// 控制台日志结果：
 // => {'name':'Chris','age':31,'traits':
 //    {'shoe_size':10,'hair':'brown','eyes':'blue'}}
 ```
@@ -169,13 +169,13 @@ AsyncStorage.setItem(
 static clear([callback]: ?(error: ?Error) => void)
 ```
 
-Erases _all_ `AsyncStorage` for all clients, libraries, etc. You probably don't want to call this; use `removeItem` or `multiRemove` to clear only your app's keys. Returns a `Promise` object.
+擦除 _所有_ 客户端、库等的 `AsyncStorage`。你可能不想调用这个；使用 `removeItem` 或 `multiRemove` 仅清除你应用的键。返回一个 `Promise` 对象。
 
-**Parameters:**
+**参数：**
 
-| Name     | Type                       | Required | Description                                  |
+| 名称     | 类型                       | 必填 | 描述                                  |
 | -------- | -------------------------- | -------- | -------------------------------------------- |
-| callback | `?(error: ?Error) => void` | No       | Function that will be called with any error. |
+| callback | `?(error: ?Error) => void` | 否       | 如果发生任何错误，将调用该函数。 |
 
 ---
 
@@ -185,13 +185,13 @@ Erases _all_ `AsyncStorage` for all clients, libraries, etc. You probably don't 
 static getAllKeys([callback]: ?(error: ?Error, keys: ?Array<string>) => void)
 ```
 
-Gets _all_ keys known to your app; for all callers, libraries, etc. Returns a `Promise` object.
+获取你的应用已知的 _所有_ 键；适用于所有调用者、库等。返回一个 `Promise` 对象。
 
-**Parameters:**
+**参数：**
 
-| Name     | Type                                             | Required | Description                                                     |
+| 名称     | 类型                                             | 必填 | 描述                                                     |
 | -------- | ------------------------------------------------ | -------- | --------------------------------------------------------------- |
-| callback | `?(error: ?Error, keys: ?Array<string>) => void` | No       | Function that will be called with all keys found and any error. |
+| callback | `?(error: ?Error, keys: ?Array<string>) => void` | 否       | 如果找到所有键或发生任何错误，将调用该函数。 |
 
 ---
 
@@ -201,7 +201,7 @@ Gets _all_ keys known to your app; for all callers, libraries, etc. Returns a `P
 static flushGetRequests(): [object Object]
 ```
 
-Flushes any pending requests using a single batch call to get the data.
+使用单次批量调用刷新任何挂起的请求以获取数据。
 
 ---
 
@@ -211,28 +211,28 @@ Flushes any pending requests using a single batch call to get the data.
 static multiGet(keys: Array<string>, [callback]: ?(errors: ?Array<Error>, result: ?Array<Array<string>>) => void)
 ```
 
-This allows you to batch the fetching of items given an array of `key` inputs. Your callback will be invoked with an array of corresponding key-value pairs found:
+这允许你批量获取给定 `key` 输入数组的项。你的回调将被调用，并传入一个找到的对应键值对数组：
 
 ```
 multiGet(['k1', 'k2'], cb) -> cb([['k1', 'val1'], ['k2', 'val2']])
 ```
 
-The method returns a `Promise` object.
+该方法返回一个 `Promise` 对象。
 
-**Parameters:**
+**参数：**
 
-| Name     | Type                                                              | Required | Description                                                                                                         |
+| 名称     | 类型                                                              | 必填 | 描述                                                                                                         |
 | -------- | ----------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------- |
-| keys     | `Array<string>`                                                   | Yes      | Array of key for the items to get.                                                                                  |
-| callback | `?(errors: ?Array<Error>, result: ?Array<Array<string>>) => void` | No       | Function that will be called with a key-value array of the results, plus an array of any key-specific errors found. |
+| keys     | `Array<string>`                                                   | 是      | 要获取的项的键数组。                                                                                  |
+| callback | `?(errors: ?Array<Error>, result: ?Array<Array<string>>) => void` | 否       | 将使用结果的键值数组以及任何特定于键的错误数组调用的函数。 |
 
-Example:
+示例：
 
 ```jsx
 AsyncStorage.getAllKeys((err, keys) => {
   AsyncStorage.multiGet(keys, (err, stores) => {
     stores.map((result, i, store) => {
-      // get at each store's key/value so you can work with it
+      // 获取每个存储的键/值以便你可以使用它
       let key = store[i][0];
       let value = store[i][1];
     });
@@ -248,20 +248,20 @@ AsyncStorage.getAllKeys((err, keys) => {
 static multiSet(keyValuePairs: Array<Array<string>>, [callback]: ?(errors: ?Array<Error>) => void)
 ```
 
-Use this as a batch operation for storing multiple key-value pairs. When the operation completes you'll get a single callback with any errors:
+将此用作存储多个键值对的批量操作。当操作完成时，你将得到一个包含任何错误的单个回调：
 
 ```
 multiSet([['k1', 'val1'], ['k2', 'val2']], cb);
 ```
 
-The method returns a `Promise` object.
+该方法返回一个 `Promise` 对象。
 
-**Parameters:**
+**参数：**
 
-| Name          | Type                               | Required | Description                                                                  |
+| 名称          | 类型                               | 必填 | 描述                                                                  |
 | ------------- | ---------------------------------- | -------- | ---------------------------------------------------------------------------- |
-| keyValuePairs | `Array<Array<string>>`             | Yes      | Array of key-value array for the items to set.                               |
-| callback      | `?(errors: ?Array<Error>) => void` | No       | Function that will be called with an array of any key-specific errors found. |
+| keyValuePairs | `Array<Array<string>>`             | 是      | 要设置的项的键值数组。                               |
+| callback      | `?(errors: ?Array<Error>) => void` | 否       | 将使用任何特定于键的错误数组调用的函数。 |
 
 ---
 
@@ -271,22 +271,22 @@ The method returns a `Promise` object.
 static multiRemove(keys: Array<string>, [callback]: ?(errors: ?Array<Error>) => void)
 ```
 
-Call this to batch the deletion of all keys in the `keys` array. Returns a `Promise` object.
+调用此方法以批量删除 `keys` 数组中的所有键。返回一个 `Promise` 对象。
 
-**Parameters:**
+**参数：**
 
-| Name     | Type                               | Required | Description                                                             |
+| 名称     | 类型                               | 必填 | 描述                                                             |
 | -------- | ---------------------------------- | -------- | ----------------------------------------------------------------------- |
-| keys     | `Array<string>`                    | Yes      | Array of key for the items to delete.                                   |
-| callback | `?(errors: ?Array<Error>) => void` | No       | Function that will be called an array of any key-specific errors found. |
+| keys     | `Array<string>`                    | 是      | 要删除的项的键数组。                                   |
+| callback | `?(errors: ?Array<Error>) => void` | 否       | 将使用任何特定于键的错误数组调用的函数。 |
 
-Example:
+示例：
 
 ```jsx
 let keys = ['k1', 'k2'];
 AsyncStorage.multiRemove(keys, err => {
-  // keys k1 & k2 removed, if they existed
-  // do most stuff after removal (if you want)
+  // 键 k1 & k2 已移除，如果它们存在
+  // 移除后做大部分事情（如果你想要）
 });
 ```
 
@@ -298,41 +298,41 @@ AsyncStorage.multiRemove(keys, err => {
 static multiMerge(keyValuePairs: Array<Array<string>>, [callback]: ?(errors: ?Array<Error>) => void)
 ```
 
-Batch operation to merge in existing and new values for a given set of keys. This assumes that the values are stringified JSON. Returns a `Promise` object.
+批量操作，合并给定键集的现有值和新值。假设值是字符串化的 JSON。返回一个 `Promise` 对象。
 
-**NOTE**: This is not supported by all native implementations.
+**注意**：并非所有原生实现都支持此功能。
 
-**Parameters:**
+**参数：**
 
-| Name          | Type                               | Required | Description                                                                  |
+| 名称          | 类型                               | 必填 | 描述                                                                  |
 | ------------- | ---------------------------------- | -------- | ---------------------------------------------------------------------------- |
-| keyValuePairs | `Array<Array<string>>`             | Yes      | Array of key-value array for the items to merge.                             |
-| callback      | `?(errors: ?Array<Error>) => void` | No       | Function that will be called with an array of any key-specific errors found. |
+| keyValuePairs | `Array<Array<string>>`             | 是      | 要合并的项的键值数组。                             |
+| callback      | `?(errors: ?Array<Error>) => void` | 否       | 将使用任何特定于键的错误数组调用的函数。 |
 
-Example:
+示例：
 
 ```jsx
-// first user, initial values
+// 第一个用户，初始值
 let UID234_object = {
   name: 'Chris',
   age: 30,
   traits: {hair: 'brown', eyes: 'brown'},
 };
 
-// first user, delta values
+// 第一个用户，增量值
 let UID234_delta = {
   age: 31,
   traits: {eyes: 'blue', shoe_size: 10},
 };
 
-// second user, initial values
+// 第二个用户，初始值
 let UID345_object = {
   name: 'Marge',
   age: 25,
   traits: {hair: 'blonde', eyes: 'blue'},
 };
 
-// second user, delta values
+// 第二个用户，增量值
 let UID345_delta = {
   age: 26,
   traits: {eyes: 'green', shoe_size: 6},
@@ -359,7 +359,7 @@ AsyncStorage.multiSet(multi_set_pairs, err => {
   });
 });
 
-// Console log results:
+// 控制台日志结果：
 // => UID234 {"name":"Chris","age":31,"traits":{"shoe_size":10,"hair":"brown","eyes":"blue"}}
 // => UID345 {"name":"Marge","age":26,"traits":{"shoe_size":6,"hair":"blonde","eyes":"green"}}
 ```

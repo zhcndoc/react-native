@@ -201,7 +201,7 @@ function App(): React.JSX.Element {
               : Colors.white,
             padding: 24,
           }}>
-          <Text style={styles.title}>Step One</Text>
+          <Text style={styles.title}>步骤一</Text>
           <Text>
             编辑 <Text style={styles.bold}>App.tsx</Text> 以
             更改此屏幕并查看你的编辑。
@@ -372,14 +372,14 @@ class ReactViewController: UIViewController {
 - @implementation ViewController
 +@implementation ViewController {
 +  ReactViewController *reactViewController;
-+}
+}
 
  - (void)viewDidLoad {
    [super viewDidLoad];
    // 加载视图后执行任何额外的设置。
    self.view.backgroundColor = UIColor.systemBackgroundColor;
 +  UIButton *button = [UIButton new];
-+  [button setTitle:@"Open React Native" forState:UIControlStateNormal];
++  [button setTitle:@"打开 React Native" forState:UIControlStateNormal];
 +  [button setTitleColor:UIColor.systemBlueColor forState:UIControlStateNormal];
 +  [button setTitleColor:UIColor.blueColor forState:UIControlStateHighlighted];
 +  [button addTarget:self action:@selector(presentReactNative) forControlEvents:UIControlEventTouchUpInside];
@@ -400,7 +400,7 @@ class ReactViewController: UIViewController {
 +    reactViewController = [ReactViewController new];
 +  }
 +  [self presentViewController:reactViewController animated:YES];
-+}
+}
 
 @end
 ```
@@ -421,7 +421,7 @@ class ViewController: UIViewController {
     self.view.backgroundColor = .systemBackground
 
 +    let button = UIButton()
-+    button.setTitle("Open React Native", for: .normal)
++    button.setTitle("打开 React Native", for: .normal)
 +    button.setTitleColor(.systemBlue, for: .normal)
 +    button.setTitleColor(.blue, for: .highlighted)
 +    button.addAction(UIAction { [weak self] _ in

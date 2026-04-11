@@ -1,6 +1,6 @@
 ---
 id: shadow-props
-title: Shadow Props
+title: 阴影属性
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
@@ -216,70 +216,70 @@ export default App;
 
 ---
 
-# Reference
+# 参考
 
-There are 3 sets of shadow APIs in React Native:
+React Native 中有 3 组阴影 API：
 
-- `boxShadow`: A View style prop and a spec-compliant implementation of the [web style prop of the same name](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow).
-- `dropShadow`: A specific filter function available as part of the [`filter`](./view-style-props#filter) View style prop.
-- Various `shadow` props (`shadowColor`, `shadowOffset`, `shadowOpacity`, `shadowRadius`): These map directly to their native counterparts exposed by the platform-level APIs.
+- `boxShadow`：一个 View 样式属性，以及 [同名 Web 样式属性](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow) 的符合规范的实现。
+- `dropShadow`：作为 [`filter`](./view-style-props#filter) View 样式属性一部分可用的特定滤镜函数。
+- 各种 `shadow` 属性（`shadowColor`、`shadowOffset`、`shadowOpacity`、`shadowRadius`）：这些直接映射到平台级 API 暴露的原生对应项。
 
-The difference between `dropShadow` and `boxShadow` are as follows:
+`dropShadow` 和 `boxShadow` 之间的区别如下：
 
-- `dropShadow` exists as part of `filter`, whereas `boxShadow` is a standalone style prop.
-- `dropShadow` is an alpha mask, so only pixels with a positive alpha value will "cast" a shadow. `boxShadow` will cast around the border box of the element no matter it's contents (unless it is inset).
-- `dropShadow` is only available on Android, `boxShadow` is available on iOS and Android.
-- `dropShadow` cannot be inset like `boxShadow`.
-- `dropShadow` does not have the `spreadDistance` argument like `boxShadow`.
+- `dropShadow` 作为 `filter` 的一部分存在，而 `boxShadow` 是一个独立的样式属性。
+- `dropShadow` 是一个 alpha 遮罩，所以只有具有正 alpha 值的像素才会“投射”阴影。`boxShadow` 将围绕元素的边框盒投射阴影，无论其内容如何（除非它是内嵌的）。
+- `dropShadow` 仅在 Android 上可用，`boxShadow` 在 iOS 和 Android 上均可用。
+- `dropShadow` 不能像 `boxShadow` 那样设置为内嵌。
+- `dropShadow` 没有像 `boxShadow` 那样的 `spreadDistance` 参数。
 
-Both `boxShadow` and `dropShadow` are generally more capable than the `shadow` props. The `shadow` props, however, map to native platform-level APIs, so if you only need a straightforward shadow these props are recommended. Note that only `shadowColor` works on both Android and iOS, all other `shadow` props only work on iOS.
+`boxShadow` 和 `dropShadow` 通常都比 `shadow` 属性功能更强大。然而，`shadow` 属性映射到原生平台级 API，因此如果你只需要一个简单的阴影，推荐使用这些属性。请注意，只有 `shadowColor` 在 Android 和 iOS 上都有效，所有其他 `shadow` 属性仅在 iOS 上有效。
 
-## Props
+## 属性
 
 ### `boxShadow`
 
-See [View Style Props](./view-style-props#boxshadow) for documentation.
+请参阅 [视图样式属性](./view-style-props#boxshadow) 获取文档。
 
 ### `dropShadow` <div className="label android">Android</div>
 
-See [View Style Props](./view-style-props#filter) for documentation.
+请参阅 [视图样式属性](./view-style-props#filter) 获取文档。
 
 ### `shadowColor`
 
-Sets the drop shadow color.
+设置投影颜色。
 
-This property will only work on Android API 28 and above. For similar functionality on lower Android APIs, use the [`elevation` property](view-style-props#elevation-android).
+此属性仅在 Android API 28 及以上版本有效。对于较低 Android API 上的类似功能，请使用 [`elevation` 属性](view-style-props#elevation-android)。
 
-| Type               |
+| 类型               |
 | ------------------ |
-| [color](colors.md) |
+| [颜色](colors.md) |
 
 ---
 
 ### `shadowOffset` <div className="label ios">iOS</div>
 
-Sets the drop shadow offset.
+设置投影偏移量。
 
-| Type                                     |
+| 类型                                     |
 | ---------------------------------------- |
-| object: `{width: number,height: number}` |
+| 对象：`{width: number,height: number}` |
 
 ---
 
 ### `shadowOpacity` <div className="label ios">iOS</div>
 
-Sets the drop shadow opacity (multiplied by the color's alpha component).
+设置投影不透明度（乘以颜色的 alpha 分量）。
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
 
 ---
 
 ### `shadowRadius` <div className="label ios">iOS</div>
 
-Sets the drop shadow blur radius.
+设置投影模糊半径。
 
-| Type   |
+| 类型   |
 | ------ |
-| number |
+| 数字 |
