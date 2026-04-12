@@ -424,12 +424,6 @@ $ adb devices
 
 打开 **报告导航器**，选择最后一次 **构建**，搜索 `IP=` 后跟的 IP 地址。内嵌在应用中的 IP 地址应与机器 IP 一致。
 
-</TabItem>
-</Tabs>
-
-</TabItem>
-</Tabs>
-
 ## 为生产构建你的应用
 
 你已用 React Native 构建了一个优秀的应用，迫不及待想发布到 App Store。其流程与其他本地 iOS 应用相同，但有一些额外注意事项。请参阅 [发布到 Apple App Store](publishing-to-app-store.md) 指南了解详情。

@@ -5,7 +5,7 @@ title: 文本样式属性
 
 ### 示例
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/Tabs'; import constants from '@site/core/TabsConstants';
+import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -765,8 +765,8 @@ export default App;
 
 ### `color`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
@@ -783,8 +783,8 @@ iOS 上支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-mo
 
 ### `fontSize`
 
-| 类型   |
-| ------ |
+| 类型 |
+| ---- |
 | 数字 |
 
 ---
@@ -801,8 +801,8 @@ iOS 上支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-mo
 
 指定字体粗细。大多数字体支持值 `'normal'` 和 `'bold'`。并非所有字体都有每个数值对应的变体，在这种情况下会选择最接近的一个。
 
-| 类型                                                                                                                  | 默认值     |
-| --------------------------------------------------------------------------------------------------------------------- | ---------- |
+| 类型                                                                                                                | 默认值     |
+| ------------------------------------------------------------------------------------------------------------------- | ---------- |
 | enum(`'normal'`, `'bold'`, `'100'`, `'200'`, `'300'`, `'400'`, `'500'`, `'600'`, `'700'`, `'800'`, `'900'`) 或 数字 | `'normal'` |
 
 ---
@@ -811,9 +811,9 @@ iOS 上支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-mo
 
 设置为 `false` 以移除额外的字体内边距，这些内边距旨在为某些上升部/下降部留出空间。对于某些字体，当垂直居中时，此内边距可能导致文本看起来略微未对齐。为了获得最佳结果，还将 `textAlignVertical` 设置为 `center`。
 
-| 类型    | 默认值  |
-| ---- | ------- |
-| 布尔值 | `true`  |
+| 类型   | 默认值 |
+| ------ | ------ |
+| 布尔值 | `true` |
 
 ---
 
@@ -821,9 +821,9 @@ iOS 上支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-mo
 
 允许你设置字体的所有变体。可以通过使用枚举数组或空格分隔的字符串来设置，例如 `'small-caps common-ligatures'`。
 
-| 类型                                                                                                                 | 默认值 |
-| -------------------------------------------------------------------------------------------------------------------- | ------- |
-| 枚举数组 (`'small-caps'`, `'oldstyle-nums'`, `'lining-nums'`, `'tabular-nums'`, `'proportional-nums'`) 或 字符串 | `[]`    |
+| 类型                                                                                                             | 默认值 |
+| ---------------------------------------------------------------------------------------------------------------- | ------ |
+| 枚举数组 (`'small-caps'`, `'oldstyle-nums'`, `'lining-nums'`, `'tabular-nums'`, `'proportional-nums'`) 或 字符串 | `[]`   |
 
 ---
 
@@ -831,8 +831,8 @@ iOS 上支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-mo
 
 增加或减少字符之间的间距。默认情况下没有额外的字母间距。
 
-| 类型   |
-| ------ |
+| 类型 |
+| ---- |
 | 数字 |
 
 ---
@@ -841,8 +841,8 @@ iOS 上支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-mo
 
 控制文本元素内文本行之间垂直间距的数值。它指定连续文本行基线之间的距离。
 
-| 类型   |
-| ------ |
+| 类型 |
+| ---- |
 | 数字 |
 
 ---
@@ -867,8 +867,8 @@ iOS 上支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-mo
 
 ### `textDecorationColor` <div className="label ios">iOS</div>
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
@@ -891,24 +891,24 @@ iOS 上支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-mo
 
 ### `textShadowColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
 
 ### `textShadowOffset`
 
-| 类型                                        |
-| ------------------------------------------- |
+| 类型                                      |
+| ----------------------------------------- |
 | 对象：`{width?: number, height?: number}` |
 
 ---
 
 ### `textShadowRadius`
 
-| 类型   |
-| ------ |
+| 类型 |
+| ---- |
 | 数字 |
 
 ---
@@ -942,5 +942,5 @@ iOS 上支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-mo
 允许用户选择文本并使用原生复制和粘贴功能。优先级高于 `selectable` 属性。
 
 | 类型                                                     | 默认值 |
-| -------------------------------------------------------- | ------- |
-| enum(`'auto'`, `'text'`, `'none'`, `'contain'`, `'all'`) | `none`  |
+| -------------------------------------------------------- | ------ |
+| enum(`'auto'`, `'text'`, `'none'`, `'contain'`, `'all'`) | `none` |

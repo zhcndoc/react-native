@@ -85,7 +85,7 @@ React Native 启用的转换的完整列表可以在 [@react-native/babel-preset
 #### 浏览器
 
 - [CommonJS `require`](https://nodejs.org/docs/latest/api/modules.html)
-- md [console.{log, warn, error, info, debug, trace, table, group, groupCollapsed, groupEnd}](https://developer.chrome.com/devtools/docs/console-api)
+- `md [console.{log, warn, error, info, debug, trace, table, group, groupCollapsed, groupEnd}](https://developer.chrome.com/devtools/docs/console-api)`
 - [`XMLHttpRequest`, `fetch`](network.md#content)
 - [`{set, clear}{Timeout, Interval, Immediate}, {request, cancel}AnimationFrame`](timers.md#content)
 

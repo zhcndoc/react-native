@@ -180,7 +180,7 @@ Animated 节点以前是基于其插值输出的泛型类型。现在，它们�
 
 ### 移除一些已弃用的类型
 
-< RNRepoLink href="/packages/react-native/types/public/DeprecatedPropertiesAlias.d.ts">`DeprecatedPropertiesAlias.d.ts`</RNRepoLink> 中列出的所有类型在严格 API 下均不可访问。
+All types listed in <RNRepoLink href="/packages/react-native/types/public/DeprecatedPropertiesAlias.d.ts">`DeprecatedPropertiesAlias.d.ts`</RNRepoLink> are inaccessible under the Strict API.
 
 ### 移除遗留的组件属性
 

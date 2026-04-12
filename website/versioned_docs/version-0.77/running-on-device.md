@@ -341,8 +341,6 @@ $ adb devices
 
 您现在可以从 [开发菜单](debugging.md#opening-the-dev-menu) 启用快速刷新。每当您的 JavaScript 代码更改时，您的应用将重新加载。
 
-</TabItem>
-
 ## 为生产环境构建你的应用
 
 你已经使用 React Native 构建了一个很棒的应用，现在迫不及待地想要将其发布到 Play Store。该过程与任何其他原生 Android 应用相同，但有一些额外的注意事项需要考虑。请参阅 [生成签名的 APK](signed-apk-android.md) 指南以了解更多。
