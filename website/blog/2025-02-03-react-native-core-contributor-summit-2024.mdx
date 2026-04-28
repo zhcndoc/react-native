@@ -1,0 +1,113 @@
+---
+title: 'React Native 核心贡献者峰会 2024 回顾'
+authors: [thymikee, szymonrybczak, mojavad, stmoy]
+image: https://raw.githubusercontent.com/facebook/react-native-website/9915d9c0b32ef348958c8119f6e83e571c1c0ba3/website/static/blog/assets/react-native-core-contributor-summit-2024-1.jpeg
+tags: [工程]
+date: 2025-02-03
+---
+
+每年，React Native 社区的核心贡献者都会与 React Native 团队聚在一起，共同协作塑造这个项目的未来方向。
+
+去年也不例外——只有一点小改变。我们通常会在 [React Universe Conf](https://www.reactuniverseconf.com)（前身为 React Native EU）前一天，在位于弗罗茨瓦夫的 [Callstack](https://www.callstack.com/open-source) 总部见面。2024 年，吸取以往经验，我们举办了为期两天的峰会，这样可以拥有更多非结构化的交流时间。
+
+![all-participants](../static/blog/assets/react-native-core-contributor-summit-2024-1.jpeg)
+
+{/* truncate */}
+
+这一年度传统已成为贡献者分享见解和表达意见的宝贵机会，同时也是核心团队共享计划并从 React Native 生态系统的关键贡献者——包括合作伙伴公司、个人库作者和好友——那里收集反馈的重要平台。
+
+我们将峰会划分为两个议题组，涵盖以下主题：
+
+- [发布](#releases)
+- [新架构之后的下一步是什么？](#whats-next-after-the-new-architecture)
+- [原生模块的 Web API 规范](#web-apis-for-native-modules)
+- [LeanCore 2.0](#leancore-20)
+- [Nitro Modules——通过将 props 以 jsi::Values 形式暴露来解锁视图组件](#nitro-modules---unblocking-view-components-by-exposing-props-as-jsivalues)
+- [外部平台 & CocoaPods](#out-of-tree-platforms--cocoapods)
+- [桌面上的 React Native](#react-native-on-desktop)
+
+在这篇博客中，我们想带大家提前了解这次聚会的成果。
+
+## 发布
+
+我们就 React Native 的发布流程进行了广泛讨论。核心团队非常重视来自 Meta 以外贡献者参与发布的重要性，并强调了 nightly 版本的价值，特别是对像 React Native visionOS 这样的外部平台、库维护者（如 Reanimated）和框架（如 Expo）非常有益。我们讨论了发布的频率，有些人希望更频繁发布以更快推送修复，而另一些人则担心这会影响到第三方库和升级工作。
+
+我们还集思广益，探讨如何减少非故意引起的破坏性更改，并改进 React Native 与第三方依赖之间的兼容性沟通。
+
+这次讨论表明，管理 React Native 的发布是非常复杂且微妙的事情，因为需要考虑到生态系统中众多不同部分的利益。
+
+## 新架构之后的下一步是什么？
+
+新架构已稳定发布，我们讨论了接下来应关注的重点。下一件大事可能是什么？话题围绕：
+
+- **Web 兼容性** — 在 React Strict DOM 项目方向的讨论中得出结论，该项目应被视为临时的 polyfill，同时 Xplat 团队将在 React Native 核心中实现真正的跨平台功能。
+- **核心 API 的稳定** — 我们发现需要更多共识来明确这对应用开发者、库作者和外部平台的意义。例如，可能有必要将 iOS 和 Android 的平台原生逻辑从共享的 C++ 代码库中抽离。LeanCore 2.0 的讨论部分涉及了这一点。
+- **旧架构的支持** — 正如预期，团队确认基于并发渲染的新 React 19 功能无法在旧架构中运行。新功能主要针对新架构。由于 React 19 发布计划中存在阻碍，当前尚不清楚新旧架构功能支持的分界线在哪。
+- **React Native 的第三方库** — 目前库作者可使用 TurboModules、ExpoModules，最近还有 NitroModules 来实现本地平台功能桥接。我们需要更好的文档来指导如何正确实现。
+- **混合开发文档** — 峰会时，官方关于将 React Native 集成到原生应用的文档较为陈旧。此后团队陆续发布了针对 Android 和 iOS 的更新、更简洁的文档。
+- **Metro Web 的 Tree-shaking** — 核心 Metro 团队愿意合并来自 Expo 团队的这方面工作。
+
+## 原生模块的 Web API 规范
+
+本环节聚焦于微软的 RFC，旨在将部分 Web API 引入 React Native。此举旨在提升 React Native 的可扩展性，并通过使用熟悉的 API 吸引更多 Web 开发者。此外，还能开放对大量已有的开源 Web 库的访问，而这些库目前并未明确支持 React Native。
+
+![web-apis](../static/blog/assets/react-native-core-contributor-summit-2024-2.jpeg)
+
+在 Web API 规范上达成统一不仅有利且对 React Native 的发展至关重要，也与我们的多平台愿景和 react-strict-dom 项目高度契合。Web 通过规范提供了统一接口，而 React Native 社区模块当前缺乏这一点。微软已锁定大约 200 个关键 Web API，计划首先为他们支持的平台 iOS、Android、Windows 和 macOS 实现这些 API。
+
+我们鼓励库开发者尽可能使其 API 和 Web 规范保持一致，因为这种标准化将提升跨平台的代码可移植性和开发者体验。
+
+虽然该提案对于 React Native 未来有利，我们仍在探讨下一步行动。一项关注是 API 的治理问题，及其是否需与平台实现代码分开放置的仓库。另一个问题是针对某些平台允许但 W3C 规范未定义的行为，可能导致规范偏离。我们还需探索如通过 Babel 插件避免打包不必要模块的方案。此外，此项计划的范围非常广泛。
+
+会议结论强化了两点：首先，React Native 社区普遍赞同尽可能采用兼容 Web 的规范；其次，需要确立明确的技术策略，以便不同平台的 Web API 实现能够被分开维护。微软与 Callstack 或将合作完善原始 RFC，并作为社区项目先做少量 API 的概念验证实现。这种渐进式方法能帮助我们在扩展范围前验证设计和开发者体验。
+
+## LeanCore 2.0
+
+2019 年，React Native 团队启动了 Lean Core 计划，目标是缩减 React Native 核心的范围，去除过时和遗留的 API 及组件。此后，React Native 的组件和 API 长期以来急需新一轮清理。
+
+如今，许多组件并未积极维护，且有更好的社区替代品。此外，也存在一些重复组件，理应合并以便维护。
+
+在 API 层面，JS 层许多 API 与原生 iOS 和 Android 实现紧耦合，未做到真正平台无关。例如，Pressable 组件中包含了 `android_disableSound` 和 `android_ripple` 等针对 Android 的属性。理想状态是 React Native 组件拥有尽可能小且不绑定特定平台的 API 面。
+
+随着外部平台逐渐增多并被生态广泛采用，有必要为 React Native Core 组件和 API 面积的缩减制定路径，减轻核心团队压力，同时显著简化外部平台和库维护者的跟进难度。
+
+此外，这还能让初学者更容易上手 React Native，因为组件不再重复，也减少了“坑”。有更好社区替代品时，能够指引开发者优先使用。
+
+在会议中我们讨论了：
+
+- Lean Core 的高层动机以及对各方（开发者、库维护者、Meta）的益处
+- 通过调研实际生产应用中使用的组件做出汇总
+- 核心中待移除组件的判定标准
+- Lean Core 2.0 的明确行动计划：
+  - 退役流程的高层框架
+  - 处理内部 Meta 使用但社区已有更好替代品的组件
+
+下一步，一部分核心贡献者将着手收集更多遥测和数据，评估社区替代方案，并准备 RFC 详细说明拟议变更。
+
+## Nitro Modules——通过将 props 以 jsi::Values 形式暴露来解锁视图组件
+
+近期，Marc Rousavy 推出了 Nitro Modules 作为创建原生模块的另一方案。Nitro Modules 利用了实验性的 C++ Swift 互操作特性，并融合了多种增强，某些场景下可提升性能。但在本环节我们讨论了 Nitro Modules 与当前 TurboModules 之间权衡利弊。
+
+虽然 Nitro Modules 提供性能优势，但也有局限性和需注意的事项。比如使用实验互操作特性可能带来 TurboModules 不存在的复杂度或兼容性问题。讨论聚焦于这些权衡，以及将部分 Nitro Modules 改进提案反向合入 React Native Core 的可能性，这样开发者整体上能享用更高性能的模块。
+
+## 外部平台 & CocoaPods
+
+外部平台展示了 React Native 的强大能力，我们可以在手机、桌面甚至 VR/XR 设备上共享单一 JS 代码库。创建这样的平台目前过程并不简单，事实上还没有明确的指引说明如何创建、开发和维护。此外，React Native Core 在某种程度上与 Android 和 iOS 绑定。未来，我们期待实现各平台平等对待，并通过相同 API 集成 C++/JS 核心。
+
+![oot-platforms](../static/blog/assets/react-native-core-contributor-summit-2024-3.jpeg)
+
+本环节中，不同平台维护者分享了遇到的问题、困难以及统一创建和维护新外部平台过程的解决方案。
+
+会中还讨论了 CocoaPods 及未来原生依赖管理方案。最近 CocoaPods 团队宣布进入维护模式，未来不会推出重大改进或新特性。我们探讨了可能的替代方案及各自优劣，并讨论了迁移方案。
+
+## 桌面上的 React Native
+
+微软的 Steven 和 Saad，是 react-native-windows 和 react-native-macos 的维护者，主持了关于桌面平台的反馈收集会。讨论内容包括如何提升 React Native 在桌面端的采用率（如在 Visual Studio 中支持专用工作流，或在 Nx 中将桌面纳入一部分），以及如何支持一直困扰采用的 Expo。
+
+macOS 与 Windows 的社区模块支持差异较大，原因主要是 iOS 代码大多兼容 macOS，而 RNW 需定制实现。Windows 新架构开发团队看到 C++ 模块有潜力实现跨平台更多代码共享，预计将减轻桌面支持的开发工作量。社区方面，Software Mansion 正在为其热门模块，比如 React Native Screens、Gesture Handler 和 Reanimated，添加桌面支持。
+
+---
+
+我们依然对几天内数小时面对面交流所带来的丰富知识共享和灵感碰撞印象深刻。此次峰会种下了助力我们改进和重塑 React Native 生态的种子。
+
+如果你有兴趣加入 React Native 的开发，欢迎参与我们的开放计划，并阅读我们网站上的 [贡献指南](https://reactnative.dev/contributing/overview)。期待将来能与你线下见面！

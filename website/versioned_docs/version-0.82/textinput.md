@@ -28,7 +28,7 @@ const TextInputExample = () => {
           style={styles.input}
           onChangeText={onChangeNumber}
           value={number}
-          placeholder="useless placeholder"
+          placeholder="无用的占位符"
           keyboardType="numeric"
         />
       </SafeAreaView>
@@ -58,7 +58,7 @@ import {TextInput, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const MultilineTextInputExample = () => {
-  const [value, onChangeText] = React.useState('Useless Multiline Placeholder');
+  const [value, onChangeText] = React.useState('无用的多行占位符');
 
   // 如果你在文本框中输入的内容是一种颜色，
   // 背景将变为该颜色。
@@ -238,8 +238,8 @@ export default MultilineTextInputExample;
 
 ### `blurOnSubmit`
 
-:::warning 已弃用
-请注意，`submitBehavior` 现在取代了 `blurOnSubmit` 并将覆盖 `blurOnSubmit` 定义的任何行为。参见 [submitBehavior](textinput#submitbehavior)。
+:::warning[已弃用]
+请注意，`submitBehavior` 现在取代了 `blurOnSubmit`，并且会覆盖由 `blurOnSubmit` 定义的任何行为。参见 [submitBehavior](textinput#submitbehavior)。
 :::
 
 如果为 `true`，提交时文本字段将失去焦点。单行字段的默认值为 true，多行字段的默认值为 false。请注意，对于多行字段，将 `blurOnSubmit` 设置为 `true` 意味着按下 return 键将使字段失去焦点并触发 `onSubmitEditing` 事件，而不是在字段中插入换行符。
@@ -664,7 +664,7 @@ iOS 上的 `numberOfLines` 仅在 [新架构](/architecture/landing-page) 上可
 
 ### `onPressIn`
 
-当触摸 engaged 时调用的回调。
+当触摸接触时调用的回调。
 
 | 类型                                                   |
 | ------------------------------------------------------ |

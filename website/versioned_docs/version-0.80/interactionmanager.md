@@ -5,8 +5,8 @@ title: 🗑️ InteractionManager
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-:::warning 已弃用
-避免长时间运行的工作，改用 `requestIdleCallback`。
+:::warning[已弃用]
+请避免长时间运行的工作，并改用 `requestIdleCallback`。
 :::
 
 InteractionManager 允许在任何交互/动画完成后安排长时间运行的工作。特别是，这允许 JavaScript 动画流畅运行。

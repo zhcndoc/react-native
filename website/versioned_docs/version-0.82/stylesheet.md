@@ -174,8 +174,8 @@ export default App;
 
 ### `setStyleAttributePreprocessor()`
 
-:::warning 实验性
-破坏性变更可能会频繁发生，且不会可靠地宣布。整个东西可能会被删除，谁知道呢？使用风险自负。
+:::warning[Experimental]
+破坏性变更很可能会经常发生，并且不会可靠地提前通知。整个东西也许会被删除，谁知道呢？请自行承担风险使用。
 :::
 
 ```tsx

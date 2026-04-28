@@ -1,0 +1,453 @@
+---
+title: 'React Native 0.74 - Yoga 3.0、新架构无桥接默认启用等更新'
+authors: [hurali, alanjhughes, alfonsocj, huntie, cortinico]
+tags: [公告, 发布, yoga]
+date: 2024-04-22
+---
+
+今天我们发布了 React Native 0.74！本次发布引入了 Yoga 3.0、新架构下默认启用的无桥接模式、批量处理的 `onLayout` 更新（新架构），以及为新项目默认使用 Yarn 3 作为包管理器。
+
+我们还移除了废弃的 API，包括 `PropTypes` 的移除和对 `PushNotificationIOS` 的破坏性更改。Android 平台现在最低支持的 SDK 版本为 23（Android 6.0）。
+
+### 亮点
+
+- [Yoga 3.0](/blog/2024/04/22/release-0.74#yoga-30)
+- [新架构：默认启用无桥接模式](/blog/2024/04/22/release-0.74#new-architecture-bridgeless-by-default)
+- [新架构：批量处理 `onLayout` 更新](/blog/2024/04/22/release-0.74#new-architecture-batched-onlayout-updates)
+- [新项目默认使用 Yarn 3](/blog/2024/04/22/release-0.74#yarn-3-for-new-projects)
+
+### 破坏性变更
+
+- [Android 最低 SDK 版本提升（Android 6.0）](/blog/2024/04/22/release-0.74#android-minimum-sdk-bump-android-60)
+- [PushNotificationIOS API 变更（废弃）](/blog/2024/04/22/release-0.74#api-changes-to-pushnotificationios-deprecated)
+- [移除废弃的 `PropTypes`](/blog/2024/04/22/release-0.74#removal-of-deprecated-proptypes)
+- [移除 Flipper React Native 插件](/blog/2024/04/22/release-0.74#removal-of-flipper-react-native-plugin)
+- [其他破坏性变更](/blog/2024/04/22/release-0.74#other-breaking-changes)
+
+{/* truncate */}
+
+## 亮点
+
+### Yoga 3.0
+
+#### 新的布局行为
+
+React Native 0.74 集成了 [Yoga 3.0](https://yogalayout.dev/blog/announcing-yoga-3.0)，这是我们的布局引擎的新版本。Yoga 3.0 通过使样式更具可预测性改善了布局表现，并支持渲染为 Web 编写的组件。
+
+React Native 仍有意保留一些错误的布局行为，因为修正这些行为会影响大量真实案例中的组件。未来 React Native 版本中将支持更细粒度配置布局规范性。
+
+:::warning
+
+React Native [之前在处理 `row-reverse` 容器上的 `margin`、`padding` 或 `border` 时](https://yogalayout.dev/blog/announcing-yoga-3.0#correct-handling-of-logical-edges-in-row-reverse-containers) 会交换 `left`/`right`（以及 `start`/`end`）边缘的逻辑。现在，这些属性的行为与 Web 保持一致。之前依赖边缘被翻转的代码可能需要更新以保证正确渲染。
+
+<table>
+<tr>
+  <th>样式</th>
+  <th>之前</th>
+  <th>现在</th>
+</tr>
+<tr>
+<td width="350">
+
+```jsx
+<View
+  style={{
+    flexDirection: 'row',
+    backgroundColor: 'red',
+    margin: 10,
+    width: 200,
+    height: 100,
+  }}>
+  <View
+    style={{
+      flexDirection: 'row-reverse',
+      backgroundColor: 'blue',
+      flex: 1,
+      marginLeft: 50,
+    }}>
+    <View
+      style={{
+        backgroundColor: 'green',
+        height: '50%',
+        flex: 1,
+        marginLeft: 50,
+      }}
+    />
+  </View>
+</View>
+```
+
+</td>
+<td>
+
+![之前的布局](../static/blog/assets/0.74-row-reverse-before.png)
+
+</td>
+<td>
+
+![新的布局](../static/blog/assets/0.74-row-reverse-after.png)
+
+</td>
+</tr>
+</table>
+
+:::
+
+#### 支持 `align-content: 'space-evenly'`
+
+Yoga 3.0 支持了 [`alignContent: 'space-evenly'`](https://developer.mozilla.org/en-US/docs/Web/CSS/align-content#space-evenly)。`space-evenly` 会在多行弹性容器中均匀分布行与容器边缘之间的间隙。
+
+<figure>
+  <img
+    alt="`alignContent` 行为的视觉参考"
+    src="/blog/assets/0.74-align-content.png"
+    width="360"
+  />
+  <figcaption>
+    <small>
+      来源：[World Wide Web
+      Consortium](https://www.w3.org/TR/css-align-3/#distribution-values)
+    </small>
+  </figcaption>
+</figure>
+
+#### 支持 `position: 'static'`
+
+:::info
+`position: 'static'` 仅在新架构中支持。
+:::
+
+被标记为 [`position: 'static'`](https://developer.mozilla.org/en-US/docs/Web/CSS/position#static) 的元素无法进行偏移，并且在确定绝对定位元素的[包含块](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block)时不会被考虑。这样允许相对非直接父级的祖先进行定位。
+
+<table>
+<tr>
+<td width="350">
+
+```jsx
+<View
+  style={{
+    backgroundColor: 'blue',
+    width: 200,
+    height: 200,
+    flexDirection: 'row-reverse',
+  }}>
+  <View
+    style={{
+      backgroundColor: 'red',
+      width: 100,
+      height: 100,
+      position: 'static',
+    }}>
+    <View
+      style={{
+        backgroundColor: 'green',
+        width: 25,
+        height: '25%',
+        left: 25,
+        top: 25,
+        position: 'absolute',
+      }}
+    />
+  </View>
+</View>
+```
+
+</td>
+<td width="300">
+
+![静态定位示例](../static/blog/assets/0.74-static-example.png)
+
+</td>
+</tr>
+</table>
+
+可以看到，绿色的 `<View>` 声明了 `left` 和 `top`，它是相对于蓝色 `<View>` 定位的，而不是其父级。
+
+React Native 默认仍为未指定 `position` 时使用 `position: 'relative'`。
+
+### 新架构：默认启用无桥接模式
+
+本次发布中，当启用新架构时，默认启用无桥接模式。你可以在[这篇文章](https://github.com/reactwg/react-native-new-architecture/discussions/174)中了解我们切换到默认无桥接的更多信息。为了让转换更顺畅，我们增强了无桥接的互操作层，并与多个库合作，确保它们在无桥接模式下一开始就能正常工作。
+
+无桥接并非我们唯一改进的互操作层：我们也对新渲染器的互操作层进行了改进。最令人兴奋的是，这些改进现在默认启用：你不需要再指定必须通过它的组件！可以在[这里](https://github.com/reactwg/react-native-new-architecture/discussions/175)了解更多。
+
+最后，如果你想深入了解新架构，可以查看 [react-native-new-architecture](https://github.com/reactwg/react-native-new-architecture/tree/main/docs) 仓库中的文档。新架构成为默认后，这些内容也会被整合进 [reactnative.dev](https://reactnative.dev)。
+
+### 新架构：批量处理 `onLayout` 更新
+
+`onLayout` 回调中的状态更新现在会被批量处理。之前，每次 `onLayout` 事件中的状态更新都会触发一次新的渲染提交。
+
+```jsx
+function MyComponent(props) {
+  const [state1, setState1] = useState(false);
+  const [state2, setState2] = useState(false);
+
+  return (
+    <View>
+      <View
+        onLayout={() => {
+          setState1(true);
+       }}>
+      <View
+         onLayout={() => {
+          // 当此事件执行时，不再能观察到 state1 的新值。
+          setState2(true);
+        }}>
+      </View>
+    </View>
+  );
+}
+```
+
+在 0.74 中，`setState1` 和 `setState2` 会被同时批量处理。此更改是 React 的[预期行为](https://react.dev/learn/queueing-a-series-of-state-updates#react-batches-state-updates)，减少了不必要的重新渲染。
+
+:::danger
+此更改**可能破坏依赖未批量状态更新的代码**。你需要将代码重构为使用[更新函数](https://react.dev/learn/queueing-a-series-of-state-updates#updating-the-same-state-multiple-times-before-the-next-render)或等效方案。
+:::
+
+### 新项目默认使用 Yarn 3
+
+[Yarn 3](https://yarnpkg.com/blog/release/3.0) 现为使用 React Native Community CLI 初始化的新项目的默认 JavaScript 包管理器。
+
+Yarn 3.x 会采用 `nodeLinker: node-modules` 模式，该模式兼容 React Native 库。它取代了之前的 Yarn Classic（1.x，已废弃），成为默认包管理器。要升级现有项目中的 Yarn 版本，请参考此[指南](https://yarnpkg.com/migration/guide)。
+
+```sh
+$ yarn --help
+━━━ Yarn 包管理器 - 3.6.4 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  $ yarn <command>
+```
+
+Community CLI 也支持通过 `--pm` 参数使用其他包管理器（[了解更多](https://github.com/react-native-community/cli/blob/main/docs/init.md)）。
+
+## 破坏性变更
+
+### Android 最低 SDK 版本提升（Android 6.0）
+
+React Native 0.74 的最低 Android SDK 版本为 23（Android 6.0）。此前为 Android 5.0（API 21）。更多变更背景详见[这里](https://github.com/react-native-community/discussions-and-proposals/discussions/740)。
+
+#### 附加好处：Android 应用体积减少
+
+最低 SDK 版本提升，加上原生构建方面的诸多改进，大幅缩小了用户设备上应用的体积。
+
+例如，React Native 0.74 新建应用在用户设备上映射空间减少约 13%，节省约 4MB。
+
+![Android 系统存储视图中新建 React Native 应用的并排比较](/blog/assets/0.74-android-app-size.jpg)
+
+### 移除废弃的 `PropTypes`
+
+在 0.74 之前，React Native 仍带有 `PropTypes`，该 API 早在 2017 年 React 15.5 版本中就被废弃！我们现在完全移除了 React Native 中内置的 `PropTypes`，从而减小应用体积（最小化后约 26.4kB）并减少内存开销。
+
+被移除的 `PropTypes` 属性包括：`Image.propTypes`、`Text.propTypes`、`TextInput.propTypes`、`ColorPropType`、`EdgeInsetsPropType`、`PointPropType`、`ViewPropTypes`（详见[提交](https://github.com/facebook/react-native/commit/228cb80af9ded20107f3c7a30ffe00e24471bfeb)）。
+
+如果你的应用或库依赖于 `PropTypes`，我们强烈建议迁移到如 TypeScript 这类类型系统。
+
+### PushNotificationIOS API 变更（废弃）
+
+在 React Native 0.74 中，我们开始移除废弃的 [PushNotificationIOS](https://reactnative.dev/docs/pushnotificationios) 库。本次发布主要删除了对旧 iOS API 的引用。PushNotificationIOS 已迁移至 Apple 的 [User Notifications](https://developer.apple.com/documentation/usernotifications?language=objc) 框架，并提供了调度及处理通知的新 API。
+
+在下个版本（0.75）中，我们计划**移除该库**，转移至社区包 [@react-native-community/push-notification-ios](https://github.com/react-native-push-notification/ios)。如果你仍依赖 PushNotificationIOS，需要在下个版本前完成迁移。
+
+#### API 变动
+
+`RCTPushNotificationManager` 上的 `didRegisterUserNotificationSettings:` 回调原为无操作，现已删除。
+
+以下回调在 `RCTPushNotificationManager` 上已废弃，将在 0.75 中移除：
+
+```objectivec
++ (void)didReceiveLocalNotification:(UILocalNotification *)notification;
++ (void)didReceiveRemoteNotification:(NSDictionary *)notification;
+```
+
+若要通过 `getInitialNotification()` 获取启动应用的通知，需显式设置 `RCTPushNotificationManager` 的 `initialNotification`：
+
+```objectivec
+[RCTPushNotificationManager setInitialNotification:response.notification];
+```
+
+JS 端 `Notification` 对象的属性有变更。`alertAction` 和 `repeatInterval` 已废弃，将于 0.75 版本移除：
+
+```js
+type Notification = {
+  ...
+  // 新增：距离当前时间触发通知的秒数。
+  fireIntervalSeconds?: ?number,
+
+  // 变更：仅用于调度通知。当通过 `getScheduledLocalNotifications` 或 `getDeliveredNotifications` 获取通知时，该字段为 null。
+  soundName?: ?string,
+
+  // 废弃：用于 iOS 旧的 UILocalNotification。
+  alertAction?: ?string,
+
+  // 废弃：请使用 `fireDate` 或 `fireIntervalSeconds` 替代。
+  repeatInterval?: ?string,
+};
+```
+
+最后，`PushNotificationIOS.removeEventListener` 的 `handler` 参数已不再使用并被移除。
+
+<details>
+<summary>**💡 迁移指南**</summary>
+
+#### iOS
+
+你的 `AppDelegate` 需要实现 `UNUserNotificationCenterDelegate`。应在应用启动 `application:willFinishLaunchingWithOptions:` 或 `application:didFinishLaunchingWithOptions:` 中完成设置（详见 [Apple 文档](https://developer.apple.com/documentation/usernotifications/unusernotificationcenterdelegate?language=objc)）。
+
+```objectivec
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+  ...
+  UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+  center.delegate = self;
+
+  return YES;
+}
+```
+
+实现 <code>[userNotificationCenter:willPresentNotification:withCompletionHandler:](https://developer.apple.com/documentation/usernotifications/unusernotificationcenterdelegate/1649518-usernotificationcenter?language=objc)</code>，此方法在通知到达且应用处于<em>前台</em>时调用。使用 <code>completionHandler</code> 确定是否向用户显示通知，并相应通知 <code>RCTPushNotificationManager</code>：
+
+```objectivec
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center
+       willPresentNotification:(UNNotification *)notification
+         withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler
+{
+  // 触发 PushNotificationIOS 的 'notification' 和 'localNotification' 事件
+  [RCTPushNotificationManager didReceiveNotification:notification];
+  // 决定是否以及如何展示通知给用户
+  completionHandler(UNNotificationPresentationOptionNone);
+}
+```
+
+处理通知被点击时，实现 <code>[userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:](https://developer.apple.com/documentation/usernotifications/unusernotificationcenterdelegate/1649501-usernotificationcenter?language=objc)</code>。请注意，如果你在 <code>userNotificationCenter:willPresentNotification:withCompletionHandler:</code> 中设置了前台显示通知，则应仅在这两个回调中通知一次 <code>RCTPushNotificationManager</code>。
+
+如果点击通知启动了应用，调用 `setInitialNotification:`。如果通知没有被 `userNotificationCenter:willPresentNotification:withCompletionHandler:` 处理，也调用 `didReceiveNotification:`：
+
+```objectivec
+- (void)  userNotificationCenter:(UNUserNotificationCenter *)center
+  didReceiveNotificationResponse:(UNNotificationResponse *)response
+           withCompletionHandler:(void (^)(void))completionHandler
+{
+  // 如果通知是通过点击启动应用的，则条件成立
+  if ([response.actionIdentifier isEqualToString:UNNotificationDefaultActionIdentifier]) {
+  // 允许 JS 端通过 getInitialNotification() 获取此通知
+    [RCTPushNotificationManager setInitialNotification:response.notification];
+  }
+ // 触发 PushNotificationIOS 的 'notification' 和 'localNotification' 事件
+  [RCTPushNotificationManager didReceiveNotification:response.notification];
+  completionHandler();
+}
+```
+
+最后，删除以下方法，并将逻辑整合至上述回调中：
+
+1. <code>
+     [application:didReceiveLocalNotification:](https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1622930-application?language=objc)
+   </code>
+   [deprecated]
+2. <code>
+     [application:didReceiveRemoteNotification:](https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1623117-application?language=objc)
+   </code>
+   [deprecated]
+3. <code>
+     [application:didReceiveRemoteNotification:fetchCompletionHandler:](https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1623013-application?language=objc)
+   </code>
+   [not deprecated, but is superseded by the
+   <code>UNUserNotificationCenterDelegate</code> methods]
+
+删除所有对 <code>[application:didRegisterUserNotificationSettings:](https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1623022-application?language=objc)</code> 和 `RCTPushNotificationManager` 中相应的 `didRegisterUserNotificationSettings:` 的调用。
+
+**示例：** 参见 RNTester 的 <code>[AppDelegate.mm](https://github.com/facebook/react-native/blob/main/packages/rn-tester/RNTester/AppDelegate.mm)</code>。
+
+#### JS
+
+1. 移除所有对 `alertAction` 的引用。
+2. 移除对所有 `removeEventListener` 调用中的 `handler` 参数。
+3. 使用 `fireDate` 或 `fireIntervalSeconds` 替代所有 `repeatInterval` 的用法，来实现多次触发通知。
+4. 注意，当通过 `getScheduledLocalNotifications()` 和 `getDeliveredNotifications()` 获取通知时，`soundName` 可能为 null。
+
+</details>
+
+### 移除 Flipper React Native 插件
+
+用于调试 React Native 布局、网络请求及[其他插件功能](https://fbflipper.com/docs/features/react-native/)的 [Flipper](https://fbflipper.com/) 现已不再支持。在 0.74 版本中，我们从新建 React Native 项目中删除了原生 Flipper 库及相关初始化代码。这意味着依赖项减少，开发环境搭建更快（详见[原始 RFC](https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0641-decoupling-flipper-from-react-native-core.md)）。
+
+在 [升级助手](https://react-native-community.github.io/upgrade-helper/) 中可查看移除 Flipper 的差异。若需保留 Flipper，请忽略相关变更。
+
+<details>
+<summary>**💡 如何重新集成 Flipper**</summary>
+
+Flipper 仍可作为独立工具用于调试 Android 或 iOS 应用，并可以按照 Flipper 官方文档手动集成（[Android 指南](https://fbflipper.com/docs/getting-started/android-native/)，[iOS 指南](https://fbflipper.com/docs/getting-started/ios-native/)）。
+
+我们推荐团队投资使用 Android Studio 和 Xcode 提供的原生调试工具。
+
+</details>
+
+:::tip
+
+#### 替代 Flipper
+
+已有多款专用调试工具可替代 Flipper 的功能。阅读 Jamon Holmgren 的精彩文章 [_Why you don't need Flipper in your React Native app_](https://shift.infinite.red/why-you-dont-need-flipper-in-your-react-native-app-and-how-to-get-by-without-it-3af461955109) 以了解详情。
+
+:::
+
+#### JavaScript 调试
+
+使用 [Hermes Debugger](https://reactnative.dev/docs/debugging?js-debugger=hermes#opening-the-debugger) 仍是 0.74 标准推荐的调试方案。此外，实验性的 [New Debugger](https://reactnative.dev/docs/debugging?js-debugger=new-debugger#opening-the-debugger) 也是可选方案，Expo 默认启用的即为此新调试器。目前仍处于早期预览阶段，已知的问题与更新可在[这里](https://github.com/react-native-community/discussions-and-proposals/discussions/733)跟踪。
+
+### 其他破坏性变更
+
+**通用**
+
+- 使样式中的 `start`/`end` 总是参照书写方向 ([#42251](https://github.com/facebook/react-native/pull/42251))。
+
+**Android**
+
+- 从 `FabricUIManagerProvider` 移除 `JSIModule*` ([#42059](https://github.com/facebook/react-native/pull/42059))。
+  - 该 API 在开源中未被使用，推荐使用[TurboModules](https://github.com/reactwg/react-native-new-architecture/blob/main/docs/turbo-modules.md)。
+- 废弃 `UIManagerModule.showPopupMenu` 和 `UIManagerModule.dismissPopupMenu` ([#42441](https://github.com/facebook/react-native/pull/42441))。
+  - 该 API 已迁移至 [`@react-native/popup-menu-android`](https://www.npmjs.com/package/@react-native/popup-menu-android) 包，0.75 版本将删除。
+
+**iOS**
+
+- 删除 iOS 代码生成 CLI 中 `configFilename` 和 `configKey` 参数 ([#41533](https://github.com/facebook/react-native/pull/41533))。
+- 修改 [`bundleURL`](https://github.com/facebook/react-native/blob/0.74-stable/packages/react-native/template/ios/HelloWorld/AppDelegate.mm#L22-L29) 处理方式 ([#43994](https://github.com/facebook/react-native/pull/43994))。
+  - 之前，`bundleURL` 在启动时作为实例变量设置，且无法更新。
+  - 现在，[`bundleUrl` 变为函数](https://github.com/facebook/react-native/blob/0.74-stable/packages/react-native/template/ios/HelloWorld/AppDelegate.mm#L22-L29)，在需要时重新计算，支持多次刷新时使用不同 URL。
+  - 该改动仅影响启动后会修改 `bundleURL` 变量的应用，这时请将更新逻辑迁移至 `AppDelegate` 的 [`bundleURL` 函数](https://github.com/facebook/react-native/blob/0.74-stable/packages/react-native/template/ios/HelloWorld/AppDelegate.mm#L22-L29)。
+
+完整变更信息请参阅 [完整更新日志](https://github.com/facebook/react-native/blob/main/CHANGELOG.md)。
+
+## 已知问题
+
+**iOS**
+
+- 多窗口使用的边缘情况：当主窗口处于非活动状态且系统尝试弹出对话框时，对话框未显示在正确位置。修复已在 [#44167](https://github.com/facebook/react-native/pull/44167) 提交，将在 0.74.1 版本发布。
+
+## 致谢
+
+React Native 0.74 包含了来自 57 位贡献者的超过 [1673 个提交](https://github.com/facebook/react-native/compare/v0.73.6...v0.74.0)，感谢大家的辛勤付出！
+
+感谢以下作者协助撰写本次发布文档：
+
+- [Nick Gerleman](https://github.com/NickGerleman) 贡献了 _Yoga 3.0_
+- [Joe Vilches](https://github.com/joevilches) 贡献了 _Yoga 3.0_
+- [Riccardo Cipolleschi](https://twitter.com/CipolleschiR) 贡献了 _新架构：默认启用无桥接_
+- [Samuel Susla](https://twitter.com/SamuelSusla) 贡献了 _新架构：批量处理 `onLayout` 更新_
+- [Tim Yung](https://twitter.com/yungsters) 贡献了 _移除废弃的 `PropTypes`_
+- [Ingrid Wang](https://github.com/ingridwang) 贡献了 _PushNotificationIOS API 变更（废弃）_
+
+## 升级至 0.74
+
+请使用 [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) 查看 React Native 版本间的代码差异，结合[升级文档](/docs/upgrading)，辅助升级已有项目。
+
+新建项目请使用：
+
+```sh
+npx react-native@latest init MyProject
+```
+
+若使用 Expo，React Native 0.74 将在 Expo SDK 51 中支持。
+
+:::info
+0.74 现为 React Native 的最新稳定版本，**0.71.x 已停止支持**。详情参见 [React Native 支持政策](https://github.com/reactwg/react-native-releases#releases-support-policy)。我们计划于五月初发布 0.71 的最终生命周期结束更新。
+:::

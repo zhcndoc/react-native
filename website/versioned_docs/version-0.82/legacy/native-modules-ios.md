@@ -12,7 +12,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 ## 创建日历原生模块
 
-在以下指南中，你将创建一个原生模块 `CalendarModule`，它将允许你从 JavaScript 访问 Apple 的日历 API。最后你将能够从 JavaScript 调用 `CalendarModule.createCalendarEvent('Dinner Party', 'My House');`， invoking a native method that creates a calendar event.（调用一个创建日历事件的原生方法。）
+在以下指南中，你将创建一个原生模块 `CalendarModule`，它将允许你从 JavaScript 访问 Apple 的日历 API。最后你将能够从 JavaScript 调用 `CalendarModule.createCalendarEvent('Dinner Party', 'My House');`，调用一个创建日历事件的原生方法。
 
 ### 设置
 
@@ -551,8 +551,8 @@ RCT_EXPORT_METHOD(doSomethingExpensive:(NSString *)param callback:(RCTResponseSe
 
 ```
 
-:::info 在模块之间共享 dispatch 队列
-`methodQueue` 方法将在模块初始化时调用一次，然后由 React Native 保留，因此无需自己保留对队列的引用，除非你希望在模块内使用它。但是，如果你希望在多个模块之间共享同一个队列，那么你需要确保为每个模块保留并返回相同的队列实例。
+:::info[Sharing dispatch queues between modules]
+methodQueue 方法将在模块初始化时调用一次，然后由 React Native 保留，因此你无需自己保留对该队列的引用，除非你希望在模块中使用它。但是，如果你希望在多个模块之间共享同一个队列，那么你需要确保为每个模块保留并返回相同的队列实例。
 :::
 
 ### 依赖注入
@@ -584,7 +584,7 @@ class CalendarModule: NSObject {
 
  @objc(addEvent:location:date:)
  func addEvent(_ name: String, location: String, date: NSNumber) -> Void {
-   // Date 已准备好使用！
+   // 日期已经准备好使用！
  }
 
  @objc

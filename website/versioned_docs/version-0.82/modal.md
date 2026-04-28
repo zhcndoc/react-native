@@ -1,6 +1,6 @@
 ---
 id: modal
-title: Modal
+title: 模态框
 ---
 
 Modal 组件是一种在封闭视图上方呈现内容的基本方式。
@@ -22,16 +22,16 @@ const App = () => {
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
+            Alert.alert('模态框已关闭。');
             setModalVisible(!modalVisible);
           }}>
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Text style={styles.modalText}>Hello World!</Text>
+              <Text style={styles.modalText}>你好，世界！</Text>
               <Pressable
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => setModalVisible(!modalVisible)}>
-                <Text style={styles.textStyle}>Hide Modal</Text>
+                <Text style={styles.textStyle}>隐藏模态框</Text>
               </Pressable>
             </View>
           </View>
@@ -39,7 +39,7 @@ const App = () => {
         <Pressable
           style={[styles.button, styles.buttonOpen]}
           onPress={() => setModalVisible(true)}>
-          <Text style={styles.textStyle}>Show Modal</Text>
+          <Text style={styles.textStyle}>显示模态框</Text>
         </Pressable>
       </SafeAreaView>
     </SafeAreaProvider>
@@ -106,7 +106,7 @@ export default App;
 
 ### `animated`
 
-:::warning 已废弃
+:::warning[Deprecated]
 请改用 [`animationType`](modal.md#animationtype) 属性。
 :::
 

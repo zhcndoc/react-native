@@ -61,8 +61,8 @@ new IntersectionObserver(callback, options?)
 
 ### `rnRootThresholds` ⚠️
 
-:::warning 非标准
-这是 React Native 特定的扩展。
+:::warning[Non-standard]
+This is a React Native specific extension.
 :::
 
 一个根阈值列表，按数值递增排序，每个阈值是指定根视图（默认为视口）的交叉面积与边界框面积的比例。

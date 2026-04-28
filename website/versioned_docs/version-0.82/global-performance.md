@@ -25,7 +25,7 @@ import CanaryAPIWarning from './\_canary-channel-api-warning.mdx';
 
 ### `rnStartupTiming` ⚠️
 
-:::warning 非标准
+:::warning[Non-standard]
 这是 React Native 特定的扩展。
 :::
 
@@ -45,7 +45,7 @@ get rnStartupTiming(): ReactNativeStartupTiming;
 
 ### `timeOrigin`
 
-:::warning 部分支持
+:::warning[Partial support]
 提供从 UNIX 纪元到系统启动的毫秒数，而不是从 UNIX 纪元到应用启动的毫秒数。
 :::
 
@@ -83,7 +83,7 @@ get rnStartupTiming(): ReactNativeStartupTiming;
 
 ### `now()`
 
-:::warning 部分支持
+:::warning[Partial support]
 提供从系统启动开始的毫秒数，而不是从应用启动开始的毫秒数。
 :::
 

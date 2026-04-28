@@ -5,6 +5,6 @@ title: PerformanceLongTaskTiming
 
 全局的 [`PerformanceLongTaskTiming`](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming) 类，按照 Web 规范定义。
 
-:::warning 部分支持
-`attribution` 属性的值始终是一个空数组。
+:::warning[部分支持]
+`attribution` 属性的值始终为空数组。
 :::

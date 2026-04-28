@@ -5,7 +5,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 # 跨平台原生模块 (C++)
 
-用 C++ 编写模块是在 Android 和 iOS 之间共享平台无关代码的最佳方式。使用纯 C++ 模块，你只需编写一次逻辑，即可在所有平台上直接重用，无需编写特定于平台的代码。
+使用 C++ 编写模块是在 Android 和 iOS 之间共享平台无关代码的最佳方式。使用纯 C++ 模块，你只需编写一次逻辑，即可在所有平台上直接重用，无需编写特定于平台的代码。
 
 在本指南中，我们将逐步创建一个纯 C++ Turbo 原生模块：
 
@@ -71,7 +71,7 @@ export default TurboModuleRegistry.getEnforcing<Spec>(
 
 ## 2. 配置 Codegen
 
-下一步是在 `package.json` 中配置 [Codegen](what-is-codegen.md)。更新文件以包含：
+下一步是在你的 `package.json` 中配置 [Codegen](what-is-codegen.mdx)。将文件更新为包含以下内容：
 
 ```json title="package.json"
      "start": "react-native start",
@@ -445,17 +445,17 @@ function App(): React.JSX.Element {
     <SafeAreaView style={styles.container}>
       <View>
         <Text style={styles.title}>
-          Welcome to C++ Turbo Native Module Example
+          欢迎来到 C++ Turbo Native Module 示例
         </Text>
-        <Text>Write down here the text you want to reverse</Text>
+        <Text>在这里输入你想要反转的文本</Text>
         <TextInput
           style={styles.textInput}
-          placeholder="Write your text here"
+          placeholder="在这里输入你的文本"
           onChangeText={setValue}
           value={value}
         />
-        <Button title="Reverse" onPress={onPress} />
-        <Text>Reversed text: {reversedValue}</Text>
+        <Button title="反转" onPress={onPress} />
+        <Text>反转后的文本：{reversedValue}</Text>
       </View>
     </SafeAreaView>
   );

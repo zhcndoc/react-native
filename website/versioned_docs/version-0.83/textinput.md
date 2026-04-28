@@ -238,8 +238,8 @@ export default MultilineTextInputExample;
 
 ### 🗑️ `blurOnSubmit`
 
-:::warning 已弃用
-请注意，`submitBehavior` 现已替代 `blurOnSubmit` 并会覆盖由 `blurOnSubmit` 定义的任何行为。详见 [submitBehavior](textinput#submitbehavior)。
+:::warning[已弃用]
+请注意，`submitBehavior` 现在取代了 `blurOnSubmit`，并且会覆盖 `blurOnSubmit` 定义的任何行为。参见 [submitBehavior](textinput#submitbehavior)。
 :::
 
 如果为 `true`，文本框在提交时将失焦。单行文本框的默认值为 `true`，多行文本框默认值为 `false`。注意，对于多行文本，当 `blurOnSubmit` 设置为 `true` 时，按回车键会使文本框失焦并触发 `onSubmitEditing` 事件，而不会插入换行符。
@@ -1087,7 +1087,7 @@ _仅 iOS_
 | ------ |
 | string |
 
-## 方法
+## Methods
 
 ### `.focus()`
 
@@ -1095,7 +1095,7 @@ _仅 iOS_
 focus();
 ```
 
-使原生输入框获得焦点。
+Give the native input focus.
 
 ### `.blur()`
 
@@ -1103,7 +1103,7 @@ focus();
 blur();
 ```
 
-使原生输入框失去焦点。
+Remove focus from the native input.
 
 ### `clear()`
 
@@ -1111,7 +1111,7 @@ blur();
 clear();
 ```
 
-清空 `TextInput` 中的所有文本。
+Clears all text from the `TextInput`.
 
 ---
 
@@ -1121,10 +1121,10 @@ clear();
 isFocused(): boolean;
 ```
 
-如果当前输入框具有焦点，返回 `true`，否则返回 `false`。
+Returns `true` if the input currently has focus, `false` otherwise.
 
-# 已知问题
+# Known Issues
 
-- [react-native#19096](https://github.com/facebook/react-native/issues/19096)：不支持 Android 的 `onKeyPreIme`。
-- [react-native#19366](https://github.com/facebook/react-native/issues/19366)：在按返回键关闭 Android 键盘后调用 `.focus()` 无法重新弹出键盘。
-- [react-native#26799](https://github.com/facebook/react-native/issues/26799)：当 `keyboardType="email-address"` 或 `keyboardType="phone-pad"` 时，Android 不支持 `secureTextEntry`。
+- [react-native#19096](https://github.com/facebook/react-native/issues/19096): Android `onKeyPreIme` is not supported.
+- [react-native#19366](https://github.com/facebook/react-native/issues/19366): Calling `.focus()` after dismissing the Android keyboard with the back button does not reopen the keyboard.
+- [react-native#26799](https://github.com/facebook/react-native/issues/26799): Android does not support `secureTextEntry` when `keyboardType="email-address"` or `keyboardType="phone-pad"`.

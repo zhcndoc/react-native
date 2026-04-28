@@ -47,10 +47,10 @@ const App = () => {
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <Text style={styles.status}>
-          The reduce motion is {reduceMotionEnabled ? 'enabled' : 'disabled'}.
+          减少动态效果是{reduceMotionEnabled ? '已启用' : '已禁用'}。
         </Text>
         <Text style={styles.status}>
-          The screen reader is {screenReaderEnabled ? 'enabled' : 'disabled'}.
+          屏幕阅读器是{screenReaderEnabled ? '已启用' : '已禁用'}。
         </Text>
       </SafeAreaView>
     </SafeAreaProvider>
@@ -254,8 +254,8 @@ static prefersCrossFadeTransitions(): Promise<boolean>;
 
 ### `setAccessibilityFocus()`
 
-:::warning 已弃用
-建议改用 eventType 为 `focus` 的 `sendAccessibilityEvent`。
+:::warning[Deprecated]
+建议改为使用带有 eventType `focus` 的 `sendAccessibilityEvent`。
 :::
 
 ```tsx
@@ -278,7 +278,7 @@ static setAccessibilityFocus(reactTag: number);
 static sendAccessibilityEvent(host: HostInstance, eventType: AccessibilityEventTypes);
 ```
 
-命令式地在 React 组件上触发无障碍事件，例如改变屏幕阅读器的聚焦元素。
+以命令式方式在 React 组件上触发无障碍事件，例如改变屏幕阅读器的聚焦元素。
 
 :::note
 确保任何你想要接收无障碍焦点的 `View` 都有 `accessible={true}`。

@@ -206,7 +206,7 @@ class NativeLocalStoragePackage : BaseReactPackage() {
 在这种情况下，你将其添加到由 [getPackages](https://github.com/facebook/react-native/blob/8d8b8c343e62115a5509e1aed62047053c2f6e39/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/ReactNativeHost.java#L233) 方法返回的内容中。
 
 :::info
-稍后你将学习如何将原生模块作为 [npm 包](the-new-architecture/create-module-library.md#publish-the-library-on-npm) 分发，我们的构建工具会自动为你链接它们。
+之后你会了解如何将你的原生模块作为 [npm 包](the-new-architecture/create-module-library.mdx#publish-the-library-on-npm) 分发，我们的构建工具会自动为你进行链接。
 :::
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>

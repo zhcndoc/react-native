@@ -32,7 +32,7 @@ import RNRepoLink from '@site/core/RNRepoLink';
 }
 ```
 
-:::note 幕后原理
+:::note[在幕后]
 
 这将指示 TypeScript 从我们新的 [`types_generated/`](https://www.npmjs.com/package/react-native?activeTab=code) 目录解析 `react-native` 类型，而不是之前的 [`types/`](https://www.npmjs.com/package/react-native?activeTab=code) 目录（手动维护）。不需要重启 TypeScript 或编辑器。
 
@@ -40,7 +40,7 @@ import RNRepoLink from '@site/core/RNRepoLink';
 
 严格 TypeScript API 遵循我们的 [RFC](https://github.com/react-native-community/discussions-and-proposals/pull/894) 以从 React Native 中移除深层导入。因此，某些 API 不再在根目录导出。这是有意为之，目的是减少 React Native API 的整体暴露面。
 
-:::tip API 反馈
+:::tip[API 反馈]
 
 **发送反馈**：我们将与社区合作，在接下来的（至少）两个 React Native 版本中最终确定我们导出哪些 API。请在我们的 [反馈讨论区](https://github.com/react-native-community/discussions-and-proposals/discussions/893) 中分享您的反馈。
 

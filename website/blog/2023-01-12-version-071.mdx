@@ -1,0 +1,231 @@
+---
+title: 'React Native 0.71：默认使用 TypeScript、Flexbox 间隙支持及更多新特性'
+authors: [mattcarrollcode, NickGerleman, cortinico, kelset]
+tags: [公告, 发布]
+date: 2023-01-12
+---
+
+今天我们发布了 React Native 0.71 版本！这是一个功能丰富的版本，包含：
+
+- [默认使用 TypeScript](/blog/2023/01/12/version-071#typescript-by-default)
+- [使用 Flexbox 间隙简化布局](/blog/2023/01/12/version-071#simplifying-layouts-with-flexbox-gap)
+- [受 Web 启发的无障碍、样式和事件属性](/blog/2023/01/12/version-071#web-inspired-props-for-accessibility-styles-and-events)
+- [恢复 PropTypes](/blog/2023/01/12/version-071#restoring-proptypes)
+- [开发者体验改进](/blog/2023/01/12/version-071#developer-experience-improvements)
+- [新架构更新](/blog/2023/01/12/version-071#new-architecture)
+
+本文将介绍 0.71 版本的一些亮点。
+
+{/* truncate */}
+
+:::info
+完整更新列表请查看 [CHANGELOG.md](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v071)。
+:::
+
+## 默认使用 TypeScript
+
+本次发布，我们投入力量提升了 React Native 的 TypeScript 体验。
+
+从 0.71 版本开始，当你通过 React Native CLI 创建新的 React Native 应用时，将默认生成一个基于 TypeScript 的项目。新项目已经预配置了 `tsconfig.json`，因此你的 IDE 会立即支持类型辅助，让你无需额外配置即可开始编写类型安全代码。
+
+此外，我们提供了来自 `react-native` 包内置的更准确 TypeScript 声明文件。这意味着你不再需要安装 `@types/react-native`，且类型定义会与 React Native 的版本同步更新。
+
+最后，我们还更新了文档示例，全面采用 TypeScript。
+
+:::note
+
+升级到 React Native 0.71 后，建议从你的 `package.json` 的 `devDependencies` 中移除 `@types/react-native`。
+
+:::
+
+更多详情、迁移步骤及对 Flow 用户的影响，请参考我们之前的文章 【优先支持 TypeScript】(https://reactnative.dev/blog/2023/01/03/typescript-first)。
+
+## 使用 Flexbox gap 简化布局
+
+使用 React Native，你可以通过 Flexbox 在不同屏幕尺寸上灵活布局组件。浏览器已支持 Flexbox 属性 [gap](https://developer.mozilla.org/en-US/docs/Web/CSS/gap)、[rowGap](https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap) 和 [columnGap](https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap)，它们允许你指定 Flexbox 中所有项目之间的间距。
+
+这些属性已在 React Native 社区被广泛需求，0.71 版本初步支持了以像素为单位的间隙。未来版本还将支持更多类型的单位，例如百分比。
+
+举例说明该功能的应用：假设你想构建一个响应式布局，内部有尺寸可变的卡片，它们之间间距为 10 像素，且紧贴父容器边缘。仅通过给子元素设置 margin 实现这一布局相对复杂。
+
+下面的示例演示了给每个子元素设置 `margin: 10` 时的布局效果：
+
+![两个示意图。左侧为应用骨架图，三个盒子四周均有 margin 产生外部间距。右侧示意图重点展示了四周均存在 margin 的效果。](/blog/assets/FlexboxGapBefore.png)
+
+由于 margin 均匀施加到所有子元素边缘，并且在 Flexbox 中不会合并折叠，导致卡片外部留有间距，内部的间距则是我们想要的两倍。尽管可通过非均匀设置 margin、对父元素使用负 margin、将间距减半等方法规避，但操作复杂。
+
+使用 Flexbox gap 后，只需在容器上设置 `gap: 10` 即可实现卡片之间 10 像素的间隙，同时保证卡片靠近外边缘：
+
+![两个示意图。左侧为应用骨架图，三个盒子仅在内侧有间隙，外侧紧贴父容器，这是 Flexbox gap 属性的作用。右侧示意图重点展示了内侧存在间隙，外侧无间隙。](/blog/assets/FlexboxGapAfter.png)
+
+欲了解更多关于 Flexbox 间隙信息，请参阅 [CSS Tricks 博客](https://css-tricks.com/minding-the-gap/#aa-flexbox-gaps)。
+
+## 受 Web 启发的无障碍、样式和事件属性
+
+本次发布新增了一批受 Web 标准启发的新属性，旨在使 React Native API 在多个平台间保持一致。这些新属性都是向后兼容添加，等效的无障碍、行为或样式属性不会产生迁移成本，也不会改变原有行为。
+
+对于新增的别名属性，如果同时指定了原属性和新别名属性，则新别名属性优先。例如，此版本为 Image 组件增加了 `src` 属性别名以对应 Web 上的 `src`，如果同时传递了 `src` 和 `source`，会优先使用新的 `src`。
+
+:::note
+
+关于对齐 React Native 与 Web 标准的更多背景信息，请查看此 [提案](https://github.com/necolas/discussions-and-proposals/blob/reduce-fragmentation/proposals/0000-reduce-fragmentation.md) 及其 [相关讨论](https://github.com/react-native-community/discussions-and-proposals/pull/496)。
+
+:::
+
+#### 无障碍（Accessibility）
+
+我们引入了 ARIA 属性，作为现有 React Native 无障碍属性的别名。
+
+以下属性已出现在 React Native 的所有核心组件中：`aria-label`、`aria-labelledby`、`aria-modal`、`id`、`aria-busy`、`aria-checked`、`aria-disabled`、`aria-expanded`、`aria-selected`、`aria-valuemax`、`aria-valuemin`、`aria-valuenow`、`aria-valuetext`。
+
+我们也新增了 `aria-hidden`、`aria-live`、`role` 和 `tabIndex` 的等效 Web 行为。
+
+详情请参见此 [issue](https://github.com/facebook/react-native/issues/34424)。
+
+#### 组件特定行为
+
+为使核心组件的属性名称与对应的 DOM 属性保持一致，本次升级引入了下列属性：
+
+- **Image** 组件新增属性：`alt`、`tintColor`、`crossOrigin`、`height`、`referrerPolicy`、`src`、`srcSet`、`width`。
+- **TextInput** 组件新增属性：`autoComplete`、`enterKeyHint`、`inputMode`、`readOnly`、`rows`。
+
+详情请参见此 [issue](https://github.com/facebook/react-native/issues/34424)。
+
+#### 样式
+
+为契合特定 CSS 样式，以下样式属性得到了扩展：
+
+- [`aspectRatio`](https://reactnative.dev/docs/layout-props#aspectratio) 现在支持字符串类型值
+- [`fontVariant`](https://reactnative.dev/docs/text-style-props#fontvariant) 现在支持以空格分隔的字符串值
+- [`fontWeight`](https://reactnative.dev/docs/text-style-props#fontWeight) 现在支持数字类型值
+- [`transform`](https://developer.mozilla.org/en-US/docs/Web/CSS/transform) 现在支持字符串类型值
+
+以下属性被添加为现有 React Native 样式的别名：
+
+- [`objectFit`](https://reactnative.dev/docs/image#objectfit)
+- [`pointerEvents`](https://reactnative.dev/docs/view-style-props#pointerevents)
+- [`userSelect`](https://developer.mozilla.org/en-US/docs/Web/CSS/user-select)
+- [`verticalAlign`](https://reactnative.dev/docs/text-style-props#verticalalign-android)
+
+详情请参见此 [issue](https://github.com/facebook/react-native/issues/34425)。
+
+#### 事件
+
+此外，我们还引入了可选的 [PointerEvents](https://w3c.github.io/pointerevents) 实现。
+
+启用后，`View` 组件将支持以下鼠标悬停相关事件：
+
+- `onPointerOver`、`onPointerOut`
+- `onPointerEnter`、`onPointerLeave`
+
+上述事件也被集成到 `Pressability` 中，支持全新的鼠标悬停功能。
+
+启用这些功能，请设置以下特性标志为 true：
+
+```js
+import ReactNativeFeatureFlags from 'react-native/Libraries/ReactNative/ReactNativeFeatureFlags';
+
+// 启用 JS 侧的 W3C PointerEvent 实现
+ReactNativeFeatureFlags.shouldEmitW3CPointerEvents = () => true;
+
+// 在 Pressability 中使用 PointerEvent 实现处理悬停事件
+// 需要同时将 shouldEmitW3CPointerEvents 设为 true
+ReactNativeFeatureFlags.shouldPressibilityUseW3CPointerEventsForHover =
+  () => true;
+```
+
+:::note
+
+你还需要在 [Android](https://reactnative.dev/blog/2022/12/13/pointer-events-in-react-native#android-specific) 和 [iOS](https://reactnative.dev/blog/2022/12/13/pointer-events-in-react-native#ios-specific) 的原生设置中启用 React 特性标志。
+
+:::
+
+更多内容请查阅我们专门的 [PointerEvents 文章](https://reactnative.dev/blog/2022/12/13/pointer-events-in-react-native)。
+
+## 恢复 PropTypes
+
+React Native 的 PropTypes 类型，如 `ViewPropTypes` 和 `Text.propTypes`，在 0.66 版本时被废弃，访问它们会打印弃用警告。而在 0.68 版本移除后，许多开发者在升级到最新版本时遇到了报错。
+
+经过调查，我们发现两个问题导致社区对该弃用警告采取行动不够。一是弃用警告并不总是明确有效，用户因此忽视了它们（[问题一](https://github.com/facebook/react-native/pull/34650)、[问题二](https://github.com/react-native-community/cli/pull/1699)）。二是弃用警告被 `LogBox.ignoreLogs` 错误地过滤了（[相关提交](https://github.com/facebook/react-native/commit/fa2842d)）。这两个问题现已修复，但我们希望用户有更多时间升级并迁移代码以避免使用已废弃的接口。
+
+因此，本次版本中我们恢复了 React Native 的 PropTypes，以方便用户升级和迁移。`deprecated-react-native-prop-types` 包也更新支持 0.71 的所有 PropTypes。未来我们仍计划继续废弃并再次移除这些类型，届时社区遇到的问题预期会大幅减少。
+
+:::caution
+
+作为此项变动的一部分，我们移除了 `LogBox.ignoreLog` 的日志过滤功能。这意味着你之前用 `LogBox.ignoreLog` 过滤的日志，在升级到本版本后会重新显示在控制台中。
+
+这属于预期行为，方便你发现和修复弃用警告等日志。
+
+:::
+
+## 开发者体验改进
+
+### React DevTools
+
+本版本将两个在 Web 端 React DevTools 中广受欢迎的功能带到了 React Native。
+
+“点击检查”（Click to inspect）是 React DevTools 左上角的一个选项，你可以点击应用中的元素以在 DevTools 中定位它，类似 Chrome 的元素检查器。
+
+组件高亮会将你在 DevTools 中选中的元素在应用中高亮显示，方便你了解哪些 React 组件对应哪些界面元素。
+
+下面动图演示了这两个功能：
+
+![左侧为 iPhone 模拟器中的 React Native 应用，右侧为 React DevTools。在两个工作流中，点击 DevTools 中的元素都会高亮应用中对应的组件。](/blog/assets/ElementInspecting.gif)
+
+### Hermes
+
+在 React Native 0.70 版本，我们将 [Hermes 设为默认引擎](https://reactnative.dev/blog/2022/07/08/hermes-as-the-default)。
+
+0.71 版本对 Hermes 进行了重要升级，值得关注：
+
+- **改进 Source Maps**：通过 Metro 从网络加载 Source Maps，我们恢复了在最近版本的 Chrome DevTools（不依赖 Flipper）中使用 Source Maps 的能力。
+- **提升 `JSON.parse` 性能**：此次升级包括对 `JSON.parse` 性能的优化，最高提升可达 30%。
+- **支持 `.at()` 方法**：Hermes 现支持 [String](https://github.com/facebook/hermes/issues/823)、`TypedArray` 和 `Array` 的 `.at()` 方法。
+
+完整更新列表请参考 [Road to 71 issue](https://github.com/reactwg/react-native-releases/discussions/41#discussioncomment-4089256)。
+
+### 新架构
+
+本次发布基于用户反馈和收集到的问题，对实验性的新架构体验做了诸多改进：
+
+- **缩短编译时间**：新分发模式改用 Maven Central，这大幅减少了 Android 上的构建时间，解决了 Windows 构建相关问题，并为新架构提供更顺畅的体验。[详细见此](https://github.com/reactwg/react-native-new-architecture/discussions/105)。
+- **减少 C++ 代码**：现在可启用新架构而无需在应用中添加任何 C++ 代码，CLI 的应用模板也已清理所有 C++ 代码和 CMake 文件。[详细见此](https://github.com/reactwg/react-native-new-architecture/discussions/101)。
+- **iOS 应用设置封装更好**：iOS 方面，我们参考 Android 方案，将新架构的初始化逻辑封装至 `RCTAppDelegate` 类，简化未来升级，减少手动破坏兼容的修改。
+- **iOS 依赖管理改进**：为库维护者新增了 `install_module_dependencies` 函数，可在包的 `podspec` 中调用，自动安装新架构的所有依赖项。
+- **修复 bug 及增强 IDE 支持**：修复了多项由社区在 [新架构工作组](https://github.com/reactwg/react-native-new-architecture/discussions)报告的问题，如 [Android IDE 支持改进](https://github.com/reactwg/react-native-new-architecture/discussions/102)。
+
+提醒：新架构仍为实验性 API 体验，我们持续迭代以便更易采纳。请尝试新架构文档中的简化步骤 [新架构介绍](https://reactnative.dev/docs/new-architecture-intro)，并就体验反馈提交至 [新架构工作组](https://github.com/reactwg/react-native-new-architecture/discussions)。
+
+### 其他显著修复
+
+- **增强堆栈帧折叠**：我们更新了 React Native 内部堆栈帧列表，使 LogBox 更频繁显示你的用户代码，而非 React Native 内部代码，助力更快调试。[详情](https://github.com/react-native-community/cli/pull/1699)。
+- **构建时间优化**：我们将 Hermes 的资源迁移至 Maven Central，用于 Prefabs，提升 iOS 与 Android 新旧架构的构建速度。
+- **Android 模板改进**：Android 模板被大幅简化，现在完全依赖 React Native Gradle 插件。你可以在模板内找到配置说明，或访问网站的[专门页面](https://reactnative.dev/docs/react-native-gradle-plugin)。
+
+## 破坏性变更
+
+- **控制台日志行为变更**：`LogBox.ignoreLog` 不再过滤控制台日志。你之前用 LogBox 静音的日志将重新显示。详情见 [该评论](https://github.com/facebook/react-native/pull/34476#issuecomment-1240667794)。
+- **移除 AsyncStorage 和 MaskedViewIOS**：这两个组件自 [0.59](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#deprecated-8) 版本起即被弃用，现全面移除。可参考 [React Native Directory](https://reactnative.directory/) 中社区维护的替代库。
+- **JSCRuntime 移至 react-jsc**：react-jsi 被拆分为 react-jsc 和 react-jsi。如使用 JSCRuntime，请将 react-jsc 添加为依赖 ([提交](https://github.com/facebook/react-native/commit/6b129d81ed8cab301775d2a04971e255df9290de))。
+
+## 致谢
+
+本次发布得益于 70 多名贡献者的努力，共计超 1000 次提交。
+
+我们特别感谢为以下重大工程做出贡献的开发者：
+
+- **Flexbox 间隙支持**：[@intergalacticspacehighway](https://github.com/intergalacticspacehighway)、[@jacobp100](https://github.com/jacobp100)。
+- **受 Web 启发的属性**：[@gabrieldonadel](https://github.com/gabrieldonadel)、[@dakshbhardwaj](https://github.com/dakshbhardwaj)、[@dhruvtailor7](https://github.com/dhruvtailor7)、[@ankit-tailor](https://github.com/ankit-tailor)、[@madhav23bansal](https://github.com/madhav23bansal)。
+- **代码生成改进**：[@AntoineDoubovetzky](https://github.com/AntoineDoubovetzky)、[@MaeIg](https://github.com/MaeIg)、[@Marcoo09](https://github.com/Marcoo09)、[@Naturalclar](https://github.com/Naturalclar)、[@Pranav-yadav](https://github.com/Pranav-yadav)、[@ZihanChen-MSFT](https://github.com/ZihanChen-MSFT)、[@dakshbhardwaj](https://github.com/dakshbhardwaj)、[@dhruvtailor7](https://github.com/dhruvtailor7)、[@gabrieldonadel](https://github.com/gabrieldonadel)、[@harshsiri110](https://github.com/harshsiri110)、[@ken0nek](https://github.com/ken0nek)、[@kylemacabasco](https://github.com/kylemacabasco)、[@matiassalles99](https://github.com/matiassalles99)、[@mdaj06](https://github.com/mdaj06)、[@mohitcharkha](https://github.com/mohitcharkha)、[@tarunrajput](https://github.com/tarunrajput)、[@vinayharwani13](https://github.com/vinayharwani13)、[@youedd](https://github.com/youedd)、[@byCedric](https://github.com/byCedric)。
+
+最后，感谢 [@cortinico](https://github.com/cortinico)、[@kelset](https://github.com/kelset)、[@dmytrorykun](https://github.com/dmytrorykun)、[@cipolleschi](https://github.com/cipolleschi) 和 [@titozzz](https://github.com/titozzz) 对本次发布的贡献！
+
+## 立即体验 0.71.0！
+
+React Native CLI 用户请查看 [升级文档](https://reactnative.dev/docs/upgrading) 了解如何更新现有项目，或使用命令 `npx react-native init MyProject` 创建新项目。
+
+React Native 0.71 将被包括在 Expo SDK 48 版本中支持。
+
+:::info
+0.71 现为 React Native 最新稳定版本，0.68.x 版本不再受支持。详情请参阅 [React Native 支持政策](https://github.com/reactwg/react-native-releases#releases-support-policy)。
+:::

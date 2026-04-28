@@ -1,0 +1,86 @@
+---
+title: 宣布 React Native 0.64 在 iOS 上支持 Hermes
+authors: [grabbou]
+tags: [公告, 发布]
+---
+
+今天我们发布了 React Native 0.64，新增了在 iOS 上支持 Hermes。
+
+## iOS 上的 Hermes 选择启用
+
+[Hermes](https://hermesengine.dev) 是一个开源的 JavaScript 引擎，专为运行 React Native 优化。它通过减少内存使用、减小下载包体积以及缩短应用可用时间（即“交互时间”，TTI）来提升性能。
+
+在本次发布中，我们很高兴地宣布，你现在也可以在 iOS 上使用 Hermes。要启用 iOS 上的 Hermes，请在你的 `Podfile` 中将 `hermes_enabled` 设置为 `true`，然后运行 `pod install`。
+
+```ruby
+use_react_native!(
+   :path => config[:reactNativePath],
+   # 在 iOS 上启用hermes，将 false 改为 true 并安装 pods
+   :hermes_enabled => true
+)
+```
+
+请注意，iOS 上的 Hermes 支持仍处于早期阶段。我们暂时保持其为可选启用状态，同时继续进行基准测试。我们鼓励你在自己的应用中尝试，并告知我们其表现如何！
+
+## 默认启用 Inline Requires
+
+Inline Requires 是 Metro 的一个配置选项，它通过延迟 JavaScript 模块执行直到实际使用时，来提升启动速度，而不是在启动时全部执行。
+
+该功能已存在多年，并作为一个可选配置在我们的[性能文档部分](/docs/performance)中推荐使用。我们现在默认为新应用启用此选项，帮助用户无需额外配置即可获得快速的 React Native 应用启动速度。
+
+Inline Requires 是一个 Babel 转换，将模块导入转换为内联形式。举例来说，Inline Requires 会把模块导入从文件顶部转移到实际使用的位置。
+
+**之前的写法：**
+
+```jsx
+import {MyFunction} from 'my-module';
+
+const MyComponent = props => {
+  const result = MyFunction();
+
+  return <Text>{result}</Text>;
+};
+```
+
+**转换后的写法：**
+
+```jsx
+const MyComponent = props => {
+  const result = require('my-module').MyFunction();
+
+  return <Text>{result}</Text>;
+};
+```
+
+关于 Inline Requires 的更多信息请参阅 [性能文档](https://reactnative.dev/docs/0.74/ram-bundles-inline-requires#inline-requires)。
+
+## 使用 Chrome 查看 Hermes 跟踪
+
+{/* alex ignore fellowship */}
+
+过去一年，Facebook 赞助了 [Major League Hacking 资助项目](https://fellowship.mlh.io/)，支持对 React Native 的贡献。[Jessie Nguyen](https://twitter.com/jessie_anh_ng) 和 [Saphal Patro](https://twitter.com/saphalinsaan) 贡献了使 Chrome DevTools 的 Performance 标签页能可视化在 Hermes 环境下运行应用的执行情况的功能。
+
+详细信息请查看 [新文档页面](https://reactnative-archive-august-2023.netlify.app/docs/0.64/profile-hermes#record-a-hermes-sampling-profile)。
+
+## 带 Proxy 支持的 Hermes
+
+我们为 Hermes 添加了 Proxy 支持，使其兼容流行的社区项目，如 react-native-firebase 和 mobx。如果你之前使用了这些包，现在可以迁移到 Hermes。
+
+我们计划在未来版本中让 Hermes 成为 Android 的默认 JavaScript 引擎，因此正在解决用户在使用 Hermes 时碰到的剩余问题。如果还有问题阻碍你的应用采用 Hermes，请在 [Hermes GitHub 仓库](https://github.com/facebook/hermes) 提交 issue 反馈。
+
+## React 17
+
+React 17 并未包含面向开发者的新特性或重大破坏性更改。对于 React Native 应用，主要变化是支持了[新的 JSX 转换](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html)，使文件无需导入 React 即可使用 JSX。
+
+关于 React 17 的更多信息，请参阅 [React 博客](https://reactjs.org/blog/2020/10/20/react-v17.html)。
+
+## 主要依赖版本变更
+
+- 放弃支持 Android API 16-20。Facebook 应用持续放弃使用量较低的 Android 版本支持。由于 Facebook 应用不再支持这些版本，并且是 React Native 的主要测试环境，React Native 也将放弃支持。
+- 需求 Xcode 12 和 CocoaPods 1.10
+- Node.js 最低支持版本由 10 升级至 12
+- Flipper 升级至 0.75.1
+
+## 致谢
+
+感谢数百位贡献者助力 0.64 发布！[0.64 变更日志](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0640) 列出了本次发布包含的全部更改内容。

@@ -300,8 +300,8 @@ CellRendererComponent 允许自定义由 `renderItem`/`ListItemComponent` 渲染
 
 ### 🗑️ `disableVirtualization`
 
-:::warning 已弃用
-虚拟化提供了显著的性能和内存优化，但会完全卸载渲染窗口外的 react 实例。你应该只为了调试目的才需要禁用它。
+:::warning[Deprecated]
+Virtualization provides significant performance and memory optimizations, but fully unmounts react instances that are outside of the render window. You should only need to disable this for debugging purposes.
 :::
 
 | 类型    |
@@ -585,7 +585,7 @@ CellRendererComponent 允许自定义由 `renderItem`/`ListItemComponent` 渲染
 | ------ |
 | 数字 |
 
-## 方法
+## Methods
 
 ### `flashScrollIndicators()`
 
@@ -620,7 +620,7 @@ getScrollRef():
 getScrollResponder () => ScrollResponderMixin | null;
 ```
 
-提供对底层 scroll responder 的句柄。注意 `this._scrollRef` 可能不是一个 `ScrollView`，所以我们在调用之前需要检查它是否响应 `getScrollResponder`。
+Provides a handle to the underlying scroll responder. Note that `this._scrollRef` may not be a `ScrollView`, so we need to check that it responds to `getScrollResponder` before calling it.
 
 ---
 
@@ -630,17 +630,17 @@ getScrollResponder () => ScrollResponderMixin | null;
 scrollToEnd(params?: {animated?: boolean});
 ```
 
-滚动到内容的末尾。如果没有 `getItemLayout` 属性，可能会卡顿。
+Scrolls to the end of the content. May be janky without `getItemLayout` prop.
 
-**参数：**
+**Parameters:**
 
-| 名称   | 类型   |
+| Name   | Type   |
 | ------ | ------ |
 | params | object |
 
-有效的 `params` 键包括：
+Valid `params` keys are:
 
-- `'animated'` (boolean) - 列表在滚动时是否应该执行动画。默认为 `true`。
+- `'animated'` (boolean) - Whether the list should do an animation while scrolling. Defaults to `true`.
 
 ---
 
@@ -655,12 +655,12 @@ scrollToIndex(params: {
 });
 ```
 
-有效的 `params` 包括：
+Valid `params` includes:
 
-- 'index' (number)。必需。
-- 'animated' (boolean)。可选。
-- 'viewOffset' (number)。可选。
-- 'viewPosition' (number)。可选。
+- 'index' (number). Required.
+- 'animated' (boolean). Optional.
+- 'viewOffset' (number). Optional.
+- 'viewPosition' (number). Optional.
 
 ---
 
@@ -675,12 +675,12 @@ scrollToItem(params: {
 );
 ```
 
-有效的 `params` 包括：
+Valid `params` includes:
 
-- 'item' (Item)。必需。
-- 'animated' (boolean)。可选。
-- 'viewOffset' (number)。可选。
-- 'viewPosition' (number)。可选。
+- 'item' (Item). Required.
+- 'animated' (boolean). Optional.
+- 'viewOffset' (number). Optional.
+- 'viewPosition' (number). Optional.
 
 ---
 
@@ -693,8 +693,8 @@ scrollToOffset(params: {
 });
 ```
 
-滚动到列表中特定的内容像素偏移量。
+Scroll to a specific content pixel offset in the list.
 
-参数 `offset` 期望要滚动到的偏移量。如果 `horizontal` 为 true，则偏移量是 x 值，在其他任何情况下，偏移量是 y 值。
+The `offset` parameter expects the offset you would like to scroll to. In case `horizontal` is true, the offset is the x-value, in any other case the offset is the y-value.
 
-参数 `animated`（默认为 `true`）定义列表在滚动时是否应该执行动画。
+The `animated` parameter (defaults to `true`) defines whether the list should do an animation while scrolling.

@@ -3,8 +3,8 @@ id: pushnotificationios
 title: '🗑️ PushNotificationIOS'
 ---
 
-:::warning 已弃用
-请改用 [社区包](https://reactnative.directory/?search=notification) 之一。
+:::warning[已弃用]
+请改用 [社区包](https://reactnative.directory/?search=notification) 中的一个。
 :::
 
 <div className="banner-native-code-required">
@@ -275,7 +275,7 @@ static cancelLocalNotifications(userInfo: Object);
 **参数：**
 
 | 名称 | 类型 | 是否必填 | 描述 |
-| -------- | ------ | -------- | ----------- |
+| ------ | ------ | -------- | ----------- |
 | userInfo | object | 否 | |
 
 ---

@@ -1,0 +1,445 @@
+---
+title: '新架构来了'
+authors: [reactteam]
+tags: [announcement]
+date: 2024-10-23T16:01
+---
+
+React Native 0.76 默认启用的新架构现已在 npm 上可用！
+
+在[0.76 版本博客文章](/blog/2024/10/23/release-0.76-new-architecture)中，我们分享了该版本中的一系列重要变化。在本文中，我们将概述新架构及其如何塑造 React Native 的未来。
+
+新架构全面支持现代 React 特性，包括 [Suspense](https://react.dev/blog/2022/03/29/react-v18#new-suspense-features)、[Transitions](https://react.dev/blog/2022/03/29/react-v18#new-feature-transitions)、[自动批处理](https://react.dev/blog/2022/03/29/react-v18#new-feature-automatic-batching) 和 [`useLayoutEffect`](https://react.dev/reference/react/useLayoutEffect)。新架构还包含了新的 [Native Module](/docs/next/turbo-native-modules-introduction) 和 [Native Component](/docs/next/fabric-native-components-introduction) 系统，使您能够编写具有类型安全的代码，直接访问原生接口而无需桥接。
+
+这次发布是 React Native 自 2018 年以来全面重写的成果，我们特别注意使新架构成为大多数应用的渐进式迁移。2021 年，我们创建了[新架构工作组](https://github.com/reactwg/react-native-new-architecture/)，与社区合作保证整个 React 生态系统的平滑升级体验。
+
+大多数应用能够以跟其他版本相同的努力采用 React Native 0.76。最受欢迎的 React Native 库已经支持了新架构。新架构还包含了一个自动互操作层，用于实现与旧架构库的向后兼容。
+
+{/* truncate */}
+
+在过去数年的开发中，我们团队公开分享了新架构的愿景。如果您错过了以下任何演讲，请点击查看：
+
+- [React Native EU 2019 - 新的 React Native](https://www.youtube.com/watch?v=52El0EUI6D0)
+- [React Conf 2021 - React 18 主题演讲](https://www.youtube.com/watch?v=FZ0cG47msEk)
+- [App.js 2022 - 将新 React Native 架构带入开源社区](https://www.youtube.com/watch?v=Q6TkkzRJfUo)
+- [React Conf 2024 - 第二天主题演讲](https://www.youtube.com/watch?v=Q5SMmKb7qVI)
+
+## 什么是新架构
+
+新架构是对支撑 React Native 的主要系统的全面重写，包括组件如何渲染、JavaScript 抽象层如何与原生抽象层通信、以及如何调度跨线程的工作。虽然大多数用户无需关心这些系统的具体实现，但这些变化带来了改进和新能力。
+
+在旧架构中，React Native 通过异步桥与原生平台通信。要渲染组件或调用原生函数，React Native 需要通过桥序列化并入队原生函数调用，异步处理。该架构的好处是主线程不会被阻塞用于渲染更新或处理原生模块函数调用，所有工作都在后台线程完成。
+
+然而，用户期待对交互的即时反馈，以获得原生应用般的感觉。这意味着某些更新需要同步渲染以响应用户输入，可能会中断正在进行的渲染。由于旧架构仅支持异步，我们必须重写它，使其支持异步和同步更新。
+
+此外，在旧架构中，桥上的函数调用序列化很快成为瓶颈，尤其是对于频繁更新或大型对象。这使得应用难以可靠地实现 60+ 帧率。也存在同步问题：当 JavaScript 和原生层不同步时，无法同步调和它们，导致列表出现空白帧，以及由于中间状态渲染而产生的视觉跳变。
+
+最后，由于旧架构维护原生层次结构中 UI 的单个副本，并对其进行就地修改，布局只能在单线程计算。这导致无法处理用户输入等紧急更新，布局也无法同步读取，例如在布局效果钩子中读取布局以更新工具提示的位置。
+
+所有这些问题意味着无法正确支持 React 的并发特性。为解决这些问题，新架构包含四个主要部分：
+
+- 新的原生模块系统
+- 新的渲染器
+- 事件循环
+- 移除桥接
+
+新的模块系统允许 React Native 渲染器同步访问原生层，可异步和同步处理事件、调度更新和读取布局。新的原生模块默认懒加载，为应用带来显著性能提升。
+
+新的渲染器能跨多线程处理多个进行中的 UI 树，允许 React 在主线程或后台线程处理多种更新优先级。它还支持跨线程同步或异步读取布局，提升 UI 响应性，减少卡顿。
+
+新的事件循环能在 JavaScript 线程上以明确的顺序处理任务。这允许 React 中断渲染来处理事件，使得紧急用户事件优先于低优先级 UI 过渡。事件循环还与 Web 规范对齐，可支持类似微任务、`MutationObserver` 和 `IntersectionObserver` 的浏览器特性。
+
+最后，移除桥接允许更快启动和 JavaScript 与原生运行时之间的直接通信，减少工作切换成本。这也改进错误报告、调试，降低未定义行为导致崩溃。
+
+新架构现已准备好生产使用，Meta 在 Facebook 应用和其他产品中大规模采用。我们成功地在 Facebook 和 Instagram 应用（用于我们的 [Quest 设备](https://engineering.fb.com/2024/10/02/android/react-at-meta-connect-2024/)）中使用了 React Native 和新架构。
+
+我们的合作伙伴已经在生产环境使用新架构数月：请查看 [Expensify](https://blog.swmansion.com/sunrising-new-architecture-in-the-new-expensify-app-729d237a02f5) 和 [Kraken](https://blog.kraken.com/product/engineering/how-kraken-fixed-performance-issues-via-incremental-adoption-of-the-react-native-new-architecture) 的成功故事，试试 [Bluesky](https://github.com/bluesky-social/social-app/releases/tag/1.92.0-na-rc.2) 的新版本。
+
+### 新的原生模块
+
+新的原生模块系统是 JavaScript 和原生平台通信方式的重大重写。它完全用 C++ 编写，解锁了许多新能力：
+
+- 同步访问原生运行时
+- JavaScript 与原生代码之间的类型安全
+- 跨平台代码共享
+- 默认懒加载模块
+
+在新模块系统中，JavaScript 和原生层可通过 JavaScript 接口 (JSI) 同步通信，无需使用异步桥。您的自定义原生模块现在可以同步调用函数、返回值，并将该值传递给另一个原生模块函数。
+
+旧架构中，为处理原生函数调用响应，必须提供回调，且返回值需可序列化：
+
+```ts
+// ❌ 原生模块的同步回调
+nativeModule.getValue(value => {
+  // ❌ value 不能引用原生对象
+  nativeModule.doSomething(value);
+});
+```
+
+新架构中，您可以同步调用原生函数：
+
+```ts
+// ✅ 原生模块的同步返回值
+const value = nativeModule.getValue();
+
+// ✅ value 可引用原生对象
+nativeModule.doSomething(value);
+```
+
+新架构让您充分利用 C++ 原生实现的强大能力，同时仍可通过 JavaScript/TypeScript API 访问。新模块系统支持[用 C++ 编写的模块](/docs/next/the-new-architecture/pure-cxx-modules)，您只需编写一次模块，便可在 Android、iOS、Windows 和 macOS 等所有平台运行。用 C++ 实现模块可实现更细粒度的内存管理和性能优化。
+
+此外，借助[Codegen](/docs/next/the-new-architecture/what-is-codegen)，您的模块可在 JavaScript 和原生层之间定义强类型契约。据我们的经验，跨边界类型错误是跨平台应用崩溃的最常见原因之一。Codegen 帮助您解决这些问题，并为您生成样板代码。
+
+最后，模块现在实现了懒加载：仅在需要时加载进内存，而非启动时加载。这减少了应用启动时间，并随着应用复杂性增加而保持低。
+
+诸如 [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv) 等流行库已从迁移到新原生模块中获益：
+
+> “新原生模块大大简化了 `react-native-mmkv` 的设置、自动链接和初始化。借助新架构，`react-native-mmkv` 现在是一个纯 C++ 原生模块，能在所有平台工作。新 Codegen 使 MMKV 完全类型安全，解决了长久存在的 `NullPointerReference` 问题，强制实现了空安全；能够同步调用原生模块函数让我们用新原生模块 API 替换了自定义 JSI 访问。”
+>
+> [Marc Rousavy](https://twitter.com/mrousavy)，`react-native-mmkv` 创建者
+
+### 新的渲染器
+
+我们也完全重写了原生渲染器，带来多项优势：
+
+- 更新可在不同线程上以不同优先级渲染
+- 布局可同步读取，且跨线程
+- 渲染器用 C++ 编写，跨所有平台共享
+
+更新后的原生渲染器将视图层次结构存储在不可变树结构中。这意味着 UI 以无法直接更改的方式存储，支持线程安全更新处理。它可以同时处理多个进行中的树，代表用户界面的不同版本。结果，更新可以在后台渲染（如过渡时）而不阻塞 UI，或在主线程渲染（如响应用户输入）。
+
+通过支持多线程，React 可以中断低优先级更新，优先渲染用户输入触发的紧急更新，再按需恢复低优先级更新。新渲染器还能同步且跨线程读取布局，支持后台计算低优先级更新和需要时的同步读取，比如重新定位工具提示。
+
+最终，重写渲染器为 C++，使其可跨所有平台共享。这确保相同代码可在 iOS、Android、Windows、macOS 及其他 React Native 支持的平台运行，提供一致渲染能力，无需为每个平台重新实现。
+
+这是实现我们[多平台愿景](/blog/2021/08/26/many-platform-vision)的重要一步。例如，视图扁平化以前是仅在安卓实现的优化，用来避免深层布局树。新渲染器基于共享 C++ 核心，[将此特性带到 iOS](https://github.com/reactwg/react-native-new-architecture/discussions/110)。此优化自动生效，无需配置，随共享渲染器免费提供。
+
+借助这些改变，React Native 现在全面支持 Concurrent React 特性，如 Suspense 和 Transitions，使得构建复杂且高速响应用户输入的 UI 变得更容易，避免卡顿、延迟或视觉跳变。未来，我们将利用这些能力为内置组件（如 FlatList 和 TextInput）带来更多改进。
+
+流行库如 [Reanimated](https://docs.swmansion.com/react-native-reanimated/) 已在利用新渲染器：
+
+> “正在开发的 Reanimated 4 引入了直接与新渲染器协作的新动画引擎，支持跨线程处理动画和布局管理。新渲染器的设计是真正使这些特性无数规避方法得以构建的关键。此外，由于它是用 C++ 实现并跨平台共享，Reanimated 大部分代码只需编写一次，减少了平台特定的问题，缩小了代码基，并简化了对第三方平台的支持。”
+>
+> [Krzysztof Magiera](https://x.com/kzzzf)，[Reanimated](https://docs.swmansion.com/react-native-reanimated/) 创建者
+
+### 事件循环
+
+新架构使我们能够实现一个明确定义的事件循环处理模型，如该[RFC](https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0744-well-defined-event-loop.md)所描述。该 RFC 遵循了[HTML 标准](https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model)中事件循环处理模型的规范，说明了 React Native 应如何在 JavaScript 线程执行任务。
+
+实现明确定义的事件循环填补了 React DOM 和 React Native 之间的差距：React Native 应用的行为更接近 React DOM 应用，使得“一次学习，处处编写”更容易。
+
+事件循环为 React Native 带来了诸多好处：
+
+- 能够中断渲染以处理事件和任务
+- 更接近 Web 规范
+- 为更多浏览器功能的支持奠定基础
+
+借助事件循环，React 能够按可预测的顺序安排更新和事件。这使得 React 可以用紧急用户事件中断低优先级更新，而新渲染器允许我们独立渲染这些更新。
+
+事件循环还使事件和任务（如计时器）的行为符合 Web 规范，这意味着 React Native 的行为更接近 Web 的常见用户体验，支持 React DOM 和 React Native 之间更好的代码共享。
+
+它还有助于实现更多规范的浏览器功能，如微任务、`MutationObserver` 和 `IntersectionObserver`。这些功能在 React Native 中尚未准备好使用，但我们正在努力未来逐步支持。
+
+最后，事件循环和新渲染器同步读取布局的改动，使 React Native 正确支持 `useLayoutEffect`，从而能同步读取布局信息，并在同一帧内更新 UI。这样您可以在元素显示给用户前正确定位元素。
+
+详见 [`useLayoutEffect`](/blog/2024/10/23/the-new-architecture-is-here#uselayouteffect)。
+
+### 移除桥接
+
+在新架构中，我们完全移除了 React Native 对桥接的依赖，改用通过 JSI 实现的 JavaScript 与原生代码之间的直接、高效通信：
+
+![](/blog/assets/0.76-bridge-diagram.png)
+
+移除桥接通过避免初始化桥接提高了启动速度。例如，在旧架构中，为了向 JavaScript 提供全局方法，我们需要在启动时初始化 JavaScript 模块，这会稍微延长应用启动时间：
+
+```js
+// ❌ 启动慢
+import {NativeTimingModule} from 'NativeTimingModule';
+global.setTimeout = timer => {
+  NativeTimingModule.setTimeout(timer);
+};
+
+// App.js
+setTimeout(() => {}, 100);
+```
+
+在新架构中，我们可以直接绑定 C++ 中的方法：
+
+```cpp
+// ✅ 直接在 C++ 初始化
+runtime.global().setProperty(runtime, "setTimeout", createTimer);
+```
+
+```js
+// App.js
+setTimeout(() => {}, 100);
+```
+
+重写还改进了错误报告，特别是启动时的 JavaScript 崩溃，并减少了未定义行为导致的崩溃。如果发生崩溃，新[React Native DevTools](/docs/next/react-native-devtools)简化调试，并支持新架构。
+
+桥接仍保留着以支持向新架构的渐进式迁移。未来，我们将彻底移除桥接代码。
+
+### 渐进式迁移
+
+我们预期大多数应用升级到 0.76 的工作量与其他版本类似。
+
+升级到 0.76 后，新架构和 React 18 默认启用。但是，若要使用并发特性并充分发挥新架构的优势，您的应用及其依赖库需要逐步迁移以完全支持新架构。
+
+首次升级时，您的应用将在带有与旧架构自动互操作层的新架构上运行。对大多数应用而言无需做任何改动即可运行，但[互操作层存在已知限制](https://github.com/reactwg/react-native-new-architecture/discussions/237)，其不支持访问自定义 Shadow Nodes 或并发特性。
+
+要使用并发特性，应用还需更新以支持[Concurrent React](https://react.dev/blog/2022/03/29/react-v18#what-is-concurrent-react)，遵循[React 规则](https://react.dev/reference/rules)；迁移 JavaScript 代码到 React 18 及其语义，请参考[React 18 升级指南](https://react.dev/blog/2022/03/08/react-18-upgrade-guide)。
+
+总体策略是先让您的应用在新架构上运行而不破坏现有代码，然后逐步迁移。对已经迁移所有模块的新表面，您可以立即使用并发特性。对现有表面，您可能需要先解决一些问题并迁移模块，然后再启用并发特性。
+
+我们与最受欢迎的 React Native 库合作，确保它们支持新架构。已有超过 850 个库兼容，包括所有下载量超过 20 万/周的库（约占下载库的 10%）。您可以在 [reactnative.directory](https://reactnative.directory) 网站查看库的兼容性：
+
+![](/blog/assets/0.76-directory.png)
+
+有关升级的详细信息，请参见下面的[如何升级](/blog/2024/10/23/the-new-architecture-is-here#how-to-upgrade)。
+
+## 新功能
+
+新架构完全支持 React 18、并发特性和 React Native 中的 `useLayoutEffect`。有关 React 18 功能的完整列表，请参阅[React 18 博客文章](https://react.dev/blog/2021/12/17/react-conf-2021-recap#react-18-and-concurrent-features)。
+
+### Transitions（过渡）
+
+Transitions 是 React 18 中的新概念，用于区分紧急和非紧急更新。
+
+- **紧急更新**反映直接交互，如输入和按压。
+- **过渡更新**则对应界面从一个视图到另一个视图的切换。
+
+紧急更新需要立即响应，以吻合我们对物理对象行为的直觉预期。但过渡不同，因为用户不期望看到所有中间值。在新架构中，React Native 能够支持紧急更新和过渡更新分别渲染。
+
+通常，为了最佳用户体验，一次用户输入应产生紧急更新和非紧急更新两种效果。类似于 ReactDOM，诸如 `press` 或 `change` 事件被视为紧急，并立即渲染。您可以在输入事件中使用 `startTransition` API 指示 React 哪些更新是可延迟的“过渡”：
+
+```jsx
+import {startTransition} from 'react';
+
+// 紧急：显示滑块值
+setCount(input);
+
+// 将状态更新标记为过渡
+startTransition(() => {
+  // 过渡：显示结果
+  setNumberOfTiles(input);
+});
+```
+
+将紧急事件与过渡分开，能让界面更响应迅速，体验更自然。
+
+下面对比了无过渡的旧架构和带过渡的新架构。假设每个瓦片不是简单的背景色视图，而是包含图像和其他复杂组件的富组件，渲染成本高昂。**使用 `useTransition` 后，您可以避免因更新震荡导致的性能问题，防止落后。**
+
+<div className="TwoColumns TwoFigures">
+  <figure>
+    <img
+      src="/img/new-architecture/without-transitions.gif"
+      alt="A video demonstrating an app rendering many views (tiles) according to a slider input. The views are rendered in batches as the slider is quickly adjusted from 0 to 1000."
+    />
+    <figcaption>
+      <b>Before:</b> rendering tiles without marking it as a
+      transition.
+    </figcaption>
+  </figure>
+  <figure>
+    <img
+      src="/img/new-architecture/with-transitions.gif"
+      alt="A video demonstrating an app rendering many views (tiles) according to a slider input. The views are rendered in batches as the slider is quickly adjusted from 0 to 1000. There are less batch renders in comparison to the next video."
+    />
+    <figcaption>
+      <b>After:</b> rendering tiles <em>with transitions</em> to
+      interrupt in-progress renders of stale state.
+    </figcaption>
+  </figure>
+</div>
+
+详情请见 [支持并发渲染器和功能](/architecture/landing-page#support-for-concurrent-renderer-and-features)。
+
+### 自动批处理
+
+升级到新架构后，您将受益于 React 18 的自动批处理。
+
+自动批处理使 React 能够将更多状态更新合并渲染，避免中间状态的渲染。这让 React Native 更快且减少卡顿，无需开发者编写额外代码。
+
+<div className="TwoColumns TwoFigures">
+  <figure>
+    <img
+      src="/img/new-architecture/legacy-renderer.gif"
+      alt="A video demonstrating an app rendering many views according to a slider input. The slider value is adjusted from 0 to 1000 and the UI slowly catches up to rendering 1000 views."
+    />
+    <figcaption>
+      <b>Before:</b> rendering frequent state updates with legacy
+      renderer.
+    </figcaption>
+  </figure>
+  <figure>
+    <img
+      src="/img/new-architecture/react18-renderer.gif"
+      alt="A video demonstrating an app rendering many views according to a slider input. The slider value is adjusted from 0 to 1000 and the UI resolves to 1000 views faster than the previous example, without as many intermediate states."
+    />
+    <figcaption>
+      <b>After:</b> rendering frequent state updates with{' '}
+      <em>automatic batching</em>.
+    </figcaption>
+  </figure>
+</div>
+
+旧架构渲染了更多中间状态，滑块停止移动时 UI 仍持续更新。新架构减少了中间状态渲染，渲染完成更快，全赖更新的自动批处理。
+
+详情请见 [支持并发渲染器和功能](/architecture/landing-page#support-for-concurrent-renderer-and-features)。
+
+### useLayoutEffect
+
+基于事件循环和同步读取布局的能力，新的架构为 React Native 增加了对 `useLayoutEffect` 的完整支持。
+
+旧架构中，您必须使用异步的 `onLayout` 事件读取视图的布局信息（异步的）。导致至少一帧布局不正确，直到读取完成并更新，出现工具提示位置错误等问题：
+
+```tsx
+// ❌ commit 后异步 onLayout
+const onLayout = React.useCallback(event => {
+  // ❌ 异步回调读取布局
+  ref.current?.measureInWindow((x, y, width, height) => {
+    setPosition({x, y, width, height});
+  });
+}, []);
+
+// ...
+<ViewWithTooltip
+  onLayout={onLayout}
+  ref={ref}
+  position={position}
+/>;
+```
+
+新架构修正了该问题，使得可以在 `useLayoutEffect` 中同步访问布局信息：
+
+```tsx
+// ✅ commit 期间同步布局效果
+useLayoutEffect(() => {
+  // ✅ 同步读取布局
+  const rect = ref.current?.getBoundingClientRect();
+  setPosition(rect);
+}, []);
+
+// ...
+<ViewWithTooltip ref={ref} position={position} />;
+```
+
+该改动允许运行时同步读取布局信息，并在同一帧更新 UI，让您能在元素显示前正确定位：
+
+<div className="TwoColumns TwoFigures">
+  <figure>
+    <img
+      src="/img/new-architecture/async-on-layout.gif"
+      alt="A view that is moving to the corners of the viewport and center with a tooltip rendered either above or below it. The tooltip is rendered after a short delay after the view moves"
+    />
+    <figcaption>
+      In the old architecture, layout was read asynchronously in
+      `onLayout`, causing the position of the tooltip to be
+      delayed.
+    </figcaption>
+  </figure>
+  <figure>
+    <img
+      src="/img/new-architecture/sync-use-layout-effect.gif"
+      alt="A view that is moving to the corners of the viewport and center with a tooltip rendered either above or below it. The view and tooltip move in unison."
+    />
+    <figcaption>
+      In the New Architecture, layout can be read in
+      `useLayoutEffect` synchronously, updating the tooltip
+      position before displaying.
+    </figcaption>
+  </figure>
+</div>
+
+有关更多信息，请参阅 [同步布局与效果](/architecture/landing-page#synchronous-layout-and-effects) 的文档。
+
+### 全面支持 Suspense
+
+Suspense 允许您声明式指定组件树某部分未准备好显示时的加载状态：
+
+```jsx
+<Suspense fallback={<Spinner />}>
+  <Comments />
+</Suspense>
+```
+
+我们几年之前引入了有限版 Suspense，而 React 18 则实现了完整支持。此前 React Native 无法支持 Suspense 的并发渲染。
+
+新架构全面支持 React 18 中的 Suspense，这意味着您现在可以在 React Native 中使用 Suspense 处理组件加载状态，挂起的内容将在后台渲染，同时显示加载状态，对可见内容的用户输入赋予更高优先级。
+
+更多信息见 [React 18 中 Suspense 的 RFC](https://github.com/reactjs/rfcs/blob/main/text/0213-suspense-in-react-18.md)。
+
+## 如何升级
+
+升级到 0.76，参照[发布文章](/blog/2024/10/23/release-0.76-new-architecture#upgrade-to-076)中的步骤。因该版本同时升级至 React 18，您还需参照[React 18 升级指南](https://react.dev/blog/2022/03/08/react-18-upgrade-guide)。
+
+多亏了与旧架构的互操作层，大多数应用按此步骤即可升级新架构。然而，要充分发挥新架构优势并启用并发特性，您还需要迁移自定义原生模块和原生组件，支持新原生模块和组件 API。
+
+未迁移的自定义原生模块将无法享受共享 C++、同步方法调用或 codegen 类型安全优势。未迁移原生组件无法使用并发特性。建议尽快将所有原生组件和原生模块迁移至新架构。
+
+:::note
+在未来版本中，我们将移除互操作层，模块需支持新架构。
+:::
+
+### 应用
+
+如果您是应用开发者，要完整支持新架构，需升级依赖库、自定义原生组件及模块，完全支持新架构。
+
+我们与最受欢迎的 React Native 库合作，确保它们支持新架构。您可在 [reactnative.directory](https://reactnative.directory) 网站查看所依赖库的新架构兼容性。
+
+若应用依赖的某库尚不兼容，您可以：
+
+- 向库仓库提交 issue，请作者迁移至新架构。
+- 如果库不再维护，考虑替代库。
+- 在库迁移期间，[关闭新架构](/blog/2024/10/23/the-new-architecture-is-here#opt-out)。
+
+若应用包含自定义原生模块或组件，得益于[互操作层](https://github.com/reactwg/react-native-new-architecture/discussions/135)，它们应能正常工作。但我们建议升级至新原生模块和组件 API，全面支持新架构并启用并发功能。
+
+请参阅以下指南迁移模块与组件至新架构：
+
+- [原生模块](/docs/next/turbo-native-modules-introduction)
+- [原生组件](/docs/next/fabric-native-components-introduction)
+
+### 库
+
+如果您是库维护者，首先测试您的库是否兼容互操作层。若不兼容，请在[新架构工作组](https://github.com/reactwg/react-native-new-architecture/)开 issue。
+
+要全面支持新架构，建议尽快迁移至新原生模块和组件 API，让用户能充分利用新架构和并发特性。
+
+参阅以下指南迁移模块和组件：
+
+- [原生模块](/docs/next/turbo-native-modules-introduction)
+- [原生组件](/docs/next/fabric-native-components-introduction)
+
+### 关闭新架构
+
+若出于某些原因，新架构在您的应用中表现不佳，您随时可以选择关闭，待准备好再开启。
+
+关闭新架构操作如下：
+
+- 在 Android 修改 `android/gradle.properties` 文件，将 `newArchEnabled` 标志关闭：
+
+```diff title=”gradle.properties”
+-newArchEnabled=true
++newArchEnabled=false
+```
+
+- 在 iOS 通过运行命令重装依赖：
+
+```shell
+RCT_NEW_ARCH_ENABLED=0 bundle exec pod install
+```
+
+## 致谢
+
+将新架构交付给开源社区是一项耗时多年的重大学术与开发工程。我们想借此机会感谢所有现在和过去的 React 团队成员，感谢他们帮助我们达成这项成果。
+
+我们也十分感谢所有合作者，特别表扬：
+
+- [Expo](https://expo.dev/)，早期采纳新架构，支持热门库迁移工作。
+- [Software Mansion](https://swmansion.com/)，维护生态内关键库，早期迁移新架构，协助调查与修复各类问题。
+- [Callstack](https://www.callstack.com/)，维护关键库，迁移新架构，支持社区 CLI 工作。
+- [Microsoft](https://opensource.microsoft.com/)，为 `react-native-windows` 和 `react-native-macos` 实现新架构，并贡献多个开发工具。
+- [Expensify](https://www.expensify.com/)、[Kraken](https://www.kraken.com/)、[Bluesky](https://bsky.app/) 和 [Brigad](https://www.brigad.co/)，开拓性采用新架构并反馈多项问题，协助完善。
+- 所有独立库维护者与开发者，测试新架构，修复问题，提出疑问，帮助我们澄清细节。
+

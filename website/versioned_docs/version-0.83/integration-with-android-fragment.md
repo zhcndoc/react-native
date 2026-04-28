@@ -33,8 +33,8 @@ React Native 需要这样来处理返回键事件。
 
 进入你的宿主 Activity，确保它实现了 `DefaultHardwareBackBtnHandler` 接口：
 
-:::warning 已废弃
-`Activity.onBackPressed()` 自 API 级别 33 起已被 [废弃](<https://developer.android.com/reference/android/app/Activity#onBackPressed()>)。在 Android 16 设备上的应用如果目标 API 级别为 36，将 [不再调用](https://developer.android.com/about/versions/16/behavior-changes-16#predictive-back) 它，应改用 [OnBackPressedDispatcher](https://developer.android.com/reference/androidx/activity/OnBackPressedDispatcher)。
+:::warning[Deprecated]
+`Activity.onBackPressed()` 自 API level 33 起已被 [弃用](<https://developer.android.com/reference/android/app/Activity#onBackPressed()>)。对于目标 API level 36 的 Android 16 设备，[将不再调用](https://developer.android.com/about/versions/16/behavior-changes-16#predictive-back)，应改用 [OnBackPressedDispatcher](https://developer.android.com/reference/androidx/activity/OnBackPressedDispatcher)。
 :::
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>

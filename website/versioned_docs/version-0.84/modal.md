@@ -106,8 +106,8 @@ export default App;
 
 ### 🗑️ `animated`
 
-:::warning 已废弃
-请使用 [`animationType`](modal.md#animationtype) 属性代替。
+:::warning[已弃用]
+请改用 [`animationType`](modal.md#animationtype) 属性。
 :::
 
 ---
@@ -201,7 +201,7 @@ export default App;
 在 iOS 上，当模态框通过拖拽手势关闭（`presentationStyle` 为 `pageSheet` 或 `formSheet`）时也会调用此回调；当启用 `allowSwipeDismissal` 后，在关闭模态框后会调用该回调。
 
 | 类型                                                                                                                                                                                             |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | function <div className="label basic required">必需</div><div className="label android">Android</div><div className="label tv">电视</div><hr />function <div className="label ios">iOS</div> |
 
 ---

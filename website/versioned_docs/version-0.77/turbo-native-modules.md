@@ -34,7 +34,7 @@ npx @react-native-community/cli@latest init TurboModuleExample --version 0.76.0
 
 ### 1. 声明类型化规范
 
-React Native 提供了一个名为 [Codegen](/the-new-architecture/what-is-codegen.md) 的工具，它接受用 TypeScript 或 Flow 编写的规范，并为 Android 和 iOS 生成平台特定的代码。该规范声明了将在您的原生代码和 React Native JavaScript 运行时之间来回传递的方法和数据结构。Turbo 原生模块既是您的规范、您编写的原生代码，也是从您的规范生成的 Codegen 接口。
+React Native 提供了一个名为 [Codegen](/the-new-architecture/what-is-codegen.mdx) 的工具，它接受用 TypeScript 或 Flow 编写的规范，并为 Android 和 iOS 生成平台特定的代码。该规范声明了将在您的原生代码和 React Native JavaScript 运行时之间来回传递的方法和数据类型。Turbo 原生模块既包括您的规范、您编写的原生代码，也包括由您的规范生成的 Codegen 接口。
 
 要创建规范文件：
 
@@ -96,7 +96,7 @@ export interface Spec extends TurboModule {
      "start": "react-native start",
      "test": "jest"
    },
-   // highlight-add-start
+   // 高亮-添加-开始
    "codegenConfig": {
      "name": "NativeLocalStorageSpec",
      "type": "modules",
@@ -105,7 +105,7 @@ export interface Spec extends TurboModule {
        "javaPackageName": "com.nativelocalstorage"
      }
    },
-   // highlight-add-end
+   // 高亮-添加-结束
    "dependencies": {
 ```
 

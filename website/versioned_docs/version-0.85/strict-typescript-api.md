@@ -32,7 +32,7 @@ import RNRepoLink from '@site/core/RNRepoLink';
 }
 ```
 
-:::note 底层原理
+:::note[幕后说明]
 
 这将指示 TypeScript 从我们新的 [`types_generated/`](https://www.npmjs.com/package/react-native?activeTab=code) 目录解析 `react-native` 类型，而不是之前的 [`types/`](https://www.npmjs.com/package/react-native?activeTab=code) 目录（手动维护）。不需要重启 TypeScript 或编辑器。
 
@@ -40,7 +40,7 @@ import RNRepoLink from '@site/core/RNRepoLink';
 
 严格 TypeScript API 遵循我们的 [RFC](https://github.com/react-native-community/discussions-and-proposals/pull/894) 以从 React Native 中移除深层导入。因此，某些 API 不再在根目录导出。这是故意的，目的是减少 React Native API 的整体表面面积。
 
-:::tip API 反馈
+:::tip[API 反馈]
 
 **发送反馈**：我们将与社区合作，在接下来的（至少）两个 React Native 版本中最终确定我们导出哪些 API。请在我们的 [反馈线程](https://github.com/react-native-community/discussions-and-proposals/discussions/893) 中分享您的反馈。
 
@@ -180,11 +180,11 @@ Animated 节点以前是基于其插值输出的泛型类型。现在，它们�
 
 ### 移除一些已弃用的类型
 
-All types listed in <RNRepoLink href="/packages/react-native/types/public/DeprecatedPropertiesAlias.d.ts">`DeprecatedPropertiesAlias.d.ts`</RNRepoLink> are inaccessible under the Strict API.
+<RNRepoLink href="/packages/react-native/types/public/DeprecatedPropertiesAlias.d.ts">`DeprecatedPropertiesAlias.d.ts`</RNRepoLink> 中列出的所有类型在严格 API 下都无法访问。
 
 ### 移除遗留的组件属性
 
-一些在类型定义中定义但未由组件使用或缺乏定义的性质被移除（例如：`Text` 上的 `lineBreakMode`，`ScrollView` 上的 `scrollWithoutAnimationTo`，在 transform 数组之外定义的 transform 样式）。
+一些在类型定义中定义但未由组件使用或缺乏定义的属性被移除（例如：`Text` 上的 `lineBreakMode`，`ScrollView` 上的 `scrollWithoutAnimationTo`，在 transform 数组之外定义的 transform 样式）。
 
 ### 以前可访问的私有类型帮助器现在可能被移除
 

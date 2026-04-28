@@ -21,8 +21,8 @@ title: 性能
 
 ### `rnStartupTiming` ⚠️
 
-:::warning 非标准
-这是一个 React Native 特有的扩展。
+:::warning[Non-standard]
+这是 React Native 特有的扩展。
 :::
 
 提供关于应用启动时间的信息。
@@ -41,8 +41,8 @@ get rnStartupTiming(): ReactNativeStartupTiming;
 
 ### `timeOrigin`
 
-:::warning 部分支持
-提供的是从 UNIX 纪元到系统启动的毫秒数，而非从 UNIX 纪元到应用启动的毫秒数。
+:::warning[Partial support]
+提供从 UNIX 纪元到系统启动的毫秒数，而不是从 UNIX 纪元到应用启动的毫秒数。
 :::
 
 参见 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/Performance/timeOrigin)。
@@ -79,8 +79,8 @@ get rnStartupTiming(): ReactNativeStartupTiming;
 
 ### `now()`
 
-:::warning 部分支持
-提供的是从系统启动开始计时的毫秒数，而非从应用启动开始计时的毫秒数。
+:::warning[Partial support]
+提供从系统启动到当前的毫秒数，而不是从应用启动到当前的毫秒数。
 :::
 
 参见 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/API/Performance/now)。

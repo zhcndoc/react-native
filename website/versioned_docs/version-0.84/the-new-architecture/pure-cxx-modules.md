@@ -72,7 +72,7 @@ export default TurboModuleRegistry.getEnforcing<Spec>(
 
 ## 2. 配置 Codegen
 
-下一步是在你的 `package.json` 中配置 [Codegen](what-is-codegen.md)。修改文件包含：
+下一步是在你的 `package.json` 中配置 [Codegen](what-is-codegen.mdx)。将文件更新为包含：
 
 ```json title="package.json"
      "start": "react-native start",
@@ -441,17 +441,17 @@ function App(): React.JSX.Element {
     <SafeAreaView style={styles.container}>
       <View>
         <Text style={styles.title}>
-          Welcome to C++ Turbo Native Module Example
+          欢迎来到 C++ Turbo 原生模块示例
         </Text>
-        <Text>Write down here the text you want to reverse</Text>
+        <Text>在这里输入你想要反转的文本</Text>
         <TextInput
           style={styles.textInput}
-          placeholder="Write your text here"
+          placeholder="在这里输入你的文本"
           onChangeText={setValue}
           value={value}
         />
-        <Button title="Reverse" onPress={onPress} />
-        <Text>Reversed text: {reversedValue}</Text>
+        <Button title="反转" onPress={onPress} />
+        <Text>反转后的文本：{reversedValue}</Text>
       </View>
     </SafeAreaView>
   );

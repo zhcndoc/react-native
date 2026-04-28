@@ -33,14 +33,14 @@ Android 支持超过 1 万种不同的手机，并且为了支持软件渲染而
 
 ![示例](/docs/assets/SystraceExample.png)
 
-:::note 提示
+:::note[提示]
 使用 WASD 键进行平移和缩放。
 :::
 
 具体界面可能有所不同，但以下说明对使用任何工具都适用。
 
-:::info 启用 VSync 高亮
-勾选屏幕右上角的复选框以高亮显示 16ms 帧边界：
+:::info[启用 VSync 高亮]
+勾选屏幕右上角的此复选框，以高亮显示 16ms 的帧边界：
 
 ![启用 VSync 高亮](/docs/assets/SystraceHighlightVSync.png)
 
@@ -133,7 +133,7 @@ Android 支持超过 1 万种不同的手机，并且为了支持软件渲染而
 
 如果问题疑似出在原生端，可使用 [CPU 热点分析器](https://developer.android.com/studio/profile/record-java-kotlin-methods) 获得更详细信息。打开 Android Studio Profiler 面板，选择“查找 CPU 热点（Java/Kotlin 方法记录）”。
 
-:::info 选择 Java/Kotlin 记录
+:::info[选择 Java/Kotlin 录制]
 
 请确保选择“查找 CPU 热点 **（Java/Kotlin 记录）**"而非“查找 CPU 热点（调用栈采样）”。它们图标相似，但实现不同。
 :::

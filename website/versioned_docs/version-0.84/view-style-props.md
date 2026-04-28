@@ -3,6 +3,9 @@ id: view-style-props
 title: 视图样式属性
 ---
 
+import ExperimentalAPIWarning from './\_experimental-api-warning.mdx';
+import {getCoreBranchNameForCurrentVersion} from '@site/src/getCoreBranchNameForCurrentVersion';
+
 ### 示例
 
 ```SnackPlayer name=ViewStyleProps
@@ -68,6 +71,33 @@ export default App;
 | 类型               |
 | ------------------ |
 | [颜色](colors.md) |
+
+---
+
+### `experimental_backgroundImage`
+
+<ExperimentalAPIWarning />
+
+`experimental_backgroundImage` 提供了使用类似 Web 语法绘制 [`linear-gradient()`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/gradient/linear-gradient) ([0.76.x+](https://github.com/facebook/react-native/blob/main/CHANGELOG-0.7x.md#v0760)) 和 [`radial-gradient()`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/gradient/radial-gradient) ([0.80.x+](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0800)) 的能力。
+
+```tsx
+// 简单用法：
+<View style={{
+  experimental_backgroundImage: 'linear-gradient(45deg, blue, red)'
+}} />
+<View style={{
+  experimental_backgroundImage: 'radial-gradient(ellipse farthest-corner at 30% 40%, red, blue)'
+}} />
+```
+
+更复杂的用法示例可在 RNTester 应用中找到（支持 `PlatformColor`）：
+
+- <a href={`https://github.com/facebook/react-native/blob/${getCoreBranchNameForCurrentVersion()}/packages/rn-tester/js/examples/LinearGradient/LinearGradientExample.js`}>LinearGradientExample.js</a>
+- <a href={`https://github.com/facebook/react-native/blob/${getCoreBranchNameForCurrentVersion()}/packages/rn-tester/js/examples/RadialGradient/RadialGradientExample.js`}>RadialGradientExample.js</a>
+
+| Type                                                                                                                                                                                               |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| string, array of objects: `{type: 'linear-gradient', direction: string, colorStops: object[] }`, `{type: 'radial-gradient', shape: string, position: object, size: string, colorStops: object[] }` |
 
 ---
 

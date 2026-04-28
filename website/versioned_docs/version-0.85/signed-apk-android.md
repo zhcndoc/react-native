@@ -65,12 +65,12 @@ MYAPP_UPLOAD_KEY_PASSWORD=*****
 
 这些将是全局 Gradle 变量，我们稍后可以在 Gradle 配置中使用它们来签名我们的应用。
 
-:::note 关于使用 git 的说明
-将上述 Gradle 变量保存在 `~/.gradle/gradle.properties` 中而不是 `android/gradle.properties` 中可以防止它们被检入 git。在添加变量之前，您可能需要在用户的主目录中创建 `~/.gradle/gradle.properties` 文件。
+:::note[关于使用 git 的说明]
+将上述 Gradle 变量保存在 `~/.gradle/gradle.properties` 而不是 `android/gradle.properties` 中，可以避免它们被提交到 git。您可能需要先在用户主目录中创建 `~/.gradle/gradle.properties` 文件，然后才能添加这些变量。
 :::
 
-:::note 关于安全性的说明
-如果您不愿意以明文形式存储密码，并且您运行的是 macOS，您也可以 [将凭据存储在钥匙串访问应用中](https://pilloxa.gitlab.io/posts/safer-passwords-in-gradle/)。然后您可以跳过 `~/.gradle/gradle.properties` 中的最后两行。
+:::note[关于安全性的说明]
+如果您不愿意以明文形式存储密码，并且您正在运行 macOS，您还可以 [将凭据存储在 Keychain Access 应用中](https://pilloxa.gitlab.io/posts/safer-passwords-in-gradle/)。然后您可以跳过 `~/.gradle/gradle.properties` 中最后两行。
 :::
 
 ## 将签名配置添加到应用的 Gradle 配置中
@@ -174,8 +174,8 @@ android {
 
 Proguard 是一个可以稍微减小 APK 大小的工具。它通过剥离您的应用未使用的 React Native Java 字节码（及其依赖项）的部分来实现这一点。
 
-:::caution 重要
-如果您启用了 Proguard，请确保彻底测试您的应用。Proguard 通常需要针对您使用的每个原生库进行特定配置。请参阅 `app/proguard-rules.pro`。
+:::caution[重要]
+如果您启用了 Proguard，请务必彻底测试您的应用。Proguard 通常需要针对您使用的每个原生库进行特定配置。请参阅 `app/proguard-rules.pro`。
 :::
 
 要启用 Proguard，编辑 `android/app/build.gradle`：

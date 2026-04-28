@@ -3,7 +3,7 @@ id: pushnotificationios
 title: '🗑️ PushNotificationIOS'
 ---
 
-:::warning 已弃用
+:::warning[已弃用]
 请改用 [社区包](https://reactnative.directory/?search=notification) 之一。
 :::
 
@@ -259,7 +259,7 @@ static getApplicationIconBadgeNumber(callback: (num: number) => void);
 **参数：**
 
 | 名称     | 类型     | 是否必填 | 描述                               |
-| -------- | -------- | -------- | ---------------------------------- |
+| -------- | -------- | ---------------------------------- | ---------------------------------- |
 | callback | function | 是       | 处理当前徽章数字的函数。 |
 
 ---

@@ -5,8 +5,8 @@ title: 🗑️ InteractionManager
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-:::warning 已弃用
-避免长时间运行的工作，改用 [`requestIdleCallback`](global-requestIdleCallback)。
+:::warning[Deprecated]
+避免长时间运行的工作，并改用 [`requestIdleCallback`](global-requestIdleCallback)。
 :::
 
 InteractionManager 允许在任何交互/动画完成后安排长时间运行的工作。特别是，这使得 JavaScript 动画能够流畅运行。
@@ -64,10 +64,10 @@ import {
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
+  ios: '按 Cmd+R 重新加载，\n' + 'Cmd+D 或摇动以打开开发者菜单',
   android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
+    '双击键盘上的 R 重新加载，\n' +
+    '摇动或按菜单按钮打开开发者菜单',
 });
 
 const useFadeIn = (duration = 5000) => {
@@ -106,7 +106,7 @@ const App = () => {
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <Text>{instructions}</Text>
-        <Ball onShown={() => Alert.alert('Animation is done')} />
+        <Ball onShown={() => Alert.alert('动画已完成')} />
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -146,10 +146,10 @@ import {
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
+  ios: '按 Cmd+R 重新加载，\n' + 'Cmd+D 或摇动以打开开发者菜单',
   android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
+    '双击键盘上的 R 重新加载，\n' +
+    '摇动或按菜单按钮打开开发者菜单',
 });
 
 const useFadeIn = (duration = 5000) => {
@@ -192,7 +192,7 @@ const App = () => {
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <Text>{instructions}</Text>
-        <Ball onShown={() => Alert.alert('Animation is done')} />
+        <Ball onShown={() => Alert.alert('动画已完成')} />
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -236,10 +236,10 @@ import {
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
+  ios: '按 Cmd+R 重新加载，\n' + 'Cmd+D 或摇动以打开开发者菜单',
   android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
+    '双击键盘上的 R 重新加载，\n' +
+    '摇动或按菜单按钮打开开发者菜单',
 });
 
 // 你可以创建自定义交互/动画并添加
@@ -273,7 +273,7 @@ const App = () => {
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <Text>{instructions}</Text>
-        <Ball onInteractionIsDone={() => Alert.alert('Interaction is done')} />
+        <Ball onInteractionIsDone={() => Alert.alert('交互已完成')} />
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -312,10 +312,10 @@ import {
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
+  ios: '按 Cmd+R 重新加载，\n' + 'Cmd+D 或摇动以打开开发者菜单',
   android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
+    '双击键盘上的 R 重新加载，\n' +
+    '摇动或按菜单按钮打开开发者菜单',
 });
 
 // 你可以创建自定义交互/动画并添加
@@ -353,7 +353,7 @@ const App = () => {
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <Text>{instructions}</Text>
-        <Ball onInteractionIsDone={() => Alert.alert('Interaction is done')} />
+        <Ball onInteractionIsDone={() => Alert.alert('交互已完成')} />
       </SafeAreaView>
     </SafeAreaProvider>
   );

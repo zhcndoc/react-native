@@ -1,0 +1,211 @@
+---
+title: 'React Native 0.73 - 调试改进、稳定的符号链接支持及更多内容'
+authors: [fortmarek, titozzz, hurali, lunaleaps, huntie]
+tags: [公告, 发行版, 调试]
+date: 2023-12-06
+---
+
+今天我们发布了 React Native 0.73！本次发布增加了 Hermes 调试的改进、稳定的符号链接支持、Android 14 支持以及新的实验性功能。我们还弃用了旧有的调试功能，并发布了新架构的下一个重要支柱：无桥接模式（Bridgeless Mode）！
+
+### 亮点
+
+- [调试改进](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#debugging-improvements)
+- [Metro 中稳定的符号链接支持](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#stable-symlink-support-in-metro)
+- [Android 上的 Kotlin 模板](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#kotlin-template-on-android)
+- [Android 14 支持](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#android-14-support)
+- [新架构更新](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#new-architecture-updates)
+- [弃用的调试功能](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#deprecated-debugging-features)
+
+### 重大变更
+
+- [Babel 包重命名](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#babel-package-renames)
+- [其他重大变更](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#other-breaking-changes)
+- [React Native CLI 变更](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#react-native-cli-changes)
+- [弃用 @types/react-native](/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks#deprecated-typesreact-native)
+
+{/* truncate */}
+
+## 亮点
+
+### 调试改进
+
+React Native 和 Hermes 团队致力于提升 React Native 的调试体验。在 0.73 版本中，我们很高兴分享一些初步成果。
+
+#### Hermes 中的控制台日志历史
+
+`console.log()` 是开发者快速调试 JavaScript 代码的常用方式。在之前的版本中，React Native 应用中的控制台日志只有在连接调试器时才会被记录，这让观察应用加载初期的日志变得困难。
+
+在 React Native 0.73 中，我们解决了这个问题。Hermes 现在会在后台捕获所有的 `console.log()` 调用，并在首次连接调试器时发送到“控制台”标签页——这一行为与网页浏览器调试体验一致。此新行为适用于 Flipper、连接 Hermes 的 Chrome DevTools 以及实验性的新调试器。
+
+#### 更新后的调试文档
+
+我们刷新了[调试](/docs/debugging)部分文档，包含了如何连接所有支持的调试器的最新信息、更多 React DevTools 相关内容以及更新的视觉示意。
+
+![0.73 版本调试文档概览](/blog/assets/0.73-debugging-docs.jpg)
+
+#### 实验性新调试器
+
+React Native 团队正在开发新的 JavaScript 调试器体验，计划替代 Flipper，在 React Native 0.73 中推出技术预览版。新调试器启动非常迅速，拥有简化的 Chrome DevTools UI，专为使用 Hermes 调试 React Native 定制。
+
+:::note
+新调试器处于**实验性**阶段，存在一些[已知问题](https://github.com/react-native-community/discussions-and-proposals/discussions/733)，我们正积极解决，未来版本会修复。如果你正在尝试，请使用[同一讨论串](https://github.com/react-native-community/discussions-and-proposals/discussions/733)反馈。
+:::
+
+![新调试器前端打开“欢迎”面板截图](/docs/assets/debugging-debugger-welcome.jpg)
+
+更多关于开启此体验的信息请参阅[文档](/docs/next/debugging?js-debugger=new-debugger#opening-the-debugger)。
+
+### Metro 中稳定的符号链接支持
+
+Metro中对符号链接（symlinks）的支持现已**默认启用**。符号链接支持使 React Native 可以与配置了 [`watchFolders`](https://metrobundler.dev/docs/configuration/#watchfolders) 的 monorepo 结构协同工作。
+
+符号链接深入集成于 Metro 内部，这意味着它可以与诸如[快速刷新](/docs/fast-refresh)等功能配合正常工作，且打包时性能开销极小。符号链接在所有桌面平台均被支持，无论是否使用 Watchman。
+
+:::info
+
+#### Monorepo 解决方案
+
+我们知道在 monorepo 结构中使用 React Native 仍存在一些边缘情况。我们已规划相关改进，虽未赶上 0.73 版本，但将尽快发布。
+
+**对于 React Native 模板项目(`npx react-native init`)**，你需要配置项目根目录外的任何 [`watchFolders`](https://metrobundler.dev/docs/configuration/#watchfolders)，以便 Metro 发现这些目录（[更多详情](https://metrobundler.dev/docs/configuration/#unstable_enablesymlinks-experimental)）。如果你的 `react-native` 依赖安装在不同层级文件夹，也可能需要更新文件路径。
+
+**对于 Expo 应用**，默认支持 Yarn (Classic) 工作区。详见 Expo 文档中的[使用 monorepo](https://docs.expo.dev/guides/monorepos/) 指南。
+:::
+
+### Android 上的 Kotlin 模板
+
+我们激动地宣布，从 0.73 开始，Kotlin 已成为使用 React Native 构建 Android 应用的**推荐语言**。这符合 Android 生态多年来的发展趋势，使你可以使用现代语言编写应用。
+
+我们已将 React Native Android 模板更新为 Kotlin 代替 Java，新生成的 `MainActivity.kt` 和 `MainApplication.kt` 文件减少了 36% 的大小。
+
+[升级助手](https://react-native-community.github.io/upgrade-helper/) 也已更新，方便将 `.java` 文件迁移为 `.kt` 文件。
+如果你之前修改过项目中的 Java 文件，需要帮助迁移到 Kotlin，可以使用 Android Studio 的 `Code > Convert Java file to Kotlin File` 功能（快捷键 <kbd>Cmd ⌘</kbd> + <kbd>Shift ⇧</kbd> + <kbd>Option ⌥</kbd> + <kbd>K</kbd>）。
+
+### Android 14 支持
+
+我们更新了 React Native，使其完全支持 Android 14。从 0.73 版本开始，React Native 开发者现在可以以最新的 Android SDK 版本 [API Level 34](https://developer.android.com/guide/topics/manifest/uses-sdk-element?hl=en#ApiLevels)（称为 _Upside Down Cake_）为目标。
+
+#### Java 17 和 Android Gradle 插件升级
+
+为支持 Android 14，我们将用于构建 Android 应用的 Android Gradle Plugin (AGP) 版本从 `7.4.x` 升级到 `8.1.x`。
+
+AGP 的此重大版本升级带来了若干破坏性变更，详见 Google 的发布说明（[8.0.0](https://developer.android.com/build/releases/past-releases/agp-8-0-0-release-notes) 和 [8.1.0](https://developer.android.com/build/releases/past-releases/agp-8-1-0-release-notes)）。
+
+最重要的是，构建 Android 应用**现在必须使用 Java 17**。你可以通过以下命令升级 Java 版本：
+
+```sh
+brew install --cask zulu@17
+```
+
+并按照[入门指南](https://reactnative.dev/docs/environment-setup)设置 `JAVA_HOME`。
+
+如果你是库开发者，你的库在 React Native 0.73 下无需改动即可工作。今年早些时候，我们发布了一个说明文档，阐明 AGP 升级对库作者的影响，详见[此处](https://github.com/react-native-community/discussions-and-proposals/issues/671)。
+
+#### 赋予对照片及视频的部分访问权限
+
+[选择性照片访问](https://developer.android.com/about/versions/14/changes/partial-photo-video-access)允许 Android 14 用户授权应用访问其媒体库中的特定项目，而非全部媒体。在 0.73 中，React Native 应用通过 [`PermissionsAndroid`](/docs/permissionsandroid) API 中的 `READ_MEDIA_VISUAL_USER_SELECTED` 权限支持此功能。
+
+![Android 14 中的选择性照片访问](/blog/assets/0.73-android-media-picker.jpg)
+
+#### 最低 SDK 版本提升
+
+React Native 0.73 是最后一个支持 Android 5.0（API 级别 21）的版本。下一版本 React Native 的最低 SDK 版本将提升至 23（Android 6.0）。有关最低 SDK 提升的更多信息，请参阅[这里](https://github.com/react-native-community/discussions-and-proposals/discussions/740)。
+
+### 新架构更新
+
+我们继续推进 React Native 新架构的推广，使其向开源社区所有人可用。
+
+自 React Native 0.68 起，新渲染器（Fabric）和新原生模块系统（TurboModules）就已供用户试验和评估。感谢社区迄今提供的反馈。
+
+今天我们发布新架构的又一组成部分：[**无桥接模式**](https://github.com/reactwg/react-native-new-architecture/discussions/154)。至今为止，开启新架构时，桥接仍会被保留以支持向后兼容旧组件和模块。但我们的愿景是完全废弃桥接。从 React Native 0.73 开始，你可以启用无桥接模式，彻底禁用桥接的创建。
+
+配合无桥接模式，我们发布了一个原生模块互操作层，允许在无桥接模式下复用旧模块。此前 React Native 0.72 版本中引入的渲染器互操作层也已适配无桥接模式。
+
+与新架构的其他部分一样，无桥接模式初期为实验性功能。欢迎感兴趣的用户启用并在[新架构工作组](https://github.com/reactwg/react-native-new-architecture/discussions)反馈遇到的问题及不兼容情况。
+
+### 弃用的调试功能
+
+#### Flipper 与 React Native 集成
+
+我们正逐步放弃 Flipper 作为 React Native 应用的默认调试工具。0.73 版本开始，弃用 React Native 中的 Flipper 原生集成（即连接 Flipper 核心插件的引导代码）。我们将在下一版本中移除这一集成及其依赖，这意味着 Flipper 的部分功能如网络插件将停止工作。
+
+**不变**：Flipper 作为独立原生应用调试产品仍将存在。即使未来从 React Native 新项目中移除，开发者仍可[手动将 Flipper 添加至应用](https://fbflipper.com/docs/getting-started/android-native/)。
+
+关于为何放弃 Flipper，详见[RFC](https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0641-decoupling-flipper-from-react-native-core.md)。
+
+#### 远程 JavaScript 调试
+
+远程 JavaScript 调试是将外部网页浏览器（Chrome）连接至应用，并在网页（即 `http://localhost:8081/debugger-ui`）内运行 JavaScript 代码的传统调试模式。该模式可能导致调试时应用行为不一致，与新架构下的原生模块不兼容。
+
+在 0.73 中，远程 JavaScript 调试被[弃用](https://github.com/react-native-community/discussions-and-proposals/discussions/734)，并从开发菜单中移除。启用远程调试器现在必须通过 `NativeDevSettings` API 手动完成，具体请参阅[其他调试方法文档](/docs/next/other-debugging-methods#remote-js-debugging)。
+
+:::info
+远程 JavaScript 调试曾是使用 JavaScriptCore (JSC) 的应用的默认调试方式。我们推荐 iOS 应用使用[Safari 开发者工具（直接 JSC 调试）](/docs/next/other-debugging-methods#safari-developer-tools-direct-jsc-debugging)。
+
+我们推荐使用 [Hermes](/docs/hermes) 以获得跨平台一致的调试体验。
+:::
+
+## 重大变更
+
+### Babel 包重命名
+
+我们已将两个与 Babel 相关的包从 Metro 中迁移至 React Native 仓库并同步版本，简化维护和升级。这些新版本在 0.73 中支持新架构，需更新依赖。
+
+升级时请使用 [升级助手](https://react-native-community.github.io/upgrade-helper/) 确认已更新这些包。部分包名已更改：
+
+| 旧包名                                | 新包名                                 |
+| ------------------------------------ | ------------------------------------ |
+| `metro-react-native-babel-preset`   | `@react-native/babel-preset`          |
+| `metro-react-native-babel-transformer` | `@react-native/metro-babel-transformer` |
+
+:::info
+`@react-native/babel-preset` 现在包含了 `@react-native/babel-plugin-codegen`，无需在 Babel 配置文件中单独声明。
+:::
+
+### 其他重大变更
+
+以下是 0.73 中一些关键的破坏性变更。完整列表请查看[完整变更日志](https://github.com/facebook/react-native/blob/main/CHANGELOG.md)。
+
+- Node.js 最低版本提升至 18.x （[#37709](https://github.com/facebook/react-native/pull/37709)）（参见[Node.js 16 终止支持](https://nodejs.org/en/blog/announcements/nodejs16-eol)）。
+- 模板升级至 TypeScript 5.0（[#36862](https://github.com/facebook/react-native/pull/36862)）。
+  - React Native 类型仍兼容 TypeScript 4.8。
+- **Android**：构建安卓应用需使用 Java 17（见上文[#Java 17 和 Android Gradle 插件升级](#java-17-and-android-gradle-plugin-upgrade)）。
+- **Android**：Fresco 依赖升级至 3.0（[#38275](https://github.com/facebook/react-native/pull/38275)）。
+- **iOS**：最低 iOS 版本提升至 13.4（[#36795](https://github.com/facebook/react-native/pull/36795)）。
+- **iOS**：通过 Xcode 构建时不再自动启动 Metro（[#38242](https://github.com/facebook/react-native/pull/38242)）。
+
+针对库开发者：
+
+- **Android**：升级至 AGP 8.1.1（[讨论](https://github.com/react-native-community/discussions-and-proposals/issues/671)）
+
+### React Native CLI 变更
+
+#### 重点重大变更
+
+- 默认任务前缀由 `build-android` 命令中改为执行 `bundle` 任务而非 `assemble` （[#1913](https://github.com/react-native-community/cli/pull/1913)）。
+- 移除了 Metro 配置默认值的回退机制（[#1972](https://github.com/react-native-community/cli/pull/1972)）。
+  - 0.72 引入的[更新后的 `metro.config.js` 配置格式](/blog/2023/06/21/0.72-metro-package-exports-symlinks#new-metroconfigjs-setup)在 0.73 变为必需。
+- 移除 `run-ios` 中的 `--configuration` 选项，改为使用 `--mode` （[#2028](https://github.com/react-native-community/cli/pull/2028)）。
+- 移除 `build-android` 命令中的 `--variant` 选项，改为使用 `--mode` （[#2026](https://github.com/react-native-community/cli/pull/2026)）。
+
+[完整 v12.0.0 版本变更日志请见此处](https://github.com/react-native-community/cli/releases/tag/v12.0.0)。
+
+### 弃用的 `@types/react-native`
+
+正如在[TypeScript 的一流支持](/blog/2023/01/03/typescript-first#declarations-shipped-with-react-native)中提到的，自 0.71 版本起，`react-native` 已自带 TypeScript 类型文件。0.73 版本开始，弃用 `@types/react-native`。
+
+未来不会再为老版本发布补丁。建议迁移离开 `@types/react-native`。有关如何迁移，请参见[迁移说明](/blog/2023/01/03/typescript-first#how-to-migrate)。
+
+## 致谢
+
+React Native 0.73 包含了 68 名贡献者的超过 [2259 次提交](https://github.com/facebook/react-native/compare/v0.72.7...v0.73.0)。感谢大家的辛勤付出！
+
+## 升级至 0.73
+
+请使用 [React Native 升级助手](https://react-native-community.github.io/upgrade-helper/) 查看项目中不同版本间的代码变更，同时查阅[升级文档](/docs/upgrading)。你也可以用命令 `npx react-native@latest init MyProject` 创建新项目。
+
+如果你使用 Expo，React Native 0.73 将在 Expo SDK 50 版本支持。
+
+:::info
+0.73 现为 React Native 的最新稳定版本，**0.70.x 版本开始进入不支持状态**。详情见[React Native 支持政策](https://github.com/reactwg/react-native-releases#releases-support-policy)。
+:::

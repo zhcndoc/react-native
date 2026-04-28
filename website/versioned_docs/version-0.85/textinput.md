@@ -3,7 +3,7 @@ id: textinput
 title: TextInput
 ---
 
-通过键盘向应用输入文本的基础组件。Props 提供了几种功能的可配置性，例如自动纠正、自动大写、占位符文本以及不同的键盘类型，例如数字键盘。
+用于通过键盘向应用输入文本的基础组件。Props 提供了多种功能的可配置性，例如自动纠正、自动大写、占位符文本以及不同的键盘类型，例如数字键盘。
 
 最基本的用例是放置一个 `TextInput` 并订阅 `onChangeText` 事件以读取用户输入。还有其他事件，例如 `onSubmitEditing` 和 `onFocus` 也可以被订阅。一个最小的示例：
 
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
 export default MultilineTextInputExample;
 ```
 
-`TextInput` 默认在其视图底部有一个边框。该边框的内边距由系统提供的背景图像设置，无法更改。避免这种情况的解决方案是 either 不显式设置高度，在这种情况下系统将负责在正确位置显示边框，或者通过将 `underlineColorAndroid` 设置为 transparent 来不显示边框。
+`TextInput` 默认在其视图底部有一个边框。该边框的内边距由系统提供的背景图像设置，无法更改。避免这种情况的解决方案要么是不显式设置高度，在这种情况下系统将负责在正确位置显示边框，要么通过将 `underlineColorAndroid` 设置为 transparent 来不显示边框。
 
 请注意，在 Android 上，在输入框中执行文本选择可能会将应用的 activity `windowSoftInputMode` 参数更改为 `adjustResize`。这可能会导致具有 position: 'absolute' 的组件在键盘活动时出现问题。要避免此行为，请在 AndroidManifest.xml 中指定 `windowSoftInputMode` ( https://developer.android.com/guide/topics/manifest/activity-element.html ) 或通过原生代码以编程方式控制此参数。
 
@@ -238,8 +238,8 @@ export default MultilineTextInputExample;
 
 ### 🗑️ `blurOnSubmit`
 
-:::warning 已弃用
-请注意 `submitBehavior` 现在取代了 `blurOnSubmit` 并将覆盖 `blurOnSubmit` 定义的任何行为。参见 [submitBehavior](textinput#submitbehavior)。
+:::warning[已废弃]
+请注意，`submitBehavior` 现在取代了 `blurOnSubmit`，并将覆盖 `blurOnSubmit` 定义的任何行为。参见 [submitBehavior](textinput#submitbehavior)。
 :::
 
 如果为 `true`，文本框在提交时将失焦。对于单行字段，默认值为 true；对于多行字段，默认值为 false。请注意，对于多行字段，将 `blurOnSubmit` 设置为 `true` 意味着按下 return 键将使字段失焦并触发 `onSubmitEditing` 事件，而不是在字段中插入换行符。
@@ -313,7 +313,7 @@ export default MultilineTextInputExample;
 
 ### `defaultValue`
 
-提供一个初始值，当用户开始输入时该值 will change。适用于你不想处理监听事件和更新 value 属性以保持受控状态同步的用例。
+提供一个初始值，当用户开始输入时该值将会改变。适用于你不想处理监听事件和更新 value 属性以保持受控状态同步的用例。
 
 | 类型   |
 | ------ |

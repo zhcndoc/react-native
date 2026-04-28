@@ -1,0 +1,85 @@
+---
+title: 宣布 React Native 0.69
+authors: [fortmarek, cortinico]
+tags: [公告, 发行]
+---
+
+# 宣布 0.69
+
+我们很高兴发布 React Native 新版本 0.69.0。此版本针对 React Native 新架构带来了多项改进与新功能：支持 React 18 及内置 Hermes。继续往下阅读以了解更多内容！
+
+### 目录
+
+- [React 18](/blog/2022/06/21/version-069#react-18)
+- [内置 Hermes](/blog/2022/06/21/version-069#bundled-hermes)
+- [0.69 亮点](/blog/2022/06/21/version-069#highlights-of-069)
+
+{/* truncate */}
+
+## React 18
+
+我们很高兴与您分享，React Native 0.69 是首个支持 React 18 的版本。React 18 带来了[诸多改进](https://reactjs.org/blog/2022/03/29/react-v18.html)，例如新的 Hook：`useId`。此外，React 18 还添加了诸如 `useTransition` 和完整的 Suspense 支持等并发特性。
+
+在 React Native 0.69 中，默认启用了 React 18。然而，如果您尚未迁移到新架构，您只能使用不涉及并发渲染的特性。新架构设计时已考虑并发渲染，但旧架构不支持此功能。
+
+您可以在[这里](https://reactnative.dev/docs/0.69/react-18-and-react-native)了解更多关于 React Native 中 React 18 支持的内容。
+
+## 内置 Hermes
+
+在本次发布之前，Hermes 和 React Native 是分开发布的，这导致了 Hermes 与 React Native 版本兼容性的混淆。为了解决这个问题，从 React Native 0.69 起，我们将随 React Native 一起发布兼容的 Hermes 版本。这一改动将使 Hermes 在 React Native 中的使用更加稳定。
+
+Hermes 版本的正确使用由 React Native 管理，但请确保按照[升级助手](https://react-native-community.github.io/upgrade-helper/?from=0.68.2&to=0.69.0)中的步骤操作以保证集成正常。如果您尚未启用 Hermes，可以参考[这里](/docs/hermes)的步骤进行启用。虽然我们会继续支持其他 JS 引擎，但推荐所有用户迁移到 Hermes，以获得最佳体验并确保更好的支持。
+
+请注意，运行新架构的 Android 用户需要**从源码构建 Hermes**。Windows 用户如需从源码构建 Hermes，还需额外遵循[这些步骤](/architecture/bundled-hermes#android-users-on-new-architecture-building-on-windows)。
+
+如果您对 React Native 内置 Hermes 的工作原理感兴趣，可以查看深入文档[这里](/architecture/bundled-hermes)。
+
+## 新架构
+
+我们正在继续推进新架构在 Android 和 iOS 上的部署。如果您尚未迁移应用或库，请按照[这里](https://github.com/reactwg/react-native-new-architecture#guides)的步骤进行。您也可以阅读关于新架构工具和资源的[最新更新](/blog/2022/06/16/resources-migrating-your-react-native-library-to-the-new-architecture)以了解更多。
+
+## 0.69 亮点
+
+如上所述，此版本最重要的改进是聚焦于 React 18 支持和内置 Hermes。但还有其他值得注意的变更，包括：
+
+- [不再支持](https://github.com/facebook/react-native/commit/982ca30de079d7e80bd0b50365d58b9048fb628f) iOS/tvOS SDK 11.0，需使用 12.4+ 版本
+- [增强](https://github.com/facebook/react-native/commit/c5babd993a2bed2994ecc4710fa9e424b3e6cfc2) M1 Mac 用户的 Android 开发支持
+- [新增](https://github.com/facebook/react-native/commit/0480f56c5b5478b6ebe5ad88e347cad2810bfb17) `.xcode.env` 配置文件，用于更确定地获取 node 可执行文件路径
+- [React Native 现使用](https://github.com/facebook/react-native/commit/50c8e973f067d4ef1fc3c2eddd360a0709828968) Android 11 的最新状态栏 API
+- [支持 C++17](https://github.com/facebook/react-native/commit/c2e4ae39b8a5c6534a3fa4dae4130166eda15169)
+- [新的](https://github.com/facebook/react-native/commit/1a1a304ed2023d60547aef65b1a7bf56467edf08) iOS 调试菜单选项 `hotkeysEnabled`
+
+### 破坏性变更
+
+此外，还包含一些破坏性变更：
+
+- React Native CLI 升级到新主版本 [8.0](https://github.com/react-native-community/cli/releases/tag/v8.0.0)：
+  - 移除 `link` 和 `unlink` 命令，改为自动链接
+  - 移除废弃的 `initCompat`，请使用 `init` 命令
+  - 移除废弃的 `run-android` 属性
+  - 移除 `install` 和 `uninstall` 命令
+  - 移除 `react-native.config.js` 中的 assets 和 hooks 属性，需从配置中删除这些属性
+  - iOS 依赖配置中移除 `podspecPath`
+  - 移除 `run-ios` 命令的 `--project-path` 选项
+  - iOS 源目录的检测改为查找 Podfile，而非 Xcode 项目
+- 不再支持 `console.disableYellowBox` [相关功能已移除](https://github.com/facebook/react-native/commit/b633cc130533f0731b2577123282c4530e4f0abe)
+- 已废弃的 prop types 被移除（[cdfddb4dad](https://github.com/facebook/react-native/commit/cdfddb4dad7c69904850d7e5f089a32a1d3445d1)，[3e229f27bc](https://github.com/facebook/react-native/commit/3e229f27bc9c7556876ff776abf70147289d544b)，[10199b1581](https://github.com/facebook/react-native/commit/10199b158138b8645550b5579df87e654213fe42)）
+- 已从 Appearance 移除自 RN 0.65 起废弃的 `removeListener`（[8dfbed786b](https://github.com/facebook/react-native/commit/8dfbed786b40082a7a222e00dc0a621c0695697d)）
+- 如果您使用 `SegmentedComponentIOS`，现在需要替换为第三方库，例如 [segmented-control](https://github.com/react-native-segmented-control/segmented-control) （[235f168574](https://github.com/facebook/react-native/commit/235f1685748442553e53f8ec6d904bc0314a8ae6)）
+
+### 依赖升级
+
+我们还升级了部分依赖：
+
+- 升级 [AGP（Android Gradle Plugin）至 7.1.1](https://github.com/facebook/react-native/commit/200488e87cf4bc355e03c78cd814b97b23452117)——建议在项目中使用此版本
+- Android 端 boost 库升级至 1.76 [以与 iOS 对齐](https://github.com/facebook/react-native/commit/5cd6367f0b86543274a15bb6d0e53a8545fed845)
+- Ruby 版本升级至 2.7.5（[链接](https://github.com/facebook/react-native/commit/2c87b7466e098c5cd230e02b279fc7bc7a357615)）
+- 直接依赖的 metro 包升级至 0.70.1（[链接](https://github.com/facebook/react-native/commit/b74e964e705c40834acad7020562e870cdad9db1)）
+
+您可以在[变更日志](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#0690)中查看完整变更列表。
+
+### 致谢
+
+共有 80 名贡献者，通过 629 次提交帮助实现了本次发布——感谢大家！
+
+我们还要感谢发布测试人员、支持者以及所有提供反馈的朋友们，确保本版本尽可能稳定。

@@ -25,7 +25,7 @@ title: 计时器
 
 ## InteractionManager
 
-:::warning 已弃用
+:::warning[Deprecated]
 `InteractionManager` 的行为已更改为与 `setImmediate` 相同，应改用后者。
 :::
 

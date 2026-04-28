@@ -256,8 +256,8 @@ static prefersCrossFadeTransitions(): Promise<boolean>;
 
 ### 🗑️ `setAccessibilityFocus()`
 
-:::warning 已废弃
-推荐使用事件类型为 `focus` 的 `sendAccessibilityEvent` 代替。
+:::warning[Deprecated]
+建议改用带有 `focus` 事件类型的 `sendAccessibilityEvent`。
 :::
 
 ```tsx

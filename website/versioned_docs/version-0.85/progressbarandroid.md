@@ -3,8 +3,8 @@ id: progressbarandroid
 title: '🗑️ ProgressBarAndroid'
 ---
 
-:::warning 已弃用
-请改用 [社区包](https://reactnative.directory/?search=progressbar) 之一。
+:::warning[已废弃]
+请改用 [community packages](https://reactnative.directory/?search=progressbar) 中的一个。
 :::
 
 仅适用于 Android 的 React 组件，用于指示应用正在加载或应用中存在一些活动。
@@ -19,19 +19,19 @@ const App = () => {
   return (
     <View style={styles.container}>
       <View style={styles.example}>
-        <Text>Circle Progress Indicator</Text>
+        <Text>圆形进度指示器</Text>
         <ProgressBarAndroid />
       </View>
       <View style={styles.example}>
-        <Text>Horizontal Progress Indicator</Text>
+        <Text>水平进度指示器</Text>
         <ProgressBarAndroid styleAttr="Horizontal" />
       </View>
       <View style={styles.example}>
-        <Text>Colored Progress Indicator</Text>
+        <Text>彩色进度指示器</Text>
         <ProgressBarAndroid styleAttr="Horizontal" color="#2196F3" />
       </View>
       <View style={styles.example}>
-        <Text>Fixed Progress Value</Text>
+        <Text>固定进度值</Text>
         <ProgressBarAndroid
           styleAttr="Horizontal"
           indeterminate={false}

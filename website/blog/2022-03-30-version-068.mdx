@@ -1,0 +1,76 @@
+---
+title: 宣布发布 React Native 0.68
+authors: [kelset, shikaSD]
+tags: [公告, 版本发布]
+---
+
+大家好！今天我们宣布 React Native 0.68.0 版本发布，本次版本支持可选启用新的 React Native 架构，包含错误修复等更多内容。
+
+### 目录
+
+- [0.68 亮点](/blog/2022/03/30/version-068#highlights-of-068)
+- [如何选择启用新架构](/blog/2022/03/30/version-068#opting-in-to-the-new-architecture)
+- [官网更新](/blog/2022/03/30/version-068#website-updates)
+- [想帮助 React Native 稳定新版本吗？](/blog/2022/03/30/version-068#interested-in-helping-react-native-stabilize-new-releases)
+
+{/* truncate */}
+
+## 0.68 亮点
+
+[Andrei Calazans](https://twitter.com/Andrei_Calazans) 帮助我们挑选了 0.68 版本带来的最重要的变更：
+
+### 破坏性变更和版本升级
+
+本版本包含一些破坏性变更：
+
+- React Native 升级到了 Node 16，这是最新的长期支持版本（LTS）。由于在 CI 中我们测试 LTS 和前一个 LTS 版本，这意味着用户现在至少需要使用 Node 14 及以上版本。
+- Android Gradle 插件升级到了 7.0.1，要求使用 JDK 11 进行 Android 构建，请确保升级你的配置（我们建议在 Intel 和 M1 Mac 上都使用 `zulu11` JDK 版本）
+- iOS 上 `RCTBundleURLProvider` API 移除了 `fallbackResource` 参数。这个参数可以安全地从方法调用中移除，无需替代。
+
+工具链也进行了更新，主要版本提升如下：
+
+- @react-native-community/cli 升级到 7.0.3
+- Metro 升级到 0.67
+- react-devtools-core 依赖升级到 4.23.0
+- Flipper 升级到 0.125.0
+- react-native-codegen 升级到 0.0.9
+- Kotlin 升级到 1.6.10
+- Soloader 升级到 0.10.3
+- Gradle 升级到 7.3
+- Android 编译和目标 SDK 升级到 31
+
+另外，多亏了 [Nicola Corti](https://github.com/cortinico) 的[这个提交](https://github.com/facebook/react-native/commit/bd7caa64f5d6ee5ea9484e92c3629c9ce711f73c)，Android Gradle 插件现在会自动下载默认版本的 NDK，用户无需再手动指定和安装。
+
+### 其他改进
+
+本次发布还包含了许多其他更改和修复，以下是你可能感兴趣的一些精选：
+
+- [Gijs Weterings](https://github.com/GijsWeterings) [修复了将 testID 转发至 RCTModalHostView](https://github.com/facebook/react-native/commit/5050e7eaa17cb417baf7c20eb5c4406cce6790a5)，使得 E2E 测试定位模态框更加方便。
+- [Liam Jones](https://github.com/liamjones) [修复了一个问题](https://github.com/facebook/react-native/commit/9d2df5b8ae9)，该问题会导致调用 `console.error` 时，RedBox 和 LogBox 同时出现。
+- [Sam Kline](https://github.com/samkline) [修复了 Android 开发模式下 BundleDownloader 失败后出现的空白屏幕问题](https://github.com/facebook/react-native/commit/c8d823b9bd9619dfa1f5851af003cc24ba2e8830)。
+- [Jeffrey Hyer](https://github.com/JeffreyHyer) [修复了键盘避免视图 KeyboardAvoidingView 在使用 `onLayout` 属性时的不正常行为](https://github.com/facebook/react-native/commit/9c5e177a79c)。
+
+如果你想了解完整的变更列表，可以查看发布日志的[完整链接](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#0680)。
+
+### 感谢
+
+本次版本包含了 68 位贡献者共计 614 个提交！感谢大家的贡献！
+
+我们还要感谢在稳定版 0.68.0 发布前协助我们发现回归问题的发布测试者及支持者：你们对于本次版本的成功至关重要！
+
+如果你、你的应用或你的公司有兴趣加入“发布测试者”计划，可以[在这里报名](https://forms.gle/fPuPE1MZRDGWNqpd6)。
+
+## 选择启用新架构
+
+如上文简要提到，React Native 0.68 是首个支持可选启用 Fabric 渲染器和 TurboModule 系统的版本。这标志着新 React Native 架构推广的重要里程碑。为帮助大家更好了解这些变更，我们在官网添加了[架构章节](/architecture/overview)，其中包含多个关于新系统内部实现的深入指南。
+
+同时，我们为文档增加了[迁移指南](https://github.com/reactwg/react-native-new-architecture#guides)，并启动了一个专门针对新架构的[工作组](https://github.com/reactwg/react-native-new-architecture)。你可以在[之前的博客文章](/blog/2022/03/15/an-update-on-the-new-architecture-rollout)中找到更多信息，包括如何启用新架构。
+
+请注意，新架构仍在调整中。你所依赖的一些第三方库可能还未迁移，你可能会遇到尚未发现的问题。如果遇到，请将问题反馈给我们的[新架构工作组](https://github.com/reactwg/react-native-new-architecture)。
+
+**关于 React 18：** React 18 的新渲染引擎暂不支持 React Native 0.68，支持将会在未来版本提供。这是因为 React 18 依赖新架构来发挥其在[React 18 公告博客](https://reactjs.org/blog/2022/03/29/react-v18.html)中介绍的新特性。更多信息请参考[React Conf 主题演讲](https://www.youtube.com/watch?v=FZ0cG47msEk&t=1530s)。
+
+## 官网更新
+
+除了对主代码库的优化外，借助 [Simek](https://github.com/Simek)、[Megatron4537](https://github.com/Megatron4537) 和 [slorber](https://github.com/slorber) 的贡献，官网也有不少改进！尤其是你现在可以在顶部工具栏中新看到如何为 React Native 贡献代码的部分。
+此外，“Contributing（贡献指南）”章节和全新的“Architecture（架构）”章节现已为无版本控制——也就是说，这两个章节只有一份内容，而不再针对每个 React Native 版本保留单独的副本。

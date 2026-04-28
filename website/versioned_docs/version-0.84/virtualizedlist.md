@@ -21,7 +21,7 @@ import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const getItem = (_data, index) => ({
   id: Math.random().toString(12).substring(0),
-  title: `Item ${index + 1}`,
+  title: `项目 ${index + 1}`,
 });
 
 const getItemCount = _data => 50;
@@ -82,7 +82,7 @@ type ItemData = {
 
 const getItem = (_data: unknown, index: number): ItemData => ({
   id: Math.random().toString(12).substring(0),
-  title: `Item ${index + 1}`,
+  title: `项目 ${index + 1}`,
 });
 
 const getItemCount = (_data: unknown) => 50;
@@ -300,8 +300,8 @@ export default App;
 
 ### 🗑️ `disableVirtualization`
 
-:::warning 已废弃
-虚拟化可显著提升性能和内存优化，但会完全卸载不在渲染窗口内的 React 实例。仅应在调试时禁用。
+:::warning[Deprecated]
+虚拟化提供了显著的性能和内存优化，但会彻底卸载渲染窗口之外的 react 实例。你通常只需要在调试时关闭它。
 :::
 
 | 类型    |

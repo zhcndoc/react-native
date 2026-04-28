@@ -17,7 +17,7 @@ const App = () => (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContentContainer}>
         <View style={styles.box}>
-          <Text style={styles.text}>Original Object</Text>
+          <Text style={styles.text}>原始对象</Text>
         </View>
 
         <View
@@ -27,7 +27,7 @@ const App = () => (
               transform: [{scale: 2}],
             },
           ]}>
-          <Text style={styles.text}>Scale by 2</Text>
+          <Text style={styles.text}>缩放 2 倍</Text>
         </View>
 
         <View
@@ -37,7 +37,7 @@ const App = () => (
               transform: [{scaleX: 2}],
             },
           ]}>
-          <Text style={styles.text}>ScaleX by 2</Text>
+          <Text style={styles.text}>ScaleX 2 倍</Text>
         </View>
 
         <View
@@ -47,7 +47,7 @@ const App = () => (
               transform: [{scaleY: 2}],
             },
           ]}>
-          <Text style={styles.text}>ScaleY by 2</Text>
+          <Text style={styles.text}>ScaleY 2 倍</Text>
         </View>
 
         <View
@@ -57,7 +57,7 @@ const App = () => (
               transform: [{rotate: '45deg'}],
             },
           ]}>
-          <Text style={styles.text}>Rotate by 45 deg</Text>
+          <Text style={styles.text}>旋转 45 度</Text>
         </View>
 
         <View
@@ -67,7 +67,7 @@ const App = () => (
               transform: [{rotateX: '45deg'}, {rotateZ: '45deg'}],
             },
           ]}>
-          <Text style={styles.text}>Rotate X&Z by 45 deg</Text>
+          <Text style={styles.text}>X&Z 旋转 45 度</Text>
         </View>
 
         <View
@@ -77,7 +77,7 @@ const App = () => (
               transform: [{rotateY: '45deg'}, {rotateZ: '45deg'}],
             },
           ]}>
-          <Text style={styles.text}>Rotate Y&Z by 45 deg</Text>
+          <Text style={styles.text}>Y&Z 旋转 45 度</Text>
         </View>
 
         <View
@@ -87,7 +87,7 @@ const App = () => (
               transform: [{skewX: '45deg'}],
             },
           ]}>
-          <Text style={styles.text}>SkewX by 45 deg</Text>
+          <Text style={styles.text}>SkewX 45 度</Text>
         </View>
 
         <View
@@ -97,7 +97,7 @@ const App = () => (
               transform: [{skewY: '45deg'}],
             },
           ]}>
-          <Text style={styles.text}>SkewY by 45 deg</Text>
+          <Text style={styles.text}>SkewY 45 度</Text>
         </View>
 
         <View
@@ -107,7 +107,7 @@ const App = () => (
               transform: [{skewX: '30deg'}, {skewY: '30deg'}],
             },
           ]}>
-          <Text style={styles.text}>Skew X&Y by 30 deg</Text>
+          <Text style={styles.text}>X&Y 倾斜 30 度</Text>
         </View>
 
         <View
@@ -117,7 +117,7 @@ const App = () => (
               transform: [{translateX: -50}],
             },
           ]}>
-          <Text style={styles.text}>TranslateX by -50 </Text>
+          <Text style={styles.text}>TranslateX -50</Text>
         </View>
 
         <View
@@ -127,7 +127,7 @@ const App = () => (
               transform: [{translateY: 50}],
             },
           ]}>
-          <Text style={styles.text}>TranslateY by 50 </Text>
+          <Text style={styles.text}>TranslateY 50</Text>
         </View>
 
         <View
@@ -141,7 +141,7 @@ const App = () => (
               ],
             },
           ]}>
-          <Text style={styles.text}>Matrix Transform</Text>
+          <Text style={styles.text}>矩阵变换</Text>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -268,11 +268,11 @@ export default App;
 
 ### `decomposedMatrix`, `rotation`, `scaleX`, `scaleY`, `transformMatrix`, `translateX`, `translateY`
 
-:::warning 已弃用
+:::warning[已弃用]
 请改用 [`transform`](transforms#transform) 属性。
 :::
 
-## Transform Origin
+## 变换原点
 
 `transformOrigin` 属性设置视图变换的原点。变换原点是应用变换的中心点。默认情况下，变换的原点是 `center`。
 

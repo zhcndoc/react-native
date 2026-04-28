@@ -139,7 +139,7 @@ type Movie = {
 const App = () => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState<Movie[]>([]);
-
+  
   const getMovies = async () => {
     try {
       const response = await fetch('https://reactnative.dev/movies.json');
@@ -201,9 +201,9 @@ request.onreadystatechange = e => {
   }
 
   if (request.status === 200) {
-    console.log('success', request.responseText);
+    console.log('成功', request.responseText);
   } else {
-    console.warn('error');
+    console.warn('错误');
   }
 };
 
@@ -211,8 +211,8 @@ request.open('GET', 'https://mywebsite.com/endpoint/');
 request.send();
 ```
 
-:::warning 注意
-XMLHttpRequest 的安全模型与 Web 不同，因为原生应用中没有 [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) 的概念。
+:::warning[Caution]
+XMLHttpRequest 的安全模型与网页端不同，因为原生应用中没有 [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) 的概念。
 :::
 
 ## WebSocket 支持

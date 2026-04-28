@@ -12,7 +12,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 ## 创建日历原生模块
 
-在下面的指南中，你将创建一个原生模块 `CalendarModule`，它将允许你从 JavaScript 访问 Apple 的日历 API。最后你将能够从 JavaScript 调用 `CalendarModule.createCalendarEvent('Dinner Party', 'My House');`， invoking a native method that creates a calendar event.（调用一个创建日历事件的原生方法。）
+在下面的指南中，你将创建一个原生模块 `CalendarModule`，它将允许你从 JavaScript 访问 Apple 的日历 API。最后你将能够从 JavaScript 调用 `CalendarModule.createCalendarEvent('Dinner Party', 'My House');`，调用一个创建日历事件的原生方法。
 
 ### 设置
 
@@ -427,7 +427,7 @@ const onPress = () => {
 };
 ```
 
-如果你想将类似错误的对象传递给 JavaScript，请使用 [`RCTUtils.h.`](https://github.com/facebook/react-native/blob/main/packages/react-native/React/Base/RCTUtils.h) 中的 `RCTMakeError`。目前这只会将一个错误形状的字典传递给 JavaScript，但 React Native 旨在将来自动生成真正的 JavaScript Error 对象。你还可以提供一个 `RCTResponseErrorBlock` 参数，它用于错误回调并接受一个 `NSError \* object`。请注意，此参数类型在 TurboModules 中将不受支持。
+如果你想将类似错误的对象传递给 JavaScript，请使用 [`RCTUtils.h`](https://github.com/facebook/react-native/blob/main/packages/react-native/React/Base/RCTUtils.h) 中的 `RCTMakeError`。目前这只会将一个错误形状的字典传递给 JavaScript，但 React Native 旨在将来自动生成真正的 JavaScript Error 对象。你还可以提供一个 `RCTResponseErrorBlock` 参数，它用于错误回调并接受一个 `NSError \* object`。请注意，此参数类型在 TurboModules 中将不受支持。
 
 ### Promise
 
@@ -551,8 +551,8 @@ RCT_EXPORT_METHOD(doSomethingExpensive:(NSString *)param callback:(RCTResponseSe
 
 ```
 
-:::info 在模块之间共享 dispatch 队列
-`methodQueue` 方法将在模块初始化时调用一次，然后由 React Native 保留，因此你自己无需保留对队列的引用，除非你希望在模块内使用它。但是，如果你希望在多个模块之间共享同一个队列，那么你需要确保为每个模块保留并返回同一个队列实例。
+:::info[Sharing dispatch queues between modules]
+`methodQueue` 方法将在模块初始化时调用一次，然后由 React Native 保留，因此你无需自己持有该队列的引用，除非你希望在模块内部使用它。但是，如果你希望在多个模块之间共享同一个队列，那么你需要确保为每个模块保留并返回同一个队列实例。
 :::
 
 ### 依赖注入
@@ -584,7 +584,7 @@ class CalendarModule: NSObject {
 
  @objc(addEvent:location:date:)
  func addEvent(_ name: String, location: String, date: NSNumber) -> Void {
-   // Date 已准备好使用！
+   // 日期已准备好使用！
  }
 
  @objc
@@ -623,7 +623,7 @@ RCT_EXTERN_METHOD(addEvent:(NSString *)name location:(NSString *)location date:(
 
 :::note
 制作第三方模块时的重要事项：带有 Swift 的静态库仅在 Xcode 9 及更高版本中受支持。为了在使用模块中包含的 iOS 静态库中的 Swift 时构建 Xcode 项目，你的主应用项目必须包含 Swift 代码和桥接头文件。如果你的应用项目不包含任何 Swift 代码，一种变通方法是使用单个空的 .swift 文件和空的桥接头文件。
-:::
+::::
 
 ### 保留方法名
 

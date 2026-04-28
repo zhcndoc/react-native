@@ -148,12 +148,12 @@ public class NativeLocalStoragePackage extends BaseReactPackage {
       public Map<String, ReactModuleInfo> getReactModuleInfos() {
         Map<String, ReactModuleInfo> map = new HashMap<>();
         map.put(NativeLocalStorageModule.NAME, new ReactModuleInfo(
-          NativeLocalStorageModule.NAME,       // name
-          NativeLocalStorageModule.NAME,       // className
-          false, // canOverrideExistingModule
-          false, // needsEagerInit
-          false, // isCXXModule
-          true   // isTurboModule
+          NativeLocalStorageModule.NAME,       // 名称
+          NativeLocalStorageModule.NAME,       // 类名
+          false, // 是否可覆盖现有模块
+          false, // 是否需要急切初始化
+          false, // 是否为 CXX 模块
+          true   // 是否为 Turbo 模块
         ));
         return map;
       }
@@ -206,7 +206,7 @@ class NativeLocalStoragePackage : BaseReactPackage() {
 在本例中，你需要将其添加到 [getPackages](https://github.com/facebook/react-native/blob/8d8b8c343e62115a5509e1aed62047053c2f6e39/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/ReactNativeHost.java#L233) 方法的返回列表中。
 
 :::info
-后续你还将学习如何将你的原生模块发布为 [npm 包](the-new-architecture/create-module-library.md#publish-the-library-on-npm)，我们的构建工具将自动为你完成自动链接。
+以后你会了解如何将你的原生模块作为 [npm 包](the-new-architecture/create-module-library.mdx#publish-the-library-on-npm) 分发，我们的构建工具会为你自动链接它们。
 :::
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>

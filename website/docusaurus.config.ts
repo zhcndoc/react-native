@@ -17,9 +17,9 @@ import prismTheme from './core/PrismTheme';
 import remarkSnackPlayer from '@react-native-website/remark-snackplayer';
 import remarkCodeblockLanguageTitle from '@react-native-website/remark-codeblock-language-as-title';
 
-// See https://docs.netlify.com/configure-builds/environment-variables/
 const isProductionDeployment =
-  !!process.env.NETLIFY && process.env.CONTEXT === 'production';
+  (!!process.env.NETLIFY && process.env.CONTEXT === 'production') ||
+  (!!process.env.VERCEL && process.env.VERCEL_ENV === 'production');
 
 const lastVersion = versions[0];
 const copyright = `<a target="_blank" style="text-decoration: none;" href="https://www.zhcndoc.com">简中文档</a>｜<a rel="nofollow" target="_blank" style="text-decoration: none;" href="https://beian.miit.gov.cn">沪ICP备2024070610号-3</a>`;
@@ -30,6 +30,7 @@ export type EditUrlButton = {
 };
 
 const commonDocsOptions: PluginContentDocs.Options = {
+  admonitions: {keywords: ['important'], extendDefaults: true},
   breadcrumbs: false,
   showLastUpdateAuthor: false,
   showLastUpdateTime: true,
@@ -63,7 +64,9 @@ const commonDocsOptions: PluginContentDocs.Options = {
   remarkPlugins: [remarkSnackPlayer, remarkCodeblockLanguageTitle],
 };
 
-const isDeployPreview = process.env.PREVIEW_DEPLOY === 'true';
+const isDeployPreview =
+  process.env.PREVIEW_DEPLOY === 'true' ||
+  (!!process.env.VERCEL && process.env.VERCEL_ENV === 'preview');
 
 const config: Config = {
   future: {
@@ -73,7 +76,7 @@ const config: Config = {
     // See https://github.com/facebook/docusaurus/issues/10556
     // See https://github.com/facebook/react-native-website/pull/4268
     // See https://docusaurus.io/blog/releases/3.6
-    experimental_faster: (process.env.DOCUSAURUS_FASTER ?? 'true') === 'true',
+    faster: (process.env.DOCUSAURUS_FASTER ?? 'true') === 'true',
   },
 
   title: 'React Native 中文文档',
@@ -361,6 +364,7 @@ const config: Config = {
             '/blog/tags/**',
             '/blog/archive',
             '/blog/authors',
+            '/releases',
             '/search',
           ],
         },

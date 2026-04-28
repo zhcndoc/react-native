@@ -1,0 +1,77 @@
+---
+title: 宣布 React Native 0.67
+authors: [kelset, lunaleaps]
+tags: [announcement, release]
+---
+
+大家新年好！今天我们宣布最新版本 React Native 0.67.0，同时分享过去几个月我们在发布流程上的一些改进。
+
+### 目录
+
+- [0.67 版本亮点](/blog/2022/01/19/version-067#highlights-of-067)
+- [发布流程改进](/blog/2022/01/19/version-067#improvements-to-release-process)
+- [想帮助 React Native 稳定新版本吗？](/blog/2022/01/19/version-067#interested-in-helping-react-native-stabilise-new-releases)
+
+{/* truncate */}
+
+## 0.67 版本亮点
+
+正如 Meta 在其[2021年下半年计划](https://reactnative.dev/blog/2021/08/19/h2-2021)中提到的，React Native 正尝试更频繁地发布版本，以更短的时间将新功能和修复（如新架构）交付给社区。因此，许多版本会主要专注于修复和改进。
+
+以下是 0.67.0 版本中的一些重要变更：
+
+- Lean-core 移除：[DatePickerAndroid](https://github.com/facebook/react-native/commit/7a770526c626e6659a12939f8c61057a688aa623#diff-e727e4bdf3657fd1d798edcd6b099d6e092f8573cba266154583a746bba0f346)
+- Gradle 版本升级到 7.2，Kotlin 版本升级到 1.5.31 [升级 Kotlin 和 Gradle 版本 (#32319)](https://github.com/facebook/react-native/commit/9ae3367431428748f5486c782199beb4f9c6b477)
+- 重要提示：0.67 继续依赖 Hermes 0.9.0，和 0.66 版本一致
+
+完整更新日志请查看[这里](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0670)。
+
+欢迎在[这个讨论](https://github.com/reactwg/react-native-releases/discussions/10)中参与本次版本的状态交流——另外，正如以往，为帮助大家升级到此版本，你可以使用[升级助手](https://react-native-community.github.io/upgrade-helper/) ⚛️
+
+### 致谢
+
+本次发布包含了[379 次提交，由 74 位贡献者](https://github.com/facebook/react-native/compare/0.66-stable...0.67-stable)完成！感谢所有贡献者（新老）！完整更新日志请查看[这里](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0670)。
+
+我们还要感谢帮助测试发布版本，确保 0.67.0 能够顺利应用到你们代码库且没有重大回归的测试人员。特别感谢：
+
+- Marc Rousavy ([@mrousavy](https://github.com/mrousavy)) 来自 [Margelo](https://margelo.com/)，他发现了一个 [Hermes 0.10 的回归问题](https://github.com/facebook/hermes/issues/649)（这个问题原本在 CI 测试中永远不会被发现），该问题将在 React Native 0.68 版本中的 Hermes 0.11 里修复。
+- Reanimated 团队在 0.67 RC 阶段早期就迅速准备好了他们库的 [0.67 兼容版本](https://github.com/software-mansion/react-native-reanimated/releases/tag/2.2.4)。
+- Elias Nahum ([@enahum](https://github.com/enahum)) 来自 [Mattermost](https://mattermost.com/)
+- Mike Hardy ([@mikeHardy](https://github.com/mikeHardy)) 与 [Invertase](https://invertase.io/) 合作
+
+我们同样感谢 [Rainbow](https://rainbow.me/)、[Comm](https://comm.app/) 和 [Ledger Live](https://www.ledger.com/ledger-live) 参与了“发布测试者”项目的试点（更多细节见下文）。
+
+## 发布流程改进
+
+如上所述，React Native 正在重构发布流程，以实现更频繁的版本发布，使新功能和修复更快推送给社区。
+
+过去几个月里，我们解决了一些导致发布延迟的问题。
+
+### 协作与知识共享
+
+我们投入资源完善发布文档，涵盖如何执行发布、常见问题解答、发布问题的协调等 —— 可以在 [react-native wiki](https://github.com/facebook/react-native/wiki/Releases) 的这一部分找到。
+通过完善文档，发布流程不再依赖于某个个人或隐性的经验知识。
+
+除了文档，我们还改进了发布协调，将预发布状态和补丁的讨论移至专门的讨论组：[react-wg/react-native-releases](https://github.com/reactwg/react-native-releases/discussions)。
+
+### 职责明确
+
+随着文档完善，发布工作可以规模化，不再需要某一个人承担关键责任。
+
+React Native 发布涉及广泛的潜在风险点，依赖众多环节和后续工作。鉴于 React Native 社区的多样性，必须有利益相关者参与发布。我们已定义了一套[发布支持的角色与职责](https://github.com/facebook/react-native/wiki/Release-Roles-and-Responsibilities)。
+
+### 发布候选版本信号
+
+另一问题是难以获得足够的信号，确认发布版本不会出现构建回归。可以通过加大对构建变体测试的投入缓解，但来自采用者的反馈仍然非常重要。
+
+在 0.67 版本中，我们试点了“发布测试者”项目，邀请 React Native 开发者[承诺在他们的开源应用中测试发布候选版本](https://github.com/facebook/react-native/wiki/Release-Roles-and-Responsibilities#release-tester-responsibilities)。此前，社区没有正式期望帮忙测试候选版本以发现潜在问题。该项目能让我们更快地获得反馈，保障版本稳定性。
+
+开源 React Native 应用特别有用，因为源码公开，有助于调试回归问题。借助该项目，一位测试者发现了 0.67 版本的回归，且我们能在不影响广大社区用户的情况下修复。
+
+## 想帮助 React Native 稳定新版本吗？
+
+捕获回归的好方法是，将 React Native 预发布版本 [`react-native@next`](https://www.npmjs.com/package/react-native) 或 [`react-native@nightly`](https://www.npmjs.com/package/react-native) 集成到你的 CI 流程中。发现回归时，可以[提交发布问题](https://github.com/facebook/react-native/issues/new?assignees=&labels=Needs%3A+Triage+%3Amag%3A%2CType%3A+Upgrade+Issue&template=upgrade-regression-form.yml)，并通知相应讨论组。
+
+如果你的应用或公司有意加入“发布测试者”项目，请访问[发布角色与职责 wiki](https://github.com/facebook/react-native/wiki/Release-Roles-and-Responsibilities#release-tester-responsibilities)底部的专门章节了解详情。
+
+最后，感谢大家尝试我们的发布候选版本并协助解决发布问题！

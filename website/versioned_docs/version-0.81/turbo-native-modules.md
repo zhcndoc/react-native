@@ -38,7 +38,7 @@ import {TurboNativeModulesAndroid, TurboNativeModulesIOS} from './\_turbo-native
 
 ### 1. 声明类型化规范
 
-React Native 提供了一个名为 [Codegen](/the-new-architecture/what-is-codegen.md) 的工具，它接受用 TypeScript 或 Flow 编写的规范，并为 Android 和 iOS 生成平台特定的代码。该规范声明了将在您的原生代码和 React Native JavaScript 运行时之间来回传递的方法和数据结构。Turbo 原生模块既是您的规范，也是您编写的原生代码，以及从您的规范生成的 Codegen 接口。
+React Native 提供了一个名为 [Codegen](/the-new-architecture/what-is-codegen.mdx) 的工具，它接受使用 TypeScript 或 Flow 编写的规范，并为 Android 和 iOS 生成平台特定代码。该规范声明了将在您的原生代码和 React Native JavaScript 运行时之间来回传递的方法和数据类型。Turbo 原生模块既包括您的规范、您编写的原生代码，也包括从您的规范生成的 Codegen 接口。
 
 要创建规范文件：
 
@@ -100,7 +100,7 @@ export interface Spec extends TurboModule {
      "start": "react-native start",
      "test": "jest"
    },
-   // highlight-add-start
+   // 高亮添加开始
    "codegenConfig": {
      "name": "NativeLocalStorageSpec",
      "type": "modules",
@@ -109,7 +109,7 @@ export interface Spec extends TurboModule {
        "javaPackageName": "com.nativelocalstorage"
      }
    },
-   // highlight-add-end
+   // 高亮添加结束
    "dependencies": {
 ```
 
@@ -209,16 +209,16 @@ function App(): React.JSX.Element {
   return (
     <SafeAreaView style={{flex: 1}}>
       <Text style={styles.text}>
-        Current stored value is: {value ?? 'No Value'}
+        当前存储的值是：{value ?? '没有值'}
       </Text>
       <TextInput
-        placeholder="Enter the text you want to store"
+        placeholder="输入您想要存储的文本"
         style={styles.textInput}
         onChangeText={setEditingValue}
       />
-      <Button title="Save" onPress={saveValue} />
-      <Button title="Delete" onPress={deleteValue} />
-      <Button title="Clear" onPress={clearAll} />
+      <Button title="保存" onPress={saveValue} />
+      <Button title="删除" onPress={deleteValue} />
+      <Button title="清除" onPress={clearAll} />
     </SafeAreaView>
   );
 }

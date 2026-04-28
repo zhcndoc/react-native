@@ -1,6 +1,6 @@
 ---
 id: statusbar
-title: StatusBar
+title: 状态栏
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
@@ -67,31 +67,31 @@ const App = () => {
           hidden={hidden}
         />
         <Text style={styles.textStyle}>
-          StatusBar Visibility:{'\n'}
-          {hidden ? 'Hidden' : 'Visible'}
+          状态栏可见性:{'\n'}
+          {hidden ? '隐藏' : '可见'}
         </Text>
         <Text style={styles.textStyle}>
-          StatusBar Style:{'\n'}
+          状态栏样式:{'\n'}
           {statusBarStyle}
         </Text>
         {Platform.OS === 'ios' ? (
           <Text style={styles.textStyle}>
-            StatusBar Transition:{'\n'}
+            状态栏过渡:{'\n'}
             {statusBarTransition}
           </Text>
         ) : null}
         <View style={styles.buttonsContainer}>
           <Button
-            title="Toggle StatusBar"
+            title="切换状态栏"
             onPress={changeStatusBarVisibility}
           />
           <Button
-            title="Change StatusBar Style"
+            title="更改状态栏样式"
             onPress={changeStatusBarStyle}
           />
           {Platform.OS === 'ios' ? (
             <Button
-              title="Change StatusBar Transition"
+              title="更改状态栏过渡"
               onPress={changeStatusBarTransition}
             />
           ) : null}
@@ -178,31 +178,31 @@ const App = () => {
           hidden={hidden}
         />
         <Text style={styles.textStyle}>
-          StatusBar Visibility:{'\n'}
-          {hidden ? 'Hidden' : 'Visible'}
+          状态栏可见性:{'\n'}
+          {hidden ? '隐藏' : '可见'}
         </Text>
         <Text style={styles.textStyle}>
-          StatusBar Style:{'\n'}
+          状态栏样式:{'\n'}
           {statusBarStyle}
         </Text>
         {Platform.OS === 'ios' ? (
           <Text style={styles.textStyle}>
-            StatusBar Transition:{'\n'}
+            状态栏过渡:{'\n'}
             {statusBarTransition}
           </Text>
         ) : null}
         <View style={styles.buttonsContainer}>
           <Button
-            title="Toggle StatusBar"
+            title="切换状态栏"
             onPress={changeStatusBarVisibility}
           />
           <Button
-            title="Change StatusBar Style"
+            title="更改状态栏样式"
             onPress={changeStatusBarStyle}
           />
           {Platform.OS === 'ios' ? (
             <Button
-              title="Change StatusBar Transition"
+              title="更改状态栏过渡"
               onPress={changeStatusBarTransition}
             />
           ) : null}
@@ -440,8 +440,8 @@ static setHidden(hidden: boolean, animation?: StatusBarAnimation);
 
 ### 🗑️ `setNetworkActivityIndicatorVisible()` <div className="label ios">iOS</div>
 
-:::warning 已弃用
-状态栏网络活动指示器在 iOS 13 及更高版本中不受支持。这将在未来的版本中移除。
+:::warning[Deprecated]
+状态栏网络活动指示器不再受 iOS 13 及更高版本支持。它将在未来的版本中移除。
 :::
 
 ```tsx

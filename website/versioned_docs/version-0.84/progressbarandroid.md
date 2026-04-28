@@ -1,10 +1,10 @@
 ---
 id: progressbarandroid
-title: '🗑️ ProgressBarAndroid'
+title: '🗑️ 进度条 Android'
 ---
 
-:::warning 已废弃
-请改用 [社区包](https://reactnative.directory/?search=progressbar) 中的组件。
+:::warning[已弃用]
+请改用 [社区包](https://reactnative.directory/?search=progressbar) 之一。
 :::
 
 仅限 Android 的 React 组件，用于指示应用正在加载或有活动进行中。

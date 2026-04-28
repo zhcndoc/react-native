@@ -18,7 +18,7 @@ const TextWithRefs = () => {
     const textElement = ref.current;
     const textNode = textElement.childNodes[0];
     setViewInfo(
-      `Text content is: ${textNode.nodeValue}`,
+      `文本内容是：${textNode.nodeValue}`,
     );
   }, []);
 
@@ -73,7 +73,7 @@ export default TextWithRefs;
   - [`nodeType`](https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType)
   - [`nodeValue`](https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeValue)
   - [`ownerDocument`](https://developer.mozilla.org/en-US/docs/Web/API/Node/ownerDocument)
-    - ℹ️ 将返回渲染此组件的 [文档实例](/docs/next/document-instances)。
+    - ℹ️ 将返回渲染此组件所在的 [document node](/docs/next/document-nodes)。
   - [`parentElement`](https://developer.mozilla.org/en-US/docs/Web/API/Node/parentElement)
   - [`parentNode`](https://developer.mozilla.org/en-US/docs/Web/API/Node/parentNode)
   - [`previousSibling`](https://developer.mozilla.org/en-US/docs/Web/API/Node/previousSibling)

@@ -1,0 +1,165 @@
+---
+title: 'React Native 0.72 - 符号链接支持、更好的错误提示等'
+authors: [kelset, fortmarek, cipolleschi, lunaleaps]
+tags: [公告, 发行]
+date: 2023-06-21
+---
+
+今天我们发布了 0.72！
+
+本次发布为 Metro 增加了备受期待的功能，更好的错误处理，以及其他开发者体验的改进。许多工作都是基于你们在[2022 年社区调查](https://github.com/react-native-community/discussions-and-proposals/discussions/528)中的反馈优先排序的——感谢所有参与的朋友们！
+
+### 亮点
+
+- [Metro 新特性](/blog/2023/06/21/0.72-metro-package-exports-symlinks#new-metro-features)
+- [开发者体验改进](/blog/2023/06/21/0.72-metro-package-exports-symlinks#developer-experience-improvements)
+- [新架构更新迁移](/blog/2023/06/21/0.72-metro-package-exports-symlinks#moving-new-architecture-updates)
+
+### 重大变更
+
+- [已废弃组件移除](/blog/2023/06/21/0.72-metro-package-exports-symlinks#deprecated-component-removals)
+- [包重命名](/blog/2023/06/21/0.72-metro-package-exports-symlinks#package-renames)
+
+{/* truncate */}
+
+## 亮点
+
+### Metro 新特性
+
+#### 符号链接支持（Beta）
+
+符号链接支持一直是 Metro 中最受欢迎的功能之一，在 React Native 0.72 中，我们高兴地宣布其进入 Beta 版本支持。
+
+符号链接支持使 React Native 能够透明地支持 monorepo 结构和 pnpm，消除了使用变通方案的需求。请参阅[启用 Beta 功能](/blog/2023/06/21/0.72-metro-package-exports-symlinks#enabling-beta-features)，在你的应用中使用该功能。
+
+该功能目前处于 Beta 阶段，旨在收集针对不同工作流程的开发者体验反馈，详情见[这里](https://twitter.com/robjhogan/status/1672293540632641554)。我们计划在 0.73 版本默认启用符号链接。
+
+#### 包导出支持（Beta）
+
+[包导出](https://nodejs.org/api/packages.html#exports)是 package.json 中 "main" 字段的现代替代方案，为 npm 包定义其公共 API 和针对 React Native 的目标提供了新能力。
+
+通过在 Metro 配置中启用包导出支持，你的应用将兼容更广泛的 JavaScript 生态系统，包括新的 ["react-native" 社区条件](https://nodejs.org/docs/latest-v19.x/api/packages.html#community-conditions-definitions)。参见[启用 Beta 功能](/blog/2023/06/21/0.72-metro-package-exports-symlinks#enabling-beta-features)来使用此功能。
+
+:::tip
+详见 [React Native 中的包导出支持](/blog/2023/06/21/package-exports-support)，了解此功能和我们稳定发布的规划。
+:::
+
+#### 启用 Beta 功能
+
+要在项目中启用这些功能，请更新应用的 `metro.config.js` 文件，设置 `resolver.unstable_enableSymlinks` 或 `resolver.unstable_enablePackageExports` 选项。
+
+```js
+const config = {
+  // ...
+  resolver: {
+    unstable_enableSymlinks: true,
+    unstable_enablePackageExports: true,
+  },
+};
+```
+
+#### 新的 `metro.config.js` 设置
+
+在 React Native 0.72 中，我们更改了 React Native CLI 中 Metro 的配置加载方式。请将你的项目中的 `metro.config.js` 文件更新为[模板版本](https://github.com/facebook/react-native/blob/76a42c292de838a0dd537935db792eaa81410b9b/packages/react-native/template/metro.config.js)。
+
+:::info
+请将配置文件更新为以下[格式](https://github.com/facebook/react-native/blob/76a42c292de838a0dd537935db792eaa81410b9b/packages/react-native/template/metro.config.js)。你也可以参考[升级助手](https://react-native-community.github.io/upgrade-helper/?from=0.71.8&to=0.72.0)。
+
+这些对 `metro.config.js` 格式的更改将在 0.73 版本成为必需。0.72 版本如果未更新，将会有警告提示。
+:::
+
+这使得扩展基础 React Native Metro 配置的控制权转移到你的项目中，并清理了残留的默认设置。此外，这意味着独立的 Metro CLI 命令（如 `metro get-dependencies`）现在可以正常工作。
+
+### 开发者体验改进
+
+#### 无效样式属性不再导致红屏
+
+在此之前，在 StyleSheet 中提供无效的样式属性会导致红屏错误。这个错误信号等级较高，打断开发者的工作流程，但错误的风险相对较低。
+
+在 0.72 版本中，我们放宽了这一限制，使其静默失败，类似于浏览器中无效 CSS 属性的处理，并更新了类型定义，使部分错误可在构建时（而非运行时）捕获。
+
+#### Hermes 错误可读性提升
+
+当调用未定义可调用对象时，Hermes 增加了更友好的错误提示。
+
+```
+    var x = undefined; x();
+    // 之前：undefined is not a function
+    // 现在：x is not a function (it is undefined)
+```
+
+另外，LogBox 的堆栈追踪现在会过滤掉与应用用户无关的 Hermes 内部字节码堆栈帧。
+
+#### React Native CLI 错误输出改进
+
+0.72 捆绑了 React Native CLI v11，改进内容包括减少重复、用词更清晰、减少冗长的堆栈追踪，并为 `init`、`run-android` 和 `run-ios` 命令添加到相关文档的深度链接。
+
+你可以在 [React Native CLI 更新日志](https://github.com/react-native-community/cli/releases) 中看到更多改进。
+
+#### Hermes 中更快的编译和 JSON 解析
+
+Hermes 提升了大型对象字面量的编译速度。例如，在一个报告的问题[#852](https://github.com/facebook/hermes/issues/852)中，用户将整个数据集写成了一个大型对象字面量。通过改进 Hermes 的会去重算法，编译速度提升了 97%（[221c](https://github.com/facebook/hermes/commit/221ce21a209e2e32a3eaaa2d9e28ca81842fad20)）。这些改进将有利于打包许多对象的应用构建时间。
+
+另外对 JSON 解析的多项优化（[de9c](https://github.com/facebook/hermes/commit/de9cff2aa41fc1f297b568848143347823d73659), [6e2d](https://github.com/facebook/hermes/commit/6e2dd652c8d90c5d59737a81f66a259efffdcd00)）也已合入，特别对依赖大量 JSON 操作的库（如 redux-persist）带来性能提升。
+
+#### Hermes 支持更多 ECMAScript 特性
+
+React Native 0.72 中 Hermes 新支持以下规范：
+
+- 支持 [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at)、[TypedArray](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/at) 和 [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/at) 的 `prototype.at` 方法。详见[#823](https://github.com/facebook/hermes/issues/823) ([ebe2](https://github.com/facebook/hermes/commit/ebe2915ac386a6b73dec39c2af4ac7063e68cd99))。
+- 实现了[良构 JSON.stringify](https://github.com/tc39/proposal-well-formed-stringify) （[d41d](https://github.com/facebook/hermes/commit/d41decf244aa814b1e58827a9de982f3b71667de)），防止不良格式的 Unicode 字符串。
+- 实现了 [AggregateError](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError) （[9b25](https://github.com/facebook/hermes/commit/9b25a2530eb515f6c4fbd397ae290b6c97c049b2）），它表示多个错误被包装成一个错误。对 `Promise.any()`（当所有传入的 Promise 都拒绝）返回多个错误场景非常有用。
+
+JSC 用户已经可以使用这些功能。
+
+### 新架构更新迁移
+
+新架构目前仍处于实验阶段。为了将更新集中于目标受众，我们将在 0.72 及未来版本中，将新架构的更新迁移到专门的[工作组](https://github.com/reactwg/react-native-new-architecture/discussions)。此举也方便更频繁地推送更新，如我们夜间版本中发布的内容。
+
+你可以在[这里](https://github.com/reactwg/react-native-new-architecture/discussions/136)阅读 0.72 新架构更新。订阅该工作组的 GitHub 通知，随时了解我们新架构的进展。
+
+## 重大变更
+
+### 已废弃组件移除
+
+下列包在 React Native 0.72 中已被移除。请迁移到对应的社区推荐包：
+
+- [Slider](https://reactnative.dev/docs/0.72/slider) 被 [@react-native-community/slider](https://github.com/callstack/react-native-slider/tree/main/package) 取代
+- [DatePickerIOS](https://reactnative.dev/docs/0.72/datepickerios) 被 [@react-native-community/datetimepicker](https://github.com/react-native-datetimepicker/datetimepicker) 取代
+- [ProgressViewIOS](https://reactnative.dev/docs/0.72/progressviewios) 被 [@react-native-community/progress-view](https://github.com/react-native-progress-view/progress-view) 取代
+
+### 包重命名
+
+所有从 [`react-native`](https://github.com/facebook/react-native) 核心仓库发布的包，现在都位于 `react-native/packages` 下，并且以 [@react-native npm 作用域](https://www.npmjs.com/search?q=%40react-native)发布，以确保清晰的归属。
+
+[react-native](https://www.npmjs.com/package/react-native) 主包没有变更。
+
+| 旧包名                              | 新包名                         |
+| --------------------------------- | ------------------------------ |
+| `@react-native-community/eslint-config` | `@react-native/eslint-config`    |
+| `@react-native-community/eslint-plugin` | `@react-native/eslint-plugin`    |
+| `@react-native/polyfills`          | `@react-native/js-polyfills`     |
+| `@react-native/normalize-color`   | `@react-native/normalize-colors` |
+| `@react-native/assets`             | `@react-native/assets-registry`  |
+| `react-native-codegen`             | `@react-native/codegen`           |
+| `react-native-gradle-plugin`       | `@react-native/gradle-plugin`     |
+
+如果你没有直接依赖这些已重命名的包，这一变更不会影响你。否则，在升级到 React Native 0.72 时，请将重命名的依赖升级到 ~0.72 版本。
+
+你可以在[专门的 RFC](https://github.com/react-native-community/discussions-and-proposals/pull/480)中阅读导致这些变更的原因。
+
+## 致谢
+
+本次发布的许多内容源自社区的直接反馈。从[嘈杂的红屏报告](https://twitter.com/baconbrix/status/1623039650775371792)、[包导出相关的 Bug](https://github.com/facebook/metro/issues/965)、[新架构的基准测试](https://github.com/reactwg/react-native-new-architecture/discussions/85) —— 这些反馈都非常宝贵，我们感谢花时间提供反馈的你们。
+
+0.72 版本包含了 66 位贡献者提交的超过 [1100 个提交](https://github.com/facebook/react-native/compare/v0.71.8...v0.72.0)。感谢大家的辛勤工作！
+
+## 升级至 0.72
+
+查看 [升级助手](https://react-native-community.github.io/upgrade-helper/) 中所需的变更列表，或阅读[升级文档](/docs/upgrading)了解如何更新现有项目，或使用 `npx react-native@latest init MyProject` 创建新项目。
+
+如果你使用 Expo，React Native 0.72 版本将在 Expo SDK 49 中支持。
+
+:::info
+0.72 现已成为 React Native 的最新稳定版本，0.69.x 版本转为不再支持。更多信息请查看 [React Native 的支持政策](https://github.com/reactwg/react-native-releases#releases-support-policy)。
+:::

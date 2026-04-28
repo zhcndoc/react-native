@@ -43,8 +43,8 @@ import CanaryAPIWarning from './\_canary-channel-api-warning.mdx';
 
 ### `rnRootIntersectionRatio` ⚠️
 
-:::warning 非标准
-这是 React Native 特定的扩展。
+:::warning[Non-standard]
+这是 React Native 特有的扩展。
 :::
 
 返回 `intersectionRect` 与 `rootBounds` 的比例。

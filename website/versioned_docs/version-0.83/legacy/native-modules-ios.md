@@ -547,8 +547,8 @@ RCT_EXPORT_METHOD(doSomethingExpensive:(NSString *)param callback:(RCTResponseSe
 }
 ```
 
-:::info 共享 dispatch 队列提示
-`methodQueue` 函数只会在模块初始化时被调用一次，返回的队列会被 React Native 保持引用。因此，一般不必自行保存队列引用，除非想自身调用队列。但若想共享同一队列给多个模块，需要确保每个模块返回同一个队列实例。
+:::info[Sharing dispatch queues between modules]
+`methodQueue` 方法会在模块初始化时调用一次，然后由 React Native 保留，因此无需你自己持有该队列的引用，除非你希望在模块内部使用它。不过，如果你希望多个模块共享同一个队列，则需要确保为每个模块持有并返回同一个队列实例。
 :::
 
 ### 依赖注入

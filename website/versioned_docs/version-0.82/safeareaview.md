@@ -3,7 +3,7 @@ id: safeareaview
 title: '🗑️ SafeAreaView'
 ---
 
-:::warning 已弃用
+:::warning[已弃用]
 请改用 [react-native-safe-area-context](https://github.com/AppAndFlow/react-native-safe-area-context)。
 :::
 
@@ -22,7 +22,7 @@ import {StyleSheet, Text, SafeAreaView} from 'react-native';
 const App = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.text}>Page content</Text>
+      <Text style={styles.text}>页面内容</Text>
     </SafeAreaView>
   );
 };

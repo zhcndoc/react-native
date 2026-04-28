@@ -7,7 +7,7 @@ import CanaryAPIWarning from './\_canary-channel-api-warning.mdx';
 
 <CanaryAPIWarning />
 
-全局的 [`IntersectionObserver`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver) 接口，根据 Web 规范定义。它提供了一种异步观察目标元素与其祖先元素或顶层文档视口的交叉区域变化的方法。
+全局 [`IntersectionObserver`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver) 接口，根据 Web 规范定义。它提供了一种异步观察目标元素与其祖先元素或顶层文档视口的交叉区域变化的方法。
 
 ---
 
@@ -61,8 +61,8 @@ new IntersectionObserver(callback, options?)
 
 ### `rnRootThresholds` ⚠️
 
-:::warning 非标准
-这是 React Native 特定的扩展。
+:::warning[Non-standard]
+This is a React Native specific extension.
 :::
 
 一个根阈值列表，按数值递增排序，每个阈值是指定根视图（默认为视口）的交叉面积与边界框面积的比例。

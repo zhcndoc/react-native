@@ -1,0 +1,15 @@
+# 什么是 Codegen？
+
+**Codegen** 是一个用于避免编写大量重复代码的工具。使用 Codegen **不是强制性的**：你可以手动编写所有生成的代码。不过，Codegen 会生成脚手架代码，这可以为你节省大量时间。
+
+React Native 在每次构建 iOS 或 Android 应用时都会自动调用 Codegen。有时，你可能希望手动运行 Codegen 脚本，以了解实际生成了哪些类型和文件：这在开发 [Turbo Native Modules](/docs/turbo-native-modules-introduction) 和 Fabric Native Components 时是一个常见场景。
+
+{/* TODO: Add links to TM and FC */}
+
+## Codegen 的工作原理
+
+**Codegen** 是一个与 React Native 应用紧密耦合的过程。Codegen 脚本位于 `react-native` 的 NPM 包中，应用会在构建时调用这些脚本。
+
+Codegen 会从你在 `package.json` 中指定的目录开始，遍历项目中的各个文件夹，查找包含你自定义模块和组件规范（specs）的特定 JS 文件。规范文件是使用类型化方言编写的 JS 文件：React Native 目前支持 Flow 和 TypeScript。
+
+每次 Codegen 找到一个规范文件时，都会为其生成关联的样板代码。Codegen 会先生成一些 C++ 连接代码，然后再生成平台特定代码，Android 使用 Java，iOS 使用 Objective-C++。

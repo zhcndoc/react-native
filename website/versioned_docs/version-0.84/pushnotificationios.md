@@ -3,8 +3,8 @@ id: pushnotificationios
 title: '🗑️ PushNotificationIOS'
 ---
 
-:::warning 已废弃
-请使用其他 [社区包](https://reactnative.directory/?search=notification)。
+:::warning[已弃用]
+请改用 [社区包](https://reactnative.directory/?search=notification) 之一。
 :::
 
 <div className="banner-native-code-required">

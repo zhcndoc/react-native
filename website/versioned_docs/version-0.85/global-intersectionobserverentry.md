@@ -7,7 +7,7 @@ import CanaryAPIWarning from './\_canary-channel-api-warning.mdx';
 
 <CanaryAPIWarning />
 
-[`IntersectionObserverEntry`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry) 接口，如 Web 规范中所定义。它描述了目标元素与其根容器在过渡特定时刻的交叉情况。
+[`IntersectionObserverEntry`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry) 接口，如 Web 规范中所定义。它描述了目标元素与其根容器在特定时刻的交叉情况。
 
 `IntersectionObserverEntry` 的实例会通过 [`IntersectionObserver`](global-intersectionobserver) 回调的 `entries` 参数传递。
 
@@ -43,8 +43,8 @@ import CanaryAPIWarning from './\_canary-channel-api-warning.mdx';
 
 ### `rnRootIntersectionRatio` ⚠️
 
-:::warning 非标准
-这是 React Native 特定的扩展。
+:::warning[Non-standard]
+这是 React Native 特有的扩展。
 :::
 
 返回 `intersectionRect` 与 `rootBounds` 的比率。

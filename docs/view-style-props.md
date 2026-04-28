@@ -3,6 +3,9 @@ id: view-style-props
 title: View 样式属性
 ---
 
+import ExperimentalAPIWarning from './\_experimental-api-warning.mdx';
+import {getCoreBranchNameForCurrentVersion} from '@site/src/getCoreBranchNameForCurrentVersion';
+
 ### 示例
 
 ```SnackPlayer name=ViewStyleProps
@@ -68,6 +71,33 @@ export default App;
 | 类型               |
 | ------------------ |
 | [颜色](colors.md) |
+
+---
+
+### `experimental_backgroundImage`
+
+<ExperimentalAPIWarning />
+
+`experimental_backgroundImage` 提供了使用类似 Web 的语法绘制 [`linear-gradient()`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/gradient/linear-gradient) ([0.76.x+](https://github.com/facebook/react-native/blob/main/CHANGELOG-0.7x.md#v0760)) 和 [`radial-gradient()`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/gradient/radial-gradient) ([0.80.x+](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0800)) 的能力。
+
+```tsx
+// 简单用法：
+<View style={{
+  experimental_backgroundImage: 'linear-gradient(45deg, blue, red)'
+}} />
+<View style={{
+  experimental_backgroundImage: 'radial-gradient(ellipse farthest-corner at 30% 40%, red, blue)'
+}} />
+```
+
+更多复杂用法示例可在 RNTester 应用中找到（支持 `PlatformColor`）：
+
+- <a href={`https://github.com/facebook/react-native/blob/${getCoreBranchNameForCurrentVersion()}/packages/rn-tester/js/examples/LinearGradient/LinearGradientExample.js`}>LinearGradientExample.js</a>
+- <a href={`https://github.com/facebook/react-native/blob/${getCoreBranchNameForCurrentVersion()}/packages/rn-tester/js/examples/RadialGradient/RadialGradientExample.js`}>RadialGradientExample.js</a>
+
+| Type                                                                                                                                                                                               |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| string, array of objects: `{type: 'linear-gradient', direction: string, colorStops: object[] }`, `{type: 'radial-gradient', shape: string, position: object, size: string, colorStops: object[] }` |
 
 ---
 
@@ -401,26 +431,27 @@ export default App;
 
 ##### mixBlendMode 值
 
-- `normal`：元素绘制在其背景之上，不进行混合。
-- `multiply`：源颜色乘以目标颜色并替换目标。
-- `screen`：将背景和源颜色值的补色相乘，然后对结果取补色。
-- `overlay`：根据背景颜色值，将颜色相乘或筛色。
-- `darken`：选择背景和源颜色中较暗的一个。
-- `lighten`：选择背景和源颜色中较亮的一个。
-- `color-dodge`：提亮背景颜色以反映源颜色。用黑色绘制不会产生变化。
-- `color-burn`：变暗背景颜色以反映源颜色。用白色绘制不会产生变化。
-- `hard-light`：根据源颜色值，将颜色相乘或筛色。效果类似于在背景上照射强烈的聚光灯。
-- `soft-light`：根据源颜色值，变暗或提亮颜色。效果类似于在背景上照射漫射聚光灯。
-- `difference`：从较亮的颜色中减去两个组成颜色中较暗的一个。
-- `exclusion`：产生类似于差异模式的效果，但对比度较低。
-- `hue`：创建一种颜色，具有源颜色的色相以及背景颜色的饱和度和亮度。
-- `saturation`：创建一种颜色，具有源颜色的饱和度以及背景颜色的色相和亮度。
-- `color`：创建一种颜色，具有源颜色的色相和饱和度以及背景颜色的亮度。这保留了背景的灰度级别，适用于为单色图像着色或为彩色图像着色。
-- `luminosity`：创建一种颜色，具有源颜色的亮度以及背景颜色的色相和饱和度。这产生与颜色模式相反的效果。
+- `normal`: 元素绘制在其背景之上，不进行混合。
+- `multiply`: 源颜色与目标颜色相乘，并替换目标颜色。
+- `screen`: 将背景和源颜色值的补色相乘，然后对结果取补。
+- `overlay`: 根据背景颜色值，对颜色进行相乘或滤色。
+- `darken`: 选择背景和源颜色中较深的颜色。
+- `lighten`: 选择背景和源颜色中较浅的颜色。
+- `color-dodge`: 使背景颜色变亮以反映源颜色。使用黑色绘制不会产生任何变化。
+- `color-burn`: 使背景颜色变暗以反映源颜色。使用白色绘制不会产生变化。
+- `hard-light`: 根据源颜色值对颜色进行相乘或滤色。效果类似于在背景上照射强烈聚光灯。
+- `soft-light`: 根据源颜色值使颜色变暗或变亮。效果类似于在背景上照射漫射聚光灯。
+- `difference`: 从较浅的颜色中减去两种组成颜色中较深的那一种。
+- `exclusion`: 产生类似于 Difference 模式但对比度更低的效果。
+- `hue`: 创建一种具有源颜色色相以及背景颜色饱和度和亮度的颜色。
+- `saturation`: 创建一种具有源颜色饱和度以及背景颜色色相和亮度的颜色。
+- `color`: 创建一种具有源颜色色相和饱和度以及背景颜色亮度的颜色。这会保留背景的灰度级别，适用于为单色图像着色或为彩色图像添加色调。
+- `luminosity`: 创建一种具有源颜色亮度以及背景颜色色相和饱和度的颜色。这会产生与 Color 模式相反的效果。
+- `plus-lighter`: 将源色彩通道与目标色彩通道相加，并将每个通道限制在最大值。
 
-| 类型                                                                                                                                                                                                                                 |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 枚举 (`'normal'`, `'multiply'`, `'screen'`, `'overlay'`, `'darken'`, `'lighten'`, `'color-dodge'`, `'color-burn'`, `'hard-light'`, `'soft-light'`, `'difference'`, `'exclusion'`, `'hue'`, `'saturation'`, `'color'`, `'luminosity'`) |
+| Type                                                                                                                                                                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| enum(`'normal'`, `'multiply'`, `'screen'`, `'overlay'`, `'darken'`, `'lighten'`, `'color-dodge'`, `'color-burn'`, `'hard-light'`, `'soft-light'`, `'difference'`, `'exclusion'`, `'hue'`, `'saturation'`, `'color'`, `'luminosity'`, `'plus-lighter'`) |
 
 ---
 

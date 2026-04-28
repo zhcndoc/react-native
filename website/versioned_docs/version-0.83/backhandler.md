@@ -10,8 +10,8 @@ BackHandler API 用于检测硬件返回按钮的按下事件，允许你为系�
 - **如果某个订阅返回 true，** 则先前注册的订阅将不被调用。
 - **如果没有订阅返回 true 或根本没有注册订阅，** 则会程序化地调用默认的返回按钮功能来退出应用。
 
-:::warning 针对模态框用户的警告
-如果你的应用显示了一个打开的 `Modal`，`BackHandler` 不会发布任何事件（[参见 `Modal` 文档](modal#onrequestclose)）。
+:::warning[警告：适用于模态框用户]
+如果你的应用显示了一个已打开的 `Modal`，`BackHandler` 将不会触发任何事件（[请参见 `Modal` 文档](modal#onrequestclose)）。
 :::
 
 ## 使用示例

@@ -68,8 +68,8 @@ React Native 本身不带有存储敏感数据的功能。不过，Android 和 i
 - [expo-secure-store](https://docs.expo.dev/versions/latest/sdk/securestore/)
 - [react-native-keychain](https://github.com/oblador/react-native-keychain)
 
-:::warning 警告
-**注意避免无意中存储或暴露敏感信息。** 比如意外将敏感表单数据保存于 redux 状态，并将整个状态树持久化到 Async Storage，或者将用户令牌及个人信息发送到诸如 Sentry 或 Crashlytics 之类的应用监控服务。
+:::warning[Caution]
+**请注意不要无意中存储或暴露敏感信息。** 例如，这可能会意外发生，比如将敏感表单数据保存到 redux 状态中，并将整个状态树持久化到 Async Storage。或者将用户令牌和个人信息发送到 Sentry 或 Crashlytics 之类的应用监控服务。
 :::
 
 ## 身份认证与深度链接
@@ -127,8 +127,8 @@ OAuth2 认证协议现今非常流行，被誉为最全面且安全的协议。O
 
 **SSL 固定** 是客户端采用的一种避免此攻击的技术。它通过在开发阶段将一组受信任的证书嵌入（固定）到客户端，只接受带有受信任证书签名的请求，拒绝自签证书。
 
-:::warning 警告
-使用 SSL 固定时，需关注证书过期问题。证书通常每 1-2 年过期一次，过期后必须在应用和服务器端同时更新。服务器端证书一旦更新，内嵌旧证书的应用将无法工作。
+:::warning[Caution]
+使用 SSL 固定时，您应当注意证书过期问题。证书每 1-2 年会过期一次，而一旦过期，就需要在应用和服务器上同时更新。只要服务器上的证书更新了，任何内嵌旧证书的应用都会停止工作。
 :::
 
 ## 总结

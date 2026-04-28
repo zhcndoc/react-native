@@ -440,8 +440,8 @@ static setHidden(hidden: boolean, animation?: StatusBarAnimation);
 
 ### 🗑️ `setNetworkActivityIndicatorVisible()` <div className="label ios">iOS</div>
 
-:::warning 废弃提示
-iOS 13 及以后版本不支持状态栏网络活动指示器功能，该方法将在后续版本中移除。
+:::warning[Deprecated]
+状态栏网络活动指示器不支持 iOS 13 及更高版本。该功能将在未来版本中移除。
 :::
 
 ```tsx
@@ -476,38 +476,38 @@ static setTranslucent(translucent: boolean);
 | ---------------------------------------------------------- | ------- | -------------------- |
 | translucent <div className="label basic required">必填</div> | boolean | 是否设置为半透明     |
 
-## 类型定义
+## Types
 
 ### StatusBarAnimation
 
-用于 iOS 状态栏切换过渡动画的类型。
+The type for transition animations when switching the iOS status bar.
 
-| 类型 |
+| Type |
 | ---- |
-| 枚举（enum） |
+| Enum (enum) |
 
-**常量：**
+**Constants:**
 
-| 值        | 类型   | 说明             |
-| --------- | ------ | ---------------- |
-| `'fade'`  | string | 渐隐动画         |
-| `'slide'` | string | 滑动动画         |
-| `'none'`  | string | 无动画           |
+| Value     | Type   | Description |
+| --------- | ------ | ----------- |
+| `'fade'`  | string | Fade animation |
+| `'slide'` | string | Slide animation |
+| `'none'`  | string | No animation |
 
 ---
 
 ### StatusBarStyle
 
-状态栏样式类型。
+Status bar style type.
 
-| 类型 |
+| Type |
 | ---- |
-| 枚举（enum） |
+| Enum (enum) |
 
-**常量：**
+**Constants:**
 
-| 值               | 类型   | 说明                                |
-| ---------------- | ------ | ----------------------------------- |
-| `'default'`      | string | 默认状态栏样式（iOS 为深色，安卓为浅色） |
-| `'light-content'`| string | 白色文本和图标                      |
-| `'dark-content'` | string | 深色文本和图标（安卓需 API >= 23）  |
+| Value               | Type   | Description |
+| ------------------- | ------ | ----------- |
+| `'default'`         | string | Default status bar style (dark on iOS, light on Android) |
+| `'light-content'`   | string | White text and icons |
+| `'dark-content'`    | string | Dark text and icons (Android requires API >= 23) |

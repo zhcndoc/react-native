@@ -144,12 +144,12 @@ import {Button} from 'react-native';
 
 const NewModuleButton = () => {
   const onPress = () => {
-    console.log('We will invoke the native module here!');
+    console.log('我们将在这里调用原生模块！');
   };
 
   return (
     <Button
-      title="Click to invoke your native module!"
+      title="点击以调用你的原生模块！"
       color="#841584"
       onPress={onPress}
     />
@@ -547,8 +547,8 @@ RCT_EXPORT_METHOD(doSomethingExpensive:(NSString *)param callback:(RCTResponseSe
 }
 ```
 
-:::info 共享 dispatch 队列提示
-`methodQueue` 函数只会在模块初始化时被调用一次，返回的队列会被 React Native 保持引用。因此，一般不必自行保存队列引用，除非想自身调用队列。但若想共享同一队列给多个模块，需要确保每个模块返回同一个队列实例。
+:::info[Sharing dispatch queues between modules]
+The `methodQueue` method will be called once when the module is initialized, and then retained by React Native, so there is no need to keep a reference to the queue yourself, unless you wish to make use of it within your module. However, if you wish to share the same queue between multiple modules then you will need to ensure that you retain and return the same queue instance for each of them.
 :::
 
 ### 依赖注入

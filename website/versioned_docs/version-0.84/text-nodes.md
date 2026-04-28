@@ -14,7 +14,7 @@ const TextWithRefs = () => {
   const [viewInfo, setViewInfo] = React.useState('');
 
   React.useEffect(() => {
-    // `textElement` 是一个实现了此处描述接口的对象
+    // `textElement` is an object that implements the interface described here
     const textElement = ref.current;
     const textNode = textElement.childNodes[0];
     setViewInfo(
@@ -73,7 +73,7 @@ export default TextWithRefs;
   - [`nodeType`](https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType)
   - [`nodeValue`](https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeValue)
   - [`ownerDocument`](https://developer.mozilla.org/en-US/docs/Web/API/Node/ownerDocument)
-    - ℹ️ 会返回该组件被渲染的 [文档实例](/docs/next/document-instances)。
+    - ℹ️ 将返回渲染此组件所在的 [文档节点](/docs/next/document-nodes)。
   - [`parentElement`](https://developer.mozilla.org/en-US/docs/Web/API/Node/parentElement)
   - [`parentNode`](https://developer.mozilla.org/en-US/docs/Web/API/Node/parentNode)
   - [`previousSibling`](https://developer.mozilla.org/en-US/docs/Web/API/Node/previousSibling)

@@ -268,8 +268,8 @@ export default App;
 
 ### 🗑️ `decomposedMatrix`, `rotation`, `scaleX`, `scaleY`, `transformMatrix`, `translateX`, `translateY`
 
-:::warning 已废弃
-请使用 [`transform`](transforms#transform) 属性代替。
+:::warning[Deprecated]
+请改用 [`transform`](transforms#transform) 属性。
 :::
 
 ## 变换原点 (Transform Origin)

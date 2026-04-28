@@ -33,14 +33,14 @@ Android 支持 10000+ 种不同的手机，并且泛化以支持软件渲染：�
 
 ![Example](/docs/assets/SystraceExample.png)
 
-:::note 提示
+:::note[Hint]
 使用 WASD 键进行平移和缩放。
 :::
 
 确切的用户界面可能有所不同，但下面的说明无论你使用什么工具都适用。
 
-:::info 启用 VSync 高亮
-选中屏幕右上角的此复选框以高亮显示 16ms 帧边界：
+:::info[Enable VSync highlighting]
+勾选屏幕右上角的这个复选框以高亮显示 16ms 帧边界：
 
 ![Enable VSync Highlighting](/docs/assets/SystraceHighlightVSync.png)
 
@@ -133,7 +133,7 @@ Android 支持 10000+ 种不同的手机，并且泛化以支持软件渲染：�
 
 如果问题似乎出现在原生方面，你可以使用 [CPU 热点性能分析器](https://developer.android.com/studio/profile/record-java-kotlin-methods) 来获取有关发生情况的更多详细信息。打开 Android Studio Profiler 面板并选择 "Find CPU Hotspots (Java/Kotlin Method Recording)"。
 
-:::info 选择 Java/Kotlin 录制
+:::info[Choose the Java/Kotlin recording]
 
 确保你选择 "Find CPU Hotspots **(Java/Kotlin Recording)**" 而不是 "Find CPU Hotspots (Callstack Sample)"。它们有相似的图标但做不同的事情。
 :::

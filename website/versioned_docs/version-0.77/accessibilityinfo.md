@@ -47,10 +47,10 @@ const App = () => {
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <Text style={styles.status}>
-          The reduce motion is {reduceMotionEnabled ? 'enabled' : 'disabled'}.
+          减少运动为{reduceMotionEnabled ? '已启用' : '已禁用'}。
         </Text>
         <Text style={styles.status}>
-          The screen reader is {screenReaderEnabled ? 'enabled' : 'disabled'}.
+          屏幕阅读器为{screenReaderEnabled ? '已启用' : '已禁用'}。
         </Text>
       </SafeAreaView>
     </SafeAreaProvider>
@@ -254,8 +254,8 @@ static prefersCrossFadeTransitions(): Promise<boolean>;
 
 ### `setAccessibilityFocus()`
 
-:::warning 已弃用
-建议改用 `sendAccessibilityEvent` 并将 eventType 设为 `focus`。
+:::warning[Deprecated]
+Prefer using `sendAccessibilityEvent` with eventType `focus` instead.
 :::
 
 ```tsx
