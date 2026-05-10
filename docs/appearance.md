@@ -1,6 +1,6 @@
 ---
 id: appearance
-title: Appearance
+title: 外观
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
@@ -9,57 +9,76 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 import {Appearance} from 'react-native';
 ```
 
-The `Appearance` module exposes information about the user's appearance preferences, such as their preferred color scheme (light or dark).
+`Appearance` 模块提供有关用户外观偏好的信息，例如他们偏好的系统配色方案（浅色或深色）。
 
-#### Developer notes
+#### 开发者说明
 
 <Tabs groupId="guide" queryString defaultValue="web" values={constants.getDevNotesTabs(["android", "ios", "web"])}>
 
 <TabItem value="web">
 
 :::info
-The `Appearance` API is inspired by the [Media Queries draft](https://drafts.csswg.org/mediaqueries-5/) from the W3C. The color scheme preference is modeled after the [`prefers-color-scheme` CSS media feature](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme).
+`Appearance` API 的灵感来自 W3C 的 [Media Queries 草案](https://drafts.csswg.org/mediaqueries-5/)。配色方案偏好是参照 [`prefers-color-scheme` CSS 媒体特性](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme) 建模的。
 :::
 
 </TabItem>
 <TabItem value="android">
 
 :::info
-The color scheme preference will map to the user's Light or [Dark theme](https://developer.android.com/guide/topics/ui/look-and-feel/darktheme) preference on Android 10 (API level 29) devices and higher.
+在 Android 10（API 级别 29）及更高版本设备上，配色方案偏好将映射为用户的浅色或 [深色主题](https://developer.android.com/guide/topics/ui/look-and-feel/darktheme) 偏好。
 :::
 
 </TabItem>
 <TabItem value="ios">
 
 :::info
-The color scheme preference will map to the user's Light or [Dark Mode](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/dark-mode/) preference on iOS 13 devices and higher.
+在 iOS 13 及更高版本设备上，配色方案偏好将映射为用户的浅色或 [深色模式](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/dark-mode/) 偏好。
 :::
 
 :::note
-When taking a screenshot, by default, the color scheme may flicker between light and dark mode. It happens because the iOS takes snapshots on both color schemes and updating the user interface with color scheme is asynchronous.
+在截屏时，默认情况下，配色方案可能会在浅色和深色模式之间闪烁。这是因为 iOS 会在两种配色方案下获取快照，而使用配色方案更新用户界面是异步的。
 :::
 
 </TabItem>
 </Tabs>
 
-## Example
+## 示例
 
-You can use the `Appearance` module to determine if the user prefers a dark color scheme:
+你可以使用 `Appearance` 模块来判断用户是否偏好深色配色方案：
 
 ```tsx
 const colorScheme = Appearance.getColorScheme();
 if (colorScheme === 'dark') {
-  // Use dark color scheme
+  // 使用深色配色方案
 }
 ```
 
-Although the color scheme is available immediately, this may change (e.g. scheduled color scheme change at sunrise or sunset). Any rendering logic or styles that depend on the user preferred color scheme should try to call this function on every render, rather than caching the value. For example, you may use the [`useColorScheme`](usecolorscheme) React hook as it provides and subscribes to color scheme updates, or you may use inline styles rather than setting a value in a `StyleSheet`.
+尽管配色方案会立即可用，但在未通过 `setColorScheme()` 覆盖时，它可能会发生变化（例如在日出或日落时计划的配色方案变更）。任何依赖用户偏好配色方案的渲染逻辑或样式，都应尝试在每次渲染时调用此函数，而不是缓存该值。
+
+**推荐：** 使用 [`useColorScheme`](usecolorscheme) Hook。
+
+### 应用级覆盖
+
+`setColorScheme()` 会在应用级别覆盖配色方案——它不会影响系统设置或其他应用程序。传入 `'auto'` 会移除任何覆盖，恢复系统偏好。
+
+```mermaid
+flowchart TD
+    USC["useColorScheme()"] --> GCS["getColorScheme()"]
+    GCS --> DEC{App override?}
+    DEC -- "NO / reset via setColorScheme('auto')" --> SYS["System preference\n'light' or 'dark'"]
+    DEC -- "YES — setColorScheme('light' | 'dark')" --> OVR["'light' or 'dark' (static)"]
+
+    classDef fn fill:#dce8f8,stroke:#4a90d9,color:#1a1a1a
+    classDef out fill:#f0f4f8,stroke:#8faabb,color:#1a1a1a
+    class USC,GCS fn
+    class OVR,SYS out
+```
 
 ---
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `getColorScheme()`
 
@@ -67,39 +86,34 @@ Although the color scheme is available immediately, this may change (e.g. schedu
 static getColorScheme(): 'light' | 'dark' | null;
 ```
 
-Indicates the current user preferred color scheme. The value may be updated later, either through direct user action (e.g. theme selection in device settings or application-level selected user interface style via `setColorScheme`) or on a schedule (e.g. light and dark themes that follow the day/night cycle).
+返回当前激活的配色方案。此值可能在运行时发生变化，既可能是系统级别的变化（例如在日出或日落时计划的配色方案变更），也可能是在应用级别通过 `setColorScheme()` 覆盖后发生变化。
 
-Supported color schemes:
+返回值：
 
-- `'light'`: The user prefers a light color theme.
-- `'dark'`: The user prefers a dark color theme.
-- `null`: The user has not indicated a preferred color theme.
+- `'light'`：应用浅色配色方案。
+- `'dark'`：应用深色配色方案。
+- `null`：当原生 Appearance 模块不可用时可能返回。
 
-See also: `useColorScheme` hook.
-
-:::note
-`getColorScheme()` will always return `light` when debugging with Chrome.
-:::
+另见：[`useColorScheme`](usecolorscheme)（Hook）。
 
 ---
 
 ### `setColorScheme()`
 
 ```tsx
-static setColorScheme('light' | 'dark' | null): void;
+static setColorScheme('light' | 'dark' | 'auto' | 'unspecified'): void;
 ```
 
-Force the application to always adopt a light or dark interface style. The default value is `null` which causes the application to inherit the system's interface style. If you assign a different value, the new style applies to the application and all native elements within the application (Alerts, Pickers etc).
+强制应用始终采用浅色或深色界面风格。此更改会应用于应用及其内部的所有原生元素（Alerts、Pickers 等）。
 
-Supported color schemes:
+这是应用级覆盖——它不会影响系统选定的界面风格，也不会影响其他应用中设置的任何风格。
 
-- `light`: Apply light user interface style.
-- `dark`: Apply dark user interface style.
-- null: Follow the system's interface style.
+支持的值：
 
-:::note
-The change will not affect the system's selected interface style or any style set in other applications.
-:::
+- `'light'`：应用浅色配色方案。
+- `'dark'`：应用深色配色方案。
+- `'auto'`：遵循系统配色方案（移除任何覆盖）。
+- `'unspecified'`（**已弃用**）：遵循系统配色方案（移除任何覆盖）。
 
 ---
 
@@ -111,4 +125,4 @@ static addChangeListener(
 ): NativeEventSubscription;
 ```
 
-Add an event handler that is fired when appearance preferences change.
+添加一个事件处理程序，当外观偏好发生变化时触发。在 iOS 和 Android 上，回调中的 `colorScheme` 值始终为 `'light'` 或 `'dark'`。

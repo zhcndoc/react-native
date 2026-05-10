@@ -7,13 +7,14 @@ title: useColorScheme
 import {useColorScheme} from 'react-native';
 ```
 
-`useColorScheme` React 钩子提供并订阅来自 [`Appearance`](appearance) 模块的颜色方案更新。返回值表示当前用户首选的颜色方案。该值可能会稍后更新，要么通过直接的用户操作（例如设备设置中的主题选择），要么按计划更新（例如遵循昼夜循环的浅色和深色主题）。
+`useColorScheme` 这个 React 钩子提供并订阅来自 [`Appearance`](appearance) 模块的配色方案更新。返回值表示当前激活的配色方案。该值可能会在之后更新，方式可以是直接由用户操作（例如在设备设置中选择主题，或通过 [`setColorScheme`](appearance#setcolorscheme) 在应用级别选择用户界面样式），也可以按计划更新（例如遵循昼夜循环的浅色和深色主题）。
 
-### 支持的颜色方案
+### 返回值
 
-- `"light"`：用户首选浅色主题。
-- `"dark"`：用户首选深色主题。
-- `null`：用户未指示首选颜色主题。
+- `'light'`：应用浅色配色方案。
+- `'dark'`：应用深色配色方案。
+- `'unspecified'`：**_永远不会返回_**（类型标注错误）。
+- `null`：如果原生 Appearance 模块不可用，则可能返回。
 
 ---
 

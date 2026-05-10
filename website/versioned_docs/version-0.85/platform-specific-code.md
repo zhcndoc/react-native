@@ -72,7 +72,7 @@ const Component = Platform.select({
 <Component />;
 ```
 
-### 检测 Android 版本 <div className="label android" title="本节与 Android 平台相关">Android</div>
+### 检测 Android 版本 <div className="label android">Android</div>
 
 在 Android 上，`Platform` 模块还可用于检测应用运行的 Android 平台版本：
 
@@ -80,13 +80,13 @@ const Component = Platform.select({
 import {Platform} from 'react-native';
 
 if (Platform.Version === 25) {
-  console.log('Running on Nougat!');
+  console.log('正在 Nougat 上运行！');
 }
 ```
 
 **注意**：`Version` 设置为 Android API 版本，而不是 Android 操作系统版本。要查找映射，请参阅 [Android 版本历史](https://en.wikipedia.org/wiki/Android_version_history#Overview)。
 
-### 检测 iOS 版本 <div className="label ios" title="本节与 iOS 平台相关">iOS</div>
+### 检测 iOS 版本 <div className="label ios">iOS</div>
 
 在 iOS 上，`Version` 是 `-[UIDevice systemVersion]` 的结果，这是一个包含当前操作系统版本的字符串。系统版本的一个示例是 "10.3"。例如，要检测 iOS 上的主版本号：
 
@@ -95,7 +95,7 @@ import {Platform} from 'react-native';
 
 const majorVersionIOS = parseInt(Platform.Version, 10);
 if (majorVersionIOS <= 9) {
-  console.log('Work around a change in behavior');
+  console.log('绕过行为变更');
 }
 ```
 

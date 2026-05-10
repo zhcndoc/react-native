@@ -69,6 +69,10 @@ const isDeployPreview =
   (!!process.env.VERCEL && process.env.VERCEL_ENV === 'preview');
 
 const config: Config = {
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
   future: {
     // Turns Docusaurus v4 future flags on to make it easier to upgrade later
     v4: true,
@@ -615,6 +619,16 @@ const config: Config = {
       {name: 'twitter:site', content: '@reactnative'},
       {name: 'mobile-web-app-capable', content: 'yes'},
     ],
+    mermaid: {
+      theme: {
+        light: 'neutral',
+        dark: 'dark',
+      },
+      options: {
+        fontFamily:
+          '"Optimistic Display", system-ui, -apple-system, sans-serif',
+      },
+    },
   } satisfies Preset.ThemeConfig,
 };
 

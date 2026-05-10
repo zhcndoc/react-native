@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 import {Appearance} from 'react-native';
 ```
 
-`Appearance` 模块暴露了关于用户外观偏好信息，例如他们首选的配色方案（浅色或深色）。
+`Appearance` 模块提供有关用户外观偏好的信息，例如他们偏好的系统配色方案（浅色或深色）。
 
 #### 开发者说明
 
@@ -53,7 +53,26 @@ if (colorScheme === 'dark') {
 }
 ```
 
-虽然配色方案立即可用，但它可能会发生变化（例如在日出或日落时计划的配色方案更改）。任何依赖于用户首选配色方案的渲染逻辑或样式都应尝试在每次渲染时调用此函数，而不是缓存该值。例如，你可以使用 [`useColorScheme`](usecolorscheme) React hook，因为它提供并订阅配色方案更新，或者你可以使用内联样式而不是在 `StyleSheet` 中设置值。
+虽然配色方案会立即可用，但当未通过 `setColorScheme()` 覆盖时，它可能会发生变化（例如在日出或日落时按计划切换配色方案）。任何依赖用户偏好配色方案的渲染逻辑或样式都应尝试在每次渲染时调用此函数，而不是缓存该值。
+
+**推荐：** 使用 [`useColorScheme`](usecolorscheme) hook。
+
+### 应用级覆盖
+
+`setColorScheme()` 会在应用级别覆盖配色方案——它不会影响系统设置或其他应用程序。传入 `'unspecified'` 会移除任何覆盖，恢复系统偏好。
+
+```mermaid
+flowchart TD
+    USC["useColorScheme()"] --> GCS["getColorScheme()"]
+    GCS --> DEC{App override?}
+    DEC -- "NO / reset via setColorScheme('unspecified')" --> SYS["System preference\n'light' or 'dark'"]
+    DEC -- "YES — setColorScheme('light' | 'dark')" --> OVR["'light' or 'dark' (static)"]
+
+    classDef fn fill:#dce8f8,stroke:#4a90d9,color:#1a1a1a
+    classDef out fill:#f0f4f8,stroke:#8faabb,color:#1a1a1a
+    class USC,GCS fn
+    class OVR,SYS out
+```
 
 ---
 
@@ -64,42 +83,37 @@ if (colorScheme === 'dark') {
 ### `getColorScheme()`
 
 ```tsx
-static getColorScheme(): 'light' | 'dark' | null;
+static getColorScheme(): 'light' | 'dark' | 'unspecified' | null;
 ```
 
-指示当前用户首选的配色方案。该值可能会稍后更新，要么通过直接用户操作（例如设备设置中的主题选择或通过 `setColorScheme` 选择的应用程序级用户界面样式），要么按计划（例如遵循昼夜循环的浅色和深色主题）。
+返回当前活动的配色方案。该值可能会在稍后更新，既可能通过直接用户操作（例如设备设置中的主题选择，或通过 `setColorScheme` 在应用级别选择的用户界面样式）进行更新，也可能按计划（例如遵循昼夜周期的浅色和深色主题）进行更新。
 
-支持的配色方案：
+返回值：
 
-- `'light'`：用户偏好浅色主题。
-- `'dark'`：用户偏好深色主题。
-- `null`：用户未指示首选配色主题。
+- `'light'`：应用浅色配色方案。
+- `'dark'`：应用深色配色方案。
+- `'unspecified'`：**_永远不会返回_**（类型标注错误）。
+- `null`：当原生 Appearance 模块不可用时可能返回。
 
-另见：`useColorScheme` hook。
-
-:::note
-使用 Chrome 调试时，`getColorScheme()` 将始终返回 `light`。
-:::
+另请参见：[`useColorScheme`](usecolorscheme)（hook）。
 
 ---
 
 ### `setColorScheme()`
 
 ```tsx
-static setColorScheme('light' | 'dark' | null): void;
+static setColorScheme('light' | 'dark' | 'unspecified'): void;
 ```
 
-强制应用程序始终采用浅色或深色界面样式。默认值为 `null`，这将导致应用程序继承系统的界面样式。如果分配不同的值，新样式将应用于应用程序及其中的所有原生元素（Alerts、Pickers 等）。
+强制应用始终采用浅色或深色界面样式。该更改会应用于应用及其中所有原生元素（Alerts、Pickers 等）。
 
-支持的配色方案：
+这是应用级覆盖——它不会影响系统选择的界面样式，也不会影响其他应用中设置的任何样式。
 
-- `light`：应用浅色用户界面样式。
-- `dark`：应用深色用户界面样式。
-- null：遵循系统的界面样式。
+支持的值：
 
-:::note
-此更改不会影响系统选择的界面样式或在其他应用程序中设置的任何样式。
-:::
+- `'light'`：应用浅色配色方案。
+- `'dark'`：应用深色配色方案。
+- `'unspecified'`：遵循系统配色方案（移除任何覆盖）。
 
 ---
 
@@ -111,4 +125,4 @@ static addChangeListener(
 ): NativeEventSubscription;
 ```
 
-添加一个当外观偏好更改时触发的事件处理程序。
+添加一个事件处理程序，当外观偏好发生变化时会触发。在 iOS 和 Android 上，回调中的 `colorScheme` 值始终为 `'light'` 或 `'dark'`。
