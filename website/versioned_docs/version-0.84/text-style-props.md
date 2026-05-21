@@ -805,7 +805,7 @@ iOS 支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monos
 
 ---
 
-### `includeFontPadding` <div className="label android">Android</div>
+### `includeFontPadding` <div className="label android">安卓</div>
 
 设置为 `false` 可移除字体用于部分字符（如升部和降部）预留的额外内边距。部分字体中，这样的内边距可能导致文本垂直居中时轻微偏移。建议配合 `textAlignVertical` 设置为 `center`。
 
@@ -855,7 +855,9 @@ iOS 支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monos
 
 ---
 
-### `textAlignVertical` <div className="label android">Android</div>
+### `textAlignVertical` <div className="label android">安卓</div>
+
+`verticalAlign` 样式属性的别名；如果同时使用这两个属性，`verticalAlign` 将优先于 `textAlignVertical`。
 
 | 类型                                            | 默认值  |
 | ----------------------------------------------- | -------- |
@@ -919,7 +921,7 @@ iOS 支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monos
 
 ---
 
-### `verticalAlign` <div className="label android">Android</div>
+### `verticalAlign` <div className="label android">安卓</div>
 
 | 类型                                            | 默认值  |
 | ----------------------------------------------- | -------- |

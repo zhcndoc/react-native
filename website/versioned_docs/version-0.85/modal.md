@@ -1,6 +1,6 @@
 ---
 id: modal
-title: Modal
+title: 模态框
 ---
 
 Modal 组件是一种在封闭视图之上呈现内容的基本方式。
@@ -197,8 +197,8 @@ export default App;
 
 ### `onRequestClose`
 
-`onRequestClose` 回调在用户在 Android 上点击硬件返回键或在 Apple TV 上点击菜单按钮时调用。由于此属性是必需的，请注意只要模态框打开，`BackHandler` 事件将不会被发出。
-在 iOS 上，当 `presentationStyle` 为 `pageSheet or formSheet` 时，使用拖动手势关闭 Modal 时会调用此回调。当启用 `allowSwipeDismissal` 时，此回调将在关闭模态框后被调用。
+当用户在 Android 上点击硬件返回按钮，或在 Apple TV 上点击菜单按钮时，会调用 `onRequestClose` 回调。因此，由于这是必需的属性，只要模态框处于打开状态，就不会触发 `BackHandler` 事件。
+在 iOS 上，当使用 `presentationStyle` 为 `pageSheet` 或 `formSheet` 的拖拽手势关闭 Modal 时，会调用此回调。当启用 `allowSwipeDismissal` 时，该回调会在关闭模态框后被调用。
 
 | 类型                                                                                                                                                                                           |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

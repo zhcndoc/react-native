@@ -5,16 +5,16 @@ title: AppState
 
 `AppState` 可以告诉你应用程序是在前台还是后台运行，并在状态发生变化时通知你。
 
-AppState 常用于确定在处理推送通知时的意图和正确行为。
+`AppState` 常用于确定在处理推送通知时的意图和正确行为。
 
 ### 应用状态
 
-- `active` - 应用程序正在前台运行
-- `background` - 应用程序正在后台运行。用户此时可能：
+- `active` - 应用正在前台运行
+- `background` - 应用正在后台运行。此时用户可能处于以下任一情况：
   - 在另一个应用中
   - 在主屏幕上
-  - [Android] 在另一个 `Activity` 中（即使该界面是由你的应用启动的）
-- [iOS] `inactive` - 这是一个在前台和后台切换期间，以及在进入多任务视图、打开通知中心或来电等不活跃期间出现的状态。
+  - [Android] 在另一个 `Activity` 上，包括临时系统活动，例如自动填充凭据选择器（即使该活动由你的应用或系统启动）
+- [iOS] `inactive` - 这是一个在前台和后台之间切换时会出现的状态，也会在无操作期间出现，例如进入多任务视图、打开通知中心，或来电时。
 
 更多信息请参见 [Apple 官方文档](https://developer.apple.com/documentation/uikit/app_and_scenes/managing_your_app_s_life_cycle)
 
@@ -37,7 +37,7 @@ const AppStateExample = () => {
         appState.current.match(/inactive|background/) &&
         nextAppState === 'active'
       ) {
-        console.log('App has come to the foreground!');
+        console.log('App 已回到前台！');
       }
 
       appState.current = nextAppState;
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
 export default AppStateExample;
 ```
 
-该示例通常只会显示“当前状态是：active"，因为应用只有在 `active` 状态时才对用户可见，且 null 状态只会出现短暂瞬间。如果你想尝试代码，建议使用你自己的设备，而非嵌入式预览。
+该示例通常只会显示“当前状态是：active”，因为应用只有在 `active` 状态时才对用户可见，且 null 状态只会出现短暂瞬间。如果你想尝试代码，建议使用你自己的设备，而非嵌入式预览。
 
 ---
 

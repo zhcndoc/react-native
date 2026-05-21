@@ -68,7 +68,7 @@ React Native 仅支持小写颜色名称。不支持大写颜色名称。
 
 #### `transparent`
 
-这是 `rgba(0,0,0,0)` 的简写，与 [CSS3](https://www.w3.org/TR/css-color-3/#transparent) 中相同。
+这是 `rgba(0,0,0,0)` 的快捷方式，与 [CSS3](https://www.w3.org/TR/css-color-3/#transparent) 中相同。
 
 #### 颜色关键字
 

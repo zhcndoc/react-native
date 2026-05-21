@@ -1,6 +1,6 @@
 ---
 id: stylesheet
-title: StyleSheet
+title: 样式表
 ---
 
 StyleSheet 是一个类似于 CSS StyleSheets 的抽象。
@@ -59,7 +59,7 @@ export default App;
 static compose(style1: Object, style2: Object): Object | Object[];
 ```
 
-组合两种样式，使得 `style2` 将覆盖 `style1` 中的任何样式。如果任一样式为假值，则返回另一个样式而不分配数组，从而节省分配并为 PureComponent 检查保持引用相等性。
+组合两种样式，使得 `style2` 会覆盖 `style1` 中的任何样式。如果任一样式为假值，则返回另一个样式而不分配数组，从而节省分配并为 PureComponent 检查保持引用相等性。
 
 ```SnackPlayer name=Compose
 import React from 'react';
@@ -174,7 +174,7 @@ export default App;
 
 ### `setStyleAttributePreprocessor()`
 
-:::warning[Experimental]
+:::warning[实验性]
 破坏性变更很可能会经常发生，并且不会可靠地提前通知。整个功能可能会被删除，谁知道呢？请自行承担风险使用。
 :::
 
@@ -235,70 +235,6 @@ const styles = StyleSheet.create({
   },
   box3: {
     position: 'absolute',
-    top: 120,
-    left: 120,
-    width: 100,
-    height: 100,
-    backgroundColor: 'green',
-  },
-  text: {
-    color: '#FFF',
-    fontSize: 80,
-  },
-});
-
-export default App;
-```
-
----
-
-### `absoluteFillObject`
-
-有时你可能想要 `absoluteFill` 但需要进行一些调整 - `absoluteFillObject` 可用于在 `StyleSheet` 中创建自定义条目，例如：
-
-```SnackPlayer name=absoluteFillObject
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
-
-const App = () => (
-  <SafeAreaProvider>
-    <SafeAreaView style={styles.container}>
-      <View style={styles.box1}>
-        <Text style={styles.text}>1</Text>
-      </View>
-      <View style={styles.box2}>
-        <Text style={styles.text}>2</Text>
-      </View>
-      <View style={styles.box3}>
-        <Text style={styles.text}>3</Text>
-      </View>
-    </SafeAreaView>
-  </SafeAreaProvider>
-);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  box1: {
-    position: 'absolute',
-    top: 40,
-    left: 40,
-    width: 100,
-    height: 100,
-    backgroundColor: 'red',
-  },
-  box2: {
-    ...StyleSheet.absoluteFillObject,
-    top: 120,
-    left: 50,
-    width: 100,
-    height: 100,
-    backgroundColor: 'blue',
-  },
-  box3: {
-    ...StyleSheet.absoluteFillObject,
     top: 120,
     left: 120,
     width: 100,

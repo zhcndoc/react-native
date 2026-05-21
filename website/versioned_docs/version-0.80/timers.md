@@ -12,7 +12,7 @@ title: 计时器
 - `setImmediate` 和 `clearImmediate`
 - `requestAnimationFrame` 和 `cancelAnimationFrame`
 
-`requestAnimationFrame(fn)` 与 `setTimeout(fn, 0)` 不同 - 前者会在所有帧刷新后触发，而后者会尽可能快地触发（在 iPhone 5S 上每秒超过 1000 次）。
+`requestAnimationFrame(fn)` 与 `setTimeout(fn, 0)` 并不相同——前者会在所有帧都已刷新后触发，而后者会尽可能快地触发（在 iPhone 5S 上每秒超过 1000 次）。
 
 `setImmediate` 在当前 JavaScript 执行块结束时执行，就在将批处理响应发送回原生端之前。请注意，如果在 `setImmediate` 回调中调用 `setImmediate`，它将立即执行，中间不会交还控制权给原生端。
 
@@ -25,7 +25,7 @@ title: 计时器
 
 ## InteractionManager
 
-:::warning[Deprecated]
+:::warning[已弃用]
 `InteractionManager` 的行为已更改为与 `setImmediate` 相同，应改用后者。
 :::
 

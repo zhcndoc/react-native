@@ -98,9 +98,9 @@ export default App;
 
 ## 属性
 
-### [View Props](view.md#props)
+### [View 属性](view.md#props)
 
-继承 [View Props](view.md#props)。
+继承 [View 属性](view.md#props)。
 
 ---
 
@@ -191,14 +191,14 @@ export default App;
 
 ### `ref`
 
-挂载时会被赋值为一个 [element node](element-nodes) 的 ref setter。
+挂载时会被赋值为一个 [元素节点](element-nodes) 的 ref setter。
 
 ---
 
 ### `onRequestClose`
 
-当用户在 Android 上点击硬件返回按钮，或在 Apple TV 上点击菜单按钮时，会调用 `onRequestClose` 回调。由于这是必需属性，只要模态框处于打开状态，`BackHandler` 事件就不会被触发。
-在 iOS 上，当使用 `presentationStyle` 为 `pageSheet` 或 `formSheet` 时，通过拖动手势关闭 Modal 会调用此回调。当启用 `allowSwipeDismissal` 时，此回调会在关闭模态框后调用。
+当用户在 Android 上点击硬件返回按钮，或在 Apple TV 上点击菜单按钮时，会调用 `onRequestClose` 回调。由于这是必需的属性，请注意，只要模态框处于打开状态，`BackHandler` 事件就不会被触发。
+在 iOS 上，当使用拖拽手势关闭 `presentationStyle` 为 `pageSheet` 或 `formSheet` 的 Modal 时，会调用此回调。当启用 `allowSwipeDismissal` 时，此回调会在模态框关闭后被调用。
 
 | 类型                                                                                                                                                                                           |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

@@ -1,11 +1,11 @@
 ---
 id: modal
-title: Modal
+title: 模态框
 ---
 
-The Modal component is a basic way to present content above an enclosing view.
+Modal 组件是一种在包裹视图之上展示内容的基本方式。
 
-## Example
+## 示例
 
 ```SnackPlayer name=Modal&supportedPlatforms=android,ios
 import React, {useState} from 'react';
@@ -94,75 +94,75 @@ export default App;
 
 ---
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
-### [View Props](view.md#props)
+### [View 属性](view.md#props)
 
-Inherits [View Props](view.md#props).
+继承 [View 属性](view.md#props)。
 
 ---
 
 ### 🗑️ `animated`
 
-:::warning Deprecated
-Use the [`animationType`](modal.md#animationtype) prop instead.
+:::warning 已弃用
+请改用 [`animationType`](modal.md#animationtype) 属性。
 :::
 
 ---
 
 ### `animationType`
 
-The `animationType` prop controls how the modal animates.
+`animationType` 属性控制 modal 的动画方式。
 
-Possible values:
+可选值：
 
-- `slide` slides in from the bottom
-- `fade` fades into view
-- `none` appears without an animation
+- `slide` 从底部滑入
+- `fade` 淡入视图
+- `none` 不带动画显示
 
-| Type                                | Default |
-| ----------------------------------- | ------- |
-| enum(`'none'`, `'slide'`, `'fade'`) | `none`  |
+| 类型                                | 默认值 |
+| ----------------------------------- | ------ |
+| enum(`'none'`, `'slide'`, `'fade'`) | `none` |
 
 ---
 
 ### `backdropColor`
 
-The `backdropColor` of the modal (or background color of the modal's container.) Defaults to `white` if not provided and transparent is `false`. Ignored if `transparent` is `true`.
+modal 的 `backdropColor`（或 modal 容器的背景色）。如果未提供且 `transparent` 为 `false`，默认为 `white`。当 `transparent` 为 `true` 时忽略此项。
 
-| Type            | Default |
-| --------------- | ------- |
-| [color](colors) | white   |
+| 类型              | 默认值 |
+| ----------------- | ------ |
+| [color](colors) | white  |
 
 ---
 
 ### `hardwareAccelerated` <div className="label android">Android</div>
 
-The `hardwareAccelerated` prop controls whether to force hardware acceleration for the underlying window.
+`hardwareAccelerated` 属性控制是否为底层窗口强制启用硬件加速。
 
-| Type | Default |
-| ---- | ------- |
+| 类型 | 默认值 |
+| ---- | ------ |
 | bool | `false` |
 
 ---
 
 ### `navigationBarTranslucent` <div className="label android">Android</div>
 
-The `navigationBarTranslucent` prop determines whether your modal should go under the system navigation bar. However, `statusBarTranslucent` also needs to be set to `true` to make navigation bar translucent.
+`navigationBarTranslucent` 属性决定你的 modal 是否应显示在系统导航栏之下。不过，还需要将 `statusBarTranslucent` 设为 `true`，才能使导航栏透明。
 
-| Type | Default |
-| ---- | ------- |
+| 类型 | 默认值 |
+| ---- | ------ |
 | bool | `false` |
 
 ---
 
 ### `onDismiss` <div className="label ios">iOS</div>
 
-The `onDismiss` prop allows passing a function that will be called once the modal has been dismissed.
+`onDismiss` 属性允许传入一个函数，该函数会在 modal 被关闭后调用一次。
 
-| Type     |
+| 类型     |
 | -------- |
 | function |
 
@@ -170,9 +170,9 @@ The `onDismiss` prop allows passing a function that will be called once the moda
 
 ### `onOrientationChange` <div className="label ios">iOS</div>
 
-The `onOrientationChange` callback is called when the orientation changes while the modal is being displayed. The orientation provided is only 'portrait' or 'landscape'. This callback is also called on initial render, regardless of the current orientation.
+当 modal 显示期间方向发生变化时，会调用 `onOrientationChange` 回调。提供的方向只会是 `'portrait'` 或 `'landscape'`。无论当前方向如何，在初始渲染时也会调用此回调。
 
-| Type     |
+| 类型     |
 | -------- |
 | function |
 
@@ -180,37 +180,37 @@ The `onOrientationChange` callback is called when the orientation changes while 
 
 ### `allowSwipeDismissal` <div className="label ios">iOS</div>
 
-Controls whether the modal can be dismissed by swiping down on iOS.
-This requires you to implement the `onRequestClose` prop to handle the dismissal.
+控制是否可以在 iOS 上通过向下滑动来关闭 modal。
+这要求你实现 `onRequestClose` 属性来处理关闭逻辑。
 
-| Type | Default |
-| ---- | ------- |
+| 类型 | 默认值 |
+| ---- | ------ |
 | bool | `false` |
 
 ---
 
 ### `ref`
 
-A ref setter that will be assigned an [element node](element-nodes) when mounted.
+挂载时会被赋值为一个 [元素节点](element-nodes) 的 ref setter。
 
 ---
 
 ### `onRequestClose`
 
-The `onRequestClose` callback is called when the user taps the hardware back button on Android or the menu button on Apple TV. Because of this required prop, be aware that `BackHandler` events will not be emitted as long as the modal is open.
-On iOS, this callback is called when a Modal is being dismissed using a drag gesture when `presentationStyle` is `pageSheet or formSheet`. When `allowSwipeDismissal` is enabled this callback will be called after dismissing the modal.
+当用户在 Android 上点击硬件返回按钮，或在 Apple TV 上点击菜单按钮时，会调用 `onRequestClose` 回调。由于这是必需属性，请注意，只要 modal 处于打开状态，`BackHandler` 事件就不会被触发。
+在 iOS 上，当使用 `presentationStyle` 为 `pageSheet` 或 `formSheet` 时，通过拖拽手势关闭 Modal 会调用此回调。启用 `allowSwipeDismissal` 后，此回调会在关闭 modal 之后调用。
 
-| Type                                                                                                                                                                                           |
+| 类型                                                                                                                                                                                           |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| function <div className="label basic required">Required</div><div className="label android">Android</div><div className="label tv">TV</div><hr />function <div className="label ios">iOS</div> |
+| function <div className="label basic required">必需</div><div className="label android">Android</div><div className="label tv">电视</div><hr />function <div className="label ios">iOS</div> |
 
 ---
 
 ### `onShow`
 
-The `onShow` prop allows passing a function that will be called once the modal has been shown.
+`onShow` 属性允许传入一个函数，该函数会在 modal 显示后调用一次。
 
-| Type     |
+| 类型     |
 | -------- |
 | function |
 
@@ -218,40 +218,40 @@ The `onShow` prop allows passing a function that will be called once the modal h
 
 ### `presentationStyle` <div className="label ios">iOS</div>
 
-The `presentationStyle` prop controls how the modal appears (generally on larger devices such as iPad or plus-sized iPhones). See https://developer.apple.com/reference/uikit/uimodalpresentationstyle for details.
+`presentationStyle` 属性控制 modal 的显示方式（通常用于 iPad 或加大尺寸 iPhone 等较大设备）。详情请参见 https://developer.apple.com/reference/uikit/uimodalpresentationstyle。
 
-Possible values:
+可选值：
 
-- `fullScreen` covers the screen completely
-- `pageSheet` covers portrait-width view centered (only on larger devices)
-- `formSheet` covers narrow-width view centered (only on larger devices)
-- `overFullScreen` covers the screen completely, but allows transparency
+- `fullScreen` 完全覆盖屏幕
+- `pageSheet` 居中覆盖纵向宽度的视图（仅适用于较大设备）
+- `formSheet` 居中覆盖较窄宽度的视图（仅适用于较大设备）
+- `overFullScreen` 完全覆盖屏幕，但允许透明
 
-| Type                                                                   | Default                                                                             |
+| 类型                                                                   | 默认值                                                                              |
 | ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| enum(`'fullScreen'`, `'pageSheet'`, `'formSheet'`, `'overFullScreen'`) | `fullScreen` if `transparent={false}`<hr />`overFullScreen` if `transparent={true}` |
+| enum(`'fullScreen'`, `'pageSheet'`, `'formSheet'`, `'overFullScreen'`) | `fullScreen` 当 `transparent={false}` 时<hr />`overFullScreen` 当 `transparent={true}` 时 |
 
 ---
 
 ### `statusBarTranslucent` <div className="label android">Android</div>
 
-The `statusBarTranslucent` prop determines whether your modal should go under the system statusbar.
+`statusBarTranslucent` 属性决定你的 modal 是否应显示在系统状态栏之下。
 
-| Type | Default |
-| ---- | ------- |
+| 类型 | 默认值 |
+| ---- | ------ |
 | bool | `false` |
 
 ---
 
 ### `supportedOrientations` <div className="label ios">iOS</div>
 
-The `supportedOrientations` prop allows the modal to be rotated to any of the specified orientations. On iOS, the modal is still restricted by what's specified in your app's Info.plist's UISupportedInterfaceOrientations field.
+`supportedOrientations` 属性允许 modal 旋转到所指定的任一方向。在 iOS 上，modal 仍然会受到应用 Info.plist 中 `UISupportedInterfaceOrientations` 字段的限制。
 
 :::note
-When using `presentationStyle` of `pageSheet` or `formSheet`, this property will be ignored on iOS.
+当 `presentationStyle` 为 `pageSheet` 或 `formSheet` 时，此属性在 iOS 上会被忽略。
 :::
 
-| Type                                                                                                           | Default        |
+| 类型                                                                                                           | 默认值        |
 | -------------------------------------------------------------------------------------------------------------- | -------------- |
 | array of enums(`'portrait'`, `'portrait-upside-down'`, `'landscape'`, `'landscape-left'`, `'landscape-right'`) | `['portrait']` |
 
@@ -259,18 +259,18 @@ When using `presentationStyle` of `pageSheet` or `formSheet`, this property will
 
 ### `transparent`
 
-The `transparent` prop determines whether your modal will fill the entire view. Setting this to `true` will render the modal over a transparent background.
+`transparent` 属性决定你的 modal 是否会填满整个视图。将其设为 `true` 会让 modal 在透明背景上渲染。
 
-| Type | Default |
-| ---- | ------- |
+| 类型 | 默认值 |
+| ---- | ------ |
 | bool | `false` |
 
 ---
 
 ### `visible`
 
-The `visible` prop determines whether your modal is visible.
+`visible` 属性决定你的 modal 是否可见。
 
-| Type | Default |
-| ---- | ------- |
+| 类型 | 默认值 |
+| ---- | ------ |
 | bool | `true`  |

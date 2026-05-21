@@ -12,9 +12,9 @@ title: 计时器
 - `setImmediate` 和 `clearImmediate`
 - `requestAnimationFrame` 和 `cancelAnimationFrame`
 
-`requestAnimationFrame(fn)` 与 `setTimeout(fn, 0)` 不同 - 前者会在所有帧刷新后触发，而后者会尽可能快地触发（在 iPhone 5S 上每秒超过 1000 次）。
+`requestAnimationFrame(fn)` 并不等同于 `setTimeout(fn, 0)`——前者会在所有帧都刷新完成后触发，而后者会尽可能快地触发（在 iPhone 5S 上每秒超过 1000 次）。
 
-`setImmediate` 在当前 JavaScript 执行块结束时执行，就在将批处理响应发送回原生模块之前。请注意，如果在 `setImmediate` 回调中调用 `setImmediate`，它将立即执行，中间不会屈服回原生模块。
+`setImmediate` 会在当前 JavaScript 执行块结束时执行，就在将批处理响应发送回原生模块之前。请注意，如果在 `setImmediate` 回调中调用 `setImmediate`，它将立即执行，中间不会屈服回原生模块。
 
 `Promise` 实现使用 `setImmediate` 作为其异步实现。
 
@@ -25,8 +25,8 @@ title: 计时器
 
 ## 交互管理器
 
-:::warning[Deprecated]
-The `InteractionManager` 行为已更改为与 `setImmediate` 相同，应改用后者。
+:::warning[已废弃]
+`InteractionManager` 的行为已更改为与 `setImmediate` 相同，应改用后者。
 :::
 
 构建良好的原生应用感觉如此流畅的原因之一是在交互和动画期间避免昂贵的操作。在 React Native 中，我们目前有一个限制，即只有一个 JS 执行线程，但您可以使用 `InteractionManager` 确保长时间运行的工作安排在任何交互/动画完成后开始。
@@ -41,7 +41,7 @@ InteractionManager.runAfterInteractions(() => {
 
 将其与其他调度替代方案进行比较：
 
-- requestAnimationFrame()：用于随时间动画化视图的代码。
+- requestAnimationFrame()：用于随时间对视图进行动画处理的代码。
 - setImmediate/setTimeout/setInterval()：稍后运行代码，请注意这可能会延迟动画。
 - runAfterInteractions()：稍后运行代码，不会延迟活动动画。
 

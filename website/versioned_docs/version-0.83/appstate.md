@@ -9,12 +9,12 @@ AppState 常用于确定在处理推送通知时的意图和正确行为。
 
 ### 应用状态
 
-- `active` - 应用程序正在前台运行
-- `background` - 应用程序正在后台运行。用户此时可能：
+- `active` - 应用在前台运行
+- `background` - 应用在后台运行。用户可能处于以下任一情况：
   - 在另一个应用中
   - 在主屏幕上
-  - [Android] 在另一个 `Activity` 中（即使该界面是由你的应用启动的）
-- [iOS] `inactive` - 这是一个在前台和后台切换期间，以及在进入多任务视图、打开通知中心或来电等不活跃期间出现的状态。
+  - [Android] 在另一个 `Activity` 上，包括临时系统活动，例如自动填充凭据选择器（即使它是由你的应用或系统启动的）
+- [iOS] `inactive` - 这是在前后台切换期间发生的一种状态，也会出现在无活动期间，例如进入多任务视图、打开通知中心，或来电时。
 
 更多信息请参见 [Apple 官方文档](https://developer.apple.com/documentation/uikit/app_and_scenes/managing_your_app_s_life_cycle)
 

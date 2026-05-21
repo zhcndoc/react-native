@@ -1,9 +1,9 @@
 ---
 id: text-style-props
-title: Text Style Props
+title: 文本样式属性
 ---
 
-### Example
+### 示例
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
@@ -759,7 +759,7 @@ export default App;
 </TabItem>
 </Tabs>
 
-# Reference
+# 参考
 
 ## Props
 
@@ -777,7 +777,7 @@ export default App;
 | ------ |
 | string |
 
-The generic font families `system-ui`, `ui-sans-serif`, `ui-serif`, `ui-monospace`, and `ui-rounded` are supported on iOS.
+支持 iOS 上的通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monospace` 和 `ui-rounded`。
 
 ---
 
@@ -799,7 +799,7 @@ The generic font families `system-ui`, `ui-sans-serif`, `ui-serif`, `ui-monospac
 
 ### `fontWeight`
 
-Specifies font weight. The values `'normal'` and `'bold'` are supported for most fonts. Not all fonts have a variant for each of the numeric values, in that case the closest one is chosen.
+指定字体粗细。对于大多数字体，支持 `'normal'` 和 `'bold'` 两个值。并非所有字体都对每个数值都有对应的变体，在这种情况下会选择最接近的一个。
 
 | Type                                                                                                                  | Default    |
 | --------------------------------------------------------------------------------------------------------------------- | ---------- |
@@ -809,7 +809,7 @@ Specifies font weight. The values `'normal'` and `'bold'` are supported for most
 
 ### `includeFontPadding` <div className="label android">Android</div>
 
-Set to `false` to remove extra font padding intended to make space for certain ascenders / descenders. With some fonts, this padding can make text look slightly misaligned when centered vertically. For best results also set `textAlignVertical` to `center`.
+设为 `false` 可移除额外的字体内边距，这些内边距用于为某些上伸部 / 下伸部留出空间。对于某些字体，这种内边距会使文本在垂直居中时看起来略微不对齐。为获得最佳效果，还应将 `textAlignVertical` 设置为 `center`。
 
 | Type | Default |
 | ---- | ------- |
@@ -819,7 +819,7 @@ Set to `false` to remove extra font padding intended to make space for certain a
 
 ### `fontVariant`
 
-Allows you to set all the font variants for a font. Can be set by using an array of enums or a space-separated string e.g. `'small-caps common-ligatures'`.
+允许你为字体设置所有字体变体。可通过数组形式的枚举值或以空格分隔的字符串进行设置，例如 `'small-caps common-ligatures'`。
 
 | Type                                                                                                                 | Default |
 | -------------------------------------------------------------------------------------------------------------------- | ------- |
@@ -829,7 +829,7 @@ Allows you to set all the font variants for a font. Can be set by using an array
 
 ### `letterSpacing`
 
-Increase or decrease the spacing between characters. By default there is no extra letter spacing.
+增加或减少字符之间的间距。默认没有额外的字母间距。
 
 | Type   |
 | ------ |
@@ -839,7 +839,7 @@ Increase or decrease the spacing between characters. By default there is no extr
 
 ### `lineHeight`
 
-Numeric value that controls the vertical spacing between lines of text within a text element. It specifies the distance between the baselines of consecutive lines of text.
+控制文本元素内文本行之间垂直间距的数值。它指定连续文本行基线之间的距离。
 
 | Type   |
 | ------ |
@@ -849,7 +849,7 @@ Numeric value that controls the vertical spacing between lines of text within a 
 
 ### `textAlign`
 
-Specifies text alignment. On Android, the value 'justify' is only supported on Oreo (8.0) or above (API level >= 26). The value will fallback to `left` on lower Android versions.
+指定文本对齐方式。在 Android 上，值 'justify' 仅支持 Oreo（8.0）或更高版本（API level >= 26）。在较低版本的 Android 上，该值将回退为 `left`。
 
 | Type                                                         | Default  |
 | ------------------------------------------------------------ | -------- |
@@ -858,6 +858,8 @@ Specifies text alignment. On Android, the value 'justify' is only supported on O
 ---
 
 ### `textAlignVertical` <div className="label android">Android</div>
+
+`verticalAlign` 样式属性的别名，如果同时使用这两个属性，`verticalAlign` 将优先于 `textAlignVertical`
 
 | Type                                            | Default  |
 | ----------------------------------------------- | -------- |
@@ -875,8 +877,8 @@ Specifies text alignment. On Android, the value 'justify' is only supported on O
 
 ### `textDecorationLine`
 
-| Type                                                                        | Default  |
-| --------------------------------------------------------------------------- | -------- |
+| Type                                                                        | Default   |
+| --------------------------------------------------------------------------- | --------- |
 | enum(`'none'`, `'underline'`, `'line-through'`, `'underline line-through'`) | `'none'` |
 
 ---
@@ -939,7 +941,7 @@ Specifies text alignment. On Android, the value 'justify' is only supported on O
 
 ### `userSelect`
 
-It allows the user to select text and to use the native copy and paste functionality. Has precedence over the `selectable` prop.
+它允许用户选择文本并使用原生复制和粘贴功能。其优先级高于 `selectable` 属性。
 
 | Type                                                     | Default |
 | -------------------------------------------------------- | ------- |

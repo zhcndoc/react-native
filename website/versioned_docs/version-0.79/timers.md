@@ -12,7 +12,7 @@ title: 定时器
 - setImmediate, clearImmediate
 - requestAnimationFrame, cancelAnimationFrame
 
-`requestAnimationFrame(fn)` 与 `setTimeout(fn, 0)` 不同——前者会在所有帧刷新后触发，而后者会尽可能快地触发（在 iPhone 5S 上每秒超过 1000 次）。
+`requestAnimationFrame(fn)` 与 `setTimeout(fn, 0)` 并不相同——前者会在所有帧都已刷新后触发，而后者会尽可能快地触发（在 iPhone 5S 上每秒可超过 1000 次）。
 
 `setImmediate` 在当前 JavaScript 执行块结束时执行，就在将批处理响应发送回原生端之前。请注意，如果在 `setImmediate` 回调中调用 `setImmediate`，它将立即执行，中间不会交还给原生端。
 
@@ -25,7 +25,7 @@ title: 定时器
 
 ## InteractionManager
 
-构建良好的原生应用感觉如此流畅的原因之一是在交互和动画期间避免耗时操作。在 React Native 中，我们目前有一个限制，即只有一个 JS 执行线程，但你可以使用 `InteractionManager` 确保长时间运行的工作安排在任何交互/动画完成后开始。
+构建良好的原生应用之所以感觉如此流畅，原因之一是在交互和动画期间避免耗时操作。在 React Native 中，我们目前有一个限制，即只有一个 JS 执行线程，但你可以使用 `InteractionManager` 确保长时间运行的工作安排在任何交互/动画完成后开始。
 
 应用可以使用以下内容安排在交互后运行的任务：
 
@@ -37,7 +37,7 @@ InteractionManager.runAfterInteractions(() => {
 
 将其与其他调度替代方案进行比较：
 
-- requestAnimationFrame()：用于随时间动画化视图的代码。
+- requestAnimationFrame()：用于随时间为视图添加动画的代码。
 - setImmediate/setTimeout/setInterval()：稍后运行代码，请注意这可能会延迟动画。
 - runAfterInteractions()：稍后运行代码，不会延迟活动动画。
 
@@ -47,7 +47,7 @@ InteractionManager 还允许应用通过在动画开始时创建交互“句柄�
 
 ```tsx
 const handle = InteractionManager.createInteractionHandle();
-// 运行动画...（`runAfterInteractions` 任务已排队）
+// 运行动画……（`runAfterInteractions` 任务已排队）
 // 稍后，在动画完成时：
 InteractionManager.clearInteractionHandle(handle);
 // 如果所有句柄都被清除，排队的任务将运行

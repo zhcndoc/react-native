@@ -116,7 +116,7 @@ const App = () => {
         </View>
         <ScrollView style={{padding: 12}}>
           <View>
-            <Text>Common platform properties</Text>
+            <Text>通用平台属性</Text>
             <CustomSlider
               label="Text Shadow Offset - Height"
               value={textShadowOffset.height}
@@ -199,7 +199,7 @@ const App = () => {
           {Platform.OS === 'android' && (
             <View style={styles.platformContainer}>
               <Text style={styles.platformContainerTitle}>
-                Android only properties
+                仅限 Android 的属性
               </Text>
               <CustomPicker
                 label="Text Vertical Align"
@@ -217,7 +217,7 @@ const App = () => {
           {Platform.OS === 'ios' && (
             <View style={styles.platformContainer}>
               <Text style={styles.platformContainerTitle}>
-                iOS only properties
+                仅限 iOS 的属性
               </Text>
               <CustomPicker
                 label="Text Decoration Style"
@@ -444,7 +444,7 @@ const App = () => {
         </View>
         <ScrollView style={{padding: 12}}>
           <View>
-            <Text>Common platform properties</Text>
+            <Text>通用平台属性</Text>
             <CustomSlider
               label="Text Shadow Offset - Height"
               value={textShadowOffset.height}
@@ -527,7 +527,7 @@ const App = () => {
           {Platform.OS === 'android' && (
             <View style={styles.platformContainer}>
               <Text style={styles.platformContainerTitle}>
-                Android only properties
+                仅限 Android 的属性
               </Text>
               <CustomPicker
                 label="Text Vertical Align"
@@ -545,7 +545,7 @@ const App = () => {
           {Platform.OS === 'ios' && (
             <View style={styles.platformContainer}>
               <Text style={styles.platformContainerTitle}>
-                iOS only properties
+                仅限 iOS 的属性
               </Text>
               <CustomPicker
                 label="Text Decoration Style"
@@ -859,7 +859,9 @@ export default App;
 
 ### `textAlignVertical` <div className="label android">Android</div>
 
-| 类型                                            | 默认值   |
+`verticalAlign` 样式属性的别名，如果同时使用这两个属性，`verticalAlign` 将优先于 `textAlignVertical`
+
+| Type                                            | Default  |
 | ----------------------------------------------- | -------- |
 | enum(`'auto'`, `'top'`, `'bottom'`, `'center'`) | `'auto'` |
 

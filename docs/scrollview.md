@@ -1,25 +1,25 @@
 ---
 id: scrollview
-title: ScrollView
+title: 滚动视图
 ---
 
-Component that wraps platform ScrollView while providing integration with touch locking "responder" system.
+一个封装平台原生 ScrollView 并提供与触摸锁定“responder”系统集成的组件。
 
-Keep in mind that ScrollViews must have a bounded height in order to work, since they contain unbounded-height children into a bounded container (via a scroll interaction). In order to bound the height of a ScrollView, either set the height of the view directly (discouraged) or make sure all parent views have bounded height. Forgetting to transfer `{flex: 1}` down the view stack can lead to errors here, which the element inspector makes quick to debug.
+请记住，ScrollView 要正常工作必须具有有界高度，因为它会通过滚动交互将无限高度的子元素放入一个有界容器中。要限制 ScrollView 的高度，可以直接设置视图的高度（不推荐），或者确保所有父视图都具有有界高度。忘记在视图层级中向下传递 `{flex: 1}` 可能会在这里导致错误，而元素检查器可以帮助你快速调试这些问题。
 
-Doesn't yet support other contained responders from blocking this scroll view from becoming the responder.
+目前还不支持让其他已包含的 responder 阻止该 ScrollView 成为 responder。
 
-`<ScrollView>` vs [`<FlatList>`](flatlist.md) - which one to use?
+`<ScrollView>` 与 [`<FlatList>`](flatlist.md) - 该用哪一个？
 
-`ScrollView` renders all its react child components at once, but this has a performance downside.
+`ScrollView` 会一次性渲染所有 React 子组件，但这会带来性能上的缺点。
 
-Imagine you have a very long list of items you want to display, maybe several screens worth of content. Creating JS components and native views for everything all at once, much of which may not even be shown, will contribute to slow rendering and increased memory usage.
+设想你有一个很长的项目列表想要显示，可能足够占满好几个屏幕。一次性为所有内容创建 JS 组件和原生视图，其中很多甚至可能根本不会显示，会导致渲染变慢并增加内存占用。
 
-This is where `FlatList` comes into play. `FlatList` renders items lazily, when they are about to appear, and removes items that scroll way off screen to save memory and processing time.
+这时就该 `FlatList` 登场了。`FlatList` 会在项目即将显示时按需渲染，并移除滚动到屏幕之外很远的项目，以节省内存和处理时间。
 
-`FlatList` is also handy if you want to render separators between your items, multiple columns, infinite scroll loading, or any number of other features it supports out of the box.
+如果你希望在项目之间渲染分隔线、使用多列、实现无限滚动加载，或者利用它开箱即用支持的其他各种特性，`FlatList` 也非常方便。
 
-## Example
+## 示例
 
 ```SnackPlayer name=ScrollView%20Example
 import React from 'react';
@@ -37,7 +37,7 @@ const App = () => (
           aliquip ex ea commodo consequat. Duis aute irure dolor in
           reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
+          culpa qui deserunt mollit anim id est laborum.
         </Text>
       </ScrollView>
     </SafeAreaView>
@@ -63,21 +63,21 @@ export default App;
 
 ---
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
-### [View Props](view.md#props)
+### [View 属性](view.md#props)
 
-Inherits [View Props](view#props).
+继承 [View 属性](view#props)。
 
 ---
 
 ### `StickyHeaderComponent`
 
-A React Component that will be used to render sticky headers, should be used together with `stickyHeaderIndices`. You may need to set this component if your sticky header uses custom transforms, for example, when you want your list to have an animated and hidable header. If a component has not been provided, the default [`ScrollViewStickyHeader`](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Components/ScrollView/ScrollViewStickyHeader.js) component will be used.
+一个 React 组件，用于渲染粘性标题，应与 `stickyHeaderIndices` 一起使用。如果你的粘性标题使用了自定义变换，可能需要设置此组件，例如当你希望列表拥有一个可动画和可隐藏的标题时。如果未提供该组件，将使用默认的 [`ScrollViewStickyHeader`](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Components/ScrollView/ScrollViewStickyHeader.js) 组件。
 
-| Type               |
+| 类型               |
 | ------------------ |
 | component, element |
 
@@ -85,29 +85,29 @@ A React Component that will be used to render sticky headers, should be used tog
 
 ### `alwaysBounceHorizontal` <div className="label ios">iOS</div>
 
-When true, the scroll view bounces horizontally when it reaches the end even if the content is smaller than the scroll view itself.
+当为 true 时，即使内容比 ScrollView 本身更小，滚动视图在到达末尾时也会水平回弹。
 
-| Type | Default                                               |
+| 类型 | 默认值                                               |
 | ---- | ----------------------------------------------------- |
-| bool | `true` when `horizontal={true}`<hr/>`false` otherwise |
+| bool | `horizontal={true}` 时为 `true`<hr/>否则为 `false` |
 
 ---
 
 ### `alwaysBounceVertical` <div className="label ios">iOS</div>
 
-When true, the scroll view bounces vertically when it reaches the end even if the content is smaller than the scroll view itself.
+当为 true 时，即使内容比 ScrollView 本身更小，滚动视图在到达末尾时也会垂直回弹。
 
-| Type | Default                                               |
+| 类型 | 默认值                                               |
 | ---- | ----------------------------------------------------- |
-| bool | `false` when `horizontal={true}`<hr/>`true` otherwise |
+| bool | `horizontal={true}` 时为 `false`<hr/>否则为 `true` |
 
 ---
 
 ### `automaticallyAdjustContentInsets` <div className="label ios">iOS</div>
 
-Controls whether iOS should automatically adjust the content inset for scroll views that are placed behind a navigation bar or tab bar/toolbar.
+控制 iOS 是否应自动调整位于导航栏或标签栏/工具栏后面的滚动视图的内容 inset。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `true`  |
 
@@ -115,9 +115,9 @@ Controls whether iOS should automatically adjust the content inset for scroll vi
 
 ### `automaticallyAdjustKeyboardInsets` <div className="label ios">iOS</div>
 
-Controls whether the ScrollView should automatically adjust its `contentInset` and `scrollViewInsets` when the Keyboard changes its size.
+控制当键盘改变尺寸时，ScrollView 是否应自动调整其 `contentInset` 和 `scrollViewInsets`。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `false` |
 
@@ -125,9 +125,9 @@ Controls whether the ScrollView should automatically adjust its `contentInset` a
 
 ### `automaticallyAdjustsScrollIndicatorInsets` <div className="label ios">iOS</div>
 
-Controls whether iOS should automatically adjust the scroll indicator insets. See Apple's [documentation on the property](https://developer.apple.com/documentation/uikit/uiscrollview/3198043-automaticallyadjustsscrollindica).
+控制 iOS 是否应自动调整滚动指示器的 inset。请参阅 Apple 关于该属性的[文档](https://developer.apple.com/documentation/uikit/uiscrollview/3198043-automaticallyadjustsscrollindica)。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `true`  |
 
@@ -135,9 +135,9 @@ Controls whether iOS should automatically adjust the scroll indicator insets. Se
 
 ### `bounces` <div className="label ios">iOS</div>
 
-When true, the scroll view bounces when it reaches the end of the content if the content is larger than the scroll view along the axis of the scroll direction. When `false`, it disables all bouncing even if the `alwaysBounce*` props are `true`.
+当为 true 时，如果内容沿滚动方向的轴比 ScrollView 更大，滚动视图在到达内容末尾时会回弹。当为 false 时，即使 `alwaysBounce*` 属性为 `true`，也会禁用所有回弹。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `true`  |
 
@@ -145,9 +145,9 @@ When true, the scroll view bounces when it reaches the end of the content if the
 
 ### `bouncesZoom` <div className="label ios">iOS</div>
 
-When `true`, gestures can drive zoom past min/max and the zoom will animate to the min/max value at gesture end, otherwise the zoom will not exceed the limits.
+当为 `true` 时，手势可以驱动缩放超过最小/最大值，并且在手势结束时会动画到最小/最大值；否则缩放不会超过限制。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `true`  |
 
@@ -155,9 +155,9 @@ When `true`, gestures can drive zoom past min/max and the zoom will animate to t
 
 ### `canCancelContentTouches` <div className="label ios">iOS</div>
 
-When `false`, once tracking starts, won't try to drag if the touch moves.
+当为 `false` 时，一旦开始跟踪，就不会尝试在触摸移动时拖拽。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `true`  |
 
@@ -165,9 +165,9 @@ When `false`, once tracking starts, won't try to drag if the touch moves.
 
 ### `centerContent` <div className="label ios">iOS</div>
 
-When `true`, the scroll view automatically centers the content when the content is smaller than the scroll view bounds; when the content is larger than the scroll view, this property has no effect.
+当为 `true` 时，如果内容小于 ScrollView 的边界，滚动视图会自动将内容居中；当内容大于 ScrollView 时，此属性无效。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `false` |
 
@@ -175,7 +175,7 @@ When `true`, the scroll view automatically centers the content when the content 
 
 ### `contentContainerStyle`
 
-These styles will be applied to the scroll view content container which wraps all of the child views. Example:
+这些样式将应用于包裹所有子视图的滚动视图内容容器。示例：
 
 ```
 return (
@@ -190,17 +190,17 @@ const styles = StyleSheet.create({
 });
 ```
 
-| Type                           |
+| 类型                           |
 | ------------------------------ |
-| [View Style](view-style-props) |
+| [View 样式](view-style-props) |
 
 ---
 
 ### `contentInset` <div className="label ios">iOS</div>
 
-The amount by which the scroll view content is inset from the edges of the scroll view.
+滚动视图内容距滚动视图边缘的内缩量。
 
-| Type                                                                 | Default                                  |
+| 类型                                                                 | 默认值                                  |
 | -------------------------------------------------------------------- | ---------------------------------------- |
 | object: `{top: number, left: number, bottom: number, right: number}` | `{top: 0, left: 0, bottom: 0, right: 0}` |
 
@@ -208,9 +208,9 @@ The amount by which the scroll view content is inset from the edges of the scrol
 
 ### `contentInsetAdjustmentBehavior` <div className="label ios">iOS</div>
 
-This property specifies how the safe area insets are used to modify the content area of the scroll view. Available on iOS 11 and later.
+此属性指定安全区域 inset 如何用于修改滚动视图的内容区域。适用于 iOS 11 及更高版本。
 
-| Type                                                           | Default   |
+| 类型                                                           | 默认值   |
 | -------------------------------------------------------------- | --------- |
 | enum(`'automatic'`, `'scrollableAxes'`, `'never'`, `'always'`) | `'never'` |
 
@@ -218,9 +218,9 @@ This property specifies how the safe area insets are used to modify the content 
 
 ### `contentOffset`
 
-Used to manually set the starting scroll offset.
+用于手动设置起始滚动偏移量。
 
-| Type  | Default        |
+| 类型  | 默认值        |
 | ----- | -------------- |
 | Point | `{x: 0, y: 0}` |
 
@@ -228,12 +228,12 @@ Used to manually set the starting scroll offset.
 
 ### `decelerationRate`
 
-A floating-point number that determines how quickly the scroll view decelerates after the user lifts their finger. You may also use string shortcuts `"normal"` and `"fast"` which match the underlying iOS settings for `UIScrollViewDecelerationRateNormal` and `UIScrollViewDecelerationRateFast` respectively.
+一个浮点数，用于决定用户抬起手指后滚动视图减速的速度。你也可以使用字符串快捷值 `"normal"` 和 `"fast"`，它们分别对应底层 iOS 设置中的 `UIScrollViewDecelerationRateNormal` 和 `UIScrollViewDecelerationRateFast`。
 
-- `'normal'` 0.998 on iOS, 0.985 on Android.
-- `'fast'`, 0.99 on iOS, 0.9 on Android.
+- `'normal'` 在 iOS 上为 0.998，在 Android 上为 0.985。
+- `'fast'` 在 iOS 上为 0.99，在 Android 上为 0.9。
 
-| Type                               | Default    |
+| 类型                               | 默认值    |
 | ---------------------------------- | ---------- |
 | enum(`'fast'`, `'normal'`), number | `'normal'` |
 
@@ -241,9 +241,9 @@ A floating-point number that determines how quickly the scroll view decelerates 
 
 ### `directionalLockEnabled` <div className="label ios">iOS</div>
 
-When true, the ScrollView will try to lock to only vertical or horizontal scrolling while dragging.
+当为 true 时，ScrollView 会尝试在拖动时只锁定为垂直或水平滚动。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `false` |
 
@@ -251,9 +251,9 @@ When true, the ScrollView will try to lock to only vertical or horizontal scroll
 
 ### `disableIntervalMomentum`
 
-When true, the scroll view stops on the next index (in relation to scroll position at release) regardless of how fast the gesture is. This can be used for pagination when the page is less than the width of the horizontal ScrollView or the height of the vertical ScrollView.
+当为 true 时，无论手势多快，滚动视图都会停在下一个索引位置（相对于松手时的滚动位置）。当页面宽度小于水平 ScrollView 的宽度，或页面高度小于垂直 ScrollView 的高度时，可用于分页。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `false` |
 
@@ -261,9 +261,9 @@ When true, the scroll view stops on the next index (in relation to scroll positi
 
 ### `disableScrollViewPanResponder`
 
-When true, the default JS pan responder on the ScrollView is disabled, and full control over touches inside the ScrollView is left to its child components. This is particularly useful if `snapToInterval` is enabled, since it does not follow typical touch patterns. Do not use this on regular ScrollView use cases without `snapToInterval` as it may cause unexpected touches to occur while scrolling.
+当为 true 时，会禁用 ScrollView 上默认的 JS pan responder，ScrollView 内部触摸的完全控制权会交给其子组件。尤其在启用 `snapToInterval` 时非常有用，因为它不遵循典型的触摸模式。若未启用 `snapToInterval`，不要在普通 ScrollView 场景下使用此属性，否则在滚动时可能会触发意外的触摸事件。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `false` |
 
@@ -271,21 +271,21 @@ When true, the default JS pan responder on the ScrollView is disabled, and full 
 
 ### `endFillColor` <div className="label android">Android</div>
 
-Sometimes a scrollview takes up more space than its content fills. When this is the case, this prop will fill the rest of the scrollview with a color to avoid setting a background and creating unnecessary overdraw. This is an advanced optimization that is not needed in the general case.
+有时 ScrollView 占用的空间会大于其内容填充的空间。在这种情况下，此属性会用一种颜色填充 ScrollView 剩余区域，以避免设置背景并产生不必要的过度绘制。这是一项高级优化，在一般情况下并不需要。
 
-| Type            |
+| 类型            |
 | --------------- |
-| [color](colors) |
+| [颜色](colors) |
 
 ---
 
 ### `fadingEdgeLength` <div className="label android">Android</div>
 
-Fades out the edges of the scroll content.
+使滚动内容的边缘淡出。
 
-If the value is greater than `0`, the fading edges will be set accordingly to the current scroll direction and position, indicating if there is more content to show.
+如果该值大于 `0`，则会根据当前滚动方向和位置相应地设置淡出边缘，以指示是否还有更多内容可显示。
 
-| Type                                               | Default |
+| 类型                                               | 默认值 |
 | -------------------------------------------------- | ------- |
 | number<hr />object: `{start: number, end: number}` | `0`     |
 
@@ -293,9 +293,9 @@ If the value is greater than `0`, the fading edges will be set accordingly to th
 
 ### `horizontal`
 
-When `true`, the scroll view's children are arranged horizontally in a row instead of vertically in a column.
+当为 `true` 时，滚动视图的子元素会按行水平排列，而不是按列垂直排列。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `false` |
 
@@ -303,13 +303,13 @@ When `true`, the scroll view's children are arranged horizontally in a row inste
 
 ### `indicatorStyle` <div className="label ios">iOS</div>
 
-The style of the scroll indicators.
+滚动指示器的样式。
 
-- `'default'` same as `black`.
-- `'black'`, scroll indicator is `black`. This style is good against a light background.
-- `'white'`, scroll indicator is `white`. This style is good against a dark background.
+- `'default'` 与 `black` 相同。
+- `'black'`，滚动指示器为 `black`。这种样式适合浅色背景。
+- `'white'`，滚动指示器为 `white`。这种样式适合深色背景。
 
-| Type                                    | Default     |
+| 类型                                    | 默认值     |
 | --------------------------------------- | ----------- |
 | enum(`'default'`, `'black'`, `'white'`) | `'default'` |
 
@@ -317,9 +317,9 @@ The style of the scroll indicators.
 
 ### `invertStickyHeaders`
 
-If sticky headers should stick at the bottom instead of the top of the ScrollView. This is usually used with inverted ScrollViews.
+如果应让粘性标题固定在 ScrollView 底部而不是顶部。通常与反向 ScrollView 一起使用。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `false` |
 
@@ -327,16 +327,16 @@ If sticky headers should stick at the bottom instead of the top of the ScrollVie
 
 ### `keyboardDismissMode`
 
-Determines whether the keyboard gets dismissed in response to a drag.
+决定键盘是否会响应拖动而被关闭。
 
-- `'none'`, drags do not dismiss the keyboard.
-- `'on-drag'`, the keyboard is dismissed when a drag begins.
+- `'none'`，拖动不会关闭键盘。
+- `'on-drag'`，在拖动开始时键盘会被关闭。
 
-**iOS Only**
+**仅限 iOS**
 
-- `'interactive'`, the keyboard is dismissed interactively with the drag and moves in synchrony with the touch, dragging upwards cancels the dismissal. On Android this is not supported and it will have the same behavior as `'none'`.
+- `'interactive'`，键盘会随着拖动以交互方式被关闭，并与触摸同步移动，向上拖动会取消关闭。在 Android 上不支持该模式，其行为与 `'none'` 相同。
 
-| Type                                                                                                                                                            | Default  |
+| 类型                                                                                                                                                            | 默认值  |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | enum(`'none'`, `'on-drag'`) <div className="label android">Android</div><hr />enum(`'none'`, `'on-drag'`, `'interactive'`) <div className="label ios">iOS</div> | `'none'` |
 
@@ -344,15 +344,15 @@ Determines whether the keyboard gets dismissed in response to a drag.
 
 ### `keyboardShouldPersistTaps`
 
-Determines when the keyboard should stay visible after a tap.
+决定在点击后键盘应何时保持可见。
 
-- `'never'` tapping outside of the focused text input when the keyboard is up dismisses the keyboard. When this happens, children won't receive the tap.
-- `'always'`, the keyboard will not dismiss automatically, and the scroll view will not catch taps, but children of the scroll view can catch taps.
-- `'handled'`, the keyboard will not dismiss automatically when the tap was handled by children of the scroll view (or captured by an ancestor).
-- `false`, **_deprecated_**, use `'never'` instead
-- `true`, **_deprecated_**, use `'always'` instead
+- `'never'`，当键盘弹出时，点击聚焦文本输入框之外的区域会关闭键盘。发生这种情况时，子组件不会收到该点击。
+- `'always'`，键盘不会自动关闭，滚动视图也不会拦截点击，但滚动视图的子组件可以接收点击。
+- `'handled'`，如果该点击已被滚动视图的子组件处理（或被祖先捕获），键盘不会自动关闭。
+- `false`，**_已废弃_**，请改用 `'never'`
+- `true`，**_已废弃_**，请改用 `'always'`
 
-| Type                                                      | Default   |
+| 类型                                                      | 默认值   |
 | --------------------------------------------------------- | --------- |
 | enum(`'always'`, `'never'`, `'handled'`, `false`, `true`) | `'never'` |
 
@@ -360,15 +360,15 @@ Determines when the keyboard should stay visible after a tap.
 
 ### `maintainVisibleContentPosition`
 
-When set, the scroll view will adjust the scroll position so that the first child that is currently visible and at or beyond `minIndexForVisible` will not change position. This is useful for lists that are loading content in both directions, e.g. a chat thread, where new messages coming in might otherwise cause the scroll position to jump. A value of 0 is common, but other values such as 1 can be used to skip loading spinners or other content that should not maintain position.
+设置后，滚动视图会调整滚动位置，使当前可见且索引大于或等于 `minIndexForVisible` 的第一个子元素不会改变位置。这对于双向加载内容的列表非常有用，例如聊天线程；否则新消息的到来可能会导致滚动位置跳动。`0` 是常见值，但也可以使用其他值，例如 `1`，以跳过加载指示器或其他不应保持位置的内容。
 
-The optional `autoscrollToTopThreshold` can be used to make the content automatically scroll to the top after making the adjustment if the user was within the threshold of the top before the adjustment was made. This is also useful for chat-like applications where you want to see new messages scroll into place, but not if the user has scrolled up a ways and it would be disruptive to scroll a bunch.
+可选的 `autoscrollToTopThreshold` 可用于在调整后让内容自动滚动到顶部，前提是用户在调整之前距离顶部仍在阈值范围内。这对于类似聊天的应用也很有用：你希望看到新消息滚动到位，但如果用户已经向上滚动了一段距离，此时再强行滚动回去会造成干扰。
 
-Caveat 1: Reordering elements in the scrollview with this enabled will probably cause jumpiness and jank. It can be fixed, but there are currently no plans to do so. For now, don't re-order the content of any ScrollViews or Lists that use this feature.
+注意事项 1：在启用此功能时对 scrollview 中的元素重新排序，可能会导致明显的跳动和卡顿。这个问题理论上可以修复，但目前没有计划处理。就目前而言，不要对使用此功能的任何 ScrollView 或 List 的内容重新排序。
 
-Caveat 2: This uses `contentOffset` and `frame.origin` in native code to compute visibility. Occlusion, transforms, and other complexity won't be taken into account as to whether content is "visible" or not.
+注意事项 2：这会使用原生代码中的 `contentOffset` 和 `frame.origin` 来计算可见性。遮挡、变换以及其他复杂情况不会被纳入“是否可见”的判断。
 
-| Type                                                                     |
+| 类型                                                                     |
 | ------------------------------------------------------------------------ |
 | object: `{minIndexForVisible: number, autoscrollToTopThreshold: number}` |
 
@@ -376,9 +376,9 @@ Caveat 2: This uses `contentOffset` and `frame.origin` in native code to compute
 
 ### `maximumZoomScale` <div className="label ios">iOS</div>
 
-The maximum allowed zoom scale.
+允许的最大缩放比例。
 
-| Type   | Default |
+| 类型   | 默认值 |
 | ------ | ------- |
 | number | `1.0`   |
 
@@ -386,9 +386,9 @@ The maximum allowed zoom scale.
 
 ### `minimumZoomScale` <div className="label ios">iOS</div>
 
-The minimum allowed zoom scale.
+允许的最小缩放比例。
 
-| Type   | Default |
+| 类型   | 默认值 |
 | ------ | ------- |
 | number | `1.0`   |
 
@@ -396,9 +396,9 @@ The minimum allowed zoom scale.
 
 ### `nestedScrollEnabled` <div className="label android">Android</div>
 
-Enables nested scrolling for Android API level 21+.
+为 Android API 21+ 启用嵌套滚动。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `false` |
 
@@ -406,13 +406,13 @@ Enables nested scrolling for Android API level 21+.
 
 ### `onContentSizeChange`
 
-Called when scrollable content view of the ScrollView changes.
+当 ScrollView 的可滚动内容视图发生变化时调用。
 
-The handler function will receive two parameters: the content width and content height `(contentWidth, contentHeight)`.
+处理函数将接收两个参数：内容宽度和内容高度 `(contentWidth, contentHeight)`。
 
-It's implemented using onLayout handler attached to the content container which this ScrollView renders.
+它通过附加到该 ScrollView 所渲染的内容容器上的 onLayout 处理函数来实现。
 
-| Type     |
+| 类型     |
 | -------- |
 | function |
 
@@ -420,9 +420,9 @@ It's implemented using onLayout handler attached to the content container which 
 
 ### `onMomentumScrollBegin`
 
-Called when the momentum scroll starts (scroll which occurs as the ScrollView starts gliding).
+当动量滚动开始时调用（即 ScrollView 开始滑行时发生的滚动）。
 
-| Type     |
+| 类型     |
 | -------- |
 | function |
 
@@ -430,9 +430,9 @@ Called when the momentum scroll starts (scroll which occurs as the ScrollView st
 
 ### `onMomentumScrollEnd`
 
-Called when the momentum scroll ends (scroll which occurs as the ScrollView glides to a stop).
+当动量滚动结束时调用（即 ScrollView 滑行停止时发生的滚动）。
 
-| Type     |
+| 类型     |
 | -------- |
 | function |
 
@@ -440,7 +440,7 @@ Called when the momentum scroll ends (scroll which occurs as the ScrollView glid
 
 ### `onScroll`
 
-Fires at most once per frame during scrolling. The event has the following shape (all values with unspecified type are numbers):
+滚动过程中每帧最多触发一次。该事件具有以下结构（所有未指定类型的值都是数字）：
 
 ```js
 {
@@ -452,13 +452,13 @@ Fires at most once per frame during scrolling. The event has the following shape
     velocity: {x, y},
     responderIgnoreScroll: boolean,
     zoomScale,
-    // iOS only
+    // 仅限 iOS
     targetContentOffset: {x, y}
   }
 }
 ```
 
-| Type     |
+| 类型     |
 | -------- |
 | function |
 
@@ -466,9 +466,9 @@ Fires at most once per frame during scrolling. The event has the following shape
 
 ### `onScrollBeginDrag`
 
-Called when the user begins to drag the scroll view.
+当用户开始拖动滚动视图时调用。
 
-| Type     |
+| 类型     |
 | -------- |
 | function |
 
@@ -476,9 +476,9 @@ Called when the user begins to drag the scroll view.
 
 ### `onScrollEndDrag`
 
-Called when the user stops dragging the scroll view and it either stops or begins to glide.
+当用户停止拖动滚动视图，而滚动视图要么停止、要么开始滑行时调用。
 
-| Type     |
+| 类型     |
 | -------- |
 | function |
 
@@ -486,9 +486,9 @@ Called when the user stops dragging the scroll view and it either stops or begin
 
 ### `onScrollToTop` <div className="label ios">iOS</div>
 
-Fires when the scroll view scrolls to top after the status bar has been tapped.
+当状态栏被点击后滚动视图滚动到顶部时触发。
 
-| Type     |
+| 类型     |
 | -------- |
 | function |
 
@@ -496,15 +496,15 @@ Fires when the scroll view scrolls to top after the status bar has been tapped.
 
 ### `overScrollMode` <div className="label android">Android</div>
 
-Used to override default value of overScroll mode.
+用于覆盖 overScroll 模式的默认值。
 
-Possible values:
+可选值：
 
-- `'auto'` - Allow a user to over-scroll this view only if the content is large enough to meaningfully scroll.
-- `'always'` - Always allow a user to over-scroll this view.
-- `'never'` - Never allow a user to over-scroll this view.
+- `'auto'` - 只有当内容足够大、可以有意义地滚动时，才允许用户对该视图进行超滚动。
+- `'always'` - 始终允许用户对该视图进行超滚动。
+- `'never'` - 从不允许用户对该视图进行超滚动。
 
-| Type                                  | Default  |
+| 类型                                  | 默认值  |
 | ------------------------------------- | -------- |
 | enum(`'auto'`, `'always'`, `'never'`) | `'auto'` |
 
@@ -512,9 +512,9 @@ Possible values:
 
 ### `pagingEnabled`
 
-When true, the scroll view stops on multiples of the scroll view's size when scrolling. This can be used for horizontal pagination.
+当为 true 时，滚动视图在滚动时会停在其尺寸的整数倍位置。可用于水平分页。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `false` |
 
@@ -522,9 +522,9 @@ When true, the scroll view stops on multiples of the scroll view's size when scr
 
 ### `persistentScrollbar` <div className="label android">Android</div>
 
-Causes the scrollbars not to turn transparent when they are not in use.
+使滚动条在不使用时不会变为透明。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `false` |
 
@@ -532,9 +532,9 @@ Causes the scrollbars not to turn transparent when they are not in use.
 
 ### `pinchGestureEnabled` <div className="label ios">iOS</div>
 
-When true, ScrollView allows use of pinch gestures to zoom in and out.
+当为 true 时，ScrollView 允许使用捏合手势进行放大和缩小。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `true`  |
 
@@ -542,11 +542,11 @@ When true, ScrollView allows use of pinch gestures to zoom in and out.
 
 ### `refreshControl`
 
-A RefreshControl component, used to provide pull-to-refresh functionality for the ScrollView. Only works for vertical ScrollViews (`horizontal` prop must be `false`).
+一个 RefreshControl 组件，用于为 ScrollView 提供下拉刷新功能。仅适用于垂直 ScrollView（`horizontal` 属性必须为 `false`）。
 
-See [RefreshControl](refreshcontrol).
+参见 [RefreshControl](refreshcontrol)。
 
-| Type    |
+| 类型    |
 | ------- |
 | element |
 
@@ -555,12 +555,12 @@ See [RefreshControl](refreshcontrol).
 ### `removeClippedSubviews`
 
 :::warning
-Using this property may lead to bugs (missing content) in some circumstances - use at your own risk.
+在某些情况下，使用此属性可能会导致 bug（内容缺失）——风险自担。
 :::
 
-When `true`, offscreen child views are removed from their native backing superview when offscreen. This may improve scroll performance for large lists. On Android the default value is `true`.
+当为 `true` 时，屏幕外的子视图在离开屏幕后会从其原生承载的父视图中移除。这可能会提升大型列表的滚动性能。在 Android 上默认值为 `true`。
 
-| Type    |
+| 类型    |
 | ------- |
 | boolean |
 
@@ -568,11 +568,11 @@ When `true`, offscreen child views are removed from their native backing supervi
 
 ### `scrollEnabled`
 
-When false, the view cannot be scrolled via touch interaction.
+当为 false 时，视图无法通过触摸交互滚动。
 
-Note that the view can always be scrolled by calling `scrollTo`.
+注意，仍然可以通过调用 `scrollTo` 来滚动视图。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `true`  |
 
@@ -580,9 +580,9 @@ Note that the view can always be scrolled by calling `scrollTo`.
 
 ### `scrollEventThrottle`
 
-Limits how often scroll events will be fired while scrolling, specified as a time interval in ms. This may be useful when expensive work is performed in response to scrolling. Values &le; `16` will disable throttling, regardless of the refresh rate of the device.
+限制滚动时触发滚动事件的频率，单位为毫秒。当滚动响应中需要执行开销较大的工作时，这可能很有用。值 &le; `16` 将禁用节流，无论设备刷新率如何。
 
-| Type   | Default |
+| 类型   | 默认值 |
 | ------ | ------- |
 | number | `0`     |
 
@@ -590,9 +590,9 @@ Limits how often scroll events will be fired while scrolling, specified as a tim
 
 ### `scrollIndicatorInsets` <div className="label ios">iOS</div>
 
-The amount by which the scroll view indicators are inset from the edges of the scroll view. This should normally be set to the same value as the `contentInset`.
+滚动视图指示器距滚动视图边缘的内缩量。通常应设置为与 `contentInset` 相同的值。
 
-| Type                                                                 | Default                                  |
+| 类型                                                                 | 默认值                                  |
 | -------------------------------------------------------------------- | ---------------------------------------- |
 | object: `{top: number, left: number, bottom: number, right: number}` | `{top: 0, left: 0, bottom: 0, right: 0}` |
 
@@ -600,19 +600,29 @@ The amount by which the scroll view indicators are inset from the edges of the s
 
 ### `scrollPerfTag` <div className="label android">Android</div>
 
-Tag used to log scroll performance on this scroll view. Will force momentum events to be turned on (see sendMomentumEvents). This doesn't do anything out of the box and you need to implement a custom native FpsListener for it to be useful.
+用于记录此 ScrollView 的滚动性能的标签。会强制开启动量事件（见 sendMomentumEvents）。默认情况下它不会起任何作用，若要让它有用，你需要实现一个自定义原生 FpsListener。
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
 ---
 
+### `scrollsChildToFocus` <div className="label android">Android</div>
+
+当为 `true` 时，ScrollView 会自动滚动以将获得焦点的子元素带入视图。将其设置为 `false` 可禁用此行为，并在焦点变化时手动控制滚动位置。
+
+| 类型 | 默认值 |
+| ---- | ------- |
+| bool | `true`  |
+
+---
+
 ### `scrollToOverflowEnabled` <div className="label ios">iOS</div>
 
-When `true`, the scroll view can be programmatically scrolled beyond its content size.
+当为 `true` 时，滚动视图可以通过编程方式滚动到超出其内容尺寸的区域。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `false` |
 
@@ -620,9 +630,9 @@ When `true`, the scroll view can be programmatically scrolled beyond its content
 
 ### `scrollsToTop` <div className="label ios">iOS</div>
 
-When `true`, the scroll view scrolls to top when the status bar is tapped.
+当为 `true` 时，点击状态栏会让滚动视图滚动到顶部。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `true`  |
 
@@ -630,9 +640,9 @@ When `true`, the scroll view scrolls to top when the status bar is tapped.
 
 ### `showsHorizontalScrollIndicator`
 
-When `true`, shows a horizontal scroll indicator.
+当为 `true` 时，显示水平滚动指示器。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `true`  |
 
@@ -640,9 +650,9 @@ When `true`, shows a horizontal scroll indicator.
 
 ### `showsVerticalScrollIndicator`
 
-When `true`, shows a vertical scroll indicator.
+当为 `true` 时，显示垂直滚动指示器。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `true`  |
 
@@ -650,15 +660,15 @@ When `true`, shows a vertical scroll indicator.
 
 ### `snapToAlignment`
 
-When `snapToInterval` is set, `snapToAlignment` will define the relationship of the snapping to the scroll view.
+当设置了 `snapToInterval` 时，`snapToAlignment` 将定义吸附与 ScrollView 的关系。
 
-Possible values:
+可选值：
 
-- `'start'` will align the snap at the left (horizontal) or top (vertical).
-- `'center'` will align the snap in the center.
-- `'end'` will align the snap at the right (horizontal) or bottom (vertical).
+- `'start'` 会将吸附对齐到左侧（水平）或顶部（垂直）。
+- `'center'` 会将吸附对齐到中心。
+- `'end'` 会将吸附对齐到右侧（水平）或底部（垂直）。
 
-| Type                                 | Default   |
+| 类型                                 | 默认值   |
 | ------------------------------------ | --------- |
 | enum(`'start'`, `'center'`, `'end'`) | `'start'` |
 
@@ -666,9 +676,9 @@ Possible values:
 
 ### `snapToEnd`
 
-Use in conjunction with `snapToOffsets`. By default, the end of the list counts as a snap offset. Set `snapToEnd` to false to disable this behavior and allow the list to scroll freely between its end and the last `snapToOffsets` offset.
+与 `snapToOffsets` 配合使用。默认情况下，列表末尾会被视为一个吸附偏移量。将 `snapToEnd` 设置为 false 可禁用此行为，并允许列表在末尾与最后一个 `snapToOffsets` 偏移量之间自由滚动。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `true`  |
 
@@ -676,9 +686,9 @@ Use in conjunction with `snapToOffsets`. By default, the end of the list counts 
 
 ### `snapToInterval`
 
-When set, causes the scroll view to stop at multiples of the value of `snapToInterval`. This can be used for paginating through children that have lengths smaller than the scroll view. Typically used in combination with `snapToAlignment` and `decelerationRate="fast"`. Overrides less configurable `pagingEnabled` prop.
+设置后，滚动视图会停在 `snapToInterval` 值的整数倍位置。可用于对长度小于滚动视图的子元素进行分页。通常与 `snapToAlignment` 和 `decelerationRate="fast"` 一起使用。会覆盖配置较少的 `pagingEnabled` 属性。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -686,9 +696,9 @@ When set, causes the scroll view to stop at multiples of the value of `snapToInt
 
 ### `snapToOffsets`
 
-When set, causes the scroll view to stop at the defined offsets. This can be used for paginating through variously sized children that have lengths smaller than the scroll view. Typically used in combination with `decelerationRate="fast"`. Overrides less configurable `pagingEnabled` and `snapToInterval` props.
+设置后，滚动视图会停在定义的偏移位置。可用于对不同尺寸、且长度小于滚动视图的子元素进行分页。通常与 `decelerationRate="fast"` 一起使用。会覆盖配置较少的 `pagingEnabled` 和 `snapToInterval` 属性。
 
-| Type            |
+| 类型            |
 | --------------- |
 | array of number |
 
@@ -696,9 +706,9 @@ When set, causes the scroll view to stop at the defined offsets. This can be use
 
 ### `snapToStart`
 
-Use in conjunction with `snapToOffsets`. By default, the beginning of the list counts as a snap offset. Set `snapToStart` to `false` to disable this behavior and allow the list to scroll freely between its start and the first `snapToOffsets` offset.
+与 `snapToOffsets` 配合使用。默认情况下，列表开头会被视为一个吸附偏移量。将 `snapToStart` 设置为 `false` 可禁用此行为，并允许列表在起始位置与第一个 `snapToOffsets` 偏移量之间自由滚动。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `true`  |
 
@@ -706,9 +716,9 @@ Use in conjunction with `snapToOffsets`. By default, the beginning of the list c
 
 ### `stickyHeaderHiddenOnScroll`
 
-When set to `true`, sticky header will be hidden when scrolling down the list, and it will dock at the top of the list when scrolling up.
+当设置为 `true` 时，粘性标题在向下滚动列表时会隐藏，在向上滚动时会停靠到列表顶部。
 
-| Type | Default |
+| 类型 | 默认值 |
 | ---- | ------- |
 | bool | `false` |
 
@@ -716,9 +726,9 @@ When set to `true`, sticky header will be hidden when scrolling down the list, a
 
 ### `stickyHeaderIndices`
 
-An array of child indices determining which children get docked to the top of the screen when scrolling. For example, passing `stickyHeaderIndices={[0]}` will cause the first child to be fixed to the top of the scroll view. You can also use like [x,y,z] to make multiple items sticky when they are at the top. This property is not supported in conjunction with `horizontal={true}`.
+一个子元素索引数组，用于决定滚动时哪些子元素会停靠到屏幕顶部。例如，传入 `stickyHeaderIndices={[0]}` 会使第一个子元素固定到滚动视图顶部。你也可以使用 `[x,y,z]` 让多个项目在位于顶部时变为粘性。此属性不支持与 `horizontal={true}` 一起使用。
 
-| Type            |
+| 类型            |
 | --------------- |
 | array of number |
 
@@ -726,15 +736,15 @@ An array of child indices determining which children get docked to the top of th
 
 ### `zoomScale` <div className="label ios">iOS</div>
 
-The current scale of the scroll view content.
+滚动视图内容的当前缩放比例。
 
-| Type   | Default |
+| 类型   | 默认值 |
 | ------ | ------- |
 | number | `1.0`   |
 
 ---
 
-## Methods
+## 方法
 
 ### `flashScrollIndicators()`
 
@@ -742,7 +752,7 @@ The current scale of the scroll view content.
 flashScrollIndicators();
 ```
 
-Displays the scroll indicators momentarily.
+短暂显示滚动指示器。
 
 ---
 
@@ -756,14 +766,14 @@ scrollTo(
 );
 ```
 
-Scrolls to a given x, y offset, either immediately, with a smooth animation.
+将内容滚动到指定的 x、y 偏移位置，可立即执行，也可使用平滑动画。
 
-**Example:**
+**示例：**
 
 `scrollTo({x: 0, y: 0, animated: true})`
 
 :::note
-The weird function signature is due to the fact that, for historical reasons, the function also accepts separate arguments as an alternative to the options object. This is deprecated due to ambiguity (y before x), and SHOULD NOT BE USED.
+这个奇怪的函数签名是因为出于历史原因，该函数除了接受选项对象外，也接受单独的参数作为替代方式。由于存在歧义（y 在 x 之前），这已被弃用，不应使用。
 :::
 
 ---
@@ -774,6 +784,6 @@ The weird function signature is due to the fact that, for historical reasons, th
 scrollToEnd(options?: {animated?: boolean});
 ```
 
-If this is a vertical ScrollView scrolls to the bottom. If this is a horizontal ScrollView scrolls to the right.
+如果这是一个垂直的 ScrollView，则滚动到底部。如果这是一个水平的 ScrollView，则滚动到右侧。
 
-Use `scrollToEnd({animated: true})` for smooth animated scrolling, `scrollToEnd({animated: false})` for immediate scrolling. If no options are passed, `animated` defaults to `true`.
+使用 `scrollToEnd({animated: true})` 可进行平滑动画滚动，使用 `scrollToEnd({animated: false})` 可立即滚动。如果未传入任何选项，`animated` 默认为 `true`。

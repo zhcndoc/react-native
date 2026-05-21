@@ -110,15 +110,14 @@ const App = () => {
                 textShadowRadius,
               },
             ]}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. 112 Likes
+            Lorem Ipsum 只是印刷和排版行业的虚拟文本。112 个赞
           </Text>
         </View>
         <ScrollView style={{padding: 12}}>
           <View>
-            <Text>Common platform properties</Text>
+            <Text>常见平台属性</Text>
             <CustomSlider
-              label="Text Shadow Offset - Height"
+              label="文本阴影偏移 - 高度"
               value={textShadowOffset.height}
               minimumValue={-40}
               maximumValue={40}
@@ -127,7 +126,7 @@ const App = () => {
               }
             />
             <CustomSlider
-              label="Text Shadow Offset - Width"
+              label="文本阴影偏移 - 宽度"
               value={textShadowOffset.width}
               minimumValue={-40}
               maximumValue={40}
@@ -136,61 +135,61 @@ const App = () => {
               }
             />
             <CustomSlider
-              label="Font Size"
+              label="字体大小"
               value={fontSize}
               maximumValue={40}
               handleValueChange={setFontSize}
             />
             <CustomPicker
-              label="Font Style"
+              label="字体样式"
               data={fontStyles}
               currentIndex={fontStyleIdx}
               onSelected={setFontStyleIdx}
             />
             <CustomPicker
-              label="Font Weight"
+              label="字体粗细"
               data={fontWeights}
               currentIndex={fontWeightIdx}
               onSelected={setFontWeightIdx}
             />
             <CustomSlider
-              label="Line Height"
+              label="行高"
               value={lineHeight}
               minimumValue={10}
               maximumValue={50}
               handleValueChange={setLineHeight}
             />
             <CustomPicker
-              label="Text Align"
+              label="文本对齐"
               data={textAlignments}
               currentIndex={textAlignIdx}
               onSelected={setTextAlignIdx}
             />
             <CustomPicker
-              label="Text Decoration Line"
+              label="文本装饰线"
               data={textDecorationLines}
               currentIndex={textDecorationLineIdx]
               onSelected={setTextDecorationLineIdx}
             />
             <CustomSlider
-              label="Text Shadow Radius"
+              label="文本阴影半径"
               value={textShadowRadius}
               handleValueChange={setTextShadowRadius}
             />
             <CustomPicker
-              label="Font Variant"
+              label="字体变体"
               data={fontVariants}
               currentIndex={fontVariantIdx}
               onSelected={setFontVariantIdx}
             />
             <CustomSlider
-              label="Letter Spacing"
+              label="字母间距"
               step={0.1}
               value={letterSpacing}
               handleValueChange={setLetterSpacing}
             />
             <CustomPicker
-              label="Text Transform"
+              label="文本转换"
               data={textTransformations}
               currentIndex={textTransformIdx}
               onSelected={setTextTransformIdx}
@@ -199,16 +198,16 @@ const App = () => {
           {Platform.OS === 'android' && (
             <View style={styles.platformContainer}>
               <Text style={styles.platformContainerTitle}>
-                Android only properties
+                仅 Android 属性
               </Text>
               <CustomPicker
-                label="Text Vertical Align"
+                label="文本垂直对齐"
                 data={textAlignmentsVertical}
                 currentIndex={textVerticalAlignIdx}
                 onSelected={setTextVerticalAlignIdx}
               />
               <CustomSwitch
-                label="Include Font Padding"
+                label="包含字体内边距"
                 handleValueChange={setIncludeFontPadding}
                 value={includeFontPadding}
               />
@@ -217,16 +216,16 @@ const App = () => {
           {Platform.OS === 'ios' && (
             <View style={styles.platformContainer}>
               <Text style={styles.platformContainerTitle}>
-                iOS only properties
+                仅 iOS 属性
               </Text>
               <CustomPicker
-                label="Text Decoration Style"
+                label="文本装饰样式"
                 data={textDecorationStyles}
                 currentIndex={textDecorationStyleIdx}
                 onSelected={setTextDecorationStyleIdx}
               />
               <CustomPicker
-                label="Writing Direction"
+                label="书写方向"
                 data={writingDirections}
                 currentIndex={writingDirectionIdx}
                 onSelected={setWritingDirectionIdx}
@@ -438,15 +437,14 @@ const App = () => {
                 textShadowRadius,
               } as TextStyle,
             ]}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. 112 Likes
+            Lorem Ipsum 只是印刷和排版行业的虚拟文本。112 个赞
           </Text>
         </View>
         <ScrollView style={{padding: 12}}>
           <View>
-            <Text>Common platform properties</Text>
+            <Text>常见平台属性</Text>
             <CustomSlider
-              label="Text Shadow Offset - Height"
+              label="文本阴影偏移 - 高度"
               value={textShadowOffset.height}
               minimumValue={-40}
               maximumValue={40}
@@ -455,7 +453,7 @@ const App = () => {
               }
             />
             <CustomSlider
-              label="Text Shadow Offset - Width"
+              label="文本阴影偏移 - 宽度"
               value={textShadowOffset.width}
               minimumValue={-40}
               maximumValue={40}
@@ -464,61 +462,61 @@ const App = () => {
               }
             />
             <CustomSlider
-              label="Font Size"
+              label="字体大小"
               value={fontSize}
               maximumValue={40}
               handleValueChange={setFontSize}
             />
             <CustomPicker
-              label="Font Style"
+              label="字体样式"
               data={fontStyles}
               currentIndex={fontStyleIdx}
               onSelected={setFontStyleIdx}
             />
             <CustomPicker
-              label="Font Weight"
+              label="字体粗细"
               data={fontWeights}
               currentIndex={fontWeightIdx}
               onSelected={setFontWeightIdx}
             />
             <CustomSlider
-              label="Line Height"
+              label="行高"
               value={lineHeight}
               minimumValue={10}
               maximumValue={50}
               handleValueChange={setLineHeight}
             />
             <CustomPicker
-              label="Text Align"
+              label="文本对齐"
               data={textAlignments}
               currentIndex={textAlignIdx}
               onSelected={setTextAlignIdx}
             />
             <CustomPicker
-              label="Text Decoration Line"
+              label="文本装饰线"
               data={textDecorationLines}
               currentIndex={textDecorationLineIdx]
               onSelected={setTextDecorationLineIdx}
             />
             <CustomSlider
-              label="Text Shadow Radius"
+              label="文本阴影半径"
               value={textShadowRadius}
               handleValueChange={setTextShadowRadius}
             />
             <CustomPicker
-              label="Font Variant"
+              label="字体变体"
               data={fontVariants}
               currentIndex={fontVariantIdx}
               onSelected={setFontVariantIdx}
             />
             <CustomSlider
-              label="Letter Spacing"
+              label="字母间距"
               step={0.1}
               value={letterSpacing}
               handleValueChange={setLetterSpacing}
             />
             <CustomPicker
-              label="Text Transform"
+              label="文本转换"
               data={textTransformations}
               currentIndex={textTransformIdx}
               onSelected={setTextTransformIdx}
@@ -527,16 +525,16 @@ const App = () => {
           {Platform.OS === 'android' && (
             <View style={styles.platformContainer}>
               <Text style={styles.platformContainerTitle}>
-                Android only properties
+                仅 Android 属性
               </Text>
               <CustomPicker
-                label="Text Vertical Align"
+                label="文本垂直对齐"
                 data={textAlignmentsVertical}
                 currentIndex={textVerticalAlignIdx}
                 onSelected={setTextVerticalAlignIdx}
               />
               <CustomSwitch
-                label="Include Font Padding"
+                label="包含字体内边距"
                 handleValueChange={setIncludeFontPadding}
                 value={includeFontPadding}
               />
@@ -545,16 +543,16 @@ const App = () => {
           {Platform.OS === 'ios' && (
             <View style={styles.platformContainer}>
               <Text style={styles.platformContainerTitle}>
-                iOS only properties
+                仅 iOS 属性
               </Text>
               <CustomPicker
-                label="Text Decoration Style"
+                label="文本装饰样式"
                 data={textDecorationStyles}
                 currentIndex={textDecorationStyleIdx}
                 onSelected={setTextDecorationStyleIdx}
               />
               <CustomPicker
-                label="Writing Direction"
+                label="书写方向"
                 data={writingDirections}
                 currentIndex={writingDirectionIdx}
                 onSelected={setWritingDirectionIdx}
@@ -859,8 +857,10 @@ iOS 上支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-mo
 
 ### `textAlignVertical` <div className="label android">Android</div>
 
-| 类型                                            | 默认值   |
-| ----------------------------------------------- | -------- |
+`verticalAlign` 样式属性的别名，如果你同时使用这两个属性，`verticalAlign` 将优先于 `textAlignVertical`
+
+| 类型                                            | 默认值  |
+| ----------------------------------------------- | ------- |
 | enum(`'auto'`, `'top'`, `'bottom'`, `'center'`) | `'auto'` |
 
 ---

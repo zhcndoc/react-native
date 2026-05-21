@@ -1,6 +1,6 @@
 ---
 id: modal
-title: Modal
+title: 模态框
 ---
 
 Modal 组件是一种在封闭视图之上呈现内容的基本方式。
@@ -136,7 +136,7 @@ export default App;
 
 ---
 
-### `hardwareAccelerated` <div className="label android">Android</div>
+### `hardwareAccelerated` <div className="label android">安卓</div>
 
 `hardwareAccelerated` 属性控制是否强制底层窗口进行硬件加速。
 
@@ -146,7 +146,7 @@ export default App;
 
 ---
 
-### `navigationBarTranslucent` <div className="label android">Android</div>
+### `navigationBarTranslucent` <div className="label android">安卓</div>
 
 `navigationBarTranslucent` 属性决定你的模态框是否应该位于系统导航栏下方。但是，也需要将 `statusBarTranslucent` 设置为 `true` 才能使导航栏半透明。
 
@@ -178,12 +178,12 @@ export default App;
 
 ### `onRequestClose`
 
-`onRequestClose` 回调在用户在 Android 上点击硬件返回按钮或在 Apple TV 上点击菜单按钮时调用。由于此属性是必需的，请注意只要模态框打开，`BackHandler` 事件就不会被发出。
-在 iOS 上，当 `presentationStyle` 为 `pageSheet` 或 `formSheet` 时，如果使用拖动手势关闭 Modal，则会调用此回调。
+当用户在 Android 上点击硬件返回按钮或在 Apple TV 上点击菜单按钮时，会调用 `onRequestClose` 回调。由于这是必需属性，只要模态框处于打开状态，`BackHandler` 事件就不会被触发。
+在 iOS 上，当 `presentationStyle` 为 `pageSheet` 或 `formSheet` 时，如果通过拖动手势关闭 Modal，则会调用此回调
 
 | 类型                                                                                                                                                                                           |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| function <div className="label basic required">必需</div><div className="label android">Android</div><div className="label tv">TV</div><hr />function <div className="label ios">iOS</div> |
+| function <div className="label basic required">必需</div><div className="label android">安卓</div><div className="label tv">电视</div><hr />function <div className="label ios">iOS</div> |
 
 ---
 
@@ -214,7 +214,7 @@ export default App;
 
 ---
 
-### `statusBarTranslucent` <div className="label android">Android</div>
+### `statusBarTranslucent` <div className="label android">安卓</div>
 
 `statusBarTranslucent` 属性决定你的模态框是否应该位于系统状态栏下方。
 

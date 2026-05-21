@@ -870,6 +870,8 @@ export default App;
 
 ### `textAlignVertical` <div className="label android">Android</div>
 
+`verticalAlign` 样式属性的别名；如果同时使用这两个属性，`verticalAlign` 将优先于 `textAlignVertical`
+
 | 类型                                            | 默认值   |
 | ----------------------------------------------- | -------- |
 | enum(`'auto'`, `'top'`, `'bottom'`, `'center'`) | `'auto'` |

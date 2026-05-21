@@ -189,8 +189,8 @@ export default App;
 
 ### `onRequestClose`
 
-`onRequestClose` 回调在用户在 Android 上点击硬件返回键或在 Apple TV 上点击菜单键时调用。由于此属性是必填的，请注意只要模态框打开，`BackHandler` 事件就不会被发出。
-在 iOS 上，当使用拖动手势关闭模态框且 `presentationStyle` 为 `pageSheet` 或 `formSheet` 时，会调用此回调。当启用 `allowSwipeDismissal` 时，此回调将在关闭模态框后被调用。
+当用户在 Android 上点击硬件返回按钮，或在 Apple TV 上点击菜单按钮时，会调用 `onRequestClose` 回调。由于这是一个必需的属性，请注意只要模态框处于打开状态，`BackHandler` 事件就不会被触发。
+在 iOS 上，当使用 `presentationStyle` 为 `pageSheet` 或 `formSheet` 时，通过拖拽手势关闭 Modal 会调用此回调。当启用 `allowSwipeDismissal` 时，此回调会在关闭模态框后调用。
 
 | 类型                                                                                                                                                                                           |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

@@ -1,6 +1,6 @@
 ---
 id: scrollview
-title: ScrollView
+title: 滚动视图
 ---
 
 该组件封装了平台的 ScrollView，同时提供了与触摸锁定“响应者”系统的集成。
@@ -283,7 +283,7 @@ const styles = StyleSheet.create({
 
 淡出滚动内容的边缘。
 
-如果值大于 `0`， fading edges 将根据当前的滚动方向和位置进行设置，指示是否有更多内容要显示。
+如果值大于 `0`，fading edges 将根据当前的滚动方向和位置进行设置，指示是否有更多内容要显示。
 
 | 类型                                               | 默认值 |
 | -------------------------------------------------- | ------- |
@@ -450,7 +450,7 @@ const styles = StyleSheet.create({
     velocity: {x, y},
     responderIgnoreScroll: boolean,
     zoomScale,
-    // iOS only
+    // 仅 iOS
     targetContentOffset: {x, y}
   }
 }
@@ -606,6 +606,16 @@ const styles = StyleSheet.create({
 
 ---
 
+### `scrollsChildToFocus` <div className="label android">Android</div>
+
+当为 `true` 时，ScrollView 会自动滚动以将获得焦点的子元素显示出来。设置为 `false` 可禁用此行为，并在焦点变化时手动控制滚动位置。
+
+| 类型 | 默认值 |
+| ---- | ------- |
+| 布尔值 | `true`  |
+
+---
+
 ### `scrollToOverflowEnabled` <div className="label ios">iOS</div>
 
 当 `true` 时，滚动视图可以以编程方式滚动超过其内容大小。
@@ -719,16 +729,6 @@ const styles = StyleSheet.create({
 | 类型            |
 | --------------- |
 | 数字数组 |
-
----
-
-### `zoomScale` <div className="label ios">iOS</div>
-
-滚动视图内容的当前缩放比例。
-
-| 类型   | 默认值 |
-| ------ | ------- |
-| 数字 | `1.0`   |
 
 ---
 

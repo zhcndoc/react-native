@@ -1,6 +1,6 @@
 ---
 id: scrollview
-title: ScrollView
+title: 滚动视图
 ---
 
 一个包装平台原生 ScrollView 并提供与触摸锁定“响应器”系统集成的组件。
@@ -67,9 +67,9 @@ export default App;
 
 ## 属性
 
-### [View Props](view.md#props)
+### [视图属性](view.md#props)
 
-继承 [View Props](view#props)。
+继承 [视图属性](view#props)。
 
 ---
 
@@ -605,6 +605,16 @@ const styles = StyleSheet.create({
 | Type   |
 | ------ |
 | string |
+
+---
+
+### `scrollsChildToFocus` <div className="label android">Android</div>
+
+当为 `true` 时，ScrollView 会自动滚动以使获得焦点的子元素进入可视区域。将其设为 `false` 可禁用此行为，并在焦点变化时手动控制滚动位置。
+
+| Type | Default |
+| ---- | ------- |
+| bool | `true` |
 
 ---
 

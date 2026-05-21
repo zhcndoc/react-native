@@ -9,12 +9,12 @@ AppState 常用于在处理推送通知时确定意图和适当的行为。
 
 ### 应用状态
 
-- `active` - 应用正在前台运行
-- `background` - 应用正在后台运行。用户要么：
-  - 在另一个应用中
+- `active` - 应用在前台运行
+- `background` - 应用在后台运行。用户此时可能处于以下任一情况：
+  - 在其他应用中
   - 在主屏幕上
-  - [Android] 在另一个 `Activity` 上（即使是由您的应用启动的）
-- [iOS] `inactive` - 这是一种在前台和后台之间过渡时发生的状态，以及在非活动期间，例如进入多任务视图、打开通知中心或有来电时。
+  - [Android] 在另一个 `Activity` 中，包括临时的系统 Activity，例如自动填充凭据选择器（即使是由您的应用或系统启动的）
+- [iOS] `inactive` - 这是在前台与后台之间切换时出现的一种状态，也会在不活动期间出现，例如进入多任务视图、打开通知中心，或有来电时。
 
 更多信息，请参阅 [Apple 的文档](https://developer.apple.com/documentation/uikit/app_and_scenes/managing_your_app_s_life_cycle)
 
@@ -88,7 +88,7 @@ export default AppStateExample;
 
 ### `memoryWarning` <div className="label ios">iOS</div>
 
-当应用收到操作系统的内存警告时触发。
+当应用收到操作系统发出的内存警告时触发。
 
 ### `focus` <div className="label android">Android</div>
 
@@ -96,7 +96,7 @@ export default AppStateExample;
 
 ### `blur` <div className="label android">Android</div>
 
-当用户未积极与应用交互时接收。适用于用户下拉 [通知栏](https://developer.android.com/guide/topics/ui/notifiers/notifications#bar-and-drawer) 的情况。`AppState` 不会改变，但 `blur` 事件会被触发。
+当用户没有积极与应用交互时接收。适用于用户下拉 [通知栏](https://developer.android.com/guide/topics/ui/notifiers/notifications#bar-and-drawer) 的情况。`AppState` 不会改变，但 `blur` 事件会被触发。
 
 ## 方法
 

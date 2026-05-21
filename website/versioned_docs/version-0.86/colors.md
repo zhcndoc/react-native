@@ -68,7 +68,7 @@ React Native 仅支持小写颜色名称。不支持大写颜色名称。
 
 #### `transparent`
 
-这是 `rgba(0,0,0,0)` 的快捷方式，与 [CSS3](https://www.w3.org/TR/css-color-3/#transparent) 中一样。
+这是 `rgba(0,0,0,0)` 的简写，与 [CSS3](https://www.w3.org/TR/css-color-3/#transparent) 中相同。
 
 #### 颜色关键字
 
@@ -191,7 +191,7 @@ React Native 仅支持小写颜色名称。不支持大写颜色名称。
 - <ins style={{background: '#dda0dd'}} className="color-box" /> 李子色 (<code>#dda0dd</code>)
 - <ins style={{background: '#b0e0e6'}} className="color-box" /> 粉蓝 (<code>#b0e0e6</code>)
 - <ins style={{background: '#800080'}} className="color-box" /> 紫色 (<code>#800080</code>)
-- <ins style={{background: '#663399'}} className="color-box" /> Rebecca 紫 (<code>#663399</code>)
+- <ins style={{background: '#663399'}} className="color-box" /> Rebecca 紫色 (<code>#663399</code>)
 - <ins style={{background: '#ff0000'}} className="color-box" /> 红色 (<code>#ff0000</code>)
 - <ins style={{background: '#bc8f8f'}} className="color-box" /> 玫瑰褐 (<code>#bc8f8f</code>)
 - <ins style={{background: '#4169e1'}} className="color-box" /> 皇家蓝 (<code>#4169e1</code>)

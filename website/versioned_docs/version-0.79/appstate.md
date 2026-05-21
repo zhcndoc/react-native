@@ -10,11 +10,11 @@ AppState 常用于在处理推送通知时确定意图和适当的行为。
 ### 应用状态
 
 - `active` - 应用正在前台运行
-- `background` - 应用正在后台运行。用户要么：
+- `background` - 应用正在后台运行。用户此时可能处于以下任一情况：
   - 在另一个应用中
   - 在主屏幕上
-  - [Android] 在另一个 `Activity` 上（即使是由您的应用启动的）
-- [iOS] `inactive` - 这是一个在前台和后台之间过渡时发生的状态，以及在非活动期间，例如进入多任务视图、打开通知中心或有来电时。
+  - [Android] 在另一个 `Activity` 上，包括临时系统活动，例如自动填充凭据选择器（即使由您的应用或系统启动）
+- [iOS] `inactive` - 这是在前台与后台之间切换时，以及在无活动期间出现的一种状态，例如进入多任务视图、打开通知中心或接到来电时。
 
 更多信息，请参阅 [Apple 的文档](https://developer.apple.com/documentation/uikit/app_and_scenes/managing_your_app_s_life_cycle)
 
@@ -41,7 +41,7 @@ const AppStateExample = () => {
         appState.current.match(/inactive|background/) &&
         nextAppState === 'active'
       ) {
-        console.log('App has come to the foreground!');
+        console.log('应用已回到前台！');
       }
 
       appState.current = nextAppState;
@@ -57,7 +57,7 @@ const AppStateExample = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <Text>Current state is: {appStateVisible}</Text>
+        <Text>当前状态是：{appStateVisible}</Text>
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
 export default AppStateExample;
 ```
 
-此示例似乎只会显示 "Current state is: active"，因为应用仅在 `active` 状态下对用户可见。如果您想尝试此代码，我们建议使用您自己的设备而不是嵌入式预览。
+此示例似乎只会显示 "当前状态是：active"，因为应用仅在 `active` 状态下对用户可见。如果您想尝试此代码，我们建议使用您自己的设备而不是嵌入式预览。
 
 ---
 
