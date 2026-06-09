@@ -7,22 +7,22 @@ title: 键盘
 
 ### 用法
 
-Keyboard 模块允许你监听原生事件并做出响应，同时也可以对键盘进行操作，比如收起键盘。
+Keyboard 模块允许你监听原生事件并对其作出响应，同时也可以对键盘进行操作，比如将其收起。
 
 ```SnackPlayer name=Keyboard%20Example&supportedPlatforms=ios,android
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {Keyboard, Text, TextInput, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const Example = () => {
-  const [keyboardStatus, setKeyboardStatus] = useState('Keyboard Hidden');
+  const [keyboardStatus, setKeyboardStatus] = useState('键盘已隐藏');
 
   useEffect(() => {
     const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
-      setKeyboardStatus('Keyboard Shown');
+      setKeyboardStatus('键盘已显示');
     });
     const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
-      setKeyboardStatus('Keyboard Hidden');
+      setKeyboardStatus('键盘已隐藏');
     });
 
     return () => {
@@ -36,7 +36,7 @@ const Example = () => {
       <SafeAreaView style={style.container}>
         <TextInput
           style={style.input}
-          placeholder="点击这里…"
+          placeholder="点这里…"
           onSubmitEditing={Keyboard.dismiss}
         />
         <Text style={style.status}>{keyboardStatus}</Text>
@@ -79,20 +79,20 @@ static addListener: (
 ) => EmitterSubscription;
 ```
 
-`addListener` 函数用于将一个 JavaScript 函数连接到指定的原生键盘通知事件。
+`addListener` 函数将一个 JavaScript 函数连接到一个指定的原生键盘通知事件。
 
-此函数返回监听器的引用。
+然后该函数会返回监听器的引用。
 
-**参数说明：**
+**参数：**
 
-| 名称                                                                     | 类型     | 说明                                                                           |
-| ------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------ |
-| eventName <div className="label basic two-lines required">必填</div>    | string   | 用于标识你监听事件的字符串。详见下面的事件列表。                                |
-| callback <div className="label basic two-lines required">必填</div>     | function | 事件触发时调用的函数                                                           |
+| 名称                                                                     | 类型     | 描述                                                                    |
+| ------------------------------------------------------------------------ | -------- | ----------------------------------------------------------------------- |
+| eventName <div className="label basic two-lines required">必填</div> | string   | 标识你正在监听的事件的字符串。见下方列表。 |
+| callback <div className="label basic two-lines required">必填</div>  | function | 事件触发时要调用的函数                                 |
 
 **`eventName`**
 
-该参数可以是下列任意一个：
+可以是以下任意一种：
 
 - `keyboardWillShow`
 - `keyboardDidShow`
@@ -102,7 +102,7 @@ static addListener: (
 - `keyboardDidChangeFrame`
 
 :::note
-在 Android 上，仅支持 `keyboardDidShow` 和 `keyboardDidHide` 事件。如果你的 Activity 设置了 `android:windowSoftInputMode` 为 `adjustResize` 或 `adjustNothing`，且系统版本是 Android 10 或更低，则事件不会被触发。
+只有 `keyboardDidShow` 和 `keyboardDidHide` 事件可在 Android 上使用。如果你的 activity 将 `android:windowSoftInputMode` 设置为 `adjustResize` 或 `adjustNothing`，那么在 Android 10 或以下版本中，这些事件不会被触发。
 :::
 
 ---
@@ -113,7 +113,7 @@ static addListener: (
 static dismiss();
 ```
 
-收起当前激活的键盘并移除焦点。
+关闭当前活动的键盘并移除焦点。
 
 ---
 
@@ -123,7 +123,7 @@ static dismiss();
 static scheduleLayoutAnimation(event: KeyboardEvent);
 ```
 
-用于同步 TextInput（或其他键盘辅助视图）的尺寸或位置变化与键盘的移动。
+用于将 TextInput（或其他键盘辅助视图）的大小或位置变化与键盘移动同步。
 
 ---
 
@@ -133,7 +133,7 @@ static scheduleLayoutAnimation(event: KeyboardEvent);
 static isVisible(): boolean;
 ```
 
-返回键盘当前是否处于可见状态。
+键盘当前最后一次已知是否可见。
 
 ---
 
@@ -143,4 +143,4 @@ static isVisible(): boolean;
 static metrics(): KeyboardMetrics | undefined;
 ```
 
-返回软键盘的尺寸信息（如果键盘可见）。
+如果键盘可见，则返回软键盘的指标。

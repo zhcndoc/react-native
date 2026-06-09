@@ -12,7 +12,6 @@ title: 警告
 ## 示例
 
 ```SnackPlayer name=Alert%20Example&supportedPlatforms=ios,android
-import React from 'react';
 import {StyleSheet, Button, Alert} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -81,7 +80,6 @@ export default App;
 ### 示例 <div className="label android">Android</div>
 
 ```SnackPlayer name=Alert%20Android%20Dissmissable%20Example&supportedPlatforms=android
-import React from 'react';
 import {StyleSheet, Button, Alert} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 

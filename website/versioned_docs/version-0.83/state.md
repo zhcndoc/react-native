@@ -1,21 +1,21 @@
 ---
 id: state
-title: 状态（State）
+title: State
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-有两种类型的数据来控制一个组件：`props` 和 `state`。`props` 由父组件设置，并且在组件的整个生命周期中是固定的。对于会变化的数据，我们必须使用 `state`。
+有两种类型的数据会控制组件：`props` 和 `state`。`props` 由父组件设置，并且在组件的整个生命周期内保持不变。对于会变化的数据，我们必须使用 `state`。
 
-一般来说，你应该在构造函数中初始化 `state`，然后在想要改变它时调用 `setState`。
+通常，你应该在构造函数中初始化 `state`，然后在想要更改它时调用 `setState`。
 
-例如，假设我们想让文本一直闪烁。文本内容本身在闪烁组件被创建时设置一次，所以文本内容本身是一个 `prop`。“文本当前是否显示”会随着时间而变化，因此应保存在 `state` 中。
+例如，假设我们想让文本一直闪烁。文本本身在闪烁组件创建时只会设置一次，因此文本本身是一个 `prop`。而“文本当前是显示还是隐藏”会随时间变化，所以应该保存在 `state` 中。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
 ```SnackPlayer name=State&ext=js
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {Text, View} from 'react-native';
 
 const Blink = props => {
@@ -54,7 +54,7 @@ export default BlinkApp;
 <TabItem value="typescript">
 
 ```SnackPlayer name=State&ext=tsx
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {Text, View} from 'react-native';
 
 type BlinkProps = {
@@ -96,8 +96,8 @@ export default BlinkApp;
 </TabItem>
 </Tabs>
 
-在实际应用中，你可能不会用定时器来设置状态。你可能会在从服务器获取新数据或用户输入时设置状态。你也可以使用像 [Redux](https://redux.js.org/) 或 [MobX](https://mobx.js.org/) 这样的状态容器来控制你的数据流。在这种情况下，你会使用 Redux 或 MobX 来修改状态，而不是直接调用 `setState`。
+在实际应用中，你大概不会用定时器来设置状态。你可能会在从服务器获得新数据时，或在用户输入时设置状态。你也可以使用像 [Redux](https://redux.js.org/) 或 [MobX](https://mobx.js.org/) 这样的状态容器来控制数据流。在这种情况下，你会使用 Redux 或 MobX 来修改 state，而不是直接调用 `setState`。
 
-当调用 setState 时，BlinkApp 会重新渲染其组件。通过在定时器内部调用 setState，组件会在定时器每次触发时重新渲染。
+当调用 setState 时，BlinkApp 会重新渲染其组件。通过在 Timer 内部调用 setState，组件会在每次 Timer 触发时重新渲染。
 
-状态（state）的工作方式和 React 中一样，想了解状态处理的更多细节，你可以查看 [React.Component API](https://react.dev/reference/react/Component#setstate)。到这里，你可能已经注意到我们的示例大多使用了默认的文字颜色。要自定义文字颜色，你需要 [了解样式](style.md)。
+State 的工作方式与 React 中相同，因此要了解更多关于状态处理的细节，你可以查看 [React.Component API](https://react.dev/reference/react/Component#setstate)。到目前为止，你可能已经注意到我们的大多数示例都使用默认的文本颜色。要自定义文本颜色，你需要先[了解 Style](style.md)。

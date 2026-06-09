@@ -8,33 +8,33 @@ import NativeDeprecated from '../the-new-architecture/\_markdown_native_deprecat
 
 <NativeDeprecated />
 
-有大量原生 UI 组件已经准备好可以用于最新的应用中——其中一些是平台自带的，另一些来自第三方库，还有一些可能正好就在你自己的产品组合中使用。React Native 已经封装了几个最关键的平台组件，比如 `ScrollView` 和 `TextInput`，但并不是全部，当然也不包括你可能为之前的应用自己编写的那些组件。幸运的是，我们可以把这些已有组件包装起来，让它们与 React Native 应用无缝集成。
+这里有大量可直接用于最新应用的原生 UI 组件——其中一些是平台自带的，另一些是第三方库，还有一些可能就在你自己的项目中使用过。React Native 已经封装了几个最关键的平台组件，比如 `ScrollView` 和 `TextInput`，但并不是全部，当然也不包括你可能在之前某个应用中自己写过的组件。幸运的是，我们可以把这些现有组件封装起来，与 React Native 应用无缝集成。
 
-和原生模块指南一样，这也是一份更高级的指南，假定你已经对 Android SDK 编程有一定了解。本指南将带你构建一个原生 UI 组件，通过实现核心 React Native 库中现有 `ImageView` 组件的一个子集来展开讲解。
+和原生模块指南一样，这也是一份更高级的指南，默认你对 Android SDK 编程已经有一定了解。本指南将带你构建一个原生 UI 组件，通过实现 React Native 核心库中现有 `ImageView` 组件的一个子集来进行讲解。
 
 :::info
-你也可以使用一个命令来设置包含原生组件的本地库。更多细节请阅读 [本地库设置](local-library-setup) 指南。
+你也可以通过一条命令设置包含原生组件的本地库。有关更多细节，请阅读 [本地库设置](local-library-setup) 指南。
 :::
 
 ## ImageView 示例
 
-在这个示例中，我们将逐步实现如何在 JavaScript 中使用 ImageView。
+在这个示例中，我们将一步步实现允许在 JavaScript 中使用 ImageView 的需求。
 
-原生视图是通过扩展 `ViewManager` 或更常见的 `SimpleViewManager` 来创建和操作的。这里使用 `SimpleViewManager` 很方便，因为它会应用诸如背景色、不透明度以及 Flexbox 布局等通用属性。
+原生视图是通过扩展 `ViewManager`，或者更常见的 `SimpleViewManager` 来创建和操作的。这里使用 `SimpleViewManager` 很方便，因为它会应用背景颜色、不透明度和 Flexbox 布局等通用属性。
 
-这些子类本质上是单例——桥接层只会为每个子类创建一个实例。它们将原生视图发送给 `NativeViewHierarchyManager`，后者再反过来委托它们在必要时设置和更新视图属性。`ViewManagers` 通常也是这些视图的代理，通过桥接层将事件发送回 JavaScript。
+这些子类本质上是单例——桥接层只会为每个子类创建一个实例。它们会把原生视图发送给 `NativeViewHierarchyManager`，后者再委托它们按需设置和更新视图属性。`ViewManagers` 通常也是这些视图的代理，通过桥接层把事件发送回 JavaScript。
 
 要发送一个视图：
 
 1. 创建 `ViewManager` 子类。
 2. 实现 `createViewInstance` 方法
-3. 使用 `@ReactProp`（或 `@ReactPropGroup`）注解暴露视图属性设置器
-4. 在应用的 package 中的 `createViewManagers` 里注册该管理器。
+3. 使用 `@ReactProp`（或 `@ReactPropGroup`）注解暴露视图属性 setter
+4. 在应用程序包的 `createViewManagers` 中注册该管理器。
 5. 实现 JavaScript 模块
 
 ### 1. 创建 `ViewManager` 子类
 
-在这个示例中，我们创建了视图管理器类 `ReactImageManager`，它扩展了类型为 `ReactImageView` 的 `SimpleViewManager`。`ReactImageView` 是该管理器所管理的对象类型，这将是自定义的原生视图。`getName` 返回的名称用于在 JavaScript 中引用该原生视图类型。
+在这个示例中，我们创建一个名为 `ReactImageManager` 的视图管理器类，它扩展了 `ReactImageView` 类型的 `SimpleViewManager`。`ReactImageView` 是管理器所管理的对象类型，它将成为自定义原生视图。`getName` 返回的名称用于在 JavaScript 中引用该原生视图类型。
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="kotlin">
@@ -77,7 +77,7 @@ public class ReactImageManager extends SimpleViewManager<ReactImageView> {
 
 ### 2. 实现 `createViewInstance` 方法
 
-视图是在 `createViewInstance` 方法中创建的，视图应当在默认状态下完成初始化，任何属性都会通过后续对 `updateView` 的调用来设置。
+视图是在 `createViewInstance` 方法中创建的，视图应当以默认状态完成初始化，任何属性都会在后续对 `updateView` 的调用中设置。
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="kotlin">
@@ -100,15 +100,15 @@ public class ReactImageManager extends SimpleViewManager<ReactImageView> {
 </TabItem>
 </Tabs>
 
-### 3. 使用 `@ReactProp`（或 `@ReactPropGroup`）注解暴露视图属性设置器
+### 3. 使用 `@ReactProp`（或 `@ReactPropGroup`）注解暴露视图属性 setter
 
-需要在 JavaScript 中体现的属性，应当作为带有 `@ReactProp`（或 `@ReactPropGroup`）注解的 setter 方法暴露出来。setter 方法应将要更新的视图（当前视图类型）作为第一个参数，将属性值作为第二个参数。setter 应该是 public 且不返回值（即在 Java 中返回类型应为 `void`，在 Kotlin 中应为 `Unit`）。发送给 JS 的属性类型会根据 setter 的值参数类型自动确定。目前支持的值类型（Java 中）有：`boolean`、`int`、`float`、`double`、`String`、`Boolean`、`Integer`、`ReadableArray`、`ReadableMap`。Kotlin 中对应的类型是 `Boolean`、`Int`、`Float`、`Double`、`String`、`ReadableArray`、`ReadableMap`。
+需要在 JavaScript 中体现的属性，应当作为带有 `@ReactProp`（或 `@ReactPropGroup`）注解的 setter 方法暴露出来。setter 方法应将要更新的视图（当前视图类型）作为第一个参数，将属性值作为第二个参数。setter 应为 public 且不返回值（即在 Java 中返回类型应为 `void`，在 Kotlin 中应为 `Unit`）。发送给 JS 的属性类型会根据 setter 的值参数类型自动确定。目前支持的值类型（Java 中）有：`boolean`、`int`、`float`、`double`、`String`、`Boolean`、`Integer`、`ReadableArray`、`ReadableMap`。Kotlin 中对应的类型是 `Boolean`、`Int`、`Float`、`Double`、`String`、`ReadableArray`、`ReadableMap`。
 
-`@ReactProp` 注解有一个必填参数 `name`，类型为 `String`。与 setter 方法关联的 `@ReactProp` 注解所分配的名称，会用于在 JS 端引用该属性。
+`@ReactProp` 注解有一个必需参数 `name`，类型为 `String`。分配给与 setter 方法关联的 `@ReactProp` 注解的名称，会用于在 JS 端引用该属性。
 
-除了 `name` 之外，`@ReactProp` 注解还可以接受以下可选参数：`defaultBoolean`、`defaultInt`、`defaultFloat`。这些参数应为对应类型（Java 中分别为 `boolean`、`int`、`float`，Kotlin 中分别为 `Boolean`、`Int`、`Float`），当 setter 所引用的属性已从组件中移除时，提供的值将传递给 setter 方法。注意，“默认”值只会为基本类型提供；如果 setter 是某种复杂类型，那么在对应属性被移除时，会传入 `null` 作为默认值。
+除了 `name` 之外，`@ReactProp` 注解还可以接受以下可选参数：`defaultBoolean`、`defaultInt`、`defaultFloat`。这些参数应为对应类型（Java 中分别为 `boolean`、`int`、`float`，Kotlin 中分别为 `Boolean`、`Int`、`Float`），当 setter 所引用的属性已从组件中移除时，会把提供的值传给 setter 方法。注意，“默认”值只会提供给原始类型；如果 setter 的类型比较复杂，当对应属性被移除时，会将 `null` 作为默认值传入。
 
-对于带有 `@ReactPropGroup` 注解的方法，其 setter 声明要求与 `@ReactProp` 不同，更多信息请参考 `@ReactPropGroup` 注解类文档。**重要！** 在 ReactJS 中更新属性值会导致调用 setter 方法。请注意，我们更新组件的方式之一是移除之前设置过的属性。在这种情况下，setter 方法也会被调用，以通知视图管理器该属性已经变化。此时会提供“默认”值（对于基本类型，可以通过 `@ReactProp` 注解的 `defaultBoolean`、`defaultFloat` 等参数指定“默认”值；对于复杂类型，setter 将以 `null` 作为值被调用）。
+对于带有 `@ReactPropGroup` 注解的方法，setter 声明要求与 `@ReactProp` 不同。更多信息请参阅 `@ReactPropGroup` 注解类文档。**重要！** 在 ReactJS 中，更新属性值会触发 setter 方法调用。注意，我们更新组件的一种方式，是移除之前已设置的属性。在这种情况下，setter 方法同样会被调用，以通知视图管理器该属性已发生变化。此时会提供“默认”值（对于原始类型，“默认”值可以通过 `@ReactProp` 注解的 `defaultBoolean`、`defaultFloat` 等参数指定；对于复杂类型，setter 会接收到 `null` 值）。
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="kotlin">
@@ -155,7 +155,7 @@ public class ReactImageManager extends SimpleViewManager<ReactImageView> {
 
 ### 4. 注册 `ViewManager`
 
-最后一步是将 ViewManager 注册到应用中，这与 [Native Modules](native-modules-android.md) 的做法类似，通过应用 package 的成员函数 `createViewManagers` 完成。
+最后一步是将 ViewManager 注册到应用中，这与 [Native Modules](native-modules-android.md) 类似，通过应用包成员函数 `createViewManagers` 来完成。
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="kotlin">
@@ -184,7 +184,7 @@ public class ReactImageManager extends SimpleViewManager<ReactImageView> {
 
 ### 5. 实现 JavaScript 模块
 
-最后一步是创建 JavaScript 模块，为新视图的用户定义 Java/Kotlin 与 JavaScript 之间的接口层。建议你在此模块中记录组件接口文档（例如使用 TypeScript、Flow，或者普通注释）。
+最后一步是创建 JavaScript 模块，用于定义 Java/Kotlin 与 JavaScript 之间的接口层，供新视图的使用者调用。建议你在这个模块中为组件接口编写文档（例如使用 TypeScript、Flow 或普通注释）。
 
 ```tsx title="ImageView.tsx"
 import {requireNativeComponent} from 'react-native';
@@ -199,11 +199,11 @@ import {requireNativeComponent} from 'react-native';
 export default requireNativeComponent('RCTImageView');
 ```
 
-`requireNativeComponent` 函数接收原生视图的名称。请注意，如果你的组件需要做更复杂的事情（例如自定义事件处理），你应该将原生组件再包装到另一个 React 组件中。下面的 `MyCustomView` 示例展示了这一点。
+`requireNativeComponent` 函数接收原生视图的名称。注意，如果你的组件需要做更复杂的事情（例如自定义事件处理），你应该将原生组件再包装到另一个 React 组件中。下面的 `MyCustomView` 示例就演示了这一点。
 
 ## 事件
 
-到现在为止，我们已经知道如何暴露可从 JS 自由控制的原生视图组件，但当用户触发事件时，比如双指缩放或平移，我们该如何处理？当原生事件发生时，原生代码应当向该 View 的 JavaScript 表示发出一个事件，这两个视图通过 `getId()` 方法返回的值关联起来。
+现在我们知道如何暴露可以从 JS 自由控制的原生视图组件了，但如果要处理来自用户的事件，比如捏合缩放或拖拽平移，该怎么办？当原生事件发生时，原生代码应当向该 View 的 JavaScript 表示发送一个事件，这两个视图通过 `getId()` 方法返回的值关联起来。
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="kotlin">
@@ -243,7 +243,7 @@ class MyCustomView extends View {
 </TabItem>
 </Tabs>
 
-要将 `topChange` 事件名称映射到 JavaScript 中的 `onChange` 回调属性，可以通过在你的 `ViewManager` 中重写 `getExportedCustomBubblingEventTypeConstants` 方法来注册它：
+要将 `topChange` 事件名称映射到 JavaScript 中的 `onChange` 回调属性，需要在你的 `ViewManager` 中通过重写 `getExportedCustomBubblingEventTypeConstants` 方法进行注册：
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="kotlin">
@@ -284,7 +284,7 @@ public class ReactImageManager extends SimpleViewManager<MyCustomView> {
 </TabItem>
 </Tabs>
 
-这个回调会携带原始事件被调用，通常我们会在包装组件中对其进行处理，以提供更简单的 API：
+这个回调会接收到原始事件，我们通常会在包装组件中对其进行处理，以提供更简单的 API：
 
 ```tsx {8-11,13-17} title="MyCustomView.tsx"
 import {useCallback} from 'react';
@@ -295,7 +295,7 @@ const RCTMyCustomView = requireNativeComponent('RCTMyCustomView');
 export default function MyCustomView(props: {
   // ...
   /**
-   * 当用户拖动地图时连续调用的回调。
+   * 当用户拖动地图时持续调用的回调。
    */
   onChangeMessage: (message: string) => unknown;
 }) {
@@ -310,19 +310,19 @@ export default function MyCustomView(props: {
 }
 ```
 
-## 与 Android Fragment 示例集成
+## Android Fragment 集成示例
 
-为了将现有的 Native UI 元素集成到你的 React Native 应用中，你可能需要使用 Android Fragments，以便相比于从你的 `ViewManager` 返回一个 `View`，对原生组件进行更细粒度的控制。如果你想借助 [生命周期方法](https://developer.android.com/guide/fragments/lifecycle) 添加与视图绑定的自定义逻辑，例如 `onViewCreated`、`onPause`、`onResume`，你就需要这样做。以下步骤将展示如何实现：
+为了将现有的 Native UI 元素集成到你的 React Native 应用中，你可能需要使用 Android Fragment，从而比从 `ViewManager` 返回一个 `View` 获得对原生组件更细粒度的控制。如果你希望借助 [生命周期方法](https://developer.android.com/guide/fragments/lifecycle)（例如 `onViewCreated`、`onPause`、`onResume`）添加与视图绑定的自定义逻辑，就需要这样做。以下步骤将向你展示如何实现：
 
-### 1. 创建一个自定义视图示例
+### 1. 创建一个示例自定义视图
 
-首先，让我们创建一个 `CustomView` 类，它继承自 `FrameLayout`（该视图的内容可以是你想渲染的任何视图）
+首先，让我们创建一个继承自 `FrameLayout` 的 `CustomView` 类（这个视图的内容可以是你想渲染的任何视图）
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="kotlin">
 
 ```kotlin title="CustomView.kt"
-// 用你的包名替换
+// 替换为你的包名
 package com.mypackage
 
 import android.content.Context
@@ -338,7 +338,7 @@ class CustomView(context: Context) : FrameLayout(context) {
 
     // 添加默认文本视图
     addView(TextView(context).apply {
-      text = "欢迎使用 React Native 与 Android Fragments。"
+      text = "欢迎使用 React Native 的 Android Fragment。"
     })
   }
 }
@@ -348,7 +348,7 @@ class CustomView(context: Context) : FrameLayout(context) {
 <TabItem value="java">
 
 ```java title="CustomView.java"
-// 用你的包名替换
+// 替换为你的包名
 package com.mypackage;
 
 import android.content.Context;
@@ -368,7 +368,7 @@ public class CustomView extends FrameLayout {
 
     // 添加默认文本视图
     TextView text = new TextView(context);
-    text.setText("欢迎使用 React Native 与 Android Fragments。");
+    text.setText("欢迎使用 React Native 的 Android Fragment。");
     this.addView(text);
   }
 }
@@ -383,7 +383,7 @@ public class CustomView extends FrameLayout {
 <TabItem value="kotlin">
 
 ```kotlin title="MyFragment.kt"
-// 用你的包名替换
+// 替换为你的包名
 package com.mypackage
 
 import android.os.Bundle
@@ -401,7 +401,7 @@ class MyFragment : Fragment() {
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
     super.onCreateView(inflater, container, savedInstanceState)
     customView = CustomView(requireNotNull(context))
-    return customView // 这个 CustomView 可以是你想要渲染的任何视图
+    return customView // 这个 CustomView 可以是你想渲染的任何视图
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -434,7 +434,7 @@ class MyFragment : Fragment() {
 <TabItem value="java">
 
 ```java title="MyFragment.java"
-// 用你的包名替换
+// 替换为你的包名
 package com.mypackage;
 
 import android.os.Bundle;
@@ -453,7 +453,7 @@ public class MyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         super.onCreateView(inflater, parent, savedInstanceState);
         customView = new CustomView(this.getContext());
-        return customView; // 这个 CustomView 可以是你想要渲染的任何视图
+        return customView; // 这个 CustomView 可以是你想渲染的任何视图
     }
 
     @Override
@@ -495,7 +495,7 @@ public class MyFragment extends Fragment {
 <TabItem value="kotlin">
 
 ```kotlin title="MyViewManager.kt"
-// 用你的包名替换
+// 替换为你的包名
 package com.mypackage
 
 import android.view.Choreographer
@@ -518,7 +518,7 @@ class MyViewManager(
   override fun getName() = REACT_CLASS
 
   /**
-   * 返回一个稍后会承载 Fragment 的 FrameLayout
+   * 返回一个稍后将承载 Fragment 的 FrameLayout
    */
   override fun createViewInstance(reactContext: ThemedReactContext) =
       FrameLayout(reactContext)
@@ -529,7 +529,7 @@ class MyViewManager(
   override fun getCommandsMap() = mapOf("create" to COMMAND_CREATE)
 
   /**
-   * 处理 "create" 命令（从 JS 调用）并调用 createFragment 方法
+   * 处理 "create" 命令（由 JS 调用）并调用 createFragment 方法
    */
   override fun receiveCommand(
       root: FrameLayout,
@@ -551,7 +551,7 @@ class MyViewManager(
   }
 
   /**
-   * 用自定义 fragment 替换你的 React Native 视图
+   * 用自定义 Fragment 替换你的 React Native 视图
    */
   fun createFragment(root: FrameLayout, reactNativeViewId: Int) {
     val parentView = root.findViewById<ViewGroup>(reactNativeViewId)
@@ -579,7 +579,7 @@ class MyViewManager(
    * 正确布局所有子视图
    */
   private fun manuallyLayoutChildren(view: View) {
-    // 来自 react-native props 的 propWidth 和 propHeight
+    // propWidth 和 propHeight 来自 react-native props
     val width = requireNotNull(propWidth)
     val height = requireNotNull(propHeight)
 
@@ -601,7 +601,7 @@ class MyViewManager(
 <TabItem value="java">
 
 ```java title="MyViewManager.java"
-// 用你的包名替换
+// 替换为你的包名
 package com.mypackage;
 
 import android.view.Choreographer;
@@ -642,7 +642,7 @@ public class MyViewManager extends ViewGroupManager<FrameLayout> {
   }
 
   /**
-   * 返回一个稍后会承载 Fragment 的 FrameLayout
+   * 返回一个稍后将承载 Fragment 的 FrameLayout
    */
   @Override
   public FrameLayout createViewInstance(ThemedReactContext reactContext) {
@@ -659,7 +659,7 @@ public class MyViewManager extends ViewGroupManager<FrameLayout> {
   }
 
   /**
-   * 处理 "create" 命令（从 JS 调用）并调用 createFragment 方法
+   * 处理 "create" 命令（由 JS 调用）并调用 createFragment 方法
    */
   @Override
   public void receiveCommand(
@@ -691,7 +691,7 @@ public class MyViewManager extends ViewGroupManager<FrameLayout> {
   }
 
   /**
-   * 用自定义 fragment 替换你的 React Native 视图
+   * 用自定义 Fragment 替换你的 React Native 视图
    */
   public void createFragment(FrameLayout root, int reactNativeViewId) {
     ViewGroup parentView = (ViewGroup) root.findViewById(reactNativeViewId);
@@ -720,7 +720,7 @@ public class MyViewManager extends ViewGroupManager<FrameLayout> {
    * 正确布局所有子视图
    */
   public void manuallyLayoutChildren(View view) {
-      // 来自 react-native props 的 propWidth 和 propHeight
+      // propWidth 和 propHeight 来自 react-native props
       int width = propWidth;
       int height = propHeight;
 
@@ -742,7 +742,7 @@ public class MyViewManager extends ViewGroupManager<FrameLayout> {
 <TabItem value="kotlin">
 
 ```kotlin title="MyPackage.kt"
-// 用你的包名替换
+// 替换为你的包名
 package com.mypackage
 
 import com.facebook.react.ReactPackage
@@ -761,7 +761,7 @@ class MyPackage : ReactPackage {
 <TabItem value="java">
 
 ```java title="MyPackage.java"
-// 用你的包名替换
+// 替换为你的包名
 package com.mypackage;
 
 import com.facebook.react.ReactPackage;
@@ -794,7 +794,7 @@ public class MyPackage implements ReactPackage {
 ```kotlin title="MainApplication.kt"
 override fun getPackages(): List<ReactPackage> =
     PackageList(this).packages.apply {
-        // 尚不能自动链接的包可以在这里手动添加，例如：
+        // 不能自动链接的包仍可在此手动添加，例如：
         // add(MyReactNativePackage())
         add(MyAppPackage())
     }
@@ -807,7 +807,7 @@ override fun getPackages(): List<ReactPackage> =
 @Override
 protected List<ReactPackage> getPackages() {
     List<ReactPackage> packages = new PackageList(this).getPackages();
-    // 尚不能自动链接的包可以在这里手动添加，例如：
+    // 不能自动链接的包仍可在此手动添加，例如：
     // packages.add(new MyReactNativePackage());
     packages.add(new MyAppPackage());
     return packages;
@@ -819,7 +819,7 @@ protected List<ReactPackage> getPackages() {
 
 ### 6. 实现 JavaScript 模块
 
-I. 首先创建自定义 View manager：
+I. 从自定义 View manager 开始：
 
 ```tsx title="MyViewManager.tsx"
 import {requireNativeComponent} from 'react-native';
@@ -828,10 +828,10 @@ export const MyViewManager =
   requireNativeComponent('MyViewManager');
 ```
 
-II. 然后实现调用 `create` 方法的自定义 View：
+II. 然后实现调用 `create` 方法的自定义视图：
 
 ```tsx title="MyView.tsx"
-import React, {useEffect, useRef} from 'react';
+import {useEffect, useRef} from 'react';
 import {
   PixelRatio,
   UIManager,
@@ -870,4 +870,4 @@ export const MyView = () => {
 };
 ```
 
-如果你想使用 `@ReactProp`（或 `@ReactPropGroup`）注解暴露属性设置器，请参见上面的 [ImageView 示例](#imageview-example)。
+如果你想通过 `@ReactProp`（或 `@ReactPropGroup`）注解公开属性 setter，请参见上面的 [ImageView 示例](#imageview-example)。

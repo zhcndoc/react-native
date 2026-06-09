@@ -27,7 +27,7 @@ title: AppState
 :::
 
 ```SnackPlayer name=AppState%20Example
-import React, {useRef, useState, useEffect} from 'react';
+import {useRef, useState, useEffect} from 'react';
 import {AppState, StyleSheet, Text} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -41,7 +41,7 @@ const AppStateExample = () => {
         appState.current.match(/inactive|background/) &&
         nextAppState === 'active'
       ) {
-        console.log('App has come to the foreground!');
+        console.log('应用已进入前台！');
       }
 
       appState.current = nextAppState;
@@ -57,7 +57,7 @@ const AppStateExample = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <Text>Current state is: {appStateVisible}</Text>
+        <Text>当前状态是：{appStateVisible}</Text>
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
 export default AppStateExample;
 ```
 
-此示例似乎只会显示 "Current state is: active"，因为应用仅在 `active` 状态下对用户可见。如果您想实验代码，我们建议使用您自己的设备而不是嵌入式预览。
+此示例似乎只会显示 "当前状态是：active"，因为应用仅在 `active` 状态下对用户可见。如果您想实验代码，我们建议使用您自己的设备而不是嵌入式预览。
 
 ---
 

@@ -12,7 +12,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 ## 创建日历原生模块
 
-在以下指南中，你将创建一个原生模块 `CalendarModule`，它将允许你从 JavaScript 访问 Apple 的日历 API。最后你将能够从 JavaScript 调用 `CalendarModule.createCalendarEvent('Dinner Party', 'My House');`， invoking a native method that creates a calendar event. (Wait, I need to translate the whole sentence). 最后你将能够从 JavaScript 调用 `CalendarModule.createCalendarEvent('Dinner Party', 'My House');`，调用一个创建日历事件的原生方法。
+在以下指南中，你将创建一个原生模块 `CalendarModule`，它将允许你从 JavaScript 访问 Apple 的日历 API。最后你将能够从 JavaScript 调用 `CalendarModule.createCalendarEvent('Dinner Party', 'My House');`，调用一个创建日历事件的原生方法。
 
 ### 设置
 
@@ -139,7 +139,6 @@ return [[UIDevice currentDevice] name];
 在应用程序中找到你想要添加调用原生模块 `createCalendarEvent()` 方法的地方。下面是一个组件示例，`NewModuleButton`，你可以添加到你的应用中。你可以在 `NewModuleButton` 的 `onPress()` 函数中调用原生模块。
 
 ```tsx
-import React from 'react';
 import {Button} from 'react-native';
 
 const NewModuleButton = () => {

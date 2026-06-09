@@ -14,7 +14,6 @@ title: 图片
 ## 示例
 
 ```SnackPlayer name=Image%20Example
-import React from 'react';
 import {Image, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -61,7 +60,6 @@ export default DisplayAnImage;
 你也可以为图片添加 `style`：
 
 ```SnackPlayer name=Styled%20Image%20Example
-import React from 'react';
 import {Image, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -556,7 +554,7 @@ static queryCache(
 
 | 名称                                                         | 类型   | 描述                     |
 | ------------------------------------------------------------ | ------ | ------------------------ |
-| urls <div className="label basic required">必填</div>        | array  | 要检查缓存的图片 URL 列表 |
+| urls <div className="label basic required">必填</div>      | array  | 要检查缓存的图片 URL 列表 |
 
 ---
 
@@ -631,7 +629,7 @@ static resolveAssetSource(source: ImageSourcePropType): {
 | uri                                | string                                    | 图片资源的标识字符串，可以是 HTTP 地址、本地文件路径或静态图片资源名称                                                         |
 | width                              | number                                    | 构建时已知时可指定，作为 `<Image/>` 组件默认尺寸                                                                              |
 | height                             | number                                    | 构建时已知时可指定，作为 `<Image/>` 组件默认尺寸                                                                              |
-| scale                              | number                                    | 图片的缩放因子。若未指定，默认为 `1.0`，即一个图像像素对应一个显示点 / DIP                                                   |
+| scale                             | number                                    | 图片的缩放因子。若未指定，默认为 `1.0`，即一个图像像素对应一个显示点 / DIP                                                   |
 | bundle <div className="label ios">iOS</div>    | string                                    | 图片所在的 iOS 资产包，若未设置，默认为 `[NSBundle mainBundle]`                                                                |
 | method                             | string                                    | 使用的 HTTP 方法。默认是 `'GET'`                                                                                              |
 | headers                            | object                                    | 远程请求所带的 HTTP 头部对象                                                                                                  |

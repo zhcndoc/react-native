@@ -1,14 +1,14 @@
 ---
 id: accessibilityinfo
-title: AccessibilityInfo
+title: 辅助功能信息
 ---
 
-有时知道设备是否当前激活了屏幕阅读器是很有用的。`AccessibilityInfo` API 就是为此设计的。你可以使用它来查询屏幕阅读器的当前状态，以及注册监听器以便在屏幕阅读器状态变化时收到通知。
+有时，了解设备是否当前启用了屏幕阅读器会很有用。`AccessibilityInfo` API 就是为此而设计的。你可以用它来查询屏幕阅读器的当前状态，也可以注册以在屏幕阅读器状态发生变化时接收通知。
 
 ## 示例
 
 ```SnackPlayer name=AccessibilityInfo%20Example&supportedPlatforms=android,ios
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {AccessibilityInfo, Text, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -47,10 +47,10 @@ const App = () => {
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <Text style={styles.status}>
-          减少动态效果为{reduceMotionEnabled ? '已启用' : '已禁用'}。
+          减少动态效果是{reduceMotionEnabled ? '已启用' : '已禁用'}。
         </Text>
         <Text style={styles.status}>
-          屏幕阅读器为{screenReaderEnabled ? '已启用' : '已禁用'}。
+          屏幕阅读器是{screenReaderEnabled ? '已启用' : '已禁用'}。
         </Text>
       </SafeAreaView>
     </SafeAreaProvider>
@@ -90,16 +90,16 @@ static addEventListener(
 
 添加事件处理程序。支持的事件：
 
-| 事件名称                                                                                 | 描述                                                                                                                                                                                                                                                                                              |
+| 事件名称                                                                               | 描述                                                                                                                                                                                                                                                                                              |
 | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `accessibilityServiceChanged`<br/><div className="label two-lines android">安卓</div> | 当某些服务（如 TalkBack、其他安卓辅助技术和第三方无障碍服务）启用时触发。事件处理程序的参数是一个布尔值。当某些无障碍服务启用时布尔值为 `true`，否则为 `false`。                          |
-| `announcementFinished`<br/><div className="label two-lines ios">iOS</div>                | 当屏幕阅读器完成公告时触发。事件处理程序的参数是一个包含以下键的字典：<ul><li>`announcement`：屏幕阅读器公告的字符串。</li><li>`success`：一个布尔值，指示公告是否成功制作。</li></ul> |
-| `boldTextChanged`<br/><div className="label two-lines ios">iOS</div>                     | 当粗文本切换状态变化时触发。事件处理程序的参数是一个布尔值。当启用粗文本时布尔值为 `true`，否则为 `false`。                                                                                                                             |
-| `grayscaleChanged`<br/><div className="label two-lines ios">iOS</div>                    | 当灰度切换状态变化时触发。事件处理程序的参数是一个布尔值。当启用灰度时布尔值为 `true`，否则为 `false`。                                                                                                                         |
-| `invertColorsChanged`<br/><div className="label two-lines ios">iOS</div>                 | 当反色切换状态变化时触发。事件处理程序的参数是一个布尔值。当启用反色时布尔值为 `true`，否则为 `false`。                                                                                                                     |
-| `reduceMotionChanged`                                                                    | 当减少运动切换状态变化时触发。事件处理程序的参数是一个布尔值。当启用减少运动时（或当“开发者选项”中的“过渡动画缩放”为“动画关闭”时）布尔值为 `true`，否则为 `false`。                                  |
-| `reduceTransparencyChanged`<br/><div className="label two-lines ios">iOS</div>           | 当减少透明度切换状态变化时触发。事件处理程序的参数是一个布尔值。当启用减少透明度时布尔值为 `true`，否则为 `false`。                                                                                                         |
-| `screenReaderChanged`                                                                    | 当屏幕阅读器状态变化时触发。事件处理程序的参数是一个布尔值。当启用屏幕阅读器时布尔值为 `true`，否则为 `false`。                                                                                                                          |
+| `accessibilityServiceChanged`<br/><div className="label two-lines android">Android</div> | 当某些服务（例如 TalkBack、其他 Android 辅助技术以及第三方辅助功能服务）被启用时触发。传递给事件处理程序的参数是一个布尔值。当某些辅助功能服务已启用时，该布尔值为 `true`，否则为 `false`。                          |
+| `announcementFinished`<br/><div className="label two-lines ios">iOS</div>                | 当屏幕阅读器完成播报时触发。传递给事件处理程序的参数是一个包含以下键的字典：<ul><li>`announcement`：屏幕阅读器播报的字符串。</li><li>`success`：一个布尔值，表示播报是否成功完成。</li></ul> |
+| `boldTextChanged`<br/><div className="label two-lines ios">iOS</div>                     | 当粗体文本切换开关状态发生变化时触发。传递给事件处理程序的参数是一个布尔值。当粗体文本已启用时，该布尔值为 `true`，否则为 `false`。                                                                                                                             |
+| `grayscaleChanged`<br/><div className="label two-lines ios">iOS</div>                    | 当灰度切换开关状态发生变化时触发。传递给事件处理程序的参数是一个布尔值。当灰度已启用时，该布尔值为 `true`，否则为 `false`。                                                                                                                         |
+| `invertColorsChanged`<br/><div className="label two-lines ios">iOS</div>                 | 当反转颜色切换开关状态发生变化时触发。传递给事件处理程序的参数是一个布尔值。当反转颜色已启用时，该布尔值为 `true`，否则为 `false`。                                                                                                                     |
+| `reduceMotionChanged`                                                                    | 当减少动态效果切换开关状态发生变化时触发。传递给事件处理程序的参数是一个布尔值。当减少动态效果已启用时（或者在“开发者选项”中的“过渡动画缩放”设为“关闭动画”时）该布尔值为 `true`，否则为 `false`。                                  |
+| `reduceTransparencyChanged`<br/><div className="label two-lines ios">iOS</div>           | 当减少透明度切换开关状态发生变化时触发。传递给事件处理程序的参数是一个布尔值。当减少透明度已启用时，该布尔值为 `true`，否则为 `false`。                                                                                                         |
+| `screenReaderChanged`                                                                    | 当屏幕阅读器状态发生变化时触发。传递给事件处理程序的参数是一个布尔值。当屏幕阅读器已启用时，该布尔值为 `true`，否则为 `false`。                                                                                                                          |
 
 ---
 
@@ -109,7 +109,7 @@ static addEventListener(
 static announceForAccessibility(announcement: string);
 ```
 
-发布一个字符串供屏幕阅读器朗读。
+发布一段由屏幕阅读器播报的字符串。
 
 ---
 
@@ -122,41 +122,41 @@ static announceForAccessibilityWithOptions(
 );
 ```
 
-发布一个字符串供屏幕阅读器朗读，并带有修改选项。默认情况下，公告会中断任何现有的语音，但在 iOS 上，可以通过在选项对象中将 `queue` 设置为 `true` 将它们排队在现有语音之后。
+发布一段带有修改选项、由屏幕阅读器播报的字符串。默认情况下，播报会打断任何现有语音，但在 iOS 上，可以通过在选项对象中将 `queue` 设置为 `true`，将其排在现有语音之后。
 
 **参数：**
 
 | 名称                                                              | 类型   | 描述                                                                                  |
 | ----------------------------------------------------------------- | ------ | -------------------------------------------------------------------------------------------- |
-| announcement <div className="label basic required">必需</div> | string | 要公告的字符串                                                                   |
-| options <div className="label basic required">必需</div>      | object | `queue` - 将公告排队在现有语音之后 <div className="label ios">iOS</div> |
+| announcement <div className="label basic required">Required</div> | string | 要播报的字符串                                                                   |
+| options <div className="label basic required">Required</div>      | object | `queue` - 将播报排在现有语音之后 <div className="label ios">iOS</div> |
 
 ---
 
-### `getRecommendedTimeoutMillis()` <div className="label android">安卓</div>
+### `getRecommendedTimeoutMillis()` <div className="label android">Android</div>
 
 ```tsx
 static getRecommendedTimeoutMillis(originalTimeout: number): Promise<number>;
 ```
 
-获取用户需要的超时时间（毫秒）。
-此值设置在“无障碍”设置的“采取行动时间（无障碍超时）”中。
+获取用户所需的毫秒级超时时间。
+该值在“无障碍”设置中的“执行操作所需时间（无障碍超时）”里设定。
 
 **参数：**
 
 | 名称                                                                 | 类型   | 描述                                                                           |
 | -------------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------- |
-| originalTimeout <div className="label basic required">必需</div> | number | 如果未设置“无障碍超时”则返回的超时时间。以毫秒为单位指定。 |
+| originalTimeout <div className="label basic required">Required</div> | number | 如果未设置“无障碍超时”，则返回该超时值。请以毫秒为单位指定。 |
 
 ---
 
-### `isAccessibilityServiceEnabled()` <div className="label android">安卓</div>
+### `isAccessibilityServiceEnabled()` <div className="label android">Android</div>
 
 ```tsx
 static isAccessibilityServiceEnabled(): Promise<boolean>;
 ```
 
-检查是否启用了任何无障碍服务。这包括 TalkBack，也包括任何可能安装的第三方无障碍应用。如果只想检查是否启用了 TalkBack，请使用 [isScreenReaderEnabled](#isscreenreaderenabled)。返回一个解析为布尔值的 Promise。当某些无障碍服务启用时结果为 `true`，否则为 `false`。
+检查是否启用了任何辅助功能服务。这包括 TalkBack，也包括可能已安装的任何第三方辅助功能应用。若只想检查 TalkBack 是否已启用，请使用 [isScreenReaderEnabled](#isscreenreaderenabled)。返回一个解析为布尔值的 promise。结果在某些辅助功能服务已启用时为 `true`，否则为 `false`。
 
 > **注意**：如果你只想检查 TalkBack 的状态，请使用 [isScreenReaderEnabled](#isscreenreaderenabled)。
 
@@ -168,7 +168,7 @@ static isAccessibilityServiceEnabled(): Promise<boolean>;
 static isBoldTextEnabled(): Promise<boolean>:
 ```
 
-查询当前是否启用了粗文本。返回一个解析为布尔值的 Promise。当启用粗文本时结果为 `true`，否则为 `false`。
+查询粗体文本当前是否已启用。返回一个解析为布尔值的 promise。结果在粗体文本已启用时为 `true`，否则为 `false`。
 
 ---
 
@@ -178,7 +178,7 @@ static isBoldTextEnabled(): Promise<boolean>:
 static isGrayscaleEnabled(): Promise<boolean>;
 ```
 
-查询当前是否启用了灰度。返回一个解析为布尔值的 Promise。当启用灰度时结果为 `true`，否则为 `false`。
+查询灰度当前是否已启用。返回一个解析为布尔值的 promise。结果在灰度已启用时为 `true`，否则为 `false`。
 
 ---
 
@@ -188,7 +188,7 @@ static isGrayscaleEnabled(): Promise<boolean>;
 static isInvertColorsEnabled(): Promise<boolean>;
 ```
 
-查询当前是否启用了反色。返回一个解析为布尔值的 Promise。当启用反色时结果为 `true`，否则为 `false`。
+查询反转颜色当前是否已启用。返回一个解析为布尔值的 promise。结果在反转颜色已启用时为 `true`，否则为 `false`。
 
 ---
 
@@ -198,7 +198,7 @@ static isInvertColorsEnabled(): Promise<boolean>;
 static isReduceMotionEnabled(): Promise<boolean>;
 ```
 
-查询当前是否启用了减少运动。返回一个解析为布尔值的 Promise。当启用减少运动时结果为 `true`，否则为 `false`。
+查询减少动态效果当前是否已启用。返回一个解析为布尔值的 promise。结果在减少动态效果已启用时为 `true`，否则为 `false`。
 
 ---
 
@@ -208,7 +208,7 @@ static isReduceMotionEnabled(): Promise<boolean>;
 static isReduceTransparencyEnabled(): Promise<boolean>;
 ```
 
-查询当前是否启用了减少透明度。返回一个解析为布尔值的 Promise。当启用减少透明度时结果为 `true`，否则为 `false`。
+查询减少透明度当前是否已启用。返回一个解析为布尔值的 promise。结果在减少透明度已启用时为 `true`，否则为 `false`。
 
 ---
 
@@ -218,17 +218,17 @@ static isReduceTransparencyEnabled(): Promise<boolean>;
 static isScreenReaderEnabled(): Promise<boolean>;
 ```
 
-查询当前是否启用了屏幕阅读器。返回一个解析为布尔值的 Promise。当启用屏幕阅读器时结果为 `true`，否则为 `false`。
+查询屏幕阅读器当前是否已启用。返回一个解析为布尔值的 promise。结果在屏幕阅读器已启用时为 `true`，否则为 `false`。
 
 ---
 
-### `isHighTextContrastEnabled()` <div className="label android">安卓</div>
+### `isHighTextContrastEnabled()` <div className="label android">Android</div>
 
 ```tsx
 static isHighTextContrastEnabled(): Promise<boolean>
 ```
 
-查询当前是否启用了高文本对比度。返回一个解析为布尔值的 Promise。当启用高文本对比度时结果为 `true`，否则为 `false`。
+查询高文本对比度当前是否已启用。返回一个解析为布尔值的 promise。结果在高文本对比度已启用时为 `true`，否则为 `false`。
 
 ---
 
@@ -238,7 +238,7 @@ static isHighTextContrastEnabled(): Promise<boolean>
 static isDarkerSystemColorsEnabled(): Promise<boolean>
 ```
 
-查询当前是否启用了深色系统颜色。返回一个解析为布尔值的 Promise。当启用深色系统颜色时结果为 `true`，否则为 `false`。
+查询深色系统颜色当前是否已启用。返回一个解析为布尔值的 promise。结果在深色系统颜色已启用时为 `true`，否则为 `false`。
 
 ---
 
@@ -248,26 +248,26 @@ static isDarkerSystemColorsEnabled(): Promise<boolean>
 static prefersCrossFadeTransitions(): Promise<boolean>;
 ```
 
-查询当前是否启用了减少运动和偏好交叉淡入淡出过渡设置。返回一个解析为布尔值的 Promise。当启用偏好交叉淡入淡出过渡时结果为 `true`，否则为 `false`。
+查询“减少动态效果”和“优先交叉淡化过渡”设置当前是否已启用。返回一个解析为布尔值的 promise。结果在“优先交叉淡化过渡”已启用时为 `true`，否则为 `false`。
 
 ---
 
 ### `setAccessibilityFocus()`
 
 :::warning[Deprecated]
-建议改为使用带有事件类型 `focus` 的 `sendAccessibilityEvent`。
+建议改用带有 `focus` 事件类型的 `sendAccessibilityEvent`。
 :::
 
 ```tsx
 static setAccessibilityFocus(reactTag: number);
 ```
 
-将无障碍焦点设置到 React 组件。
+将辅助功能焦点设置到一个 React 组件。
 
-在安卓上，这会调用 `UIManager.sendAccessibilityEvent` 方法，并传入 `reactTag` 和 `UIManager.AccessibilityEventTypes.typeViewFocused` 参数。
+在 Android 上，这会使用传入的 `reactTag` 和 `UIManager.AccessibilityEventTypes.typeViewFocused` 参数调用 `UIManager.sendAccessibilityEvent` 方法。
 
 :::note
-确保任何你想要接收无障碍焦点的 `View` 都有 `accessible={true}`。
+请确保任何希望接收辅助功能焦点的 `View` 都设置了 `accessible={true}`。
 :::
 
 ---
@@ -278,13 +278,13 @@ static setAccessibilityFocus(reactTag: number);
 static sendAccessibilityEvent(host: HostInstance, eventType: AccessibilityEventTypes);
 ```
 
-命令式地在 React 组件上触发无障碍事件，例如改变屏幕阅读器的聚焦元素。
+以命令式方式在一个 React 组件上触发辅助功能事件，例如更改屏幕阅读器当前聚焦的元素。
 
 :::note
-确保任何你想要接收无障碍焦点的 `View` 都有 `accessible={true}`。
+请确保任何希望接收辅助功能焦点的 `View` 都设置了 `accessible={true}`。
 :::
 
 | 名称                                                           | 类型                    | 描述                                                                                                            |
 | -------------------------------------------------------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| host <div className="label basic required">必需</div>      | HostInstance            | 要发送事件的组件 ref。                                                                                |
-| eventType <div className="label basic required">必需</div> | AccessibilityEventTypes | `'click'`（仅安卓）、`'focus'`、`'viewHoverEnter'`（仅安卓）或 `'windowStateChange'`（仅安卓）之一 |
+| host <div className="label basic required">Required</div>      | HostInstance            | 要向其发送事件的组件 ref。                                                                                |
+| eventType <div className="label basic required">Required</div> | AccessibilityEventTypes | `'click'`（仅 Android）、`'focus'`、`'viewHoverEnter'`（仅 Android）或 `'windowStateChange'`（仅 Android）之一 |

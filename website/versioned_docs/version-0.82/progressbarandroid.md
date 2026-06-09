@@ -1,9 +1,9 @@
 ---
 id: progressbarandroid
-title: '🗑️ ProgressBarAndroid'
+title: '🗑️ 进度条 Android'
 ---
 
-:::warning[Deprecated]
+:::warning[已弃用]
 请改用 [社区包](https://reactnative.directory/?search=progressbar) 之一。
 :::
 
@@ -12,7 +12,6 @@ title: '🗑️ ProgressBarAndroid'
 ### 示例
 
 ```SnackPlayer name=ProgressBarAndroid&supportedPlatforms=android
-import React from 'react';
 import {View, StyleSheet, ProgressBarAndroid, Text} from 'react-native';
 
 const App = () => {

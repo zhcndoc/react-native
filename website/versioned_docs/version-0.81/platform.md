@@ -6,7 +6,6 @@ title: 平台
 ## 示例
 
 ```SnackPlayer name=Platform%20API%20Example&supportedPlatforms=ios,android
-import React from 'react';
 import {Platform, StyleSheet, Text, ScrollView} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -15,19 +14,19 @@ const App = () => {
     <SafeAreaProvider>
       <SafeAreaView style={styles.safeArea}>
         <ScrollView contentContainerStyle={styles.container}>
-          <Text>OS</Text>
+          <Text>操作系统</Text>
           <Text style={styles.value}>{Platform.OS}</Text>
-          <Text>OS Version</Text>
+          <Text>操作系统版本</Text>
           <Text style={styles.value}>{Platform.Version}</Text>
-          <Text>isTV</Text>
+          <Text>是否为电视</Text>
           <Text style={styles.value}>{Platform.isTV.toString()}</Text>
           {Platform.OS === 'ios' && (
             <>
-              <Text>isPad</Text>
+              <Text>是否为 iPad</Text>
               <Text style={styles.value}>{Platform.isPad.toString()}</Text>
             </>
           )}
-          <Text>Constants</Text>
+          <Text>常量</Text>
           <Text style={styles.value}>
             {JSON.stringify(Platform.constants, null, 2)}
           </Text>
@@ -85,7 +84,7 @@ static constants: PlatformConstants;
 | Manufacturer <div className="label android">Android</div> | string  | 否       | Android 设备的制造商。                                                                                                                                                           |
 | ServerHost <div className="label android">Android</div>   | string  | 是      |                                                                                                                                                                                                   |
 | uiMode <div className="label android">Android</div>       | string  | 否       | 可能的值有：`'car'`、`'desk'`、`'normal'`、`'tv'`、`'watch'` 和 `'unknown'`。了解更多关于 [Android ModeType](https://developer.android.com/reference/android/app/UiModeManager.html)。 |
-| forceTouchAvailable <div className="label ios">iOS</div>  | boolean | 否       | 指示设备上 3D Touch 的可用性。                                                                                                                                                |
+| forceTouchAvailable <div className="label ios">iOS</div>  | boolean | 否       | 表示设备上 3D Touch 的可用性。                                                                                                                                                |
 | interfaceIdiom <div className="label ios">iOS</div>       | string  | 否       | 设备的界面类型。了解更多关于 [UIUserInterfaceIdiom](https://developer.apple.com/documentation/uikit/uiuserinterfaceidiom)。                                                  |
 | osVersion <div className="label ios">iOS</div>            | string  | 否       | iOS 特有的 OS 版本常量。                                                                                                                                                              |
 | systemName <div className="label ios">iOS</div>           | string  | 否       | iOS 特有的 OS 名称常量。                                                                                                                                                                 |

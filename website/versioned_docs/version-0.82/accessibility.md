@@ -500,34 +500,34 @@ Android 和 iOS 的方法略有不同，因此 React Native 的实现可能因�
 - **timer** 用于代表计时器。
 - **toolbar** 用于代表工具栏（操作按钮或组件的容器）。
 
-## 无障碍操作
+## Accessibility Actions
 
-无障碍操作允许辅助技术以编程方式调用组件的操作。要支持无障碍操作，组件必须完成两件事：
+Accessibility actions allow assistive technologies to programmatically invoke the actions of a component. To support accessibility actions, a component must do two things:
 
-- 通过 `accessibilityActions` 属性定义它支持的操作列表。
-- 实现一个 `onAccessibilityAction` 函数来处理操作请求。
+- Define the list of actions it supports through the `accessibilityActions` prop.
+- Implement an `onAccessibilityAction` function to handle action requests.
 
-`accessibilityActions` 属性应包含一个操作对象列表。每个操作对象应包含以下字段：
+The `accessibilityActions` prop should include a list of action objects. Each action object should contain the following fields:
 
-| 名称  | 类型   | 是否必需 |
+| Name  | Type   | Required |
 | ----- | ------ | -------- |
-| name  | string | 是      |
-| label | string | 否       |
+| name  | string | Yes      |
+| label | string | No       |
 
-操作要么代表标准操作，例如点击按钮或调整滑块，要么代表特定于给定组件的自定义操作，例如删除电子邮件消息。`name` 字段对于标准操作和自定义操作都是必需的，但 `label` 对于标准操作是可选的。
+Actions either represent standard actions, such as clicking a button or adjusting a slider, or custom actions specific to a given component, such as deleting an email message. The `name` field is required for both standard and custom actions, but `label` is optional for standard actions.
 
-添加对标准操作的支持时，`name` 必须是以下之一：
+When adding support for standard actions, `name` must be one of the following:
 
-- `'magicTap'` - 仅限 iOS - 当 VoiceOver 焦点在组件上或组件内时，用户用两根手指双击。
-- `'escape'` - 仅限 iOS - 当 VoiceOver 焦点在组件上或组件内时，用户执行了两指擦除手势（左、右、左）。
-- `'activate'` - 激活组件。无论是否有辅助技术，这都应执行相同的操作。当屏幕阅读器用户双击组件时触发。
-- `'increment'` - 增加可调整组件的值。在 iOS 上，当组件具有 `'adjustable'` 角色且用户将焦点放在其上并向上滑动时，VoiceOver 会生成此操作。在 Android 上，当用户将无障碍焦点放在组件上并按下音量增加按钮时，TalkBack 会生成此操作。
-- `'decrement'` - 减少可调整组件的值。在 iOS 上，当组件具有 `'adjustable'` 角色且用户将焦点放在其上并向下滑动时，VoiceOver 会生成此操作。在 Android 上，当用户将无障碍焦点放在组件上并按下音量减少按钮时，TalkBack 会生成此操作。
-- `'longpress'` - 仅限 Android - 当用户将无障碍焦点放在组件上，然后双击并按住一根手指在屏幕上时生成此操作。无论是否有辅助技术，这都应执行相同的操作。
-- `'expand'` - 仅限 Android - 此操作“展开”组件，以便 TalkBack 宣布“已展开”提示。
-- `'collapse'` - 仅限 Android - 此操作“折叠”组件，以便 TalkBack 宣布“已折叠”提示。
+- `'magicTap'` - iOS only - 当 VoiceOver 焦点位于组件上或组件内时，用户用两根手指双击。
+- `'escape'` - iOS only - 当 VoiceOver 焦点位于组件上或组件内时，用户执行了两指 scrub 手势（左、右、左）。
+- `'activate'` - 激活组件。无论是否使用辅助技术，都应执行相同的操作。当屏幕阅读器用户双击组件时会触发。
+- `'increment'` - 增加可调整组件的值。在 iOS 上，当组件的角色为 `'adjustable'`，且用户将焦点放在其上并向上滑动时，VoiceOver 会生成此操作。在 Android 上，在 TalkBack 8.1 及以下版本中，当用户聚焦该组件并按下音量增大按钮时会生成此操作。在 TalkBack 9.1 及更高版本中，这一行为被“调整阅读控制”手势（在聚焦的控件上向上滑动）所替代。
+- `'decrement'` - 减少可调整组件的值。在 iOS 上，当组件的角色为 `'adjustable'`，且用户将焦点放在其上并向下滑动时，VoiceOver 会生成此操作。在 Android 上，在 TalkBack 8.2 及以下版本中，当用户聚焦该组件并按下音量减小按钮时会生成此操作。在 TalkBack 9.2 及更高版本中，这一行为被“调整阅读控制”手势（在聚焦的控件上向下滑动）所替代。
+- `'longpress'` - Android only - 当用户将无障碍焦点放在组件上，然后双击并按住屏幕上的一根手指时会生成此操作。这应该在是否使用辅助技术的情况下都执行相同的操作。
+- `'expand'` - Android only - 此操作会“展开”组件，以便 TalkBack 播报“已展开”提示。
+- `'collapse'` - Android only - 此操作会“折叠”组件，以便 TalkBack 播报“已折叠”提示。
 
-`label` 字段对于标准操作是可选的，辅助技术通常不使用它。对于自定义操作，它是一个本地化字符串，包含要向用户展示的操作描述。
+`label` 字段对于标准操作是可选的，它由辅助技术用于描述操作的具体结果。例如，TalkBack 使用此字段覆盖默认的“Double tap to activate”提示，并显示类似“Double tap to open chat”的自定义描述。对于自定义操作，`label` 是一个本地化字符串，包含要呈现给用户的操作描述。
 
 要处理操作请求，组件必须实现一个 `onAccessibilityAction` 函数。此函数的唯一参数是一个包含要执行的操作名称的事件。下面来自 RNTester 的示例展示了如何创建定义和处理几个自定义操作的组件。
 

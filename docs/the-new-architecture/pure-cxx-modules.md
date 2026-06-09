@@ -309,15 +309,15 @@ open SampleApp.xcworkspace
 
 2. 点击左侧的 `SampleApp` 项目，然后选择 `Add files to "Sample App"...`。
 
-![Add Files to Sample App...](/docs/assets/AddFilesToXcode1.png)
+![添加文件到 Sample App...](/docs/assets/AddFilesToXcode1.png)
 
 3. 选择 `shared` 文件夹并点击 `Add`。
 
-![Add Files to Sample App...](/docs/assets/AddFilesToXcode2.png)
+![添加文件到 Sample App...](/docs/assets/AddFilesToXcode2.png)
 
 如果一切正确，左侧的项目应如下所示：
 
-![Xcode Project](/docs/assets/CxxTMGuideXcodeProject.png)
+![Xcode 项目](/docs/assets/CxxTMGuideXcodeProject.png)
 
 #### 3. 在应用中注册 Cxx Turbo Native Module
 
@@ -422,7 +422,7 @@ open SampleApp.xcworkspace
 2. 将模板内容替换为以下代码：
 
 ```tsx title="App.tsx"
-import React from 'react';
+import {type JSX, useState} from 'react';
 import {
   Button,
   SafeAreaView,
@@ -433,9 +433,9 @@ import {
 } from 'react-native';
 import SampleTurboModule from './specs/NativeSampleModule';
 
-function App(): React.JSX.Element {
-  const [value, setValue] = React.useState('');
-  const [reversedValue, setReversedValue] = React.useState('');
+function App(): JSX.Element {
+  const [value, setValue] = useState('');
+  const [reversedValue, setReversedValue] = useState('');
 
   const onPress = () => {
     const revString = SampleTurboModule.reverseString(value);

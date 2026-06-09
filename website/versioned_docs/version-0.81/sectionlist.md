@@ -21,25 +21,24 @@ title: SectionList
 ## 示例
 
 ```SnackPlayer name=SectionList%20Example
-import React from 'react';
 import {StyleSheet, Text, View, SectionList, StatusBar} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const DATA = [
   {
-    title: 'Main dishes',
+    title: '主菜',
     data: ['Pizza', 'Burger', 'Risotto'],
   },
   {
-    title: 'Sides',
+    title: '配菜',
     data: ['French Fries', 'Onion Rings', 'Fried Shrimps'],
   },
   {
-    title: 'Drinks',
+    title: '饮品',
     data: ['Water', 'Coke', 'Beer'],
   },
   {
-    title: 'Desserts',
+    title: '甜点',
     data: ['Cheese Cake', 'Ice Cream'],
   },
 ];
@@ -295,8 +294,8 @@ export default App;
 
 使分区头粘滞在屏幕顶部，直到下一个分区头将其推离。仅在 iOS 上默认启用，因为那是那里的平台标准。
 
-| 类型    | 默认值                                                                                              |
-| ------- | ---------------------------------------------------------------------------------------------------- |
+| 类型    | 默认值 |
+| ------- | ------- |
 | 布尔值 | `false` <div className="label android">Android</div><hr/>`true` <div className="label ios">iOS</div> |
 
 ## 方法

@@ -8,7 +8,6 @@ title: KeyboardAvoidingView
 ## 示例
 
 ```SnackPlayer name=KeyboardAvoidingView&supportedPlatforms=android,ios
-import React from 'react';
 import {
   View,
   KeyboardAvoidingView,

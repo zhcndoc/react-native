@@ -1,14 +1,13 @@
 ---
 id: using-a-scrollview
-title: Using a ScrollView
+title: 使用 ScrollView
 ---
 
-The [ScrollView](scrollview.md) is a generic scrolling container that can contain multiple components and views. The scrollable items can be heterogeneous, and you can scroll both vertically and horizontally (by setting the `horizontal` property).
+[ScrollView](scrollview.md) 是一个通用的滚动容器，可以包含多个组件和视图。可滚动的条目可以是异构的，并且你可以通过设置 `horizontal` 属性来实现垂直和水平滚动。
 
-This example creates a vertical `ScrollView` with both images and text mixed together.
+这个示例创建了一个同时混合图片和文本的垂直 `ScrollView`。
 
 ```SnackPlayer name=Using%20ScrollView
-import React from 'react';
 import {Image, ScrollView, Text} from 'react-native';
 
 const logo = {
@@ -19,31 +18,31 @@ const logo = {
 
 const App = () => (
   <ScrollView>
-    <Text style={{fontSize: 96}}>Scroll me plz</Text>
+    <Text style={{fontSize: 96}}>请向下滚动我</Text>
     <Image source={logo} />
     <Image source={logo} />
     <Image source={logo} />
     <Image source={logo} />
     <Image source={logo} />
-    <Text style={{fontSize: 96}}>If you like</Text>
+    <Text style={{fontSize: 96}}>如果你喜欢</Text>
     <Image source={logo} />
     <Image source={logo} />
     <Image source={logo} />
     <Image source={logo} />
     <Image source={logo} />
-    <Text style={{fontSize: 96}}>Scrolling down</Text>
+    <Text style={{fontSize: 96}}>继续向下滚动</Text>
     <Image source={logo} />
     <Image source={logo} />
     <Image source={logo} />
     <Image source={logo} />
     <Image source={logo} />
-    <Text style={{fontSize: 96}}>What's the best</Text>
+    <Text style={{fontSize: 96}}>最好的是什么</Text>
     <Image source={logo} />
     <Image source={logo} />
     <Image source={logo} />
     <Image source={logo} />
     <Image source={logo} />
-    <Text style={{fontSize: 96}}>Framework around?</Text>
+    <Text style={{fontSize: 96}}>周围的框架？</Text>
     <Image source={logo} />
     <Image source={logo} />
     <Image source={logo} />
@@ -56,8 +55,8 @@ const App = () => (
 export default App;
 ```
 
-ScrollViews can be configured to allow paging through views using swiping gestures by using the `pagingEnabled` props. Swiping horizontally between views can also be implemented on Android using the [ViewPager](https://github.com/react-native-community/react-native-viewpager) component.
+可以使用 `pagingEnabled` 属性来配置 ScrollView，使其通过滑动手势在各个视图之间分页浏览。在 Android 上，也可以使用 [ViewPager](https://github.com/react-native-community/react-native-viewpager) 组件来实现水平滑动切换视图。
 
-On iOS a ScrollView with a single item can be used to allow the user to zoom content. Set up the `maximumZoomScale` and `minimumZoomScale` props and your user will be able to use pinch and expand gestures to zoom in and out.
+在 iOS 上，带有单个条目的 ScrollView 可用于让用户缩放内容。设置 `maximumZoomScale` 和 `minimumZoomScale` 属性后，用户就可以通过捏合和展开手势来放大和缩小。
 
-The ScrollView works best to present a small number of things of a limited size. All the elements and views of a `ScrollView` are rendered, even if they are not currently shown on the screen. If you have a long list of items which cannot fit on the screen, you should use a `FlatList` instead. So let's [learn about list views](using-a-listview.md) next.
+ScrollView 最适合展示数量较少、尺寸有限的内容。`ScrollView` 的所有元素和视图都会被渲染，即使它们当前没有显示在屏幕上。如果你有一个无法在屏幕上完全显示的长列表，应该改用 `FlatList`。接下来让我们[了解列表视图](using-a-listview.md)。

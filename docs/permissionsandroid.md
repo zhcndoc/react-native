@@ -4,20 +4,19 @@ title: PermissionsAndroid
 ---
 
 <div className="banner-native-code-required">
-  <h3>Project with Native Code Required</h3>
-  <p>The following section only applies to projects with native code exposed. If you are using the managed Expo workflow, see the guide on <a href="https://docs.expo.dev/guides/permissions/">Permissions</a> in the Expo documentation for the appropriate alternative.</p>
+  <h3>需要原生代码的项目</h3>
+  <p>以下部分仅适用于已暴露原生代码的项目。如果你使用的是受管理的 Expo 工作流，请参阅 Expo 文档中的 <a href="https://docs.expo.dev/guides/permissions/">Permissions</a> 指南，了解合适的替代方案。</p>
 </div>
 
-`PermissionsAndroid` provides access to Android M's new permissions model. The so-called "normal" permissions are granted by default when the application is installed as long as they appear in `AndroidManifest.xml`. However, "dangerous" permissions require a dialog prompt. You should use this module for those permissions.
+`PermissionsAndroid` 提供对 Android M 新权限模型的访问。所谓的“普通”权限会在应用安装时默认授予，只要它们出现在 `AndroidManifest.xml` 中。不过，“危险”权限需要弹窗提示。你应该为这些权限使用此模块。
 
-On devices before SDK version 23, the permissions are automatically granted if they appear in the manifest, so `check` should always result to `true` and `request` should always resolve to `PermissionsAndroid.RESULTS.GRANTED`.
+在 SDK 版本 23 之前的设备上，如果权限出现在清单中，就会自动授予，因此 `check` 的结果应始终为 `true`，而 `request` 应始终解析为 `PermissionsAndroid.RESULTS.GRANTED`。
 
-If a user has previously turned off a permission that you prompt for, the OS will advise your app to show a rationale for needing the permission. The optional `rationale` argument will show a dialog prompt only if necessary - otherwise the normal permission prompt will appear.
+如果用户之前关闭了你请求的某项权限，操作系统会建议你的应用显示一段说明，解释为何需要该权限。可选的 `rationale` 参数只会在必要时显示弹窗；否则会显示常规权限请求弹窗。
 
-### Example
+### 示例
 
 ```SnackPlayer name=PermissionsAndroid%20Example&supportedPlatforms=android
-import React from 'react';
 import {
   Button,
   PermissionsAndroid,
@@ -32,19 +31,19 @@ const requestCameraPermission = async () => {
     const granted = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.CAMERA,
       {
-        title: 'Cool Photo App Camera Permission',
+        title: '酷炫照片应用相机权限',
         message:
-          'Cool Photo App needs access to your camera ' +
-          'so you can take awesome pictures.',
-        buttonNeutral: 'Ask Me Later',
-        buttonNegative: 'Cancel',
-        buttonPositive: 'OK',
+          '酷炫照片应用需要访问你的相机 ' +
+          '这样你就可以拍摄超棒的照片。',
+        buttonNeutral: '稍后再问我',
+        buttonNegative: '取消',
+        buttonPositive: '确定',
       },
     );
     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      console.log('You can use the camera');
+      console.log('你可以使用相机了');
     } else {
-      console.log('Camera permission denied');
+      console.log('相机权限被拒绝');
     }
   } catch (err) {
     console.warn(err);
@@ -54,8 +53,8 @@ const requestCameraPermission = async () => {
 const App = () => (
   <SafeAreaProvider>
     <SafeAreaView style={styles.container}>
-      <Text style={styles.item}>Try permissions</Text>
-      <Button title="request permissions" onPress={requestCameraPermission} />
+      <Text style={styles.item}>试试权限</Text>
+      <Button title="请求权限" onPress={requestCameraPermission} />
     </SafeAreaView>
   </SafeAreaProvider>
 );
@@ -79,9 +78,9 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-### Permissions that require prompting the user
+### 需要提示用户授权的权限
 
-Available as constants under `PermissionsAndroid.PERMISSIONS`:
+可作为 `PermissionsAndroid.PERMISSIONS` 下的常量使用：
 
 - `READ_CALENDAR`: 'android.permission.READ_CALENDAR'
 - `WRITE_CALENDAR`: 'android.permission.WRITE_CALENDAR'
@@ -126,19 +125,19 @@ Available as constants under `PermissionsAndroid.PERMISSIONS`:
 - `READ_VOICEMAIL`: 'com.android.voicemail.permission.READ_VOICEMAIL',
 - `WRITE_VOICEMAIL`: 'com.android.voicemail.permission.WRITE_VOICEMAIL',
 
-### Result strings for requesting permissions
+### 请求权限时的结果字符串
 
-Available as constants under `PermissionsAndroid.RESULTS`:
+可作为 `PermissionsAndroid.RESULTS` 下的常量使用：
 
-- `GRANTED`: 'granted'
-- `DENIED`: 'denied'
-- `NEVER_ASK_AGAIN`: 'never_ask_again'
+- `GRANTED`: '已授予'
+- `DENIED`: '已拒绝'
+- `NEVER_ASK_AGAIN`: '不再询问'
 
 ---
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `check()`
 
@@ -146,13 +145,13 @@ Available as constants under `PermissionsAndroid.RESULTS`:
 static check(permission: Permission): Promise<boolean>;
 ```
 
-Returns a promise resolving to a boolean value as to whether the specified permissions has been granted.
+返回一个 promise，解析为布尔值，用于表示指定权限是否已被授予。
 
-**Parameters:**
+**参数：**
 
-| Name       | Type   | Required | Description                  |
-| ---------- | ------ | -------- | ---------------------------- |
-| permission | string | Yes      | The permission to check for. |
+| 名称       | 类型   | 必填 | 描述           |
+| ---------- | ------ | ---- | -------------- |
+| permission | string | 是   | 要检查的权限。 |
 
 ---
 
@@ -165,26 +164,26 @@ static request(
 ): Promise<PermissionStatus>;
 ```
 
-Prompts the user to enable a permission and returns a promise resolving to a string value (see result strings above) indicating whether the user allowed or denied the request or does not want to be asked again.
+提示用户启用某项权限，并返回一个 promise，解析为字符串值（参见上面的结果字符串），用于表示用户是允许、拒绝了请求，还是不希望再次被询问。
 
-If `rationale` is provided, this function checks with the OS whether it is necessary to show a dialog explaining why the permission is needed (https://developer.android.com/training/permissions/requesting.html#explain) and then shows the system permission dialog.
+如果提供了 `rationale`，此函数会先向操作系统确认是否需要显示一个解释为何需要该权限的对话框（https://developer.android.com/training/permissions/requesting.html#explain），然后显示系统权限对话框。
 
-**Parameters:**
+**参数：**
 
-| Name       | Type   | Required | Description                |
-| ---------- | ------ | -------- | -------------------------- |
-| permission | string | Yes      | The permission to request. |
-| rationale  | object | No       | See `rationale` below.     |
+| 名称        | 类型   | 必填 | 描述                     |
+| ----------- | ------ | ---- | ------------------------ |
+| permission  | string | 是   | 要请求的权限。           |
+| rationale   | object | 否   | 见下方 `rationale`。     |
 
-**Rationale:**
+**Rationale：**
 
-| Name           | Type   | Required | Description                      |
-| -------------- | ------ | -------- | -------------------------------- |
-| title          | string | Yes      | The title of the dialog.         |
-| message        | string | Yes      | The message of the dialog.       |
-| buttonPositive | string | Yes      | The text of the positive button. |
-| buttonNegative | string | No       | The text of the negative button. |
-| buttonNeutral  | string | No       | The text of the neutral button.  |
+| 名称           | 类型   | 必填 | 描述                         |
+| -------------- | ------ | ---- | ---------------------------- |
+| title          | string | 是   | 对话框标题。                 |
+| message        | string | 是   | 对话框消息。                 |
+| buttonPositive | string | 是   | 正向按钮文本。               |
+| buttonNegative | string | 否   | 负向按钮文本。               |
+| buttonNeutral  | string | 否   | 中性按钮文本。               |
 
 ---
 
@@ -196,10 +195,10 @@ static requestMultiple(
 ): Promise<{[key in Permission]: PermissionStatus}>;
 ```
 
-Prompts the user to enable multiple permissions in the same dialog and returns an object with the permissions as keys and strings as values (see result strings above) indicating whether the user allowed or denied the request or does not want to be asked again.
+在同一个对话框中提示用户启用多个权限，并返回一个对象，其中权限作为键、字符串作为值（参见上面的结果字符串），用于表示用户是允许、拒绝了请求，还是不希望再次被询问。
 
-**Parameters:**
+**参数：**
 
-| Name        | Type  | Required | Description                      |
-| ----------- | ----- | -------- | -------------------------------- |
-| permissions | array | Yes      | Array of permissions to request. |
+| 名称        | 类型  | 必填 | 描述                     |
+| ----------- | ----- | ---- | ------------------------ |
+| permissions | array | 是   | 要请求的权限数组。       |

@@ -134,7 +134,6 @@ Framework build type is static library
 打开 `App.tsx` 文件并按如下方式修改：
 
 ```diff title="App.tsx"
-import React from 'react';
 import {
 + Alert,
 + EventSubscription,
@@ -155,8 +154,8 @@ function App(): React.JSX.Element {
 + const listenerSubscription = React.useRef<null | EventSubscription>(null);
 
 + React.useEffect(() => {
-+   listenerSubscription.current = NativeLocalStorage?.onKeyAdded((pair) => Alert.alert(`New key added: ${pair.key} with value: ${pair.value}`));
-
++   listenerSubscription.current = NativeLocalStorage?.onKeyAdded((pair) => Alert.alert(`新增键：${pair.key}，值为：${pair.value}`));
++
 +   return  () => {
 +     listenerSubscription.current?.remove();
 +     listenerSubscription.current = null;
@@ -174,7 +173,7 @@ function App(): React.JSX.Element {
 
   function saveValue() {
 +   if (key == null) {
-+     Alert.alert('Please enter a key');
++     Alert.alert('请输入键');
 +     return;
 +   }
     NativeLocalStorage?.setItem(editingValue ?? EMPTY, key);
@@ -188,7 +187,7 @@ function App(): React.JSX.Element {
 
   function deleteValue() {
 +   if (key == null) {
-+     Alert.alert('Please enter a key');
++     Alert.alert('请输入键');
 +     return;
 +   }
     NativeLocalStorage?.removeItem(key);
@@ -197,7 +196,7 @@ function App(): React.JSX.Element {
 
 + function retrieveValue() {
 +   if (key == null) {
-+     Alert.alert('Please enter a key');
++     Alert.alert('请输入键');
 +     return;
 +   }
 +   const val = NativeLocalStorage?.getItem(key);
@@ -209,13 +208,13 @@ function App(): React.JSX.Element {
       <Text style={styles.text}>
         Current stored value is: {value ?? 'No Value'}
       </Text>
-+     <Text>Key:</Text>
++     <Text>键：</Text>
 +      <TextInput
 +       placeholder="Enter the key you want to store"
 +       style={styles.textInput}
 +       onChangeText={setKey}
 +     />
-+     <Text>Value:</Text>
++     <Text>值：</Text>
       <TextInput
         placeholder="Enter the text you want to store"
         style={styles.textInput}

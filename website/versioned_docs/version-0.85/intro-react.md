@@ -22,20 +22,18 @@ React Native 运行在 [React](https://react.dev/) 之上，这是一个用于�
 这篇 React 介绍的其余部分将以猫为例：友好、亲切的生物，它们需要名字和一个工作的咖啡馆。这是你的第一个 Cat 组件：
 
 ```SnackPlayer name=Your%20Cat
-import React from 'react';
 import {Text} from 'react-native';
 
 const Cat = () => {
-  return <Text>Hello, I am your cat!</Text>;
+  return <Text>你好，我是你的猫！</Text>;
 };
 
 export default Cat;
 ```
 
-做法如下：要定义你的 `Cat` 组件，首先使用 JavaScript 的 [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 导入 React 和 React Native 的 [`Text`](/docs/next/text) 核心组件：
+Here is how you do it: To define your `Cat` component, first use JavaScript’s [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) to import React Native’s [`Text`](/docs/next/text) Core Component:
 
 ```tsx
-import React from 'react';
 import {Text} from 'react-native';
 ```
 
@@ -51,7 +49,7 @@ const Cat = () => {};
 
 ```tsx
 const Cat = () => {
-  return <Text>Hello, I am your cat!</Text>;
+  return <Text>你好，我是你的猫！</Text>;
 };
 ```
 
@@ -59,7 +57,7 @@ const Cat = () => {
 
 ```tsx
 const Cat = () => {
-  return <Text>Hello, I am your cat!</Text>;
+  return <Text>你好，我是你的猫！</Text>;
 };
 
 export default Cat;
@@ -76,7 +74,6 @@ export default Cat;
 React 和 React Native 使用 **JSX**，这是一种允许你在 JavaScript 内部编写元素的语法，如下所示：`<Text>Hello, I am your cat!</Text>`。React 文档有一份 [关于 JSX 的综合指南](https://react.dev/learn/writing-markup-with-jsx) 供你参考以了解更多。因为 JSX 是 JavaScript，你可以在其中使用变量。这里你正在声明猫的名字，`name`，并将其用花括号嵌入到 `<Text>` 中。
 
 ```SnackPlayer name=Curly%20Braces
-import React from 'react';
 import {Text} from 'react-native';
 
 const Cat = () => {
@@ -93,7 +90,6 @@ export default Cat;
 <TabItem value="javascript">
 
 ```SnackPlayer name=Curly%20Braces&ext=js
-import React from 'react';
 import {Text} from 'react-native';
 
 const getFullName = (firstName, secondName, thirdName) => {
@@ -111,7 +107,6 @@ export default Cat;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Curly%20Braces&ext=tsx
-import React from 'react';
 import {Text} from 'react-native';
 
 const getFullName = (
@@ -134,10 +129,6 @@ export default Cat;
 
 你可以将花括号视为在你的 JSX 中创建了一个通往 JS 功能的门户！
 
-:::tip
-因为 JSX 包含在 React 库中，如果你没有在文件顶部使用 `import React from 'react'`，它将无法工作！
-:::
-
 ## 自定义组件
 
 你已经见过 [React Native 的核心组件](intro-react-native-components)。React 允许你将这些组件相互嵌套以创建新组件。这些可嵌套、可重用的组件是 React 范式的核心。
@@ -145,20 +136,19 @@ export default Cat;
 例如，你可以在下面的 [`View`](view) 中嵌套 [`Text`](text) 和 [`TextInput`](textinput)，React Native 会将它们一起渲染：
 
 ```SnackPlayer name=Custom%20Components
-import React from 'react';
 import {Text, TextInput, View} from 'react-native';
 
 const Cat = () => {
   return (
     <View>
-      <Text>Hello, I am...</Text>
+      <Text>你好，我是...</Text>
       <TextInput
         style={{
           height: 40,
           borderColor: 'gray',
           borderWidth: 1,
         }}
-        defaultValue="Name me!"
+        defaultValue="给我起个名字吧！"
       />
     </View>
   );
@@ -190,13 +180,12 @@ export default Cat;
 你可以通过使用 `<Cat>` 多次渲染此组件，并在多个地方渲染，而无需重复代码：
 
 ```SnackPlayer name=Multiple%20Components
-import React from 'react';
 import {Text, View} from 'react-native';
 
 const Cat = () => {
   return (
     <View>
-      <Text>I am also a cat!</Text>
+      <Text>我也是一只猫！</Text>
     </View>
   );
 };
@@ -204,7 +193,7 @@ const Cat = () => {
 const Cafe = () => {
   return (
     <View>
-      <Text>Welcome!</Text>
+      <Text>欢迎！</Text>
       <Cat />
       <Cat />
       <Cat />
@@ -227,7 +216,6 @@ export default Cafe;
 <TabItem value="javascript">
 
 ```SnackPlayer name=Multiple%20Props&ext=js
-import React from 'react';
 import {Text, View} from 'react-native';
 
 const Cat = props => {
@@ -255,7 +243,6 @@ export default Cafe;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Multiple%20Props&ext=tsx
-import React from 'react';
 import {Text, View} from 'react-native';
 
 type CatProps = {
@@ -289,7 +276,6 @@ export default Cafe;
 大多数 React Native 的核心组件也可以用 props 定制。例如，使用 [`Image`](image) 时，你传递给它一个名为 [`source`](image#source) 的 prop 来定义它显示什么图像：
 
 ```SnackPlayer name=Props
-import React from 'react';
 import {Text, View, Image} from 'react-native';
 
 const CatApp = () => {
@@ -333,7 +319,7 @@ export default CatApp;
 <TabItem value="javascript">
 
 ```SnackPlayer name=State&ext=js
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Button, Text, View} from 'react-native';
 
 const Cat = props => {
@@ -342,14 +328,14 @@ const Cat = props => {
   return (
     <View>
       <Text>
-        I am {props.name}, and I am {isHungry ? 'hungry' : 'full'}!
+        我是 {props.name}，而且我{isHungry ? '饿了' : '饱了'}！
       </Text>
       <Button
         onPress={() => {
           setIsHungry(false);
         }}
         disabled={!isHungry}
-        title={isHungry ? 'Give me some food, please!' : 'Thank you!'}
+        title={isHungry ? '请给我一些食物！' : '谢谢你！'}
       />
     </View>
   );
@@ -371,7 +357,7 @@ export default Cafe;
 <TabItem value="typescript">
 
 ```SnackPlayer name=State&ext=tsx
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Button, Text, View} from 'react-native';
 
 type CatProps = {
@@ -384,14 +370,14 @@ const Cat = (props: CatProps) => {
   return (
     <View>
       <Text>
-        I am {props.name}, and I am {isHungry ? 'hungry' : 'full'}!
+        我是 {props.name}，而且我{isHungry ? '饿了' : '饱了'}！
       </Text>
       <Button
         onPress={() => {
           setIsHungry(false);
         }}
         disabled={!isHungry}
-        title={isHungry ? 'Give me some food, please!' : 'Thank you!'}
+        title={isHungry ? '请给我一些食物！' : '谢谢你！'}
       />
     </View>
   );
@@ -415,7 +401,7 @@ export default Cafe;
 首先，你需要像这样从 React 导入 `useState`：
 
 ```tsx
-import React, {useState} from 'react';
+import {useState} from 'react';
 ```
 
 然后通过在组件函数内调用 `useState` 来声明组件的 state。在此示例中，`useState` 创建一个 `isHungry` state 变量：
@@ -455,7 +441,7 @@ const Cat = (props: CatProps) => {
 <Button
   //..
   disabled={!isHungry}
-  title={isHungry ? 'Give me some food, please!' : 'Thank you!'}
+  title={isHungry ? '请给我一些食物！' : '谢谢你！'}
 />
 ```
 

@@ -271,7 +271,7 @@ class MyAppPackage : ReactPackage {
 
 :::note
 值得注意的是，这种注册原生模块的方式会在应用启动时急切地初始化所有原生模块，这会增加应用的启动时间。你可以使用 [TurboReactPackage](https://github.com/facebook/react-native/blob/main/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/TurboReactPackage.kt) 作为替代方案。TurboReactPackage 不实现返回实例化原生模块对象列表的 `createNativeModules`，而是实现 `getModule(String name, ReactApplicationContext rac)` 方法，该方法在需要时创建原生模块对象。目前 TurboReactPackage 实现起来有点复杂。除了实现 `getModule()` 方法外，你还必须实现 `getReactModuleInfoProvider()` 方法，该方法返回包可以实例化的所有原生模块列表以及实例化它们的函数，示例 [此处](https://github.com/facebook/react-native/blob/8ac467c51b94c82d81930b4802b2978c85539925/ReactAndroid/src/main/java/com/facebook/react/CoreModulesPackage.java#L86-L165)。同样，使用 TurboReactPackage 将使你的应用具有更快的启动时间，但目前编写起来有点麻烦。因此，如果你选择使用 TurboReactPackages，请谨慎行事。
-:::
+::>
 
 要注册 `CalendarModule` 包，你必须将 `MyAppPackage` 添加到 ReactNativeHost 的 `getPackages()` 方法返回的包列表中。打开你的 `MainApplication.java` 或 `MainApplication.kt` 文件，可以在以下路径找到：`android/app/src/main/java/com/your-app-name/`。
 
@@ -315,7 +315,6 @@ override fun getPackages(): List<ReactPackage> =
 在你的应用中找到一个你想要添加调用原生模块 `createCalendarEvent()` 方法的地方。下面是一个组件示例 `NewModuleButton`，你可以将其添加到你的应用中。你可以在 `NewModuleButton` 的 `onPress()` 函数中调用原生模块。
 
 ```tsx
-import React from 'react';
 import {NativeModules, Button} from 'react-native';
 
 const NewModuleButton = () => {
@@ -395,30 +394,30 @@ yarn android
 
 像上面那样通过从 `NativeModules` 中提取来导入你的原生模块有点笨拙。
 
-为了节省原生模块的使用者每次想要访问你的原生模块时都需要这样做的麻烦，你可以为该模块创建一个 JavaScript 包装器。创建一个名为 `CalendarModule.js` 的新 JavaScript 文件，内容如下：
+为了省去原生模块使用者每次想要访问你的原生模块时都要这样做的麻烦，你可以为该模块创建一个 JavaScript 包装器。创建一个名为 `CalendarModule.js` 的新 JavaScript 文件，内容如下：
 
 ```tsx
 /**
-* 这将原生 CalendarModule 模块暴露为 JS 模块。它具有一个
-* 函数 'createCalendarEvent'，接受以下参数：
+* 这会将原生 `CalendarModule` 模块暴露为 JS 模块。它包含一个
+* 函数 `createCalendarEvent`，接受以下参数：
 
-* 1. String name: 代表事件名称的字符串
-* 2. String location: 代表事件地点的字符串
+* 1. String name: 表示事件名称的字符串
+* 2. String location: 表示事件地点的字符串
 */
 import {NativeModules} from 'react-native';
 const {CalendarModule} = NativeModules;
 export default CalendarModule;
 ```
 
-这个 JavaScript 文件也成为了你添加任何 JavaScript 端功能的好地方。例如，如果你使用像 TypeScript 这样的类型系统，你可以在此处为你的原生模块添加类型注解。虽然 React Native 尚未支持原生到 JS 的类型安全，但你所有的 JS 代码将是类型安全的。这样做也将使你以后更容易切换到类型安全的原生模块。下面是为 CalendarModule 添加类型安全的示例：
+这个 JavaScript 文件也很适合添加任何 JavaScript 端功能。例如，如果你使用像 TypeScript 这样的类型系统，你可以在这里为你的原生模块添加类型注解。虽然 React Native 目前还不支持原生到 JS 的类型安全，但你的所有 JS 代码都会是类型安全的。这样也会让你以后更容易切换到类型安全的原生模块。下面是为 `CalendarModule` 添加类型安全的示例：
 
 ```tsx
 /**
- * 这将原生 CalendarModule 模块暴露为 JS 模块。它具有一个
- * 函数 'createCalendarEvent'，接受以下参数：
+ * 这会将原生 `CalendarModule` 模块暴露为 JS 模块。它包含一个
+ * 函数 `createCalendarEvent`，接受以下参数：
  *
- * 1. String name: 代表事件名称的字符串
- * 2. String location: 代表事件地点的字符串
+ * 1. String name: 表示事件名称的字符串
+ * 2. String location: 表示事件地点的字符串
  */
 import {NativeModules} from 'react-native';
 const {CalendarModule} = NativeModules;
@@ -428,7 +427,7 @@ interface CalendarInterface {
 export default CalendarModule as CalendarInterface;
 ```
 
-在你的其他 JavaScript 文件中，你可以访问原生模块并调用其方法，如下所示：
+在其他 JavaScript 文件中，你可以访问原生模块并调用其方法，如下所示：
 
 ```tsx
 import CalendarModule from './CalendarModule';
@@ -436,12 +435,12 @@ CalendarModule.createCalendarEvent('foo', 'bar');
 ```
 
 :::note
-这假设你导入 `CalendarModule` 的位置与 `CalendarModule.js` 处于相同的层级结构中。请根据需要更新相对导入。
+这假设你导入 `CalendarModule` 的位置与 `CalendarModule.js` 处于相同的目录层级中。请根据需要更新相对导入路径。
 :::
 
 ### 参数类型
 
-当在 JavaScript 中调用原生模块方法时，React Native 会将参数从 JS 对象转换为其 Java/Kotlin 对象对应物。例如，如果你的 Java 原生模块方法接受一个 double，在 JS 中你需要用数字调用该方法。React Native 会为你处理转换。下面是原生模块方法支持的参数类型列表及其映射的 JavaScript 等效类型。
+当在 JavaScript 中调用原生模块方法时，React Native 会将参数从 JS 对象转换为其 Java/Kotlin 对象对应类型。例如，如果你的 Java 原生模块方法接受一个 double，那么在 JS 中你需要用数字调用该方法。React Native 会帮你处理这种转换。下面是原生模块方法支持的参数类型列表及其映射的 JavaScript 等效类型。
 
 | Java          | Kotlin        | JavaScript |
 | ------------- | ------------- | ---------- |
@@ -464,7 +463,7 @@ CalendarModule.createCalendarEvent('foo', 'bar');
 - float Java -> number
   :::
 
-对于上面未列出的参数类型，你需要自己处理转换。例如，在 Android 中，`Date` 转换不支持开箱即用。你可以像这样在原生的方法内部处理到 `Date` 类型的转换：
+对于上面未列出的参数类型，你需要自己处理转换。例如，在 Android 中，`Date` 转换并不提供开箱即用的支持。你可以像这样在原生方法内部处理到 `Date` 类型的转换：
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
@@ -533,12 +532,12 @@ console.log(DEFAULT_EVENT_NAME);
 从技术上讲，可以直接从原生模块对象访问 `getConstants()` 中导出的常量。这在 TurboModules 中将不再受支持，所以我们鼓励社区切换到上述方法，以避免以后必要的迁移。
 
 :::note
-目前常量仅在初始化时导出，因此如果你在运行时更改 getConstants 值，不会影响 JavaScript 环境。这将随着 Turbomodules 而改变。使用 Turbomodules 时，`getConstants()` 将成为常规原生模块方法，每次调用都会触及原生端。
+目前常量仅在初始化时导出，因此如果你在运行时更改 `getConstants` 的值，不会影响 JavaScript 环境。这将随着 TurboModules 而改变。使用 TurboModules 时，`getConstants()` 将成为常规原生模块方法，每次调用都会触及原生端。
 :::
 
 ### 回调
 
-原生模块还支持一种独特的参数类型：回调。回调用于将数据从 Java/Kotlin 传递给 JavaScript 以用于异步方法。它们也可用于从原生端异步执行 JavaScript。
+原生模块还支持一种独特的参数类型：回调。回调用于将数据从 Java/Kotlin 传递给 JavaScript，以用于异步方法。它们也可用于从原生端异步执行 JavaScript。
 
 为了创建带有回调的原生模块方法，首先导入 `Callback` 接口，然后在你的原生模块方法中添加一个类型为 `Callback` 的新参数。回调参数有一些细微差别，这些很快将随着 TurboModules 而被消除。首先，你的函数参数中只能有两个回调——一个 successCallback 和一个 failureCallback。此外，原生模块方法调用的最后一个参数，如果是函数，则被视为 successCallback，而原生模块方法调用的倒数第二个参数，如果是函数，则被视为 failure callback。
 
@@ -606,7 +605,7 @@ const onPress = () => {
 };
 ```
 
-另一个需要注意的重要细节是，原生模块方法只能调用一次回调，一次。这意味着你可以调用成功回调或失败回调，但不能同时调用，且每个回调最多只能被调用一次。然而，原生模块可以存储回调并在以后调用它。
+另一个需要注意的重要细节是，原生模块方法只能调用一次回调，且只能调用一次。这意味着你可以调用成功回调或失败回调，但不能同时调用，且每个回调最多只能被调用一次。然而，原生模块可以存储回调并在以后调用它。
 
 使用回调进行错误处理有两种方法。第一种是遵循 Node 的约定，将传递给回调的第一个参数视为错误对象。
 
@@ -698,9 +697,9 @@ const onPress = () => {
 
 ### Promise
 
-原生模块还可以履行 [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)，这可以简化你的 JavaScript，特别是当使用 ES2016 的 [async/await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) 语法时。当原生模块 Java/Kotlin 方法的最后一个参数是 Promise 时，其对应的 JS 方法将返回一个 JS Promise 对象。
+原生模块还可以返回 [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)，这可以简化你的 JavaScript，特别是在使用 ES2016 的 [async/await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) 语法时。当原生模块 Java/Kotlin 方法的最后一个参数是 Promise 时，其对应的 JS 方法将返回一个 JS Promise 对象。
 
-将上述代码重构为使用 Promise 而不是回调如下所示：
+将上述代码重构为使用 Promise 而不是回调，如下所示：
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 <TabItem value="java">
@@ -743,7 +742,7 @@ fun createCalendarEvent(name: String, location: String, promise: Promise) {
 与回调类似，原生模块方法可以拒绝或解决 promise（但不能同时两者），且最多只能执行一次。这意味着你可以调用成功回调或失败回调，但不能同时调用，且每个回调最多只能被调用一次。然而，原生模块可以存储回调并在以后调用它。
 :::
 
-此方法的 JavaScript 对应部分返回一个 Promise。这意味着你可以在异步函数中使用 `await` 关键字来调用它并等待其结果：
+此方法在 JavaScript 中对应返回一个 Promise。这意味着你可以在异步函数中使用 `await` 关键字来调用它并等待其结果：
 
 ```tsx
 const onSubmit = async () => {
@@ -778,7 +777,7 @@ code: String, message: String, userInfo: WritableMap, throwable: Throwable
 </TabItem>
 </Tabs>
 
-有关更多详细信息，你可以在此处找到 `Promise.java` 接口 [here](https://github.com/facebook/react-native/blob/main/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/bridge/Promise.kt)。如果未提供 `userInfo`，ReactNative 将其设置为 null。对于其余参数，React Native 将使用默认值。`message` 参数提供错误调用堆栈顶部显示的错误 `message`。下面是从以下 Java/Kotlin 中的 reject 调用在 JavaScript 中显示的错误消息示例。
+有关更多详细信息，你可以在此处找到 `Promise.java` 接口 [here](https://github.com/facebook/react-native/blob/main/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/bridge/Promise.kt)。如果未提供 `userInfo`，React Native 将其设置为 null。对于其余参数，React Native 将使用默认值。`message` 参数提供错误调用堆栈顶部显示的错误 `message`。下面是从以下 Java/Kotlin 中的 reject 调用在 JavaScript 中显示的错误消息示例。
 
 Java/Kotlin reject 调用：
 
@@ -1190,4 +1189,4 @@ override fun onHostDestroy() {
 
 ### 线程
 
-迄今为止，在 Android 上，所有原生模块异步方法都在一个线程上执行。原生模块不应对其被调用的线程有任何假设，因为当前的分配在未来可能会发生变化。如果需要阻塞调用，应将繁重的工作分派到内部管理的工人线程，并从那里分发任何回调。
+到目前为止，在 Android 上，所有原生模块异步方法都在同一个线程上执行。原生模块不应对其被调用的线程做任何假设，因为当前的分配在未来可能会发生变化。如果需要阻塞调用，应将繁重的工作分派到内部管理的工作线程，并从那里分发任何回调。

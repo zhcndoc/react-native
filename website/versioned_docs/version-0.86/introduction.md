@@ -30,7 +30,6 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 这篇介绍让你可以立即在浏览器中通过这样的交互式示例开始：
 
 ```SnackPlayer name=Hello%20World
-import React from 'react';
 import {Text, View} from 'react-native';
 
 const YourApp = () => {

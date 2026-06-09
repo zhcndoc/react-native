@@ -4,17 +4,17 @@ title: TouchableOpacity
 ---
 
 :::tip
-If you're looking for a more extensive and future-proof way to handle touch-based input, check out the [Pressable](pressable.md) API.
+如果你正在寻找一种更全面、面向未来的方式来处理基于触摸的输入，可以查看 [Pressable](pressable.md) API。
 :::
 
-A wrapper for making views respond properly to touches. On press down, the opacity of the wrapped view is decreased, dimming it.
+一个用于让视图对触摸正确响应的包装器。按下时，被包装视图的透明度会降低，从而变暗。
 
-Opacity is controlled by wrapping the children in an `Animated.View`, which is added to the view hierarchy. Be aware that this can affect layout.
+透明度通过将子元素包裹在一个 `Animated.View` 中来控制，该视图会被添加到视图层级中。请注意，这可能会影响布局。
 
-## Example
+## 示例
 
 ```SnackPlayer name=TouchableOpacity%20Example
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -29,7 +29,7 @@ const App = () => {
           <Text>Count: {count}</Text>
         </View>
         <TouchableOpacity style={styles.button} onPress={onPress}>
-          <Text>Press Here</Text>
+          <Text>按这里</Text>
         </TouchableOpacity>
       </SafeAreaView>
     </SafeAreaProvider>
@@ -58,19 +58,19 @@ export default App;
 
 ---
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
 ### [TouchableWithoutFeedback Props](touchablewithoutfeedback.md#props)
 
-Inherits [TouchableWithoutFeedback Props](touchablewithoutfeedback.md#props).
+继承自 [TouchableWithoutFeedback Props](touchablewithoutfeedback.md#props)。
 
 ---
 
 ### `style`
 
-| Type                           |
+| 类型                           |
 | ------------------------------ |
 | [View.style](view-style-props) |
 
@@ -78,9 +78,9 @@ Inherits [TouchableWithoutFeedback Props](touchablewithoutfeedback.md#props).
 
 ### `activeOpacity`
 
-Determines what the opacity of the wrapped view should be when touch is active. Defaults to `0.2`.
+决定触摸激活时被包装视图应具有的透明度。默认为 `0.2`。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -88,9 +88,9 @@ Determines what the opacity of the wrapped view should be when touch is active. 
 
 ### `hasTVPreferredFocus` <div className="label ios">iOS</div>
 
-_(Apple TV only)_ TV preferred focus (see documentation for the View component).
+_(仅 Apple TV)_ TV 首选焦点（参见 View 组件文档）。
 
-| Type |
+| 类型 |
 | ---- |
 | bool |
 
@@ -98,9 +98,9 @@ _(Apple TV only)_ TV preferred focus (see documentation for the View component).
 
 ### `nextFocusDown` <div className="label android">Android</div>
 
-TV next focus down (see documentation for the View component).
+TV 下一个焦点向下（参见 View 组件文档）。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -108,9 +108,9 @@ TV next focus down (see documentation for the View component).
 
 ### `nextFocusForward` <div className="label android">Android</div>
 
-TV next focus forward (see documentation for the View component).
+TV 下一个焦点向前（参见 View 组件文档）。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -118,9 +118,9 @@ TV next focus forward (see documentation for the View component).
 
 ### `nextFocusLeft` <div className="label android">Android</div>
 
-TV next focus left (see documentation for the View component).
+TV 下一个焦点向左（参见 View 组件文档）。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -128,9 +128,9 @@ TV next focus left (see documentation for the View component).
 
 ### `nextFocusRight` <div className="label android">Android</div>
 
-TV next focus right (see documentation for the View component).
+TV 下一个焦点向右（参见 View 组件文档）。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -138,9 +138,9 @@ TV next focus right (see documentation for the View component).
 
 ### `nextFocusUp` <div className="label android">Android</div>
 
-TV next focus up (see documentation for the View component).
+TV 下一个焦点向上（参见 View 组件文档）。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -148,4 +148,4 @@ TV next focus up (see documentation for the View component).
 
 ### `ref`
 
-A ref setter that will be assigned an [element node](element-nodes) when mounted.
+一个 ref 设置器，在挂载时会被分配一个 [element node](element-nodes)。

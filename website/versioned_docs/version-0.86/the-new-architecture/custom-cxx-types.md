@@ -173,8 +173,8 @@ std::string NativeSampleModule::reverseString(jsi::Runtime& rt, std::string inpu
 
 ```diff title="App.tsx"
 // ...
-+ const [cubicSource, setCubicSource] = React.useState('')
-+ const [cubicRoot, setCubicRoot] = React.useState(0)
++ const [cubicSource, setCubicSource] = useState('')
++ const [cubicRoot, setCubicRoot] = useState(0)
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -190,15 +190,15 @@ std::string NativeSampleModule::reverseString(jsi::Runtime& rt, std::string inpu
         />
         <Button title="Reverse" onPress={onPress} />
         <Text>Reversed text: {reversedValue}</Text>
-+        <Text>For which number do you want to compute the Cubic Root?</Text>
++        <Text>你想对哪个数字计算立方根？</Text>
 +        <TextInput
 +          style={styles.textInput}
-+          placeholder="Write your text here"
++          placeholder="在此输入你的文本"
 +          onChangeText={setCubicSource}
 +          value={cubicSource}
 +        />
-+        <Button title="Get Cubic Root" onPress={() => setCubicRoot(SampleTurboModule.cubicRoot(cubicSource))} />
-+        <Text>The cubic root is: {cubicRoot}</Text>
++        <Button title="获取立方根" onPress={() => setCubicRoot(SampleTurboModule.cubicRoot(cubicSource))} />
++        <Text>立方根是：{cubicRoot}</Text>
       </View>
     </SafeAreaView>
   );
@@ -366,9 +366,9 @@ bool NativeSampleModule::validateAddress(jsi::Runtime &rt, jsi::Object input) {
 2. 用以下代码替换 `App()` 函数的主体：
 
 ```tsx title="App.tsx (App function body replacement)"
-const [street, setStreet] = React.useState('');
-const [num, setNum] = React.useState('');
-const [isValidAddress, setIsValidAddress] = React.useState<
+const [street, setStreet] = useState('');
+const [num, setNum] = useState('');
+const [isValidAddress, setIsValidAddress] = useState<
   boolean | null
 >(null);
 

@@ -26,7 +26,6 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 <TabItem value="javascript">
 
 ```SnackPlayer name=setNativeProps%20on%20TextInput&ext=js
-import React from 'react';
 import {useCallback, useRef} from 'react';
 import {
   StyleSheet,
@@ -39,7 +38,7 @@ import {
 const App = () => {
   const inputRef = useRef(null);
   const editText = useCallback(() => {
-    inputRef.current.setNativeProps({text: 'Edited Text'});
+    inputRef.current.setNativeProps({text: '编辑后的文本'});
   }, []);
 
   return (
@@ -74,7 +73,6 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Clear%20text&ext=tsx
-import React from 'react';
 import {useCallback, useRef} from 'react';
 import {
   StyleSheet,
@@ -87,7 +85,7 @@ import {
 const App = () => {
   const inputRef = useRef<TextInput>(null);
   const editText = useCallback(() => {
-    inputRef.current?.setNativeProps({text: 'Edited Text'});
+    inputRef.current?.setNativeProps({text: '编辑后的文本'});
   }, []);
 
   return (

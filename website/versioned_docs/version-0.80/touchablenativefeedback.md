@@ -3,18 +3,18 @@ id: touchablenativefeedback
 title: TouchableNativeFeedback
 ---
 
-> 如果你正在寻找一种更广泛且面向未来的方式来处理基于触摸的输入，请查看 [Pressable](pressable.md) API。
+> 如果你在寻找一种更广泛、面向未来的方式来处理基于触摸的输入，请查看 [Pressable](pressable.md) API。
 
-一个使视图能够正确响应触摸的包装器（仅限 Android）。在 Android 上，此组件使用原生状态 drawable 来显示触摸反馈。
+一个用于使视图能够正确响应触摸的包装组件（仅限 Android）。在 Android 上，这个组件使用原生 state drawable 来显示触摸反馈。
 
-目前它仅支持将单个 View 实例作为子节点，因为它是通过将该 View 替换为另一个具有某些附加属性的 RCTView 节点实例来实现的。
+目前它只支持将单个 View 实例作为子节点，因为它的实现方式是用另一个带有一些额外属性设置的 RCTView 节点替换该 View。
 
-原生反馈触摸的背景 drawable 可以通过 `background` 属性自定义。
+原生反馈可触摸组件的背景 drawable 可以通过 `background` 属性进行自定义。
 
-## 示例
+## Example
 
 ```SnackPlayer name=TouchableNativeFeedback%20Android%20Component%20Example&supportedPlatforms=android
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Text, View, StyleSheet, TouchableNativeFeedback} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -72,21 +72,21 @@ export default App;
 
 ---
 
-# 参考
+# Reference
 
-## 属性
+## Props
 
-### [TouchableWithoutFeedback 属性](touchablewithoutfeedback.md#props)
+### [TouchableWithoutFeedback Props](touchablewithoutfeedback.md#props)
 
-继承 [TouchableWithoutFeedback 属性](touchablewithoutfeedback.md#props)。
+继承自 [TouchableWithoutFeedback Props](touchablewithoutfeedback.md#props)。
 
 ---
 
 ### `background`
 
-确定将用于显示反馈的背景 drawable 类型。它接受一个带有 `type` 属性的对象，以及取决于 `type` 的额外数据。建议使用其中一种静态方法来生成该字典。
+决定将用于显示反馈的背景 drawable 类型。它接受一个包含 `type` 属性的对象，以及根据 `type` 不同而附加的额外数据。建议使用静态方法之一来生成该字典。
 
-| 类型               |
+| Type               |
 | ------------------ |
 | backgroundPropType |
 
@@ -94,11 +94,11 @@ export default App;
 
 ### `useForeground`
 
-设置为 true 将涟漪效果添加到视图的前景，而不是背景。如果你的某个子视图有自己的背景，或者你例如正在显示图像，并且你不希望涟漪被它们覆盖，这很有用。
+将其设置为 true，可将 ripple 效果添加到视图前景而不是背景。这在你的某个子视图本身就有背景，或者你在显示图片且不希望 ripple 被它们遮挡时很有用。
 
-首先检查 TouchableNativeFeedback.canUseNativeForeground()，因为这仅在 Android 6.0 及以上版本可用。如果你尝试在较旧版本上使用此功能，你将收到警告并回退到背景。
+请先检查 TouchableNativeFeedback.canUseNativeForeground()，因为它仅适用于 Android 6.0 及以上版本。如果你在旧版本上使用它，会收到警告并回退到背景。
 
-| 类型 |
+| Type |
 | ---- |
 | bool |
 
@@ -106,9 +106,9 @@ export default App;
 
 ### `hasTVPreferredFocus` <div className="label android">Android</div>
 
-TV 首选焦点（请参阅 View 组件的文档）。
+TV 首选焦点（参见 View 组件的文档）。
 
-| 类型 |
+| Type |
 | ---- |
 | bool |
 
@@ -116,9 +116,9 @@ TV 首选焦点（请参阅 View 组件的文档）。
 
 ### `nextFocusDown` <div className="label android">Android</div>
 
-TV 下一个向下焦点（请参阅 View 组件的文档）。
+TV 下一个焦点向下（参见 View 组件的文档）。
 
-| 类型   |
+| Type   |
 | ------ |
 | number |
 
@@ -126,9 +126,9 @@ TV 下一个向下焦点（请参阅 View 组件的文档）。
 
 ### `nextFocusForward` <div className="label android">Android</div>
 
-TV 下一个向前焦点（请参阅 View 组件的文档）。
+TV 下一个焦点向前（参见 View 组件的文档）。
 
-| 类型   |
+| Type   |
 | ------ |
 | number |
 
@@ -136,19 +136,19 @@ TV 下一个向前焦点（请参阅 View 组件的文档）。
 
 ### `nextFocusLeft` <div className="label android">Android</div>
 
-TV 下一个向左焦点（请参阅 View 组件的文档）。
+TV 下一个焦点向左（参见 View 组件的文档）。
 
-| 类型   |
-| ------ |
+| Type   |
+| ------ | 
 | number |
 
 ---
 
 ### `nextFocusRight` <div className="label android">Android</div>
 
-TV 下一个向右焦点（请参阅 View 组件的文档）。
+TV 下一个焦点向右（参见 View 组件的文档）。
 
-| 类型   |
+| Type   |
 | ------ |
 | number |
 
@@ -156,13 +156,13 @@ TV 下一个向右焦点（请参阅 View 组件的文档）。
 
 ### `nextFocusUp` <div className="label android">Android</div>
 
-TV 下一个向上焦点（请参阅 View 组件的文档）。
+TV 下一个焦点向上（参见 View 组件的文档）。
 
-| 类型   |
+| Type   |
 | ------ |
 | number |
 
-## 方法
+## Methods
 
 ### `SelectableBackground()`
 
@@ -172,7 +172,7 @@ static SelectableBackground(
 ): ThemeAttributeBackgroundPropType;
 ```
 
-创建一个对象，表示 Android 主题的可选择元素默认背景（`?android:attr/selectableItemBackground`）。`rippleRadius` 参数控制涟漪效果的半径。
+创建一个对象，表示 Android 主题中可选元素的默认背景（`?android:attr/selectableItemBackground`）。`rippleRadius` 参数控制 ripple 效果的半径。
 
 ---
 
@@ -184,7 +184,7 @@ static SelectableBackgroundBorderless(
 ): ThemeAttributeBackgroundPropType;
 ```
 
-创建一个对象，表示无边框可选择元素的 Android 主题默认背景（`?android:attr/selectableItemBackgroundBorderless`）。适用于 Android API 级别 21+。`rippleRadius` 参数控制涟漪效果的半径。
+创建一个对象，表示 Android 主题中无边框可选元素的默认背景（`?android:attr/selectableItemBackgroundBorderless`）。可用于 Android API 21 及以上版本。`rippleRadius` 参数控制 ripple 效果的半径。
 
 ---
 
@@ -198,15 +198,15 @@ static Ripple(
 ): RippleBackgroundPropType;
 ```
 
-创建一个对象，表示具有指定颜色（作为字符串）的涟漪 drawable。如果属性 `borderless` 计算结果为 true，涟漪将渲染在视图边界之外（参见原生 ActionBar 按钮作为该行为的示例）。此背景类型适用于 Android API 级别 21+。
+创建一个对象，表示具有指定颜色（字符串形式）的 ripple drawable。如果属性 `borderless` 为 true，ripple 将在视图边界之外渲染（例如可参见原生 actionbar 按钮的这种行为）。此背景类型适用于 Android API 21+。
 
-**参数：**
+**Parameters:**
 
-| 名称         | 类型    | 是否必填 | 描述                                 |
+| Name         | Type    | Required | Description                                 |
 | ------------ | ------- | -------- | ------------------------------------------- |
-| color        | string  | 是      | 涟漪颜色                            |
-| borderless   | boolean | 是      | 涟漪是否可以渲染到边界之外 |
-| rippleRadius | ?number | 否       | 控制涟漪效果的半径    |
+| color        | string  | Yes      | ripple 颜色                                  |
+| borderless   | boolean | Yes      | ripple 是否可以在其边界之外渲染              |
+| rippleRadius | ?number | No       | 控制 ripple 效果的半径                      |
 
 ---
 

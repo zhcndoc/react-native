@@ -172,7 +172,6 @@ React Native 的 Codegen 工具会使用该规范为我们生成平台特定的�
 最后，你可以在应用中使用这个新组件。将生成的 `App.tsx` 更新为：
 
 ```javascript title="Demo/App.tsx"
-import React from 'react';
 import {Alert, StyleSheet, View} from 'react-native';
 import WebView from './specs/WebViewNativeComponent';
 

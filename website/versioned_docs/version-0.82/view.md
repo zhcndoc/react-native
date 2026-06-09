@@ -12,7 +12,6 @@ import ExperimentalAPIWarning from './\_experimental-api-warning.mdx';
 此示例创建了一个 `View`，它在行内包裹了两个带有颜色的盒子以及一个文本组件，并带有内边距。
 
 ```SnackPlayer name=View%20Example
-import React from 'react';
 import {View, Text} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 

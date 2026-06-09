@@ -8,7 +8,7 @@ title: AccessibilityInfo
 ## 示例
 
 ```SnackPlayer name=AccessibilityInfo%20Example&supportedPlatforms=android,ios
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {AccessibilityInfo, Text, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -47,10 +47,10 @@ const App = () => {
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <Text style={styles.status}>
-          The reduce motion is {reduceMotionEnabled ? 'enabled' : 'disabled'}.
+          减弱动态效果是{reduceMotionEnabled ? '已启用' : '已禁用'}。
         </Text>
         <Text style={styles.status}>
-          The screen reader is {screenReaderEnabled ? 'enabled' : 'disabled'}.
+          屏幕阅读器是{screenReaderEnabled ? '已启用' : '已禁用'}。
         </Text>
       </SafeAreaView>
     </SafeAreaProvider>

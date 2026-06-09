@@ -1,4 +1,4 @@
----
+我会严格保留原始 Markdown 结构，只翻译可见文本与注释内容，代码标识符和标签属性保持不变。现在开始逐段翻译并检查格式一致性。---
 id: intro-react
 title: React 基础
 description: 要全面理解 React Native，你需要扎实的 React 基础。这个关于 React 的简短介绍可以帮助你入门或复习。
@@ -10,7 +10,7 @@ React Native 运行在 [React](https://react.dev/) 之上，React 是一个用�
 
 我们将介绍 React 背后的核心概念：
 
-- components
+- 组件
 - JSX
 - props
 - state
@@ -22,7 +22,6 @@ React Native 运行在 [React](https://react.dev/) 之上，React 是一个用�
 这篇关于 React 的其余介绍都会使用猫作为示例：友好、平易近人的生物，需要名字和一个可以工作的咖啡馆。下面是你的第一个 Cat 组件：
 
 ```SnackPlayer name=Your%20Cat
-import React from 'react';
 import {Text} from 'react-native';
 
 const Cat = () => {
@@ -32,10 +31,9 @@ const Cat = () => {
 export default Cat;
 ```
 
-下面是具体做法：要定义你的 `Cat` 组件，首先使用 JavaScript 的 [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 导入 React 和 React Native 的 [`Text`](/docs/next/text) 核心组件：
+下面是具体做法：要定义你的 `Cat` 组件，首先使用 JavaScript 的 [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 导入 React Native 的 [`Text`](/docs/next/text) 核心组件：
 
 ```tsx
-import React from 'react';
 import {Text} from 'react-native';
 ```
 
@@ -76,7 +74,6 @@ export default Cat;
 React 和 React Native 使用 **JSX，** 这是一种让你可以像这样在 JavaScript 中编写元素的语法：`<Text>Hello, I am your cat!</Text>`。React 文档中有一份 [完整的 JSX 指南](https://react.dev/learn/writing-markup-with-jsx)，你可以参考以了解更多。由于 JSX 本质上是 JavaScript，你可以在其中使用变量。这里你正在为猫声明一个名字 `name`，并用大括号将它嵌入到 `<Text>` 中。
 
 ```SnackPlayer name=Curly%20Braces
-import React from 'react';
 import {Text} from 'react-native';
 
 const Cat = () => {
@@ -93,7 +90,6 @@ export default Cat;
 <TabItem value="javascript">
 
 ```SnackPlayer name=Curly%20Braces&ext=js
-import React from 'react';
 import {Text} from 'react-native';
 
 const getFullName = (firstName, secondName, thirdName) => {
@@ -111,7 +107,6 @@ export default Cat;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Curly%20Braces&ext=tsx
-import React from 'react';
 import {Text} from 'react-native';
 
 const getFullName = (
@@ -134,10 +129,6 @@ export default Cat;
 
 你可以把大括号想象成在 JSX 中打开了一个通往 JS 功能的入口！
 
-:::tip
-因为 JSX 包含在 React 库中，如果你的文件顶部没有 `import React from 'react'`，它将无法工作！
-:::
-
 ## 自定义组件
 
 你已经见过 [React Native 的核心组件](intro-react-native-components)。React 允许你将这些组件相互嵌套，从而创建新的组件。这些可嵌套、可复用的组件是 React 范式的核心。
@@ -145,7 +136,6 @@ export default Cat;
 例如，你可以在下面的一个 [`View`](view) 中嵌套 [`Text`](text) 和 [`TextInput`](textinput)，React Native 会将它们一起渲染：
 
 ```SnackPlayer name=Custom%20Components
-import React from 'react';
 import {Text, TextInput, View} from 'react-native';
 
 const Cat = () => {
@@ -190,7 +180,6 @@ export default Cat;
 你可以使用 `<Cat>` 在多个地方多次渲染这个组件，而无需重复代码：
 
 ```SnackPlayer name=Multiple%20Components
-import React from 'react';
 import {Text, View} from 'react-native';
 
 const Cat = () => {
@@ -227,7 +216,6 @@ export default Cafe;
 <TabItem value="javascript">
 
 ```SnackPlayer name=Multiple%20Props&ext=js
-import React from 'react';
 import {Text, View} from 'react-native';
 
 const Cat = props => {
@@ -255,7 +243,6 @@ export default Cafe;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Multiple%20Props&ext=tsx
-import React from 'react';
 import {Text, View} from 'react-native';
 
 type CatProps = {
@@ -289,7 +276,6 @@ export default Cafe;
 React Native 的大多数核心组件也可以通过 props 进行自定义。例如，使用 [`Image`](image) 时，你会传入一个名为 [`source`](image#source) 的 prop 来定义它显示的图片：
 
 ```SnackPlayer name=Props
-import React from 'react';
 import {Text, View, Image} from 'react-native';
 
 const CatApp = () => {
@@ -333,7 +319,7 @@ export default CatApp;
 <TabItem value="javascript">
 
 ```SnackPlayer name=State&ext=js
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Button, Text, View} from 'react-native';
 
 const Cat = props => {
@@ -371,7 +357,7 @@ export default Cafe;
 <TabItem value="typescript">
 
 ```SnackPlayer name=State&ext=tsx
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Button, Text, View} from 'react-native';
 
 type CatProps = {
@@ -415,7 +401,7 @@ export default Cafe;
 首先，你需要像这样从 React 中导入 `useState`：
 
 ```tsx
-import React, {useState} from 'react';
+import {useState} from 'react';
 ```
 
 然后在组件函数内部调用 `useState` 来声明组件的 state。在这个例子中，`useState` 创建了一个 `isHungry` state 变量：

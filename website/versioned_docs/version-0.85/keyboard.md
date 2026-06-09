@@ -7,10 +7,10 @@ title: 键盘
 
 ### 用法
 
-Keyboard 模块允许你监听原生事件并做出反应，以及更改键盘状态，例如收起键盘。
+Keyboard 模块允许你监听原生事件并对其作出响应，同时也可以对键盘进行更改，例如将其收起。
 
 ```SnackPlayer name=Keyboard%20Example&supportedPlatforms=ios,android
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {Keyboard, Text, TextInput, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -79,20 +79,20 @@ static addListener: (
 ) => EmitterSubscription;
 ```
 
-`addListener` 函数将一个 JavaScript 函数连接到一个已识别的原生键盘通知事件。
+`addListener` 函数会将一个 JavaScript 函数连接到一个已识别的原生键盘通知事件。
 
-此函数随后返回对监听器的引用。
+然后该函数会返回监听器的引用。
 
 **参数：**
 
-| 名称                                                                     | 类型     | 描述                                                                    |
-| ------------------------------------------------------------------------ | -------- | ----------------------------------------------------------------------- |
-| eventName <div className="label basic two-lines required">必需</div> | string   | 标识你正在监听的事件的字符串。见下表。 |
-| callback <div className="label basic two-lines required">必需</div>  | function | 当事件触发时要调用的函数                                 |
+| Name                                                                     | Type     | Description                                                                    |
+| ------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------ |
+| eventName <div className="label basic two-lines required">Required</div> | string   | 标识你正在监听的事件的字符串。请参见下面的列表。 |
+| callback <div className="label basic two-lines required">Required</div>  | function | 当事件触发时要调用的函数                                 |
 
 **`eventName`**
 
-可以是以下任意值：
+这可以是以下任意一种：
 
 - `keyboardWillShow`
 - `keyboardDidShow`
@@ -102,7 +102,7 @@ static addListener: (
 - `keyboardDidChangeFrame`
 
 :::note
-只有 `keyboardDidShow` 和 `keyboardDidHide` 事件在 Android 上可用。如果你的 activity 将 `android:windowSoftInputMode` 设置为 `adjustResize` 或 `adjustNothing`，则在使用 Android 10 或更低版本时不会触发这些事件。
+只有 `keyboardDidShow` 和 `keyboardDidHide` 事件在 Android 上可用。如果你的 activity 将 `android:windowSoftInputMode` 设置为 `adjustResize` 或 `adjustNothing`，在 Android 10 或更低版本上，这些事件将不会触发。
 :::
 
 ---
@@ -113,7 +113,7 @@ static addListener: (
 static dismiss();
 ```
 
-收起活动键盘并移除焦点。
+关闭活动键盘并移除焦点。
 
 ---
 
@@ -123,7 +123,7 @@ static dismiss();
 static scheduleLayoutAnimation(event: KeyboardEvent);
 ```
 
-用于同步 TextInput（或其他键盘 accessory 视图）的大小或位置变化与键盘移动。
+用于将 TextInput（或其他键盘辅助视图）的大小或位置变化与键盘移动同步。
 
 ---
 
@@ -133,7 +133,7 @@ static scheduleLayoutAnimation(event: KeyboardEvent);
 static isVisible(): boolean;
 ```
 
-键盘上次已知是否可见。
+键盘最后一次已知是否可见。
 
 ---
 
@@ -143,4 +143,4 @@ static isVisible(): boolean;
 static metrics(): KeyboardMetrics | undefined;
 ```
 
-如果可见，返回软键盘的度量信息。
+如果软键盘可见，则返回其度量信息。

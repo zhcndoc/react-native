@@ -26,7 +26,6 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 <TabItem value="javascript">
 
 ```SnackPlayer name=setNativeProps%20on%20TextInput&ext=js
-import React from 'react';
 import {useCallback, useRef} from 'react';
 import {
   StyleSheet,
@@ -46,7 +45,7 @@ const App = () => {
     <View style={styles.container}>
       <TextInput ref={inputRef} style={styles.input} />
       <TouchableOpacity onPress={editText}>
-        <Text>Edit text</Text>
+        <Text>编辑文本</Text>
       </TouchableOpacity>
     </View>
   );
@@ -74,7 +73,6 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Clear%20text&ext=tsx
-import React from 'react';
 import {useCallback, useRef} from 'react';
 import {
   StyleSheet,
@@ -94,7 +92,7 @@ const App = () => {
     <View style={styles.container}>
       <TextInput ref={inputRef} style={styles.input} />
       <TouchableOpacity onPress={editText}>
-        <Text>Edit text</Text>
+        <Text>编辑文本</Text>
       </TouchableOpacity>
     </View>
   );

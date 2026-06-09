@@ -30,7 +30,7 @@ React Native 提供了一种统一的方式来管理 Android 和 iOS 应用中�
 <Image source={require('./img/check.png')} />
 ```
 
-...打包器将打包并提供与设备屏幕密度相对应的图片。例如，`check@2x.png` 将用于 iPhone 7，而 `check@3x.png` 将用于 iPhone 7 Plus 或 Nexus 5。如果没有与屏幕密度匹配的图片，将选择最接近的最佳选项。
+...打包器会打包并提供与设备屏幕密度相对应的图片。例如，在 iPhone 7 上会使用 `check@2x.png`，而在 iPhone 7 Plus 或 Nexus 5 上会使用 `check@3x.png`。如果没有与屏幕密度匹配的图片，将选择最接近的最佳选项。
 
 在 Windows 上，如果你向项目添加了新图片，可能需要重启打包器。
 

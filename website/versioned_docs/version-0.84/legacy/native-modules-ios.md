@@ -139,7 +139,6 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(getName)
 下面是一个例子组件 `NewModuleButton`，你可以放入你的应用。你可以在它的 `onPress()` 函数中调用原生模块：
 
 ```tsx
-import React from 'react';
 import {Button} from 'react-native';
 
 const NewModuleButton = () => {
@@ -352,7 +351,7 @@ const onSubmit = () => {
     'Party',
     '04-12-2020',
     eventId => {
-      console.log(`Created a new event with id ${eventId}`);
+      console.log(`创建了一个新事件，id 为 ${eventId}`);
     },
   );
 };
@@ -379,9 +378,9 @@ const onPress = () => {
     'testLocation',
     (error, eventId) => {
       if (error) {
-        console.error(`Error found! ${error}`);
+        console.error(`发现错误！${error}`);
       }
-      console.log(`event id ${eventId} returned`);
+      console.log(`返回的事件 id ${eventId}`);
     },
   );
 };
@@ -414,10 +413,10 @@ const onPress = () => {
     'testName',
     'testLocation',
     error => {
-      console.error(`Error found! ${error}`);
+      console.error(`发现错误！${error}`);
     },
     eventId => {
-      console.log(`event id ${eventId} returned`);
+      console.log(`返回的事件 id ${eventId}`);
     },
   );
 };
@@ -455,7 +454,7 @@ const onSubmit = async () => {
       'Party',
       'my house',
     );
-    console.log(`Created a new event with id ${eventId}`);
+    console.log(`创建了一个新事件，id 为 ${eventId}`);
   } catch (e) {
     console.error(e);
   }

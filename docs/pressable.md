@@ -3,51 +3,51 @@ id: pressable
 title: Pressable
 ---
 
-Pressable is a Core Component wrapper that can detect various stages of press interactions on any of its defined children.
+Pressable 是一个核心组件包装器，可检测其任意已定义子元素上的各种按压交互阶段。
 
 ```tsx
 <Pressable onPress={onPressFunction}>
-  <Text>I'm pressable!</Text>
+  <Text>我可以被按下！</Text>
 </Pressable>
 ```
 
-## How it works
+## 工作原理
 
-On an element wrapped by `Pressable`:
+在被 `Pressable` 包裹的元素上：
 
-- [`onPressIn`](#onpressin) is called when a press is activated.
-- [`onPressOut`](#onpressout) is called when the press gesture is deactivated.
+- [`onPressIn`](#onpressin) 会在按压被激活时调用。
+- [`onPressOut`](#onpressout) 会在按压手势失效时调用。
 
-After pressing [`onPressIn`](#onpressin), one of two things will happen:
+在按下 [`onPressIn`](#onpressin) 之后，会发生以下两种情况之一：
 
-1. The person will remove their finger, triggering [`onPressOut`](#onpressout) followed by [`onPress`](#onpress).
-2. If the person leaves their finger longer than 500 milliseconds before removing it, [`onLongPress`](#onlongpress) is triggered. ([`onPressOut`](#onpressout) will still fire when they remove their finger.)
+1. 用户移开手指，触发 [`onPressOut`](#onpressout)，随后触发 [`onPress`](#onpress)。
+2. 如果用户在松开前持续按住超过 500 毫秒，则会触发 [`onLongPress`](#onlongpress)。（在他们移开手指时，[`onPressOut`](#onpressout) 仍然会触发。）
 
-<img src="/docs/assets/d_pressable_pressing.svg" width="1000" alt="Diagram of the onPress events in sequence." />
+<img src="/docs/assets/d_pressable_pressing.svg" width="1000" alt="按压事件顺序示意图。" />
 
-Fingers are not the most precise instruments, and it is common for users to accidentally activate the wrong element or miss the activation area. To help, `Pressable` has an optional `HitRect` you can use to define how far a touch can register away from the wrapped element. Presses can start anywhere within a `HitRect`.
+手指并不是最精确的工具，用户常常会不小心点到错误的元素，或者错过激活区域。为了解决这个问题，`Pressable` 提供了可选的 `HitRect`，你可以用它来定义触摸在距离包装元素多远的位置内仍可被识别。按压可以从 `HitRect` 内的任意位置开始。
 
-`PressRect` allows presses to move beyond the element and its `HitRect` while maintaining activation and being eligible for a "press"—think of sliding your finger slowly away from a button you're pressing down on.
+`PressRect` 允许按压在超出元素及其 `HitRect` 的范围内移动，同时仍保持激活状态并具备触发“按压”的资格——可以把它想象成，你的手指正缓慢地从一个正在按下的按钮上滑开。
 
 :::note
-The touch area never extends past the parent view bounds and the Z-index of sibling views always takes precedence if a touch hits two overlapping views.
+触摸区域永远不会超出父视图边界，并且当一次触摸同时命中两个重叠视图时，兄弟视图的 Z-index 始终具有优先级。
 :::
 
 <figure>
-  <img src="/docs/assets/d_pressable_anatomy.svg" width="1000" alt="Diagram of HitRect and PressRect and how they work." />
+  <img src="/docs/assets/d_pressable_anatomy.svg" width="1000" alt="HitRect 和 PressRect 及其工作方式示意图。" />
   <figcaption>
-    You can set <code>HitRect</code> with <code>hitSlop</code> and set <code>PressRect</code> with <code>pressRetentionOffset</code>.
+    你可以使用 <code>hitSlop</code> 设置 <code>HitRect</code>，并使用 <code>pressRetentionOffset</code> 设置 <code>PressRect</code>。
   </figcaption>
 </figure>
 
 :::info
-`Pressable` uses React Native's `Pressability` API. For more information around the state machine flow of Pressability and how it works, check out the implementation for [Pressability](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Pressability/Pressability.js#L350).
+`Pressable` 使用 React Native 的 `Pressability` API。有关 Pressability 状态机流程及其工作方式的更多信息，请查看 [Pressability](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Pressability/Pressability.js#L350) 的实现。
 :::
 
-## Example
+## 示例
 
 ```SnackPlayer name=Pressable
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -110,11 +110,11 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-## Props
+## 属性
 
 ### `android_disableSound` <div className="label android">Android</div>
 
-If true, doesn't play Android system sound on press.
+如果为 true，则按下时不会播放 Android 系统音效。
 
 | Type    | Default |
 | ------- | ------- |
@@ -122,7 +122,7 @@ If true, doesn't play Android system sound on press.
 
 ### `android_ripple` <div className="label android">Android</div>
 
-Enables the Android ripple effect and configures its properties.
+启用 Android ripple 效果并配置其属性。`color` 字段既接受普通颜色值，也接受 [`PlatformColor`](platformcolor) 值，因此你可以引用诸如 `?attr/colorAccent` 之类的主题属性。当使用 `PlatformColor` 时，如果系统配置发生变化（例如在浅色和深色模式之间切换），ripple 会自动更新。
 
 | Type                                   |
 | -------------------------------------- |
@@ -130,7 +130,7 @@ Enables the Android ripple effect and configures its properties.
 
 ### `children`
 
-Either children or a function that receives a boolean reflecting whether the component is currently pressed.
+要么是子元素，要么是一个接收布尔值的函数，该布尔值表示组件当前是否处于按下状态。
 
 | Type                     |
 | ------------------------ |
@@ -138,7 +138,7 @@ Either children or a function that receives a boolean reflecting whether the com
 
 ### `unstable_pressDelay`
 
-Duration (in milliseconds) to wait after press down before calling `onPressIn`.
+在按下后、调用 `onPressIn` 之前等待的持续时间（毫秒）。
 
 | Type   |
 | ------ |
@@ -146,15 +146,15 @@ Duration (in milliseconds) to wait after press down before calling `onPressIn`.
 
 ### `delayLongPress`
 
-Duration (in milliseconds) from `onPressIn` before `onLongPress` is called.
+从 `onPressIn` 开始到调用 `onLongPress` 之间的持续时间（毫秒）。
 
 | Type   | Default |
-| ------ | ------- |
+| ------- | ------- |
 | number | `500`   |
 
 ### `disabled`
 
-Whether the press behavior is disabled.
+是否禁用按压行为。
 
 | Type    | Default |
 | ------- | ------- |
@@ -162,7 +162,7 @@ Whether the press behavior is disabled.
 
 ### `hitSlop`
 
-Sets additional distance outside of element in which a press can be detected.
+设置元素外部可检测到按压的额外距离。
 
 | Type                   |
 | ---------------------- |
@@ -170,7 +170,7 @@ Sets additional distance outside of element in which a press can be detected.
 
 ### `onHoverIn`
 
-Called when the hover is activated to provide visual feedback.
+在 hover 被激活时调用，以提供视觉反馈。
 
 | Type                                                                                                      |
 | --------------------------------------------------------------------------------------------------------- |
@@ -178,7 +178,7 @@ Called when the hover is activated to provide visual feedback.
 
 ### `onHoverOut`
 
-Called when the hover is deactivated to undo visual feedback.
+在 hover 被取消激活时调用，以撤销视觉反馈。
 
 | Type                                                                                                      |
 | --------------------------------------------------------------------------------------------------------- |
@@ -186,7 +186,7 @@ Called when the hover is deactivated to undo visual feedback.
 
 ### `onLongPress`
 
-Called if the time after `onPressIn` lasts longer than 500 milliseconds. This time period can be customized with [`delayLongPress`](#delaylongpress).
+如果 `onPressIn` 之后经过的时间超过 500 毫秒，则调用。此时间段可以通过 [`delayLongPress`](#delaylongpress) 自定义。
 
 | Type                                                   |
 | ------------------------------------------------------ |
@@ -194,7 +194,7 @@ Called if the time after `onPressIn` lasts longer than 500 milliseconds. This ti
 
 ### `onPress`
 
-Called after `onPressOut`.
+在 `onPressOut` 之后调用。
 
 | Type                                                   |
 | ------------------------------------------------------ |
@@ -202,7 +202,7 @@ Called after `onPressOut`.
 
 ### `onPressIn`
 
-Called immediately when a touch is engaged, before `onPressOut` and `onPress`.
+当触摸刚接触时立即调用，在 `onPressOut` 和 `onPress` 之前。
 
 | Type                                                   |
 | ------------------------------------------------------ |
@@ -210,7 +210,7 @@ Called immediately when a touch is engaged, before `onPressOut` and `onPress`.
 
 ### `onPressMove`
 
-Called when the press location moves.
+当按压位置移动时调用。
 
 | Type                                                   |
 | ------------------------------------------------------ |
@@ -218,7 +218,7 @@ Called when the press location moves.
 
 ### `onPressOut`
 
-Called when a touch is released.
+当触摸释放时调用。
 
 | Type                                                   |
 | ------------------------------------------------------ |
@@ -226,7 +226,7 @@ Called when a touch is released.
 
 ### `pressRetentionOffset`
 
-Additional distance outside of this view in which a touch is considered a press before `onPressOut` is triggered.
+在该视图外部，触摸在触发 `onPressOut` 之前仍被视为按压的额外距离。
 
 | Type                   | Default                                      |
 | ---------------------- | -------------------------------------------- |
@@ -234,7 +234,7 @@ Additional distance outside of this view in which a touch is considered a press 
 
 ### `style`
 
-Either view styles or a function that receives a boolean reflecting whether the component is currently pressed and returns view styles.
+要么是视图样式，要么是一个接收布尔值的函数，该布尔值表示组件当前是否处于按下状态，并返回视图样式。
 
 | Type                                                                                            |
 | ----------------------------------------------------------------------------------------------- |
@@ -242,17 +242,17 @@ Either view styles or a function that receives a boolean reflecting whether the 
 
 ### `testOnly_pressed`
 
-Used only for documentation or testing (e.g. snapshot testing).
+仅用于文档或测试（例如快照测试）。
 
 | Type    | Default |
 | ------- | ------- |
 | boolean | `false` |
 
-## Type Definitions
+## 类型定义
 
 ### RippleConfig
 
-Ripple effect configuration for the `android_ripple` property.
+`android_ripple` 属性的 ripple 效果配置。
 
 | Type   |
 | ------ |
@@ -260,9 +260,10 @@ Ripple effect configuration for the `android_ripple` property.
 
 **Properties:**
 
-| Name       | Type            | Required | Description                                                                                                                                                                                                                                                  |
-| ---------- | --------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| color      | [color](colors) | No       | Defines the color of the ripple effect.                                                                                                                                                                                                                      |
-| borderless | boolean         | No       | Defines if ripple effect should not include border.                                                                                                                                                                                                          |
-| radius     | number          | No       | Defines the radius of the ripple effect.                                                                                                                                                                                                                     |
-| foreground | boolean         | No       | Set to true to add the ripple effect to the foreground of the view, instead of the background. This is useful if one of your child views has a background of its own, or you're e.g. displaying images, and you don't want the ripple to be covered by them. |
+| Name       | Type                                              | Required | Description                                                                                                                                                                                                                                                  |
+| ---------- | ------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| color      | [color](colors) or [PlatformColor](platformcolor) | No       | 定义 ripple 效果的颜色。                                                                                                                                                                                                                                     |
+| borderless | boolean                                           | No       | 定义 ripple 效果是否不包含边框。                                                                                                                                                                                                                             |
+| radius     | number                                            | No       | 定义 ripple 效果的半径。                                                                                                                                                                                                                                    |
+| foreground | boolean                                           | No       | 设置为 true 可将 ripple 效果添加到视图前景，而不是背景。如果你的某个子视图本身带有背景，或者例如你正在显示图片，并且不希望 ripple 被它们遮挡，这会很有用。 |
+| alpha      | number                                            | No       | 控制 ripple 的不透明度。接受介于 `0.0`（完全透明）和 `1.0`（完全不透明）之间的值。该值会叠加在颜色中已存在的任何 alpha 之上。                                                                       |

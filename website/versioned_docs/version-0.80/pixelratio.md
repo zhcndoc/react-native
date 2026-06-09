@@ -30,7 +30,6 @@ const image = getImage({
 ## 示例
 
 ```SnackPlayer name=PixelRatio%20Example
-import React from 'react';
 import {
   Image,
   PixelRatio,
@@ -53,20 +52,20 @@ const App = () => (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.container}>
-          <Text>Current Pixel Ratio is:</Text>
+          <Text>当前像素比为：</Text>
           <Text style={styles.value}>{PixelRatio.get()}</Text>
         </View>
         <View style={styles.container}>
-          <Text>Current Font Scale is:</Text>
+          <Text>当前字体缩放比例为：</Text>
           <Text style={styles.value}>{PixelRatio.getFontScale()}</Text>
         </View>
         <View style={styles.container}>
-          <Text>On this device images with a layout width of</Text>
+          <Text>在此设备上，布局宽度为</Text>
           <Text style={styles.value}>{size} px</Text>
           <Image source={cat} />
         </View>
         <View style={styles.container}>
-          <Text>require images with a pixel width of</Text>
+          <Text>需要像素宽度为</Text>
           <Text style={styles.value}>
             {PixelRatio.getPixelSizeForLayoutSize(size)} px
           </Text>

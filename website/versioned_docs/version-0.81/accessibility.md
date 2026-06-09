@@ -423,16 +423,16 @@ Android 和 iOS 的方法略有不同，因此 React Native 的实现可能因�
 
 当添加对标准操作的支持时， `name` 必须是以下之一：
 
-- `'magicTap'` - 仅限 iOS - 当 VoiceOver 焦点在组件上或组件内时，用户用两根手指双击。
-- `'escape'` - 仅限 iOS - 当 VoiceOver 焦点在组件上或组件内时，用户执行了两指擦除手势（左、右、左）。
-- `'activate'` - 激活组件。无论是否有辅助技术，这都应该执行相同的操作。当屏幕阅读器用户双击组件时触发。
-- `'increment'` - 增加可调整组件的值。在 iOS 上，当组件具有 `'adjustable'` 角色且用户将焦点放在其上并向上滑动时，VoiceOver 会生成此操作。在 Android 上，当用户将无障碍焦点放在组件上并按下音量增加按钮时，TalkBack 会生成此操作。
-- `'decrement'` - 减少可调整组件的值。在 iOS 上，当组件具有 `'adjustable'` 角色且用户将焦点放在其上并向下滑动时，VoiceOver 会生成此操作。在 Android 上，当用户将无障碍焦点放在组件上并按下音量减少按钮时，TalkBack 会生成此操作。
-- `'longpress'` - 仅限 Android - 当用户将无障碍焦点放在组件上，然后双击并按住一根手指在屏幕上时生成此操作。无论是否有辅助技术，这都应该执行相同的操作。
-- `'expand'` - 仅限 Android - 此操作“展开”组件，以便 TalkBack 宣布“已展开”提示。
-- `'collapse'` - 仅限 Android - 此操作“折叠”组件，以便 TalkBack 宣布“已折叠”提示。
+- `'magicTap'` - 仅 iOS - 当 VoiceOver 焦点位于组件上或组件内部时，用户用两根手指双击。
+- `'escape'` - 仅 iOS - 当 VoiceOver 焦点位于组件上或组件内部时，用户执行两指扫动手势（左、右、左）。
+- `'activate'` - 激活组件。无论是否使用辅助技术，都应执行相同的操作。在屏幕阅读器用户双击组件时触发。
+- `'increment'` - 增加可调组件的值。在 iOS 上，当组件角色为 `'adjustable'` 且用户将焦点置于其上并向上滑动时，VoiceOver 会生成此操作。在 Android 上，在 TalkBack 8.1 及更低版本中，当用户聚焦组件并按下音量增加按钮时会生成此操作。在 TalkBack 9.1 及更高版本中，这一操作被“Adjust Reading Control”手势（在当前聚焦控件上向上滑动）所取代。
+- `'decrement'` - 减少可调组件的值。在 iOS 上，当组件角色为 `'adjustable'` 且用户将焦点置于其上并向下滑动时，VoiceOver 会生成此操作。在 Android 上，在 TalkBack 8.2 及更低版本中，当用户聚焦组件并按下音量降低按钮时会生成此操作。在 TalkBack 9.2 及更高版本中，这一操作被“Adjust Reading Control”手势（在当前聚焦控件上向下滑动）所取代。
+- `'longpress'` - 仅 Android - 当用户将无障碍焦点置于组件上，然后双击并按住屏幕上的一根手指时会生成此操作。无论是否使用辅助技术，都应执行相同的操作。
+- `'expand'` - 仅 Android - 此操作会“展开”组件，使 TalkBack 朗读“expanded”提示。
+- `'collapse'` - 仅 Android - 此操作会“折叠”组件，使 TalkBack 朗读“collapsed”提示。
 
-对于标准操作， `label` 字段是可选的，辅助技术通常不使用它。对于自定义操作，它是一个本地化字符串，包含要向用户展示的操作描述。
+`label` 字段对于标准操作是可选的，辅助技术会使用它来描述操作的具体结果。例如，TalkBack 使用此字段覆盖默认的“Double tap to activate”提示，并提供自定义描述，例如“Double tap to open chat.”。对于自定义操作，`label` 是一个本地化字符串，包含要呈现给用户的操作描述。
 
 要处理操作请求，组件必须实现一个 `onAccessibilityAction` 函数。此函数的唯一参数是一个包含要执行的操作名称的事件。下面来自 RNTester 的示例展示了如何创建定义和处理几个自定义操作的组件。
 
@@ -466,7 +466,7 @@ Android 和 iOS 的方法略有不同，因此 React Native 的实现可能因�
 
 ## 发送无障碍事件 <div className="label android">Android</div>
 
-有时触发 UI 组件上的无障碍事件很有用（即当自定义视图出现在屏幕上或将无障碍焦点设置到视图时）。原生 UIManager 模块为此公开了一个方法 'sendAccessibilityEvent'。它接受两个参数：一个视图标签和一个事件类型。支持的事件类型是 `typeWindowStateChanged`、 `typeViewFocused` 和 `typeViewClicked`。
+有时触发 UI 组件上的无障碍事件很有用（即当自定义视图出现在屏幕上或将无障碍焦点设置到视图时）。原生 UIManager 模块为此公开了一个方法 `'sendAccessibilityEvent'`。它接受两个参数：一个视图标签和一个事件类型。支持的事件类型是 `typeWindowStateChanged`、 `typeViewFocused` 和 `typeViewClicked`。
 
 ```tsx
 import {Platform, UIManager, findNodeHandle} from 'react-native';

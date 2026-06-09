@@ -12,7 +12,6 @@ title: '🗑️ 进度条安卓'
 ### 示例
 
 ```SnackPlayer name=ProgressBarAndroid&supportedPlatforms=android
-import React from 'react';
 import {View, StyleSheet, ProgressBarAndroid, Text} from 'react-native';
 
 const App = () => {

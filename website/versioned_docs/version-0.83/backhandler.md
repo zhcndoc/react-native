@@ -1,20 +1,20 @@
 ---
 id: backhandler
-title: 返回按钮处理器（BackHandler）
+title: BackHandler
 ---
 
-BackHandler API 用于检测硬件返回按钮的按下事件，允许你为系统的返回操作注册事件监听器，并控制应用的响应方式。该功能仅限于 Android 平台。
+Backhandler API 用于检测硬件返回按钮按下、让你注册系统返回操作的事件监听器，并让你控制应用程序的响应方式。它仅适用于 Android。
 
-事件订阅按逆序调用（即最后注册的订阅最先被调用）。
+事件订阅会按相反顺序调用（即最后注册的订阅会最先调用）。
 
-- **如果某个订阅返回 true，** 则先前注册的订阅将不被调用。
-- **如果没有订阅返回 true 或根本没有注册订阅，** 则会程序化地调用默认的返回按钮功能来退出应用。
+- **如果某个订阅返回 true，**则更早注册的订阅不会被调用。
+- **如果没有订阅返回 true，或者没有注册任何订阅，**它会以编程方式调用默认的返回按钮功能来退出应用。
 
-:::warning[警告：适用于模态框用户]
-如果你的应用显示了一个已打开的 `Modal`，`BackHandler` 将不会触发任何事件（[请参见 `Modal` 文档](modal#onrequestclose)）。
+:::warning[模态窗口用户须知]
+如果你的应用显示了一个已打开的 `Modal`，`BackHandler` 将不会发布任何事件（[参见 `Modal` 文档](modal#onrequestclose)）。
 :::
 
-## 使用示例
+## 模式
 
 ```tsx
 const subscription = BackHandler.addEventListener(
@@ -22,37 +22,37 @@ const subscription = BackHandler.addEventListener(
   function () {
     /**
      * this.onMainScreen 和 this.goBack 只是示例，
-     * 你需要根据自己的实现调整这里的逻辑。
+     * 你需要在这里使用自己的实现。
      *
-     * 通常情况下，你会使用导航器返回到上一个状态。
+     * 通常你会在这里使用导航器返回到上一个状态。
      */
 
     if (!this.onMainScreen()) {
       this.goBack();
       /**
-       * 返回 true 表示事件不会被冒泡，
-       * 且不会执行其他的返回操作。
+       * 当返回 true 时，事件不会继续向上传播
+       * 且不会执行其他返回操作
        */
       return true;
     }
     /**
-     * 返回 false 会允许事件冒泡，
-     * 并执行其他事件监听器或系统默认的返回操作。
+     * 返回 false 会让事件继续向上传播，并让其他事件监听器
+     * 或系统默认的返回操作被执行。
      */
     return false;
   },
 );
 
-// 在组件卸载时取消订阅监听
+// 在卸载时取消订阅监听器
 subscription.remove();
 ```
 
 ## 示例
 
-下面的示例展示了一个场景：当用户按返回键时，确认是否退出应用：
+以下示例实现了一个场景：当用户想退出应用时进行确认：
 
 ```SnackPlayer name=BackHandler&supportedPlatforms=android
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import {Text, StyleSheet, BackHandler, Alert} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -65,7 +65,7 @@ const App = () => {
           onPress: () => null,
           style: 'cancel',
         },
-        {text: '确定', onPress: () => BackHandler.exitApp()},
+        {text: '是', onPress: () => BackHandler.exitApp()},
       ]);
       return true;
     };
@@ -102,15 +102,15 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-`BackHandler.addEventListener` 会创建一个事件监听器并返回一个 `NativeEventSubscription` 对象，该对象应通过调用其 `NativeEventSubscription.remove` 方法进行取消订阅。
+`BackHandler.addEventListener` 会创建一个事件监听器，并返回一个 `NativeEventSubscription` 对象，该对象应使用 `NativeEventSubscription.remove` 方法清除。
 
-## 与 React Navigation 一起使用
+## 与 React Navigation 配合使用
 
-如果你使用 React Navigation 在不同屏幕间导航，可以参考他们的指南：[自定义安卓返回按钮行为](https://reactnavigation.org/docs/custom-android-back-button-handling/)
+如果你使用 React Navigation 在不同屏幕之间导航，可以参考他们关于 [自定义 Android 返回按钮行为](https://reactnavigation.org/docs/custom-android-back-button-handling/) 的指南。
 
-## BackHandler Hook
+## Backhandler hook
 
-[React Native Hooks](https://github.com/react-native-community/hooks#usebackhandler) 提供了一个非常方便的 `useBackHandler` Hook，使设置事件监听更简单。
+[React Native Hooks](https://github.com/react-native-community/hooks#usebackhandler) 提供了一个很好的 `useBackHandler` hook，可简化设置事件监听器的过程。
 
 ---
 

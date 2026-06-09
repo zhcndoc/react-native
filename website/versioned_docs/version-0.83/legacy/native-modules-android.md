@@ -271,7 +271,7 @@ class MyAppPackage : ReactPackage {
 
 :::note
 这种注册原生模块的方式会在应用启动时立即初始化所有模块，可能增加启动时间。可考虑使用 [TurboReactPackage](https://github.com/facebook/react-native/blob/main/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/TurboReactPackage.kt) 替代。TurboReactPackage 通过实现 `getModule(String name, ReactApplicationContext rac)` 方法按需实例化模块，从而加快启动速度。不过目前实现略复杂，还需实现 `getReactModuleInfoProvider()` 方法，返回包含所有可实例化原生模块及其构造函数的列表，示例参见 [这里](https://github.com/facebook/react-native/blob/8ac467c51b94c82d81930b4802b2978c85539925/ReactAndroid/src/main/java/com/facebook/react/CoreModulesPackage.java#L86-L165)。若选择该方式，请谨慎操作。
-:::
+::>
 
 在 `MainApplication.java` 或 `MainApplication.kt`（路径为 `android/app/src/main/java/com/your-app-name/`）中找到 ReactNativeHost 的 `getPackages()` 方法，将 `MyAppPackage` 添加到返回列表：
 
@@ -313,17 +313,16 @@ override fun getPackages(): List<ReactPackage> =
 找一个合适位置调用原生模块的 `createCalendarEvent()` 方法。以下示例显示了一个组件 `NewModuleButton`，您可以在它的 `onPress()` 函数内部调用原生模块。
 
 ```tsx
-import React from 'react';
 import {NativeModules, Button} from 'react-native';
 
 const NewModuleButton = () => {
   const onPress = () => {
-    console.log('We will invoke the native module here!');
+    console.log('我们将在这里调用原生模块！');
   };
 
   return (
     <Button
-      title="Click to invoke your native module!"
+      title="单击以调用您的原生模块！"
       color="#841584"
       onPress={onPress}
     />
@@ -397,10 +396,10 @@ yarn android
 
 ```tsx
 /**
-* 这个文件将原生的 CalendarModule 模块暴露为 JS 模块，包含一个函数 'createCalendarEvent'，参数如下：
+* This file exposes the native CalendarModule as a JS module. It includes a function 'createCalendarEvent' with the following parameters:
 
-* 1. String name: 活动名称字符串
-* 2. String location: 活动地点字符串
+* 1. String name: The name of the event
+* 2. String location: The location of the event
 */
 import {NativeModules} from 'react-native';
 const {CalendarModule} = NativeModules;
@@ -411,10 +410,10 @@ export default CalendarModule;
 
 ```tsx
 /**
- * 这个文件将原生的 CalendarModule 模块暴露为 JS 模块，包含一个函数 'createCalendarEvent'，参数如下：
+ * This file exposes the native CalendarModule as a JS module. It includes a function 'createCalendarEvent' with the following parameters:
  *
- * 1. String name: 活动名称字符串
- * 2. String location: 活动地点字符串
+ * 1. String name: The name of the event
+ * 2. String location: The location of the event
  */
 import {NativeModules} from 'react-native';
 const {CalendarModule} = NativeModules;

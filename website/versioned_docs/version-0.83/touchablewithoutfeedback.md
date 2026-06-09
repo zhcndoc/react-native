@@ -4,12 +4,12 @@ title: TouchableWithoutFeedback
 ---
 
 :::tip
-如果你正在寻找一种更全面、更具未来适应性的方式来处理触摸输入，请查看 [Pressable](pressable.md) API。
+如果你正在寻找一种更全面且面向未来的方式来处理基于触摸的输入，请查看 [Pressable](pressable.md) API。
 :::
 
-除非有非常充分的理由，否则不要使用。所有响应按压的元素在被触摸时都应具有视觉反馈。
+除非你有非常充分的理由，否则不要使用。所有响应按压的元素在被触摸时都应有视觉反馈。
 
-`TouchableWithoutFeedback` 只支持一个子元素。如果你希望包含多个子组件，请将它们包装在一个 View 中。重要的是，`TouchableWithoutFeedback` 通过克隆其子组件并将响应者属性应用到它来工作。因此，任何中间组件都需要将这些属性传递给底层的 React Native 组件。
+`TouchableWithoutFeedback` 只支持一个子元素。如果你希望有多个子组件，请将它们包裹在一个 View 中。重要的是，`TouchableWithoutFeedback` 的工作方式是克隆其子元素并将 responder props 应用于它。因此，任何中间组件都必须将这些 props 透传给底层的 React Native 组件。
 
 ## 使用模式
 
@@ -17,12 +17,12 @@ title: TouchableWithoutFeedback
 function MyComponent(props: MyComponentProps) {
   return (
     <View {...props} style={{flex: 1, backgroundColor: '#fff'}}>
-      <Text>My Component</Text>
+      <Text>我的组件</Text>
     </View>
   );
 }
 
-<TouchableWithoutFeedback onPress={() => alert('Pressed!')}>
+<TouchableWithoutFeedback onPress={() => alert('已按下！')}>
   <MyComponent />
 </TouchableWithoutFeedback>;
 ```
@@ -30,7 +30,7 @@ function MyComponent(props: MyComponentProps) {
 ## 示例
 
 ```SnackPlayer name=TouchableWithoutFeedback
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {StyleSheet, TouchableWithoutFeedback, Text, View} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -49,7 +49,7 @@ const TouchableWithoutFeedbackExample = () => {
         </View>
         <TouchableWithoutFeedback onPress={onPress}>
           <View style={styles.button}>
-            <Text>点这里触摸</Text>
+            <Text>点这里</Text>
           </View>
         </TouchableWithoutFeedback>
       </SafeAreaView>
@@ -84,15 +84,15 @@ export default TouchableWithoutFeedbackExample;
 
 # 参考
 
-## 属性
+## Props
 
 ### `accessibilityIgnoresInvertColors` <div className="label ios">iOS</div>
 
-指示当启用颜色反转时，该视图是否应被反转。`true` 表示即使启用了颜色反转，该视图也不被反转。
+一个值，用于指示当启用颜色反转时，此视图是否应被反转。值为 `true` 时，即使启用了颜色反转，也会告诉视图不要被反转。
 
-更多信息请参阅 [辅助功能指南](accessibility.md#accessibilityignoresinvertcolors)。
+有关更多信息，请参阅 [可访问性指南](accessibility.md#accessibilityignoresinvertcolors)。
 
-| 类型    |
+| Type    |
 | ------- |
 | Boolean |
 
@@ -100,9 +100,9 @@ export default TouchableWithoutFeedbackExample;
 
 ### `accessible`
 
-为 `true` 时，表示该视图是一个辅助功能元素。默认情况下，所有可触摸元素都是可访问的。
+当为 `true` 时，表示该视图是一个可访问性元素。默认情况下，所有可触摸元素都是可访问的。
 
-| 类型 |
+| Type |
 | ---- |
 | bool |
 
@@ -110,9 +110,9 @@ export default TouchableWithoutFeedbackExample;
 
 ### `accessibilityLabel`
 
-覆盖屏幕阅读器与用户交互时朗读的文本。默认标签通过遍历所有子元素并累积所有的 `Text` 节点，用空格分隔构成。
+覆盖用户与元素交互时屏幕阅读器读取的文本。默认情况下，该标签通过遍历所有子元素并收集所有 `Text` 节点（以空格分隔）来构造。
 
-| 类型   |
+| Type   |
 | ------ |
 | string |
 
@@ -120,11 +120,11 @@ export default TouchableWithoutFeedbackExample;
 
 ### `accessibilityLanguage` <div className="label ios">iOS</div>
 
-指定屏幕阅读器应使用的语言，遵循 [BCP 47 规范](https://www.rfc-editor.org/info/bcp47)。
+一个值，用于指示用户与元素交互时屏幕阅读器应使用哪种语言。它应遵循 [BCP 47 规范](https://www.rfc-editor.org/info/bcp47)。
 
-更多信息请参阅 [iOS `accessibilityLanguage` 文档](https://developer.apple.com/documentation/objectivec/nsobject/1615192-accessibilitylanguage)。
+有关更多信息，请参阅 [iOS `accessibilityLanguage` 文档](https://developer.apple.com/documentation/objectivec/nsobject/1615192-accessibilitylanguage)。
 
-| 类型   |
+| Type   |
 | ------ |
 | string |
 
@@ -132,9 +132,9 @@ export default TouchableWithoutFeedbackExample;
 
 ### `accessibilityHint`
 
-辅助功能提示，用于帮助用户理解执行操作后会发生什么，当该结果无法从辅助功能标签明确看出时使用。
+当从无障碍标签中无法清楚看出执行某个操作会发生什么时，无障碍提示有助于用户理解在无障碍元素上执行操作后会发生什么。
 
-| 类型   |
+| Type   |
 | ------ |
 | string |
 
@@ -142,39 +142,39 @@ export default TouchableWithoutFeedbackExample;
 
 ### `accessibilityRole`
 
-`accessibilityRole` 用于向辅助技术的用户传达组件的用途。
+`accessibilityRole` 用于向辅助技术用户传达组件的用途。
 
 `accessibilityRole` 可以是以下之一：
 
-- `'none'` - 元素无角色。
-- `'button'` - 元素应被视为按钮。
-- `'link'` - 元素应被视为链接。
-- `'search'` - 文本字段元素也应被视为搜索字段。
-- `'image'` - 元素应被视为图像。可与按钮或链接结合使用。
-- `'keyboardkey'` - 元素充当键盘按键。
-- `'text'` - 元素应被视为静态文本，不可变化。
-- `'adjustable'` - 元素可“调整”（例如滑块）。
-- `'imagebutton'` - 元素既是按钮又是图像。
-- `'header'` - 元素充当内容区域的标题（例如导航栏标题）。
-- `'summary'` - 元素用于在应用启动时快速提供当前状态摘要。
-- `'alert'` - 元素包含重要文本，应呈现给用户。
-- `'checkbox'` - 元素代表可选中、未选中或混合状态的复选框。
-- `'combobox'` - 元素代表组合框，允许用户从多个选项中选择。
-- `'menu'` - 元素是一个选项菜单。
-- `'menubar'` - 元素是多个菜单的容器。
-- `'menuitem'` - 元素是菜单内的项目。
-- `'progressbar'` - 元素表示任务进度条。
-- `'radio'` - 元素表示单选按钮。
-- `'radiogroup'` - 元素表示单选按钮组。
-- `'scrollbar'` - 元素表示滚动条。
-- `'spinbutton'` - 元素表示打开选择列表的按钮。
-- `'switch'` - 元素表示开关，可开或关。
-- `'tab'` - 元素表示标签页。
-- `'tablist'` - 元素表示标签页列表。
-- `'timer'` - 元素表示计时器。
-- `'toolbar'` - 元素表示工具栏（动作按钮或组件的容器）。
+- `'none'` - 当元素没有角色时使用。
+- `'button'` - 当元素应被视为按钮时使用。
+- `'link'` - 当元素应被视为链接时使用。
+- `'search'` - 当文本字段元素也应被视为搜索字段时使用。
+- `'image'` - 当元素应被视为图像时使用。例如可与 button 或 link 结合使用。
+- `'keyboardkey'` - 当元素充当键盘按键时使用。
+- `'text'` - 当元素应被视为不可更改的静态文本时使用。
+- `'adjustable'` - 当元素可以“调节”时使用（例如滑块）。
+- `'imagebutton'` - 当元素应被视为按钮且同时也是图像时使用。
+- `'header'` - 当元素充当内容区块的标题时使用（例如导航栏标题）。
+- `'summary'` - 当应用首次启动时，可用来提供当前状态的快速摘要时使用。
+- `'alert'` - 当元素包含应展示给用户的重要文本时使用。
+- `'checkbox'` - 当元素表示可选中、可取消选中或具有混合选中状态的复选框时使用。
+- `'combobox'` - 当元素表示组合框，允许用户在多个选项中进行选择时使用。
+- `'menu'` - 当组件是一个选项菜单时使用。
+- `'menubar'` - 当组件是包含多个菜单的容器时使用。
+- `'menuitem'` - 用于表示菜单中的一项。
+- `'progressbar'` - 用于表示指示任务进度的组件。
+- `'radio'` - 用于表示单选按钮。
+- `'radiogroup'` - 用于表示单选按钮组。
+- `'scrollbar'` - 用于表示滚动条。
+- `'spinbutton'` - 用于表示打开选项列表的按钮。
+- `'switch'` - 用于表示可开启和关闭的开关。
+- `'tab'` - 用于表示标签页。
+- `'tablist'` - 用于表示标签页列表。
+- `'timer'` - 用于表示计时器。
+- `'toolbar'` - 用于表示工具栏（按钮或组件的容器）。
 
-| 类型   |
+| Type   |
 | ------ |
 | string |
 
@@ -182,33 +182,33 @@ export default TouchableWithoutFeedbackExample;
 
 ### `accessibilityState`
 
-描述组件当前状态，供辅助技术使用。
+向辅助技术用户描述组件的当前状态。
 
-更多信息请参阅 [辅助功能指南](accessibility.md#accessibilitystate-ios-android)。
+有关更多信息，请参阅 [可访问性指南](accessibility.md#accessibilitystate-ios-android)。
 
-| 类型                                                                                             |
+| Type                                                                                             |
 | ------------------------------------------------------------------------------------------------ |
-| 对象：`{disabled: bool, selected: bool, checked: bool 或 'mixed', busy: bool, expanded: bool}` |
+| object: `{disabled: bool, selected: bool, checked: bool or 'mixed', busy: bool, expanded: bool}` |
 
 ---
 
 ### `accessibilityActions`
 
-辅助功能动作允许辅助技术以编程方式调用组件的动作。该属性应包含一个动作对象列表，每个对象应包含名称和标签字段。
+可访问性操作允许辅助技术以编程方式调用组件的操作。`accessibilityActions` 属性应包含一个操作对象列表。每个操作对象应包含字段名和标签。
 
-更多信息请参阅 [辅助功能指南](accessibility.md#accessibility-actions)。
+有关更多信息，请参阅 [可访问性指南](accessibility.md#accessibility-actions)。
 
-| 类型  |
+| Type  |
 | ----- |
-| 数组 |
+| array |
 
 ---
 
 ### `aria-busy`
 
-表示元素正在被修改，辅助技术可能希望等待变更完成后再通知用户。
+表示某个元素正在被修改，辅助技术可能希望等到更改完成后再向用户告知更新。
 
-| 类型    | 默认值 |
+| Type    | Default |
 | ------- | ------- |
 | boolean | false   |
 
@@ -216,19 +216,19 @@ export default TouchableWithoutFeedbackExample;
 
 ### `aria-checked`
 
-表示可选中元素的状态。可为布尔值或字符串 "mixed"（混合状态复选框）。
+表示可勾选元素的状态。此字段可以是布尔值，也可以是表示混合复选框的 `"mixed"` 字符串。
 
-| 类型             | 默认值 |
+| Type             | Default |
 | ---------------- | ------- |
-| boolean，'mixed' | false   |
+| boolean, 'mixed' | false   |
 
 ---
 
 ### `aria-disabled`
 
-表示该元素可感知，但被禁用，不可编辑或操作。
+表示该元素可感知但已禁用，因此不可编辑或以其他方式操作。
 
-| 类型    | 默认值 |
+| Type    | Default |
 | ------- | ------- |
 | boolean | false   |
 
@@ -238,7 +238,7 @@ export default TouchableWithoutFeedbackExample;
 
 表示可展开元素当前是展开还是折叠状态。
 
-| 类型    | 默认值 |
+| Type    | Default |
 | ------- | ------- |
 | boolean | false   |
 
@@ -246,11 +246,11 @@ export default TouchableWithoutFeedbackExample;
 
 ### `aria-hidden`
 
-表示元素是否对辅助技术隐藏。
+表示该元素对辅助技术是否隐藏。
 
-例如，在包含兄弟视图 A 和 B 的窗口中，将 `aria-hidden` 设为 `true` 的视图 B 会使 VoiceOver 忽略 B 视图及其子视图。
+例如，在一个包含兄弟视图 `A` 和 `B` 的窗口中，将视图 `B` 的 `aria-hidden` 设为 `true` 会使 VoiceOver 忽略 `B` 元素及其子元素。
 
-| 类型    | 默认值 |
+| Type    | Default |
 | ------- | ------- |
 | boolean | false   |
 
@@ -258,9 +258,9 @@ export default TouchableWithoutFeedbackExample;
 
 ### `aria-label`
 
-定义交互元素的文本标签。
+定义一个用于标记交互元素的字符串值。
 
-| 类型   |
+| Type   |
 | ------ |
 | string |
 
@@ -268,23 +268,23 @@ export default TouchableWithoutFeedbackExample;
 
 ### `aria-live` <div className="label android">Android</div>
 
-表示元素将被更新，并描述用户代理、辅助技术和用户可以预期的动态区域更新类型。
+表示某个元素将被更新，并描述用户代理、辅助技术以及用户对该实时区域更新的预期类型。
 
-- **off** 辅助服务不应该朗读该视图的变更。
-- **polite** 辅助服务应礼貌地朗读变更。
-- **assertive** 辅助服务应立即中断正在朗读内容，优先朗读变更。
+- **off** 辅助功能服务不应宣布对此视图的更改。
+- **polite** 辅助功能服务应宣布对此视图的更改。
+- **assertive** 辅助功能服务应中断当前语音，立即宣布对此视图的更改。
 
-| 类型                                     | 默认值 |
+| Type                                     | Default |
 | ---------------------------------------- | ------- |
-| 枚举 (`'assertive'`, `'off'`, `'polite'`) | `'off'` |
+| enum(`'assertive'`, `'off'`, `'polite'`) | `'off'` |
 
 ---
 
 ### `aria-modal` <div className="label ios">iOS</div>
 
-布尔值，指示 VoiceOver 是否应忽略与接收者视图为兄弟关系的元素。在 [`accessibilityViewIsModal`](#accessibilityviewismodal-ios) 属性前有优先级。
+一个布尔值，表示 VoiceOver 是否应忽略其兄弟视图中的元素。其优先级高于 [`accessibilityViewIsModal`](#accessibilityviewismodal-ios) 属性。
 
-| 类型    | 默认值 |
+| Type    | Default |
 | ------- | ------- |
 | boolean | false   |
 
@@ -292,41 +292,41 @@ export default TouchableWithoutFeedbackExample;
 
 ### `aria-selected`
 
-表示当前是否选中可选元素。
+表示某个可选择元素当前是否被选中。
 
-| 类型    |
+| Type    |
 | ------- |
 | boolean |
 
 ### `onAccessibilityAction`
 
-当用户执行辅助功能动作时调用。函数唯一参数是包含要执行动作名称的事件。
+当用户执行无障碍操作时调用。该函数的唯一参数是一个包含要执行操作名称的事件。
 
-更多信息见 [辅助功能指南](accessibility.md#accessibility-actions)。
+有关更多信息，请参阅 [可访问性指南](accessibility.md#accessibility-actions)。
 
-| 类型     |
+| Type     |
 | -------- |
-| 函数     |
+| function |
 
 ---
 
 ### `accessibilityValue`
 
-表示组件的当前值。可以是组件值的文本描述，或者对于基于范围的组件（如滑块和进度条），包含范围信息（最小值、当前值和最大值）。
+表示组件的当前值。它可以是组件值的文本描述；对于基于范围的组件（如滑块和进度条），它包含范围信息（最小值、当前值和最大值）。
 
-更多信息见 [辅助功能指南](accessibility.md#accessibilityvalue-ios-android)。
+有关更多信息，请参阅 [可访问性指南](accessibility.md#accessibilityvalue-ios-android)。
 
-| 类型                                                            |
+| Type                                                            |
 | --------------------------------------------------------------- |
-| 对象：`{min: number, max: number, now: number, text: string}` |
+| object: `{min: number, max: number, now: number, text: string}` |
 
 ---
 
 ### `aria-valuemax`
 
-表示基于范围的组件（如滑块和进度条）的最大值。优先于 `accessibilityValue` 中的 `max`。
+表示基于范围的组件（如滑块和进度条）的最大值。其优先级高于 `accessibilityValue` 属性中的 `max` 值。
 
-| 类型   |
+| Type   |
 | ------ |
 | number |
 
@@ -334,9 +334,9 @@ export default TouchableWithoutFeedbackExample;
 
 ### `aria-valuemin`
 
-表示基于范围的组件（如滑块和进度条）的最小值。优先于 `accessibilityValue` 中的 `min`。
+表示基于范围的组件（如滑块和进度条）的最小值。其优先级高于 `accessibilityValue` 属性中的 `min` 值。
 
-| 类型   |
+| Type   |
 | ------ |
 | number |
 
@@ -344,9 +344,9 @@ export default TouchableWithoutFeedbackExample;
 
 ### `aria-valuenow`
 
-表示基于范围的组件（如滑块和进度条）的当前值。优先于 `accessibilityValue` 中的 `now`。
+表示基于范围的组件（如滑块和进度条）的当前值。其优先级高于 `accessibilityValue` 属性中的 `now` 值。
 
-| 类型   |
+| Type   |
 | ------ |
 | number |
 
@@ -354,9 +354,9 @@ export default TouchableWithoutFeedbackExample;
 
 ### `aria-valuetext`
 
-表示组件的文本描述。优先于 `accessibilityValue` 中的 `text`。
+表示组件的文本描述。其优先级高于 `accessibilityValue` 属性中的 `text` 值。
 
-| 类型   |
+| Type   |
 | ------ |
 | string |
 
@@ -364,9 +364,9 @@ export default TouchableWithoutFeedbackExample;
 
 ### `delayLongPress`
 
-从 `onPressIn` 开始，到调用 `onLongPress` 的延迟时间（毫秒）。
+从 `onPressIn` 开始到调用 `onLongPress` 之间的持续时间（毫秒）。
 
-| 类型   |
+| Type   |
 | ------ |
 | number |
 
@@ -374,9 +374,9 @@ export default TouchableWithoutFeedbackExample;
 
 ### `delayPressIn`
 
-触摸开始到调用 `onPressIn` 的延迟时间（毫秒）。
+从触摸开始到调用 `onPressIn` 之间的持续时间（毫秒）。
 
-| 类型   |
+| Type   |
 | ------ |
 | number |
 
@@ -384,9 +384,9 @@ export default TouchableWithoutFeedbackExample;
 
 ### `delayPressOut`
 
-触摸释放到调用 `onPressOut` 的延迟时间（毫秒）。
+从触摸释放到调用 `onPressOut` 之间的持续时间（毫秒）。
 
-| 类型   |
+| Type   |
 | ------ |
 | number |
 
@@ -394,9 +394,9 @@ export default TouchableWithoutFeedbackExample;
 
 ### `disabled`
 
-为 `true` 时，禁用该组件的所有交互。
+如果为 true，则禁用此组件的所有交互。
 
-| 类型 |
+| Type |
 | ---- |
 | bool |
 
@@ -404,21 +404,21 @@ export default TouchableWithoutFeedbackExample;
 
 ### `hitSlop`
 
-定义触摸开始点可以与按钮边界的最大距离。该距离会加到 `pressRetentionOffset` 上，当触摸点离开按钮区域时生效。
+这定义了你的触摸可以从距离按钮多远的位置开始。它会在离开按钮时被添加到 `pressRetentionOffset` 中。
 
 :::note
-触摸区域永远不会超出父视图边界，并且如果两个重叠视图都被触摸，具有更高 Z-index 的视图优先响应。
+触摸区域绝不会超出父视图边界，而且如果一次触摸命中两个重叠视图，兄弟视图的 Z-index 始终优先。
 :::
 
-| 类型                   |
+| Type                   |
 | ---------------------- |
-| [Rect](rect) 或 数字    |
+| [Rect](rect) or number |
 
 ### `id`
 
-用于从原生代码定位此视图。优先于 `nativeID`。
+用于从原生代码中定位此视图。其优先级高于 `nativeID` 属性。
 
-| 类型   |
+| Type   |
 | ------ |
 | string |
 
@@ -426,9 +426,9 @@ export default TouchableWithoutFeedbackExample;
 
 ### `onBlur`
 
-当元素失去焦点时调用。
+在项目失去焦点时调用。
 
-| 类型                                                     |
+| Type                                                     |
 | -------------------------------------------------------- |
 | `md ({nativeEvent: [TargetEvent](targetevent)}) => void` |
 
@@ -436,9 +436,9 @@ export default TouchableWithoutFeedbackExample;
 
 ### `onFocus`
 
-当元素获得焦点时调用。
+在项目获得焦点时调用。
 
-| 类型                                                     |
+| Type                                                     |
 | -------------------------------------------------------- |
 | `md ({nativeEvent: [TargetEvent](targetevent)}) => void` |
 
@@ -446,9 +446,9 @@ export default TouchableWithoutFeedbackExample;
 
 ### `onLayout`
 
-组件挂载及布局变化时调用。
+在挂载时和布局变化时调用。
 
-| 类型                                                     |
+| Type                                                     |
 | -------------------------------------------------------- |
 | `md ({nativeEvent: [LayoutEvent](layoutevent)}) => void` |
 
@@ -456,57 +456,57 @@ export default TouchableWithoutFeedbackExample;
 
 ### `onLongPress`
 
-从 `onPressIn` 开始超过 370 毫秒后调用。该时间可用 [`delayLongPress`](#delaylongpress) 自定义。
+当 `onPressIn` 之后的持续时间超过 370 毫秒时调用。这个时间可以通过 [`delayLongPress`](#delaylongpress) 自定义。
 
-| 类型     |
+| Type     |
 | -------- |
-| 函数     |
+| function |
 
 ---
 
 ### `onPress`
 
-触摸释放时调用，若被取消（例如滚动抢占响应锁）则不调用。第一个函数参数是一个 [PressEvent](pressevent) 事件。
+在触摸释放时调用，但如果被取消则不会调用（例如被抢占 responder lock 的滚动操作）。第一个函数参数是 [PressEvent](pressevent) 形式的事件。
 
-| 类型     |
+| Type     |
 | -------- |
-| 函数     |
+| function |
 
 ---
 
 ### `onPressIn`
 
-一开始按下触摸时调用，甚至早于 `onPress`。可用于发起网络请求。第一个函数参数是一个 [PressEvent](pressevent) 事件。
+在可触摸元素一被按下时立即调用，甚至早于 `onPress`。这在发起网络请求时会很有用。第一个函数参数是 [PressEvent](pressevent) 形式的事件。
 
-| 类型     |
+| Type     |
 | -------- |
-| 函数     |
+| function |
 
 ---
 
 ### `onPressOut`
 
-触摸释放时调用，早于 `onPress`。第一个函数参数是一个 [PressEvent](pressevent) 事件。
+在触摸一释放时立即调用，甚至早于 `onPress`。第一个函数参数是 [PressEvent](pressevent) 形式的事件。
 
-| 类型     |
+| Type     |
 | -------- |
-| 函数     |
+| function |
 
 ---
 
 ### `pressRetentionOffset`
 
-当滚动视图被禁用时，定义触摸可以偏离按钮的最大距离，超过此距离按钮将被失效。失效后，将触摸点移回按钮内，按钮会再次激活！可多次演示。建议传入常量以减少内存分配。
+当滚动视图被禁用时，它定义了你的触摸在按钮外最多可以移动多远，才会使按钮失效。一旦失效，尝试把它移回去，你会看到按钮再次被激活！在滚动视图被禁用时，可前后移动几次。确保传入一个常量以减少内存分配。
 
-| 类型                   |
+| Type                   |
 | ---------------------- |
-| [Rect](rect) 或 数字    |
+| [Rect](rect) or number |
 
 ---
 
 ### `nativeID`
 
-| 类型   |
+| Type   |
 | ------ |
 | string |
 
@@ -514,9 +514,9 @@ export default TouchableWithoutFeedbackExample;
 
 ### `testID`
 
-用于在端到端测试中定位该视图。
+用于在端到端测试中定位此视图。
 
-| 类型   |
+| Type   |
 | ------ |
 | string |
 
@@ -524,8 +524,8 @@ export default TouchableWithoutFeedbackExample;
 
 ### `touchSoundDisabled` <div className="label android">Android</div>
 
-为 `true` 时，触摸时不播放系统音效。
+如果为 true，则不会在触摸时播放系统声音。
 
-| 类型    |
+| Type    |
 | ------- |
 | Boolean |

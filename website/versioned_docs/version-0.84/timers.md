@@ -33,7 +33,7 @@ title: 定时器
 
 应用程序可以使用以下方式安排交互后的任务执行：
 
-```tsx
+```ts
 InteractionManager.runAfterInteractions(() => {
   // ...长时间运行的同步任务...
 });
@@ -49,7 +49,7 @@ InteractionManager.runAfterInteractions(() => {
 
 `InteractionManager` 还允许通过在动画开始时创建一个交互“句柄”，并在动画完成时清除它，来注册动画：
 
-```tsx
+```ts
 const handle = InteractionManager.createInteractionHandle();
 // 运行动画...（`runAfterInteractions` 任务排队中）
 // 稍后动画完成时：

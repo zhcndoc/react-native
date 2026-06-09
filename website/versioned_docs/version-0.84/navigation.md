@@ -64,7 +64,6 @@ npm install @react-navigation/native @react-navigation/native-stack
 现在，你可以创建一个包含主界面和个人资料界面的应用：
 
 ```tsx
-import * as React from 'react';
 import {createStaticNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 

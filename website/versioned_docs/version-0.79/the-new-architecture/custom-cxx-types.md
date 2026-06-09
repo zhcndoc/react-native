@@ -37,7 +37,7 @@ struct Bridging<int64_t> {
       auto str = value.utf8(rt);
       auto num = std::stoll(str, &pos);
       if (pos != str.size()) {
-        throw std::invalid_argument("Invalid number"); // 不支持字母数字字符串
+        throw std::invalid_argument("无效数字"); // 不支持字母数字字符串
       }
       return num;
     } catch (const std::logic_error &e) {
@@ -190,15 +190,15 @@ std::string NativeSampleModule::reverseString(jsi::Runtime& rt, std::string inpu
         />
         <Button title="Reverse" onPress={onPress} />
         <Text>Reversed text: {reversedValue}</Text>
-+        <Text>For which number do you want to compute the Cubic Root?</Text>
++        <Text>您想计算哪个数字的立方根？</Text>
 +        <TextInput
 +          style={styles.textInput}
-+          placeholder="Write your text here"
++          placeholder="在此输入文本"
 +          onChangeText={setCubicSource}
 +          value={cubicSource}
 +        />
-+        <Button title="Get Cubic Root" onPress={() => setCubicRoot(SampleTurboModule.cubicRoot(cubicSource))} />
-+        <Text>The cubic root is: {cubicRoot}</Text>
++        <Button title="获取立方根" onPress={() => setCubicRoot(SampleTurboModule.cubicRoot(cubicSource))} />
++        <Text>立方根是：{cubicRoot}</Text>
       </View>
     </SafeAreaView>
   );
@@ -336,7 +336,7 @@ namespace facebook::react {
 
 2. 打开 `shared/NativeSampleModule.cpp` 文件并添加函数实现
 
-```c++ title="NativeSampleModule.cpp（validateAddress 实现）"
+```cpp title="NativeSampleModule.cpp (validateAddress implementation)"
 bool NativeSampleModule::validateAddress(jsi::Runtime &rt, jsi::Object input) {
   std::string street = input.getProperty(rt, "street").asString(rt).utf8(rt);
   int32_t number = input.getProperty(rt, "num").asNumber();
@@ -392,24 +392,24 @@ return (
       <Text style={styles.title}>
         Welcome to C Turbo Native Module Example
       </Text>
-      <Text>Address:</Text>
+      <Text>地址：</Text>
       <TextInput
         style={styles.textInput}
-        placeholder="Write your address here"
+        placeholder="在此输入您的地址"
         onChangeText={setStreet}
         value={street}
       />
-      <Text>Number:</Text>
+      <Text>门牌号：</Text>
       <TextInput
         style={styles.textInput}
-        placeholder="Write your address here"
+        placeholder="在此输入您的地址"
         onChangeText={setNum}
         value={num}
       />
-      <Button title="Validate" onPress={onPress} />
+      <Button title="验证" onPress={onPress} />
       {isValidAddress != null && (
         <Text>
-          Your address is {isValidAddress ? 'valid' : 'not valid'}
+          您的地址{isValidAddress ? '有效' : '无效'}
         </Text>
       )}
     </View>

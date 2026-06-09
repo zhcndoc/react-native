@@ -4,7 +4,7 @@ title: '🗑️ ProgressBarAndroid'
 ---
 
 :::warning[已废弃]
-请改用 [community packages](https://reactnative.directory/?search=progressbar) 中的一个。
+请改用 [社区包](https://reactnative.directory/?search=progressbar) 中的一个。
 :::
 
 仅适用于 Android 的 React 组件，用于指示应用正在加载或应用中存在一些活动。
@@ -12,7 +12,6 @@ title: '🗑️ ProgressBarAndroid'
 ### 示例
 
 ```SnackPlayer name=ProgressBarAndroid&supportedPlatforms=android
-import React from 'react';
 import {View, StyleSheet, ProgressBarAndroid, Text} from 'react-native';
 
 const App = () => {

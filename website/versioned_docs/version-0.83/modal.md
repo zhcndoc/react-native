@@ -1,14 +1,14 @@
 ---
 id: modal
-title: 模态框
+title: Modal
 ---
 
-模态框组件是在封闭视图之上呈现内容的基本方式。
+Modal 组件是一种在包围视图之上展示内容的基本方式。
 
 ## 示例
 
 ```SnackPlayer name=Modal&supportedPlatforms=android,ios
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Alert, Modal, StyleSheet, Text, Pressable, View} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -22,7 +22,7 @@ const App = () => {
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
-            Alert.alert('模态框已被关闭。');
+            Alert.alert('Modal 已关闭。');
             setModalVisible(!modalVisible);
           }}>
           <View style={styles.centeredView}>
@@ -31,7 +31,7 @@ const App = () => {
               <Pressable
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => setModalVisible(!modalVisible)}>
-                <Text style={styles.textStyle}>隐藏模态框</Text>
+                <Text style={styles.textStyle}>隐藏 Modal</Text>
               </Pressable>
             </View>
           </View>
@@ -39,7 +39,7 @@ const App = () => {
         <Pressable
           style={[styles.button, styles.buttonOpen]}
           onPress={() => setModalVisible(true)}>
-          <Text style={styles.textStyle}>显示模态框</Text>
+          <Text style={styles.textStyle}>显示 Modal</Text>
         </Pressable>
       </SafeAreaView>
     </SafeAreaProvider>
@@ -98,9 +98,9 @@ export default App;
 
 ## 属性
 
-### [视图属性](view.md#props)
+### [View 属性](view.md#props)
 
-继承自 [视图属性](view.md#props)。
+继承自 [View 属性](view.md#props)。
 
 ---
 
@@ -114,53 +114,53 @@ export default App;
 
 ### `animationType`
 
-`animationType` 属性控制模态框的动画方式。
+`animationType` 属性控制 Modal 的动画方式。
 
 可选值：
 
 - `slide` 从底部滑入
 - `fade` 淡入显示
-- `none` 无动画直接显示
+- `none` 不带动画显示
 
-| 类型                                 | 默认值  |
-| ------------------------------------ | ------- |
-| 枚举 (`'none'`, `'slide'`, `'fade'`) | `none`  |
+| 类型                                | 默认值 |
+| ----------------------------------- | ------- |
+| enum(`'none'`, `'slide'`, `'fade'`) | `none`  |
 
 ---
 
 ### `backdropColor`
 
-模态框的背景色（或模态框容器的背景色）。如果未提供且 `transparent` 为 `false`，默认为 `white`。当 `transparent` 为 `true` 时此属性被忽略。
+Modal 的 `backdropColor`（或 Modal 容器的背景色）。如果未提供且 `transparent` 为 `false`，默认值为 `white`。如果 `transparent` 为 `true`，则会被忽略。
 
-| 类型         | 默认值  |
-| ------------ | ------- |
-| [颜色](colors) | white   |
+| 类型             | 默认值 |
+| ---------------- | ------ |
+| [color](colors) | white  |
 
 ---
 
 ### `hardwareAccelerated` <div className="label android">Android</div>
 
-`hardwareAccelerated` 属性控制是否强制为底层窗口启用硬件加速。
+`hardwareAccelerated` 属性控制是否为底层窗口强制启用硬件加速。
 
-| 类型  | 默认值  |
-| ----- | ------- |
-| bool  | `false` |
+| 类型 | 默认值 |
+| ---- | ------ |
+| bool | `false` |
 
 ---
 
 ### `navigationBarTranslucent` <div className="label android">Android</div>
 
-`navigationBarTranslucent` 属性确定模态框是否应该显示在系统导航栏之下。但同时 `statusBarTranslucent` 也必须设置为 `true`，导航栏才会变为半透明。
+`navigationBarTranslucent` 属性决定你的 Modal 是否应显示在系统导航栏下方。不过，还需要将 `statusBarTranslucent` 设为 `true` 才能让导航栏透明。
 
-| 类型  | 默认值  |
-| ----- | ------- |
-| bool  | `false` |
+| 类型 | 默认值 |
+| ---- | ------ |
+| bool | `false` |
 
 ---
 
 ### `onDismiss` <div className="label ios">iOS</div>
 
-`onDismiss` 属性允许传入一个函数，在模态框被关闭后调用。
+`onDismiss` 属性允许传入一个函数，该函数会在 Modal 被关闭后调用。
 
 | 类型     |
 | -------- |
@@ -170,7 +170,7 @@ export default App;
 
 ### `onOrientationChange` <div className="label ios">iOS</div>
 
-`onOrientationChange` 回调函数会在模态框显示期间屏幕方向发生变化时调用。传入的方向仅可能为 `'portrait'` 或 `'landscape'`。此回调在初始渲染时也会调用，无论当前方向如何。
+当 Modal 显示时发生方向变化，`onOrientationChange` 回调会被调用。提供的方向仅为 `'portrait'` 或 `'landscape'`。无论当前方向如何，此回调也会在首次渲染时调用。
 
 | 类型     |
 | -------- |
@@ -180,35 +180,35 @@ export default App;
 
 ### `allowSwipeDismissal` <div className="label ios">iOS</div>
 
-控制模态框是否可以通过向下滑动手势来关闭，这仅在 iOS 有效。
-需要实现 `onRequestClose` 属性来处理关闭。
+控制是否可以在 iOS 上通过向下滑动来关闭 Modal。
+这要求你实现 `onRequestClose` 属性来处理关闭逻辑。
 
-| 类型  | 默认值  |
-| ----- | ------- |
-| bool  | `false` |
+| 类型 | 默认值 |
+| ---- | ------ |
+| bool | `false` |
 
 ---
 
 ### `ref`
 
-一个 ref 设置器，当组件挂载时将被赋予对应的 [元素节点](element-nodes)。
+挂载时会被赋值为一个 [元素节点](element-nodes) 的 ref setter。
 
 ---
 
 ### `onRequestClose`
 
-当用户在 Android 上点击硬件返回按钮或在 Apple TV 上点击菜单按钮时，会调用 `onRequestClose` 回调。由于这是必需属性，请注意，只要模态框处于打开状态，就不会触发 `BackHandler` 事件。
-在 iOS 上，当使用拖拽手势关闭一个 `presentationStyle` 为 `pageSheet` 或 `formSheet` 的 Modal 时，会调用此回调。当启用 `allowSwipeDismissal` 时，此回调会在模态框被关闭后调用。
+当用户在 Android 上点击硬件返回键或在 Apple TV 上点击菜单按钮时，会调用 `onRequestClose` 回调。因此，由于这是必需属性，只要 Modal 处于打开状态，`BackHandler` 事件就不会被触发。
+在 iOS 上，当 Modal 使用拖拽手势并且 `presentationStyle` 为 `pageSheet` 或 `formSheet` 时，也会调用此回调。当启用 `allowSwipeDismissal` 时，关闭 Modal 后会调用此回调。
 
-| 类型                                                                                                                                                                                             |
+| 类型                                                                                                                                                                                           |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| function <div className="label basic required">必需</div><div className="label android">Android</div><div className="label tv">电视</div><hr />function <div className="label ios">iOS</div> |
+| function <div className="label basic required">必需</div><div className="label android">Android</div><div className="label tv">TV</div><hr />function <div className="label ios">iOS</div> |
 
 ---
 
 ### `onShow`
 
-`onShow` 属性允许传入一个函数，在模态框显示后调用。
+`onShow` 属性允许传入一个函数，该函数会在 Modal 显示后调用。
 
 | 类型     |
 | -------- |
@@ -218,59 +218,59 @@ export default App;
 
 ### `presentationStyle` <div className="label ios">iOS</div>
 
-`presentationStyle` 属性控制模态框的呈现风格（通常用于 iPad 或更大尺寸 iPhone）。详情请参阅 https://developer.apple.com/reference/uikit/uimodalpresentationstyle 。
+`presentationStyle` 属性控制 Modal 的呈现方式（通常在 iPad 或加大尺寸 iPhone 等较大设备上）。详情请参见 https://developer.apple.com/reference/uikit/uimodalpresentationstyle。
 
 可选值：
 
-- `fullScreen` 全屏覆盖
-- `pageSheet` 覆盖一个居中的竖屏宽度视图（仅限更大设备）
-- `formSheet` 覆盖一个居中的窄屏宽度视图（仅限更大设备）
-- `overFullScreen` 全屏覆盖且允许透明背景
+- `fullScreen` 完全覆盖屏幕
+- `pageSheet` 覆盖居中的纵向宽度视图（仅在较大设备上）
+- `formSheet` 覆盖居中的窄宽度视图（仅在较大设备上）
+- `overFullScreen` 完全覆盖屏幕，但允许透明
 
-| 类型                                                                 | 默认值                                                                                  |
-| -------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| 枚举 (`'fullScreen'`, `'pageSheet'`, `'formSheet'`, `'overFullScreen'`) | `fullScreen`（当 `transparent={false}`）<hr />`overFullScreen`（当 `transparent={true}`） |
+| 类型                                                                   | 默认值                                                                             |
+| ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| enum(`'fullScreen'`, `'pageSheet'`, `'formSheet'`, `'overFullScreen'`) | `transparent={false}` 时为 `fullScreen`<hr />`transparent={true}` 时为 `overFullScreen` |
 
 ---
 
 ### `statusBarTranslucent` <div className="label android">Android</div>
 
-`statusBarTranslucent` 属性确定模态框是否应该显示在系统状态栏之下。
+`statusBarTranslucent` 属性决定你的 Modal 是否应显示在系统状态栏下方。
 
-| 类型  | 默认值  |
-| ----- | ------- |
-| bool  | `false` |
+| 类型 | 默认值 |
+| ---- | ------ |
+| bool | `false` |
 
 ---
 
 ### `supportedOrientations` <div className="label ios">iOS</div>
 
-`supportedOrientations` 属性允许模态框旋转到指定的屏幕方向列表。在 iOS 上，模态框的旋转依然受应用 Info.plist 中 `UISupportedInterfaceOrientations` 字段限制。
+`supportedOrientations` 属性允许 Modal 旋转到所指定的任意方向。在 iOS 上，Modal 仍受应用 `Info.plist` 中 `UISupportedInterfaceOrientations` 字段的限制。
 
 :::note
-当使用 `presentationStyle` 为 `pageSheet` 或 `formSheet` 时，此属性会被 iOS 忽略。
+当使用 `pageSheet` 或 `formSheet` 的 `presentationStyle` 时，此属性在 iOS 上将被忽略。
 :::
 
-| 类型                                                                                                         | 默认值         |
-| ------------------------------------------------------------------------------------------------------------ | -------------- |
-| 枚举数组 (`'portrait'`, `'portrait-upside-down'`, `'landscape'`, `'landscape-left'`, `'landscape-right'`)      | `['portrait']` |
+| 类型                                                                                                           | 默认值        |
+| -------------------------------------------------------------------------------------------------------------- | -------------- |
+| array of enums(`'portrait'`, `'portrait-upside-down'`, `'landscape'`, `'landscape-left'`, `'landscape-right'`) | `['portrait']` |
 
 ---
 
 ### `transparent`
 
-`transparent` 属性决定模态框是否填充整个视图。设置为 `true` 会让模态框渲染在透明背景之上。
+`transparent` 属性决定你的 Modal 是否会填满整个视图。将其设为 `true` 会在透明背景上渲染 Modal。
 
-| 类型  | 默认值  |
-| ----- | ------- |
-| bool  | `false` |
+| 类型 | 默认值 |
+| ---- | ------ |
+| bool | `false` |
 
 ---
 
 ### `visible`
 
-`visible` 属性决定模态框是否可见。
+`visible` 属性决定你的 Modal 是否可见。
 
-| 类型  | 默认值  |
-| ----- | ------- |
-| bool  | `true`  |
+| 类型 | 默认值 |
+| ---- | ------ |
+| bool | `true`  |

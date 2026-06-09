@@ -10,7 +10,7 @@ import {FabricNativeComponentsAndroid,FabricNativeComponentsIOS} from './\_fabri
 
 # 原生组件
 
-如果你想构建 _新_ 的 React Native 组件，这些组件封装了 [宿主组件](https://reactnative.dev/architecture/glossary#host-view-tree-and-host-view)，例如 Android 上独特的 [CheckBox](https://developer.android.com/reference/androidx/appcompat/widget/AppCompatCheckBox) 种类，或 iOS 上的 [UIButton](https://developer.apple.com/documentation/uikit/uibutton?language=objc)，你应该使用 Fabric 原生组件。
+如果你想构建 _新的_ React Native 组件，这些组件封装了 [宿主组件](https://reactnative.dev/architecture/glossary#host-view-tree-and-host-view)，例如 Android 上独特的 [CheckBox](https://developer.android.com/reference/androidx/appcompat/widget/AppCompatCheckBox) 变体，或 iOS 上的 [UIButton](https://developer.apple.com/documentation/uikit/uibutton?language=objc)，你应该使用 Fabric 原生组件。
 
 本指南将通过实现一个 web view 组件来展示如何构建 Fabric 原生组件。步骤如下：
 
@@ -172,7 +172,6 @@ export default (codegenNativeComponent<NativeProps>(
 最后，你可以在你的应用中使用新组件。更新生成的 `App.tsx` 为：
 
 ```javascript title="Demo/App.tsx"
-import React from 'react';
 import {Alert, StyleSheet, View} from 'react-native';
 import WebView from './specs/WebViewNativeComponent';
 
@@ -183,7 +182,7 @@ function App(): React.JSX.Element {
         sourceURL="https://react.dev/"
         style={styles.webview}
         onScriptLoaded={() => {
-          Alert.alert('Page Loaded');
+          Alert.alert('页面已加载');
         }}
       />
     </View>

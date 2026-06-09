@@ -30,7 +30,7 @@ React Native 提供了一种统一的方式来管理 Android 和 iOS 应用中�
 <Image source={require('./img/check.png')} />
 ```
 
-...打包器会根据设备的屏幕密度打包并加载对应的图片。例如，iPhone 7 会使用 `check@2x.png`，而 iPhone 7 Plus 或 Nexus 5 会使用 `check@3x.png`。如果没有与屏幕密度完全匹配的图片，将选择最接近的最佳选项。
+...打包器会打包并提供与设备屏幕密度相对应的图片。例如，在 iPhone 7 上会使用 `check@2x.png`，而在 iPhone 7 Plus 或 Nexus 5 上会使用 `check@3x.png`。如果没有与屏幕密度匹配的图片，则会选择最接近的最佳选项。
 
 在 Windows 上，如果你添加了新图片，可能需要重启打包器。
 
@@ -122,7 +122,7 @@ const icon = this.props.active
     headers: {
       Pragma: 'no-cache',
     },
-    body: 'Your Body goes here',
+    body: '你的请求体写在这里',
   }}
   style={{width: 400, height: 400}}
 />
@@ -275,6 +275,6 @@ RCTSetImageCacheLimits(4*1024*1024, 200*1024*1024);
 | 名称            | 类型    | 是否必填 | 说明               |
 | -------------- | ------- | -------- | ------------------ |
 | imageSizeLimit | number  | 是       | 单张图片缓存尺寸限制。 |
-| totalCostLimit | number  | 是       | 总缓存成本限制。       |
+| totalCostLimit  | number  | 是       | 总缓存成本限制。       |
 
 以上例子中，单张图片缓存大小限制设置为 4 MB，总缓存成本限制设置为 200 MB。

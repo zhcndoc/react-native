@@ -14,7 +14,6 @@ title: 图片
 ## 示例
 
 ```SnackPlayer name=Image%20Example
-import React from 'react';
 import {Image, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -61,7 +60,6 @@ export default DisplayAnImage;
 你也可以给图片添加 `style`：
 
 ```SnackPlayer name=Styled%20Image%20Example
-import React from 'react';
 import {Image, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -225,7 +223,7 @@ blurRadius：添加到图片上的模糊滤镜的模糊半径。
 图片组件的高度。
 
 | 类型   |
-| ------ |
+| ------ | ------- |
 | number |
 
 ---

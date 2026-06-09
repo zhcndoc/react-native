@@ -2,37 +2,37 @@ import {getCoreBranchNameForCurrentVersion} from '@site/src/getCoreBranchNameFor
 import {getCurrentVersion} from '@site/src/getCurrentVersion';
 import CodeBlock from '@theme/CodeBlock';
 
-# 跨平台原生模块 (C++)
+# 跨平台原生模块（C++）
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-用 C++ 编写模块是在 Android 和 iOS 之间共享平台无关代码的最佳方式。使用纯 C++ 模块，你只需编写一次逻辑，即可在所有平台上直接重用，无需编写特定于平台的代码。
+用 C++ 编写模块是在 Android 和 iOS 之间共享平台无关代码的最佳方式。使用纯 C++ 模块时，你只需编写一次逻辑，就可以立即在所有平台上复用，而无需编写平台特定代码。
 
-在本指南中，我们将逐步创建纯 C++ Turbo Native Module：
+在本指南中，我们将逐步创建一个纯 C++ Turbo 原生模块：
 
 1. 创建 JS 规范
-2. 配置 Codegen 以生成脚手架
+2. 配置 Codegen 以生成脚手架代码
 3. 实现原生逻辑
-4. 在 Android 和 iOS 应用程序中注册模块
+4. 在 Android 和 iOS 应用中注册模块
 5. 在 JS 中测试你的更改
 
-本指南的其余部分假设你已运行以下命令创建了应用程序：
+本指南的其余部分假设你已经使用以下命令创建了应用：
 
-<CodeBlock language="bash" title="终端">
+<CodeBlock language="bash" title="shell">
 {`npx @react-native-community/cli@latest init SampleApp --version ${getCurrentVersion()}`}
 </CodeBlock>
 
 ## 1. 创建 JS 规范
 
-纯 C++ Turbo Native Module 是 Turbo Native Module。它们需要一个规范文件（也称为 spec 文件），以便 Codegen 为我们创建脚手架代码。规范文件也是我们在 JS 中访问 Turbo Native Module 所使用的文件。
+纯 C++ Turbo 原生模块属于 Turbo 原生模块。它们需要一个规范文件（也称为 spec 文件），这样 Codegen 才能为我们创建脚手架代码。规范文件也是我们在 JS 中访问 Turbo 原生模块时使用的文件。
 
-规范文件需要用类型化的 JS 方言编写。React Native 目前支持 Flow 或 TypeScript。
+Spec 文件需要用带类型的 JS 方言编写。React Native 目前支持 Flow 或 TypeScript。
 
-1. 在应用程序的根文件夹内，创建一个名为 `specs` 的新文件夹。
-2. 创建一个名为 `NativeSampleModule.ts` 的新文件，包含以下代码：
+1. 在应用的根目录下，创建一个名为 `specs` 的新文件夹。
+2. 创建一个名为 `NativeSampleModule.ts` 的新文件，并使用以下代码：
 
 :::warning
-所有 Native Turbo Module 规范文件必须具有前缀 `Native`，否则 Codegen 将忽略它们。
+所有原生 Turbo Module spec 文件都必须以 `Native` 为前缀，否则 Codegen 会忽略它们。
 :::
 
 <Tabs groupId="tnm-specs" queryString defaultValue={constants.defaultJavaScriptSpecLanguages} values={constants.javaScriptSpecLanguages}>
@@ -72,7 +72,7 @@ export default TurboModuleRegistry.getEnforcing<Spec>(
 
 ## 2. 配置 Codegen
 
-下一步是在你的 `package.json` 中配置 [Codegen](what-is-codegen.mdx)。更新文件以包含：
+下一步是在你的 `package.json` 中配置 [Codegen](what-is-codegen.mdx)。将文件更新为包含以下内容：
 
 ```json title="package.json"
      "start": "react-native start",
@@ -91,14 +91,14 @@ export default TurboModuleRegistry.getEnforcing<Spec>(
    "dependencies": {
 ```
 
-此配置告诉 Codegen 在 `specs` 文件夹中查找规范文件。它还指示 Codegen 仅为 `modules` 生成代码，并将生成的代码命名为 `AppSpecs`。
+这个配置告诉 Codegen 去 `specs` 文件夹中查找 spec 文件。它还指示 Codegen 只为 `modules` 生成代码，并将生成的代码命名空间设为 `AppSpecs`。
 
 ## 3. 编写原生代码
 
-编写 C++ Turbo Native Module 允许你在 Android 和 iOS 之间共享代码。因此我们将编写一次代码，然后我们将查看需要对平台应用哪些更改，以便能够使用 C++ 代码。
+编写 C++ Turbo 原生模块可以让你在 Android 和 iOS 之间共享代码。因此我们会只编写一次代码，然后再看看需要对各个平台做哪些修改，以便让 C++ 代码被正确加载。
 
-1. 在与 `android` 和 `ios` 文件夹相同的级别创建一个名为 `shared` 的文件夹。
-2. 在 `shared` 文件夹内，创建一个名为 `NativeSampleModule.h` 的新文件。
+1. 在与 `android` 和 `ios` 文件夹相同的层级创建一个名为 `shared` 的文件夹。
+2. 在 `shared` 文件夹中，创建一个名为 `NativeSampleModule.h` 的新文件。
 
    ```cpp title="shared/NativeSampleModule.h"
    #pragma once
@@ -121,7 +121,7 @@ export default TurboModuleRegistry.getEnforcing<Spec>(
 
    ```
 
-3. 在 `shared` 文件夹内，创建一个名为 `NativeSampleModule.cpp` 的新文件。
+3. 在 `shared` 文件夹中，创建一个名为 `NativeSampleModule.cpp` 的新文件。
 
    ```cpp title="shared/NativeSampleModule.cpp"
    #include "NativeSampleModule.h"
@@ -138,65 +138,65 @@ export default TurboModuleRegistry.getEnforcing<Spec>(
    } // namespace facebook::react
    ```
 
-让我们看看我们创建的两个文件：
+让我们看看刚创建的这两个文件：
 
-- `NativeSampleModule.h` 文件是纯 C++ TurboModule 的头文件。`include` 语句确保我们包含将由 Codegen 创建的规范，其中包含我们需要实现的接口和基类。
-- 模块位于 `facebook::react` 命名空间中，以便访问该命名空间中的所有类型。
-- 类 `NativeSampleModule` 是实际的 Turbo Native Module 类，它扩展了 `NativeSampleModuleCxxSpec` 类，该类包含一些胶水代码和样板代码，使此类表现为 Turbo Native Module。
-- 最后，我们有了构造函数，它接受指向 `CallInvoker` 的指针，以便在需要时与 JS 通信，以及我们必须实现的函数原型。
+- `NativeSampleModule.h` 文件是纯 C++ TurboModule 的头文件。`include` 语句确保我们包含由 Codegen 生成的规范，其中包含我们需要实现的接口和基类。
+- 该模块位于 `facebook::react` 命名空间中，以便访问该命名空间中的所有类型。
+- `NativeSampleModule` 类是实际的 Turbo 原生模块类，它继承了 `NativeSampleModuleCxxSpec` 类；后者包含一些胶水代码和样板代码，用于让该类表现得像一个 Turbo 原生模块。
+- 最后，我们有构造函数，它接收一个指向 `CallInvoker` 的指针，以便在需要时与 JS 通信，以及我们需要实现的函数原型。
 
-`NativeSampleModule.cpp` 文件是我们 Turbo Native Module 的实际实现，并实现了我们在规范中声明的构造函数和方法。
+`NativeSampleModule.cpp` 文件是我们 Turbo 原生模块的实际实现，它实现了构造函数和我们在 spec 中声明的方法。
 
 ## 4. 在平台中注册模块
 
-接下来的步骤将让我们在平台中注册模块。这是将原生代码暴露给 JS 的步骤，以便 React Native 应用程序最终可以从 JS 层调用原生方法。
+接下来的步骤会让我们在平台中注册该模块。这一步会将原生代码暴露给 JS，从而让 React Native 应用最终可以从 JS 层调用原生方法。
 
-这是唯一需要编写一些特定于平台代码的时候。
+这也是唯一一次我们需要编写一些平台特定代码的时候。
 
 ### Android
 
-为了确保 Android 应用程序可以有效地构建 C++ Turbo Native Module，我们需要：
+为了确保 Android 应用能够正常构建 C++ Turbo 原生模块，我们需要：
 
-1. 创建 `CMakeLists.txt` 以访问我们的 C++ 代码。
-2. 修改 `build.gradle` 以指向新创建的 `CMakeLists.txt` 文件。
-3. 在我们的 Android 应用程序中创建 `OnLoad.cpp` 文件以注册新的 Turbo Native Module。
+1. 创建一个 `CMakeLists.txt` 来访问我们的 C++ 代码。
+2. 修改 `build.gradle`，让它指向新创建的 `CMakeLists.txt` 文件。
+3. 在 Android 应用中创建一个 `OnLoad.cpp` 文件来注册新的 Turbo 原生模块。
 
 #### 1. 创建 `CMakeLists.txt` 文件
 
-Android 使用 CMake 进行构建。CMake 需要访问我们在共享文件夹中定义的文件才能构建它们。
+Android 使用 CMake 来构建。CMake 需要访问我们在 shared 文件夹中定义的文件，才能构建它们。
 
-1. 创建一个新文件夹 `SampleApp/android/app/src/main/jni`。`jni` 文件夹是 Android C++ 部分所在的位置。
-2. 创建一个 `CMakeLists.txt` 文件并添加以下内容：
+1. 创建一个新文件夹 `SampleApp/android/app/src/main/jni`。`jni` 文件夹是 Android 的 C++ 代码所在的位置。
+2. 创建一个 `CMakeLists.txt` 文件，并添加以下内容：
 
 ```shell title="CMakeLists.txt"
 cmake_minimum_required(VERSION 3.13)
 
-# 在此处定义库名称。
+# 在这里定义库名称。
 project(appmodules)
 
-# 此文件包含构建你的 React Native 应用程序所需的所有内容
+# 这个文件包含了构建 React Native 应用所需的全部内容
 include(${REACT_ANDROID_DIR}/cmake-utils/ReactNative-application.cmake)
 
-# 定义额外源代码的位置。我们需要回退 jni, main, src, app, android 文件夹
+# 定义额外源代码所在的位置。我们需要从 jni、main、src、app、android 目录逐级返回。
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE ../../../../../shared/NativeSampleModule.cpp)
 
-# 定义 CMake 可以找到额外头文件的位置。我们需要回退 jni, main, src, app, android 文件夹
+# 定义 CMake 可以在哪里找到额外的头文件。这里同样需要从 jni、main、src、app、android 目录逐级返回。
 target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ../../../../../shared)
 ```
 
-CMake 文件执行以下操作：
+这个 CMake 文件执行了以下操作：
 
-- 定义 `appmodules` 库，所有应用程序 C++ 代码都将包含在其中。
-- 加载基础的 React Native CMake 文件。
-- 添加我们需要使用 `target_sources` 指令构建的模块 C++ 源代码。默认情况下，React Native 已经会用默认源填充 `appmodules` 库，这里我们包含我们的自定义源。你可以看到我们需要从 `jni` 文件夹回退到我们的 C++ Turbo Module 所在的 `shared` 文件夹。
-- 指定 CMake 在哪里可以找到模块头文件。同样在这种情况下，我们需要从 `jni` 文件夹回退。
+- 定义 `appmodules` 库，所有应用的 C++ 代码都会包含在其中。
+- 加载 React Native 的基础 CMake 文件。
+- 使用 `target_sources` 指令添加我们需要构建的模块 C++ 源代码。默认情况下，React Native 已经会为 `appmodules` 库填充默认源文件，这里我们加入自定义源文件。你可以看到，我们需要从 `jni` 文件夹回到 `shared` 文件夹，也就是 C++ Turbo Module 所在的位置。
+- 指定 CMake 可以在哪里找到模块头文件。在这种情况下也同样需要从 `jni` 文件夹逐级返回。
 
 #### 2. 修改 `build.gradle` 以包含自定义 C++ 代码
 
-Gradle 是协调 Android 构建的工具。我们需要告诉它在哪里可以找到 `CMake` 文件以构建 Turbo Native Module。
+Gradle 是负责协调 Android 构建的工具。我们需要告诉它去哪里查找 `CMake` 文件，以便构建 Turbo 原生模块。
 
 1. 打开 `SampleApp/android/app/build.gradle` 文件。
-2. 将以下块添加到 Gradle 文件中，位于现有的 `android` 块内：
+2. 在现有的 `android` 块内，向 Gradle 文件中添加以下代码块：
 
 ```diff title="android/app/build.gradle"
     buildTypes {
@@ -204,8 +204,8 @@ Gradle 是协调 Android 构建的工具。我们需要告诉它在哪里可以�
             signingConfig signingConfigs.debug
         }
         release {
-            // 注意！在生产环境中，你需要生成自己的密钥库文件。
-            // 参见 https://reactnative.dev/docs/signed-apk-android。
+            // 注意！在生产环境中，你需要生成自己的 keystore 文件。
+            // 参见 https://reactnative.dev/docs/signed-apk-android.
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
@@ -220,19 +220,19 @@ Gradle 是协调 Android 构建的工具。我们需要告诉它在哪里可以�
 }
 ```
 
-此块告诉 Gradle 文件在哪里查找 CMake 文件。路径是相对于 `build.gradle` 文件所在的文件夹，所以我们需要添加 `jni` 文件夹中 `CMakeLists.txt` 文件的路径。
+这个代码块告诉 Gradle 文件去哪里查找 CMake 文件。路径是相对于 `build.gradle` 文件所在文件夹的，所以我们需要添加指向 `jni` 文件夹中 `CMakeLists.txt` 文件的路径。
 
-#### 3. 注册新的 Turbo Native Module
+#### 3. 注册新的 Turbo 原生模块
 
-最后一步是在运行时注册新的 C++ Turbo Native Module，以便当 JS 需要 C++ Turbo Native Module 时，应用程序知道在哪里找到它并可以返回它。
+最后一步是在运行时中注册新的 C++ Turbo 原生模块，这样当 JS 请求这个 C++ Turbo 原生模块时，应用就知道去哪里找到它并返回它。
 
-1. 从文件夹 `SampleApp/android/app/src/main/jni`，运行以下命令：
+1. 在 `SampleApp/android/app/src/main/jni` 文件夹中，运行以下命令：
 
-<CodeBlock language="sh" title="终端">
+<CodeBlock language="sh" title="shell">
 {`curl -O https://raw.githubusercontent.com/facebook/react-native/${getCoreBranchNameForCurrentVersion()}/packages/react-native/ReactAndroid/cmake-utils/default-app-setup/OnLoad.cpp`}
 </CodeBlock>
 
-2. 然后，按如下方式修改此文件：
+2. 然后按如下方式修改这个文件：
 
 ```diff title="android/app/src/main/jni/OnLoad.cpp"
 #include <DefaultComponentsRegistry.h>
@@ -250,46 +250,46 @@ Gradle 是协调 Android 构建的工具。我们需要告诉它在哪里可以�
 std::shared_ptr<TurboModule> cxxModuleProvider(
     const std::string& name,
     const std::shared_ptr<CallInvoker>& jsInvoker) {
-  // 在这里你可以提供你的 CXX Turbo Module，它们来自
-  // 你的应用程序或外部库。遵循的方法
-  // 类似于以下内容（对于名为 `NativeCxxModuleExample` 的模块）：
+  // 这里你可以提供来自
+  // 你的应用或外部库的 CXX Turbo Modules。遵循的方式
+  // 与下面类似（以名为 `NativeCxxModuleExample` 的模块为例）：
   //
   // if (name == NativeCxxModuleExample::kModuleName) {
   //   return std::make_shared<NativeCxxModuleExample>(jsInvoker);
   // }
 
-+  // 此代码注册模块，以便当 JS 端请求它时，应用程序可以返回它
++  // 这段代码会注册该模块，这样当 JS 端请求它时，应用就可以返回它
 +  if (name == NativeSampleModule::kModuleName) {
 +    return std::make_shared<NativeSampleModule>(jsInvoker);
 +  }
 
-  // 并且我们回退到自动链接的 CXX 模块提供者
+  // 然后我们回退到自动链接的 CXX 模块提供者
   return autolinking_cxxModuleProvider(name, jsInvoker);
 }
 
-// 保留文件的其余部分
+// 保留文件其余部分
 ```
 
-这些步骤从 React Native 下载原始的 `OnLoad.cpp` 文件，以便我们可以安全地覆盖它以在应用程序中加载 C++ Turbo Native Module。
+这些步骤会从 React Native 下载原始的 `OnLoad.cpp` 文件，这样我们就可以安全地覆盖它，以在应用中加载 C++ Turbo 原生模块。
 
-下载文件后，我们可以通过以下方式修改它：
+下载完这个文件后，我们可以通过以下方式修改它：
 
 - 包含指向我们模块的头文件
-- 注册 Turbo Native Module，以便当 JS 需要它时，应用程序可以返回它。
+- 注册 Turbo 原生模块，以便当 JS 请求它时，应用可以返回它
 
-现在，你可以从项目根目录运行 `yarn android` 以查看应用程序成功构建。
+现在，你可以在项目根目录运行 `yarn android` 来查看应用是否成功构建。
 
 ### iOS
 
-为了确保 iOS 应用程序可以有效地构建 C++ Turbo Native Module，我们需要：
+为了确保 iOS 应用能够正常构建 C++ Turbo 原生模块，我们需要：
 
 1. 安装 pods 并运行 Codegen。
-2. 将 `shared` 文件夹添加到我们的 iOS 项目。
-3. 在应用程序中注册 C++ Turbo Native Module。
+2. 将 `shared` 文件夹添加到 iOS 项目中。
+3. 在应用中注册 C++ Turbo 原生模块。
 
-#### 1. 安装 Pods 并运行 Codegen。
+#### 1. 安装 Pods 并运行 Codegen
 
-我们需要运行的第一步是每次准备 iOS 应用程序时运行的常规步骤。CocoaPods 是我们用来设置和安装 React Native 依赖项的工具，作为过程的一部分，它也会为我们运行 Codegen。
+我们需要运行的第一步就是每次准备 iOS 应用时都会执行的常规步骤。CocoaPods 是我们用来设置和安装 React Native 依赖的工具，在这个过程中，它也会为我们运行 Codegen。
 
 ```bash
 cd ios
@@ -297,9 +297,9 @@ bundle install
 bundle exec pod install
 ```
 
-#### 2. 将共享文件夹添加到 iOS 项目
+#### 2. 将 shared 文件夹添加到 iOS 项目
 
-此步骤将 `shared` 文件夹添加到项目，使其对 Xcode 可见。
+这一步会将 `shared` 文件夹添加到项目中，使其在 Xcode 中可见。
 
 1. 打开 CocoaPods 生成的 Xcode Workspace。
 
@@ -310,33 +310,33 @@ open SampleApp.xcworkspace
 
 2. 点击左侧的 `SampleApp` 项目，然后选择 `Add files to "Sample App"...`。
 
-![将文件添加到 Sample App...](/docs/assets/AddFilesToXcode1.png)
+![Add Files to Sample App...](/docs/assets/AddFilesToXcode1.png)
 
 3. 选择 `shared` 文件夹并点击 `Add`。
 
-![将文件添加到 Sample App...](/docs/assets/AddFilesToXcode2.png)
+![Add Files to Sample App...](/docs/assets/AddFilesToXcode2.png)
 
-如果你做对了所有事情，左侧的项目应该看起来像这样：
+如果你做对了，左侧的项目看起来应该像这样：
 
-![Xcode 项目](/docs/assets/CxxTMGuideXcodeProject.png)
+![Xcode Project](/docs/assets/CxxTMGuideXcodeProject.png)
 
-#### 3. 在应用程序中注册 Cxx Turbo Native Module
+#### 3. 在你的应用中注册 Cxx Turbo 原生模块
 
-要在应用程序中注册纯 Cxx Turbo Native Module，你需要：
+要在你的应用中注册一个纯 Cxx Turbo 原生模块，你需要：
 
-1. 为原生模块创建 `ModuleProvider`
-2. 配置 `package.json` 将 JS 模块名称与 ModuleProvider 类关联起来。
+1. 为原生模块创建一个 `ModuleProvider`
+2. 配置 `package.json`，将 JS 模块名与 `ModuleProvider` 类关联起来。
 
-ModuleProvider 是一个 Objective-C++ 文件，它将纯 C++ 模块与 iOS 应用程序的其余部分连接在一起。
+`ModuleProvider` 是一个 Objective-C++，用于将纯 C++ 模块与 iOS 应用的其余部分连接起来。
 
-##### 3.1 创建 ModuleProvider
+##### 3.1 创建 `ModuleProvider`
 
-1. 从 Xcode 中，选择 `SampleApp` 项目并按 <kbd>⌘</kbd> + <kbd>N</kbd> 创建新文件。
+1. 在 Xcode 中，选择 `SampleApp` 项目并按 <kbd>⌘</kbd> + <kbd>N</kbd> 创建一个新文件。
 2. 选择 `Cocoa Touch Class` 模板
-3. 添加名称 `NativeSampleModuleProvider`（保持其他字段为 `Subclass of: NSObject` 和 `Language: Objective-C`）
+3. 添加名称 `NativeSampleModuleProvider`（保持另一个字段为 `Subclass of: NSObject` 和 `Language: Objective-C`）
 4. 点击 Next 生成文件。
-5. 将 `NativeSampleModuleProvider.m` 重命名为 `NativeSampleModuleProvider.mm`。`mm` 扩展名表示 Objective-C++ 文件。
-6. 使用以下内容实现 `NativeSampleModuleProvider.h` 的内容：
+5. 将 `NativeSampleModuleProvider.m` 重命名为 `NativeSampleModuleProvider.mm`。`mm` 扩展名表示一个 Objective-C++ 文件。
+6. 使用以下内容实现 `NativeSampleModuleProvider.h`：
 
 ```objc title="NativeSampleModuleProvider.h"
 
@@ -354,7 +354,7 @@ NS_ASSUME_NONNULL_END
 
 这声明了一个符合 `RCTModuleProvider` 协议的 `NativeSampleModuleProvider` 对象。
 
-7. 使用以下内容实现 `NativeSampleModuleProvider.mm` 的内容：
+7. 使用以下内容实现 `NativeSampleModuleProvider.mm`：
 
 ```objc title="NativeSampleModuleProvider.mm"
 
@@ -374,11 +374,11 @@ NS_ASSUME_NONNULL_END
 @end
 ```
 
-此代码通过在被调用 `getTurboModule:` 方法时创建纯 C++ `NativeSampleModule` 来实现 `RCTModuleProvider` 协议。
+这段代码通过在调用 `getTurboModule:` 方法时创建纯 C++ 的 `NativeSampleModule` 来实现 `RCTModuleProvider` 协议。
 
-##### 3.2 更新 package.json
+##### 3.2 更新 `package.json`
 
-最后一步包括更新 `package.json` 以告知 React Native 原生模块的 JS 规范与原生代码中这些规范的具体实现之间的链接。
+最后一步是更新 `package.json`，以告诉 React Native JS 规范中的原生模块与其原生代码中的具体实现之间的关联。
 
 按如下方式修改 `package.json`：
 
@@ -405,25 +405,25 @@ NS_ASSUME_NONNULL_END
    "dependencies": {
 ```
 
-此时，你需要重新安装 pods 以确保 codegen 再次运行以生成新文件：
+此时，你需要重新安装 pods，以确保 codegen 再次运行并生成新的文件：
 
 ```bash
-# 从 ios 文件夹
+# 从 ios 文件夹中执行
 bundle exec pod install
 open SampleApp.xcworkspace
 ```
 
-如果你现在从 Xcode 构建应用程序，你应该能够成功构建。
+如果你现在从 Xcode 构建应用，应该能够成功构建。
 
 ## 5. 测试你的代码
 
-现在是时候从 JS 访问我们的 C++ Turbo 原生模块了。为此，我们必须修改 `App.tsx` 文件以导入 Turbo 原生模块并在代码中调用它。
+现在是时候从 JS 中访问我们的 C++ Turbo Native Module 了。为此，我们需要修改 `App.tsx` 文件，导入 Turbo Native Module，并在代码中调用它。
 
 1. 打开 `App.tsx` 文件。
-2. 将模板的内容替换为以下代码：
+2. 用以下代码替换模板内容：
 
 ```tsx title="App.tsx"
-import React from 'react';
+import {type JSX, useState} from 'react';
 import {
   Button,
   SafeAreaView,
@@ -434,9 +434,9 @@ import {
 } from 'react-native';
 import SampleTurboModule from './specs/NativeSampleModule';
 
-function App(): React.JSX.Element {
-  const [value, setValue] = React.useState('');
-  const [reversedValue, setReversedValue] = React.useState('');
+function App(): JSX.Element {
+  const [value, setValue] = useState('');
+  const [reversedValue, setReversedValue] = useState('');
 
   const onPress = () => {
     const revString = SampleTurboModule.reverseString(value);
@@ -447,9 +447,9 @@ function App(): React.JSX.Element {
     <SafeAreaView style={styles.container}>
       <View>
         <Text style={styles.title}>
-          欢迎使用 C++ Turbo 原生模块示例
+          欢迎使用 C++ Turbo Native Module 示例
         </Text>
-        <Text>在这里写下你想要反转的文本</Text>
+        <Text>在这里输入你想要反转的文本</Text>
         <TextInput
           style={styles.textInput}
           placeholder="在这里输入你的文本"
@@ -485,19 +485,19 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-此应用中有趣的行是：
+这个应用里有几行比较关键：
 
-- `import SampleTurboModule from './specs/NativeSampleModule';`：这一行将 Turbo 原生模块导入到应用中，
-- `onPress` 回调中的 `const revString = SampleTurboModule.reverseString(value);`：这就是你在应用中使用 Turbo 原生模块的方式。
+- `import SampleTurboModule from './specs/NativeSampleModule';`：这一行在应用中导入了 Turbo Native Module，
+- `const revString = SampleTurboModule.reverseString(value);` 位于 `onPress` 回调中：这就是在应用中使用 Turbo Native Module 的方式。
 
 :::warning
-为了本示例的缘故并尽可能保持简短，我们直接在应用中导入了 spec 文件。
-这种情况下的最佳实践是创建一个单独的文件来封装规范，并在你的应用程序中使用该文件。
-这允许你为规范准备输入，并让你在 JS 中对它们有更多的控制权。
+为了这个示例并尽可能保持简短，我们直接在应用中导入了 spec 文件。
+这里更好的实践是创建一个单独的文件来包装这些 specs，并在你的应用中使用那个文件。
+这样可以为 specs 准备输入，并让你在 JS 中对它们拥有更多控制。
 :::
 
-恭喜你，你编写了第一个 C++ Turbo 原生模块！
+恭喜你，你写出了第一个 C++ Turbo Native Module！
 
 | <center>Android</center>                                                                             | <center>iOS</center>                                                                          |
 | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| <center><img src="/docs/assets/CxxGuideAndroidVideo.gif" alt="Android 视频" height="600"/></center> | <center><img src="/docs/assets/CxxGuideIOSVideo.gif" alt="iOS 视频" height="600" /></center> |
+| <center><img src="/docs/assets/CxxGuideAndroidVideo.gif" alt="Android Video" height="600"/></center> | <center><img src="/docs/assets/CxxGuideIOSVideo.gif" alt="iOS video" height="600" /></center> |

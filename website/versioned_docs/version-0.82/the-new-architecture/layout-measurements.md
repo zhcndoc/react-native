@@ -10,11 +10,11 @@ React Native 提供了一些原生方法来了解视图的测量值。
 
 ```tsx
 function AComponent(children) {
-  const targetRef = React.useRef(null)
+  const targetRef = useRef(null)
 
   useLayoutEffect(() => {
     targetRef.current?.measure((x, y, width, height, pageX, pageY) => {
-      //对测量值进行一些处理
+      // 对测量值进行一些处理
     });
   }, [ /* 在此处添加依赖项 */]);
 

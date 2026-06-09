@@ -12,7 +12,6 @@ title: ImageBackground
 ## 示例
 
 ```SnackPlayer name=ImageBackground
-import React from 'react';
 import {ImageBackground, StyleSheet, Text} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -22,7 +21,7 @@ const App = () => (
   <SafeAreaProvider>
     <SafeAreaView style={styles.container} edges={['left', 'right']}>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-        <Text style={styles.text}>Inside</Text>
+        <Text style={styles.text}>内部</Text>
       </ImageBackground>
     </SafeAreaView>
   </SafeAreaProvider>

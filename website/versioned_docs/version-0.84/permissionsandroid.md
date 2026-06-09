@@ -17,7 +17,6 @@ title: PermissionsAndroid
 ### 示例
 
 ```SnackPlayer name=PermissionsAndroid%20Example&supportedPlatforms=android
-import React from 'react';
 import {
   Button,
   PermissionsAndroid,

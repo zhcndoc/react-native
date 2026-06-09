@@ -10,16 +10,15 @@ title: 样式
 当组件变得越来越复杂时，通常使用 `StyleSheet.create` 在一个地方定义多个样式会更清晰。下面是一个示例：
 
 ```SnackPlayer name=Style
-import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
 const LotsOfStyles = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.red}>just red</Text>
-      <Text style={styles.bigBlue}>just bigBlue</Text>
-      <Text style={[styles.bigBlue, styles.red]}>bigBlue, then red</Text>
-      <Text style={[styles.red, styles.bigBlue]}>red, then bigBlue</Text>
+      <Text style={styles.red}>只是红色</Text>
+      <Text style={styles.bigBlue}>只是大号蓝色</Text>
+      <Text style={[styles.bigBlue, styles.red]}>大号蓝色，然后红色</Text>
+      <Text style={[styles.red, styles.bigBlue]}>红色，然后大号蓝色</Text>
     </View>
   );
 };

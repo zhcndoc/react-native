@@ -3,9 +3,9 @@ id: navigation
 title: 屏幕间导航
 ---
 
-移动应用很少由单个屏幕组成。管理多个屏幕的展示和它们之间的转换通常由所谓的导航器（navigator）来处理。
+移动应用很少由单个屏幕组成。管理多个屏幕的展示以及它们之间的转换，通常由所谓的导航器（navigator）来处理。
 
-本指南涵盖了 React Native 中可用的各种导航组件。如果你刚开始接触导航，你可能会想要使用 [React Navigation](navigation.md#react-navigation)。React Navigation 提供了一个直接的导航解决方案，能够在 Android 和 iOS 上呈现常见的堆栈导航和标签页导航模式。
+本指南涵盖了 React Native 中可用的各种导航组件。如果你刚开始接触导航，你可能会想使用 [React Navigation](navigation.md#react-navigation)。React Navigation 提供了一个直接的导航解决方案，能够在 Android 和 iOS 上呈现常见的堆栈导航和标签页导航模式。
 
 如果你正在将 React Native 集成到一个已经原生管理导航的应用中，或者正在寻找 React Navigation 的替代方案，以下库在两个平台上都提供了原生导航：[react-native-navigation](https://github.com/wix/react-native-navigation)。
 
@@ -64,7 +64,6 @@ npm install @react-navigation/native @react-navigation/native-stack
 现在你可以创建一个带有主屏幕和个人资料屏幕的应用：
 
 ```tsx
-import * as React from 'react';
 import {createStaticNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 

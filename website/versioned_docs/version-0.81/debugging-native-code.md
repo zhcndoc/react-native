@@ -6,7 +6,7 @@ title: 调试原生代码
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 <div className="banner-native-code-required">
-  <h3>仅包含原生代码的项目</h3>
+  <h3>仅限原生代码的项目</h3>
   <p>以下部分仅适用于暴露了原生代码的项目。如果你使用的是托管的 Expo 工作流，请参阅关于 <a href="https://docs.expo.dev/workflow/prebuild/" target="_blank">prebuild</a> 的指南以使用此 API。</p>
 </div>
 
@@ -50,7 +50,7 @@ adb logcat "*:S" ReactNative:V ReactNativeJS:V YourModuleName:D
 
 在你的原生模块中，使用 `NSLog` 进行自定义日志记录：
 
-```objective-c
+```objectivec
 NSLog(@"YourModuleName: %@", message);
 ```
 

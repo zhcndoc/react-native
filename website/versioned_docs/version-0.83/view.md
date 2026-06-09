@@ -5,14 +5,13 @@ title: 视图
 
 import ExperimentalAPIWarning from './\_experimental-api-warning.mdx';
 
-构建用户界面最基本的组件，`View` 是一个容器，支持使用 [flexbox](flexbox.md)、[样式](style.md)、[部分触摸处理](handling-touches.md) 以及 [辅助功能](accessibility.md) 控制。`View` 直接映射到 React Native 运行的任意平台上的原生视图对应物，无论是 `UIView`、`<div>`、`android.view` 等。
+构建用户界面最基本的组件，`View` 是一个容器，支持使用 [flexbox](flexbox.md)、[样式](style.md)、[触摸处理](handling-touches.md) 以及 [辅助功能](accessibility.md) 控制。`View` 直接映射到 React Native 运行的任意平台上的原生视图对应物，无论是 `UIView`、`<div>`、`android.view` 等。
 
 `View` 设计为可以嵌套在其他视图内部，并且可以拥有零个或多个任意类型的子元素。
 
 以下示例创建了一个 `View`，在一行内包裹两个带颜色的盒子和一个文本组件，带有内边距。
 
-```SnackPlayer name=View%20 示例
-import React from 'react';
+```SnackPlayer name=View%20Example
 import {View, Text} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 

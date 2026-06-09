@@ -148,8 +148,8 @@ import android.util.Log;
 
 @ReactMethod
 public void createCalendarEvent(String name, String location) {
-   Log.d("CalendarModule", "Create event called with name: " + name
-   + " and location: " + location);
+   Log.d("CalendarModule", "创建事件，传入的名称：" + name
+   + "，位置：" + location);
 }
 ```
 
@@ -161,7 +161,7 @@ import android.util.Log
 
 @ReactMethod
 fun createCalendarEvent(name: String, location: String) {
-    Log.d("CalendarModule", "Create event called with name: $name and location: $location")
+    Log.d("CalendarModule", "创建事件，传入的名称：$name，位置：$location")
 }
 ```
 
@@ -311,7 +311,6 @@ override fun getPackages(): List<ReactPackage> =
 在应用中找到一个你想要添加对原生模块 `createCalendarEvent()` 方法调用的地方。下面是你可以在应用中添加的组件 `NewModuleButton` 的示例。你可以在 `NewModuleButton` 的 `onPress()` 函数中调用原生模块。
 
 ```tsx
-import React from 'react';
 import {NativeModules, Button} from 'react-native';
 
 const NewModuleButton = () => {
@@ -391,12 +390,12 @@ yarn android
 
 像上面那样通过从 `NativeModules` 中提取来导入你的原生模块有点笨拙。
 
-为了节省你的原生模块使用者每次访问原生模块时都需要这样做的麻烦，你可以为该模块创建一个 JavaScript 包装器。创建一个名为 `CalendarModule.js` 的新 JavaScript 文件，内容如下：
+为了省去你的原生模块使用者每次访问原生模块时都要这样做的麻烦，你可以为该模块创建一个 JavaScript 包装器。创建一个名为 `CalendarModule.js` 的新 JavaScript 文件，内容如下：
 
 ```tsx
 /**
-* 这将原生 CalendarModule 模块暴露为 JS 模块。它有一个
-* 函数 'createCalendarEvent'，它接受以下参数：
+* 这将原生 `CalendarModule` 模块暴露为 JS 模块。它有一个
+* 函数 `createCalendarEvent`，它接受以下参数：
 
 * 1. String name：一个代表事件名称的字符串
 * 2. String location：一个代表事件位置的字符串
@@ -406,12 +405,12 @@ const {CalendarModule} = NativeModules;
 export default CalendarModule;
 ```
 
-这个 JavaScript 文件也成为你添加任何 JavaScript 端功能的好地方。例如，如果你使用像 TypeScript 这样的类型系统，你可以在此处为你的原生模块添加类型注解。虽然 React Native 尚未支持原生到 JS 的类型安全，但你所有的 JS 代码将是类型安全的。这样做也将使你更容易在未来切换到类型安全的原生模块。下面是为 CalendarModule 添加类型安全的示例：
+这个 JavaScript 文件也很适合作为你添加任何 JavaScript 端功能的地方。例如，如果你使用像 TypeScript 这样的类型系统，你可以在这里为你的原生模块添加类型注解。虽然 React Native 目前还不支持原生到 JS 的类型安全，但你所有的 JS 代码将是类型安全的。这样也会让你将来更容易切换到类型安全的原生模块。下面是为 `CalendarModule` 添加类型安全的示例：
 
 ```tsx
 /**
- * 这将原生 CalendarModule 模块暴露为 JS 模块。它有一个
- * 函数 'createCalendarEvent'，它接受以下参数：
+ * 这将原生 `CalendarModule` 模块暴露为 JS 模块。它有一个
+ * 函数 `createCalendarEvent`，它接受以下参数：
  *
  * 1. String name：一个代表事件名称的字符串
  * 2. String location：一个代表事件位置的字符串
@@ -524,7 +523,7 @@ console.log(DEFAULT_EVENT_NAME);
 
 从技术上讲，可以直接从原生模块对象访问 `getConstants()` 中导出的常量。这在 TurboModules 中将不再受支持，所以我们鼓励社区切换到上述方法，以避免将来必要的迁移。
 
-> 目前常量仅在初始化时导出，因此如果你在运行时更改 getConstants 值，它不会影响 JavaScript 环境。这将随着 Turbomodules 而改变。在 Turbomodules 中，`getConstants()` 将成为一个常规的原生模块方法，每次调用都会触及原生端。
+> 目前常量仅在初始化时导出，因此如果你在运行时更改 `getConstants` 值，它不会影响 JavaScript 环境。这将随着 Turbomodules 而改变。在 Turbomodules 中，`getConstants()` 将成为一个常规的原生模块方法，每次调用都会触及原生端。
 
 ### 回调
 
@@ -590,7 +589,7 @@ const onPress = () => {
     'Party',
     'My House',
     eventId => {
-      console.log(`Created a new event with id ${eventId}`);
+      console.log(`创建了一个新事件，id 为 ${eventId}`);
     },
   );
 };
@@ -634,9 +633,9 @@ const onPress = () => {
     'testLocation',
     (error, eventId) => {
       if (error) {
-        console.error(`Error found! ${error}`);
+        console.error(`发现错误！${error}`);
       }
-      console.log(`event id ${eventId} returned`);
+      console.log(`返回的事件 id ${eventId}`);
     },
   );
 };
@@ -677,10 +676,10 @@ const onPress = () => {
     'testName',
     'testLocation',
     error => {
-      console.error(`Error found! ${error}`);
+      console.error(`发现错误！${error}`);
     },
     eventId => {
-      console.log(`event id ${eventId} returned`);
+      console.log(`返回的事件 id ${eventId}`);
     },
   );
 };
@@ -740,7 +739,7 @@ const onSubmit = async () => {
       'Party',
       'My House',
     );
-    console.log(`Created a new event with id ${eventId}`);
+    console.log(`创建了一个新事件，id 为 ${eventId}`);
   } catch (e) {
     console.error(e);
   }

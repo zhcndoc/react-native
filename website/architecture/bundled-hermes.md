@@ -120,9 +120,9 @@ dependencies {
 你可通过如下命令触发 Hermes 构建：
 
 ```bash
-// 构建 Hermes 的调试版本
+# 构建 Hermes 的调试版本
 ./gradlew :ReactAndroid:hermes-engine:assembleDebug
-// 构建 Hermes 的发行版本
+# 构建 Hermes 的发布版本
 ./gradlew :ReactAndroid:hermes-engine:assembleRelease
 ```
 
@@ -134,7 +134,7 @@ dependencies {
 
 但是这导致模板中必须加上：
 
-```
+```groovy
 exclude group:'com.facebook.fbjni'
 ```
 

@@ -22,7 +22,6 @@ title: ScrollView
 ## 示例
 
 ```SnackPlayer name=ScrollView%20Example
-import React from 'react';
 import {StyleSheet, Text, ScrollView, StatusBar} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -757,14 +756,14 @@ scrollTo(
 );
 ```
 
-滚动至指定的 x，y 偏移，可立即或平滑动画滚动。
+滚动至指定的 x、y 偏移，可立即滚动或平滑动画滚动。
 
 **示例：**
 
 `scrollTo({x: 0, y: 0, animated: true})`
 
 :::note
-之所以有该奇怪的函数签名，是因为历史原因该函数既接受一个对象参数，也接受分开的多个参数。由于参数顺序（y 在 x 之前）导致歧义，已废弃，强烈不推荐使用分开参数形式。
+之所以有这个奇怪的函数签名，是因为历史原因，该函数既接受一个对象参数，也接受分开的多个参数。由于参数顺序（y 在 x 之前）会造成歧义，该形式已废弃，强烈不推荐使用分开的参数形式。
 :::
 
 ---
@@ -775,6 +774,6 @@ scrollTo(
 scrollToEnd(options?: {animated?: boolean});
 ```
 
-如果是纵向 ScrollView，滚动到底部；如果是横向，滚动到右侧。
+如果是纵向 `ScrollView`，滚动到底部；如果是横向，滚动到右侧。
 
 使用 `scrollToEnd({animated: true})` 进行平滑动画滚动，`scrollToEnd({animated: false})` 则立即滚动。如果不传参数，`animated` 默认为 `true`。

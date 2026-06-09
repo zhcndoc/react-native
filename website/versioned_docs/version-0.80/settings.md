@@ -3,12 +3,12 @@ id: settings
 title: 设置
 ---
 
-`Settings` 作为 [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults) 的包装器，这是一个仅在 iOS 上可用的持久化键值存储。
+`Settings` 充当 [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults) 的包装器，它是一个仅在 iOS 上可用的持久键值存储。
 
 ## 示例
 
 ```SnackPlayer name=Settings%20Example&supportedPlatforms=ios
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Button, Settings, StyleSheet, Text} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -66,7 +66,7 @@ export default App;
 static clearWatch(watchId: number);
 ```
 
-`watchId` 是最初配置订阅时 `watchKeys()` 返回的数字。
+`watchId` 是在订阅最初配置时由 `watchKeys()` 返回的数字。
 
 ---
 
@@ -96,6 +96,6 @@ static set(settings: Record<string, any>);
 static watchKeys(keys: string | array<string>, callback: () => void): number;
 ```
 
-订阅通知，以便在 `NSUserDefaults` 中由 `keys` 参数指定的任何键的值发生更改时收到通知。返回一个 `watchId` 数字，可与 `clearWatch()` 一起使用以取消订阅。
+订阅以在 `keys` 参数指定的任意键的值在 `NSUserDefaults` 中发生变化时收到通知。返回一个可与 `clearWatch()` 一起使用以取消订阅的 `watchId` 数字。
 
-> **注意：** `watchKeys()` 设计上会忽略内部的 `set()` 调用，仅在 React Native 代码外部执行的更改时触发回调。
+> **注意：** `watchKeys()` 设计上会忽略内部的 `set()` 调用，并且只在 React Native 代码之外发生的更改时触发回调。

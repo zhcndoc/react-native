@@ -3,16 +3,15 @@ id: imagebackground
 title: ImageBackground
 ---
 
-A common feature request from developers familiar with the web is `background-image`. To handle this use case, you can use the `<ImageBackground>` component, which has the same props as `<Image>`, and add whatever children to it you would like to layer on top of it.
+对于熟悉 Web 的开发者来说，一个常见需求是 `background-image`。要处理这种使用场景，可以使用 `<ImageBackground>` 组件，它拥有与 `<Image>` 相同的 props，并且可以添加任何你希望叠加在其上的子元素。
 
-You might not want to use `<ImageBackground>` in some cases, since the implementation is basic. Refer to `<ImageBackground>`'s [source code](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Image/ImageBackground.js) for more insight, and create your own custom component when needed.
+在某些情况下，你可能不想使用 `<ImageBackground>`，因为它的实现比较基础。请参考 `<ImageBackground>` 的 [源代码](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Image/ImageBackground.js) 以获得更多理解，并在需要时创建你自己的自定义组件。
 
-Note that you must specify some width and height style attributes.
+请注意，你必须指定一些宽度和高度样式属性。
 
-## Example
+## 示例
 
 ```SnackPlayer name=ImageBackground
-import React from 'react';
 import {ImageBackground, StyleSheet, Text} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -22,7 +21,7 @@ const App = () => (
   <SafeAreaProvider>
     <SafeAreaView style={styles.container} edges={['left', 'right']}>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-        <Text style={styles.text}>Inside</Text>
+        <Text style={styles.text}>内部</Text>
       </ImageBackground>
     </SafeAreaView>
   </SafeAreaProvider>
@@ -51,19 +50,19 @@ export default App;
 
 ---
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
 ### [Image Props](image.md#props)
 
-Inherits [Image Props](image.md#props).
+继承 [Image Props](image.md#props)。
 
 ---
 
 ### `imageStyle`
 
-| Type                                |
+| 类型                                |
 | ----------------------------------- |
 | [Image Style](image-style-props.md) |
 
@@ -71,12 +70,12 @@ Inherits [Image Props](image.md#props).
 
 ### `imageRef`
 
-A ref setter that will be assigned the [element node](element-nodes) of the inner `Image` component when mounted.
+一个 ref 设置器，在挂载时会被赋予内部 `Image` 组件的 [element node](element-nodes)。
 
 ---
 
 ### `style`
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
 | [View Style](view-style-props.md) |

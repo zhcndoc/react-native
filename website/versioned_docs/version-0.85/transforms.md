@@ -3,12 +3,11 @@ id: transforms
 title: 变换
 ---
 
-变换（Transforms）是样式属性，可帮助您使用 2D 或 3D 变换修改组件的外观和位置。但是，一旦应用了变换，变换组件周围的布局将保持不变，因此它可能会与附近的组件重叠。您可以向变换组件、附近组件应用边距（margin），或向容器应用内边距（padding）以防止此类重叠。
+变换是一种样式属性，可帮助你使用 2D 或 3D 变换来修改组件的外观和位置。不过，一旦应用了变换，布局在变换后的组件周围仍保持不变，因此可能会与附近的组件重叠。你可以为变换后的组件、附近的组件添加 margin，或为容器添加 padding，以防止这种重叠。
 
 ## 示例
 
 ```SnackPlayer name=Transforms%20Example
-import React from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -37,7 +36,7 @@ const App = () => (
               transform: [{scaleX: 2}],
             },
           ]}>
-          <Text style={styles.text}>ScaleX 2 倍</Text>
+          <Text style={styles.text}>X 方向缩放 2 倍</Text>
         </View>
 
         <View
@@ -47,7 +46,7 @@ const App = () => (
               transform: [{scaleY: 2}],
             },
           ]}>
-          <Text style={styles.text}>ScaleY 2 倍</Text>
+          <Text style={styles.text}>Y 方向缩放 2 倍</Text>
         </View>
 
         <View
@@ -87,7 +86,7 @@ const App = () => (
               transform: [{skewX: '45deg'}],
             },
           ]}>
-          <Text style={styles.text}>X 轴倾斜 45 度</Text>
+          <Text style={styles.text}>X 方向倾斜 45 度</Text>
         </View>
 
         <View
@@ -97,7 +96,7 @@ const App = () => (
               transform: [{skewY: '45deg'}],
             },
           ]}>
-          <Text style={styles.text}>Y 轴倾斜 45 度</Text>
+          <Text style={styles.text}>Y 方向倾斜 45 度</Text>
         </View>
 
         <View
@@ -107,7 +106,7 @@ const App = () => (
               transform: [{skewX: '30deg'}, {skewY: '30deg'}],
             },
           ]}>
-          <Text style={styles.text}>X 和 Y 倾斜 30 度</Text>
+          <Text style={styles.text}>X 和 Y 方向倾斜 30 度</Text>
         </View>
 
         <View
@@ -117,7 +116,7 @@ const App = () => (
               transform: [{translateX: -50}],
             },
           ]}>
-          <Text style={styles.text}>向左平移 50</Text>
+          <Text style={styles.text}>X 方向平移 -50 </Text>
         </View>
 
         <View
@@ -127,7 +126,7 @@ const App = () => (
               transform: [{translateY: 50}],
             },
           ]}>
-          <Text style={styles.text}>向下平移 50</Text>
+          <Text style={styles.text}>Y 方向平移 50 </Text>
         </View>
 
         <View
@@ -181,11 +180,11 @@ export default App;
 
 # 参考
 
-## Transform
+## 变换
 
-`transform` 接受一个变换对象数组或空格分隔的字符串值。每个对象指定将作为键进行变换的属性，以及变换中使用的值。对象不应合并。每个对象使用单个键/值对。
+`transform` 接受一个由变换对象组成的数组，或以空格分隔的字符串值。每个对象都以要被变换的属性作为键，并以要用于变换的值作为值。对象不应组合使用。每个对象只使用一个键/值对。
 
-旋转变换需要字符串，以便可以用度（deg）或弧度（rad）表示变换。例如：
+旋转变换要求使用字符串，以便可以用度（deg）或弧度（rad）表示变换。例如：
 
 ```js
 {
@@ -193,7 +192,7 @@ export default App;
 }
 ```
 
-同样的效果也可以使用空格分隔的字符串实现：
+也可以使用以空格分隔的字符串来实现相同效果：
 
 ```js
 {
@@ -201,7 +200,7 @@ export default App;
 }
 ```
 
-倾斜变换需要字符串，以便可以用度（deg）表示变换。例如：
+倾斜变换要求使用字符串，以便可以用度（deg）表示变换。例如：
 
 ```js
 {
@@ -211,9 +210,9 @@ export default App;
 
 ### 矩阵变换
 
-`matrix` 变换接受一个由 16 个数字组成的数组作为 4x4 变换矩阵。这允许您在单个操作中应用结合平移、旋转、缩放和倾斜的复杂变换。
+`matrix` 变换接受一个 4x4 变换矩阵，形式为包含 16 个数字的数组。这允许你通过单次操作组合平移、旋转、缩放和倾斜等复杂变换。
 
-矩阵按列主序指定：
+矩阵以列优先顺序指定：
 
 ```js
 {
@@ -242,7 +241,7 @@ export default App;
 }
 ```
 
-例如，应用缩放和倾斜的组合：
+例如，要应用缩放和倾斜的组合：
 
 ```js
 {
@@ -257,29 +256,29 @@ export default App;
 ```
 
 :::note
-矩阵变换在需要应用预计算的变换矩阵时非常有用，例如来自动画库的矩阵，或在构建 UI 编辑器应用程序时。对于基本变换，建议使用单独的变换属性（scale、rotate、translate 等），因为它们更具可读性。
+当你需要应用预先计算好的变换矩阵时，例如来自动画库的矩阵，或者在构建 UI 编辑器应用时，矩阵变换非常有用。对于基本变换，建议使用各个独立的 transform 属性（scale、rotate、translate 等），因为它们更易读。
 :::
 
 | 类型                                                                                                                                                                                                                                                                                                          | 是否必需 |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| 对象数组：`{matrix: number[]}`, `{perspective: number}`, `{rotate: string}`, `{rotateX: string}`, `{rotateY: string}`, `{rotateZ: string}`, `{scale: number}`, `{scaleX: number}`, `{scaleY: number}`, `{translateX: number}`, `{translateY: number}`, `{skewX: string}`, `{skewY: string}` 或字符串 | 否       |
+| 对象数组：`{matrix: number[]}`、`{perspective: number}`、`{rotate: string}`、`{rotateX: string}`、`{rotateY: string}`、`{rotateZ: string}`、`{scale: number}`、`{scaleX: number}`、`{scaleY: number}`、`{translateX: number}`、`{translateY: number}`、`{skewX: string}`、`{skewY: string}` 或字符串 | 否       |
 
 ---
 
 ### 🗑️ `decomposedMatrix`, `rotation`, `scaleX`, `scaleY`, `transformMatrix`, `translateX`, `translateY`
 
 :::warning[已弃用]
-改用 [`transform`](transforms#transform) 属性。
+请改用 [`transform`](transforms#transform) 属性。
 :::
 
 ## 变换原点
 
-`transformOrigin` 属性设置视图变换的原点。变换原点是应用变换的中心点。默认情况下，变换的原点是 `center`。
+`transformOrigin` 属性用于设置视图变换的原点。变换原点是应用变换时所围绕的点。默认情况下，变换的原点是 `center`。
 
 # 示例
 
 ```SnackPlayer name=TransformOrigin%20Example
-import React, {useEffect, useRef} from 'react';
+import {useEffect, useRef} from 'react';
 import {Animated, View, StyleSheet, Easing} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -343,13 +342,13 @@ export default App;
 
 ### 值
 
-变换原点支持 `px`、`percentage` 以及关键字 `top`、`left`、`right`、`bottom`、`center` 值。
+变换原点支持 `px`、`percentage` 以及关键字 `top`、`left`、`right`、`bottom`、`center` 的值。
 
-`transformOrigin` 属性可以使用一个、两个或三个值来指定，其中每个值代表一个偏移量。
+`transformOrigin` 属性可以使用一个、两个或三个值来指定，每个值表示一个偏移量。
 
 #### 单值语法：
 
-- 值必须是 `px`、`percentage` 或关键字 `left`、`center`、`right`、`top` 和 `bottom` 之一。
+- 该值必须是 `px`、`percentage`，或关键字 `left`、`center`、`right`、`top`、`bottom` 之一。
 
 ```js
 {
@@ -360,8 +359,8 @@ export default App;
 
 #### 双值语法：
 
-- 第一个值（x-offset）必须是 `px`、`percentage` 或关键字 `left`、`center` 和 `right` 之一。
-- 第二个值（y-offset）必须是 `px`、`percentage` 或关键字 `top`、`center` 和 `bottom` 之一。
+- 第一个值（x 偏移）必须是 `px`、`percentage`，或关键字 `left`、`center`、`right` 之一。
+- 第二个值（y 偏移）必须是 `px`、`percentage`，或关键字 `top`、`center`、`bottom` 之一。
 
 ```js
 {
@@ -374,7 +373,7 @@ export default App;
 #### 三值语法：
 
 - 前两个值与双值语法相同。
-- 第三个值（z-offset）必须是 `px`。它始终代表 Z 偏移量。
+- 第三个值（z 偏移）必须是 `px`。它始终表示 Z 偏移。
 
 ```js
 {
@@ -385,7 +384,7 @@ export default App;
 
 #### 数组语法
 
-`transformOrigin` 也支持数组语法。这使得与 Animated API 一起使用更加方便。它还避免了字符串解析，因此应该更高效。
+`transformOrigin` 也支持数组语法。它便于与 Animated API 一起使用。它还能避免字符串解析，因此效率更高。
 
 ```js
 {
@@ -396,4 +395,4 @@ export default App;
 }
 ```
 
-您可以参考 MDN 关于 [变换原点](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin) 的指南以获取更多信息。
+你可以参考 MDN 的 [变换原点](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin) 指南以获取更多信息。

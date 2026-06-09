@@ -37,7 +37,7 @@ export interface NativeProps extends ViewProps {
 +interface NativeCommands {
 +    reload: (viewRef: React.ElementRef<HostComponent<NativeProps>>) => void;
 +}
-
++
 +export const Commands: NativeCommands = codegenNativeCommands<NativeCommands>({
 +    supportedCommands: ['reload'],
 +});
@@ -73,7 +73,7 @@ type NativeProps = $ReadOnly<{|
 +interface NativeCommands {
 +    reload: (viewRef: React.ElementRef<HostComponent<NativeProps>>) => void;
 +}
-
++
 +export const Commands: NativeCommands = codegenNativeCommands<NativeCommands>({
 +    supportedCommands: ['reload'],
 +});
@@ -107,7 +107,6 @@ export default (codegenNativeComponent<NativeProps>(
 打开 `App.tsx` 文件并按如下方式修改它：
 
 ```diff title="App.tsx"
-import React from 'react';
 -import {Alert, StyleSheet, View} from 'react-native';
 -import WebView from '../specs/WebViewNativeComponent';
 +import {Alert, StyleSheet, Pressable, Text, View} from 'react-native';
@@ -186,7 +185,6 @@ export default App;
 打开 `App.tsx` 文件并按如下方式修改它：
 
 ```diff title="App.jsx"
-import React from 'react';
 -import {Alert, StyleSheet, View} from 'react-native';
 -import WebView from '../specs/WebViewNativeComponent';
 +import {Alert, StyleSheet, Pressable, Text, View} from 'react-native';
@@ -420,7 +418,7 @@ Framework build type is static library
 
 ## 5. 运行您的应用
 
-最后，您可以使用通常的命令运行您的应用。一旦应用运行，您可以点击刷新按钮查看页面重新加载。
+最后，您可以使用常用的命令运行您的应用。一旦应用运行，您可以点击刷新按钮查看页面重新加载。
 
 | <center>Android</center>                                                                         | <center>iOS</center>                                                                         |
 | ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |

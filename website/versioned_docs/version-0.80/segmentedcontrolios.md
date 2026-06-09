@@ -1,6 +1,6 @@
 ---
 id: segmentedcontrolios
-title: '❌ SegmentedControlIOS'
+title: '❌ 分段控制器 iOS'
 ---
 
 > **已从 React Native 中移除。** 请改用 [社区包](https://reactnative.directory/?search=segmentedcontrol) 之一。
@@ -14,7 +14,7 @@ title: '❌ SegmentedControlIOS'
 ## 示例
 
 ```SnackPlayer name=SegmentedControlIOS%20Example&supportedPlatforms=ios&ext=js
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {SegmentedControlIOS, StyleSheet, Text, View} from 'react-native';
 
 const App = () => {
@@ -28,7 +28,7 @@ const App = () => {
           setIndex(event.nativeEvent.selectedSegmentIndex);
         }}
       />
-      <Text style={styles.text}>Selected index: {index}</Text>
+      <Text style={styles.text}>选中的索引：{index}</Text>
     </View>
   );
 };

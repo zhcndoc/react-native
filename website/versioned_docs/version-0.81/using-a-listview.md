@@ -12,7 +12,6 @@ React Native 提供了一套用于展示数据列表的组件。通常，你会�
 此示例创建了一个包含硬编码数据的基本 `FlatList`。`data` props 中的每个项都渲染为 `Text` 组件。`FlatListBasics` 组件随后渲染 `FlatList` 和所有 `Text` 组件。
 
 ```SnackPlayer name=FlatList%20Basics
-import React from 'react';
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 
 const styles = StyleSheet.create({
@@ -55,7 +54,6 @@ export default FlatListBasics;
 如果你想渲染一组被划分为逻辑部分的数据，可能带有部分标题，类似于 iOS 上的 `UITableView`，那么 [SectionList](sectionlist.md) 是合适的选择。
 
 ```SnackPlayer name=SectionList%20Basics
-import React from 'react';
 import {SectionList, StyleSheet, Text, View} from 'react-native';
 
 const styles = StyleSheet.create({

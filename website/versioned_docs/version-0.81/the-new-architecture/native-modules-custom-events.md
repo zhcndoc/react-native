@@ -134,7 +134,6 @@ Framework build type is static library
 打开 `App.tsx` 文件并按如下方式修改：
 
 ```diff title="App.tsx"
-import React from 'react';
 import {
 + Alert,
 + EventSubscription,

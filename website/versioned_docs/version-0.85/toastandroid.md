@@ -17,18 +17,17 @@ React Native 的 ToastAndroid API 将 Android 平台的 ToastAndroid 模块暴�
 :::
 
 ```SnackPlayer name=Toast%20Android%20API%20Example&supportedPlatforms=android
-import React from 'react';
 import {StyleSheet, ToastAndroid, Button, StatusBar} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   const showToast = () => {
-    ToastAndroid.show('A pikachu appeared nearby !', ToastAndroid.SHORT);
+    ToastAndroid.show('附近出现了一只皮卡丘！', ToastAndroid.SHORT);
   };
 
   const showToastWithGravity = () => {
     ToastAndroid.showWithGravity(
-      'All Your Base Are Belong To Us',
+      '你们的一切基础都已归我们所有',
       ToastAndroid.SHORT,
       ToastAndroid.CENTER,
     );
@@ -36,7 +35,7 @@ const App = () => {
 
   const showToastWithGravityAndOffset = () => {
     ToastAndroid.showWithGravityAndOffset(
-      'A wild toast appeared!',
+      '一只野生 toast 出现了！',
       ToastAndroid.LONG,
       ToastAndroid.BOTTOM,
       25,
@@ -47,13 +46,13 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <Button title="Toggle Toast" onPress={() => showToast()} />
+        <Button title="切换 Toast" onPress={() => showToast()} />
         <Button
-          title="Toggle Toast With Gravity"
+          title="切换带重力的 Toast"
           onPress={() => showToastWithGravity()}
         />
         <Button
-          title="Toggle Toast With Gravity & Offset"
+          title="切换带重力和偏移的 Toast"
           onPress={() => showToastWithGravityAndOffset()}
         />
       </SafeAreaView>

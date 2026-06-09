@@ -10,7 +10,7 @@ React Native 提供了一些原生方法，用于获取视图的测量信息。
 
 ```tsx
 function AComponent(children) {
-  const targetRef = React.useRef(null)
+  const targetRef = useRef(null)
 
   useLayoutEffect(() => {
     targetRef.current?.measure((x, y, width, height, pageX, pageY) => {

@@ -1,20 +1,19 @@
----
+我会严格保留 Markdown 结构，只翻译可见文本；接下来直接输出完整中文译文。---
 id: tutorial
-title: 学习基础知识
+title: 了解基础知识
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-React Native 就像 React，但它使用原生组件而不是 Web 组件作为构建块。所以要理解 React Native 应用程序的基本结构，您需要了解一些基本的 React 概念，如 JSX、组件、`state` 和 `props`。如果您已经知道 React，您仍然需要学习一些 React Native 特有的东西，比如原生组件。本教程面向所有受众，无论您是否有 React 经验。
+React Native 很像 React，但它使用原生组件而不是 Web 组件作为构建块。因此，要理解 React Native 应用的基本结构，你需要了解一些 React 的基础概念，比如 JSX、组件、`state` 和 `props`。如果你已经了解 React，你仍然需要学习一些 React Native 特有的内容，比如原生组件。本教程面向所有读者，无论你是否有 React 经验。
 
 让我们开始吧。
 
-## 你好世界
+## Hello World
 
-按照我们人民的古老传统，我们必须首先构建一个除了说"Hello, world!"之外什么都不做的应用程序。它是这样的：
+按照我们民族的古老传统，我们必须先构建一个除了说“Hello, world!”之外什么都不做的应用。如下所示：
 
 ```SnackPlayer name=Hello%20World
-import React from 'react';
 import {Text, View} from 'react-native';
 
 const HelloWorldApp = () => {
@@ -32,42 +31,41 @@ const HelloWorldApp = () => {
 export default HelloWorldApp;
 ```
 
-如果您感到好奇，可以直接在 Web 模拟器中玩转示例代码。您也可以将其粘贴到您的 `App.js` 文件中，在本地机器上创建一个真实的应用程序。
+如果你感到好奇，可以直接在网页模拟器中运行这段示例代码。你也可以把它粘贴到你的 `App.js` 文件中，在本地机器上创建一个真正的应用。
 
 ## 这里发生了什么？
 
-1. 首先，我们需要导入 `React` 以便能够使用 `JSX`，然后它将被转换为每个平台的原生组件。
-2. 在第 2 行，我们从 `react-native` 导入 `Text` 和 `View` 组件。
+1. 首先，我们需要导入 `React`，这样才能使用 `JSX`，之后它会被转换为各个平台的原生组件。
+2. 在第 2 行，我们从 `react-native` 导入了 `Text` 和 `View` 组件
 
-然后我们定义 `HelloWorldApp` 函数，它是一个 [函数组件](https://react.dev/reference/react/Component)，其行为与 Web 版 React 中的方式相同。此函数返回一个带有一些样式的 `View` 组件，并将 `Text` 作为其子组件。
+然后我们定义了 `HelloWorldApp` 函数，它是一个 [函数组件](https://react.dev/reference/react/Component)，其行为方式与 Web 上的 React 相同。这个函数返回一个带有一些样式的 `View` 组件，以及一个作为其子元素的 `Text`。
 
-`Text` 组件允许我们渲染文本，而 `View` 组件渲染一个容器。此容器应用了多种样式，让我们分析一下每一个的作用。
+`Text` 组件允许我们渲染文本，而 `View` 组件则渲染一个容器。这个容器应用了几种样式，我们来分析一下每一种样式的作用。
 
-我们发现的第一个样式是 `flex: 1`，[`flex`](layout-props#flex) prop 将定义您的项目如何沿主轴“填充”可用空间。由于我们只有一个容器，它将占用父组件的所有可用空间。在这种情况下，它是唯一的组件，因此它将占用所有可用的屏幕空间。
+我们看到的第一个样式是 `flex: 1`，[`flex`](layout-props#flex) 属性将定义你的项目如何沿主轴“填充”可用空间。由于我们只有一个容器，它将占据父组件的所有可用空间。在这个例子里，它是唯一的组件，所以它会占据所有可用的屏幕空间。
 
-下一个样式是 [`justifyContent`](layout-props#justifycontent): "center"。这将容器的子组件对齐到容器主轴的中心。最后，我们有 [`alignItems`](layout-props#alignitems): "center"，它将容器的子组件对齐到容器交叉轴的中心。
+接下来的样式是 [`justifyContent`](layout-props#justifycontent): "center"。这会将容器的子元素对齐到容器主轴的中心。最后，我们有 [`alignItems`](layout-props#alignitems): "center"，它会将容器的子元素对齐到容器交叉轴的中心。
 
-这里的一些东西在你看来可能不像 JavaScript。别慌。_这是未来_。
+这里的一些内容看起来可能不像 JavaScript。别慌。_这就是未来_。
 
-首先，ES2015（也称为 ES6）是对 JavaScript 的一组改进，它现在是官方标准的一部分，但尚未被所有浏览器支持，因此通常尚未在 Web 开发中使用。React Native 附带 ES2015 支持，因此您可以使用这些东西而无需担心兼容性。上面示例中的 `import`、`export`、`const` 和 `from` 都是 ES2015 特性。如果您不熟悉 ES2015，您可以通过阅读本教程这样的示例代码来了解它。如果您愿意，[此页面](https://babeljs.io/learn-es2015/) 有一个很好的 ES2015 特性概述。
+首先，ES2015（也称为 ES6）是对 JavaScript 的一组改进，如今已经成为官方标准的一部分，但并非所有浏览器都支持，所以在 Web 开发中它通常还没有被广泛使用。React Native 自带 ES2015 支持，因此你可以放心使用这些内容，而无需担心兼容性。上面示例中的 `import`、`export`、`const` 和 `from` 都是 ES2015 特性。如果你不熟悉 ES2015，你可以通过阅读像本教程这样的示例代码来逐步掌握它。如果你愿意，[这个页面](https://babeljs.io/learn-es2015/)对 ES2015 特性有很好的概述。
 
-此代码示例中的另一个不寻常之处是 `<View><Text>Hello world!</Text></View>`。这是 JSX - 一种在 JavaScript 中嵌入 XML 的语法。许多框架使用专门的模板语言，允许您在标记语言中嵌入代码。在 React 中，这是相反的。JSX 允许您在代码中编写标记语言。它看起来像 Web 上的 HTML，除了不是使用 `<div>` 或 `<span>` 这样的 Web 东西，您使用的是 React 组件。在这种情况下，`<Text>` 是一个显示一些文本的 [核心组件](intro-react-native-components)，而 `View` 就像 `<div>` 或 `<span>`。
+这段代码示例里另一个不太寻常的地方是 `<View><Text>Hello world!</Text></View>`。这就是 JSX——一种在 JavaScript 中嵌入 XML 的语法。许多框架使用专门的模板语言，让你可以在标记语言中嵌入代码。而在 React 中，情况正好相反。JSX 让你可以在代码中编写标记语言。它看起来像 Web 上的 HTML，只不过你使用的不是 `<div>` 或 `<span>` 之类的 Web 元素，而是 React 组件。在这里，`<Text>` 是一个显示文本的 [核心组件](intro-react-native-components)，而 `View` 则类似于 `<div>` 或 `<span>`。
 
 ## 组件
 
-所以这段代码正在定义 `HelloWorldApp`，一个新的 `Component`。当您构建 React Native 应用程序时，您将经常制作新组件。您在屏幕上看到的任何内容都是某种组件。
+所以这段代码定义了 `HelloWorldApp`，一个新的 `Component`。当你构建 React Native 应用时，你会经常创建新组件。你在屏幕上看到的任何内容，都属于某种组件。
 
-## 属性
+## Props
 
-大多数组件在创建时可以使用不同的参数进行自定义。这些创建参数称为 props。
+大多数组件在创建时都可以通过不同参数进行自定义。这些创建参数被称为 props。
 
-您自己的组件也可以使用 `props`。这使您可以创建一个单个组件，该组件在应用程序中的许多不同地方使用，每个地方的属性略有不同。在函数组件中引用 `props.YOUR_PROP_NAME`，或在类组件中引用 `this.props.YOUR_PROP_NAME`。这是一个示例：
+你自己的组件也可以使用 `props`。这让你可以只编写一个组件，然后在应用的许多不同地方使用它，只是在每个地方传入略有不同的属性。在函数组件中引用 `props.YOUR_PROP_NAME`，在类组件中引用 `this.props.YOUR_PROP_NAME`。下面是一个示例：
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
 ```SnackPlayer name=Hello%20Props&ext=js
-import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
@@ -101,7 +99,6 @@ export default LotsOfGreetings;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Hello%20Props&ext=tsx
-import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
@@ -138,28 +135,28 @@ export default LotsOfGreetings;
 </TabItem>
 </Tabs>
 
-使用 `name` 作为 prop 让我们可以自定义 `Greeting` 组件，因此我们可以为每个问候语重用该组件。此示例还在 JSX 中使用了 `Greeting` 组件。能够做到这一点正是 React 如此酷的原因。
+使用 `name` 作为 prop，我们就可以自定义 `Greeting` 组件，这样就能在每个问候语中复用这个组件。这个示例还在 JSX 中使用了 `Greeting` 组件。能够做到这一点，正是 React 如此酷的原因。
 
-这里发生的另一件新事情是 [`View`](view.md) 组件。[`View`](view.md) 可用作其他组件的容器，有助于控制样式和布局。
+这里另一个新出现的内容是 [`View`](view.md) 组件。[`View`](view.md) 适合作为其他组件的容器，有助于控制样式和布局。
 
-使用 `props` 和基本的 [`Text`](text.md)、[`Image`](image.md) 和 [`View`](view.md) 组件，您可以构建各种各样的静态屏幕。要了解如何使您的应用程序随时间变化，您需要 [了解状态](#state)。
+借助 `props` 以及基础的 [`Text`](text.md)、[`Image`](image.md) 和 [`View`](view.md) 组件，你可以构建各种各样的静态界面。要了解如何让应用随着时间变化，你需要[学习 State](#state)。
 
-## 状态
+## State
 
-与 [只读](https://react.dev/reference/react/Component#props) 且不应修改的 props 不同，`state` 允许 React 组件响应用户操作、网络响应和其他任何事物随时间改变其输出。
+与 [只读的](https://react.dev/reference/react/Component#props) 并且不应被修改的 props 不同，`state` 允许 React 组件根据用户操作、网络响应以及其他任何变化，随着时间推移改变其输出。
 
 #### React 中 state 和 props 有什么区别？
 
-在 React 组件中，props 是我们从父组件传递给子组件的变量。同样，state 也是变量，区别在于它们不是作为参数传递的，而是由组件内部初始化和管理的。
+在 React 组件中，props 是我们从父组件传递给子组件的变量。类似地，state 也是变量，区别在于它们不是作为参数传递的，而是由组件在内部初始化并管理。
 
-#### React 和 React Native 在处理 state 方面有区别吗？
+#### 处理 state 时，React 和 React Native 有区别吗？
 
 <div className="two-columns">
 
 ```tsx
-// 使用 Hooks 的 ReactJS 计数器示例！
+// 使用 Hooks 的 React 计数器示例！
 
-import React, {useState} from 'react';
+import {useState} from 'react';
 
 
 
@@ -168,10 +165,10 @@ const App = () => {
 
   return (
     <div className="container">
-      <p>You clicked {count} times</p>
+      <p>你点击了 {count} 次</p>
       <button
         onClick={() => setCount(count + 1)}>
-        Click me!
+        点击我！
       </button>
     </div>
   );
@@ -190,7 +187,7 @@ const App = () => {
 ```tsx
 // 使用 Hooks 的 React Native 计数器示例！
 
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {View, Text, Button, StyleSheet} from 'react-native';
 
 const App = () => {
@@ -198,10 +195,10 @@ const App = () => {
 
   return (
     <View style={styles.container}>
-      <Text>You clicked {count} times</Text>
+      <Text>你点击了 {count} 次</Text>
       <Button
         onPress={() => setCount(count + 1)}
-        title="Click me!"
+        title="点击我！"
       />
     </View>
   );
@@ -219,12 +216,12 @@ const styles = StyleSheet.create({
 
 </div>
 
-如上所示，在 [React](https://react.dev/learn/state-a-components-memory) 和 `React Native` 之间处理 `state` 没有区别。您可以使用 [hooks](https://reactjs.org/docs/hooks-intro.html) 在类和函数组件中使用组件的状态！
+如上所示，在 [React](https://react.dev/learn/state-a-components-memory) 和 `React Native` 中处理 `state` 没有区别。你可以在类组件和函数组件中使用 [hooks](https://reactjs.org/docs/hooks-intro.html) 来使用组件的状态！
 
-在下面的示例中，我们将使用类展示上述相同的计数器示例。
+在下面的示例中，我们将用类组件展示上面的同一个计数器示例。
 
 ```SnackPlayer name=Hello%20Classes
-import React, {Component} from 'react';
+import {Component} from 'react';
 import {StyleSheet, TouchableOpacity, Text, View} from 'react-native';
 
 class App extends Component {
@@ -242,10 +239,10 @@ class App extends Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity style={styles.button} onPress={this.onPress}>
-          <Text>Click me</Text>
+          <Text>点击我</Text>
         </TouchableOpacity>
         <View>
-          <Text>You clicked {this.state.count} times</Text>
+          <Text>你点击了 {this.state.count} 次</Text>
         </View>
       </View>
     );

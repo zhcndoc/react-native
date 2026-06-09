@@ -16,13 +16,19 @@ title: 动画（Animated）
 下面的示例包含一个 `View`，它将基于动画值 `fadeAnim` 进行淡入和淡出。
 
 ```SnackPlayer name=Animated%20Example
-import React, {useRef} from 'react';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
-import {Animated, Text, View, StyleSheet, Button} from 'react-native';
+import {
+  Animated,
+  Text,
+  View,
+  StyleSheet,
+  Button,
+  useAnimatedValue,
+} from 'react-native';
 
 const App = () => {
-  // fadeAnim 将用作透明度的值。初始值：0
-  const fadeAnim = useRef(new Animated.Value(0)).current;
+  // fadeAnim 将用作不透明度的值。初始值：0
+  const fadeAnim = useAnimatedValue(0);
 
   const fadeIn = () => {
     // 在 5 秒内将 fadeAnim 的值变为 1

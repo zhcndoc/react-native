@@ -34,7 +34,7 @@ import {TurboModuleRegistry} from 'react-native';
 export interface Spec extends TurboModule {
   setItem(value: string, key: string): void;
   getItem(key: string): string | null;
-  removeItem(key: string): void;
+  removeItem(key: string): string;
   clear(): void;
 
 + readonly onKeyAdded: CodegenTypes.EventEmitter<KeyValuePair>;
@@ -64,7 +64,7 @@ import {TurboModule, TurboModuleRegistry} from 'react-native';
 export interface Spec extends TurboModule {
   setItem(value: string, key: string): void;
   getItem(key: string): ?string;
-  removeItem(key: string): void;
+  removeItem(key: string): ?string;
   clear(): void;
 + onKeyAdded: CodegenTypes.EventEmitter<KeyValuePair>
 }
@@ -114,13 +114,13 @@ bundle exec pod install
 ```shell
 ...
 Framework build type is static library
-[Codegen] Adding script_phases to ReactCodegen.
-[Codegen] Generating ./build/generated/ios/ReactCodegen.podspec.json
-[Codegen] Analyzing /Users/me/src/TurboModuleExample/package.json
-[Codegen] Searching for Codegen-enabled libraries in the app.
-[Codegen] Found TurboModuleExample
-[Codegen] Searching for Codegen-enabled libraries in the project dependencies.
-[Codegen] Found react-native
+[Codegen] 添加 script_phases 到 ReactCodegen。
+[Codegen] 正在生成 ./build/generated/ios/ReactCodegen.podspec.json
+[Codegen] 正在分析 /Users/me/src/TurboModuleExample/package.json
+[Codegen] 正在搜索应用中的 Codegen-enabled 库。
+[Codegen] 找到 TurboModuleExample
+[Codegen] 正在搜索项目依赖中的 Codegen-enabled 库。
+[Codegen] 找到 react-native
 ...
 ```
 
@@ -134,7 +134,6 @@ Framework build type is static library
 打开 `App.tsx` 文件并按如下方式修改：
 
 ```diff title="App.tsx"
-import React from 'react';
 import {
 + Alert,
 + EventSubscription,
@@ -155,7 +154,7 @@ function App(): React.JSX.Element {
 + const listenerSubscription = React.useRef<null | EventSubscription>(null);
 
 + React.useEffect(() => {
-+   listenerSubscription.current = NativeLocalStorage?.onKeyAdded((pair) => Alert.alert(`New key added: ${pair.key} with value: ${pair.value}`));
++   listenerSubscription.current = NativeLocalStorage?.onKeyAdded((pair) => Alert.alert(`添加了新键：${pair.key}，值为：${pair.value}`));
 
 +   return  () => {
 +     listenerSubscription.current?.remove();
@@ -174,7 +173,7 @@ function App(): React.JSX.Element {
 
   function saveValue() {
 +   if (key == null) {
-+     Alert.alert('Please enter a key');
++     Alert.alert('请输入键');
 +     return;
 +   }
     NativeLocalStorage?.setItem(editingValue ?? EMPTY, key);
@@ -188,7 +187,7 @@ function App(): React.JSX.Element {
 
   function deleteValue() {
 +   if (key == null) {
-+     Alert.alert('Please enter a key');
++     Alert.alert('请输入键');
 +     return;
 +   }
     NativeLocalStorage?.removeItem(key);
@@ -197,7 +196,7 @@ function App(): React.JSX.Element {
 
 + function retrieveValue() {
 +   if (key == null) {
-+     Alert.alert('Please enter a key');
++     Alert.alert('请输入键');
 +     return;
 +   }
 +   const val = NativeLocalStorage?.getItem(key);
@@ -207,24 +206,24 @@ function App(): React.JSX.Element {
   return (
     <SafeAreaView style={{flex: 1}}>
       <Text style={styles.text}>
-        Current stored value is: {value ?? 'No Value'}
+        当前存储的值是：{value ?? 'No Value'}
       </Text>
-+     <Text>Key:</Text>
++     <Text>键：</Text>
 +      <TextInput
-+       placeholder="Enter the key you want to store"
++       placeholder="输入你想存储的键"
 +       style={styles.textInput}
 +       onChangeText={setKey}
 +     />
-+     <Text>Value:</Text>
++     <Text>值：</Text>
       <TextInput
-        placeholder="Enter the text you want to store"
+        placeholder="输入你想存储的文本"
         style={styles.textInput}
         onChangeText={setEditingValue}
       />
-      <Button title="Save" onPress={saveValue} />
-+     <Button title="Retrieve" onPress={retrieveValue} />
-      <Button title="Delete" onPress={deleteValue} />
-      <Button title="Clear" onPress={clearAll} />
+      <Button title="保存" onPress={saveValue} />
++     <Button title="检索" onPress={retrieveValue} />
+      <Button title="删除" onPress={deleteValue} />
+      <Button title="清除" onPress={clearAll} />
     </SafeAreaView>
   );
 }

@@ -1,14 +1,13 @@
 ---
 id: transforms
-title: Transforms
+title: 变换
 ---
 
-Transforms are style properties that will help you modify the appearance and position of your components using 2D or 3D transformations. However, once you apply transforms, the layouts remain the same around the transformed component hence it might overlap with the nearby components. You can apply margin to the transformed component, the nearby components or padding to the container to prevent such overlaps.
+变换是样式属性，可帮助你使用 2D 或 3D 变换来修改组件的外观和位置。不过，一旦应用了变换，布局在变换后的组件周围仍然保持不变，因此它可能会与附近的组件重叠。你可以为变换后的组件添加 margin，为附近的组件添加 margin，或为容器添加 padding，以避免此类重叠。
 
-## Example
+## 示例
 
 ```SnackPlayer name=Transforms%20Example
-import React from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -17,7 +16,7 @@ const App = () => (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContentContainer}>
         <View style={styles.box}>
-          <Text style={styles.text}>Original Object</Text>
+          <Text style={styles.text}>原始对象</Text>
         </View>
 
         <View
@@ -27,7 +26,7 @@ const App = () => (
               transform: [{scale: 2}],
             },
           ]}>
-          <Text style={styles.text}>Scale by 2</Text>
+          <Text style={styles.text}>缩放 2 倍</Text>
         </View>
 
         <View
@@ -37,7 +36,7 @@ const App = () => (
               transform: [{scaleX: 2}],
             },
           ]}>
-          <Text style={styles.text}>ScaleX by 2</Text>
+          <Text style={styles.text}>X 轴缩放 2 倍</Text>
         </View>
 
         <View
@@ -47,7 +46,7 @@ const App = () => (
               transform: [{scaleY: 2}],
             },
           ]}>
-          <Text style={styles.text}>ScaleY by 2</Text>
+          <Text style={styles.text}>Y 轴缩放 2 倍</Text>
         </View>
 
         <View
@@ -57,7 +56,7 @@ const App = () => (
               transform: [{rotate: '45deg'}],
             },
           ]}>
-          <Text style={styles.text}>Rotate by 45 deg</Text>
+          <Text style={styles.text}>旋转 45 度</Text>
         </View>
 
         <View
@@ -67,7 +66,7 @@ const App = () => (
               transform: [{rotateX: '45deg'}, {rotateZ: '45deg'}],
             },
           ]}>
-          <Text style={styles.text}>Rotate X&Z by 45 deg</Text>
+          <Text style={styles.text}>X 和 Z 轴旋转 45 度</Text>
         </View>
 
         <View
@@ -77,7 +76,7 @@ const App = () => (
               transform: [{rotateY: '45deg'}, {rotateZ: '45deg'}],
             },
           ]}>
-          <Text style={styles.text}>Rotate Y&Z by 45 deg</Text>
+          <Text style={styles.text}>Y 和 Z 轴旋转 45 度</Text>
         </View>
 
         <View
@@ -87,7 +86,7 @@ const App = () => (
               transform: [{skewX: '45deg'}],
             },
           ]}>
-          <Text style={styles.text}>SkewX by 45 deg</Text>
+          <Text style={styles.text}>X 轴倾斜 45 度</Text>
         </View>
 
         <View
@@ -97,7 +96,7 @@ const App = () => (
               transform: [{skewY: '45deg'}],
             },
           ]}>
-          <Text style={styles.text}>SkewY by 45 deg</Text>
+          <Text style={styles.text}>Y 轴倾斜 45 度</Text>
         </View>
 
         <View
@@ -107,7 +106,7 @@ const App = () => (
               transform: [{skewX: '30deg'}, {skewY: '30deg'}],
             },
           ]}>
-          <Text style={styles.text}>Skew X&Y by 30 deg</Text>
+          <Text style={styles.text}>X 和 Y 轴倾斜 30 度</Text>
         </View>
 
         <View
@@ -117,7 +116,7 @@ const App = () => (
               transform: [{translateX: -50}],
             },
           ]}>
-          <Text style={styles.text}>TranslateX by -50 </Text>
+          <Text style={styles.text}>X 轴平移 -50 </Text>
         </View>
 
         <View
@@ -127,7 +126,7 @@ const App = () => (
               transform: [{translateY: 50}],
             },
           ]}>
-          <Text style={styles.text}>TranslateY by 50 </Text>
+          <Text style={styles.text}>Y 轴平移 50 </Text>
         </View>
 
         <View
@@ -141,7 +140,7 @@ const App = () => (
               ],
             },
           ]}>
-          <Text style={styles.text}>Matrix Transform</Text>
+          <Text style={styles.text}>矩阵变换</Text>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -179,13 +178,13 @@ export default App;
 
 ---
 
-# Reference
+# 参考
 
 ## Transform
 
-`transform` accepts an array of transformation objects or space-separated string values. Each object specifies the property that will be transformed as the key, and the value to use in the transformation. Objects should not be combined. Use a single key/value pair per object.
+`transform` 接受一个由变换对象组成的数组，或用空格分隔的字符串值。每个对象指定要被变换的属性作为键，以及在变换中使用的值。对象不应组合使用。每个对象只使用一个键/值对。
 
-The rotate transformations require a string so that the transform may be expressed in degrees (deg) or radians (rad). For example:
+旋转变换要求使用字符串，以便将 transform 以度（deg）或弧度（rad）表示。例如：
 
 ```js
 {
@@ -193,7 +192,7 @@ The rotate transformations require a string so that the transform may be express
 }
 ```
 
-The same could also be achieved using a space-separated string:
+也可以使用空格分隔的字符串实现相同效果：
 
 ```js
 {
@@ -201,7 +200,7 @@ The same could also be achieved using a space-separated string:
 }
 ```
 
-The skew transformations require a string so that the transform may be expressed in degrees (deg). For example:
+倾斜变换要求使用字符串，以便将 transform 以度（deg）表示。例如：
 
 ```js
 {
@@ -209,11 +208,11 @@ The skew transformations require a string so that the transform may be expressed
 }
 ```
 
-### Matrix Transform
+### 矩阵变换
 
-The `matrix` transform accepts a 4x4 transformation matrix as an array of 16 numbers. This allows you to apply complex transformations that combine translation, rotation, scaling, and skewing in a single operation.
+`matrix` 变换接受一个 4x4 变换矩阵，形式为包含 16 个数字的数组。这使你可以在单次操作中应用组合了平移、旋转、缩放和倾斜的复杂变换。
 
-The matrix is specified in column-major order:
+矩阵以列优先顺序指定：
 
 ```js
 {
@@ -242,7 +241,7 @@ The matrix is specified in column-major order:
 }
 ```
 
-For example, to apply a combination of scale and skew:
+例如，要应用缩放和倾斜的组合：
 
 ```js
 {
@@ -257,29 +256,29 @@ For example, to apply a combination of scale and skew:
 ```
 
 :::note
-Matrix transforms are useful when you need to apply pre-calculated transformation matrices, such as those from animation libraries or when building UI editor applications. For basic transformations, it's recommended to use the individual transform properties (scale, rotate, translate, etc.) as they are more readable.
+当你需要应用预先计算好的变换矩阵时，矩阵变换非常有用，例如来自动画库的矩阵，或在构建 UI 编辑器应用时。对于基础变换，建议使用各自独立的 transform 属性（scale、rotate、translate 等），因为它们更易读。
 :::
 
-| Type                                                                                                                                                                                                                                                                                                          | Required |
+| 类型                                                                                                                                                                                                                                                                                                          | 是否必需 |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| array of objects: `{matrix: number[]}`, `{perspective: number}`, `{rotate: string}`, `{rotateX: string}`, `{rotateY: string}`, `{rotateZ: string}`, `{scale: number}`, `{scaleX: number}`, `{scaleY: number}`, `{translateX: number}`, `{translateY: number}`, `{skewX: string}`, `{skewY: string}` or string | No       |
+| 对象数组：`{matrix: number[]}`、`{perspective: number}`、`{rotate: string}`、`{rotateX: string}`、`{rotateY: string}`、`{rotateZ: string}`、`{scale: number}`、`{scaleX: number}`、`{scaleY: number}`、`{translateX: number}`、`{translateY: number}`、`{skewX: string}`、`{skewY: string}`，或字符串 | 否       |
 
 ---
 
-### 🗑️ `decomposedMatrix`, `rotation`, `scaleX`, `scaleY`, `transformMatrix`, `translateX`, `translateY`
+### 🗑️ `decomposedMatrix`、`rotation`、`scaleX`、`scaleY`、`transformMatrix`、`translateX`、`translateY`
 
-:::warning Deprecated
-Use the [`transform`](transforms#transform) prop instead.
+:::warning 已废弃
+请改用 [`transform`](transforms#transform) 属性。
 :::
 
 ## Transform Origin
 
-The `transformOrigin` property sets the origin for a view's transformations. The transform origin is the point around which a transformation is applied. By default, the origin of a transform is `center`.
+`transformOrigin` 属性为视图的变换设置原点。变换原点是应用变换时围绕的点。默认情况下，变换的原点是 `center`。
 
-# Example
+# 示例
 
 ```SnackPlayer name=TransformOrigin%20Example
-import React, {useEffect, useRef} from 'react';
+import {useEffect, useRef} from 'react';
 import {Animated, View, StyleSheet, Easing} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -341,15 +340,15 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-### Values
+### 值
 
-Transform origin supports `px`, `percentage` and keywords `top`, `left`, `right`, `bottom`, `center` values.
+`transformOrigin` 支持 `px`、`percentage` 以及关键字 `top`、`left`、`right`、`bottom`、`center` 的值。
 
-The `transformOrigin` property may be specified using one, two, or three values, where each value represents an offset.
+`transformOrigin` 属性可以使用一个、两个或三个值来指定，其中每个值表示一个偏移量。
 
-#### One-value syntax:
+#### 单值语法：
 
-- The value must be a `px`, a `percentage`, or one of the keywords `left`, `center`, `right`, `top`, and `bottom`.
+- 该值必须是 `px`、`percentage`，或关键字 `left`、`center`、`right`、`top` 和 `bottom` 之一。
 
 ```js
 {
@@ -358,10 +357,10 @@ The `transformOrigin` property may be specified using one, two, or three values,
 }
 ```
 
-#### Two-value syntax:
+#### 双值语法：
 
-- First value (x-offset) must be a `px`, a `percentage`, or one of the keywords `left`, `center`, and `right`.
-- The second value (y-offset) must be a `px`, a `percentage`, or one of the keywords `top`, `center`, and `bottom`.
+- 第一个值（x 偏移）必须是 `px`、`percentage`，或关键字 `left`、`center` 和 `right` 之一。
+- 第二个值（y 偏移）必须是 `px`、`percentage`，或关键字 `top`、`center` 和 `bottom` 之一。
 
 ```js
 {
@@ -371,10 +370,10 @@ The `transformOrigin` property may be specified using one, two, or three values,
 }
 ```
 
-#### Three-value syntax:
+#### 三值语法：
 
-- The first two values are the same as for the two-value syntax.
-- The third value (z-offset) must be a `px`. It always represents the Z offset.
+- 前两个值与双值语法相同。
+- 第三个值（z 偏移）必须是 `px`。它始终表示 Z 偏移。
 
 ```js
 {
@@ -383,17 +382,17 @@ The `transformOrigin` property may be specified using one, two, or three values,
 }
 ```
 
-#### Array syntax
+#### 数组语法
 
-`transformOrigin` also supports an array syntax. It makes it convenient to use it with Animated APIs. It also avoids string parsing, so should be more efficient.
+`transformOrigin` 也支持数组语法。它便于与 Animated APIs 配合使用，也避免了字符串解析，因此效率可能更高。
 
 ```js
 {
-  // Using numeric values
+  // 使用数值
   transformOrigin: [10, 30, 40],
-  // Mixing numeric and percentage values
+  // 混合数值和百分比值
   transformOrigin: [10, '20%', 0],
 }
 ```
 
-You may refer to MDN's guide on [Transform origin](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin) for additional information.
+你可以参考 MDN 的 [Transform origin](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin) 指南获取更多信息。

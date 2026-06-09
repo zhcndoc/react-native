@@ -1,17 +1,17 @@
 ---
 id: dimensions
-title: Dimensions
+title: 尺寸
 ---
 
 :::info
-[`useWindowDimensions`](usewindowdimensions) is the preferred API for React components. Unlike `Dimensions`, it updates as the window's dimensions update. This works nicely with the React paradigm.
+[`useWindowDimensions`](usewindowdimensions) 是 React 组件更推荐的 API。与 `Dimensions` 不同，它会随着窗口尺寸变化而更新。这与 React 的范式非常契合。
 :::
 
 ```tsx
 import {Dimensions} from 'react-native';
 ```
 
-You can get the application window's width and height using the following code:
+你可以使用以下代码获取应用窗口的宽度和高度：
 
 ```tsx
 const windowWidth = Dimensions.get('window').width;
@@ -19,15 +19,15 @@ const windowHeight = Dimensions.get('window').height;
 ```
 
 :::note
-Although dimensions are available immediately, they may change (e.g due to device rotation, foldable devices etc) so any rendering logic or styles that depend on these constants should try to call this function on every render, rather than caching the value (for example, using inline styles rather than setting a value in a `StyleSheet`).
+虽然尺寸会立即可用，但它们可能会变化（例如由于设备旋转、折叠设备等），因此任何依赖这些常量的渲染逻辑或样式都应尽量在每次渲染时调用这个函数，而不是缓存其值（例如使用内联样式，而不是在 `StyleSheet` 中设置值）。
 :::
 
-If you are targeting foldable devices or devices which can change the screen size or app window size, you can use the event listener available in the Dimensions module as shown in the below example.
+如果你的目标设备是折叠设备，或者屏幕尺寸或应用窗口尺寸可能变化的设备，你可以像下面的示例一样，使用 Dimensions 模块中可用的事件监听器。
 
-## Example
+## 示例
 
 ```SnackPlayer name=Dimensions%20Example
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {StyleSheet, Text, Dimensions} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -53,13 +53,13 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <Text style={styles.header}>Window Dimensions</Text>
+        <Text style={styles.header}>窗口尺寸</Text>
         {Object.entries(dimensions.window).map(([key, value]) => (
           <Text>
             {key} - {value}
           </Text>
         ))}
-        <Text style={styles.header}>Screen Dimensions</Text>
+        <Text style={styles.header}>屏幕尺寸</Text>
         {Object.entries(dimensions.screen).map(([key, value]) => (
           <Text>
             {key} - {value}
@@ -85,9 +85,9 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `addEventListener()`
 
@@ -101,9 +101,9 @@ static addEventListener(
 ): EmitterSubscription;
 ```
 
-Add an event handler. Supported events:
+添加事件处理器。支持的事件：
 
-- `change`: Fires when a property within the `Dimensions` object changes. The argument to the event handler is a [`DimensionsValue`](#dimensionsvalue) type object.
+- `change`：当 `Dimensions` 对象中的某个属性发生变化时触发。传递给事件处理器的参数是一个 [`DimensionsValue`](#dimensionsvalue) 类型对象。
 
 ---
 
@@ -113,40 +113,40 @@ Add an event handler. Supported events:
 static get(dim: 'window' | 'screen'): ScaledSize;
 ```
 
-Initial dimensions are set before `runApplication` is called so they should be available before any other require's are run, but may be updated later.
+在调用 `runApplication` 之前就会设置初始尺寸，因此它们应该在任何其他 require 运行之前可用，但之后可能会更新。
 
-Example: `const {height, width} = Dimensions.get('window');`
+示例：`const {height, width} = Dimensions.get('window');`
 
-**Parameters:**
+**参数：**
 
-| Name                                                               | Type   | Description                                                                       |
-| ------------------------------------------------------------------ | ------ | --------------------------------------------------------------------------------- |
-| dim <div className="label basic required two-lines">Required</div> | string | Name of dimension as defined when calling `set`. Returns value for the dimension. |
+| 名称                                                              | 类型   | 描述                                                                       |
+| ----------------------------------------------------------------- | ------ | -------------------------------------------------------------------------- |
+| dim <div className="label basic required two-lines">必填</div> | string | 调用 `set` 时定义的尺寸名称。返回该尺寸的值。 |
 
 :::note
-For Android the `window` dimension will be reduced by the size of status bar (if not translucent) and bottom navigation bar.
+对于 Android，`window` 尺寸会减去状态栏（如果不是半透明）和底部导航栏的大小。
 :::
 
-## Type Definitions
+## 类型定义
 
 ### DimensionsValue
 
-**Properties:**
+**属性：**
 
-| Name   | Type                                | Description                             |
-| ------ | ----------------------------------- | --------------------------------------- |
-| window | [ScaledSize](dimensions#scaledsize) | Size of the visible Application window. |
-| screen | [ScaledSize](dimensions#scaledsize) | Size of the device's screen.            |
+| 名称   | 类型                                | 描述                             |
+| ------ | ----------------------------------- | -------------------------------- |
+| window | [ScaledSize](dimensions#scaledsize) | 可见应用窗口的大小。             |
+| screen | [ScaledSize](dimensions#scaledsize) | 设备屏幕的大小。                 |
 
 ### ScaledSize
 
-| Type   |
+| 类型   |
 | ------ |
 | object |
 
-**Properties:**
+**属性：**
 
-| Name      | Type   |
+| 名称      | 类型   |
 | --------- | ------ |
 | width     | number |
 | height    | number |

@@ -8,7 +8,6 @@ title: 振动
 ## 示例
 
 ```SnackPlayer name=Vibration%20Example&supportedPlatforms=ios,android
-import React from 'react';
 import {
   Button,
   Platform,

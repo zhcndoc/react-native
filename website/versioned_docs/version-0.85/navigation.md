@@ -64,7 +64,6 @@ npm install @react-navigation/native @react-navigation/native-stack
 现在你可以创建一个带有主屏幕和个人资料屏幕的应用：
 
 ```tsx
-import * as React from 'react';
 import {createStaticNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -72,7 +71,7 @@ const RootStack = createNativeStackNavigator({
   screens: {
     Home: {
       screen: HomeScreen,
-      options: {title: 'Welcome'},
+      options: {title: '欢迎'},
     },
     Profile: {
       screen: ProfileScreen,
@@ -101,7 +100,7 @@ function HomeScreen() {
 
   return (
     <Button
-      title="Go to Jane's profile"
+      title="前往 Jane 的个人资料"
       onPress={() =>
         navigation.navigate('Profile', {name: 'Jane'})
       }
@@ -110,7 +109,7 @@ function HomeScreen() {
 }
 
 function ProfileScreen({route}) {
-  return <Text>This is {route.params.name}'s profile</Text>;
+  return <Text>这是 {route.params.name} 的个人资料</Text>;
 }
 ```
 

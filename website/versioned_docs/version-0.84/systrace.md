@@ -10,7 +10,6 @@ title: Systrace（系统跟踪）
 `Systrace` 允许你用标签和整数值标记 JavaScript (JS) 事件。在 EasyProfiler 中捕获非定时（non-Timed）的 JS 事件。
 
 ```SnackPlayer name=Systrace%20Example
-import React from 'react';
 import {Button, Text, View, StyleSheet, Systrace} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 

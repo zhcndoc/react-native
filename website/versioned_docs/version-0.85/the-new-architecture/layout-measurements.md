@@ -4,17 +4,17 @@
 
 React Native 提供了一些原生方法来了解视图的测量值。
 
-调用这些方法的最好方式是在 `useLayoutEffect` hook 中：这将为您提供这些测量值的最新值，并允许您在计算测量值的同一帧中应用更改。
+调用这些方法的最佳方式是在 `useLayoutEffect` hook 中：这将为您提供这些测量值的最新值，并允许您在计算测量值的同一帧中应用更改。
 
 典型代码如下所示：
 
 ```tsx
 function AComponent(children) {
-  const targetRef = React.useRef(null)
+  const targetRef = useRef(null)
 
   useLayoutEffect(() => {
     targetRef.current?.measure((x, y, width, height, pageX, pageY) => {
-      //对测量值做一些操作
+      // 对测量值做一些操作
     });
   }, [ /* 在此处添加依赖项 */]);
 

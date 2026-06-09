@@ -11,7 +11,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 <TabItem value="javascript">
 
 ```SnackPlayer name=TextStyleProps&supportedPlatforms=ios,android&ext=js&dependencies=@react-native-community/slider
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {
   FlatList,
   Platform,
@@ -110,14 +110,15 @@ const App = () => {
                 textShadowRadius,
               },
             ]}>
-            Lorem Ipsum 只是印刷和排版行业的虚拟文本。112 个赞
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. 112 Likes
           </Text>
         </View>
         <ScrollView style={{padding: 12}}>
           <View>
-            <Text>常见平台属性</Text>
+            <Text>Common platform properties</Text>
             <CustomSlider
-              label="文本阴影偏移 - 高度"
+              label="Text Shadow Offset - Height"
               value={textShadowOffset.height}
               minimumValue={-40}
               maximumValue={40}
@@ -126,7 +127,7 @@ const App = () => {
               }
             />
             <CustomSlider
-              label="文本阴影偏移 - 宽度"
+              label="Text Shadow Offset - Width"
               value={textShadowOffset.width}
               minimumValue={-40}
               maximumValue={40}
@@ -135,61 +136,61 @@ const App = () => {
               }
             />
             <CustomSlider
-              label="字体大小"
+              label="Font Size"
               value={fontSize}
               maximumValue={40}
               handleValueChange={setFontSize}
             />
             <CustomPicker
-              label="字体样式"
+              label="Font Style"
               data={fontStyles}
               currentIndex={fontStyleIdx}
               onSelected={setFontStyleIdx}
             />
             <CustomPicker
-              label="字体粗细"
+              label="Font Weight"
               data={fontWeights}
               currentIndex={fontWeightIdx}
               onSelected={setFontWeightIdx}
             />
             <CustomSlider
-              label="行高"
+              label="Line Height"
               value={lineHeight}
               minimumValue={10}
               maximumValue={50}
               handleValueChange={setLineHeight}
             />
             <CustomPicker
-              label="文本对齐"
+              label="Text Align"
               data={textAlignments}
               currentIndex={textAlignIdx}
               onSelected={setTextAlignIdx}
             />
             <CustomPicker
-              label="文本装饰线"
+              label="Text Decoration Line"
               data={textDecorationLines}
-              currentIndex={textDecorationLineIdx]
+              currentIndex={textDecorationLineIdx}
               onSelected={setTextDecorationLineIdx}
             />
             <CustomSlider
-              label="文本阴影半径"
+              label="Text Shadow Radius"
               value={textShadowRadius}
               handleValueChange={setTextShadowRadius}
             />
             <CustomPicker
-              label="字体变体"
+              label="Font Variant"
               data={fontVariants}
               currentIndex={fontVariantIdx}
               onSelected={setFontVariantIdx}
             />
             <CustomSlider
-              label="字母间距"
+              label="Letter Spacing"
               step={0.1}
               value={letterSpacing}
               handleValueChange={setLetterSpacing}
             />
             <CustomPicker
-              label="文本转换"
+              label="Text Transform"
               data={textTransformations}
               currentIndex={textTransformIdx}
               onSelected={setTextTransformIdx}
@@ -198,16 +199,16 @@ const App = () => {
           {Platform.OS === 'android' && (
             <View style={styles.platformContainer}>
               <Text style={styles.platformContainerTitle}>
-                仅 Android 属性
+                仅限 Android 的属性
               </Text>
               <CustomPicker
-                label="文本垂直对齐"
+                label="Text Vertical Align"
                 data={textAlignmentsVertical}
                 currentIndex={textVerticalAlignIdx}
                 onSelected={setTextVerticalAlignIdx}
               />
               <CustomSwitch
-                label="包含字体内边距"
+                label="Include Font Padding"
                 handleValueChange={setIncludeFontPadding}
                 value={includeFontPadding}
               />
@@ -216,16 +217,16 @@ const App = () => {
           {Platform.OS === 'ios' && (
             <View style={styles.platformContainer}>
               <Text style={styles.platformContainerTitle}>
-                仅 iOS 属性
+                仅限 iOS 的属性
               </Text>
               <CustomPicker
-                label="文本装饰样式"
+                label="Text Decoration Style"
                 data={textDecorationStyles}
                 currentIndex={textDecorationStyleIdx}
                 onSelected={setTextDecorationStyleIdx}
               />
               <CustomPicker
-                label="书写方向"
+                label="Writing Direction"
                 data={writingDirections}
                 currentIndex={writingDirectionIdx}
                 onSelected={setWritingDirectionIdx}
@@ -367,11 +368,12 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
+
 </TabItem>
 <TabItem value="typescript">
 
 ```SnackPlayer name=TextStyleProps&supportedPlatforms=ios,android&ext=tsx&dependencies=@react-native-community/slider
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {
   FlatList,
   Platform,
@@ -437,14 +439,15 @@ const App = () => {
                 textShadowRadius,
               } as TextStyle,
             ]}>
-            Lorem Ipsum 只是印刷和排版行业的虚拟文本。112 个赞
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. 112 Likes
           </Text>
         </View>
         <ScrollView style={{padding: 12}}>
           <View>
-            <Text>常见平台属性</Text>
+            <Text>Common platform properties</Text>
             <CustomSlider
-              label="文本阴影偏移 - 高度"
+              label="Text Shadow Offset - Height"
               value={textShadowOffset.height}
               minimumValue={-40}
               maximumValue={40}
@@ -453,7 +456,7 @@ const App = () => {
               }
             />
             <CustomSlider
-              label="文本阴影偏移 - 宽度"
+              label="Text Shadow Offset - Width"
               value={textShadowOffset.width}
               minimumValue={-40}
               maximumValue={40}
@@ -462,61 +465,61 @@ const App = () => {
               }
             />
             <CustomSlider
-              label="字体大小"
+              label="Font Size"
               value={fontSize}
               maximumValue={40}
               handleValueChange={setFontSize}
             />
             <CustomPicker
-              label="字体样式"
+              label="Font Style"
               data={fontStyles}
               currentIndex={fontStyleIdx}
               onSelected={setFontStyleIdx}
             />
             <CustomPicker
-              label="字体粗细"
+              label="Font Weight"
               data={fontWeights}
               currentIndex={fontWeightIdx}
               onSelected={setFontWeightIdx}
             />
             <CustomSlider
-              label="行高"
+              label="Line Height"
               value={lineHeight}
               minimumValue={10}
               maximumValue={50}
               handleValueChange={setLineHeight}
             />
             <CustomPicker
-              label="文本对齐"
+              label="Text Align"
               data={textAlignments}
               currentIndex={textAlignIdx}
               onSelected={setTextAlignIdx}
             />
             <CustomPicker
-              label="文本装饰线"
+              label="Text Decoration Line"
               data={textDecorationLines}
-              currentIndex={textDecorationLineIdx]
+              currentIndex={textDecorationLineIdx}
               onSelected={setTextDecorationLineIdx}
             />
             <CustomSlider
-              label="文本阴影半径"
+              label="Text Shadow Radius"
               value={textShadowRadius}
               handleValueChange={setTextShadowRadius}
             />
             <CustomPicker
-              label="字体变体"
+              label="Font Variant"
               data={fontVariants}
               currentIndex={fontVariantIdx}
               onSelected={setFontVariantIdx}
             />
             <CustomSlider
-              label="字母间距"
+              label="Letter Spacing"
               step={0.1}
               value={letterSpacing}
               handleValueChange={setLetterSpacing}
             />
             <CustomPicker
-              label="文本转换"
+              label="Text Transform"
               data={textTransformations}
               currentIndex={textTransformIdx}
               onSelected={setTextTransformIdx}
@@ -525,16 +528,16 @@ const App = () => {
           {Platform.OS === 'android' && (
             <View style={styles.platformContainer}>
               <Text style={styles.platformContainerTitle}>
-                仅 Android 属性
+                仅限 Android 的属性
               </Text>
               <CustomPicker
-                label="文本垂直对齐"
+                label="Text Vertical Align"
                 data={textAlignmentsVertical}
                 currentIndex={textVerticalAlignIdx}
                 onSelected={setTextVerticalAlignIdx}
               />
               <CustomSwitch
-                label="包含字体内边距"
+                label="Include Font Padding"
                 handleValueChange={setIncludeFontPadding}
                 value={includeFontPadding}
               />
@@ -543,16 +546,16 @@ const App = () => {
           {Platform.OS === 'ios' && (
             <View style={styles.platformContainer}>
               <Text style={styles.platformContainerTitle}>
-                仅 iOS 属性
+                仅限 iOS 的属性
               </Text>
               <CustomPicker
-                label="文本装饰样式"
+                label="Text Decoration Style"
                 data={textDecorationStyles}
                 currentIndex={textDecorationStyleIdx}
                 onSelected={setTextDecorationStyleIdx}
               />
               <CustomPicker
-                label="书写方向"
+                label="Writing Direction"
                 data={writingDirections}
                 currentIndex={writingDirectionIdx}
                 onSelected={setWritingDirectionIdx}
@@ -754,6 +757,7 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
+
 </TabItem>
 </Tabs>
 
@@ -763,9 +767,9 @@ export default App;
 
 ### `color`
 
-| 类型              |
-| ----------------- |
-| [颜色](colors.md) |
+| 类型               |
+| ------------------ |
+| [color](colors.md) |
 
 ---
 
@@ -773,17 +777,17 @@ export default App;
 
 | 类型   |
 | ------ |
-| 字符串 |
+| string |
 
-iOS 上支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monospace` 和 `ui-rounded`。
+通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monospace` 和 `ui-rounded` 在 iOS 上受支持。
 
 ---
 
 ### `fontSize`
 
-| 类型 |
-| ---- |
-| 数字 |
+| 类型   |
+| ------ |
+| number |
 
 ---
 
@@ -797,31 +801,31 @@ iOS 上支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-mo
 
 ### `fontWeight`
 
-指定字体粗细。大多数字体支持值 `'normal'` 和 `'bold'`。并非所有字体都有每个数值对应的变体，在这种情况下会选择最接近的一个。
+指定字体粗细。对于大多数字体，支持 `'normal'` 和 `'bold'` 这两个值。并非所有字体都为每个数值提供对应变体，在这种情况下会选择最接近的值。
 
-| 类型                                                                                                                | 默认值     |
-| ------------------------------------------------------------------------------------------------------------------- | ---------- |
-| enum(`'normal'`, `'bold'`, `'100'`, `'200'`, `'300'`, `'400'`, `'500'`, `'600'`, `'700'`, `'800'`, `'900'`) 或 数字 | `'normal'` |
+| 类型                                                                                                                  | 默认值    |
+| --------------------------------------------------------------------------------------------------------------------- | ---------- |
+| enum(`'normal'`, `'bold'`, `'100'`, `'200'`, `'300'`, `'400'`, `'500'`, `'600'`, `'700'`, `'800'`, `'900'`) or number | `'normal'` |
 
 ---
 
 ### `includeFontPadding` <div className="label android">Android</div>
 
-设置为 `false` 以移除额外的字体内边距，这些内边距旨在为某些上升部/下降部留出空间。对于某些字体，当垂直居中时，此内边距可能导致文本看起来略微未对齐。为了获得最佳结果，还将 `textAlignVertical` 设置为 `center`。
+设为 `false` 可移除额外的字体内边距，该内边距用于为某些上伸部 / 下伸部预留空间。对于某些字体，这个内边距会导致文本在垂直居中时看起来略有偏移。为了获得最佳效果，也请将 `textAlignVertical` 设为 `center`。
 
-| 类型   | 默认值 |
-| ------ | ------ |
-| 布尔值 | `true` |
+| 类型 | 默认值 |
+| ---- | ------- |
+| bool | `true`  |
 
 ---
 
 ### `fontVariant`
 
-允许你设置字体的所有变体。可以通过使用枚举数组或空格分隔的字符串来设置，例如 `'small-caps common-ligatures'`。
+允许你为字体设置所有字体变体。可以通过使用枚举数组或以空格分隔的字符串来设置，例如 `'small-caps common-ligatures'`。
 
-| 类型                                                                                                             | 默认值 |
-| ---------------------------------------------------------------------------------------------------------------- | ------ |
-| 枚举数组 (`'small-caps'`, `'oldstyle-nums'`, `'lining-nums'`, `'tabular-nums'`, `'proportional-nums'`) 或 字符串 | `[]`   |
+| 类型                                                                                                                 | 默认值 |
+| -------------------------------------------------------------------------------------------------------------------- | ------- |
+| array of enum(`'small-caps'`, `'oldstyle-nums'`, `'lining-nums'`, `'tabular-nums'`, `'proportional-nums'`) or string | `[]`    |
 
 ---
 
@@ -829,27 +833,27 @@ iOS 上支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-mo
 
 增加或减少字符之间的间距。默认情况下没有额外的字母间距。
 
-| 类型 |
-| ---- |
-| 数字 |
+| 类型   |
+| ------ |
+| number |
 
 ---
 
 ### `lineHeight`
 
-控制文本元素内文本行之间垂直间距的数值。它指定连续文本行基线之间的距离。
+控制文本元素内各行文本之间垂直间距的数值。它指定了连续文本行基线之间的距离。
 
-| 类型 |
-| ---- |
-| 数字 |
+| 类型   |
+| ------ |
+| number |
 
 ---
 
 ### `textAlign`
 
-指定文本对齐方式。在 Android 上，值 'justify' 仅在 Oreo (8.0) 或更高版本（API 级别 >= 26）上支持。在较低版本的 Android 上，该值将回退到 `left`。
+指定文本对齐方式。在 Android 上，值 `'justify'` 仅在 Oreo（8.0）及以上版本（API level >= 26）受支持。在较低版本的 Android 上，该值会回退为 `left`。
 
-| 类型                                                         | 默认值   |
+| 类型                                                         | 默认值  |
 | ------------------------------------------------------------ | -------- |
 | enum(`'auto'`, `'left'`, `'right'`, `'center'`, `'justify'`) | `'auto'` |
 
@@ -857,25 +861,25 @@ iOS 上支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-mo
 
 ### `textAlignVertical` <div className="label android">Android</div>
 
-`verticalAlign` 样式属性的别名，如果你同时使用这两个属性，`verticalAlign` 将优先于 `textAlignVertical`
+`verticalAlign` 样式属性的别名，如果同时使用这两个属性，`verticalAlign` 的优先级高于 `textAlignVertical`
 
 | 类型                                            | 默认值  |
-| ----------------------------------------------- | ------- |
+| ----------------------------------------------- | -------- |
 | enum(`'auto'`, `'top'`, `'bottom'`, `'center'`) | `'auto'` |
 
 ---
 
 ### `textDecorationColor` <div className="label ios">iOS</div>
 
-| 类型              |
-| ----------------- |
-| [颜色](colors.md) |
+| 类型               |
+| ------------------ |
+| [color](colors.md) |
 
 ---
 
 ### `textDecorationLine`
 
-| 类型                                                                        | 默认值   |
+| 类型                                                                        | 默认值  |
 | --------------------------------------------------------------------------- | -------- |
 | enum(`'none'`, `'underline'`, `'line-through'`, `'underline line-through'`) | `'none'` |
 
@@ -883,7 +887,7 @@ iOS 上支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-mo
 
 ### `textDecorationStyle` <div className="label ios">iOS</div>
 
-| 类型                                                | 默认值    |
+| 类型                                                | 默认值   |
 | --------------------------------------------------- | --------- |
 | enum(`'solid'`, `'double'`, `'dotted'`, `'dashed'`) | `'solid'` |
 
@@ -891,31 +895,31 @@ iOS 上支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-mo
 
 ### `textShadowColor`
 
-| 类型              |
-| ----------------- |
-| [颜色](colors.md) |
+| 类型               |
+| ------------------ |
+| [color](colors.md) |
 
 ---
 
 ### `textShadowOffset`
 
-| 类型                                      |
-| ----------------------------------------- |
-| 对象：`{width?: number, height?: number}` |
+| 类型                                        |
+| ------------------------------------------- |
+| object: `{width?: number, height?: number}` |
 
 ---
 
 ### `textShadowRadius`
 
-| 类型 |
-| ---- |
-| 数字 |
+| 类型   |
+| ------ |
+| number |
 
 ---
 
 ### `textTransform`
 
-| 类型                                                         | 默认值   |
+| 类型                                                         | 默认值  |
 | ------------------------------------------------------------ | -------- |
 | enum(`'none'`, `'uppercase'`, `'lowercase'`, `'capitalize'`) | `'none'` |
 
@@ -923,7 +927,7 @@ iOS 上支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-mo
 
 ### `verticalAlign` <div className="label android">Android</div>
 
-| 类型                                            | 默认值   |
+| 类型                                            | 默认值  |
 | ----------------------------------------------- | -------- |
 | enum(`'auto'`, `'top'`, `'bottom'`, `'middle'`) | `'auto'` |
 
@@ -931,7 +935,7 @@ iOS 上支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-mo
 
 ### `writingDirection` <div className="label ios">iOS</div>
 
-| 类型                             | 默认值   |
+| 类型                             | 默认值  |
 | -------------------------------- | -------- |
 | enum(`'auto'`, `'ltr'`, `'rtl'`) | `'auto'` |
 
@@ -939,8 +943,8 @@ iOS 上支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-mo
 
 ### `userSelect`
 
-允许用户选择文本并使用原生复制和粘贴功能。优先级高于 `selectable` 属性。
+它允许用户选择文本并使用原生复制和粘贴功能。其优先级高于 `selectable` 属性。
 
 | 类型                                                     | 默认值 |
-| -------------------------------------------------------- | ------ |
-| enum(`'auto'`, `'text'`, `'none'`, `'contain'`, `'all'`) | `none` |
+| -------------------------------------------------------- | ------- |
+| enum(`'auto'`, `'text'`, `'none'`, `'contain'`, `'all'`) | `none`  |

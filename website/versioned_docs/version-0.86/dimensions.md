@@ -4,7 +4,7 @@ title: 尺寸
 ---
 
 :::info
-[`useWindowDimensions`](usewindowdimensions) 是 React 组件首选的 API。与 `Dimensions` 不同，它会随着窗口尺寸变化而更新。这与 React 的范式非常契合。
+[`useWindowDimensions`](usewindowdimensions) 是 React 组件首选的 API。与 `Dimensions` 不同，它会随着窗口尺寸的变化而更新。这种方式与 React 的范式非常契合。
 :::
 
 ```tsx
@@ -19,15 +19,15 @@ const windowHeight = Dimensions.get('window').height;
 ```
 
 :::note
-虽然尺寸会立即可用，但它们可能会变化（例如由于设备旋转、折叠屏设备等），因此任何依赖这些常量的渲染逻辑或样式都应尽量在每次渲染时调用此函数，而不是缓存该值（例如，使用内联样式，而不是在 `StyleSheet` 中设置值）。
+虽然尺寸会立即可用，但它们可能会发生变化（例如由于设备旋转、折叠屏设备等），因此任何依赖这些常量的渲染逻辑或样式都应尽量在每次渲染时调用这个函数，而不是缓存该值（例如，使用行内样式，而不是在 `StyleSheet` 中设置一个值）。
 :::
 
-如果你的目标设备是折叠屏设备，或者屏幕尺寸或应用窗口尺寸可能变化的设备，你可以使用 Dimensions 模块中提供的事件监听器，如下面的示例所示。
+如果你的目标设备是折叠屏设备，或屏幕尺寸/应用窗口尺寸可能变化的设备，你可以使用 `Dimensions` 模块中提供的事件监听器，如下面的示例所示。
 
 ## 示例
 
 ```SnackPlayer name=Dimensions%20Example
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {StyleSheet, Text, Dimensions} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -103,7 +103,7 @@ static addEventListener(
 
 添加事件处理程序。支持的事件：
 
-- `change`：当 `Dimensions` 对象中的某个属性发生变化时触发。事件处理程序的参数是一个 [`DimensionsValue`](#dimensionsvalue) 类型对象。
+- `change`: 当 `Dimensions` 对象中的某个属性发生变化时触发。事件处理程序的参数是一个 [`DimensionsValue`](#dimensionsvalue) 类型对象。
 
 ---
 
@@ -113,7 +113,7 @@ static addEventListener(
 static get(dim: 'window' | 'screen'): ScaledSize;
 ```
 
-初始尺寸会在调用 `runApplication` 之前设置，因此在任何其他 require 运行之前都应该可用，但之后可能会更新。
+初始尺寸会在调用 `runApplication` 之前设置，因此在执行任何其他 `require` 之前它们就应该已经可用，但之后也可能会更新。
 
 示例：`const {height, width} = Dimensions.get('window');`
 
@@ -121,10 +121,10 @@ static get(dim: 'window' | 'screen'): ScaledSize;
 
 | 名称                                                               | 类型   | 描述                                                                       |
 | ------------------------------------------------------------------ | ------ | -------------------------------------------------------------------------- |
-| dim <div className="label basic required two-lines">必需</div> | string | 在调用 `set` 时定义的尺寸名称。返回该尺寸的值。 |
+| dim <div className="label basic required two-lines">Required</div> | string | 在调用 `set` 时定义的尺寸名称。返回该尺寸的值。 |
 
 :::note
-在 Android 上，`window` 尺寸会减去状态栏（如果不是半透明的）和底部导航栏的大小。
+对于 Android，`window` 尺寸会减去状态栏（如果不是半透明）和底部导航栏的大小。
 :::
 
 ## 类型定义
@@ -133,10 +133,10 @@ static get(dim: 'window' | 'screen'): ScaledSize;
 
 **属性：**
 
-| 名称   | 类型                                | 描述                             |
-| ------ | ----------------------------------- | -------------------------------- |
-| window | [ScaledSize](dimensions#scaledsize) | 可见应用窗口的大小。 |
-| screen | [ScaledSize](dimensions#scaledsize) | 设备屏幕的大小。            |
+| 名称   | 类型                                | 描述                         |
+| ------ | ----------------------------------- | ---------------------------- |
+| window | [ScaledSize](dimensions#scaledsize) | 可见应用窗口的大小。         |
+| screen | [ScaledSize](dimensions#scaledsize) | 设备屏幕的大小。             |
 
 ### ScaledSize
 

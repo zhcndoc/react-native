@@ -22,7 +22,6 @@ React Native 运行于 [React](https://react.dev/) 之上，这是一个使用 J
 这篇 React 介绍的其余部分将在示例中使用猫：友好、亲切的生物，它们需要名字和工作的咖啡馆。这是你的第一个 Cat 组件：
 
 ```SnackPlayer name=Your%20Cat
-import React from 'react';
 import {Text} from 'react-native';
 
 const Cat = () => {
@@ -32,10 +31,9 @@ const Cat = () => {
 export default Cat;
 ```
 
-做法如下：要定义你的 `Cat` 组件，首先使用 JavaScript 的 [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 导入 React 和 React Native 的 [`Text`](/docs/next/text) 核心组件：
+这里是它的写法：要定义你的 `Cat` 组件，首先使用 JavaScript 的 [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 导入 React Native 的 [`Text`](/docs/next/text) 核心组件：
 
 ```tsx
-import React from 'react';
 import {Text} from 'react-native';
 ```
 
@@ -65,7 +63,9 @@ const Cat = () => {
 export default Cat;
 ```
 
-> 这是导出组件的众多方式之一。这种导出方式适用于 Snack Player。但是，取决于你的应用文件结构，你可能需要使用不同的约定。这份 [关于 JavaScript 导入和导出的实用速查表](https://medium.com/dailyjs/javascript-module-cheatsheet-7bd474f1d829) 会有所帮助。
+:::tip
+这是导出组件的众多方式之一。这种导出方式与 Snack Player 配合得很好。不过，具体取决于你的应用文件结构，你可能需要使用不同的约定。这个关于 JavaScript 导入和导出的 [实用速查表](https://medium.com/dailyjs/javascript-module-cheatsheet-7bd474f1d829) 可以帮到你。
+:::
 
 现在仔细看看那个 `return` 语句。`<Text>Hello, I am your cat!</Text>` 使用了一种让编写元素变得方便的 JavaScript 语法：JSX。
 
@@ -74,7 +74,6 @@ export default Cat;
 React 和 React Native 使用 **JSX**，这是一种允许你在 JavaScript 内部编写元素的语法，例如：`<Text>Hello, I am your cat!</Text>`。React 文档有一份 [全面的 JSX 指南](https://react.dev/learn/writing-markup-with-jsx) 供你参考以了解更多。因为 JSX 是 JavaScript，你可以在其中使用变量。这里你声明了一个猫的名字 `name`，并使用花括号将其嵌入到 `<Text>` 中。
 
 ```SnackPlayer name=Curly%20Braces
-import React from 'react';
 import {Text} from 'react-native';
 
 const Cat = () => {
@@ -91,7 +90,6 @@ export default Cat;
 <TabItem value="javascript">
 
 ```SnackPlayer name=Curly%20Braces&ext=js
-import React from 'react';
 import {Text} from 'react-native';
 
 const getFullName = (firstName, secondName, thirdName) => {
@@ -109,7 +107,6 @@ export default Cat;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Curly%20Braces&ext=tsx
-import React from 'react';
 import {Text} from 'react-native';
 
 const getFullName = (
@@ -132,8 +129,6 @@ export default Cat;
 
 你可以将花括号视为在 JSX 中创建了一个通往 JS 功能的门户！
 
-> 因为 JSX 包含在 React 库中，如果你的文件顶部没有 `import React from 'react'`，它将无法工作！
-
 ## 自定义组件
 
 你已经见过 [React Native 的核心组件](intro-react-native-components)。React 允许你将这些组件相互嵌套以创建新组件。这些可嵌套、可复用的组件是 React 范式的核心。
@@ -141,7 +136,6 @@ export default Cat;
 例如，你可以在下面的 [`View`](view) 中嵌套 [`Text`](text) 和 [`TextInput`](textinput)，React Native 会将它们一起渲染：
 
 ```SnackPlayer name=Custom%20Components
-import React from 'react';
 import {Text, TextInput, View} from 'react-native';
 
 const Cat = () => {
@@ -169,12 +163,16 @@ export default Cat;
 
 <TabItem value="web">
 
-> 如果你熟悉 Web 开发，`<View>` 和 `<Text>` 可能会让你想起 HTML！你可以将它们视为应用开发中的 `<div>` 和 `<p>` 标签。
+:::info
+如果你熟悉 Web 开发，`<View>` 和 `<Text>` 可能会让你联想到 HTML！你可以把它们看作应用开发中的 `<div>` 和 `<p>` 标签。
+:::
 
 </TabItem>
 <TabItem value="android">
 
-> 在 Android 上，你通常将视图放在 `LinearLayout`、`FrameLayout`、`RelativeLayout` 等内部，以定义视图的子元素如何在屏幕上排列。在 React Native 中，`View` 使用 Flexbox 来进行子元素布局。你可以在 [我们的 Flexbox 布局指南](flexbox) 中了解更多。
+:::info
+在 Android 上，你通常会把视图放在 `LinearLayout`、`FrameLayout`、`RelativeLayout` 等容器中，以定义视图的子元素如何在屏幕上排列。在 React Native 中，`View` 使用 Flexbox 来布局其子元素。你可以在[我们的 Flexbox 布局指南](flexbox)中了解更多。
+:::
 
 </TabItem>
 </Tabs>
@@ -182,7 +180,6 @@ export default Cat;
 你可以通过使用 `<Cat>` 多次并在多处渲染此组件，而无需重复代码：
 
 ```SnackPlayer name=Multiple%20Components
-import React from 'react';
 import {Text, View} from 'react-native';
 
 const Cat = () => {
@@ -219,7 +216,6 @@ export default Cafe;
 <TabItem value="javascript">
 
 ```SnackPlayer name=Multiple%20Props&ext=js
-import React from 'react';
 import {Text, View} from 'react-native';
 
 const Cat = props => {
@@ -247,7 +243,6 @@ export default Cafe;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Multiple%20Props&ext=tsx
-import React from 'react';
 import {Text, View} from 'react-native';
 
 type CatProps = {
@@ -281,7 +276,6 @@ export default Cafe;
 大多数 React Native 的核心组件也可以用 props 定制。例如，使用 [`Image`](image) 时，你传递一个名为 [`source`](image#source) 的 prop 来定义它显示什么图像：
 
 ```SnackPlayer name=Props
-import React from 'react';
 import {Text, View, Image} from 'react-native';
 
 const CatApp = () => {
@@ -303,15 +297,19 @@ export default CatApp;
 
 `Image` 有 [许多不同的 props](image#props)，包括 [`style`](image#style)，它接受一个包含设计和布局相关属性 - 值对的 JS 对象。
 
-> 注意围绕 `style` 宽度和高度的双花括号 `{{ }}`。在 JSX 中，JavaScript 值使用 `{}` 引用。如果你传递的不是字符串而是其他内容作为 props，比如数组或数字，这很方便：`<Cat food={["fish", "kibble"]} age={2} />`。但是，JS 对象也 **_同样_** 用花括号表示：`{width: 200, height: 200}`。因此，要在 JSX 中传递 JS 对象，你必须将对象包裹在 **另一对** 花括号中：`{{width: 200, height: 200}}`
+:::note
+注意包围 `style` 的宽度和高度的双花括号 `{{ }}`。在 JSX 中，JavaScript 值使用 `{}` 引用。如果你传递的 props 不是字符串，比如数组或数字，这会很方便：`<Cat food={["fish", "kibble"]} age={2} />`。不过，JS 对象 **同样** 用花括号表示：`{width: 200, height: 200}`。因此，要在 JSX 中传递 JS 对象，你必须用 **另一对** 花括号包裹该对象：`{{width: 200, height: 200}}`
+:::
 
-你可以使用 props 和核心组件 [`Text`](text)、[`Image`](image) 和 [`View`](view) 构建许多东西！但要构建交互式的東西，你需要 state。
+你可以使用 props 和核心组件 [`Text`](text)、[`Image`](image) 和 [`View`](view) 构建许多东西！但要构建交互式的东西，你需要 state。
 
 ## State
 
 虽然你可以将 props 视为用于配置组件渲染方式的参数，但 **state** 就像组件的个人数据存储。State 对于处理随时间变化的数据或来自用户交互的数据很有用。State 赋予你的组件记忆！
 
-> 作为一般规则，使用 props 在组件渲染时配置它。使用 state 跟踪任何你预期会随时间变化的组件数据。
+:::info
+一般来说，使用 props 来配置组件渲染时的表现。使用 state 来跟踪你预期会随时间变化的任何组件数据。
+:::
 
 以下示例发生在一家猫咖啡馆，两只饥饿的猫正等待喂食。它们的饥饿感（我们预期会随时间变化，与名字不同）被存储为 state。要喂猫，按下它们的按钮——这将更新它们的 state。
 
@@ -321,7 +319,7 @@ export default CatApp;
 <TabItem value="javascript">
 
 ```SnackPlayer name=State&ext=js
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Button, Text, View} from 'react-native';
 
 const Cat = props => {
@@ -359,7 +357,7 @@ export default Cafe;
 <TabItem value="typescript">
 
 ```SnackPlayer name=State&ext=tsx
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Button, Text, View} from 'react-native';
 
 type CatProps = {
@@ -403,7 +401,7 @@ export default Cafe;
 首先，你需要像这样从 React 导入 `useState`：
 
 ```tsx
-import React, {useState} from 'react';
+import {useState} from 'react';
 ```
 
 然后通过在组件函数内调用 `useState` 来声明组件的 state。在此示例中，`useState` 创建一个 `isHungry` state 变量：
@@ -415,7 +413,9 @@ const Cat = (props: CatProps) => {
 };
 ```
 
-> 你可以使用 `useState` 跟踪任何类型的数据：字符串、数字、布尔值、数组、对象。例如，你可以使用 `const [timesPetted, setTimesPetted] = useState(0)` 跟踪猫被抚摸的次数！
+:::tip
+你可以使用 `useState` 跟踪任何类型的数据：字符串、数字、布尔值、数组、对象。例如，你可以使用 `const [timesPetted, setTimesPetted] = useState(0)` 跟踪猫被抚摸的次数！
+:::
 
 调用 `useState` 会做两件事：
 
@@ -445,7 +445,10 @@ const Cat = (props: CatProps) => {
 />
 ```
 
-> 你可能已经注意到，虽然 `isHungry` 是一个 [const](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/const)，但它似乎可以重新赋值！发生的情况是，当像 `setIsHungry` 这样的 state 设置函数被调用时，其组件将重新渲染。在这种情况下，`Cat` 函数将再次运行——这次，`useState` 将给我们 `isHungry` 的下一个值。
+:::info
+你可能已经注意到，虽然 `isHungry` 是一个 [const](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/const)，它看起来却是可重新赋值的！这里的 `const` 关键字并不意味着 state 本身是不可变的。相反，它意味着包含 state 以及更新它的函数的对象引用不会改变。
+当调用像 `setIsHungry` 这样的 state 设置函数时，它所在的组件会重新渲染。在这种情况下，`Cat` 函数会再次运行——而这一次，`useState` 会给我们 `isHungry` 的下一个值。
+:::
 
 最后，将你的猫放入 `Cafe` 组件中：
 
@@ -460,7 +463,9 @@ const Cafe = () => {
 };
 ```
 
-> 看到上面的 `<>` 和 `</>` 了吗？这些 JSX 片段是 [fragments](https://react.dev/reference/react/Fragment)。相邻的 JSX 元素必须包裹在一个封闭标签中。Fragments 让你这样做而无需嵌套额外的、不必要的包裹元素，如 `View`。
+:::info
+看到上面的 `<>` 和 `</>` 了吗？这些 JSX 片段是 [fragments](https://react.dev/reference/react/Fragment)。相邻的 JSX 元素必须包裹在一个封闭标签中。Fragments 让你无需再嵌套一个额外且不必要的包裹元素，比如 `View`。
+:::
 
 ---
 

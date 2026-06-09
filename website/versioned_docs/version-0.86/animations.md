@@ -5,15 +5,15 @@ title: 动画
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-动画对于创造出色的用户体验非常重要。静止的对象在开始移动时必须克服惯性。运动中的对象具有动量，通常不会立即停下。动画可以让你在界面中传达符合物理直觉的运动。
+动画对于创造出色的用户体验非常重要。静止的对象在开始移动时必须克服惯性。运动中的对象具有动量，且很少会立即停止。动画使你能够在界面中传达符合物理直觉的运动。
 
-React Native 提供了两种互补的动画系统：[`Animated`](animations#animated-api) 用于对特定值进行细粒度和交互式控制，[`LayoutAnimation`](animations#layoutanimation-api) 用于整体布局变更的动画。
+React Native 提供了两套互补的动画系统：[`Animated`](animations#animated-api) 用于对特定值进行细粒度且交互式的控制，[`LayoutAnimation`](animations#layoutanimation-api) 用于全局布局变更的动画处理。
 
 ## `Animated` API
 
-[`Animated`](animated) API 旨在以高性能的方式简洁地表达各种有趣的动画和交互模式。`Animated` 重点关注输入和输出之间的声明式关系，中间可以配置变换，并通过 `start`/`stop` 方法控制基于时间的动画执行。
+[`Animated`](animated) API 旨在以高性能的方式简洁地表达各种有趣的动画和交互模式。`Animated` 关注输入与输出之间的声明式关系，中间可配置变换，并通过 `start`/`stop` 方法控制基于时间的动画执行。
 
-`Animated` 导出了六种可设动画的组件类型：`View`、`Text`、`Image`、`ScrollView`、`FlatList` 和 `SectionList`，但你也可以使用 `Animated.createAnimatedComponent()` 创建自己的组件。
+`Animated` 导出了六种可做动画的组件类型：`View`、`Text`、`Image`、`ScrollView`、`FlatList` 和 `SectionList`，但你也可以使用 `Animated.createAnimatedComponent()` 自行创建。
 
 例如，一个在挂载时淡入的容器视图可能如下所示：
 
@@ -21,11 +21,11 @@ React Native 提供了两种互补的动画系统：[`Animated`](animations#anim
 <TabItem value="javascript">
 
 ```SnackPlayer ext=js
-import React, {useEffect, useRef} from 'react';
+import {useEffect, useRef} from 'react';
 import {Animated, Text, View} from 'react-native';
 
 const FadeInView = props => {
-  const fadeAnim = useRef(new Animated.Value(0)).current; // 透明度初始值：0
+  const fadeAnim = useRef(new Animated.Value(0)).current; // 不透明度的初始值：0
 
   useEffect(() => {
     Animated.timing(fadeAnim, {
@@ -36,17 +36,17 @@ const FadeInView = props => {
   }, [fadeAnim]);
 
   return (
-    <Animated.View // 可设动画的特殊 View
+    <Animated.View // 特殊的可动画 View
       style={{
         ...props.style,
-        opacity: fadeAnim, // 将透明度绑定到动画值
+        opacity: fadeAnim, // 将不透明度绑定到动画值
       }}>
       {props.children}
     </Animated.View>
   );
 };
 
-// 然后你就可以在组件中用 `FadeInView` 代替 `View`：
+// 然后你可以在组件中用 `FadeInView` 替代 `View`：
 export default () => {
   return (
     <View
@@ -74,13 +74,13 @@ export default () => {
 <TabItem value="typescript">
 
 ```SnackPlayer ext=tsx
-import React, {useEffect, useRef, type PropsWithChildren} from 'react';
+import {useEffect, useRef, type PropsWithChildren, type FC} from 'react';
 import {Animated, Text, View, type ViewStyle} from 'react-native';
 
 type FadeInViewProps = PropsWithChildren<{style: ViewStyle}>;
 
-const FadeInView: React.FC<FadeInViewProps> = props => {
-  const fadeAnim = useRef(new Animated.Value(0)).current; // 透明度初始值：0
+const FadeInView: FC<FadeInViewProps> = props => {
+  const fadeAnim = useRef(new Animated.Value(0)).current; // 不透明度的初始值：0
 
   useEffect(() => {
     Animated.timing(fadeAnim, {
@@ -91,17 +91,17 @@ const FadeInView: React.FC<FadeInViewProps> = props => {
   }, [fadeAnim]);
 
   return (
-    <Animated.View // 可设动画的特殊 View
+    <Animated.View // 特殊的可动画 View
       style={{
         ...props.style,
-        opacity: fadeAnim, // 将透明度绑定到动画值
+        opacity: fadeAnim, // 将不透明度绑定到动画值
       }}>
       {props.children}
     </Animated.View>
   );
 };
 
-// 然后你就可以在组件中用 `FadeInView` 代替 `View`：
+// 然后你可以在组件中用 `FadeInView` 替代 `View`：
 export default () => {
   return (
     <View
@@ -128,21 +128,21 @@ export default () => {
 </TabItem>
 </Tabs>
 
-让我们来拆解这里发生了什么。在 `FadeInView` 的 render 方法中，使用 `useRef` 初始化了一个名为 `fadeAnim` 的新 `Animated.Value`。`View` 上的 opacity 属性被映射到这个动画值。其背后，数值会被提取并用于设置 opacity。
+让我们来拆解这里发生了什么。在 `FadeInView` 的 render 方法中，使用 `useRef` 初始化了一个名为 `fadeAnim` 的新 `Animated.Value`。`View` 上的 opacity 属性映射到了这个动画值。幕后会提取数值并用于设置 opacity。
 
-当组件挂载时，opacity 被设置为 0。然后，针对 `fadeAnim` 动画值启动一个缓动动画，它会在每一帧更新其所有依赖映射（在这个例子中只有 opacity），随着值动画到最终值 1。
+当组件挂载时，opacity 会被设置为 0。随后，会在 `fadeAnim` 动画值上启动一个缓动动画，它会在每一帧更新所有依赖它的映射（在这个例子中只有 opacity），直到该值动画到最终值 1。
 
-这是以一种经过优化的方式完成的，比调用 `setState` 并重新渲染更快。由于整个配置是声明式的，我们将能够进一步实现优化：序列化配置，并在高优先级线程上运行动画。
+这样做的优化方式比调用 `setState` 并重新渲染更快。由于整个配置是声明式的，我们将能够实现进一步的优化，把配置序列化并将动画运行在高优先级线程上。
 
 ### 配置动画
 
 动画具有高度可配置性。自定义和预定义的缓动函数、延迟、时长、衰减因子、弹簧常量等，都可以根据动画类型进行调整。
 
-`Animated` 提供了多种动画类型，其中最常用的是 [`Animated.timing()`](animated#timing)。它支持使用多种预定义缓动函数之一来随时间动画一个值，也可以使用你自己的缓动函数。缓动函数通常用于动画中，以传达对象逐渐加速和减速的运动过程。
+`Animated` 提供了多种动画类型，其中最常用的是 [`Animated.timing()`](animated#timing)。它支持使用多种预定义缓动函数之一按时间对值进行动画，你也可以使用自己的缓动函数。缓动函数通常用于动画中，以传达对象逐渐加速和减速的过程。
 
-默认情况下，`timing` 会使用一种 easeInOut 曲线，它传达了逐渐加速到全速，并在结束时逐渐减速直至停止。你可以通过传入 `easing` 参数来指定不同的缓动函数。也支持自定义 `duration`，甚至在动画开始前添加 `delay`。
+默认情况下，`timing` 会使用 easeInOut 曲线，传达逐渐加速到全速，并在结束时逐渐减速直到停止。你可以通过传入 `easing` 参数指定不同的缓动函数。也支持自定义 `duration`，甚至在动画开始前设置 `delay`。
 
-例如，如果我们想创建一个持续 2 秒的动画，让对象在移动到最终位置之前稍微后退一下：
+例如，如果我们想创建一个持续 2 秒的对象动画，它会在移动到最终位置之前稍微后退一下：
 
 ```tsx
 Animated.timing(this.state.xPosition, {
@@ -153,20 +153,20 @@ Animated.timing(this.state.xPosition, {
 }).start();
 ```
 
-请查看 `Animated` API 参考中的 [配置动画](animated#configuring-animations) 部分，了解内置动画支持的所有配置参数。
+查看 `Animated` API 参考中的 [配置动画](animated#configuring-animations) 部分，了解内置动画支持的全部配置参数。
 
 ### 组合动画
 
-动画可以组合起来，按顺序或并行播放。顺序动画可以在前一个动画完成后立即播放，也可以在指定延迟后开始。`Animated` API 提供了多个方法，例如 `sequence()` 和 `delay()`，它们各自接收一个要执行的动画数组，并在需要时自动调用 `start()`/`stop()`。
+动画可以组合，并按顺序或并行播放。顺序动画可以在前一个动画完成后立即播放，也可以在指定延迟后开始。`Animated` API 提供了多个方法，例如 `sequence()` 和 `delay()`，它们各自接收一个要执行的动画数组，并在需要时自动调用 `start()`/`stop()`。
 
-例如，下面的动画会先滑行减速直至停止，然后同时弹回并旋转：
+例如，下面的动画会先滑行到停止，然后一边弹回一边旋转：
 
 ```tsx
 Animated.sequence([
-  // 衰减，然后弹回起点并旋转
+  // 先衰减，再弹回起点并旋转
   Animated.decay(position, {
-    // 滑行至停止
-    velocity: {x: gestureState.vx, y: gestureState.vy}, // 手势释放时的速度
+    // 滑行到停止
+    velocity: {x: gestureState.vx, y: gestureState.vy}, // 来自手势释放的速度
     deceleration: 0.997,
     useNativeDriver: true,
   }),
@@ -177,7 +177,7 @@ Animated.sequence([
       useNativeDriver: true,
     }),
     Animated.timing(twirl, {
-      // 以及旋转
+      // 并旋转
       toValue: 360,
       useNativeDriver: true,
     }),
@@ -185,15 +185,15 @@ Animated.sequence([
 ]).start(); // 启动序列组
 ```
 
-如果一个动画被停止或中断，那么组中的其他所有动画也会被停止。`Animated.parallel` 有一个 `stopTogether` 选项，可以设置为 `false` 来禁用这一行为。
+如果某个动画被停止或中断，那么该组中的所有其他动画也会停止。`Animated.parallel` 有一个 `stopTogether` 选项，可以设置为 `false` 来禁用这一行为。
 
-你可以在 `Animated` API 参考中的 [组合动画](animated#composing-animations) 部分找到完整的组合方法列表。
+你可以在 `Animated` API 参考中的 [组合动画](animated#composing-animations) 部分查看完整的组合方法列表。
 
 ### 组合动画值
 
-你可以通过加法、乘法、除法或取模来[组合两个动画值](animated#combining-animated-values)，从而生成一个新的动画值。
+你可以通过加法、乘法、除法或取模来[组合两个动画值](animated#combining-animated-values)，从而创建一个新的动画值。
 
-在某些情况下，动画值需要在计算中反转另一个动画值。例如，反转缩放比例（2x --> 0.5x）：
+有些情况下，一个动画值需要在计算时反转另一个动画值。一个例子是反转缩放（2x --> 0.5x）：
 
 ```tsx
 const a = new Animated.Value(1);
@@ -207,9 +207,9 @@ Animated.spring(a, {
 
 ### 插值
 
-每个属性都可以先经过插值处理。插值会将输入范围映射到输出范围，通常使用线性插值，但也支持缓动函数。默认情况下，它会在给定范围之外外推曲线，但你也可以让它将输出值钳制住。
+每个属性都可以先经过插值处理。插值会将输入范围映射到输出范围，通常使用线性插值，但也支持缓动函数。默认情况下，它会将曲线外推到给定范围之外，但你也可以让它将输出值限制住。
 
-将 0-1 范围转换为 0-100 范围的基本映射如下：
+一个将 0-1 范围映射到 0-100 范围的基本例子如下：
 
 ```tsx
 value.interpolate({
@@ -218,7 +218,7 @@ value.interpolate({
 });
 ```
 
-例如，你可能希望将 `Animated.Value` 看作从 0 到 1 变化，但让位置从 150px 动画到 0px，透明度从 0 到 1。可以通过像下面这样修改上面的 `style` 来实现：
+例如，你可能希望将 `Animated.Value` 看作从 0 变到 1，但将位置从 150px 动画到 0px，并将 opacity 从 0 动画到 1。这可以像下面这样通过修改上面的 `style` 来实现：
 
 ```tsx
   style={{
@@ -232,7 +232,7 @@ value.interpolate({
   }}
 ```
 
-[`interpolate()`](animated#interpolate) 也支持多个范围段，这对于定义死区和其他实用技巧很有帮助。例如，要得到一个在 -300 处为反向关系、到 -100 时变为 0、然后在 0 时回到 1、接着在 100 时再次回到 0，并在此之后保持为 0 的死区，可以这样写：
+[`interpolate()`](animated#interpolate) 也支持多个范围段，这对于定义死区和其他实用技巧很有帮助。例如，要得到一种在 -300 时为负向关系、到 -100 时变为 0、然后在 0 时回到 1、再在 100 时回到 0，接着在此之后保持 0 的死区，你可以这样做：
 
 ```tsx
 value.interpolate({
@@ -241,7 +241,7 @@ value.interpolate({
 });
 ```
 
-映射结果如下：
+映射效果如下：
 
 ```
 输入 | 输出
@@ -258,7 +258,7 @@ value.interpolate({
    200|      0
 ```
 
-`interpolate()` 也支持映射到字符串，因此你既可以动画化数值，也可以动画化带单位的值和颜色。例如，如果你想动画一个旋转，可以这样做：
+`interpolate()` 还支持映射到字符串，这使你既可以为数值也可以为带单位的值设置动画。例如，如果你想给旋转添加动画，可以这样做：
 
 ```tsx
 value.interpolate({
@@ -267,11 +267,11 @@ value.interpolate({
 });
 ```
 
-`interpolate()` 也支持任意缓动函数，其中很多已经在 [`Easing`](easing) 模块中实现。`interpolate()` 还可以配置 `outputRange` 的外推行为。你可以通过设置 `extrapolate`、`extrapolateLeft` 或 `extrapolateRight` 选项来指定外推方式。默认值是 `extend`，但你可以使用 `clamp` 来防止输出值超过 `outputRange`。
+`interpolate()` 还支持任意缓动函数，其中许多已经在 [`Easing`](easing) 模块中实现。`interpolate()` 还可以为 `outputRange` 的外推行为进行配置。你可以通过设置 `extrapolate`、`extrapolateLeft` 或 `extrapolateRight` 选项来配置外推。默认值是 `extend`，但你可以使用 `clamp` 来防止输出值超过 `outputRange`。
 
 ### 跟踪动态值
 
-通过将动画的 `toValue` 设置为另一个动画值，而不是普通数字，动画值也可以跟踪其他值。例如，类似 Messenger 在 Android 上使用的 “Chat Heads” 动画，可以通过把 `spring()` 绑定到另一个动画值上来实现，或者使用 `timing()` 并将 `duration` 设为 0 来实现刚性跟踪。它们也可以与插值组合使用：
+通过将动画的 `toValue` 设置为另一个动画值而不是普通数字，动画值也可以跟踪其他值。例如，Messenger 在 Android 上使用的那种“Chat Heads”动画，可以通过将一个 `spring()` 绑定到另一个动画值上来实现，或者通过 `timing()` 并将 `duration` 设为 0 来实现刚性跟踪。它们也可以与插值组合使用：
 
 ```tsx
 Animated.spring(follower, {toValue: leader}).start();
@@ -284,13 +284,13 @@ Animated.timing(opacity, {
 }).start();
 ```
 
-`leader` 和 `follower` 这两个动画值会使用 `Animated.ValueXY()` 来实现。`ValueXY` 是处理二维交互的便捷方式，例如平移或拖拽。它是一个基础封装，包含两个 `Animated.Value` 实例以及一些调用这些实例的辅助函数，因此在许多情况下，`ValueXY` 可以直接替代 `Value`。它让我们能够在上面的示例中同时跟踪 x 和 y 值。
+`leader` 和 `follower` 这两个动画值会使用 `Animated.ValueXY()` 来实现。`ValueXY` 是处理二维交互（例如平移或拖拽）的便捷方式。它是一个基础封装，内部包含两个 `Animated.Value` 实例以及一些调用它们的辅助函数，在很多场景下可以直接替代 `Value`。它让我们能够在上面的例子中同时跟踪 x 和 y 值。
 
 ### 跟踪手势
 
-平移或滚动等手势以及其他事件，可以使用 [`Animated.event`](animated#event) 直接映射到动画值。这里使用结构化映射语法，以便从复杂事件对象中提取值。第一层是一个数组，用于允许跨多个参数进行映射，而该数组包含嵌套对象。
+平移或滚动等手势，以及其他事件，都可以使用 [`Animated.event`](animated#event) 直接映射到动画值。这通过结构化的映射语法来完成，以便从复杂的事件对象中提取值。第一层是一个数组，用于支持跨多个参数的映射，而该数组中包含嵌套对象。
 
-例如，在处理水平滚动手势时，你会按如下方式将 `event.nativeEvent.contentOffset.x` 映射到 `scrollX`（一个 `Animated.Value`）：
+例如，在处理水平滚动手势时，你可以按以下方式将 `event.nativeEvent.contentOffset.x` 映射到 `scrollX`（一个 `Animated.Value`）：
 
 ```tsx
  onScroll={Animated.event(
@@ -304,12 +304,11 @@ Animated.timing(opacity, {
  )}
 ```
 
-下面的示例实现了一个水平滚动轮播图，其中滚动位置指示器通过 `ScrollView` 中使用的 `Animated.event` 进行动画处理
+下面的示例实现了一个水平滚动轮播，其中滚动位置指示器使用 `ScrollView` 中的 `Animated.event` 进行动画处理
 
-#### 使用 Animated Event 的 ScrollView 示例
+#### `ScrollView` 与 Animated Event 示例
 
 ```SnackPlayer name=Animated&supportedPlatforms=ios,android
-import React from 'react';
 import {
   ScrollView,
   Text,
@@ -438,7 +437,7 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-当使用 `PanResponder` 时，你可以使用以下代码从 `gestureState.dx` 和 `gestureState.dy` 中提取 x 和 y 位置。我们在数组的第一个位置使用 `null`，因为我们只对传递给 `PanResponder` 处理器的第二个参数感兴趣，也就是 `gestureState`。
+使用 `PanResponder` 时，你可以使用以下代码从 `gestureState.dx` 和 `gestureState.dy` 中提取 x 和 y 位置。我们在数组的第一个位置使用 `null`，因为我们只关心传递给 `PanResponder` 处理器的第二个参数，即 `gestureState`。
 
 ```tsx
 onPanResponderMove={Animated.event(
@@ -449,10 +448,10 @@ onPanResponderMove={Animated.event(
 ])}
 ```
 
-#### 使用 Animated Event 的 PanResponder 示例
+#### `PanResponder` 与 Animated Event 示例
 
 ```SnackPlayer name=Animated
-import React, {useRef} from 'react';
+import {useRef} from 'react';
 import {Animated, View, StyleSheet, PanResponder, Text} from 'react-native';
 
 const App = () => {
@@ -472,7 +471,7 @@ const App = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titleText}>拖动并释放这个方块！</Text>
+      <Text style={styles.titleText}>拖动并松开这个盒子！</Text>
       <Animated.View
         style={{
           transform: [{translateX: pan.x}, {translateY: pan.y}],
@@ -508,30 +507,30 @@ export default App;
 
 ### 响应当前动画值
 
-你可能会注意到，在动画进行时没有明显的方法来读取当前值。这是因为由于优化，只有在原生运行时中才可能知道该值。如果你需要在当前值变化时运行 JavaScript，有两种方法：
+你可能会注意到，在动画过程中并没有很明显的方法来读取当前值。这是因为由于优化，这个值可能只在原生运行时中可知。如果你需要在当前值变化时运行 JavaScript，有两种方法：
 
-- `spring.stopAnimation(callback)` 会停止动画并将最终值传递给 `callback`。这在进行手势过渡时很有用。
-- `spring.addListener(callback)` 会在动画运行时异步调用 `callback`，提供一个较新的值。这对于触发状态变化很有用，例如当用户把一个 bobble 拖得更近时，将其吸附到新选项，因为与需要以 60 fps 运行的连续手势（如平移）相比，这类较大的状态变化对几帧延迟不那么敏感。
+- `spring.stopAnimation(callback)` 会停止动画并使用最终值调用 `callback`。这在处理手势过渡时很有用。
+- `spring.addListener(callback)` 会在动画运行时异步调用 `callback`，提供一个最近的值。这适用于触发状态变化，例如当用户拖动一个 bobble 靠近某个新选项时将其吸附过去，因为与像平移这类需要以 60 fps 运行的连续手势相比，这类较大的状态变化对少数几帧的延迟没那么敏感。
 
-`Animated` 的设计目标是完全可序列化，从而使动画能够以高性能方式运行，而不依赖于普通的 JavaScript 事件循环。这确实会影响 API，所以当某些事情看起来比完全同步的系统更难实现时，请记住这一点。可以查看 `Animated.Value.addListener` 作为绕过这些限制的一种方式，但请谨慎使用，因为它未来可能会带来性能影响。
+`Animated` 的设计目标是完全可序列化，以便动画可以以高性能方式运行，并独立于普通的 JavaScript 事件循环。这确实会影响 API，所以当某些事情相比完全同步的系统显得更难做时，请记住这一点。你可以查看 `Animated.Value.addListener` 作为绕过这些限制的方法，但要谨慎使用，因为它未来可能会带来性能影响。
 
 ### 使用原生驱动
 
-`Animated` API 的设计是可序列化的。通过使用 [原生驱动](/blog/2017/02/14/using-native-driver-for-animated)，我们会在启动动画之前将动画的所有信息发送到原生端，这样原生代码就可以在 UI 线程上执行动画，而无需每一帧都通过桥接。动画启动后，JS 线程即使被阻塞，也不会影响动画。
+`Animated` API 的设计是可序列化的。通过使用[原生驱动](/blog/2017/02/14/using-native-driver-for-animated)，我们会在开始动画之前把关于动画的一切发送到原生端，使原生代码能够在 UI 线程上执行动画，而不必在每一帧都经过桥接。动画一旦开始，JS 线程即使被阻塞也不会影响动画。
 
-要在普通动画中使用原生驱动，只需在启动动画时的配置中设置 `useNativeDriver: true`。没有 `useNativeDriver` 属性的动画出于历史原因默认是 `false`，但会发出警告（在 TypeScript 中还会有类型检查错误）。
+要在普通动画中使用原生驱动，只需在启动动画时的配置中设置 `useNativeDriver: true`。没有 `useNativeDriver` 属性的动画出于历史原因默认会是 `false`，但会发出警告（在 TypeScript 中还会有类型检查错误）。
 
 ```tsx
 Animated.timing(this.state.animatedValue, {
   toValue: 1,
   duration: 500,
-  useNativeDriver: true, // <-- 将此设置为 true
+  useNativeDriver: true, // <-- 将其设为 true
 }).start();
 ```
 
-动画值只能与一种驱动兼容，因此如果你在某个值上启动动画时使用了原生驱动，请确保该值上的每个动画也都使用原生驱动。
+动画值一次只能兼容一个驱动，因此如果你在某个值上使用原生驱动启动动画，请确保该值上的每个动画也都使用原生驱动。
 
-原生驱动也适用于 `Animated.event`。这对于跟随滚动位置的动画特别有用，因为如果没有原生驱动，由于 React Native 的异步特性，动画总会比手势落后一帧。
+原生驱动也适用于 `Animated.event`。这对于跟随滚动位置的动画尤其有用，因为如果没有原生驱动，由于 React Native 的异步特性，动画总会比手势慢一帧。
 
 ```tsx
 <Animated.ScrollView // <-- 使用 Animated ScrollView 包装器
@@ -543,23 +542,23 @@ Animated.timing(this.state.animatedValue, {
         },
       },
     ],
-    {useNativeDriver: true}, // <-- 将此设置为 true
+    {useNativeDriver: true}, // <-- 将其设为 true
   )}>
   {content}
 </Animated.ScrollView>
 ```
 
-你可以通过运行 [RNTester 应用](https://github.com/facebook/react-native/blob/main/packages/rn-tester/)，然后加载 Native Animated Example 来查看原生驱动的实际效果。你也可以查看[源代码](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/NativeAnimation/NativeAnimationsExample.js)来了解这些示例是如何生成的。
+你可以通过运行 [RNTester app](https://github.com/facebook/react-native/blob/main/packages/rn-tester/)，然后加载 Native Animated Example 来查看原生驱动的实际效果。你也可以查看[源代码](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/NativeAnimation/NativeAnimationsExample.js) 了解这些示例是如何生成的。
 
 #### 注意事项
 
-并非所有 `Animated` 能做的事情都受原生驱动支持。目前的主要限制是你只能动画非布局属性：像 `transform` 和 `opacity` 这样的属性可以工作，但 Flexbox 和位置属性不行。使用 `Animated.event` 时，它只能用于直接事件，而不能用于冒泡事件。这意味着它不能与 `PanResponder` 一起工作，但可以与 `ScrollView#onScroll` 之类的东西一起工作。
+并非你能用 `Animated` 做的所有事情目前都受原生驱动支持。主要限制是你只能对非布局属性做动画：像 `transform` 和 `opacity` 这样的属性可以工作，但 Flexbox 和位置属性不行。使用 `Animated.event` 时，它只适用于直接事件，不适用于冒泡事件。这意味着它不适用于 `PanResponder`，但适用于像 `ScrollView#onScroll` 这样的场景。
 
-当动画运行时，它可能会阻止 `VirtualizedList` 组件渲染更多行。如果你需要在用户滚动列表时运行一个很长或循环的动画，可以在动画配置中使用 `isInteraction: false` 来避免这个问题。
+当动画运行时，它可能会阻止 `VirtualizedList` 组件渲染更多行。如果你需要在用户滚动列表时运行一个较长或循环的动画，可以在动画配置中使用 `isInteraction: false` 来避免这个问题。
 
 ### 请注意
 
-在使用 `rotateY`、`rotateX` 等变换样式时，请确保 transform 样式 `perspective` 已经设置好。目前在 Android 上，如果没有它，某些动画可能不会渲染。下面是示例。
+当使用诸如 `rotateY`、`rotateX` 等变换样式时，请确保设置了变换样式 `perspective`。目前在 Android 上，如果没有它，某些动画可能无法渲染。如下例所示。
 
 ```tsx
 <Animated.View
@@ -567,7 +566,7 @@ Animated.timing(this.state.animatedValue, {
     transform: [
       {scale: this.state.scale},
       {rotateY: this.state.rotateY},
-      {perspective: 1000}, // 如果没有这一行，这个动画在 Android 上将无法渲染，而在 iOS 上则正常工作
+      {perspective: 1000}, // 如果没有这一行，这个动画在 Android 上将不会渲染，而在 iOS 上则正常工作
     ],
   }}
 />
@@ -575,25 +574,25 @@ Animated.timing(this.state.animatedValue, {
 
 ### 其他示例
 
-RNTester 应用中有多个 `Animated` 的使用示例：
+RNTester app 中有各种 `Animated` 的使用示例：
 
 - [AnimatedGratuitousApp](https://github.com/facebook/react-native/tree/main/packages/rn-tester/js/examples/AnimatedGratuitousApp)
 - [NativeAnimationsExample](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/NativeAnimation/NativeAnimationsExample.js)
 
 ## `LayoutAnimation` API
 
-`LayoutAnimation` 允许你全局配置 `create` 和 `update` 动画，这些动画将在下一次渲染/布局周期中用于所有视图。这对于在不必测量或计算特定属性来直接为其设置动画的情况下进行 Flexbox 布局更新非常有用；尤其是在布局变化可能影响祖先组件时更有用，例如“查看更多”展开时也会增大父组件尺寸，并把下面的行向下推，这种情况原本需要组件之间显式协调才能让它们同步动画。
+`LayoutAnimation` 允许你全局配置 `create` 和 `update` 动画，这些动画会在下一次渲染/布局周期中应用于所有视图。这对于在不需要测量或计算具体属性并直接为其添加动画的情况下进行 Flexbox 布局更新非常有用；当布局变化可能影响祖先节点时，它尤其有用。例如，“查看更多”展开不仅会增大父组件的尺寸，还会把下面的行向下推移；如果没有它，就需要组件之间进行显式协调，才能让所有动画同步执行。
 
-请注意，虽然 `LayoutAnimation` 非常强大且很有用，但它提供的控制远不如 `Animated` 和其他动画库，因此如果你无法让 `LayoutAnimation` 按你的需求工作，可能需要采用其他方法。
+请注意，尽管 `LayoutAnimation` 非常强大且相当有用，但它提供的控制远少于 `Animated` 和其他动画库，因此如果你无法让 `LayoutAnimation` 实现你想要的效果，可能需要改用其他方案。
 
-请注意，要使其在 **Android** 上正常工作，你需要通过 `UIManager` 设置以下标志：
+还要注意，要让它在 **Android** 上正常工作，你需要通过 `UIManager` 设置以下标志：
 
 ```tsx
 UIManager.setLayoutAnimationEnabledExperimental(true);
 ```
 
 ```SnackPlayer name=LayoutAnimations
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {
   NativeModules,
   LayoutAnimation,
@@ -625,7 +624,7 @@ export default function App() {
       <View style={[styles.box, {width: state.w, height: state.h}]} />
       <TouchableOpacity onPress={onPress}>
         <View style={styles.button}>
-          <Text style={styles.buttonText}>Press me!</Text>
+          <Text style={styles.buttonText}>按我！</Text>
         </View>
       </TouchableOpacity>
     </View>
@@ -658,16 +657,16 @@ const styles = StyleSheet.create({
 
 这个示例使用了一个预设值，你可以根据需要自定义动画，更多信息请参见 [LayoutAnimation.js](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/LayoutAnimation/LayoutAnimation.js)。
 
-## 额外说明
+## 其他说明
 
 ### `requestAnimationFrame`
 
-`requestAnimationFrame` 是一个来自浏览器的 polyfill，你可能会很熟悉。它接受一个函数作为唯一参数，并在下一次重绘之前调用该函数。它是所有基于 JavaScript 的动画 API 的基础构件。在一般情况下，你不需要自己调用它——动画 API 会为你管理每一帧的更新。
+`requestAnimationFrame` 是一种你可能已经很熟悉的浏览器 polyfill。它接受一个函数作为唯一参数，并在下一次重绘之前调用该函数。它是动画的基础构建块，支撑着所有基于 JavaScript 的动画 API。通常情况下，你不需要自己调用它——动画 API 会为你管理每一帧的更新。
 
 ### `setNativeProps`
 
-如 [Direct Manipulation 部分](legacy/direct-manipulation) 所提到的，`setNativeProps` 允许我们直接修改原生承载组件（实际上由原生视图支持的组件，不同于复合组件）的属性，而无需 `setState` 并重新渲染组件层级。
+如 [直接操作章节](legacy/direct-manipulation) 所述，`setNativeProps` 允许我们直接修改原生支持组件（即实际由原生视图支撑的组件，而不是复合组件）的属性，而无需通过 `setState` 重新渲染组件层级。
 
-我们可以在 Rebound 示例中使用它来更新缩放比例——如果我们正在更新的组件嵌套很深，并且没有通过 `shouldComponentUpdate` 做过优化，这会很有帮助。
+我们可以在 Rebound 示例中使用它来更新缩放比例——如果我们正在更新的组件嵌套很深，而且还没有通过 `shouldComponentUpdate` 做过优化，这可能会很有帮助。
 
-如果你发现动画出现掉帧（低于每秒 60 帧），可以考虑使用 `setNativeProps` 或 `shouldComponentUpdate` 来优化它们。或者，你也可以使用 [useNativeDriver 选项](/blog/2017/02/14/using-native-driver-for-animated) 将动画运行在 UI 线程而不是 JavaScript 线程上。你也可能希望使用 [InteractionManager](interactionmanager) 将任何计算密集型工作推迟到动画完成之后。你可以使用 In-App Dev Menu 中的 “FPS Monitor” 工具来监控帧率。
+如果你发现动画掉帧（低于每秒 60 帧），可以考虑使用 `setNativeProps` 或 `shouldComponentUpdate` 来优化。或者，你也可以通过 [useNativeDriver 选项](/blog/2017/02/14/using-native-driver-for-animated) 让动画运行在 UI 线程而不是 JavaScript 线程上。你还可以使用 [InteractionManager](interactionmanager)，将任何计算密集型工作延后到动画完成之后再执行。你可以通过 In-App Dev Menu 中的 “FPS Monitor” 工具来监控帧率。

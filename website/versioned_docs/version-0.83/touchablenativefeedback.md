@@ -4,19 +4,19 @@ title: TouchableNativeFeedback
 ---
 
 :::tip
-如果你正在寻找一种更全面且更具未来兼容性的触摸交互处理方式，请查看 [Pressable](pressable.md) API。
+如果你在寻找一种更全面且更具前瞻性的方式来处理基于触摸的输入，可以查看 [Pressable](pressable.md) API。
 :::
 
-一个用于使视图正确响应触摸事件的包装器（仅限 Android）。在 Android 上，此组件使用原生状态 drawable 来显示触摸反馈。
+一个用于让视图正确响应触摸的包装器（仅限 Android）。在 Android 上，这个组件使用原生状态 drawable 来显示触摸反馈。
 
-目前它只支持拥有单个 View 实例作为子节点，因为它通过用另一个具有一些附加属性设置的 RCTView 节点替换该 View 实现。
+目前它只支持将单个 View 实例作为子节点，因为它的实现方式是用另一个带有一些额外属性设置的 RCTView 节点替换该 View。
 
-原生反馈触摸的背景 drawable 可以通过 `background` 属性自定义。
+原生反馈触摸组件的背景 drawable 可以通过 `background` 属性自定义。
 
 ## 示例
 
 ```SnackPlayer name=TouchableNativeFeedback%20Android%20Component%20Example&supportedPlatforms=android
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Text, View, StyleSheet, TouchableNativeFeedback} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -86,7 +86,7 @@ export default App;
 
 ### `background`
 
-决定将用于显示反馈的背景 drawable 类型。它接受一个带有 `type` 属性的对象，以及根据 `type` 不同的额外数据。建议使用静态方法之一生成该字典。
+决定将用于显示反馈的背景 drawable 类型。它接受一个带有 `type` 属性的对象，以及取决于 `type` 的额外数据。建议使用静态方法之一来生成该字典。
 
 | 类型               |
 | ------------------ |
@@ -96,9 +96,9 @@ export default App;
 
 ### `useForeground`
 
-设置为 true 时，会将波纹效果添加到视图的前景而非背景。这在你的子视图拥有自己背景，或者例如你正在展示图片且不希望波纹被覆盖时非常有用。
+设置为 true 时，会将 ripple 效果添加到视图前景，而不是背景。当你的某个子视图本身已有背景，或者你正在例如显示图片，并且不希望 ripple 被它们遮挡时，这很有用。
 
-请先检查 TouchableNativeFeedback.canUseNativeForeground()，因为此功能仅在 Android 6.0 及以上版本可用。如果你在较旧版本上尝试使用，会收到警告并回退使用背景。
+请先检查 TouchableNativeFeedback.canUseNativeForeground()，因为它仅在 Android 6.0 及以上版本可用。如果你在旧版本上尝试使用它，会收到警告并回退到背景。
 
 | 类型 |
 | ---- |
@@ -108,7 +108,7 @@ export default App;
 
 ### `hasTVPreferredFocus` <div className="label android">Android</div>
 
-电视优先焦点（请查看 View 组件文档）。
+TV 首选焦点（请参阅 View 组件的文档）。
 
 | 类型 |
 | ---- |
@@ -118,7 +118,7 @@ export default App;
 
 ### `nextFocusDown` <div className="label android">Android</div>
 
-电视向下的下一个焦点（请查看 View 组件文档）。
+TV 下一个聚焦方向为下（请参阅 View 组件的文档）。
 
 | 类型   |
 | ------ |
@@ -128,7 +128,7 @@ export default App;
 
 ### `nextFocusForward` <div className="label android">Android</div>
 
-电视向前的下一个焦点（请查看 View 组件文档）。
+TV 下一个聚焦方向为前（请参阅 View 组件的文档）。
 
 | 类型   |
 | ------ |
@@ -138,7 +138,7 @@ export default App;
 
 ### `nextFocusLeft` <div className="label android">Android</div>
 
-电视向左的下一个焦点（请查看 View 组件文档）。
+TV 下一个聚焦方向为左（请参阅 View 组件的文档）。
 
 | 类型   |
 | ------ |
@@ -148,7 +148,7 @@ export default App;
 
 ### `nextFocusRight` <div className="label android">Android</div>
 
-电视向右的下一个焦点（请查看 View 组件文档）。
+TV 下一个聚焦方向为右（请参阅 View 组件的文档）。
 
 | 类型   |
 | ------ |
@@ -158,7 +158,7 @@ export default App;
 
 ### `nextFocusUp` <div className="label android">Android</div>
 
-电视向上的下一个焦点（请查看 View 组件文档）。
+TV 下一个聚焦方向为上（请参阅 View 组件的文档）。
 
 | 类型   |
 | ------ |
@@ -174,7 +174,7 @@ static SelectableBackground(
 ): ThemeAttributeBackgroundPropType;
 ```
 
-创建一个表示 Android 主题默认可选元素背景的对象（`?android:attr/selectableItemBackground`）。`rippleRadius` 参数控制波纹效果的半径。
+创建一个表示 Android 主题中可选元素默认背景的对象（`?android:attr/selectableItemBackground`）。`rippleRadius` 参数控制 ripple 效果的半径。
 
 ---
 
@@ -186,7 +186,7 @@ static SelectableBackgroundBorderless(
 ): ThemeAttributeBackgroundPropType;
 ```
 
-创建一个表示 Android 主题默认无边框可选元素背景的对象（`?android:attr/selectableItemBackgroundBorderless`）。仅在 Android API 21 及以上版本可用。`rippleRadius` 参数控制波纹效果的半径。
+创建一个表示 Android 主题中无边框可选元素默认背景的对象（`?android:attr/selectableItemBackgroundBorderless`）。可在 Android API 21 及以上版本使用。`rippleRadius` 参数控制 ripple 效果的半径。
 
 ---
 
@@ -200,15 +200,15 @@ static Ripple(
 ): RippleBackgroundPropType;
 ```
 
-创建一个表示具有指定颜色的波纹 drawable 的对象（颜色为字符串）。如果 `borderless` 属性为 true，波纹会渲染在视图边界之外（例如原生 ActionBar 按钮的行为）。此背景类型仅在 Android API 21+ 可用。
+创建一个表示指定颜色（字符串形式）ripple drawable 的对象。如果属性 `borderless` 为 true，ripple 将在视图边界之外渲染（例如原生 actionbar 按钮就表现出这种行为）。此背景类型在 Android API 21 及以上版本可用。
 
 **参数：**
 
-| 名称         | 类型    | 必填 | 描述                                 |
+| 名称         | 类型    | 必需 | 描述                                 |
 | ------------ | ------- | ---- | ------------------------------------ |
-| color        | string  | 是   | 波纹颜色                            |
-| borderless   | boolean | 是   | 波纹是否可以渲染在边界外           |
-| rippleRadius | ?number | 否   | 控制波纹效果的半径                  |
+| color        | string  | 是   | ripple 颜色                            |
+| borderless   | boolean | 是   | ripple 是否可以在其边界之外渲染         |
+| rippleRadius | ?number | 否   | 控制 ripple 效果的半径                |
 
 ---
 

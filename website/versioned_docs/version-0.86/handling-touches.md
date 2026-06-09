@@ -14,7 +14,7 @@ title: 处理触摸
   onPress={() => {
     console.log('你点击了按钮！');
   }}
-  title="Press Me"
+  title="按我"
 />
 ```
 
@@ -22,10 +22,9 @@ title: 处理触摸
 
 ![](/docs/assets/Button.png)
 
-你可以使用下面的示例来亲自试试 `Button` 组件。你可以通过点击右下角的切换开关，然后点击 "Tap to Play" 来预览应用，从而选择应用预览所在的平台。
+你可以使用下面的示例来亲自试试 `Button` 组件。你可以通过点击右下角的切换开关，然后点击 "点击运行" 来预览应用，从而选择应用预览所在的平台。
 
 ```SnackPlayer name=Button%20Basics
-import React from 'react';
 import {Alert, Button, StyleSheet, View} from 'react-native';
 
 const ButtonBasics = () => {
@@ -36,14 +35,14 @@ const ButtonBasics = () => {
   return (
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
-        <Button onPress={onPress} title="Press Me" />
+        <Button onPress={onPress} title="按我" />
       </View>
       <View style={styles.buttonContainer}>
-        <Button onPress={onPress} title="Press Me" color="#841584" />
+        <Button onPress={onPress} title="按我" color="#841584" />
       </View>
       <View style={styles.alternativeLayoutButtonContainer}>
-        <Button onPress={onPress} title="This looks great!" />
-        <Button onPress={onPress} title="OK!" color="#841584" />
+        <Button onPress={onPress} title="看起来很棒！" />
+        <Button onPress={onPress} title="好的！" color="#841584" />
       </View>
     </View>
   );
@@ -86,7 +85,6 @@ export default ButtonBasics;
 让我们看看这些效果的实际表现：
 
 ```SnackPlayer name=Touchables
-import React from 'react';
 import {
   Alert,
   Platform,

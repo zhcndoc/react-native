@@ -8,7 +8,6 @@ title: 使用 ScrollView
 这个示例创建了一个垂直的 `ScrollView`，将图片和文本混合在一起。
 
 ```SnackPlayer name=Using%20ScrollView
-import React from 'react';
 import {Image, ScrollView, Text} from 'react-native';
 
 const logo = {

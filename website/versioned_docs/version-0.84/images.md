@@ -30,7 +30,7 @@ React Native 提供了一种统一的方式来管理 Android 和 iOS 应用中�
 <Image source={require('./img/check.png')} />
 ```
 
-...打包器会根据设备的屏幕密度打包并加载对应的图片。例如，iPhone 7 会使用 `check@2x.png`，而 iPhone 7 Plus 或 Nexus 5 会使用 `check@3x.png`。如果没有与屏幕密度完全匹配的图片，将选择最接近的最佳选项。
+...打包器会打包并提供与设备屏幕密度相对应的图片。例如，`check@2x.png` 会用于 iPhone 7，而 `check@3x.png` 会用于 iPhone 7 Plus 或 Nexus 5。如果没有与屏幕密度匹配的图片，将选择最接近的最佳选项。
 
 在 Windows 上，如果你添加了新图片，可能需要重启打包器。
 
@@ -242,7 +242,7 @@ React Native 中的一个有意思的设计是，`src` 属性被命名为 `sourc
 ```tsx
 return (
   <ImageBackground source={...} style={{width: '100%', height: '100%'}}>
-    <Text>Inside</Text>
+    <Text>内部</Text>
   </ImageBackground>
 );
 ```

@@ -6,7 +6,6 @@ title: 平台
 ## 示例
 
 ```SnackPlayer name=Platform%20API%20Example&supportedPlatforms=ios,android
-import React from 'react';
 import {Platform, StyleSheet, Text, ScrollView} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -187,7 +186,7 @@ static select(config: Record<string, T>): T;
 #### 参数：
 
 | 名称   | 类型   | 必填   | 说明                       |
-| ------ | ------ | ------ | -------------------------- |
+| ------ | ------ | ---- | -------------------------- |
 | config | object | 是     | 见下方配置说明。           |
 
 `select` 方法返回当前运行平台最匹配的值。也就是说，如果你运行在手机上，会优先选择 `android` 和 `ios` 键对应的值；如果这些没有指定，则会使用 `native` 键；最后是 `default` 键。
@@ -215,7 +214,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'red',
       },
       default: {
-        // 其它平台，例如 web
+        // 其他平台，例如 web
         backgroundColor: 'blue',
       },
     }),

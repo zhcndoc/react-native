@@ -1,6 +1,6 @@
 ---
 id: button
-title: Button
+title: 按钮
 ---
 
 一个基本的按钮组件，应在任何平台上都能良好渲染。支持最低程度的自定义。
@@ -10,71 +10,78 @@ title: Button
 ```tsx
 <Button
   onPress={onPressLearnMore}
-  title="Learn More"
+  title="了解更多"
   color="#841584"
-  accessibilityLabel="Learn more about this purple button"
+  accessibilityLabel="了解有关此紫色按钮的更多信息"
 />
 ```
 
 ## 示例
 
-```SnackPlayer name=Button%20Example
-import React from 'react';
-import {StyleSheet, Button, View, Text, Alert} from 'react-native';
+```SnackPlayer name=Button%20Example&ext=js
+import {StyleSheet, Button, View, Text, Alert, Platform} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const Separator = () => <View style={styles.separator} />;
+
+function showAlert(message) {
+  if (Platform.OS === 'web') {
+    window.alert(message);
+  } else {
+    Alert.alert(message);
+  }
+}
 
 const App = () => (
   <SafeAreaProvider>
     <SafeAreaView style={styles.container}>
       <View>
         <Text style={styles.title}>
-          The title and onPress handler are required. It is recommended to set
-          accessibilityLabel to help make your app usable by everyone.
+          标题和 onPress 处理函数是必需的。建议设置
+          accessibilityLabel，以帮助让所有人都能使用你的应用。
         </Text>
         <Button
-          title="Press me"
-          onPress={() => Alert.alert('Simple Button pressed')}
+          title="按我"
+          onPress={() => showAlert('Simple Button pressed')}
         />
       </View>
       <Separator />
       <View>
         <Text style={styles.title}>
-          Adjust the color in a way that looks standard on each platform. On
-          iOS, the color prop controls the color of the text. On Android, the
-          color adjusts the background color of the button.
+          以在每个平台上看起来都标准的方式调整颜色。在
+          iOS 上，color 属性控制文本颜色。在 Android 上，
+          color 调整按钮的背景颜色。
         </Text>
         <Button
-          title="Press me"
+          title="按我"
           color="#f194ff"
-          onPress={() => Alert.alert('Button with adjusted color pressed')}
+          onPress={() => showAlert('Button with adjusted color pressed')}
         />
       </View>
       <Separator />
       <View>
         <Text style={styles.title}>
-          All interaction for the component are disabled.
+          组件的所有交互都已禁用。
         </Text>
         <Button
-          title="Press me"
+          title="按我"
           disabled
-          onPress={() => Alert.alert('Cannot press this one')}
+          onPress={() => showAlert('Cannot press this one')}
         />
       </View>
       <Separator />
       <View>
         <Text style={styles.title}>
-          This layout strategy lets the title define the width of the button.
+          这种布局策略让标题决定按钮的宽度。
         </Text>
         <View style={styles.fixToText}>
           <Button
-            title="Left button"
-            onPress={() => Alert.alert('Left button pressed')}
+            title="左侧按钮"
+            onPress={() => showAlert('Left button pressed')}
           />
           <Button
-            title="Right button"
-            onPress={() => Alert.alert('Right button pressed')}
+            title="右侧按钮"
+            onPress={() => showAlert('Right button pressed')}
           />
         </View>
       </View>

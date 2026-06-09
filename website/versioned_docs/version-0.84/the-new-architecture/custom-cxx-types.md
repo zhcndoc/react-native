@@ -173,8 +173,8 @@ std::string NativeSampleModule::reverseString(jsi::Runtime& rt, std::string inpu
 
 ```diff title="App.tsx"
 // ...
-+ const [cubicSource, setCubicSource] = React.useState('')
-+ const [cubicRoot, setCubicRoot] = React.useState(0)
++ const [cubicSource, setCubicSource] = useState('')
++ const [cubicRoot, setCubicRoot] = useState(0)
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -368,10 +368,10 @@ bool NativeSampleModule::validateAddress(jsi::Runtime &rt, jsi::Object input) {
 1. 打开 `App.tsx`，清空 `App()` 函数内容。
 2. 用以下代码替换 `App()` 函数主体：
 
-```tsx title="App.tsx (替换 App 函数体)"
-const [street, setStreet] = React.useState('');
-const [num, setNum] = React.useState('');
-const [isValidAddress, setIsValidAddress] = React.useState<
+```tsx title="App.tsx (App function body replacement)"
+const [street, setStreet] = useState('');
+const [num, setNum] = useState('');
+const [isValidAddress, setIsValidAddress] = useState<
   boolean | null
 >(null);
 

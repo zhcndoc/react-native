@@ -173,8 +173,8 @@ std::string NativeSampleModule::reverseString(jsi::Runtime& rt, std::string inpu
 
 ```diff title="App.tsx"
 // ...
-+ const [cubicSource, setCubicSource] = React.useState('')
-+ const [cubicRoot, setCubicRoot] = React.useState(0)
++ const [cubicSource, setCubicSource] = useState('')
++ const [cubicRoot, setCubicRoot] = useState(0)
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -336,7 +336,7 @@ namespace facebook::react {
 
 2. 打开 `shared/NativeSampleModule.cpp` 文件并添加函数实现
 
-```c++ title="NativeSampleModule.cpp (validateAddress implementation)"
+```cpp title="NativeSampleModule.cpp (validateAddress implementation)"
 bool NativeSampleModule::validateAddress(jsi::Runtime &rt, jsi::Object input) {
   std::string street = input.getProperty(rt, "street").asString(rt).utf8(rt);
   int32_t number = input.getProperty(rt, "num").asNumber();
@@ -366,9 +366,9 @@ bool NativeSampleModule::validateAddress(jsi::Runtime &rt, jsi::Object input) {
 2. 用以下代码替换 `App()` 函数的主体：
 
 ```ts title="App.tsx (App function body replacement)"
-const [street, setStreet] = React.useState('');
-const [num, setNum] = React.useState('');
-const [isValidAddress, setIsValidAddress] = React.useState<
+const [street, setStreet] = useState('');
+const [num, setNum] = useState('');
+const [isValidAddress, setIsValidAddress] = useState<
   boolean | null
 >(null);
 

@@ -64,7 +64,6 @@ npm install @react-navigation/native @react-navigation/native-stack
 现在你可以创建一个带有主页屏幕和个人资料屏幕的应用：
 
 ```tsx
-import * as React from 'react';
 import {createStaticNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 

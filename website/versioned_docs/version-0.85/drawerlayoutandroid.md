@@ -5,7 +5,7 @@ title: DrawerLayoutAndroid
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-包装平台 `DrawerLayout` 的 React 组件（仅限 Android）。抽屉（通常用于导航）通过 `renderNavigationView` 渲染，直接子元素是主视图（您的内容所在处）。导航视图最初在屏幕上不可见，但可以通过 `drawerPosition` 属性指定的窗口侧面拉入，其宽度可以通过 `drawerWidth` 属性设置。
+包裹平台 `DrawerLayout` 的 React 组件（仅 Android）。抽屉（通常用于导航）通过 `renderNavigationView` 渲染，直接子元素是主视图（内容所在位置）。导航视图在屏幕上最初不可见，但可以从 `drawerPosition` 属性指定的窗口一侧滑入，其宽度可通过 `drawerWidth` 属性设置。
 
 ## 示例
 
@@ -13,7 +13,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 <TabItem value="javascript">
 
 ```SnackPlayer name=DrawerLayoutAndroid%20Component%20Example&supportedPlatforms=android&ext=js
-import React, {useRef, useState} from 'react';
+import {useRef, useState} from 'react';
 import {Button, DrawerLayoutAndroid, Text, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -30,9 +30,9 @@ const App = () => {
 
   const navigationView = () => (
     <SafeAreaView style={[styles.container, styles.navigationContainer]}>
-      <Text style={styles.paragraph}>I'm in the Drawer!</Text>
+      <Text style={styles.paragraph}>我在抽屉里！</Text>
       <Button
-        title="Close drawer"
+        title="关闭抽屉"
         onPress={() => drawer.current.closeDrawer()}
       />
     </SafeAreaView>
@@ -46,16 +46,16 @@ const App = () => {
         drawerPosition={drawerPosition}
         renderNavigationView={navigationView}>
         <SafeAreaView style={styles.container}>
-          <Text style={styles.paragraph}>Drawer on the {drawerPosition}!</Text>
+          <Text style={styles.paragraph}>抽屉在{drawerPosition}边！</Text>
           <Button
-            title="Change Drawer Position"
+            title="更改抽屉位置"
             onPress={() => changeDrawerPosition()}
           />
           <Text style={styles.paragraph}>
-            Swipe from the side or press button below to see it!
+            从侧边滑动或点击下面的按钮来查看它！
           </Text>
           <Button
-            title="Open drawer"
+            title="打开抽屉"
             onPress={() => drawer.current.openDrawer()}
           />
         </SafeAreaView>
@@ -86,7 +86,7 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=DrawerLayoutAndroid%20Component%20Example&supportedPlatforms=android&ext=tsx
-import React, {useRef, useState} from 'react';
+import {useRef, useState} from 'react';
 import {
   Button,
   DrawerLayoutAndroid,
@@ -110,9 +110,9 @@ const App = () => {
 
   const navigationView = () => (
     <View style={[styles.container, styles.navigationContainer]}>
-      <Text style={styles.paragraph}>I'm in the Drawer!</Text>
+      <Text style={styles.paragraph}>我在抽屉里！</Text>
       <Button
-        title="Close drawer"
+        title="关闭抽屉"
         onPress={() => drawer.current?.closeDrawer()}
       />
     </View>
@@ -125,16 +125,16 @@ const App = () => {
       drawerPosition={drawerPosition}
       renderNavigationView={navigationView}>
       <View style={styles.container}>
-        <Text style={styles.paragraph}>Drawer on the {drawerPosition}!</Text>
+        <Text style={styles.paragraph}>抽屉在{drawerPosition}边！</Text>
         <Button
-          title="Change Drawer Position"
+          title="更改抽屉位置"
           onPress={() => changeDrawerPosition()}
         />
         <Text style={styles.paragraph}>
-          Swipe from the side or press button below to see it!
+          从侧边滑动或点击下面的按钮来查看它！
         </Text>
         <Button
-          title="Open drawer"
+          title="打开抽屉"
           onPress={() => drawer.current?.openDrawer()}
         />
       </View>
@@ -171,15 +171,15 @@ export default App;
 
 ## 属性
 
-### [View 属性](view.md#props)
+### [View Props](view.md#props)
 
-继承 [View 属性](view.md#props)。
+继承 [View Props](view.md#props)。
 
 ---
 
 ### `drawerBackgroundColor`
 
-指定抽屉的背景颜色。默认值为 `white`。如果您想设置抽屉的透明度，请使用 rgba。示例：
+指定抽屉的背景颜色。默认值为 `white`。如果你想设置抽屉的不透明度，请使用 rgba。示例：
 
 ```tsx
 return (
@@ -187,56 +187,56 @@ return (
 );
 ```
 
-| 类型               | 必填 |
+| Type               | Required |
 | ------------------ | -------- |
-| [颜色](colors.md) | 否       |
+| [color](colors.md) | No       |
 
 ---
 
 ### `drawerLockMode`
 
-指定抽屉的锁定模式。抽屉可以锁定在 3 种状态：
+指定抽屉的锁定模式。抽屉可以处于 3 种状态：
 
-- unlocked（默认），意味着抽屉将响应（打开/关闭）触摸手势。
-- locked-closed，意味着抽屉将保持关闭且不响应手势。
-- locked-open，意味着抽屉将保持打开且不响应手势。抽屉仍然可以通过编程方式打开和关闭（`openDrawer`/`closeDrawer`）。
+- unlocked（默认），表示抽屉会响应触摸手势（打开/关闭）。
+- locked-closed，表示抽屉将保持关闭状态且不响应手势。
+- locked-open，表示抽屉将保持打开状态且不响应手势。抽屉仍然可以通过编程方式打开和关闭（`openDrawer`/`closeDrawer`）。
 
-| 类型                                             | 必填 |
+| Type                                             | Required |
 | ------------------------------------------------ | -------- |
-| enum('unlocked', 'locked-closed', 'locked-open') | 否       |
+| enum('unlocked', 'locked-closed', 'locked-open') | No       |
 
 ---
 
 ### `drawerPosition`
 
-指定抽屉将滑入的屏幕侧边。默认设置为 `left`。
+指定抽屉从屏幕哪一侧滑入。默认设置为 `left`。
 
-| 类型                  | 必填 |
+| Type                  | Required |
 | --------------------- | -------- |
-| enum('left', 'right') | 否       |
+| enum('left', 'right') | No       |
 
 ---
 
 ### `drawerWidth`
 
-指定抽屉的宽度，更确切地说，是从窗口边缘拉入的视图的宽度。
+指定抽屉的宽度，更准确地说，是从窗口边缘拉入的视图宽度。
 
-| 类型   | 必填 |
+| Type   | Required |
 | ------ | -------- |
-| 数字 | 否       |
+| number | No       |
 
 ---
 
 ### `keyboardDismissMode`
 
-确定键盘是否响应拖动而被关闭。
+决定在拖动时键盘是否会被关闭。
 
 - 'none'（默认），拖动不会关闭键盘。
-- 'on-drag'，当拖动开始时键盘被关闭。
+- 'on-drag'，拖动开始时键盘会被关闭。
 
-| 类型                    | 必填 |
+| Type                    | Required |
 | ----------------------- | -------- |
-| enum('none', 'on-drag') | 否       |
+| enum('none', 'on-drag') | No       |
 
 ---
 
@@ -244,9 +244,9 @@ return (
 
 每当导航视图关闭时调用的函数。
 
-| 类型     | 必填 |
+| Type     | Required |
 | -------- | -------- |
-| 函数 | 否       |
+| function | No       |
 
 ---
 
@@ -254,53 +254,53 @@ return (
 
 每当导航视图打开时调用的函数。
 
-| 类型     | 必填 |
+| Type     | Required |
 | -------- | -------- |
-| 函数 | 否       |
+| function | No       |
 
 ---
 
 ### `onDrawerSlide`
 
-每当与导航视图有交互时调用的函数。
+每当与导航视图发生交互时调用的函数。
 
-| 类型     | 必填 |
+| Type     | Required |
 | -------- | -------- |
-| 函数 | 否       |
+| function | No       |
 
 ---
 
 ### `onDrawerStateChanged`
 
-当抽屉状态改变时调用的函数。抽屉可以处于 3 种状态：
+当抽屉状态发生变化时调用的函数。抽屉可以处于 3 种状态：
 
-- idle，意味着当前没有与导航视图发生交互
-- dragging，意味着当前正在与导航视图进行交互
-- settling，意味着之前与导航视图有过交互，且导航视图正在完成关闭或打开动画
+- idle，表示此时没有与导航视图发生交互
+- dragging，表示当前正在与导航视图交互
+- settling，表示曾与导航视图发生过交互，导航视图正在完成关闭或打开动画
 
-| 类型     | 必填 |
+| Type     | Required |
 | -------- | -------- |
-| 函数 | 否       |
+| function | No       |
 
 ---
 
 ### `renderNavigationView`
 
-将渲染到屏幕侧面并可被拉入的导航视图。
+将渲染在屏幕侧边并可被拉入的导航视图。
 
-| 类型     | 必填 |
+| Type     | Required |
 | -------- | -------- |
-| 函数 | 是      |
+| function | Yes      |
 
 ---
 
 ### `statusBarBackgroundColor`
 
-使抽屉占据整个屏幕并绘制状态栏背景，以允许其在状态栏上方打开。仅对 API 21+ 生效。
+让抽屉占据整个屏幕，并绘制状态栏的背景，以便它可以在状态栏上方打开。它仅在 API 21+ 上生效。
 
-| 类型               | 必填 |
+| Type               | Required |
 | ------------------ | -------- |
-| [颜色](colors.md) | 否       |
+| [color](colors.md) | No       |
 
 ## 方法
 

@@ -8,19 +8,19 @@ title: 元素节点
 它们可由所有原生组件以及许多内置组件通过 refs 提供：
 
 ```SnackPlayer ext=js&name=Element%20instances%20example
-import * as React from 'react';
-import { View, SafeAreaView, StyleSheet, Text } from 'react-native';
+import {useEffect, useRef, useState} from 'react';
+import {View, SafeAreaView, StyleSheet, Text} from 'react-native';
 
 const ViewWithRefs = () => {
-  const ref = React.useRef(null);
-  const [viewInfo, setViewInfo] = React.useState('');
+  const ref = useRef(null);
+  const [viewInfo, setViewInfo] = useState('');
 
-  React.useEffect(() => {
+  useEffect(() => {
     // `element` 是一个实现了此处所述接口的对象。
     const element = ref.current;
     const rect = JSON.stringify(element.getBoundingClientRect());
     setViewInfo(
-      `Bounding rect is: ${rect}.\nText content is: ${element.textContent}`,
+      `边界矩形为：${rect}。\n文本内容为：${element.textContent}`,
     );
   }, []);
 

@@ -12,7 +12,6 @@ title: 图片
 ## 示例
 
 ```SnackPlayer name=Image%20Example
-import React from 'react';
 import {Image, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -59,7 +58,6 @@ export default DisplayAnImage;
 你也可以为图片添加 `style`：
 
 ```SnackPlayer name=Styled%20Image%20Example
-import React from 'react';
 import {Image, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -217,7 +215,7 @@ blurRadius：添加到图片的模糊滤镜的模糊半径。
 图片组件的高度。
 
 | 类型   |
-| ------ |
+| ------ | ------- |
 | number |
 
 ---
@@ -486,9 +484,9 @@ static abortPrefetch(requestId: number);
 static getSize(uri: string): Promise<{width: number, height: number}>;
 ```
 
-在显示图像之前检索其宽度和高度（以像素为单位）。如果找不到图像或下载失败，此方法可能会失败。
+在显示图像之前获取其宽度和高度（以像素为单位）。如果找不到图像或下载失败，此方法可能会失败。
 
-为了检索图像尺寸，图像可能需要先加载或下载，之后会被缓存。这意味着原则上你可以使用此方法预加载图像，但它并未为此目的优化，并且将来可能会以实现方式不完全加载/下载图像数据的方式实施。合适的、受支持的预加载图像方式将作为单独的 API 提供。
+为了获取图像尺寸，图像可能需要先加载或下载，之后会被缓存。这意味着原则上你可以使用此方法预加载图像，但它并未针对这一用途进行优化，并且未来可能会以不完全加载/下载图像数据的方式实现。合适且受支持的图像预加载方式将作为单独的 API 提供。
 
 **参数：**
 
@@ -507,9 +505,9 @@ static getSizeWithHeaders(
 ): Promise<{width: number, height: number}>;
 ```
 
-在显示图像之前检索其宽度和高度（以像素为单位），并提供为请求设置请求头的能力。如果找不到图像或下载失败，此方法可能会失败。它也不适用于静态图像资源。
+在显示图像之前获取其宽度和高度（以像素为单位），并提供为请求设置请求头的能力。如果找不到图像或下载失败，此方法可能会失败。它也不适用于静态图像资源。
 
-为了检索图像尺寸，图像可能需要先加载或下载，之后会被缓存。这意味着原则上你可以使用此方法预加载图像，但它并未为此目的优化，并且将来可能会以实现方式不完全加载/下载图像数据的方式实施。合适的、受支持的预加载图像方式将作为单独的 API 提供。
+为了获取图像尺寸，图像可能需要先加载或下载，之后会被缓存。这意味着原则上你可以使用此方法预加载图像，但它并未针对这一用途进行优化，并且未来可能会以不完全加载/下载图像数据的方式实现。合适且受支持的图像预加载方式将作为单独的 API 提供。
 
 **参数：**
 
@@ -566,7 +564,7 @@ static resolveAssetSource(source: ImageSourcePropType): {
 };
 ```
 
-将资产引用解析为具有 `uri`、`scale`、`width` 和 `height` 属性的对象。
+将资源引用解析为具有 `uri`、`scale`、`width` 和 `height` 属性的对象。
 
 **参数：**
 
@@ -578,7 +576,7 @@ static resolveAssetSource(source: ImageSourcePropType): {
 
 ### ImageCacheEnum <div className="label ios">iOS</div>
 
-可用于为潜在缓存的响应设置缓存处理或策略的枚举。
+可用于为可能被缓存的响应设置缓存处理或策略的枚举。
 
 | 类型                                                               | 默认值     |
 | ------------------------------------------------------------------ | ----------- |
@@ -631,7 +629,7 @@ static resolveAssetSource(source: ImageSourcePropType): {
 | method                                     | string                                     | 要使用的 HTTP 方法。如果未指定，默认为 `'GET'`。                                                                                                                        |
 | headers                                    | object                                     | 一个对象，表示随远程图像请求一起发送的 HTTP 请求头。                                                                                           |
 | body                                       | string                                     | 随请求一起发送的 HTTP 主体。这必须是有效的 UTF-8 字符串，并将完全按指定发送，不应用额外的编码（例如 URL 转义或 base64）。 |
-| cache<div className="label ios">iOS</div>  | [ImageCacheEnum](image#imagecacheenum-ios) | 确定请求如何处理潜在缓存的响应。                                                                                                                    |
+| cache<div className="label ios">iOS</div>  | [ImageCacheEnum](image#imagecacheenum-ios) | 确定请求如何处理可能被缓存的响应。                                                                                                                    |
 
 **如果传递数字：**
 

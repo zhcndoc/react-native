@@ -91,7 +91,6 @@ pod 'React', :path => '../node_modules/react-native', :subspecs => [
 React Native 实现了 WebSockets 的 polyfill。这些 [polyfill](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Core/InitializeCore.js) 是作为 react-native 模块的一部分在你通过 `import React from 'react'` 导入时初始化的。如果你加载了另一个需要 WebSocket 支持的模块，比如 [Firebase](https://github.com/facebook/react-native/issues/3645)，确保在加载它之前已经加载了 react-native：
 
 ```
-import React from 'react';
 import Firebase from 'firebase';
 ```
 

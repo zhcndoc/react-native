@@ -3,21 +3,20 @@ id: toastandroid
 title: ToastAndroid
 ---
 
-React Native's ToastAndroid API exposes the Android platform's ToastAndroid module as a JS module. It provides the method `show(message, duration)` which takes the following parameters:
+React Native 的 `ToastAndroid` API 将 Android 平台的 `ToastAndroid` 模块作为一个 JS 模块暴露出来。它提供了 `show(message, duration)` 方法，接收以下参数：
 
-- _message_ A string with the text to toast
-- _duration_ The duration of the toast—either `ToastAndroid.SHORT` or `ToastAndroid.LONG`
+- _message_ 要显示为 toast 的文本字符串
+- _duration_ toast 的持续时间——可以是 `ToastAndroid.SHORT` 或 `ToastAndroid.LONG`
 
-You can alternatively use `showWithGravity(message, duration, gravity)` to specify where the toast appears in the screen's layout. May be `ToastAndroid.TOP`, `ToastAndroid.BOTTOM` or `ToastAndroid.CENTER`.
+你也可以使用 `showWithGravity(message, duration, gravity)` 来指定 toast 在屏幕布局中的显示位置。可选值可以是 `ToastAndroid.TOP`、`ToastAndroid.BOTTOM` 或 `ToastAndroid.CENTER`。
 
-The `showWithGravityAndOffset(message, duration, gravity, xOffset, yOffset)` method adds the ability to specify an offset with in pixels.
+`showWithGravityAndOffset(message, duration, gravity, xOffset, yOffset)` 方法增加了指定像素偏移量的能力。
 
 :::note
-Starting with Android 11 (API level 30), setting the gravity has no effect on text toasts. Read about the changes [here](https://developer.android.com/about/versions/11/behavior-changes-11#text-toast-api-changes).
+从 Android 11（API 级别 30）开始，设置 gravity 对文本 toast 不再生效。有关这些变更，请阅读[这里](https://developer.android.com/about/versions/11/behavior-changes-11#text-toast-api-changes)。
 :::
 
 ```SnackPlayer name=Toast%20Android%20API%20Example&supportedPlatforms=android
-import React from 'react';
 import {StyleSheet, ToastAndroid, Button, StatusBar} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -47,13 +46,13 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <Button title="Toggle Toast" onPress={() => showToast()} />
+        <Button title="切换 Toast" onPress={() => showToast()} />
         <Button
-          title="Toggle Toast With Gravity"
+          title="切换带重力的 Toast"
           onPress={() => showToastWithGravity()}
         />
         <Button
-          title="Toggle Toast With Gravity & Offset"
+          title="切换带重力和偏移的 Toast"
           onPress={() => showToastWithGravityAndOffset()}
         />
       </SafeAreaView>
@@ -76,9 +75,9 @@ export default App;
 
 ---
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `show()`
 
@@ -90,7 +89,7 @@ static show(message: string, duration: number);
 
 ### `showWithGravity()`
 
-This property will only work on Android API 29 and below. For similar functionality on higher Android APIs, consider using snackbar or notification.
+此属性仅适用于 Android API 29 及以下版本。对于更高版本的 Android API 上的类似功能，请考虑使用 snackbar 或通知。
 
 ```tsx
 static showWithGravity(message: string, duration: number, gravity: number);
@@ -100,7 +99,7 @@ static showWithGravity(message: string, duration: number, gravity: number);
 
 ### `showWithGravityAndOffset()`
 
-This property will only work on Android API 29 and below. For similar functionality on higher Android APIs, consider using snackbar or notification.
+此属性仅适用于 Android API 29 及以下版本。对于更高版本的 Android API 上的类似功能，请考虑使用 snackbar 或通知。
 
 ```tsx
 static showWithGravityAndOffset(
@@ -112,11 +111,11 @@ static showWithGravityAndOffset(
 );
 ```
 
-## Properties
+## 属性
 
 ### `SHORT`
 
-Indicates the duration on the screen.
+表示在屏幕上的持续时间。
 
 ```tsx
 static SHORT: number;
@@ -126,7 +125,7 @@ static SHORT: number;
 
 ### `LONG`
 
-Indicates the duration on the screen.
+表示在屏幕上的持续时间。
 
 ```tsx
 static LONG: number;
@@ -136,7 +135,7 @@ static LONG: number;
 
 ### `TOP`
 
-Indicates the position on the screen.
+表示在屏幕上的位置。
 
 ```tsx
 static TOP: number;
@@ -146,7 +145,7 @@ static TOP: number;
 
 ### `BOTTOM`
 
-Indicates the position on the screen.
+表示在屏幕上的位置。
 
 ```tsx
 static BOTTOM: number;
@@ -156,7 +155,7 @@ static BOTTOM: number;
 
 ### `CENTER`
 
-Indicates the position on the screen.
+表示在屏幕上的位置。
 
 ```tsx
 static CENTER: number;

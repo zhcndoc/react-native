@@ -3,9 +3,9 @@ id: button
 title: 按钮
 ---
 
-一个基础的按钮组件，应该能在任何平台上良好渲染。支持最小程度的自定义。
+一个基础的按钮组件，应能在任何平台上良好渲染。支持最少量的自定义。
 
-如果这个按钮在你的应用中看起来不合适，你可以使用 [Pressable](pressable) 来构建你自己的按钮。想要获取灵感，可以查看[按钮组件的源码](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Components/Button.js)。
+如果这个按钮在你的应用中看起来不合适，你可以使用 [Pressable](pressable) 来构建你自己的按钮。想获取灵感，可以查看[按钮组件的源码](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Components/Button.js)。
 
 ```tsx
 <Button
@@ -19,7 +19,6 @@ title: 按钮
 ## 示例
 
 ```SnackPlayer name=Button%20Example&ext=js
-import React from 'react';
 import {StyleSheet, Button, View, Text, Alert, Platform} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 

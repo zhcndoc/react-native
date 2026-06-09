@@ -10,7 +10,6 @@ title: View
 此示例创建了一个 `View`，它在行内包裹了两个带有颜色的盒子以及一个带有内边距的文本组件。
 
 ```SnackPlayer name=View%20Example
-import React from 'react';
 import {View, Text} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 

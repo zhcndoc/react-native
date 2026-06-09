@@ -8,7 +8,6 @@ title: 图片样式属性
 ### 图片缩放模式
 
 ```SnackPlayer name=Image%20Resize%20Modes%20Example
-import React from 'react';
 import {View, Image, Text, StyleSheet, ScrollView} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -20,35 +19,35 @@ const DisplayAnImageWithStyle = () => (
       <ScrollView style={styles.scrollView}>
         <View>
           <Image style={[styles.image, {resizeMode: 'cover'}]} source={asset} />
-          <Text style={styles.text}>resizeMode : cover</Text>
+          <Text style={styles.text}>resizeMode：cover</Text>
         </View>
         <View>
           <Image
             style={[styles.image, {resizeMode: 'contain'}]}
             source={asset}
           />
-          <Text style={styles.text}>resizeMode : contain</Text>
+          <Text style={styles.text}>resizeMode：contain</Text>
         </View>
         <View>
           <Image
             style={[styles.image, {resizeMode: 'stretch'}]}
             source={asset}
           />
-          <Text style={styles.text}>resizeMode : stretch</Text>
+          <Text style={styles.text}>resizeMode：stretch</Text>
         </View>
         <View>
           <Image
             style={[styles.image, {resizeMode: 'repeat'}]}
             source={asset}
           />
-          <Text style={styles.text}>resizeMode : repeat</Text>
+          <Text style={styles.text}>resizeMode：repeat</Text>
         </View>
         <View>
           <Image
             style={[styles.image, {resizeMode: 'center'}]}
             source={asset}
           />
-          <Text style={styles.text}>resizeMode : center</Text>
+          <Text style={styles.text}>resizeMode：center</Text>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -82,7 +81,6 @@ export default DisplayAnImageWithStyle;
 ### 图片边框
 
 ```SnackPlayer name=Style%20BorderWidth%20and%20BorderColor%20Example
-import React from 'react';
 import {Image, StyleSheet, Text} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -118,7 +116,6 @@ export default DisplayAnImageWithStyle;
 ### 图片圆角
 
 ```SnackPlayer name=Style%20Border%20Radius%20Example
-import React from 'react';
 import {View, Image, StyleSheet, Text, ScrollView} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -184,7 +181,6 @@ export default DisplayAnImageWithStyle;
 ### 图片色调
 
 ```SnackPlayer name=Style%20tintColor%20Function%20Component
-import React from 'react';
 import {Image, StyleSheet, Text} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 

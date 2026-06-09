@@ -21,25 +21,24 @@ title: SectionList
 ## 示例
 
 ```SnackPlayer name=SectionList%20Example
-import React from 'react';
 import {StyleSheet, Text, View, SectionList, StatusBar} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const DATA = [
   {
-    title: 'Main dishes',
+    title: '主菜',
     data: ['Pizza', 'Burger', 'Risotto'],
   },
   {
-    title: 'Sides',
+    title: '配菜',
     data: ['French Fries', 'Onion Rings', 'Fried Shrimps'],
   },
   {
-    title: 'Drinks',
+    title: '饮料',
     data: ['Water', 'Coke', 'Beer'],
   },
   {
-    title: 'Desserts',
+    title: '甜点',
     data: ['Cheese Cake', 'Ice Cream'],
   },
 ];

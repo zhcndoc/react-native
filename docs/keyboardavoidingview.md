@@ -3,12 +3,11 @@ id: keyboardavoidingview
 title: KeyboardAvoidingView
 ---
 
-This component will automatically adjust its height, position, or bottom padding based on the keyboard height to remain visible while the virtual keyboard is displayed.
+该组件会根据键盘高度自动调整自身的高度、位置或底部内边距，以便在虚拟键盘显示时保持可见。
 
-## Example
+## 示例
 
 ```SnackPlayer name=KeyboardAvoidingView&supportedPlatforms=android,ios
-import React from 'react';
 import {
   View,
   KeyboardAvoidingView,
@@ -28,10 +27,10 @@ const KeyboardAvoidingComponent = () => {
       style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.inner}>
-          <Text style={styles.header}>Header</Text>
-          <TextInput placeholder="Username" style={styles.textInput} />
+          <Text style={styles.header}>标题</Text>
+          <TextInput placeholder="用户名" style={styles.textInput} />
           <View style={styles.btnContainer}>
-            <Button title="Submit" onPress={() => null} />
+            <Button title="提交" onPress={() => null} />
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -69,25 +68,25 @@ export default KeyboardAvoidingComponent;
 
 ---
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
 ### [View Props](view.md#props)
 
-Inherits [View Props](view.md#props).
+继承自 [View Props](view.md#props)。
 
 ---
 
 ### `behavior`
 
-Specify how to react to the presence of the keyboard.
+指定对键盘出现的响应方式。
 
 :::note
-Android and iOS both interact with this prop differently. On both iOS and Android, setting `behavior` is recommended.
+Android 和 iOS 对该属性的交互方式不同。建议在 iOS 和 Android 上都设置 `behavior`。
 :::
 
-| Type                                        |
+| 类型                                        |
 | ------------------------------------------- |
 | enum(`'height'`, `'position'`, `'padding'`) |
 
@@ -95,9 +94,9 @@ Android and iOS both interact with this prop differently. On both iOS and Androi
 
 ### `contentContainerStyle`
 
-The style of the content container (View) when behavior is `'position'`.
+当 `behavior` 为 `'position'` 时，内容容器（View）的样式。
 
-| Type                              |
+| 类型                              |
 | --------------------------------- |
 | [View Style](view-style-props.md) |
 
@@ -105,9 +104,9 @@ The style of the content container (View) when behavior is `'position'`.
 
 ### `enabled`
 
-Enabled or disabled KeyboardAvoidingView.
+启用或禁用 KeyboardAvoidingView。
 
-| Type    | Default |
+| 类型    | 默认值 |
 | ------- | ------- |
 | boolean | `true`  |
 
@@ -115,8 +114,8 @@ Enabled or disabled KeyboardAvoidingView.
 
 ### `keyboardVerticalOffset`
 
-This is the distance between the top of the user screen and the react native view, may be non-zero in some use cases.
+这是用户屏幕顶部与 react native 视图之间的距离，在某些使用场景中可能不为零。
 
-| Type   | Default |
+| 类型   | 默认值 |
 | ------ | ------- |
 | number | `0`     |

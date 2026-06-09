@@ -4,20 +4,20 @@ title: TouchableHighlight
 ---
 
 :::tip
-如果您正在寻找一种更全面且面向未来的触摸输入处理方法，请查看 [Pressable](pressable.md) API。
+如果你正在寻找一种更全面、面向未来的方式来处理基于触摸的输入，可以查看 [Pressable](pressable.md) API。
 :::
 
-用于让视图能够正确响应触摸的包装器。在按下时，包装视图的不透明度会降低，从而允许底层颜色透出，变暗或给视图着色。
+用于让视图正确响应触摸的包装器。按下时，被包裹视图的透明度会降低，从而让底色显示出来，使视图变暗或带上色调。
 
-底层颜色是通过将子组件包装在一个新的 View 中实现的，这可能会影响布局，并且如果使用不当，比如没有显式将被包装视图的 backgroundColor 设置为不透明的颜色，可能会导致不想要的视觉伪影。
+底层颜色来自于将子组件包裹在一个新的 View 中，这可能会影响布局；如果使用不当，有时还会导致不希望出现的视觉瑕疵，例如当被包裹视图的 backgroundColor 没有明确设置为不透明颜色时。
 
-TouchableHighlight 必须有且仅有一个子元素（不能是零个或多个）。如果您想包含多个子组件，请将它们包装在一个 View 中。
+TouchableHighlight 必须有一个子组件（不能为零个或多于一个）。如果你希望有多个子组件，请将它们包裹在一个 View 中。
 
 ```tsx
 function MyComponent(props: MyComponentProps) {
   return (
     <View {...props} style={{flex: 1, backgroundColor: '#fff'}}>
-      <Text>My Component</Text>
+      <Text>我的组件</Text>
     </View>
   );
 }
@@ -32,8 +32,8 @@ function MyComponent(props: MyComponentProps) {
 
 ## 示例
 
-```SnackPlayer name=TouchableHighlight%20示例
-import React, {useState} from 'react';
+```SnackPlayer name=TouchableHighlight%20Example
+import {useState} from 'react';
 import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -46,7 +46,7 @@ const TouchableHighlightExample = () => {
       <SafeAreaView style={styles.container}>
         <TouchableHighlight onPress={onPress}>
           <View style={styles.button}>
-            <Text>Touch Here</Text>
+            <Text>点击这里</Text>
           </View>
         </TouchableHighlight>
         <View style={styles.countContainer}>
@@ -82,19 +82,19 @@ export default TouchableHighlightExample;
 
 ---
 
-# 参考资料
+# 参考
 
 ## 属性
 
-### [TouchableWithoutFeedback 属性](touchablewithoutfeedback.md#props)
+### [TouchableWithoutFeedback Props](touchablewithoutfeedback.md#props)
 
-继承自 [TouchableWithoutFeedback 属性](touchablewithoutfeedback.md#props)。
+继承自 [TouchableWithoutFeedback Props](touchablewithoutfeedback.md#props)。
 
 ---
 
 ### `activeOpacity`
 
-决定触摸激活时被包装视图的不透明度。该值应在 0 到 1 之间。默认为 0.85。需要设置 `underlayColor`。
+决定触摸激活时被包裹视图的透明度应是多少。取值应介于 0 和 1 之间。默认为 0.85。需要设置 `underlayColor`。
 
 | 类型   |
 | ------ |
@@ -104,7 +104,7 @@ export default TouchableHighlightExample;
 
 ### `onHideUnderlay`
 
-当底层颜色隐藏后立即调用。
+在底层被隐藏后立即调用。
 
 | 类型     |
 | -------- |
@@ -114,7 +114,7 @@ export default TouchableHighlightExample;
 
 ### `onShowUnderlay`
 
-当底层颜色显示后立即调用。
+在底层被显示后立即调用。
 
 | 类型     |
 | -------- |
@@ -124,21 +124,21 @@ export default TouchableHighlightExample;
 
 ### `ref`
 
-一个 ref 设置器，组件挂载后会被赋值为一个 [元素节点](element-nodes)。
+一个 ref 设置器，在挂载时会被赋予一个 [element node](element-nodes)。
 
 ---
 
 ### `style`
 
-| 类型       |
-| ---------- |
+| 类型        |
+| ----------- |
 | View.style |
 
 ---
 
 ### `underlayColor`
 
-触摸激活时显示的底层颜色。
+当触摸激活时，会透出的底层颜色。
 
 | 类型               |
 | ------------------ |
@@ -158,7 +158,7 @@ _（仅限 Apple TV）_ TV 首选焦点（参见 View 组件文档）。
 
 ### `nextFocusDown` <div className="label android">Android</div>
 
-TV 向下的下一个焦点（参见 View 组件文档）。
+TV 下一个焦点向下（参见 View 组件文档）。
 
 | 类型   |
 | ------ |
@@ -168,7 +168,7 @@ TV 向下的下一个焦点（参见 View 组件文档）。
 
 ### `nextFocusForward` <div className="label android">Android</div>
 
-TV 向前的下一个焦点（参见 View 组件文档）。
+TV 下一个焦点向前（参见 View 组件文档）。
 
 | 类型   |
 | ------ |
@@ -178,7 +178,7 @@ TV 向前的下一个焦点（参见 View 组件文档）。
 
 ### `nextFocusLeft` <div className="label android">Android</div>
 
-TV 向左的下一个焦点（参见 View 组件文档）。
+TV 下一个焦点向左（参见 View 组件文档）。
 
 | 类型   |
 | ------ |
@@ -188,7 +188,7 @@ TV 向左的下一个焦点（参见 View 组件文档）。
 
 ### `nextFocusRight` <div className="label android">Android</div>
 
-TV 向右的下一个焦点（参见 View 组件文档）。
+TV 下一个焦点向右（参见 View 组件文档）。
 
 | 类型   |
 | ------ |
@@ -198,7 +198,7 @@ TV 向右的下一个焦点（参见 View 组件文档）。
 
 ### `nextFocusUp` <div className="label android">Android</div>
 
-TV 向上的下一个焦点（参见 View 组件文档）。
+TV 下一个焦点向上（参见 View 组件文档）。
 
 | 类型   |
 | ------ |
@@ -208,7 +208,7 @@ TV 向上的下一个焦点（参见 View 组件文档）。
 
 ### `testOnly_pressed`
 
-适用于快照测试。
+便于快照测试使用。
 
 | 类型 |
 | ---- |

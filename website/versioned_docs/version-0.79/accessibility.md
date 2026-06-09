@@ -423,14 +423,14 @@ Android 和 iOS 的方法略有不同，因此 React Native 的实现可能因�
 
 添加对标准操作的支持时，`name` 必须是以下之一：
 
-- `'magicTap'` - 仅限 iOS - 当 VoiceOver 焦点位于组件上或组件内时，用户用两根手指双击。
-- `'escape'` - 仅限 iOS - 当 VoiceOver 焦点位于组件上或组件内时，用户执行双指擦除手势（左、右、左）。
-- `'activate'` - 激活组件。无论是否有辅助技术，这都应执行相同的操作。当屏幕阅读器用户双击组件时触发。
-- `'increment'` - 增加可调整组件的值。在 iOS 上，当组件具有 `'adjustable'` 角色且用户将焦点放在其上并向上滑动时，VoiceOver 会生成此操作。在 Android 上，当用户将无障碍焦点放在组件上并按下音量增加按钮时，TalkBack 会生成此操作。
-- `'decrement'` - 减少可调整组件的值。在 iOS 上，当组件具有 `'adjustable'` 角色且用户将焦点放在其上并向下滑动时，VoiceOver 会生成此操作。在 Android 上，当用户将无障碍焦点放在组件上并按下音量减少按钮时，TalkBack 会生成此操作。
-- `'longpress'` - 仅限 Android - 当用户将无障碍焦点放在组件上，然后双击并按住一根手指在屏幕上时生成此操作。无论是否有辅助技术，这都应执行相同的操作。
+- `'magicTap'` - 仅 iOS - 当 VoiceOver 焦点位于组件上或组件内部时，用户用两根手指双击。
+- `'escape'` - 仅 iOS - 当 VoiceOver 焦点位于组件上或组件内部时，用户执行两指扫动手势（左、右、左）。
+- `'activate'` - 激活组件。这应该在有或没有辅助技术的情况下执行相同的操作。当屏幕阅读器用户双击组件时触发。
+- `'increment'` - 增加可调节组件。在 iOS 上，当组件的角色为 `'adjustable'`，且用户将焦点放在其上并向上滑动时，VoiceOver 会生成此操作。在 Android 上，在 TalkBack 8.1 及以下版本中，当用户聚焦组件并按下音量增加按钮时，会生成此操作。在 TalkBack 9.1 及更高版本中，这被“调整阅读控制”手势（在聚焦的控件上向上滑动）所取代。
+- `'decrement'` - 减少可调节组件。在 iOS 上，当组件的角色为 `'adjustable'`，且用户将焦点放在其上并向下滑动时，VoiceOver 会生成此操作。在 Android 上，在 TalkBack 8.2 及以下版本中，当用户聚焦组件并按下音量降低按钮时，会生成此操作。在 TalkBack 9.2 及更高版本中，这被“调整阅读控制”手势（在聚焦的控件上向下滑动）所取代。
+- `'longpress'` - 仅 Android - 当用户将无障碍焦点放在组件上，然后双击并按住屏幕上的一根手指时，会生成此操作。这应该在有或没有辅助技术的情况下执行相同的操作。
 
-`label` 字段对于标准操作是可选的，辅助技术通常不使用它。对于自定义操作，它是一个本地化字符串，包含要向用户展示的操作描述。
+对于标准操作，`label` 字段是可选的，它由辅助技术用于描述某个操作的具体结果。例如，TalkBack 会使用此字段覆盖默认的“Double tap to activate”提示，并显示自定义说明，例如“Double tap to open chat.”。对于自定义操作，`label` 是一个本地化字符串，包含将向用户展示的操作描述。
 
 要处理操作请求，组件必须实现一个 `onAccessibilityAction` 函数。此函数的唯一参数是一个包含要执行的操作名称的事件。下面来自 RNTester 的示例展示了如何创建定义和处理几个自定义操作的组件。
 
@@ -494,7 +494,7 @@ Android 模拟器默认没有安装 TalkBack。你可以通过 Google Play 商�
 adb shell settings put secure enabled_accessibility_services com.android.talkback/com.google.android.marvin.talkback.TalkBackService
 
 # 启用
-adb shell settings put secure enabled_accessibility_services com.google.android.marvin.talkback/com.google.android.marvin.talkback.TalkBackService
+adb shell settings put secure enabled_accessibility_services com.android.marvin.talkback/com.google.android.marvin.talkback.TalkBackService
 ```
 
 ## 测试 VoiceOver 支持 <div className="label ios">iOS</div>

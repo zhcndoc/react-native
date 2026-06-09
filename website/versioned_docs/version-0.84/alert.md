@@ -12,7 +12,6 @@ title: 警告
 ## 示例
 
 ```SnackPlayer name=Alert%20Example&supportedPlatforms=ios,android
-import React from 'react';
 import {StyleSheet, Button, Alert} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -81,7 +80,6 @@ export default App;
 ### 示例 <div className="label android">Android</div>
 
 ```SnackPlayer name=Alert%20Android%20Dissmissable%20Example&supportedPlatforms=android
-import React from 'react';
 import {StyleSheet, Button, Alert} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -248,7 +246,7 @@ iOS 警告类型。
 **属性:**
 
 | 名称                                                    | 类型     | 描述                                                                                     |
-| ------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------- |
+| ------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
 | cancelable <div className="label android">Android</div> | boolean  | 是否允许点击警告框外部关闭警告                                                         |
 | userInterfaceStyle <div className="label ios">iOS</div> | string   | 警告使用的界面样式，可设为 `light` 或 `dark`，否则使用系统默认样式                      |
 | onDismiss <div className="label android">Android</div>  | function | 警告被关闭时触发的回调函数                                                              |

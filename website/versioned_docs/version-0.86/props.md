@@ -10,7 +10,6 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 例如，一个基本的 React Native 组件是 `Image`。当你创建一张图片时，可以使用名为 `source` 的 prop 来控制它显示什么图片。
 
 ```SnackPlayer name=Props
-import React from 'react';
 import {Image} from 'react-native';
 
 const Bananas = () => {
@@ -33,7 +32,6 @@ export default Bananas;
 <TabItem value="javascript">
 
 ```SnackPlayer name=Props&ext=js
-import React from 'react';
 import {Text, View} from 'react-native';
 
 const Greeting = props => {
@@ -61,7 +59,6 @@ export default LotsOfGreetings;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Props&ext=tsx
-import React from 'react';
 import {Text, View} from 'react-native';
 
 type GreetingProps = {

@@ -9,17 +9,16 @@ title: I18nManager
 
 ## 示例
 
-### 根据 RTL 更改位置和动画
+### 根据 RTL 调整位置和动画
 
-如果你将元素绝对定位以与其他 flexbox 元素对齐，它们在 RTL 语言中可能无法对齐。可以使用 `isRTL` 来调整对齐或动画。
+如果你将元素绝对定位以便与其他 flexbox 元素对齐，它们在 RTL 语言中可能无法对齐。可以使用 `isRTL` 来调整对齐或动画。
 
 ```SnackPlayer name=I18nManager%20Change%20Absolute%20Positions%20And%20Animations
-import React from 'react';
 import {I18nManager, Text, View} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
-  // 将其改为 `true`，可在非 RTL 语言中看到效果
+  // 将其改为 `true`，以在非 RTL 语言中查看效果
   const isRTL = I18nManager.isRTL;
   return (
     <SafeAreaProvider>
@@ -30,7 +29,7 @@ const App = () => {
             left: isRTL ? undefined : 0,
             right: isRTL ? 0 : undefined,
           }}>
-          {isRTL ? <Text>Back &gt;</Text> : <Text>&lt; Back</Text>}
+          {isRTL ? <Text>后退 &gt;</Text> : <Text>&lt; 后退</Text>}
         </View>
       </SafeAreaView>
     </SafeAreaProvider>
@@ -40,10 +39,10 @@ const App = () => {
 export default App;
 ```
 
-### 开发期间
+### 开发过程中
 
 ```SnackPlayer name=I18nManager%20During%20Development
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Alert, I18nManager, StyleSheet, Switch, Text, View} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -61,7 +60,7 @@ const App = () => {
                 setRTL(value);
                 I18nManager.forceRTL(value);
                 Alert.alert(
-                  '重新加载此页面',
+                  '请重新加载此页面',
                   '请重新加载此页面以更改 UI 方向！' +
                     '此应用中的所有示例都会受到影响。' +
                     '查看它们以了解它们在 RTL 布局下的样子。',
@@ -103,14 +102,14 @@ static isRTL: boolean;
 
 `isRTL` 的值由以下逻辑决定：
 
-- 如果 `forceRTL` 为 `true`，`isRTL` 返回 `true`
-- 如果 `allowRTL` 为 `false`，`isRTL` 返回 `false`
-- 否则，`isRTL` 将在以下情况下为 `true`：
-  - **iOS：**
-    - 设备上用户偏好的语言是 RTL 语言
-    - 应用定义的本地化包含用户选择的语言（如 Xcode 项目文件中定义的 `knownRegions = (...)`）
-  - **Android：**
-    - 设备上用户偏好的语言是 RTL 语言
+- 如果 `forceRTL` 为 `true`，则 `isRTL` 返回 `true`
+- 如果 `allowRTL` 为 `false`，则 `isRTL` 返回 `false`
+- 否则，在以下情况下 `isRTL` 将为 `true`：
+  - **iOS:**
+    - 设备上用户首选语言为 RTL 语言
+    - 应用定义的本地化内容包含用户选择的语言（如 Xcode 项目文件中定义的 `knownRegions = (...)`）
+  - **Android:**
+    - 设备上用户首选语言为 RTL 语言
     - 应用的 `AndroidManifest.xml` 在 `<application>` 元素上定义了 `android:supportsRTL="true"`
 
 ### `doLeftAndRightSwapInRTL`
@@ -129,7 +128,7 @@ static doLeftAndRightSwapInRTL: boolean;
 static allowRTL: (allowRTL: boolean) => void;
 ```
 
-为应用启用或禁用 RTL 布局支持。
+启用或禁用应用的 RTL 布局支持。
 
 **参数：**
 
@@ -137,8 +136,8 @@ static allowRTL: (allowRTL: boolean) => void;
 
 **重要说明：**
 
-- 更改会在下次应用启动时生效，而不是立即生效
-- 此设置会在应用重启后保留
+- 更改会在下次应用启动时生效，不会立即生效
+- 此设置会在应用重启后持续保留
 
 ### `forceRTL()`
 
@@ -146,9 +145,9 @@ static allowRTL: (allowRTL: boolean) => void;
 static forceRTL: (forced: boolean) => void;
 ```
 
-强制应用使用 RTL 布局，而不受设备语言设置影响。这主要用于在开发期间测试 RTL 布局。
+强制应用使用 RTL 布局，而不考虑设备语言设置。这主要用于在开发过程中测试 RTL 布局。
 
-请避免在生产应用中强制使用 RTL，因为这需要完整重启应用后才会生效，用户体验较差。
+避免在生产应用中强制启用 RTL，因为这需要完整重启应用后才会生效，这会带来较差的用户体验。
 
 **参数：**
 
@@ -156,9 +155,9 @@ static forceRTL: (forced: boolean) => void;
 
 **重要说明：**
 
-- 更改会在下次应用启动时完全生效，而不是立即生效
-- 该设置会在应用重启后保留
-- 仅用于开发和测试。在生产环境中，你应该要么完全禁止 RTL，要么妥善处理它（参见 `isRTL`）
+- 更改会在下次应用启动时完全生效，不会立即生效
+- 此设置会在应用重启后持续保留
+- 仅用于开发和测试。在生产环境中，你应当完全禁止 RTL，或者适当地处理它（参见 `isRTL`）
 
 ### `swapLeftAndRightInRTL()`
 

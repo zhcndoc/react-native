@@ -7,20 +7,19 @@ title: useColorScheme
 import {useColorScheme} from 'react-native';
 ```
 
-`useColorScheme` 这是一个 React 钩子，用于提供并订阅来自 [`Appearance`](appearance) 模块的色彩方案更新。返回值表示当前用户偏好的色彩方案。该值可能会在以后更新，这可能是由于用户直接操作（例如设备设置中的主题选择）或按计划更新（例如跟随昼夜周期变化的浅色和深色主题）。
+`useColorScheme` is a React Hook that provides and subscribes to color scheme updates from the [`Appearance`](appearance) module. The return value indicates the user's current preferred color scheme. This value may update in the future, which can happen due to direct user action (for example, a theme choice in device settings) or scheduled updates (for example, switching between light and dark themes following the day/night cycle).
 
-### 支持的色彩方案
+### Supported color schemes
 
-- `"light"`：用户偏好浅色主题。
-- `"dark"`：用户偏好深色主题。
-- `null`：用户未指示偏好的色彩主题。
+- `"light"`: The user prefers a light theme.
+- `"dark"`: The user prefers a dark theme.
+- `null`: The user has not indicated a preferred color scheme.
 
 ---
 
-## 示例
+## Example
 
 ```SnackPlayer
-import React from 'react';
 import {Text, StyleSheet, useColorScheme} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -46,4 +45,4 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-你可以在 [`AppearanceExample.js`](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/Appearance/AppearanceExample.js) 中找到一个完整示例，该示例演示了如何将此钩子与 React 上下文配合使用，为你的应用添加对浅色和深色主题的支持。
+A complete example can be found in [`AppearanceExample.js`](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/Appearance/AppearanceExample.js), which demonstrates using this hook together with React context to add support for light and dark themes to your app.

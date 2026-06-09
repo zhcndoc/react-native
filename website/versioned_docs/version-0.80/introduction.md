@@ -21,14 +21,13 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 要使用 React Native 工作，您需要了解 JavaScript 基础知识。如果您是 JavaScript 新手或需要复习，可以在 Mozilla Developer Network [深入学习](https://developer.mozilla.org/en-US/docs/Web/JavaScript) 或 [复习](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript)。
 
-> 虽然我们会尽力假设您没有 React、Android 或 iOS 开发的先前知识，但这些是雄心勃勃的 React Native 开发者值得学习的主题。在合适的地方，我们链接了更深入的资源 and 文章。
+> 虽然我们会尽力假设您没有 React、Android 或 iOS 开发的先前知识，但这些是雄心勃勃的 React Native 开发者值得学习的主题。在合适的地方，我们链接了更深入的资源和文章。
 
 ## 交互式示例
 
 本介绍让您可以在浏览器中立即开始使用交互式示例，如下所示：
 
 ```SnackPlayer name=Hello%20World
-import React from 'react';
 import {Text, View} from 'react-native';
 
 const YourApp = () => {

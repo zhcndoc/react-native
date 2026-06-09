@@ -4,14 +4,14 @@ title: 尺寸
 ---
 
 :::info
-[`useWindowDimensions`](usewindowdimensions) 是 React 组件的首选 API。与 `Dimensions` 不同，它会随着窗口尺寸的更新而更新。这与 React 范式很好地契合。
+[`useWindowDimensions`](usewindowdimensions) 是 React 组件首选的 API。与 `Dimensions` 不同，它会随着窗口尺寸的变化而更新。这与 React 的范式非常契合。
 :::
 
 ```tsx
 import {Dimensions} from 'react-native';
 ```
 
-您可以使用以下代码获取应用窗口的宽度和高度：
+你可以使用以下代码获取应用窗口的宽度和高度：
 
 ```tsx
 const windowWidth = Dimensions.get('window').width;
@@ -19,15 +19,15 @@ const windowHeight = Dimensions.get('window').height;
 ```
 
 :::note
-虽然尺寸立即可用，但它们可能会发生变化（例如由于设备旋转、折叠屏设备等），因此任何依赖于这些常数的渲染逻辑或样式都应尝试在每次渲染时调用此函数，而不是缓存该值（例如，使用内联样式而不是在 `StyleSheet` 中设置值）。
+虽然尺寸会立即可用，但它们可能会变化（例如由于设备旋转、折叠屏设备等），因此任何依赖这些常量的渲染逻辑或样式都应尽量在每次渲染时调用此函数，而不是缓存该值（例如使用内联样式，而不是在 `StyleSheet` 中设置值）。
 :::
 
-如果您针对的是折叠屏设备或可以更改屏幕尺寸或应用窗口尺寸的设备，您可以使用 Dimensions 模块中提供的事件监听器，如下例所示。
+如果你的目标设备是折叠屏设备，或者设备可能会改变屏幕尺寸或应用窗口尺寸，你可以使用 `Dimensions` 模块中提供的事件监听器，如下例所示。
 
 ## 示例
 
 ```SnackPlayer name=Dimensions%20Example
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {StyleSheet, Text, Dimensions} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -53,13 +53,13 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <Text style={styles.header}>Window Dimensions</Text>
+        <Text style={styles.header}>窗口尺寸</Text>
         {Object.entries(dimensions.window).map(([key, value]) => (
           <Text>
             {key} - {value}
           </Text>
         ))}
-        <Text style={styles.header}>Screen Dimensions</Text>
+        <Text style={styles.header}>屏幕尺寸</Text>
         {Object.entries(dimensions.screen).map(([key, value]) => (
           <Text>
             {key} - {value}
@@ -103,7 +103,7 @@ static addEventListener(
 
 添加事件处理程序。支持的事件：
 
-- `change`: 当 `Dimensions` 对象内的属性发生变化时触发。事件处理程序的参数是一个 [`DimensionsValue`](#dimensionsvalue) 类型的对象。
+- `change`：当 `Dimensions` 对象中的某个属性发生变化时触发。事件处理程序的参数是一个 [`DimensionsValue`](#dimensionsvalue) 类型对象。
 
 ---
 
@@ -113,18 +113,18 @@ static addEventListener(
 static get(dim: 'window' | 'screen'): ScaledSize;
 ```
 
-初始尺寸在 `runApplication` 被调用之前设置，因此它们在任何其他 require 运行之前应该可用，但可能会稍后更新。
+初始尺寸在调用 `runApplication` 之前就已设置，因此在运行任何其他 `require` 之前它们应该已经可用，但之后可能会更新。
 
 示例：`const {height, width} = Dimensions.get('window');`
 
 **参数：**
 
 | 名称                                                               | 类型   | 描述                                                                       |
-| ------------------------------------------------------------------ | ------ | --------------------------------------------------------------------------------- |
-| dim <div className="label basic required two-lines">必需</div> | 字符串 | 调用 `set` 时定义的维度名称。返回该维度的值。 |
+| ------------------------------------------------------------------ | ------ | -------------------------------------------------------------------------- |
+| dim <div className="label basic required two-lines">必填</div> | string | 调用 `set` 时定义的尺寸名称。返回该尺寸的值。 |
 
 :::note
-对于 Android，`window` 尺寸将减去状态栏（如果不半透明）和底部导航栏的大小。
+在 Android 上，`window` 尺寸会减去状态栏（如果未设置为透明）和底部导航栏的大小。
 :::
 
 ## 类型定义
@@ -134,7 +134,7 @@ static get(dim: 'window' | 'screen'): ScaledSize;
 **属性：**
 
 | 名称   | 类型                                | 描述                             |
-| ------ | ----------------------------------- | --------------------------------------- |
+| ------ | ----------------------------------- | -------------------------------- |
 | window | [ScaledSize](dimensions#scaledsize) | 可见应用窗口的大小。 |
 | screen | [ScaledSize](dimensions#scaledsize) | 设备屏幕的大小。            |
 
@@ -142,13 +142,13 @@ static get(dim: 'window' | 'screen'): ScaledSize;
 
 | 类型   |
 | ------ |
-| 对象 |
+| object |
 
 **属性：**
 
 | 名称      | 类型   |
 | --------- | ------ |
-| width     | 数字 |
-| height    | 数字 |
-| scale     | 数字 |
-| fontScale | 数字 |
+| width     | number |
+| height    | number |
+| scale     | number |
+| fontScale | number |

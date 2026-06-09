@@ -30,7 +30,6 @@ const image = getImage({
 ## 示例
 
 ```SnackPlayer name=PixelRatio%20Example
-import React from 'react';
 import {
   Image,
   PixelRatio,

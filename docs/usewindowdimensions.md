@@ -7,16 +7,15 @@ title: useWindowDimensions
 import {useWindowDimensions} from 'react-native';
 ```
 
-`useWindowDimensions` automatically updates all of its values when screen size or font scale changes. You can get your application window's width and height like so:
+`useWindowDimensions` 会在屏幕尺寸或字体缩放变化时自动更新其所有值。你可以像这样获取应用窗口的宽度和高度：
 
 ```tsx
 const {height, width} = useWindowDimensions();
 ```
 
-## Example
+## 示例
 
 ```SnackPlayer name=useWindowDimensions&supportedPlatforms=ios,android
-import React from 'react';
 import {StyleSheet, Text, useWindowDimensions} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -25,11 +24,11 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <Text style={styles.header}>Window Dimension Data</Text>
-        <Text>Height: {height}</Text>
-        <Text>Width: {width}</Text>
-        <Text>Font scale: {fontScale}</Text>
-        <Text>Pixel ratio: {scale}</Text>
+        <Text style={styles.header}>窗口尺寸数据</Text>
+        <Text>高度：{height}</Text>
+        <Text>宽度：{width}</Text>
+        <Text>字体缩放：{fontScale}</Text>
+        <Text>像素密度：{scale}</Text>
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -49,7 +48,7 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-## Properties
+## 属性
 
 ### `fontScale`
 
@@ -57,7 +56,7 @@ export default App;
 useWindowDimensions().fontScale;
 ```
 
-The scale of the font currently used. Some operating systems allow users to scale their font sizes larger or smaller for reading comfort. This property will let you know what is in effect.
+当前使用的字体缩放比例。某些操作系统允许用户将字体大小放大或缩小，以提高阅读舒适度。该属性可让你了解当前生效的设置。
 
 ---
 
@@ -67,7 +66,7 @@ The scale of the font currently used. Some operating systems allow users to scal
 useWindowDimensions().height;
 ```
 
-The height in pixels of the window or screen your app occupies.
+应用所占窗口或屏幕的像素高度。
 
 ---
 
@@ -77,10 +76,10 @@ The height in pixels of the window or screen your app occupies.
 useWindowDimensions().scale;
 ```
 
-The pixel ratio of the device your app is running on. The values can be:
+应用运行设备的像素比。取值可以是：
 
-- `1` which indicates that one point equals one pixel (usually PPI/DPI of 96, 76 on some platforms).
-- `2` or `3` which indicates a Retina or high DPI display.
+- `1`，表示一个点等于一个像素（通常 PPI/DPI 为 96，某些平台为 76）。
+- `2` 或 `3`，表示 Retina 或高 DPI 显示屏。
 
 ---
 
@@ -90,4 +89,4 @@ The pixel ratio of the device your app is running on. The values can be:
 useWindowDimensions().width;
 ```
 
-The width in pixels of the window or screen your app occupies.
+应用所占窗口或屏幕的像素宽度。

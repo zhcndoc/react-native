@@ -19,7 +19,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 开始之前，请在 Android Studio 中打开你的 React Native 应用内的 Android 项目。你可以在一个 React Native 应用中在这里找到你的 Android 项目：
 
 <figure>
-  <img src="/docs/assets/native-modules-android-open-project.png" width="500" alt="Image of opening up an Android project within a React Native app inside of Android Studio." />
+  <img src="/docs/assets/native-modules-android-open-project.png" width="500" alt="在 Android Studio 中打开 React Native 应用内的 Android 项目的图片。" />
   <figcaption>你可以在这里找到你的 Android 项目的位置</figcaption>
 </figure>
 
@@ -32,7 +32,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 第一步是在 `android/app/src/main/java/com/your-app-name/` 文件夹中创建 (`CalendarModule.java` 或 `CalendarModule.kt`) Java/Kotlin 文件（该文件夹对 Kotlin 和 Java 都相同）。这个 Java/Kotlin 文件将包含你的原生模块 Java/Kotlin 类。
 
 <figure>
-  <img src="/docs/assets/native-modules-android-add-class.png" width="700" alt="Image of adding a class called CalendarModule.java within the Android Studio." />
+  <img src="/docs/assets/native-modules-android-add-class.png" width="700" alt="在 Android Studio 中添加名为 CalendarModule.java 的类的图片。" />
   <figcaption>如何添加 CalendarModule 类的示意图</figcaption>
 </figure>
 
@@ -315,7 +315,6 @@ override fun getPackages(): List<ReactPackage> =
 在你的应用中找一个你想要添加对原生模块 `createCalendarEvent()` 方法调用的位置。下面是一个组件示例，`NewModuleButton`，你可以将其添加到应用中。你可以在 `NewModuleButton` 的 `onPress()` 函数中调用原生模块。
 
 ```tsx
-import React from 'react';
 import {NativeModules, Button} from 'react-native';
 
 const NewModuleButton = () => {

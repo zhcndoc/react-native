@@ -4,7 +4,7 @@ title: 介绍
 description: 本指南介绍了学习 React Native 的先决条件、如何使用这些文档以及如何配置开发环境。
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
+import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; constants from '@site/core/TabsConstants';
 
 <div className="content-banner">
   欢迎来到您的 React Native 旅程的起点！如果您正在寻找快速入门指南，相关内容已移至<a href="environment-setup">独立章节</a>。继续阅读，了解文档介绍、原生组件、React 以及更多信息！
@@ -30,7 +30,6 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 本介绍允许您立即在浏览器中通过如下交互式示例开始实践：
 
 ```SnackPlayer name=Hello%20World
-import React from 'react';
 import {Text, View} from 'react-native';
 
 const YourApp = () => {

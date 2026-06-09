@@ -12,7 +12,6 @@ import ExperimentalAPIWarning from './\_experimental-api-warning.mdx';
 这个示例创建了一个 `View`，它在一行中包裹了两个带颜色的方框和一个文本组件，并带有内边距。
 
 ```SnackPlayer name=View%20Example
-import React from 'react';
 import {View, Text} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -35,7 +34,7 @@ export default ViewBoxesWithColorAndText;
 `View` 通常与 [`StyleSheet`](style.md) 一起使用，以提高清晰度和性能，不过也支持内联样式。
 :::
 
-### Synthetic Touch Events
+### 合成触摸事件
 
 对于 `View` 的 responder 属性（例如 `onResponderMove`），传递给它们的合成触摸事件采用 [PressEvent](pressevent) 的形式。
 

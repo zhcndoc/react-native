@@ -6,7 +6,6 @@ title: 平台
 ## 示例
 
 ```SnackPlayer name=Platform%20API%20Example&supportedPlatforms=ios,android
-import React from 'react';
 import {Platform, StyleSheet, Text, ScrollView} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -215,7 +214,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'red',
       },
       default: {
-        // 其它平台，例如 web
+        // 其他平台，例如 web
         backgroundColor: 'blue',
       },
     }),

@@ -1,16 +1,16 @@
 ---
 id: switch
-title: Switch
+title: 开关
 ---
 
 渲染一个布尔输入。
 
-这是一个受控组件，需要提供 `onValueChange` 回调来更新 `value` 属性，以便组件反映用户操作。如果 `value` 属性未更新，组件将继续渲染所提供的 `value` 属性，而不是任何用户操作所期望的结果。
+这是一个受控组件，需要提供 `onValueChange` 回调来更新 `value` 属性，组件才能反映用户操作。如果 `value` 属性没有更新，组件将继续渲染所提供的 `value` 属性，而不是任何用户操作的预期结果。
 
 ## 示例
 
 ```SnackPlayer name=Switch&supportedPlatforms=android,ios
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Switch, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -52,7 +52,7 @@ export default App;
 
 ### [View Props](view.md#props)
 
-继承 [View Props](view.md#props)。
+继承自 [View Props](view.md#props)。
 
 ---
 
@@ -68,9 +68,9 @@ export default App;
 
 ### `ios_backgroundColor` <div className="label ios">iOS</div>
 
-在 iOS 上，背景的自定义颜色。当开关值为 `false` 时，或者当开关被禁用（且开关是半透明的）时，都可以看到此背景色。
+在 iOS 上，背景的自定义颜色。当开关值为 `false` 时，或者当开关被禁用（且开关是半透明的）时，可以看到该背景颜色。
 
-| 类型               |
+| 类型                 |
 | ------------------ |
 | [color](colors.md) |
 
@@ -78,7 +78,7 @@ export default App;
 
 ### `onChange`
 
-当用户尝试更改开关值时调用。接收变化事件作为参数。如果你只想接收新值，请改用 `onValueChange`。
+当用户尝试更改开关值时调用。接收更改事件作为参数。如果你只想接收新值，请改用 `onValueChange`。
 
 | 类型     |
 | -------- |
@@ -88,7 +88,7 @@ export default App;
 
 ### `onValueChange`
 
-当用户尝试更改开关值时调用。接收新值作为参数。如果你想接收事件，请改用 `onChange`。
+当用户尝试更改开关值时调用。接收新值作为参数。如果你想改为接收事件，请使用 `onChange`。
 
 | 类型     |
 | -------- |
@@ -98,15 +98,15 @@ export default App;
 
 ### `ref`
 
-挂载时会被分配给一个 [element node](element-nodes) 的 ref 设置器。
+挂载时会被赋值为一个 [element node](element-nodes) 的 ref setter。
 
 ---
 
 ### `thumbColor`
 
-前景开关滑块的颜色。如果在 iOS 上设置此项，开关滑块将失去其投影阴影。
+前景开关滑块的颜色。如果在 iOS 上设置此项，开关滑块会失去其投影效果。
 
-| 类型               |
+| 类型                 |
 | ------------------ |
 | [color](colors.md) |
 
@@ -116,7 +116,7 @@ export default App;
 
 开关轨道的自定义颜色。
 
-_iOS_: 当开关值为 `false` 时，轨道会缩入边框内。如果你想更改收缩后的轨道暴露出的背景颜色，请使用 [`ios_backgroundColor`](switch.md#ios_backgroundColor)。
+_iOS_: 当开关值为 `false` 时，轨道会缩进到边框中。如果你想更改缩进轨道露出的背景颜色，请使用 [`ios_backgroundColor`](switch.md#ios_backgroundColor)。
 
 | 类型                                                         |
 | ------------------------------------------------------------ |
@@ -126,7 +126,7 @@ _iOS_: 当开关值为 `false` 时，轨道会缩入边框内。如果你想更�
 
 ### `value`
 
-开关的值。如果为 true，开关将开启。默认值为 false。
+开关的值。如果为 true，开关将处于开启状态。默认值为 false。
 
 | 类型 |
 | ---- |

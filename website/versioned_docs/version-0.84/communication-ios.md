@@ -1,6 +1,6 @@
 ---
 id: communication-ios
-title: 原生与 React Native 之间的通信
+title: Native 和 React Native 之间的通信
 ---
 
 在 [与现有应用程序集成指南](integration-with-existing-apps) 和 [原生 UI 组件指南](legacy/native-components-ios) 中，我们学习了如何在原生组件中嵌入 React Native，反之亦然。当我们混合使用原生与 React Native 组件时，最终会发现需要在这两个世界之间进行通信。其他指南中已经提到了一些实现方式。本文总结了可用的技术手段。
@@ -33,7 +33,6 @@ RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
 ```
 
 ```tsx
-import React from 'react';
 import {View, Image} from 'react-native';
 
 export default class ImageBrowserApp extends React.Component {

@@ -5,41 +5,41 @@ import CodeBlock from '@theme/CodeBlock';
 import RNTemplateRepoLink from '@site/core/RNTemplateRepoLink';
 import {getTemplateBranchNameForCurrentVersion} from '@site/src/getTemplateBranchNameForCurrentVersion';
 
-## Key Concepts
+## 核心概念
 
-The keys to integrating React Native components into your Android application are to:
+将 React Native 组件集成到 Android 应用中的关键在于：
 
-1. Set up the correct directory structure.
-2. Install the necessary NPM dependencies.
-3. Adding React Native to your Gradle configuration.
-4. Writing the TypeScript code for your first React Native screen.
-5. Integrate React Native with your Android code using a ReactActivity.
-6. Testing your integration by running the bundler and seeing your app in action.
+1. 设置正确的目录结构。
+2. 安装必要的 NPM 依赖。
+3. 将 React Native 添加到你的 Gradle 配置中。
+4. 编写第一个 React Native 屏幕的 TypeScript 代码。
+5. 使用 `ReactActivity` 将 React Native 与你的 Android 代码集成。
+6. 运行打包器并查看应用实际效果，以测试集成结果。
 
-## Using the Community Template
+## 使用社区模板
 
-While you follow this guide, we suggest you to use the [React Native Community Template](https://github.com/react-native-community/template/) as reference. The template contains a **minimal Android app** and will help you understanding how to integrate React Native into an existing Android app.
+在按照本指南操作时，我们建议你将 [React Native Community Template](https://github.com/react-native-community/template/) 作为参考。该模板包含一个**最小化的 Android 应用**，并将帮助你理解如何将 React Native 集成到现有的 Android 应用中。
 
-## Prerequisites
+## 前提条件
 
-Follow the guide on [setting up your development environment](set-up-your-environment) and using [React Native without a framework](getting-started-without-a-framework) to configure your development environment for building React Native apps for Android.
-This guide also assumes you're familiar with the basics of Android development such as creating Activities and editing the `AndroidManifest.xml` file.
+请先按照 [配置开发环境](set-up-your-environment) 和 [在没有框架的情况下使用 React Native](getting-started-without-a-framework) 中的指南配置你的开发环境，以便构建 Android 版 React Native 应用。
+本指南还假设你已经熟悉 Android 开发基础，例如创建 `Activity` 和编辑 `AndroidManifest.xml` 文件。
 
-## 1. Set up directory structure
+## 1. 设置目录结构
 
-To ensure a smooth experience, create a new folder for your integrated React Native project, then **move your existing Android project** to the `/android` subfolder.
+为了确保顺畅的开发体验，请为集成 React Native 的项目创建一个新文件夹，然后将你现有的 Android 项目**移动到** `/android` 子文件夹中。
 
-## 2. Install NPM dependencies
+## 2. 安装 NPM 依赖
 
-Go to the root directory and run the following command:
+进入根目录并运行以下命令：
 
 <CodeBlock language="bash" title="shell">
 {`curl -O https://raw.githubusercontent.com/react-native-community/template/refs/heads/${getTemplateBranchNameForCurrentVersion()}/template/package.json`}
 </CodeBlock>
 
-This will copy the `package.json` <RNTemplateRepoLink href="template/package.json">file from the Community template</RNTemplateRepoLink> to your project.
+这会将社区模板中的 `package.json` <RNTemplateRepoLink href="template/package.json">文件</RNTemplateRepoLink>复制到你的项目中。
 
-Next, install the NPM packages by running:
+接下来，运行以下命令安装 NPM 包：
 
 <Tabs groupId="package-manager" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>
 <TabItem value="npm">
@@ -58,32 +58,32 @@ yarn install
 </TabItem>
 </Tabs>
 
-Installation process has created a new `node_modules` folder. This folder stores all the JavaScript dependencies required to build your project.
+安装过程会创建一个新的 `node_modules` 文件夹。这个文件夹用于存放构建项目所需的所有 JavaScript 依赖项。
 
-Add `node_modules/` to your `.gitignore` file (here the <RNTemplateRepoLink href="template/_gitignore">Community default one</RNTemplateRepoLink>).
+将 `node_modules/` 添加到你的 `.gitignore` 文件中（这里使用 <RNTemplateRepoLink href="template/_gitignore">社区默认版本</RNTemplateRepoLink>）。
 
-## 3. Adding React Native to your app
+## 3. 将 React Native 添加到你的应用中
 
-### Configuring Gradle
+### 配置 Gradle
 
-React Native uses the React Native Gradle Plugin to configure your dependencies and project setup.
+React Native 使用 React Native Gradle Plugin 来配置你的依赖项和项目设置。
 
-First, let's edit your `settings.gradle` file by adding those lines (as suggested from the <RNTemplateRepoLink href="template/android/settings.gradle">Community template</RNTemplateRepoLink>):
+首先，编辑你的 `settings.gradle` 文件并添加这些行（如 <RNTemplateRepoLink href="template/android/settings.gradle">社区模板</RNTemplateRepoLink> 所建议）：
 
 ```groovy
-// Configures the React Native Gradle Settings plugin used for autolinking
+// 配置用于自动链接的 React Native Gradle Settings 插件
 pluginManagement { includeBuild("../node_modules/@react-native/gradle-plugin") }
 plugins { id("com.facebook.react.settings") }
 extensions.configure(com.facebook.react.ReactSettingsExtension){ ex -> ex.autolinkLibrariesFromCommand() }
-// If using .gradle.kts files:
+// 如果使用 .gradle.kts 文件：
 // extensions.configure<com.facebook.react.ReactSettingsExtension> { autolinkLibrariesFromCommand() }
 includeBuild("../node_modules/@react-native/gradle-plugin")
 
-// Include your existing Gradle modules here.
+// 在这里包含你现有的 Gradle 模块。
 // include(":app")
 ```
 
-Then you need to open your top level `build.gradle` and include this line (as suggested from the <RNTemplateRepoLink href="template/android/build.gradle">Community template</RNTemplateRepoLink>):
+然后，你需要打开顶层的 `build.gradle` 并加入这一行（如 <RNTemplateRepoLink href="template/android/build.gradle">社区模板</RNTemplateRepoLink> 所建议）：
 
 ```diff
 buildscript {
@@ -98,8 +98,8 @@ buildscript {
 }
 ```
 
-This makes sure the React Native Gradle Plugin (RNGP) is available inside your project.
-Finally, add those lines inside your Applications's `build.gradle` file (it's a different `build.gradle` file usually inside your `app` folder - you can use the <RNTemplateRepoLink href="template/android/build.gradle">Community template file as reference</RNTemplateRepoLink>):
+这可确保 React Native Gradle Plugin（RNGP）在你的项目中可用。
+最后，在你的应用 `build.gradle` 文件中添加这些行（它是另一个 `build.gradle` 文件，通常位于你的 `app` 文件夹中——你可以将 <RNTemplateRepoLink href="template/android/build.gradle">社区模板文件作为参考</RNTemplateRepoLink>）：
 
 ```diff
 apply plugin: "com.android.application"
@@ -110,20 +110,20 @@ repositories {
 }
 
 dependencies {
-    // Other dependencies here
-+   // Note: we intentionally don't specify the version number here as RNGP will take care of it.
-+   // If you don't use the RNGP, you'll have to specify version manually.
+    // 其他依赖写在这里
++   // 注意：我们故意不在这里指定版本号，因为 RNGP 会负责处理。
++   // 如果你不使用 RNGP，就必须手动指定版本。
 +   implementation("com.facebook.react:react-android")
 +   implementation("com.facebook.react:hermes-android")
 }
 
 +react {
-+   // Needed to enable Autolinking - https://github.com/react-native-community/cli/blob/master/docs/autolinking.md
++   // 启用自动链接所需 - https://github.com/react-native-community/cli/blob/master/docs/autolinking.md
 +   autolinkLibrariesWithApp()
 +}
 ```
 
-Finally, open your application `gradle.properties` files and add the following line (here the <RNTemplateRepoLink href="template/android/gradle.properties">Community template file as reference</RNTemplateRepoLink>):
+最后，打开你的应用 `gradle.properties` 文件并添加以下行（这里将 <RNTemplateRepoLink href="template/android/gradle.properties">社区模板文件作为参考</RNTemplateRepoLink>）：
 
 ```diff
 +reactNativeArchitectures=armeabi-v7a,arm64-v8a,x86,x86_64
@@ -131,9 +131,9 @@ Finally, open your application `gradle.properties` files and add the following l
 +hermesEnabled=true
 ```
 
-### Configuring your manifest
+### 配置清单文件
 
-First, make sure you have the Internet permission in your `AndroidManifest.xml`:
+首先，确保你的 `AndroidManifest.xml` 中具有 Internet 权限：
 
 ```diff
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
@@ -146,7 +146,7 @@ First, make sure you have the Internet permission in your `AndroidManifest.xml`:
 </manifest>
 ```
 
-Then you need to enable [cleartext traffic](https://developer.android.com/training/articles/security-config#CleartextTrafficPermitted) in your **debug** `AndroidManifest.xml`:
+然后，你需要在**调试**用的 `AndroidManifest.xml` 中启用 [明文流量](https://developer.android.com/training/articles/security-config#CleartextTrafficPermitted)：
 
 ```diff
 <?xml version="1.0" encoding="utf-8"?>
@@ -160,25 +160,25 @@ Then you need to enable [cleartext traffic](https://developer.android.com/traini
 </manifest>
 ```
 
-As usual, here the AndroidManifest.xml file from the Community template to use as a reference: <RNTemplateRepoLink href="template/android/app/src/main/AndroidManifest.xml">main</RNTemplateRepoLink> and <RNTemplateRepoLink href="template/android/app/src/debug/AndroidManifest.xml">debug</RNTemplateRepoLink>.
+和往常一样，这里提供社区模板中的 AndroidManifest.xml 文件作为参考：<RNTemplateRepoLink href="template/android/app/src/main/AndroidManifest.xml">main</RNTemplateRepoLink> 和 <RNTemplateRepoLink href="template/android/app/src/debug/AndroidManifest.xml">debug</RNTemplateRepoLink>。
 
-This is needed as your application will communicate with your local bundler, [Metro](https://metrobundler.dev/), via HTTP.
+这是必需的，因为你的应用将通过 HTTP 与本地打包器 [Metro](https://metrobundler.dev/) 通信。
 
-Make sure you add this only to your **debug** manifest.
+请确保只将其添加到你的**调试**清单文件中。
 
-## 4. Writing the TypeScript Code
+## 4. 编写 TypeScript 代码
 
-Now we will actually modify the native Android application to integrate React Native.
+现在我们将真正修改原生 Android 应用，以集成 React Native。
 
-The first bit of code we will write is the actual React Native code for the new screen that will be integrated into our application.
+我们要编写的第一部分代码是新屏幕的实际 React Native 代码，该屏幕将被集成到我们的应用中。
 
-### Create a `index.js` file
+### 创建一个 `index.js` 文件
 
-First, create an empty `index.js` file in the root of your React Native project.
+首先，在你的 React Native 项目根目录下创建一个空的 `index.js` 文件。
 
-`index.js` is the starting point for React Native applications, and it is always required. It can be a small file that `import`s other file that are part of your React Native component or application, or it can contain all the code that is needed for it.
+`index.js` 是 React Native 应用的入口点，并且始终是必需的。它可以是一个小文件，通过 `import` 导入属于你的 React Native 组件或应用的其他文件；也可以直接包含所需的全部代码。
 
-Our index.js should look as follows (here the <RNTemplateRepoLink href="template/index.js">Community template file as reference</RNTemplateRepoLink>):
+我们的 `index.js` 应如下所示（这里以 <RNTemplateRepoLink href="template/index.js">社区模板文件作为参考</RNTemplateRepoLink>）：
 
 ```js
 import {AppRegistry} from 'react-native';
@@ -187,12 +187,12 @@ import App from './App';
 AppRegistry.registerComponent('HelloWorld', () => App);
 ```
 
-### Create a `App.tsx` file
+### 创建一个 `App.tsx` 文件
 
-Let's create an `App.tsx` file. This is a [TypeScript](https://www.typescriptlang.org/) file that can have [JSX](<https://en.wikipedia.org/wiki/JSX_(JavaScript)>) expressions. It contains the root React Native component that we will integrate into our Android application (<RNTemplateRepoLink href="template/App.tsx">link</RNTemplateRepoLink>):
+让我们创建一个 `App.tsx` 文件。这是一个可以包含 [JSX](<https://en.wikipedia.org/wiki/JSX_(JavaScript)>) 表达式的 [TypeScript](https://www.typescriptlang.org/) 文件。它包含我们将集成到 Android 应用中的根 React Native 组件（<RNTemplateRepoLink href="template/App.tsx">链接</RNTemplateRepoLink>）：
 
 ```tsx
-import React from 'react';
+import {type JSX} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -202,7 +202,6 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-
 import {
   Colors,
   DebugInstructions,
@@ -210,7 +209,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-function App(): React.JSX.Element {
+function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -234,14 +233,14 @@ function App(): React.JSX.Element {
               : Colors.white,
             padding: 24,
           }}>
-          <Text style={styles.title}>Step One</Text>
+          <Text style={styles.title}>第一步</Text>
           <Text>
-            Edit <Text style={styles.bold}>App.tsx</Text> to
-            change this screen and see your edits.
+            编辑 <Text style={styles.bold}>App.tsx</Text> 来
+            更改此屏幕并查看你的修改。
           </Text>
-          <Text style={styles.title}>See your changes</Text>
+          <Text style={styles.title}>查看你的更改</Text>
           <ReloadInstructions />
-          <Text style={styles.title}>Debug</Text>
+          <Text style={styles.title}>调试</Text>
           <DebugInstructions />
         </View>
       </ScrollView>
@@ -262,15 +261,15 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-Here is the <RNTemplateRepoLink href="template/App.tsx">Community template file as reference</RNTemplateRepoLink>.
+这里是 <RNTemplateRepoLink href="template/App.tsx">社区模板文件作为参考</RNTemplateRepoLink>。
 
-## 5. Integrating with your Android code
+## 5. 与你的 Android 代码集成
 
-We now need to add some native code in order to start the React Native runtime and tell it to render our React components.
+现在我们需要添加一些原生代码，以便启动 React Native 运行时并告诉它渲染我们的 React 组件。
 
-### Updating your Application class
+### 更新你的 Application 类
 
-First, we need to update your `Application` class to properly initialize React Native as follows:
+首先，我们需要更新你的 `Application` 类，以便正确初始化 React Native，如下所示：
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 
@@ -373,11 +372,11 @@ import android.app.Application
 </TabItem>
 </Tabs>
 
-As usual, here the <RNTemplateRepoLink href="template/android/app/src/main/java/com/helloworld/MainApplication.kt">`MainApplication.kt` Community template file as reference</RNTemplateRepoLink>.
+和往常一样，这里是 <RNTemplateRepoLink href="template/android/app/src/main/java/com/helloworld/MainApplication.kt">`MainApplication.kt` 社区模板文件作为参考</RNTemplateRepoLink>。
 
-#### Creating a `ReactActivity`
+#### 创建一个 `ReactActivity`
 
-Finally, we need to create a new `Activity` that will extend `ReactActivity` and host the React Native code. This activity will be responsible for starting the React Native runtime and rendering the React component.
+最后，我们需要创建一个新的 `Activity`，它将继承 `ReactActivity` 并承载 React Native 代码。这个 `Activity` 将负责启动 React Native 运行时并渲染 React 组件。
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>
 
@@ -429,9 +428,9 @@ class MyReactActivity : ReactActivity() {
 </TabItem>
 </Tabs>
 
-As usual, here the <RNTemplateRepoLink href="template/android/app/src/main/java/com/helloworld/MainActivity.kt">`MainActivity.kt` Community template file as reference</RNTemplateRepoLink>.
+和往常一样，这里是 <RNTemplateRepoLink href="template/android/app/src/main/java/com/helloworld/MainActivity.kt">`MainActivity.kt` 社区模板文件作为参考</RNTemplateRepoLink>。
 
-Whenever you create a new Activity, you need to add it to your `AndroidManifest.xml` file. You also need set the theme of `MyReactActivity` to `Theme.AppCompat.Light.NoActionBar` (or to any non-ActionBar theme) as otherwise your application will render an ActionBar on top of your React Native screen:
+每当你创建一个新的 `Activity` 时，都需要将其添加到你的 `AndroidManifest.xml` 文件中。你还需要将 `MyReactActivity` 的主题设置为 `Theme.AppCompat.Light.NoActionBar`（或任何非 ActionBar 主题），否则你的应用会在 React Native 屏幕顶部渲染一个 ActionBar：
 
 ```diff
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
@@ -450,22 +449,22 @@ Whenever you create a new Activity, you need to add it to your `AndroidManifest.
 </manifest>
 ```
 
-Now your activity is ready to run some JavaScript code.
+现在你的 `Activity` 已经可以运行一些 JavaScript 代码了。
 
-## 6. Test your integration
+## 6. 测试你的集成
 
-You have completed all the basic steps to integrate React Native with your application. Now we will start the [Metro bundler](https://metrobundler.dev/) to build your TypeScript application code into a bundle. Metro's HTTP server shares the bundle from `localhost` on your developer environment to a simulator or device. This allows for [hot reloading](https://reactnative.dev/blog/2016/03/24/introducing-hot-reloading).
+你已经完成了将 React Native 与你的应用程序集成的所有基本步骤。现在我们将启动 [Metro bundler](https://metrobundler.dev/)，把你的 TypeScript 应用代码构建成一个 bundle。Metro 的 HTTP 服务器会将你开发环境中 `localhost` 上的 bundle 分享到模拟器或设备。这使得 [热重载](https://reactnative.dev/blog/2016/03/24/introducing-hot-reloading) 成为可能。
 
-First, you need to create a `metro.config.js` file in the root of your project as follows:
+首先，你需要在项目根目录中创建一个 `metro.config.js` 文件，如下所示：
 
 ```js
 const {getDefaultConfig} = require('@react-native/metro-config');
 module.exports = getDefaultConfig(__dirname);
 ```
 
-You can checkout the <RNTemplateRepoLink href="template/metro.config.js">`metro.config.js` file</RNTemplateRepoLink> from the Community template file as reference.
+你可以参考 Community 模板文件中的 <RNTemplateRepoLink href="template/metro.config.js">`metro.config.js` 文件</RNTemplateRepoLink>。
 
-Once you have the configuration file in place, you can run the bundler. Run the following command in the root directory of your project:
+配置文件就位后，你就可以运行 bundler 了。在项目根目录下运行以下命令：
 
 <Tabs groupId="package-manager" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>
 <TabItem value="npm">
@@ -484,28 +483,28 @@ yarn start
 </TabItem>
 </Tabs>
 
-Now build and run your Android app as normal.
+现在像平常一样构建并运行你的 Android 应用。
 
-Once you reach your React-powered Activity inside the app, it should load the JavaScript code from the development server and display:
+一旦你进入应用中的 React 驱动 Activity，它就应该会从开发服务器加载 JavaScript 代码并显示：
 
 <center><img src="/docs/assets/EmbeddedAppAndroidVideo.gif" width="300" /></center>
 
-### Creating a release build in Android Studio
+### 在 Android Studio 中创建发布构建
 
-You can use Android Studio to create your release builds too! It’s as quick as creating release builds of your previously-existing native Android app.
+你也可以使用 Android Studio 来创建发布构建！这和为你之前已有的原生 Android 应用创建发布构建一样快捷。
 
-The React Native Gradle Plugin will take care of bundling the JS code inside your APK/App Bundle.
+React Native Gradle Plugin 会负责将 JS 代码打包到你的 APK/App Bundle 中。
 
-If you're not using Android Studio, you can create a release build with:
+如果你不使用 Android Studio，可以通过以下方式创建发布构建：
 
 ```
 cd android
-# For a Release APK
+# 对于 Release APK
 ./gradlew :app:assembleRelease
-# For a Release AAB
+# 对于 Release AAB
 ./gradlew :app:bundleRelease
 ```
 
-### Now what?
+### 接下来呢？
 
-At this point you can continue developing your app as usual. Refer to our [debugging](debugging) and [deployment](running-on-device) docs to learn more about working with React Native.
+此时你可以像往常一样继续开发你的应用。请参考我们的 [调试](debugging) 和 [部署](running-on-device) 文档，了解更多有关使用 React Native 的内容。

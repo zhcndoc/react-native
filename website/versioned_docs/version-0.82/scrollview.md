@@ -3,7 +3,7 @@ id: scrollview
 title: ScrollView
 ---
 
-该组件包装了平台的 ScrollView，同时提供了与触摸锁定“响应者”（responder）系统的集成。
+该组件封装了平台的 ScrollView，同时提供了与触摸锁定“响应者”（responder）系统的集成。
 
 请记住，ScrollView 必须有固定高度才能工作，因为它们将无固定高度的子组件包含在一个有界容器中（通过滚动交互）。为了限定 ScrollView 的高度，可以直接设置视图的高度（不推荐）或确保所有父视图都有固定高度。忘记将 `{flex: 1}` 传递到视图堆栈中可能会导致此处出现错误，元素检查器可以快速调试这些问题。
 
@@ -22,7 +22,6 @@ title: ScrollView
 ## 示例
 
 ```SnackPlayer name=ScrollView%20Example
-import React from 'react';
 import {StyleSheet, Text, ScrollView, StatusBar} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -756,14 +755,14 @@ scrollTo(
 );
 ```
 
-滚动到指定的 x, y 偏移量，可以是立即滚动，也可以是平滑动画滚动。
+滚动到指定的 x、y 偏移量，可以是立即滚动，也可以是平滑动画滚动。
 
 **示例：**
 
 `scrollTo({x: 0, y: 0, animated: true})`
 
 :::note
-奇怪的函数签名是因为，出于历史原因，该函数也接受单独的参数作为选项对象的替代方案。由于存在歧义（y 在 x 之前），此用法已弃用，不应使用。
+这个看起来奇怪的函数签名是因为，出于历史原因，该函数也接受单独传入参数，作为选项对象的替代方案。由于存在歧义（y 在 x 之前），这种用法已弃用，不应使用。
 :::
 
 ---
@@ -774,6 +773,6 @@ scrollTo(
 scrollToEnd(options?: {animated?: boolean});
 ```
 
-如果是垂直 ScrollView，则滚动到底部。如果是水平 ScrollView，则滚动到右侧。
+如果是垂直 `ScrollView`，则滚动到底部；如果是水平 `ScrollView`，则滚动到右侧。
 
-使用 `scrollToEnd({animated: true})` 进行平滑动画滚动，使用 `scrollToEnd({animated: false})` 进行立即滚动。如果未传递选项，`animated` 默认为 `true`。
+使用 `scrollToEnd({animated: true})` 可进行平滑动画滚动，使用 `scrollToEnd({animated: false})` 可立即滚动。如果未传递选项，`animated` 默认值为 `true`。

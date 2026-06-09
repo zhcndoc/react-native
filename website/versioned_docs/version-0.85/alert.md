@@ -12,40 +12,39 @@ title: Alert
 ## 示例
 
 ```SnackPlayer name=Alert%20Example&supportedPlatforms=ios,android
-import React from 'react';
 import {StyleSheet, Button, Alert} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   const createTwoButtonAlert = () =>
-    Alert.alert('Alert Title', 'My Alert Msg', [
+    Alert.alert('警告标题', '我的警告消息', [
       {
-        text: 'Cancel',
-        onPress: () => console.log('Cancel Pressed'),
+        text: '取消',
+        onPress: () => console.log('取消被按下'),
         style: 'cancel',
       },
-      {text: 'OK', onPress: () => console.log('OK Pressed')},
+      {text: '确定', onPress: () => console.log('确定被按下')},
     ]);
 
   const createThreeButtonAlert = () =>
-    Alert.alert('Alert Title', 'My Alert Msg', [
+    Alert.alert('警告标题', '我的警告消息', [
       {
-        text: 'Ask me later',
-        onPress: () => console.log('Ask me later pressed'),
+        text: '稍后再问我',
+        onPress: () => console.log('稍后再问我被按下'),
       },
       {
-        text: 'Cancel',
-        onPress: () => console.log('Cancel Pressed'),
+        text: '取消',
+        onPress: () => console.log('取消被按下'),
         style: 'cancel',
       },
-      {text: 'OK', onPress: () => console.log('OK Pressed')},
+      {text: '确定', onPress: () => console.log('确定被按下')},
     ]);
 
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <Button title={'2-Button Alert'} onPress={createTwoButtonAlert} />
-        <Button title={'3-Button Alert'} onPress={createThreeButtonAlert} />
+        <Button title={'2 个按钮的警告框'} onPress={createTwoButtonAlert} />
+        <Button title={'3 个按钮的警告框'} onPress={createThreeButtonAlert} />
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -81,18 +80,17 @@ Android 上的警告框可以通过点击警告框外部来关闭。默认情况
 ### 示例 <div className="label android">Android</div>
 
 ```SnackPlayer name=Alert%20Android%20Dissmissable%20Example&supportedPlatforms=android
-import React from 'react';
 import {StyleSheet, Button, Alert} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const showAlert = () =>
   Alert.alert(
-    'Alert Title',
-    'My Alert Msg',
+    '警告标题',
+    '我的警告消息',
     [
       {
-        text: 'Cancel',
-        onPress: () => Alert.alert('Cancel Pressed'),
+        text: '取消',
+        onPress: () => Alert.alert('取消被按下'),
         style: 'cancel',
       },
     ],
@@ -100,7 +98,7 @@ const showAlert = () =>
       cancelable: true,
       onDismiss: () =>
         Alert.alert(
-          'This alert was dismissed by tapping outside of the alert dialog.',
+          '此警告通过点击警告对话框外部被关闭。',
         ),
     },
   );
@@ -108,7 +106,7 @@ const showAlert = () =>
 const App = () => (
   <SafeAreaProvider>
     <SafeAreaView style={styles.container}>
-      <Button title="Show alert" onPress={showAlert} />
+      <Button title="显示警告" onPress={showAlert} />
     </SafeAreaView>
   </SafeAreaProvider>
 );

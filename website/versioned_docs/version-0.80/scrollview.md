@@ -22,7 +22,6 @@ title: ScrollView
 ## 示例
 
 ```SnackPlayer name=ScrollView%20Example
-import React from 'react';
 import {StyleSheet, Text, ScrollView, StatusBar} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -752,7 +751,7 @@ scrollTo(
 );
 ```
 
-滚动到给定的 x, y 偏移量，可以是立即滚动，也可以是平滑动画滚动。
+滚动到给定的 x、y 偏移量，可以是立即滚动，也可以是平滑动画滚动。
 
 **示例：**
 
@@ -768,6 +767,6 @@ scrollTo(
 scrollToEnd(options?: {animated?: boolean});
 ```
 
-如果是垂直 ScrollView，则滚动到底部。如果是水平 ScrollView，则滚动到右侧。
+如果是垂直 `ScrollView`，则滚动到底部。如果是水平 `ScrollView`，则滚动到右侧。
 
 使用 `scrollToEnd({animated: true})` 进行平滑动画滚动，使用 `scrollToEnd({animated: false})` 进行立即滚动。如果未传递选项，`animated` 默认为 `true`。

@@ -3,12 +3,12 @@ id: handling-text-input
 title: 处理文本输入
 ---
 
-[`TextInput`](textinput#content) 是一个 [核心组件](intro-react-native-components)，允许用户输入文本。它有一个 `onChangeText` 属性，接收一个函数，每次文本发生变化时都会被调用；还有一个 `onSubmitEditing` 属性，接收一个函数，在文本提交时被调用。
+[`TextInput`](textinput#content) 是一个 [核心组件](intro-react-native-components)，允许用户输入文本。它有一个 `onChangeText` 属性，每次文本发生变化时都会调用一个函数；还有一个 `onSubmitEditing` 属性，在提交文本时会调用一个函数。
 
-例如，假设用户在输入时，你把他们的话翻译成另一种语言。在这种新语言中，每个单词都写成同样的形式：🍕。因此，句子 "Hello there Bob" 会被翻译成 "🍕 🍕 🍕"。
+例如，假设用户在输入时，你正在把他们的话翻译成另一种语言。在这种新语言中，每个单词都用同一种方式书写：🍕。所以句子 "Hello there Bob" 会被翻译成 "🍕 🍕 🍕"。
 
 ```SnackPlayer name=Handling%20Text%20Input
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Text, TextInput, View} from 'react-native';
 
 const PizzaTranslator = () => {
@@ -16,7 +16,7 @@ const PizzaTranslator = () => {
   return (
     <View style={{flex: 1, justifyContent: 'center'}}>
       <TextInput
-        placeholder="在此输入以翻译！"
+        placeholder="Type here to translate!"
         onChangeText={newText => setText(newText)}
         defaultValue={text}
         style={{
@@ -39,10 +39,10 @@ const PizzaTranslator = () => {
 export default PizzaTranslator;
 ```
 
-在这个例子中，我们将 `text` 存储在 state 中，因为它会随着时间变化。
+在这个示例中，我们将 `text` 存储在状态中，因为它会随着时间变化。
 
-关于文本输入，你可能还想做很多其他事情。例如，你可以在用户输入时验证其中的文本。更多详细示例，请参阅 [React 关于受控组件的文档](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)，或 [TextInput 的参考文档](textinput.md)。
+关于文本输入，你还可能想做很多其他事情。例如，你可以在用户输入时验证其中的文本。更多详细示例，请参阅 [React docs on controlled components](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)，或 [TextInput 的参考文档](textinput.md)。
 
-`TextInput` 是用户与你的应用交互的众多方式之一。有关处理输入的其他方式示例，请参阅 [如何处理触摸](handling-touches.md) 的文档。
+`TextInput` 是用户与应用交互的众多方式之一。有关处理其他输入方式的示例，请参阅 [如何处理触摸](handling-touches.md) 的文档。
 
-现在，让我们来看看 [ScrollView](using-a-scrollview)，另一个核心组件。
+现在，让我们来看一看另一个核心组件 [ScrollView](using-a-scrollview)。

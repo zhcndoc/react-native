@@ -16,7 +16,6 @@ title: 动画（Animated）
 下面的示例包含一个 `View`，它将基于动画值 `fadeAnim` 进行淡入和淡出。
 
 ```SnackPlayer name=Animated%20Example
-import React, {useRef} from 'react';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 import {Animated, Text, View, StyleSheet, Button} from 'react-native';
 
@@ -497,42 +496,42 @@ static reset();
 
 停止正在运行的动画，并将值重置为初始值。
 
-## 属性
+## Attributes
 
 ### `Value`
 
-用于驱动动画的标准值类。通常使用 `useAnimatedValue(0);` 或在类组件中使用 `new Animated.Value(0);` 初始化。
+A standard value class used to drive animations. It is typically initialized with `useAnimatedValue(0);` or, in class components, with `new Animated.Value(0);`.
 
-你可以在单独的 [页面](animatedvalue) 了解更多关于 `Animated.Value` 的 API。
+You can learn more about the `Animated.Value` API on a separate [page](animatedvalue).
 
 ---
 
 ### `ValueXY`
 
-用于驱动二维动画（如平移手势）的值类。
+A value class used to drive two-dimensional animations, such as pan gestures.
 
-你可以在单独的 [页面](animatedvaluexy) 了解更多关于 `Animated.ValueXY` 的 API。
+You can learn more about the `Animated.ValueXY` API on a separate [page](animatedvaluexy).
 
 ---
 
 ### `Interpolation`
 
-导出以用于 Flow 中的 Interpolation 类型。
+Exported for use as the Interpolation type in Flow.
 
 ---
 
 ### `Node`
 
-导出用于类型检查。所有动画值均继承自此类。
+Exported for type checking. All animated values inherit from this class.
 
 ---
 
 ### `createAnimatedComponent`
 
-使任意 React 组件变得可动画。用于创建 `Animated.View` 等。
+Makes any React component animatable. Used to create `Animated.View` and similar components.
 
 ---
 
 ### `attachNativeEvent`
 
-命令式 API，用于将动画值绑定到视图的事件。尽可能优先使用带 `useNativeDriver: true` 的 `Animated.event`。
+An imperative API used to bind animated values to view events. Prefer `Animated.event` with `useNativeDriver: true` whenever possible.

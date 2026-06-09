@@ -5,13 +5,13 @@ title: 🗑️ InteractionManager
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-:::warning[Deprecated]
-避免长时间运行的工作，并改用 `requestIdleCallback`。
+:::warning[已弃用]
+请避免执行长时间运行的工作，并改用 `requestIdleCallback`。
 :::
 
-InteractionManager 允许在任何交互/动画完成后安排长时间运行的工作。特别是，这允许 JavaScript 动画流畅运行。
+InteractionManager 允许在任何交互/动画完成后安排长时间运行的工作。尤其是，这使 JavaScript 动画能够平滑运行。
 
-应用程序可以使用以下内容安排在交互后运行的任务：
+应用可以使用以下方式安排在交互之后执行的任务：
 
 ```tsx
 InteractionManager.runAfterInteractions(() => {
@@ -21,37 +21,37 @@ InteractionManager.runAfterInteractions(() => {
 
 将其与其他调度替代方案进行比较：
 
-- `requestAnimationFrame()` 用于随时间动画化视图的代码。
-- `setImmediate/setTimeout()` 稍后运行代码，注意这可能会延迟动画。
-- `runAfterInteractions()` 稍后运行代码，而不延迟活动动画。
+- `requestAnimationFrame()`：用于随时间对视图进行动画处理的代码。
+- `setImmediate/setTimeout()`：稍后运行代码，请注意这可能会延迟动画。
+- `runAfterInteractions()`：稍后运行代码，不会延迟正在进行的动画。
 
-触摸处理系统将一个或多个活动触摸视为“交互”，并将延迟 `runAfterInteractions()` 回调，直到所有触摸结束或被取消。
+触摸处理系统会将一个或多个活动触摸视为一次“交互”，并会延迟 `runAfterInteractions()` 回调，直到所有触摸都已结束或被取消。
 
-InteractionManager 还允许应用程序通过在动画开始时创建交互"handle"并在完成时清除它来注册动画：
+InteractionManager 还允许应用通过在动画开始时创建一个交互“句柄”，并在完成时将其清除，来注册动画：
 
 ```tsx
 const handle = InteractionManager.createInteractionHandle();
-// 运行动画... (`runAfterInteractions` 任务被排队)
-// 稍后，动画完成后：
+// 运行动画...（`runAfterInteractions` 任务会被排队）
+// 稍后，在动画完成时：
 InteractionManager.clearInteractionHandle(handle);
-// 如果所有 handle 都被清除，排队的任务将运行
+// 如果所有句柄都已清除，则已排队的任务会运行
 ```
 
-`runAfterInteractions` 接受一个普通回调函数，或者一个带有 `gen` 方法（返回 `Promise`）的 `PromiseTask` 对象。如果提供了 `PromiseTask`，那么在开始下一个可能更早同步排队的任务之前，它将被完全解析（包括也通过 `runAfterInteractions` 安排更多任务的异步依赖项）。
+`runAfterInteractions` 接受普通回调函数，或带有 `gen` 方法的 `PromiseTask` 对象，该方法返回一个 `Promise`。如果提供了 `PromiseTask`，那么在开始处理可能更早同步排队的下一个任务之前，它会被完全解析（包括那些也通过 `runAfterInteractions` 继续排队更多任务的异步依赖）。
 
-默认情况下，排队的任务在一个 `setImmediate` 批次中的循环中一起执行。如果调用 `setDeadline` 时传入一个正数，那么任务只会执行直到截止日期（就 js 事件循环运行时间而言）临近，此时执行将通过 setTimeout 让出，允许诸如触摸之类的事件启动交互并阻止排队任务执行，从而使应用程序响应更灵敏。
+默认情况下，已排队的任务会在一个 `setImmediate` 批次中循环执行在一起。如果调用 `setDeadline` 并传入一个正数，那么任务只会执行到接近截止时间为止（以 js 事件循环运行时间衡量），此时执行会通过 `setTimeout` 让出，从而允许诸如触摸之类的事件开始交互并阻止已排队的任务执行，使应用更具响应性。
 
 ---
 
 ## 示例
 
-### 基本
+### 基础
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
 ```SnackPlayer name=InteractionManager%20Function%20Component%20Basic%20Example&supportedPlatforms=ios,android&ext=js
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import {
   Alert,
   Animated,
@@ -64,19 +64,19 @@ import {
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const instructions = Platform.select({
-  ios: '按 Cmd+R 重新加载,\n' + 'Cmd+D 或摇动打开开发者菜单',
+  ios: '按 Cmd+R 重新加载，\n' + '按 Cmd+D 或摇晃以打开开发者菜单',
   android:
-    '双击键盘上的 R 重新加载,\n' +
-    '摇动或按菜单按钮打开开发者菜单',
+    '在键盘上双击 R 重新加载，\n' +
+    '摇晃设备或按菜单按钮以打开开发者菜单',
 });
 
 const useFadeIn = (duration = 5000) => {
   const opacity = useAnimatedValue(0);
 
-  // 当组件挂载时运行动画
+  // 组件挂载时运行动画
   useEffect(() => {
-    // Animated.timing() 默认创建一个交互 handle，如果你想禁用该
-    // 行为，你可以将 isInteraction 设置为 false 来禁用它。
+    // Animated.timing() 默认会创建一个交互句柄，如果你想禁用它
+    // 可以将 isInteraction 设为 false 来禁用它。
     Animated.timing(opacity, {
       toValue: 1,
       duration,
@@ -90,7 +90,7 @@ const useFadeIn = (duration = 5000) => {
 const Ball = ({onShown}) => {
   const opacity = useFadeIn();
 
-  // 动画后运行一个方法
+  // 动画结束后运行一个方法
   useEffect(() => {
     const interactionPromise = InteractionManager.runAfterInteractions(() =>
       onShown(),
@@ -106,7 +106,7 @@ const App = () => {
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <Text>{instructions}</Text>
-        <Ball onShown={() => Alert.alert('Animation is done')} />
+        <Ball onShown={() => Alert.alert('动画已完成')} />
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -133,7 +133,7 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=InteractionManager%20Function%20Component%20Basic%20Example&supportedPlatforms=ios,android&ext=tsx
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import {
   Alert,
   Animated,
@@ -146,19 +146,19 @@ import {
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const instructions = Platform.select({
-  ios: '按 Cmd+R 重新加载,\n' + 'Cmd+D 或摇动打开开发者菜单',
+  ios: '按 Cmd+R 重新加载，\n' + '按 Cmd+D 或摇晃以打开开发者菜单',
   android:
-    '双击键盘上的 R 重新加载,\n' +
-    '摇动或按菜单按钮打开开发者菜单',
+    '在键盘上双击 R 重新加载，\n' +
+    '摇晃设备或按菜单按钮以打开开发者菜单',
 });
 
 const useFadeIn = (duration = 5000) => {
   const opacity = useAnimatedValue(0);
 
-  // 当组件挂载时运行动画
+  // 组件挂载时运行动画
   useEffect(() => {
-    // Animated.timing() 默认创建一个交互 handle，如果你想禁用该
-    // 行为，你可以将 isInteraction 设置为 false 来禁用它。
+    // Animated.timing() 默认会创建一个交互句柄，如果你想禁用它
+    // 可以将 isInteraction 设为 false 来禁用它。
     Animated.timing(opacity, {
       toValue: 1,
       duration,
@@ -176,7 +176,7 @@ type BallProps = {
 const Ball = ({onShown}: BallProps) => {
   const opacity = useFadeIn();
 
-  // 动画后运行一个方法
+  // 动画结束后运行一个方法
   useEffect(() => {
     const interactionPromise = InteractionManager.runAfterInteractions(() =>
       onShown(),
@@ -192,7 +192,7 @@ const App = () => {
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <Text>{instructions}</Text>
-        <Ball onShown={() => Alert.alert('动画完成')} />
+        <Ball onShown={() => Alert.alert('动画已完成')} />
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -224,7 +224,7 @@ export default App;
 <TabItem value="javascript">
 
 ```SnackPlayer name=InteractionManager%20Function%20Component%20Advanced%20Example&supportedPlatforms=ios,android&ext=js
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import {
   Alert,
   Animated,
@@ -236,14 +236,14 @@ import {
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const instructions = Platform.select({
-  ios: '按 Cmd+R 重新加载,\n' + 'Cmd+D 或摇动打开开发者菜单',
+  ios: '按 Cmd+R 重新加载，\n' + '按 Cmd+D 或摇晃以打开开发者菜单',
   android:
-    '双击键盘上的 R 重新加载,\n' +
-    '摇动或按菜单按钮打开开发者菜单',
+    '在键盘上双击 R 重新加载，\n' +
+    '摇晃设备或按菜单按钮以打开开发者菜单',
 });
 
-// 你可以创建一个自定义交互/动画并添加
-// 对 InteractionManager 的支持
+// 你可以创建自定义交互/动画，并为
+// InteractionManager 添加支持
 const useCustomInteraction = (timeLocked = 2000) => {
   useEffect(() => {
     const handle = InteractionManager.createInteractionHandle();
@@ -260,7 +260,7 @@ const useCustomInteraction = (timeLocked = 2000) => {
 const Ball = ({onInteractionIsDone}) => {
   useCustomInteraction();
 
-  // 交互后运行一个方法
+  // 交互结束后运行一个方法
   useEffect(() => {
     InteractionManager.runAfterInteractions(() => onInteractionIsDone());
   }, [onInteractionIsDone]);
@@ -300,7 +300,7 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=InteractionManager%20Function%20Component%20Advanced%20Example&supportedPlatforms=ios,android&ext=tsx
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import {
   Alert,
   Animated,
@@ -312,14 +312,14 @@ import {
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const instructions = Platform.select({
-  ios: '按 Cmd+R 重新加载,\n' + 'Cmd+D 或摇动打开开发者菜单',
+  ios: '按 Cmd+R 重新加载，\n' + '按 Cmd+D 或摇晃以打开开发者菜单',
   android:
-    '双击键盘上的 R 重新加载,\n' +
-    '摇动或按菜单按钮打开开发者菜单',
+    '在键盘上双击 R 重新加载，\n' +
+    '摇晃设备或按菜单按钮以打开开发者菜单',
 });
 
-// 你可以创建一个自定义交互/动画并添加
-// 对 InteractionManager 的支持
+// 你可以创建自定义交互/动画，并为
+// InteractionManager 添加支持
 const useCustomInteraction = (timeLocked = 2000) => {
   useEffect(() => {
     const handle = InteractionManager.createInteractionHandle();
@@ -340,7 +340,7 @@ type BallProps = {
 const Ball = ({onInteractionIsDone}: BallProps) => {
   useCustomInteraction();
 
-  // 交互后运行一个方法
+  // 交互结束后运行一个方法
   useEffect(() => {
     InteractionManager.runAfterInteractions(() => onInteractionIsDone());
   }, [onInteractionIsDone]);
@@ -389,7 +389,7 @@ export default App;
 static runAfterInteractions(task?: (() => any) | SimpleTask | PromiseTask);
 ```
 
-安排一个函数在所有交互完成后运行。返回一个可取消的 "promise"。
+安排一个函数在所有交互完成后运行。返回一个可取消的“promise”。
 
 ---
 
@@ -399,7 +399,7 @@ static runAfterInteractions(task?: (() => any) | SimpleTask | PromiseTask);
 static createInteractionHandle(): Handle;
 ```
 
-通知管理器交互已开始。
+通知管理器，一个交互已经开始。
 
 ---
 
@@ -409,7 +409,7 @@ static createInteractionHandle(): Handle;
 static clearInteractionHandle(handle: Handle);
 ```
 
-通知管理器交互已完成。
+通知管理器，一个交互已经完成。
 
 ---
 
@@ -419,4 +419,4 @@ static clearInteractionHandle(handle: Handle);
 static setDeadline(deadline: number);
 ```
 
-正数将使用 setTimeout 在 eventLoopRunningTime 达到 deadline 值后调度任何任务，否则所有任务将在一个 setImmediate 批次中执行（默认）。
+正数会使用 `setTimeout` 在 `eventLoopRunningTime` 达到截止值后调度任务；否则所有任务都会在一个 `setImmediate` 批次中执行（默认）。

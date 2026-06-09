@@ -16,7 +16,6 @@ title: '🗑️ SafeAreaView'
 使用时，请将顶层视图用一个应用了 `flex: 1` 样式的 `SafeAreaView` 包裹起来。你也可以使用与应用设计相匹配的背景颜色。
 
 ```SnackPlayer name=SafeAreaView&supportedPlatforms=ios
-import React from 'react';
 import {StyleSheet, Text, SafeAreaView} from 'react-native';
 
 const App = () => {

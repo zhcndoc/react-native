@@ -1,22 +1,22 @@
 ---
 id: text
-title: Text
+title: 文本
 ---
 
-A React component for displaying text.
+用于显示文本的 React 组件。
 
-`Text` supports nesting, styling, and touch handling.
+`Text` 支持嵌套、样式和触摸处理。
 
-In the following example, the nested title and body text will inherit the `fontFamily` from `styles.baseText`, but the title provides its own additional styles. The title and body will stack on top of each other on account of the literal newlines:
+在下面的示例中，嵌套的标题和正文文本会从 `styles.baseText` 继承 `fontFamily`，但标题会提供自己额外的样式。由于字面换行符的存在，标题和正文会垂直堆叠：
 
 ```SnackPlayer name=Text%20Function%20Component%20Example
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Text, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const TextInANest = () => {
   const [titleText, setTitleText] = useState("Bird's Nest");
-  const bodyText = 'This is not really a bird nest.';
+  const bodyText = '这其实并不是一个鸟巢。';
 
   const onPressTitle = () => {
     setTitleText("Bird's Nest [pressed]");
@@ -54,12 +54,11 @@ const styles = StyleSheet.create({
 export default TextInANest;
 ```
 
-## Nested text
+## 嵌套文本
 
-Both Android and iOS allow you to display formatted text by annotating ranges of a string with specific formatting like bold or colored text (`NSAttributedString` on iOS, `SpannableString` on Android). In practice, this is very tedious. For React Native, we decided to use the web paradigm for this, where you can nest text to achieve the same effect.
+Android 和 iOS 都允许你通过为字符串中的特定范围标注特定格式（如粗体或彩色文本）来显示格式化文本（iOS 上是 `NSAttributedString`，Android 上是 `SpannableString`）。实际上，这非常繁琐。对于 React Native，我们决定采用 Web 的范式：你可以通过嵌套文本来实现相同的效果。
 
 ```SnackPlayer name=Nested%20Text%20Example
-import React from 'react';
 import {Text, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -67,8 +66,8 @@ const BoldAndBeautiful = () => (
   <SafeAreaProvider>
     <SafeAreaView style={styles.container}>
       <Text style={styles.baseText}>
-        I am bold
-        <Text style={styles.innerText}> and red</Text>
+        我很粗体
+        <Text style={styles.innerText}> 并且是红色</Text>
       </Text>
     </SafeAreaView>
   </SafeAreaProvider>
@@ -89,7 +88,7 @@ const styles = StyleSheet.create({
 export default BoldAndBeautiful;
 ```
 
-Behind the scenes, React Native converts this to a flat `NSAttributedString` or `SpannableString` that contains the following information:
+在底层，React Native 会将其转换为一个扁平的 `NSAttributedString` 或 `SpannableString`，其中包含以下信息：
 
 ```
 "I am bold and red"
@@ -97,19 +96,19 @@ Behind the scenes, React Native converts this to a flat `NSAttributedString` or 
 9-17: bold, red
 ```
 
-## Containers
+## 容器
 
-The `<Text>` element is unique relative to layout: everything inside is no longer using the Flexbox layout but using text layout. This means that elements inside of a `<Text>` are no longer rectangles, but wrap when they see the end of the line.
+与布局相关时，`<Text>` 元素是独特的：其内部的所有内容不再使用 Flexbox 布局，而是使用文本布局。这意味着 `<Text>` 内的元素不再是矩形，而是在到达行尾时自动换行。
 
 ```tsx
 <Text>
   <Text>First part and </Text>
   <Text>second part</Text>
 </Text>
-// Text container: the text will be inline, if the space allows it
+// 文本容器：如果空间允许，文本会以内联方式显示
 // |First part and second part|
 
-// otherwise, the text will flow as if it was one
+// 否则，文本会像一个整体那样流动
 // |First part |
 // |and second |
 // |part       |
@@ -118,19 +117,19 @@ The `<Text>` element is unique relative to layout: everything inside is no longe
   <Text>First part and </Text>
   <Text>second part</Text>
 </View>
-// View container: each text is its own block
+// View 容器：每段文本都是自己的块
 // |First part and|
 // |second part   |
 
-// otherwise, the text will flow in its own block
+// 否则，文本会在自己的块中流动
 // |First part |
 // |and        |
 // |second part|
 ```
 
-## Limited Style Inheritance
+## 有限的样式继承
 
-On the web, the usual way to set a font family and size for the entire document is to take advantage of inherited CSS properties like so:
+在 Web 上，为整个文档设置字体族和字号的常见方式，是利用继承的 CSS 属性，例如：
 
 ```css
 html {
@@ -141,17 +140,17 @@ html {
 }
 ```
 
-All elements in the document will inherit this font unless they or one of their parents specifies a new rule.
+文档中的所有元素都会继承这个字体，除非它们或其某个父级指定了新的规则。
 
-In React Native, we are more strict about it: **you must wrap all the text nodes inside of a `<Text>` component**. You cannot have a text node directly under a `<View>`.
+在 React Native 中，我们对此更加严格：**你必须将所有文本节点包裹在 `<Text>` 组件内**。不能在 `<View>` 下直接放置文本节点。
 
 ```tsx
-// BAD: will raise exception, can't have a text node as child of a <View>
+// 错误：会抛出异常，`<View>` 不能直接包含文本节点作为子元素
 <View>
   Some text
 </View>
 
-// GOOD
+// 正确
 <View>
   <Text>
     Some text
@@ -159,18 +158,18 @@ In React Native, we are more strict about it: **you must wrap all the text nodes
 </View>
 ```
 
-You also lose the ability to set up a default font for an entire subtree. Meanwhile, `fontFamily` only accepts a single font name, which is different from `font-family` in CSS. The recommended way to use consistent fonts and sizes across your application is to create a component `MyAppText` that includes them and use this component across your app. You can also use this component to make more specific components like `MyAppHeaderText` for other kinds of text.
+你也会失去为整个子树设置默认字体的能力。与此同时，`fontFamily` 只接受单个字体名称，这与 CSS 中的 `font-family` 不同。在应用中保持字体和字号一致的推荐方式，是创建一个包含这些样式的组件 `MyAppText`，并在整个应用中使用它。你也可以基于这个组件创建更具体的组件，比如 `MyAppHeaderText`，用于其他类型的文本。
 
 ```tsx
 <View>
   <MyAppText>
-    Text styled with the default font for the entire application
+    使用应用程序整个默认字体样式的文本
   </MyAppText>
-  <MyAppHeaderText>Text styled as a header</MyAppHeaderText>
+  <MyAppHeaderText>作为标题样式的文本</MyAppHeaderText>
 </View>
 ```
 
-Assuming that `MyAppText` is a component that only renders out its children into a `Text` component with styling, then `MyAppHeaderText` can be defined as follows:
+假设 `MyAppText` 是一个组件，它只会把自身的子元素以带样式的 `Text` 组件形式渲染出来，那么 `MyAppHeaderText` 可以这样定义：
 
 ```tsx
 const MyAppHeaderText = ({children}) => {
@@ -182,9 +181,9 @@ const MyAppHeaderText = ({children}) => {
 };
 ```
 
-Composing `MyAppText` in this way ensures that we get the styles from a top-level component, but leaves us the ability to add/override them in specific use cases.
+以这种方式组合 `MyAppText` 可以确保我们从顶层组件获得样式，同时仍然保留在特定使用场景中添加/覆盖样式的能力。
 
-React Native still has the concept of style inheritance, but limited to text subtrees. In this case, the second part will be both bold and red.
+React Native 仍然具有样式继承的概念，但仅限于文本子树。在这种情况下，第二部分会同时加粗并显示为红色。
 
 ```tsx
 <Text style={{fontWeight: 'bold'}}>
@@ -193,23 +192,23 @@ React Native still has the concept of style inheritance, but limited to text sub
 </Text>
 ```
 
-We believe that this more constrained way to style text will yield better apps:
+我们认为，这种更受约束的文本样式设置方式会带来更好的应用：
 
-- (Developer) React components are designed with strong isolation in mind: You should be able to drop a component anywhere in your application, trusting that as long as the props are the same, it will look and behave the same way. Text properties that could inherit from outside of the props would break this isolation.
+-（开发者）React 组件在设计上强调强隔离：你应该能够把一个组件放到应用中的任何位置，并相信只要 props 相同，它的外观和行为就会保持一致。那些可能从 props 外部继承的文本属性会破坏这种隔离性。
 
-- (Implementor) The implementation of React Native is also simplified. We do not need to have a `fontFamily` field on every single element, and we do not need to potentially traverse the tree up to the root every time we display a text node. The style inheritance is only encoded inside of the native Text component and doesn't leak to other components or the system itself.
+-（实现者）React Native 的实现也更简单了。我们不需要在每一个元素上都设置 `fontFamily` 字段，也不需要在每次显示文本节点时都潜在地遍历树一直到根节点。样式继承只会编码在原生 Text 组件内部，不会泄漏到其他组件或系统本身。
 
 ---
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
 ### `accessibilityHint`
 
-An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not clear from the accessibility label.
+无障碍提示可以帮助用户理解在无障碍元素上执行操作时会发生什么，尤其是在从无障碍标签中无法清楚看出结果时。
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -217,11 +216,11 @@ An accessibility hint helps users understand what will happen when they perform 
 
 ### `accessibilityLanguage` <div className="label ios">iOS</div>
 
-A value indicating which language should be used by the screen reader when the user interacts with the element. It should follow the [BCP 47 specification](https://www.rfc-editor.org/info/bcp47).
+一个值，用于指示用户与该元素交互时，屏幕阅读器应使用哪种语言。它应遵循 [BCP 47 规范](https://www.rfc-editor.org/info/bcp47)。
 
-See the [iOS `accessibilityLanguage` doc](https://developer.apple.com/documentation/objectivec/nsobject/1615192-accessibilitylanguage) for more information.
+更多信息请参见 [iOS `accessibilityLanguage` 文档](https://developer.apple.com/documentation/objectivec/nsobject/1615192-accessibilitylanguage)。
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -229,9 +228,9 @@ See the [iOS `accessibilityLanguage` doc](https://developer.apple.com/documentat
 
 ### `accessibilityLabel`
 
-Overrides the text that's read by the screen reader when the user interacts with the element. By default, the label is constructed by traversing all the children and accumulating all the `Text` nodes separated by space.
+覆盖屏幕阅读器在用户与该元素交互时读取的文本。默认情况下，标签会通过遍历所有子元素并累积所有由空格分隔的 `Text` 节点来构建。
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -239,13 +238,13 @@ Overrides the text that's read by the screen reader when the user interacts with
 
 ### `accessibilityRole`
 
-Tells the screen reader to treat the currently focused on element as having a specific role.
+告诉屏幕阅读器将当前聚焦的元素视为具有特定角色。
 
-On iOS, these roles map to corresponding Accessibility Traits. Image button has the same functionality as if the trait was set to both 'image' and 'button'. See the [Accessibility guide](accessibility.md#accessibilitytraits-ios) for more information.
+在 iOS 上，这些角色会映射到对应的无障碍特征。Image button 的功能与同时设置为 `image` 和 `button` 特征时相同。更多信息请参见 [无障碍指南](accessibility.md#accessibilitytraits-ios)。
 
-On Android, these roles have similar functionality on TalkBack as adding Accessibility Traits does on Voiceover in iOS
+在 Android 上，这些角色在 TalkBack 上的作用与在 iOS 的 VoiceOver 上添加无障碍特征类似
 
-| Type                                                 |
+| 类型                                                 |
 | ---------------------------------------------------- |
 | [AccessibilityRole](accessibility#accessibilityrole) |
 
@@ -253,11 +252,11 @@ On Android, these roles have similar functionality on TalkBack as adding Accessi
 
 ### `accessibilityState`
 
-Tells the screen reader to treat the currently focused on element as being in a specific state.
+告诉屏幕阅读器将当前聚焦的元素视为处于某种特定状态。
 
-You can provide one state, no state, or multiple states. The states must be passed in through an object, e.g. `{selected: true, disabled: true}`.
+你可以提供一个状态、不提供状态，或者提供多个状态。状态必须通过对象传入，例如 `{selected: true, disabled: true}`。
 
-| Type                                                   |
+| 类型                                                   |
 | ------------------------------------------------------ |
 | [AccessibilityState](accessibility#accessibilitystate) |
 
@@ -265,115 +264,115 @@ You can provide one state, no state, or multiple states. The states must be pass
 
 ### `accessibilityActions`
 
-Accessibility actions allow an assistive technology to programmatically invoke the actions of a component. The `accessibilityActions` property should contain a list of action objects. Each action object should contain the field name and label.
+无障碍操作允许辅助技术以编程方式调用组件的操作。`accessibilityActions` 属性应包含一个操作对象列表。每个操作对象都应包含字段名称和标签。
 
-See the [Accessibility guide](accessibility.md#accessibility-actions) for more information.
+更多信息请参见 [无障碍指南](accessibility.md#accessibility-actions)。
 
-| Type  | Required |
-| ----- | -------- |
-| array | No       |
+| 类型  | 必需 |
+| ----- | ---- |
+| array | 否   |
 
 ---
 
 ### `onAccessibilityAction`
 
-Invoked when the user performs the accessibility actions. The only argument to this function is an event containing the name of the action to perform.
+当用户执行无障碍操作时触发。此函数唯一的参数是一个包含要执行操作名称的事件。
 
-See the [Accessibility guide](accessibility.md#accessibility-actions) for more information.
+更多信息请参见 [无障碍指南](accessibility.md#accessibility-actions)。
 
-| Type     | Required |
-| -------- | -------- |
-| function | No       |
+| 类型     | 必需 |
+| -------- | ---- |
+| function | 否   |
 
 ---
 
 ### `accessible`
 
-When set to `true`, indicates that the view is an accessibility element.
+设置为 `true` 时，表示该视图是一个无障碍元素。
 
-See the [Accessibility guide](accessibility#accessible-ios-android) for more information.
+更多信息请参见 [无障碍指南](accessibility#accessible-ios-android)。
 
-| Type    | Default |
-| ------- | ------- |
+| 类型    | 默认值 |
+| ------- | ------ |
 | boolean | `true`  |
 
 ---
 
 ### `adjustsFontSizeToFit`
 
-Specifies whether fonts should be scaled down automatically to fit given style constraints.
+指定字体是否应自动缩小以适应给定的样式约束。
 
-| Type    | Default |
-| ------- | ------- |
+| 类型    | 默认值 |
+| ------- | ------ |
 | boolean | `false` |
 
 ---
 
 ### `allowFontScaling`
 
-Specifies whether fonts should scale to respect Text Size accessibility settings.
+指定字体是否应缩放以遵守文本大小无障碍设置。
 
-| Type    | Default |
-| ------- | ------- |
-| boolean | `true`  |
+| 类型    | 默认值 |
+| ------- | ------ |
+| boolean | `true` |
 
 ---
 
 ### `android_hyphenationFrequency` <div className="label android">Android</div>
 
-Sets the frequency of automatic hyphenation to use when determining word breaks on Android API Level 23+.
+设置在 Android API Level 23+ 上确定单词断行时自动连字符的使用频率。
 
-| Type                                | Default  |
-| ----------------------------------- | -------- |
+| 类型                                | 默认值  |
+| ----------------------------------- | ------- |
 | enum(`'none'`, `'normal'`,`'full'`) | `'none'` |
 
 ---
 
 ### `aria-busy`
 
-Indicates an element is being modified and that assistive technologies may want to wait until the changes are complete before informing the user about the update.
+表示某个元素正在被修改，辅助技术可能希望等到更改完成后再向用户通报更新。
 
-| Type    | Default |
-| ------- | ------- |
+| 类型    | 默认值 |
+| ------- | ------ |
 | boolean | false   |
 
 ---
 
 ### `aria-checked`
 
-Indicates the state of a checkable element. This field can either take a boolean or the "mixed" string to represent mixed checkboxes.
+表示可勾选元素的状态。该字段可以接收布尔值或 `"mixed"` 字符串来表示混合状态的复选框。
 
-| Type             | Default |
-| ---------------- | ------- |
+| 类型             | 默认值 |
+| ---------------- | ------ |
 | boolean, 'mixed' | false   |
 
 ---
 
 ### `aria-disabled`
 
-Indicates that the element is perceivable but disabled, so it is not editable or otherwise operable.
+表示该元素可感知但已禁用，因此不可编辑或以其他方式操作。
 
-| Type    | Default |
-| ------- | ------- |
+| 类型    | 默认值 |
+| ------- | ------ |
 | boolean | false   |
 
 ---
 
 ### `aria-expanded`
 
-Indicates whether an expandable element is currently expanded or collapsed.
+表示可展开元素当前是展开还是折叠状态。
 
-| Type    | Default |
-| ------- | ------- |
+| 类型    | 默认值 |
+| ------- | ------ |
 | boolean | false   |
 
 ---
 
 ### `aria-label`
 
-Defines a string value that labels an interactive element.
+定义用于标识交互元素的字符串值。
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -381,70 +380,70 @@ Defines a string value that labels an interactive element.
 
 ### `aria-selected`
 
-Indicates whether a selectable element is currently selected or not.
+表示可选择元素当前是否被选中。
 
-| Type    |
+| 类型    |
 | ------- |
 | boolean |
 
 ### `dataDetectorType` <div className="label android">Android</div>
 
-Determines the types of data converted to clickable URLs in the text element. By default, no data types are detected.
+确定在文本元素中被转换为可点击 URL 的数据类型。默认情况下，不检测任何数据类型。
 
-You can provide only one type.
+你只能提供一种类型。
 
-| Type                                                          | Default  |
-| ------------------------------------------------------------- | -------- |
+| 类型                                                          | 默认值  |
+| ------------------------------------------------------------- | ------- |
 | enum(`'phoneNumber'`, `'link'`, `'email'`, `'none'`, `'all'`) | `'none'` |
 
 ---
 
 ### `disabled` <div className="label android">Android</div>
 
-Specifies the disabled state of the text view for testing purposes.
+用于测试目的，指定文本视图的禁用状态。
 
-| Type | Default |
-| ---- | ------- |
+| 类型 | 默认值 |
+| ---- | ------ |
 | bool | `false` |
 
 ---
 
 ### `dynamicTypeRamp` <div className="label ios">iOS</div>
 
-The [Dynamic Type](https://developer.apple.com/documentation/uikit/uifont/scaling_fonts_automatically) ramp to apply to this element on iOS.
+要在 iOS 上应用于该元素的 [Dynamic Type](https://developer.apple.com/documentation/uikit/uifont/scaling_fonts_automatically) 级别。
 
-| Type                                                                                                                                                     | Default  |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| 类型                                                                                                                                                     | 默认值  |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
 | enum(`'caption2'`, `'caption1'`, `'footnote'`, `'subheadline'`, `'callout'`, `'body'`, `'headline'`, `'title3'`, `'title2'`, `'title1'`, `'largeTitle'`) | `'body'` |
 
 ---
 
 ### `ellipsizeMode`
 
-When `numberOfLines` is set, this prop defines how the text will be truncated. `numberOfLines` must be set in conjunction with this prop.
+当设置了 `numberOfLines` 时，此属性定义文本将如何截断。`numberOfLines` 必须与此属性一起设置。
 
-This can be one of the following values:
+可选值如下：
 
-- `head` - The line is displayed so that the end fits in the container and the missing text at the beginning of the line is indicated by an ellipsis glyph. e.g., "...wxyz"
-- `middle` - The line is displayed so that the beginning and end fit in the container and the missing text in the middle is indicated by an ellipsis glyph. "ab...yz"
-- `tail` - The line is displayed so that the beginning fits in the container and the missing text at the end of the line is indicated by an ellipsis glyph. e.g., "abcd..."
-- `clip` - Lines are not drawn past the edge of the text container.
+- `head` - 显示该行时，使末尾部分适配容器，并用省略号字符指示行首缺失的文本。例如：`"...wxyz"`
+- `middle` - 显示该行时，使开头和结尾适配容器，并用省略号字符指示中间缺失的文本。`"ab...yz"`
+- `tail` - 显示该行时，使开头部分适配容器，并用省略号字符指示行尾缺失的文本。例如：`"abcd..."`
+- `clip` - 文本行不会绘制到文本容器边缘之外。
 
 :::note
-On Android, when `numberOfLines` is set to a value higher than `1`, only `tail` value will work correctly.
+在 Android 上，当 `numberOfLines` 被设置为大于 `1` 的值时，只有 `tail` 值才能正常工作。
 :::
 
-| Type                                           | Default |
-| ---------------------------------------------- | ------- |
+| 类型                                           | 默认值 |
+| ---------------------------------------------- | ------ |
 | enum(`'head'`, `'middle'`, `'tail'`, `'clip'`) | `tail`  |
 
 ---
 
 ### `id`
 
-Used to locate this view from native code. Has precedence over `nativeID` prop.
+用于从原生代码中定位此视图。其优先级高于 `nativeID` 属性。
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -452,13 +451,13 @@ Used to locate this view from native code. Has precedence over `nativeID` prop.
 
 ### `maxFontSizeMultiplier`
 
-Specifies the largest possible scale a font can reach when `allowFontScaling` is enabled. Possible values:
+指定在启用 `allowFontScaling` 时字体能够达到的最大缩放比例。可选值：
 
-- `null/undefined`: inherit from the parent node or the global default (0)
-- `0`: no max, ignore parent/global default
-- `>= 1`: sets the `maxFontSizeMultiplier` of this node to this value
+- `null/undefined`：继承自父节点或全局默认值（0）
+- `0`：无限制，忽略父级/全局默认值
+- `>= 1`：将此节点的 `maxFontSizeMultiplier` 设置为该值
 
-| Type   | Default     |
+| 类型   | 默认值     |
 | ------ | ----------- |
 | number | `undefined` |
 
@@ -466,9 +465,9 @@ Specifies the largest possible scale a font can reach when `allowFontScaling` is
 
 ### `minimumFontScale`
 
-Specifies the smallest possible scale a font can reach when `adjustsFontSizeToFit` is enabled. (values 0.01-1.0).
+指定在启用 `adjustsFontSizeToFit` 时字体能够达到的最小缩放比例。（取值 0.01-1.0）。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -476,9 +475,9 @@ Specifies the smallest possible scale a font can reach when `adjustsFontSizeToFi
 
 ### `nativeID`
 
-Used to locate this view from native code.
+用于从原生代码中定位此视图。
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -486,21 +485,21 @@ Used to locate this view from native code.
 
 ### `numberOfLines`
 
-Used to truncate the text with an ellipsis after computing the text layout, including line wrapping, such that the total number of lines does not exceed this number. Setting this property to `0` will result in unsetting this value, which means that no lines restriction will be applied.
+在计算文本布局（包括自动换行）后，使用省略号截断文本，使总行数不超过此数值。将该属性设为 `0` 会取消该值，这意味着不会应用行数限制。
 
-This prop is commonly used with `ellipsizeMode`.
+此属性通常与 `ellipsizeMode` 一起使用。
 
-| Type   | Default |
-| ------ | ------- |
+| 类型   | 默认值 |
+| ------ | ------ |
 | number | `0`     |
 
 ---
 
 ### `onLayout`
 
-Invoked on mount and on layout changes.
+在挂载时以及布局变化时触发。
 
-| Type                                                     |
+| 类型                                                     |
 | -------------------------------------------------------- |
 | `md ({nativeEvent: [LayoutEvent](layoutevent)}) => void` |
 
@@ -508,9 +507,9 @@ Invoked on mount and on layout changes.
 
 ### `onLongPress`
 
-This function is called on long press.
+长按时调用此函数。
 
-| Type                                                   |
+| 类型                                                   |
 | ------------------------------------------------------ |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => void` |
 
@@ -518,9 +517,9 @@ This function is called on long press.
 
 ### `onMoveShouldSetResponder`
 
-Does this view want to "claim" touch responsiveness? This is called for every touch move on the `View` when it is not the responder.
+这个视图是否希望“抢占”触摸响应？当 `View` 不是 responder 时，每次触摸移动都会调用此方法。
 
-| Type                                                      |
+| 类型                                                      |
 | --------------------------------------------------------- |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => boolean` |
 
@@ -528,9 +527,9 @@ Does this view want to "claim" touch responsiveness? This is called for every to
 
 ### `onPress`
 
-Function called on user press, triggered after `onPressOut`.
+用户按下时调用的函数，在 `onPressOut` 之后触发。
 
-| Type                                                   |
+| 类型                                                   |
 | ------------------------------------------------------ |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => void` |
 
@@ -538,9 +537,9 @@ Function called on user press, triggered after `onPressOut`.
 
 ### `onPressIn`
 
-Called immediately when a touch is engaged, before `onPressOut` and `onPress`.
+触摸刚接触时立即调用，在 `onPressOut` 和 `onPress` 之前。
 
-| Type                                                   |
+| 类型                                                   |
 | ------------------------------------------------------ |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => void` |
 
@@ -548,9 +547,9 @@ Called immediately when a touch is engaged, before `onPressOut` and `onPress`.
 
 ### `onPressOut`
 
-Called when a touch is released.
+触摸释放时调用。
 
-| Type                                                   |
+| 类型                                                   |
 | ------------------------------------------------------ |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => void` |
 
@@ -558,11 +557,11 @@ Called when a touch is released.
 
 ### `onResponderGrant`
 
-The View is now responding to touch events. This is the time to highlight and show the user what is happening.
+`View` 现在正在响应触摸事件。这是高亮显示并向用户展示正在发生什么的时机。
 
-On Android, return true from this callback to prevent any other native components from becoming responder until this responder terminates.
+在 Android 上，从此回调中返回 `true` 可阻止任何其他原生组件在该 responder 结束之前成为 responder。
 
-| Type                                                              |
+| 类型                                                              |
 | ----------------------------------------------------------------- |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => void ｜ boolean` |
 
@@ -570,9 +569,9 @@ On Android, return true from this callback to prevent any other native component
 
 ### `onResponderMove`
 
-The user is moving their finger.
+用户正在移动手指。
 
-| Type                                                   |
+| 类型                                                   |
 | ------------------------------------------------------ |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => void` |
 
@@ -580,9 +579,9 @@ The user is moving their finger.
 
 ### `onResponderRelease`
 
-Fired at the end of the touch.
+在触摸结束时触发。
 
-| Type                                                   |
+| 类型                                                   |
 | ------------------------------------------------------ |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => void` |
 
@@ -590,9 +589,9 @@ Fired at the end of the touch.
 
 ### `onResponderTerminate`
 
-The responder has been taken from the `View`. Might be taken by other views after a call to `onResponderTerminationRequest`, or might be taken by the OS without asking (e.g., happens with control center/ notification center on iOS)
+responder 已从 `View` 中被移除。它可能是在调用 `onResponderTerminationRequest` 后被其他视图接管，也可能在未请求的情况下被操作系统接管（例如：iOS 上控制中心/通知中心会发生这种情况）
 
-| Type                                                   |
+| 类型                                                   |
 | ------------------------------------------------------ |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => void` |
 
@@ -600,9 +599,9 @@ The responder has been taken from the `View`. Might be taken by other views afte
 
 ### `onResponderTerminationRequest`
 
-Some other `View` wants to become a responder and is asking this `View` to release its responder. Returning `true` allows its release.
+某个其他 `View` 想要成为 responder，并请求此 `View` 释放其 responder。返回 `true` 允许其释放。
 
-| Type                                                      |
+| 类型                                                      |
 | --------------------------------------------------------- |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => boolean` |
 
@@ -610,9 +609,9 @@ Some other `View` wants to become a responder and is asking this `View` to relea
 
 ### `onStartShouldSetResponderCapture`
 
-If a parent `View` wants to prevent a child `View` from becoming a responder on a touch start, it should have this handler which returns `true`.
+如果父级 `View` 想在触摸开始时阻止子级 `View` 成为 responder，就应使用此处理函数，并返回 `true`。
 
-| Type                                                      |
+| 类型                                                      |
 | --------------------------------------------------------- |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => boolean` |
 
@@ -620,9 +619,9 @@ If a parent `View` wants to prevent a child `View` from becoming a responder on 
 
 ### `onTextLayout`
 
-Invoked on Text layout change.
+在 Text 布局发生变化时触发。
 
-| Type                                                 |
+| 类型                                                 |
 | ---------------------------------------------------- |
 | ([`TextLayoutEvent`](text#textlayoutevent)) => mixed |
 
@@ -630,9 +629,9 @@ Invoked on Text layout change.
 
 ### `pressRetentionOffset`
 
-When the scroll view is disabled, this defines how far your touch may move off of the button, before deactivating the button. Once deactivated, try moving it back and you'll see that the button is once again reactivated! Move it back and forth several times while the scroll view is disabled. Ensure you pass in a constant to reduce memory allocations.
+当滚动视图被禁用时，此属性定义在按钮失活之前，触摸可以离开按钮多远。按钮失活后，尝试把手指移回去，你会看到按钮再次被激活！在滚动视图被禁用时，来回移动几次。确保传入一个常量以减少内存分配。
 
-| Type                 |
+| 类型                 |
 | -------------------- |
 | [Rect](rect), number |
 
@@ -640,17 +639,17 @@ When the scroll view is disabled, this defines how far your touch may move off o
 
 ### `ref`
 
-A ref setter that will be assigned an [element node](element-nodes) when mounted.
+在挂载时会被赋值为一个 [element node](element-nodes) 的 ref setter。
 
-Note that `Text` components don't provide text nodes, the same way that paragraph elements (`<p>`) on Web are element nodes instead of text nodes. Text nodes can be found as their child nodes instead.
+请注意，`Text` 组件不会提供文本节点，就像 Web 上的段落元素（`<p>`）是元素节点而不是文本节点一样。文本节点可以在它们的子节点中找到。
 
 ---
 
 ### `role`
 
-`role` communicates the purpose of a component to the user of an assistive technology. Has precedence over the [`accessibilityRole`](text#accessibilityrole) prop.
+`role` 会将组件的用途传达给辅助技术用户。其优先级高于 [`accessibilityRole`](text#accessibilityrole) 属性。
 
-| Type                       |
+| 类型                       |
 | -------------------------- |
 | [Role](accessibility#role) |
 
@@ -658,19 +657,19 @@ Note that `Text` components don't provide text nodes, the same way that paragrap
 
 ### `selectable`
 
-Lets the user select text, to use the native copy and paste functionality.
+允许用户选择文本，以使用原生复制和粘贴功能。
 
-| Type    | Default |
-| ------- | ------- |
+| 类型    | 默认值 |
+| ------- | ------ |
 | boolean | `false` |
 
 ---
 
 ### `selectionColor` <div className="label android">Android</div>
 
-The highlight color of the text.
+文本的高亮颜色。
 
-| Type            |
+| 类型            |
 | --------------- |
 | [color](colors) |
 
@@ -678,7 +677,7 @@ The highlight color of the text.
 
 ### `style`
 
-| Type                                                                 |
+| 类型                                                                 |
 | -------------------------------------------------------------------- |
 | [Text Style](text-style-props), [View Style Props](view-style-props) |
 
@@ -686,19 +685,19 @@ The highlight color of the text.
 
 ### `suppressHighlighting` <div className="label ios">iOS</div>
 
-When `true`, no visual change is made when text is pressed down. By default, a gray oval highlights the text on press down.
+当为 `true` 时，按下文本时不会产生任何视觉变化。默认情况下，文本按下时会以灰色椭圆高亮显示。
 
-| Type    | Default |
-| ------- | ------- |
+| 类型    | 默认值 |
+| ------- | ------ |
 | boolean | `false` |
 
 ---
 
 ### `testID`
 
-Used to locate this view in end-to-end tests.
+用于在端到端测试中定位此视图。
 
-| Type   |
+| 类型   |
 | ------ |
 | string |
 
@@ -706,9 +705,9 @@ Used to locate this view in end-to-end tests.
 
 ### `textBreakStrategy` <div className="label android">Android</div>
 
-Set text break strategy on Android API Level 23+, possible values are `simple`, `highQuality`, `balanced`.
+在 Android API Level 23+ 上设置文本断行策略，可选值为 `simple`、`highQuality`、`balanced`。
 
-| Type                                            | Default       |
+| 类型                                            | 默认值       |
 | ----------------------------------------------- | ------------- |
 | enum(`'simple'`, `'highQuality'`, `'balanced'`) | `highQuality` |
 
@@ -716,19 +715,19 @@ Set text break strategy on Android API Level 23+, possible values are `simple`, 
 
 ### `lineBreakStrategyIOS` <div className="label ios">iOS</div>
 
-Set line break strategy on iOS 14+. Possible values are `none`, `standard`, `hangul-word` and `push-out`.
+在 iOS 14+ 上设置断行策略。可选值为 `none`、`standard`、`hangul-word` 和 `push-out`。
 
-| Type                                                        | Default  |
-| ----------------------------------------------------------- | -------- |
+| 类型                                                        | 默认值  |
+| ----------------------------------------------------------- | ------- |
 | enum(`'none'`, `'standard'`, `'hangul-word'`, `'push-out'`) | `'none'` |
 
-## Type Definitions
+## 类型定义
 
 ### TextLayout
 
-`TextLayout` object is a part of [`TextLayoutEvent`](text#textlayoutevent) callback and contains the measurement data for `Text` line.
+`TextLayout` 对象是 [`TextLayoutEvent`](text#textlayoutevent) 回调的一部分，并包含 `Text` 行的测量数据。
 
-#### Example
+#### 示例
 
 ```js
 {
@@ -743,24 +742,24 @@ Set line break strategy on iOS 14+. Possible values are `none`, `standard`, `han
 }
 ```
 
-#### Properties
+#### 属性
 
-| Name      | Type   | Optional | Description                                                         |
-| --------- | ------ | -------- | ------------------------------------------------------------------- |
-| ascender  | number | No       | The line ascender height after the text layout changes.             |
-| capHeight | number | No       | Height of capital letter above the baseline.                        |
-| descender | number | No       | The line descender height after the text layout changes.            |
-| height    | number | No       | Height of the line after the text layout changes.                   |
-| width     | number | No       | Width of the line after the text layout changes.                    |
-| x         | number | No       | Line X coordinate inside the Text component.                        |
-| xHeight   | number | No       | Distance between the baseline and median of the line (corpus size). |
-| y         | number | No       | Line Y coordinate inside the Text component.                        |
+| 名称      | 类型   | 可选 | 描述                                                         |
+| --------- | ------ | ---- | ------------------------------------------------------------------- |
+| ascender  | number | 否   | 文本布局变化后该行的上升高度。             |
+| capHeight | number | 否   | 基线以上大写字母的高度。                        |
+| descender | number | 否   | 文本布局变化后该行的下降高度。            |
+| height    | number | 否   | 文本布局变化后该行的高度。                   |
+| width     | number | 否   | 文本布局变化后该行的宽度。                    |
+| x         | number | 否   | `Text` 组件内部该行的 X 坐标。                        |
+| xHeight   | number | 否   | 基线与该行中线（正文字号）之间的距离。 |
+| y         | number | 否   | `Text` 组件内部该行的 Y 坐标。                        |
 
 ### TextLayoutEvent
 
-`TextLayoutEvent` object is returned in the callback as a result of a component layout change. It contains a key called `lines` with a value which is an array containing [`TextLayout`](text#textlayout) object corresponded to every rendered text line.
+`TextLayoutEvent` 对象会在组件布局变化时作为回调结果返回。它包含一个名为 `lines` 的键，其值为一个数组，数组中包含与每一条已渲染文本行对应的 [`TextLayout`](text#textlayout) 对象。
 
-#### Example
+#### 示例
 
 ```js
 {
@@ -773,9 +772,9 @@ Set line break strategy on iOS 14+. Possible values are `none`, `standard`, `han
 }
 ```
 
-#### Properties
+#### 属性
 
-| Name   | Type                                    | Optional | Description                                           |
-| ------ | --------------------------------------- | -------- | ----------------------------------------------------- |
-| lines  | array of [TextLayout](text#textlayout)s | No       | Provides the TextLayout data for every rendered line. |
-| target | number                                  | No       | The node id of the element.                           |
+| 名称   | 类型                                    | 可选 | 描述                                           |
+| ------ | --------------------------------------- | ---- | ----------------------------------------------------- |
+| lines  | [TextLayout](text#textlayout) 的数组 | 否   | 为每一条已渲染行提供 `TextLayout` 数据。 |
+| target | number                                  | 否   | 元素的节点 id。                           |

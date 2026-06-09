@@ -11,7 +11,6 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 <TabItem value="javascript">
 
 ```SnackPlayer name=Example&supportedPlatforms=ios,android&ext=js
-import React from 'react';
 import {Alert, Share, Button} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -20,7 +19,7 @@ const ShareExample = () => {
     try {
       const result = await Share.share({
         message:
-          'React Native | A framework for building native apps using React',
+          'React Native | 使用 React 构建原生应用的框架',
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -38,7 +37,7 @@ const ShareExample = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView>
-        <Button onPress={onShare} title="Share" />
+        <Button onPress={onShare} title="分享" />
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -51,7 +50,6 @@ export default ShareExample;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Example&supportedPlatforms=ios,android&ext=tsx
-import React from 'react';
 import {Alert, Share, Button} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -60,7 +58,7 @@ const ShareExample = () => {
     try {
       const result = await Share.share({
         message:
-          'React Native | A framework for building native apps using React',
+          'React Native | 使用 React 构建原生应用的框架',
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -78,7 +76,7 @@ const ShareExample = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView>
-        <Button onPress={onShare} title="Share" />
+        <Button onPress={onShare} title="分享" />
       </SafeAreaView>
     </SafeAreaProvider>
   );

@@ -7,14 +7,15 @@ title: Animated 动画
 
 创建动画的核心工作流程是创建一个 `Animated.Value`，将其连接到动画组件的一个或多个样式属性，然后通过使用 `Animated.timing()` 的动画来驱动更新。
 
-> 不要直接修改动画值。你可以使用 [`useRef` Hook](https://react.dev/reference/react/useRef) 返回一个可变 ref 对象。该 ref 对象的 `current` 属性被初始化为给定的参数，并在整个组件生命周期中持久存在。
+:::note
+不要直接修改 animated value。你可以使用 [`useRef` Hook](https://react.dev/reference/react/useRef) 来返回一个可变的 ref 对象。该 ref 对象的 `current` 属性会以给定参数初始化，并在整个组件生命周期中持续存在。
+:::
 
 ## 示例
 
 以下示例包含一个 `View`，它将基于动画值 `fadeAnim` 进行淡入和淡出
 
 ```SnackPlayer name=Animated%20Example
-import React, {useRef} from 'react';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 import {
   Animated,
@@ -22,11 +23,12 @@ import {
   View,
   StyleSheet,
   Button,
+  useAnimatedValue,
 } from 'react-native';
 
 const App = () => {
   // fadeAnim 将用作 opacity 的值。初始值：0
-  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const fadeAnim = useAnimatedValue(0);
 
   const fadeIn = () => {
     // 将在 5 秒内将 fadeAnim 值更改为 1

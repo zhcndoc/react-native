@@ -5,12 +5,11 @@ title: Props
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-Most components can be customized when they are created, with different parameters. These created parameters are called `props`, short for properties.
+大多数组件在创建时都可以通过不同的参数进行自定义。这些创建时传入的参数称为 `props`，是 properties 的缩写。
 
-For example, one basic React Native component is the `Image`. When you create an image, you can use a prop named `source` to control what image it shows.
+例如，一个基础的 React Native 组件是 `Image`。当你创建一张图片时，可以使用名为 `source` 的 prop 来控制它显示什么图片。
 
 ```SnackPlayer name=Props
-import React from 'react';
 import {Image} from 'react-native';
 
 const Bananas = () => {
@@ -25,15 +24,14 @@ const Bananas = () => {
 export default Bananas;
 ```
 
-Notice the braces surrounding `{pic}` - these embed the variable `pic` into JSX. You can put any JavaScript expression inside braces in JSX.
+注意包围 `{pic}` 的大括号——它们将变量 `pic` 嵌入到 JSX 中。你可以在 JSX 的大括号里放入任何 JavaScript 表达式。
 
-Your own components can also use `props`. This lets you make a single component that is used in many different places in your app, with slightly different properties in each place by referring to `props` in your `render` function. Here's an example:
+你自己的组件也可以使用 `props`。这使你可以创建一个单独的组件，并在应用的许多不同位置使用它，只需通过在 `render` 函数中引用 `props`，就能让每个位置拥有略有不同的属性。下面是一个例子：
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
 ```SnackPlayer name=Props&ext=js
-import React from 'react';
 import {Text, View} from 'react-native';
 
 const Greeting = props => {
@@ -61,7 +59,6 @@ export default LotsOfGreetings;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Props&ext=tsx
-import React from 'react';
 import {Text, View} from 'react-native';
 
 type GreetingProps = {
@@ -92,8 +89,8 @@ export default LotsOfGreetings;
 </TabItem>
 </Tabs>
 
-Using `name` as a prop lets us customize the `Greeting` component, so we can reuse that component for each of our greetings. This example also uses the `Greeting` component in JSX, similar to the [Core Components](intro-react-native-components). The power to do this is what makes React so cool - if you find yourself wishing that you had a different set of UI primitives to work with, you can invent new ones.
+使用 `name` 作为 prop 可以让我们自定义 `Greeting` 组件，这样就能在每个问候语中复用这个组件。这个示例还在 JSX 中使用了 `Greeting` 组件，类似于 [Core Components](intro-react-native-components)。能够做到这一点正是 React 如此出色的原因——如果你发现自己希望拥有一组不同的 UI 基元来使用，你可以发明新的。
 
-The other new thing going on here is the [`View`](view.md) component. A [`View`](view.md) is useful as a container for other components, to help control style and layout.
+这里另一个新出现的内容是 [`View`](view.md) 组件。[`View`](view.md) 很适合作为其他组件的容器，有助于控制样式和布局。
 
-With `props` and the basic [`Text`](text.md), [`Image`](image.md), and [`View`](view.md) components, you can build a wide variety of static screens. To learn how to make your app change over time, you need to [learn about State](state.md).
+借助 `props` 以及基础的 [`Text`](text.md)、[`Image`](image.md) 和 [`View`](view.md) 组件，你可以构建各种各样的静态界面。要了解如何让你的应用随时间变化，你需要[了解 State](state.md)。

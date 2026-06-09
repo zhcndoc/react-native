@@ -4,7 +4,7 @@ title: 尺寸
 ---
 
 :::info
-[`useWindowDimensions`](usewindowdimensions) 是 React 组件推荐使用的 API。不同于 `Dimensions`，它会随着窗口尺寸的变化而更新。这与 React 的范式非常契合。
+[`useWindowDimensions`](usewindowdimensions) 是 React 组件首选的 API。与 `Dimensions` 不同，它会随着窗口尺寸变化而更新。这与 React 的范式非常契合。
 :::
 
 ```tsx
@@ -19,15 +19,15 @@ const windowHeight = Dimensions.get('window').height;
 ```
 
 :::note
-尽管尺寸信息可以立即获取，但它们可能会变化（例如设备旋转、折叠设备等），因此任何依赖这些常量的渲染逻辑或样式，应该尝试在每次渲染时调用此函数，而不是缓存其值（例如，使用内联样式而非在 `StyleSheet` 中设置值）。
+尽管尺寸可立即获取，但它们可能会发生变化（例如由于设备旋转、折叠设备等），因此任何依赖这些常量的渲染逻辑或样式都应尽量在每次渲染时调用此函数，而不是缓存该值（例如，使用内联样式，而不是在 `StyleSheet` 中设置值）。
 :::
 
-如果你的目标设备包括折叠屏设备或能够改变屏幕尺寸或应用窗口尺寸的设备，可以使用 Dimensions 模块中的事件监听器，如以下示例所示。
+如果你的目标设备是折叠屏设备，或者可能改变屏幕尺寸或应用窗口尺寸的设备，你可以使用 `Dimensions` 模块中可用的事件监听器，如下面的示例所示。
 
 ## 示例
 
 ```SnackPlayer name=Dimensions%20Example
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {StyleSheet, Text, Dimensions} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -101,9 +101,9 @@ static addEventListener(
 ): EmitterSubscription;
 ```
 
-添加事件处理器。支持的事件：
+添加事件处理程序。支持的事件：
 
-- `change`：当 `Dimensions` 对象中的属性发生变化时触发。事件处理器的参数是一个 [`DimensionsValue`](#dimensionsvalue) 类型的对象。
+- `change`：当 `Dimensions` 对象中的某个属性发生变化时触发。传递给事件处理程序的参数是一个 [`DimensionsValue`](#dimensionsvalue) 类型对象。
 
 ---
 
@@ -113,18 +113,18 @@ static addEventListener(
 static get(dim: 'window' | 'screen'): ScaledSize;
 ```
 
-初始尺寸在调用 `runApplication` 之前已设置，因此它们应该在任何其他 require 执行前可用，但可能随后会被更新。
+在调用 `runApplication` 之前就会设置初始尺寸，因此它们应当在任何其他 `require` 运行之前就可用，但之后可能会更新。
 
 示例：`const {height, width} = Dimensions.get('window');`
 
 **参数：**
 
-| 名称                                                               | 类型   | 说明                                                                       |
-| ------------------------------------------------------------------ | ------ | -------------------------------------------------------------------------- |
-| dim <div className="label basic required two-lines">必填</div>     | string | 维度名称，如调用 `set` 时定义。返回该维度的值。                           |
+| 名称                                                                | 类型   | 描述                                                                       |
+| ------------------------------------------------------------------- | ------ | -------------------------------------------------------------------------- |
+| dim <div className="label basic required two-lines">必填</div> | string | 调用 `set` 时定义的尺寸名称。返回该尺寸的值。 |
 
 :::note
-对于 Android，如果状态栏非透明，`window` 维度会减去状态栏的高度和底部导航栏的高度。
+对于 Android，`window` 尺寸会减去状态栏（如果不是半透明）和底部导航栏的大小。
 :::
 
 ## 类型定义
@@ -133,10 +133,10 @@ static get(dim: 'window' | 'screen'): ScaledSize;
 
 **属性：**
 
-| 名称   | 类型                                | 说明                                       |
-| ------ | ----------------------------------- | ------------------------------------------ |
-| window | [ScaledSize](dimensions#scaledsize) | 可见应用窗口的尺寸。                       |
-| screen | [ScaledSize](dimensions#scaledsize) | 设备屏幕的尺寸。                           |
+| 名称   | 类型                                | 描述                             |
+| ------ | ----------------------------------- | -------------------------------- |
+| window | [ScaledSize](dimensions#scaledsize) | 可见应用窗口的大小。              |
+| screen | [ScaledSize](dimensions#scaledsize) | 设备屏幕的大小。                  |
 
 ### ScaledSize
 

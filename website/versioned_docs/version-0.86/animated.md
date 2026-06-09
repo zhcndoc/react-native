@@ -1,6 +1,6 @@
 ---
 id: animated
-title: Animated
+title: 动画
 ---
 
 `Animated` 库旨在让动画的构建和维护变得流畅、强大且轻松。`Animated` 专注于输入与输出之间的声明式关系、中间可配置的变换，以及用于控制基于时间的动画执行的 `start`/`stop` 方法。
@@ -16,7 +16,6 @@ title: Animated
 下面的示例包含一个 `View`，它会根据 animated value `fadeAnim` 实现淡入和淡出
 
 ```SnackPlayer name=Animated%20Example
-import React from 'react';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 import {
   Animated,
@@ -63,8 +62,8 @@ const App = () => {
           <Text style={styles.fadingText}>Fading View!</Text>
         </Animated.View>
         <View style={styles.buttonRow}>
-          <Button title="Fade In View" onPress={fadeIn} />
-          <Button title="Fade Out View" onPress={fadeOut} />
+          <Button title="淡入视图" onPress={fadeIn} />
+          <Button title="淡出视图" onPress={fadeOut} />
         </View>
       </SafeAreaView>
     </SafeAreaProvider>

@@ -8,7 +8,7 @@ Modal 组件是一种在包裹视图之上展示内容的基本方式。
 ## 示例
 
 ```SnackPlayer name=Modal&supportedPlatforms=android,ios
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Alert, Modal, StyleSheet, Text, Pressable, View} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -22,16 +22,16 @@ const App = () => {
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
+            Alert.alert('Modal 已关闭。');
             setModalVisible(!modalVisible);
           }}>
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Text style={styles.modalText}>Hello World!</Text>
+              <Text style={styles.modalText}>你好，世界！</Text>
               <Pressable
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => setModalVisible(!modalVisible)}>
-                <Text style={styles.textStyle}>Hide Modal</Text>
+                <Text style={styles.textStyle}>隐藏模态框</Text>
               </Pressable>
             </View>
           </View>
@@ -39,7 +39,7 @@ const App = () => {
         <Pressable
           style={[styles.button, styles.buttonOpen]}
           onPress={() => setModalVisible(true)}>
-          <Text style={styles.textStyle}>Show Modal</Text>
+          <Text style={styles.textStyle}>显示模态框</Text>
         </Pressable>
       </SafeAreaView>
     </SafeAreaProvider>

@@ -12,7 +12,7 @@ title: 处理触摸事件
 ```tsx
 <Button
   onPress={() => {
-    console.log('You tapped the button!');
+    console.log('你点了这个按钮！');
   }}
   title="Press Me"
 />
@@ -25,12 +25,11 @@ title: 处理触摸事件
 你可以使用下面的示例尽情玩转 `Button` 组件。通过点击右下角的切换按钮选择预览的运行平台，然后点击"Tap to Play"预览应用。
 
 ```SnackPlayer name=Button%20Basics
-import React from 'react';
 import {Alert, Button, StyleSheet, View} from 'react-native';
 
 const ButtonBasics = () => {
   const onPress = () => {
-    Alert.alert('You tapped the button!');
+    Alert.alert('你点了这个按钮！');
   };
 
   return (
@@ -86,7 +85,6 @@ export default ButtonBasics;
 下面让我们来看这些组件的实际演示：
 
 ```SnackPlayer name=Touchables
-import React from 'react';
 import {
   Alert,
   Platform,
@@ -101,11 +99,11 @@ import {
 
 const Touchables = () => {
   const onPressButton = () => {
-    Alert.alert('You tapped the button!');
+    Alert.alert('你点了这个按钮！');
   };
 
   const onLongPressButton = () => {
-    Alert.alert('You long-pressed the button!');
+    Alert.alert('你长按了这个按钮！');
   };
 
   return (

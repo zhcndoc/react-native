@@ -4,20 +4,20 @@ title: TouchableHighlight
 ---
 
 :::tip
-如果您正在寻找一种更广泛且面向未来的方式来处理基于触摸的输入，请查看 [Pressable](pressable.md) API。
+如果你正在寻找一种更全面且面向未来的方式来处理基于触摸的输入，请查看 [Pressable](pressable.md) API。
 :::
 
-一个用于使视图正确响应触摸的包装器。按下时，被包裹视图的不透明度会降低，从而允许底层颜色透出来，使视图变暗或着色。
+用于让视图对触摸作出正确响应的包装组件。按下时，被包装视图的透明度会降低，从而让底层颜色显示出来，使视图变暗或带有色调。
 
-底层来源于将子组件包裹在一个新的 View 中，这可能会影响布局，如果未正确使用，有时会导致不必要的视觉异常，例如如果被包裹视图的 backgroundColor 没有显式设置为不透明颜色。
+底层颜色来自于将子组件包裹在一个新的 View 中，这可能会影响布局，并且如果使用不当，有时会导致不希望出现的视觉瑕疵，例如当被包装视图的 backgroundColor 没有明确设置为不透明颜色时。
 
-TouchableHighlight 必须有一个子组件（不能为零个或多个）。如果您希望有多个子组件，请将它们包裹在一个 View 中。
+TouchableHighlight 必须只有一个子元素（不能是零个或多个）。如果你希望包含多个子组件，请将它们包裹在一个 View 中。
 
 ```tsx
 function MyComponent(props: MyComponentProps) {
   return (
     <View {...props} style={{flex: 1, backgroundColor: '#fff'}}>
-      <Text>My Component</Text>
+      <Text>我的组件</Text>
     </View>
   );
 }
@@ -25,7 +25,7 @@ function MyComponent(props: MyComponentProps) {
 <TouchableHighlight
   activeOpacity={0.6}
   underlayColor="#DDDDDD"
-  onPress={() => alert('Pressed!')}>
+  onPress={() => alert('已按下！')}>
   <MyComponent />
 </TouchableHighlight>;
 ```
@@ -33,7 +33,7 @@ function MyComponent(props: MyComponentProps) {
 ## 示例
 
 ```SnackPlayer name=TouchableHighlight%20Example
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -46,7 +46,7 @@ const TouchableHighlightExample = () => {
       <SafeAreaView style={styles.container}>
         <TouchableHighlight onPress={onPress}>
           <View style={styles.button}>
-            <Text>Touch Here</Text>
+            <Text>点按这里</Text>
           </View>
         </TouchableHighlight>
         <View style={styles.countContainer}>
@@ -86,15 +86,15 @@ export default TouchableHighlightExample;
 
 ## 属性
 
-### [TouchableWithoutFeedback 属性](touchablewithoutfeedback.md#props)
+### [TouchableWithoutFeedback Props](touchablewithoutfeedback.md#props)
 
-继承 [TouchableWithoutFeedback 属性](touchablewithoutfeedback.md#props)。
+继承自 [TouchableWithoutFeedback Props](touchablewithoutfeedback.md#props)。
 
 ---
 
 ### `activeOpacity`
 
-确定当触摸激活时，被包裹视图的不透明度应为多少。值应在 0 到 1 之间。默认为 0.85。需要设置 `underlayColor`。
+决定触摸激活时被包装视图应有的透明度。该值应介于 0 和 1 之间。默认值为 0.85。需要设置 `underlayColor`。
 
 | 类型   |
 | ------ |
@@ -104,7 +104,7 @@ export default TouchableHighlightExample;
 
 ### `onHideUnderlay`
 
-在底层隐藏后立即调用。
+在底层颜色隐藏后立即调用。
 
 | 类型     |
 | -------- |
@@ -114,7 +114,7 @@ export default TouchableHighlightExample;
 
 ### `onShowUnderlay`
 
-在底层显示后立即调用。
+在底层颜色显示后立即调用。
 
 | 类型     |
 | -------- |
@@ -124,31 +124,31 @@ export default TouchableHighlightExample;
 
 ### `ref`
 
-一个 ref 设置器，挂载时将被分配一个 [元素节点](element-nodes)。
+一个 ref 设置器，在挂载时会被分配一个 [元素节点](element-nodes)。
 
 ---
 
 ### `style`
 
-| 类型       |
-| ---------- |
+| 类型        |
+| ----------- |
 | View.style |
 
 ---
 
 ### `underlayColor`
 
-当触摸激活时将显示出来的底层颜色。
+在触摸激活时会透出来的底层颜色。
 
 | 类型               |
 | ------------------ |
-| [颜色](colors.md) |
+| [color](colors.md) |
 
 ---
 
 ### `hasTVPreferredFocus` <div className="label ios">iOS</div>
 
-_(仅限 Apple TV)_ 电视首选焦点（请参阅 View 组件的文档）。
+_（仅限 Apple TV）_ TV 首选焦点（参见 View 组件的文档）。
 
 | 类型 |
 | ---- |
@@ -158,7 +158,7 @@ _(仅限 Apple TV)_ 电视首选焦点（请参阅 View 组件的文档）。
 
 ### `nextFocusDown` <div className="label android">Android</div>
 
-电视下一个向下焦点（请参阅 View 组件的文档）。
+TV 下一个向下焦点（参见 View 组件的文档）。
 
 | 类型   |
 | ------ |
@@ -168,7 +168,7 @@ _(仅限 Apple TV)_ 电视首选焦点（请参阅 View 组件的文档）。
 
 ### `nextFocusForward` <div className="label android">Android</div>
 
-电视下一个向前焦点（请参阅 View 组件的文档）。
+TV 下一个向前焦点（参见 View 组件的文档）。
 
 | 类型   |
 | ------ |
@@ -178,7 +178,7 @@ _(仅限 Apple TV)_ 电视首选焦点（请参阅 View 组件的文档）。
 
 ### `nextFocusLeft` <div className="label android">Android</div>
 
-电视下一个向左焦点（请参阅 View 组件的文档）。
+TV 下一个向左焦点（参见 View 组件的文档）。
 
 | 类型   |
 | ------ |
@@ -188,7 +188,7 @@ _(仅限 Apple TV)_ 电视首选焦点（请参阅 View 组件的文档）。
 
 ### `nextFocusRight` <div className="label android">Android</div>
 
-电视下一个向右焦点（请参阅 View 组件的文档）。
+TV 下一个向右焦点（参见 View 组件的文档）。
 
 | 类型   |
 | ------ |
@@ -198,7 +198,7 @@ _(仅限 Apple TV)_ 电视首选焦点（请参阅 View 组件的文档）。
 
 ### `nextFocusUp` <div className="label android">Android</div>
 
-电视下一个向上焦点（请参阅 View 组件的文档）。
+TV 下一个向上焦点（参见 View 组件的文档）。
 
 | 类型   |
 | ------ |

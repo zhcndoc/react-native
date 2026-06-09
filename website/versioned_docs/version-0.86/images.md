@@ -30,7 +30,7 @@ React Native 为在 Android 和 iOS 应用中管理图片及其他媒体资源�
 <Image source={require('./img/check.png')} />
 ```
 
-...那么 bundler 会打包并提供与设备屏幕密度相对应的图片。例如，`check@2x.png` 将用于 iPhone 7，而 `check@3x.png` 将用于 iPhone 7 Plus 或 Nexus 5。如果没有与屏幕密度匹配的图片，则会选择最接近的最佳选项。
+...bundler 将会打包并提供与设备屏幕密度相对应的图片。例如，`check@2x.png` 会在 iPhone 7 上使用，而 `check@3x.png` 会在 iPhone 7 Plus 或 Nexus 5 上使用。如果没有与屏幕密度匹配的图片，则会选择最接近的最佳选项。
 
 在 Windows 上，如果你向项目中添加了新的图片，可能需要重启 bundler。
 
@@ -122,7 +122,7 @@ const icon = this.props.active
     headers: {
       Pragma: 'no-cache',
     },
-    body: 'Your Body goes here',
+    body: '你的请求体放在这里',
   }}
   style={{width: 400, height: 400}}
 />

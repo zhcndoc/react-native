@@ -48,8 +48,8 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
-```SnackPlayer name=Easing%20Demo&ext=js&supportedPlatforms=ios,android
-import React, {useRef} from 'react';
+```SnackPlayer name=Easing%20Demo&ext=js
+import {useRef} from 'react';
 import {
   Animated,
   Easing,
@@ -94,7 +94,7 @@ const App = () => {
       <SafeAreaView style={styles.container} edges={['right', 'top', 'left']}>
         <StatusBar hidden={true} />
         <Text style={styles.title}>
-          Press rows below to preview the Easing!
+          按下下方各行以预览缓动效果！
         </Text>
         <View style={styles.boxContainer}>
           <Animated.View style={animatedStyles} />
@@ -121,46 +121,46 @@ const App = () => {
 
 const SECTIONS = [
   {
-    title: 'Predefined animations',
+    title: '预定义动画',
     data: [
-      {title: 'Bounce', easing: Easing.bounce},
-      {title: 'Ease', easing: Easing.ease},
-      {title: 'Elastic', easing: Easing.elastic(4)},
+      {title: '弹跳', easing: Easing.bounce},
+      {title: '缓动', easing: Easing.ease},
+      {title: '弹性', easing: Easing.elastic(4)},
     ],
   },
   {
-    title: 'Standard functions',
+    title: '标准函数',
     data: [
-      {title: 'Linear', easing: Easing.linear},
-      {title: 'Quad', easing: Easing.quad},
-      {title: 'Cubic', easing: Easing.cubic},
+      {title: '线性', easing: Easing.linear},
+      {title: '二次', easing: Easing.quad},
+      {title: '三次', easing: Easing.cubic},
     ],
   },
   {
-    title: 'Additional functions',
+    title: '附加函数',
     data: [
       {
-        title: 'Bezier',
+        title: '贝塞尔',
         easing: Easing.bezier(0, 2, 1, -1),
       },
-      {title: 'Circle', easing: Easing.circle},
-      {title: 'Sin', easing: Easing.sin},
-      {title: 'Exp', easing: Easing.exp},
+      {title: '圆形', easing: Easing.circle},
+      {title: '正弦', easing: Easing.sin},
+      {title: '指数', easing: Easing.exp},
     ],
   },
   {
-    title: 'Combinations',
+    title: '组合',
     data: [
       {
-        title: 'In + Bounce',
+        title: 'In + 弹跳',
         easing: Easing.in(Easing.bounce),
       },
       {
-        title: 'Out + Exp',
+        title: 'Out + 指数',
         easing: Easing.out(Easing.exp),
       },
       {
-        title: 'InOut + Elastic',
+        title: 'InOut + 弹性',
         easing: Easing.inOut(Easing.elastic(1)),
       },
     ],
@@ -209,7 +209,7 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Easing%20Demo&ext=tsx
-import React, {useRef} from 'react';
+import {useRef} from 'react';
 import {
   Animated,
   Easing,
@@ -255,7 +255,7 @@ const App = () => {
       <SafeAreaView style={styles.container} edges={['right', 'top', 'left']}>
         <StatusBar hidden={true} />
         <Text style={styles.title}>
-          Press rows below to preview the Easing!
+          按下下方各行以预览缓动效果！
         </Text>
         <View style={styles.boxContainer}>
           <Animated.View style={animatedStyles} />
@@ -282,46 +282,46 @@ const App = () => {
 
 const SECTIONS = [
   {
-    title: 'Predefined animations',
+    title: '预定义动画',
     data: [
-      {title: 'Bounce', easing: Easing.bounce},
-      {title: 'Ease', easing: Easing.ease},
-      {title: 'Elastic', easing: Easing.elastic(4)},
+      {title: '弹跳', easing: Easing.bounce},
+      {title: '缓动', easing: Easing.ease},
+      {title: '弹性', easing: Easing.elastic(4)},
     ],
   },
   {
-    title: 'Standard functions',
+    title: '标准函数',
     data: [
-      {title: 'Linear', easing: Easing.linear},
-      {title: 'Quad', easing: Easing.quad},
-      {title: 'Cubic', easing: Easing.cubic},
+      {title: '线性', easing: Easing.linear},
+      {title: '二次', easing: Easing.quad},
+      {title: '三次', easing: Easing.cubic},
     ],
   },
   {
-    title: 'Additional functions',
+    title: '附加函数',
     data: [
       {
-        title: 'Bezier',
+        title: '贝塞尔',
         easing: Easing.bezier(0, 2, 1, -1),
       },
-      {title: 'Circle', easing: Easing.circle},
-      {title: 'Sin', easing: Easing.sin},
-      {title: 'Exp', easing: Easing.exp},
+      {title: '圆形', easing: Easing.circle},
+      {title: '正弦', easing: Easing.sin},
+      {title: '指数', easing: Easing.exp},
     ],
   },
   {
-    title: 'Combinations',
+    title: '组合',
     data: [
       {
-        title: 'In + Bounce',
+        title: 'In + 弹跳',
         easing: Easing.in(Easing.bounce),
       },
       {
-        title: 'Out + Exp',
+        title: 'Out + 指数',
         easing: Easing.out(Easing.exp),
       },
       {
-        title: 'InOut + Elastic',
+        title: 'InOut + 弹性',
         easing: Easing.inOut(Easing.elastic(1)),
       },
     ],

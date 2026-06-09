@@ -1,28 +1,28 @@
 ---
 id: document-nodes
-title: Document nodes
+title: 文档节点
 ---
 
-Document nodes represent a complete native view tree. Apps using native navigation would provide a separate document node for each screen. Apps not using native navigation would generally provide a single document for the whole app (similar to single-page apps on Web).
+文档节点表示一个完整的原生视图树。使用原生导航的应用会为每个屏幕提供一个单独的文档节点。不使用原生导航的应用通常会为整个应用提供一个单一文档（类似于 Web 上的单页应用）。
 
 ```SnackPlayer ext=js&name=Document%20instance%20example
-import * as React from 'react';
+import {useEffect, useRef} from 'react';
 import {Text, TextInput, View} from 'react-native';
 
 function MyComponent(props) {
   return (
     <View ref={props.ref}>
-      <Text>Start typing below</Text>
+      <Text>在下方开始输入</Text>
       <TextInput id="main-text-input" />
     </View>
   )
 }
 
 export default function AccessingDocument() {
-  const ref = React.useRef(null);
+  const ref = useRef(null);
 
-  React.useEffect(() => {
-    // Get the main text input in the screen and focus it after initial load.
+  useEffect(() => {
+    // 获取屏幕中的主文本输入框，并在初始加载后聚焦它。
     const element = ref.current;
     const doc = element.ownerDocument;
     const textInput = doc.getElementById('main-text-input');
@@ -37,24 +37,24 @@ export default function AccessingDocument() {
 
 ---
 
-## Reference
+## 参考
 
-### Web-compatible API
+### Web 兼容 API
 
-From [`Document`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement):
+来自 [`Document`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement)：
 
-- Properties
+- 属性
   - [`childElementCount`](https://developer.mozilla.org/en-US/docs/Web/API/Document/childElementCount)
   - [`children`](https://developer.mozilla.org/en-US/docs/Web/API/Document/children)
   - [`documentElement`](https://developer.mozilla.org/en-US/docs/Web/API/Document/documentElement)
   - [`firstElementChild`](https://developer.mozilla.org/en-US/docs/Web/API/Document/firstElementChild)
   - [`lastElementChild`](https://developer.mozilla.org/en-US/docs/Web/API/Document/lastElementChild)
-- Methods
+- 方法
   - [`getElementById()`](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById)
 
-From [`Node`](https://developer.mozilla.org/en-US/docs/Web/API/Node):
+来自 [`Node`](https://developer.mozilla.org/en-US/docs/Web/API/Node)：
 
-- Properties
+- 属性
   - [`childNodes`](https://developer.mozilla.org/en-US/docs/Web/API/Node/childNodes)
   - [`firstChild`](https://developer.mozilla.org/en-US/docs/Web/API/Node/firstChild)
   - [`isConnected`](https://developer.mozilla.org/en-US/docs/Web/API/Node/isConnected)
@@ -68,7 +68,7 @@ From [`Node`](https://developer.mozilla.org/en-US/docs/Web/API/Node):
   - [`parentNode`](https://developer.mozilla.org/en-US/docs/Web/API/Node/parentNode)
   - [`previousSibling`](https://developer.mozilla.org/en-US/docs/Web/API/Node/previousSibling)
   - [`textContent`](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent)
-- Methods
+- 方法
   - [`compareDocumentPosition()`](https://developer.mozilla.org/en-US/docs/Web/API/Node/compareDocumentPosition)
   - [`contains()`](https://developer.mozilla.org/en-US/docs/Web/API/Node/contains)
   - [`getRootNode()`](https://developer.mozilla.org/en-US/docs/Web/API/Node/getRootNode)

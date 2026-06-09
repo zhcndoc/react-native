@@ -1,19 +1,19 @@
 ---
 id: improvingux
-title: 改善用户体验
+title: 提升用户体验
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 ## 配置文本输入
 
-在触屏手机上输入文本是一项挑战——屏幕小、软键盘。但根据你需要什么样的数据，你可以通过正确配置文本输入来使其更容易：
+在触摸手机上输入文本是一项挑战——屏幕小，还有软件键盘。但根据你需要的数据类型，可以通过正确配置文本输入来让它更容易一些：
 
 - 自动聚焦第一个字段
-- 使用占位符文本作为预期数据格式的示例
-- 启用或禁用自动大写和自动纠正
-- 选择键盘类型（例如，email、numeric）
-- 确保返回键聚焦下一个字段或提交表单
+- 使用占位文本作为所需数据格式的示例
+- 启用或禁用自动大写和自动更正
+- 选择键盘类型（例如：电子邮件、数字）
+- 确保回车按钮会聚焦下一个字段或提交表单
 
 查看 [`TextInput` 文档](textinput.md) 了解更多配置选项。
 
@@ -21,7 +21,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 <TabItem value="javascript">
 
 ```SnackPlayer name=TextInput%20form%20example&ext=js
-import React, {useState, useRef} from 'react';
+import {useState, useRef} from 'react';
 import {
   Alert,
   Text,
@@ -38,7 +38,7 @@ const App = () => {
 
   const submit = () => {
     Alert.alert(
-      `Welcome, ${name}! Confirmation email has been sent to ${email}`,
+      `欢迎，${name}！确认邮件已发送至 ${email}`,
     );
   };
 
@@ -47,17 +47,14 @@ const App = () => {
       <StatusBar barStyle="light-content" />
       <View style={styles.header}>
         <Text style={styles.description}>
-          This demo shows how using available TextInput customizations can make
-          forms much easier to use. Try completing the form and notice that
-          different fields have specific optimizations and the return key
-          changes from focusing next input to submitting the form.
+          这个演示展示了如何利用可用的 `TextInput` 自定义配置让表单更易于使用。尝试填写表单，并注意不同字段具有特定优化，以及回车键会从聚焦下一个输入框变为提交表单。
         </Text>
       </View>
       <TextInput
         style={styles.input}
         value={name}
         onChangeText={text => setName(text)}
-        placeholder="Full Name"
+        placeholder="姓名全称"
         autoFocus={true}
         autoCapitalize="words"
         autoCorrect={true}
@@ -115,7 +112,7 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=TextInput%20form%20example&ext=tsx
-import React, {useState, useRef} from 'react';
+import {useState, useRef} from 'react';
 import {
   Alert,
   Text,
@@ -132,7 +129,7 @@ const App = () => {
 
   const submit = () => {
     Alert.alert(
-      `Welcome, ${name}! Confirmation email has been sent to ${email}`,
+      `欢迎，${name}！确认邮件已发送至 ${email}`,
     );
   };
 
@@ -141,17 +138,14 @@ const App = () => {
       <StatusBar barStyle="light-content" />
       <View style={styles.header}>
         <Text style={styles.description}>
-          This demo shows how using available TextInput customizations can make
-          forms much easier to use. Try completing the form and notice that
-          different fields have specific optimizations and the return key
-          changes from focusing next input to submitting the form.
+          这个演示展示了如何利用可用的 `TextInput` 自定义配置让表单更易于使用。尝试填写表单，并注意不同字段具有特定优化，以及回车键会从聚焦下一个输入框变为提交表单。
         </Text>
       </View>
       <TextInput
         style={styles.input}
         value={name}
         onChangeText={text => setName(text)}
-        placeholder="Full Name"
+        placeholder="姓名全称"
         autoFocus={true}
         autoCapitalize="words"
         autoCorrect={true}
@@ -208,15 +202,15 @@ export default App;
 </TabItem>
 </Tabs>
 
-## 管理键盘可见时的布局
+## 键盘可见时管理布局
 
-软键盘几乎占据了屏幕的一半。如果你有可能被键盘覆盖的交互元素，请确保通过使用 [`KeyboardAvoidingView` 组件](keyboardavoidingview.md) 使它们仍然可访问。
+软件键盘会占据屏幕将近一半的空间。如果你有可能被键盘遮住的交互元素，请务必使用 [`KeyboardAvoidingView` 组件](keyboardavoidingview.md) 确保它们仍然可访问。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
 ```SnackPlayer name=KeyboardAvoidingView%20example&ext=js
-import React, {useState, useRef} from 'react';
+import {useState, useRef} from 'react';
 import {
   Alert,
   Text,
@@ -234,7 +228,7 @@ const App = () => {
 
   const submit = () => {
     emailInput.current.blur();
-    Alert.alert(`Confirmation email has been sent to ${email}`);
+    Alert.alert(`确认邮件已发送至 ${email}`);
   };
 
   return (
@@ -242,10 +236,7 @@ const App = () => {
       <StatusBar barStyle="light-content" />
       <View style={styles.header}>
         <Text style={styles.description}>
-          This demo shows how to avoid covering important UI elements with the
-          software keyboard. Focus the email input below and notice that the
-          Sign Up button and the text adjusted positions to make sure they are
-          not hidden under the keyboard.
+          这个演示展示了如何避免重要的界面元素被软件键盘遮挡。聚焦下面的电子邮件输入框，并注意“注册”按钮和文本的位置已调整，以确保它们不会被键盘隐藏。
         </Text>
       </View>
       <KeyboardAvoidingView behavior="padding" style={styles.form}>
@@ -263,8 +254,8 @@ const App = () => {
           blurOnSubmit={true}
         />
         <View>
-          <Button title="Sign Up" onPress={submit} />
-          <Text style={styles.legal}>Some important legal fine print here</Text>
+          <Button title="注册" onPress={submit} />
+          <Text style={styles.legal}>这里有一些重要的法律细则</Text>
         </View>
       </KeyboardAvoidingView>
     </View>
@@ -313,7 +304,7 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=KeyboardAvoidingView%20example&ext=tsx
-import React, {useState, useRef} from 'react';
+import {useState, useRef} from 'react';
 import {
   Alert,
   Text,
@@ -331,7 +322,7 @@ const App = () => {
 
   const submit = () => {
     emailInput.current?.blur();
-    Alert.alert(`Confirmation email has been sent to ${email}`);
+    Alert.alert(`确认邮件已发送至 ${email}`);
   };
 
   return (
@@ -339,10 +330,7 @@ const App = () => {
       <StatusBar barStyle="light-content" />
       <View style={styles.header}>
         <Text style={styles.description}>
-          This demo shows how to avoid covering important UI elements with the
-          software keyboard. Focus the email input below and notice that the
-          Sign Up button and the text adjusted positions to make sure they are
-          not hidden under the keyboard.
+          这个演示展示了如何避免重要的界面元素被软件键盘遮挡。聚焦下面的电子邮件输入框，并注意“注册”按钮和文本的位置已调整，以确保它们不会被键盘隐藏。
         </Text>
       </View>
       <KeyboardAvoidingView behavior="padding" style={styles.form}>
@@ -360,8 +348,8 @@ const App = () => {
           blurOnSubmit={true}
         />
         <View>
-          <Button title="Sign Up" onPress={submit} />
-          <Text style={styles.legal}>Some important legal fine print here</Text>
+          <Button title="注册" onPress={submit} />
+          <Text style={styles.legal}>这里有一些重要的法律细则</Text>
         </View>
       </KeyboardAvoidingView>
     </View>
@@ -409,12 +397,11 @@ export default App;
 </TabItem>
 </Tabs>
 
-## 增大可点击区域
+## 使可点击区域更大
 
-在手机上按下按钮时很难非常精确。确保所有交互元素至少为 44x44 或更大。做到这一点的一种方法是为元素留出足够的空间，`padding`、`minWidth` 和 `minHeight` 样式值对此很有用。或者，你可以使用 [`hitSlop` 属性](touchablewithoutfeedback.md#hitslop) 来增加交互区域而不影响布局。这是一个演示：
+在手机上按按钮时，很难做到非常精确。请确保所有交互元素的尺寸至少为 44x44。实现这一点的一种方法是为元素留出足够空间，`padding`、`minWidth` 和 `minHeight` 这些样式值会很有用。或者，你也可以使用 [`hitSlop` 属性](touchablewithoutfeedback.md#hitslop) 在不影响布局的情况下增大可交互区域。下面是一个示例：
 
 ```SnackPlayer name=HitSlop%20example
-import React from 'react';
 import {
   Text,
   StatusBar,
@@ -429,10 +416,7 @@ const App = () => {
       <StatusBar barStyle="light-content" />
       <View style={styles.header}>
         <Text style={styles.description}>
-          This demo shows how using hitSlop can make interactive elements much
-          easier to tap without changing their layout and size. Try pressing
-          each button quickly multiple times and notice which one is easier to
-          hit.
+          这个示例展示了使用 hitSlop 如何在不改变布局和尺寸的情况下，让交互元素更容易点击。试着快速多次按下每个按钮，看看哪个更容易命中。
         </Text>
       </View>
       <View style={styles.content}>
@@ -488,12 +472,11 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-## 使用 Android 涟漪效果
+## 使用 Android Ripple
 
-Android API 21+ 使用 Material Design 涟漪效果，在用户触摸屏幕上的交互区域时提供反馈。React Native 通过 [`TouchableNativeFeedback` 组件](touchablenativefeedback.md) 暴露了这一功能。使用这种触摸效果而不是透明度或高亮效果，通常会让你的应用在平台上感觉更加合适。也就是说，使用时需要小心，因为它在 iOS 或 Android API < 21 上不起作用，因此你需要在 iOS 上回退使用其他 Touchable 组件之一。你可以使用像 [react-native-platform-touchable](https://github.com/react-community/react-native-platform-touchable) 这样的库来为你处理平台差异。
+Android API 21+ 使用 Material Design 的 ripple（涟漪）效果，在用户触摸屏幕上的可交互区域时提供反馈。React Native 通过 [`TouchableNativeFeedback` 组件](touchablenativefeedback.md) 暴露了这一能力。使用这种触摸效果替代透明度变化或高亮，通常会让你的应用更符合平台风格。不过，使用它时需要小心，因为它在 iOS 上以及 Android API < 21 的设备上都无法工作，因此你需要在 iOS 上回退使用其他 Touchable 组件之一。你可以使用像 [react-native-platform-touchable](https://github.com/react-community/react-native-platform-touchable) 这样的库来帮你处理平台差异。
 
 ```SnackPlayer name=Android%20Ripple%20example&supportedPlatforms=android
-import React from 'react';
 import {
   TouchableNativeFeedback,
   TouchableOpacity,
@@ -585,12 +568,12 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-## 屏幕方向锁定
+## 锁定屏幕方向
 
-默认情况下多种屏幕方向应该能正常工作，除非你使用了 `Dimensions` API 且没有处理方向变化。如果你不想支持多种屏幕方向，可以将屏幕方向锁定为纵向或横向。
+默认情况下，多种屏幕方向都应该可以正常工作，除非你使用了 `Dimensions` API 且没有处理方向变化。如果你不想支持多种屏幕方向，可以将屏幕方向锁定为竖屏或横屏。
 
-在 iOS 上，在 Xcode 的 General 标签页和 Deployment Info 部分启用你想要支持的设备方向（在进行更改时确保你已从 Devices 菜单中选择了 iPhone）。对于 Android，打开 AndroidManifest.xml 文件，并在 activity 元素内添加 `'android:screenOrientation="portrait"'` 以锁定为纵向，或添加 `'android:screenOrientation="landscape"'` 以锁定为横向。
+在 iOS 上，在 Xcode 的 General 选项卡和 Deployment Info 部分启用你想支持的设备方向（进行更改时请确保在 Devices 菜单中选择了 iPhone）。对于 Android，打开 AndroidManifest.xml 文件，并在 activity 元素中添加 `'android:screenOrientation="portrait"'` 来锁定为竖屏，或添加 `'android:screenOrientation="landscape"'` 来锁定为横屏。
 
 # 了解更多
 
-[Material Design](https://material.io/) 和 [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines) 是学习更多关于移动平台设计的绝佳资源。
+[Material Design](https://material.io/) 和 [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines) 是学习如何为移动平台设计的极佳资源。

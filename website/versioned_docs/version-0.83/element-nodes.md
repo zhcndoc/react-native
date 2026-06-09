@@ -3,20 +3,20 @@ id: element-nodes
 title: 元素节点
 ---
 
-元素节点代表原生视图树中的原生组件（类似于 Web 上的 [Element](https://developer.mozilla.org/en-US/docs/Web/API/Element) 节点）。
+元素节点表示原生视图树中的原生组件（类似于 Web 上的 [Element](https://developer.mozilla.org/en-US/docs/Web/API/Element) 节点）。
 
-它们由所有原生组件以及许多内置组件通过 ref 提供：
+它们由所有原生组件以及许多内置组件通过 refs 提供：
 
-```SnackPlayer ext=js&name=元素实例示例
-import * as React from 'react';
-import { View, SafeAreaView, StyleSheet, Text } from 'react-native';
+```SnackPlayer ext=js&name=Element%20instances%20example
+import {useEffect, useRef, useState} from 'react';
+import {View, SafeAreaView, StyleSheet, Text} from 'react-native';
 
 const ViewWithRefs = () => {
-  const ref = React.useRef(null);
-  const [viewInfo, setViewInfo] = React.useState('');
+  const ref = useRef(null);
+  const [viewInfo, setViewInfo] = useState('');
 
-  React.useEffect(() => {
-    // `element` 是一个实现了这里描述接口的对象。
+  useEffect(() => {
+    // `element` 是这里描述的接口的一个对象实现。
     const element = ref.current;
     const rect = JSON.stringify(element.getBoundingClientRect());
     setViewInfo(
@@ -27,7 +27,7 @@ const ViewWithRefs = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View ref={ref} style={styles.content}>
-        <Text>你好，世界！</Text>
+        <Text>Hello world!</Text>
       </View>
       <Text>{viewInfo}</Text>
     </SafeAreaView>
@@ -48,7 +48,7 @@ export default ViewWithRefs;
 ```
 
 :::info
-请注意，一些内置组件仅是其他组件（包括原生组件）的容器。例如，`ScrollView` 内部渲染了一个原生滚动视图和一个原生视图，这些视图可以通过它提供的 ref 使用如 `getNativeScrollRef()` 和 `getInnerViewRef()` 等方法访问。
+请注意，某些内置组件只是其他组件（包括原生组件）的容器。例如，`ScrollView` 内部会渲染一个原生滚动视图和一个原生视图，它们可通过其提供的 ref 使用 `getNativeScrollRef()` 和 `getInnerViewRef()` 等方法访问。
 :::
 
 ---
@@ -66,8 +66,8 @@ export default ViewWithRefs;
   - [`offsetTop`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetTop)
   - [`offsetWidth`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetWidth)
 - 方法
-  - [`blur()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/blur)
-  - [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus)
+  - [`blur()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/blur)。
+  - [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus)。
     - ⚠️ 不支持 `options` 参数。
 
 来自 [`Element`](https://developer.mozilla.org/en-US/docs/Web/API/Element)：
@@ -81,7 +81,7 @@ export default ViewWithRefs;
   - [`clientWidth`](https://developer.mozilla.org/en-US/docs/Web/API/Element/clientWidth)
   - [`firstElementChild`](https://developer.mozilla.org/en-US/docs/Web/API/Element/firstElementChild)
   - [`id`](https://developer.mozilla.org/en-US/docs/Web/API/Element/id)
-    - ℹ️ 返回 `id` 或 `nativeID` 属性的值。
+    - ℹ️ 返回 `id` 或 `nativeID` props 的值。
   - [`lastElementChild`](https://developer.mozilla.org/en-US/docs/Web/API/Element/lastElementChild)
   - [`nextElementSibling`](https://developer.mozilla.org/en-US/docs/Web/API/Element/nextElementSibling)
   - [`nodeName`](https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeName)
@@ -90,12 +90,12 @@ export default ViewWithRefs;
   - [`previousElementSibling`](https://developer.mozilla.org/en-US/docs/Web/API/Element/previousElementSibling)
   - [`scrollHeight`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight)
   - [`scrollLeft`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollLeft)
-    - ⚠️ 对于内置组件，只有 `ScrollView` 实例可以返回非零值。
+    - ⚠️ 对于内置组件，只有 `ScrollView` 实例才可能返回非零值。
   - [`scrollTop`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTop)
-    - ⚠️ 对于内置组件，只有 `ScrollView` 实例可以返回非零值。
+    - ⚠️ 对于内置组件，只有 `ScrollView` 实例才可能返回非零值。
   - [`scrollWidth`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollWidth)
   - [`tagName`](https://developer.mozilla.org/en-US/docs/Web/API/Element/tagName)
-    - ℹ️ 返回带有 `RN:` 前缀的规范化原生组件名称，如 `RN:View`。
+    - ℹ️ 返回带有 `RN:` 前缀的标准化原生组件名称，例如 `RN:View`。
   - [`textContent`](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent)
 - 方法
   - [`getBoundingClientRect()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect)
@@ -115,7 +115,7 @@ export default ViewWithRefs;
   - [`nodeType`](https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType)
   - [`nodeValue`](https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeValue)
   - [`ownerDocument`](https://developer.mozilla.org/en-US/docs/Web/API/Node/ownerDocument)
-    - ℹ️ 将返回该组件渲染所在的 [document node](/docs/next/document-nodes)。
+    - ℹ️ 将返回该组件渲染所在的 [文档节点](/docs/next/document-nodes)。
   - [`parentElement`](https://developer.mozilla.org/en-US/docs/Web/API/Node/parentElement)
   - [`parentNode`](https://developer.mozilla.org/en-US/docs/Web/API/Node/parentNode)
   - [`previousSibling`](https://developer.mozilla.org/en-US/docs/Web/API/Node/previousSibling)
@@ -124,7 +124,7 @@ export default ViewWithRefs;
   - [`compareDocumentPosition()`](https://developer.mozilla.org/en-US/docs/Web/API/Node/compareDocumentPosition)
   - [`contains()`](https://developer.mozilla.org/en-US/docs/Web/API/Node/contains)
   - [`getRootNode()`](https://developer.mozilla.org/en-US/docs/Web/API/Node/getRootNode)
-    - ℹ️ 如果组件未挂载，则返回自身引用。
+    - ℹ️ 如果组件未挂载，则会返回对其自身的引用。
   - [`hasChildNodes()`](https://developer.mozilla.org/en-US/docs/Web/API/Node/hasChildNodes)
 
 ### 旧版 API

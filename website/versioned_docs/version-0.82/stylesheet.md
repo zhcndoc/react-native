@@ -6,7 +6,6 @@ title: StyleSheet
 StyleSheet 是一个类似于 CSS 样式表的抽象。
 
 ```SnackPlayer name=StyleSheet
-import React from 'react';
 import {StyleSheet, Text} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -62,7 +61,6 @@ static compose(style1: Object, style2: Object): Object | Object[];
 合并两种样式，使得 `style2` 将覆盖 `style1` 中的任何样式。如果任一样式为假值，则返回另一个样式而不分配数组，从而节省分配并保持引用相等性以用于 PureComponent 检查。
 
 ```SnackPlayer name=Compose
-import React from 'react';
 import {StyleSheet, Text} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -123,7 +121,6 @@ static flatten(style: Array<Object extends Record<string, ViewStyle | ImageStyle
 将样式对象数组展平为一个聚合的样式对象。
 
 ```SnackPlayer name=Flatten
-import React from 'react';
 import {StyleSheet, Text} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -196,7 +193,6 @@ static setStyleAttributePreprocessor(
 一个非常常见的模式是使用绝对定位和零定位创建覆盖层（`position: 'absolute', left: 0, right: 0, top: 0, bottom: 0`），因此 `absoluteFill` 可用于方便起见并减少这些重复样式的复制。如果你愿意，`absoluteFill` 可用于在 StyleSheet 中创建自定义条目，例如：
 
 ```SnackPlayer name=absoluteFill
-import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -321,7 +317,6 @@ export default App;
 这被定义为平台上细线的宽度。它可以用作边框或两个元素之间分割线的厚度。示例：
 
 ```SnackPlayer name=hairlineWidth
-import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
 const App = () => (

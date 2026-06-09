@@ -46,14 +46,13 @@ PlatformColor('bogusName', 'linkColor');
 ## 示例
 
 ```SnackPlayer name=PlatformColor%20Example&supportedPlatforms=android,ios
-import React from 'react';
 import {Platform, PlatformColor, StyleSheet, Text} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => (
   <SafeAreaProvider>
     <SafeAreaView style={styles.container}>
-      <Text style={styles.label}>I am a special label color!</Text>
+      <Text style={styles.label}>我是一个特殊的标签颜色！</Text>
     </SafeAreaView>
   </SafeAreaProvider>
 );

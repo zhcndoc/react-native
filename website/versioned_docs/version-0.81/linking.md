@@ -5,42 +5,42 @@ title: 链接
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-`Linking` 提供了一个通用接口，用于处理传入和传出的应用链接。
+`Linking` 为你提供了一个通用接口，用于与传入和传出的应用链接进行交互。
 
-每个链接 (URL) 都有一个 URL 方案，有些网站以 `https://` 或 `http://` 为前缀，这里的 `http` 就是 URL 方案。我们简称为 scheme。
+每个链接（URL）都有一个 URL Scheme，一些网站会以前缀 `https://` 或 `http://` 开头，其中 `http` 就是 URL Scheme。我们简称它为 scheme。
 
-除了 `https`，你可能还熟悉 `mailto` 方案。当你打开一个带有 mailto 方案的链接时，操作系统将打开已安装的邮件应用程序。同样，也有用于拨打电话和发送短信的方案。请在下方阅读更多关于 [内置 URL](#built-in-url-schemes) 方案的信息。
+除了 `https` 之外，你可能也熟悉 `mailto` scheme。当你打开一个带有 mailto scheme 的链接时，你的操作系统会打开已安装的邮件应用。同样地，也有用于拨打电话和发送 SMS 的 scheme。更多内容请阅读下面的[内置 URL](#built-in-url-schemes) scheme。
 
-就像使用 mailto 方案一样，也可以使用自定义 URL 方案链接到其他应用程序。例如，当你收到来自 Slack 的 **Magic Link** 电子邮件时，**Launch Slack** 按钮是一个锚标签，其 href 看起来像这样：`slack://secret/magic-login/other-secret`。与 Slack 一样，你可以告诉操作系统你想要处理一个自定义方案。当 Slack 应用打开时，它会收到用于打开它的 URL。这通常被称为深链接。阅读更多关于如何 [获取深链接](#get-the-deep-link) 到你的应用的信息。
+和使用 mailto scheme 类似，也可以通过自定义 url scheme 来链接到其他应用。例如，当你收到来自 Slack 的 **Magic Link** 邮件时，**Launch Slack** 按钮是一个带有 href 的锚点标签，看起来大概像这样：`slack://secret/magic-login/other-secret`。和 Slack 一样，你可以告诉操作系统你想处理某个自定义 scheme。当 Slack 应用打开时，它会接收到用于打开它的 URL。这通常被称为深度链接。更多关于如何将[深度链接](#get-the-deep-link)引入你的应用的信息，请阅读相关内容。
 
-自定义 URL 方案不是在移动设备上打开应用程序的唯一方式。例如，如果你想通过电子邮件发送一个在移动设备上打开的链接，使用自定义 URL 方案并不理想，因为用户可能在桌面上打开电子邮件，那里链接将无法工作。相反，你应该使用标准的 `https` 链接，例如 `https://www.myapp.io/records/1234546`。在移动设备上，这些链接可以配置为打开你的应用。在 Android 上，此功能称为 **深链接**，而在 iOS 上，它被称为 **通用链接**。
+自定义 URL scheme 并不是在移动端打开你的应用的唯一方式。例如，如果你想给某人发送一条链接，让其在移动端打开，使用自定义 URL scheme 并不理想，因为用户可能会在桌面端打开邮件，而在那里这个链接无法工作。相反，你应该使用标准的 `https` 链接，例如 `https://www.myapp.io/records/1234546`。在移动端，这些链接可以配置为打开你的应用。在 Android 上，这个功能叫做 **Deep Links**，而在 iOS 上，它被称为 **Universal Links**。
 
-### 内置 URL Scheme
+### 内置 URL Schemes
 
-如引言中所述，每个平台上都存在一些用于核心功能的 URL 方案。以下是一个非详尽列表，但涵盖了最常用的方案。
+如前言所述，所有平台上都存在一些用于核心功能的 URL scheme。下面的列表并不完整，但涵盖了最常用的 scheme。
 
-| Scheme           | 描述                                | iOS | Android |
-| ---------------- | ------------------------------------------ | --- | ------- |
-| `mailto`         | 打开邮件应用，例如：mailto: hello@world.dev | ✅  | ✅      |
-| `tel`            | 打开电话应用，例如：tel:+123456789         | ✅  | ✅      |
+| Scheme           | 描述                                         | iOS | Android |
+| ---------------- | -------------------------------------------- | --- | ------- |
+| `mailto`         | 打开邮件应用，例如：mailto: hello@world.dev   | ✅  | ✅      |
+| `tel`            | 打开电话应用，例如：tel:+123456789           | ✅  | ✅      |
 | `sms`            | 打开短信应用，例如：sms:+123456789           | ✅  | ✅      |
-| `https` / `http` | 打开 Web 浏览器应用，例如：https://expo.dev | ✅  | ✅      |
+| `https` / `http` | 打开网页浏览器应用，例如： https://expo.dev | ✅  | ✅      |
 
-### 启用深链接
+### 启用深度链接
 
 <div className="banner-native-code-required">
-  <h3>仅包含原生代码的项目</h3>
-  <p>以下部分仅适用于暴露了原生代码的项目。如果你使用的是托管的 Expo 工作流，请参阅 Expo 文档中关于 <a href="https://docs.expo.dev/guides/linking/">链接</a> 的指南以获取适当的替代方案。</p>
+  <h3>仅适用于包含原生代码的项目</h3>
+  <p>以下部分仅适用于已暴露原生代码的项目。如果你使用的是托管式 Expo 工作流，请参阅 Expo 文档中关于 <a href="https://docs.expo.dev/guides/linking/">Linking</a> 的指南，以获取合适的替代方案。</p>
 </div>
 
-如果你想在应用中启用深链接，请阅读以下指南：
+如果你想在应用中启用深度链接，请阅读下面的指南：
 
 <Tabs groupId="syntax" queryString defaultValue={constants.defaultPlatform} values={constants.platforms}>
 <TabItem value="android">
 
-> 有关如何在 Android 上添加深链接支持的说明，请参阅 [为应用内容启用深链接 - 为你的深链接添加 Intent 过滤器](https://developer.android.com/training/app-indexing/deep-linking.html#adding-filters)。
+> 有关如何在 Android 上添加对深度链接支持的说明，请参阅 [为应用内容启用深度链接 - 为你的深度链接添加 Intent Filters](https://developer.android.com/training/app-indexing/deep-linking.html#adding-filters)。
 
-如果你希望在现有的 MainActivity 实例中接收 intent，你可以在 `AndroidManifest.xml` 中将 MainActivity 的 `launchMode` 设置为 `singleTask`。有关更多信息，请参阅 [`<activity>`](https://developer.android.com/guide/topics/manifest/activity-element.html) 文档。
+如果你希望在已有的 MainActivity 实例中接收 intent，可以在 `AndroidManifest.xml` 中将 MainActivity 的 `launchMode` 设置为 `singleTask`。更多信息请参阅 [`<activity>`](https://developer.android.com/guide/topics/manifest/activity-element.html) 文档。
 
 ```xml
 <activity
@@ -51,13 +51,13 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 </TabItem>
 <TabItem value="ios">
 
-> **注意：** 在 iOS 上，你需要按照 [此处](linking-libraries-ios#step-3) 步骤 3 中的描述将 `LinkingIOS` 文件夹添加到你的头文件搜索路径中。如果你还希望在应用执行期间监听传入的应用链接，你需要将以下行添加到你的 `*AppDelegate.m` 中：
+> **注意：** 在 iOS 上，你需要像这里第 3 步所述那样，将 `LinkingIOS` 文件夹添加到 header search paths 中：[这里](linking-libraries-ios#step-3)。如果你还想在应用运行期间监听传入的应用链接，你需要将以下几行添加到你的 `*AppDelegate.m` 中：
 
 <Tabs groupId="ios-language" queryString defaultValue={constants.defaultAppleLanguage} values={constants.appleLanguages}>
 <TabItem value="objc">
 
 ```objc title="AppDelegate.mm"
-// iOS 9.x 或更高版本
+// iOS 9.x or newer
 #import <React/RCTLinkingManager.h>
 
 - (BOOL)application:(UIApplication *)application
@@ -68,7 +68,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 }
 ```
 
-如果你的应用正在使用 [通用链接](https://developer.apple.com/ios/universal-links/)，你还需要添加以下代码：
+如果你的应用使用了 [Universal Links](https://developer.apple.com/ios/universal-links/)，你还需要添加以下代码：
 
 ```objc title="AppDelegate.mm"
 - (BOOL)application:(UIApplication *)application continueUserActivity:(nonnull NSUserActivity *)userActivity
@@ -84,15 +84,15 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 <TabItem value="swift">
 
 ```swift title="AppDelegate.swift"
-override func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
   return RCTLinkingManager.application(app, open: url, options: options)
 }
 ```
 
-如果你的应用正在使用 [通用链接](https://developer.apple.com/ios/universal-links/)，你还需要添加以下代码：
+如果你的应用使用了 [Universal Links](https://developer.apple.com/ios/universal-links/)，你还需要添加以下代码：
 
 ```swift title="AppDelegate.swift"
-override func application(
+func application(
   _ application: UIApplication,
   continue userActivity: NSUserActivity,
   restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
@@ -110,29 +110,29 @@ override func application(
 </TabItem>
 </Tabs>
 
-### 处理深链接
+### 处理深度链接
 
-有两种方法可以处理打开你应用的 URL。
+有两种方式来处理打开你应用的 URL。
 
-#### 1. 如果应用已经打开，应用将被置于前台并触发 Linking 'url' 事件
+#### 1. 如果应用已经打开，应用会被切到前台，并触发 Linking 的 'url' 事件
 
-你可以使用 `Linking.addEventListener('url', callback)` 处理这些事件 - 它会使用链接的 URL 调用 `callback({url})`
+你可以使用 `Linking.addEventListener('url', callback)` 来处理这些事件——它会用链接 URL 调用 `callback({url})`
 
-#### 2. 如果应用尚未打开，它将被打开并且 URL 将作为 initialURL 传入
+#### 2. 如果应用尚未打开，它会被启动，并且 url 会作为 initialURL 传入
 
-你可以使用 `Linking.getInitialURL()` 处理这些事件 - 它返回一个 Promise，如果有的话，该 Promise 会解析为 URL。
+你可以使用 `Linking.getInitialURL()` 来处理这些事件——它会返回一个 Promise，如果存在 URL，则解析为该 URL。
 
 ---
 
 ## 示例
 
-### 打开链接和深链接（通用链接）
+### 打开链接和深度链接（Universal Links）
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
 ```SnackPlayer name=Linking%20Example&supportedPlatforms=ios,android&ext=js
-import React, {useCallback} from 'react';
+import {useCallback} from 'react';
 import {Alert, Button, Linking, StyleSheet, View} from 'react-native';
 
 const supportedURL = 'https://google.com';
@@ -141,15 +141,14 @@ const unsupportedURL = 'slack://open?team=123456';
 
 const OpenURLButton = ({url, children}) => {
   const handlePress = useCallback(async () => {
-    // 检查是否支持具有自定义 URL 方案的链接。
+    // 检查带有自定义 URL scheme 的链接是否受支持。
     const supported = await Linking.canOpenURL(url);
 
     if (supported) {
-      // 用某个应用打开链接，如果 URL 方案是 "http"，网页链接应该被打开
-      // 由手机上的某个浏览器
+      // 使用某个应用打开链接；如果 URL scheme 是 "http"，则应由手机上的某个浏览器打开网页链接
       await Linking.openURL(url);
     } else {
-      Alert.alert(`Don't know how to open this URL: ${url}`);
+      Alert.alert(`不知道如何打开这个 URL: ${url}`);
     }
   }, [url]);
 
@@ -159,8 +158,8 @@ const OpenURLButton = ({url, children}) => {
 const App = () => {
   return (
     <View style={styles.container}>
-      <OpenURLButton url={supportedURL}>Open Supported URL</OpenURLButton>
-      <OpenURLButton url={unsupportedURL}>Open Unsupported URL</OpenURLButton>
+      <OpenURLButton url={supportedURL}>打开受支持的 URL</OpenURLButton>
+      <OpenURLButton url={unsupportedURL}>打开不受支持的 URL</OpenURLButton>
     </View>
   );
 };
@@ -180,7 +179,7 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Linking%20Example&supportedPlatforms=ios,android&ext=tsx
-import React, {useCallback} from 'react';
+import {useCallback} from 'react';
 import {Alert, Button, Linking, StyleSheet, View} from 'react-native';
 
 const supportedURL = 'https://google.com';
@@ -194,15 +193,14 @@ type OpenURLButtonProps = {
 
 const OpenURLButton = ({url, children}: OpenURLButtonProps) => {
   const handlePress = useCallback(async () => {
-    // 检查是否支持具有自定义 URL 方案的链接。
+    // 检查带有自定义 URL scheme 的链接是否受支持。
     const supported = await Linking.canOpenURL(url);
 
     if (supported) {
-      // 用某个应用打开链接，如果 URL 方案是 "http"，网页链接应该被打开
-      // 由手机上的某个浏览器
+      // 使用某个应用打开链接；如果 URL scheme 是 "http"，则应由手机上的某个浏览器打开网页链接
       await Linking.openURL(url);
     } else {
-      Alert.alert(`Don't know how to open this URL: ${url}`);
+      Alert.alert(`不知道如何打开这个 URL: ${url}`);
     }
   }, [url]);
 
@@ -212,8 +210,8 @@ const OpenURLButton = ({url, children}: OpenURLButtonProps) => {
 const App = () => {
   return (
     <View style={styles.container}>
-      <OpenURLButton url={supportedURL}>Open Supported URL</OpenURLButton>
-      <OpenURLButton url={unsupportedURL}>Open Unsupported URL</OpenURLButton>
+      <OpenURLButton url={supportedURL}>打开受支持的 URL</OpenURLButton>
+      <OpenURLButton url={unsupportedURL}>打开不受支持的 URL</OpenURLButton>
     </View>
   );
 };
@@ -238,12 +236,12 @@ export default App;
 <TabItem value="javascript">
 
 ```SnackPlayer name=Linking%20Example&supportedPlatforms=ios,android&ext=js
-import React, {useCallback} from 'react';
+import {useCallback} from 'react';
 import {Button, Linking, StyleSheet, View} from 'react-native';
 
 const OpenSettingsButton = ({children}) => {
   const handlePress = useCallback(async () => {
-    // 如果应用有自定义设置，则打开它
+    // 如果应用有自己的设置页，则打开自定义设置
     await Linking.openSettings();
   }, []);
 
@@ -253,7 +251,7 @@ const OpenSettingsButton = ({children}) => {
 const App = () => {
   return (
     <View style={styles.container}>
-      <OpenSettingsButton>Open Settings</OpenSettingsButton>
+      <OpenSettingsButton>打开设置</OpenSettingsButton>
     </View>
   );
 };
@@ -273,7 +271,7 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Linking%20Example&supportedPlatforms=ios,android&ext=tsx
-import React, {useCallback} from 'react';
+import {useCallback} from 'react';
 import {Button, Linking, StyleSheet, View} from 'react-native';
 
 type OpenSettingsButtonProps = {
@@ -282,7 +280,7 @@ type OpenSettingsButtonProps = {
 
 const OpenSettingsButton = ({children}: OpenSettingsButtonProps) => {
   const handlePress = useCallback(async () => {
-    // 如果应用有自定义设置，则打开它
+    // 如果应用有自己的设置页，则打开自定义设置
     await Linking.openSettings();
   }, []);
 
@@ -292,7 +290,7 @@ const OpenSettingsButton = ({children}: OpenSettingsButtonProps) => {
 const App = () => {
   return (
     <View style={styles.container}>
-      <OpenSettingsButton>Open Settings</OpenSettingsButton>
+      <OpenSettingsButton>打开设置</OpenSettingsButton>
     </View>
   );
 };
@@ -311,13 +309,13 @@ export default App;
 </TabItem>
 </Tabs>
 
-### 获取深链接
+### 获取深度链接
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
 ```SnackPlayer name=Linking%20Example&supportedPlatforms=ios,android&ext=js
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {Linking, StyleSheet, Text, View} from 'react-native';
 
 const useInitialURL = () => {
@@ -326,10 +324,10 @@ const useInitialURL = () => {
 
   useEffect(() => {
     const getUrlAsync = async () => {
-      // 获取用于打开应用的深链接
+      // 获取用于打开应用的深度链接
       const initialUrl = await Linking.getInitialURL();
 
-      // setTimeout 仅用于测试目的
+      // setTimeout 仅用于测试
       setTimeout(() => {
         setUrl(initialUrl);
         setProcessing(false);
@@ -349,8 +347,8 @@ const App = () => {
     <View style={styles.container}>
       <Text>
         {processing
-          ? 'Processing the initial url from a deep link'
-          : `The deep link is: ${initialUrl || 'None'}`}
+          ? '正在处理来自深度链接的初始 url'
+          : `深度链接是：${initialUrl || 'None'}`}
       </Text>
     </View>
   );
@@ -371,7 +369,7 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Linking%20Example&supportedPlatforms=ios,android&ext=tsx
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {Linking, StyleSheet, Text, View} from 'react-native';
 
 const useInitialURL = () => {
@@ -380,10 +378,10 @@ const useInitialURL = () => {
 
   useEffect(() => {
     const getUrlAsync = async () => {
-      // 获取用于打开应用的深链接
+      // 获取用于打开应用的深度链接
       const initialUrl = await Linking.getInitialURL();
 
-      // setTimeout 仅用于测试目的
+      // setTimeout 仅用于测试
       setTimeout(() => {
         setUrl(initialUrl);
         setProcessing(false);
@@ -403,8 +401,8 @@ const App = () => {
     <View style={styles.container}>
       <Text>
         {processing
-          ? 'Processing the initial url from a deep link'
-          : `The deep link is: ${initialUrl || 'None'}`}
+          ? '正在处理来自深度链接的初始 url'
+          : `深度链接是：${initialUrl || 'None'}`}
       </Text>
     </View>
   );
@@ -424,13 +422,13 @@ export default App;
 </TabItem>
 </Tabs>
 
-### 发送 Intents (Android)
+### 发送 Intent（Android）
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
 ```SnackPlayer name=Linking%20Example&supportedPlatforms=android&ext=js
-import React, {useCallback} from 'react';
+import {useCallback} from 'react';
 import {Alert, Button, Linking, StyleSheet, View} from 'react-native';
 
 const SendIntentButton = ({action, extras, children}) => {
@@ -449,7 +447,7 @@ const App = () => {
   return (
     <View style={styles.container}>
       <SendIntentButton action="android.intent.action.POWER_USAGE_SUMMARY">
-        Power Usage Summary
+        电量使用情况摘要
       </SendIntentButton>
       <SendIntentButton
         action="android.settings.APP_NOTIFICATION_SETTINGS"
@@ -459,7 +457,7 @@ const App = () => {
             value: 'com.facebook.katana',
           },
         ]}>
-        App Notification Settings
+        应用通知设置
       </SendIntentButton>
     </View>
   );
@@ -480,7 +478,7 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Linking%20Example&ext=tsx
-import React, {useCallback} from 'react';
+import {useCallback} from 'react';
 import {Alert, Button, Linking, StyleSheet, View} from 'react-native';
 
 type SendIntentButtonProps = {
@@ -512,7 +510,7 @@ const App = () => {
   return (
     <View style={styles.container}>
       <SendIntentButton action="android.intent.action.POWER_USAGE_SUMMARY">
-        Power Usage Summary
+        电量使用情况摘要
       </SendIntentButton>
       <SendIntentButton
         action="android.settings.APP_NOTIFICATION_SETTINGS"
@@ -522,7 +520,7 @@ const App = () => {
             value: 'com.facebook.katana',
           },
         ]}>
-        App Notification Settings
+        应用通知设置
       </SendIntentButton>
     </View>
   );
@@ -542,7 +540,7 @@ export default App;
 </TabItem>
 </Tabs>
 
-# 参考
+# Reference
 
 ## 方法
 
@@ -555,7 +553,7 @@ static addEventListener(
 ): EmitterSubscription;
 ```
 
-通过监听 `url` 事件类型并提供处理程序，来添加一个用于处理 Linking 变化的处理器。
+通过监听 `url` 事件类型并提供 handler，向 Linking 变更添加一个处理函数。
 
 ---
 
@@ -565,29 +563,29 @@ static addEventListener(
 static canOpenURL(url: string): Promise<boolean>;
 ```
 
-确定已安装的应用是否可以处理给定的 URL。
+判断已安装的应用是否可以处理给定的 URL。
 
-该方法返回一个 `Promise` 对象。当确定给定的 URL 是否可以被处理时，promise 会被 resolve，第一个参数表示是否可以打开。
+该方法返回一个 `Promise` 对象。当确定给定 URL 是否可处理后，promise 会被 resolve，且第一个参数表示是否可以打开。
 
-在 Android 上，如果无法检查 URL 是否可以打开，或者当目标为 Android 11 (SDK 30) 但未在 `AndroidManifest.xml` 中指定相关的 intent queries 时，`Promise` 将 reject。类似地，在 iOS 上，如果你没有在 `Info.plist` 内的 `LSApplicationQueriesSchemes` 键中添加特定的 scheme，promise 将 reject（见下文）。
+如果在 Android 上无法检查该 URL 是否可打开，或者在面向 Android 11（SDK 30）时未在 `AndroidManifest.xml` 中指定相关的 intent queries，`Promise` 将会 reject。同样地，在 iOS 上，如果你没有在 `Info.plist` 的 `LSApplicationQueriesSchemes` 键中添加特定 scheme，promise 也会 reject（见下文）。
 
 **参数：**
 
 | 名称                                                     | 类型   | 描述      |
 | -------------------------------------------------------- | ------ | ---------------- |
-| url <div className="label basic required">必需</div> | string | 要打开的 URL。 |
+| url <div className="label basic required">必填</div> | string | 要打开的 URL。 |
 
-> 对于 Web URL，必须相应地设置协议（`"http://"`, `"https://"`）！
+> 对于 web URL，协议（`"http://"`, `"https://"`）必须正确设置！
 
-> 此方法在 iOS 9+ 上有限制。来自 [苹果官方文档](https://developer.apple.com/documentation/uikit/uiapplication/1622952-canopenurl)：
+> 此方法在 iOS 9+ 上有局限性。根据 [Apple 官方文档](https://developer.apple.com/documentation/uikit/uiapplication/1622952-canopenurl)：
 >
-> - 如果你的应用链接的是较早版本的 iOS 但在 iOS 9.0 或更高版本上运行，你最多可以调用此方法 50 次。达到该限制后，后续调用始终 resolve 为 `false`。如果用户重新安装或升级应用，iOS 会重置限制。
+> - 如果你的应用链接到了更早版本的 iOS，但运行在 iOS 9.0 或更高版本上，你最多可以调用此方法 50 次。达到该限制后，后续调用始终会解析为 `false`。如果用户重新安装或升级应用，iOS 会重置该限制。
 >
-> 自 iOS 9 起，你的应用还需要在 `Info.plist` 中提供 `LSApplicationQueriesSchemes` 键，否则 `canOpenURL()` 将始终 resolve 为 `false`。
+> 自 iOS 9 起，你的应用还需要在 `Info.plist` 中提供 `LSApplicationQueriesSchemes` 键，否则 `canOpenURL()` 将始终解析为 `false`。
 
-> 当目标为 Android 11 (SDK 30) 时，你必须在 `AndroidManifest.xml` 中指定想要处理的 scheme 的 intents。常见 intents 列表可以在 [这里](https://developer.android.com/guide/components/intents-common) 找到。
+> 当面向 Android 11（SDK 30）时，你必须在 `AndroidManifest.xml` 中为你想处理的 scheme 指定 intents。常见 intents 列表可在[这里](https://developer.android.com/guide/components/intents-common)找到。
 >
-> 例如，要处理 `https` schemes，需要将以下内容添加到你的 manifest 中：
+> 例如，要处理 `https` scheme，需要将以下内容添加到你的 manifest 中：
 >
 > ```
 > <manifest ...>
@@ -608,11 +606,11 @@ static canOpenURL(url: string): Promise<boolean>;
 static getInitialURL(): Promise<string | null>;
 ```
 
-如果应用启动是由应用链接触发的，它将返回链接 url，否则将返回 `null`。
+如果应用启动是由 app link 触发的，则返回链接 url；否则返回 `null`。
 
-> 要在 Android 上支持深链接，请参考 https://developer.android.com/training/app-indexing/deep-linking.html#handling-intents
+> 要在 Android 上支持深度链接，请参考 https://developer.android.com/training/app-indexing/deep-linking.html#handling-intents
 
-> 当启用 Remote JS Debugging 时，getInitialURL 可能返回 `null`。禁用调试器以确保它能正常传递。
+> 当 Remote JS Debugging 处于活动状态时，`getInitialURL` 可能返回 `null`。请禁用调试器以确保它被传递。
 
 ---
 
@@ -622,7 +620,7 @@ static getInitialURL(): Promise<string | null>;
 static openSettings(): Promise<void>;
 ```
 
-打开设置应用并显示应用的自定义设置（如果有的话）。
+打开设置应用，并显示该应用的自定义设置（如果有）。
 
 ---
 
@@ -632,23 +630,23 @@ static openSettings(): Promise<void>;
 static openURL(url: string): Promise<any>;
 ```
 
-尝试使用任何已安装的应用打开给定的 `url`。
+尝试使用已安装应用中的任意一个打开给定的 `url`。
 
-你可以使用其他 URL，例如位置（例如 Android 上的 "geo:37.484847,-122.148386" 或 iOS 上的 "https://maps.apple.com/?ll=37.484847,-122.148386"）、联系人，或任何可以用已安装应用打开的其他 URL。
+你可以使用其他 URL，例如位置（如 Android 上的 "geo:37.484847,-122.148386" 或 iOS 上的 "https://maps.apple.com/?ll=37.484847,-122.148386"）、联系人，或任何可被已安装应用打开的其他 URL。
 
-该方法返回一个 `Promise` 对象。如果用户确认打开对话框或 url 自动打开，promise 将 resolve。如果用户取消打开对话框或没有为该 url 注册的应用，promise 将 reject。
+该方法返回一个 `Promise` 对象。如果用户确认打开对话框，或者 url 自动打开，promise 会被 resolve。如果用户取消打开对话框，或者没有为该 url 注册任何应用，promise 会被 reject。
 
 **参数：**
 
 | 名称                                                     | 类型   | 描述      |
 | -------------------------------------------------------- | ------ | ---------------- |
-| url <div className="label basic required">必需</div> | string | 要打开的 URL。 |
+| url <div className="label basic required">必填</div> | string | 要打开的 URL。 |
 
-> 如果系统不知道如何打开指定的 URL，此方法将失败。如果你传递的是非 http(s) URL，最好先检查 `canOpenURL()`。
+> 如果系统不知道如何打开指定的 URL，此方法将失败。如果你传入的是非 http(s) URL，最好先检查 `canOpenURL()`。
 
-> 对于 Web URL，必须相应地设置协议（`"http://"`, `"https://"`）！
+> 对于 web URL，协议（`"http://"`, `"https://"`）必须正确设置！
 
-> 此方法在模拟器中的行为可能不同，例如 `"tel:"` 链接无法在 iOS 模拟器中处理，因为无法访问拨号器应用。
+> 该方法在模拟器中的行为可能不同，例如 iOS 模拟器无法处理 `"tel:"` 链接，因为无法访问拨号器应用。
 
 ---
 
@@ -661,11 +659,11 @@ static sendIntent(
 ): Promise<void>;
 ```
 
-启动一个带有 extras 的 Android intent。
+使用 extras 启动一个 Android intent。
 
 **参数：**
 
 | 名称                                                        | 类型                                                       |
 | ----------------------------------------------------------- | ---------------------------------------------------------- |
-| action <div className="label basic required">必需</div> | string                                                     |
+| action <div className="label basic required">必填</div> | string                                                     |
 | extras                                                      | `Array<{key: string, value: string ｜ number ｜ boolean}>` |

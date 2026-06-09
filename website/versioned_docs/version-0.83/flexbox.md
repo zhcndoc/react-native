@@ -1,27 +1,26 @@
 ---
 id: flexbox
-title: 使用 Flexbox 布局
+title: 使用 Flexbox 进行布局
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-组件可以使用 Flexbox 算法来指定其子组件的布局。Flexbox 旨在在不同屏幕尺寸上提供一致的布局。
+组件可以使用 Flexbox 算法来指定其子元素的布局。Flexbox 旨在在不同屏幕尺寸上提供一致的布局。
 
-通常你会组合使用 `flexDirection`、`alignItems` 和 `justifyContent` 来实现合适的布局。
+通常你会结合使用 `flexDirection`、`alignItems` 和 `justifyContent` 来实现正确的布局。
 
 :::caution
-Flexbox 在 React Native 中的工作方式与网页上的 CSS 类似，但有一些例外。
-默认值不同，`flexDirection` 默认是 `column` 而非 `row`，`alignContent` 默认是 `flex-start` 而不是 `stretch`，`flexShrink` 默认是 `0` 而不是 `1`，`flex` 参数只支持单个数字。
+Flexbox 在 React Native 中的工作方式与它在 Web 端 CSS 中的工作方式相同，但有一些例外。
+默认值不同：`flexDirection` 默认是 `column` 而不是 `row`，`alignContent` 默认是 `flex-start` 而不是 `stretch`，`flexShrink` 默认是 `0` 而不是 `1`，`flex` 参数只支持单个数字。
 :::
 
 ## Flex
 
-[`flex`](layout-props#flex) 定义了你的项目将如何沿主轴在可用空间中“填充”。空间会根据每个元素的 flex 属性进行分配。
+[`flex`](layout-props#flex) 将定义你的项目如何沿主轴 **“填充”** 可用空间。空间会根据每个元素的 flex 属性进行分配。
 
-在下面的示例中，红色、橙色和绿色视图都是容器视图的子视图，该容器设置了 `flex: 1`。红色视图使用了 `flex: 1`，橙色视图使用了 `flex: 2`，绿色视图使用了 `flex: 3`。**1+2+3 = 6**，这意味着红色视图会占用空间的 `1/6`，橙色视图占用 `2/6`，绿色视图占用 `3/6`。
+在下面的示例中，红色、橙色和绿色视图都是容器视图的子元素，并且容器设置了 `flex: 1`。红色视图使用 `flex: 1`，橙色视图使用 `flex: 2`，绿色视图使用 `flex: 3`。**1+2+3 = 6**，这意味着红色视图将获得空间的 `1/6`，橙色视图获得 `2/6`，绿色视图获得 `3/6`。
 
 ```SnackPlayer name=Flex%20Example
-import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
 const Flex = () => {
@@ -51,17 +50,17 @@ const styles = StyleSheet.create({
 export default Flex;
 ```
 
-## Flex 方向
+## Flex Direction
 
-[`flexDirection`](layout-props#flexdirection) 控制一个节点的子元素如何排列方向，这也称为主轴。交叉轴是垂直于主轴的轴，也就是换行时排列的方向。
+[`flexDirection`](layout-props#flexdirection) 控制节点子元素的布局方向。这也被称为主轴。交叉轴是与主轴垂直的轴，或者说是换行内容所在的轴。
 
-- `column`（**默认值**）子元素从上到下排列。如果启用换行，下一行会从容器顶部第一个元素的右侧开始。
+- `column` (**默认值**) 将子元素从上到下排列。如果启用了换行，那么下一行将从容器顶部第一个项目的右侧开始。
 
-- `row` 子元素从左到右排列。如果启用换行，下一行会从容器左侧第一个元素的下方开始。
+- `row` 将子元素从左到右排列。如果启用了换行，那么下一行将从容器左侧第一个项目的下方开始。
 
-- `column-reverse` 子元素从下到上排列。如果启用换行，下一行会从容器底部第一个元素的右侧开始。
+- `column-reverse` 将子元素从下到上排列。如果启用了换行，那么下一行将从容器底部第一个项目的右侧开始。
 
-- `row-reverse` 子元素从右到左排列。如果启用换行，下一行会从容器右侧第一个元素的下方开始。
+- `row-reverse` 将子元素从右到左排列。如果启用了换行，那么下一行将从容器右侧第一个项目的下方开始。
 
 你可以在 [这里](https://www.yogalayout.dev/docs/styling/flex-direction) 了解更多。
 
@@ -69,7 +68,7 @@ export default Flex;
 <TabItem value="javascript">
 
 ```SnackPlayer name=Flex%20Direction&ext=js
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 const FlexDirectionBasics = () => {
@@ -168,7 +167,7 @@ export default FlexDirectionBasics;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Flex%20Direction&ext=tsx
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import type {PropsWithChildren} from 'react';
 
@@ -276,17 +275,17 @@ export default FlexDirectionBasics;
 
 ## 布局方向
 
-布局的 [`direction`](layout-props#direction) 指定了子项和文本在层次中的排列方向。布局方向还会影响 `start` 和 `end` 指的边缘。默认情况下，React Native 使用 LTR（从左到右）的布局方向。在此模式下，`start` 指左边，`end` 指右边。
+布局 [`direction`](layout-props#direction) 指定层次结构中的子元素和文本应如何布局。布局方向还会影响 `start` 和 `end` 所指的边。默认情况下，React Native 使用 LTR 布局方向。在此模式下，`start` 指左边，`end` 指右边。
 
-- `LTR`（**默认值**）文本和子项从左到右排列。对元素的 start 侧应用的 margin 和 padding 会被应用到左边。
+- `LTR` (**默认值**) 文本和子元素从左到右布局。应用于元素起始位置的 margin 和 padding 会作用在左侧。
 
-- `RTL` 文本和子项从右到左排列。对元素的 start 侧应用的 margin 和 padding 会被应用到右边。
+- `RTL` 文本和子元素从右到左布局。应用于元素起始位置的 margin 和 padding 会作用在右侧。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
 ```SnackPlayer name=Flex%20Direction&ext=js
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 
 const DirectionLayout = () => {
@@ -385,7 +384,7 @@ export default DirectionLayout;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Flex%20Direction&ext=tsx
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 import type {PropsWithChildren} from 'react';
 
@@ -491,29 +490,29 @@ export default DirectionLayout;
 </TabItem>
 </Tabs>
 
-## 内容对齐
+## 主轴对齐
 
-[`justifyContent`](layout-props#justifycontent) 描述如何在容器的主轴上对齐子元素。例如，你可以用此属性在 `flexDirection` 设置为 `row` 的容器中水平居中子元素，或者在 `flexDirection` 设置为 `column` 的容器中垂直居中子元素。
+[`justifyContent`](layout-props#justifycontent) 描述了如何在容器的主轴上对齐子元素。例如，当 `flexDirection` 设置为 `row` 时，你可以使用此属性让子元素在容器中水平居中；当 `flexDirection` 设置为 `column` 时，可以让子元素在容器中垂直居中。
 
-- `flex-start`（**默认值**）将子元素对齐到容器主轴的起点。
+- `flex-start`（**默认值**）将容器的子元素对齐到容器主轴的起点。
 
-- `flex-end` 将子元素对齐到容器主轴的终点。
+- `flex-end` 将容器的子元素对齐到容器主轴的终点。
 
-- `center` 将子元素对齐到容器主轴的中心。
+- `center` 将容器的子元素对齐到容器主轴的中心。
 
-- `space-between` 在容器主轴上均匀分布子元素，剩余空间平均分配到子元素间。
+- `space-between` 在容器主轴上均匀分布子元素，在子元素之间分配剩余空间。
 
-- `space-around` 在容器主轴上均匀分布子元素，剩余空间平均分配到子元素周围。相比于 `space-between`，`space-around` 会使首个子元素开始处和最后一个子元素末尾处也有空间。
+- `space-around` 在容器主轴上均匀分布子元素，在子元素周围分配剩余空间。与 `space-between` 相比，使用 `space-around` 会在第一个子元素的起始位置和最后一个子元素的末尾位置分配空间。
 
-- `space-evenly` 在主轴上均匀分布子元素，且相邻子元素间、首端与第一个子元素之间、末端与最后一个子元素之间的空间全部相等。
+- `space-evenly` 沿主轴在对齐容器内均匀分布子元素。每一对相邻项目之间、主轴起始边缘与第一个项目之间，以及主轴结束边缘与最后一个项目之间的间距都完全相同。
 
-你可以在 [这里](https://www.yogalayout.dev/docs/styling/justify-content) 了解更多。
+你可以在[这里](https://www.yogalayout.dev/docs/styling/justify-content)了解更多。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
 ```SnackPlayer name=Justify%20Content&ext=js
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 
 const JustifyContentBasics = () => {
@@ -619,7 +618,7 @@ export default JustifyContentBasics;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Justify%20Content&ext=tsx
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 import type {PropsWithChildren} from 'react';
 
@@ -732,31 +731,31 @@ export default JustifyContentBasics;
 </TabItem>
 </Tabs>
 
-## 项目对齐
+## 交叉轴对齐
 
-[`alignItems`](layout-props#alignitems) 描述了如何在容器的交叉轴上对齐子元素。它与 `justifyContent` 类似，但作用于交叉轴，而非主轴。
+[`alignItems`](layout-props#alignitems) 描述了如何沿着容器的交叉轴对齐子元素。它与 `justifyContent` 非常相似，但 `justifyContent` 作用于主轴，而 `alignItems` 作用于交叉轴。
 
-- `stretch`（**默认值**）拉伸容器内的子元素以匹配容器交叉轴的高度。
+- `stretch`（**默认值**）拉伸容器的子元素，使其与容器交叉轴的 `height` 匹配。
 
-- `flex-start` 将容器内的子元素对齐到交叉轴的起点。
+- `flex-start` 将容器的子元素对齐到容器交叉轴的起点。
 
-- `flex-end` 将容器内的子元素对齐到交叉轴的终点。
+- `flex-end` 将容器的子元素对齐到容器交叉轴的终点。
 
-- `center` 将容器内的子元素对齐到交叉轴的中心。
+- `center` 将容器的子元素对齐到容器交叉轴的中心。
 
-- `baseline` 让容器内的子元素沿着共同的基线对齐。单独的子元素可以设置为父级的参考基线。
+- `baseline` 沿着共同的基线对齐容器的子元素。单个子元素可以被设置为其父元素的参考基线。
 
 :::info
-`stretch` 需要子元素在次轴上没有固定的尺寸才会生效。在下面的示例中，设置 `alignItems: stretch` 不起作用，直到去掉子元素的 `width: 50`。
+要让 `stretch` 生效，子元素在次轴上不能有固定尺寸。在下面的示例中，在子元素上移除 `width: 50` 之前，设置 `alignItems: stretch` 不会产生任何效果。
 :::
 
-你可以在 [这里](https://www.yogalayout.dev/docs/styling/align-items-self) 学习更多。
+你可以在[这里](https://www.yogalayout.dev/docs/styling/align-items-self)了解更多。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
 ```SnackPlayer name=Align%20Items&ext=js
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 
 const AlignItemsLayout = () => {
@@ -865,7 +864,7 @@ export default AlignItemsLayout;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Align%20Items&ext=tsx
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 import type {PropsWithChildren} from 'react';
 
@@ -981,15 +980,15 @@ export default AlignItemsLayout;
 </TabItem>
 </Tabs>
 
-## alignSelf
+## 自身对齐
 
-[`alignSelf`](layout-props#alignself) 和 `alignItems` 具有相同的选项和效果，但它不影响容器内所有子元素，而是用于单个子元素，改变其在父容器中的排列。`alignSelf` 会覆盖父容器通过 `alignItems` 设置的选项。
+[`alignSelf`](layout-props#alignself) 与 `alignItems` 具有相同的选项和效果，但不同的是，它不是影响容器内的子元素，而是可以将此属性应用于单个子元素，以改变它在其父元素中的对齐方式。`alignSelf` 会覆盖父元素通过 `alignItems` 设置的任何选项。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
 ```SnackPlayer name=Align%20Self&ext=js
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 
 const AlignSelfLayout = () => {
@@ -1099,7 +1098,7 @@ export default AlignSelfLayout;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Align%20Self&ext=tsx
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 import type {PropsWithChildren} from 'react';
 import type {FlexAlignType} from 'react-native';
@@ -1217,31 +1216,31 @@ export default AlignSelfLayout;
 </TabItem>
 </Tabs>
 
-## alignContent
+## 对齐内容
 
-[`alignContent`](layout-props#aligncontent) 定义了多行内容沿交叉轴的分布。当使用 `flexWrap` 使项目换行到多行时，此属性才生效。
+[alignContent](layout-props#aligncontent) 定义了沿着交叉轴的行分布方式。仅当项目使用 `flexWrap` 换行到多行时才会生效。
 
-- `flex-start`（**默认值**）将换行行对齐至容器交叉轴的起点。
+- `flex-start` (**默认值**) 将换行后的各行对齐到容器交叉轴的起始位置。
 
-- `flex-end` 将换行行对齐至容器交叉轴的终点。
+- `flex-end` 将换行后的各行对齐到容器交叉轴的末尾位置。
 
-- `stretch`（_web 版本 Yoga 的默认值_）拉伸换行行以匹配容器交叉轴的高度。
+- `stretch` (_在 web 上使用 Yoga 时的默认值_) 使换行后的各行拉伸，以匹配容器交叉轴的高度。
 
-- `center` 将换行行对齐至容器交叉轴的中心。
+- `center` 将换行后的各行居中对齐到容器交叉轴。
 
-- `space-between` 在容器交叉轴上均匀分布换行行，剩余空间平均分配至行之间。
+- `space-between` 将换行后的各行沿容器交叉轴均匀分布，并在各行之间分配剩余空间。
 
-- `space-around` 在容器交叉轴上均匀分布换行行，剩余空间平均分配至行周围。容器两端的空间是行间空间的一半。
+- `space-around` 将换行后的各行沿容器交叉轴均匀分布，并在各行周围分配剩余空间。容器两端的空间大小是项目之间空间的一半。
 
-- `space-evenly` 在容器交叉轴上均匀分布换行行，所有空隙大小相等。
+- `space-evenly` 将换行后的各行沿容器交叉轴均匀分布，并在各行周围分配剩余空间。每个间隔大小相同。
 
-你可以在 [这里](https://www.yogalayout.dev/docs/styling/align-content) 了解更多。
+你可以在[这里](https://www.yogalayout.dev/docs/styling/align-content)了解更多。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
 ```SnackPlayer name=Align%20Content&ext=js
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 
 const AlignContentLayout = () => {
@@ -1353,7 +1352,7 @@ export default AlignContentLayout;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Align%20Content&ext=tsx
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 import type {PropsWithChildren} from 'react';
 
@@ -1472,17 +1471,17 @@ export default AlignContentLayout;
 </TabItem>
 </Tabs>
 
-## Flex 换行
+## Flex Wrap
 
-[`flexWrap`](layout-props#flexwrap) 属性设置在容器上，控制当子元素在主轴方向上溢出容器大小时的行为。默认情况下，子元素被强制放入一行（可能导致元素缩小）。如果允许换行，则项目会在需要时沿主轴换行成多行。
+[`flexWrap`](layout-props#flexwrap) 属性设置在容器上，用于控制子元素在主轴方向上超出容器尺寸时会发生什么。默认情况下，子元素会被强制放在单行中（这可能会使元素收缩）。如果允许换行，则项目会在需要时沿主轴换成多行。
 
-当换行时，可以使用 `alignContent` 指定行在容器中的摆放方式。了解更多 [这里](https://www.yogalayout.dev/docs/styling/flex-wrap)。
+当进行换行时，可以使用 `alignContent` 来指定各行在容器中的排列方式。了解更多 [这里](https://www.yogalayout.dev/docs/styling/flex-wrap)。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
 ```SnackPlayer name=Flex%20Wrap&ext=js
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 
 const FlexWrapLayout = () => {
@@ -1585,7 +1584,7 @@ export default FlexWrapLayout;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Flex%20Wrap&ext=tsx
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 import type {PropsWithChildren} from 'react';
 
@@ -1695,17 +1694,17 @@ export default FlexWrapLayout;
 </TabItem>
 </Tabs>
 
-## Flex 基础、增长和缩小
+## Flex Basis、Grow 和 Shrink
 
-- [`flexBasis`](layout-props#flexbasis) 是一个轴独立的属性，用来设定项目沿主轴的默认尺寸。给子元素设置 `flexBasis` 类似于在父容器的 `flexDirection: row` 情况下设置宽度，或者在 `flexDirection: column` 情况下设置高度。`flexBasis` 决定了该元素在进行任何 `flexGrow` 和 `flexShrink` 计算前的初始尺寸。
+- [`flexBasis`](layout-props#flexbasis) 是一种与轴无关的方式，用于提供项目在主轴上的默认尺寸。为子元素设置 `flexBasis`，类似于当其父元素是 `flexDirection: row` 的容器时设置该子元素的 `width`，或者当其父元素是 `flexDirection: column` 的容器时设置该子元素的 `height`。项目的 `flexBasis` 是该项目的默认尺寸，即在执行任何 `flexGrow` 和 `flexShrink` 计算之前的尺寸。
 
-- [`flexGrow`](layout-props#flexgrow) 描述容器内剩余空间应如何沿主轴分配给其子元素。布局完子元素后，容器会根据子元素的 `flexGrow` 值对剩余空间进行分配。
+- [`flexGrow`](layout-props#flexgrow) 描述了容器内的空间应如何沿主轴分配给其子元素。在布局完成子元素后，容器会根据子元素指定的 `flexGrow` 值分配任何剩余空间。
 
-  `flexGrow` 取任何大于等于 0 的浮点数，默认是 0。容器会根据子元素的 `flexGrow` 权重分配剩余空间。
+  `flexGrow` 接受任何大于等于 0 的浮点值，默认值为 0。容器会按照子元素的 `flexGrow` 值加权分配任何剩余空间。
 
-- [`flexShrink`](layout-props#flexshrink) 描述在子元素总尺寸超出容器主轴尺寸时，子元素应如何缩小。`flexShrink` 与 `flexGrow` 类似，当考虑溢出尺寸为负的剩余空间时，它代表了缩小的比例。这两个属性配合使用，实现元素的适当增长和缩小。
+- [`flexShrink`](layout-props#flexshrink) 描述了在子元素总尺寸沿主轴超过容器尺寸时，如何沿主轴压缩子元素。`flexShrink` 与 `flexGrow` 非常相似，如果将任何溢出的尺寸视为负的剩余空间，也可以用同样的方式来理解它。这两个属性也能很好地协同工作，使子元素能够按需要增长和收缩。
 
-  `flexShrink` 取任何大于等于 0 的浮点数，默认是 0（网页上默认是 1）。容器会根据子元素的 `flexShrink` 权重缩小子元素。
+  `flexShrink` 接受任何大于等于 0 的浮点值，默认值为 0（在 web 上，默认值为 1）。容器会按照子元素的 `flexShrink` 值加权压缩其子元素。
 
 你可以在 [这里](https://www.yogalayout.dev/docs/styling/flex-basis-grow-shrink) 了解更多。
 
@@ -1713,7 +1712,7 @@ export default FlexWrapLayout;
 <TabItem value="javascript">
 
 ```SnackPlayer name=Flex%20Basis%2C%20Grow%2C%20and%20Shrink&ext=js
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {View, Text, TextInput, StyleSheet} from 'react-native';
 
 const App = () => {
@@ -1887,7 +1886,7 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Flex%20Basis%2C%20Grow%2C%20and%20Shrink&ext=tsx
-import React, {useState} from 'react';
+import {useState, type Dispatch, type SetStateAction} from 'react';
 import {View, Text, TextInput, StyleSheet} from 'react-native';
 import type {ViewStyle} from 'react-native';
 
@@ -1962,7 +1961,7 @@ const App = () => {
 
 type BoxInfoProps = ViewStyle & {
   color: string;
-  setStyle: React.Dispatch<React.SetStateAction<ViewStyle>>;
+  setStyle: Dispatch<SetStateAction<ViewStyle>>;
 };
 
 const BoxInfo = ({
@@ -2074,19 +2073,19 @@ export default App;
 
 ## 行间距、列间距和间距
 
-- [`rowGap`](layout-props#rowgap) 设置元素行之间的间隙（沟槽）大小。
+- [`rowGap`](layout-props#rowgap) 设置元素各行之间的间隙（gutter）大小。
 
-- [`columnGap`](layout-props#columngap) 设置元素列之间的间隙（沟槽）大小。
+- [`columnGap`](layout-props#columngap) 设置元素各列之间的间隙（gutter）大小。
 
-- [`gap`](layout-props#gap) 同时设置行和列之间的间隙大小，相当于 `rowGap` 和 `columnGap` 的简写。
+- [`gap`](layout-props#gap) 设置行与列之间的间隙（gutter）大小。它是 `rowGap` 和 `columnGap` 的简写。
 
-你可以结合使用 `flexWrap` 和 `alignContent` 以及 `gap`，实现项目间的均匀间距。
+你可以将 `flexWrap` 和 `alignContent` 与 `gap` 一起使用，在项目之间添加一致的间距。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
 ```SnackPlayer name=Row%20Gap%20and%20Column%20Gap&ext=js
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
 
 const RowGapAndColumnGap = () => {
@@ -2188,7 +2187,7 @@ export default RowGapAndColumnGap;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Row%20Gap%20and%20Column%20Gap&ext=tsx
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
 import type {PropsWithChildren} from 'react';
 
@@ -2299,21 +2298,21 @@ export default RowGapAndColumnGap;
 
 ## 宽度和高度
 
-`width` 属性指定元素内容区的宽度。同样，`height` 属性指定元素内容区的高度。
+`width` 属性指定元素内容区域的宽度。类似地，`height` 属性指定元素内容区域的高度。
 
-`width` 和 `height` 可以采用以下值：
+`width` 和 `height` 都可以取以下值：
 
-- `auto`（**默认值**）React Native 根据内容（子元素、文本或图片）计算元素的宽度/高度。
+- `auto`（**默认值**）React Native 会根据元素的内容计算其宽度/高度，无论内容是其他子元素、文本还是图像。
 
-- `pixels` 以绝对像素值定义宽度/高度。根据组件的其他样式设置，这可能是节点的最终尺寸，也可能不是。
+- `pixels` 以绝对像素定义宽度/高度。根据组件上设置的其他样式，这可能是也可能不是节点的最终尺寸。
 
-- `percentage` 以其父元素宽度或高度的百分比定义宽度/高度。
+- `percentage` 以父元素宽度或高度的百分比来定义宽度或高度。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
 ```SnackPlayer name=Width%20and%20Height&ext=js
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -2439,7 +2438,7 @@ export default WidthHeightBasics;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Width%20and%20Height&ext=tsx
-import React, {useState, PropsWithChildren} from 'react';
+import {useState, PropsWithChildren} from 'react';
 import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -2575,21 +2574,21 @@ export default WidthHeightBasics;
 </TabItem>
 </Tabs>
 
-## 定位
+## 位置
 
-元素的 `position` 类型定义了它如何相对于自身、父元素或 [包含块](./flexbox.md#the-containing-block) 定位。
+元素的 `position` 类型定义了它相对于自身、其父元素，或其 [包含块](./flexbox.md#the-containing-block) 的定位方式。
 
-- `relative`（**默认值**）默认情况下，元素采用相对定位。意味着元素按照正常布局流排列，然后根据 `top`、`right`、`bottom` 和 `left` 值进行偏移。此偏移不会影响任何兄弟或父元素的位置。
+- `relative`（**默认值**）默认情况下，元素采用相对定位。这意味着元素会先按照布局的正常流进行定位，然后再根据 `top`、`right`、`bottom` 和 `left` 的值相对于该位置进行偏移。这个偏移不会影响任何兄弟元素或父元素的位置。
 
-- `absolute` 采用绝对定位时，元素不参与正常布局流。而是独立于兄弟元素进行布局。位置由 `top`、`right`、`bottom` 和 `left` 决定，这些值相对于包含块定位。
+- `absolute` 绝对定位时，元素不会参与正常的布局流。它会独立于其兄弟元素进行布局。其位置由 `top`、`right`、`bottom` 和 `left` 的值决定。这些值会将元素相对于其包含块进行定位。
 
-- `static` 采用静态定位时，元素按照正常布局流排列，忽略 `top`、`right`、`bottom` 和 `left`。此 `position` 也会导致元素不形成绝对定位子元素的包含块，除非存在某些其他样式（如 `transform`）。这允许绝对定位元素可以超越其父元素定位。注意，**`static` 仅在新架构下可用**。
+- `static` 静态定位时，元素会按照布局的正常流进行定位，并会忽略 `top`、`right`、`bottom` 和 `left` 的值。这个 `position` 还会导致该元素不会为绝对定位的后代形成包含块，除非存在某些其他优先级更高的样式属性（例如 `transform`）。这使得 `absolute` 元素可以相对于不是其父元素的对象进行定位。请注意，**`static` 仅在新架构中可用**。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
 ```SnackPlayer name=Position&ext=js
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 
 const PositionLayout = () => {
@@ -2719,7 +2718,7 @@ export default PositionLayout;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Position&ext=tsx
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 import type {PropsWithChildren} from 'react';
 
@@ -2860,24 +2859,23 @@ export default PositionLayout;
 
 ## 包含块
 
-元素的包含块是控制其位置和大小的祖先元素。
-React Native 中包含块的工作方式与 [网页上的类似](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block)，但由于缺少某些网页功能，有所简化。
+元素的包含块是一个祖先元素，它会控制该元素的位置和大小。React Native 中包含块的工作方式与 [Web 上的工作方式](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block) 非常相似，但由于缺少某些 Web 特性而做了一些简化。
 
-绝对定位元素的 `top`、`right`、`bottom` 和 `left` 值相对于其包含块。
+绝对定位元素的 `top`、`right`、`bottom` 和 `left` 值将相对于其包含块。
 
-百分比长度（例如：`width: '50%'` 或 `padding: '10%'`）应用于绝对定位元素时，将相对于包含块的尺寸计算。例如，如果包含块宽 100 点，则绝对定位元素的 `width: 50%` 会使其宽度为 50 点。
+应用于绝对定位元素的百分比长度（例如：`width: '50%'` 或 `padding: '10%'`）将根据其包含块的大小按比例计算。例如，如果包含块宽度为 100 点，那么绝对定位元素上的 `width: 50%` 将使其宽度变为 50 点。
 
-以下列表帮助你判断任一元素的包含块：
+下面的列表将帮助你确定任意元素的包含块：
 
-- 若元素的 `position` 类型是 `relative` 或 `static`，那么其包含块是其父元素。
-- 若元素的 `position` 类型是 `absolute`，那么其包含块是最近的满足以下条件的祖先元素：
-  - 其 `position` 类型非 `static`
-  - 或者拥有 `transform`
+- 如果该元素的 `position` 类型是 `relative` 或 `static`，那么它的包含块就是其父元素。
+- 如果该元素的 `position` 类型是 `absolute`，那么它的包含块就是最近的满足以下任一条件的祖先元素：
+  - 它的 `position` 类型不是 `static`
+  - 它具有 `transform`
 
-## 深入学习
+## 深入了解
 
-查看交互式的 [yoga playground](https://www.yogalayout.dev/playground)，帮助你更好地理解 flexbox。
+查看可交互的 [yoga playground](https://www.yogalayout.dev/playground)，你可以通过它更好地理解 flexbox。
 
-我们已经覆盖了基础内容，但还有很多其他样式可用于布局。控制布局的完整属性列表，请参阅 [这里](./layout-props.md)。
+我们已经介绍了基础知识，但布局中你可能还需要许多其他样式。控制布局的完整属性列表记录在 [这里](./layout-props.md)。
 
-另外，你也可以看看 [Wix 工程师](https://medium.com/wix-engineering/the-full-react-native-layout-cheat-sheet-a4147802405c) 的一些示例。
+此外，你还可以查看来自 [Wix Engineers](https://medium.com/wix-engineering/the-full-react-native-layout-cheat-sheet-a4147802405c) 的一些示例。

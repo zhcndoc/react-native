@@ -1,16 +1,15 @@
 ---
 id: height-and-width
-title: Height and Width
+title: 高度和宽度
 ---
 
-A component's height and width determine its size on the screen.
+组件的高度和宽度决定了它在屏幕上的尺寸。
 
-## Fixed Dimensions
+## 固定尺寸
 
-The general way to set the dimensions of a component is by adding a fixed `width` and `height` to style. All dimensions in React Native are unitless, and represent density-independent pixels.
+设置组件尺寸的常见方式是在样式中添加固定的 `width` 和 `height`。React Native 中的所有尺寸都不带单位，表示与密度无关的像素。
 
 ```SnackPlayer name=Height%20and%20Width
-import React from 'react';
 import {View} from 'react-native';
 
 const FixedDimensionsBasics = () => {
@@ -44,29 +43,28 @@ const FixedDimensionsBasics = () => {
 export default FixedDimensionsBasics;
 ```
 
-Setting dimensions this way is common for components whose size should always be fixed to a number of points and not calculated based on screen size.
+这种方式很适合那些尺寸应始终固定为某个点数、而不是根据屏幕大小计算的组件。
 
 :::caution
-There is no universal mapping from points to physical units of measurement. This means that a component with fixed dimensions might not have the same physical size, across different devices and screen sizes. However, this difference is unnoticeable for most use cases.
+点与物理测量单位之间没有通用的映射关系。这意味着，具有固定尺寸的组件在不同设备和屏幕尺寸上，物理大小可能并不相同。不过，对于大多数使用场景来说，这种差异是难以察觉的。
 :::
 
-## Flex Dimensions
+## 弹性尺寸
 
-Use `flex` in a component's style to have the component expand and shrink dynamically based on available space. Normally you will use `flex: 1`, which tells a component to fill all available space, shared evenly amongst other components with the same parent. The larger the `flex` given, the higher the ratio of space a component will take compared to its siblings.
+在组件样式中使用 `flex` 可以让组件根据可用空间动态扩展和收缩。通常会使用 `flex: 1`，它表示组件填充所有可用空间，并与同级中其他具有相同父组件的组件平均分配。`flex` 值越大，组件相对于其兄弟组件所占的空间比例就越高。
 
 :::info
-A component can only expand to fill available space if its parent has dimensions greater than `0`. If a parent does not have either a fixed `width` and `height` or `flex`, the parent will have dimensions of `0` and the `flex` children will not be visible.
+只有当父组件的尺寸大于 `0` 时，组件才能扩展以填充可用空间。如果父组件没有固定的 `width` 和 `height`，也没有 `flex`，那么父组件的尺寸将为 `0`，而 `flex` 子组件将不可见。
 :::
 
 ```SnackPlayer name=Flex%20Dimensions
-import React from 'react';
 import {View} from 'react-native';
 
 const FlexDimensionsBasics = () => {
   return (
-    // Try removing the `flex: 1` on the parent View.
-    // The parent will not have dimensions, so the children can't expand.
-    // What if you add `height: 300` instead of `flex: 1`?
+    // 尝试移除父级 `View` 上的 `flex: 1`。
+    // 父级将没有尺寸，因此子组件无法扩展。
+    // 如果改为添加 `height: 300` 而不是 `flex: 1` 会怎样？
     <View style={{flex: 1}}>
       <View style={{flex: 1, backgroundColor: 'powderblue'}} />
       <View style={{flex: 2, backgroundColor: 'skyblue'}} />
@@ -78,19 +76,18 @@ const FlexDimensionsBasics = () => {
 export default FlexDimensionsBasics;
 ```
 
-After you can control a component's size, the next step is to [learn how to lay it out on the screen](flexbox.md).
+在你能够控制组件尺寸之后，下一步就是[学习如何在屏幕上进行布局](flexbox.md)。
 
-## Percentage Dimensions
+## 百分比尺寸
 
-If you want to fill a certain portion of the screen, but you _don't_ want to use the `flex` layout, you _can_ use **percentage values** in the component's style. Similar to flex dimensions, percentage dimensions require parent with a defined size.
+如果你想填充屏幕的某一部分，但又_不想_使用 `flex` 布局，那么你_可以_在组件样式中使用**百分比值**。与弹性尺寸类似，百分比尺寸也要求父组件具有已定义的尺寸。
 
 ```SnackPlayer name=Percentage%20Dimensions
-import React from 'react';
 import {View} from 'react-native';
 
 const PercentageDimensionsBasics = () => {
-  // Try removing the `height: '100%'` on the parent View.
-  // The parent will not have dimensions, so the children can't expand.
+  // 尝试移除父级 `View` 上的 `height: '100%'`。
+  // 父级将没有尺寸，因此子组件无法扩展。
   return (
     <View style={{height: '100%'}}>
       <View

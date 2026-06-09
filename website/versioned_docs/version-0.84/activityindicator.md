@@ -7,8 +7,7 @@ title: ActivityIndicator
 
 ## 示例
 
-```SnackPlayer name=ActivityIndicator%20 示例
-import React from 'react';
+```SnackPlayer name=ActivityIndicator%20Example
 import {ActivityIndicator, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 

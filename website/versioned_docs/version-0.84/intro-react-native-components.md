@@ -43,7 +43,6 @@ React Native 拥有许多核心组件，从控件到活动指示器应有尽有�
 在下一节中，你将开始组合这些核心组件来学习 React 的工作方式。现在就来试试吧！
 
 ```SnackPlayer name=Hello%20World
-import React from 'react';
 import {View, Text, Image, ScrollView, TextInput} from 'react-native';
 
 const App = () => {

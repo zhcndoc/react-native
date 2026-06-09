@@ -12,7 +12,7 @@ title: 处理触摸
 ```tsx
 <Button
   onPress={() => {
-    console.log('You tapped the button!');
+    console.log('你点击了按钮！');
   }}
   title="Press Me"
 />
@@ -25,12 +25,11 @@ title: 处理触摸
 继续使用下面的示例玩转 `Button` 组件。你可以通过点击右下角的切换按钮来选择你的应用预览平台，然后点击 "点击播放" 来预览应用。
 
 ```SnackPlayer name=Button%20Basics
-import React from 'react';
 import {Alert, Button, StyleSheet, View} from 'react-native';
 
 const ButtonBasics = () => {
   const onPress = () => {
-    Alert.alert('You tapped the button!');
+    Alert.alert('你点击了按钮！');
   };
 
   return (
@@ -86,7 +85,6 @@ export default ButtonBasics;
 让我们看看所有这些的实际效果：
 
 ```SnackPlayer name=Touchables
-import React from 'react';
 import {
   Alert,
   Platform,
@@ -101,11 +99,11 @@ import {
 
 const Touchables = () => {
   const onPressButton = () => {
-    Alert.alert('You tapped the button!');
+    Alert.alert('你点击了按钮！');
   };
 
   const onLongPressButton = () => {
-    Alert.alert('You long-pressed the button!');
+    Alert.alert('你长按了按钮！');
   };
 
   return (
@@ -130,7 +128,7 @@ const Touchables = () => {
         <View style={styles.button}>
           <Text style={styles.buttonText}>
             TouchableNativeFeedback{' '}
-            {Platform.OS !== 'android' ? '(Android only)' : ''}
+            {Platform.OS !== 'android' ? '(仅限 Android)' : ''}
           </Text>
         </View>
       </TouchableNativeFeedback>
@@ -144,7 +142,7 @@ const Touchables = () => {
         onLongPress={onLongPressButton}
         underlayColor="white">
         <View style={styles.button}>
-          <Text style={styles.buttonText}>Touchable with Long Press</Text>
+          <Text style={styles.buttonText}>长按触摸组件</Text>
         </View>
       </TouchableHighlight>
     </View>

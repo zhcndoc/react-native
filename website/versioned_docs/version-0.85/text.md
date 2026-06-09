@@ -1,4 +1,4 @@
----
+我会严格保留原始 Markdown 结构，只翻译可见文本与注释，代码标识符和属性值保持不变。现在直接开始转换。---
 id: text
 title: Text
 ---
@@ -7,10 +7,10 @@ title: Text
 
 `Text` 支持嵌套、样式和触摸处理。
 
-在下面的示例中，嵌套的标题和正文文本将从 `styles.baseText` 继承 `fontFamily`，但标题提供了其自己的额外样式。由于字面换行符，标题和正文将相互堆叠：
+在下面的示例中，嵌套的标题和正文文本会从 `styles.baseText` 继承 `fontFamily`，但标题提供了它自己的附加样式。由于使用了字面量换行符，标题和正文会彼此垂直堆叠：
 
 ```SnackPlayer name=Text%20Function%20Component%20Example
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Text, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -56,10 +56,9 @@ export default TextInANest;
 
 ## 嵌套文本
 
-Android 和 iOS 都允许你通过用特定的格式（如粗体或彩色文本）注释字符串的范围来显示格式化的文本（iOS 上的 `NSAttributedString`，Android 上的 `SpannableString`）。实际上，这非常繁琐。对于 React Native，我们决定为此使用 Web 范式，你可以嵌套文本来达到相同的效果。
+Android 和 iOS 都允许你通过为字符串的某些范围添加特定格式（如粗体或彩色文本）来显示格式化文本（iOS 上使用 `NSAttributedString`，Android 上使用 `SpannableString`）。但在实际开发中，这非常繁琐。对于 React Native，我们决定采用 Web 的范式，即通过嵌套文本来实现相同效果。
 
 ```SnackPlayer name=Nested%20Text%20Example
-import React from 'react';
 import {Text, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -89,27 +88,27 @@ const styles = StyleSheet.create({
 export default BoldAndBeautiful;
 ```
 
-在幕后，React Native 将其转换为包含以下信息的扁平 `NSAttributedString` 或 `SpannableString`：
+在幕后，React Native 会将其转换为一个扁平的 `NSAttributedString` 或 `SpannableString`，其中包含以下信息：
 
 ```
 "I am bold and red"
-0-9: 粗体
-9-17: 粗体，红色
+0-9: bold
+9-17: bold, red
 ```
 
 ## 容器
 
-`<Text>` 元素在布局方面是独特的：内部的所有内容不再使用 Flexbox 布局，而是使用文本布局。这意味着 `<Text>` 内部的元素不再是矩形，而是在看到行尾时换行。
+相对于布局而言，`<Text>` 元素是独特的：其中的所有内容不再使用 Flexbox 布局，而是使用文本布局。这意味着 `<Text>` 内部的元素不再是矩形，而是在遇到行尾时自动换行。
 
 ```tsx
 <Text>
   <Text>First part and </Text>
   <Text>second part</Text>
 </Text>
-// 文本容器：文本将是内联的，如果空间允许
+// 文本容器：如果空间允许，文本会以内联方式显示
 // |First part and second part|
 
-// 否则，文本将流式排列，就像它是一个整体
+// 否则，文本会像一个整体一样流动
 // |First part |
 // |and second |
 // |part       |
@@ -118,11 +117,11 @@ export default BoldAndBeautiful;
   <Text>First part and </Text>
   <Text>second part</Text>
 </View>
-// View 容器：每个文本都是自己的块
+// View 容器：每段文本都是自己的块级元素
 // |First part and|
 // |second part   |
 
-// 否则，文本将在其自己的块中流动
+// 否则，文本会在自己的块中流动
 // |First part |
 // |and        |
 // |second part|
@@ -130,7 +129,7 @@ export default BoldAndBeautiful;
 
 ## 有限的样式继承
 
-在 Web 上，为整个文档设置字体家族和大小的常用方法是利用继承的 CSS 属性，如下所示：
+在 Web 上，通常会利用继承的 CSS 属性来为整个文档设置字体族和字号，例如：
 
 ```css
 html {
@@ -141,12 +140,12 @@ html {
 }
 ```
 
-文档中的所有元素都将继承此字体，除非它们或其父级之一指定了新规则。
+文档中的所有元素都会继承这个字体，除非它们自己或其某个父元素指定了新的规则。
 
-在 React Native 中，我们对此更严格：**你必须将所有文本节点包裹在 `<Text>` 组件中**。你不能在 `<View>` 下直接拥有文本节点。
+在 React Native 中，我们对此要求更严格：**你必须把所有文本节点包裹在 `<Text>` 组件内**。不能直接在 `<View>` 下放置文本节点。
 
 ```tsx
-// 错误：将抛出异常，不能在 <View> 的子级中拥有文本节点
+// 错误：会抛出异常，`<View>` 的子元素不能是文本节点
 <View>
   Some text
 </View>
@@ -159,18 +158,18 @@ html {
 </View>
 ```
 
-你也失去了为整个子树设置默认字体的能力。同时，`fontFamily` 只接受单个字体名称，这与 CSS 中的 `font-family` 不同。在整个应用程序中使用一致字体和大小的推荐方法是创建一个包含它们的组件 `MyAppText`，并在整个应用程序中使用此组件。你也可以使用此组件创建更具体的组件，如 `MyAppHeaderText` 用于其他类型的文本。
+你也失去了为整个子树设置默认字体的能力。与此同时，`fontFamily` 只接受单个字体名称，这与 CSS 中的 `font-family` 不同。跨应用保持字体和字号一致的推荐方式，是创建一个包含这些样式的组件 `MyAppText`，并在整个应用中使用它。你也可以基于这个组件创建更具体的组件，例如用于其他类型文本的 `MyAppHeaderText`。
 
 ```tsx
 <View>
   <MyAppText>
-    使用整个应用程序的默认字体设置样式的文本
+    使用应用程序默认字体样式的文本
   </MyAppText>
-  <MyAppHeaderText>设置为标题样式的文本</MyAppHeaderText>
+  <MyAppHeaderText>作为标题样式的文本</MyAppHeaderText>
 </View>
 ```
 
-假设 `MyAppText` 是一个只将其子级渲染到带有样式的 `Text` 组件中的组件，那么 `MyAppHeaderText` 可以定义如下：
+假设 `MyAppText` 是一个组件，它只会将其子元素作为带样式的 `Text` 组件输出，那么 `MyAppHeaderText` 可以定义如下：
 
 ```tsx
 const MyAppHeaderText = ({children}) => {
@@ -182,9 +181,9 @@ const MyAppHeaderText = ({children}) => {
 };
 ```
 
-以这种方式组合 `MyAppText` 确保我们从顶级组件获取样式，但使我们在特定用例中添加/覆盖它们的能力。
+以这种方式组合 `MyAppText`，可以确保我们获得来自顶层组件的样式，同时仍然能够在特定场景中添加或覆盖这些样式。
 
-React Native 仍然有样式继承的概念，但仅限于文本子树。在这种情况下，第二部分将既是粗体又是红色。
+React Native 仍然具有样式继承的概念，但仅限于文本子树。在这种情况下，第二部分会同时是粗体和红色。
 
 ```tsx
 <Text style={{fontWeight: 'bold'}}>
@@ -193,11 +192,11 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 </Text>
 ```
 
-我们相信这种更受限的文本样式方式将产生更好的应用：
+我们认为这种更受约束的文本样式方式会带来更好的应用：
 
-- (开发者) React 组件的设计具有强烈的隔离性：你应该能够将组件放在应用程序的任何地方，相信只要属性相同，它的外观和行为方式就会相同。可以从属性外部继承的文本属性将破坏这种隔离。
+- （开发者）React 组件的设计强调强隔离：你应该能够把某个组件放到应用中的任何位置，并相信只要 props 相同，它就会以相同的方式显示和运行。如果文本属性可以从 props 之外继承，就会破坏这种隔离性。
 
-- (实现者) React Native 的实现也得到了简化。我们不需要在每个元素上都有一个 `fontFamily` 字段，也不需要每次显示文本节点时都可能遍历树直到根节点。样式继承仅编码在原生 Text 组件内部，不会泄漏到其他组件或系统本身。
+- （实现者）React Native 的实现也更简单了。我们不需要在每个元素上都设置一个 `fontFamily` 字段，也不需要在每次显示文本节点时都可能向上遍历树直到根节点。样式继承只会编码在原生 `Text` 组件内部，不会泄漏到其他组件或系统本身。
 
 ---
 
@@ -207,33 +206,33 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 
 ### `accessibilityHint`
 
-无障碍提示帮助用户理解当他们在无障碍元素上执行操作时会发生什么，当结果从无障碍标签中不清楚时。
+辅助功能提示可帮助用户理解当他们对辅助功能元素执行操作时会发生什么，前提是仅从辅助功能标签中无法清楚看出该结果。
 
 | 类型   |
 | ------ |
-| 字符串 |
+| string |
 
 ---
 
 ### `accessibilityLanguage` <div className="label ios">iOS</div>
 
-一个值，指示屏幕阅读器在用户与元素交互时应使用哪种语言。它应遵循 [BCP 47 规范](https://www.rfc-editor.org/info/bcp47)。
+一个值，表示当用户与该元素交互时，屏幕阅读器应使用哪种语言。它应遵循 [BCP 47 规范](https://www.rfc-editor.org/info/bcp47)。
 
-参见 [iOS `accessibilityLanguage` 文档](https://developer.apple.com/documentation/objectivec/nsobject/1615192-accessibilitylanguage) 以获取更多信息。
+更多信息请参见 [iOS `accessibilityLanguage` 文档](https://developer.apple.com/documentation/objectivec/nsobject/1615192-accessibilitylanguage)。
 
 | 类型   |
 | ------ |
-| 字符串 |
+| string |
 
 ---
 
 ### `accessibilityLabel`
 
-覆盖用户与元素交互时屏幕阅读器读取的文本。默认情况下，标签是通过遍历所有子级并累积所有由空格分隔的 `Text` 节点构建的。
+覆盖屏幕阅读器在用户与该元素交互时朗读的文本。默认情况下，该标签通过遍历所有子元素并将所有 `Text` 节点以空格分隔后拼接而成。
 
 | 类型   |
 | ------ |
-| 字符串 |
+| string |
 
 ---
 
@@ -241,9 +240,9 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 
 告诉屏幕阅读器将当前聚焦的元素视为具有特定角色。
 
-在 iOS 上，这些角色映射到相应的无障碍特性。图像按钮具有与将特性设置为“图像”和“按钮”相同的功能。参见 [无障碍指南](accessibility.md#accessibilitytraits-ios) 以获取更多信息。
+在 iOS 上，这些角色会映射到相应的 Accessibility Traits。Image button 的功能与同时设置为 'image' 和 'button' 时相同。更多信息请参见 [辅助功能指南](accessibility.md#accessibilitytraits-ios)。
 
-在 Android 上，这些角色在 TalkBack 上具有类似的功能，就像在 iOS 的 Voiceover 上添加无障碍特性一样。
+在 Android 上，这些角色在 TalkBack 中的作用与 iOS 中的 VoiceOver 添加 Accessibility Traits 类似
 
 | 类型                                                 |
 | ---------------------------------------------------- |
@@ -253,9 +252,9 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 
 ### `accessibilityState`
 
-告诉屏幕阅读器将当前聚焦的元素视为处于特定状态。
+告诉屏幕阅读器将当前聚焦的元素视为处于某种特定状态。
 
-你可以提供一个状态、无状态或多个状态。状态必须通过对象传递，例如 `{selected: true, disabled: true}`。
+你可以提供一个状态、没有状态，或多个状态。状态必须通过对象传入，例如 `{selected: true, disabled: true}`。
 
 | 类型                                                   |
 | ------------------------------------------------------ |
@@ -265,57 +264,57 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 
 ### `accessibilityActions`
 
-无障碍操作允许辅助技术以编程方式调用组件的操作。`accessibilityActions` 属性应包含一个操作对象列表。每个操作对象应包含字段名称和标签。
+辅助功能操作允许辅助技术以编程方式调用组件的操作。`accessibilityActions` 属性应包含一个操作对象列表。每个操作对象都应包含字段名和标签。
 
-参见 [无障碍指南](accessibility.md#accessibility-actions) 以获取更多信息。
+更多信息请参见 [辅助功能指南](accessibility.md#accessibility-actions)。
 
-| 类型  | 必需 |
+| 类型  | 是否必需 |
 | ----- | -------- |
-| 数组 | 否       |
+| array | 否       |
 
 ---
 
 ### `onAccessibilityAction`
 
-当用户执行无障碍操作时调用。此函数的唯一参数是包含要执行的操作名称的事件。
+当用户执行辅助功能操作时调用。此函数的唯一参数是一个事件，其中包含要执行的操作名称。
 
-参见 [无障碍指南](accessibility.md#accessibility-actions) 以获取更多信息。
+更多信息请参见 [辅助功能指南](accessibility.md#accessibility-actions)。
 
-| 类型     | 必需 |
+| 类型     | 是否必需 |
 | -------- | -------- |
-| 函数 | 否       |
+| function | 否       |
 
 ---
 
 ### `accessible`
 
-当设置为 `true` 时，表示该视图是一个无障碍元素。
+当设为 `true` 时，表示该视图是一个辅助功能元素。
 
-参见 [无障碍指南](accessibility#accessible-ios-android) 以获取更多信息。
+更多信息请参见 [辅助功能指南](accessibility#accessible-ios-android)。
 
 | 类型    | 默认值 |
-| ------- | ------- |
-| 布尔值 | `true`  |
+| ------- | ------ |
+| boolean | `true`  |
 
 ---
 
 ### `adjustsFontSizeToFit`
 
-指定字体是否应自动缩小以适应给定的样式约束。
+指定是否应自动缩小字体以适应给定的样式约束。
 
 | 类型    | 默认值 |
-| ------- | ------- |
-| 布尔值 | `false` |
+| ------- | ------ |
+| boolean | `false` |
 
 ---
 
 ### `allowFontScaling`
 
-指定字体是否应缩放以尊重文本大小无障碍设置。
+指定字体是否应缩放以尊重文本大小辅助功能设置。
 
 | 类型    | 默认值 |
-| ------- | ------- |
-| 布尔值 | `true`  |
+| ------- | ------ |
+| boolean | `true`  |
 
 ---
 
@@ -324,181 +323,181 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 设置在 Android API Level 23+ 上确定单词断行时使用的自动连字符频率。
 
 | 类型                                | 默认值  |
-| ----------------------------------- | -------- |
+| ----------------------------------- | ------- |
 | enum(`'none'`, `'normal'`,`'full'`) | `'none'` |
 
 ---
 
 ### `aria-busy`
 
-指示元素正在被修改，辅助技术可能希望等待更改完成后再告知用户更新。
+表示某个元素正在被修改，辅助技术可能会等待更改完成后再通知用户更新内容。
 
 | 类型    | 默认值 |
-| ------- | ------- |
-| 布尔值 | false   |
+| ------- | ------ |
+| boolean | false   |
 
 ---
 
 ### `aria-checked`
 
-指示可检查元素的状态。此字段可以采用布尔值或 "mixed" 字符串来表示混合复选框。
+表示一个可勾选元素的状态。该字段既可以取布尔值，也可以取 `"mixed"` 字符串来表示混合状态的复选框。
 
 | 类型             | 默认值 |
-| ---------------- | ------- |
-| 布尔值，'mixed' | false   |
+| ---------------- | ------ |
+| boolean, 'mixed' | false   |
 
 ---
 
 ### `aria-disabled`
 
-指示元素可感知但已禁用，因此不可编辑或以其他方式操作。
+表示该元素可感知但已禁用，因此不可编辑或以其他方式操作。
 
 | 类型    | 默认值 |
-| ------- | ------- |
-| 布尔值 | false   |
+| ------- | ------ |
+| boolean | false   |
 
 ---
 
 ### `aria-expanded`
 
-指示可展开元素当前是展开还是折叠。
+表示可展开元素当前是展开还是折叠状态。
 
 | 类型    | 默认值 |
-| ------- | ------- |
-| 布尔值 | false   |
+| ------- | ------ |
+| boolean | false   |
 
 ---
 
 ### `aria-label`
 
-定义标记交互式元素的字符串值。
+定义用于标注交互式元素的字符串值。
 
 | 类型   |
 | ------ |
-| 字符串 |
+| string |
 
 ---
 
 ### `aria-selected`
 
-指示可选择元素当前是否被选中。
+表示可选元素当前是否被选中。
 
 | 类型    |
 | ------- |
-| 布尔值 |
+| boolean |
 
 ### `dataDetectorType` <div className="label android">Android</div>
 
-确定文本元素中转换为可点击 URL 的数据类型。默认情况下，不检测数据类型。
+确定在文本元素中转换为可点击 URL 的数据类型。默认情况下，不检测任何数据类型。
 
 你只能提供一种类型。
 
 | 类型                                                          | 默认值  |
-| ------------------------------------------------------------- | -------- |
+| ------------------------------------------------------------- | ------- |
 | enum(`'phoneNumber'`, `'link'`, `'email'`, `'none'`, `'all'`) | `'none'` |
 
 ---
 
 ### `disabled` <div className="label android">Android</div>
 
-指定文本视图的禁用状态以用于测试目的。
+指定文本视图的禁用状态，仅用于测试。
 
 | 类型 | 默认值 |
-| ---- | ------- |
-| 布尔值 | `false` |
+| ---- | ------ |
+| bool | `false` |
 
 ---
 
 ### `dynamicTypeRamp` <div className="label ios">iOS</div>
 
-要在 iOS 上应用于此元素的 [动态类型](https://developer.apple.com/documentation/uikit/uifont/scaling_fonts_automatically) 等级。
+要在 iOS 上应用于此元素的 [Dynamic Type](https://developer.apple.com/documentation/uikit/uifont/scaling_fonts_automatically) 层级。
 
 | 类型                                                                                                                                                     | 默认值  |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
 | enum(`'caption2'`, `'caption1'`, `'footnote'`, `'subheadline'`, `'callout'`, `'body'`, `'headline'`, `'title3'`, `'title2'`, `'title1'`, `'largeTitle'`) | `'body'` |
 
 ---
 
 ### `ellipsizeMode`
 
-当设置 `numberOfLines` 时，此属性定义文本将如何被截断。`numberOfLines` 必须与此属性一起设置。
+当设置了 `numberOfLines` 时，此属性定义文本将如何被截断。`numberOfLines` 必须与此属性一起设置。
 
-这可以是以下值之一：
+可取以下值之一：
 
-- `head` - 显示该行使得末尾适合容器，行开头缺失的文本由省略号符号指示。例如，"...wxyz"
-- `middle` - 显示该行使得开头和末尾适合容器，中间缺失的文本由省略号符号指示。"ab...yz"
-- `tail` - 显示该行使得开头适合容器，行末尾缺失的文本由省略号符号指示。例如，"abcd..."
-- `clip` - 行不会绘制在文本容器边缘之外。
+- `head` - 文本行会以末尾能容纳在容器中为准显示，行首缺失的文本会用省略号表示。例如：`"...wxyz"`
+- `middle` - 文本行会以开头和结尾都能容纳在容器中为准显示，中间缺失的文本会用省略号表示。`"ab...yz"`
+- `tail` - 文本行会以开头能容纳在容器中为准显示，行尾缺失的文本会用省略号表示。例如：`"abcd..."`
+- `clip` - 文本不会绘制到文本容器边界之外。
 
 :::note
-在 Android 上，当 `numberOfLines` 设置为高于 `1` 的值时，只有 `tail` 值能正常工作。
+在 Android 上，当 `numberOfLines` 设置为大于 `1` 的值时，只有 `tail` 值能正常工作。
 :::
 
 | 类型                                           | 默认值 |
-| ---------------------------------------------- | ------- |
+| ---------------------------------------------- | ------ |
 | enum(`'head'`, `'middle'`, `'tail'`, `'clip'`) | `tail`  |
 
 ---
 
 ### `id`
 
-用于从原生代码定位此视图。优先级高于 `nativeID` 属性。
+用于从原生代码中定位此视图。优先级高于 `nativeID` 属性。
 
 | 类型   |
 | ------ |
-| 字符串 |
+| string |
 
 ---
 
 ### `maxFontSizeMultiplier`
 
-指定当 `allowFontScaling` 启用时字体可达到的最大缩放比例。可能的值：
+指定在启用 `allowFontScaling` 时字体可达到的最大缩放值。可能的值：
 
-- `null/undefined`：从父节点或全局默认值继承 (0)
-- `0`：无最大值，忽略父节点/全局默认值
-- `>= 1`：将此节点的 `maxFontSizeMultiplier` 设置为此值
+- `null/undefined`：继承自父节点或全局默认值（0）
+- `0`：没有最大值，忽略父级/全局默认值
+- `>= 1`：将此节点的 `maxFontSizeMultiplier` 设置为该值
 
 | 类型   | 默认值     |
-| ------ | ----------- |
-| 数字 | `undefined` |
+| ------ | ---------- |
+| number | `undefined` |
 
 ---
 
 ### `minimumFontScale`
 
-指定当 `adjustsFontSizeToFit` 启用时字体可达到的最小缩放比例。(值 0.01-1.0)。
+指定在启用 `adjustsFontSizeToFit` 时字体可达到的最小缩放值。（取值范围 0.01-1.0）
 
 | 类型   |
 | ------ |
-| 数字 |
+| number |
 
 ---
 
 ### `nativeID`
 
-用于从原生代码定位此视图。
+用于从原生代码中定位此视图。
 
 | 类型   |
 | ------ |
-| 字符串 |
+| string |
 
 ---
 
 ### `numberOfLines`
 
-用于在计算文本布局（包括换行）后用省略号截断文本，使得总行数不超过此数字。将此属性设置为 `0` 将导致取消设置此值，这意味着不会应用行限制。
+在计算文本布局后用于通过省略号截断文本，包括换行，使总行数不超过该值。将此属性设置为 `0` 会取消该值，表示不再限制行数。
 
 此属性通常与 `ellipsizeMode` 一起使用。
 
 | 类型   | 默认值 |
-| ------ | ------- |
-| 数字 | `0`     |
+| ------ | ------ |
+| number | `0`     |
 
 ---
 
 ### `onLayout`
 
-在挂载和布局更改时调用。
+在挂载和布局变化时调用。
 
 | 类型                                                     |
 | -------------------------------------------------------- |
@@ -508,7 +507,7 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 
 ### `onLongPress`
 
-此函数在长按时调用。
+长按时调用此函数。
 
 | 类型                                                   |
 | ------------------------------------------------------ |
@@ -518,7 +517,7 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 
 ### `onMoveShouldSetResponder`
 
-此视图想要“声明”触摸响应吗？当 `View` 不是响应者时，每次触摸移动都会调用此函数。
+这个视图是否想要“请求”触摸响应？当 `View` 不是 responder 时，每次触摸移动都会调用此函数。
 
 | 类型                                                      |
 | --------------------------------------------------------- |
@@ -528,7 +527,7 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 
 ### `onPress`
 
-用户按下时调用的函数，在 `onPressOut` 后触发。
+用户按下时调用，在 `onPressOut` 之后触发。
 
 | 类型                                                   |
 | ------------------------------------------------------ |
@@ -538,7 +537,7 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 
 ### `onPressIn`
 
-当触摸开始时立即调用，在 `onPressOut` 和 `onPress` 之前。
+在触摸开始接触时立即调用，早于 `onPressOut` 和 `onPress`。
 
 | 类型                                                   |
 | ------------------------------------------------------ |
@@ -548,7 +547,7 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 
 ### `onPressOut`
 
-当触摸释放时调用。
+在触摸释放时调用。
 
 | 类型                                                   |
 | ------------------------------------------------------ |
@@ -558,9 +557,9 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 
 ### `onResponderGrant`
 
-View 现在正在响应触摸事件。这是高亮显示并向用户展示正在发生什么的时候。
+此时 View 正在响应触摸事件。这是高亮显示并告诉用户当前正在发生什么的时机。
 
-在 Android 上，从此回调返回 true 以防止任何其他原生组件成为响应者，直到此响应者终止。
+在 Android 上，从此回调返回 true 可阻止任何其他原生组件成为 responder，直到此 responder 终止。
 
 | 类型                                                              |
 | ----------------------------------------------------------------- |
@@ -590,7 +589,7 @@ View 现在正在响应触摸事件。这是高亮显示并向用户展示正在
 
 ### `onResponderTerminate`
 
-响应者已从 `View` 被移除。可能在调用 `onResponderTerminationRequest` 后被其他视图接管，或者可能被操作系统无需询问而接管（例如，在 iOS 上与控制中心/通知中心一起发生）
+responder 已从 `View` 中被移走。可能是在调用 `onResponderTerminationRequest` 后被其他视图获取，也可能在未询问的情况下被操作系统拿走（例如，在 iOS 上的控制中心/通知中心中会发生）
 
 | 类型                                                   |
 | ------------------------------------------------------ |
@@ -600,7 +599,7 @@ View 现在正在响应触摸事件。这是高亮显示并向用户展示正在
 
 ### `onResponderTerminationRequest`
 
-其他 `View` 想要成为响应者，并要求此 `View` 释放其响应者身份。返回 `true` 允许其释放。
+某个其他 `View` 想要成为 responder，并请求此 `View` 释放其 responder。返回 `true` 允许释放。
 
 | 类型                                                      |
 | --------------------------------------------------------- |
@@ -610,7 +609,7 @@ View 现在正在响应触摸事件。这是高亮显示并向用户展示正在
 
 ### `onStartShouldSetResponderCapture`
 
-如果父 `View` 想要防止子 `View` 在触摸开始时成为响应者，它应该具有此处理程序并返回 `true`。
+如果父级 `View` 想要在触摸开始时阻止子级 `View` 成为 responder，它应当使用这个处理函数并返回 `true`。
 
 | 类型                                                      |
 | --------------------------------------------------------- |
@@ -620,7 +619,7 @@ View 现在正在响应触摸事件。这是高亮显示并向用户展示正在
 
 ### `onTextLayout`
 
-在文本布局更改时调用。
+在 Text 布局变化时调用。
 
 | 类型                                                 |
 | ---------------------------------------------------- |
@@ -630,25 +629,25 @@ View 现在正在响应触摸事件。这是高亮显示并向用户展示正在
 
 ### `pressRetentionOffset`
 
-当滚动视图被禁用时，这定义了你的触摸可以在按钮上移动多远，然后才停用按钮。一旦停用，尝试将其移回，你会看到按钮再次被激活！当滚动视图被禁用时，来回移动几次。确保传入一个常量以减少内存分配。
+当滚动视图被禁用时，此属性定义在按钮失效之前，你的触摸可以离开按钮多远。一旦失效，尝试将其移回，你会看到按钮会再次被激活！在滚动视图禁用时，多次来回移动它。确保传入一个常量以减少内存分配。
 
 | 类型                 |
 | -------------------- |
-| [Rect](rect), 数字 |
+| [Rect](rect), number |
 
 ---
 
 ### `ref`
 
-一个 ref 设置器，挂载时将被分配一个 [元素节点](element-nodes)。
+挂载时会分配给一个 [element node](element-nodes) 的 ref setter。
 
-注意 `Text` 组件不提供文本节点，就像 Web 上的段落元素 (`<p>`) 是元素节点而不是文本节点一样。文本节点可以作为它们的子节点找到。
+请注意，`Text` 组件不会提供 text nodes，就像 Web 上的段落元素（`<p>`）是 element nodes 而不是 text nodes 一样。text nodes 可以在其子节点中找到。
 
 ---
 
 ### `role`
 
-`role` 向辅助技术的用户传达组件的目的。优先级高于 [`accessibilityRole`](text#accessibilityrole) 属性。
+`role` 会向辅助技术用户传达组件的用途。其优先级高于 [`accessibilityRole`](text#accessibilityrole) 属性。
 
 | 类型                       |
 | -------------------------- |
@@ -661,8 +660,8 @@ View 现在正在响应触摸事件。这是高亮显示并向用户展示正在
 允许用户选择文本，以使用原生复制和粘贴功能。
 
 | 类型    | 默认值 |
-| ------- | ------- |
-| 布尔值 | `false` |
+| ------- | ------ |
+| boolean | `false` |
 
 ---
 
@@ -680,17 +679,17 @@ View 现在正在响应触摸事件。这是高亮显示并向用户展示正在
 
 | 类型                                                                 |
 | -------------------------------------------------------------------- |
-| [文本样式](text-style-props), [视图样式属性](view-style-props) |
+| [Text Style](text-style-props), [View Style Props](view-style-props) |
 
 ---
 
 ### `suppressHighlighting` <div className="label ios">iOS</div>
 
-当 `true` 时，按下文本时不会进行视觉更改。默认情况下，按下时灰色椭圆会高亮显示文本。
+当为 `true` 时，按下文本时不会产生任何视觉变化。默认情况下，按下时会以灰色椭圆高亮文本。
 
 | 类型    | 默认值 |
-| ------- | ------- |
-| 布尔值 | `false` |
+| ------- | ------ |
+| boolean | `false` |
 
 ---
 
@@ -700,26 +699,26 @@ View 现在正在响应触摸事件。这是高亮显示并向用户展示正在
 
 | 类型   |
 | ------ |
-| 字符串 |
+| string |
 
 ---
 
 ### `textBreakStrategy` <div className="label android">Android</div>
 
-在 Android API Level 23+ 上设置文本断行策略，可能的值是 `simple`, `highQuality`, `balanced`。
+在 Android API Level 23+ 上设置文本断行策略，可选值为 `simple`、`highQuality`、`balanced`。
 
 | 类型                                            | 默认值       |
-| ----------------------------------------------- | ------------- |
+| ----------------------------------------------- | ------------ |
 | enum(`'simple'`, `'highQuality'`, `'balanced'`) | `highQuality` |
 
 ---
 
 ### `lineBreakStrategyIOS` <div className="label ios">iOS</div>
 
-在 iOS 14+ 上设置换行策略。可能的值是 `none`, `standard`, `hangul-word` 和 `push-out`。
+在 iOS 14+ 上设置换行策略。可选值为 `none`、`standard`、`hangul-word` 和 `push-out`。
 
 | 类型                                                        | 默认值  |
-| ----------------------------------------------------------- | -------- |
+| ----------------------------------------------------------- | ------- |
 | enum(`'none'`, `'standard'`, `'hangul-word'`, `'push-out'`) | `'none'` |
 
 ## 类型定义
@@ -745,20 +744,20 @@ View 现在正在响应触摸事件。这是高亮显示并向用户展示正在
 
 #### 属性
 
-| 名称      | 类型   | 可选 | 描述                                                                |
-| --------- | ------ | ---- | ------------------------------------------------------------------- |
-| ascender  | number | 否   | 文本布局更改后的行上升高度。                                        |
-| capHeight | number | 否   | 基线上方大写字母的高度。                                            |
-| descender | number | 否   | 文本布局更改后的行下降高度。                                        |
-| height    | number | 否   | 文本布局更改后的行高度。                                            |
-| width     | number | 否   | 文本布局更改后的行宽度。                                            |
-| x         | number | 否   | Text 组件内部的行 X 坐标。                                          |
-| xHeight   | number | 否   | 基线与行中线之间的距离（字体主体大小）。                            |
-| y         | number | 否   | Text 组件内部的行 Y 坐标。                                          |
+| 名称      | 类型   | 可选 | 描述                                                         |
+| --------- | ------ | ---- | ------------------------------------------------------------ |
+| ascender  | number | 否   | 文本布局变化后该行的上升部高度。                              |
+| capHeight | number | 否   | 基线以上大写字母的高度。                                     |
+| descender | number | 否   | 文本布局变化后该行的下降部高度。                            |
+| height    | number | 否   | 文本布局变化后该行的高度。                                   |
+| width     | number | 否   | 文本布局变化后该行的宽度。                                   |
+| x         | number | 否   | `Text` 组件内该行的 X 坐标。                                 |
+| xHeight   | number | 否   | 基线与该行中线之间的距离（主体尺寸）。                       |
+| y         | number | 否   | `Text` 组件内该行的 Y 坐标。                                 |
 
 ### TextLayoutEvent
 
-`TextLayoutEvent` 对象在组件布局更改时作为回调结果返回。它包含一个名为 `lines` 的键，其值是一个数组，包含对应于每个渲染文本行的 [`TextLayout`](text#textlayout) 对象。
+`TextLayoutEvent` 对象会在组件布局变化时作为回调结果返回。它包含一个名为 `lines` 的键，其值是一个数组，包含与每一条已渲染文本行对应的 [`TextLayout`](text#textlayout) 对象。
 
 #### 示例
 
@@ -777,5 +776,5 @@ View 现在正在响应触摸事件。这是高亮显示并向用户展示正在
 
 | 名称   | 类型                                    | 可选 | 描述                                           |
 | ------ | --------------------------------------- | ---- | ---------------------------------------------- |
-| lines  | [TextLayout](text#textlayout) 数组      | 否   | 提供每个渲染行的 TextLayout 数据。               |
-| target | number                                  | 否   | 元素的节点 id。                                  |
+| lines  | array of [TextLayout](text#textlayout)s | 否   | 提供每一条已渲染文本行的 TextLayout 数据。     |
+| target | number                                  | 否   | 元素的节点 ID。                                |

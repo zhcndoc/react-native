@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 <TabItem value="javascript">
 
 ```SnackPlayer name=Shadow%20Props&supportedPlatforms=ios&ext=js&dependencies=@react-native-community/slider
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 import Slider from '@react-native-community/slider';
@@ -110,7 +110,7 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Shadow%20Props&supportedPlatforms=ios&ext=tsx&dependencies=@react-native-community/slider
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import Slider, {SliderProps} from '@react-native-community/slider';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
@@ -220,35 +220,35 @@ export default App;
 
 React Native 中有 3 组阴影 API：
 
-- `boxShadow`：一个 View 样式属性，以及 [同名 Web 样式属性](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow) 的符合规范的实现。
-- `dropShadow`：作为 [`filter`](./view-style-props#filter) View 样式属性一部分可用的特定滤镜函数。
-- 各种 `shadow` 属性（`shadowColor`、`shadowOffset`、`shadowOpacity`、`shadowRadius`）：这些直接映射到平台级 API 暴露的原生对应项。
+- `boxShadow`：View 样式属性，以及与 [同名的 Web 样式属性](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow) 规范一致的实现。
+- `dropShadow`：作为 [`filter`](./view-style-props#filter) View 样式属性的一部分提供的特定滤镜函数。
+- 各种 `shadow` 属性（`shadowColor`、`shadowOffset`、`shadowOpacity`、`shadowRadius`）：它们直接映射到平台级 API 暴露的原生对应项。
 
-`dropShadow` 和 `boxShadow` 之间的区别如下：
+`dropShadow` 和 `boxShadow` 的区别如下：
 
-- `dropShadow` 作为 `filter` 的一部分存在，而 `boxShadow` 是一个独立的样式属性。
-- `dropShadow` 是一个 alpha 遮罩，所以只有具有正 alpha 值的像素才会“投射”阴影。`boxShadow` 将围绕元素的边框盒投射阴影，无论其内容如何（除非它是内嵌的）。
-- `dropShadow` 仅在 Android 上可用，`boxShadow` 在 iOS 和 Android 上均可用。
-- `dropShadow` 不能像 `boxShadow` 那样设置为内嵌。
+- `dropShadow` 是 `filter` 的一部分，而 `boxShadow` 是一个独立的样式属性。
+- `dropShadow` 是一个 alpha 蒙版，因此只有具有正 alpha 值的像素才会“投射”阴影。`boxShadow` 会围绕元素的边框盒投射阴影，无论其内容是什么（除非它是内阴影）。
+- `dropShadow` 仅适用于 Android，`boxShadow` 适用于 iOS 和 Android。
+- `dropShadow` 不能像 `boxShadow` 那样设置为内阴影。
 - `dropShadow` 没有像 `boxShadow` 那样的 `spreadDistance` 参数。
 
-`boxShadow` 和 `dropShadow` 通常都比 `shadow` 属性功能更强大。然而，`shadow` 属性映射到原生平台级 API，因此如果你只需要一个简单的阴影，推荐使用这些属性。请注意，只有 `shadowColor` 在 Android 和 iOS 上都有效，所有其他 `shadow` 属性仅在 iOS 上有效。
+总体而言，`boxShadow` 和 `dropShadow` 的能力都比 `shadow` 属性更强。不过，`shadow` 属性映射到原生平台级 API，因此如果你只需要简单直接的阴影，推荐使用这些属性。请注意，只有 `shadowColor` 同时适用于 Android 和 iOS，其他所有 `shadow` 属性都仅适用于 iOS。
 
 ## 属性
 
 ### `boxShadow`
 
-请参阅 [视图样式属性](./view-style-props#boxshadow) 获取文档。
+文档请参见 [View Style Props](./view-style-props#boxshadow)。
 
 ### `dropShadow` <div className="label android">Android</div>
 
-请参阅 [视图样式属性](./view-style-props#filter) 获取文档。
+文档请参见 [View Style Props](./view-style-props#filter)。
 
 ### `shadowColor`
 
 设置投影颜色。
 
-此属性仅在 Android API 28 及以上版本有效。对于较低 Android API 上的类似功能，请使用 [`elevation` 属性](view-style-props#elevation-android)。
+此属性仅适用于 Android API 28 及以上版本。在较低版本的 Android API 上，如需类似功能，请使用 [`elevation` 属性](view-style-props#elevation-android)。
 
 | 类型               |
 | ------------------ |
@@ -258,7 +258,7 @@ React Native 中有 3 组阴影 API：
 
 ### `shadowOffset` <div className="label ios">iOS</div>
 
-设置投影偏移量。
+设置投影偏移。
 
 | 类型                                     |
 | ---------------------------------------- |
@@ -268,11 +268,11 @@ React Native 中有 3 组阴影 API：
 
 ### `shadowOpacity` <div className="label ios">iOS</div>
 
-设置投影不透明度（乘以颜色的 alpha 分量）。
+设置投影不透明度（与颜色的 alpha 分量相乘）。
 
 | 类型   |
 | ------ |
-| 数字 |
+| number |
 
 ---
 
@@ -282,4 +282,4 @@ React Native 中有 3 组阴影 API：
 
 | 类型   |
 | ------ |
-| 数字 |
+| number |

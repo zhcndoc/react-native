@@ -37,7 +37,7 @@ struct Bridging<int64_t> {
       auto str = value.utf8(rt);
       auto num = std::stoll(str, &pos);
       if (pos != str.size()) {
-        throw std::invalid_argument("Invalid number"); // 不支持字母数字字符串
+        throw std::invalid_argument("无效数字"); // 不支持字母数字字符串
       }
       return num;
     } catch (const std::logic_error &e) {
@@ -336,7 +336,7 @@ namespace facebook::react {
 
 2. 打开 `shared/NativeSampleModule.cpp` 文件并添加函数实现
 
-```c++ title="NativeSampleModule.cpp (validateAddress implementation)"
+```cpp title="NativeSampleModule.cpp (validateAddress implementation)"
 bool NativeSampleModule::validateAddress(jsi::Runtime &rt, jsi::Object input) {
   std::string street = input.getProperty(rt, "street").asString(rt).utf8(rt);
   int32_t number = input.getProperty(rt, "num").asNumber();

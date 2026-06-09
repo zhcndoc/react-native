@@ -11,7 +11,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 <TabItem value="javascript">
 
 ```SnackPlayer name=TextStyleProps&supportedPlatforms=ios,android&ext=js&dependencies=@react-native-community/slider
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {
   FlatList,
   Platform,
@@ -110,14 +110,15 @@ const App = () => {
                 textShadowRadius,
               },
             ]}>
-            Lorem Ipsum 是印刷和排版行业的简单占位文本。112 个赞
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. 112 Likes
           </Text>
         </View>
         <ScrollView style={{padding: 12}}>
           <View>
             <Text>通用平台属性</Text>
             <CustomSlider
-              label="文本阴影偏移 - 高度"
+              label="文字阴影偏移 - 高度"
               value={textShadowOffset.height}
               minimumValue={-40}
               maximumValue={40}
@@ -126,7 +127,7 @@ const App = () => {
               }
             />
             <CustomSlider
-              label="文本阴影偏移 - 宽度"
+              label="文字阴影偏移 - 宽度"
               value={textShadowOffset.width}
               minimumValue={-40}
               maximumValue={40}
@@ -172,7 +173,7 @@ const App = () => {
               onSelected={setTextDecorationLineIdx}
             />
             <CustomSlider
-              label="文本阴影半径"
+              label="文字阴影半径"
               value={textShadowRadius}
               handleValueChange={setTextShadowRadius}
             />
@@ -198,7 +199,7 @@ const App = () => {
           {Platform.OS === 'android' && (
             <View style={styles.platformContainer}>
               <Text style={styles.platformContainerTitle}>
-                仅 Android 属性
+                仅限 Android 的属性
               </Text>
               <CustomPicker
                 label="文本垂直对齐"
@@ -216,7 +217,7 @@ const App = () => {
           {Platform.OS === 'ios' && (
             <View style={styles.platformContainer}>
               <Text style={styles.platformContainerTitle}>
-                仅 iOS 属性
+                仅限 iOS 的属性
               </Text>
               <CustomPicker
                 label="文本装饰样式"
@@ -371,7 +372,7 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=TextStyleProps&supportedPlatforms=ios,android&ext=tsx&dependencies=@react-native-community/slider
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {
   FlatList,
   Platform,
@@ -437,14 +438,15 @@ const App = () => {
                 textShadowRadius,
               } as TextStyle,
             ]}>
-            Lorem Ipsum 是印刷和排版行业的简单占位文本。112 个赞
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. 112 Likes
           </Text>
         </View>
         <ScrollView style={{padding: 12}}>
           <View>
             <Text>通用平台属性</Text>
             <CustomSlider
-              label="文本阴影偏移 - 高度"
+              label="文字阴影偏移 - 高度"
               value={textShadowOffset.height}
               minimumValue={-40}
               maximumValue={40}
@@ -453,7 +455,7 @@ const App = () => {
               }
             />
             <CustomSlider
-              label="文本阴影偏移 - 宽度"
+              label="文字阴影偏移 - 宽度"
               value={textShadowOffset.width}
               minimumValue={-40}
               maximumValue={40}
@@ -499,7 +501,7 @@ const App = () => {
               onSelected={setTextDecorationLineIdx}
             />
             <CustomSlider
-              label="文本阴影半径"
+              label="文字阴影半径"
               value={textShadowRadius}
               handleValueChange={setTextShadowRadius}
             />
@@ -525,7 +527,7 @@ const App = () => {
           {Platform.OS === 'android' && (
             <View style={styles.platformContainer}>
               <Text style={styles.platformContainerTitle}>
-                仅 Android 属性
+                仅限 Android 的属性
               </Text>
               <CustomPicker
                 label="文本垂直对齐"
@@ -543,7 +545,7 @@ const App = () => {
           {Platform.OS === 'ios' && (
             <View style={styles.platformContainer}>
               <Text style={styles.platformContainerTitle}>
-                仅 iOS 属性
+                仅限 iOS 的属性
               </Text>
               <CustomPicker
                 label="文本装饰样式"
@@ -759,7 +761,7 @@ export default App;
 
 # 参考
 
-## 属性
+## Props
 
 ### `color`
 
@@ -797,7 +799,7 @@ iOS 支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monos
 
 ### `fontWeight`
 
-指定字体粗细。大多数字体支持 `'normal'` 和 `'bold'` 这两个值。并非所有字体都有每个数值对应的变体，在这种情况下会选择最接近的一个。
+指定字体粗细。大多数字体支持 `'normal'` 和 `'bold'` 这两个值。并非所有字体都有每个数字值对应的变体，在这种情况下会选择最接近的一个。
 
 | 类型                                                                                                                  | 默认值    |
 | --------------------------------------------------------------------------------------------------------------------- | ---------- |
@@ -807,7 +809,7 @@ iOS 支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monos
 
 ### `includeFontPadding` <div className="label android">Android</div>
 
-设置为 `false` 可移除用于为某些上伸部 / 下伸部留出空间的额外字体内边距。在某些字体中，这种内边距会使文本在垂直居中时看起来略微不对齐。为了获得最佳效果，也请将 `textAlignVertical` 设置为 `center`。
+设为 `false` 可移除额外的字体内边距，这些内边距用于为某些上伸部 / 下伸部留出空间。对于某些字体，这种内边距会使文本在垂直居中时看起来略微不对齐。为了获得最佳效果，也请将 `textAlignVertical` 设为 `center`。
 
 | 类型 | 默认值 |
 | ---- | ------- |
@@ -817,7 +819,7 @@ iOS 支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monos
 
 ### `fontVariant`
 
-允许你设置某个字体的所有字体变体。可以使用变体枚举数组或以空格分隔的字符串来设置，例如 `'small-caps common-ligatures'`。
+允许你设置字体的所有变体。可以使用枚举数组或以空格分隔的字符串进行设置，例如 `'small-caps common-ligatures'`。
 
 | 类型                                                                                                                 | 默认值 |
 | -------------------------------------------------------------------------------------------------------------------- | ------- |
@@ -837,7 +839,7 @@ iOS 支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monos
 
 ### `lineHeight`
 
-控制文本元素中各行之间垂直间距的数值。它指定了连续文本行基线之间的距离。
+控制文本元素中各行文本之间垂直间距的数值。它指定了相邻文本行基线之间的距离。
 
 | 类型   |
 | ------ |
@@ -847,7 +849,7 @@ iOS 支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monos
 
 ### `textAlign`
 
-指定文本对齐方式。在 Android 上，值 `'justify'` 仅在 Oreo（8.0）或更高版本（API level >= 26）上受支持。在较低版本的 Android 上，该值会回退为 `left`。
+指定文本对齐方式。在 Android 上，`justify` 仅支持 Oreo（8.0）及以上版本（API level >= 26）。在较低版本的 Android 上，该值会回退为 `left`。
 
 | 类型                                                         | 默认值  |
 | ------------------------------------------------------------ | -------- |
@@ -859,7 +861,7 @@ iOS 支持通用字体族 `system-ui`、`ui-sans-serif`、`ui-serif`、`ui-monos
 
 `verticalAlign` 样式属性的别名；如果同时使用这两个属性，`verticalAlign` 将优先于 `textAlignVertical`
 
-| Type                                            | Default  |
+| 类型                                            | 默认值  |
 | ----------------------------------------------- | -------- |
 | enum(`'auto'`, `'top'`, `'bottom'`, `'center'`) | `'auto'` |
 

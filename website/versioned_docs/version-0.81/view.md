@@ -10,7 +10,6 @@ title: View
 此示例创建了一个 `View`，它在行中使用内边距包裹了两个带颜色的框和一个文本组件。
 
 ```SnackPlayer name=View%20Example
-import React from 'react';
 import {View, Text} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -588,7 +587,7 @@ export default ViewBoxesWithColorAndText;
 
 ### `onResponderGrant`
 
-View 现在正在响应触摸事件。这是高亮显示并向用户展示正在发生什么的时候。
+`View` 现在正在响应触摸事件。这是高亮显示并向用户展示正在发生什么的时候。
 
 在 Android 上，从此回调返回 true 以防止任何其他原生组件在此响应器终止之前成为响应器。
 

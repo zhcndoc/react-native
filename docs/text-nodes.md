@@ -6,14 +6,14 @@ title: 文本节点
 文本节点表示树上的原始文本内容（类似于 Web 上的 [`Text`](https://developer.mozilla.org/en-US/docs/Web/API/Text) 节点）。它们不能直接通过 `refs` 访问，但可以使用元素 ref 上的方法（例如 [`childNodes`](https://developer.mozilla.org/en-US/docs/Web/API/Node/childNodes)）来访问。
 
 ```SnackPlayer ext=js&name=Text%20instances%20example
-import * as React from 'react';
-import { SafeAreaView, StyleSheet, Text } from 'react-native';
+import {useEffect, useRef, useState} from 'react';
+import {SafeAreaView, StyleSheet, Text} from 'react-native';
 
 const TextWithRefs = () => {
-  const ref = React.useRef(null);
-  const [viewInfo, setViewInfo] = React.useState('');
+  const ref = useRef(null);
+  const [viewInfo, setViewInfo] = useState('');
 
-  React.useEffect(() => {
+  useEffect(() => {
     // `textElement` 是一个实现了此处所述接口的对象。
     const textElement = ref.current;
     const textNode = textElement.childNodes[0];

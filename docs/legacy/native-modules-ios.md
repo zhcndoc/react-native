@@ -19,7 +19,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 首先，在 Xcode 中打开你的 React Native 应用里的 iOS 项目。你可以在一个 React Native 应用中在这里找到你的 iOS 项目：
 
 <figure>
-  <img src="/docs/assets/native-modules-ios-open-project.png" width="500" alt="Image of opening up an iOS project within a React Native app inside of Xcode." />
+  <img src="/docs/assets/native-modules-ios-open-project.png" width="500" alt="在 Xcode 中打开 React Native 应用里的 iOS 项目的示意图。" />
   <figcaption>你可以找到 iOS 项目的位置示意图</figcaption>
 </figure>
 
@@ -30,7 +30,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 第一步是创建我们的主要自定义原生模块头文件和实现文件。创建一个名为 `RCTCalendarModule.h` 的新文件
 
 <figure>
-  <img src="/docs/assets/native-modules-ios-add-class.png" width="500" alt="Image of creating a class called  RCTCalendarModule.h." />
+  <img src="/docs/assets/native-modules-ios-add-class.png" width="500" alt="创建一个名为 RCTCalendarModule.h 的类的示意图。" />
   <figcaption>在与 AppDelegate 相同的文件夹中创建自定义原生模块文件的示意图</figcaption>
 </figure>
 
@@ -141,7 +141,6 @@ return [[UIDevice currentDevice] name];
 在你的应用中找到一个你想添加对原生模块 `createCalendarEvent()` 方法调用的位置。下面是一个组件示例，`NewModuleButton`，你可以把它添加到应用中。你可以在 `NewModuleButton` 的 `onPress()` 函数中调用原生模块。
 
 ```tsx
-import React from 'react';
 import {Button} from 'react-native';
 
 const NewModuleButton = () => {

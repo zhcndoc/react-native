@@ -3,12 +3,12 @@ id: inputaccessoryview
 title: InputAccessoryView
 ---
 
-一个允许自定义 iOS 键盘输入辅助视图（input accessory view）的组件。每当 `TextInput` 获得焦点时，输入辅助视图就会显示在键盘上方。此组件可用于创建自定义工具栏。
+一个用于自定义 iOS 上键盘输入辅助视图的组件。输入辅助视图会在任何 `TextInput` 获得焦点时显示在键盘上方。该组件可用于创建自定义工具栏。
 
-要使用此组件，请用 InputAccessoryView 组件包裹您的自定义工具栏，并设置一个 `nativeID`。然后，将该 `nativeID` 作为所需的任何 `TextInput` 的 `inputAccessoryViewID` 传递。基本示例：
+要使用此组件，请用 InputAccessoryView 组件包裹你的自定义工具栏，并设置一个 `nativeID`。然后，将该 `nativeID` 作为你想要使用的任意 `TextInput` 的 `inputAccessoryViewID` 传入。下面是一个基本示例：
 
 ```SnackPlayer name=InputAccessoryView&supportedPlatforms=ios
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {
   Button,
   InputAccessoryView,
@@ -33,12 +33,12 @@ const App = () => {
             inputAccessoryViewID={inputAccessoryViewID}
             onChangeText={setText}
             value={text}
-            placeholder={'Please type here…'}
+            placeholder={'请在此输入…'}
           />
         </ScrollView>
       </SafeAreaView>
       <InputAccessoryView nativeID={inputAccessoryViewID}>
-        <Button onPress={() => setText(initialText)} title="Clear text" />
+        <Button onPress={() => setText(initialText)} title="清除文本" />
       </InputAccessoryView>
     </SafeAreaProvider>
   );
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-此组件还可用于创建粘性文本输入框（固定在键盘顶部的文本输入框）。为此，请用 `InputAccessoryView` 组件包裹 `TextInput`，并且不要设置 `nativeID`。示例请参阅 [InputAccessoryViewExample.js](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/InputAccessoryView/InputAccessoryViewExample.js)。
+此组件也可用于创建粘性文本输入框（即固定在键盘顶部的文本输入框）。要实现这一点，请用 `InputAccessoryView` 组件包裹一个 `TextInput`，并且不要设置 `nativeID`。示例可参考 [InputAccessoryViewExample.js](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/InputAccessoryView/InputAccessoryViewExample.js)。
 
 ---
 
@@ -72,13 +72,13 @@ export default App;
 
 | 类型               |
 | ------------------ |
-| [颜色](colors.md) |
+| [颜色](colors.md) | |
 
 ---
 
 ### `nativeID`
 
-一个用于将此 `InputAccessoryView` 关联到指定 TextInput 的 ID。
+用于将此 `InputAccessoryView` 与指定的 TextInput 关联的 ID。
 
 | 类型   |
 | ------ |
@@ -94,5 +94,5 @@ export default App;
 
 # 已知问题
 
-- [react-native#18997](https://github.com/facebook/react-native/issues/18997): 不支持多行 `TextInput`
-- [react-native#20157](https://github.com/facebook/react-native/issues/20157): 无法与底部标签栏一起使用
+- [react-native#18997](https://github.com/facebook/react-native/issues/18997)：不支持多行 `TextInput`
+- [react-native#20157](https://github.com/facebook/react-native/issues/20157)：不能与底部标签栏一起使用

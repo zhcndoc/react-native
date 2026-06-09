@@ -1,6 +1,6 @@
 # 测量布局
 
-有时，您需要测量当前布局以便对整体布局应用一些更改，或者做出决策并调用某些特定逻辑。
+有时，您需要测量当前布局，以便对整体布局应用一些更改，或者据此做出决策并调用某些特定逻辑。
 
 React Native 提供了一些原生方法来了解视图的尺寸。
 
@@ -10,7 +10,7 @@ React Native 提供了一些原生方法来了解视图的尺寸。
 
 ```tsx
 function AComponent(children) {
-  const targetRef = React.useRef(null)
+  const targetRef = useRef(null)
 
   useLayoutEffect(() => {
     targetRef.current?.measure((x, y, width, height, pageX, pageY) => {

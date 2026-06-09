@@ -19,7 +19,7 @@ React Native 不仅适用于 Android 和 iOS 设备——我们的合作伙伴�
 
 ## 创建你自己的 React Native 平台
 
-目前从头创建一个 React Native 平台的流程文档还不够完善——即将到来的重新架构（[Fabric](/blog/2018/06/14/state-of-react-native-2018)）的目标之一就是让平台维护更容易。
+从零开始创建 React Native 平台的过程仍然没有很完善的文档说明——New Architecture 和 [Fabric](/architecture/fabric-renderer) 的目标之一就是让平台维护更容易。
 
 ### 打包
 

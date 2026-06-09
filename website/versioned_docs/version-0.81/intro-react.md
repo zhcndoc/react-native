@@ -10,7 +10,7 @@ React Native 运行在 [React](https://react.dev/) 之上，这是一个用于�
 
 我们将涵盖 React 背后的核心概念：
 
-- components
+- 组件
 - JSX
 - props
 - state
@@ -22,7 +22,6 @@ React Native 运行在 [React](https://react.dev/) 之上，这是一个用于�
 这篇 React 介绍的其余部分将在示例中使用猫：友好、亲切的生物，它们需要名字和一个工作的咖啡馆。这是你的第一个 Cat 组件：
 
 ```SnackPlayer name=Your%20Cat
-import React from 'react';
 import {Text} from 'react-native';
 
 const Cat = () => {
@@ -32,10 +31,9 @@ const Cat = () => {
 export default Cat;
 ```
 
-做法如下：要定义你的 `Cat` 组件，首先使用 JavaScript 的 [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 导入 React 和 React Native 的 [`Text`](/docs/next/text) 核心组件：
+Here is how you do it: To define your `Cat` component, first use JavaScript’s [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) to import React Native’s [`Text`](/docs/next/text) Core Component:
 
 ```tsx
-import React from 'react';
 import {Text} from 'react-native';
 ```
 
@@ -76,7 +74,6 @@ export default Cat;
 React 和 React Native 使用 **JSX**，这是一种允许你在 JavaScript 内部编写元素的语法，如下所示：`<Text>Hello, I am your cat!</Text>`。React 文档有一份 [关于 JSX 的综合指南](https://react.dev/learn/writing-markup-with-jsx)，你可以参考它以了解更多。因为 JSX 是 JavaScript，你可以在其中使用变量。这里你为猫声明了一个名字 `name`，并使用花括号将其嵌入到 `<Text>` 中。
 
 ```SnackPlayer name=Curly%20Braces
-import React from 'react';
 import {Text} from 'react-native';
 
 const Cat = () => {
@@ -93,7 +90,6 @@ export default Cat;
 <TabItem value="javascript">
 
 ```SnackPlayer name=Curly%20Braces&ext=js
-import React from 'react';
 import {Text} from 'react-native';
 
 const getFullName = (firstName, secondName, thirdName) => {
@@ -111,7 +107,6 @@ export default Cat;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Curly%20Braces&ext=tsx
-import React from 'react';
 import {Text} from 'react-native';
 
 const getFullName = (
@@ -134,10 +129,6 @@ export default Cat;
 
 你可以将花括号视为创建一个进入 JSX 中 JS 功能的门户！
 
-:::tip
-因为 JSX 包含在 React 库中，如果你的文件顶部没有 `import React from 'react'`，它将无法工作！
-:::
-
 ## 自定义组件
 
 你已经见过 [React Native 的核心组件](intro-react-native-components)。React 允许你将这些组件相互嵌套以创建新组件。这些可嵌套、可重用的组件是 React 范式的核心。
@@ -145,7 +136,6 @@ export default Cat;
 例如，你可以在下面的 [`View`](view) 中嵌套 [`Text`](text) 和 [`TextInput`](textinput)，React Native 会将它们一起渲染：
 
 ```SnackPlayer name=Custom%20Components
-import React from 'react';
 import {Text, TextInput, View} from 'react-native';
 
 const Cat = () => {
@@ -190,7 +180,6 @@ export default Cat;
 你可以通过使用 `<Cat>` 多次渲染此组件并在多个地方渲染，而无需重复代码：
 
 ```SnackPlayer name=Multiple%20Components
-import React from 'react';
 import {Text, View} from 'react-native';
 
 const Cat = () => {
@@ -227,7 +216,6 @@ export default Cafe;
 <TabItem value="javascript">
 
 ```SnackPlayer name=Multiple%20Props&ext=js
-import React from 'react';
 import {Text, View} from 'react-native';
 
 const Cat = props => {
@@ -255,7 +243,6 @@ export default Cafe;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Multiple%20Props&ext=tsx
-import React from 'react';
 import {Text, View} from 'react-native';
 
 type CatProps = {
@@ -289,7 +276,6 @@ export default Cafe;
 大多数 React Native 的核心组件也可以用 props 定制。例如，当使用 [`Image`](image) 时，你传递一个名为 [`source`](image#source) 的 prop 来定义它显示什么图像：
 
 ```SnackPlayer name=Props
-import React from 'react';
 import {Text, View, Image} from 'react-native';
 
 const CatApp = () => {
@@ -315,7 +301,7 @@ export default CatApp;
 注意 `style` 的宽度和高度周围的双花括号 `{{ }}`。在 JSX 中，JavaScript 值使用 `{}` 引用。如果你传递的不是字符串而是其他内容作为 props，比如数组或数字，这很方便：`<Cat food={["fish", "kibble"]} age={2} />`。但是，JS 对象 **_也_** 用花括号表示：`{width: 200, height: 200}`。因此，要在 JSX 中传递 JS 对象，你必须将对象包裹在 **另一对** 花括号中：`{{width: 200, height: 200}}`
 :::
 
-你可以使用 props 和核心组件 [`Text`](text)、[`Image`](image) 和 [`View`](view) 构建许多东西！但要构建交互式的東西，你需要 state。
+你可以使用 props 和核心组件 [`Text`](text)、[`Image`](image) 和 [`View`](view) 构建许多东西！但要构建交互式的东西，你需要 state。
 
 ## State
 
@@ -333,7 +319,7 @@ export default CatApp;
 <TabItem value="javascript">
 
 ```SnackPlayer name=State&ext=js
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Button, Text, View} from 'react-native';
 
 const Cat = props => {
@@ -371,7 +357,7 @@ export default Cafe;
 <TabItem value="typescript">
 
 ```SnackPlayer name=State&ext=tsx
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Button, Text, View} from 'react-native';
 
 type CatProps = {
@@ -415,7 +401,7 @@ export default Cafe;
 首先，你需要像这样从 React 导入 `useState`：
 
 ```tsx
-import React, {useState} from 'react';
+import {useState} from 'react';
 ```
 
 然后你在组件函数内部调用 `useState` 来声明组件的 state。在此示例中，`useState` 创建一个 `isHungry` state 变量：
@@ -460,7 +446,8 @@ const Cat = (props: CatProps) => {
 ```
 
 :::info
-你可能已经注意到，虽然 `isHungry` 是一个 [const](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/const)，但它似乎可以重新赋值！发生的情况是，当像 `setIsHungry` 这样的 state 设置函数被调用时，其组件将重新渲染。在此例中，`Cat` 函数将再次运行——这次，`useState` 将给我们 `isHungry` 的下一个值。
+You might’ve noticed that although `isHungry` is a [const](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/const), it is seemingly reassignable! The `const` keyword here does not mean that the state itself is immutable. Rather, it means that the reference to the object, that contains the state and the function to update it, will not change.
+What is happening is when a state-setting function like `setIsHungry` is called, its component will re-render. In this case the `Cat` function will run again—and this time, `useState` will give us the next value of `isHungry`.
 :::
 
 最后，将你的猫放入 `Cafe` 组件中：

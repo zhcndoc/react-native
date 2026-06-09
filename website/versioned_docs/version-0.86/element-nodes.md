@@ -8,19 +8,19 @@ title: 元素节点
 它们由所有原生组件以及许多内置组件通过 refs 提供：
 
 ```SnackPlayer ext=js&name=Element%20instances%20example
-import * as React from 'react';
-import { View, SafeAreaView, StyleSheet, Text } from 'react-native';
+import {useEffect, useRef, useState} from 'react';
+import {View, SafeAreaView, StyleSheet, Text} from 'react-native';
 
 const ViewWithRefs = () => {
-  const ref = React.useRef(null);
-  const [viewInfo, setViewInfo] = React.useState('');
+  const ref = useRef(null);
+  const [viewInfo, setViewInfo] = useState('');
 
-  React.useEffect(() => {
-    // `element` 是一个实现了此处所述接口的对象。
+  useEffect(() => {
+    // `element` 是这里描述的接口的一个实现对象。
     const element = ref.current;
     const rect = JSON.stringify(element.getBoundingClientRect());
     setViewInfo(
-      `边界矩形为：${rect}。\n文本内容为：${element.textContent}`,
+      `Bounding rect is: ${rect}.\nText content is: ${element.textContent}`,
     );
   }, []);
 
@@ -48,14 +48,14 @@ export default ViewWithRefs;
 ```
 
 :::info
-请注意，某些内置组件仅仅是其他组件（包括原生组件）的容器。例如，`ScrollView` 在内部渲染一个原生滚动视图和一个原生视图，它们可通过其提供的 ref 以及 `getNativeScrollRef()` 和 `getInnerViewRef()` 等方法访问。
+请注意，某些内置组件只是其他组件（包括原生组件）的容器。例如，`ScrollView` 会在内部渲染一个原生滚动视图和一个原生视图，这些都可以通过它提供的 ref 及 `getNativeScrollRef()` 和 `getInnerViewRef()` 等方法访问。
 :::
 
 ---
 
 ## 参考
 
-### 兼容 Web 的 API
+### Web 兼容 API
 
 来自 [`HTMLElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement)：
 
@@ -90,12 +90,12 @@ export default ViewWithRefs;
   - [`previousElementSibling`](https://developer.mozilla.org/en-US/docs/Web/API/Element/previousElementSibling)
   - [`scrollHeight`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight)
   - [`scrollLeft`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollLeft)
-    - ⚠️ 对于内置组件，只有 `ScrollView` 实例可以返回非零值。
+    - ⚠️ 对于内置组件，只有 `ScrollView` 实例才能返回非零值。
   - [`scrollTop`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTop)
-    - ⚠️ 对于内置组件，只有 `ScrollView` 实例可以返回非零值。
+    - ⚠️ 对于内置组件，只有 `ScrollView` 实例才能返回非零值。
   - [`scrollWidth`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollWidth)
   - [`tagName`](https://developer.mozilla.org/en-US/docs/Web/API/Element/tagName)
-    - ℹ️ 返回一个规范化的原生组件名称，并以前缀 `RN:` 开头，例如 `RN:View`。
+    - ℹ️ 返回一个标准化的原生组件名称，并以 `RN:` 为前缀，例如 `RN:View`。
   - [`textContent`](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent)
 - 方法
   - [`getBoundingClientRect()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect)
@@ -115,7 +115,7 @@ export default ViewWithRefs;
   - [`nodeType`](https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType)
   - [`nodeValue`](https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeValue)
   - [`ownerDocument`](https://developer.mozilla.org/en-US/docs/Web/API/Node/ownerDocument)
-    - ℹ️ 将返回渲染此组件时所在的 [document node](/docs/next/document-nodes)。
+    - ℹ️ 将返回该组件被渲染所在的[文档节点](/docs/next/document-nodes)。
   - [`parentElement`](https://developer.mozilla.org/en-US/docs/Web/API/Node/parentElement)
   - [`parentNode`](https://developer.mozilla.org/en-US/docs/Web/API/Node/parentNode)
   - [`previousSibling`](https://developer.mozilla.org/en-US/docs/Web/API/Node/previousSibling)
@@ -124,7 +124,7 @@ export default ViewWithRefs;
   - [`compareDocumentPosition()`](https://developer.mozilla.org/en-US/docs/Web/API/Node/compareDocumentPosition)
   - [`contains()`](https://developer.mozilla.org/en-US/docs/Web/API/Node/contains)
   - [`getRootNode()`](https://developer.mozilla.org/en-US/docs/Web/API/Node/getRootNode)
-    - ℹ️ 如果组件未挂载，将返回其自身的引用。
+    - ℹ️ 如果组件尚未挂载，将返回其自身的引用。
   - [`hasChildNodes()`](https://developer.mozilla.org/en-US/docs/Web/API/Node/hasChildNodes)
 
 ### 旧版 API

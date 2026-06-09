@@ -1,14 +1,14 @@
 ---
 id: settings
-title: Settings
+title: 设置
 ---
 
-`Settings` serves as a wrapper for [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults), a persistent key-value store available only on iOS.
+`Settings` 作为 [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults) 的包装器使用，它是一个仅在 iOS 上可用的持久化键值存储。
 
-## Example
+## 示例
 
 ```SnackPlayer name=Settings%20Example&supportedPlatforms=ios
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Button, Settings, StyleSheet, Text} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -18,21 +18,21 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <Text>Stored value:</Text>
+        <Text>存储的值：</Text>
         <Text style={styles.value}>{data}</Text>
         <Button
           onPress={() => {
             Settings.set({data: 'React'});
             setData(Settings.get('data'));
           }}
-          title="Store 'React'"
+          title="存储 'React'"
         />
         <Button
           onPress={() => {
             Settings.set({data: 'Native'});
             setData(Settings.get('data'));
           }}
-          title="Store 'Native'"
+          title="存储 'Native'"
         />
       </SafeAreaView>
     </SafeAreaProvider>
@@ -56,9 +56,9 @@ export default App;
 
 ---
 
-# Reference
+# 参考
 
-## Methods
+## 方法
 
 ### `clearWatch()`
 
@@ -66,7 +66,7 @@ export default App;
 static clearWatch(watchId: number);
 ```
 
-`watchId` is the number returned by `watchKeys()` when the subscription was originally configured.
+`watchId` 是在最初配置订阅时由 `watchKeys()` 返回的数字。
 
 ---
 
@@ -76,7 +76,7 @@ static clearWatch(watchId: number);
 static get(key: string): any;
 ```
 
-Get the current value for a given `key` in `NSUserDefaults`.
+获取 `NSUserDefaults` 中某个给定 `key` 的当前值。
 
 ---
 
@@ -86,7 +86,7 @@ Get the current value for a given `key` in `NSUserDefaults`.
 static set(settings: Record<string, any>);
 ```
 
-Set one or more values in `NSUserDefaults`.
+在 `NSUserDefaults` 中设置一个或多个值。
 
 ---
 
@@ -96,8 +96,8 @@ Set one or more values in `NSUserDefaults`.
 static watchKeys(keys: string | array<string>, callback: () => void): number;
 ```
 
-Subscribe to be notified when the value for any of the keys specified by the `keys` parameter has been changed in `NSUserDefaults`. Returns a `watchId` number that may be used with `clearWatch()` to unsubscribe.
+订阅以在 `NSUserDefaults` 中指定的 `keys` 参数所包含的任意键的值发生变化时收到通知。返回一个可与 `clearWatch()` 一起使用以取消订阅的 `watchId` 数字。
 
 :::note
-`watchKeys()` by design ignores internal `set()` calls and fires callback only on changes preformed outside of React Native code.
+`watchKeys()` 按设计会忽略内部的 `set()` 调用，并且仅在 React Native 代码之外发生更改时触发回调。
 :::

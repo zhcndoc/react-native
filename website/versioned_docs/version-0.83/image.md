@@ -14,7 +14,6 @@ title: 图片
 ## 示例
 
 ```SnackPlayer name=Image%20Example
-import React from 'react';
 import {Image, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -61,7 +60,6 @@ export default DisplayAnImage;
 你也可以为图片添加 `style`：
 
 ```SnackPlayer name=Styled%20Image%20Example
-import React from 'react';
 import {Image, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -556,7 +554,7 @@ static queryCache(
 
 | 名称                                                         | 类型   | 描述                     |
 | ------------------------------------------------------------ | ------ | ------------------------ |
-| urls <div className="label basic required">必填</div>        | array  | 要检查缓存的图片 URL 列表 |
+| urls <div className="label basic required">必填</div>      | array  | 要检查缓存的图片 URL 列表 |
 
 ---
 

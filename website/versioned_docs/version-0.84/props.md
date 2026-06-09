@@ -7,10 +7,9 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 大多数组件可以在创建时通过不同的参数进行自定义。这些创建时传入的参数称为 `props`，即属性的缩写。
 
-例如，一个基本的 React Native 组件是 `Image`。当你创建一个图片时，可以使用一个名为 `source` 的 prop 来控制显示哪张图片。
+例如，一个基本的 React Native 组件是 `Image`。当你创建一张图片时，可以使用一个名为 `source` 的 prop 来控制显示哪张图片。
 
 ```SnackPlayer name=Props
-import React from 'react';
 import {Image} from 'react-native';
 
 const Bananas = () => {
@@ -33,7 +32,6 @@ export default Bananas;
 <TabItem value="javascript">
 
 ```SnackPlayer name=Props&ext=js
-import React from 'react';
 import {Text, View} from 'react-native';
 
 const Greeting = props => {
@@ -61,7 +59,6 @@ export default LotsOfGreetings;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Props&ext=tsx
-import React from 'react';
 import {Text, View} from 'react-native';
 
 type GreetingProps = {

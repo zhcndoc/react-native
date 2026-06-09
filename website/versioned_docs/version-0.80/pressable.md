@@ -3,47 +3,47 @@ id: pressable
 title: Pressable
 ---
 
-Pressable 是一个核心组件包装器，可以检测其定义的任意子元素上的各种按压交互阶段。
+Pressable 是一个核心组件包装器，能够检测其任意已定义子组件上的各种按压交互阶段。
 
 ```tsx
 <Pressable onPress={onPressFunction}>
-  <Text>I'm pressable!</Text>
+  <Text>我是可按压的！</Text>
 </Pressable>
 ```
 
 ## 工作原理
 
-在由 `Pressable` 包装的元素上：
+在被 `Pressable` 包裹的元素上：
 
-- [`onPressIn`](#onpressin) 在按压被激活时调用。
-- [`onPressOut`](#onpressout) 在按压手势被停用时调用。
+- [`onPressIn`](#onpressin) 会在按压开始时调用。
+- [`onPressOut`](#onpressout) 会在按压手势结束时调用。
 
-在按下 [`onPressIn`](#onpressin) 之后，会发生以下两种情况之一：
+在触发 [`onPressIn`](#onpressin) 后，会发生以下两种情况之一：
 
-1. 用户将手指移开，触发 [`onPressOut`](#onpressout)，随后触发 [`onPress`](#onpress)。
-2. 如果用户在移开手指之前保持手指按压超过 500 毫秒，则触发 [`onLongPress`](#onlongpress)。（当用户移开手指时，[`onPressOut`](#onpressout) 仍会触发。）
+1. 用户移开手指，触发 [`onPressOut`](#onpressout)，随后触发 [`onPress`](#onpress)。
+2. 如果用户在移开手指之前停留超过 500 毫秒，就会触发 [`onLongPress`](#onlongpress)。（当他们移开手指时，[`onPressOut`](#onpressout) 仍然会触发。）
 
-<img src="/docs/assets/d_pressable_pressing.svg" width="1000" alt="onPress 事件序列图。" />
+<img src="/docs/assets/d_pressable_pressing.svg" width="1000" alt="按压事件按顺序发生的示意图。" />
 
-手指并不是最精确的仪器，用户意外激活错误的元素或错过激活区域是很常见的。为了提供帮助，`Pressable` 具有一个可选的 `HitRect`，你可以使用它来定义触摸可以在距离包装元素多远的地方注册。按压可以在 `HitRect` 内的任何位置开始。
+手指并不是最精确的工具，用户经常会不小心激活错误的元素，或错过激活区域。为此，`Pressable` 提供了一个可选的 `HitRect`，你可以用它来定义触摸在距离包裹元素多远的位置内仍可被识别。按压可以从 `HitRect` 内的任意位置开始。
 
-`PressRect` 允许按压移出元素及其 `HitRect`，同时保持激活状态并有资格成为“按压”——想象一下将你按在按钮上的手指慢慢滑开。
+`PressRect` 允许按压在保持激活状态并仍可被视为一次“按压”的前提下，超出元素及其 `HitRect` 移动——可以把它想象成手指从正在按下的按钮上缓慢滑开。
 
-> 触摸区域永远不会超出父视图边界，如果触摸命中两个重叠视图，兄弟视图的 Z-index 始终优先。
+> 触摸区域永远不会超出父视图边界；如果一次触摸命中两个重叠视图，兄弟视图的 Z-index 始终优先。
 
 <figure>
-  <img src="/docs/assets/d_pressable_anatomy.svg" width="1000" alt="HitRect 和 PressRect 及其工作原理图。" />
+  <img src="/docs/assets/d_pressable_anatomy.svg" width="1000" alt="HitRect 和 PressRect 及其工作方式的示意图。" />
   <figcaption>
     你可以使用 <code>hitSlop</code> 设置 <code>HitRect</code>，并使用 <code>pressRetentionOffset</code> 设置 <code>PressRect</code>。
   </figcaption>
 </figure>
 
-> `Pressable` 使用 React Native 的 `Pressability` API。有关 Pressability 的状态机流程及其工作原理的更多信息，请查看 [Pressability](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Pressability/Pressability.js#L350) 的实现。
+> `Pressable` 使用 React Native 的 `Pressability` API。有关 Pressability 状态机流程及其工作方式的更多信息，请查看 [Pressability](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Pressability/Pressability.js#L350) 的实现。
 
 ## 示例
 
 ```SnackPlayer name=Pressable
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -110,9 +110,9 @@ export default App;
 
 ### `android_disableSound` <div className="label android">Android</div>
 
-如果为 true，则在按压时不播放 Android 系统声音。
+如果为 true，则在按压时不会播放 Android 系统音效。
 
-| 类型    | 默认值 |
+| Type    | Default |
 | ------- | ------- |
 | boolean | `false` |
 
@@ -120,31 +120,31 @@ export default App;
 
 启用 Android 涟漪效果并配置其属性。
 
-| 类型                                   |
+| Type                                   |
 | -------------------------------------- |
 | [RippleConfig](pressable#rippleconfig) |
 
 ### `children`
 
-可以是子节点，也可以是一个函数，该函数接收一个布尔值，反映组件当前是否被按压。
+子元素，也可以是一个接收布尔值的函数，用于表示组件当前是否处于按下状态。
 
-| 类型                     |
+| Type                     |
 | ------------------------ |
 | [React Node](react-node) |
 
 ### `unstable_pressDelay`
 
-按下后等待调用 `onPressIn` 的持续时间（毫秒）。
+按下后，在调用 `onPressIn` 之前等待的时长（毫秒）。
 
-| 类型   |
+| Type   |
 | ------ |
 | number |
 
 ### `delayLongPress`
 
-从 `onPressIn` 到调用 `onLongPress` 的持续时间（毫秒）。
+从 `onPressIn` 开始到调用 `onLongPress` 之间的时长（毫秒）。
 
-| 类型   | 默认值 |
+| Type   | Default |
 | ------ | ------- |
 | number | `500`   |
 
@@ -152,39 +152,39 @@ export default App;
 
 是否禁用按压行为。
 
-| 类型    | 默认值 |
+| Type    | Default |
 | ------- | ------- |
 | boolean | `false` |
 
 ### `hitSlop`
 
-设置元素外部可检测到按压的额外距离。
+设置元素外可检测到按压的额外距离。
 
-| 类型                   |
+| Type                   |
 | ---------------------- |
-| [Rect](rect) 或 number |
+| [Rect](rect) or number |
 
 ### `onHoverIn`
 
-当悬停被激活以提供视觉反馈时调用。
+在悬停激活时调用，以提供视觉反馈。
 
-| 类型                                                                                                      |
+| Type                                                                                                      |
 | --------------------------------------------------------------------------------------------------------- |
 | `md ({ nativeEvent: [MouseEvent](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent) }) => void` |
 
 ### `onHoverOut`
 
-当悬停被停用以撤销视觉反馈时调用。
+在悬停取消激活时调用，以撤销视觉反馈。
 
-| 类型                                                                                                      |
+| Type                                                                                                      |
 | --------------------------------------------------------------------------------------------------------- |
 | `md ({ nativeEvent: [MouseEvent](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent) }) => void` |
 
 ### `onLongPress`
 
-如果 `onPressIn` 后的持续时间超过 500 毫秒，则调用。此时间段可通过 [`delayLongPress`](#delaylongpress) 自定义。
+如果 `onPressIn` 之后的时间超过 500 毫秒，则会调用。此时间段可通过 [`delayLongPress`](#delaylongpress) 自定义。
 
-| 类型                                                   |
+| Type                                                   |
 | ------------------------------------------------------ |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => void` |
 
@@ -192,55 +192,55 @@ export default App;
 
 在 `onPressOut` 之后调用。
 
-| 类型                                                   |
+| Type                                                   |
 | ------------------------------------------------------ |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => void` |
 
 ### `onPressIn`
 
-当触摸开始时立即调用，在 `onPressOut` 和 `onPress` 之前。
+在触摸开始时立即调用，早于 `onPressOut` 和 `onPress`。
 
-| 类型                                                   |
+| Type                                                   |
 | ------------------------------------------------------ |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => void` |
 
 ### `onPressMove`
 
-当按压位置移动时调用。
+在按压位置移动时调用。
 
-| 类型                                                   |
+| Type                                                   |
 | ------------------------------------------------------ |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => void` |
 
 ### `onPressOut`
 
-当触摸释放时调用。
+在触摸释放时调用。
 
-| 类型                                                   |
+| Type                                                   |
 | ------------------------------------------------------ |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => void` |
 
 ### `pressRetentionOffset`
 
-在此视图外部的额外距离，在此距离内的触摸在触发 `onPressOut` 之前仍被视为按压。
+在触发 `onPressOut` 之前，触摸在该视图外仍会被视为按压的额外距离。
 
-| 类型                   | 默认值                                      |
+| Type                   | Default                                      |
 | ---------------------- | -------------------------------------------- |
-| [Rect](rect) 或 number | `{bottom: 30, left: 20, right: 20, top: 20}` |
+| [Rect](rect) or number | `{bottom: 30, left: 20, right: 20, top: 20}` |
 
 ### `style`
 
-可以是视图样式，也可以是一个函数，该函数接收一个布尔值反映组件当前是否被按压，并返回视图样式。
+可以是视图样式，也可以是一个接收布尔值的函数，用于表示组件当前是否处于按下状态，并返回视图样式。
 
-| 类型                                                                                            |
+| Type                                                                                            |
 | ----------------------------------------------------------------------------------------------- |
-| [View Style](view-style-props) 或 `md ({ pressed: boolean }) => [View Style](view-style-props)` |
+| [View Style](view-style-props) or `md ({ pressed: boolean }) => [View Style](view-style-props)` |
 
 ### `testOnly_pressed`
 
 仅用于文档或测试（例如快照测试）。
 
-| 类型    | 默认值 |
+| Type    | Default |
 | ------- | ------- |
 | boolean | `false` |
 
@@ -250,15 +250,15 @@ export default App;
 
 `android_ripple` 属性的涟漪效果配置。
 
-| 类型   |
+| Type   |
 | ------ |
 | object |
 
-**属性：**
+**Properties:**
 
-| 名称       | 类型            | 必填 | 描述                                                                                                                                                                                                                                                  |
+| Name       | Type            | Required | Description                                                                                                                                                                                                                                                  |
 | ---------- | --------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| color      | [color](colors) | 否       | 定义涟漪效果的颜色。                                                                                                                                                                                                                      |
-| borderless | boolean         | 否       | 定义涟漪效果是否不应包含边框。                                                                                                                                                                                                          |
-| radius     | number          | 否       | 定义涟漪效果的半径。                                                                                                                                                                                                                     |
-| foreground | boolean         | 否       | 设置为 true 可将涟漪效果添加到视图的前景而不是背景。如果你的某个子视图有自己的背景，或者你例如正在显示图像，并且你不希望涟漪被它们覆盖，这很有用。 |
+| color      | [color](colors) | No       | 定义涟漪效果的颜色。                                                                                                                                                                                                                                          |
+| borderless | boolean         | No       | 定义涟漪效果是否不包含边框。                                                                                                                                                                                                                                  |
+| radius     | number          | No       | 定义涟漪效果的半径。                                                                                                                                                                                                                                          |
+| foreground | boolean         | No       | 设置为 true 时，会将涟漪效果添加到视图前景，而不是背景。如果你的某个子视图本身有背景，或者你例如正在显示图片，并且不希望涟漪被它们遮挡，这会很有用。 |

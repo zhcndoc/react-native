@@ -3,10 +3,10 @@ id: document-nodes
 title: 文档节点
 ---
 
-文档节点表示一个完整的原生视图树。使用原生导航的应用会为每个屏幕提供一个独立的文档节点。不使用原生导航的应用通常会为整个应用提供一个单一文档（类似于 Web 上的单页应用）。
+文档节点表示完整的原生视图树。使用原生导航的应用会为每个屏幕提供一个单独的文档节点。不使用原生导航的应用通常会为整个应用提供单个文档（类似于 Web 上的单页应用）。
 
 ```SnackPlayer ext=js&name=Document%20instance%20example
-import * as React from 'react';
+import {useEffect, useRef} from 'react';
 import {Text, TextInput, View} from 'react-native';
 
 function MyComponent(props) {
@@ -19,10 +19,10 @@ function MyComponent(props) {
 }
 
 export default function AccessingDocument() {
-  const ref = React.useRef(null);
+  const ref = useRef(null);
 
-  React.useEffect(() => {
-    // 获取屏幕上的主文本输入框，并在初始加载后聚焦它。
+  useEffect(() => {
+    // 获取屏幕中的主文本输入框，并在初次加载后聚焦它。
     const element = ref.current;
     const doc = element.ownerDocument;
     const textInput = doc.getElementById('main-text-input');

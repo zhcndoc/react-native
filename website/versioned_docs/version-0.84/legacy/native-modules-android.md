@@ -313,7 +313,6 @@ override fun getPackages(): List<ReactPackage> =
 找一个合适位置调用原生模块的 `createCalendarEvent()` 方法。以下示例显示了一个组件 `NewModuleButton`，您可以在它的 `onPress()` 函数内部调用原生模块。
 
 ```tsx
-import React from 'react';
 import {NativeModules, Button} from 'react-native';
 
 const NewModuleButton = () => {
@@ -397,10 +396,10 @@ yarn android
 
 ```tsx
 /**
-* 这个文件将原生的 CalendarModule 模块暴露为 JS 模块，包含一个函数 'createCalendarEvent'，参数如下：
+* 该文件将原生的 CalendarModule 模块暴露为 JS 模块，包含一个函数 'createCalendarEvent'，参数如下：
 
-* 1. String name: 活动名称字符串
-* 2. String location: 活动地点字符串
+* 1. String name: 事件名称字符串
+* 2. String location: 事件地点字符串
 */
 import {NativeModules} from 'react-native';
 const {CalendarModule} = NativeModules;
@@ -411,10 +410,10 @@ export default CalendarModule;
 
 ```tsx
 /**
- * 这个文件将原生的 CalendarModule 模块暴露为 JS 模块，包含一个函数 'createCalendarEvent'，参数如下：
+ * 该文件将原生的 CalendarModule 模块暴露为 JS 模块，包含一个函数 'createCalendarEvent'，参数如下：
  *
- * 1. String name: 活动名称字符串
- * 2. String location: 活动地点字符串
+ * 1. String name: 事件名称字符串
+ * 2. String location: 事件地点字符串
  */
 import {NativeModules} from 'react-native';
 const {CalendarModule} = NativeModules;
@@ -596,7 +595,7 @@ const onPress = () => {
     'Party',
     'My House',
     eventId => {
-      console.log(`Created a new event with id ${eventId}`);
+      console.log(`创建了一个新事件，id 为 ${eventId}`);
     },
   );
 };
@@ -640,9 +639,9 @@ const onPress = () => {
     'testLocation',
     (error, eventId) => {
       if (error) {
-        console.error(`Error found! ${error}`);
+        console.error(`发现错误！${error}`);
       }
-      console.log(`event id ${eventId} returned`);
+      console.log(`返回的 event id ${eventId}`);
     },
   );
 };
@@ -683,10 +682,10 @@ const onPress = () => {
     'testName',
     'testLocation',
     error => {
-      console.error(`Error found! ${error}`);
+      console.error(`发现错误！${error}`);
     },
     eventId => {
-      console.log(`event id ${eventId} returned`);
+      console.log(`返回的 event id ${eventId}`);
     },
   );
 };
@@ -748,7 +747,7 @@ const onSubmit = async () => {
       'Party',
       'My House',
     );
-    console.log(`Created a new event with id ${eventId}`);
+    console.log(`创建了一个新事件，id 为 ${eventId}`);
   } catch (e) {
     console.error(e);
   }

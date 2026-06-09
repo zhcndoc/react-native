@@ -3,10 +3,9 @@ id: stylesheet
 title: 样式表
 ---
 
-样式表是类似于 CSS 样式表的一种抽象。
+样式表是一种类似于 CSS 样式表的抽象。
 
 ```SnackPlayer name=StyleSheet
-import React from 'react';
 import {StyleSheet, Text} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -62,7 +61,6 @@ static compose(style1: Object, style2: Object): Object | Object[];
 合并两个样式，使得 `style2` 会覆盖 `style1` 中的任何样式。如果任一样式为假值，则返回另一个样式，而不分配数组，从而节省分配且保持纯组件检查的引用相等性。
 
 ```SnackPlayer name=Compose
-import React from 'react';
 import {StyleSheet, Text} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -123,7 +121,6 @@ static flatten(style: Array<Object extends Record<string, ViewStyle | ImageStyle
 将样式对象数组展平成一个合并的样式对象。
 
 ```SnackPlayer name=Flatten
-import React from 'react';
 import {StyleSheet, Text} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -174,7 +171,7 @@ export default App;
 
 ### `setStyleAttributePreprocessor()`
 
-:::warning[Experimental]
+:::warning[实验性]
 破坏性变更很可能会经常发生，并且不会被可靠地通知。整个功能也许会被删除，谁知道呢？请自行承担风险使用。
 :::
 
@@ -193,10 +190,9 @@ static setStyleAttributePreprocessor(
 
 ### `absoluteFill`
 
-一个非常常见的用法是创建使用绝对定位且四边零偏移的遮罩（`position: 'absolute', left: 0, right: 0, top: 0, bottom: 0`），因此 `absoluteFill` 可用于方便且减少重复这些样式。如果愿意，`absoluteFill` 也可以用来创建样式表中的自定义条目，例如：
+一个非常常见的用法是创建使用绝对定位且四边零偏移的遮罩（`position: 'absolute', left: 0, right: 0, top: 0, bottom: 0`），因此 `absoluteFill` 可用于方便地减少这些样式的重复。如果愿意，`absoluteFill` 也可以用来创建样式表中的自定义条目，例如：
 
 ```SnackPlayer name=absoluteFill
-import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -321,7 +317,6 @@ export default App;
 这是平台上细线的宽度。它可以用作边框或两个元素之间分隔线的厚度。示例：
 
 ```SnackPlayer name=hairlineWidth
-import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
 const App = () => (

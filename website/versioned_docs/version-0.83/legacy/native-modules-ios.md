@@ -139,17 +139,16 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(getName)
 下面是一个例子组件 `NewModuleButton`，你可以放入你的应用。你可以在它的 `onPress()` 函数中调用原生模块：
 
 ```tsx
-import React from 'react';
 import {Button} from 'react-native';
 
 const NewModuleButton = () => {
   const onPress = () => {
-    console.log('We will invoke the native module here!');
+    console.log('我们将在这里调用原生模块！');
   };
 
   return (
     <Button
-      title="Click to invoke your native module!"
+      title="点击调用你的原生模块！"
       color="#841584"
       onPress={onPress}
     />

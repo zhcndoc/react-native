@@ -5,21 +5,20 @@ title: I18nManager
 
 # I18nManager
 
-`I18nManager` 模块提供用于管理从右到左 (RTL) 布局支持的工具，适用于阿拉伯语、希伯来语和其他语言。它提供用于控制 RTL 行为和检查当前布局方向的方法。
+`I18nManager` 模块提供了用于管理从右到左（RTL）布局支持的工具，适用于阿拉伯语、希伯来语等语言。它提供了控制 RTL 行为以及检查当前布局方向的方法。
 
 ## 示例
 
 ### 根据 RTL 更改位置和动画
 
-如果你绝对定位元素以与其他 flexbox 元素对齐，它们在 RTL 语言中可能无法对齐。可以使用 `isRTL` 来调整对齐或动画。
+如果你将元素绝对定位以与其他 flexbox 元素对齐，它们在 RTL 语言中可能不会对齐。可以使用 `isRTL` 来调整对齐或动画。
 
 ```SnackPlayer name=I18nManager%20Change%20Absolute%20Positions%20And%20Animations
-import React from 'react';
 import {I18nManager, Text, View} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
-  // 更改为 `true` 以在非 RTL 语言中查看效果
+  // 将其更改为 `true` 可在非 RTL 语言中查看效果
   const isRTL = I18nManager.isRTL;
   return (
     <SafeAreaProvider>
@@ -42,7 +41,7 @@ export default App;
 ### 开发期间
 
 ```SnackPlayer name=I18nManager%20During%20Development
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Alert, I18nManager, StyleSheet, Switch, Text, View} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -53,15 +52,15 @@ const App = () => {
       <SafeAreaView>
         <View style={styles.container}>
           <View style={styles.forceRtl}>
-            <Text>Force RTL in Development:</Text>
+            <Text>在开发中强制使用 RTL：</Text>
             <Switch value={rtl} onValueChange={(value) => {
               setRTL(value);
               I18nManager.forceRTL(value);
               Alert.alert(
-                'Reload this page',
-                'Please reload this page to change the UI direction! ' +
-                  'All examples in this app will be affected. ' +
-                  'Check them out to see what they look like in RTL layout.',
+                '重新加载此页面',
+                '请重新加载此页面以更改 UI 方向！' +
+                  '此应用中的所有示例都会受到影响。' +
+                  '查看它们以了解它们在 RTL 布局中的样子。',
               );
             }} />
           </View>
@@ -95,18 +94,18 @@ export default App;
 static isRTL: boolean;
 ```
 
-一个布尔值，指示应用当前是否处于 RTL 布局模式。
+一个布尔值，表示应用当前是否处于 RTL 布局模式。
 
-`isRTL` 的值由以下逻辑确定：
+`isRTL` 的值由以下逻辑决定：
 
-- 如果 `forceRTL` 为 `true`，`isRTL` 返回 `true`
-- 如果 `allowRTL` 为 `false`，`isRTL` 返回 `false`
+- 如果 `forceRTL` 为 `true`，则 `isRTL` 返回 `true`
+- 如果 `allowRTL` 为 `false`，则 `isRTL` 返回 `false`
 - 否则，在以下情况下 `isRTL` 将为 `true`：
-  - **iOS:**
-    - 设备上的用户首选语言是 RTL 语言
-    - 应用定义的本地化包括用户选择的语言（如在 Xcode 项目文件中定义的那样（`knownRegions = (...)`））
-  - **Android:**
-    - 设备上的用户首选语言是 RTL 语言
+  - **iOS：**
+    - 设备上用户首选的语言是 RTL 语言
+    - 应用定义的本地化内容包含用户选择的语言（如 Xcode 项目文件中定义的 `knownRegions = (...)`）
+  - **Android：**
+    - 设备上用户首选的语言是 RTL 语言
     - 应用的 `AndroidManifest.xml` 在 `<application>` 元素上定义了 `android:supportsRTL="true"`
 
 ### `doLeftAndRightSwapInRTL`
@@ -115,7 +114,7 @@ static isRTL: boolean;
 static doLeftAndRightSwapInRTL: boolean;
 ```
 
-一个布尔值，指示在 RTL 模式下是否应自动交换左右样式属性。启用时，在 RTL 布局中左变为右，右变为左。
+一个布尔值，表示在 RTL 模式下是否应自动交换 left 和 right 样式属性。启用后，在 RTL 布局中 left 会变为 right，right 会变为 left。
 
 ## 方法
 
@@ -129,12 +128,12 @@ static allowRTL: (allowRTL: boolean) => void;
 
 **参数：**
 
-- `allowRTL` (boolean): 是否允许 RTL 布局
+- `allowRTL`（boolean）：是否允许 RTL 布局
 
 **重要说明：**
 
-- 更改将在下次应用启动时生效，而不是立即生效
-- 此设置在应用重启后依然保留
+- 更改会在应用下次启动时生效，不会立即生效
+- 该设置会在应用重启后保留
 
 ### `forceRTL()`
 
@@ -142,19 +141,19 @@ static allowRTL: (allowRTL: boolean) => void;
 static forceRTL: (forced: boolean) => void;
 ```
 
-强制应用使用 RTL 布局，无论设备语言设置如何。这主要用于在开发期间测试 RTL 布局。
+强制应用使用 RTL 布局，而不考虑设备语言设置。这主要用于在开发期间测试 RTL 布局。
 
-避免在生产应用中强制 RTL，因为它需要完全重启应用才能生效，这会导致用户体验不佳。
+避免在生产应用中强制启用 RTL，因为它需要完整重启应用才能生效，这会带来较差的用户体验。
 
 **参数：**
 
-- `forced` (boolean): 是否强制 RTL 布局
+- `forced`（boolean）：是否强制使用 RTL 布局
 
 **重要说明：**
 
-- 更改将在下次应用启动时完全生效，而不是立即生效
-- 该设置在应用重启后依然保留
-- 仅用于开发和测试。在生产环境中，你应该要么完全禁止 RTL，要么适当处理它（参见 `isRTL`）
+- 更改会在应用下次启动时完全生效，不会立即生效
+- 该设置会在应用重启后保留
+- 仅用于开发和测试。在生产环境中，你应该完全禁止 RTL，或妥善处理它（参见 `isRTL`）
 
 ### `swapLeftAndRightInRTL()`
 
@@ -162,4 +161,4 @@ static forceRTL: (forced: boolean) => void;
 static swapLeftAndRightInRTL: (swapLeftAndRight: boolean) => void;
 ```
 
-在 RTL 模式下交换左右样式属性。启用时，在 RTL 布局中左变为右，右变为左。不影响 `isRTL` 的值。
+在 RTL 模式下交换 left 和 right 样式属性。启用后，在 RTL 布局中 left 会变为 right，right 会变为 left。不会影响 `isRTL` 的值。

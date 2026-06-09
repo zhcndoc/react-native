@@ -1,13 +1,13 @@
 ---
 id: layoutanimation
-title: LayoutAnimation
+title: 布局动画
 ---
 
-当下一次布局发生时，会自动将视图动画到新的位置。
+当下一次布局发生时，自动将视图动画过渡到新位置。
 
-在函数组件中使用此 API 的常见方式是在更新 state hook 之前调用它，而在类组件中则是在调用 `setState` 之前调用它。
+在函数组件中，常见的使用方式是在更新状态 Hook 之前调用此 API；在类组件中，则是在调用 `setState` 之前调用。
 
-请注意，为了在 **Android** 上正常工作，你需要通过 `UIManager` 设置以下标志：
+请注意，要使其在 **Android** 上正常工作，你需要通过 `UIManager` 设置以下标志：
 
 ```js
 if (Platform.OS === 'android') {
@@ -20,7 +20,7 @@ if (Platform.OS === 'android') {
 ## 示例
 
 ```SnackPlayer name=LayoutAnimation%20Example&supportedPlatforms=android,ios
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {
   LayoutAnimation,
   Platform,
@@ -49,7 +49,7 @@ const App = () => {
             LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
             setExpanded(!expanded);
           }}>
-          <Text>按我来 {expanded ? '收起' : '展开'}！</Text>
+          <Text>按我以{expanded ? '折叠' : '展开'}！</Text>
         </TouchableOpacity>
         {expanded && (
           <View style={style.tile}>
@@ -95,15 +95,15 @@ static configureNext(
 );
 ```
 
-安排在下一次布局时执行动画。
+安排一个动画在下一次布局时发生。
 
 #### 参数：
 
-| 名称               | 类型     | 必需 | 描述                         |
-| ------------------ | -------- | ---- | ---------------------------- |
-| config             | object   | 是   | 见下方配置说明。             |
-| onAnimationDidEnd  | function | 否   | 动画完成时调用。             |
-| onAnimationDidFail | function | 否   | 动画失败时调用。             |
+| 名称                | 类型     | 必需 | 描述                                 |
+| ------------------ | -------- | ---- | ----------------------------------- |
+| config             | object   | 是   | 见下方的配置说明。                   |
+| onAnimationDidEnd  | function | 否   | 动画完成时调用。                     |
+| onAnimationDidFail | function | 否   | 动画失败时调用。                     |
 
 `config` 参数是一个包含以下键的对象。[`create`](layoutanimation.md#create) 会返回一个适用于 `config` 的有效对象，[`Presets`](layoutanimation.md#presets) 对象也都可以作为 `config` 传入。
 
@@ -114,9 +114,9 @@ static configureNext(
 
 传递给 `create`、`update` 或 `delete` 的配置具有以下键：
 
-- `type`，要使用的[动画类型](layoutanimation.md#types)
-- `property`，要动画化的[布局属性](layoutanimation.md#properties)（可选，但建议用于 `create` 和 `delete`）
-- `springDamping`（数字，可选，且仅在 `type: Type.spring` 时使用）
+- `type`，要使用的 [动画类型](layoutanimation.md#types)
+- `property`，要动画化的 [布局属性](layoutanimation.md#properties)（可选，但建议在 `create` 和 `delete` 中使用）
+- `springDamping`（数字，可选，且仅适用于 `type: Type.spring`）
 - `initialVelocity`（数字，可选）
 - `delay`（数字，可选）
 - `duration`（数字，可选）
@@ -129,12 +129,12 @@ static configureNext(
 static create(duration, type, creationProp)
 ```
 
-一个辅助方法，用于创建一个对象（包含 `create`、`update` 和 `delete` 字段）并传入 [`configureNext`](layoutanimation.md#configurenext)。`type` 参数是[动画类型](layoutanimation.md#types)，`creationProp` 参数是[布局属性](layoutanimation.md#properties)。
+一个帮助方法，用于创建一个对象（包含 `create`、`update` 和 `delete` 字段）并传入 [`configureNext`](layoutanimation.md#configurenext)。`type` 参数是一个 [动画类型](layoutanimation.md#types)，`creationProp` 参数是一个 [布局属性](layoutanimation.md#properties)。
 
 **示例：**
 
 ```SnackPlayer name=LayoutAnimation&supportedPlatforms=android,ios
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {
   View,
   Platform,
@@ -167,7 +167,7 @@ const App = () => {
   return (
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
-        <Button title="Toggle Layout" onPress={toggleBox} />
+        <Button title="切换布局" onPress={toggleBox} />
       </View>
       <View
         style={[styles.box, boxPosition === 'left' ? null : styles.moveRight]}
@@ -206,7 +206,7 @@ export default App;
 
 ### 类型
 
-在 [`create`](layoutanimation.md#create) 方法中使用，或在 [`configureNext`](layoutanimation.md#configurenext) 的 `create`/`update`/`delete` 配置中使用的动画类型枚举。（示例用法：`LayoutAnimation.Types.easeIn`）
+一个用于在 [`create`](layoutanimation.md#create) 方法中，或在 [`configureNext`](layoutanimation.md#configurenext) 的 `create`/`update`/`delete` 配置中使用的动画类型枚举。（示例用法：`LayoutAnimation.Types.easeIn`）
 
 | 类型          |
 | ------------- |
@@ -221,7 +221,7 @@ export default App;
 
 ### 属性
 
-在 [`create`](layoutanimation.md#create) 方法中使用，或在 [`configureNext`](layoutanimation.md#configurenext) 的 `create`/`update`/`delete` 配置中使用的布局属性枚举。（示例用法：`LayoutAnimation.Properties.opacity`）
+一个用于在 [`create`](layoutanimation.md#create) 方法中，或在 [`configureNext`](layoutanimation.md#configurenext) 的 `create`/`update`/`delete` 配置中使用的布局属性枚举。（示例用法：`LayoutAnimation.Properties.opacity`）
 
 | 属性       |
 | ---------- |
@@ -236,7 +236,7 @@ export default App;
 
 一组预定义的动画配置，可传入 [`configureNext`](layoutanimation.md#configurenext)。
 
-| 预设          | 值                                                                                                                                                          |
+| 预设           | 值                                                                                                                                                          |
 | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | easeInEaseOut | `create(300, 'easeInEaseOut', 'opacity')`                                                                                                                      |
 | linear        | `create(500, 'linear', 'opacity')`                                                                                                                             |
@@ -246,24 +246,24 @@ export default App;
 
 ### `easeInEaseOut`
 
-使用 `Presets.easeInEaseOut` 调用 `configureNext()`。
+调用 `configureNext()`，并使用 `Presets.easeInEaseOut`。
 
 ---
 
 ### `linear`
 
-使用 `Presets.linear` 调用 `configureNext()`。
+调用 `configureNext()`，并使用 `Presets.linear`。
 
 ---
 
 ### `spring`
 
-使用 `Presets.spring` 调用 `configureNext()`。
+调用 `configureNext()`，并使用 `Presets.spring`。
 
 **示例：**
 
 ```SnackPlayer name=LayoutAnimation&supportedPlatforms=android,ios
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {
   View,
   Platform,

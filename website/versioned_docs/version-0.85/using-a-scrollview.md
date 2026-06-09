@@ -8,7 +8,6 @@ title: 使用 ScrollView
 此示例创建了一个垂直的 `ScrollView`，其中混合了图像和文本。
 
 ```SnackPlayer name=Using%20ScrollView
-import React from 'react';
 import {Image, ScrollView, Text} from 'react-native';
 
 const logo = {
@@ -19,31 +18,31 @@ const logo = {
 
 const App = () => (
   <ScrollView>
-    <Text style={{fontSize: 96}}>Scroll me plz</Text>
+    <Text style={{fontSize: 96}}>向上滚动我吧</Text>
     <Image source={logo} />
     <Image source={logo} />
     <Image source={logo} />
     <Image source={logo} />
     <Image source={logo} />
-    <Text style={{fontSize: 96}}>If you like</Text>
+    <Text style={{fontSize: 96}}>如果你喜欢</Text>
     <Image source={logo} />
     <Image source={logo} />
     <Image source={logo} />
     <Image source={logo} />
     <Image source={logo} />
-    <Text style={{fontSize: 96}}>Scrolling down</Text>
+    <Text style={{fontSize: 96}}>向下滚动</Text>
     <Image source={logo} />
     <Image source={logo} />
     <Image source={logo} />
     <Image source={logo} />
     <Image source={logo} />
-    <Text style={{fontSize: 96}}>What's the best</Text>
+    <Text style={{fontSize: 96}}>最好的是什么</Text>
     <Image source={logo} />
     <Image source={logo} />
     <Image source={logo} />
     <Image source={logo} />
     <Image source={logo} />
-    <Text style={{fontSize: 96}}>Framework around?</Text>
+    <Text style={{fontSize: 96}}>周围的框架？</Text>
     <Image source={logo} />
     <Image source={logo} />
     <Image source={logo} />

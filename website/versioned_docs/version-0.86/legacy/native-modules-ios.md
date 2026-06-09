@@ -141,7 +141,6 @@ return [[UIDevice currentDevice] name];
 在你的应用中找一个你想添加对原生模块的 `createCalendarEvent()` 方法调用的位置。下面是一个组件示例，`NewModuleButton`，你可以将它添加到应用中。你可以在 `NewModuleButton` 的 `onPress()` 函数中调用原生模块。
 
 ```tsx
-import React from 'react';
 import {Button} from 'react-native';
 
 const NewModuleButton = () => {

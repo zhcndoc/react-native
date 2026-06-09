@@ -3,14 +3,14 @@ id: switch
 title: Switch
 ---
 
-渲染一个布尔输入控件。
+渲染一个布尔输入。
 
-这是一个受控组件，需要一个 `onValueChange` 回调来更新 `value` 属性，以便组件反映用户操作。如果 `value` 属性未更新，组件将继续渲染提供的 `value` 属性，而不是用户操作的预期结果。
+这是一个受控组件，需要 `onValueChange` 回调来更新 `value` 属性，组件才能反映用户操作。如果 `value` 属性没有更新，组件将继续渲染所提供的 `value` 属性，而不是任何用户操作的预期结果。
 
 ## 示例
 
 ```SnackPlayer name=Switch&supportedPlatforms=android,ios
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Switch, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -50,9 +50,9 @@ export default App;
 
 ## 属性
 
-### [View 属性](view.md#props)
+### [View Props](view.md#props)
 
-继承 [View 属性](view.md#props)。
+继承自 [View Props](view.md#props)。
 
 ---
 
@@ -68,17 +68,17 @@ export default App;
 
 ### `ios_backgroundColor` <div className="label ios">iOS</div>
 
-在 iOS 上，背景的自定义颜色。当开关值为 `false` 或开关被禁用（且开关是半透明的）时，可以看到此背景颜色。
+在 iOS 上，背景的自定义颜色。当开关值为 `false` 时，或者开关被禁用（且开关是半透明的）时，都可以看到此背景颜色。
 
 | 类型               |
 | ------------------ |
-| [颜色](colors.md) |
+| [color](colors.md) |
 
 ---
 
 ### `onChange`
 
-当用户尝试更改开关值时调用。接收变更事件作为参数。如果你只想接收新值，请改用 `onValueChange`。
+当用户尝试更改开关值时调用。将更改事件作为参数接收。如果你只想接收新值，请改用 `onValueChange`。
 
 | 类型     |
 | -------- |
@@ -88,7 +88,7 @@ export default App;
 
 ### `onValueChange`
 
-当用户尝试更改开关值时调用。接收新值作为参数。如果你只想接收事件，请改用 `onChange`。
+当用户尝试更改开关值时调用。将新值作为参数接收。如果你想改为接收事件，请使用 `onChange`。
 
 | 类型     |
 | -------- |
@@ -98,11 +98,11 @@ export default App;
 
 ### `thumbColor`
 
-前景开关握柄的颜色。如果在 iOS 上设置此项，开关握柄将失去其投影阴影。
+前景开关滑块的颜色。如果在 iOS 上设置此属性，开关滑块将失去阴影效果。
 
 | 类型               |
 | ------------------ |
-| [颜色](colors.md) |
+| [color](colors.md) |
 
 ---
 
@@ -110,11 +110,11 @@ export default App;
 
 开关轨道的自定义颜色。
 
-_iOS_：当开关值为 `false` 时，轨道会缩进到边框中。如果你想更改收缩轨道暴露出的背景颜色，请使用 [`ios_backgroundColor`](switch.md#ios_backgroundColor)。
+_iOS_: 当开关值为 `false` 时，轨道会缩进到边框中。如果你想更改缩进后的轨道所露出的背景颜色，请使用 [`ios_backgroundColor`](switch.md#ios_backgroundColor)。
 
 | 类型                                                         |
 | ------------------------------------------------------------ |
-| `对象：{false: [颜色](colors), true: [颜色](colors)}` |
+| `md object: {false: [color](colors), true: [color](colors)}` |
 
 ---
 

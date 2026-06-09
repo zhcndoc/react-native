@@ -11,7 +11,6 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 <TabItem value="javascript">
 
 ```SnackPlayer name=Example&supportedPlatforms=ios,android&ext=js
-import React from 'react';
 import {Alert, Share, Button} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -51,7 +50,6 @@ export default ShareExample;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Example&supportedPlatforms=ios,android&ext=tsx
-import React from 'react';
 import {Alert, Share, Button} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -108,9 +106,9 @@ static share(content: ShareContent, options?: ShareOptions);
 
 **属性:**
 
-| 名称                                                         | 类型   | 描述                                                                                                                                                                                                                                                                                                                                                                                  |
-| ------------------------------------------------------------ | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| content <div className="label basic required">必填</div>    | object | `message` - 要分享的信息<br/>`url` - 要分享的网址 <div className="label ios">iOS</div><br/>`title` - 信息的标题 <div className="label android">Android</div><hr/>`url` 和 `message` 至少填写一个。                                                                                                                                                                                        |
+| 名称                                                         | 类型   | 描述                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ------------------------------------------------------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| content <div className="label basic required">必填</div>    | object | `message` - 要分享的信息<br/>`url` - 要分享的网址 <div className="label ios">iOS</div><br/>`title` - 信息的标题 <div className="label android">Android</div><hr/>`url` 和 `message` 至少填写一个。                                                                                                                                                                                                                                                        |
 | options                                                      | object | `dialogTitle` <div className="label android">Android</div><br/>`excludedActivityTypes` <div className="label ios">iOS</div><br/>`subject` - 用于通过邮件分享的主题 <div className="label ios">iOS</div><br/>`tintColor` <div className="label ios">iOS</div><br/>`anchor` - 用于定位动作表的节点（用于 iPad） <div className="label ios">iOS</div> |
 
 ---

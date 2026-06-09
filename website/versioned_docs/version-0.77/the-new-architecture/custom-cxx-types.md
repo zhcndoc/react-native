@@ -336,7 +336,7 @@ namespace facebook::react {
 
 2. 打开 `shared/NativeSampleModule.cpp` 文件并添加函数实现
 
-```c++ title="NativeSampleModule.cpp (validateAddress implementation)"
+```cpp title="NativeSampleModule.cpp (validateAddress implementation)"
 bool NativeSampleModule::validateAddress(jsi::Runtime &rt, jsi::Object input) {
   std::string street = input.getProperty(rt, "street").asString(rt).utf8(rt);
   int32_t number = input.getProperty(rt, "num").asNumber();

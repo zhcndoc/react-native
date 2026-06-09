@@ -8,7 +8,6 @@ title: KeyboardAvoidingView
 ## 示例
 
 ```SnackPlayer name=KeyboardAvoidingView&supportedPlatforms=android,ios
-import React from 'react';
 import {
   View,
   KeyboardAvoidingView,
@@ -28,10 +27,10 @@ const KeyboardAvoidingComponent = () => {
       style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.inner}>
-          <Text style={styles.header}>Header</Text>
-          <TextInput placeholder="Username" style={styles.textInput} />
+          <Text style={styles.header}>标题</Text>
+          <TextInput placeholder="用户名" style={styles.textInput} />
           <View style={styles.btnContainer}>
-            <Button title="Submit" onPress={() => null} />
+            <Button title="提交" onPress={() => null} />
           </View>
         </View>
       </TouchableWithoutFeedback>

@@ -107,7 +107,6 @@ export default (codegenNativeComponent<NativeProps>(
 打开 `App.tsx` 文件并按如下方式修改：
 
 ```diff title="App.tsx"
-import React from 'react';
 -import {Alert, StyleSheet, View} from 'react-native';
 -import WebView from '../specs/WebViewNativeComponent';
 +import {Alert, StyleSheet, Pressable, Text, View} from 'react-native';
@@ -186,7 +185,6 @@ export default App;
 打开 `App.tsx` 文件并按如下方式修改：
 
 ```diff title="App.jsx"
-import React from 'react';
 -import {Alert, StyleSheet, View} from 'react-native';
 -import WebView from '../specs/WebViewNativeComponent';
 +import {Alert, StyleSheet, Pressable, Text, View} from 'react-native';
@@ -420,7 +418,7 @@ Framework build type is static library
 
 ## 5. 运行你的应用
 
-最后，你可以使用通常的命令运行你的应用。一旦应用运行起来，你可以点击刷新按钮查看页面重新加载。
+最后，你可以使用常规命令运行你的应用。一旦应用运行起来，你可以点击刷新按钮查看页面重新加载。
 
 | <center>Android</center>                                                                         | <center>iOS</center>                                                                         |
 | ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |

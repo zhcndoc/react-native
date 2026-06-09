@@ -3,12 +3,12 @@ id: inputaccessoryview
 title: InputAccessoryView
 ---
 
-一个用于自定义 iOS 上键盘输入辅助视图的组件。当 `TextInput` 获得焦点时，输入辅助视图会显示在键盘上方。此组件可用于创建自定义工具栏。
+一个组件，用于在 iOS 上自定义键盘输入辅助视图。只要 `TextInput` 获得焦点，输入辅助视图就会显示在键盘上方。这个组件可用于创建自定义工具栏。
 
-要使用此组件，请将你的自定义工具栏包裹在 InputAccessoryView 组件中，并设置一个 `nativeID`。然后，将该 `nativeID` 作为你想要的任意 `TextInput` 的 `inputAccessoryViewID` 传入。一个基本示例：
+要使用此组件，请将自定义工具栏包裹在 InputAccessoryView 组件中，并设置一个 `nativeID`。然后，将该 `nativeID` 作为你想要的任意 `TextInput` 的 `inputAccessoryViewID` 传入。下面是一个基本示例：
 
 ```SnackPlayer name=InputAccessoryView&supportedPlatforms=ios
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {
   Button,
   InputAccessoryView,
@@ -38,7 +38,7 @@ const App = () => {
         </ScrollView>
       </SafeAreaView>
       <InputAccessoryView nativeID={inputAccessoryViewID}>
-        <Button onPress={() => setText(initialText)} title="清空文本" />
+        <Button onPress={() => setText(initialText)} title="清除文本" />
       </InputAccessoryView>
     </SafeAreaProvider>
   );
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-此组件还可用于创建粘性文本输入（即锚定在键盘顶部的文本输入）。要实现这一点，请将 `TextInput` 包裹在 `InputAccessoryView` 组件中，并且不要设置 `nativeID`。如需示例，请查看 [InputAccessoryViewExample.js](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/InputAccessoryView/InputAccessoryViewExample.js)。
+这个组件也可用于创建粘性文本输入框（即锚定在键盘顶部的文本输入框）。要实现这一点，请将 `TextInput` 包裹在 `InputAccessoryView` 组件中，并且不要设置 `nativeID`。示例请参见 [InputAccessoryViewExample.js](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/InputAccessoryView/InputAccessoryViewExample.js)。
 
 ---
 
@@ -78,7 +78,7 @@ export default App;
 
 ### `nativeID`
 
-用于将此 `InputAccessoryView` 与指定的 TextInput 关联的 ID。
+用于将此 `InputAccessoryView` 与指定 `TextInput` 关联的 ID。
 
 | 类型   |
 | ------ |

@@ -2,7 +2,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 # 在原生模块中发送事件
 
-在某些情况下，您可能希望有一个原生模块监听平台层的一些事件，然后将它们发送到 JavaScript 层，以便让您的应用程序对这些原生事件作出响应。在其他情况下，您可能有长时间运行的操作，它们可以发送事件，以便在事件发生时更新 UI。
+在某些情况下，您可能希望一个原生模块监听平台层的一些事件，然后将它们发送到 JavaScript 层，以便让您的应用程序对这些原生事件作出响应。在其他情况下，您可能有长时间运行的操作，它们可以发送事件，以便在事件发生时更新 UI。
 
 这两种情况都是从原生模块发送事件的良好用例。在本指南中，您将学习如何做到这一点。
 
@@ -34,7 +34,7 @@ import {TurboModuleRegistry} from 'react-native';
 export interface Spec extends TurboModule {
   setItem(value: string, key: string): void;
   getItem(key: string): string | null;
-  removeItem(key: string): void;
+  removeItem(key: string): string | null;
   clear(): void;
 
 + readonly onKeyAdded: CodegenTypes.EventEmitter<KeyValuePair>;
@@ -134,7 +134,6 @@ Framework build type is static library
 打开 `App.tsx` 文件，并按如下方式修改：
 
 ```diff title="App.tsx"
-import React from 'react';
 import {
 + Alert,
 + EventSubscription,
@@ -155,7 +154,7 @@ function App(): React.JSX.Element {
 + const listenerSubscription = React.useRef<null | EventSubscription>(null);
 
 + React.useEffect(() => {
-+   listenerSubscription.current = NativeLocalStorage?.onKeyAdded((pair) => Alert.alert(`New key added: ${pair.key} with value: ${pair.value}`));
++   listenerSubscription.current = NativeLocalStorage?.onKeyAdded((pair) => Alert.alert(`新键已添加：${pair.key}，值为：${pair.value}`));
 
 +   return  () => {
 +     listenerSubscription.current?.remove();
@@ -174,7 +173,7 @@ function App(): React.JSX.Element {
 
   function saveValue() {
 +   if (key == null) {
-+     Alert.alert('Please enter a key');
++     Alert.alert('请输入键');
 +     return;
 +   }
     NativeLocalStorage?.setItem(editingValue ?? EMPTY, key);
@@ -188,7 +187,7 @@ function App(): React.JSX.Element {
 
   function deleteValue() {
 +   if (key == null) {
-+     Alert.alert('Please enter a key');
++     Alert.alert('请输入键');
 +     return;
 +   }
     NativeLocalStorage?.removeItem(key);
@@ -197,7 +196,7 @@ function App(): React.JSX.Element {
 
 + function retrieveValue() {
 +   if (key == null) {
-+     Alert.alert('Please enter a key');
++     Alert.alert('请输入键');
 +     return;
 +   }
 +   const val = NativeLocalStorage?.getItem(key);
@@ -209,13 +208,13 @@ function App(): React.JSX.Element {
       <Text style={styles.text}>
         Current stored value is: {value ?? 'No Value'}
       </Text>
-+     <Text>Key:</Text>
++     <Text>键：</Text>
 +      <TextInput
-+       placeholder="Enter the key you want to store"
++       placeholder="输入您想存储的键"
 +       style={styles.textInput}
 +       onChangeText={setKey}
 +     />
-+     <Text>Value:</Text>
++     <Text>值：</Text>
       <TextInput
         placeholder="Enter the text you want to store"
         style={styles.textInput}

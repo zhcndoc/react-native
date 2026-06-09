@@ -4,20 +4,20 @@ title: TouchableHighlight
 ---
 
 :::tip
-If you're looking for a more extensive and future-proof way to handle touch-based input, check out the [Pressable](pressable.md) API.
+如果你正在寻找一种更全面、面向未来的方式来处理基于触摸的输入，可以看看 [Pressable](pressable.md) API。
 :::
 
-A wrapper for making views respond properly to touches. On press down, the opacity of the wrapped view is decreased, which allows the underlay color to show through, darkening or tinting the view.
+用于让视图正确响应触摸的包装组件。按下时，被包装视图的透明度会降低，从而使底层颜色显示出来，让视图变暗或带有色调。
 
-The underlay comes from wrapping the child in a new View, which can affect layout, and sometimes cause unwanted visual artifacts if not used correctly, for example if the backgroundColor of the wrapped view isn't explicitly set to an opaque color.
+底层效果来自于将子元素包裹在一个新的 View 中，这可能会影响布局；如果使用不当，有时还会导致不希望出现的视觉瑕疵，例如没有明确将被包装视图的 `backgroundColor` 设置为不透明颜色时。
 
-TouchableHighlight must have one child (not zero or more than one). If you wish to have several child components, wrap them in a View.
+TouchableHighlight 必须只有一个子元素（不能是零个，也不能多于一个）。如果你希望有多个子组件，请将它们包裹在一个 View 中。
 
 ```tsx
 function MyComponent(props: MyComponentProps) {
   return (
     <View {...props} style={{flex: 1, backgroundColor: '#fff'}}>
-      <Text>My Component</Text>
+      <Text>我的组件</Text>
     </View>
   );
 }
@@ -25,15 +25,15 @@ function MyComponent(props: MyComponentProps) {
 <TouchableHighlight
   activeOpacity={0.6}
   underlayColor="#DDDDDD"
-  onPress={() => alert('Pressed!')}>
+  onPress={() => alert('已按下！')}>
   <MyComponent />
 </TouchableHighlight>;
 ```
 
-## Example
+## 示例
 
 ```SnackPlayer name=TouchableHighlight%20Example
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -46,7 +46,7 @@ const TouchableHighlightExample = () => {
       <SafeAreaView style={styles.container}>
         <TouchableHighlight onPress={onPress}>
           <View style={styles.button}>
-            <Text>Touch Here</Text>
+            <Text>点这里</Text>
           </View>
         </TouchableHighlight>
         <View style={styles.countContainer}>
@@ -82,21 +82,21 @@ export default TouchableHighlightExample;
 
 ---
 
-# Reference
+# 参考
 
-## Props
+## 属性
 
 ### [TouchableWithoutFeedback Props](touchablewithoutfeedback.md#props)
 
-Inherits [TouchableWithoutFeedback Props](touchablewithoutfeedback.md#props).
+继承自 [TouchableWithoutFeedback Props](touchablewithoutfeedback.md#props)。
 
 ---
 
 ### `activeOpacity`
 
-Determines what the opacity of the wrapped view should be when touch is active. The value should be between 0 and 1. Defaults to 0.85. Requires `underlayColor` to be set.
+确定触摸激活时被包装视图的不透明度应是多少。该值应介于 0 和 1 之间。默认值为 0.85。需要设置 `underlayColor`。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -104,9 +104,9 @@ Determines what the opacity of the wrapped view should be when touch is active. 
 
 ### `onHideUnderlay`
 
-Called immediately after the underlay is hidden.
+在底层效果隐藏后立即调用。
 
-| Type     |
+| 类型     |
 | -------- |
 | function |
 
@@ -114,9 +114,9 @@ Called immediately after the underlay is hidden.
 
 ### `onShowUnderlay`
 
-Called immediately after the underlay is shown.
+在底层效果显示后立即调用。
 
-| Type     |
+| 类型     |
 | -------- |
 | function |
 
@@ -124,13 +124,13 @@ Called immediately after the underlay is shown.
 
 ### `ref`
 
-A ref setter that will be assigned an [element node](element-nodes) when mounted.
+一个 ref 设置器，在挂载时会被分配一个 [元素节点](element-nodes)。
 
 ---
 
 ### `style`
 
-| Type       |
+| 类型       |
 | ---------- |
 | View.style |
 
@@ -138,9 +138,9 @@ A ref setter that will be assigned an [element node](element-nodes) when mounted
 
 ### `underlayColor`
 
-The color of the underlay that will show through when the touch is active.
+在触摸激活时会透出的底层颜色。
 
-| Type               |
+| 类型               |
 | ------------------ |
 | [color](colors.md) |
 
@@ -148,9 +148,9 @@ The color of the underlay that will show through when the touch is active.
 
 ### `hasTVPreferredFocus` <div className="label ios">iOS</div>
 
-_(Apple TV only)_ TV preferred focus (see documentation for the View component).
+_(仅限 Apple TV)_ TV 首选焦点（参见 View 组件的文档）。
 
-| Type |
+| 类型 |
 | ---- |
 | bool |
 
@@ -158,9 +158,9 @@ _(Apple TV only)_ TV preferred focus (see documentation for the View component).
 
 ### `nextFocusDown` <div className="label android">Android</div>
 
-TV next focus down (see documentation for the View component).
+TV 下一个焦点向下（参见 View 组件的文档）。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -168,9 +168,9 @@ TV next focus down (see documentation for the View component).
 
 ### `nextFocusForward` <div className="label android">Android</div>
 
-TV next focus forward (see documentation for the View component).
+TV 下一个焦点向前（参见 View 组件的文档）。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -178,9 +178,9 @@ TV next focus forward (see documentation for the View component).
 
 ### `nextFocusLeft` <div className="label android">Android</div>
 
-TV next focus left (see documentation for the View component).
+TV 下一个焦点向左（参见 View 组件的文档）。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -188,9 +188,9 @@ TV next focus left (see documentation for the View component).
 
 ### `nextFocusRight` <div className="label android">Android</div>
 
-TV next focus right (see documentation for the View component).
+TV 下一个焦点向右（参见 View 组件的文档）。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -198,9 +198,9 @@ TV next focus right (see documentation for the View component).
 
 ### `nextFocusUp` <div className="label android">Android</div>
 
-TV next focus up (see documentation for the View component).
+TV 下一个焦点向上（参见 View 组件的文档）。
 
-| Type   |
+| 类型   |
 | ------ |
 | number |
 
@@ -208,8 +208,8 @@ TV next focus up (see documentation for the View component).
 
 ### `testOnly_pressed`
 
-Handy for snapshot tests.
+用于快照测试的便捷属性。
 
-| Type |
+| 类型 |
 | ---- |
 | bool |

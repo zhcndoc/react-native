@@ -1,47 +1,47 @@
 ---
 id: easing
-title: 缓动（Easing）
+title: 缓动
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-`Easing` 模块实现了常用的缓动函数。该模块被 [`Animated.timing()`](animated.md#timing) 使用，以传递动画中物理上可信的运动效果。
+`Easing` 模块实现了常见的缓动函数。该模块由 [`Animated.timing()`](animated.md#timing) 使用，用于在动画中传达符合物理直觉的运动效果。
 
-你可以在 https://easings.net/ 查看一些常见缓动函数的可视化演示。
+你可以在 https://easings.net/ 查看一些常见缓动函数的可视化效果
 
 ### 预定义动画
 
-`Easing` 模块通过以下方法提供几个预定义动画：
+`Easing` 模块通过以下方法提供了若干预定义动画：
 
-- [`back`](easing.md#back) 提供一个基本动画，物体在向前移动前稍微往后移
-- [`bounce`](easing.md#bounce) 提供一个弹跳动画
-- [`ease`](easing.md#ease) 提供一个基本的惯性动画
-- [`elastic`](easing.md#elastic) 提供一个基本的弹簧效果
+- [`back`](easing.md#back) 提供一种基础动画：对象会先略微向后移动，再向前移动
+- [`bounce`](easing.md#bounce) 提供弹跳动画
+- [`ease`](easing.md#ease) 提供基础的惯性动画
+- [`elastic`](easing.md#elastic) 提供基础的弹簧交互效果
 
 ### 标准函数
 
-提供三种标准缓动函数：
+提供了三个标准缓动函数：
 
 - [`linear`](easing.md#linear)
 - [`quad`](easing.md#quad)
 - [`cubic`](easing.md#cubic)
 
-[`poly`](easing.md#poly) 函数用于实现四次、五次及其他更高次幂的函数。
+[`poly`](easing.md#poly) 函数可用于实现四次、五次以及其他更高次幂函数。
 
-### 额外函数
+### 其他函数
 
-通过以下方法提供更多数学函数：
+以下方法提供了额外的数学函数：
 
 - [`bezier`](easing.md#bezier) 提供三次贝塞尔曲线
 - [`circle`](easing.md#circle) 提供圆形函数
 - [`sin`](easing.md#sin) 提供正弦函数
 - [`exp`](easing.md#exp) 提供指数函数
 
-以下辅助函数用于修饰其它缓动函数：
+以下辅助函数用于修改其他缓动函数。
 
-- [`in`](easing.md#in) 让缓动函数正向运行
-- [`inOut`](easing.md#inout) 让任意缓动函数对称运行
-- [`out`](easing.md#out) 让缓动函数反向运行
+- [`in`](easing.md#in) 正向运行缓动函数
+- [`inOut`](easing.md#inout) 使任意缓动函数对称
+- [`out`](easing.md#out) 反向运行缓动函数
 
 ## 示例
 
@@ -49,7 +49,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 <TabItem value="javascript">
 
 ```SnackPlayer name=Easing%20Demo&ext=js
-import React, {useRef} from 'react';
+import {useRef} from 'react';
 import {
   Animated,
   Easing,
@@ -94,7 +94,7 @@ const App = () => {
       <SafeAreaView style={styles.container} edges={['right', 'top', 'left']}>
         <StatusBar hidden={true} />
         <Text style={styles.title}>
-          点击下面的行以预览缓动效果！
+          按下下方各行以预览 Easing！
         </Text>
         <View style={styles.boxContainer}>
           <Animated.View style={animatedStyles} />
@@ -123,33 +123,33 @@ const SECTIONS = [
   {
     title: '预定义动画',
     data: [
-      {title: 'Bounce 弹跳', easing: Easing.bounce},
-      {title: 'Ease 缓动', easing: Easing.ease},
-      {title: 'Elastic 弹性', easing: Easing.elastic(4)},
+      {title: 'Bounce', easing: Easing.bounce},
+      {title: 'Ease', easing: Easing.ease},
+      {title: 'Elastic', easing: Easing.elastic(4)},
     ],
   },
   {
     title: '标准函数',
     data: [
-      {title: 'Linear 线性', easing: Easing.linear},
-      {title: 'Quad 二次方', easing: Easing.quad},
-      {title: 'Cubic 三次方', easing: Easing.cubic},
+      {title: 'Linear', easing: Easing.linear},
+      {title: 'Quad', easing: Easing.quad},
+      {title: 'Cubic', easing: Easing.cubic},
     ],
   },
   {
-    title: '额外函数',
+    title: '其他函数',
     data: [
       {
-        title: 'Bezier 贝塞尔',
+        title: 'Bezier',
         easing: Easing.bezier(0, 2, 1, -1),
       },
-      {title: 'Circle 圆形', easing: Easing.circle},
-      {title: 'Sin 正弦', easing: Easing.sin},
-      {title: 'Exp 指数', easing: Easing.exp},
+      {title: 'Circle', easing: Easing.circle},
+      {title: 'Sin', easing: Easing.sin},
+      {title: 'Exp', easing: Easing.exp},
     ],
   },
   {
-    title: '组合使用',
+    title: '组合',
     data: [
       {
         title: 'In + Bounce',
@@ -209,7 +209,7 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Easing%20Demo&ext=tsx
-import React, {useRef} from 'react';
+import {useRef} from 'react';
 import {
   Animated,
   Easing,
@@ -255,7 +255,7 @@ const App = () => {
       <SafeAreaView style={styles.container} edges={['right', 'top', 'left']}>
         <StatusBar hidden={true} />
         <Text style={styles.title}>
-          点击下面的行以预览缓动效果！
+          按下下方各行以预览 Easing！
         </Text>
         <View style={styles.boxContainer}>
           <Animated.View style={animatedStyles} />
@@ -284,33 +284,33 @@ const SECTIONS = [
   {
     title: '预定义动画',
     data: [
-      {title: 'Bounce 弹跳', easing: Easing.bounce},
-      {title: 'Ease 缓动', easing: Easing.ease},
-      {title: 'Elastic 弹性', easing: Easing.elastic(4)},
+      {title: 'Bounce', easing: Easing.bounce},
+      {title: 'Ease', easing: Easing.ease},
+      {title: 'Elastic', easing: Easing.elastic(4)},
     ],
   },
   {
     title: '标准函数',
     data: [
-      {title: 'Linear 线性', easing: Easing.linear},
-      {title: 'Quad 二次方', easing: Easing.quad},
-      {title: 'Cubic 三次方', easing: Easing.cubic},
+      {title: 'Linear', easing: Easing.linear},
+      {title: 'Quad', easing: Easing.quad},
+      {title: 'Cubic', easing: Easing.cubic},
     ],
   },
   {
-    title: '额外函数',
+    title: '其他函数',
     data: [
       {
-        title: 'Bezier 贝塞尔',
+        title: 'Bezier',
         easing: Easing.bezier(0, 2, 1, -1),
       },
-      {title: 'Circle 圆形', easing: Easing.circle},
-      {title: 'Sin 正弦', easing: Easing.sin},
-      {title: 'Exp 指数', easing: Easing.exp},
+      {title: 'Circle', easing: Easing.circle},
+      {title: 'Sin', easing: Easing.sin},
+      {title: 'Exp', easing: Easing.exp},
     ],
   },
   {
-    title: '组合使用',
+    title: '组合',
     data: [
       {
         title: 'In + Bounce',
@@ -381,7 +381,7 @@ export default App;
 static step0(n: number);
 ```
 
-阶跃函数，当 `n` 为正数时返回 1。
+阶梯函数，对于任何正数 `n` 都返回 1。
 
 ---
 
@@ -391,7 +391,7 @@ static step0(n: number);
 static step1(n: number);
 ```
 
-阶跃函数，当 `n` 大于或等于 1 时返回 1。
+阶梯函数，当 `n` 大于或等于 1 时返回 1。
 
 ---
 
@@ -413,7 +413,7 @@ https://cubic-bezier.com/#0,0,1,1
 static ease(t: number);
 ```
 
-基本惯性交互，类似物体慢慢加速到速度。
+一种基础的惯性交互，类似于对象缓慢加速到目标速度。
 
 https://cubic-bezier.com/#.42,0,1,1
 
@@ -449,9 +449,9 @@ https://easings.net/#easeInCubic
 static poly(n: number);
 ```
 
-幂函数。位置等于经过时间的 n 次幂。
+幂函数。位置等于经过时间的 N 次幂。
 
-n = 4: https://easings.net/#easeInQuart  n = 5: https://easings.net/#easeInQuint
+n = 4: https://easings.net/#easeInQuart n = 5: https://easings.net/#easeInQuint
 
 ---
 
@@ -497,9 +497,9 @@ https://easings.net/#easeInExpo
 static elastic(bounciness: number);
 ```
 
-基本弹性交互，类似弹簧往复振荡的效果。
+一种基础的弹性交互，类似于弹簧来回振荡。
 
-默认弹性系数为 1，会有一次轻微的超出。弹性系数为 0 不会超出，大于 1 的弹性系数会超出约 N 次。
+默认弹性系数为 1，会略微越界一次。弹性系数为 0 时不会越界，而弹性系数为 N > 1 时会大约越界 N 次。
 
 https://easings.net/#easeInElastic
 
@@ -511,7 +511,7 @@ https://easings.net/#easeInElastic
 static back(s)
 ```
 
-配合 `Animated.parallel()` 使用，创建一个动画开始时物体稍微向后移动的效果。
+与 `Animated.parallel()` 一起使用，可创建一种基础效果：动画开始时，对象会先稍微向后移动。
 
 ---
 
@@ -521,7 +521,7 @@ static back(s)
 static bounce(t: number);
 ```
 
-提供基本的弹跳效果。
+提供基础的弹跳效果。
 
 https://easings.net/#easeInBounce
 
@@ -533,9 +533,9 @@ https://easings.net/#easeInBounce
 static bezier(x1: number, y1: number, x2: number, y2: number);
 ```
 
-提供三次贝塞尔曲线，等价于 CSS 过渡中的 `transition-timing-function`。
+提供三次贝塞尔曲线，等同于 CSS Transitions 的 `transition-timing-function`。
 
-一个很有用的贝塞尔曲线可视化工具在 https://cubic-bezier.com/
+可用于可视化三次贝塞尔曲线的工具可在 https://cubic-bezier.com/ 找到
 
 ---
 
@@ -545,7 +545,7 @@ static bezier(x1: number, y1: number, x2: number, y2: number);
 static in(easing: number);
 ```
 
-正向运行一个缓动函数。
+正向运行缓动函数。
 
 ---
 
@@ -555,7 +555,7 @@ static in(easing: number);
 static out(easing: number);
 ```
 
-反向运行一个缓动函数。
+反向运行缓动函数。
 
 ---
 
@@ -565,4 +565,4 @@ static out(easing: number);
 static inOut(easing: number);
 ```
 
-使任何缓动函数对称运行。缓动函数在持续时间的前半段正向运行，后半段反向运行。
+使任意缓动函数对称。该缓动函数会在前半段时间正向运行，然后在剩余时间内反向运行。

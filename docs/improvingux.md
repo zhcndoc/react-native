@@ -1,27 +1,27 @@
 ---
 id: improvingux
-title: Improving User Experience
+title: 改善用户体验
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-## Configure text inputs
+## 配置文本输入
 
-Entering text on touch phone is a challenge - small screen, software keyboard. But based on what kind of data you need, you can make it easier by properly configuring the text inputs:
+在触摸手机上输入文本是一个挑战——屏幕小、软件键盘。但根据你需要的数据类型，你可以通过正确配置文本输入来让它更容易：
 
-- Focus the first field automatically
-- Use placeholder text as an example of expected data format
-- Enable or disable autocapitalization and autocorrect
-- Choose keyboard type (e.g. email, numeric)
-- Make sure the return button focuses the next field or submits the form
+- 自动聚焦第一个字段
+- 使用占位文本作为所需数据格式的示例
+- 启用或禁用自动首字母大写和自动更正
+- 选择键盘类型（例如电子邮件、数字）
+- 确保回车按钮聚焦下一个字段或提交表单
 
-Check out [`TextInput` docs](textinput.md) for more configuration options.
+查看[`TextInput` 文档](textinput.md)了解更多配置选项。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
 ```SnackPlayer name=TextInput%20form%20example&ext=js
-import React, {useState, useRef} from 'react';
+import {useState, useRef} from 'react';
 import {
   Alert,
   Text,
@@ -38,7 +38,7 @@ const App = () => {
 
   const submit = () => {
     Alert.alert(
-      `Welcome, ${name}! Confirmation email has been sent to ${email}`,
+      `欢迎，${name}！确认邮件已发送至 ${email}`,
     );
   };
 
@@ -115,7 +115,7 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=TextInput%20form%20example&ext=tsx
-import React, {useState, useRef} from 'react';
+import {useState, useRef} from 'react';
 import {
   Alert,
   Text,
@@ -132,7 +132,7 @@ const App = () => {
 
   const submit = () => {
     Alert.alert(
-      `Welcome, ${name}! Confirmation email has been sent to ${email}`,
+      `欢迎，${name}！确认邮件已发送至 ${email}`,
     );
   };
 
@@ -208,15 +208,15 @@ export default App;
 </TabItem>
 </Tabs>
 
-## Manage layout when keyboard is visible
+## 在键盘可见时管理布局
 
-Software keyboard takes almost half of the screen. If you have interactive elements that can get covered by the keyboard, make sure they are still accessible by using the [`KeyboardAvoidingView` component](keyboardavoidingview.md).
+软件键盘几乎会占用屏幕的一半。如果你有可能被键盘遮挡的交互元素，请确保它们仍然可访问，可以使用[`KeyboardAvoidingView` 组件](keyboardavoidingview.md)。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
 ```SnackPlayer name=KeyboardAvoidingView%20example&ext=js
-import React, {useState, useRef} from 'react';
+import {useState, useRef} from 'react';
 import {
   Alert,
   Text,
@@ -234,7 +234,7 @@ const App = () => {
 
   const submit = () => {
     emailInput.current.blur();
-    Alert.alert(`Confirmation email has been sent to ${email}`);
+    Alert.alert(`确认邮件已发送至 ${email}`);
   };
 
   return (
@@ -264,7 +264,7 @@ const App = () => {
         />
         <View>
           <Button title="Sign Up" onPress={submit} />
-          <Text style={styles.legal}>Some important legal fine print here</Text>
+          <Text style={styles.legal}>这里显示一些重要的法律细则</Text>
         </View>
       </KeyboardAvoidingView>
     </View>
@@ -313,7 +313,7 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=KeyboardAvoidingView%20example&ext=tsx
-import React, {useState, useRef} from 'react';
+import {useState, useRef} from 'react';
 import {
   Alert,
   Text,
@@ -331,7 +331,7 @@ const App = () => {
 
   const submit = () => {
     emailInput.current?.blur();
-    Alert.alert(`Confirmation email has been sent to ${email}`);
+    Alert.alert(`确认邮件已发送至 ${email}`);
   };
 
   return (
@@ -361,7 +361,7 @@ const App = () => {
         />
         <View>
           <Button title="Sign Up" onPress={submit} />
-          <Text style={styles.legal}>Some important legal fine print here</Text>
+          <Text style={styles.legal}>这里显示一些重要的法律细则</Text>
         </View>
       </KeyboardAvoidingView>
     </View>
@@ -409,12 +409,11 @@ export default App;
 </TabItem>
 </Tabs>
 
-## Make tappable areas larger
+## 让可点击区域更大
 
-On mobile phones it's hard to be very precise when pressing buttons. Make sure all interactive elements are 44x44 or larger. One way to do this is to leave enough space for the element, `padding`, `minWidth` and `minHeight` style values can be useful for that. Alternatively, you can use [`hitSlop` prop](touchablewithoutfeedback.md#hitslop) to increase interactive area without affecting the layout. Here's a demo:
+在手机上按按钮时很难做到非常精准。请确保所有交互元素的尺寸至少为 44x44。实现这一点的一种方法是为元素留出足够空间，`padding`、`minWidth` 和 `minHeight` 这些样式值会很有帮助。或者，你也可以使用 [`hitSlop` prop](touchablewithoutfeedback.md#hitslop) 在不影响布局的情况下增大可交互区域。下面是一个演示：
 
 ```SnackPlayer name=HitSlop%20example
-import React from 'react';
 import {
   Text,
   StatusBar,
@@ -429,21 +428,18 @@ const App = () => {
       <StatusBar barStyle="light-content" />
       <View style={styles.header}>
         <Text style={styles.description}>
-          This demo shows how using hitSlop can make interactive elements much
-          easier to tap without changing their layout and size. Try pressing
-          each button quickly multiple times and notice which one is easier to
-          hit.
+          此演示展示了使用 hitSlop 如何让交互元素更容易点击，而不会改变它们的布局和尺寸。试着快速多次按下每个按钮，并注意哪个更容易点中。
         </Text>
       </View>
       <View style={styles.content}>
         <TouchableOpacity>
-          <Text style={styles.label}>Without hitSlop</Text>
+          <Text style={styles.label}>没有 hitSlop</Text>
         </TouchableOpacity>
         <View style={styles.separator} />
         <View style={styles.preview}>
           <TouchableOpacity
             hitSlop={{top: 20, left: 20, bottom: 20, right: 20}}>
-            <Text style={styles.label}>With hitSlop</Text>
+            <Text style={styles.label}>有 hitSlop</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -488,12 +484,11 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-## Use Android Ripple
+## 使用 Android Ripple
 
-Android API 21+ uses the material design ripple to provide user with feedback when they touch an interactable area on the screen. React Native exposes this through the [`TouchableNativeFeedback` component](touchablenativefeedback.md). Using this touchable effect instead of opacity or highlight will often make your app feel much more fitting on the platform. That said, you need to be careful when using it because it doesn't work on iOS or on Android API < 21, so you will need to fallback to using one of the other Touchable components on iOS. You can use a library like [react-native-platform-touchable](https://github.com/react-community/react-native-platform-touchable) to handle the platform differences for you.
+Android API 21+ 会使用 Material Design 的涟漪效果，在用户触摸屏幕上的可交互区域时提供反馈。React Native 通过 [`TouchableNativeFeedback` 组件](touchablenativefeedback.md) 暴露了这一能力。使用这种触摸反馈效果来替代不透明度或高亮，通常会让你的应用在该平台上的感觉更自然。不过，在使用时需要小心，因为它在 iOS 上或 Android API < 21 上都无法工作，所以你需要在 iOS 上回退到使用其他 Touchable 组件之一。你可以使用像 [react-native-platform-touchable](https://github.com/react-community/react-native-platform-touchable) 这样的库来帮你处理平台差异。
 
 ```SnackPlayer name=Android%20Ripple%20example&supportedPlatforms=android
-import React from 'react';
 import {
   TouchableNativeFeedback,
   TouchableOpacity,
@@ -517,7 +512,7 @@ const ButtonsWithNativeFeedback = () => (
       background={TouchableNativeFeedback.Ripple('#06bcee', false)}
       hitSlop={defaultHitSlop}>
       <View style={styles.button}>
-        <Text style={styles.text}>This is a ripple respecting borders</Text>
+        <Text style={styles.text}>这是一个遵循边框的涟漪效果</Text>
       </View>
     </TouchableNativeFeedback>
     <TouchableNativeFeedback
@@ -526,8 +521,7 @@ const ButtonsWithNativeFeedback = () => (
       hitSlop={defaultHitSlop}>
       <View style={styles.button}>
         <Text style={styles.text}>
-          This is ripple without borders, this is more useful for icons, eg: in
-          tab bar
+          这是没有边框的涟漪效果，这种效果更适合图标，例如：在标签栏中
         </Text>
       </View>
     </TouchableNativeFeedback>
@@ -540,14 +534,14 @@ const Buttons = () => (
       style={styles.button}
       onPress={noop}
       hitSlop={defaultHitSlop}>
-      <Text style={styles.text}>This is opacity</Text>
+      <Text style={styles.text}>这是 opacity</Text>
     </TouchableOpacity>
     <TouchableHighlight
       style={styles.button}
       onPress={noop}
       hitSlop={defaultHitSlop}
       underlayColor="#06bcee">
-      <Text style={styles.text}>This is highlight</Text>
+      <Text style={styles.text}>这是 highlight</Text>
     </TouchableHighlight>
   </View>
 );
@@ -585,12 +579,12 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-## Screen orientation lock
+## 屏幕方向锁定
 
-Multiple screen orientations should work fine by default unless you're using `Dimensions` API and don't handle orientation changes. If you don't want to support multiple screen orientations, you can lock the screen orientation to either portrait or landscape.
+默认情况下，多种屏幕方向都应该可以正常工作，除非你使用了 `Dimensions` API 且没有处理方向变化。如果你不想支持多种屏幕方向，可以将屏幕方向锁定为纵向或横向。
 
-On iOS, in the General tab and Deployment Info section of Xcode enable the Device Orientation you want to support (ensure you have selected iPhone from the Devices menu when making the changes). For Android, open the AndroidManifest.xml file and within the activity element add `'android:screenOrientation="portrait"'` to lock to portrait or `'android:screenOrientation="landscape"'` to lock to landscape.
+在 iOS 上，在 Xcode 的 General 选项卡和 Deployment Info 部分中启用你想支持的设备方向（确保在进行更改时已在 Devices 菜单中选择了 iPhone）。对于 Android，打开 `AndroidManifest.xml` 文件，并在 activity 元素中添加 `'android:screenOrientation="portrait"'` 以锁定为纵向，或添加 `'android:screenOrientation="landscape"'` 以锁定为横向。
 
-# Learn more
+# 了解更多
 
-[Material Design](https://material.io/) and [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines) are great resources for learning more about designing for mobile platforms.
+[Material Design](https://material.io/) 和 [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines) 是学习如何为移动平台设计的绝佳资源。

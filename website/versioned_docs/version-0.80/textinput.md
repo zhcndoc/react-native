@@ -3,18 +3,18 @@ id: textinput
 title: TextInput
 ---
 
-通过键盘向应用输入文本的基础组件。Props 提供了几种功能的可配置性，例如自动纠正、自动大写、占位符文本和不同的键盘类型，例如数字键盘。
+用于通过键盘向应用输入文本的基础组件。Props 提供了多种功能的可配置性，例如自动纠正、自动首字母大写、占位符文本，以及不同的键盘类型，例如数字键盘。
 
-最基本的用例是放置一个 `TextInput` 并订阅 `onChangeText` 事件以读取用户输入。还有其他事件，例如 `onSubmitEditing` 和 `onFocus` 也可以订阅。一个最小化的例子：
+最基本的用法是放置一个 `TextInput`，并订阅 `onChangeText` 事件来读取用户输入。还可以订阅其他事件，例如 `onSubmitEditing` 和 `onFocus`。下面是一个最小示例：
 
 ```SnackPlayer name=TextInput%20Example
-import React from 'react';
+import {useState} from 'react';
 import {StyleSheet, TextInput} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const TextInputExample = () => {
-  const [text, onChangeText] = React.useState('Useless Text');
-  const [number, onChangeNumber] = React.useState('');
+  const [text, onChangeText] = useState('无用文本');
+  const [number, onChangeNumber] = useState('');
 
   return (
     <SafeAreaProvider>
@@ -28,7 +28,7 @@ const TextInputExample = () => {
           style={styles.input}
           onChangeText={onChangeNumber}
           value={number}
-          placeholder="useless placeholder"
+          placeholder="无用占位符"
           keyboardType="numeric"
         />
       </SafeAreaView>
@@ -48,20 +48,20 @@ const styles = StyleSheet.create({
 export default TextInputExample;
 ```
 
-通过原生元素暴露的两个方法是 `.focus()` 和 `.blur()`，它们将以编程方式聚焦或取消聚焦 TextInput。
+原生元素暴露了两个方法：`.focus()` 和 `.blur()`，可以以编程方式让 `TextInput` 获得焦点或失去焦点。
 
-请注意，某些 props 仅在 `multiline={true/false}` 时可用。此外，仅应用于元素一侧的边框样式（例如 `borderBottomColor`、`borderLeftWidth` 等）在 `multiline=true` 时将不会应用。为了实现相同的效果，你可以将 `TextInput` 包裹在 `View` 中：
+请注意，某些 props 仅在 `multiline={true/false}` 时可用。此外，仅作用于元素单侧的边框样式（例如 `borderBottomColor`、`borderLeftWidth` 等）在 `multiline=true` 时不会生效。要达到相同效果，可以将 `TextInput` 包裹在一个 `View` 中：
 
 ```SnackPlayer name=Multiline%20TextInput%20Example
-import React from 'react';
+import {useState} from 'react';
 import {TextInput, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const MultilineTextInputExample = () => {
-  const [value, onChangeText] = React.useState('Useless Multiline Placeholder');
+  const [value, onChangeText] = useState('无用的多行占位符');
 
-  // 如果你在文本框中输入的是颜色，
-  // 背景将变为该颜色。
+  // 如果你在文本框中输入的内容是一个颜色，
+  // 背景将会变成该颜色。
   return (
     <SafeAreaProvider>
       <SafeAreaView
@@ -95,25 +95,25 @@ const styles = StyleSheet.create({
 export default MultilineTextInputExample;
 ```
 
-`TextInput` 默认在其视图底部有一个边框。此边框的内边距由系统提供的背景图像设置，无法更改。避免这种情况的解决方案是 either 不显式设置高度（在这种情况下系统将负责在正确位置显示边框），或者通过将 `underlineColorAndroid` 设置为 transparent 来不显示边框。
+`TextInput` 默认在其视图底部带有一条边框。该边框的内边距由系统提供的背景图像设置，且无法更改。避免此问题的方案是：要么不要显式设置高度，此时系统会负责在正确位置显示边框；要么通过将 `underlineColorAndroid` 设为透明来不显示边框。
 
-请注意，在 Android 上，在输入中进行文本选择可能会将应用的 activity `windowSoftInputMode` 参数更改为 `adjustResize`。这可能会导致具有 position: 'absolute' 的组件在键盘活动时出现问题。要避免此行为，请在 AndroidManifest.xml 中指定 `windowSoftInputMode` ( https://developer.android.com/guide/topics/manifest/activity-element.html ) 或使用原生代码以编程方式控制此参数。
+请注意，在 Android 上对输入框中的文本进行选择时，应用的活动 `windowSoftInputMode` 参数可能会变为 `adjustResize`。这可能会在键盘激活时导致 `position: 'absolute'` 的组件出现问题。要避免这种行为，可以在 `AndroidManifest.xml` 中指定 `windowSoftInputMode`（ https://developer.android.com/guide/topics/manifest/activity-element.html ），或者使用原生代码以编程方式控制该参数。
 
 ---
 
 # 参考
 
-## 属性
+## Props
 
-### [View 属性](view.md#props)
+### [View Props](view.md#props)
 
-继承 [View 属性](view.md#props)。
+继承自 [View Props](view.md#props)。
 
 ---
 
 ### `allowFontScaling`
 
-指定字体是否应该缩放以尊重文本大小无障碍设置。默认为 `true`。
+指定字体是否应缩放以适配文本大小无障碍设置。默认值为 `true`。
 
 | 类型 |
 | ---- |
@@ -123,12 +123,12 @@ export default MultilineTextInputExample;
 
 ### `autoCapitalize`
 
-告诉 `TextInput` 自动大写某些字符。此属性不受某些键盘类型支持，例如 `name-phone-pad`。
+告知 `TextInput` 自动将某些字符大写。某些键盘类型（例如 `name-phone-pad`）不支持此属性。
 
-- `characters`: 所有字符。
-- `words`: 每个单词的首字母。
-- `sentences`: 每个句子的首字母 (_默认_)。
-- `none`: 不自动大写任何内容。
+- `characters`：所有字符。
+- `words`：每个单词的首字母。
+- `sentences`：每个句子的首字母（_默认_）。
+- `none`：不自动将任何内容大写。
 
 | 类型                                             |
 | ------------------------------------------------ |
@@ -138,9 +138,9 @@ export default MultilineTextInputExample;
 
 ### `autoComplete`
 
-为系统指定自动完成提示，以便它可以提供自动填充。在 Android 上，系统将始终尝试使用启发式方法识别内容类型来提供自动填充。要禁用自动完成，请将 `autoComplete` 设置为 `off`。
+指定系统的自动完成提示，以便提供自动填充。在 Android 上，系统会始终尝试通过启发式方法识别内容类型来提供自动填充。要禁用自动完成，请将 `autoComplete` 设置为 `off`。
 
-以下值适用于所有平台：
+以下值可跨平台使用：
 
 - `additional-name`
 - `address-line1`
@@ -173,7 +173,7 @@ export default MultilineTextInputExample;
 
 <div className="label basic ios">iOS</div>
 
-以下值仅适用于 iOS：
+以下值仅可在 iOS 上使用：
 
 - `cc-family-name` (iOS 17+)
 - `cc-given-name` (iOS 17+)
@@ -187,7 +187,7 @@ export default MultilineTextInputExample;
 
 <div className="label basic android">Android</div>
 
-以下值仅适用于 Android：
+以下值仅可在 Android 上使用：
 
 - `gender`
 - `name-family`
@@ -218,7 +218,7 @@ export default MultilineTextInputExample;
 
 ### `autoCorrect`
 
-如果为 `false`，禁用自动纠正。默认值为 `true`。
+如果为 `false`，则禁用自动纠正。默认值为 `true`。
 
 | 类型 |
 | ---- |
@@ -228,7 +228,7 @@ export default MultilineTextInputExample;
 
 ### `autoFocus`
 
-如果为 `true`，聚焦输入。默认值为 `false`。
+如果为 `true`，则聚焦该输入框。默认值为 `false`。
 
 | 类型 |
 | ---- |
@@ -238,9 +238,9 @@ export default MultilineTextInputExample;
 
 ### `blurOnSubmit`
 
-> **已弃用。** 请注意 `submitBehavior` 现在取代了 `blurOnSubmit` 并将覆盖 `blurOnSubmit` 定义的任何行为。参见 [submitBehavior](textinput#submitbehavior)
+> **已弃用。** 请注意，`submitBehavior` 现已取代 `blurOnSubmit`，并将覆盖由 `blurOnSubmit` 定义的任何行为。参见 [submitBehavior](textinput#submitbehavior)
 
-如果为 `true`，提交时文本字段将失焦。单行字段的默认值为 true，多行字段的默认值为 false。请注意，对于多行字段，将 `blurOnSubmit` 设置为 `true` 意味着按下返回键将使字段失焦并触发 `onSubmitEditing` 事件，而不是在字段中插入换行符。
+如果为 `true`，提交时文本字段将失去焦点。单行字段的默认值为 `true`，多行字段的默认值为 `false`。请注意，对于多行字段，将 `blurOnSubmit` 设为 `true` 意味着按下回车会使字段失去焦点并触发 `onSubmitEditing` 事件，而不是在字段中插入换行符。
 
 | 类型 |
 | ---- |
@@ -250,7 +250,7 @@ export default MultilineTextInputExample;
 
 ### `caretHidden`
 
-如果为 `true`，光标隐藏。默认值为 `false`。
+如果为 `true`，则隐藏光标。默认值为 `false`。
 
 | 类型 |
 | ---- |
@@ -260,7 +260,7 @@ export default MultilineTextInputExample;
 
 ### `clearButtonMode` <div className="label ios">iOS</div>
 
-清除按钮何时应出现在文本视图右侧。此属性仅支持单行 TextInput 组件。默认值为 `never`。
+清除按钮应出现在文本视图右侧的时机。此属性仅支持单行 `TextInput` 组件。默认值为 `never`。
 
 | 类型                                                       |
 | ---------------------------------------------------------- |
@@ -270,7 +270,7 @@ export default MultilineTextInputExample;
 
 ### `clearTextOnFocus` <div className="label ios">iOS</div>
 
-如果为 `true`，当编辑开始时自动清除文本字段。
+如果为 `true`，则在编辑开始时自动清空文本字段。
 
 | 类型 |
 | ---- |
@@ -280,7 +280,7 @@ export default MultilineTextInputExample;
 
 ### `contextMenuHidden`
 
-如果为 `true`，上下文菜单隐藏。默认值为 `false`。
+如果为 `true`，则隐藏上下文菜单。默认值为 `false`。
 
 | 类型 |
 | ---- |
@@ -290,11 +290,11 @@ export default MultilineTextInputExample;
 
 ### `dataDetectorTypes` <div className="label ios">iOS</div>
 
-确定文本输入中转换为可点击 URL 的数据类型。仅在 `multiline={true}` 和 `editable={false}` 时有效。默认情况下不检测任何数据类型。
+决定在文本输入中哪些类型的数据会被转换为可点击的 URL。仅在 `multiline={true}` 且 `editable={false}` 时有效。默认情况下不检测任何数据类型。
 
-你可以提供一种类型或多种类型的数组。
+你可以提供一种类型或多种类型组成的数组。
 
-`dataDetectorTypes` 的可能值为：
+`dataDetectorTypes` 的可选值为：
 
 - `'phoneNumber'`
 - `'link'`
@@ -311,7 +311,7 @@ export default MultilineTextInputExample;
 
 ### `defaultValue`
 
-提供一个初始值，当用户开始输入时将改变。适用于你不想处理监听事件和更新 value prop 以保持受控状态同步的用例。
+提供一个初始值，该值会在用户开始输入时发生变化。适用于不想处理事件监听并更新 `value` prop 来保持受控状态同步的场景。
 
 | 类型   |
 | ------ |
@@ -319,7 +319,7 @@ export default MultilineTextInputExample;
 
 ### `disableKeyboardShortcuts` <div className="label ios">iOS</div>
 
-如果为 `true`，键盘快捷键（撤销/重做和复制按钮）被禁用。
+如果为 `true`，则会禁用键盘快捷键（撤销/重做和复制按钮）。
 
 | 类型 | 默认值 |
 | ---- | ------- |
@@ -329,7 +329,7 @@ export default MultilineTextInputExample;
 
 ### `cursorColor` <div className="label android">Android</div>
 
-当提供时，它将设置组件中光标（或 "caret"）的颜色。与 `selectionColor` 的行为不同，光标颜色将独立于文本选择框的颜色进行设置。
+提供后会设置组件中光标（或“插入符”）的颜色。与 `selectionColor` 的行为不同，光标颜色会独立于文本选择框的颜色进行设置。
 
 | 类型               |
 | ------------------ |
@@ -339,7 +339,7 @@ export default MultilineTextInputExample;
 
 ### `disableFullscreenUI` <div className="label android">Android</div>
 
-当 `false` 时，如果文本输入周围有少量可用空间（例如手机上的横向方向），操作系统可能会选择让用户在全屏文本输入模式下编辑文本。当 `true` 时，此功能被禁用，用户将始终直接在文本输入内编辑文本。默认为 `false`。
+当为 `false` 时，如果文本输入周围可用空间较小（例如手机横屏时），系统可能会选择让用户在全屏文本输入模式中编辑文本。为 `true` 时，此功能将被禁用，用户始终会直接在文本输入中编辑文本。默认值为 `false`。
 
 | 类型 |
 | ---- |
@@ -349,7 +349,7 @@ export default MultilineTextInputExample;
 
 ### `editable`
 
-如果为 `false`，文本不可编辑。默认值为 `true`。
+如果为 `false`，则文本不可编辑。默认值为 `true`。
 
 | 类型 |
 | ---- |
@@ -359,7 +359,7 @@ export default MultilineTextInputExample;
 
 ### `enablesReturnKeyAutomatically` <div className="label ios">iOS</div>
 
-如果为 `true`，当没有文本时键盘禁用返回键，并在有文本时自动启用它。默认值为 `false`。
+如果为 `true`，当没有文本时键盘会禁用回车键，并在有文本时自动启用它。默认值为 `false`。
 
 | 类型 |
 | ---- |
@@ -369,9 +369,9 @@ export default MultilineTextInputExample;
 
 ### `enterKeyHint`
 
-确定返回键上应显示什么文本。优先于 `returnKeyType` 属性。
+决定回车键上应显示什么文本。其优先级高于 `returnKeyType` prop。
 
-以下值适用于所有平台：
+以下值可跨平台使用：
 
 - `done`
 - `next`
@@ -381,13 +381,13 @@ export default MultilineTextInputExample;
 
 _仅 Android_
 
-以下值仅适用于 Android：
+以下值仅可在 Android 上使用：
 
 - `previous`
 
 _仅 iOS_
 
-以下值仅适用于 iOS：
+以下值仅可在 iOS 上使用：
 
 - `enter`
 
@@ -399,13 +399,13 @@ _仅 iOS_
 
 ### `importantForAutofill` <div className="label android">Android</div>
 
-告诉操作系统你的应用中的各个字段是否应包含在 Android API Level 26+ 的自动填充视图结构中。可能的值为 `auto`、`no`、`noExcludeDescendants`、`yes` 和 `yesExcludeDescendants`。默认值为 `auto`。
+告知操作系统在 Android API 26+ 上，你应用中的单个字段是否应包含在用于自动填充的视图结构中。可选值为 `auto`、`no`、`noExcludeDescendants`、`yes` 和 `yesExcludeDescendants`。默认值为 `auto`。
 
-- `auto`: 让 Android 系统使用其启发式方法确定视图是否对自动填充重要。
-- `no`: 此视图对自动填充不重要。
-- `noExcludeDescendants`: 此视图及其子项对自动填充不重要。
-- `yes`: 此视图对自动填充重要。
-- `yesExcludeDescendants`: 此视图对自动填充重要，但其子项对自动填充不重要。
+- `auto`：让 Android 系统使用其启发式方法来确定该视图是否对自动填充重要。
+- `no`：此视图对自动填充不重要。
+- `noExcludeDescendants`：此视图及其子级对自动填充不重要。
+- `yes`：此视图对自动填充重要。
+- `yesExcludeDescendants`：此视图对自动填充重要，但其子级对自动填充不重要。
 
 | 类型                                                                       |
 | -------------------------------------------------------------------------- |
@@ -415,7 +415,7 @@ _仅 iOS_
 
 ### `inlineImageLeft` <div className="label android">Android</div>
 
-如果定义，提供的图像资源将渲染在左侧。图像资源必须在 `/android/app/src/main/res/drawable` 内并引用如下
+如果定义了该属性，则提供的图片资源将渲染在左侧。图片资源必须位于 `/android/app/src/main/res/drawable` 中，并按如下方式引用
 
 ```
 <TextInput
@@ -431,7 +431,7 @@ _仅 iOS_
 
 ### `inlineImagePadding` <div className="label android">Android</div>
 
-内联图像（如果有）与文本输入本身之间的内边距。
+内联图片与文本输入本身之间的内边距。
 
 | 类型   |
 | ------ |
@@ -441,7 +441,7 @@ _仅 iOS_
 
 ### `inputAccessoryViewID` <div className="label ios">iOS</div>
 
-一个可选标识符，将自定义 [InputAccessoryView](inputaccessoryview.md) 链接到此文本输入。当此文本输入聚焦时，InputAccessoryView 将渲染在键盘上方。
+一个可选标识符，用于将自定义的 [InputAccessoryView](inputaccessoryview.md) 关联到此文本输入。该 InputAccessoryView 会在该文本输入获得焦点时显示在键盘上方。
 
 | 类型   |
 | ------ |
@@ -451,9 +451,9 @@ _仅 iOS_
 
 ### `inputAccessoryViewButtonLabel` <div className="label ios">iOS</div>
 
-一个可选标签，覆盖默认 [InputAccessoryView](inputaccessoryview.md) 按钮标签。
+一个可选标签，用于覆盖默认的 [InputAccessoryView](inputaccessoryview.md) 按钮标签。
 
-默认情况下，默认按钮标签未本地化。使用此属性提供本地化版本。
+默认情况下，默认按钮标签未进行本地化。请使用此属性提供本地化版本。
 
 | 类型   |
 | ------ |
@@ -463,7 +463,7 @@ _仅 iOS_
 
 ### `inputMode`
 
-工作原理类似于 HTML 中的 `inputmode` 属性，它确定打开哪个键盘，例如 `numeric`，并且优先于 `keyboardType`。
+其作用类似于 HTML 中的 `inputmode` 属性，用于决定打开哪种键盘，例如 `numeric`，并且其优先级高于 `keyboardType`。
 
 支持以下值：
 
@@ -484,7 +484,7 @@ _仅 iOS_
 
 ### `keyboardAppearance` <div className="label ios">iOS</div>
 
-确定键盘的颜色。
+决定键盘的颜色。
 
 | 类型                             |
 | -------------------------------- |
@@ -494,11 +494,11 @@ _仅 iOS_
 
 ### `keyboardType`
 
-确定打开哪个键盘，例如 `numeric`。
+决定打开哪种键盘，例如 `numeric`。
 
-在此处 [这里](https://davidl.fr/blog/keyboard-react-native-ios-android#all-react-native-keyboard-type-examples-i-os-on-the-left-android-on-the-right) 查看所有类型的截图。
+查看所有类型的截图 [这里](https://davidl.fr/blog/keyboard-react-native-ios-android#all-react-native-keyboard-type-examples-i-os-on-the-left-android-on-the-right)。
 
-以下值适用于所有平台：
+以下值可跨平台使用：
 
 - `default`
 - `number-pad`
@@ -510,7 +510,7 @@ _仅 iOS_
 
 _仅 iOS_
 
-以下值仅适用于 iOS：
+以下值仅可在 iOS 上使用：
 
 - `ascii-capable`
 - `numbers-and-punctuation`
@@ -520,7 +520,7 @@ _仅 iOS_
 
 _仅 Android_
 
-以下值仅适用于 Android：
+以下值仅可在 Android 上使用：
 
 - `visible-password`
 
@@ -532,9 +532,9 @@ _仅 Android_
 
 ### `lineBreakModeIOS` <div className="label ios">iOS</div>
 
-在 iOS 上设置换行模式。可能的值为 `wordWrapping`、`char`、`clip`、`head`、`middle` 和 `tail`。
+在 iOS 上设置换行模式。可选值为 `wordWrapping`、`char`、`clip`、`head`、`middle` 和 `tail`。
 
-| 类型                                                                       | 默认值           |
+| 类型                                                                       | 默认值          |
 | -------------------------------------------------------------------------- | ---------------- |
 | enum(`'wordWrapping'`, `'char'`, `'clip'`, `'head'`, `'middle'`, `'tail'`) | `'wordWrapping'` |
 
@@ -542,9 +542,9 @@ _仅 Android_
 
 ### `lineBreakStrategyIOS` <div className="label ios">iOS</div>
 
-在 iOS 14+ 上设置换行策略。可能的值为 `none`、`standard`、`hangul-word` 和 `push-out`。
+在 iOS 14+ 上设置换行策略。可选值为 `none`、`standard`、`hangul-word` 和 `push-out`。
 
-| 类型                                                        | 默认值   |
+| 类型                                                        | 默认值  |
 | ----------------------------------------------------------- | -------- |
 | enum(`'none'`, `'standard'`, `'hangul-word'`, `'push-out'`) | `'none'` |
 
@@ -552,11 +552,11 @@ _仅 Android_
 
 ### `maxFontSizeMultiplier`
 
-指定当 `allowFontScaling` 启用时字体可达到的最大缩放比例。可能的值：
+指定在启用 `allowFontScaling` 时字体可达到的最大缩放比例。可选值：
 
-- `null/undefined` (默认): 从父节点或全局默认值继承 (0)
-- `0`: 无最大值，忽略父节点/全局默认值
-- `>= 1`: 将此节点的 `maxFontSizeMultiplier` 设置为此值
+- `null/undefined`（默认）：从父节点或全局默认值（0）继承
+- `0`：无限制，忽略父级/全局默认值
+- `>= 1`：将此节点的 `maxFontSizeMultiplier` 设为该值
 
 | 类型   |
 | ------ |
@@ -566,7 +566,7 @@ _仅 Android_
 
 ### `maxLength`
 
-限制可输入的最大字符数。使用此代替在 JS 中实现逻辑以避免闪烁。
+限制可输入的最大字符数。请使用此属性代替在 JS 中实现逻辑，以避免闪烁。
 
 | 类型   |
 | ------ |
@@ -579,7 +579,7 @@ _仅 Android_
 如果为 `true`，文本输入可以是多行。默认值为 `false`。
 
 :::note
-需要注意的是，这在 iOS 上将文本顶部对齐，在 Android 上居中。在两个平台上获得相同行为，请配合使用 `textAlignVertical` 设置为 `top`。
+需要注意的是，这会在 iOS 上将文本对齐到顶部，而在 Android 上则居中。将 `textAlignVertical` 设为 `top` 可以在两个平台上获得相同的行为。
 :::
 
 | 类型 |
@@ -591,10 +591,10 @@ _仅 Android_
 ### `numberOfLines`
 
 :::note
-`numberOfLines` 在 iOS 上仅在 [新架构](/architecture/landing-page) 上可用
+iOS 上的 `numberOfLines` 仅在 [新架构](/architecture/landing-page) 中可用
 :::
 
-设置 `TextInput` 的最大行数。配合 multiline 设置为 `true` 使用以能够填充行。
+设置 `TextInput` 的最大行数。将其与 `multiline` 设为 `true` 一起使用，才能填满这些行。
 
 | 类型   |
 | ------ |
@@ -604,9 +604,9 @@ _仅 Android_
 
 ### `onBlur`
 
-当文本输入失焦时调用的回调。
+输入框失去焦点时调用的回调。
 
-> 注意：如果你试图从 `nativeEvent` 访问 `text` 值，请记住你得到的结果值可能是 `undefined`，这可能会导致意外错误。如果你试图找到 TextInput 的最后一个值，可以使用 [`onEndEditing`](textinput#onendediting) 事件，它在编辑完成时触发。
+> 注意：如果你尝试从 `nativeEvent` 中访问 `text` 值，请注意你获得的结果值可能为 `undefined`，这可能会导致意外错误。如果你想获取 `TextInput` 的最后一个值，可以使用 [`onEndEditing`](textinput#onendediting) 事件，它会在编辑完成时触发。
 
 | 类型                                                     |
 | -------------------------------------------------------- |
@@ -616,7 +616,7 @@ _仅 Android_
 
 ### `onChange`
 
-当文本输入的文本变化时调用的回调。
+文本输入内容发生变化时调用的回调。
 
 | 类型                                                  |
 | ----------------------------------------------------- |
@@ -626,7 +626,7 @@ _仅 Android_
 
 ### `onChangeText`
 
-当文本输入的文本变化时调用的回调。变化的文本作为单个字符串参数传递给回调处理程序。
+文本输入内容发生变化时调用的回调。变更后的文本会作为单个字符串参数传递给回调处理器。
 
 | 类型     |
 | -------- |
@@ -636,9 +636,9 @@ _仅 Android_
 
 ### `onContentSizeChange`
 
-当文本输入的内容大小变化时调用的回调。
+文本输入内容尺寸发生变化时调用的回调。
 
-仅针对多行文本输入调用。
+仅对多行文本输入调用。
 
 | 类型                                                       |
 | ---------------------------------------------------------- |
@@ -648,7 +648,7 @@ _仅 Android_
 
 ### `onEndEditing`
 
-当文本输入结束时调用的回调。
+文本输入结束时调用的回调。
 
 | 类型     |
 | -------- |
@@ -658,7 +658,7 @@ _仅 Android_
 
 ### `onPressIn`
 
-当触摸开始时调用的回调。
+触摸按下时调用的回调。
 
 | 类型                                                   |
 | ------------------------------------------------------ |
@@ -668,7 +668,7 @@ _仅 Android_
 
 ### `onPressOut`
 
-当触摸释放时调用的回调。
+触摸释放时调用的回调。
 
 | 类型                                                   |
 | ------------------------------------------------------ |
@@ -678,7 +678,7 @@ _仅 Android_
 
 ### `onFocus`
 
-当文本输入聚焦时调用的回调。
+输入框获得焦点时调用的回调。
 
 | 类型                                                     |
 | -------------------------------------------------------- |
@@ -688,7 +688,7 @@ _仅 Android_
 
 ### `onKeyPress`
 
-当按下键时调用的回调。这将使用对象调用，其中 `keyValue` 对于相应键为 `'Enter'` 或 `'Backspace'`，否则为输入的字符，包括 `' '` 表示空格。在 `onChange` 回调之前触发。注意：在 Android 上仅处理软键盘的输入，不处理硬件键盘输入。
+按下键时调用的回调。此回调会收到一个对象，其中 `keyValue` 对应 `Enter` 或 `Backspace` 等按键，其余情况下对应所输入的字符，包括空格键对应的 `' '`。在 `onChange` 回调之前触发。注意：在 Android 上只处理来自软键盘的输入，不处理硬件键盘输入。
 
 | 类型                                        |
 | ------------------------------------------- |
@@ -698,7 +698,7 @@ _仅 Android_
 
 ### `onLayout`
 
-在挂载和布局变化时调用。
+在挂载时以及布局变化时调用。
 
 | 类型                                                     |
 | -------------------------------------------------------- |
@@ -708,7 +708,7 @@ _仅 Android_
 
 ### `onScroll`
 
-在内容滚动时调用。也可能包含来自 `ScrollEvent` 的其他属性，但在 Android 上出于性能原因不提供 `contentSize`。
+在内容滚动时调用。在 Android 上，出于性能原因不会提供 `contentSize`，但也可能包含 `ScrollEvent` 的其他属性。
 
 | 类型                                                |
 | --------------------------------------------------- |
@@ -718,7 +718,7 @@ _仅 Android_
 
 ### `onSelectionChange`
 
-当文本输入选择变化时调用的回调。
+文本输入选择内容发生变化时调用的回调。
 
 | 类型                                                  |
 | ----------------------------------------------------- |
@@ -728,19 +728,19 @@ _仅 Android_
 
 ### `onSubmitEditing`
 
-当文本输入的提交按钮被按下时调用的回调。
+文本输入的提交按钮被按下时调用的回调。
 
 | 类型                                                  |
 | ----------------------------------------------------- |
 | (`{nativeEvent: {text, eventCount, target}}`) => void |
 
-请注意，在 iOS 上，当使用 `keyboardType="phone-pad"` 时，此方法不会被调用。
+请注意，在 iOS 上使用 `keyboardType="phone-pad"` 时不会调用此方法。
 
 ---
 
 ### `placeholder`
 
-在文本输入输入之前将渲染的字符串。
+在文本输入尚未输入内容之前将要渲染的字符串。
 
 | 类型   |
 | ------ |
@@ -760,7 +760,7 @@ _仅 Android_
 
 ### `readOnly`
 
-如果为 `true`，文本不可编辑。默认值为 `false`。
+如果为 `true`，则文本不可编辑。默认值为 `false`。
 
 | 类型 |
 | ---- |
@@ -770,7 +770,7 @@ _仅 Android_
 
 ### `returnKeyLabel` <div className="label android">Android</div>
 
-将返回键设置为标签。使用它代替 `returnKeyType`。
+将回车键设置为该标签。请用它替代 `returnKeyType`。
 
 | 类型   |
 | ------ |
@@ -780,11 +780,11 @@ _仅 Android_
 
 ### `returnKeyType`
 
-确定返回键的外观。在 Android 上你也可以使用 `returnKeyLabel`。
+决定回车键应显示的样式。在 Android 上，你也可以使用 `returnKeyLabel`。
 
 _跨平台_
 
-以下值适用于所有平台：
+以下值可跨平台使用：
 
 - `done`
 - `go`
@@ -794,14 +794,14 @@ _跨平台_
 
 _仅 Android_
 
-以下值仅适用于 Android：
+以下值仅可在 Android 上使用：
 
 - `none`
 - `previous`
 
 _仅 iOS_
 
-以下值仅适用于 iOS：
+以下值仅可在 iOS 上使用：
 
 - `default`
 - `emergency-call`
@@ -816,7 +816,7 @@ _仅 iOS_
 
 ### `rejectResponderTermination` <div className="label ios">iOS</div>
 
-如果为 `true`，允许 TextInput 将触摸事件传递给父组件。这允许诸如 SwipeableListView 之类的组件在 iOS 上从 TextInput 滑动，就像 Android 上默认情况一样。如果为 `false`，TextInput 始终请求处理输入（除非禁用）。默认值为 `true`。
+如果为 `true`，则允许 `TextInput` 将触摸事件传递给父组件。这使得诸如 SwipeableListView 之类的组件在 iOS 上可以像 Android 默认那样，从 `TextInput` 处滑动。如果为 `false`，`TextInput` 总是会请求处理输入（除非被禁用）。默认值为 `true`。
 
 | 类型 |
 | ---- |
@@ -826,7 +826,7 @@ _仅 iOS_
 
 ### `rows` <div className="label android">Android</div>
 
-设置 `TextInput` 的行数。配合 multiline 设置为 `true` 使用以能够填充行。
+设置 `TextInput` 的行数。将其与 `multiline` 设为 `true` 一起使用，才能填满这些行。
 
 | 类型   |
 | ------ |
@@ -836,7 +836,7 @@ _仅 iOS_
 
 ### `scrollEnabled` <div className="label ios">iOS</div>
 
-如果为 `false`，文本视图的滚动将被禁用。默认值为 `true`。仅与 `multiline={true}` 配合使用。
+如果为 `false`，则会禁用文本视图滚动。默认值为 `true`。仅在 `multiline={true}` 时有效。
 
 | 类型 |
 | ---- |
@@ -846,7 +846,7 @@ _仅 iOS_
 
 ### `secureTextEntry`
 
-如果为 `true`，文本输入掩盖输入的文本，以便密码等敏感文本保持安全。默认值为 `false`。不适用于 `multiline={true}`。
+如果为 `true`，文本输入会隐藏已输入的文本，以确保密码等敏感文本的安全。默认值为 `false`。不适用于 `multiline={true}`。
 
 | 类型 |
 | ---- |
@@ -856,7 +856,7 @@ _仅 iOS_
 
 ### `selection`
 
-文本输入选择的开始和结束。将 start 和 end 设置为相同的值以定位光标。
+文本输入选择范围的起始和结束位置。将起始和结束设置为相同值即可定位光标。
 
 | 类型                                  |
 | ------------------------------------- |
@@ -866,7 +866,7 @@ _仅 iOS_
 
 ### `selectionColor`
 
-文本输入的高亮、选择手柄和光标颜色。
+文本输入高亮、选择手柄和光标的颜色。
 
 | 类型               |
 | ------------------ |
@@ -876,7 +876,7 @@ _仅 iOS_
 
 ### `selectionHandleColor` <div className="label android">Android</div>
 
-设置选择手柄的颜色。与 `selectionColor` 不同，它允许独立于选择颜色自定义选择手柄颜色。
+设置选择手柄的颜色。与 `selectionColor` 不同，它允许独立自定义选择手柄颜色，而不受选择高亮颜色影响。
 
 | 类型               |
 | ------------------ |
@@ -886,7 +886,7 @@ _仅 iOS_
 
 ### `selectTextOnFocus`
 
-如果为 `true`，所有文本将在聚焦时自动选中。
+如果为 `true`，则在获得焦点时自动全选所有文本。
 
 | 类型 |
 | ---- |
@@ -896,7 +896,7 @@ _仅 iOS_
 
 ### `showSoftInputOnFocus`
 
-当 `false` 时，它将防止字段聚焦时显示软键盘。默认值为 `true`。
+当为 `false` 时，输入框获得焦点时将阻止软键盘显示。默认值为 `true`。
 
 | 类型 |
 | ---- |
@@ -916,7 +916,7 @@ _仅 iOS_
 
 ### `spellCheck` <div className="label ios">iOS</div>
 
-如果为 `false`，禁用拼写检查样式（即红色下划线）。默认值继承自 `autoCorrect`。
+如果为 `false`，则禁用拼写检查样式（即红色下划线）。默认值继承自 `autoCorrect`。
 
 | 类型 |
 | ---- |
@@ -926,22 +926,22 @@ _仅 iOS_
 
 ### `submitBehavior`
 
-当按下返回键时，
+当按下回车键时，
 
 对于单行输入：
 
-- `'newline'` 默认为 `'blurAndSubmit'`
-- `undefined` 默认为 `'blurAndSubmit'`
+- `'newline'` 默认对应 `'blurAndSubmit'`
+- `undefined` 默认对应 `'blurAndSubmit'`
 
 对于多行输入：
 
-- `'newline'` 添加换行符
-- `undefined` 默认为 `'newline'`
+- `'newline'` 会插入换行
+- `undefined` 默认对应 `'newline'`
 
-对于单行和多行输入：
+对于单行和多行输入均适用：
 
-- `'submit'` 将仅发送提交事件而不使输入失焦
-- `'blurAndSubmit`' 将使输入失焦并发送提交事件
+- `'submit'` 只会发送提交事件，不会使输入框失去焦点
+- `'blurAndSubmit`' 既会使输入框失去焦点，也会发送提交事件
 
 | 类型                                       |
 | ------------------------------------------ |
@@ -951,9 +951,9 @@ _仅 iOS_
 
 ### `textAlign`
 
-将输入文本对齐到输入字段的左侧、中心或右侧。
+将输入文本对齐到输入字段的左侧、居中或右侧。
 
-`textAlign` 的可能值为：
+`textAlign` 的可选值为：
 
 - `left`
 - `center`
@@ -967,21 +967,21 @@ _仅 iOS_
 
 ### `textContentType` <div className="label ios">iOS</div>
 
-向键盘和系统提供有关用户输入内容的预期语义含义的信息。
+为键盘和系统提供用户输入内容的预期语义含义信息。
 
 :::note
-[`autoComplete`](#autocomplete) 提供相同的功能并适用于所有平台。你可以使用 [`Platform.select`](/docs/next/platform#select) 来处理不同的平台行为。
+[`autoComplete`](#autocomplete) 提供相同功能，并且适用于所有平台。你可以使用 [`Platform.select`](/docs/next/platform#select) 来处理不同的平台行为。
 
-避免同时使用 `textContentType` 和 `autoComplete`。为了向后兼容，当同时设置这两个属性时，`textContentType` 优先。
+避免同时使用 `textContentType` 和 `autoComplete`。为了向后兼容，当两个属性都设置时，`textContentType` 具有优先级。
 :::
 
-你可以将 `textContentType` 设置为 `username` 或 `password` 以启用来自设备钥匙串的登录详细信息自动填充。
+你可以将 `textContentType` 设置为 `username` 或 `password`，以启用从设备钥匙串自动填充登录信息。
 
-`newPassword` 可用于指示用户可能想要保存在钥匙串中的新密码输入，`oneTimeCode` 可用于指示字段可以通过短信到达的代码自动填充。
+`newPassword` 可用于表示用户可能希望保存到钥匙串的新密码输入，而 `oneTimeCode` 可用于表示某个字段可以通过短信中的验证码自动填充。
 
 要禁用自动填充，请将 `textContentType` 设置为 `none`。
 
-`textContentType` 的可能值为：
+`textContentType` 的可选值为：
 
 - `none`
 - `addressCity`
@@ -1033,12 +1033,12 @@ _仅 iOS_
 
 ### `passwordRules` <div className="label ios">iOS</div>
 
-当在 iOS 上使用 `textContentType` 为 `newPassword` 时，我们可以让操作系统知道密码的最低要求，以便它可以生成一个满足这些要求的密码。为了创建有效的 `PasswordRules` 字符串，请查看 [Apple 文档](https://developer.apple.com/password-rules/)。
+在 iOS 上将 `textContentType` 设为 `newPassword` 时，我们可以让系统了解密码的最小要求，以便它生成一个满足这些要求的密码。要创建一个有效的 `PasswordRules` 字符串，请查看 [Apple 文档](https://developer.apple.com/password-rules/)。
 
 > 如果密码生成对话框没有出现，请确保：
 >
-> - 已启用自动填充：**设置** → **密码与账户** → 切换 "开" **自动填充密码**，
-> - 使用 iCloud 钥匙串：**设置** → **Apple ID** → **iCloud** → **钥匙串** → 切换 "开" **iCloud 钥匙串**。
+> - 已启用 AutoFill：**设置** → **密码与账户** → 打开 **AutoFill Passwords**，
+> - 正在使用 iCloud 钥匙串：**设置** → **Apple ID** → **iCloud** → **钥匙串** → 打开 **iCloud Keychain**。
 
 | 类型   |
 | ------ |
@@ -1048,7 +1048,7 @@ _仅 iOS_
 
 ### `style`
 
-注意，并非所有 Text 样式都受支持，不支持的不完整列表包括：
+请注意，并非所有 Text 样式都受支持，以下是不受支持项的不完整列表：
 
 - `borderLeftWidth`
 - `borderTopWidth`
@@ -1069,7 +1069,7 @@ _仅 iOS_
 
 ### `textBreakStrategy` <div className="label android">Android</div>
 
-在 Android API Level 23+ 上设置文本中断策略，可能的值为 `simple`、`highQuality`、`balanced`。默认值为 `highQuality`。
+在 Android API 23+ 上设置文本换行策略，可选值为 `simple`、`highQuality`、`balanced`。默认值为 `highQuality`。
 
 | 类型                                      |
 | ----------------------------------------- |
@@ -1089,7 +1089,7 @@ _仅 iOS_
 
 ### `value`
 
-为文本输入显示的值。`TextInput` 是一个受控组件，这意味着如果提供，原生值将被强制匹配此 value prop。对于大多数用途，这效果很好，但在某些情况下这可能导致闪烁 - 一个常见原因是通过保持值相同来防止编辑。除了设置相同的值外，要么设置 `editable={false}`，要么设置/更新 `maxLength` 以防止不必要的编辑而不闪烁。
+文本输入要显示的值。`TextInput` 是受控组件，这意味着如果提供了该 `value` prop，原生值将被强制与之匹配。对于大多数用法，这非常有效，但在某些情况下可能会导致闪烁——一个常见原因是通过保持 `value` 不变来阻止编辑。除了设置相同的值之外，还可以设置 `editable={false}`，或者设置/更新 `maxLength`，以在不闪烁的情况下防止不需要的编辑。
 
 | 类型   |
 | ------ |
@@ -1129,10 +1129,10 @@ clear();
 isFocused(): boolean;
 ```
 
-如果输入框当前处于聚焦状态则返回 `true`；否则返回 `false`。
+如果输入框当前处于聚焦状态，则返回 `true`；否则返回 `false`。
 
 # 已知问题
 
-- [react-native#19096](https://github.com/facebook/react-native/issues/19096): 不支持 Android 的 `onKeyPreIme`。
-- [react-native#19366](https://github.com/facebook/react-native/issues/19366): 通过返回键关闭 Android 键盘后调用 .focus() 不会再次弹出键盘。
-- [react-native#26799](https://github.com/facebook/react-native/issues/26799): 当 `keyboardType="email-address"` 或 `keyboardType="phone-pad"` 时不支持 Android 的 `secureTextEntry`。
+- [react-native#19096](https://github.com/facebook/react-native/issues/19096)：不支持 Android 的 `onKeyPreIme`。
+- [react-native#19366](https://github.com/facebook/react-native/issues/19366)：通过返回键关闭 Android 键盘后再调用 `.focus()` 不会重新唤起键盘。
+- [react-native#26799](https://github.com/facebook/react-native/issues/26799)：当 `keyboardType="email-address"` 或 `keyboardType="phone-pad"` 时，不支持 Android 的 `secureTextEntry`。

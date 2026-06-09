@@ -1,6 +1,6 @@
 ---
 id: animated
-title: Animated
+title: 动画
 ---
 
 `Animated` 库旨在使动画流畅、强大且易于构建和维护。`Animated` 专注于输入和输出之间的声明式关系、中间的可配置变换，以及用于控制基于时间的动画执行的 `start`/`stop` 方法。
@@ -16,7 +16,6 @@ title: Animated
 以下示例包含一个 `View`，它将根据动画值 `fadeAnim` 淡入和淡出
 
 ```SnackPlayer name=Animated%20Example
-import React from 'react';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 import {
   Animated,
@@ -28,11 +27,11 @@ import {
 } from 'react-native';
 
 const App = () => {
-  // fadeAnim 将用作 opacity 的值。初始值：0
+  // `fadeAnim` 将用作 `opacity` 的值。初始值：0
   const fadeAnim = useAnimatedValue(0);
 
   const fadeIn = () => {
-    // 将在 5 秒内将 fadeAnim 值更改为 1
+    // 将在 5 秒内将 `fadeAnim` 值更改为 1
     Animated.timing(fadeAnim, {
       toValue: 1,
       duration: 5000,
@@ -41,7 +40,7 @@ const App = () => {
   };
 
   const fadeOut = () => {
-    // 将在 3 秒内将 fadeAnim 值更改为 0
+    // 将在 3 秒内将 `fadeAnim` 值更改为 0
     Animated.timing(fadeAnim, {
       toValue: 0,
       duration: 3000,
@@ -60,11 +59,11 @@ const App = () => {
               opacity: fadeAnim,
             },
           ]}>
-          <Text style={styles.fadingText}>Fading View!</Text>
+          <Text style={styles.fadingText}>淡入淡出视图！</Text>
         </Animated.View>
         <View style={styles.buttonRow}>
-          <Button title="Fade In View" onPress={fadeIn} />
-          <Button title="Fade Out View" onPress={fadeOut} />
+          <Button title="淡入视图" onPress={fadeIn} />
+          <Button title="淡出视图" onPress={fadeOut} />
         </View>
       </SafeAreaView>
     </SafeAreaProvider>
@@ -187,7 +186,7 @@ Animated.timing({}).start(({finished}) => {
 
 ```tsx
  onScroll={Animated.event(
-   // scrollX 等于 e.nativeEvent.contentOffset.x
+   // `scrollX` 等于 `e.nativeEvent.contentOffset.x`
    [{nativeEvent: {
         contentOffset: {
           x: scrollX
@@ -423,7 +422,7 @@ onPanResponderMove: Animated.event(
   [
     null, // 原始事件参数被忽略
     {dx: this._panX},
-  ], // gestureState 参数
+  ], // `gestureState` 参数
   {
     listener: (
       event: GestureResponderEvent,
@@ -464,13 +463,13 @@ static unforkEvent(event: AnimatedEvent, listener: Function);
 static start(callback?: (result: {finished: boolean}) => void);
 ```
 
-通过调用动画上的 start() 来启动动画。start() 接受一个完成回调，该回调将在动画完成运行正常时或动画在完成之前被调用 stop() 而完成时调用。
+通过调用动画上的 `start()` 来启动动画。`start()` 接受一个完成回调，该回调将在动画完成正常时或动画在完成之前被调用 `stop()` 而完成时调用。
 
 **参数：**
 
 | 名称     | 类型                                    | 必需 | 描述                                                                                                                                                     |
 | -------- | --------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| callback | `(result: {finished: boolean}) => void` | 否       | 动画正常完成运行后或动画在完成之前被调用 stop() 而完成时将调用的函数 |
+| callback | `(result: {finished: boolean}) => void` | 否       | 动画正常完成运行后或动画在完成之前被调用 `stop()` 而完成时将调用的函数 |
 
 带回调的启动示例：
 

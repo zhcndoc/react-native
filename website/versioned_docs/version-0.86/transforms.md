@@ -3,12 +3,11 @@ id: transforms
 title: 变换
 ---
 
-变换是一种样式属性，可帮助你使用 2D 或 3D 变换来修改组件的外观和位置。然而，一旦应用了变换，布局在变换后的组件周围仍保持不变，因此它可能会与附近的组件重叠。你可以为变换后的组件或附近的组件添加 margin，或者为容器添加 padding，以防止此类重叠。
+变换是一种样式属性，可帮助你使用 2D 或 3D 变换来修改组件的外观和位置。不过，一旦应用了变换，布局在变换后的组件周围仍保持不变，因此可能会与附近的组件重叠。你可以为变换后的组件或附近的组件添加外边距，或者为容器添加内边距，以防止此类重叠。
 
 ## 示例
 
 ```SnackPlayer name=Transforms%20Example
-import React from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -27,7 +26,7 @@ const App = () => (
               transform: [{scale: 2}],
             },
           ]}>
-          <Text style={styles.text}>放大 2 倍</Text>
+          <Text style={styles.text}>缩放 2 倍</Text>
         </View>
 
         <View
@@ -37,7 +36,7 @@ const App = () => (
               transform: [{scaleX: 2}],
             },
           ]}>
-          <Text style={styles.text}>X 轴放大 2 倍</Text>
+          <Text style={styles.text}>X 轴缩放 2 倍</Text>
         </View>
 
         <View
@@ -47,7 +46,7 @@ const App = () => (
               transform: [{scaleY: 2}],
             },
           ]}>
-          <Text style={styles.text}>Y 轴放大 2 倍</Text>
+          <Text style={styles.text}>Y 轴缩放 2 倍</Text>
         </View>
 
         <View
@@ -117,7 +116,7 @@ const App = () => (
               transform: [{translateX: -50}],
             },
           ]}>
-          <Text style={styles.text}>X 轴平移 -50</Text>
+          <Text style={styles.text}>X 轴平移 -50 </Text>
         </View>
 
         <View
@@ -127,7 +126,7 @@ const App = () => (
               transform: [{translateY: 50}],
             },
           ]}>
-          <Text style={styles.text}>Y 轴平移 50</Text>
+          <Text style={styles.text}>Y 轴平移 50 </Text>
         </View>
 
         <View
@@ -181,11 +180,11 @@ export default App;
 
 # 参考
 
-## Transform
+## 变换
 
-`transform` 接受一个由变换对象组成的数组，或者以空格分隔的字符串值。每个对象都指定一个将被变换的属性作为键，以及在变换中使用的值。对象不应组合使用。每个对象只使用一个键/值对。
+`transform` 接受一个变换对象数组或以空格分隔的字符串值。每个对象都指定要作为键进行变换的属性，以及在变换中使用的值。对象不应合并。每个对象只使用一个键/值对。
 
-rotate 变换需要使用字符串，以便将变换表示为角度（deg）或弧度（rad）。例如：
+旋转变换需要字符串，以便可以用度（deg）或弧度（rad）表示变换。例如：
 
 ```js
 {
@@ -201,7 +200,7 @@ rotate 变换需要使用字符串，以便将变换表示为角度（deg）或�
 }
 ```
 
-skew 变换需要使用字符串，以便将变换表示为角度（deg）。例如：
+倾斜变换需要字符串，以便可以用度（deg）表示变换。例如：
 
 ```js
 {
@@ -209,9 +208,9 @@ skew 变换需要使用字符串，以便将变换表示为角度（deg）。例
 }
 ```
 
-### Matrix Transform
+### 矩阵变换
 
-`matrix` 变换接受一个 4x4 的变换矩阵，作为包含 16 个数字的数组。这使你能够在单个操作中应用组合了平移、旋转、缩放和倾斜的复杂变换。
+`matrix` 变换接受一个包含 16 个数字的数组形式的 4x4 变换矩阵。这使你能够在单个操作中应用结合平移、旋转、缩放和倾斜的复杂变换。
 
 矩阵按列主序指定：
 
@@ -257,29 +256,29 @@ skew 变换需要使用字符串，以便将变换表示为角度（deg）。例
 ```
 
 :::note
-当你需要应用预先计算好的变换矩阵时，例如来自动画库的矩阵，或者在构建 UI 编辑器应用时，矩阵变换会很有用。对于基本变换，建议使用单独的变换属性（scale、rotate、translate 等），因为它们更易读。
+当你需要应用预先计算好的变换矩阵时，矩阵变换非常有用，例如来自动画库的矩阵，或在构建 UI 编辑器应用时。对于基础变换，建议使用各个独立的变换属性（scale、rotate、translate 等），因为它们更易读。
 :::
 
-| 类型                                                                                                                                                                                                                                                                                                          | 必需 |
+| 类型                                                                                                                                                                                                                                                                                                          | 是否必需 |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | 对象数组：`{matrix: number[]}`、`{perspective: number}`、`{rotate: string}`、`{rotateX: string}`、`{rotateY: string}`、`{rotateZ: string}`、`{scale: number}`、`{scaleX: number}`、`{scaleY: number}`、`{translateX: number}`、`{translateY: number}`、`{skewX: string}`、`{skewY: string}` 或字符串 | 否       |
 
 ---
 
-### 🗑️ `decomposedMatrix`, `rotation`, `scaleX`, `scaleY`, `transformMatrix`, `translateX`, `translateY`
+### 🗑️ `decomposedMatrix`、`rotation`、`scaleX`、`scaleY`、`transformMatrix`、`translateX`、`translateY`
 
-:::warning 已弃用
+:::warning Deprecated
 请改用 [`transform`](transforms#transform) 属性。
 :::
 
-## Transform Origin
+## 变换原点
 
-`transformOrigin` 属性用于设置视图变换的原点。变换原点是应用变换时所围绕的点。默认情况下，变换的原点为 `center`。
+`transformOrigin` 属性用于设置视图变换的原点。变换原点是应用变换所围绕的点。默认情况下，变换的原点为 `center`。
 
 # 示例
 
 ```SnackPlayer name=TransformOrigin%20Example
-import React, {useEffect, useRef} from 'react';
+import {useEffect, useRef} from 'react';
 import {Animated, View, StyleSheet, Easing} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -343,13 +342,13 @@ export default App;
 
 ### 值
 
-Transform origin 支持 `px`、`percentage` 以及关键字 `top`、`left`、`right`、`bottom`、`center` 值。
+变换原点支持 `px`、`percentage` 以及关键字 `top`、`left`、`right`、`bottom`、`center` 的值。
 
-`transformOrigin` 属性可以使用一个、两个或三个值来指定，其中每个值代表一个偏移量。
+`transformOrigin` 属性可以使用一个、两个或三个值来指定，每个值都表示一个偏移量。
 
 #### 单值语法：
 
-- 该值必须是 `px`、`percentage`，或者关键字 `left`、`center`、`right`、`top` 和 `bottom` 之一。
+- 该值必须是 `px`、`percentage`，或者关键字 `left`、`center`、`right`、`top`、`bottom` 之一。
 
 ```js
 {
@@ -360,8 +359,8 @@ Transform origin 支持 `px`、`percentage` 以及关键字 `top`、`left`、`ri
 
 #### 双值语法：
 
-- 第一个值（x 偏移）必须是 `px`、`percentage`，或者关键字 `left`、`center` 和 `right` 之一。
-- 第二个值（y 偏移）必须是 `px`、`percentage`，或者关键字 `top`、`center` 和 `bottom` 之一。
+- 第一个值（x 偏移）必须是 `px`、`percentage`，或者关键字 `left`、`center`、`right` 之一。
+- 第二个值（y 偏移）必须是 `px`、`percentage`，或者关键字 `top`、`center`、`bottom` 之一。
 
 ```js
 {
@@ -385,7 +384,7 @@ Transform origin 支持 `px`、`percentage` 以及关键字 `top`、`left`、`ri
 
 #### 数组语法
 
-`transformOrigin` 也支持数组语法。它使其更方便与 Animated API 配合使用。它还能避免字符串解析，因此效率更高。
+`transformOrigin` 也支持数组语法。这样与 Animated API 一起使用会更方便。它还避免了字符串解析，因此效率可能更高。
 
 ```js
 {
@@ -396,4 +395,4 @@ Transform origin 支持 `px`、`percentage` 以及关键字 `top`、`left`、`ri
 }
 ```
 
-你可以参考 MDN 关于 [Transform origin](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin) 的指南以获取更多信息。
+你可以参考 MDN 关于 [Transform origin](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin) 的指南了解更多信息。

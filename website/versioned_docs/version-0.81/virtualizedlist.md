@@ -15,13 +15,12 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 <TabItem value="javascript">
 
 ```SnackPlayer name=VirtualizedListExample&ext=js
-import React from 'react';
 import {View, VirtualizedList, StyleSheet, Text, StatusBar} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const getItem = (_data, index) => ({
   id: Math.random().toString(12).substring(0),
-  title: `Item ${index + 1}`,
+  title: `项目 ${index + 1}`,
 });
 
 const getItemCount = _data => 50;
@@ -71,7 +70,6 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=VirtualizedListExample&ext=tsx
-import React from 'react';
 import {View, VirtualizedList, StyleSheet, Text, StatusBar} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -82,7 +80,7 @@ type ItemData = {
 
 const getItem = (_data: unknown, index: number): ItemData => ({
   id: Math.random().toString(12).substring(0),
-  title: `Item ${index + 1}`,
+  title: `项目 ${index + 1}`,
 });
 
 const getItemCount = (_data: unknown) => 50;
@@ -618,7 +616,7 @@ getScrollRef():
 getScrollResponder () => ScrollResponderMixin | null;
 ```
 
-提供对底层滚动响应器的句柄。注意 `this._scrollRef` 可能不是 `ScrollView`，所以我们在调用之前需要检查它是否响应 `getScrollResponder`。
+返回底层滚动响应器的句柄。注意 `this._scrollRef` 可能不是 `ScrollView`，因此在调用前需要检查它是否响应 `getScrollResponder`。
 
 ---
 
@@ -628,7 +626,7 @@ getScrollResponder () => ScrollResponderMixin | null;
 scrollToEnd(params?: {animated?: boolean});
 ```
 
-滚动到内容末尾。如果没有 `getItemLayout` 属性，可能会卡顿。
+滚动到内容末尾。如果没有 `getItemLayout` 属性，可能会出现卡顿。
 
 **参数：**
 
@@ -693,6 +691,6 @@ scrollToOffset(params: {
 
 滚动到列表中特定的内容像素偏移量。
 
-参数 `offset` 期望滚动的偏移量。如果 `horizontal` 为 true，则偏移量为 x 值，其他情况下偏移量为 y 值。
+参数 `offset` 是期望滚动到的偏移量。如果 `horizontal` 为 `true`，则偏移量为 x 值；否则为 y 值。
 
 参数 `animated`（默认为 `true`）定义列表在滚动时是否执行动画。

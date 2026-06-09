@@ -1,10 +1,10 @@
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-# 在你的原生组件上调用原生函数
+# 在你的原生组件上调用原生命令
 
 在编写新原生组件的 [基础指南](/docs/fabric-native-components-introduction) 中，你已经了解了如何创建新组件、如何从 JS 侧向原生侧传递属性，以及如何从原生侧向 JS 发射事件。
 
-自定义组件还可以命令式地调用原生代码中实现的一些函数，以实现更高级的功能，例如编程式地重新加载网页。
+自定义组件还可以命令式地调用原生代码中实现的一些函数，以实现更高级的功能，例如以编程方式重新加载网页。
 
 在本指南中，你将学习如何实现这一点，使用一个新概念：原生命令（Native Commands）。
 
@@ -37,7 +37,7 @@ export interface NativeProps extends ViewProps {
 +interface NativeCommands {
 +    reload: (viewRef: React.ElementRef<HostComponent<NativeProps>>) => void;
 +}
-
++
 +export const Commands: NativeCommands = codegenNativeCommands<NativeCommands>({
 +    supportedCommands: ['reload'],
 +});
@@ -73,7 +73,7 @@ type NativeProps = $ReadOnly<{|
 +interface NativeCommands {
 +    reload: (viewRef: React.ElementRef<HostComponent<NativeProps>>) => void;
 +}
-
++
 +export const Commands: NativeCommands = codegenNativeCommands<NativeCommands>({
 +    supportedCommands: ['reload'],
 +});
@@ -107,7 +107,6 @@ export default (codegenNativeComponent<NativeProps>(
 打开 `App.tsx` 并修改如下：
 
 ```diff title="App.tsx"
-import React from 'react';
 -import {Alert, StyleSheet, View} from 'react-native';
 -import WebView from '../specs/WebViewNativeComponent';
 +import {Alert, StyleSheet, Pressable, Text, View} from 'react-native';
@@ -186,7 +185,6 @@ export default App;
 打开 `App.tsx` 并修改如下：
 
 ```diff title="App.jsx"
-import React from 'react';
 -import {Alert, StyleSheet, View} from 'react-native';
 -import WebView from '../specs/WebViewNativeComponent';
 +import {Alert, StyleSheet, Pressable, Text, View} from 'react-native';
@@ -418,9 +416,9 @@ Framework build type is static library
 </TabItem>
 </Tabs>
 
-## 5. 运行你的应用
+## 5. Run Your App
 
-最后，你可以用平常的命令运行你的应用。应用启动后，点击刷新按钮即可看到页面重新加载。
+Finally, you can run your app with your usual command. After the app starts, click the refresh button to see the page reload.
 
 | <center>Android</center>                                                                         | <center>iOS</center>                                                                         |
 | ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |

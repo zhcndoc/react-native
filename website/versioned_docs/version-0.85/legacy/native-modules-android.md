@@ -315,7 +315,6 @@ override fun getPackages(): List<ReactPackage> =
 在应用程序中找到你想要添加调用原生模块 `createCalendarEvent()` 方法的地方。下面是一个组件，`NewModuleButton` 的示例，你可以将其添加到应用中。你可以在 `NewModuleButton` 的 `onPress()` 函数中调用原生模块。
 
 ```tsx
-import React from 'react';
 import {NativeModules, Button} from 'react-native';
 
 const NewModuleButton = () => {

@@ -8,7 +8,6 @@ title: 振动
 ## 示例
 
 ```SnackPlayer name=Vibration%20Example&supportedPlatforms=ios,android
-import React from 'react';
 import {
   Button,
   Platform,
@@ -34,41 +33,41 @@ const App = () => {
 
   const PATTERN_DESC =
     Platform.OS === 'android'
-      ? 'wait 1s, vibrate 2s, wait 3s'
-      : 'wait 1s, vibrate, wait 2s, vibrate, wait 3s';
+      ? '等待 1 秒，振动 2 秒，等待 3 秒'
+      : '等待 1 秒，振动，等待 2 秒，振动，等待 3 秒';
 
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <Text style={[styles.header, styles.paragraph]}>Vibration API</Text>
+        <Text style={[styles.header, styles.paragraph]}>振动 API</Text>
         <View>
-          <Button title="Vibrate once" onPress={() => Vibration.vibrate()} />
+          <Button title="振动一次" onPress={() => Vibration.vibrate()} />
         </View>
         <Separator />
         {Platform.OS === 'android'
           ? [
               <View>
                 <Button
-                  title="Vibrate for 10 seconds"
+                  title="振动 10 秒"
                   onPress={() => Vibration.vibrate(10 * ONE_SECOND_IN_MS)}
                 />
               </View>,
               <Separator />,
             ]
           : null}
-        <Text style={styles.paragraph}>Pattern: {PATTERN_DESC}</Text>
+        <Text style={styles.paragraph}>模式：{PATTERN_DESC}</Text>
         <Button
-          title="Vibrate with pattern"
+          title="使用模式振动"
           onPress={() => Vibration.vibrate(PATTERN)}
         />
         <Separator />
         <Button
-          title="Vibrate with pattern until cancelled"
+          title="使用模式振动直到取消"
           onPress={() => Vibration.vibrate(PATTERN, true)}
         />
         <Separator />
         <Button
-          title="Stop vibration pattern"
+          title="停止振动模式"
           onPress={() => Vibration.cancel()}
           color="#FF0000"
         />

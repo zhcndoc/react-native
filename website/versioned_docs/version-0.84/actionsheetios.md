@@ -3,12 +3,12 @@ id: actionsheetios
 title: ActionSheetIOS
 ---
 
-显示 iOS 原生的 [操作表](https://developer.apple.com/design/human-interface-guidelines/action-sheets) 组件。
+显示 iOS 原生的 [Action Sheet](https://developer.apple.com/design/human-interface-guidelines/action-sheets) 组件。
 
 ## 示例
 
 ```SnackPlayer name=ActionSheetIOS%20Example&supportedPlatforms=ios
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {ActionSheetIOS, Button, StyleSheet, Text} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -71,33 +71,33 @@ static showActionSheetWithOptions: (
 );
 ```
 
-显示一个 iOS 操作表。`options` 对象必须包含以下一项或多项：
+显示一个 iOS 操作表。`options` 对象必须包含以下一个或多个字段：
 
 - `options`（字符串数组）- 按钮标题列表（必填）
 - `cancelButtonIndex`（整数）- `options` 中取消按钮的索引
 - `cancelButtonTintColor`（字符串）- 用于更改取消按钮文本颜色的 [颜色](colors)
-- `destructiveButtonIndex`（整数或整数数组）- `options` 中破坏性按钮的索引
+- `destructiveButtonIndex`（整数或整数数组）- `options` 中危险按钮的索引
 - `title`（字符串）- 显示在操作表上方的标题
 - `message`（字符串）- 显示在标题下方的消息
-- `anchor`（数字）- 操作表应锚定的节点（用于 iPad）
-- `tintColor`（字符串）- 用于非破坏性按钮标题的 [颜色](colors)
-- `disabledButtonIndices`（数字数组）- 需禁用的按钮索引列表
-- `userInterfaceStyle`（字符串）- 操作表的界面样式，可设置为 `light` 或 `dark`，否则使用默认系统样式
+- `anchor`（数字）- 操作表应锚定到的节点（用于 iPad）
+- `tintColor`（字符串）- 用于非危险按钮标题的 [颜色](colors)
+- `disabledButtonIndices`（数字数组）- 应被禁用的按钮索引列表
+- `userInterfaceStyle`（字符串）- 操作表使用的界面样式，可设置为 `light` 或 `dark`，否则将使用默认系统样式
 
-`callback` 函数接收一个参数，即所选项的零基索引。
+`callback` 函数接收一个参数，即所选项目的从零开始索引。
 
-最简示例：
+最小示例：
 
 ```tsx
 ActionSheetIOS.showActionSheetWithOptions(
   {
-    options: ['取消', '删除'],
+    options: ['Cancel', 'Remove'],
     destructiveButtonIndex: 1,
     cancelButtonIndex: 0,
   },
   buttonIndex => {
     if (buttonIndex === 1) {
-      /* 破坏性操作 */
+      /* 危险操作 */
     }
   },
 );
@@ -111,7 +111,7 @@ ActionSheetIOS.showActionSheetWithOptions(
 static dismissActionSheet();
 ```
 
-关闭最上层展示的 iOS 操作表，如果没有操作表展示，会显示警告。
+关闭当前显示的最上层 iOS 操作表，如果没有显示操作表，则会显示警告。
 
 ---
 
@@ -125,20 +125,20 @@ static showShareActionSheetWithOptions: (
 );
 ```
 
-显示 iOS 分享表。`options` 对象应包含 `message` 和/或 `url`，此外可含有 `subject` 或 `excludedActivityTypes`：
+显示 iOS 分享表。`options` 对象应包含 `message` 和 `url` 中的一项或两项，也可以额外包含 `subject` 或 `excludedActivityTypes`：
 
-- `url`（字符串）- 待分享的 URL
-- `message`（字符串）- 待分享的信息
-- `subject`（字符串）- 信息的主题
-- `excludedActivityTypes`（数组）- 需从操作表中排除的活动类型
+- `url`（字符串）- 要分享的 URL
+- `message`（字符串）- 要分享的消息
+- `subject`（字符串）- 消息主题
+- `excludedActivityTypes`（数组）- 要从 ActionSheet 中排除的活动
 
 :::note
-如果 `url` 指向本地文件，或是 base64 编码 URI，则直接加载并分享该文件。这样，可以分享图片、视频、PDF 等文件。如果 `url` 指向远程文件或地址，则必须符合 [RFC 2396](https://www.ietf.org/rfc/rfc2396.txt) 中描述的 URL 格式。例如，没有合法协议（HTTP/HTTPS）的网络 URL 将无法分享。
+如果 `url` 指向本地文件，或者是 base64 编码的 uri，则会直接加载并分享其指向的文件。通过这种方式，你可以分享图片、视频、PDF 文件等。如果 `url` 指向远程文件或地址，则必须符合 [RFC 2396](https://www.ietf.org/rfc/rfc2396.txt) 中描述的 URL 格式。例如，没有正确协议（HTTP/HTTPS）的网页 URL 将不会被分享。
 :::
 
-`failureCallback` 函数接收一个参数，为错误对象。该对象上定义的唯一属性是可选的字符串类型 `stack`。
+`failureCallback` 函数接收一个参数，即错误对象。此对象上定义的唯一属性是可选的 `stack` 属性，类型为 `string`。
 
 `successCallback` 函数接收两个参数：
 
-- 一个布尔值，表示成功或失败
-- 一个字符串，成功时表示分享方式
+- 一个表示成功或失败的布尔值
+- 一个字符串，在成功时表示分享方式

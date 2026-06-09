@@ -4,17 +4,17 @@ title: TouchableOpacity
 ---
 
 :::tip
-如果你正在寻找一种更全面且具有未来兼容性的触摸输入处理方式，可以查看 [Pressable](pressable.md) API。
+如果你正在寻找一种更全面、面向未来的方式来处理基于触摸的输入，请查看 [Pressable](pressable.md) API。
 :::
 
-一个用于使视图正确响应触摸的包装组件。在按下时，包装视图的透明度会降低，使其变暗。
+一个用于让视图对触摸作出正确响应的包装器。按下时，被包装视图的透明度会降低，从而变暗。
 
-透明度通过将子组件包裹在一个 `Animated.View` 中来控制，该组件被添加到视图层级中。请注意，这可能会影响布局。
+透明度通过将子元素包裹在添加到视图层级中的 `Animated.View` 里来控制。请注意，这可能会影响布局。
 
 ## 示例
 
 ```SnackPlayer name=TouchableOpacity%20Example
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -26,10 +26,10 @@ const App = () => {
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <View style={styles.countContainer}>
-          <Text>Count: {count}</Text>
+          <Text>次数: {count}</Text>
         </View>
         <TouchableOpacity style={styles.button} onPress={onPress}>
-          <Text>Press Here</Text>
+          <Text>按这里</Text>
         </TouchableOpacity>
       </SafeAreaView>
     </SafeAreaProvider>
@@ -62,9 +62,9 @@ export default App;
 
 ## 属性
 
-### [TouchableWithoutFeedback 属性](touchablewithoutfeedback.md#props)
+### [TouchableWithoutFeedback Props](touchablewithoutfeedback.md#props)
 
-继承自 [TouchableWithoutFeedback 属性](touchablewithoutfeedback.md#props)。
+继承自 [TouchableWithoutFeedback Props](touchablewithoutfeedback.md#props)。
 
 ---
 
@@ -78,7 +78,7 @@ export default App;
 
 ### `activeOpacity`
 
-确定触摸激活时，包装视图的透明度。默认值为 `0.2`。
+决定触摸激活时被包装视图的透明度应为多少。默认值为 `0.2`。
 
 | 类型   |
 | ------ |
@@ -88,7 +88,7 @@ export default App;
 
 ### `hasTVPreferredFocus` <div className="label ios">iOS</div>
 
-_(仅限 Apple TV)_ TV 优先聚焦（详见 View 组件文档）。
+_（仅限 Apple TV）_ TV 首选焦点（请参阅 View 组件的文档）。
 
 | 类型 |
 | ---- |
@@ -98,7 +98,7 @@ _(仅限 Apple TV)_ TV 优先聚焦（详见 View 组件文档）。
 
 ### `nextFocusDown` <div className="label android">Android</div>
 
-TV 向下下一个聚焦元素（详见 View 组件文档）。
+TV 下一个焦点向下（请参阅 View 组件的文档）。
 
 | 类型   |
 | ------ |
@@ -108,7 +108,7 @@ TV 向下下一个聚焦元素（详见 View 组件文档）。
 
 ### `nextFocusForward` <div className="label android">Android</div>
 
-TV 向前下一个聚焦元素（详见 View 组件文档）。
+TV 下一个焦点向前（请参阅 View 组件的文档）。
 
 | 类型   |
 | ------ |
@@ -118,7 +118,7 @@ TV 向前下一个聚焦元素（详见 View 组件文档）。
 
 ### `nextFocusLeft` <div className="label android">Android</div>
 
-TV 向左下一个聚焦元素（详见 View 组件文档）。
+TV 下一个焦点向左（请参阅 View 组件的文档）。
 
 | 类型   |
 | ------ |
@@ -128,7 +128,7 @@ TV 向左下一个聚焦元素（详见 View 组件文档）。
 
 ### `nextFocusRight` <div className="label android">Android</div>
 
-TV 向右下一个聚焦元素（详见 View 组件文档）。
+TV 下一个焦点向右（请参阅 View 组件的文档）。
 
 | 类型   |
 | ------ |
@@ -138,7 +138,7 @@ TV 向右下一个聚焦元素（详见 View 组件文档）。
 
 ### `nextFocusUp` <div className="label android">Android</div>
 
-TV 向上下一个聚焦元素（详见 View 组件文档）。
+TV 下一个焦点向上（请参阅 View 组件的文档）。
 
 | 类型   |
 | ------ |
@@ -148,4 +148,4 @@ TV 向上下一个聚焦元素（详见 View 组件文档）。
 
 ### `ref`
 
-一个 ref 设置器，组件挂载时会被赋值为一个 [元素节点](element-nodes)。
+一个 ref setter，在挂载时会被分配一个 [element node](element-nodes)。

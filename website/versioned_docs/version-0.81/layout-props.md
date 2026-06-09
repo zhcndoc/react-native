@@ -6,18 +6,18 @@ title: 布局属性
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 :::info
-关于这些属性的更详细示例可以在 [使用 Flexbox 布局](flexbox) 页面找到。
+关于这些属性的更详细示例可以在 [Flexbox 布局](flexbox) 页面中找到。
 :::
 
 ### 示例
 
-以下示例展示了不同的属性如何影响或塑造 React Native 布局。例如，您可以在更改属性 `flexWrap` 的值的同时，尝试在 UI 中添加或移除方块。
+下面的示例展示了不同属性如何影响或塑造 React Native 布局。你可以尝试在更改属性 `flexWrap` 的值时，向 UI 中添加或移除方块。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
 ```SnackPlayer name=LayoutProps%20Example&ext=js
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Button, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -190,7 +190,7 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=LayoutProps%20Example&ext=tsx
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {
   Button,
   ScrollView,
@@ -387,11 +387,11 @@ export default App;
 
 ### `alignContent`
 
-`alignContent` 控制行如何在交叉轴方向上对齐，覆盖父级的 `alignContent`。
+`alignContent` 控制行在交叉方向上的对齐方式，会覆盖父元素的 `alignContent`。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/align-content) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/align-content)。
 
-| 类型                                                                                                 | 是否必填 |
+| 类型                                                                                                 | 是否必需 |
 | ---------------------------------------------------------------------------------------------------- | -------- |
 | enum('flex-start', 'flex-end', 'center', 'stretch', 'space-between', 'space-around', 'space-evenly') | 否       |
 
@@ -399,11 +399,11 @@ export default App;
 
 ### `alignItems`
 
-`alignItems` 在交叉轴方向上对齐子元素。例如，如果子元素是垂直流动的，`alignItems` 控制它们如何水平对齐。它的工作原理类似于 CSS 中的 `align-items`（默认值：stretch）。
+`alignItems` 控制子元素在交叉方向上的对齐方式。例如，如果子元素按垂直方向排列，`alignItems` 控制它们如何水平对齐。它的作用类似于 CSS 中的 `align-items`（默认值：stretch）。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items)。
 
-| 类型                                                            | 是否必填 |
+| 类型                                                            | 是否必需 |
 | --------------------------------------------------------------- | -------- |
 | enum('flex-start', 'flex-end', 'center', 'stretch', 'baseline') | 否       |
 
@@ -411,11 +411,11 @@ export default App;
 
 ### `alignSelf`
 
-`alignSelf` 控制子元素如何在交叉轴方向上对齐，覆盖父级的 `alignItems`。它的工作原理类似于 CSS 中的 `align-self`（默认值：auto）。
+`alignSelf` 控制子元素在交叉方向上的对齐方式，会覆盖父元素的 `alignItems`。它的作用类似于 CSS 中的 `align-self`（默认值：auto）。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/align-self) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/align-self)。
 
-| 类型                                                                    | 是否必填 |
+| 类型                                                                    | 是否必需 |
 | ----------------------------------------------------------------------- | -------- |
 | enum('auto', 'flex-start', 'flex-end', 'center', 'stretch', 'baseline') | 否       |
 
@@ -426,14 +426,14 @@ export default App;
 宽高比控制节点未定义维度的大小。
 
 - 在设置了宽度/高度的节点上，宽高比控制未设置维度的大小
-- 在设置了 flex basis 的节点上，如果未设置，宽高比控制节点在交叉轴上的大小
-- 在具有测量函数的节点上，宽高比的工作原理仿佛测量函数测量的是 flex basis
-- 在具有 flex grow/shrink 的节点上，如果未设置，宽高比控制节点在交叉轴上的大小
+- 在设置了 flex basis 的节点上，如果交叉轴维度未设置，宽高比控制节点在交叉轴上的大小
+- 在带有 measure 函数的节点上，宽高比的作用类似于 measure 函数测量 flex basis
+- 在具有 flex grow/shrink 的节点上，如果交叉轴维度未设置，宽高比控制节点在交叉轴上的大小
 - 宽高比会考虑最小/最大尺寸
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -441,11 +441,11 @@ export default App;
 
 ### `borderBottomWidth`
 
-`borderBottomWidth` 的工作原理类似于 CSS 中的 `border-bottom-width`。
+`borderBottomWidth` 的作用类似于 CSS 中的 `border-bottom-width`。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-width) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-width)。
 
-| 类型   | 是否必填 |
+| 类型   | 是否必需 |
 | ------ | -------- |
 | number | 否       |
 
@@ -455,7 +455,7 @@ export default App;
 
 当方向为 `ltr` 时，`borderEndWidth` 等同于 `borderRightWidth`。当方向为 `rtl` 时，`borderEndWidth` 等同于 `borderLeftWidth`。
 
-| 类型   | 是否必填 |
+| 类型   | 是否必需 |
 | ------ | -------- |
 | number | 否       |
 
@@ -463,11 +463,11 @@ export default App;
 
 ### `borderLeftWidth`
 
-`borderLeftWidth` 的工作原理类似于 CSS 中的 `border-left-width`。
+`borderLeftWidth` 的作用类似于 CSS 中的 `border-left-width`。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-width) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-width)。
 
-| 类型   | 是否必填 |
+| 类型   | 是否必需 |
 | ------ | -------- |
 | number | 否       |
 
@@ -475,11 +475,11 @@ export default App;
 
 ### `borderRightWidth`
 
-`borderRightWidth` 的工作原理类似于 CSS 中的 `border-right-width`。
+`borderRightWidth` 的作用类似于 CSS 中的 `border-right-width`。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-width) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-width)。
 
-| 类型   | 是否必填 |
+| 类型   | 是否必需 |
 | ------ | -------- |
 | number | 否       |
 
@@ -489,7 +489,7 @@ export default App;
 
 当方向为 `ltr` 时，`borderStartWidth` 等同于 `borderLeftWidth`。当方向为 `rtl` 时，`borderStartWidth` 等同于 `borderRightWidth`。
 
-| 类型   | 是否必填 |
+| 类型   | 是否必需 |
 | ------ | -------- |
 | number | 否       |
 
@@ -497,11 +497,11 @@ export default App;
 
 ### `borderTopWidth`
 
-`borderTopWidth` 的工作原理类似于 CSS 中的 `border-top-width`。
+`borderTopWidth` 的作用类似于 CSS 中的 `border-top-width`。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-width) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-width)。
 
-| 类型   | 是否必填 |
+| 类型   | 是否必需 |
 | ------ | -------- |
 | number | 否       |
 
@@ -509,11 +509,11 @@ export default App;
 
 ### `borderWidth`
 
-`borderWidth` 的工作原理类似于 CSS 中的 `border-width`。
+`borderWidth` 的作用类似于 CSS 中的 `border-width`。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/border-width) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/border-width)。
 
-| 类型   | 是否必填 |
+| 类型   | 是否必需 |
 | ------ | -------- |
 | number | 否       |
 
@@ -521,13 +521,13 @@ export default App;
 
 ### `bottom`
 
-`bottom` 是偏移此组件底部边缘的逻辑像素数。
+`bottom` 是用于偏移该组件底边的逻辑像素数。
 
-它的工作原理类似于 CSS 中的 `bottom`，但在 React Native 中你必须使用点数或百分比。不支持 Em 及其他单位。
+它的工作方式类似于 CSS 中的 `bottom`，但在 React Native 中你必须使用点或百分比。不支持 em 和其他单位。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/bottom) 了解更多关于 `bottom` 如何影响布局的详情。
+有关 `bottom` 如何影响布局的更多详情，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/bottom)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -535,9 +535,9 @@ export default App;
 
 ### `boxSizing`
 
-`boxSizing` 定义如何计算元素的各种尺寸属性（`width`、`height`、`minWidth`、`minHeight` 等）。如果 `boxSizing` 为 `border-box`，这些尺寸适用于元素的边框盒。如果为 `content-box`，它们适用于元素的内容盒。默认值为 `border-box`。如果你想了解更多关于此属性如何工作的信息，[Web 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing) 是一个很好的信息来源。
+`boxSizing` 定义元素的各种尺寸属性（`width`、`height`、`minWidth`、`minHeight` 等）如何计算。如果 `boxSizing` 为 `border-box`，这些尺寸会应用于元素的边框盒。如果为 `content-box`，它们会应用于元素的内容盒。默认值是 `border-box`。如果你想了解这个属性的更多信息，[web documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing) 是一个很好的资料来源。
 
-| 类型                              | 是否必填 |
+| 类型                              | 是否必需 |
 | --------------------------------- | -------- |
 | enum('border-box', 'content-box') | 否       |
 
@@ -545,11 +545,11 @@ export default App;
 
 ### `columnGap`
 
-`columnGap` 的工作原理类似于 CSS 中的 `column-gap`。React Native 中仅支持像素单位。
+`columnGap` 的作用类似于 CSS 中的 `column-gap`。在 React Native 中只支持像素单位。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap)。
 
-| 类型   | 是否必填 |
+| 类型   | 是否必需 |
 | ------ | -------- |
 | number | 否       |
 
@@ -557,11 +557,11 @@ export default App;
 
 ### `direction`
 
-`direction` 指定用户界面的方向流。默认值为 `inherit`，根节点除外，根节点的值将基于当前区域设置。
+`direction` 指定用户界面的方向流。默认值为 `inherit`，但根节点除外，根节点的值将基于当前语言区域。
 
-详见 [MDN CSS 参考](https://www.yogalayout.dev/docs/styling/layout-direction) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://www.yogalayout.dev/docs/styling/layout-direction)。
 
-| 类型                          | 是否必填 |
+| 类型                          | 是否必需 |
 | ----------------------------- | -------- |
 | enum('inherit', 'ltr', 'rtl') | 否       |
 
@@ -569,11 +569,11 @@ export default App;
 
 ### `display`
 
-`display` 设置此组件的显示类型。
+`display` 设置该组件的显示类型。
 
-它的工作原理类似于 CSS 中的 `display`，但仅支持值 'flex'、'none' 和 'contents'。默认值为 `flex`。
+它的作用类似于 CSS 中的 `display`，但只支持 `'flex'`、`'none'` 和 `'contents'`。默认值是 `flex`。
 
-| 类型                             | 是否必填 |
+| 类型                             | 是否必需 |
 | -------------------------------- | -------- |
 | enum('none', 'flex', 'contents') | 否       |
 
@@ -583,9 +583,9 @@ export default App;
 
 当方向为 `ltr` 时，`end` 等同于 `right`。当方向为 `rtl` 时，`end` 等同于 `left`。
 
-此样式的优先级高于 `left` 和 `right` 样式。
+该样式优先于 `left` 和 `right` 样式。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -593,17 +593,17 @@ export default App;
 
 ### `flex`
 
-在 React Native 中，`flex` 的工作方式与 CSS 中的不完全相同。`flex` 是一个数字而不是字符串，它根据 [Yoga](https://github.com/facebook/yoga) 布局引擎工作。
+在 React Native 中，`flex` 的工作方式与 CSS 不同。`flex` 是数字而不是字符串，并且它按照 [Yoga](https://github.com/facebook/yoga) 布局引擎的规则工作。
 
-当 `flex` 为正数时，它使组件具有灵活性，并且其大小将与其 flex 值成比例。因此，`flex` 设置为 `2` 的组件占据的空间将是 `flex` 设置为 1 的组件的两倍。`flex: <正数>` 等同于 `flexGrow: <正数>, flexShrink: 1, flexBasis: 0`。
+当 `flex` 为正数时，它会使组件具有弹性，并按其 flex 值的比例进行尺寸分配。因此，`flex` 设为 `2` 的组件将占据 `flex` 设为 `1` 的组件两倍的空间。`flex: <positive number>` 等同于 `flexGrow: <positive number>, flexShrink: 1, flexBasis: 0`。
 
-当 `flex` 为 `0` 时，组件根据 `width` 和 `height` 调整大小，并且不可伸缩。
+当 `flex` 为 `0` 时，组件会根据 `width` 和 `height` 定尺寸，并且不具有弹性。
 
-当 `flex` 为 `-1` 时，组件通常根据 `width` 和 `height` 调整大小。但是，如果没有足够的空间，组件将缩小到其 `minWidth` 和 `minHeight`。
+当 `flex` 为 `-1` 时，组件通常会根据 `width` 和 `height` 定尺寸。不过，如果空间不足，组件会缩小到其 `minWidth` 和 `minHeight`。
 
-`flexGrow`、`flexShrink` 和 `flexBasis` 的工作方式与 CSS 中相同。
+`flexGrow`、`flexShrink` 和 `flexBasis` 的工作方式与 CSS 相同。
 
-| 类型   | 是否必填 |
+| 类型   | 是否必需 |
 | ------ | -------- |
 | number | 否       |
 
@@ -611,9 +611,9 @@ export default App;
 
 ### `flexBasis`
 
-`flexBasis` 是一种与轴无关的方式，用于提供项目沿主轴的默认大小。设置子元素的 `flexBasis` 类似于设置该子元素的 `width`（如果其父级是 `flexDirection: row` 的容器）或设置子元素的 `height`（如果其父级是 `flexDirection: column` 的容器）。项目的 `flexBasis` 是该项目的默认大小，即在进行任何 `flexGrow` 和 `flexShrink` 计算之前的大小。
+`flexBasis` 是一种与轴无关的方式，用于提供项目在主轴上的默认尺寸。为子元素设置 `flexBasis`，类似于在其父元素是 `flexDirection: row` 的容器时设置该子元素的 `width`，或者在其父元素是 `flexDirection: column` 的容器时设置该子元素的 `height`。项目的 `flexBasis` 是该项目的默认尺寸，也就是在执行任何 `flexGrow` 和 `flexShrink` 计算之前的尺寸。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -621,11 +621,11 @@ export default App;
 
 ### `flexDirection`
 
-`flexDirection` 控制容器的子元素走向哪个方向。`row` 从左到右，`column` 从上到下，你可以猜到另外两个做什么。它的工作原理类似于 CSS 中的 `flex-direction`，除了默认值为 `column`。
+`flexDirection` 控制容器中的子元素沿哪些方向排列。`row` 表示从左到右，`column` 表示从上到下，而另外两个方向你应该也能猜到。它的作用类似于 CSS 中的 `flex-direction`，只是默认值是 `column`。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction)。
 
-| 类型                                                   | 是否必填 |
+| 类型                                                   | 是否必需 |
 | ------------------------------------------------------ | -------- |
 | enum('row', 'row-reverse', 'column', 'column-reverse') | 否       |
 
@@ -633,11 +633,11 @@ export default App;
 
 ### `flexGrow`
 
-`flexGrow` 描述容器内的任何空间应如何沿主轴在其子元素之间分配。在布局其子元素后，容器将根据其子元素指定的 flex grow 值分配任何剩余空间。
+`flexGrow` 描述容器内的可用空间应如何沿主轴在子元素之间分配。布局完成子元素后，容器会根据子元素指定的 flex grow 值来分配剩余空间。
 
-`flexGrow` 接受任何 >= 0 的浮点数值，默认值为 0。容器将根据子元素的 `flexGrow` 值加权分配任何剩余空间。
+`flexGrow` 接受任何大于等于 0 的浮点数，默认值为 0。容器会按照子元素的 `flexGrow` 值加权，在它们之间分配剩余空间。
 
-| 类型   | 是否必填 |
+| 类型   | 是否必需 |
 | ------ | -------- |
 | number | 否       |
 
@@ -645,11 +645,11 @@ export default App;
 
 ### `flexShrink`
 
-[`flexShrink`](layout-props#flexshrink) 描述在子元素的总大小超出容器主轴大小的情况下，如何沿主轴缩小子元素。`flexShrink` 与 `flexGrow` 非常相似，如果任何超出大小被视为负剩余空间，则可以以相同的方式思考。这两个属性也可以很好地配合使用，允许子元素根据需要增长和缩小。
+[`flexShrink`](layout-props#flexshrink) 描述在主轴上子元素总尺寸超出容器主轴尺寸时，如何沿主轴缩小子元素。`flexShrink` 与 `flexGrow` 非常相似；如果把任何溢出的尺寸视为负的剩余空间，也可以用同样的方式理解。通过允许子元素按需伸缩，这两个属性也能很好地协同工作。
 
-`flexShrink` 接受任何 >= 0 的浮点数值，默认值为 0。容器将根据子元素的 `flexShrink` 值加权缩小子元素。
+`flexShrink` 接受任何大于等于 0 的浮点数，默认值为 0。容器会按照子元素的 `flexShrink` 值加权缩小它们。
 
-| 类型   | 是否必填 |
+| 类型   | 是否必需 |
 | ------ | -------- |
 | number | 否       |
 
@@ -657,13 +657,13 @@ export default App;
 
 ### `flexWrap`
 
-`flexWrap` 控制子元素在到达 flex 容器末尾后是否可以换行。它的工作原理类似于 CSS 中的 `flex-wrap`（默认值：nowrap）。
+`flexWrap` 控制子元素在到达 flex 容器末尾后是否可以换行。它的作用类似于 CSS 中的 `flex-wrap`（默认值：nowrap）。
 
-注意，它不再与 `alignItems: stretch`（默认值）一起工作，因此你可能想使用 `alignItems: flex-start` 例如（破坏性变更详情：https://github.com/facebook/react-native/releases/tag/v0.28.0）。
+请注意，它不再与 `alignItems: stretch`（默认值）一起工作，因此例如你可能需要使用 `alignItems: flex-start`（破坏性变更详情：https://github.com/facebook/react-native/releases/tag/v0.28.0）。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap)。
 
-| 类型                                   | 是否必填 |
+| 类型                                   | 是否必需 |
 | -------------------------------------- | -------- |
 | enum('wrap', 'nowrap', 'wrap-reverse') | 否       |
 
@@ -671,11 +671,11 @@ export default App;
 
 ### `gap`
 
-`gap` 的工作原理类似于 CSS 中的 `gap`。React Native 中仅支持像素单位。
+`gap` 的作用类似于 CSS 中的 `gap`。在 React Native 中只支持像素单位。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/gap) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/gap)。
 
-| 类型   | 是否必填 |
+| 类型   | 是否必需 |
 | ------ | -------- |
 | number | 否       |
 
@@ -683,13 +683,13 @@ export default App;
 
 ### `height`
 
-`height` 设置此组件的高度。
+`height` 设置该组件的高度。
 
-它的工作原理类似于 CSS 中的 `height`，但在 React Native 中你必须使用点数或百分比。不支持 Em 及其他单位。
+它的工作方式类似于 CSS 中的 `height`，但在 React Native 中你必须使用点或百分比。不支持 em 和其他单位。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/height) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/height)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -698,14 +698,14 @@ export default App;
 ### `inset`
 
 :::note
-`inset` 仅在 [新架构](/architecture/landing-page) 上可用
+`inset` 仅可在 [新架构](/architecture/landing-page) 中使用
 :::
 
-设置 `inset` 的效果与设置 `top`、`bottom`、`right` 和 `left` 属性相同。
+设置 `inset` 与分别设置 `top`、`bottom`、`right` 和 `left` 属性的效果相同。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/inset) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/inset)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -714,14 +714,14 @@ export default App;
 ### `insetBlock`
 
 :::note
-`insetBlock` 仅在 [新架构](/architecture/landing-page) 上可用
+`insetBlock` 仅可在 [新架构](/architecture/landing-page) 中使用
 :::
 
 等同于 [`top`](layout-props#top) 和 [`bottom`](layout-props#bottom)。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/inset-block) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/inset-block)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -730,14 +730,14 @@ export default App;
 ### `insetBlockEnd`
 
 :::note
-`insetBlockEnd` 仅在 [新架构](/architecture/landing-page) 上可用
+`insetBlockEnd` 仅可在 [新架构](/architecture/landing-page) 中使用
 :::
 
 等同于 [`bottom`](layout-props#bottom)。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/inset-block-end) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/inset-block-end)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -746,14 +746,14 @@ export default App;
 ### `insetBlockStart`
 
 :::note
-`insetBlockStart` 仅在 [新架构](/architecture/landing-page) 上可用
+`insetBlockStart` 仅可在 [新架构](/architecture/landing-page) 中使用
 :::
 
 等同于 [`top`](layout-props#top)。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/inset-block-start) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/inset-block-start)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -762,14 +762,14 @@ export default App;
 ### `insetInline`
 
 :::note
-`insetInline` 仅在 [新架构](/architecture/landing-page) 上可用
+`insetInline` 仅可在 [新架构](/architecture/landing-page) 中使用
 :::
 
 等同于 [`right`](layout-props#right) 和 [`left`](layout-props#left)。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -778,14 +778,14 @@ export default App;
 ### `insetInlineEnd`
 
 :::note
-`insetInlineEnd` 仅在 [新架构](/architecture/landing-page) 上可用
+`insetInlineEnd` 仅可在 [新架构](/architecture/landing-page) 中使用
 :::
 
 当方向为 `ltr` 时，`insetInlineEnd` 等同于 [`right`](layout-props#right)。当方向为 `rtl` 时，`insetInlineEnd` 等同于 [`left`](layout-props#left)。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline-end) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline-end)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -794,14 +794,14 @@ export default App;
 ### `insetInlineStart`
 
 :::note
-`insetInlineStart` 仅在 [新架构](/architecture/landing-page) 上可用
+`insetInlineStart` 仅可在 [新架构](/architecture/landing-page) 中使用
 :::
 
 当方向为 `ltr` 时，`insetInlineStart` 等同于 [`left`](layout-props#left)。当方向为 `rtl` 时，`insetInlineStart` 等同于 [`right`](layout-props#right)。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline-start) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline-start)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -810,17 +810,17 @@ export default App;
 ### `isolation`
 
 :::note
-`isolation` 仅在 [新架构](/architecture/landing-page) 上可用
+`isolation` 仅可在 [新架构](/architecture/landing-page) 中使用
 :::
 
-`isolation` 允许你形成一个 [堆叠上下文](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_positioned_layout/Stacking_context)。
+`isolation` 允许你形成一个 [stacking context](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_positioned_layout/Stacking_context)。
 
 有两个值：
 
-- `auto`（默认值）：无任何作用。
-- `isolate`：形成堆叠上下文。
+- `auto`（默认值）：不执行任何操作。
+- `isolate`：形成一个 stacking context。
 
-| 类型                    | 是否必填 |
+| 类型                    | 是否必需 |
 | ----------------------- | -------- |
 | enum('auto', 'isolate') | 否       |
 
@@ -828,11 +828,11 @@ export default App;
 
 ### `justifyContent`
 
-`justifyContent` 在主轴方向上对齐子元素。例如，如果子元素是垂直流动的，`justifyContent` 控制它们如何垂直对齐。它的工作原理类似于 CSS 中的 `justify-content`（默认值：flex-start）。
+`justifyContent` 控制子元素在主方向上的对齐方式。例如，如果子元素按垂直方向排列，`justifyContent` 控制它们如何垂直对齐。它的作用类似于 CSS 中的 `justify-content`（默认值：flex-start）。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content)。
 
-| 类型                                                                                      | 是否必填 |
+| 类型                                                                                      | 是否必需 |
 | ----------------------------------------------------------------------------------------- | -------- |
 | enum('flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly') | 否       |
 
@@ -840,13 +840,13 @@ export default App;
 
 ### `left`
 
-`left` 是偏移此组件左边缘的逻辑像素数。
+`left` 是用于偏移该组件左边缘的逻辑像素数。
 
-它的工作原理类似于 CSS 中的 `left`，但在 React Native 中你必须使用点数或百分比。不支持 Em 及其他单位。
+它的工作方式类似于 CSS 中的 `left`，但在 React Native 中你必须使用点或百分比。不支持 em 和其他单位。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/left) 了解更多关于 `left` 如何影响布局的详情。
+有关 `left` 如何影响布局的更多详情，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/left)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -854,11 +854,11 @@ export default App;
 
 ### `margin`
 
-设置 `margin` 的效果与设置 `marginTop`、`marginLeft`、`marginBottom` 和 `marginRight` 相同。
+设置 `margin` 与分别设置 `marginTop`、`marginLeft`、`marginBottom` 和 `marginRight` 的效果相同。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/margin) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/margin)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -866,9 +866,9 @@ export default App;
 
 ### `marginBottom`
 
-`marginBottom` 的工作原理类似于 CSS 中的 `margin-bottom`。详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom) 了解更多详情。
+`marginBottom` 的作用类似于 CSS 中的 `margin-bottom`。更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -878,9 +878,9 @@ export default App;
 
 等同于 [`marginVertical`](layout-props#marginvertical)。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/margin-block) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/margin-block)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -890,9 +890,9 @@ export default App;
 
 等同于 [`marginBottom`](layout-props#marginbottom)。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/margin-block-end) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/margin-block-end)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -902,9 +902,9 @@ export default App;
 
 等同于 [`marginTop`](layout-props#margintop)。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/margin-block-start) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/margin-block-start)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -914,7 +914,7 @@ export default App;
 
 当方向为 `ltr` 时，`marginEnd` 等同于 `marginRight`。当方向为 `rtl` 时，`marginEnd` 等同于 `marginLeft`。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -922,9 +922,9 @@ export default App;
 
 ### `marginHorizontal`
 
-设置 `marginHorizontal` 的效果与同时设置 `marginLeft` 和 `marginRight` 相同。
+设置 `marginHorizontal` 与同时设置 `marginLeft` 和 `marginRight` 的效果相同。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -934,9 +934,9 @@ export default App;
 
 等同于 [`marginHorizontal`](layout-props#marginhorizontal)。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/margin-inline) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/margin-inline)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -946,9 +946,9 @@ export default App;
 
 当方向为 `ltr` 时，`marginInlineEnd` 等同于 [`marginEnd`](layout-props#marginend)（即 `marginRight`）。当方向为 `rtl` 时，`marginInlineEnd` 等同于 [`marginEnd`](layout-props#marginend)（即 `marginLeft`）。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/margin-inline-end) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/margin-inline-end)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -958,9 +958,9 @@ export default App;
 
 当方向为 `ltr` 时，`marginInlineStart` 等同于 [`marginStart`](layout-props#marginstart)（即 `marginLeft`）。当方向为 `rtl` 时，`marginInlineStart` 等同于 [`marginStart`](layout-props#marginstart)（即 `marginRight`）。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/margin-inline-start) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/margin-inline-start)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -968,9 +968,9 @@ export default App;
 
 ### `marginLeft`
 
-`marginLeft` 的工作原理类似于 CSS 中的 `margin-left`。详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-left) 了解更多详情。
+`marginLeft` 的作用类似于 CSS 中的 `margin-left`。更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-left)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -978,11 +978,11 @@ export default App;
 
 ### `marginRight`
 
-`marginRight` 的工作原理类似于 CSS 中的 `margin-right`。
+`marginRight` 的作用类似于 CSS 中的 `margin-right`。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-right) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-right)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -992,7 +992,7 @@ export default App;
 
 当方向为 `ltr` 时，`marginStart` 等同于 `marginLeft`。当方向为 `rtl` 时，`marginStart` 等同于 `marginRight`。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -1000,11 +1000,11 @@ export default App;
 
 ### `marginTop`
 
-`marginTop` 的工作原理类似于 CSS 中的 `margin-top`。
+`marginTop` 的作用类似于 CSS 中的 `margin-top`。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -1012,9 +1012,9 @@ export default App;
 
 ### `marginVertical`
 
-设置 `marginVertical` 的效果与同时设置 `marginTop` 和 `marginBottom` 相同。
+设置 `marginVertical` 与同时设置 `marginTop` 和 `marginBottom` 的效果相同。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -1022,13 +1022,13 @@ export default App;
 
 ### `maxHeight`
 
-`maxHeight` 是此组件的最大高度，单位为逻辑像素。
+`maxHeight` 是该组件的最大高度，单位为逻辑像素。
 
-它的工作原理类似于 CSS 中的 `max-height`，但在 React Native 中你必须使用点数或百分比。不支持 Em 及其他单位。
+它的工作方式类似于 CSS 中的 `max-height`，但在 React Native 中你必须使用点或百分比。不支持 em 和其他单位。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/max-height) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/max-height)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -1036,13 +1036,13 @@ export default App;
 
 ### `maxWidth`
 
-`maxWidth` 是此组件的最大宽度，单位为逻辑像素。
+`maxWidth` 是该组件的最大宽度，单位为逻辑像素。
 
-它的工作原理类似于 CSS 中的 `max-width`，但在 React Native 中你必须使用点数或百分比。不支持 Em 及其他单位。
+它的工作方式类似于 CSS 中的 `max-width`，但在 React Native 中你必须使用点或百分比。不支持 em 和其他单位。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/max-width) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/max-width)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -1050,13 +1050,13 @@ export default App;
 
 ### `minHeight`
 
-`minHeight` 是此组件的最小高度，单位为逻辑像素。
+`minHeight` 是该组件的最小高度，单位为逻辑像素。
 
-它的工作原理类似于 CSS 中的 `min-height`，但在 React Native 中你必须使用点数或百分比。不支持 Em 及其他单位。
+它的工作方式类似于 CSS 中的 `min-height`，但在 React Native 中你必须使用点或百分比。不支持 em 和其他单位。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/min-height) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/min-height)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -1064,13 +1064,13 @@ export default App;
 
 ### `minWidth`
 
-`minWidth` 是此组件的最小宽度，单位为逻辑像素。
+`minWidth` 是该组件的最小宽度，单位为逻辑像素。
 
-它的工作原理类似于 CSS 中的 `min-width`，但在 React Native 中你必须使用点数或百分比。不支持 Em 及其他单位。
+它的工作方式类似于 CSS 中的 `min-width`，但在 React Native 中你必须使用点或百分比。不支持 em 和其他单位。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/min-width) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/min-width)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -1078,11 +1078,11 @@ export default App;
 
 ### `overflow`
 
-`overflow` 控制子元素如何测量和显示。`overflow: hidden` 会导致视图被裁剪，而 `overflow: scroll` 会导致视图独立于其父级的主轴进行测量。它的工作原理类似于 CSS 中的 `overflow`（默认值：visible）。
+`overflow` 控制子元素如何被测量和显示。`overflow: hidden` 会使视图被裁剪，而 `overflow: scroll` 会使视图的测量独立于其父元素的主轴。它的作用类似于 CSS 中的 `overflow`（默认值：visible）。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow)。
 
-| 类型                                | 是否必填 |
+| 类型                                | 是否必需 |
 | ----------------------------------- | -------- |
 | enum('visible', 'hidden', 'scroll') | 否       |
 
@@ -1090,11 +1090,11 @@ export default App;
 
 ### `padding`
 
-设置 `padding` 的效果与设置 `paddingTop`、`paddingBottom`、`paddingLeft` 和 `paddingRight` 相同。
+设置 `padding` 与分别设置 `paddingTop`、`paddingBottom`、`paddingLeft` 和 `paddingRight` 的效果相同。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/padding) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/padding)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -1102,11 +1102,11 @@ export default App;
 
 ### `paddingBottom`
 
-`paddingBottom` 的工作原理类似于 CSS 中的 `padding-bottom`。
+`paddingBottom` 的作用类似于 CSS 中的 `padding-bottom`。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -1116,9 +1116,9 @@ export default App;
 
 等同于 [`paddingVertical`](layout-props#paddingvertical)。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/padding-block) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/padding-block)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -1128,9 +1128,9 @@ export default App;
 
 等同于 [`paddingBottom`](layout-props#paddingbottom)。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/padding-block-end) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/padding-block-end)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -1140,9 +1140,9 @@ export default App;
 
 等同于 [`paddingTop`](layout-props#paddingtop)。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/padding-block-start) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/padding-block-start)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -1152,7 +1152,7 @@ export default App;
 
 当方向为 `ltr` 时，`paddingEnd` 等同于 `paddingRight`。当方向为 `rtl` 时，`paddingEnd` 等同于 `paddingLeft`。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -1160,9 +1160,9 @@ export default App;
 
 ### `paddingHorizontal`
 
-设置 `paddingHorizontal` 类似于同时设置 `paddingLeft` 和 `paddingRight`。
+设置 `paddingHorizontal` 就像同时设置 `paddingLeft` 和 `paddingRight`。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -1172,9 +1172,9 @@ export default App;
 
 等同于 [`paddingHorizontal`](layout-props#paddinghorizontal)。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/padding-inline) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/padding-inline)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -1184,9 +1184,9 @@ export default App;
 
 当方向为 `ltr` 时，`paddingInlineEnd` 等同于 [`paddingEnd`](layout-props#paddingend)（即 `paddingRight`）。当方向为 `rtl` 时，`paddingInlineEnd` 等同于 [`paddingEnd`](layout-props#paddingend)（即 `paddingLeft`）。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/padding-inline-end) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/padding-inline-end)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -1196,9 +1196,9 @@ export default App;
 
 当方向为 `ltr` 时，`paddingInlineStart` 等同于 [`paddingStart`](layout-props#paddingstart)（即 `paddingLeft`）。当方向为 `rtl` 时，`paddingInlineStart` 等同于 [`paddingStart`](layout-props#paddingstart)（即 `paddingRight`）。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/padding-inline-start) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/padding-inline-start)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -1206,11 +1206,11 @@ export default App;
 
 ### `paddingLeft`
 
-`paddingLeft` 的工作原理类似于 CSS 中的 `padding-left`。
+`paddingLeft` 的作用类似于 CSS 中的 `padding-left`。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-left) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-left)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -1218,11 +1218,11 @@ export default App;
 
 ### `paddingRight`
 
-`paddingRight` 的工作原理类似于 CSS 中的 `padding-right`。
+`paddingRight` 的作用类似于 CSS 中的 `padding-right`。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-right) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-right)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -1232,7 +1232,7 @@ export default App;
 
 当方向为 `ltr` 时，`paddingStart` 等同于 `paddingLeft`。当方向为 `rtl` 时，`paddingStart` 等同于 `paddingRight`。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -1240,11 +1240,11 @@ export default App;
 
 ### `paddingTop`
 
-`paddingTop` 的工作原理类似于 CSS 中的 `padding-top`。
+`paddingTop` 的作用类似于 CSS 中的 `padding-top`。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -1252,9 +1252,9 @@ export default App;
 
 ### `paddingVertical`
 
-设置 `paddingVertical` 类似于同时设置 `paddingTop` 和 `paddingBottom`。
+设置 `paddingVertical` 就像同时设置 `paddingTop` 和 `paddingBottom`。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -1262,18 +1262,18 @@ export default App;
 
 ### `position`
 
-React Native 中的 `position` 类似于 [常规 CSS](https://developer.mozilla.org/en-US/docs/Web/CSS/position)，但默认情况下所有内容都设置为 `relative`。
+React Native 中的 `position` 类似于 [普通 CSS](https://developer.mozilla.org/en-US/docs/Web/CSS/position)，但默认全部设置为 `relative`。
 
-`relative` 将根据布局的正常流定位元素。插入位置（`top`、`bottom`、`left`、`right`）将相对于此布局进行偏移。
+`relative` 会根据布局的正常流来定位元素。内边距偏移（`top`、`bottom`、`left`、`right`）会相对于此布局进行偏移。
 
-`absolute` 将元素从布局的正常流中取出。插入位置将相对于其 [包含块](./flexbox.md#the-containing-block) 进行偏移。
+`absolute` 会将元素从布局的正常流中移除。内边距偏移会相对于其 [包含块](./flexbox.md#the-containing-block) 进行偏移。
 
-`static` 将根据布局的正常流定位元素。插入位置将无效。
+`static` 会根据布局的正常流来定位元素。内边距偏移不会产生任何效果。
 `static` 元素不会为绝对定位的后代形成包含块。
 
-有关更多信息，请参阅 [Flexbox 布局文档](./flexbox.md#position)。此外，[Yoga 文档](https://www.yogalayout.dev/docs/styling/position) 有关於 `position` 在 React Native 和 CSS 之间差异的更多详情。
+有关更多信息，请参见 [Flexbox 布局文档](./flexbox.md#position)。此外，[Yoga 文档](https://www.yogalayout.dev/docs/styling/position) 也提供了 `position` 在 React Native 与 CSS 之间差异的更多细节。
 
-| 类型                                   | 是否必填 |
+| 类型                                   | 是否必需 |
 | -------------------------------------- | -------- |
 | enum('absolute', 'relative', 'static') | 否       |
 
@@ -1281,13 +1281,13 @@ React Native 中的 `position` 类似于 [常规 CSS](https://developer.mozilla.
 
 ### `right`
 
-`right` 是偏移此组件右边缘的逻辑像素数。
+`right` 是用于偏移该组件右边缘的逻辑像素数。
 
-它的工作原理类似于 CSS 中的 `right`，但在 React Native 中你必须使用点数或百分比。不支持 Em 及其他单位。
+它的工作方式类似于 CSS 中的 `right`，但在 React Native 中你必须使用点或百分比。不支持 em 和其他单位。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/right) 了解更多关于 `right` 如何影响布局的详情。
+有关 `right` 如何影响布局的更多详情，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/right)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -1295,11 +1295,11 @@ React Native 中的 `position` 类似于 [常规 CSS](https://developer.mozilla.
 
 ### `rowGap`
 
-`rowGap` 的工作原理类似于 CSS 中的 `row-gap`。React Native 中仅支持像素单位。
+`rowGap` 的作用类似于 CSS 中的 `row-gap`。在 React Native 中只支持像素单位。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap)。
 
-| 类型   | 是否必填 |
+| 类型   | 是否必需 |
 | ------ | -------- |
 | number | 否       |
 
@@ -1309,9 +1309,9 @@ React Native 中的 `position` 类似于 [常规 CSS](https://developer.mozilla.
 
 当方向为 `ltr` 时，`start` 等同于 `left`。当方向为 `rtl` 时，`start` 等同于 `right`。
 
-此样式的优先级高于 `left`、`right` 和 `end` 样式。
+该样式优先于 `left`、`right` 和 `end` 样式。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -1319,13 +1319,13 @@ React Native 中的 `position` 类似于 [常规 CSS](https://developer.mozilla.
 
 ### `top`
 
-`top` 是偏移此组件顶部边缘的逻辑像素数。
+`top` 是用于偏移该组件顶部边缘的逻辑像素数。
 
-它的工作原理类似于 CSS 中的 `top`，但在 React Native 中你必须使用点数或百分比。不支持 Em 及其他单位。
+它的工作方式类似于 CSS 中的 `top`，但在 React Native 中你必须使用点或百分比。不支持 em 和其他单位。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/top) 了解更多关于 `top` 如何影响布局的详情。
+有关 `top` 如何影响布局的更多详情，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/top)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -1333,13 +1333,13 @@ React Native 中的 `position` 类似于 [常规 CSS](https://developer.mozilla.
 
 ### `width`
 
-`width` 设置此组件的宽度。
+`width` 设置该组件的宽度。
 
-它的工作原理类似于 CSS 中的 `width`，但在 React Native 中你必须使用点数或百分比。不支持 Em 及其他单位。
+它的工作方式类似于 CSS 中的 `width`，但在 React Native 中你必须使用点或百分比。不支持 em 和其他单位。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/width) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/width)。
 
-| 类型           | 是否必填 |
+| 类型           | 是否必需 |
 | -------------- | -------- |
 | number, string | 否       |
 
@@ -1347,14 +1347,14 @@ React Native 中的 `position` 类似于 [常规 CSS](https://developer.mozilla.
 
 ### `zIndex`
 
-`zIndex` 控制哪些组件显示在其他组件之上。通常，你不使用 `zIndex`。组件根据它们在文档树中的顺序渲染，因此后面的组件会绘制在前面的组件之上。如果你有动画或自定义模态界面且不希望出现这种行为，`zIndex` 可能会很有用。
+`zIndex` 控制哪些组件显示在其他组件之上。通常你不会使用 `zIndex`。组件会按照它们在文档树中的顺序渲染，因此后面的组件会绘制在前面的组件之上。如果你有动画或自定义模态界面，并且不希望出现这种行为，`zIndex` 可能会很有用。
 
-它的工作原理类似于 CSS 的 `z-index` 属性 - 具有较大 `zIndex` 的组件将渲染在顶部。可以将 z 轴方向想象为从手机指向你的眼睛。
+它的作用类似于 CSS 的 `z-index` 属性——`zIndex` 更大的组件会渲染在上层。可以把 z 方向想象成从手机指向你的眼睛。
 
-在 iOS 上，`zIndex` 可能需要 `View` 互为兄弟节点才能按预期工作。
+在 iOS 上，`zIndex` 可能要求 `View` 彼此成为兄弟节点才能按预期工作。
 
-详见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/z-index) 了解更多详情。
+更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/z-index)。
 
-| 类型   | 是否必填 |
+| 类型   | 是否必需 |
 | ------ | -------- |
 | number | 否       |

@@ -21,7 +21,7 @@ React Native 提供了两个互补的动画系统：[`Animated`](animations#anim
 <TabItem value="javascript">
 
 ```SnackPlayer ext=js
-import React, {useEffect, useRef} from 'react';
+import {useEffect, useRef} from 'react';
 import {Animated, Text, View} from 'react-native';
 
 const FadeInView = props => {
@@ -74,12 +74,12 @@ export default () => {
 <TabItem value="typescript">
 
 ```SnackPlayer ext=tsx
-import React, {useEffect, useRef, type PropsWithChildren} from 'react';
+import {useEffect, useRef, type PropsWithChildren, type FC} from 'react';
 import {Animated, Text, View, type ViewStyle} from 'react-native';
 
 type FadeInViewProps = PropsWithChildren<{style: ViewStyle}>;
 
-const FadeInView: React.FC<FadeInViewProps> = props => {
+const FadeInView: FC<FadeInViewProps> = props => {
   const fadeAnim = useRef(new Animated.Value(0)).current; // 不透明度的初始值：0
 
   useEffect(() => {
@@ -309,7 +309,6 @@ Animated.timing(opacity, {
 #### 带有 Animated Event 示例的 ScrollView
 
 ```SnackPlayer name=Animated&supportedPlatforms=ios,android
-import React from 'react';
 import {
   ScrollView,
   Text,
@@ -452,7 +451,7 @@ onPanResponderMove={Animated.event(
 #### 带有 Animated Event 示例的 PanResponder
 
 ```SnackPlayer name=Animated
-import React, {useRef} from 'react';
+import {useRef} from 'react';
 import {Animated, View, StyleSheet, PanResponder, Text} from 'react-native';
 
 const App = () => {
@@ -549,7 +548,7 @@ Animated.timing(this.state.animatedValue, {
 </Animated.ScrollView>
 ```
 
-你可以通过运行 [RNTester 应用](https://github.com/facebook/react-native/blob/main/packages/rn-tester/) 查看原生驱动的实际效果，然后加载 Native Animated 示例。你也可以查看 [源代码](https://github.com/facebook/react-native/blob/master/packages/rn-tester/js/examples/NativeAnimation/NativeAnimationsExample.js) 了解这些示例是如何制作的。
+你可以通过运行 [RNTester 应用](https://github.com/facebook/react-native/blob/main/packages/rn-tester/)，然后加载 Native Animated Example，查看原生驱动的实际效果。你也可以查看 [源代码](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/NativeAnimation/NativeAnimationsExample.js) 来了解这些示例是如何生成的。
 
 #### 注意事项
 
@@ -592,8 +591,8 @@ RNTester 应用有各种 `Animated` 使用示例：
 UIManager.setLayoutAnimationEnabledExperimental(true);
 ```
 
-```SnackPlayer name=LayoutAnimations&supportedPlatforms=ios,android
-import React, {useState} from 'react';
+```SnackPlayer name=LayoutAnimations
+import {useState} from 'react';
 import {
   NativeModules,
   LayoutAnimation,
@@ -622,12 +621,10 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <View
-        style={[styles.box, {width: state.w, height: state.h}]}
-      />
+      <View style={[styles.box, {width: state.w, height: state.h}]} />
       <TouchableOpacity onPress={onPress}>
         <View style={styles.button}>
-          <Text style={styles.buttonText}>Press me!</Text>
+          <Text style={styles.buttonText}>按我！</Text>
         </View>
       </TouchableOpacity>
     </View>
@@ -664,7 +661,7 @@ const styles = StyleSheet.create({
 
 ### `requestAnimationFrame`
 
-`requestAnimationFrame` 是一个你可能熟悉的浏览器 polyfill。它接受一个函数作为其唯一参数，并在下一次重绘之前调用该函数。它是所有基于 JavaScript 的动画 API  underlying 的基本构建块。通常，你不需要自己调用它——动画 API 会为你管理帧更新。
+`requestAnimationFrame` 是一个你可能熟悉的浏览器 polyfill。它接受一个函数作为其唯一参数，并在下一次重绘之前调用该函数。它是所有基于 JavaScript 的动画 API underlying 的基本构建块。通常，你不需要自己调用它——动画 API 会为你管理帧更新。
 
 ### `setNativeProps`
 

@@ -5,42 +5,42 @@ title: 直接操作
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-有时需要直接更改组件，而不使用 state/props 来触发整个子树的重新渲染。例如，在浏览器中使用 React 时，有时需要直接修改一个 DOM 节点，移动应用中的视图也一样。`setNativeProps` 是 React Native 中直接设置原生视图属性的等价物。
+有时需要直接修改组件，而不使用 state/props 来触发整个子树的重新渲染。例如，在浏览器中的 React 里，你有时需要直接修改一个 DOM 节点，移动应用中的视图也是如此。`setNativeProps` 是 React Native 中等同于直接给 DOM 节点设置属性的方法。
 
 :::caution
-当频繁重新渲染导致性能瓶颈时，请使用 `setNativeProps`！
+当频繁重新渲染造成性能瓶颈时，请使用 `setNativeProps`！
 
-直接操作不会是你经常使用的工具。你通常只会在创建连续动画时使用它，以避免渲染组件层级和协调多个视图的开销。
-`setNativeProps` 是命令式的，它将状态存储在原生层（DOM、UIView 等）而非 React 组件内，这会让你的代码更难理解。
+直接操作并不是你会经常使用的工具。通常只会在创建连续动画时使用它，以避免渲染组件层级并协调大量视图所带来的开销。
+`setNativeProps` 是命令式的，它把状态保存在原生层（DOM、UIView 等）而不是 React 组件内部，这会让代码更难推理。
 
-在使用它之前，先尝试使用 `setState` 和 [`shouldComponentUpdate`](https://react.dev/reference/react/Component#shouldcomponentupdate) 来解决你的问题。
+在使用它之前，先尝试用 `setState` 和 [`shouldComponentUpdate`](https://react.dev/reference/react/Component#shouldcomponentupdate) 来解决问题。
 :::
 
-## TouchableOpacity 中的 setNativeProps
+## 在 TouchableOpacity 中使用 setNativeProps
 
-[TouchableOpacity](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Components/Touchable/TouchableOpacity.js) 内部使用了 `setNativeProps` 来更新其子组件的不透明度：
+[TouchableOpacity](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Components/Touchable/TouchableOpacity.js) 内部使用 `setNativeProps` 来更新其子组件的不透明度：
 
 ```tsx
 const viewRef = useRef<View>();
 const setOpacityTo = useCallback(value => {
-  // 省略：动画相关代码
+  // 已省略：与动画相关的代码
   viewRef.current.setNativeProps({
     opacity: value,
   });
 }, []);
 ```
 
-这让我们能写出如下代码，并保证子组件会根据点击事件更新其不透明度，而子组件本身无需对此有任何感知或更改实现：
+这让我们可以编写下面的代码，并知道子组件会在响应点击时更新不透明度，而子组件本身并不需要知道这一点，也不需要对其实现做任何改动：
 
 ```tsx
 <TouchableOpacity onPress={handlePress}>
   <View>
-    <Text>Press me!</Text>
+    <Text>点击我！</Text>
   </View>
 </TouchableOpacity>
 ```
 
-假如没有 `setNativeProps`，实现方式可能是将不透明度保存到 state 中，然后在 `onPress` 触发时更新：
+假设 `setNativeProps` 不可用。受这个限制时，我们可以通过一种方式来实现：把不透明度值存储在 state 中，然后在每次触发 `onPress` 时更新这个值：
 
 ```tsx
 const [buttonOpacity, setButtonOpacity] = useState(1);
@@ -49,25 +49,24 @@ return (
     onPressIn={() => setButtonOpacity(0.5)}
     onPressOut={() => setButtonOpacity(1)}>
     <View style={{opacity: buttonOpacity}}>
-      <Text>Press me!</Text>
+      <Text>点击我！</Text>
     </View>
   </TouchableOpacity>
 );
 ```
 
-相比原例，这种做法计算开销更大——每次不透明度变更时，React 都需重新渲染组件层级，尽管视图及其子视图的其它属性未变。通常这类开销无关紧要，但在执行连续动画和响应手势时，精细优化组件可提升动画的流畅度。
+与原始示例相比，这种方式计算开销更大——即使视图及其子组件的其他属性没有变化，React 仍然需要在每次不透明度变化时重新渲染组件层级。通常这类开销并不是问题，但在执行连续动画和响应手势时，谨慎地优化组件可以提升动画的保真度。
 
-查看 [NativeMethodsMixin](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Renderer/implementations/ReactNativeRenderer-prod.js) 中 `setNativeProps` 的实现，你会发现它是对 `RCTUIManager.updateView` 的封装——这正是重新渲染时调用的函数，参见 [ReactNativeBaseComponent 中的 receiveComponent](https://github.com/facebook/react-native/blob/fb2ec1ea47c53c2e7b873acb1cb46192ac74274e/Libraries/Renderer/oss/ReactNativeRenderer-prod.js#L5793-L5813)。
+如果你查看 [NativeMethodsMixin](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Renderer/implementations/ReactNativeRenderer-prod.js) 中 `setNativeProps` 的实现，会发现它只是 `RCTUIManager.updateView` 的一个包装器——这与重新渲染后触发的函数调用完全相同——参见 [ReactNativeBaseComponent 中的 receiveComponent](https://github.com/facebook/react-native/blob/fb2ec1ea47c53c2e7b873acb1cb46192ac74274e/Libraries/Renderer/oss/ReactNativeRenderer-prod.js#L5793-L5813)。
 
 ## 复合组件与 setNativeProps
 
-复合组件没有对应的原生视图，因此你不能在它们上调用 `setNativeProps`。例如：
+复合组件没有对应的原生视图，因此不能在它们上面调用 `setNativeProps`。考虑这个示例：
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
 ```SnackPlayer name=setNativeProps%20with%20Composite%20Components&ext=js
-import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 
 const MyButton = props => (
@@ -78,7 +77,7 @@ const MyButton = props => (
 
 const App = () => (
   <TouchableOpacity>
-    <MyButton label="Press me!" />
+    <MyButton label="点击我！" />
   </TouchableOpacity>
 );
 
@@ -89,7 +88,6 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=setNativeProps%20with%20Composite%20Components&ext=tsx
-import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 
 const MyButton = (props: {label: string}) => (
@@ -100,7 +98,7 @@ const MyButton = (props: {label: string}) => (
 
 const App = () => (
   <TouchableOpacity>
-    <MyButton label="Press me!" />
+    <MyButton label="点击我！" />
   </TouchableOpacity>
 );
 
@@ -110,20 +108,20 @@ export default App;
 </TabItem>
 </Tabs>
 
-运行后会看到错误：`Touchable 子组件必须是原生组件，或者将 setNativeProps 转发给原生组件`。这是因为 `MyButton` 并非直接对应一个应被设置不透明度的原生视图。你可以这样理解：如果用 `createReactClass` 创建一个组件，你不会希望直接设置样式属性生效——你需要将样式属性传递给其子组件，除非你包裹了一个原生组件。同理，我们要将 `setNativeProps` 传递给一个原生支持的子组件。
+如果你运行这段代码，会立刻看到这个错误：`Touchable child must either be native or forward setNativeProps to a native component`。之所以会这样，是因为 `MyButton` 并没有直接对应一个原生视图，而不透明度应该设置在这个视图上。你可以这样理解：如果你用 `createReactClass` 定义了一个组件，你不会期待能直接给它设置一个 style prop 并让它生效——除非你包装的是一个原生组件，否则你需要把这个 style prop 传递给子组件。同样地，我们要把 `setNativeProps` 转发给一个由原生视图支持的子组件。
 
 #### 将 setNativeProps 转发给子组件
 
-由于 `setNativeProps` 方法存在于对 `View` 的 ref 引用上，把你自定义组件的 ref 转发给其渲染的 `<View />` 组件即可。这意味着调用自定义组件上的 `setNativeProps` 与调用该包装的 `View` 组件的 `setNativeProps` 效果相同。
+由于 `setNativeProps` 方法存在于任何指向 `View` 组件的 ref 上，因此只需将自定义组件上的 ref 转发到它渲染的某个 `<View />` 组件即可。这意味着，在自定义组件上调用 `setNativeProps` 的效果，与在被包裹的 `View` 组件本身上调用 `setNativeProps` 的效果相同。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
 ```SnackPlayer name=Forwarding%20setNativeProps&ext=js
-import React from 'react';
+import {forwardRef} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 
-const MyButton = React.forwardRef((props, ref) => (
+const MyButton = forwardRef((props, ref) => (
   <View {...props} ref={ref} style={{marginTop: 50}}>
     <Text>{props.label}</Text>
   </View>
@@ -131,7 +129,7 @@ const MyButton = React.forwardRef((props, ref) => (
 
 const App = () => (
   <TouchableOpacity>
-    <MyButton label="Press me!" />
+    <MyButton label="点击我！" />
   </TouchableOpacity>
 );
 
@@ -142,10 +140,10 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Forwarding%20setNativeProps&ext=tsx
-import React from 'react';
+import {forwardRef} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 
-const MyButton = React.forwardRef<View, {label: string}>((props, ref) => (
+const MyButton = forwardRef<View, {label: string}>((props, ref) => (
   <View {...props} ref={ref} style={{marginTop: 50}}>
     <Text>{props.label}</Text>
   </View>
@@ -153,7 +151,7 @@ const MyButton = React.forwardRef<View, {label: string}>((props, ref) => (
 
 const App = () => (
   <TouchableOpacity>
-    <MyButton label="Press me!" />
+    <MyButton label="点击我！" />
   </TouchableOpacity>
 );
 
@@ -163,19 +161,18 @@ export default App;
 </TabItem>
 </Tabs>
 
-这样你就可以在 `TouchableOpacity` 内使用 `MyButton` 了！
+现在你就可以在 `TouchableOpacity` 中使用 `MyButton` 了！
 
-你可能注意到我们使用 `{...props}` 将所有属性传递给了子视图。这是因为 `TouchableOpacity` 实际上是一个复合组件，除了依赖子组件的 `setNativeProps`，它还要求子组件能够处理触摸事件。为此，它会传递 [各种属性](view.md#onmoveshouldsetresponder) 回调到 `TouchableOpacity`。相比之下，`TouchableHighlight` 是由原生视图支持的，仅需实现 `setNativeProps`。
+你可能已经注意到，我们使用 `{...props}` 将所有 props 都传递给了子视图。原因在于 `TouchableOpacity` 实际上是一个复合组件，因此除了依赖其子组件上的 `setNativeProps` 之外，它还要求子组件处理触摸事件。为此，它会传递一些回调到 `TouchableOpacity` 组件的[各种 props](view.md#onmoveshouldsetresponder)。相比之下，`TouchableHighlight` 是由原生视图支持的，只需要我们实现 `setNativeProps` 即可。
 
 ## 使用 setNativeProps 编辑 TextInput 的值
 
-另一个非常常见的使用场景是直接编辑 TextInput 的值。当 `TextInput` 处于“受控”状态时，如果 `bufferDelay` 较低且用户输入很快，有时会丢失字符。一些开发者倾向于完全跳过“受控”模式，而在必要时使用 `setNativeProps` 直接操作 TextInput 的值。下面示例展示了点击按钮时更新输入框内容：
+`setNativeProps` 另一个非常常见的用例是编辑 TextInput 的值。TextInput 的 `controlled` prop 在 `bufferDelay` 较低且用户输入非常快时，有时会丢失字符。一些开发者更倾向于完全跳过这个 prop，而是在必要时直接使用 `setNativeProps` 来操作 TextInput 的值。例如，下面的代码演示了在你点击按钮时编辑输入框：
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
 ```SnackPlayer name=Clear%20text&ext=js
-import React from 'react';
 import {useCallback, useRef} from 'react';
 import {
   StyleSheet,
@@ -195,7 +192,7 @@ const App = () => {
     <View style={styles.container}>
       <TextInput ref={inputRef} style={styles.input} />
       <TouchableOpacity onPress={editText}>
-        <Text>Edit text</Text>
+        <Text>编辑文本</Text>
       </TouchableOpacity>
     </View>
   );
@@ -223,7 +220,6 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Clear%20text&ext=tsx
-import React from 'react';
 import {useCallback, useRef} from 'react';
 import {
   StyleSheet,
@@ -243,7 +239,7 @@ const App = () => {
     <View style={styles.container}>
       <TextInput ref={inputRef} style={styles.input} />
       <TouchableOpacity onPress={editText}>
-        <Text>Edit text</Text>
+        <Text>编辑文本</Text>
       </TouchableOpacity>
     </View>
   );
@@ -270,23 +266,23 @@ export default App;
 </TabItem>
 </Tabs>
 
-你也可以用 [`clear`](../textinput#clear) 方法清空 `TextInput`，它采用了相同的方案。
+你可以使用 [`clear`](../textinput#clear) 方法以相同的方式清空 `TextInput`，它会清除当前输入文本。
 
-## 避免与渲染函数的冲突
+## 避免与 render 函数冲突
 
-如果你更新了由渲染函数管理的属性，可能会产生不可预测且令人困惑的 Bug。因为每当组件重新渲染且该属性改变时，之前通过 `setNativeProps` 设置的值会被完全忽略和覆盖。
+如果你更新了一个也由 render 函数管理的属性，可能会引发一些不可预测且令人困惑的 bug，因为只要组件重新渲染并且该属性发生变化，之前通过 `setNativeProps` 设置的任何值都会被完全忽略并覆盖。
 
-## setNativeProps 与 shouldComponentUpdate
+## setNativeProps 和 shouldComponentUpdate
 
-通过 [智能地应用 `shouldComponentUpdate`](https://react.dev/reference/react/Component#shouldcomponentupdate)，你可以避免对未改变的组件子树进行不必要的协调开销，甚至可以使使用 `setState` 代替 `setNativeProps` 变得性能足够良好。
+通过[智能地应用 `shouldComponentUpdate`](https://react.dev/reference/react/Component#shouldcomponentupdate)，你可以避免在协调未变化的组件子树时产生不必要的开销，以至于使用 `setState` 代替 `setNativeProps` 也可能已经足够高效。
 
 ## 其他原生方法
 
-这里描述的方法大多数 React Native 默认组件都支持。但请注意，它们**不**适用于没有直接对应原生视图的复合组件。这通常涵盖你在自己的应用中定义的大部分组件。
+这里描述的方法可用于 React Native 提供的大多数默认组件。不过请注意，它们**不**适用于那些并非直接由原生视图支持的复合组件。这通常包括你在自己应用中定义的大多数组件。
 
 ### measure(callback)
 
-确定给定视图在屏幕上的位置、宽度和高度，并通过异步回调返回。如果成功，回调会被调用，参数如下：
+确定给定视图在屏幕上的位置，以及其在视口中的宽度和高度，并通过异步回调返回这些值。如果成功，回调将使用以下参数被调用：
 
 - x
 - y
@@ -295,13 +291,13 @@ export default App;
 - pageX
 - pageY
 
-注意，这些测量结果只有在原生渲染完成后才可用。如果你需要尽快获得测量值，且不需要 `pageX` 和 `pageY`，可以考虑改用 [`onLayout`](view.md#onlayout) 属性。
+请注意，这些测量值要等到原生端完成渲染后才能获取。如果你希望尽快获取测量值，并且不需要 `pageX` 和 `pageY`，可以考虑改用 [`onLayout`](view.md#onlayout) 属性。
 
-另外，`measure()` 返回的宽度和高度是视口中的尺寸。如需组件的实际大小，也建议使用 [`onLayout`](view.md#onlayout) 属性。
+另外，`measure()` 返回的 width 和 height 是组件在视口中的宽度和高度。如果你需要组件的实际大小，可以考虑改用 [`onLayout`](view.md#onlayout) 属性。
 
 ### measureInWindow(callback)
 
-确定给定视图在窗口中的位置，并通过异步回调返回。如果 React 根视图嵌套在另一个原生视图中，该方法会返回绝对坐标。如果成功，回调会被调用，参数如下：
+确定给定视图在窗口中的位置，并通过异步回调返回这些值。如果 React 根视图嵌入在另一个原生视图中，这将为你提供绝对坐标。如果成功，回调将使用以下参数被调用：
 
 - x
 - y
@@ -310,17 +306,17 @@ export default App;
 
 ### measureLayout(relativeToNativeComponentRef, onSuccess, onFail)
 
-类似 `measure()`，但测量值是相对于祖先视图——由 `relativeToNativeComponentRef` 指定。即返回的坐标是相对于祖先视图的原点 `(x, y)`。
+与 `measure()` 类似，但会相对于通过 `relativeToNativeComponentRef` 引用指定的某个祖先来测量视图。这意味着返回的坐标是相对于祖先视图原点 `x`、`y` 的。
 
 :::note
-此方法也可以传入 `relativeToNativeNode`（而非引用），不过此用法在新架构下已废弃。
+这个方法也可以使用 `relativeToNativeNode` 处理器（而不是引用）来调用，但在新架构中这种变体已经过时。
 :::
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
 ```SnackPlayer name=measureLayout%20example&supportedPlatforms=android,ios&ext=js
-import React, {useEffect, useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 
 const App = () => {
@@ -373,7 +369,7 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=measureLayout%20example&ext=tsx
-import React, {useEffect, useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 
 type Measurements = {
@@ -437,8 +433,8 @@ export default App;
 
 ### focus()
 
-请求为指定的输入框或视图获取焦点。具体行为取决于平台和视图类型。
+请求给定输入框或视图获取焦点。触发的具体行为取决于平台和视图类型。
 
 ### blur()
 
-移除输入框或视图的焦点。与 `focus()` 相反。
+移除输入框或视图的焦点。这与 `focus()` 相反。

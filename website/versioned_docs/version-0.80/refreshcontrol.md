@@ -3,19 +3,19 @@ id: refreshcontrol
 title: RefreshControl
 ---
 
-此组件用于 ScrollView 或 ListView 内部，以添加下拉刷新功能。当 ScrollView 处于 `scrollY: 0` 时，向下滑动会触发 `onRefresh` 事件。
+此组件用于在 `ScrollView` 或 `ListView` 中添加下拉刷新功能。当 `ScrollView` 处于 `scrollY: 0` 时，向下滑动会触发 `onRefresh` 事件。
 
 ## 示例
 
 ```SnackPlayer name=RefreshControl&supportedPlatforms=ios,android
-import React from 'react';
+import {useCallback, useState} from 'react';
 import {RefreshControl, ScrollView, StyleSheet, Text} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
-  const [refreshing, setRefreshing] = React.useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
-  const onRefresh = React.useCallback(() => {
+  const onRefresh = useCallback(() => {
     setRefreshing(true);
     setTimeout(() => {
       setRefreshing(false);
@@ -30,7 +30,7 @@ const App = () => {
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }>
-          <Text>Pull down to see RefreshControl indicator</Text>
+          <Text>下拉查看 RefreshControl 指示器</Text>
         </ScrollView>
       </SafeAreaView>
     </SafeAreaProvider>
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-> 注意：`refreshing` 是一个受控属性，这就是为什么它需要在 `onRefresh` 函数中被设置为 `true`，否则刷新指示器会立即停止。
+> 注意：`refreshing` 是一个受控属性，这就是为什么需要在 `onRefresh` 函数中将其设置为 `true`，否则刷新指示器会立即停止。
 
 ---
 
@@ -60,15 +60,15 @@ export default App;
 
 ## 属性
 
-### [View 属性](view.md#props)
+### [View Props](view.md#props)
 
-继承 [View 属性](view.md#props)。
+继承自 [View Props](view.md#props)。
 
 ---
 
-### <div className="label required basic">必需</div>**`refreshing`**
+### <div className="label required basic">必填</div>**`refreshing`**
 
-视图是否应指示活动刷新状态。
+视图是否应显示正在刷新的状态。
 
 | 类型    |
 | ------- |
@@ -78,11 +78,11 @@ export default App;
 
 ### `colors` <div className="label android">Android</div>
 
-用于绘制刷新指示器的颜色（至少一个）。
+用于绘制刷新指示器的颜色（至少一种）。
 
 | 类型                         |
 | ---------------------------- |
-| [colors](colors.md) 数组 |
+| array of [colors](colors.md) |
 
 ---
 
@@ -91,8 +91,8 @@ export default App;
 是否启用下拉刷新功能。
 
 | 类型    | 默认值 |
-| ------- | ------- |
-| boolean | `true`  |
+| ------- | ------ |
+| boolean | `true` |
 
 ---
 
@@ -121,16 +121,16 @@ export default App;
 进度视图顶部偏移量。
 
 | 类型   | 默认值 |
-| ------ | ------- |
+| ------ | ------ |
 | number | `0`     |
 
 ---
 
 ### `size` <div className="label android">Android</div>
 
-刷新指示器的大小。
+刷新指示器的尺寸。
 
-| 类型                         | 默认值     |
+| 类型                         | 默认值      |
 | ---------------------------- | ----------- |
 | enum(`'default'`, `'large'`) | `'default'` |
 

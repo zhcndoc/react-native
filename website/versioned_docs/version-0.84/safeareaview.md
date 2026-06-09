@@ -9,14 +9,13 @@ title: '🗑️ SafeAreaView'
 
 `SafeAreaView` 的目的是在设备的安全区域边界内渲染内容。它目前仅适用于 iOS 11 及以上版本的 iOS 设备。
 
-`SafeAreaView` 渲染嵌套内容并自动应用内边距，以反映导航栏、标签栏、工具栏及其他父视图未覆盖的视图部分。更重要的是，Safe Area 的内边距反映了屏幕的物理限制，例如圆角或摄像头缺口（即 iPhone 13 上的传感器区域）。
+`SafeAreaView` 渲染嵌套内容并自动应用内边距，以反映导航栏、标签栏、工具栏及其他父视图未覆盖的视图部分。更重要的是，安全区域的内边距反映了屏幕的物理限制，例如圆角或摄像头缺口（即 iPhone 13 上的传感器区域）。
 
 ## 示例
 
 使用时，将你的顶级视图用一个带有 `flex: 1` 样式的 `SafeAreaView` 包裹起来。你可能还想使用与应用设计相匹配的背景颜色。
 
 ```SnackPlayer name=SafeAreaView&supportedPlatforms=ios
-import React from 'react';
 import {StyleSheet, Text, SafeAreaView} from 'react-native';
 
 const App = () => {

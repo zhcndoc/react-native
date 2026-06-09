@@ -17,7 +17,6 @@ title: PermissionsAndroid
 ### 示例
 
 ```SnackPlayer name=PermissionsAndroid%20Example&supportedPlatforms=android
-import React from 'react';
 import {
   Button,
   PermissionsAndroid,
@@ -34,17 +33,17 @@ const requestCameraPermission = async () => {
       {
         title: 'Cool Photo App Camera Permission',
         message:
-          'Cool Photo App needs access to your camera ' +
-          'so you can take awesome pictures.',
-        buttonNeutral: 'Ask Me Later',
-        buttonNegative: 'Cancel',
-        buttonPositive: 'OK',
+          'Cool Photo App 需要访问您的相机 ' +
+          '这样您就可以拍摄很棒的照片。',
+        buttonNeutral: '稍后再问我',
+        buttonNegative: '取消',
+        buttonPositive: '好',
       },
     );
     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      console.log('You can use the camera');
+      console.log('您可以使用相机');
     } else {
-      console.log('Camera permission denied');
+      console.log('相机权限被拒绝');
     }
   } catch (err) {
     console.warn(err);
@@ -54,7 +53,7 @@ const requestCameraPermission = async () => {
 const App = () => (
   <SafeAreaProvider>
     <SafeAreaView style={styles.container}>
-      <Text style={styles.item}>Try permissions</Text>
+      <Text style={styles.item}>尝试权限</Text>
       <Button title="request permissions" onPress={requestCameraPermission} />
     </SafeAreaView>
   </SafeAreaProvider>

@@ -113,7 +113,7 @@ RCT_EXPORT_METHOD(createCalendarEvent:(NSString *)name location:(NSString *)loca
 #import <React/RCTLog.h>
 RCT_EXPORT_METHOD(createCalendarEvent:(NSString *)name location:(NSString *)location)
 {
- RCTLogInfo(@"Pretending to create an event %@ at %@", name, location);
+ RCTLogInfo(@"假装在 %@ 创建一个事件 %@", name, location);
 }
 ```
 
@@ -139,17 +139,16 @@ return [[UIDevice currentDevice] name];
 在你的应用程序中找到一个你想要添加调用原生模块 `createCalendarEvent()` 方法的地方。下面是一个组件示例，`NewModuleButton`，你可以添加到你的应用中。你可以在 `NewModuleButton` 的 `onPress()` 函数中调用原生模块。
 
 ```tsx
-import React from 'react';
 import {Button} from 'react-native';
 
 const NewModuleButton = () => {
   const onPress = () => {
-    console.log('We will invoke the native module here!');
+    console.log('我们将在这里调用原生模块！');
   };
 
   return (
     <Button
-      title="Click to invoke your native module!"
+      title="点击以调用你的原生模块！"
       color="#841584"
       onPress={onPress}
     />
@@ -204,7 +203,7 @@ yarn ios
 
 ### 回顾✨
 
-你现在应该能够在 JavaScript 中调用原生模块上的 `createCalendarEvent()` 方法。由于你在函数中使用了 `RCTLog`，你可以通过 [在应用中启用调试模式](https://reactnative.dev/docs/debugging#chrome-developer-tools) 并查看 Chrome 中的 JS 控制台或移动应用调试器 Flipper 来确认你的原生方法正在被调用。每次调用原生模块方法时，你应该看到你的 `RCTLogInfo(@"Pretending to create an event %@ at %@", name, location);` 消息。
+你现在应该能够在 JavaScript 中调用原生模块上的 `createCalendarEvent()` 方法。由于你在函数中使用了 `RCTLog`，你可以通过 [在应用中启用调试模式](https://reactnative.dev/docs/debugging#chrome-developer-tools) 并查看 Chrome 中的 JS 控制台或移动应用调试器 Flipper 来确认你的原生方法正在被调用。每次调用原生模块方法时，你应该看到你的 `RCTLogInfo(@"假装在 %@ 创建一个事件 %@", name, location);` 消息。
 
 <figure>
   <img src="/docs/assets/native-modules-ios-logs.png" width="1000" alt="日志图片。" />
@@ -333,7 +332,7 @@ RCT_EXPORT_METHOD(createCalendarEvent:(NSString *)title location:(NSString *)loc
  NSInteger eventId = ...
  callback(@[@(eventId)]);
 
- RCTLogInfo(@"Pretending to create an event %@ at %@", title, location);
+ RCTLogInfo(@"假装在 %@ 创建一个事件 %@", title, location);
 }
 
 ```
@@ -373,9 +372,9 @@ const onPress = () => {
     'testLocation',
     (error, eventId) => {
       if (error) {
-        console.error(`Error found! ${error}`);
+        console.error(`发现错误！${error}`);
       }
-      console.log(`event id ${eventId} returned`);
+      console.log(`返回的事件 id ${eventId}`);
     },
   );
 };
@@ -408,10 +407,10 @@ const onPress = () => {
     'testName',
     'testLocation',
     error => {
-      console.error(`Error found! ${error}`);
+      console.error(`发现错误！${error}`);
     },
     eventId => {
-      console.log(`event id ${eventId} returned`);
+      console.log(`返回的事件 id ${eventId}`);
     },
   );
 };
@@ -435,7 +434,7 @@ RCT_EXPORT_METHOD(createCalendarEvent:(NSString *)title
  if (eventId) {
     resolve(@(eventId));
   } else {
-    reject(@"event_failure", @"no event id returned", nil);
+    reject(@"event_failure", @"没有返回 event id", nil);
   }
 }
 

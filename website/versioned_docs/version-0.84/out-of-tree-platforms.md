@@ -3,7 +3,7 @@ id: out-of-tree-platforms
 title: 树外平台
 ---
 
-React Native 不仅仅适用于 Android 和 iOS 设备 —— 我们的合作伙伴和社区维护着让 React Native 支持其它平台的项目，例如：
+React Native 不仅仅适用于 Android 和 iOS 设备 —— 我们的合作伙伴和社区维护着让 React Native 支持其他平台的项目，例如：
 
 **来自合作伙伴**
 
@@ -19,7 +19,7 @@ React Native 不仅仅适用于 Android 和 iOS 设备 —— 我们的合作伙
 
 ## 创建你自己的 React Native 平台
 
-目前从零开始创建一个 React Native 平台的过程文档还不完善 —— 即将到来的重新架构 ([Fabric](/blog/2018/06/14/state-of-react-native-2018)) 的目标之一就是让维护一个平台变得更容易。
+从零开始创建一个 React Native 平台的过程目前仍然没有很完善的文档记录——New Architecture 和 [Fabric](/architecture/fabric-renderer) 的目标之一是让平台维护更容易。
 
 ### 打包
 

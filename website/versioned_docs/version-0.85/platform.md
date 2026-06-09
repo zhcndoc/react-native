@@ -6,7 +6,6 @@ title: 平台
 ## 示例
 
 ```SnackPlayer name=Platform%20API%20Example&supportedPlatforms=ios,android
-import React from 'react';
 import {Platform, StyleSheet, Text, ScrollView} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -15,19 +14,19 @@ const App = () => {
     <SafeAreaProvider>
       <SafeAreaView style={styles.safeArea}>
         <ScrollView contentContainerStyle={styles.container}>
-          <Text>OS</Text>
+          <Text>操作系统</Text>
           <Text style={styles.value}>{Platform.OS}</Text>
-          <Text>OS Version</Text>
+          <Text>操作系统版本</Text>
           <Text style={styles.value}>{Platform.Version}</Text>
-          <Text>isTV</Text>
+          <Text>是否为电视</Text>
           <Text style={styles.value}>{Platform.isTV.toString()}</Text>
           {Platform.OS === 'ios' && (
             <>
-              <Text>isPad</Text>
+              <Text>是否为 iPad</Text>
               <Text style={styles.value}>{Platform.isPad.toString()}</Text>
             </>
           )}
-          <Text>Constants</Text>
+          <Text>常量</Text>
           <Text style={styles.value}>
             {JSON.stringify(Platform.constants, null, 2)}
           </Text>

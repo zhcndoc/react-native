@@ -4,7 +4,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 在 [基础指南](/docs/fabric-native-components-introduction) 中，你了解了如何编写新的原生组件，如何创建新组件，如何将属性从 JS 端传递到原生端，以及如何从原生端向 JS 发射事件。
 
-自定义组件还可以命令式地调用原生代码中实现的一些函数，以实现一些更高级的功能，例如以编程方式重新加载网页。
+自定义组件还可以以命令式方式调用原生代码中实现的一些函数，以实现一些更高级的功能，例如以编程方式重新加载网页。
 
 在本指南中，你将通过学习一个新概念来实现这一点：原生命令 (Native Commands)。
 
@@ -37,7 +37,7 @@ export interface NativeProps extends ViewProps {
 +interface NativeCommands {
 +    reload: (viewRef: React.ElementRef<HostComponent<NativeProps>>) => void;
 +}
-
++
 +export const Commands: NativeCommands = codegenNativeCommands<NativeCommands>({
 +    supportedCommands: ['reload'],
 +});
@@ -73,7 +73,7 @@ type NativeProps = $ReadOnly<{|
 +interface NativeCommands {
 +    reload: (viewRef: React.ElementRef<HostComponent<NativeProps>>) => void;
 +}
-
++
 +export const Commands: NativeCommands = codegenNativeCommands<NativeCommands>({
 +    supportedCommands: ['reload'],
 +});
@@ -107,7 +107,6 @@ export default (codegenNativeComponent<NativeProps>(
 打开 `App.tsx` 文件并按如下方式修改：
 
 ```diff title="App.tsx"
-import React from 'react';
 -import {Alert, StyleSheet, View} from 'react-native';
 -import WebView from '../specs/WebViewNativeComponent';
 +import {Alert, StyleSheet, Pressable, Text, View} from 'react-native';
@@ -186,7 +185,6 @@ export default App;
 打开 `App.tsx` 文件并按如下方式修改：
 
 ```diff title="App.jsx"
-import React from 'react';
 -import {Alert, StyleSheet, View} from 'react-native';
 -import WebView from '../specs/WebViewNativeComponent';
 +import {Alert, StyleSheet, Pressable, Text, View} from 'react-native';
@@ -378,12 +376,12 @@ Framework build type is static library
 </TabItem>
 </Tabs>
 
-在这种情况下，直接调用 `view.reload()` 方法就足够了，因为我们的 ReactWebView 继承自 Android 的 `WebView`，并且它直接提供了一个 reload 方法。如果您正在实现一个自定义函数，而该函数在您的自定义视图中不可用，您可能还必须在由 React Native 的 `ViewManager` 管理的 Android View 中实现所需的方法。
+在这种情况下，直接调用 `view.reload()` 方法就足够了，因为我们的 `ReactWebView` 继承自 Android 的 `WebView`，并且它直接提供了一个 `reload` 方法。如果你正在实现一个自定义函数，而该函数在你的自定义视图中不可用，你可能还必须在由 React Native 的 `ViewManager` 管理的 Android View 中实现所需的方法。
 
 </TabItem>
 <TabItem value="ios" label="iOS">
 
-为了让您的视图响应原生命令，我们需要在 iOS 上实现几个方法。
+为了让你的视图响应原生命令，我们需要在 iOS 上实现几个方法。
 
 让我们打开 `RCTWebView.mm` 文件并按如下方式进行修改：
 
@@ -410,9 +408,9 @@ Framework build type is static library
   }
 ```
 
-为了让您的视图响应原生命令，您需要应用以下更改：
+为了让你的视图响应原生命令，你需要应用以下更改：
 
-1. 添加一个 `handleCommand:args` 函数。此函数由组件基础设施调用以处理命令。每个函数的实现类似：您需要调用一个由 Codegen 为您生成的 `RCT<componentNameInJS>HandleCommand` 函数。`RCT<componentNameInJS>HandleCommand` 执行一系列验证，验证我们需要调用的命令是否在支持的命令之中，以及传递的参数是否与预期匹配。如果所有检查都通过，`RCT<componentNameInJS>HandleCommand` 将调用相应的原生方法。
+1. 添加一个 `handleCommand:args` 函数。此函数由组件基础设施调用以处理命令。每个函数的实现类似：你需要调用一个由 Codegen 为你生成的 `RCT<componentNameInJS>HandleCommand` 函数。`RCT<componentNameInJS>HandleCommand` 执行一系列验证，验证我们需要调用的命令是否在支持的命令之中，以及传递的参数是否与预期匹配。如果所有检查都通过，`RCT<componentNameInJS>HandleCommand` 将调用相应的原生方法。
 2. 实现 `reload` 方法。在此示例中，`reload` 方法调用 WebKit 的 WebView 的 `reloadFromOrigin` 函数。
 
 </TabItem>

@@ -4,19 +4,19 @@ title: TouchableNativeFeedback
 ---
 
 :::tip
-如果你正在寻找一种更全面且更具前瞻性的方式来处理基于触摸的输入，请查看 [Pressable](pressable.md) API。
+如果你正在寻找一种更全面且面向未来的方式来处理基于触摸的输入，请查看 [Pressable](pressable.md) API。
 :::
 
-一个用于让视图能够正确响应触摸的包装组件（仅限 Android）。在 Android 上，这个组件使用原生状态 drawable 来显示触摸反馈。
+一个用于让视图正确响应触摸的包装组件（仅限 Android）。在 Android 上，这个组件使用原生状态 drawable 来显示触摸反馈。
 
-目前它只支持将单个 View 实例作为子节点，因为它的实现方式是用另一个带有一些额外属性设置的 RCTView 节点实例替换该 View。
+目前它只支持将单个 View 实例作为子节点，因为它的实现方式是用另一个带有一些额外属性设置的 RCTView 节点替换该 View。
 
 原生反馈触摸组件的背景 drawable 可以通过 `background` 属性自定义。
 
 ## Example
 
 ```SnackPlayer name=TouchableNativeFeedback%20Android%20Component%20Example&supportedPlatforms=android
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Text, View, StyleSheet, TouchableNativeFeedback} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -96,9 +96,9 @@ export default App;
 
 ### `useForeground`
 
-设置为 true 时，会将涟漪效果添加到视图的前景，而不是背景。如果你的某个子视图本身就有背景，或者你正在显示图片等内容，并且不希望涟漪被它们遮挡，这会很有用。
+设置为 true 时，将涟漪效果添加到视图的前景，而不是背景。如果你的某个子视图本身有背景，或者你正在显示图片，并且不希望涟漪被它们遮住，这会很有用。
 
-请先检查 TouchableNativeFeedback.canUseNativeForeground()，因为这仅在 Android 6.0 及以上可用。如果你在较旧版本上使用它，你会收到警告并回退到背景。
+请先检查 TouchableNativeFeedback.canUseNativeForeground()，因为这仅适用于 Android 6.0 及以上版本。如果你在旧版本上尝试使用它，会收到警告并回退到背景模式。
 
 | Type |
 | ---- |
@@ -174,7 +174,7 @@ static SelectableBackground(
 ): ThemeAttributeBackgroundPropType;
 ```
 
-创建一个对象，表示 Android 主题中可选元素的默认背景（`?android:attr/selectableItemBackground`）。`rippleRadius` 参数控制涟漪效果的半径。
+创建一个表示 Android 主题中可选择元素默认背景的对象（`?android:attr/selectableItemBackground`）。`rippleRadius` 参数控制涟漪效果的半径。
 
 ---
 
@@ -186,7 +186,7 @@ static SelectableBackgroundBorderless(
 ): ThemeAttributeBackgroundPropType;
 ```
 
-创建一个对象，表示 Android 主题中无边界可选元素的默认背景（`?android:attr/selectableItemBackgroundBorderless`）。适用于 Android API 21 及以上。`rippleRadius` 参数控制涟漪效果的半径。
+创建一个表示 Android 主题中无边框可选择元素默认背景的对象（`?android:attr/selectableItemBackgroundBorderless`）。适用于 Android API 级别 21 及以上。`rippleRadius` 参数控制涟漪效果的半径。
 
 ---
 
@@ -200,15 +200,15 @@ static Ripple(
 ): RippleBackgroundPropType;
 ```
 
-创建一个表示具有指定颜色（字符串形式）的 ripple drawable 的对象。如果属性 `borderless` 的值为 true，则涟漪会在视图边界之外渲染（例如原生 actionbar 按钮的行为）。此背景类型适用于 Android API 21 及以上。
+创建一个表示指定颜色（字符串形式）涟漪 drawable 的对象。如果属性 `borderless` 的值为 true，涟漪将会在视图边界之外渲染（例如原生 actionbar 按钮的行为）。此背景类型适用于 Android API 级别 21 及以上。
 
-**参数：**
+**Parameters:**
 
 | Name         | Type    | Required | Description                                 |
 | ------------ | ------- | -------- | ------------------------------------------- |
-| color        | string  | Yes      | 涟漪颜色                                    |
+| color        | string  | Yes      | 涟漪颜色                                     |
 | borderless   | boolean | Yes      | 涟漪是否可以在其边界之外渲染                 |
-| rippleRadius | ?number | No       | 控制涟漪效果的半径                          |
+| rippleRadius | ?number | No       | 控制涟漪效果的半径                            |
 
 ---
 

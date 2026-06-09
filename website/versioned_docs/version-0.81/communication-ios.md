@@ -7,7 +7,7 @@ title: 原生与 React Native 之间的通信
 
 ## 简介
 
-React Native 的灵感来自 React，因此信息流的基本思想是相似的。React 中的流是单向的。我们维护一个组件层级，其中每个组件仅依赖于其父组件和自身的内部状态。我们通过属性来实现这一点：数据以自上而下的方式从父组件传递给其子组件。如果祖先组件依赖于其后代组件的状态，则应该传递一个回调供后代组件用来更新祖先组件。
+React Native 的灵感来自 React，因此信息流的基本思想是相似的。React 中的信息流是单向的。我们维护一个组件层级，其中每个组件仅依赖于其父组件和自身的内部状态。我们通过属性来实现这一点：数据以自上而下的方式从父组件传递给其子组件。如果祖先组件依赖于其后代组件的状态，则应该传递一个回调供后代组件用来更新祖先组件。
 
 同样的概念也适用于 React Native。只要我们纯粹在框架内构建应用，我们就可以通过属性和回调驱动应用。但是，当我们混合 React Native 和原生组件时，我们需要一些特定的跨语言机制，以便在它们之间传递信息。
 
@@ -33,7 +33,6 @@ RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
 ```
 
 ```tsx
-import React from 'react';
 import {View, Image} from 'react-native';
 
 export default class ImageBrowserApp extends React.Component {
@@ -111,7 +110,7 @@ React Native 允许你执行跨语言函数调用。你可以从 JS 执行自定
 
 ### 嵌入在 React Native 中的原生组件的布局
 
-[这篇文章](legacy/native-components-ios#styles) 涵盖了这种情况。总之，由于我们所有的原生 react 视图都是 `UIView` 的子类，大多数样式和尺寸属性将按预期开箱即用。
+[这篇文章](legacy/native-components-ios#styles) 涵盖了这种情况。总之，由于我们所有的原生 React 视图都是 `UIView` 的子类，大多数样式和尺寸属性将按预期开箱即用。
 
 ### 嵌入在原生的 React Native 组件的布局
 
@@ -133,7 +132,7 @@ React Native 允许你执行跨语言函数调用。你可以从 JS 执行自定
 }
 ```
 
-当我们有一个固定尺寸的根视图时，我们需要在 JS 端尊重其边界。换句话说，我们需要确保 React Native 内容可以被包含在固定尺寸的根视图内。确保这一点的最简单方法是使用 Flexbox 布局。如果你使用绝对定位，并且 React 组件在根视图边界外可见，你将与原生视图重叠，导致某些功能表现异常。例如，'TouchableHighlight' 不会高亮根视图边界外的触摸。
+当我们有一个固定尺寸的根视图时，我们需要在 JS 端尊重其边界。换句话说，我们需要确保 React Native 内容可以被包含在固定尺寸的根视图内。确保这一点的最简单方法是使用 Flexbox 布局。如果你使用绝对定位，并且 React 组件在根视图边界外可见，你将与原生视图重叠，导致某些功能表现异常。例如，`TouchableHighlight` 不会高亮根视图边界外的触摸。
 
 通过重新设置其 frame 属性来动态更新根视图的尺寸是完全没问题的。React Native 将处理内容的布局。
 

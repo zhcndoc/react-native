@@ -13,8 +13,7 @@ title: 动画
 
 以下示例包含一个 `View`，它将基于动画值 `fadeAnim` 淡入和淡出
 
-```SnackPlayer name=Animated%20Example&supportedPlatforms=ios,android
-import React, {useRef} from 'react';
+```SnackPlayer name=Animated%20Example
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 import {
   Animated,
@@ -22,11 +21,12 @@ import {
   View,
   StyleSheet,
   Button,
+  useAnimatedValue,
 } from 'react-native';
 
 const App = () => {
   // fadeAnim 将用作 opacity 的值。初始值：0
-  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const fadeAnim = useAnimatedValue(0);
 
   const fadeIn = () => {
     // 将在 5 秒内将 fadeAnim 值更改为 1
@@ -57,11 +57,11 @@ const App = () => {
               opacity: fadeAnim,
             },
           ]}>
-          <Text style={styles.fadingText}>Fading View!</Text>
+          <Text style={styles.fadingText}>正在淡出的视图！</Text>
         </Animated.View>
         <View style={styles.buttonRow}>
-          <Button title="Fade In View" onPress={fadeIn} />
-          <Button title="Fade Out View" onPress={fadeOut} />
+          <Button title="淡入视图" onPress={fadeIn} />
+          <Button title="淡出视图" onPress={fadeOut} />
         </View>
       </SafeAreaView>
     </SafeAreaProvider>
@@ -509,7 +509,7 @@ static reset();
 
 ### `ValueXY`
 
-用于驱动 2D 动画（例如平移手势）的 2D 值类。
+用于驱动 2D 动画（例如平移手势）的二维值类。
 
 您可以在单独的 [页面](animatedvaluexy) 上了解更多关于 `Animated.ValueXY` API 的信息。
 
@@ -529,7 +529,7 @@ static reset();
 
 ### `createAnimatedComponent`
 
-使任何 React 组件可动画化。用于创建 `Animated.View` 等。
+使任何 React 组件都可动画化。用于创建 `Animated.View` 等。
 
 ---
 

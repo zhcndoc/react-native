@@ -15,7 +15,6 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 <TabItem value="javascript">
 
 ```SnackPlayer name=VirtualizedListExample&ext=js
-import React from 'react';
 import {View, VirtualizedList, StyleSheet, Text, StatusBar} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -71,7 +70,6 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=VirtualizedListExample&ext=tsx
-import React from 'react';
 import {View, VirtualizedList, StyleSheet, Text, StatusBar} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -360,7 +358,7 @@ export default App;
 而非从第一个项目顶部开始，使用此索引开始。禁用“滚动到顶部”优化，直接渲染从此索引开始的项目。需要实现 `getItemLayout`。
 
 | 类型   |
-| ------ | ------- |
+| ------ |
 | number |
 
 ---
@@ -585,7 +583,7 @@ export default App;
 | ------ |
 | number |
 
-## 方法
+## Methods
 
 ### `flashScrollIndicators()`
 
@@ -620,7 +618,7 @@ getScrollRef():
 getScrollResponder () => ScrollResponderMixin | null;
 ```
 
-提供对底层滚动响应器的引用。注意 `this._scrollRef` 不一定是 `ScrollView`，因此调用前需确认其响应 `getScrollResponder`。
+Provides a reference to the underlying scroll responder. Note that `this._scrollRef` is not necessarily a `ScrollView`, so you should verify that it responds to `getScrollResponder` before calling it.
 
 ---
 
@@ -630,17 +628,17 @@ getScrollResponder () => ScrollResponderMixin | null;
 scrollToEnd(params?: {animated?: boolean});
 ```
 
-滚动到内容末尾。若未实现 `getItemLayout`，可能出现卡顿。
+Scrolls to the end of the content. This may be janky if `getItemLayout` is not implemented.
 
-**参数：**
+**Parameters:**
 
-| 名称    | 类型   |
-| ------- | ------ |
-| params  | 对象   |
+| Name   | Type   |
+| ------ | ------ |
+| params | object |
 
-支持的 params 键：
+Supported `params` keys:
 
-- `'animated'`（布尔），是否开启滚动动画，默认 `true`。
+- `'animated'` (boolean), whether to enable scroll animation, defaults to `true`.
 
 ---
 
@@ -655,12 +653,12 @@ scrollToIndex(params: {
 });
 ```
 
-参数如下：
+Parameters are as follows:
 
-- 'index'（数字），必需。
-- 'animated'（布尔），可选。
-- 'viewOffset'（数字），可选。
-- 'viewPosition'（数字），可选。
+- `'index'` (number), required.
+- `'animated'` (boolean), optional.
+- `'viewOffset'` (number), optional.
+- `'viewPosition'` (number), optional.
 
 ---
 
@@ -675,12 +673,12 @@ scrollToItem(params: {
 );
 ```
 
-参数如下：
+Parameters are as follows:
 
-- 'item'（项目），必需。
-- 'animated'（布尔），可选。
-- 'viewOffset'（数字），可选。
-- 'viewPosition'（数字），可选。
+- `'item'` (item), required.
+- `'animated'` (boolean), optional.
+- `'viewOffset'` (number), optional.
+- `'viewPosition'` (number), optional.
 
 ---
 
@@ -693,8 +691,8 @@ scrollToOffset(params: {
 });
 ```
 
-滚动到列表中特定像素偏移位置。
+Scrolls to a specific pixel offset in the list.
 
-参数 `offset` 期望滚动到的偏移量。在 `horizontal` 为 true 时，偏移是 x 轴值，否则为 y 轴值。
+The `offset` parameter is the offset to scroll to. When `horizontal` is `true`, the offset is the x-axis value; otherwise, it is the y-axis value.
 
-参数 `animated`（默认 `true`）指定滚动时是否执行动画。
+The `animated` parameter (default `true`) specifies whether to animate the scroll.

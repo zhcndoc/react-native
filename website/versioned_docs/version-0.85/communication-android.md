@@ -67,7 +67,6 @@ class MainActivity : ReactActivity() {
 </Tabs>
 
 ```tsx
-import React from 'react';
 import {View, Image} from 'react-native';
 
 export default class ImageBrowserApp extends React.Component {
@@ -125,7 +124,7 @@ var imageList = arrayListOf("https://dummyimage.com/600x400/ff0000/000000.png", 
 
 跨语言属性的主要缺点是它们不支持回调，这将允许我们处理自下而上的数据绑定。想象一下，你有一个小的 RN 视图，由于 JS 操作的结果，你希望将其从原生父视图中移除。使用属性无法做到这一点，因为信息需要自下而上流动。
 
-虽然我们有一种跨语言回调的风格（[此处描述](legacy/native-modules-android#callbacks)），但这些回调并不总是我们需要的。主要问题是它们不打算作为属性传递。相反，这种机制允许我们从 JS 触发原生操作，并在 JS 中处理该操作的结果。
+虽然我们有一种跨语言回调的风格（[此处描述](legacy/native-modules-android#callbacks)），但这些回调并不总是我们需要的。主要问题是它们并不打算作为属性传递。相反，这种机制允许我们从 JS 触发原生操作，并在 JS 中处理该操作的结果。
 
 ## 其他跨语言交互方式（事件和原生模块）
 

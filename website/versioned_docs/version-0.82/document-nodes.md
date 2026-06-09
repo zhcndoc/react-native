@@ -3,25 +3,25 @@ id: document-nodes
 title: 文档节点
 ---
 
-文档节点表示完整的原生视图树。使用原生导航的应用会为每个屏幕提供一个独立的文档节点。不使用原生导航的应用通常会为整个应用提供一个文档（类似于 Web 上的单页应用）。
+文档节点表示完整的原生视图树。使用原生导航的应用会为每个屏幕提供一个单独的文档节点。不使用原生导航的应用通常会为整个应用提供一个单独的文档（类似于 Web 上的单页应用）。
 
 ```SnackPlayer ext=js&name=Document%20instance%20example
-import * as React from 'react';
+import {useEffect, useRef} from 'react';
 import {Text, TextInput, View} from 'react-native';
 
 function MyComponent(props) {
   return (
     <View ref={props.ref}>
-      <Text>Start typing below</Text>
+      <Text>在下方开始输入</Text>
       <TextInput id="main-text-input" />
     </View>
   )
 }
 
 export default function AccessingDocument() {
-  const ref = React.useRef(null);
+  const ref = useRef(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     // 获取屏幕中的主文本输入框，并在初始加载后聚焦它。
     const element = ref.current;
     const doc = element.ownerDocument;
@@ -39,9 +39,9 @@ export default function AccessingDocument() {
 
 ## 参考
 
-### Web 兼容 API
+### 兼容 Web 的 API
 
-来自 [`Document`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement):
+来自 [`Document`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement)：
 
 - 属性
   - [`childElementCount`](https://developer.mozilla.org/en-US/docs/Web/API/Document/childElementCount)
@@ -52,14 +52,14 @@ export default function AccessingDocument() {
 - 方法
   - [`getElementById()`](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById)
 
-来自 [`Node`](https://developer.mozilla.org/en-US/docs/Web/API/Node):
+来自 [`Node`](https://developer.mozilla.org/en-US/docs/Web/API/Node)：
 
 - 属性
   - [`childNodes`](https://developer.mozilla.org/en-US/docs/Web/API/Node/childNodes)
   - [`firstChild`](https://developer.mozilla.org/en-US/docs/Web/API/Node/firstChild)
   - [`isConnected`](https://developer.mozilla.org/en-US/docs/Web/API/Node/isConnected)
   - [`lastChild`](https://developer.mozilla.org/en-US/docs/Web/API/Node/lastChild)
-  - [`nextSibling`](https://developer.mozilla.org/en-US/docs/Web/API/Node/nextSibling)
+  - [`nextSibling`](https://developer.mozilla.mozilla.org/en-US/docs/Web/API/Node/nextSibling)
   - [`nodeName`](https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeName)
   - [`nodeType`](https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType)
   - [`nodeValue`](https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeValue)

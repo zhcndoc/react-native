@@ -1,6 +1,6 @@
 ---
 id: turbo-native-modules-introduction
-title: 'Native Modules: Introduction'
+title: '原生模块：简介'
 ---
 
 import Tabs from '@theme/Tabs';
@@ -10,50 +10,50 @@ import CodeBlock from '@theme/CodeBlock';
 import {getCurrentVersion} from '@site/src/getCurrentVersion';
 import {TurboNativeModulesAndroid, TurboNativeModulesIOS} from './\_turbo-native-modules-components';
 
-# Native Modules
+# 原生模块
 
-Your React Native application code may need to interact with native platform APIs that aren't provided by React Native or an existing library. You can write the integration code yourself using a **Turbo Native Module**. This guide will show you how to write one.
+你的 React Native 应用代码可能需要与 React Native 或现有库未提供的原生平台 API 交互。你可以使用 **Turbo Native Module** 自行编写集成代码。本指南将向你展示如何编写一个。
 
-The basic steps are:
+基本步骤如下：
 
-1. **define a typed JavaScript specification** using one of the most popular JavaScript type annotation languages: Flow or TypeScript;
-2. **configure your dependency management system to run Codegen**, which converts the specification into native language interfaces;
-3. **write your application code** using your specification; and
-4. **write your native platform code using the generated interfaces** to write and hook your native code into the React Native runtime environment.
+1. 使用最流行的 JavaScript 类型注解语言之一：Flow 或 TypeScript，**定义一个带类型的 JavaScript 规范**；
+2. **配置你的依赖管理系统以运行 Codegen**，它会将规范转换为原生语言接口；
+3. **使用你的规范编写应用代码**；以及
+4. **使用生成的接口编写你的原生平台代码**，将原生代码编写并接入 React Native 运行时环境。
 
-Lets work through each of these steps by building an example Turbo Native Module. The rest of this guide assume that you have created your application running the command:
+我们将通过构建一个示例 Turbo Native Module 来逐步完成这些步骤。本指南其余部分假设你已通过以下命令创建了应用：
 
 <CodeBlock language="bash" title="shell">
 {`npx @react-native-community/cli@latest init TurboModuleExample --version ${getCurrentVersion()}`}
 </CodeBlock>
 
-## Native Persistent Storage
+## 原生持久化存储
 
-This guide will show you how to write an implementation of the [Web Storage API](https://html.spec.whatwg.org/multipage/webstorage.html#dom-localstorage-dev): `localStorage`. The API is relatable to a React developer who might be writing application code on your project.
+本指南将向你展示如何实现 [Web Storage API](https://html.spec.whatwg.org/multipage/webstorage.html#dom-localstorage-dev) 的一个实现：`localStorage`。这个 API 对可能正在你项目中编写应用代码的 React 开发者来说很熟悉。
 
-To make this work on mobile, we need to use Android and iOS APIs:
+要在移动端实现这一点，我们需要使用 Android 和 iOS API：
 
-- Android: [SharedPreferences](https://developer.android.com/reference/android/content/SharedPreferences), and
-- iOS: [NSUserDefaults](https://developer.apple.com/documentation/foundation/nsuserdefaults).
+- Android：[SharedPreferences](https://developer.android.com/reference/android/content/SharedPreferences)，以及
+- iOS：[NSUserDefaults](https://developer.apple.com/documentation/foundation/nsuserdefaults)。
 
-### 1. Declare Typed Specification
+### 1. 声明带类型的规范
 
-React Native provides a tool called [Codegen](/docs/the-new-architecture/what-is-codegen), which takes a specification written in TypeScript or Flow and generates platform specific code for Android and iOS. The specification declares the methods and data types that will pass back and forth between your native code and the React Native JavaScript runtime. A Turbo Native Module is both your specification, the native code you write, and the Codegen interfaces generated from your specification.
+React Native 提供了一个名为 [Codegen](/docs/the-new-architecture/what-is-codegen) 的工具，它会读取用 TypeScript 或 Flow 编写的规范，并为 Android 和 iOS 生成平台特定代码。该规范声明了将在你的原生代码与 React Native JavaScript 运行时之间来回传递的方法和数据类型。Turbo Native Module 既包括你的规范、你编写的原生代码，也包括根据你的规范生成的 Codegen 接口。
 
-To create a specs file:
+要创建一个 specs 文件：
 
-1. Inside the root folder of your app, create a new folder called `specs`.
-2. Create a new file called `NativeLocalStorage.ts`.
+1. 在应用的根目录中，创建一个名为 `specs` 的新文件夹。
+2. 创建一个名为 `NativeLocalStorage.ts` 的新文件。
 
 :::info
-You can see all of the types you can use in your specification and the native types that are generated in the [Appendix](/docs/appendix) documentation.
+你可以在 [附录](/docs/appendix) 文档中查看你的规范中可以使用的所有类型，以及生成的原生类型。
 :::
 
 :::info
-If you want to change the name of your module and the related specs file, make sure to always use 'Native' as prefix (e.g. `NativeStorage` or `NativeUsersDefault`).
+如果你想更改模块名称以及相关 specs 文件，请务必始终使用 `Native` 作为前缀（例如 `NativeStorage` 或 `NativeUsersDefault`）。
 :::
 
-Here is an implementation of the `localStorage` specification:
+下面是 `localStorage` 规范的一个实现：
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultJavaScriptSpecLanguage} values={constants.javaScriptSpecLanguages}>
 <TabItem value="typescript">
@@ -92,9 +92,9 @@ export interface Spec extends TurboModule {
 </TabItem>
 </Tabs>
 
-### 2. Configure Codegen to run
+### 2. 配置 Codegen 运行
 
-The specification is used by the React Native Codegen tools to generate platform specific interfaces and boilerplate for us. To do this, Codegen needs to know where to find our specification and what to do with it. Update your `package.json` to include:
+该规范会被 React Native Codegen 工具用于为我们生成平台特定的接口和样板代码。为此，Codegen 需要知道在哪里找到我们的规范，以及如何处理它。将你的 `package.json` 更新为包含以下内容：
 
 ```json title="package.json"
      "start": "react-native start",
@@ -113,11 +113,11 @@ The specification is used by the React Native Codegen tools to generate platform
    "dependencies": {
 ```
 
-With everything wired up for Codegen, we need to prepare our native code to hook into our generated code.
+在 Codegen 全部接入后，我们需要准备原生代码以接入生成的代码。
 
 <Tabs groupId="platforms" queryString defaultValue={constants.defaultPlatform}>
 <TabItem value="android" label="Android">
-Codegen is executed through the `generateCodegenArtifactsFromSchema` Gradle task:
+Codegen 通过 `generateCodegenArtifactsFromSchema` Gradle 任务执行：
 
 ```bash
 cd android
@@ -127,10 +127,10 @@ BUILD SUCCESSFUL in 837ms
 14 actionable tasks: 3 executed, 11 up-to-date
 ```
 
-This is automatically run when you build your Android application.
+这会在你构建 Android 应用时自动运行。
 </TabItem>
 <TabItem value="ios" label="iOS">
-Codegen is run as part of the script phases that's automatically added to the project generated by CocoaPods.
+Codegen 作为 CocoaPods 自动添加到项目中的脚本阶段的一部分运行。
 
 ```bash
 cd ios
@@ -138,7 +138,7 @@ bundle install
 bundle exec pod install
 ```
 
-The output will look like this:
+输出会类似于：
 
 ```shell
 ...
@@ -156,17 +156,17 @@ Framework build type is static library
 </TabItem>
 </Tabs>
 
-### 3. Write Application Code using the Turbo Native Module
+### 3. 使用 Turbo Native Module 编写应用代码
 
-Using `NativeLocalStorage`, here’s a modified `App.tsx` that includes some text we want persisted, an input field and some buttons to update this value.
+使用 `NativeLocalStorage`，这里是一个修改后的 `App.tsx`，其中包含我们想要持久化的一些文本、一个输入框以及一些用于更新该值的按钮。
 
-The `TurboModuleRegistry` supports 2 modes of retrieving a Turbo Native Module:
+`TurboModuleRegistry` 支持两种获取 Turbo Native Module 的模式：
 
-- `get<T>(name: string): T | null` which will return `null` if the Turbo Native Module is unavailable.
-- `getEnforcing<T>(name: string): T` which will throw an exception if the Turbo Native Module is unavailable. This assumes the module is always available.
+- `get<T>(name: string): T | null`：如果 Turbo Native Module 不可用，则返回 `null`。
+- `getEnforcing<T>(name: string): T`：如果 Turbo Native Module 不可用，则抛出异常。此方式假设该模块始终可用。
 
 ```tsx title="App.tsx"
-import React from 'react';
+import {useEffect, useState, type JSX} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -179,14 +179,14 @@ import NativeLocalStorage from './specs/NativeLocalStorage';
 
 const EMPTY = '<empty>';
 
-function App(): React.JSX.Element {
-  const [value, setValue] = React.useState<string | null>(null);
+function App(): JSX.Element {
+  const [value, setValue] = useState<string | null>(null);
 
-  const [editingValue, setEditingValue] = React.useState<
-    string | null
-  >(null);
+  const [editingValue, setEditingValue] = useState<string | null>(
+    null,
+  );
 
-  React.useEffect(() => {
+  useEffect(() => {
     const storedValue = NativeLocalStorage?.getItem('myKey');
     setValue(storedValue ?? '');
   }, []);
@@ -209,16 +209,16 @@ function App(): React.JSX.Element {
   return (
     <SafeAreaView style={{flex: 1}}>
       <Text style={styles.text}>
-        Current stored value is: {value ?? 'No Value'}
+        当前保存的值是：{value ?? '没有值'}
       </Text>
       <TextInput
-        placeholder="Enter the text you want to store"
+        placeholder="输入你想要存储的文本"
         style={styles.textInput}
         onChangeText={setEditingValue}
       />
-      <Button title="Save" onPress={saveValue} />
-      <Button title="Delete" onPress={deleteValue} />
-      <Button title="Clear" onPress={clearAll} />
+      <Button title="保存" onPress={saveValue} />
+      <Button title="删除" onPress={deleteValue} />
+      <Button title="清除" onPress={clearAll} />
     </SafeAreaView>
   );
 }
@@ -242,12 +242,12 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-### 4. Write your Native Platform code
+### 4. 编写你的原生平台代码
 
-With everything prepared, we're going to start writing native platform code. We do this in 2 parts:
+在一切准备就绪后，我们将开始编写原生平台代码。我们分为两部分来完成：
 
 :::note
-This guide shows you how to create a Turbo Native Module that only works with the New Architecture. If you need to support both the New Architecture and the Legacy Architecture, please refer to our [backwards compatibility guide](https://github.com/reactwg/react-native-new-architecture/blob/main/docs/backwards-compat.md).
+本指南展示了如何创建一个仅适用于新架构的 Turbo Native Module。如果你需要同时支持新架构和旧架构，请参阅我们的[向后兼容指南](https://github.com/reactwg/react-native-new-architecture/blob/main/docs/backwards-compat.md)。
 :::
 
 <Tabs groupId="platforms" queryString defaultValue={constants.defaultPlatform}>

@@ -15,7 +15,6 @@ React Native 的 ToastAndroid API 将 Android 平台的 ToastAndroid 模块暴�
 > 从 Android 11（API 级别 30）开始，设置重力对文本 toast 无效。有关更改的信息请阅读 [这里](https://developer.android.com/about/versions/11/behavior-changes-11#text-toast-api-changes)。
 
 ```SnackPlayer name=Toast%20Android%20API%20Example&supportedPlatforms=android
-import React from 'react';
 import {StyleSheet, ToastAndroid, Button, StatusBar} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 

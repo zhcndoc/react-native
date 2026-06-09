@@ -16,7 +16,6 @@ const {height, width} = useWindowDimensions();
 ## 示例
 
 ```SnackPlayer name=useWindowDimensions&supportedPlatforms=ios,android
-import React from 'react';
 import {StyleSheet, Text, useWindowDimensions} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -25,11 +24,11 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <Text style={styles.header}>Window Dimension Data</Text>
-        <Text>Height: {height}</Text>
-        <Text>Width: {width}</Text>
-        <Text>Font scale: {fontScale}</Text>
-        <Text>Pixel ratio: {scale}</Text>
+        <Text style={styles.header}>窗口尺寸数据</Text>
+        <Text>高度：{height}</Text>
+        <Text>宽度：{width}</Text>
+        <Text>字体缩放：{fontScale}</Text>
+        <Text>像素比率：{scale}</Text>
       </SafeAreaView>
     </SafeAreaProvider>
   );

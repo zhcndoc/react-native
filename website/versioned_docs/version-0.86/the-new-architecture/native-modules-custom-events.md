@@ -2,9 +2,9 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 # 在原生模块中发送事件
 
-在某些情况下，你可能希望有一个原生模块去监听平台层中的某些事件，然后将它们发送到 JavaScript 层，让你的应用能够对这些原生事件做出响应。在其他情况下，你可能会有一些长时间运行的操作，它们可以发送事件，从而在这些操作发生时更新 UI。
+在某些情况下，你可能希望一个原生模块监听平台层中的某些事件，然后将它们发送到 JavaScript 层，让你的应用能够对这些原生事件做出响应。在其他情况下，你可能会有一些长时间运行的操作，它们可以发送事件，从而在这些操作进行时更新 UI。
 
-这两种场景都是从原生模块中发送事件的很好的使用案例。在本指南中，你将学习如何实现这一点。
+这两种场景都是从原生模块中发送事件的很好用例。在本指南中，你将学习如何实现这一点。
 
 ## 在存储中添加新键时发送事件
 
@@ -134,7 +134,6 @@ Framework build type is static library
 打开 `App.tsx` 文件，并按如下方式修改：
 
 ```diff title="App.tsx"
-import React from 'react';
 import {
 + Alert,
 + EventSubscription,
@@ -211,17 +210,19 @@ function App(): React.JSX.Element {
       </Text>
 +     <Text>Key:</Text>
 +      <TextInput
-+       placeholder="Enter the key you want to store"
++       placeholder="输入你想存储的键"
 +       style={styles.textInput}
 +       onChangeText={setKey}
 +     />
 +     <Text>Value:</Text>
       <TextInput
-        placeholder="Enter the text you want to store"
+-       placeholder="Enter the text you want to store"
++       placeholder="输入你想存储的文本"
         style={styles.textInput}
         onChangeText={setEditingValue}
       />
-      <Button title="Save" onPress={saveValue} />
+-     <Button title="Save" onPress={saveValue} />
++     <Button title="Save" onPress={saveValue} />
 +     <Button title="Retrieve" onPress={retrieveValue} />
       <Button title="Delete" onPress={deleteValue} />
       <Button title="Clear" onPress={clearAll} />

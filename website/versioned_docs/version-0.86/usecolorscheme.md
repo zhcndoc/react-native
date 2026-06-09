@@ -21,7 +21,6 @@ import {useColorScheme} from 'react-native';
 ## 示例
 
 ```SnackPlayer
-import React from 'react';
 import {Text, StyleSheet, useColorScheme} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 

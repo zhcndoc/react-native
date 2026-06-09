@@ -1,32 +1,31 @@
 ---
 id: direct-manipulation-new-architecture
-title: Direct Manipulation
+title: 直接操作
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-It is sometimes necessary to make changes directly to a component without using state/props to trigger a re-render of the entire subtree. When using React in the browser for example, you sometimes need to directly modify a DOM node, and the same is true for views in mobile apps. `setNativeProps` is the React Native equivalent to setting properties directly on a DOM node.
+有时需要直接对组件进行更改，而不使用 state/props 来触发整个子树的重新渲染。比如在浏览器中使用 React 时，有时需要直接修改一个 DOM 节点，移动应用中的视图也是如此。`setNativeProps` 相当于在 React Native 中直接设置 DOM 节点属性。
 
 :::caution
-Use `setNativeProps` when frequent re-rendering creates a performance bottleneck!
+当频繁重新渲染造成性能瓶颈时，请使用 `setNativeProps`！
 
-Direct manipulation will not be a tool that you reach for frequently. You will typically only be using it for creating continuous animations to avoid the overhead of rendering the component hierarchy and reconciling many views.
-`setNativeProps` is imperative and stores state in the native layer (DOM, UIView, etc.) and not within your React components, which makes your code more difficult to reason about.
+直接操作并不是你会经常使用的工具。它通常只会用于创建连续动画，以避免渲染组件层级和协调多个视图所带来的开销。
+`setNativeProps` 是命令式的，并且将状态存储在原生层（DOM、UIView 等）中，而不是存储在你的 React 组件内，这会让代码更难以推理。
 
-Before you use it, try to solve your problem with `setState` and [`shouldComponentUpdate`](https://react.dev/reference/react/Component#shouldcomponentupdate).
+在使用它之前，先尝试用 `setState` 和 [`shouldComponentUpdate`](https://react.dev/reference/react/Component#shouldcomponentupdate) 来解决问题。
 :::
 
-## setNativeProps to edit TextInput value
+## 使用 setNativeProps 编辑 TextInput 的值
 
-Another very common use case of `setNativeProps` is to edit the value of the TextInput. The `controlled` prop of TextInput can sometimes drop characters when the `bufferDelay` is low and the user types very quickly. Some developers prefer to skip this prop entirely and instead use `setNativeProps` to directly manipulate the TextInput value when necessary.
+`setNativeProps` 另一个非常常见的使用场景是编辑 TextInput 的值。TextInput 的 `controlled` 属性在 `bufferDelay` 较低且用户输入非常快时，有时会丢失字符。一些开发者更倾向于完全跳过这个属性，而是在必要时使用 `setNativeProps` 直接操作 TextInput 的值。
 
-For example, the following code demonstrates editing the input when you tap a button:
+例如，下面的代码演示了在你点击按钮时编辑输入框：
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
 ```SnackPlayer name=setNativeProps%20on%20TextInput&ext=js
-import React from 'react';
 import {useCallback, useRef} from 'react';
 import {
   StyleSheet,
@@ -46,7 +45,7 @@ const App = () => {
     <View style={styles.container}>
       <TextInput ref={inputRef} style={styles.input} />
       <TouchableOpacity onPress={editText}>
-        <Text>Edit text</Text>
+        <Text>编辑文本</Text>
       </TouchableOpacity>
     </View>
   );
@@ -74,7 +73,6 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Clear%20text&ext=tsx
-import React from 'react';
 import {useCallback, useRef} from 'react';
 import {
   StyleSheet,
@@ -94,7 +92,7 @@ const App = () => {
     <View style={styles.container}>
       <TextInput ref={inputRef} style={styles.input} />
       <TouchableOpacity onPress={editText}>
-        <Text>Edit text</Text>
+        <Text>编辑文本</Text>
       </TouchableOpacity>
     </View>
   );
@@ -121,8 +119,8 @@ export default App;
 </TabItem>
 </Tabs>
 
-You can use the [`clear`](../textinput#clear) method to clear the `TextInput` which clears the current input text using the same approach.
+你可以使用 [`clear`](../textinput#clear) 方法来清空 `TextInput`，这会使用相同的方法清除当前输入文本。
 
-## Avoiding conflicts with the render function
+## 避免与 render 函数冲突
 
-If you update a property that is also managed by the render function, you might end up with some unpredictable and confusing bugs because anytime the component re-renders and that property changes, whatever value was previously set from `setNativeProps` will be completely ignored and overridden.
+如果你更新了一个也由 render 函数管理的属性，可能会导致一些不可预测且令人困惑的 bug，因为每当组件重新渲染且该属性发生变化时，之前通过 `setNativeProps` 设置的任何值都会被完全忽略并覆盖。

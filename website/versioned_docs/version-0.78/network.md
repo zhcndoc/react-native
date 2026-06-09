@@ -15,13 +15,13 @@ React Native 为你的网络需求提供了 [Fetch API](https://developer.mozill
 
 为了从任意 URL 获取内容，你可以将 URL 传递给 fetch：
 
-```tsx
+```ts
 fetch('https://mywebsite.com/mydata.json');
 ```
 
 Fetch 还接受一个可选的第二个参数，允许你自定义 HTTP 请求。你可能想要指定额外的头部，或发起 POST 请求：
 
-```tsx
+```ts
 fetch('https://mywebsite.com/endpoint/', {
   method: 'POST',
   headers: {
@@ -29,8 +29,8 @@ fetch('https://mywebsite.com/endpoint/', {
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-    firstParam: 'yourValue',
-    secondParam: 'yourOtherValue',
+    firstParam: '你的值',
+    secondParam: '你的另一个值',
   }),
 });
 ```
@@ -43,7 +43,7 @@ fetch('https://mywebsite.com/endpoint/', {
 
 网络操作本质上是异步的。Fetch 方法将返回一个 [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)，这使得编写以异步方式工作的代码变得简单：
 
-```tsx
+```ts
 const getMoviesFromApi = () => {
   return fetch('https://reactnative.dev/movies.json')
     .then(response => response.json())
@@ -58,7 +58,7 @@ const getMoviesFromApi = () => {
 
 你也可以在 React Native 应用中使用 `async` / `await` 语法：
 
-```tsx
+```ts
 const getMoviesFromApiAsync = async () => {
   try {
     const response = await fetch(
@@ -189,7 +189,7 @@ export default App;
 
 [XMLHttpRequest API](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) 已内置于 React Native 中。这意味着你可以使用依赖于它的第三方库，例如 [frisbee](https://github.com/niftylettuce/frisbee) 或 [axios](https://github.com/axios/axios)，或者如果你愿意，可以直接使用 XMLHttpRequest API。
 
-```tsx
+```ts
 const request = new XMLHttpRequest();
 request.onreadystatechange = e => {
   if (request.readyState !== 4) {
@@ -197,9 +197,9 @@ request.onreadystatechange = e => {
   }
 
   if (request.status === 200) {
-    console.log('success', request.responseText);
+    console.log('成功', request.responseText);
   } else {
-    console.warn('error');
+    console.warn('错误');
   }
 };
 
@@ -213,7 +213,7 @@ request.send();
 
 React Native 还支持 [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket)，这是一种通过单个 TCP 连接提供全双工通信信道的协议。
 
-```tsx
+```ts
 const ws = new WebSocket('ws://host.com/path');
 
 ws.onopen = () => {
