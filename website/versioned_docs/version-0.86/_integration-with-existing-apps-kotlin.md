@@ -1,3 +1,10 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import constants from '@site/core/TabsConstants';
+import CodeBlock from '@theme/CodeBlock';
+import RNTemplateRepoLink from '@site/core/RNTemplateRepoLink';
+import {getTemplateBranchNameForCurrentVersion} from '@site/src/getTemplateBranchNameForCurrentVersion';
+
 ## 核心概念
 
 将 React Native 组件集成到你的 Android 应用中的关键步骤是：

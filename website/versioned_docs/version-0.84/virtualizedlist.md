@@ -503,7 +503,7 @@ A custom refresh control element. When set, it overrides the default `<RefreshCo
 
 | Type    |
 | ------- |
-| element    |
+| element |
 
 ---
 
@@ -560,8 +560,8 @@ See `ViewabilityHelper.js` for flow type definitions and documentation.
 A pair of `ViewabilityConfig` and `onViewableItemsChanged` callbacks. When an item satisfies the visibility condition, the corresponding `onViewableItemsChanged` is called. See `ViewabilityHelper.js` for flow type definitions and documentation.
 
 | Type                                   |
-| ------------------------------------- |
-| Array<ViewabilityConfigCallbackPair>    |
+| -------------------------------------- |
+| `Array<ViewabilityConfigCallbackPair>` |
 
 ---
 

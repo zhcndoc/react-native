@@ -3,7 +3,7 @@ id: state
 title: 状态
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; constants from '@site/core/TabsConstants';
+import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 有两种类型的数据可以控制一个组件：`props` 和 `state`。`props` 由父组件设置，并且在组件的整个生命周期中保持不变。对于会变化的数据，我们必须使用 `state`。
 

@@ -3,7 +3,7 @@ id: direct-manipulation-new-architecture
 title: 直接操作
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants;
+import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 有时有必要直接对组件进行更改，而不使用 state/props 来触发整个子树的重渲染。例如，在浏览器中使用 React 时，有时需要直接修改 DOM 节点，移动应用中的视图也是如此。`setNativeProps` 是 React Native 中等同于直接在 DOM 节点上设置属性的方法。
 
