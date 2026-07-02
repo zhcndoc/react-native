@@ -3,7 +3,9 @@ id: publishing-to-app-store
 title: 发布到 Apple App Store
 ---
 
-发布流程与其他原生 iOS 应用相同，但需要考虑一些额外的事项。
+import ThemedImage from '@theme/ThemedImage';
+
+The publishing process is the same as any other native iOS app, with some additional considerations to take into account.
 
 :::info
 如果你使用的是 Expo，请查阅 Expo 的[发布到应用商店指南](https://docs.expo.dev/distribution/app-stores/)，以构建并提交你的应用到 Apple App Store。本指南适用于任何 React Native 应用，可实现自动化部署流程。
@@ -13,9 +15,15 @@ title: 发布到 Apple App Store
 
 构建用于 App Store 分发的应用需要在 Xcode 中使用 `Release` 方案。使用 `Release` 构建的应用会自动禁用应用内的开发菜单，从而防止用户在生产环境中误触该菜单。同时，它会将 JavaScript 本地打包，这样你即可将应用安装到设备上，在未连接电脑的情况下进行测试。
 
-要配置你的应用使用 `Release` 方案构建，请依次点击 **Product** → **Scheme** → **Edit Scheme**。在侧边栏选择 **Run** 标签，然后将 Build Configuration 下拉菜单设置为 `Release`。
+To configure your app to be built using the `Release` scheme, go to **Product** → **Scheme** → **Edit Scheme**. Select the **Run** tab in the sidebar, then set the **Build Configuration** dropdown to `Release`.
 
-![](/docs/assets/ConfigureReleaseScheme.png)
+<ThemedImage
+alt="Docusaurus themed image"
+sources={{
+    light: '/docs/assets/ConfigureReleaseScheme.png',
+    dark: '/docs/assets/ConfigureReleaseSchemeDark.png',
+  }}
+/>
 
 #### 专业提示
 

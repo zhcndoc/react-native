@@ -547,12 +547,8 @@ const config: Config = {
               to: 'community/overview',
             },
             {
-              label: '目录',
-              href: 'https://reactnative.directory/',
-            },
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/react-native',
+              label: 'Code of Conduct',
+              href: 'https://github.com/react/react-native/blob/main/CODE_OF_CONDUCT.md',
             },
           ],
         },
@@ -581,11 +577,15 @@ const config: Config = {
           title: '探索更多',
           items: [
             {
-              label: 'ReactJS',
+              label: 'React',
               href: 'https://react.dev/',
             },
             {
-              label: '隐私政策',
+              label: 'Packages Directory',
+              href: 'https://reactnative.directory/',
+            },
+            {
+              label: 'Privacy Policy',
               href: 'https://opensource.fb.com/legal/privacy/',
             },
             {

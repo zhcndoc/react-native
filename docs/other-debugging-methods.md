@@ -1,36 +1,36 @@
 ---
 id: other-debugging-methods
-title: Other Debugging Methods
+title: 其他调试方法
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-This page covers how to use legacy JavaScript debugging methods. If you are getting started with a new React Native or Expo app, we recommend using [React Native DevTools](./react-native-devtools).
+本页面介绍如何使用传统的 JavaScript 调试方法。如果你正在为新的 React Native 或 Expo 应用开始开发，我们建议使用 [React Native DevTools](./react-native-devtools)。
 
-## Safari Developer Tools (direct JSC debugging)
+## Safari 开发者工具（直接 JSC 调试）
 
-You can use Safari to debug the iOS version of your app when using [JavaScriptCore](https://trac.webkit.org/wiki/JavaScriptCore) (JSC) as your app's runtime.
+当你的应用使用 [JavaScriptCore](https://trac.webkit.org/wiki/JavaScriptCore)（JSC）作为运行时引擎时，你可以使用 Safari 来调试 iOS 版本的应用。
 
-1. **Physical devices only**: Open the Settings app, and navigate to Safari > Advanced, and make sure "Web Inspector" is turned on.
-2. On your Mac, open Safari and enable the Develop menu. This can be found under Safari > Settings..., then the Advanced tab, then selecting "Show features for web developers".
-3. Find your device under the Develop menu, and select the "JSContext" item from the submenu. This will open Safari's Web Inspector, which includes Console and Sources panels similar to Chrome DevTools.
+1. **仅限实体设备**：打开“设置”应用，进入 Safari > 高级，并确保已开启“Web 检查器”。
+2. 在你的 Mac 上，打开 Safari 并启用“开发”菜单。你可以在 Safari > 设置... 中找到它，然后切换到“高级”标签页，再勾选“为网页开发者显示功能”。
+3. 在“开发”菜单下找到你的设备，并从子菜单中选择“JSContext”项。这将打开 Safari 的 Web 检查器，其中包含类似于 Chrome DevTools 的“控制台”和“资源”面板。
 
 ![Opening Safari Web Inspector](/docs/assets/debugging-safari-developer-tools.jpg)
 
 :::tip
-While source maps may not be enabled by default, you can follow [this guide](https://blog.nparashuram.com/2019/10/debugging-react-native-ios-apps-with.html) or [video](https://www.youtube.com/watch?v=GrGqIIz51k4) to enable them and set break points at the right places in the source code.
+虽然源映射可能默认未启用，但你可以按照[这篇指南](https://blog.nparashuram.com/2019/10/debugging-react-native-ios-apps-with.html)或[视频](https://www.youtube.com/watch?v=GrGqIIz51k4)来启用它们，并在源代码中的正确位置设置断点。
 :::
 
 :::tip
-Every time the app is reloaded, a new JSContext is created. Choosing "Automatically Show Web Inspectors for JSContexts" saves you from having to select the latest JSContext manually.
+每次应用重新加载时，都会创建一个新的 JSContext。选择“Automatically Show Web Inspectors for JSContexts”可以避免你手动选择最新的 JSContext。
 :::
 
-## Remote JavaScript Debugging (removed)
+## 远程 JavaScript 调试（已移除）
 
-:::warning Important
-Remote JavaScript Debugging has been removed as of React Native 0.79. See the original [deprecation announcement](https://github.com/react-native-community/discussions-and-proposals/discussions/734).
+:::warning[重要]
+自 React Native 0.79 起，远程 JavaScript 调试已被移除。请查看原始的 [弃用公告](https://github.com/react-native-community/discussions-and-proposals/discussions/734)。
 
-If you are on an older version of React Native, please go to the docs [for your version](/versions).
+如果你使用的是较旧版本的 React Native，请前往与你的版本对应的文档 [for your version](/versions)。
 :::
 
-![The remote debugger window in Chrome](/docs/assets/debugging-chrome-remote-debugger.jpg)
+![Chrome 中的远程调试器窗口](/docs/assets/debugging-chrome-remote-debugger.jpg)

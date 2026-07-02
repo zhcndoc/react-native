@@ -238,8 +238,8 @@ export default MultilineTextInputExample;
 
 ### 🗑️ `blurOnSubmit`
 
-:::warning 已弃用
-请注意，`submitBehavior` 现在取代了 `blurOnSubmit`，并会覆盖 `blurOnSubmit` 定义的任何行为。参见 [submitBehavior](textinput#submitbehavior)。
+:::warning[Deprecated]
+Note that `submitBehavior` now takes the place of `blurOnSubmit` and will override any behavior defined by `blurOnSubmit`. See [submitBehavior](textinput#submitbehavior).
 :::
 
 如果为 `true`，提交时文本字段会失去焦点。单行字段的默认值为 `true`，多行字段的默认值为 `false`。请注意，对于多行字段，将 `blurOnSubmit` 设置为 `true` 意味着按下回车键会使字段失去焦点并触发 `onSubmitEditing` 事件，而不是在字段中插入换行符。

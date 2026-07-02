@@ -1,24 +1,23 @@
-我会严格保留 Markdown 结构，只翻译可见文本与注释，代码标识和属性值保持不变。现在开始直接输出中文译文。---
+---
 id: network
 title: 网络
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-许多移动应用需要从远程 URL 加载资源。你可能想向 REST API 发起 POST 请求，或者需要从另一台服务器获取一段静态内容。
+许多移动应用需要从远程 URL 加载资源。你可能希望向 REST API 发起 POST 请求，或者需要从另一台服务器获取一块静态内容。
 
 ## 使用 Fetch
 
-React Native 为你的网络需求提供了 [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)。如果你以前使用过 `XMLHttpRequest` 或其他网络 API，Fetch 会让你感到熟悉。你可以参考 MDN 的 [使用 Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) 指南了解更多信息。
+React Native 为你的网络需求提供了 [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)。如果你之前使用过 `XMLHttpRequest` 或其他网络 API，Fetch 会让你感到熟悉。你可以参考 MDN 关于 [Using Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) 的指南获取更多信息。
 
 ### 发起请求
 
-为了从任意 URL 获取内容，你可以将该 URL 传给 fetch：
+为了从任意 URL 获取内容，你可以将该 URL 传递给 fetch：
 
 ```ts
 fetch('https://mywebsite.com/mydata.json');
 ```
-
 
 Fetch 还接受一个可选的第二个参数，用于自定义 HTTP 请求。你可能希望指定额外的请求头，或者发起一个 POST 请求：
 
@@ -36,13 +35,13 @@ fetch('https://mywebsite.com/endpoint/', {
 });
 ```
 
-请查看 [Fetch Request 文档](https://developer.mozilla.org/en-US/docs/Web/API/Request) 以获取完整的属性列表。
+请查看 [Fetch Request 文档](https://developer.mozilla.org/en-US/docs/Web/API/Request) 以了解完整的属性列表。
 
 ### 处理响应
 
 上面的示例展示了如何发起请求。在许多情况下，你会希望对响应做一些处理。
 
-网络通信本质上是异步操作。Fetch 方法会返回一个 [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)，这使得编写异步代码变得很直接：
+网络请求本质上是异步操作。Fetch 方法会返回一个 [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)，这使得编写异步代码变得很直接：
 
 ```ts
 const getMoviesFromApi = () => {
@@ -189,16 +188,16 @@ export default App;
 </Tabs>
 
 :::info
-默认情况下，iOS 9.0 或更高版本会强制启用 App Transport Security（ATS）。ATS 要求任何 HTTP 连接都必须使用 HTTPS。如果你需要从明文 URL（即以 `http` 开头的 URL）获取内容，你需要先[添加 ATS 例外](integration-with-existing-apps.md#test-your-integration)。如果你事先知道需要访问哪些域名，为这些域名单独添加例外会更安全；如果直到运行时才知道这些域名，你可以[完全禁用 ATS](publishing-to-app-store.md#1-enable-app-transport-security)。请注意，从 2017 年 1 月起，[Apple 的 App Store 审核将要求对禁用 ATS 提供合理说明](https://forums.developer.apple.com/thread/48979)。更多信息请参见 [Apple 的文档](https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW33)。
+默认情况下，iOS 9.0 或更高版本会强制启用 App Transport Security（ATS）。ATS 要求任何 HTTP 连接都必须使用 HTTPS。如果你需要从明文 URL（以 `http` 开头的 URL）获取内容，你首先需要[添加 ATS 例外](integration-with-existing-apps.md#test-your-integration)。如果你提前知道将需要访问哪些域名，那么只为这些域名添加例外会更安全；如果要到运行时才能知道域名，你可以[完全禁用 ATS](publishing-to-app-store.md#1-enable-app-transport-security)。但请注意，从 2017 年 1 月起，[Apple 的 App Store 审核将要求对禁用 ATS 提供合理理由](https://forums.developer.apple.com/thread/48979)。更多信息请参阅 [Apple 的文档](https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW33)。
 :::
 
 :::tip
-在 Android 上，从 API Level 28 开始，明文流量也会默认被阻止。可以通过在应用清单文件中设置 [`android:usesCleartextTraffic`](https://developer.android.com/guide/topics/manifest/application-element#usesCleartextTraffic) 来覆盖此行为。
+在 Android 上，自 API Level 28 起，明文流量默认也会被阻止。可以通过在应用清单文件中设置 [`android:usesCleartextTraffic`](https://developer.android.com/guide/topics/manifest/application-element#usesCleartextTraffic) 来覆盖此行为。
 :::
 
 ## 使用其他网络库
 
-React Native 内置了 [XMLHttpRequest API](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)。这意味着你可以使用依赖它的第三方库，例如 [frisbee](https://github.com/niftylettuce/frisbee) 或 [axios](https://github.com/axios/axios)，如果你愿意，也可以直接使用 XMLHttpRequest API。
+[XMLHttpRequest API](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) 已内置于 React Native 中。这意味着你可以使用依赖它的第三方库，例如 [frisbee](https://github.com/niftylettuce/frisbee) 或 [axios](https://github.com/axios/axios)，或者如果你愿意，也可以直接使用 XMLHttpRequest API。
 
 ```ts
 const request = new XMLHttpRequest();
@@ -218,7 +217,7 @@ request.open('GET', 'https://mywebsite.com/endpoint/');
 request.send();
 ```
 
-:::warning 注意
+:::warning[注意]
 XMLHttpRequest 的安全模型与 Web 上不同，因为原生应用中没有 [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) 的概念。
 :::
 
@@ -231,7 +230,7 @@ const ws = new WebSocket('ws://host.com/path');
 
 ws.onopen = () => {
   // 连接已打开
-  ws.send('something'); // 发送消息
+  ws.send('something'); // 发送一条消息
 };
 
 ws.onmessage = e => {
@@ -252,24 +251,24 @@ ws.onclose = e => {
 
 ## `fetch` 和基于 cookie 的身份验证的已知问题
 
-以下选项目前在 `fetch` 中无法正常工作
+以下选项目前在 `fetch` 中不起作用
 
 - `redirect:manual`
 - `credentials:omit`
 
-* 在 Android 上，如果头部字段同名，只会保留最新的那个。临时解决方案见这里：https://github.com/facebook/react-native/issues/18837#issuecomment-398779994。
-* 基于 cookie 的身份验证目前不稳定。你可以在这里查看一些相关问题：https://github.com/facebook/react-native/issues/23185
-* 在 iOS 上，至少在通过 `302` 重定向时，如果存在 `Set-Cookie` 头，cookie 不会被正确设置。由于无法手动处理重定向，如果重定向是因为会话过期导致的，这可能会引发无限请求的情况。
+* 在 Android 上，具有相同名称的 header 会导致最终只保留最新的那个。这里可以找到一个临时解决方案：https://github.com/facebook/react-native/issues/18837#issuecomment-398779994。
+* 基于 cookie 的身份验证目前并不稳定。你可以在这里查看一些相关问题：https://github.com/facebook/react-native/issues/23185
+* 至少在 iOS 上，当通过 `302` 重定向时，如果存在 `Set-Cookie` header，则 cookie 无法正确设置。由于无法手动处理重定向，这可能会导致一种情况：如果重定向是由于会话过期引起的，就会发生无限请求。
 
 ## 在 iOS 上配置 NSURLSession
 
-对于某些应用，可能适合为在 iOS 上运行的 React Native 应用中的网络请求所使用的底层 `NSURLSession` 提供自定义的 `NSURLSessionConfiguration`。例如，你可能需要为来自应用的所有网络请求设置自定义的 user agent 字符串，或者向 `NSURLSession` 提供一个临时的 `NSURLSessionConfiguration`。函数 `RCTSetCustomNSURLSessionConfigurationProvider` 允许进行这样的自定义。记得在调用 `RCTSetCustomNSURLSessionConfigurationProvider` 的文件中添加以下导入：
+对于某些应用，可能适合为在 iOS 上运行的 React Native 应用中用于网络请求的底层 `NSURLSession` 提供一个自定义的 `NSURLSessionConfiguration`。例如，可能需要为来自应用的所有网络请求设置自定义的 user agent 字符串，或者向 `NSURLSession` 提供一个临时的 `NSURLSessionConfiguration`。函数 `RCTSetCustomNSURLSessionConfigurationProvider` 允许进行此类自定义。请记得在调用 `RCTSetCustomNSURLSessionConfigurationProvider` 的文件中添加以下导入：
 
 ```objectivec
 #import <React/RCTHTTPRequestHandler.h>
 ```
 
-`RCTSetCustomNSURLSessionConfigurationProvider` 应尽早在应用生命周期中调用，以便在 React 需要时可以立即使用，例如：
+应尽早在应用生命周期中调用 `RCTSetCustomNSURLSessionConfigurationProvider`，以便在 React 需要时可以立即使用，例如：
 
 ```objectivec
 -(void)application:(__unused UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {

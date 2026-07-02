@@ -3,15 +3,15 @@ id: backhandler
 title: BackHandler
 ---
 
-Backhandler API 会检测用于返回导航的硬件按键按下事件，允许你为系统返回操作注册事件监听器，并让你控制应用如何响应。它仅适用于 Android。
+BackHandler API 会检测用于返回导航的硬件按键按下事件，允许你为系统返回操作注册事件监听器，并让你控制应用如何响应。它仅适用于 Android。
 
 事件订阅会按相反顺序调用（即，最后注册的订阅会先调用）。
 
 - **如果某个订阅返回 true，**则更早注册的订阅将不会被调用。
 - **如果没有订阅返回 true，或者没有注册任何订阅，**则会以编程方式调用默认的返回按钮功能来退出应用。
 
-:::warning 模态框用户须知
-如果你的应用显示了一个已打开的 `Modal`，`BackHandler` 将不会发布任何事件（[请参阅 `Modal` 文档](modal#onrequestclose)）。
+:::warning[Modal 用户警告]
+如果你的应用显示了一个已打开的 `Modal`，`BackHandler` 将不会发布任何事件（[参见 `Modal` 文档](modal#onrequestclose)）。
 :::
 
 ## 模式

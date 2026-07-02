@@ -27,8 +27,8 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 ## 远程 JavaScript 调试（已移除）
 
-:::warning Important
-远程 JavaScript 调试已从 React Native 0.79 起移除。请参阅原始的[弃用公告](https://github.com/react-native-community/discussions-and-proposals/discussions/734)。
+:::warning[重要]
+自 React Native 0.79 起，远程 JavaScript 调试已被移除。请参阅原始的[弃用公告](https://github.com/react-native-community/discussions-and-proposals/discussions/734)。
 
 如果你使用的是较旧版本的 React Native，请前往[对应版本](/versions)的文档。
 :::

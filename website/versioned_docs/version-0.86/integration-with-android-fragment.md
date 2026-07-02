@@ -33,8 +33,8 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 进入你的宿主 activity，并确保它实现了 `DefaultHardwareBackBtnHandler` 接口：
 
-:::warning Deprecated
-`Activity.onBackPressed()` 自 [API level 33](https://developer.android.com/reference/android/app/Activity#onBackPressed()) 起已被 [弃用](<https://developer.android.com/reference/android/app/Activity#onBackPressed()>)。对于目标 API level 36 的应用在 Android 16 设备上，这个方法将 [不再被调用](https://developer.android.com/about/versions/16/behavior-changes-16#predictive-back)，应改用 [OnBackPressedDispatcher](https://developer.android.com/reference/androidx/activity/OnBackPressedDispatcher)。
+:::warning[Deprecated]
+`Activity.onBackPressed()` 自 API level 33 起已被 [弃用](<https://developer.android.com/reference/android/app/Activity#onBackPressed()>)。对于目标 API level 36 的应用，Android 16 设备将 [不再调用它](https://developer.android.com/about/versions/16/behavior-changes-16#predictive-back)，应改用 [OnBackPressedDispatcher](https://developer.android.com/reference/androidx/activity/OnBackPressedDispatcher)。
 :::
 
 <Tabs groupId="android-language" queryString defaultValue={constants.defaultAndroidLanguage} values={constants.androidLanguages}>

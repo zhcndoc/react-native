@@ -1,4 +1,6 @@
-## 安装依赖
+import ThemedImage from '@theme/ThemedImage';
+
+## Installing dependencies
 
 你需要安装 Node、Watchman、React Native 命令行界面、Xcode 和 CocoaPods。
 
@@ -27,7 +29,13 @@ brew install watchman
 
 你还需要安装 Xcode 命令行工具。打开 Xcode，然后从 Xcode 菜单中选择 **设置...（或偏好设置...）**。进入 Locations 面板，并在 Command Line Tools 下拉菜单中选择最新版本来安装这些工具。
 
-![Xcode Command Line Tools](/docs/assets/GettingStartedXcodeCommandLineTools.png)
+<ThemedImage
+alt="Xcode Command Line Tools configuration"
+sources={{
+    light: '/docs/assets/GettingStartedXcodeCommandLineTools.png',
+    dark: '/docs/assets/GettingStartedXcodeCommandLineToolsDark.png',
+  }}
+/>
 
 #### 在 Xcode 中安装 iOS 模拟器
 

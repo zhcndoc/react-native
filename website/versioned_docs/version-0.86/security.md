@@ -68,8 +68,8 @@ React Native 不附带任何用于存储敏感数据的方式。不过，Android
 - [expo-secure-store](https://docs.expo.dev/versions/latest/sdk/securestore/)
 - [react-native-keychain](https://github.com/oblador/react-native-keychain)
 
-:::warning Caution
-**请注意不要无意中存储或暴露敏感信息。** 例如，这可能会意外发生，比如将敏感表单数据保存到 redux 状态中，并将整个状态树持久化到 Async Storage；或者将用户令牌和个人信息发送到 Sentry 或 Crashlytics 之类的应用监控服务。
+:::warning[Caution]
+**请注意不要无意中存储或暴露敏感信息。** 这种情况可能会意外发生，例如将敏感表单数据保存在 redux 状态中，并将整个状态树持久化到 Async Storage。或者将用户令牌和个人信息发送到 Sentry 或 Crashlytics 等应用监控服务。
 :::
 
 ## 身份验证与深度链接
@@ -127,8 +127,8 @@ OAuth2 身份验证协议如今极其流行，被誉为目前最完整、最安�
 
 **SSL pinning** 是一种可在客户端侧使用的技术，用于避免这种攻击。它的工作方式是在开发期间将一组受信任的证书嵌入（或固定）到客户端中，这样只有使用受信任证书之一签名的请求才会被接受，而任何自签名证书都不会被接受。
 
-:::warning 注意
-在使用 SSL pinning 时，你应注意证书过期问题。证书每 1-2 年会过期一次，一旦过期，就需要在应用和服务器上同时更新。只要服务器上的证书已更新，任何嵌入了旧证书的应用都将停止工作。
+:::warning[Caution]
+使用 SSL pinning 时，你应注意证书过期问题。证书每 1-2 年会过期一次，一旦过期，就需要在应用中以及服务器上同时更新。服务器上的证书一旦更新，任何嵌入了旧证书的应用都将停止工作。
 :::
 
 ## 总结

@@ -1,6 +1,6 @@
 ---
 id: accessibilityinfo
-title: AccessibilityInfo
+title: 辅助功能信息
 ---
 
 有时了解设备是否当前激活了屏幕阅读器是很有用的。`AccessibilityInfo` API 就是为此设计的。你可以使用它来查询屏幕阅读器的当前状态，以及注册监听器以便在屏幕阅读器状态变化时收到通知。
@@ -256,8 +256,8 @@ static prefersCrossFadeTransitions(): Promise<boolean>;
 
 ### 🗑️ `setAccessibilityFocus()`
 
-:::warning 已弃用
-建议改用 `sendAccessibilityEvent` 并将 eventType 设置为 `focus`。
+:::warning[Deprecated]
+建议改为使用带有 `focus` 事件类型的 `sendAccessibilityEvent`。
 :::
 
 ```tsx

@@ -180,7 +180,7 @@ export default App;
 
 # 参考
 
-## Transform
+## 变换
 
 `transform` 接受一个由变换对象组成的数组，或用空格分隔的字符串值。每个对象指定要被变换的属性作为键，以及在变换中使用的值。对象不应组合使用。每个对象只使用一个键/值对。
 
@@ -267,8 +267,8 @@ export default App;
 
 ### 🗑️ `decomposedMatrix`、`rotation`、`scaleX`、`scaleY`、`transformMatrix`、`translateX`、`translateY`
 
-:::warning 已废弃
-请改用 [`transform`](transforms#transform) 属性。
+:::warning[Deprecated]
+使用 [`transform`](transforms#transform) 属性代替。
 :::
 
 ## Transform Origin

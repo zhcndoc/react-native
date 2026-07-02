@@ -1,15 +1,15 @@
 ---
 id: statusbar
-title: StatusBar
+title: 状态栏
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-用于控制应用状态栏的组件。状态栏通常位于屏幕顶部，显示当前时间、Wi‑Fi 和蜂窝网络信息、电池电量和/或其他状态图标。
+用于控制应用状态栏的组件。状态栏是通常位于屏幕顶部的区域，用于显示当前时间、Wi‑Fi 和蜂窝网络信息、电池电量和/或其他状态图标。
 
 ### 与 Navigator 一起使用
 
-可以同时挂载多个 `StatusBar` 组件。属性会按照 `StatusBar` 组件的挂载顺序进行合并。
+可以同时挂载多个 `StatusBar` 组件。属性会按照 `StatusBar` 组件挂载的顺序进行合并。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -67,31 +67,31 @@ const App = () => {
           hidden={hidden}
         />
         <Text style={styles.textStyle}>
-          StatusBar Visibility:{'\n'}
-          {hidden ? 'Hidden' : 'Visible'}
+          状态栏可见性:{'\n'}
+          {hidden ? '隐藏' : '可见'}
         </Text>
         <Text style={styles.textStyle}>
-          StatusBar Style:{'\n'}
+          状态栏样式:{'\n'}
           {statusBarStyle}
         </Text>
         {Platform.OS === 'ios' ? (
           <Text style={styles.textStyle}>
-            StatusBar Transition:{'\n'}
+            状态栏过渡:{'\n'}
             {statusBarTransition}
           </Text>
         ) : null}
         <View style={styles.buttonsContainer}>
           <Button
-            title="Toggle StatusBar"
+            title="切换状态栏"
             onPress={changeStatusBarVisibility}
           />
           <Button
-            title="Change StatusBar Style"
+            title="更改状态栏样式"
             onPress={changeStatusBarStyle}
           />
           {Platform.OS === 'ios' ? (
             <Button
-              title="Change StatusBar Transition"
+              title="更改状态栏过渡"
               onPress={changeStatusBarTransition}
             />
           ) : null}
@@ -178,31 +178,31 @@ const App = () => {
           hidden={hidden}
         />
         <Text style={styles.textStyle}>
-          StatusBar Visibility:{'\n'}
-          {hidden ? 'Hidden' : 'Visible'}
+          状态栏可见性:{'\n'}
+          {hidden ? '隐藏' : '可见'}
         </Text>
         <Text style={styles.textStyle}>
-          StatusBar Style:{'\n'}
+          状态栏样式:{'\n'}
           {statusBarStyle}
         </Text>
         {Platform.OS === 'ios' ? (
           <Text style={styles.textStyle}>
-            StatusBar Transition:{'\n'}
+            状态栏过渡:{'\n'}
             {statusBarTransition}
           </Text>
         ) : null}
         <View style={styles.buttonsContainer}>
           <Button
-            title="Toggle StatusBar"
+            title="切换状态栏"
             onPress={changeStatusBarVisibility}
           />
           <Button
-            title="Change StatusBar Style"
+            title="更改状态栏样式"
             onPress={changeStatusBarStyle}
           />
           {Platform.OS === 'ios' ? (
             <Button
-              title="Change StatusBar Transition"
+              title="更改状态栏过渡"
               onPress={changeStatusBarTransition}
             />
           ) : null}
@@ -235,7 +235,7 @@ export default App;
 
 ### 命令式 API
 
-在不适合使用组件的场景下，也可以使用通过组件上的静态函数暴露的命令式 API。不过，不建议对同一个属性同时使用静态 API 和组件，因为静态 API 设置的任何值都会在下一次渲染时被组件设置的值覆盖。
+对于使用组件不太理想的情况，还提供了一个以组件上的静态函数形式暴露的命令式 API。不过，不建议对同一个属性同时使用静态 API 和组件，因为静态 API 设置的任何值都会在下一次渲染时被组件设置的值覆盖。
 
 ---
 
@@ -245,19 +245,19 @@ export default App;
 
 ### `currentHeight` <div className="label android">Android</div>
 
-状态栏的高度，包括刘海高度（如果存在）。
+状态栏的高度，如果存在刘海屏，则包括刘海高度。
 
 ---
 
-## 属性
+## Props
 
 ### `animated`
 
-状态栏属性变更之间是否应使用动画。支持 `backgroundColor`、`barStyle` 和 `hidden` 属性。
+如果状态栏属性变化之间的过渡应该进行动画。支持 `backgroundColor`、`barStyle` 和 `hidden` 属性。
 
 | Type    | Required | Default |
 | ------- | -------- | ------- |
-| boolean | 否      | `false` |
+| boolean | No       | `false` |
 
 ---
 
@@ -266,12 +266,12 @@ export default App;
 状态栏的背景颜色。
 
 :::warning
-由于 Android 15 引入了边到边强制要求，在 API 级别 35 中设置状态栏背景颜色已被弃用，设置后不会产生任何效果。你可以在这里阅读更多关于我们的 [边到边建议](https://github.com/react-native-community/discussions-and-proposals/discussions/827)。
+由于 Android 15 引入的全屏边到边强制要求，在 API 级别 35 中设置状态栏背景颜色已被弃用，并且设置后不会产生任何效果。你可以在这里阅读更多关于我们的 [全屏边到边建议](https://github.com/react-native-community/discussions-and-proposals/discussions/827)。
 :::
 
 | Type            | Required | Default                                                                |
 | --------------- | -------- | ---------------------------------------------------------------------- |
-| [color](colors) | 否      | 默认系统 StatusBar 背景颜色，或者如果未定义则为 `'black'` |
+| [color](colors) | No       | 默认系统 StatusBar 背景颜色，或在未定义时为 `'black'` |
 
 ---
 
@@ -283,7 +283,7 @@ export default App;
 
 | Type                                       | Required | Default     |
 | ------------------------------------------ | -------- | ----------- |
-| [StatusBarStyle](statusbar#statusbarstyle) | 否      | `'default'` |
+| [StatusBarStyle](statusbar#statusbarstyle) | No       | `'default'` |
 
 ---
 
@@ -293,7 +293,7 @@ export default App;
 
 | Type    | Required | Default |
 | ------- | -------- | ------- |
-| boolean | 否      | `false` |
+| boolean | No       | `false` |
 
 ---
 
@@ -319,10 +319,10 @@ export default App;
 
 ### `translucent` <div className="label android">Android</div>
 
-状态栏是否半透明。将 translucent 设为 `true` 时，应用会在状态栏下方绘制内容。这在使用半透明状态栏颜色时很有用。
+状态栏是否为半透明。将 `translucent` 设为 `true` 时，应用会在状态栏下方绘制内容。这在使用半透明状态栏颜色时很有用。
 
 :::warning
-由于 Android 15 引入了边到边强制要求，在 API 级别 35 中将状态栏设置为半透明已被弃用，设置后不会产生任何效果。你可以在这里阅读更多关于我们的 [边到边建议](https://github.com/react-native-community/discussions-and-proposals/discussions/827)。
+由于 Android 15 引入的全屏边到边强制要求，在 API 级别 35 中将状态栏设为半透明已被弃用，并且设置后不会产生任何效果。你可以在这里阅读更多关于我们的 [全屏边到边建议](https://github.com/react-native-community/discussions-and-proposals/discussions/827)。
 :::
 
 | Type    | Default |
@@ -337,13 +337,13 @@ export default App;
 static popStackEntry(entry: StatusBarProps);
 ```
 
-从堆栈中获取并移除最后一个 StatusBar 条目。
+获取并移除栈中的最后一个 StatusBar 条目。
 
-**Parameters:**
+**参数：**
 
-| Name                                                       | Type | Description             |
-| ---------------------------------------------------------- | ---- | ----------------------- |
-| entry <div className="label basic required">Required</div> | any  | `pushStackEntry` 返回的条目。 |
+| 名称                                                       | 类型 | 描述                               |
+| ---------------------------------------------------------- | ---- | ---------------------------------- |
+| entry <div className="label basic required">必填</div> | any  | 从 `pushStackEntry` 返回的条目。 |
 
 ---
 
@@ -353,13 +353,13 @@ static popStackEntry(entry: StatusBarProps);
 static pushStackEntry(props: StatusBarProps): StatusBarProps;
 ```
 
-将一个 StatusBar 条目压入堆栈。完成时应将返回值传递给 `popStackEntry`。
+将一个 StatusBar 条目压入栈中。完成后应将返回值传递给 `popStackEntry`。
 
-**Parameters:**
+**参数：**
 
-| Name                                                       | Type | Description                                      |
-| ---------------------------------------------------------- | ---- | ------------------------------------------------ |
-| props <div className="label basic required">Required</div> | any  | 包含要在堆栈条目中使用的 StatusBar 属性的对象。 |
+| 名称                                                       | 类型 | 描述                                                         |
+| ---------------------------------------------------------- | ---- | ------------------------------------------------------------ |
+| props <div className="label basic required">必填</div> | any  | 包含要在栈条目中使用的 StatusBar props 的对象。 |
 
 ---
 
@@ -372,14 +372,14 @@ static replaceStackEntry(
 ): StatusBarProps;
 ```
 
-使用新属性替换现有的 StatusBar 堆栈条目。
+使用新的 props 替换现有的 StatusBar 栈条目。
 
-**Parameters:**
+**参数：**
 
-| Name                                                       | Type | Description                                                      |
-| ---------------------------------------------------------- | ---- | ---------------------------------------------------------------- |
-| entry <div className="label basic required">Required</div> | any  | 要替换的 `pushStackEntry` 返回的条目。                             |
-| props <div className="label basic required">Required</div> | any  | 包含要用于替换堆栈条目的 StatusBar 属性的对象。 |
+| 名称                                                       | 类型 | 描述                                                                     |
+| ---------------------------------------------------------- | ---- | ------------------------------------------------------------------------ |
+| entry <div className="label basic required">必填</div> | any  | 要替换的、从 `pushStackEntry` 返回的条目。                             |
+| props <div className="label basic required">必填</div> | any  | 包含要在替换后的栈条目中使用的 StatusBar props 的对象。 |
 
 ---
 
@@ -389,18 +389,18 @@ static replaceStackEntry(
 static setBackgroundColor(color: ColorValue, animated?: boolean);
 ```
 
-设置状态栏的背景颜色。
+设置状态栏的背景色。
 
 :::warning
-由于 Android 15 引入了边到边强制要求，在 API 级别 35 中设置状态栏背景颜色已被弃用，设置后不会产生任何效果。你可以在这里阅读更多关于我们的 [边到边建议](https://github.com/react-native-community/discussions-and-proposals/discussions/827)。
+由于 Android 15 中引入的边到边（edge-to-edge）强制要求，在 API 级别 35 中设置状态栏背景色已被弃用，设置后将不起作用。你可以在[这里](https://github.com/react-native-community/discussions-and-proposals/discussions/827)阅读更多关于我们的边到边建议。
 :::
 
-**Parameters:**
+**参数：**
 
-| Name                                                       | Type    | Description      |
-| ---------------------------------------------------------- | ------- | ---------------- |
-| color <div className="label basic required">Required</div> | string  | 背景颜色。       |
-| animated                                                   | boolean | 为样式变更添加动画。 |
+| 名称                                                       | 类型    | 描述               |
+| ---------------------------------------------------------- | ------- | ------------------ |
+| color <div className="label basic required">必填</div> | string  | 背景色。         |
+| animated                                                   | boolean | 是否为样式更改添加动画。 |
 
 ---
 
@@ -412,12 +412,12 @@ static setBarStyle(style: StatusBarStyle, animated?: boolean);
 
 设置状态栏样式。
 
-**Parameters:**
+**参数：**
 
-| Name                                                       | Type                                       | Description      |
-| ---------------------------------------------------------- | ------------------------------------------ | ---------------- |
-| style <div className="label basic required">Required</div> | [StatusBarStyle](statusbar#statusbarstyle) | 要设置的状态栏样式。 |
-| animated                                                   | boolean                                    | 为样式变更添加动画。 |
+| 名称                                                       | 类型                                       | 描述               |
+| ---------------------------------------------------------- | ------------------------------------------ | ------------------ |
+| style <div className="label basic required">必填</div> | [StatusBarStyle](statusbar#statusbarstyle) | 要设置的状态栏样式。  |
+| animated                                                   | boolean                                    | 是否为样式更改添加动画。 |
 
 ---
 
@@ -429,19 +429,19 @@ static setHidden(hidden: boolean, animation?: StatusBarAnimation);
 
 显示或隐藏状态栏。
 
-**Parameters:**
+**参数：**
 
-| Name                                                        | Type                                               | Description                                |
-| ----------------------------------------------------------- | -------------------------------------------------- | ------------------------------------------ |
-| hidden <div className="label basic required">Required</div> | boolean                                            | 隐藏状态栏。                               |
-| animation <div className="label ios">iOS</div>              | [StatusBarAnimation](statusbar#statusbaranimation) | 更改状态栏 hidden 属性时的动画效果。 |
+| 名称                                                        | 类型                                               | 描述                                             |
+| ----------------------------------------------------------- | -------------------------------------------------- | ------------------------------------------------ |
+| hidden <div className="label basic required">必填</div> | boolean                                            | 隐藏状态栏。                                    |
+| animation <div className="label ios">iOS</div>              | [StatusBarAnimation](statusbar#statusbaranimation) | 更改状态栏隐藏属性时的动画。 |
 
 ---
 
 ### 🗑️ `setNetworkActivityIndicatorVisible()` <div className="label ios">iOS</div>
 
-:::warning Deprecated
-状态栏网络活动指示器在 iOS 13 及更高版本中不受支持。该功能将在未来版本中移除。
+:::warning[Deprecated]
+状态栏网络活动指示器在 iOS 13 及更高版本中不受支持。此功能将在未来版本中移除。
 :::
 
 ```tsx
@@ -450,11 +450,11 @@ static setNetworkActivityIndicatorVisible(visible: boolean);
 
 控制网络活动指示器的可见性。
 
-**Parameters:**
+**参数：**
 
-| Name                                                         | Type    | Description     |
-| ------------------------------------------------------------ | ------- | --------------- |
-| visible <div className="label basic required">Required</div> | boolean | 显示指示器。 |
+| 名称                                                         | 类型    | 描述         |
+| ------------------------------------------------------------ | ------- | -------------- |
+| visible <div className="label basic required">必填</div> | boolean | 显示指示器。 |
 
 ---
 
@@ -464,19 +464,19 @@ static setNetworkActivityIndicatorVisible(visible: boolean);
 static setTranslucent(translucent: boolean);
 ```
 
-控制状态栏的半透明性。
+控制状态栏的透明度。
 
 :::warning
-由于 Android 15 引入了边到边强制要求，在 API 级别 35 中将状态栏设置为半透明已被弃用，设置后不会产生任何效果。你可以在这里阅读更多关于我们的 [边到边建议](https://github.com/react-native-community/discussions-and-proposals/discussions/827)。
+由于 Android 15 中引入的边到边（edge-to-edge）强制要求，在 API 级别 35 中将状态栏设为半透明已被弃用，设置后将不起作用。你可以在[这里](https://github.com/react-native-community/discussions-and-proposals/discussions/827)阅读更多关于我们的边到边建议。
 :::
 
-**Parameters:**
+**参数：**
 
-| Name                                                             | Type    | Description     |
-| ---------------------------------------------------------------- | ------- | --------------- |
-| translucent <div className="label basic required">Required</div> | boolean | 设为半透明。 |
+| 名称                                                             | 类型    | 描述         |
+| ---------------------------------------------------------------- | ------- | -------------- |
+| translucent <div className="label basic required">必填</div> | boolean | 设为半透明。 |
 
-## 类型定义
+## Type Definitions
 
 ### StatusBarAnimation
 

@@ -63,7 +63,7 @@ npm install @react-navigation/native @react-navigation/native-stack
 
 现在你可以创建一个包含主页和个人资料页面的应用：
 
-```tsx
+```tsx title="App.tsx"
 import {createStaticNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -92,10 +92,10 @@ export default function App() {
 
 在每个屏幕组件内部，你可以使用 `useNavigation` Hook 获取 `navigation` 对象，它包含了链接到其他屏幕的各种方法。例如，你可以使用 `navigation.navigate` 前往 `Profile` 屏幕：
 
-```tsx
+```tsx title="HomeScreen.tsx"
 import {useNavigation} from '@react-navigation/native';
 
-function HomeScreen() {
+export default function HomeScreen() {
   const navigation = useNavigation();
 
   return (
@@ -107,9 +107,11 @@ function HomeScreen() {
     />
   );
 }
+```
 
-function ProfileScreen({route}) {
-  return <Text>这就是 {route.params.name} 的个人资料</Text>;
+```tsx title="ProfileScreen.tsx"
+export default function ProfileScreen({route}) {
+  return <Text>这是 {route.params.name} 的个人资料</Text>;
 }
 ```
 

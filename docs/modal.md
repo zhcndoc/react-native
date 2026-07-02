@@ -22,7 +22,7 @@ const App = () => {
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
-            Alert.alert('Modal 已关闭。');
+            Alert.alert('模态框已关闭。');
             setModalVisible(!modalVisible);
           }}>
           <View style={styles.centeredView}>
@@ -106,7 +106,7 @@ export default App;
 
 ### 🗑️ `animated`
 
-:::warning 已弃用
+:::warning[已弃用]
 请改用 [`animationType`](modal.md#animationtype) 属性。
 :::
 
@@ -134,7 +134,7 @@ modal 的 `backdropColor`（或 modal 容器的背景色）。如果未提供且
 
 | 类型              | 默认值 |
 | ----------------- | ------ |
-| [color](colors) | white  |
+| [颜色](colors) | white  |
 
 ---
 

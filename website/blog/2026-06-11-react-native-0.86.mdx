@@ -1,0 +1,150 @@
+---
+title: 'React Native 0.86 - 边到边和 DevTools 改进，无破坏性变更'
+authors: [fabriziocucci, robhogan, zoontek, gabrieldonadel]
+tags: [announcement, release]
+date: 2026-06-11
+---
+
+# React Native 0.86 - 边到边和 DevTools 改进，无破坏性变更
+
+今天我们很高兴发布 React Native 0.86！
+
+此版本包括在 Android 15+ 上的全面边到边支持，以及对 React Native DevTools 的改进。
+
+继 0.83 之后，这是第二个没有面向用户的破坏性变更的 React Native 版本，体现了我们持续致力于让升级更加可预测且无缝。
+
+## 亮点
+
+- [React Native 的新家](/blog/2026/06/11/react-native-0.86#a-new-home-for-react-native)
+- [Android 上的边到边](/blog/2026/06/11/react-native-0.86#edge-to-edge-on-android)
+- [React Native DevTools 改进](/blog/2026/06/11/react-native-0.86#react-native-devtools-improvements)
+
+{/* truncate */}
+
+### React Native 的新家
+
+React Native 仓库，以及 React、Metro、Yoga 和 React Native 网站，已经从 `facebook` GitHub 组织迁移到了 `react` 组织。此次迁移反映了 React 和 React Native 过渡到 [React 基金会](https://react.foundation/)，这是一个致力于长期维护 React 生态系统的独立基金会。
+
+GitHub 会自动将所有现有 URL、问题和 PR 重定向到新位置，因此你无需进行任何操作。
+
+### Android 上的边到边显示
+
+React Native 0.86 为 Android 15+ 的边到边显示模式提供了全面修复，包括在操作系统强制启用但未通过 `edgeToEdgeEnabled` Gradle 属性显式开启的情况下。
+
+主要修复包括：
+
+- **`measureInWindow`** 在启用边到边显示时现在会返回正确的坐标。
+- **`KeyboardAvoidingView`** 在启用 `edgeToEdgeEnabled` 的 Android 15+ 上可正常工作。
+- **`Dimensions`** 在启用边到边显示时，在 15 之前的 Android 版本上窗口值是准确的。
+- **`StatusBar`** 现在支持在 Modal 打开时更新状态栏样式和可见性。
+- **导航栏** 对比度会遵循主题的 `enforceNavigationBarContrast` 属性。
+
+### React Native DevTools 改进
+
+React Native DevTools 现在通过 `Emulation.setEmulatedMedia` 支持 **浅色/深色模式模拟**，让你无需更改设备设置，就能直接从 DevTools 测试应用的外观模式处理。使用 `cmd`/`ctrl` + `shift` + `P` 可从命令面板中访问。
+
+与网页一样，这是一项临时切换，在 DevTools 断开连接时会重置。
+
+![React Native DevTools 命令面板显示浅色/深色模式模拟选项](/blog/assets/0.86-devtools-light-dark-emulation.png)
+
+## 重大变更
+
+React Native 0.86 **没有面向用户的破坏性变更**。
+
+如果你使用的是 React Native 0.85，那么你应该能够在不更改应用代码的情况下将应用升级到 React Native 0.86。
+
+要了解更多关于我们如何定义破坏性变更的内容，请查看[这篇文章](/docs/releases/versioning-policy#what-is-a-breaking-change)。
+
+## 弃用项
+
+以下 API 已被弃用，并将在未来的 React Native 版本中移除：
+
+- **`ViewUtil.getUIManagerType`**：作为移除旧架构的一部分，此 API 现已弃用。你可以直接内联使用 `UIManagerType.Fabric`，或者干脆移除对 UIManagerType 的检查。
+- **`AppRegistry`**：`AppRegistry.setComponentProviderInstrumentationHook` 的第二个参数现已弃用，如果使用将会发出警告。
+
+## 其他变更
+
+### 运行时与 Web 规范对齐
+
+- **`ExceptionsManager.reportErrorsAsExceptions` 严格性**：将 `reportErrorsAsExceptions` 设置为除 `false` 之外的任何值都不再生效。此前，任何假值（如 `0`、`null` 或 `""`）都会禁用错误到异常的转换。现在只有显式的布尔值 `false` 才会选择退出，从而降低 API 出错概率。
+- **`PerformanceObserver` 默认 `durationThreshold`**：`observe({type: 'event'})` 现在会根据 W3C Event Timing 规范，正确地将 `durationThreshold` 默认设置为 104ms，而不是报告所有事件。这使 React Native 的 Performance API 与 Web 标准保持一致，并减少了过短事件带来的噪音。
+
+### 渲染、布局与动画
+
+- **Modal 组件 `style` 属性**：`style` 属性现在会传递给 Modal 内部容器 View，允许自定义样式（例如 padding、背景色），而无需覆盖 `transparent` 或 `backdropColor` 的行为。
+- **Animated 挂载层同步**：启用了挂载层同步，因此 Native Animated 的同步更新不会被后续的 React 提交覆盖。这修复了一个闪烁问题：动画视图可能会短暂跳回动画前的值。
+- **文本测量崩溃**：修复了在已经停止的 surface 上测量文本时发生的崩溃。
+- **不可逆变换触摸修复**：具有不可逆变换（例如 `scaleX: 0` 或 `scaleY: 0`）的视图在 Android 或 iOS 上不再接收触摸事件。命中测试现在会检测变换矩阵是否无法逆转，并跳过这些视图。
+- **Yoga 布局修复**：修复了多个与 Yoga 相关的布局回归问题，例如 Android 上绝对定位元素中的文本换行（[#56651](https://github.com/facebook/react-native/pull/56651)）、Android 的 `BoringLayout.isBoring()` 在负宽度下的崩溃（[#56007](https://github.com/facebook/react-native/pull/56007)），以及 `display: contents` 节点的所有权问题（[#56422](https://github.com/facebook/react-native/pull/56422)）。
+
+### 无障碍
+
+- **未解决的 Promise**：修复了 `AccessibilityInfo.isDarkerSystemColorsEnabled`、`isHighTextContrastEnabled` 和 `prefersCrossFadeTransitions` 在不受支持的平台上返回永远不会 resolve 的 Promise 的问题。现在它们会解析为 `false`，而不是无限期挂起。
+
+### 基础设施与依赖
+
+- **Metro `^0.84.2`**：更新了 Metro 打包器依赖。
+- **`HeadlessJsTaskSupportModule` 自动注册**：此模块现在已在 `CoreReactPackage` 中注册，因此在 Android 上使用 headless JS 任务的应用不再需要手动确保该模块已注册。
+
+### JSI（原生接口）
+
+新增了 JSI API，以增强原生模块与 JS 引擎之间的 C++ 接口能力：
+
+- **`IRuntime` 接口**：将此前受保护的 `Runtime` 方法公开，从而在不级联接口版本的情况下启用新的 JSI 功能。
+- **`TypedArray` / `Uint8Array`**：对类型数组提供一等支持，包括创建、缓冲区访问、偏移量和长度查询。
+- **`ArrayBuffer.detached`**：检查 `ArrayBuffer` 是否已被分离。
+- **`Array.push`**：向数组追加元素（此前数组大小在创建后不可变）。
+- **`String.length`**：在不转换为完整字符串的情况下获取 UTF-16 码元长度。
+- **`isInteger`**：无需调用运行时即可检查 `jsi::Value` 是否为整数。
+- **错误创建 API**：为所有标准 JS 错误类型提供工厂方法（`TypeError`、`RangeError`、`ReferenceError`、`SyntaxError`、`EvalError`、`URIError`）。
+
+### Android 输入、导航与图片
+
+- **BackHandler 事件对象**：`hardwareBackPress` 事件现在会传递一个带有来自原生事件的 `timeStamp` 属性的事件对象，支持时间分析和事件关联。忽略该参数的现有回调不受影响。
+- **API 36+ 上的 BackHandler 恢复修复**：应用从后台恢复后，Android API 36+ 上的 `BackHandler` 回调会停止工作。此修复确保在 `onHostResume` 期间正确重新注册返回键处理程序。
+- **LogBox/RedBox 返回键关闭**：现在可以通过 Android 硬件返回键关闭 LogBox 通知 toast 和检查器覆盖层。
+- **TextInput `setAutoCapitalize` 的三星修复**：修复了 `setAutoCapitalize` 会在三星键盘上移除 `TYPE_NUMBER_FLAG_SIGNED` 和 `TYPE_NUMBER_FLAG_DECIMAL` 标志的问题，这会阻止用户在数字输入中输入负号。
+- **TextInput/KeyboardAvoidingView IME 高度**：`KeyboardAvoidingView` 和 TextInput 自动滚动现在能正确响应 IME 高度变化，例如在键盘和表情面板之间切换，或当预测文本栏出现时。
+- **Pressable `android_ripple`**：`android_ripple` 属性现在接受 `PlatformColor`。
+- **`Image.getSize` / `Image.getSizeWithHeaders`**：现在返回真实的源尺寸，而不是 Fresco 下采样后的值。
+
+### Android 网络
+
+- **`OutOfMemoryError` 处理**：`NetworkingModule` 现在能正确处理非常大的 HTTP 响应，不会 OOM 或崩溃。
+- **WebSocket `Cookie` 标头**：`WebSocketModule` 不再会移除通过 WebSocket 构造函数的 `headers` 选项传入的 `Cookie` 标头，从而允许通过 WebSocket 连接发送认证 cookie。
+- **新架构下的 Blob 内容提供程序**：Blob 内容提供程序（用于 `blob:` URL 访问二进制数据）现在可在新架构下正常工作。
+
+## 致谢
+
+React Native 0.86 包含来自 97 位贡献者的 596 多个提交。感谢你们所有的辛勤付出！
+
+{/* alex ignore special white */}
+
+我们想向那些在本次发布中贡献了重要改进的社区成员特别致谢。
+
+- [Mathieu Acthernoene](https://github.com/zoontek)，感谢其为 Android 提供了 edge-to-edge 支持以及对 StatusBar 的改进
+- [Jakub Piasecki](https://github.com/j-piasecki)，感谢其对 ShadowTree 和 Yoga 的修复
+- [Nick Gerleman](https://github.com/NickGerleman)，感谢其对 Text 渲染的修复
+- [Peter Abbondanzo](https://github.com/Abbondanzo)，感谢其对 LogBox、ScrollView 和 Image 的修复
+
+## 升级到 0.86
+
+:::info
+
+0.86 现已成为 React Native 的最新稳定版本，而 0.83.x 已转为不再受支持。更多信息请参阅 [React Native 的支持政策](/releases)。
+
+:::
+
+#### 升级
+
+请使用 [React Native 升级助手](https://react-native-community.github.io/upgrade-helper/) 查看现有项目在不同 React Native 版本之间的代码变更，此外也请参阅 [升级文档](/docs/upgrading)。
+
+#### 创建新项目
+
+```sh
+npx @react-native-community/cli@latest init MyProject --version latest
+```
+
+#### Expo
+
+对于 Expo 项目，React Native 0.86 将作为 `expo@canary` 版本的一部分提供。

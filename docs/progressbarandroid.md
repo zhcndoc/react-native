@@ -3,7 +3,7 @@ id: progressbarandroid
 title: '🗑️ ProgressBarAndroid'
 ---
 
-:::warning 已废弃
+:::warning[已弃用]
 请改用 [社区包](https://reactnative.directory/?search=progressbar) 之一。
 :::
 
@@ -79,7 +79,7 @@ export default App;
 
 | 类型               | 必需 |
 | ------------------ | -------- |
-| [color](colors.md) | 否       |
+| [颜色](colors.md) | 否       |
 
 ---
 

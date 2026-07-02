@@ -1,86 +1,86 @@
 ---
 id: global-performance
-title: performance
+title: 性能
 ---
 
-The global [`performance`](https://developer.mozilla.org/en-US/docs/Web/API/Window/performance) object, as defined in Web specifications.
+Web 规范中定义的全局 [`performance`](https://developer.mozilla.org/en-US/docs/Web/API/Window/performance) 对象。
 
 ---
 
-# Reference
+# 参考
 
-## Instance properties
+## 实例属性
 
 ### `eventCounts`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/Performance/eventCounts).
+参见 [MDN 中的文档](https://developer.mozilla.org/en-US/docs/Web/API/Performance/eventCounts)。
 
 ### `memory`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/Performance/memory).
+参见 [MDN 中的文档](https://developer.mozilla.org/en-US/docs/Web/API/Performance/memory)。
 
 ### `rnStartupTiming` ⚠️
 
-:::warning Non-standard
-This is a React Native specific extension.
+:::warning[Non-standard]
+这是 React Native 特定的扩展。
 :::
 
-Provides information about the startup time of the application.
+提供有关应用启动时间的信息。
 
 ```ts
 get rnStartupTiming(): ReactNativeStartupTiming;
 ```
 
-The `ReactNativeStartupTiming` interface provides the following fields:
+`ReactNativeStartupTiming` 接口提供以下字段：
 
-| Name                                     | Type           | Description                                               |
-| ---------------------------------------- | -------------- | --------------------------------------------------------- |
-| `startTime`                              | number \| void | When the React Native runtime initialization was started. |
-| `executeJavaScriptBundleEntryPointStart` | number \| void | When the execution of the application bundle was started. |
-| `endTime`                                | number \| void | When the React Native runtime was fully initialized.      |
+| 名称                                      | 类型           | 描述                                                  |
+| ----------------------------------------- | -------------- | ----------------------------------------------------- |
+| `startTime`                              | number \| void | React Native 运行时初始化开始的时间。                 |
+| `executeJavaScriptBundleEntryPointStart` | number \| void | 应用 bundle 开始执行的时间。                          |
+| `endTime`                                | number \| void | React Native 运行时完全初始化完成的时间。            |
 
 ### `timeOrigin`
 
-:::warning Partial support
-Provides the number of milliseconds from the UNIX epoch until system boot, instead of the number of milliseconds from the UNIX epoch until app startup.
+:::warning[Partial support]
+提供的是从 UNIX 纪元到系统启动的毫秒数，而不是从 UNIX 纪元到应用启动的毫秒数。
 :::
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/Performance/timeOrigin).
+参见 [MDN 中的文档](https://developer.mozilla.org/en-US/docs/Web/API/Performance/timeOrigin)。
 
-## Instance methods
+## 实例方法
 
 ### `clearMarks()`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/Performance/clearMarks).
+参见 [MDN 中的文档](https://developer.mozilla.org/en-US/docs/Web/API/Performance/clearMarks)。
 
 ### `clearMeasures()`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/Performance/clearMeasures).
+参见 [MDN 中的文档](https://developer.mozilla.org/en-US/docs/Web/API/Performance/clearMeasures)。
 
 ### `getEntries()`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/Performance/getEntries).
+参见 [MDN 中的文档](https://developer.mozilla.org/en-US/docs/Web/API/Performance/getEntries)。
 
 ### `getEntriesByName()`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/Performance/getEntriesByName).
+参见 [MDN 中的文档](https://developer.mozilla.org/en-US/docs/Web/API/Performance/getEntriesByName)。
 
 ### `getEntriesByType()`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/Performance/getEntriesByType).
+参见 [MDN 中的文档](https://developer.mozilla.org/en-US/docs/Web/API/Performance/getEntriesByType)。
 
 ### `mark()`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/Performance/mark).
+参见 [MDN 中的文档](https://developer.mozilla.org/en-US/docs/Web/API/Performance/mark)。
 
 ### `measure()`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/Performance/measure).
+参见 [MDN 中的文档](https://developer.mozilla.org/en-US/docs/Web/API/Performance/measure)。
 
 ### `now()`
 
-:::warning Partial support
-Provides the number of milliseconds from system boot, instead of the number of milliseconds from app startup.
+:::warning[部分支持]
+提供的是从系统启动开始计算的毫秒数，而不是从应用启动开始计算的毫秒数。
 :::
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/Performance/now).
+参见 [MDN 中的文档](https://developer.mozilla.org/en-US/docs/Web/API/Performance/now)。

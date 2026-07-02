@@ -11,7 +11,7 @@ title: 屏幕间导航
 
 ## React Navigation
 
-社区的导航解决方案是一个独立的库，允许开发者用几行代码设置应用的屏幕。
+社区提供的导航解决方案是一个独立的库，允许开发者用几行代码为应用设置屏幕。
 
 ### 入门模板
 
@@ -63,7 +63,7 @@ npm install @react-navigation/native @react-navigation/native-stack
 
 现在你可以创建一个带有主屏幕和个人资料屏幕的应用：
 
-```tsx
+```tsx title="App.tsx"
 import {createStaticNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -71,7 +71,7 @@ const RootStack = createNativeStackNavigator({
   screens: {
     Home: {
       screen: HomeScreen,
-      options: {title: 'Welcome'},
+      options: {title: '欢迎'},
     },
     Profile: {
       screen: ProfileScreen,
@@ -92,24 +92,26 @@ export default function App() {
 
 在每个屏幕组件内部，你可以使用 `useNavigation` hook 来获取 `navigation` 对象，它具有各种链接到其他屏幕的方法。例如，你可以使用 `navigation.navigate` 跳转到 `Profile` 屏幕：
 
-```tsx
+```tsx title="HomeScreen.tsx"
 import {useNavigation} from '@react-navigation/native';
 
-function HomeScreen() {
+export default function HomeScreen() {
   const navigation = useNavigation();
 
   return (
     <Button
-      title="Go to Jane's profile"
+      title="前往 Jane 的个人资料"
       onPress={() =>
         navigation.navigate('Profile', {name: 'Jane'})
       }
     />
   );
 }
+```
 
-function ProfileScreen({route}) {
-  return <Text>This is {route.params.name}'s profile</Text>;
+```tsx title="ProfileScreen.tsx"
+export default function ProfileScreen({route}) {
+  return <Text>这就是 {route.params.name} 的个人资料</Text>;
 }
 ```
 

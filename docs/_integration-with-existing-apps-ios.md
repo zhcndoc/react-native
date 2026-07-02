@@ -1,5 +1,6 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import ThemedImage from '@theme/ThemedImage';
 import constants from '@site/core/TabsConstants';
 import CodeBlock from '@theme/CodeBlock';
 import RNTemplateRepoLink from '@site/core/RNTemplateRepoLink';
@@ -68,7 +69,13 @@ yarn install
 
 安装命令行工具。在 Xcode 菜单中选择 **Settings...（或 Preferences...）**。进入 Locations 面板，然后在 Command Line Tools 下拉菜单中选择最新版本来安装工具。
 
-![Xcode Command Line Tools](/docs/assets/GettingStartedXcodeCommandLineTools.png)
+<ThemedImage
+alt="Xcode Command Line Tools configuration"
+sources={{
+    light: '/docs/assets/GettingStartedXcodeCommandLineTools.png',
+    dark: '/docs/assets/GettingStartedXcodeCommandLineToolsDark.png',
+  }}
+/>
 
 ### CocoaPods
 

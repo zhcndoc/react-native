@@ -5,8 +5,8 @@ title: 🗑️ InteractionManager
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-:::warning Deprecated
-避免长时间运行的工作，改用 [`requestIdleCallback`](global-requestIdleCallback)。
+:::warning[已弃用]
+请避免长时间运行的工作，并改用 [`requestIdleCallback`](global-requestIdleCallback)。
 :::
 
 InteractionManager 允许在任何交互/动画完成后调度长时间运行的工作。特别是，这使 JavaScript 动画能够平滑运行。
@@ -236,14 +236,14 @@ import {
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
+  ios: '按 Cmd+R 重新加载，\n' + '按 Cmd+D 或摇晃打开开发者菜单',
   android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
+    '双击键盘上的 R 重新加载，\n' +
+    '摇晃设备或按菜单按钮打开开发者菜单',
 });
 
-// You can create a custom interaction/animation and add
-// support for InteractionManager
+// 你可以创建一个自定义的交互/动画并为 InteractionManager
+// 提供支持
 const useCustomInteraction = (timeLocked = 2000) => {
   useEffect(() => {
     const handle = InteractionManager.createInteractionHandle();
@@ -260,7 +260,7 @@ const useCustomInteraction = (timeLocked = 2000) => {
 const Ball = ({onInteractionIsDone}) => {
   useCustomInteraction();
 
-  // Running a method after the interaction
+  // 交互完成后运行一个方法
   useEffect(() => {
     InteractionManager.runAfterInteractions(() => onInteractionIsDone());
   }, [onInteractionIsDone]);
@@ -312,14 +312,14 @@ import {
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
+  ios: '按 Cmd+R 重新加载，\n' + '按 Cmd+D 或摇晃打开开发者菜单',
   android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
+    '双击键盘上的 R 重新加载，\n' +
+    '摇晃设备或按菜单按钮打开开发者菜单',
 });
 
-// You can create a custom interaction/animation and add
-// support for InteractionManager
+// 你可以创建一个自定义的交互/动画并为 InteractionManager
+// 提供支持
 const useCustomInteraction = (timeLocked = 2000) => {
   useEffect(() => {
     const handle = InteractionManager.createInteractionHandle();
@@ -340,7 +340,7 @@ type BallProps = {
 const Ball = ({onInteractionIsDone}: BallProps) => {
   useCustomInteraction();
 
-  // Running a method after the interaction
+  // 交互完成后运行一个方法
   useEffect(() => {
     InteractionManager.runAfterInteractions(() => onInteractionIsDone());
   }, [onInteractionIsDone]);

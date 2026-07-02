@@ -3,14 +3,14 @@ id: backhandler
 title: BackHandler
 ---
 
-Backhandler API 可检测用于返回导航的硬件按钮按下事件，允许你注册系统返回操作的事件监听器，并让你控制应用程序的响应方式。它仅适用于 Android。
+BackHandler API 会检测用于返回导航的硬件按钮按下事件，允许你为系统的返回操作注册事件监听器，并让你控制应用程序的响应方式。它仅适用于 Android。
 
-事件订阅会按相反顺序调用（即，最后注册的订阅会最先调用）。
+事件订阅会按相反顺序调用（即，最后注册的订阅会先调用）。
 
-- **如果某个订阅返回 true，** 则更早注册的订阅不会被调用。
-- **如果没有订阅返回 true，或者根本没有注册订阅，** 则会以编程方式调用默认的返回按钮功能来退出应用。
+- **如果某个订阅返回 true，**那么更早注册的订阅将不会被调用。
+- **如果没有任何订阅返回 true，或者没有注册任何订阅，**则会以编程方式调用默认的返回按钮功能来退出应用。
 
-:::warning 模态框用户警告
+:::warning[使用 modal 的用户请注意]
 如果你的应用显示了一个已打开的 `Modal`，`BackHandler` 将不会发布任何事件（[请参阅 `Modal` 文档](modal#onrequestclose)）。
 :::
 
@@ -21,23 +21,23 @@ const subscription = BackHandler.addEventListener(
   'hardwareBackPress',
   function () {
     /**
-     * this.onMainScreen 和 this.goBack 仅是示例，
-     * 你需要在这里使用自己的实现。
+     * this.onMainScreen 和 this.goBack 只是示例，
+     * 你需要在这里使用你自己的实现。
      *
-     * 通常你会在这里使用导航器返回到上一个状态。
+     * 通常你会在这里使用 navigator 前往最后的状态。
      */
 
     if (!this.onMainScreen()) {
       this.goBack();
       /**
-       * 当返回 true 时，事件不会继续向上冒泡
-       * 并且不会执行其他返回操作
+       * 当返回 true 时，事件不会向上冒泡
+       * 且不会执行其他返回操作
        */
       return true;
     }
     /**
-     * 返回 false 将允许事件继续向上冒泡，并让其他事件监听器
-     * 或系统默认的返回操作执行。
+     * 返回 false 将允许事件向上冒泡，并让其他事件监听器
+     * 或系统的默认返回操作被执行。
      */
     return false;
   },

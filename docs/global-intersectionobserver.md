@@ -7,67 +7,67 @@ import CanaryAPIWarning from './\_canary-channel-api-warning.mdx';
 
 <CanaryAPIWarning />
 
-The global [`IntersectionObserver`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver) interface, as defined in Web specifications. It provides a way to asynchronously observe changes in the intersection of a target element with an ancestor element or with a top-level document's viewport.
+全局 [`IntersectionObserver`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver) 接口，如 Web 规范中定义。它提供了一种异步观察目标元素与其祖先元素或顶层文档视口交集变化的方法。
 
 ---
 
-# Reference
+# 参考文档
 
-## Constructor
+## 构造函数
 
 ### `IntersectionObserver()`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/IntersectionObserver).
+参见 [MDN 中的文档](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/IntersectionObserver)。
 
-Creates a new `IntersectionObserver` object which will execute a specified callback function when it detects that a target element's visibility has crossed one or more `threshold` or `rnRootThreshold` values.
+创建一个新的 `IntersectionObserver` 对象，当检测到目标元素的可见性跨越一个或多个 `threshold` 或 `rnRootThreshold` 值时，它将执行指定的回调函数。
 
 ```ts
 new IntersectionObserver(callback, options?)
 ```
 
-#### Parameters
+#### 参数
 
 **`callback`**
 
-A function which is called when the percentage of the target element is visible crosses a threshold. The callback receives two parameters:
+当目标元素可见百分比跨越某个阈值时调用的函数。该回调接收两个参数：
 
-- `entries`: An array of [`IntersectionObserverEntry`](global-intersectionobserverentry) objects, each representing one threshold which was crossed, either becoming more or less visible than the percentage specified by that threshold.
-- `observer`: The `IntersectionObserver` instance which invoked the callback.
+- `entries`：一个 [`IntersectionObserverEntry`](global-intersectionobserverentry) 对象数组，每个对象表示一个已跨越的阈值，无论是变得比该阈值指定的百分比更可见，还是更不可见。
+- `observer`：调用该回调的 `IntersectionObserver` 实例。
 
-**`options`** (optional)
+**`options`**（可选）
 
-An optional object with the following properties:
+一个可选对象，包含以下属性：
 
-| Name                 | Type                             | Description                                                                                                                                                                                                       |
+| 名称                 | 类型                             | 描述                                                                                                                                                                                                       |
 | -------------------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `root`               | [Element](element-nodes) \| null | An element that is an ancestor of the target, whose bounding rectangle will be considered the viewport. Defaults to the root viewport if not specified or if `null`.                                              |
-| `rootMargin`         | string                           | A string which specifies a set of offsets to add to the root's bounding box when calculating intersections. Defaults to `"0px 0px 0px 0px"`.                                                                      |
-| `threshold`          | number \| number[]               | Either a single number or an array of numbers between 0.0 and 1.0, specifying a ratio of intersection area to total bounding box area for the observed target. Defaults to `[0]` if `rnRootThreshold` is not set. |
-| `rnRootThreshold` ⚠️ | number \| number[]               | **React Native specific.** Either a single number or an array of numbers between 0.0 and 1.0, specifying a ratio of intersection area to the total root area.                                                     |
+| `root`               | [Element](element-nodes) \| null | 目标元素的祖先元素，其边界矩形将被视为视口。如果未指定或为 `null`，则默认为根视口。                                              |
+| `rootMargin`         | string                           | 一个字符串，用于指定在计算交集时添加到根边界框的一组偏移量。默认为 `"0px 0px 0px 0px"`。                                                                      |
+| `threshold`          | number \| number[]               | 单个数字或介于 0.0 和 1.0 之间的数字数组，用于指定观察目标的交叉区域与总边界框面积的比率。如果未设置 `rnRootThreshold`，默认为 `[0]`。 |
+| `rnRootThreshold` ⚠️ | number \| number[]               | **React Native 特定。** 单个数字或介于 0.0 和 1.0 之间的数字数组，用于指定交叉区域与总根区域的比率。                                                     |
 
-## Instance properties
+## 实例属性
 
 ### `root`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/root).
+参见 [MDN 中的文档](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/root)。
 
-The element or document whose bounds are used as the bounding box when testing for intersection.
+在测试交叉时，作为边界框使用的元素或文档。
 
 ### `rootMargin`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/rootMargin).
+参见 [MDN 中的文档](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/rootMargin)。
 
-An offset rectangle applied to the root's bounding box when calculating intersections.
+在计算交叉时应用于根边界框的偏移矩形。
 
 ### `rnRootThresholds` ⚠️
 
-:::warning Non-standard
-This is a React Native specific extension.
+:::warning[非标准]
+这是 React Native 特定的扩展。
 :::
 
-A list of root thresholds, sorted in increasing numeric order, where each threshold is a ratio of intersection area to bounding box area of the specified root view, which defaults to the viewport.
+根阈值列表，按数值递增顺序排序；其中每个阈值都是交叉区域与指定根视图边界框面积之比，默认值为视口。
 
-Notifications for a target are generated when any of the thresholds specified in `rnRootThresholds` or `thresholds` are crossed for that target.
+当为某个目标跨越 `rnRootThresholds` 或 `thresholds` 中指定的任一阈值时，会为该目标生成通知。
 
 ```ts
 get rnRootThresholds(): ReadonlyArray<number> | null;
@@ -75,34 +75,34 @@ get rnRootThresholds(): ReadonlyArray<number> | null;
 
 ### `thresholds`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/thresholds).
+参见 [MDN 中的文档](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/thresholds)。
 
-A list of thresholds, sorted in increasing numeric order, where each threshold is a ratio of intersection area to bounding box area of an observed target.
+阈值列表，按数值递增顺序排序；其中每个阈值都是交叉区域与被观察目标边界框面积之比。
 
-Notifications for a target are generated when any of the thresholds specified in `rnRootThresholds` or `thresholds` are crossed for that target.
+当为某个目标跨越 `rnRootThresholds` 或 `thresholds` 中指定的任一阈值时，会为该目标生成通知。
 
-## Instance methods
+## 实例方法
 
 ### `disconnect()`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/disconnect).
+参见 [MDN 中的文档](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/disconnect)。
 
-Stops the `IntersectionObserver` object from observing any target.
+停止 `IntersectionObserver` 对象观察任何目标。
 
 ### `observe()`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/observe).
+参见 [MDN 中的文档](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/observe)。
 
-Tells the `IntersectionObserver` to begin observing a target element.
+告诉 `IntersectionObserver` 开始观察一个目标元素。
 
 ### `takeRecords()`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/takeRecords).
+参见 [MDN 中的文档](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/takeRecords)。
 
-Returns an array of `IntersectionObserverEntry` objects for all observed targets.
+返回一个包含所有已观察目标的 `IntersectionObserverEntry` 对象数组。
 
 ### `unobserve()`
 
-See [documentation in MDN](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/unobserve).
+参见 [MDN 中的文档](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/unobserve)。
 
-Tells the `IntersectionObserver` to stop observing a particular target element.
+告诉 `IntersectionObserver` 停止观察某个特定的目标元素。

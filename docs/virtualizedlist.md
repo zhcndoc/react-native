@@ -298,8 +298,8 @@ export default App;
 
 ### 🗑️ `disableVirtualization`
 
-:::warning 已弃用
-虚拟化提供了显著的性能和内存优化，但也会完全卸载渲染窗口之外的 react 实例。你通常只需要在调试时关闭它。
+:::warning[Deprecated]
+虚拟化提供了显著的性能和内存优化，但会完全卸载渲染窗口之外的 React 实例。你通常只在调试时才需要禁用它。
 :::
 
 | 类型    |

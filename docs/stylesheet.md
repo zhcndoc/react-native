@@ -128,7 +128,7 @@ const App = () => (
   <SafeAreaProvider>
     <SafeAreaView style={page.container}>
       <Text style={flattenStyle}>React Native</Text>
-      <Text>Flatten Style</Text>
+      <Text>扁平化样式</Text>
       <Text style={page.code}>{JSON.stringify(flattenStyle, null, 2)}</Text>
     </SafeAreaView>
   </SafeAreaProvider>
@@ -171,8 +171,8 @@ export default App;
 
 ### `setStyleAttributePreprocessor()`
 
-:::warning Experimental
-可能会经常发生破坏性变更，而且不会可靠地提前通知。整个东西也许会被删除，谁知道呢？请自担风险使用。
+:::warning[实验性]
+很可能会频繁发生破坏性变更，而且不会可靠地提前通知。整个功能也许会被删除，谁知道呢？请自行承担风险使用。
 :::
 
 ```tsx
@@ -182,7 +182,7 @@ static setStyleAttributePreprocessor(
 );
 ```
 
-设置一个函数，用于预处理样式属性值。这在内部用于处理颜色和 transform 值。除非你非常清楚自己在做什么，并且已经穷尽了其他选项，否则不应使用它。
+设置一个用于预处理样式属性值的函数。这在内部用于处理颜色和 transform 值。除非你非常清楚自己在做什么，并且已经穷尽了其他选项，否则不应使用它。
 
 ## 属性
 

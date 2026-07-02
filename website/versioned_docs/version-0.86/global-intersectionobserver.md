@@ -7,11 +7,11 @@ import CanaryAPIWarning from './\_canary-channel-api-warning.mdx';
 
 <CanaryAPIWarning />
 
-全局的 [`IntersectionObserver`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver) 接口，如 Web 规范所定义。它提供了一种异步观察目标元素与祖先元素或顶层文档视口之间交集变化的方法。
+The global [`IntersectionObserver`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver) interface, as defined in the Web specification. It provides a way to asynchronously observe changes in the intersection of a target element with an ancestor element or with a top-level document's viewport.
 
 ---
 
-# 参考
+# Reference
 
 ## 构造函数
 
@@ -61,7 +61,7 @@ new IntersectionObserver(callback, options?)
 
 ### `rnRootThresholds` ⚠️
 
-:::warning Non-standard
+:::warning[非标准]
 这是 React Native 特有的扩展。
 :::
 

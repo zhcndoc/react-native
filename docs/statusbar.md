@@ -1,6 +1,6 @@
 ---
 id: statusbar
-title: StatusBar
+title: 状态栏
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
@@ -271,7 +271,7 @@ export default App;
 
 | Type            | Required | Default                                                                |
 | --------------- | -------- | ---------------------------------------------------------------------- |
-| [color](colors) | No       | default system StatusBar background color, or `'black'` if not defined |
+| [color](colors) | No       | 默认系统 StatusBar 背景颜色；如果未定义，则为 `'black'` |
 
 ---
 
@@ -440,8 +440,8 @@ static setHidden(hidden: boolean, animation?: StatusBarAnimation);
 
 ### 🗑️ `setNetworkActivityIndicatorVisible()` <div className="label ios">iOS</div>
 
-:::warning Deprecated
-状态栏网络活动指示器在 iOS 13 及更高版本中不受支持。该方法将在未来的版本中移除。
+:::warning[Deprecated]
+状态栏网络活动指示器不受 iOS 13 及更高版本支持。此功能将在未来的版本中移除。
 :::
 
 ```tsx
@@ -501,7 +501,7 @@ iOS 上过渡动画的状态栏动画类型。
 状态栏样式类型。
 
 | 类型 |
-| ---- |
+| ---- | ---- |
 | enum |
 
 **常量：**

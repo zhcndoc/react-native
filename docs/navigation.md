@@ -55,7 +55,7 @@ npm install @react-navigation/native @react-navigation/native-stack
 
 安装并配置好这些依赖后，就可以继续设置项目以使用 React Navigation。
 
-使用 React Navigation 时，你需要在应用中配置 [navigators](https://reactnavigation.org/docs/glossary-of-terms#navigator)。Navigator 负责处理应用中屏幕之间的切换，并提供诸如 header、tab bar 等 UI。
+使用 React Navigation 时，你需要在应用中配置 [navigator](https://reactnavigation.org/docs/glossary-of-terms#navigator)。Navigator 负责处理应用中屏幕之间的切换，并提供诸如 header、tab bar 等 UI。
 
 现在，你已经可以在设备/模拟器上构建并运行你的应用了。
 
@@ -63,7 +63,7 @@ npm install @react-navigation/native @react-navigation/native-stack
 
 现在你可以创建一个包含主页和个人资料页面的应用：
 
-```tsx
+```tsx title="App.tsx"
 import {createStaticNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -92,10 +92,10 @@ export default function App() {
 
 在每个屏幕组件内部，你可以使用 `useNavigation` hook 获取 `navigation` 对象，它拥有多种用于跳转到其他屏幕的方法。例如，你可以使用 `navigation.navigate` 前往 `Profile` 屏幕：
 
-```tsx
+```tsx title="HomeScreen.tsx"
 import {useNavigation} from '@react-navigation/native';
 
-function HomeScreen() {
+export default function HomeScreen() {
   const navigation = useNavigation();
 
   return (
@@ -107,8 +107,10 @@ function HomeScreen() {
     />
   );
 }
+```
 
-function ProfileScreen({route}) {
+```tsx title="ProfileScreen.tsx"
+export default function ProfileScreen({route}) {
   return <Text>这是 {route.params.name} 的个人资料</Text>;
 }
 ```

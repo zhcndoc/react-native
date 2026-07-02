@@ -3,11 +3,11 @@ id: global-PerformanceResourceTiming
 title: PerformanceResourceTiming
 ---
 
-The global [`PerformanceResourceTiming`](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming) class, as defined in Web specifications.
+全局 [`PerformanceResourceTiming`](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming) 类，按 Web 规范所定义。
 
-:::warning Partial support
+:::warning[部分支持]
 
-React Native implements the following `PerformanceResourceTiming` properties only:
+React Native 仅实现以下 `PerformanceResourceTiming` 属性：
 
 - `fetchStart`
 - `requestStart`

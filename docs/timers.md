@@ -25,8 +25,8 @@ title: 定时器
 
 ## InteractionManager
 
-:::warning Deprecated
-`InteractionManager` 的行为已更改为与 `setImmediate` 相同，应改为使用后者。
+:::warning[已弃用]
+`InteractionManager` 的行为已更改为与 `setImmediate` 相同，因此应改用 `setImmediate`。
 :::
 
 许多高质量原生应用之所以感觉如此流畅，其中一个原因就是避免在交互和动画期间执行昂贵的操作。在 React Native 中，我们目前有一个限制：只有单一的 JS 执行线程，但你可以使用 `InteractionManager` 来确保耗时较长的工作被安排在所有交互/动画完成之后开始。

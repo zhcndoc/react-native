@@ -3,7 +3,7 @@ id: safeareaview
 title: '🗑️ SafeAreaView'
 ---
 
-:::warning 已弃用
+:::warning[已弃用]
 请改用 [react-native-safe-area-context](https://github.com/AppAndFlow/react-native-safe-area-context)。
 :::
 
@@ -45,9 +45,9 @@ export default App;
 
 ## 属性
 
-### [View Props](view.md#props)
+### [视图属性](view.md#props)
 
-继承 [View Props](view.md#props)。
+继承 [视图属性](view.md#props)。
 
 :::note
 由于该组件的行为是通过内边距实现的，应用到 `SafeAreaView` 的样式中的 padding 规则将被忽略，并且可能会因平台不同而产生不同结果。详情请参见 [#22211](https://github.com/facebook/react-native/issues/22211)。

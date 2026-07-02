@@ -195,9 +195,9 @@ export default App;
 在 Android 上，从 API Level 28 开始，明文流量默认也会被阻止。可以通过在应用清单文件中设置 [`android:usesCleartextTraffic`](https://developer.android.com/guide/topics/manifest/application-element#usesCleartextTraffic) 来覆盖此行为。
 :::
 
-## 使用其他网络库
+## Use Other Network Libraries
 
-[XMLHttpRequest API](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) 已内置于 React Native 中。这意味着你可以使用依赖它的第三方库，例如 [frisbee](https://github.com/niftylettuce/frisbee) 或 [axios](https://github.com/axios/axios)，或者如果你更喜欢，也可以直接使用 XMLHttpRequest API。
+[XMLHttpRequest API](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) is built into React Native. This means you can use third-party libraries that depend on it, such as [frisbee](https://github.com/niftylettuce/frisbee) or [axios](https://github.com/axios/axios), or, if you prefer, you can also use the XMLHttpRequest API directly.
 
 ```ts
 const request = new XMLHttpRequest();
@@ -217,8 +217,8 @@ request.open('GET', 'https://mywebsite.com/endpoint/');
 request.send();
 ```
 
-:::warning 注意
-XMLHttpRequest 的安全模型与 Web 上不同，因为原生应用中没有 [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) 这个概念。
+:::warning[注意]
+XMLHttpRequest 的安全模型与 web 不同，因为原生应用中没有 [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) 的概念。
 :::
 
 ## WebSocket 支持
