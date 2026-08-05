@@ -104,14 +104,6 @@ export default App;
 
 ---
 
-### 🗑️ `animated`
-
-:::warning[已弃用]
-请改用 [`animationType`](modal.md#animationtype) 属性。
-:::
-
----
-
 ### `animationType`
 
 `animationType` 属性控制 modal 的动画方式。
@@ -132,8 +124,8 @@ export default App;
 
 modal 的 `backdropColor`（或 modal 容器的背景色）。如果未提供且 `transparent` 为 `false`，默认为 `white`。当 `transparent` 为 `true` 时忽略此项。
 
-| 类型              | 默认值 |
-| ----------------- | ------ |
+| 类型           | 默认值 |
+| -------------- | ------ |
 | [颜色](colors) | white  |
 
 ---
@@ -142,8 +134,8 @@ modal 的 `backdropColor`（或 modal 容器的背景色）。如果未提供且
 
 `hardwareAccelerated` 属性控制是否为底层窗口强制启用硬件加速。
 
-| 类型 | 默认值 |
-| ---- | ------ |
+| 类型 | 默认值  |
+| ---- | ------- |
 | bool | `false` |
 
 ---
@@ -152,8 +144,8 @@ modal 的 `backdropColor`（或 modal 容器的背景色）。如果未提供且
 
 `navigationBarTranslucent` 属性决定你的 modal 是否应显示在系统导航栏之下。不过，还需要将 `statusBarTranslucent` 设为 `true`，才能使导航栏透明。
 
-| 类型 | 默认值 |
-| ---- | ------ |
+| 类型 | 默认值  |
+| ---- | ------- |
 | bool | `false` |
 
 ---
@@ -183,8 +175,8 @@ modal 的 `backdropColor`（或 modal 容器的背景色）。如果未提供且
 控制是否可以在 iOS 上通过向下滑动来关闭 modal。
 这要求你实现 `onRequestClose` 属性来处理关闭逻辑。
 
-| 类型 | 默认值 |
-| ---- | ------ |
+| 类型 | 默认值  |
+| ---- | ------- |
 | bool | `false` |
 
 ---
@@ -200,8 +192,8 @@ modal 的 `backdropColor`（或 modal 容器的背景色）。如果未提供且
 当用户在 Android 上点击硬件返回按钮，或在 Apple TV 上点击菜单按钮时，会调用 `onRequestClose` 回调。由于这是必需属性，请注意，只要 modal 处于打开状态，`BackHandler` 事件就不会被触发。
 在 iOS 上，当使用 `presentationStyle` 为 `pageSheet` 或 `formSheet` 时，通过拖拽手势关闭 Modal 会调用此回调。启用 `allowSwipeDismissal` 后，此回调会在关闭 modal 之后调用。
 
-| 类型                                                                                                                                                                                           |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 类型                                                                                                                                                                                         |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | function <div className="label basic required">必需</div><div className="label android">Android</div><div className="label tv">电视</div><hr />function <div className="label ios">iOS</div> |
 
 ---
@@ -227,8 +219,8 @@ modal 的 `backdropColor`（或 modal 容器的背景色）。如果未提供且
 - `formSheet` 居中覆盖较窄宽度的视图（仅适用于较大设备）
 - `overFullScreen` 完全覆盖屏幕，但允许透明
 
-| 类型                                                                   | 默认值                                                                              |
-| ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| 类型                                                                   | 默认值                                                                                    |
+| ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | enum(`'fullScreen'`, `'pageSheet'`, `'formSheet'`, `'overFullScreen'`) | `fullScreen` 当 `transparent={false}` 时<hr />`overFullScreen` 当 `transparent={true}` 时 |
 
 ---
@@ -237,8 +229,8 @@ modal 的 `backdropColor`（或 modal 容器的背景色）。如果未提供且
 
 `statusBarTranslucent` 属性决定你的 modal 是否应显示在系统状态栏之下。
 
-| 类型 | 默认值 |
-| ---- | ------ |
+| 类型 | 默认值  |
+| ---- | ------- |
 | bool | `false` |
 
 ---
@@ -251,7 +243,7 @@ modal 的 `backdropColor`（或 modal 容器的背景色）。如果未提供且
 当 `presentationStyle` 为 `pageSheet` 或 `formSheet` 时，此属性在 iOS 上会被忽略。
 :::
 
-| 类型                                                                                                           | 默认值        |
+| 类型                                                                                                           | 默认值         |
 | -------------------------------------------------------------------------------------------------------------- | -------------- |
 | array of enums(`'portrait'`, `'portrait-upside-down'`, `'landscape'`, `'landscape-left'`, `'landscape-right'`) | `['portrait']` |
 
@@ -261,8 +253,8 @@ modal 的 `backdropColor`（或 modal 容器的背景色）。如果未提供且
 
 `transparent` 属性决定你的 modal 是否会填满整个视图。将其设为 `true` 会让 modal 在透明背景上渲染。
 
-| 类型 | 默认值 |
-| ---- | ------ |
+| 类型 | 默认值  |
+| ---- | ------- |
 | bool | `false` |
 
 ---
@@ -273,4 +265,4 @@ modal 的 `backdropColor`（或 modal 容器的背景色）。如果未提供且
 
 | 类型 | 默认值 |
 | ---- | ------ |
-| bool | `true`  |
+| bool | `true` |

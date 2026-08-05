@@ -8,8 +8,9 @@ React Native 不仅适用于 Android 和 iOS 设备——我们的合作伙伴�
 **来自合作伙伴**
 
 - [React Native macOS](https://github.com/microsoft/react-native-macos) - 面向 macOS 和 Cocoa 的 React Native。
-- [React Native Windows](https://github.com/microsoft/react-native-windows) - 面向 Microsoft 的通用 Windows 平台（UWP）的 React Native。
-- [React Native visionOS](https://github.com/callstack/react-native-visionos) - 面向 Apple 的 visionOS 的 React Native。
+- [React Native Windows](https://github.com/microsoft/react-native-windows) - 面向微软通用 Windows 平台（UWP）的 React Native。
+- [React Native visionOS](https://github.com/callstack/react-native-visionos) - 面向苹果 visionOS 的 React Native。
+- [React Native OpenHarmony](https://atomgit.com/CPF-RN/ohos_react_native) - 面向 OpenHarmony 的 React Native。
 
 **来自社区**
 

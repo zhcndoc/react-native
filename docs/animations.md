@@ -11,9 +11,9 @@ React Native 提供了两套互补的动画系统：[`Animated`](animations#anim
 
 ## `Animated` API
 
-[`Animated`](animated) API 的设计目标是以高性能、简洁的方式表达各种有趣的动画和交互模式。`Animated` 侧重于输入与输出之间的声明式关系，中间可以配置各种变换，并通过 `start`/`stop` 方法控制基于时间的动画执行。
+[`Animated`](animated) API 旨在以高性能且简洁的方式表达各种有趣的动画和交互模式。`Animated` 侧重于输入与输出之间的声明式关系，中间可以配置各种变换，并通过 `start`/`stop` 方法控制基于时间的动画执行。
 
-`Animated` 导出了六种可设动画的组件类型：`View`、`Text`、`Image`、`ScrollView`、`FlatList` 和 `SectionList`，你也可以使用 `Animated.createAnimatedComponent()` 自定义创建。
+`Animated` 导出了六种可设为动画的组件类型：`View`、`Text`、`Image`、`ScrollView`、`FlatList` 和 `SectionList`。你也可以使用 `Animated.createAnimatedComponent()` 自定义创建动画组件。
 
 例如，一个在挂载时淡入的容器视图可能如下所示：
 
@@ -128,11 +128,11 @@ export default () => {
 </TabItem>
 </Tabs>
 
-让我们拆解一下这里发生了什么。在 `FadeInView` 的 render 方法中，使用 `useRef` 初始化了一个名为 `fadeAnim` 的新 `Animated.Value`。`View` 上的 opacity 属性映射到了这个动画值。幕后会提取这个数值，并将其用于设置 opacity。
+让我们拆解一下这里发生了什么。在 `FadeInView` 的渲染方法中，使用 `useRef` 初始化了一个名为 `fadeAnim` 的新 `Animated.Value`。`View` 上的 `opacity` 属性映射到了这个动画值。幕后会提取这个数值，并将其用于设置 `opacity`。
 
-当组件挂载时，opacity 会被设为 0。然后会在 `fadeAnim` 动画值上启动一个缓动动画，它会在每一帧根据数值变化更新所有依赖映射（在这个例子里只有 opacity），直到值动画到最终值 1。
+当组件挂载时，`opacity` 会被设为 0。然后会在 `fadeAnim` 动画值上启动一个缓动动画，它会在每一帧根据数值变化更新所有依赖映射（在这个例子里只有 `opacity`），直到值动画到最终值 1。
 
-这样做经过了优化，比调用 `setState` 并重新渲染更快。由于整个配置是声明式的，我们将来还可以实现更多优化，把配置序列化，并将动画运行在高优先级线程上。
+这种方式经过了优化，比调用 `setState` 并重新渲染更快。由于整个配置是声明式的，我们将来还可以实现更多优化，例如将配置序列化，并将动画运行在高优先级线程上。
 
 ### 配置动画
 
@@ -577,7 +577,7 @@ Animated.timing(this.state.animatedValue, {
 RNTester 应用中有多个 `Animated` 的使用示例：
 
 - [AnimatedGratuitousApp](https://github.com/facebook/react-native/tree/main/packages/rn-tester/js/examples/AnimatedGratuitousApp)
-- [NativeAnimationsExample](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/NativeAnimation/NativeAnimationsExample.js)
+- [NativeAnimationsExample](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/NativeAnimation/NativeAnimationsExample.js)。
 
 ## `LayoutAnimation` API
 
@@ -665,8 +665,8 @@ const styles = StyleSheet.create({
 
 ### `setNativeProps`
 
-如 [Direct Manipulation 部分](legacy/direct-manipulation) 所述，`setNativeProps` 允许我们直接修改原生承载组件（也就是实际由原生视图支撑的组件，而不是复合组件）的属性，而无需通过 `setState` 重新渲染组件层级。
+如 [直接操作部分](legacy/direct-manipulation) 所述，`setNativeProps` 允许我们直接修改原生承载组件（也就是实际由原生视图支撑的组件，而不是复合组件）的属性，而无需通过 `setState` 重新渲染组件层级。
 
 我们可以在 Rebound 示例中使用它来更新缩放比例——如果我们正在更新的组件嵌套很深，并且还没有通过 `shouldComponentUpdate` 做过优化，这可能会很有帮助。
 
-如果你发现动画出现掉帧（每秒帧数低于 60），可以考虑使用 `setNativeProps` 或 `shouldComponentUpdate` 来优化它们。或者，你也可以使用 [useNativeDriver 选项](/blog/2017/02/14/using-native-driver-for-animated) 将动画运行在 UI 线程而不是 JavaScript 线程上。你也可以使用 [InteractionManager](interactionmanager) 将任何计算密集型工作推迟到动画完成之后。你可以通过 In-App Dev Menu 中的 "FPS Monitor" 工具来监控帧率。
+如果你发现动画出现丢帧（运行速度低于每秒 60 帧）的情况，可以考虑使用 `setNativeProps` 或 `shouldComponentUpdate` 对其进行优化。或者，你可以通过 [使用 `useNativeDriver` 选项](/blog/2017/02/14/using-native-driver-for-animated) 在 UI 线程而不是 JavaScript 线程上运行动画。你还可以考虑将计算密集型工作推迟到 JS 线程空闲时执行（例如使用 `requestIdleCallback`）。你可以使用应用内开发菜单中的“FPS 监视器”工具来监控帧率。

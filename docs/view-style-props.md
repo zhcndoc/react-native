@@ -59,34 +59,52 @@ export default App;
 
 ### `backfaceVisibility`
 
-| 类型                          |
-| ----------------------------- |
+| 类型                           |
+| ------------------------------ |
 | 枚举 (`'visible'`, `'hidden'`) |
 
 ---
 
 ### `backgroundColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
 
-### `experimental_backgroundImage`
+### `backgroundImage`
 
-<ExperimentalAPIWarning />
-
-`experimental_backgroundImage` 提供了使用类似 Web 的语法绘制 [`linear-gradient()`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/gradient/linear-gradient) ([0.76.x+](https://github.com/facebook/react-native/blob/main/CHANGELOG-0.7x.md#v0760)) 和 [`radial-gradient()`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/gradient/radial-gradient) ([0.80.x+](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0800)) 的能力。
+`backgroundImage` 提供了使用类似 Web 的语法绘制 [`linear-gradient()`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/gradient/linear-gradient) 和 [`radial-gradient()`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/gradient/radial-gradient) 的能力。
 
 ```tsx
 // 简单用法：
-<View style={{
-  experimental_backgroundImage: 'linear-gradient(45deg, blue, red)'
-}} />
-<View style={{
-  experimental_backgroundImage: 'radial-gradient(ellipse farthest-corner at 30% 40%, red, blue)'
-}} />
+<View style={{ backgroundImage: 'linear-gradient(45deg, blue, red)' }} />
+
+<View style={{ backgroundImage: 'radial-gradient(ellipse farthest-corner at 30% 40%, red, blue)' }} />
+
+// 也支持 PlatformColor：
+<View
+style={{
+  backgroundImage: [
+    {
+      type: 'linear-gradient',
+      direction: 'to bottom',
+      colorStops: [
+        {
+          color: Platform.select({
+            ios: PlatformColor('systemTealColor'),
+            android: PlatformColor('@android:color/holo_purple'),
+            default: 'blue',
+          }),
+          positions: ['0%'],
+        },
+        {color: 'green', positions: ['100%']},
+      ],
+    },
+  ],
+}}
+/>
 ```
 
 更多复杂用法示例可在 RNTester 应用中找到（支持 `PlatformColor`）：
@@ -94,7 +112,7 @@ export default App;
 - <a href={`https://github.com/facebook/react-native/blob/${getCoreBranchNameForCurrentVersion()}/packages/rn-tester/js/examples/LinearGradient/LinearGradientExample.js`}>LinearGradientExample.js</a>
 - <a href={`https://github.com/facebook/react-native/blob/${getCoreBranchNameForCurrentVersion()}/packages/rn-tester/js/examples/RadialGradient/RadialGradientExample.js`}>RadialGradientExample.js</a>
 
-| Type                                                                                                                                                                                               |
+| 类型                                                                                                                                                                                               |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | string, array of objects: `{type: 'linear-gradient', direction: string, colorStops: object[] }`, `{type: 'radial-gradient', shape: string, position: object, size: string, colorStops: object[] }` |
 
@@ -102,112 +120,112 @@ export default App;
 
 ### `borderBottomColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
 
 ### `borderBlockColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
 
 ### `borderBlockEndColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
 
 ### `borderBlockStartColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
 
 ### `borderBottomEndRadius`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                     |
+| ------------------------ |
 | 数字，字符串（百分比值） |
 
 ---
 
 ### `borderBottomLeftRadius`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                     |
+| ------------------------ |
 | 数字，字符串（百分比值） |
 
 ---
 
 ### `borderBottomRightRadius`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                     |
+| ------------------------ |
 | 数字，字符串（百分比值） |
 
 ---
 
 ### `borderBottomStartRadius`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                     |
+| ------------------------ |
 | 数字，字符串（百分比值） |
 
 ---
 
 ### `borderStartEndRadius`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                     |
+| ------------------------ |
 | 数字，字符串（百分比值） |
 
 ---
 
 ### `borderStartStartRadius`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                     |
+| ------------------------ |
 | 数字，字符串（百分比值） |
 
 ---
 
 ### `borderEndEndRadius`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                     |
+| ------------------------ |
 | 数字，字符串（百分比值） |
 
 ---
 
 ### `borderEndStartRadius`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                     |
+| ------------------------ |
 | 数字，字符串（百分比值） |
 
 ---
 
 ### `borderBottomWidth`
 
-| 类型   |
-| ------ |
+| 类型 |
+| ---- |
 | 数字 |
 
 ---
 
 ### `borderColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
@@ -216,32 +234,32 @@ export default App;
 
 在 iOS 13+ 上，可以更改边框的角曲线。
 
-| 类型                               |
-| ---------------------------------- |
+| 类型                                |
+| ----------------------------------- |
 | 枚举 (`'circular'`, `'continuous'`) |
 
 ---
 
 ### `borderEndColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
 
 ### `borderLeftColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
 
 ### `borderLeftWidth`
 
-| 类型   |
-| ------ |
+| 类型 |
+| ---- |
 | 数字 |
 
 ---
@@ -250,96 +268,96 @@ export default App;
 
 如果圆角边框不可见，尝试同时应用 `overflow: 'hidden'`。
 
-| 类型                              |
-| --------------------------------- |
+| 类型                     |
+| ------------------------ |
 | 数字，字符串（百分比值） |
 
 ---
 
 ### `borderRightColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
 
 ### `borderRightWidth`
 
-| 类型   |
-| ------ |
+| 类型 |
+| ---- |
 | 数字 |
 
 ---
 
 ### `borderStartColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
 
 ### `borderStyle`
 
-| 类型                                    |
-| --------------------------------------- |
+| 类型                                     |
+| ---------------------------------------- |
 | 枚举 (`'solid'`, `'dotted'`, `'dashed'`) |
 
 ---
 
 ### `borderTopColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
 
 ### `borderTopEndRadius`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                     |
+| ------------------------ |
 | 数字，字符串（百分比值） |
 
 ---
 
 ### `borderTopLeftRadius`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                     |
+| ------------------------ |
 | 数字，字符串（百分比值） |
 
 ---
 
 ### `borderTopRightRadius`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                     |
+| ------------------------ |
 | 数字，字符串（百分比值） |
 
 ---
 
 ### `borderTopStartRadius`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                     |
+| ------------------------ |
 | 数字，字符串（百分比值） |
 
 ---
 
 ### `borderTopWidth`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                     |
+| ------------------------ |
 | 数字，字符串（百分比值） |
 
 ---
 
 ### `borderWidth`
 
-| 类型   |
-| ------ |
+| 类型 |
+| ---- |
 | 数字 |
 
 ### `boxShadow`
@@ -352,17 +370,18 @@ export default App;
 
 这些阴影可以组合在一起，以便单个 `boxShadow` 可以由多个不同的阴影组成。
 
-`boxShadow` 接受一个模仿 [Web 语法](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow#syntax) 的字符串，或一个 [BoxShadowValue](./boxshadowvalue) 对象数组。
-| 类型 |
-| --------------------------- |
+`boxShadow` 接受一个字符串或 [BoxShadowValue](./boxshadowvalue) 对象数组，字符串格式与 [Web 语法](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow#syntax) 类似。
+
+| 类型                              |
+| --------------------------------- |
 | BoxShadowValue 对象数组 \| 字符串 |
 
 ### `cursor` <div className="label ios">iOS</div>
 
 在 iOS 17+ 上，设置为 `pointer` 允许当指针（例如 iOS 上的触控板或手写笔，或 visionOS 上用户的视线）悬停在视图上时产生悬停效果。
 
-| 类型                        |
-| --------------------------- |
+| 类型                         |
+| ---------------------------- |
 | 枚举 (`'auto'`, `'pointer'`) |
 
 ---
@@ -371,8 +390,8 @@ export default App;
 
 设置视图的高程，使用 Android 底层的 [elevation API](https://developer.android.com/training/material/shadows-clipping.html#Elevation)。这会给项目添加投影并影响重叠视图的 Z 轴顺序。仅支持 Android 5.0+，在早期版本上无效。
 
-| 类型   |
-| ------ |
+| 类型 |
+| ---- |
 | 数字 |
 
 ---
@@ -411,10 +430,11 @@ export default App;
 `blur` 和 `dropShadow` 仅支持 **Android 12+**
 :::
 
-`filter` 接受一个由上述滤镜函数组成的对象数组，或一个模仿 [Web 语法](https://developer.mozilla.org/en-US/docs/Web/CSS/filter#syntax) 的字符串。
-| 类型 |
-| ------ |
-| 对象数组：`{brightness: 数字\|字符串}`, `{opacity: 数字\|字符串}`, `{blur: 数字\|字符串}`, `{contrast: 数字\|字符串}`, `{dropShadow: DropShadowValue\|字符串}`, `{grayscale: 数字\|字符串}`, `{hueRotate: 数字\|字符串}`, `{invert: 数字\|字符串}`, `{sepia: 数字\|字符串}`, `{saturate: 数字\|字符串}` 或 字符串|
+`filter` 接受由上述滤镜函数组成的对象数组，或一种模拟 [Web 语法](https://developer.mozilla.org/en-US/docs/Web/CSS/filter#syntax) 的字符串。
+
+| 类型                                                                                                                                                                                                                                                                                                                               |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 对象数组：`{brightness: number\|string}`、`{opacity: number\|string}`、`{blur: number\|string}`、`{contrast: number\|string}`、`{dropShadow: DropShadowValue\|string}`、`{grayscale: number\|string}`、`{hueRotate: number\|string}`、`{invert: number\|string}`、`{sepia: number\|string}`、`{saturate: number\|string}` 或字符串 |
 
 ---
 
@@ -448,7 +468,7 @@ export default App;
 - `luminosity`: 创建一种具有源颜色亮度以及背景颜色色相和饱和度的颜色。这会产生与 Color 模式相反的效果。
 - `plus-lighter`: 将源色彩通道与目标色彩通道相加，并将每个通道限制在最大值。
 
-| Type                                                                                                                                                                                                                                                   |
+| 类型                                                                                                                                                                                                                                                   |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | enum(`'normal'`, `'multiply'`, `'screen'`, `'overlay'`, `'darken'`, `'lighten'`, `'color-dodge'`, `'color-burn'`, `'hard-light'`, `'soft-light'`, `'difference'`, `'exclusion'`, `'hue'`, `'saturation'`, `'color'`, `'luminosity'`, `'plus-lighter'`) |
 
@@ -456,8 +476,8 @@ export default App;
 
 ### `opacity`
 
-| 类型   |
-| ------ |
+| 类型 |
+| ---- |
 | 数字 |
 
 ---
@@ -470,8 +490,8 @@ export default App;
 
 设置元素轮廓的颜色。有关更多详细信息，请参阅 [Web 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-color)。
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
@@ -484,8 +504,8 @@ export default App;
 
 设置轮廓与元素边界之间的空间量。不影响布局。有关更多详细信息，请参阅 [Web 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-offset)。
 
-| 类型   |
-| ------ |
+| 类型 |
+| ---- |
 | 数字 |
 
 ---
@@ -498,8 +518,8 @@ export default App;
 
 设置元素轮廓的样式。有关更多详细信息，请参阅 [Web 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-style)。
 
-| 类型                                    |
-| --------------------------------------- |
+| 类型                                     |
+| ---------------------------------------- |
 | 枚举 (`'solid'`, `'dotted'`, `'dashed'`) |
 
 ---
@@ -512,8 +532,8 @@ export default App;
 
 绘制在元素周围、边框外部的轮廓宽度。不影响布局。有关更多详细信息，请参阅 [Web 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-width)。
 
-| 类型   |
-| ------ |
+| 类型 |
+| ---- |
 | 数字 |
 
 ---
@@ -527,6 +547,6 @@ export default App;
 - `'box-none'`：View 永远不会成为触摸事件的目标，但其子视图可以。
 - `'box-only'`：View 可以成为触摸事件的目标，但其子视图不可以。
 
-| 类型                                                  |
-| ----------------------------------------------------- |
+| 类型                                                   |
+| ------------------------------------------------------ |
 | 枚举 (`'auto'`, `'box-none'`, `'box-only'`, `'none'` ) |

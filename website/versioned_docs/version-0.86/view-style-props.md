@@ -67,9 +67,9 @@ export default App;
 
 ### `backgroundColor`
 
-| 类型               |
-| ------------------ |
-| [color](colors.md) |
+| 类型              |
+| ----------------- |
+| [颜色](colors.md) |
 
 ---
 
@@ -94,25 +94,25 @@ export default App;
 - <a href={`https://github.com/facebook/react-native/blob/${getCoreBranchNameForCurrentVersion()}/packages/rn-tester/js/examples/LinearGradient/LinearGradientExample.js`}>LinearGradientExample.js</a>
 - <a href={`https://github.com/facebook/react-native/blob/${getCoreBranchNameForCurrentVersion()}/packages/rn-tester/js/examples/RadialGradient/RadialGradientExample.js`}>RadialGradientExample.js</a>
 
-| 类型                                                                                                                                                                                               |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| string, array of objects: `{type: 'linear-gradient', direction: string, colorStops: object[] }`, `{type: 'radial-gradient', shape: string, position: object, size: string, colorStops: object[] }` |
+| 类型                                                                                                                                                                                       |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 字符串、对象数组：`{type: 'linear-gradient', direction: string, colorStops: object[] }`、`{type: 'radial-gradient', shape: string, position: object, size: string, colorStops: object[] }` |
 
 ---
 
 ### `borderBottomColor`
 
-| 类型               |
-| ------------------ |
-| [color](colors.md) |
+| 类型              |
+| ----------------- |
+| [颜色](colors.md) |
 
 ---
 
 ### `borderBlockColor`
 
-| 类型               |
-| ------------------ |
-| [color](colors.md) |
+| 类型              |
+| ----------------- |
+| [颜色](colors.md) |
 
 ---
 
@@ -126,73 +126,71 @@ export default App;
 
 ### `borderBlockStartColor`
 
-| 类型               |
-| ------------------ |
-| [color](colors.md) |
+| 类型              |
+| ----------------- |
+| [颜色](colors.md) |
 
 ---
 
 ### `borderBottomEndRadius`
 
-| 类型                              |
-| --------------------------------- |
-| number, string (percentage value) |
+| 类型                       |
+| -------------------------- |
+| number, string（百分比值） |
 
 ---
 
 ### `borderBottomLeftRadius`
 
-| 类型                              |
-| --------------------------------- |
-| number, string (percentage value) |
+| 类型                     |
+| ------------------------ |
+| 数字、字符串（百分比值） |
 
 ---
 
 ### `borderBottomRightRadius`
 
-| 类型                              |
-| --------------------------------- |
-| number, string (percentage value) |
+| 类型                       |
+| -------------------------- |
+| number, string（百分比值） |
 
 ---
 
 ### `borderBottomStartRadius`
 
-| 类型                              |
-| --------------------------------- |
-| number, string (percentage value) |
+| 类型                       |
+| -------------------------- |
+| number, string（百分比值） |
 
 ---
 
 ### `borderStartEndRadius`
 
-| 类型                              |
-| --------------------------------- |
-| number, string (percentage value) |
-
----
+| 类型                       |
+| -------------------------- |
+| number, string（百分比值） |
 
 ### `borderStartStartRadius`
 
-| 类型                              |
-| --------------------------------- |
-| number, string (percentage value) |
+| 类型                       |
+| -------------------------- |
+| number, string（百分比值） |
 
 ---
 
 ### `borderEndEndRadius`
 
-| 类型                              |
-| --------------------------------- |
-| number, string (percentage value) |
+| 类型                       |
+| -------------------------- |
+| number，string（百分比值） |
 
 ---
 
 ### `borderEndStartRadius`
 
-| 类型                              |
-| --------------------------------- |
-| number, string (percentage value) |
+| 类型                     |
+| ------------------------ |
+| 数字、字符串（百分比值） |
 
 ---
 
@@ -206,7 +204,7 @@ export default App;
 
 ### `borderColor`
 
-| 类型               |
+| Type               |
 | ------------------ |
 | [color](colors.md) |
 
@@ -232,9 +230,9 @@ export default App;
 
 ### `borderLeftColor`
 
-| 类型               |
-| ------------------ |
-| [color](colors.md) |
+| 类型              |
+| ----------------- |
+| [颜色](colors.md) |
 
 ---
 
@@ -250,9 +248,9 @@ export default App;
 
 如果圆角边框不可见，也可以尝试同时应用 `overflow: 'hidden'`。
 
-| 类型                              |
-| --------------------------------- |
-| number, string (percentage value) |
+| 类型                      |
+| ------------------------- |
+| number, string (百分比值) |
 
 ---
 
@@ -274,9 +272,9 @@ export default App;
 
 ### `borderStartColor`
 
-| 类型               |
-| ------------------ |
-| [color](colors.md) |
+| 类型              |
+| ----------------- |
+| [颜色](colors.md) |
 
 ---
 
@@ -290,49 +288,47 @@ export default App;
 
 ### `borderTopColor`
 
-| 类型               |
-| ------------------ |
-| [color](colors.md) |
+| 类型              |
+| ----------------- |
+| [颜色](colors.md) |
 
 ---
 
 ### `borderTopEndRadius`
 
-| 类型                              |
-| --------------------------------- |
-| number, string (percentage value) |
+| 类型                     |
+| ------------------------ |
+| 数字、字符串（百分比值） |
 
 ---
 
 ### `borderTopLeftRadius`
 
-| 类型                              |
-| --------------------------------- |
-| number, string (percentage value) |
-
----
+| 类型                       |
+| -------------------------- |
+| number, string（百分比值） |
 
 ### `borderTopRightRadius`
 
-| 类型                              |
-| --------------------------------- |
-| number, string (percentage value) |
+| 类型                       |
+| -------------------------- |
+| number, string（百分比值） |
 
 ---
 
 ### `borderTopStartRadius`
 
-| 类型                              |
-| --------------------------------- |
-| number, string (percentage value) |
+| 类型                     |
+| ------------------------ |
+| 数字、字符串（百分比值） |
 
 ---
 
 ### `borderTopWidth`
 
-| 类型                              |
-| --------------------------------- |
-| number, string (percentage value) |
+| 类型                       |
+| -------------------------- |
+| number, string（百分比值） |
 
 ---
 
@@ -352,10 +348,11 @@ export default App;
 
 这些阴影可以组合在一起，因此单个 `boxShadow` 可以由多个不同的阴影组成。
 
-`boxShadow` 接受一个模拟 [Web 语法](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow#syntax) 的字符串，或一个 [BoxShadowValue](./boxshadowvalue) 对象数组。
-| 类型 |
-| --------------------------- |
-| BoxShadowValue 对象数组 \| string |
+`boxShadow` 接受一个模拟 [Web 语法](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow#syntax) 的字符串，或一个由 [BoxShadowValue](./boxshadowvalue) 对象组成的数组。
+
+| Type                                      |
+| ----------------------------------------- |
+| array of BoxShadowValue objects \| string |
 
 ### `cursor` <div className="label ios">iOS</div>
 
@@ -398,7 +395,7 @@ export default App;
 
 以下滤镜函数仅在 Android 上可用：
 
-- `blur`：使用 [Gaussian blur](https://en.wikipedia.org/wiki/Gaussian_blur) 模糊 `View`，其中指定的长度表示模糊算法中使用的半径。任何非负的 DIP 值都有效（不支持百分比）。数值越大，结果越模糊。
+- `blur`：使用 [高斯模糊](https://en.wikipedia.org/wiki/Gaussian_blur) 模糊 `View`，其中指定的长度表示模糊算法中使用的半径。任何非负的 DIP 值都有效（不支持百分比）。数值越大，结果越模糊。
 - `contrast`：更改 `View` 的对比度。接受非负数或百分比。
 - `dropShadow`：围绕 `View` 的 alpha 蒙版添加阴影（只有 `View` 中非零 alpha 像素会投射阴影）。接受一个可选颜色作为阴影颜色，以及 2 或 3 个长度值。如果指定 2 个长度，则将其解释为 `offsetX` 和 `offsetY`，分别用于在 X 和 Y 方向平移阴影。如果给出第 3 个长度，则将其解释为用于阴影的高斯模糊标准差——数值越大，阴影越模糊。有关参数的更多信息，请参见 [DropShadowValue](./dropshadowvalue.md)。
 - `grayscale`：按指定程度将 `View` 转换为 [灰度](https://en.wikipedia.org/wiki/Grayscale)。接受非负数或百分比，其中 `1` 或 `100%` 表示完全灰度化。
@@ -411,10 +408,11 @@ export default App;
 `blur` 和 `dropShadow` 仅支持 **Android 12+**
 :::
 
-`filter` 接受一个由上述滤镜函数对象组成的数组，或者一个模拟 [Web 语法](https://developer.mozilla.org/en-US/docs/Web/CSS/filter#syntax) 的字符串。
-| 类型 |
-| ------ |
-| array of objects: `{brightness: number\|string}`, `{opacity: number\|string}`, `{blur: number\|string}`, `{contrast: number\|string}`, `{dropShadow: DropShadowValue\|string}`, `{grayscale: number\|string}`, `{hueRotate: number\|string}`, `{invert: number\|string}`, `{sepia: number\|string}`, `{saturate: number\|string}` or string|
+`filter` 接受由上述滤镜函数组成的对象数组，或模仿 [Web 语法](https://developer.mozilla.org/en-US/docs/Web/CSS/filter#syntax) 的字符串。
+
+| 类型                                                                                                                                                                                                                                                                                                                               |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 对象数组：`{brightness: number\|string}`、`{opacity: number\|string}`、`{blur: number\|string}`、`{contrast: number\|string}`、`{dropShadow: DropShadowValue\|string}`、`{grayscale: number\|string}`、`{hueRotate: number\|string}`、`{invert: number\|string}`、`{sepia: number\|string}`、`{saturate: number\|string}` 或字符串 |
 
 ---
 

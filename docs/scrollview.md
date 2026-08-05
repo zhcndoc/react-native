@@ -76,9 +76,9 @@ export default App;
 
 一个 React 组件，用于渲染粘性标题，应与 `stickyHeaderIndices` 一起使用。如果你的粘性标题使用了自定义变换，可能需要设置此组件，例如当你希望列表拥有一个可动画和可隐藏的标题时。如果未提供该组件，将使用默认的 [`ScrollViewStickyHeader`](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Components/ScrollView/ScrollViewStickyHeader.js) 组件。
 
-| 类型               |
-| ------------------ |
-| component, element |
+| 类型       |
+| ---------- |
+| 组件、元素 |
 
 ---
 
@@ -86,8 +86,8 @@ export default App;
 
 当为 true 时，即使内容比 ScrollView 本身更小，滚动视图在到达末尾时也会水平回弹。
 
-| 类型 | 默认值                                               |
-| ---- | ----------------------------------------------------- |
+| 类型 | 默认值                                             |
+| ---- | -------------------------------------------------- |
 | bool | `horizontal={true}` 时为 `true`<hr/>否则为 `false` |
 
 ---
@@ -96,8 +96,8 @@ export default App;
 
 当为 true 时，即使内容比 ScrollView 本身更小，滚动视图在到达末尾时也会垂直回弹。
 
-| 类型 | 默认值                                               |
-| ---- | ----------------------------------------------------- |
+| 类型 | 默认值                                             |
+| ---- | -------------------------------------------------- |
 | bool | `horizontal={true}` 时为 `false`<hr/>否则为 `true` |
 
 ---
@@ -107,8 +107,8 @@ export default App;
 控制 iOS 是否应自动调整位于导航栏或标签栏/工具栏后面的滚动视图的内容 inset。
 
 | 类型 | 默认值 |
-| ---- | ------- |
-| bool | `true`  |
+| ---- | ------ |
+| bool | `true` |
 
 ---
 
@@ -116,7 +116,7 @@ export default App;
 
 控制当键盘改变尺寸时，ScrollView 是否应自动调整其 `contentInset` 和 `scrollViewInsets`。
 
-| 类型 | 默认值 |
+| 类型 | 默认值  |
 | ---- | ------- |
 | bool | `false` |
 
@@ -127,8 +127,8 @@ export default App;
 控制 iOS 是否应自动调整滚动指示器的 inset。请参阅 Apple 关于该属性的[文档](https://developer.apple.com/documentation/uikit/uiscrollview/3198043-automaticallyadjustsscrollindica)。
 
 | 类型 | 默认值 |
-| ---- | ------- |
-| bool | `true`  |
+| ---- | ------ |
+| bool | `true` |
 
 ---
 
@@ -137,8 +137,8 @@ export default App;
 当为 true 时，如果内容沿滚动方向的轴比 ScrollView 更大，滚动视图在到达内容末尾时会回弹。当为 false 时，即使 `alwaysBounce*` 属性为 `true`，也会禁用所有回弹。
 
 | 类型 | 默认值 |
-| ---- | ------- |
-| bool | `true`  |
+| ---- | ------ |
+| bool | `true` |
 
 ---
 
@@ -147,8 +147,8 @@ export default App;
 当为 `true` 时，手势可以驱动缩放超过最小/最大值，并且在手势结束时会动画到最小/最大值；否则缩放不会超过限制。
 
 | 类型 | 默认值 |
-| ---- | ------- |
-| bool | `true`  |
+| ---- | ------ |
+| bool | `true` |
 
 ---
 
@@ -157,8 +157,8 @@ export default App;
 当为 `false` 时，一旦开始跟踪，就不会尝试在触摸移动时拖拽。
 
 | 类型 | 默认值 |
-| ---- | ------- |
-| bool | `true`  |
+| ---- | ------ |
+| bool | `true` |
 
 ---
 
@@ -166,7 +166,7 @@ export default App;
 
 当为 `true` 时，如果内容小于 ScrollView 的边界，滚动视图会自动将内容居中；当内容大于 ScrollView 时，此属性无效。
 
-| 类型 | 默认值 |
+| 类型 | 默认值  |
 | ---- | ------- |
 | bool | `false` |
 
@@ -189,8 +189,8 @@ const styles = StyleSheet.create({
 });
 ```
 
-| 类型                           |
-| ------------------------------ |
+| 类型                          |
+| ----------------------------- |
 | [View 样式](view-style-props) |
 
 ---
@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
 
 滚动视图内容距滚动视图边缘的内缩量。
 
-| 类型                                                                 | 默认值                                  |
+| 类型                                                                 | 默认值                                   |
 | -------------------------------------------------------------------- | ---------------------------------------- |
 | object: `{top: number, left: number, bottom: number, right: number}` | `{top: 0, left: 0, bottom: 0, right: 0}` |
 
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
 
 此属性指定安全区域 inset 如何用于修改滚动视图的内容区域。适用于 iOS 11 及更高版本。
 
-| 类型                                                           | 默认值   |
+| 类型                                                           | 默认值    |
 | -------------------------------------------------------------- | --------- |
 | enum(`'automatic'`, `'scrollableAxes'`, `'never'`, `'always'`) | `'never'` |
 
@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
 
 用于手动设置起始滚动偏移量。
 
-| 类型  | 默认值        |
+| 类型  | 默认值         |
 | ----- | -------------- |
 | Point | `{x: 0, y: 0}` |
 
@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
 - `'normal'` 在 iOS 上为 0.998，在 Android 上为 0.985。
 - `'fast'` 在 iOS 上为 0.99，在 Android 上为 0.9。
 
-| 类型                               | 默认值    |
+| 类型                               | 默认值     |
 | ---------------------------------- | ---------- |
 | enum(`'fast'`, `'normal'`), number | `'normal'` |
 
@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
 
 当为 true 时，ScrollView 会尝试在拖动时只锁定为垂直或水平滚动。
 
-| 类型 | 默认值 |
+| 类型 | 默认值  |
 | ---- | ------- |
 | bool | `false` |
 
@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
 
 当为 true 时，无论手势多快，滚动视图都会停在下一个索引位置（相对于松手时的滚动位置）。当页面宽度小于水平 ScrollView 的宽度，或页面高度小于垂直 ScrollView 的高度时，可用于分页。
 
-| 类型 | 默认值 |
+| 类型 | 默认值  |
 | ---- | ------- |
 | bool | `false` |
 
@@ -262,7 +262,7 @@ const styles = StyleSheet.create({
 
 当为 true 时，会禁用 ScrollView 上默认的 JS pan responder，ScrollView 内部触摸的完全控制权会交给其子组件。尤其在启用 `snapToInterval` 时非常有用，因为它不遵循典型的触摸模式。若未启用 `snapToInterval`，不要在普通 ScrollView 场景下使用此属性，否则在滚动时可能会触发意外的触摸事件。
 
-| 类型 | 默认值 |
+| 类型 | 默认值  |
 | ---- | ------- |
 | bool | `false` |
 
@@ -272,8 +272,8 @@ const styles = StyleSheet.create({
 
 有时 ScrollView 占用的空间会大于其内容填充的空间。在这种情况下，此属性会用一种颜色填充 ScrollView 剩余区域，以避免设置背景并产生不必要的过度绘制。这是一项高级优化，在一般情况下并不需要。
 
-| 类型            |
-| --------------- |
+| 类型           |
+| -------------- |
 | [颜色](colors) |
 
 ---
@@ -285,8 +285,8 @@ const styles = StyleSheet.create({
 如果该值大于 `0`，则会根据当前滚动方向和位置相应地设置淡出边缘，以指示是否还有更多内容可显示。
 
 | 类型                                               | 默认值 |
-| -------------------------------------------------- | ------- |
-| number<hr />object: `{start: number, end: number}` | `0`     |
+| -------------------------------------------------- | ------ |
+| number<hr />object: `{start: number, end: number}` | `0`    |
 
 ---
 
@@ -294,7 +294,7 @@ const styles = StyleSheet.create({
 
 当为 `true` 时，滚动视图的子元素会按行水平排列，而不是按列垂直排列。
 
-| 类型 | 默认值 |
+| 类型 | 默认值  |
 | ---- | ------- |
 | bool | `false` |
 
@@ -308,7 +308,7 @@ const styles = StyleSheet.create({
 - `'black'`，滚动指示器为 `black`。这种样式适合浅色背景。
 - `'white'`，滚动指示器为 `white`。这种样式适合深色背景。
 
-| 类型                                    | 默认值     |
+| 类型                                    | 默认值      |
 | --------------------------------------- | ----------- |
 | enum(`'default'`, `'black'`, `'white'`) | `'default'` |
 
@@ -318,7 +318,7 @@ const styles = StyleSheet.create({
 
 如果应让粘性标题固定在 ScrollView 底部而不是顶部。通常与反向 ScrollView 一起使用。
 
-| 类型 | 默认值 |
+| 类型 | 默认值  |
 | ---- | ------- |
 | bool | `false` |
 
@@ -335,7 +335,7 @@ const styles = StyleSheet.create({
 
 - `'interactive'`，键盘会随着拖动以交互方式被关闭，并与触摸同步移动，向上拖动会取消关闭。在 Android 上不支持该模式，其行为与 `'none'` 相同。
 
-| 类型                                                                                                                                                            | 默认值  |
+| 类型                                                                                                                                                            | 默认值   |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | enum(`'none'`, `'on-drag'`) <div className="label android">Android</div><hr />enum(`'none'`, `'on-drag'`, `'interactive'`) <div className="label ios">iOS</div> | `'none'` |
 
@@ -345,15 +345,13 @@ const styles = StyleSheet.create({
 
 决定在点击后键盘应何时保持可见。
 
-- `'never'`，当键盘弹出时，点击聚焦文本输入框之外的区域会关闭键盘。发生这种情况时，子组件不会收到该点击。
-- `'always'`，键盘不会自动关闭，滚动视图也不会拦截点击，但滚动视图的子组件可以接收点击。
-- `'handled'`，如果该点击已被滚动视图的子组件处理（或被祖先捕获），键盘不会自动关闭。
-- `false`，**_已废弃_**，请改用 `'never'`
-- `true`，**_已废弃_**，请改用 `'always'`
+- `'never'` 当键盘弹出时，点击获得焦点的文本输入框之外的区域会关闭键盘。发生这种情况时，子元素不会接收到点击事件。
+- `'always'` 键盘不会自动关闭，滚动视图也不会捕获点击事件，但滚动视图的子元素可以捕获点击事件。
+- `'handled'` 当点击事件由滚动视图的子元素处理（或由祖先元素捕获）时，键盘不会自动关闭。
 
-| 类型                                                      | 默认值   |
-| --------------------------------------------------------- | --------- |
-| enum(`'always'`, `'never'`, `'handled'`, `false`, `true`) | `'never'` |
+| Type                                     | Default   |
+| ---------------------------------------- | --------- |
+| enum(`'always'`, `'never'`, `'handled'`) | `'never'` |
 
 ---
 
@@ -378,8 +376,8 @@ const styles = StyleSheet.create({
 允许的最大缩放比例。
 
 | 类型   | 默认值 |
-| ------ | ------- |
-| number | `1.0`   |
+| ------ | ------ |
+| number | `1.0`  |
 
 ---
 
@@ -388,8 +386,8 @@ const styles = StyleSheet.create({
 允许的最小缩放比例。
 
 | 类型   | 默认值 |
-| ------ | ------- |
-| number | `1.0`   |
+| ------ | ------ |
+| number | `1.0`  |
 
 ---
 
@@ -397,7 +395,7 @@ const styles = StyleSheet.create({
 
 为 Android API 21+ 启用嵌套滚动。
 
-| 类型 | 默认值 |
+| 类型 | 默认值  |
 | ---- | ------- |
 | bool | `false` |
 
@@ -503,7 +501,7 @@ const styles = StyleSheet.create({
 - `'always'` - 始终允许用户对该视图进行超滚动。
 - `'never'` - 从不允许用户对该视图进行超滚动。
 
-| 类型                                  | 默认值  |
+| 类型                                  | 默认值   |
 | ------------------------------------- | -------- |
 | enum(`'auto'`, `'always'`, `'never'`) | `'auto'` |
 
@@ -513,7 +511,7 @@ const styles = StyleSheet.create({
 
 当为 true 时，滚动视图在滚动时会停在其尺寸的整数倍位置。可用于水平分页。
 
-| 类型 | 默认值 |
+| 类型 | 默认值  |
 | ---- | ------- |
 | bool | `false` |
 
@@ -523,7 +521,7 @@ const styles = StyleSheet.create({
 
 使滚动条在不使用时不会变为透明。
 
-| 类型 | 默认值 |
+| 类型 | 默认值  |
 | ---- | ------- |
 | bool | `false` |
 
@@ -534,8 +532,8 @@ const styles = StyleSheet.create({
 当为 true 时，ScrollView 允许使用捏合手势进行放大和缩小。
 
 | 类型 | 默认值 |
-| ---- | ------- |
-| bool | `true`  |
+| ---- | ------ |
+| bool | `true` |
 
 ---
 
@@ -572,8 +570,8 @@ const styles = StyleSheet.create({
 注意，仍然可以通过调用 `scrollTo` 来滚动视图。
 
 | 类型 | 默认值 |
-| ---- | ------- |
-| bool | `true`  |
+| ---- | ------ |
+| bool | `true` |
 
 ---
 
@@ -582,8 +580,8 @@ const styles = StyleSheet.create({
 限制滚动时触发滚动事件的频率，单位为毫秒。当滚动响应中需要执行开销较大的工作时，这可能很有用。值 &le; `16` 将禁用节流，无论设备刷新率如何。
 
 | 类型   | 默认值 |
-| ------ | ------- |
-| number | `0`     |
+| ------ | ------ |
+| number | `0`    |
 
 ---
 
@@ -591,7 +589,7 @@ const styles = StyleSheet.create({
 
 滚动视图指示器距滚动视图边缘的内缩量。通常应设置为与 `contentInset` 相同的值。
 
-| 类型                                                                 | 默认值                                  |
+| 类型                                                                 | 默认值                                   |
 | -------------------------------------------------------------------- | ---------------------------------------- |
 | object: `{top: number, left: number, bottom: number, right: number}` | `{top: 0, left: 0, bottom: 0, right: 0}` |
 
@@ -612,8 +610,8 @@ const styles = StyleSheet.create({
 当为 `true` 时，ScrollView 会自动滚动以将获得焦点的子元素带入视图。将其设置为 `false` 可禁用此行为，并在焦点变化时手动控制滚动位置。
 
 | 类型 | 默认值 |
-| ---- | ------- |
-| bool | `true`  |
+| ---- | ------ |
+| bool | `true` |
 
 ---
 
@@ -621,7 +619,7 @@ const styles = StyleSheet.create({
 
 当为 `true` 时，滚动视图可以通过编程方式滚动到超出其内容尺寸的区域。
 
-| 类型 | 默认值 |
+| 类型 | 默认值  |
 | ---- | ------- |
 | bool | `false` |
 
@@ -632,8 +630,8 @@ const styles = StyleSheet.create({
 当为 `true` 时，点击状态栏会让滚动视图滚动到顶部。
 
 | 类型 | 默认值 |
-| ---- | ------- |
-| bool | `true`  |
+| ---- | ------ |
+| bool | `true` |
 
 ---
 
@@ -642,8 +640,8 @@ const styles = StyleSheet.create({
 当为 `true` 时，显示水平滚动指示器。
 
 | 类型 | 默认值 |
-| ---- | ------- |
-| bool | `true`  |
+| ---- | ------ |
+| bool | `true` |
 
 ---
 
@@ -652,8 +650,8 @@ const styles = StyleSheet.create({
 当为 `true` 时，显示垂直滚动指示器。
 
 | 类型 | 默认值 |
-| ---- | ------- |
-| bool | `true`  |
+| ---- | ------ |
+| bool | `true` |
 
 ---
 
@@ -667,7 +665,7 @@ const styles = StyleSheet.create({
 - `'center'` 会将吸附对齐到中心。
 - `'end'` 会将吸附对齐到右侧（水平）或底部（垂直）。
 
-| 类型                                 | 默认值   |
+| 类型                                 | 默认值    |
 | ------------------------------------ | --------- |
 | enum(`'start'`, `'center'`, `'end'`) | `'start'` |
 
@@ -678,8 +676,8 @@ const styles = StyleSheet.create({
 与 `snapToOffsets` 配合使用。默认情况下，列表末尾会被视为一个吸附偏移量。将 `snapToEnd` 设置为 false 可禁用此行为，并允许列表在末尾与最后一个 `snapToOffsets` 偏移量之间自由滚动。
 
 | 类型 | 默认值 |
-| ---- | ------- |
-| bool | `true`  |
+| ---- | ------ |
+| bool | `true` |
 
 ---
 
@@ -708,8 +706,8 @@ const styles = StyleSheet.create({
 与 `snapToOffsets` 配合使用。默认情况下，列表开头会被视为一个吸附偏移量。将 `snapToStart` 设置为 `false` 可禁用此行为，并允许列表在起始位置与第一个 `snapToOffsets` 偏移量之间自由滚动。
 
 | 类型 | 默认值 |
-| ---- | ------- |
-| bool | `true`  |
+| ---- | ------ |
+| bool | `true` |
 
 ---
 
@@ -717,7 +715,7 @@ const styles = StyleSheet.create({
 
 当设置为 `true` 时，粘性标题在向下滚动列表时会隐藏，在向上滚动时会停靠到列表顶部。
 
-| 类型 | 默认值 |
+| 类型 | 默认值  |
 | ---- | ------- |
 | bool | `false` |
 
@@ -727,9 +725,9 @@ const styles = StyleSheet.create({
 
 一个子元素索引数组，用于决定滚动时哪些子元素会停靠到屏幕顶部。例如，传入 `stickyHeaderIndices={[0]}` 会使第一个子元素固定到滚动视图顶部。你也可以使用 `[x,y,z]` 让多个项目在位于顶部时变为粘性。此属性不支持与 `horizontal={true}` 一起使用。
 
-| 类型            |
-| --------------- |
-| array of number |
+| 类型     |
+| -------- |
+| 数字数组 |
 
 ---
 
@@ -738,8 +736,8 @@ const styles = StyleSheet.create({
 滚动视图内容的当前缩放比例。
 
 | 类型   | 默认值 |
-| ------ | ------- |
-| number | `1.0`   |
+| ------ | ------ |
+| number | `1.0`  |
 
 ---
 

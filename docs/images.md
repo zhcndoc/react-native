@@ -65,13 +65,28 @@ const icon = this.props.active
 
 请注意，以这种方式 `require` 的图片源包含了供 Image 使用的尺寸（宽度、高度）信息。如果你需要动态缩放图片（例如通过 flex），可能需要在 style 属性上手动设置 `{width: undefined, height: undefined}`。
 
-## 静态非图片资源
+### 在资源目录中打包图片（iOS）
 
-上面描述的 `require` 语法同样可以用于在项目中静态引入音频、视频或文档文件。它支持大多数常见文件类型，包括 `.mp3`、`.wav`、`.mp4`、`.mov`、`.html`、`.pdf` 等。完整列表请参见 [bundler defaults](https://github.com/facebook/metro/blob/main/packages/metro-config/src/defaults/defaults.js#L16-L51)。
+默认情况下，打包器会将每张必需的图片以及所有 `@2x` 和 `@3x` 变体作为独立文件复制到 iOS 应用中，并放置在 JavaScript 包旁边。在 iOS 上，你也可以将它们编译到[资源目录](https://developer.apple.com/documentation/xcode/managing-assets-with-asset-catalogs)中，这样系统只会随应用附带设备所需的图片比例。
 
-你可以通过在 [Metro 配置](https://metrobundler.dev/docs/configuration) 中添加 [`assetExts` resolver option](https://metrobundler.dev/docs/configuration#resolver-options) 来支持其他类型。
+要启用此功能，请在应用的 `Info.plist` 中将 `RCTUseAssetCatalog` 键设置为 `true`：
 
-需要注意的是，视频必须使用绝对定位而不是 `flexGrow`，因为目前非图片资源不会传递尺寸信息。对于直接链接到 Xcode 或 Android 的 Assets 文件夹中的视频，则不存在这个限制。
+```xml
+<key>RCTUseAssetCatalog</key>
+<true/>
+```
+
+启用后，iOS 构建脚本会在构建时将打包的图片编译到 `RNAssets.bundle` 资源目录中。你的 `require('./my-icon.png')` 调用保持完全不变，也不需要对 Xcode 项目进行任何修改。
+
+更改此设置后，请务必执行一次全量清理构建。
+
+## 静态非图像资源
+
+上面描述的 `require` 语法同样可以用于在项目中静态引入音频、视频或文档文件。它支持大多数常见文件类型，包括 `.mp3`、`.wav`、`.mp4`、`.mov`、`.html`、`.pdf` 等。完整列表请参见 [打包器默认配置](https://github.com/facebook/metro/blob/main/packages/metro-config/src/defaults/defaults.js#L16-L51)。
+
+你可以通过在 [Metro 配置](https://metrobundler.dev/docs/configuration) 中添加 [`assetExts` 解析器选项](https://metrobundler.dev/docs/configuration#resolver-options) 来支持其他类型。
+
+需要注意的是，视频必须使用绝对定位而不是 `flexGrow`，因为目前非图片资源不会传递尺寸信息。对于直接链接到 Xcode 或 Android 的资源文件夹中的视频，则不存在这个限制。
 
 ## 来自混合应用资源的图片
 
@@ -122,7 +137,7 @@ const icon = this.props.active
     headers: {
       Pragma: 'no-cache',
     },
-    body: 'Your Body goes here',
+    body: '请求正文写在这里',
   }}
   style={{width: 400, height: 400}}
 />
@@ -272,9 +287,9 @@ RCTSetImageCacheLimits(4*1024*1024, 200*1024*1024);
 
 **参数：**
 
-| 名称           | 类型   | 必需 | 描述             |
-| -------------- | ------ | ---- | ---------------- |
+| 名称           | 类型   | 必需 | 描述               |
+| -------------- | ------ | ---- | ------------------ |
 | imageSizeLimit | number | 是   | 图片缓存大小限制。 |
-| totalCostLimit  | number | 是   | 总缓存成本限制。   |
+| totalCostLimit | number | 是   | 总缓存成本限制。   |
 
 在上面的代码示例中，图片大小限制被设置为 4 MB，总成本限制被设置为 200 MB。

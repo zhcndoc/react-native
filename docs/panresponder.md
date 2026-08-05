@@ -7,9 +7,9 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 `PanResponder` 将多个触摸协调为一个手势。它使单指手势能够抵抗额外触摸的干扰，也可用于识别基本的多点触摸手势。
 
-默认情况下，`PanResponder` 会持有一个 `InteractionManager` 句柄，以阻止长时间运行的 JS 事件打断正在进行的手势。
+默认情况下，`PanResponder` 会持有一个交互句柄，以阻止长时间运行的 JS 事件中断活动手势。
 
-它为 [gesture responder system](gesture-responder-system.md) 提供的 responder 处理器提供了一个可预测的封装。对于每个处理器，它都会在原生事件对象旁边提供一个新的 `gestureState` 对象：
+它为 [手势 responder 系统](gesture-responder-system.md) 提供的 responder 处理器提供了一个可预测的封装。对于每个处理器，它都会在原生事件对象旁边提供一个新的 `gestureState` 对象：
 
 ```
 onPanResponderMove: (event, gestureState) => {}
@@ -28,7 +28,7 @@ onPanResponderMove: (event, gestureState) => {}
 - `dy` - 自触摸开始以来手势累计移动距离
 - `vx` - 当前手势速度
 - `vy` - 当前手势速度
-- `numberActiveTouches` - 当前屏幕上的触摸点数量
+- `numberActiveTouches` - 当前屏幕上的触摸点数量。
 
 ## 使用模式
 
@@ -140,7 +140,7 @@ export default App;
 
 ---
 
-# 参考
+# 参考。
 
 ## 方法
 
@@ -152,9 +152,9 @@ static create(config: PanResponderCallbacks): PanResponderInstance;
 
 **参数：**
 
-| Name                                                        | Type   | Description |
-| ----------------------------------------------------------- | ------ | ----------- |
-| config <div className="label basic required">Required</div> | object | 见下文 |
+| 名称                                                    | 类型   | 描述   |
+| ------------------------------------------------------- | ------ | ------ |
+| config <div className="label basic required">必需</div> | object | 见下文 |
 
 `config` 对象为所有 responder 回调提供增强版本，不仅提供 [`PressEvent`](pressevent)，还提供 `PanResponder` 的手势状态，其方式是在每个典型的 `onResponder*` 回调中将单词 `Responder` 替换为 `PanResponder`。例如，`config` 对象将如下所示：
 
@@ -172,6 +172,6 @@ static create(config: PanResponderCallbacks): PanResponderInstance;
 - `onPanResponderTerminationRequest: (e, gestureState) => {...}`
 - `onShouldBlockNativeResponder: (e, gestureState) => {...}`
 
-通常，对于具有 capture 对应项的事件，我们会在 capture 阶段更新一次 `gestureState`，并且也可以在 bubble 阶段使用它。
+通常，对于具有捕获对应项的事件，我们会在捕获阶段更新一次 `gestureState`，并且也可以在冒泡阶段使用它。
 
 请小心处理 `onStartShould*` 回调。它们只会反映那些冒泡/捕获到 Node 的 start/end 事件所更新的 `gestureState`。一旦该节点成为 responder，你就可以依赖每个 start/end 事件都由手势处理，并且 `gestureState` 会相应更新。除非你是 responder，否则 `(numberActiveTouches)` 可能并不完全准确。

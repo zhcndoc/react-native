@@ -19,7 +19,7 @@ import TabItem from '@theme/TabItem';
 - [React 19.2](/blog/2025/12/10/react-native-0.83#react-192)
 - [新的 DevTools 功能](/blog/2025/12/10/react-native-0.83#new-devtools-features)
 - [Intersection Observer（Canary）](/blog/2025/12/10/react-native-0.83#intersection-observers-canary)
-- [Web Performance API 正式稳定](/blog/2025/12/10/react-native-0.83#web-performance-apis-as-stable)
+- [Web Performance API 正式稳定](/blog/2025/12/10/react-native-0.83#web-performance-apis-as-stable)。
 
 {/* truncate */}
 
@@ -116,13 +116,13 @@ import TabItem from '@theme/TabItem';
 - **更好的窗口管理**：macOS 上支持更优多任务处理，断点自动激活窗口，应用重新连接时自动置顶，重启时保存窗口布局。
 - **更高稳定性**，DevTools 进程独立于个人浏览器配置，特别解决了某些预装 Chrome 扩展导致 DevTools 崩溃的问题。
 
-![macOS Dock 中的 React Native DevTools 图标](/blog/assets/0.83-rndt-desktop-app.jpg)
+![macOS Dock 中的 React Native DevTools 图标](/blog/assets/0.83-rndt-desktop-app.jpg)。
 
 ## Intersection Observer（Canary）
 
-作为将 Web API 引入 React Native 的努力之一，我们在 0.83 的[canary 版本](https://reactnative.dev/docs/next/releases/release-levels#how-to-initialize-react-native-using-canary--experimental)中添加了对 [`IntersectionObserver`](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) 的支持。
+作为将 Web API 引入 React Native 的努力之一，我们在 0.83 的[Canary 版本](https://reactnative.dev/docs/next/releases/release-levels#how-to-initialize-react-native-using-canary--experimental)中添加了对 [`IntersectionObserver`](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) 的支持。
 
-`IntersectionObserver` 允许你异步监听目标元素与其祖先元素布局交叉情况。详情请参见我们的 [API](https://reactnative.dev/docs/next/global-intersectionobserver) 和 [实现文档](https://github.com/facebook/react-native/blob/main/packages/react-native/src/private/webapis/intersectionobserver/__docs__/README.md)。RNTester 中也包含了相关 [示例](https://github.com/facebook/react-native/tree/main/packages/rn-tester/js/examples/IntersectionObserver)。
+`IntersectionObserver` 允许你异步监听目标元素与其祖先元素布局的交叉情况。详情请参见我们的 [API](https://reactnative.dev/docs/next/global-intersectionobserver) 和 [实现文档](https://github.com/facebook/react-native/blob/main/packages/react-native/src/private/webapis/intersectionobserver/__docs__/README.md)。RNTester 中也包含了相关 [示例](https://github.com/facebook/react-native/tree/main/packages/rn-tester/js/examples/IntersectionObserver)。
 
 <p style={{textAlign: 'center'}}>
   <video width={320} controls="controls" autoPlay>
@@ -269,7 +269,7 @@ add-dsym <your-app-path>/ios/Pods/React-Core-prebuilt/React.xcframework/ios-arm6
 
 如果你当前使用 React Native 0.82，升级到 0.83 理应无需对应用代码做任何改动。
 
-想了解哪些属于破坏性变更，请参见[此文](/docs/releases/versioning-policy#what-is-a-breaking-change)。
+要详细了解我们对破坏性变更的定义，请参阅[这篇文章](/releases/versioning-policy#what-is-a-breaking-change)。
 
 ## 弃用
 

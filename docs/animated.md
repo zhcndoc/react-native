@@ -1,6 +1,6 @@
 ---
 id: animated
-title: Animated
+title: 动画
 ---
 
 `Animated` 库旨在让动画的构建和维护变得流畅、强大且轻松。`Animated` 专注于输入与输出之间的声明式关系，以及中间可配置的转换，并通过 `start`/`stop` 方法来控制基于时间的动画执行。
@@ -8,12 +8,12 @@ title: Animated
 创建动画的核心流程是先创建一个 `Animated.Value`，将其绑定到动画组件的一个或多个样式属性上，然后使用 `Animated.timing()` 通过动画来驱动更新。
 
 :::note
-不要直接修改 animated value。你可以使用 [`useRef` Hook](https://react.dev/reference/react/useRef) 返回一个可变的 ref 对象。该 ref 对象的 `current` 属性会以给定参数初始化，并在组件生命周期内持续存在。
+不要直接修改 animated value。你可以使用 [`useRef` 钩子](https://react.dev/reference/react/useRef) 返回一个可变的 ref 对象。该 ref 对象的 `current` 属性会以给定参数初始化，并在组件生命周期内持续存在。
 :::
 
 ## 示例
 
-下面的示例包含一个 `View`，它会根据 animated value `fadeAnim` 实现淡入和淡出
+下面的示例包含一个 `View`，它会根据动画值 `fadeAnim` 实现淡入和淡出
 
 ```SnackPlayer name=Animated%20Example
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-参阅 [Animations](animations#animated-api) 指南，查看更多 `Animated` 的使用示例。
+参阅 [动画](animations#animated-api) 指南，查看更多 `Animated` 的使用示例。
 
 ## 概览
 
@@ -110,7 +110,7 @@ export default App;
 
 - [`Animated.decay()`](animated#decay) 从初始速度开始，并逐渐减速直至停止。
 - [`Animated.spring()`](animated#spring) 提供一个基础的弹簧物理模型。
-- [`Animated.timing()`](animated#timing) 使用 [缓动函数](easing) 在一段时间内为值添加动画。
+- [`Animated.timing()`](animated#timing) 使用[缓动函数](easing)在一段时间内为值添加动画。
 
 在大多数情况下，你会使用 `timing()`。默认情况下，它使用对称的 easeInOut 曲线，表现为对象逐渐加速到最高速度，并在结束时逐渐减速直至停止。
 
@@ -128,7 +128,7 @@ Animated.timing({}).start(({finished}) => {
 
 使用原生驱动时，我们会在动画开始前把关于动画的所有内容发送到原生端，这样原生代码就可以在 UI 线程上执行动画，而无需在每一帧都经过桥接层。一旦动画开始，JS 线程即使被阻塞也不会影响动画。
 
-你可以在动画配置中指定 `useNativeDriver: true` 来使用原生驱动。更多信息请参阅 [Animations](animations#using-the-native-driver) 指南。
+你可以在动画配置中指定 `useNativeDriver: true` 来使用原生驱动。更多信息请参阅[动画](animations#using-the-native-driver)指南。
 
 ### 可动画组件
 
@@ -154,13 +154,13 @@ Animated.timing({}).start(({finished}) => {
 - [`Animated.sequence()`](animated#sequence) 按顺序启动动画，并在开始下一个之前等待每个动画完成。
 - [`Animated.stagger()`](animated#stagger) 按顺序并以并行方式启动动画，但每个动画之间有连续的延迟。
 
-也可以通过将一个动画的 `toValue` 设置为另一个 `Animated.Value` 来将动画链式连接。请参阅 Animations 指南中的 [Tracking dynamic values](animations#tracking-dynamic-values)。
+也可以通过将一个动画的 `toValue` 设置为另一个 `Animated.Value` 来将动画链式连接。请参阅动画指南中的[跟踪动态值](animations#tracking-dynamic-values)。
 
 默认情况下，如果一个动画停止或被中断，组中的所有其他动画也会停止。
 
-### 组合 animated 值
+### 组合动画值
 
-你可以通过加法、减法、乘法、除法或取模将两个 animated 值组合成一个新的 animated 值：
+你可以通过加法、减法、乘法、除法或取模将两个动画值组合成一个新的动画值：
 
 - [`Animated.add()`](animated#add)
 - [`Animated.subtract()`](animated#subtract)
@@ -174,11 +174,11 @@ Animated.timing({}).start(({finished}) => {
 
 - [`interpolate()`](animatedvalue#interpolate)
 
-更多关于插值的内容，请参阅 [Animation](animations#interpolation) 指南。
+更多关于插值的内容，请参阅[动画](animations#interpolation)指南。
 
 ### 处理手势和其他事件
 
-手势，例如拖动或滚动，以及其他事件，都可以通过 `Animated.event()` 直接映射到 animated 值。这通过结构化的映射语法完成，以便从复杂的事件对象中提取值。第一层是一个数组，用于支持跨多个参数的映射，而该数组中包含嵌套对象。
+手势，例如拖动或滚动，以及其他事件，都可以通过 `Animated.event()` 直接映射到动画值。这通过结构化的映射语法完成，以便从复杂的事件对象中提取值。第一层是一个数组，用于支持跨多个参数的映射，而该数组中包含嵌套对象。
 
 - [`Animated.event()`](animated#event)
 
@@ -214,10 +214,10 @@ static decay(value, config): CompositeAnimation;
 
 配置是一个对象，可能包含以下选项：
 
-- `velocity`：初始速度。必需。
-- `deceleration`：衰减率。默认 0.997。
-- `isInteraction`：此动画是否在 `InteractionManager` 上创建一个“interaction handle”。默认 true。
-- `useNativeDriver`：为 true 时使用原生驱动。必需。
+- `velocity`: 初始速度。必需。
+- `deceleration`: 衰减率。默认 0.997。
+- `isInteraction`: 此动画是否创建“交互句柄”。默认 true。
+- `useNativeDriver`: 为 true 时使用原生驱动。必需。
 
 ---
 
@@ -231,11 +231,11 @@ static timing(value, config): CompositeAnimation;
 
 配置是一个对象，可能包含以下选项：
 
-- `duration`：动画时长（毫秒）。默认 500。
-- `easing`：用于定义曲线的缓动函数。默认是 `Easing.inOut(Easing.ease)`。
-- `delay`：在延迟后开始动画（毫秒）。默认 0。
-- `isInteraction`：此动画是否在 `InteractionManager` 上创建一个“interaction handle”。默认 true。
-- `useNativeDriver`：为 true 时使用原生驱动。必需。
+- `duration`: 动画时长（毫秒）。默认 500。
+- `easing`: 用于定义曲线的缓动函数。默认为 `Easing.inOut(Easing.ease)`。
+- `delay`: 延迟后启动动画（毫秒）。默认 0。
+- `isInteraction`: 此动画是否创建“交互句柄”。默认 true。
+- `useNativeDriver`: 为 true 时使用原生驱动。必需。
 
 ---
 
@@ -266,13 +266,13 @@ friction/tension 或 bounciness/speed 选项与 [`Facebook Pop`](https://github.
 
 其他配置选项如下：
 
-- `velocity`：连接在弹簧末端的物体的初始速度。默认 0（物体静止）。
-- `overshootClamping`：布尔值，表示弹簧是否应被钳制而不发生回弹。默认 false。
-- `restDisplacementThreshold`：位移距离阈值，低于此值时弹簧应被视为静止。默认 0.001。
-- `restSpeedThreshold`：弹簧应被视为静止时的速度阈值，单位为像素/秒。默认 0.001。
-- `delay`：在延迟后开始动画（毫秒）。默认 0。
-- `isInteraction`：此动画是否在 `InteractionManager` 上创建一个“interaction handle”。默认 true。
-- `useNativeDriver`：为 true 时使用原生驱动。必需。
+- `velocity`: 连接到弹簧的物体的初始速度。默认 0（物体处于静止状态）。
+- `overshootClamping`: 一个布尔值，表示是否应限制弹簧使其不发生反弹。默认 false。
+- `restDisplacementThreshold`: 位移低于此阈值时，弹簧将被视为处于静止状态。默认 0.001。
+- `restSpeedThreshold`: 速度低于此值时，弹簧将被视为处于静止状态，单位为每秒像素。默认 0.001。
+- `delay`: 延迟后启动动画（毫秒）。默认 0。
+- `isInteraction`: 此动画是否创建“交互句柄”。默认 true。
+- `useNativeDriver`: 为 true 时使用原生驱动。必需。
 
 ---
 
@@ -445,7 +445,7 @@ onPanResponderMove: Animated.event(
 static forkEvent(event: AnimatedEvent, listener: Function): AnimatedEvent;
 ```
 
-用于窥探通过 props 传入的 animated 事件的高级命令式 API。它允许向现有的 `AnimatedEvent` 添加一个新的 javascript 监听器。如果 `animatedEvent` 是一个 javascript 监听器，它会将这两个监听器合并为一个；如果 `animatedEvent` 为 null/undefined，则会直接分配 javascript 监听器。尽可能直接使用值。
+用于窥探通过 props 传入的 animated 事件的高级命令式 API。它允许向现有的 `AnimatedEvent` 添加一个新的 JavaScript 监听器。如果 `animatedEvent` 是一个 JavaScript 监听器，它会将这两个监听器合并为一个；如果 `animatedEvent` 为 null/undefined，则会直接分配 JavaScript 监听器。尽可能直接使用值。
 
 ---
 
@@ -467,9 +467,9 @@ static start(callback?: (result: {finished: boolean}) => void);
 
 **参数：**
 
-| 名称 | 类型 | 是否必需 | 说明 |
-| --- | --- | --- | --- |
-| callback | `(result: {finished: boolean}) => void` | 否 | 函数，会在动画正常结束后，或在动画因为在完成前被调用 stop() 而结束后被调用 |
+| 名称     | 类型                                    | 是否必需 | 说明                                                                       |
+| -------- | --------------------------------------- | -------- | -------------------------------------------------------------------------- |
+| callback | `(result: {finished: boolean}) => void` | 否       | 函数，会在动画正常结束后，或在动画因为在完成前被调用 stop() 而结束后被调用 |
 
 带回调的启动示例：
 

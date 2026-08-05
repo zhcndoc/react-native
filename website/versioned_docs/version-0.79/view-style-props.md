@@ -68,8 +68,8 @@ export default App;
 
 ### `backgroundColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
@@ -94,7 +94,7 @@ export default App;
 
 - <a href={`https://github.com/facebook/react-native/blob/${getCoreBranchNameForCurrentVersion()}/packages/rn-tester/js/examples/LinearGradient/LinearGradientExample.js`}>LinearGradientExample.js</a>
 
-| Type                                                                                            |
+| 类型                                                                                            |
 | ----------------------------------------------------------------------------------------------- |
 | string, array of objects: `{type: 'linear-gradient', direction: string, colorStops: object[] }` |
 
@@ -102,97 +102,95 @@ export default App;
 
 ### `borderBottomColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
 
 ### `borderBlockColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
 
 ### `borderBlockEndColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
 
 ### `borderBlockStartColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
 
 ### `borderBottomEndRadius`
 
-| 类型                              |
-| --------------------------------- |
-| number, string (百分比值) |
+| 类型                       |
+| -------------------------- |
+| number、string（百分比值） |
 
 ---
 
 ### `borderBottomLeftRadius`
 
-| 类型                              |
-| --------------------------------- |
-| number, string (百分比值) |
+| 类型                     |
+| ------------------------ |
+| 数字、字符串（百分比值） |
 
 ---
 
 ### `borderBottomRightRadius`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                      |
+| ------------------------- |
 | number, string (百分比值) |
 
 ---
 
 ### `borderBottomStartRadius`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                      |
+| ------------------------- |
 | number, string (百分比值) |
 
 ---
 
 ### `borderStartEndRadius`
 
-| 类型                              |
-| --------------------------------- |
-| number, string (百分比值) |
-
----
+| 类型                     |
+| ------------------------ |
+| 数字、字符串（百分比值） |
 
 ### `borderStartStartRadius`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                      |
+| ------------------------- |
 | number, string (百分比值) |
 
 ---
 
 ### `borderEndEndRadius`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                      |
+| ------------------------- |
 | number, string (百分比值) |
 
 ---
 
 ### `borderEndStartRadius`
 
-| 类型                              |
-| --------------------------------- |
-| number, string (百分比值) |
+| 类型                       |
+| -------------------------- |
+| number, string（百分比值） |
 
 ---
 
@@ -206,8 +204,8 @@ export default App;
 
 ### `borderColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
@@ -224,16 +222,16 @@ export default App;
 
 ### `borderEndColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
 
 ### `borderLeftColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
@@ -250,16 +248,16 @@ export default App;
 
 如果圆角边框不可见，尝试同时应用 `overflow: 'hidden'`。
 
-| 类型                              |
-| --------------------------------- |
+| 类型                      |
+| ------------------------- |
 | number, string (百分比值) |
 
 ---
 
 ### `borderRightColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
@@ -274,57 +272,57 @@ export default App;
 
 ### `borderStartColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
 
 ### `borderStyle`
 
-| 类型                                    |
-| --------------------------------------- |
-| enum(`'solid'`, `'dotted'`, `'dashed'`) |
+| 类型                                      |
+| ----------------------------------------- |
+| 枚举（`'solid'`、`'dotted'`、`'dashed'`） |
 
 ---
 
 ### `borderTopColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
 
 ### `borderTopEndRadius`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                      |
+| ------------------------- |
 | number, string (百分比值) |
 
 ---
 
 ### `borderTopLeftRadius`
 
-| 类型                              |
-| --------------------------------- |
-| number, string (百分比值) |
+| 类型                       |
+| -------------------------- |
+| number、string（百分比值） |
 
 ---
 
 ### `borderTopRightRadius`
 
-| 类型                              |
-| --------------------------------- |
-| number, string (百分比值) |
+| 类型                     |
+| ------------------------ |
+| 数字，字符串（百分比值） |
 
 ---
 
 ### `borderTopStartRadius`
 
-| 类型                              |
-| --------------------------------- |
-| number, string (百分比值) |
+| 类型                       |
+| -------------------------- |
+| number、string（百分比值） |
 
 ---
 
@@ -338,9 +336,9 @@ export default App;
 
 ### `borderWidth`
 
-| 类型   |
-| ------ |
-| number |
+| 类型 |
+| ---- |
+| 数字 |
 
 ### `boxShadow`
 
@@ -352,10 +350,11 @@ export default App;
 
 这些阴影可以组合在一起，因此单个 `boxShadow` 可以由多个不同的阴影组成。
 
-`boxShadow` 接受一个模仿 [Web 语法](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow#syntax) 的字符串，或一个 [BoxShadowValue](./boxshadowvalue) 对象数组。
-| 类型 |
-| --------------------------- |
-| BoxShadowValue 对象数组 \| string |
+`boxShadow` 接受一个模拟 [Web 语法](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow#syntax) 的字符串，或一个由 [BoxShadowValue](./boxshadowvalue) 对象组成的数组。
+
+| 类型                              |
+| --------------------------------- |
+| BoxShadowValue 对象数组 \| 字符串 |
 
 ### `cursor` <div className="label ios">iOS</div>
 
@@ -411,10 +410,11 @@ export default App;
 `blur` 和 `dropShadow` 仅支持 **Android 12+**
 :::
 
-`filter` 接受一个由上述滤镜函数组成的对象数组，或一个模仿 [Web 语法](https://developer.mozilla.org/en-US/docs/Web/CSS/filter#syntax) 的字符串。
-| 类型 |
-| ------ |
-| 对象数组：`{brightness: number\|string}`, `{opacity: number\|string}`, `{blur: number\|string}`, `{contrast: number\|string}`, `{dropShadow: DropShadowValue\|string}`, `{grayscale: number\|string}`, `{hueRotate: number\|string}`, `{invert: number\|string}`, `{sepia: number\|string}`, `{saturate: number\|string}` 或 string|
+`filter` 可以接受由上述滤镜函数组成的对象数组，也可以接受模拟 [Web 语法](https://developer.mozilla.org/en-US/docs/Web/CSS/filter#syntax) 的字符串。
+
+| 类型                                                                                                                                                                                                                                                                                                                               |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 对象数组：`{brightness: number\|string}`、`{opacity: number\|string}`、`{blur: number\|string}`、`{contrast: number\|string}`、`{dropShadow: DropShadowValue\|string}`、`{grayscale: number\|string}`、`{hueRotate: number\|string}`、`{invert: number\|string}`、`{sepia: number\|string}`、`{saturate: number\|string}` 或字符串 |
 
 ---
 
@@ -469,8 +469,8 @@ export default App;
 
 设置元素轮廓的颜色。有关更多详细信息，请参阅 [Web 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-color)。
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---

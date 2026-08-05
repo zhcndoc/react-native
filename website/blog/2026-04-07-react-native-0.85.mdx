@@ -32,7 +32,7 @@ date: 2026-04-07
 - [Jest 预设移至新包](/blog/2026/04/07/react-native-0.85#jest-preset-moved-to-new-package)
 - [停止支持已生命周期结束 (EOL) 的 Node.js 版本](/blog/2026/04/07/react-native-0.85#dropped-support-for-eol-nodejs-versions)
 - [`StyleSheet.absoluteFillObject` 被移除](/blog/2026/04/07/react-native-0.85#stylesheetabsolutefillobject-removed)
-- [其他破坏性变更](/blog/2026/04/07/react-native-0.85#other-breaking-changes)
+- [其他破坏性变更](/blog/2026/04/07/react-native-0.85#other-breaking-changes)。
 
 {/* truncate */}
 
@@ -46,13 +46,13 @@ React Native 0.85 引入了新的共享动画后端，这是与 [Software Mansio
 
 在 Animated 中，你现在可以使用原生驱动 (native driver) 动画化布局属性（[此处曾声明的限制](/docs/animations#caveats) 不再适用）。
 
-|                                              iOS                                              |                                                Android                                                |
-| :-------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------: |
+|                                         iOS                                          |                                           Android                                            |
+| :----------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------: |
 | <img src="/blog/assets/0.85-animation-backend-ios.gif" alt="iOS 上的动画后端演示" /> | <img src="/blog/assets/0.85-animation-backend-android.gif" alt="Android 上的动画后端演示" /> |
 
 你可以在 [`react-native/packages/rn-tester/js/examples/AnimationBackend/`](https://github.com/facebook/react-native/tree/main/packages/rn-tester/js/examples/AnimationBackend) 下找到更多示例。
 
-要启用，你可以 [如此页面所述](/docs/releases/release-levels) 启用 React Native 的实验性通道。
+若要启用此功能，你可以[按照此页面中的说明](/docs/release-levels)启用 React Native 的实验性频道。
 
 :::info
 
@@ -88,7 +88,7 @@ function MyComponent() {
       <Animated.View
         style={{width, height: 100, backgroundColor: 'blue'}}
       />
-      <Button title="Expand" onPress={toggle} />
+      <Button title="展开" onPress={toggle} />
     </View>
   );
 }
@@ -169,7 +169,7 @@ React Native 0.85 停止支持生命周期结束 (EOL) 的 Node.js 版本和 v20
 
 #### Android
 
-- 我们将 `receiveTouches` 重新添加回 `RCTEventEmitter`，默认为 no-op。这是一个修复，旨在减少尚未迁移离开此方法的库的破坏性变更。
+- 我们将 `receiveTouches` 重新添加回 `RCTEventEmitter`，默认为无操作。这是一个修复，旨在减少尚未迁移离开此方法的库的破坏性变更。
 - `ReactTextUpdate` 现在是内部的，不应直接公开访问。
 - 多个类因旧架构清理而被弃用或移除：
   - `ReactZIndexedViewGroup` 现已弃用。
@@ -180,7 +180,7 @@ React Native 0.85 停止支持生命周期结束 (EOL) 的 Node.js 版本和 v20
 #### iOS
 
 - `RCTHostRuntimeDelegate` 现已弃用并合并到 `RCTHostDelegate` 中。
-- 修复了使用 `React.XCFramework` 时的重复符号错误（通过 `fmt`  bump 到 12.1.0）。
+- 修复了使用 `React.XCFramework` 时的重复符号错误（通过将 `fmt` 升级到 12.1.0）。
 
 ## 其他变更
 
@@ -198,14 +198,14 @@ React Native 0.85 包含来自 58 位贡献者的超过 604 次提交。感谢�
 
 {/* alex ignore special white */}
 
-We’d like to give a special thank you to the community members who made major contributions to this release.
+我们谨向为本次发布做出重大贡献的社区成员表示特别感谢。
 
-- [Zeya Peng](https://github.com/zeyap), [Bartłomiej Błoniarz](https://github.com/bartlomiejbloniarz), and [Dawid Małecki](https://github.com/coado) for the animation backend
-- [Vitali Zaidman](https://github.com/vzaidman) for Metro TLS
-- [Moti Zilberman](https://github.com/motiz88) for multiple CDP connections
-- [Phil Pluckthun](https://github.com/kitten) and [Alex Hunt](https://github.com/huntie) for the Jest preset migration
+- 感谢 [Zeya Peng](https://github.com/zeyap)、[Bartłomiej Błoniarz](https://github.com/bartlomiejbloniarz) 和 [Dawid Małecki](https://github.com/coado) 贡献动画后端
+- 感谢 [Vitali Zaidman](https://github.com/vzaidman) 贡献 Metro TLS
+- 感谢 [Moti Zilberman](https://github.com/motiz88) 贡献多个 CDP 连接
+- 感谢 [Phil Pluckthun](https://github.com/kitten) 和 [Alex Hunt](https://github.com/huntie) 贡献 Jest 预设迁移
 
-Additionally, we’d like to thank the other authors who wrote feature docs for this release:
+此外，我们还要感谢为本次发布撰写功能文档的其他作者：
 
 {/* TODO: Add blog post co-authors */}
 

@@ -1,41 +1,41 @@
 ---
 id: performance
-title: Performance Overview
+title: 性能概览
 ---
 
-A compelling reason to use React Native instead of WebView-based tools is to achieve at least 60 frames per second and provide a native look and feel to your apps. Whenever feasible, we aim for React Native to handle optimizations automatically, allowing you to focus on your app without worrying about performance. However, there are certain areas where we haven't quite reached that level yet, and others where React Native (similar to writing native code directly) cannot determine the best optimization approach for you. In such cases, manual intervention becomes necessary. We strive to deliver buttery-smooth UI performance by default, but there may be instances where that isn't possible.
+使用 React Native 而不是基于 WebView 的工具的一个重要原因，是为了达到每秒至少 60 帧，并为应用提供原生的外观和体验。在可行的情况下，我们希望 React Native 能够自动处理优化，让你可以专注于应用本身，而无需担心性能问题。不过，目前仍有一些方面尚未达到这一程度；此外，在某些情况下，React Native（与直接编写原生代码类似）也无法替你确定最佳的优化方式。在这种情况下，就需要进行手动干预。我们的目标是默认提供极其流畅的 UI 性能，但有时可能无法做到这一点。
 
-This guide is intended to teach you some basics to help you to [troubleshoot performance issues](profiling.md), as well as discuss [common sources of problems and their suggested solutions](performance.md#common-sources-of-performance-problems).
+本指南旨在介绍一些基础知识，帮助你[排查性能问题](profiling.md)，并讨论[常见的问题来源及其建议的解决方案](performance.md#common-sources-of-performance-problems)。
 
-## What you need to know about frames
+## 关于帧，你需要了解的内容
 
-Your grandparents' generation called movies ["moving pictures"](https://www.youtube.com/watch?v=F1i40rnpOsA) for a reason: realistic motion in video is an illusion created by quickly changing static images at a consistent speed. We refer to each of these images as frames. The number of frames that is displayed each second has a direct impact on how smooth and ultimately life-like a video (or user interface) seems to be. iOS and Android devices display at least 60 frames per second, which gives you and the UI system at most 16.67ms to do all of the work needed to generate the static image (frame) that the user will see on the screen for that interval. If you are unable to do the work necessary to generate that frame within the allotted time slot, then you will "drop a frame" and the UI will appear unresponsive.
+你的祖父母那一代人称电影为[“活动画面”](https://www.youtube.com/watch?v=F1i40rnpOsA)是有原因的：视频中的真实运动，是通过以恒定速度快速切换静态图像所产生的幻觉。我们将这些图像中的每一张称为帧。每秒显示的帧数会直接影响视频（或用户界面）看起来有多流畅，以及最终有多逼真。iOS 和 Android 设备每秒至少显示 60 帧，这意味着你和 UI 系统最多只有 16.67 毫秒来完成生成静态图像（帧）所需的全部工作，用户将在这段时间内看到该图像。如果你无法在规定的时间段内完成生成该帧所需的工作，就会“丢帧”，UI 看起来也会失去响应。
 
-Now to confuse the matter a little bit, open up the [Dev Menu](debugging.md#opening-the-dev-menu) in your app and toggle `Show Perf Monitor`. You will notice that there are two different frame rates.
+现在让事情稍微复杂一点：在你的应用中打开[开发者菜单](debugging.md#opening-the-dev-menu)，然后切换 `Show Perf Monitor`。你会注意到这里有两种不同的帧率。
 
-![Performance Monitor screenshot](/docs/assets/PerfUtil.png)
+![性能监视器截图](/docs/assets/PerfUtil.png)
 
-### JS frame rate (JavaScript thread)
+### JS 帧率（JavaScript 线程）
 
-For most React Native applications, your business logic will run on the JavaScript thread. This is where your React application lives, API calls are made, touch events are processed, and more. Updates to native-backed views are batched and sent over to the native side at the end of each iteration of the event loop, before the frame deadline (if all goes well). If the JavaScript thread is unresponsive for a frame, it will be considered a dropped frame. For example, if you were to set a new state on the root component of a complex application and it resulted in re-rendering computationally expensive component subtrees, it's conceivable that this might take 200ms and result in 12 frames being dropped. Any animations controlled by JavaScript would appear to freeze during that time. If enough frames are dropped, the user will feel it.
+对于大多数 React Native 应用，你的业务逻辑会运行在 JavaScript 线程上。你的 React 应用就在这里运行，API 调用在这里发起，触摸事件在这里处理，等等。对原生支持视图的更新会进行批处理，并在事件循环的每次迭代结束时、帧截止时间之前发送到原生端（如果一切顺利的话）。如果 JavaScript 线程在某一帧中没有响应，就会被视为丢帧。例如，如果你在一个复杂应用的根组件上设置了新状态，导致计算开销很大的组件子树重新渲染，那么这很可能需要 200 毫秒，并导致丢失 12 帧。在此期间，任何由 JavaScript 控制的动画都会看起来像是冻结了。如果丢失的帧足够多，用户就会感受到明显的影响。
 
-An example is responding to touches: if you are doing work across multiple frames on the JavaScript thread, you might notice a delay in responding to `TouchableOpacity`, for example. This is because the JavaScript thread is busy and cannot process the raw touch events sent over from the main thread. As a result, `TouchableOpacity` cannot react to the touch events and command the native view to adjust its opacity.
+触摸响应就是一个例子：如果你在 JavaScript 线程上跨多个帧执行工作，你可能会注意到对 `TouchableOpacity` 的响应存在延迟。这是因为 JavaScript 线程正忙于处理其他工作，无法处理从主线程发送过来的原始触摸事件。因此，`TouchableOpacity` 无法对触摸事件做出反应，也无法命令原生视图调整其不透明度。
 
-### UI frame rate (main thread)
+### UI 帧率（主线程）
 
-You may have noticed that performance of native stack navigators (such as the [@react-navigation/native-stack](https://reactnavigation.org/docs/native-stack-navigator) provided by React Navigation) is better out of the box than JavaScript-based stack navigators. This is because the transition animations are executed on the native main UI thread, so they are not interrupted by frame drops on the JavaScript thread.
+你可能已经注意到，原生堆栈导航器（例如 React Navigation 提供的 [@react-navigation/native-stack](https://reactnavigation.org/docs/native-stack-navigator)）开箱即用的性能要优于基于 JavaScript 的堆栈导航器。这是因为过渡动画在原生主 UI 线程上执行，因此不会受到 JavaScript 线程丢帧的影响。
 
-Similarly, you can happily scroll up and down through a `ScrollView` when the JavaScript thread is locked up because the `ScrollView` lives on the main thread. The scroll events are dispatched to the JS thread, but their receipt is not necessary for the scroll to occur.
+同样，即使 JavaScript 线程被锁定，你也可以在 `ScrollView` 中愉快地上下滚动，因为 `ScrollView` 位于主线程上。滚动事件会被分发到 JS 线程，但滚动无需等待这些事件被接收即可发生。
 
-## Common sources of performance problems
+## 性能问题的常见来源
 
-### Running in development mode (`dev=true`)
+### 在开发模式下运行（`dev=true`）
 
-JavaScript thread performance suffers greatly when running in dev mode. This is unavoidable: a lot more work needs to be done at runtime to provide you with good warnings and error messages. Always make sure to test performance in [release builds](running-on-device.md#building-your-app-for-production).
+在开发模式下运行时，JavaScript 线程的性能会大幅下降。这是不可避免的：为了在运行时为你提供良好的警告和错误消息，需要完成更多工作。请务必在[发布版本](running-on-device.md#building-your-app-for-production)中测试性能。
 
-### Using `console.log` statements
+### 使用 `console.log` 语句
 
-When running a bundled app, these statements can cause a big bottleneck in the JavaScript thread. This includes calls from debugging libraries such as [redux-logger](https://github.com/evgenyrodionov/redux-logger), so make sure to remove them before bundling. You can also use this [babel plugin](https://babeljs.io/docs/plugins/transform-remove-console/) that removes all the `console.*` calls. You need to install it first with `npm i babel-plugin-transform-remove-console --save-dev`, and then edit the `.babelrc` file under your project directory like this:
+运行打包后的应用时，这些语句可能会成为 JavaScript 线程中的严重瓶颈。这包括来自 [redux-logger](https://github.com/evgenyrodionov/redux-logger) 等调试库的调用，因此请确保在打包前移除它们。你也可以使用这个 [Babel 插件](https://babeljs.io/docs/plugins/transform-remove-console/)来移除所有 `console.*` 调用。你需要先使用 `npm i babel-plugin-transform-remove-console --save-dev` 安装它，然后像这样编辑项目目录下的 `.babelrc` 文件：
 
 ```json
 {
@@ -47,41 +47,41 @@ When running a bundled app, these statements can cause a big bottleneck in the J
 }
 ```
 
-This will automatically remove all `console.*` calls in the release (production) versions of your project.
+这样会自动移除项目发布版（生产版）中的所有 `console.*` 调用。
 
-It is recommended to use the plugin even if no `console.*` calls are made in your project. A third party library could also call them.
+即使项目中没有使用任何 `console.*` 调用，也建议使用该插件。第三方库也可能调用它们。
 
-### `FlatList` rendering is too slow or scroll performance is bad for large lists
+### `FlatList` 渲染速度太慢，或大型列表的滚动性能很差
 
-If your [`FlatList`](flatlist.md) is rendering slowly, be sure that you've implemented [`getItemLayout`](flatlist.md#getitemlayout) to optimize rendering speed by skipping measurement of the rendered items.
+如果你的 [`FlatList`](flatlist.md) 渲染缓慢，请确保已经实现 [`getItemLayout`](flatlist.md#getitemlayout)，通过跳过对已渲染项目的测量来优化渲染速度。
 
-There are also other third-party list libraries that are optimized for performance, including [FlashList](https://github.com/shopify/flash-list) and [Legend List](https://github.com/legendapp/legend-list).
+此外，还有其他针对性能进行优化的第三方列表库，包括 [FlashList](https://github.com/shopify/flash-list) 和 [Legend List](https://github.com/legendapp/legend-list)。
 
-### Dropping JS thread FPS because of doing a lot of work on the JavaScript thread at the same time
+### 同时在 JavaScript 线程上执行大量工作导致 JS 线程 FPS 下降
 
-"Slow Navigator transitions" is the most common manifestation of this, but there are other times this can happen. Using [`InteractionManager`](interactionmanager.md) can be a good approach, but if the user experience cost is too high to delay work during an animation, then you might want to consider [`LayoutAnimation`](layoutanimation.md).
+“Navigator 转场速度慢”是这一问题最常见的表现，但也可能在其他情况下发生。将工作延迟到 JS 线程空闲时执行（例如使用 `requestIdleCallback`）可能是一个不错的方法，但如果在动画期间延迟工作所带来的用户体验成本过高，那么可以考虑使用 [`LayoutAnimation`](layoutanimation.md)。
 
-The [`Animated API`](animated.md) currently calculates each keyframe on-demand on the JavaScript thread unless you [set `useNativeDriver: true`](/blog/2017/02/14/using-native-driver-for-animated#how-do-i-use-this-in-my-app), while [`LayoutAnimation`](layoutanimation.md) leverages Core Animation and is unaffected by JS thread and main thread frame drops.
+[`Animated API`](animated.md) 目前会在 JavaScript 线程上按需计算每个关键帧，除非你[设置 `useNativeDriver: true`](/blog/2017/02/14/using-native-driver-for-animated#how-do-i-use-this-in-my-app)；而 [`LayoutAnimation`](layoutanimation.md) 利用了 Core Animation，不受 JS 线程和主线程帧丢失的影响。
 
-One case for using this is animating in a modal (sliding down from top and fading in a translucent overlay) while initializing and perhaps receiving responses for several network requests, rendering the contents of the modal, and updating the view where the modal was opened from. See the [Animations guide](animations.md) for more information about how to use `LayoutAnimation`.
+一种适合使用它的情况是：在初始化并可能接收多个网络请求的响应、渲染模态框内容，以及更新打开模态框的视图时，同时为模态框添加动画（从顶部向下滑入并淡入半透明遮罩层）。有关如何使用 `LayoutAnimation` 的更多信息，请参阅[动画指南](animations.md)。
 
-**Caveats:**
+**注意事项：**
 
-- `LayoutAnimation` only works for fire-and-forget animations ("static" animations) -- if it must be interruptible, you will need to use [`Animated`](animated.md).
+- `LayoutAnimation` 仅适用于即发即忘的动画（“静态”动画）——如果动画必须可中断，则需要使用 [`Animated`](animated.md)。
 
-### Moving a view on the screen (scrolling, translating, rotating) drops UI thread FPS
+### 在屏幕上移动视图（滚动、平移、旋转）导致 UI 线程 FPS 下降
 
-This is especially true on Android when you have text with a transparent background positioned on top of an image, or any other situation where alpha compositing would be required to re-draw the view on each frame. You will find that enabling `renderToHardwareTextureAndroid` can help with this significantly. For iOS, `shouldRasterizeIOS` is already enabled by default.
+在 Android 上尤其如此：当你将透明背景的文本放置在图像上方，或在其他需要通过 alpha 合成来逐帧重新绘制视图的情况下，就会出现这一问题。你会发现，启用 `renderToHardwareTextureAndroid` 可以显著改善这种情况。对于 iOS，`shouldRasterizeIOS` 默认已启用。
 
-Be careful not to overuse this or your memory usage could go through the roof. Profile your performance and memory usage when using these props. If you don't plan to move a view anymore, turn this property off.
+请注意不要过度使用此功能，否则内存使用量可能会急剧增加。使用这些属性时，请分析性能和内存使用情况。如果你不再打算移动某个视图，请关闭此属性。
 
-### Animating the size of an image drops UI thread FPS
+### 为图像设置动画改变尺寸会导致 UI 线程 FPS 下降
 
-On iOS, each time you adjust the width or height of an [`Image` component](image.md) it is re-cropped and scaled from the original image. This can be very expensive, especially for large images. Instead, use the `transform: [{scale}]` style property to animate the size. An example of when you might do this is when you tap an image and zoom it in to full screen.
+在 iOS 上，每次调整 [`Image` 组件](image.md)的宽度或高度时，系统都会根据原始图像重新裁剪和缩放。这可能非常耗费性能，尤其是对于大型图像。相反，请使用 `transform: [{scale}]` 样式属性来为尺寸设置动画。例如，当你点击图像并将其放大到全屏时，就可以采用这种方式。
 
-### My TouchableX view isn't very responsive
+### 我的 TouchableX 视图响应不够灵敏
 
-Sometimes, if we do an action in the same frame that we are adjusting the opacity or highlight of a component that is responding to a touch, we won't see that effect until after the `onPress` function has returned. This may occur if `onPress` sets a state that results in a heavy re-render and a few frames are dropped as a result. A solution to this is to wrap any action inside of your `onPress` handler in `requestAnimationFrame`:
+有时，如果我们在调整响应触摸的组件的不透明度或高亮效果的同一帧中执行某个操作，那么直到 `onPress` 函数返回后，才能看到该效果。如果 `onPress` 设置了某个状态，导致重新渲染开销很大并因此丢失几帧，就可能发生这种情况。解决方法是将 `onPress` 处理函数中的操作包装在 `requestAnimationFrame` 中：
 
 ```tsx
 function handleOnPress() {

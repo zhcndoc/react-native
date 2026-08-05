@@ -17,7 +17,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 ### 1. 选择版本
 
-你首先需要选择要从哪个版本升级到哪个版本，默认会选择最新的主版本。选择后，你可以点击“Show me how to upgrade”按钮。
+你首先需要选择要从哪个版本升级到哪个版本，默认会选择最新的主版本。选择后，你可以点击“告诉我如何升级”按钮。
 
 💡 主版本更新会在顶部显示一个“有用内容”部分，其中包含帮助你升级的链接。
 

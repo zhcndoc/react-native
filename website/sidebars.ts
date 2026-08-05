@@ -28,6 +28,7 @@ export default {
       'libraries',
       'typescript',
       'strict-typescript-api',
+      'release-levels',
       'upgrading',
     ],
     'UI 与交互': [
@@ -62,11 +63,6 @@ export default {
         collapsed: false,
         items: ['accessibility'],
       },
-    ],
-    发布: [
-      'releases/releases',
-      'releases/release-levels',
-      'releases/versioning-policy',
     ],
     调试: [
       'debugging',
@@ -222,7 +218,6 @@ export default {
       'dimensions',
       'easing',
       'i18nmanager',
-      'interactionmanager',
       'keyboard',
       'layoutanimation',
       'linking',

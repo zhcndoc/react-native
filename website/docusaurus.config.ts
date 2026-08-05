@@ -214,6 +214,8 @@ const config: Config = {
             require.resolve('./src/css/index.scss'),
             require.resolve('./src/css/showcase.scss'),
             require.resolve('./src/css/versions.scss'),
+            require.resolve('./src/css/docs-secondary-nav.scss'),
+            require.resolve('./src/css/releases.scss'),
           ],
         },
         // gtag: {
@@ -266,6 +268,16 @@ const config: Config = {
         path: 'community',
         routeBasePath: '/community',
         sidebarPath: require.resolve('./sidebarsCommunity'),
+        ...commonDocsOptions,
+      } satisfies PluginContentDocs.Options,
+    ],
+    [
+      'content-docs',
+      {
+        id: 'releases',
+        path: 'releases',
+        routeBasePath: '/releases',
+        sidebarPath: require.resolve('./sidebarsReleases'),
         ...commonDocsOptions,
       } satisfies PluginContentDocs.Options,
     ],
@@ -419,14 +431,6 @@ const config: Config = {
         },
       ],
     },
-    // announcementBar: {
-    //   id: 'watch_keynote',
-    //   content:
-    //     'Re-watch the latest <a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/watch?v=NiYwlvXsBKw">React Native Keynote</a> from React Conf 2025',
-    //   backgroundColor: '#20232a',
-    //   textColor: '#fff',
-    //   isCloseable: false,
-    // },
     navbar: {
       title: 'React Native 中文文档',
       logo: {
@@ -436,32 +440,21 @@ const config: Config = {
       style: 'dark',
       items: [
         {
-          label: '开发',
           type: 'dropdown',
+          label: 'Docs',
           position: 'right',
           items: [
-            {
-              label: '指南',
-              type: 'doc',
-              docId: 'getting-started',
-            },
-            {
-              label: '组件',
-              type: 'doc',
-              docId: 'components-and-apis',
-            },
-            {
-              label: 'API 参考',
-              type: 'doc',
-              docId: 'accessibilityinfo',
-            },
-            {
-              label: '架构',
-              type: 'doc',
-              docId: 'architecture-overview',
-              docsPluginId: 'architecture',
-            },
+            {label: '指南', to: '/docs/getting-started'},
+            {label: '组件', to: '/docs/components-and-apis'},
+            {label: 'API 参考', to: '/docs/accessibilityinfo'},
+            {label: '架构', to: '/architecture/overview'},
           ],
+        },
+        {
+          to: '/releases/overview',
+          label: 'Releases',
+          position: 'right',
+          activeBaseRegex: '^/(releases|versions)',
         },
         {
           type: 'doc',
@@ -486,17 +479,6 @@ const config: Config = {
           to: '/blog',
           label: '博客',
           position: 'right',
-        },
-        {
-          type: 'docsVersionDropdown',
-          position: 'left',
-          dropdownActiveClassDisabled: true,
-          dropdownItemsAfter: [
-            {
-              to: '/versions',
-              label: '所有版本',
-            },
-          ],
         },
         {
           href: 'https://github.com/facebook/react-native',

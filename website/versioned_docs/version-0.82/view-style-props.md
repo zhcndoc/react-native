@@ -59,16 +59,16 @@ export default App;
 
 ### `backfaceVisibility`
 
-| 类型                          |
-| ----------------------------- |
+| 类型                           |
+| ------------------------------ |
 | 枚举 (`'visible'`, `'hidden'`) |
 
 ---
 
 ### `backgroundColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
@@ -102,112 +102,112 @@ export default App;
 
 ### `borderBottomColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
 
 ### `borderBlockColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
 
 ### `borderBlockEndColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
 
 ### `borderBlockStartColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
 
 ### `borderBottomEndRadius`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                    |
+| ----------------------- |
 | 数字，字符串 (百分比值) |
 
 ---
 
 ### `borderBottomLeftRadius`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                    |
+| ----------------------- |
 | 数字，字符串 (百分比值) |
 
 ---
 
 ### `borderBottomRightRadius`
 
-| 类型                              |
-| --------------------------------- |
-| 数字，字符串 (百分比值) |
+| 类型                     |
+| ------------------------ |
+| 数字，字符串（百分比值） |
 
 ---
 
 ### `borderBottomStartRadius`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                    |
+| ----------------------- |
 | 数字，字符串 (百分比值) |
 
 ---
 
 ### `borderStartEndRadius`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                    |
+| ----------------------- |
 | 数字，字符串 (百分比值) |
 
 ---
 
 ### `borderStartStartRadius`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                    |
+| ----------------------- |
 | 数字，字符串 (百分比值) |
 
 ---
 
 ### `borderEndEndRadius`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                    |
+| ----------------------- |
 | 数字，字符串 (百分比值) |
 
 ---
 
 ### `borderEndStartRadius`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                    |
+| ----------------------- |
 | 数字，字符串 (百分比值) |
 
 ---
 
 ### `borderBottomWidth`
 
-| 类型   |
-| ------ |
+| 类型 |
+| ---- |
 | 数字 |
 
 ---
 
 ### `borderColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
@@ -216,32 +216,32 @@ export default App;
 
 在 iOS 13+ 上，可以更改边框的角曲线。
 
-| 类型                               |
-| ---------------------------------- |
+| 类型                                |
+| ----------------------------------- |
 | 枚举 (`'circular'`, `'continuous'`) |
 
 ---
 
 ### `borderEndColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
 
 ### `borderLeftColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
 
 ### `borderLeftWidth`
 
-| 类型   |
-| ------ |
+| 类型 |
+| ---- |
 | 数字 |
 
 ---
@@ -250,96 +250,96 @@ export default App;
 
 如果圆角边框不可见，尝试同时应用 `overflow: 'hidden'`。
 
-| 类型                              |
-| --------------------------------- |
+| 类型                    |
+| ----------------------- |
 | 数字，字符串 (百分比值) |
 
 ---
 
 ### `borderRightColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
 
 ### `borderRightWidth`
 
-| 类型   |
-| ------ |
+| 类型 |
+| ---- |
 | 数字 |
 
 ---
 
 ### `borderStartColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
 
 ### `borderStyle`
 
-| 类型                                    |
-| --------------------------------------- |
+| 类型                                     |
+| ---------------------------------------- |
 | 枚举 (`'solid'`, `'dotted'`, `'dashed'`) |
 
 ---
 
 ### `borderTopColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
 
 ### `borderTopEndRadius`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                    |
+| ----------------------- |
 | 数字，字符串 (百分比值) |
 
 ---
 
 ### `borderTopLeftRadius`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                    |
+| ----------------------- |
 | 数字，字符串 (百分比值) |
 
 ---
 
 ### `borderTopRightRadius`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                    |
+| ----------------------- |
 | 数字，字符串 (百分比值) |
 
 ---
 
 ### `borderTopStartRadius`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                    |
+| ----------------------- |
 | 数字，字符串 (百分比值) |
 
 ---
 
 ### `borderTopWidth`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                    |
+| ----------------------- |
 | 数字，字符串 (百分比值) |
 
 ---
 
 ### `borderWidth`
 
-| 类型   |
-| ------ |
+| 类型 |
+| ---- |
 | 数字 |
 
 ### `boxShadow`
@@ -352,17 +352,18 @@ export default App;
 
 这些阴影可以组合在一起，以便单个 `boxShadow` 可以由多个不同的阴影组成。
 
-`boxShadow` 接受一个模仿 [web 语法](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow#syntax) 的字符串，或一个 [BoxShadowValue](./boxshadowvalue) 对象数组。
-| 类型 |
-| --------------------------- |
+`boxShadow` 接受一个模拟 [web 语法](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow#syntax) 的字符串，或一个由 [BoxShadowValue](./boxshadowvalue) 对象组成的数组。
+
+| 类型                              |
+| --------------------------------- |
 | BoxShadowValue 对象数组 \| 字符串 |
 
 ### `cursor` <div className="label ios">iOS</div>
 
-在 iOS 17+ 上，设置为 `pointer` 允许当指针（例如 iOS 上的触控板或 stylus，或 visionOS 上的用户视线）悬停在视图上时产生悬停效果。
+在 iOS 17+ 上，设置为 `pointer` 允许当指针（例如 iOS 上的触控板或手写笔，或 visionOS 上的用户视线）悬停在视图上时产生悬停效果。
 
-| 类型                        |
-| --------------------------- |
+| 类型                         |
+| ---------------------------- |
 | 枚举 (`'auto'`, `'pointer'`) |
 
 ---
@@ -371,8 +372,8 @@ export default App;
 
 使用 Android 底层的 [elevation API](https://developer.android.com/training/material/shadows-clipping.html#Elevation) 设置视图的海拔高度。这会给项目添加投影，并影响重叠视图的 z 轴顺序。仅支持 Android 5.0+，在更早版本上无效。
 
-| 类型   |
-| ------ |
+| 类型 |
+| ---- |
 | 数字 |
 
 ---
@@ -411,10 +412,11 @@ export default App;
 `blur` 和 `dropShadow` 仅支持 **Android 12+**
 :::
 
-`filter` 接受一个由上述滤镜函数组成的对象数组，或一个模仿 [web 语法](https://developer.mozilla.org/en-US/docs/Web/CSS/filter#syntax) 的字符串。
-| 类型 |
-| ------ |
-| 对象数组：`{brightness: 数字\|字符串}`, `{opacity: 数字\|字符串}`, `{blur: 数字\|字符串}`, `{contrast: 数字\|字符串}`, `{dropShadow: DropShadowValue\|字符串}`, `{grayscale: 数字\|字符串}`, `{hueRotate: 数字\|字符串}`, `{invert: 数字\|字符串}`, `{sepia: 数字\|字符串}`, `{saturate: 数字\|字符串}` 或 字符串 |
+`filter` 接受由上述滤镜函数组成的对象数组，或一种模仿 [Web 语法](https://developer.mozilla.org/en-US/docs/Web/CSS/filter#syntax) 的字符串。
+
+| 类型                                                                                                                                                                                                                                                                                                                               |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 对象数组：`{brightness: number\|string}`、`{opacity: number\|string}`、`{blur: number\|string}`、`{contrast: number\|string}`、`{dropShadow: DropShadowValue\|string}`、`{grayscale: number\|string}`、`{hueRotate: number\|string}`、`{invert: number\|string}`、`{sepia: number\|string}`、`{saturate: number\|string}` 或字符串 |
 
 ---
 
@@ -447,16 +449,16 @@ export default App;
 - `color`：创建一种颜色，其色相和饱和度来自源颜色，亮度来自背景颜色。这保留了背景的灰度级别，适用于为单色图像着色或为彩色图像添加色调。
 - `luminosity`：创建一种颜色，其亮度来自源颜色，色相和饱和度来自背景颜色。这产生与颜色模式相反的效果。
 
-| 类型                                                                                                                                                                                                                                 |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 类型                                                                                                                                                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 枚举 (`'normal'`, `'multiply'`, `'screen'`, `'overlay'`, `'darken'`, `'lighten'`, `'color-dodge'`, `'color-burn'`, `'hard-light'`, `'soft-light'`, `'difference'`, `'exclusion'`, `'hue'`, `'saturation'`, `'color'`, `'luminosity'`) |
 
 ---
 
 ### `opacity`
 
-| 类型   |
-| ------ |
+| 类型 |
+| ---- |
 | 数字 |
 
 ---
@@ -467,10 +469,10 @@ export default App;
 `outlineColor` 仅适用于 [新架构](/architecture/landing-page)
 :::
 
-设置元素轮廓的颜色。有关更多详细信息，请参阅 [web 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-color)。
+设置元素轮廓的颜色。有关更多详细信息，请参阅 [Web 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-color)。
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
@@ -481,10 +483,10 @@ export default App;
 `outlineOffset` 仅适用于 [新架构](/architecture/landing-page)
 :::
 
-设置轮廓与元素边界之间的空间量。不影响布局。有关更多详细信息，请参阅 [web 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-offset)。
+设置轮廓与元素边界之间的空间量。不影响布局。有关更多详细信息，请参阅 [Web 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-offset)。
 
-| 类型   |
-| ------ |
+| 类型 |
+| ---- |
 | 数字 |
 
 ---
@@ -495,10 +497,10 @@ export default App;
 `outlineStyle` 仅适用于 [新架构](/architecture/landing-page)
 :::
 
-设置元素轮廓的样式。有关更多详细信息，请参阅 [web 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-style)。
+设置元素轮廓的样式。有关更多详细信息，请参阅 [Web 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-style)。
 
-| 类型                                    |
-| --------------------------------------- |
+| 类型                                     |
+| ---------------------------------------- |
 | 枚举 (`'solid'`, `'dotted'`, `'dashed'`) |
 
 ---
@@ -509,10 +511,10 @@ export default App;
 `outlineWidth` 仅适用于 [新架构](/architecture/landing-page)
 :::
 
-绘制在元素周围、边框外部的轮廓宽度。不影响布局。有关更多详细信息，请参阅 [web 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-width)。
+绘制在元素周围、边框外部的轮廓宽度。不影响布局。有关更多详细信息，请参阅 [Web 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-width)。
 
-| 类型   |
-| ------ |
+| 类型 |
+| ---- |
 | 数字 |
 
 ---
@@ -526,6 +528,6 @@ export default App;
 - `'box-none'`：View 永远不会成为触摸事件的目标，但其子视图可以。
 - `'box-only'`：View 可以成为触摸事件的目标，但其子视图不能。
 
-| 类型                                                  |
-| ----------------------------------------------------- |
+| 类型                                                   |
+| ------------------------------------------------------ |
 | 枚举 (`'auto'`, `'box-none'`, `'box-only'`, `'none'` ) |
