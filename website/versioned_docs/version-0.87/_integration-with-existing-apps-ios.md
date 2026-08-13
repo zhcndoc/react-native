@@ -124,10 +124,10 @@ Xcode 16 生成项目的方式与之前版本的 Xcode 略有不同，你需要�
 {`curl -O https://raw.githubusercontent.com/react-native-community/template/refs/heads/${getTemplateBranchNameForCurrentVersion()}/template/ios/Podfile`}
 </CodeBlock>
 
-请将 Community Template 作为 <RNTemplateRepoLink href="template/Gemfile">Gemfile</RNTemplateLink> 和 <RNTemplateRepoLink href="template/ios/Podfile">Podfile</RNTemplateLink> 的参考
+请将 Community Template 作为 <RNTemplateRepoLink href="template/Gemfile">Gemfile</RNTemplateRepoLink> 和 <RNTemplateRepoLink href="template/ios/Podfile">Podfile</RNTemplateRepoLink> 的参考
 
 :::note
-请记得更改< RNTemplateRepoLink href="template/ios/Podfile#L17">此行</RNTemplateRepoLink>
+请记得更改<RNTemplateRepoLink href="template/ios/Podfile#L17">此行</RNTemplateRepoLink>
 :::
 
 现在，我们需要再运行几个命令来安装 Ruby gems 和 Pods  
