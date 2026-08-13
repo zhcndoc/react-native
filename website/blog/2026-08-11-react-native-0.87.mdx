@@ -1,0 +1,266 @@
+---
+title: 'React Native 0.87 - Strict TypeScript API、Metro 更新、Swift Package Manager、AGP 9 支持'
+authors: [zeyap, fabriziocucci, gabrieldonadel, chrfalch]
+tags: [announcement, release]
+date: 2026-08-11
+---
+
+# React Native 0.87 - Strict TypeScript API、Metro 更新、Swift Package Manager、AGP 9 支持
+
+今天，我们很高兴发布 React Native 0.87！
+
+此版本将 **Strict TypeScript API** 设为默认 JavaScript API，将 Metro 更新至 0.87，并新增对 **Swift Package Manager（SwiftPM）** 的实验性支持。同时，它还提高了最低工具链要求：Node.js 22、Android Gradle Plugin 9 和 Kotlin 2.0+。
+
+### 亮点
+
+- [默认使用 Strict TypeScript API](/blog/2026/08/11/react-native-0.87#strict-typescript-api-by-default)
+- [更快速、更精简的 Metro](/blog/2026/08/11/react-native-0.87#faster-leaner-metro)
+- [针对 iOS 的实验性 Swift Package Manager 支持](/blog/2026/08/11/react-native-0.87#experimental-swift-package-manager-support-for-ios)
+- [Android Gradle Plugin（AGP）v9](/blog/2026/08/11/react-native-0.87#android-gradle-plugin-agp-v9)
+
+{/* truncate */}
+
+## 亮点
+
+### 默认启用 Strict TypeScript API
+
+React Native 的公共 JavaScript API 现在是 [Strict TypeScript API](/docs/strict-typescript-api)。它最初在 0.80 中作为可选预览功能提供，[同时弃用了深层导入](/blog/2025/06/12/react-native-0.80#javascript-deep-imports-deprecation)。在 0.87 中，它将成为所有项目的默认设置。
+
+这是一次影响整个生态系统的变更，会有意地在 API 表面带来破坏性变更。其收益包括：
+
+- **值得信赖的类型**：类型现在直接从 React Native 的源代码生成，取代了我们之前随产品发布的手动维护定义。这消除了类型与代码之间长期存在的偏差，并提高了整个 API 的覆盖率和准确性
+- **稳定的 API**：稳定的 API 始于明确界定其覆盖范围。API 现在限定为 `react-native` 在根目录导出的内容，因此我们内部文件的变更不再是你的破坏性变更。从 0.87 开始，React Native 的 JS API 只会在我们有意为之时发生变化
+
+以下是新类型的实际效果——将鼠标悬停在 `TextInput` 组件上：
+
+<figure style={{marginLeft: 0, marginRight: 0, padding: 0}}>
+  <div className="table-wrapper" style={{marginBottom: 0}}>
+    <table>
+      <thead>
+        <tr>
+          <th style={{width: '40%'}}>之前（旧版类型）</th>
+          <th style={{width: '60%'}}>之后（Strict API）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <img
+              src="/blog/assets/0.87-symbol-docs-before.png"
+              alt="在旧版类型下悬停 TextInput 符号，不显示文档"
+            />
+          </td>
+          <td>
+            <img
+              src="/blog/assets/0.87-symbol-docs-after.png"
+              alt="在 Strict API 下悬停 TextInput 符号，显示完整的类型信息和文档"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <figcaption>
+    现在大多数符号都包含文档注释，悬停时可以更方便地快速查看信息
+  </figcaption>
+</figure>
+
+#### 破坏性变更
+
+- 现在，导入内部路径（例如 `react-native/Libraries/*`）会产生类型错误，必须进行迁移
+- 一些类型名称和结构已更新，因为旧版定义不准确或不一致——最明显的是，ref 现在拥有专用类型（例如 `ViewInstance`、`TextInputInstance`）([文档](/docs/strict-typescript-api#refs-now-use-instance-types-since-087))
+
+自最初的 0.80 预览版以来，我们一直与社区和合作伙伴合作来完善 API——确定根导出内容并解决与热门库之间的不兼容问题。
+
+许多应用应该可以在几乎没有错误或完全没有错误的情况下升级到 0.87。[迁移指南](/docs/strict-typescript-api#migration-guide)涵盖了每项破坏性变更。
+
+:::tip
+
+由 Agent 驱动的升级可以使用 [**/migrate-to-strict-api**](https://www.skills.sh/react-native-community/skills/migrate-to-strict-api) skill，其中包含在现有 ESLint 修复器基础上的直接迁移说明。
+
+:::
+
+#### 选择退出
+
+我们理解并非每个应用或库都能立即完成迁移——因此，我们会继续维护一个用户选择退出开关。
+
+选择退出是一个临时过渡方案：它**将在 React Native 0.88 之前持续可用**，我们计划在后续版本中移除旧版 TypeScript 类型。
+
+<details>
+<summary>**Strict API：选择退出**</summary>
+
+若要暂时恢复使用之前的类型，请将 `"react-native-legacy-deep-imports"` 自定义条件添加到你的 `tsconfig.json`：
+
+```diff title="tsconfig.json"
+  {
+    "extends": "@react-native/typescript-config",
+    "compilerOptions": {
+      ...
++     "customConditions": ["react-native", "react-native-legacy-deep-imports"]
+    }
+  }
+```
+
+- 选择退出只会影响你自己项目中的 TypeScript 分析——应用和库可以独立迁移（[更多详情](/docs/strict-typescript-api#opting-out-since-087)）
+- 如果有什么因素阻碍你采用 Strict API，请在我们的[反馈讨论](https://github.com/react-native-community/discussions-and-proposals/discussions/1015)中告诉我们
+
+</details>
+
+<details>
+<summary>**Strict API：进一步阅读和常见问题**</summary>
+
+- [常见问题](/docs/strict-typescript-api#faqs)——回答常见问题，包括这是否会影响运行时、库作者的迁移时间，以及为什么要替换手动类型
+- [迈向稳定的 JavaScript API](/blog/2025/06/12/moving-towards-a-stable-javascript-api)——我们最初对这次迁移的理由，来自 0.80 预览版公告
+- [观看演讲](https://www.youtube.com/live/UTaJlqhTk2g?si=SDRmj80kss7hXuGG&t=6520)——深入了解我们推出 Strict TypeScript API 的动机及其背后的工作，内容来自 **App.js 2025**
+
+</details>
+
+### 更快、更精简的 Metro
+
+本次发布中，Metro 从 0.84 更新至 0.87。
+
+- Source map 生成速度现在提升了 2 倍，从而加快 React Native DevTools 的加载速度
+- 得益于更高效的 source map 存储，Metro 的内存占用减少了一半
+- 稳定支持 TypeScript 和 ESM [配置文件](https://metrobundler.dev/docs/configuration/)，例如 `metro.config.mts`，同时移除了对 `.es6` 扩展名和 YAML 配置的支持
+- 新增包括 package self-resolve 在内的解析器功能
+- 各种修复和改进，详见 Metro 的[发布说明](https://github.com/react/metro/releases)
+
+### iOS 实验性支持 Swift Package Manager
+
+React Native 0.87 为 iOS 添加了对 Swift Package Manager 的实验性支持，可作为 CocoaPods 的替代方案。这是可选且增量式的；CocoaPods 仍然是默认设置和受支持的路径。SwiftPM 路径使用 React Native 已经发布的相同预构建 XCFramework。
+
+这种新设置只需要 Xcode——无需 Ruby、Bundler 或 CocoaPods。
+
+要在现有/新建应用中试用：
+
+```sh
+cd ios
+# deintegrate will remove CocoaPods from your project
+npx react-native spm -- deintegrate
+```
+
+该命令会将 Swift package 引用注入现有的 `.xcodeproj`，而不是替换项目。你的签名、功能和构建阶段都会保持不变。`npx react-native spm deinit` 可以准确地撤销此变更。
+
+:::important
+你只需运行一次该命令。首次设置完成后，依赖发生变化时无需再次运行。安装或移除原生 package，然后进行构建。项目会检测到变更并为你重新运行自动链接。每次依赖变更后无需记住运行 `pod install`。
+:::
+
+已知限制：
+
+- 社区库必须提供 `Package.swift`。如果没有，请运行 `npx react-native spm scaffold`，从该库的 podspec 生成它
+- 在全新克隆的项目中，以及在 CI 中，构建前运行一次 `npx react-native spm`。它相当于 `pod install`
+- 命令、标志和生成的布局可能会在后续版本中发生变化。暂时不要在生产环境中使用
+
+有关完整设计和迁移计划，请参阅 [RFC #0994](https://github.com/react-native-community/discussions-and-proposals/pull/994)。
+
+#### Headers 破坏性变更
+
+为了正确支持与 React Native 的 SwiftPM 集成，我们必须重新考虑 React Native 自身预编译二进制文件的发布方式。这是因为 SwiftPM 对 XCFramework 结构和 headers 位置的要求比 Cocoapods 严格得多。
+
+你可能会注意到几个新的 XCFramework：
+
+- `ReactNativeHeaders.xcframework`
+- `ReactNativeDependenciesHeaders.xcframework`
+
+这些是仅包含 Headers 的 frameworks。得益于这项变更，headers 现在会通过标准 framework 和 header 搜索路径机制解析，并且每个 namespace 都有且只有一个物理存放位置。
+Header 内容与源 pods 完全逐字节一致。唯一面向使用者的变更是裸形式的尖括号导入——如果你导入 React Native header 时没有带 namespace，请添加它：
+
+```diff
+- #import <RCTAppDelegate.h>
++ #import <React/RCTAppDelegate.h>
+```
+
+### Android Gradle Plugin（AGP）v9
+
+这是第一个支持 AGP 9 的 React Native 版本。
+
+AGP 9.0 是 AGP 的一个主要版本，在 Gradle 构建中带来了[多项 API 和破坏性变更](https://developer.android.com/build/releases/agp-9-0-0-release-notes)。
+
+尤其是在此版本中，建议选择退出 AGP 9 内置的 Kotlin 和新的 DSL API。
+你可以按照升级助手中的建议，将这些标志添加到 android/gradle.properties 文件中：
+
+```
+# Opt out of built-in kotlin and new DSL behavior that ships with AGP 9.
+# Starting from AGP 10.x these opt outs will be removed.
+android.builtInKotlin=false
+android.newDsl=false
+```
+
+你可以在 [RFC #1006](https://github.com/react-native-community/discussions-and-proposals/pull/1006)中关注整个生态系统采用 AGP 9 的进展
+
+## 破坏性变更
+
+### 最低工具链要求
+
+- 现在要求 **Node.js >= 22.13.0**
+- **Android**：最低 Kotlin 版本现在为 2.0+（捆绑的 Kotlin 版本为 2.2.0）
+- **Android**：`minCompileSdk` 现在为 34（库必须以 compileSdk >= 34 为目标）
+- **Android**：`compileSdk`/`buildTools` 已升级至 37
+
+### API 移除
+
+- **Strict TypeScript API** 现在是默认设置（参见“亮点”）——除非通过 `"react-native-legacy-deep-imports"` 选择恢复，否则无法访问导入 `Libraries/` 的深层路径（[详情](/docs/strict-typescript-api#opting-out-since-087)）
+- 移除了对 `src/private/` 的深层导入
+- 已弃用的 `*Properties` 类型别名（例如 `ViewProperties`）在 Strict API 下无法访问——请使用对应的 `*Props`（[详情](/docs/strict-typescript-api#removal-of-some-deprecated-types)）
+- 移除了对 YAML Metro 配置文件以及扩展名为 `.es6` 的 JavaScript 配置文件的支持
+- 移除了 `InteractionManager`——请改用 `requestIdleCallback`
+- 移除了已弃用的 `Modal` `animated` 属性
+- 移除了已弃用的 `StatusBar` `backgroundColor` / `translucent` / `networkActivityIndicatorVisible` 属性及其 setter 方法
+- 移除了对 `ScrollView` `keyboardShouldPersistTaps` 布尔值的支持
+- 移除了 `useTurboModules` 功能标志（TurboModules 始终启用）
+- `useColorScheme()` 现在返回 `ColorSchemeName | null`，不再返回 `'unspecified'`
+- 移除了 `NativeDialogManagerAndroid` 导出以及（未记录文档的）`Touchable` 根导出——请改为扩展 `ViewProps`
+- 移除了 `NativeMethods` / `NativeMethodsMixin` 类型（请使用 `HostInstance`）
+
+### Packages 和工具
+
+- 不再发布 `@react-native/core-cli-utils`（仍可在仓库中作为参考实现使用）
+- 移除了 `react-native/rn-get-polyfills`——请使用 `@react-native/js-polyfills`
+- 现在必须将 `@react-native/jest-preset` 作为 package 使用
+- 移除了通过 WebSocket 连接独立 `react-devtools` package 的支持——请改用 React Native DevTools
+
+## 弃用
+
+以下 API 已弃用，并计划在未来版本中移除：
+
+- `react-native/Libraries/Core/InitializeCore` → 请使用 `react-native/setup-env`（[详情](/docs/strict-typescript-api#initializecore-is-now-react-nativesetup-env-since-087)）
+- `@react-native/assets-registry` → 请使用 `react-native` 中的 `AssetRegistry` 和新的 `@react-native/asset-utils`
+- `ImageBackground` → 请使用带有绝对定位 `Image` 的 `View`
+- `NativeMethods` 接口 → 请使用 `HostInstance`
+- `Appearance.setColorScheme('unspecified')` → 请使用 `'auto'`
+- **Android**：`DrawerLayoutAndroid` → 请使用 `react-native-drawer-layout`；`UIBlock` / `UIManagerModule.addUIBlock` / `prependUIBlock` → 请使用 `UIManagerListener` 或 View Commands；`DefaultReactActivityDelegate` 上的新架构标志构造函数
+- **iOS**：`TimingModule`；`RCTTurboModuleEnabled()` / `RCTEnableTurboModule()`
+
+## 致谢
+
+React Native 0.87 包含来自 74 位贡献者的 265 次提交。感谢大家付出的辛勤努力！
+
+我们要特别感谢在此版本中作出重大贡献的社区成员。
+
+- [Alex Hunt](https://github.com/huntie) 为 Strict TypeScript API 所做的工作
+- [Christian Falch](https://github.com/chrfalch) 添加 Swift Package Manager 支持
+- [Rob Hogan](https://github.com/robhogan) 对 Metro 的改进
+- [Hur Ali](https://github.com/hurali97) 推动采用 AGP V9
+- [Christoph Purrer](https://github.com/christophpurrer) 清理旧架构
+
+## 升级到 0.87
+
+:::info
+
+0.87 现在是 React Native 的最新稳定版本，0.84.x 进入不受支持状态。更多信息请参阅 [React Native 的支持政策](https://github.com/reactwg/react-native-releases/blob/main/docs/support.md)。
+
+:::
+
+#### 升级
+
+除了[升级文档](/docs/upgrading)之外，请使用 [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) 查看现有项目在不同 React Native 版本之间的代码变更。
+
+#### 创建新项目
+
+```sh
+npx @react-native-community/cli@latest init MyProject --version latest
+```
+
+#### Expo
+
+对于 Expo 项目，React Native 0.87 将作为 expo@canary 发布的一部分提供。

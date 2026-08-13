@@ -1,0 +1,51 @@
+---
+id: style
+title: 样式
+---
+
+使用 React Native 时，你可以使用 JavaScript 为应用设置样式。所有核心组件都接受一个名为 `style` 的 prop。样式名称和[值](colors.md)通常与网页上的 CSS 工作方式一致，但名称使用驼峰命名法书写，例如使用 `backgroundColor` 而不是 `background-color`。
+
+`style` prop 可以是一个普通的 JavaScript 对象。示例代码中通常使用这种方式。你也可以传入样式数组——数组中的最后一个样式具有优先权，因此你可以使用这种方式继承样式。
+
+随着组件变得越来越复杂，使用 `StyleSheet.create` 在同一位置定义多个样式通常会更清晰。下面是一个示例：
+
+```SnackPlayer name=Style
+import {StyleSheet, Text, View} from 'react-native';
+
+const LotsOfStyles = () => {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.red}>just red</Text>
+      <Text style={styles.bigBlue}>just bigBlue</Text>
+      <Text style={[styles.bigBlue, styles.red]}>bigBlue, then red</Text>
+      <Text style={[styles.red, styles.bigBlue]}>red, then bigBlue</Text>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 50,
+  },
+  bigBlue: {
+    color: 'blue',
+    fontWeight: 'bold',
+    fontSize: 30,
+  },
+  red: {
+    color: 'red',
+  },
+});
+
+export default LotsOfStyles;
+```
+
+一种常见模式是让组件接受一个 `style` prop，然后使用它为子组件设置样式。你可以利用这种方式，让样式像 CSS 中那样进行“层叠”。
+
+自定义文本样式的方式还有很多。请参阅[Text 组件参考](text.md)，了解完整列表。
+
+现在你可以让文本变得更漂亮了。成为样式专家的下一步是[学习如何控制组件尺寸](height-and-width.md)。
+
+## 已知问题
+
+- [react-native#29308](https://github.com/facebook/react-native/issues/29308#issuecomment-792864162)：在某些情况下，React Native 的表现与网页上的 CSS 不一致，例如触摸区域永远不会超出父视图边界，并且 Android 不支持负边距。

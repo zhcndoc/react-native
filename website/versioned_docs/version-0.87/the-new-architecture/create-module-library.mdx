@@ -1,0 +1,196 @@
+# 为你的模块创建一个库
+
+React Native 拥有丰富的库生态系统，可以解决常见问题。我们在 [reactnative.directory](https://reactnative.directory) 网站上收集 React Native 库，对于每一位 React Native 开发者来说，这都是一个值得收藏的资源。
+
+有时，你可能正在开发一个值得提取到独立库中以便复用代码的模块。这个库可以是你想在所有应用中复用的库，可以是你想作为开源组件分发给生态系统的库，甚至可以是你想出售的库。
+
+在本指南中，你将学习：
+
+- 如何将模块提取到库中
+- 如何使用 NPM 分发库
+
+## 将模块提取到库中
+
+你可以使用 [`create-react-native-library`](https://callstack.github.io/react-native-builder-bob/create) 工具来创建一个新库。这个工具会创建一个包含所有必要样板代码的新库：所有配置文件以及各个平台所需的全部文件。它还提供了一个友好的交互式菜单，引导你完成库的创建。
+
+要将模块提取到独立库中，你可以按照以下步骤操作：
+
+1. 创建新库
+2. 将代码从 App 移动到库中
+3. 更新代码以适应新的结构
+4. 发布它。
+
+### 1. 创建库
+
+1. 运行以下命令，开始创建流程：
+
+```sh
+npx create-react-native-library@latest <Name of Your Library>
+```
+
+2. 为模块添加名称。它必须是有效的 npm 名称，因此应全部使用小写字母。你可以使用 `-` 分隔单词。
+3. 为软件包添加描述。
+4. 继续填写表单，直到看到问题 _“What type of library do you want to develop?”_
+   ![库类型](/docs/assets/what-library.png)
+5. 对于本指南，请选择 _Turbo module_ 选项。请注意，你可以同时为新架构和旧架构创建库。
+6. 接下来，你可以选择要创建一个访问平台的库（Kotlin & Objective-C），还是一个共享的 C++ 库（Android 和 iOS 使用 C++）。
+7. 最后，选择 `Test App` 作为最后一个选项。此选项会创建一个库，并在库文件夹中配置好一个独立的应用。
+
+交互式提示完成后，该工具会创建一个文件夹，其结构在 Visual Studio Code 中如下所示：
+
+<img
+  className="half-size"
+  alt="初始化新库后的文件夹结构。"
+  src="/docs/assets/turbo-native-modules/c++visualstudiocode.webp"
+/>
+
+你可以随意探索为你创建的代码。不过，最重要的部分包括：
+
+- `android` 文件夹：Android 代码所在的位置
+- `cpp` 文件夹：c++ 代码所在的位置
+- `ios` 文件夹：iOS 代码所在的位置
+- `src` 文件夹：JS 代码所在的位置。
+
+`package.json` 已经配置好了我们提供给 `create-react-native-library` 工具的所有信息，包括软件包的名称和描述。请注意，`package.json` 也已经配置为运行 Codegen。
+
+```json
+  "codegenConfig": {
+    "name": "RN<your module name>Spec",
+    "type": "all",
+    "jsSrcsDir": "src",
+    "outputDir": {
+      "ios": "ios/generated",
+      "android": "android/generated"
+    },
+    "android": {
+      "javaPackageName": "com.<name-of-the-module>"
+    }
+  },
+```
+
+最后，该库已经包含了让库能够与 iOS 和 Android 链接所需的全部基础设施。
+
+### 2. 从你的 App 复制代码
+
+本指南的其余部分假设你的 App 中有一个本地 Turbo Native Module，该模块是按照网站其他指南中所示的规范创建的：平台专属 Turbo Native Modules，或[跨平台 Turbo Native Modules](./pure-cxx-modules)。不过，它同样适用于 Components 以及旧架构的模块和组件。你需要根据实际情况调整要复制和更新的文件。
+
+{/* TODO: add links for Turbo Native Modules */}
+
+1. **[旧架构模块和组件不需要执行]** 将应用中 `specs` 文件夹内的代码移动到 `create-react-native-library` 文件夹创建的 `src` 文件夹中
+2. 更新 `index.ts` 文件，正确导出 Turbo Native Module spec，使其可以从库中访问。例如：
+
+```ts
+import NativeSampleModule from './NativeSampleModule';
+
+export default NativeSampleModule;
+```
+
+3. 复制原生模块：
+   - 如果你在应用中编写了原生模块代码，请将其替换到 `android/src/main/java/com/<name-of-the-module>` 中。
+   - 如果你在应用中编写了原生模块代码，请将其替换到 `ios` 文件夹中。
+   - 如果你在应用中编写了原生模块代码，请将其替换到 `cpp` 文件夹中。
+
+4. **[旧架构模块和组件不需要执行]** 将之前的 spec 名称全部更新为新的 spec 名称，也就是库的 `package.json` 中 `codegenConfig` 字段定义的名称。例如，如果你在应用的 `package.json` 中将 `AppSpecs` 设置为 `codegenConfig.name`，而在库中它被称为 `RNNativeSampleModuleSpec`，则必须将所有出现的 `AppSpecs` 替换为 `RNNativeSampleModuleSpec`
+
+就是这样！你已经将所有必需的代码从应用中移出，并放入了一个单独的库中
+
+## 测试你的库
+
+`create-react-native-library` 自带一个有用的示例应用，该应用已经配置为可以与库正常配合使用。这是测试库的好方法！
+
+如果查看 `example` 文件夹，你可以找到一个新 React Native 应用的相同结构，该应用可以通过 [`react-native-community/template`](https://github.com/react-native-community/template) 创建
+
+要测试你的库：
+
+1. 导航到 `example` 文件夹
+2. 运行 `yarn install` 以安装所有依赖
+3. 仅针对 iOS，你需要安装 CocoaPods：`cd ios && pod install`
+4. 在 `example` 文件夹中运行 `yarn android`，构建并运行 Android
+5. 在 `example` 文件夹中运行 `yarn ios`，构建并运行 iOS
+
+## 将你的库用作本地模块
+
+在某些情况下，你可能希望将库作为本地模块供应用使用，而无需将其发布到 NPM
+
+在这种情况下，你可能会遇到库与应用彼此并列的情况
+
+```shell
+Development
+├── App
+└── Library
+```
+
+在这种情况下，你也可以使用通过 `create-react-native-library` 创建的库
+
+1. 进入 `App` 文件夹并运行 `yarn add ../Library`，将你的库添加到应用中
+2. 仅针对 iOS，进入 `App/ios` 文件夹并运行 `bundle exec pod install` 以安装依赖
+3. 更新 `App.tsx` 代码，以导入库中的代码。例如：
+
+```tsx
+import NativeSampleModule from '../Library/src/index';
+```
+
+如果你现在运行应用，Metro 将无法找到它需要提供给应用的 JS 文件。这是因为 Metro 将从 `App` 文件夹开始运行，并且无法访问位于 `Library` 文件夹中的 JS 文件。要解决这个问题，请按如下方式更新 `metro.config.js` 文件
+
+```diff
+const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
+
+/**
+ * Metro configuration
+ * https://reactnative.dev/docs/metro
+ *
+ * @type {import('metro-config').MetroConfig}
+ */
++ const path = require('path');
+
+- const config = {}
++ const config = {
++  // Make Metro able to resolve required external dependencies
++  watchFolders: [
++    path.resolve(__dirname, '../Library'),
++  ],
++  resolver: {
++    extraNodeModules: {
++      'react-native': path.resolve(__dirname, 'node_modules/react-native'),
++    },
++  },
++};
+
+module.exports = mergeConfig(getDefaultConfig(__dirname), config);
+```
+
+`watchFolders` 配置告诉 Metro 监视其他路径中的文件和更改，在本例中是包含你所需的 `src/index` 文件的 `../Library` 路径  
+`resolver` 属性用于向库提供应用所使用的 React Native 代码。库可能会引用并导入 React Native 中的代码：如果没有额外的 resolver，库中的导入将失败
+
+此时，你可以像平常一样构建并运行应用：
+
+- 在 `example` 文件夹中运行 `yarn android`，构建并运行 Android
+- 在 `example` 文件夹中运行 `yarn ios`，构建并运行 iOS
+
+## 将库发布到 NPM
+
+得益于 `create-react-native-library`，发布到 NPM 所需的一切配置都已经准备就绪
+
+1. 在你的模块中运行 `yarn install`，安装依赖
+2. 运行 `yarn prepare`，构建库
+3. 运行 `yarn release`，发布库
+
+一段时间后，你就能在 NPM 上找到你的库。要验证这一点，请运行：
+
+```bash
+npm view <package.name>
+```
+
+其中，`package.name` 是你在初始化库期间于 `package.json` 文件中设置的 `name`
+
+现在，你可以运行以下命令，将库安装到应用中：
+
+```bash
+yarn add <package.name>
+```
+
+:::note
+仅针对 iOS，每当你安装包含原生代码的新模块时，都必须重新安装 CocoaPods，运行 `bundle exec pod install`（推荐），或者如果你不使用 Ruby 的 Bundler，则运行 `pod install`（不推荐）
+:::
+
+恭喜！你已经发布了第一个 React Native 库

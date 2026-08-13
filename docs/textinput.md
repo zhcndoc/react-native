@@ -50,7 +50,7 @@ export default TextInputExample;
 
 原生元素提供了两个方法：`.focus()` 和 `.blur()`，可用于以编程方式让 TextInput 获得焦点或失去焦点。
 
-请注意，某些 props 只有在 `multiline={true/false}` 时才可用。此外，仅作用于元素单侧的边框样式（例如 `borderBottomColor`、`borderLeftWidth` 等）在 `multiline=true` 时不会生效。要达到相同效果，可以将 `TextInput` 包裹在 `View` 中：
+请注意，某些 Props 仅在 `multiline={true/false}` 时可用：
 
 ```SnackPlayer name=Multiline%20TextInput%20Example
 import {useState} from 'react';
@@ -238,8 +238,8 @@ export default MultilineTextInputExample;
 
 ### 🗑️ `blurOnSubmit`
 
-:::warning[Deprecated]
-Note that `submitBehavior` now takes the place of `blurOnSubmit` and will override any behavior defined by `blurOnSubmit`. See [submitBehavior](textinput#submitbehavior).
+:::warning[已弃用]
+请注意，`submitBehavior` 现在取代了 `blurOnSubmit`，并会覆盖 `blurOnSubmit` 定义的任何行为。请参阅 [submitBehavior](textinput#submitbehavior)。
 :::
 
 如果为 `true`，提交时文本字段会失去焦点。单行字段的默认值为 `true`，多行字段的默认值为 `false`。请注意，对于多行字段，将 `blurOnSubmit` 设置为 `true` 意味着按下回车键会使字段失去焦点并触发 `onSubmitEditing` 事件，而不是在字段中插入换行符。
@@ -325,7 +325,7 @@ Note that `submitBehavior` now takes the place of `blurOnSubmit` and will overri
 
 如果为 `true`，则会禁用键盘快捷键（撤销/重做以及复制按钮）。
 
-| 类型 | 默认值 |
+| 类型 | 默认值  |
 | ---- | ------- |
 | bool | `false` |
 
@@ -538,7 +538,7 @@ _仅 Android_
 
 在 iOS 14+ 上设置换行策略。可能的值为 `none`、`standard`、`hangul-word` 和 `push-out`。
 
-| 类型                                                        | 默认值  |
+| 类型                                                        | 默认值   |
 | ----------------------------------------------------------- | -------- |
 | enum(`'none'`, `'standard'`, `'hangul-word'`, `'push-out'`) | `'none'` |
 
@@ -548,7 +548,7 @@ _仅 Android_
 
 设置 iOS 上的换行模式。可能的值为 `wordWrapping`、`char`、`clip`、`head`、`middle` 和 `tail`。
 
-| 类型                                                                       | 默认值          |
+| 类型                                                                       | 默认值           |
 | -------------------------------------------------------------------------- | ---------------- |
 | enum(`'wordWrapping'`, `'char'`, `'clip'`, `'head'`, `'middle'`, `'tail'`) | `'wordWrapping'` |
 
@@ -736,8 +736,8 @@ iOS 上的 `numberOfLines` 仅在 [新架构](/architecture/landing-page) 中可
 
 文本输入的提交按钮被按下时调用的回调。
 
-| 类型                                                     |
-| -------------------------------------------------------- |
+| 类型                                                  |
+| ----------------------------------------------------- |
 | (`{nativeEvent: {text, eventCount, target}}`) => void |
 
 请注意，在 iOS 上，当使用 `keyboardType="phone-pad"` 时不会调用此方法。
@@ -915,8 +915,8 @@ _仅 iOS_
 如果为 `false`，iOS 系统在粘贴后不会额外插入空格，也不会在剪切或删除操作后删除一个或两个空格。
 
 | 类型 | 默认值 |
-| ---- | ------- |
-| bool | `true`  |
+| ---- | ------ |
+| bool | `true` |
 
 ---
 

@@ -1,0 +1,122 @@
+---
+id: navigation
+title: 在屏幕之间导航
+---
+
+移动应用很少由单个屏幕组成。多个屏幕的呈现和过渡通常由一种称为导航器的组件负责。
+
+本指南介绍 React Native 中提供的各种导航组件。如果你刚开始接触导航，可能会想使用 [React Navigation](navigation.md#react-navigation)。React Navigation 提供了一个简单直接的导航解决方案，能够在 Android 和 iOS 上实现常见的堆栈导航和标签页导航模式。
+
+如果你要将 React Native 集成到已经原生管理导航的应用中，或者正在寻找 React Navigation 的替代方案，以下库可在两个平台上提供原生导航：[react-native-navigation](https://github.com/wix/react-native-navigation)。
+
+## React Navigation
+
+社区提供的导航解决方案是一个独立的库，开发者只需编写几行代码即可设置应用的屏幕。
+
+### Starter template
+
+如果你要开始一个新项目，可以使用 React Navigation 模板，通过 [Expo](https://expo.dev/) 快速设置新项目：
+
+```shell
+npx create-expo-app@latest --template react-navigation/template
+```
+
+有关如何开始使用的更多信息，请参阅项目的 `README.md`。
+
+### 安装和设置
+
+首先，你需要在项目中安装它们：
+
+```shell
+npm install @react-navigation/native @react-navigation/native-stack
+```
+
+接下来，安装所需的对等依赖项。根据你的项目是 Expo 托管项目还是裸 React Native 项目，你需要运行不同的命令。
+
+- 如果你使用的是 Expo 托管项目，请使用 `expo` 安装依赖项：
+
+  ```shell
+  npx expo install react-native-screens react-native-safe-area-context
+  ```
+
+- 如果你使用的是裸 React Native 项目，请使用 `npm` 安装依赖项：
+
+  ```shell
+  npm install react-native-screens react-native-safe-area-context
+  ```
+
+  对于使用裸 React Native 项目的 iOS，请确保已经安装 [CocoaPods](https://cocoapods.org/)。然后安装 pods 以完成安装：
+
+  ```shell
+  cd ios
+  pod install
+  cd ..
+  ```
+
+安装并配置依赖项后，你就可以继续设置项目以使用 React Navigation。
+
+使用 React Navigation 时，你需要在应用中配置[导航器](https://reactnavigation.org/docs/glossary-of-terms#navigator)。导航器负责处理应用中屏幕之间的过渡，并提供标题栏、标签栏等 UI。
+
+现在，你已经可以在设备或模拟器上构建并运行应用了。
+
+### 用法
+
+现在，你可以创建一个包含主页屏幕和个人资料屏幕的应用：
+
+```tsx title="App.tsx"
+import {createStaticNavigation} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: {
+      screen: HomeScreen,
+      options: {title: 'Welcome'},
+    },
+    Profile: {
+      screen: ProfileScreen,
+    },
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+在此示例中，`RootStack` 是一个包含 2 个屏幕（`Home` 和 `Profile`）的导航器，这些屏幕在 `createNativeStackNavigator` 的 `screens` 属性中定义。同样，你可以根据需要定义任意数量的屏幕。
+
+你可以在每个屏幕的 `options` 属性中指定屏幕标题等选项。每个屏幕定义还需要一个 `screen` 属性，该属性的值可以是 React 组件或另一个导航器。
+
+在每个屏幕组件中，你可以使用 `useNavigation` hook 获取 `navigation` 对象，该对象包含用于链接到其他屏幕的各种方法。例如，你可以使用 `navigation.navigate` 前往 `Profile` 屏幕：
+
+```tsx title="HomeScreen.tsx"
+import {useNavigation} from '@react-navigation/native';
+
+export default function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <Button
+      title="Go to Jane's profile"
+      onPress={() =>
+        navigation.navigate('Profile', {name: 'Jane'})
+      }
+    />
+  );
+}
+```
+
+```tsx title="ProfileScreen.tsx"
+export default function ProfileScreen({route}) {
+  return <Text>This is {route.params.name}'s profile</Text>;
+}
+```
+
+此 `native-stack` 导航器使用原生 API：iOS 上的 `UINavigationController` 和 Android 上的 `Fragment`，因此使用 `createNativeStackNavigator` 构建的导航，其行为和性能特征将与基于这些 API 原生构建的应用相同或相似。
+
+React Navigation 还提供了适用于不同类型导航器的包，例如标签页和抽屉。你可以使用它们在应用中实现各种模式。
+
+如需完整了解 React Navigation，请参阅 [React Navigation 入门指南](https://reactnavigation.org/docs/getting-started)。

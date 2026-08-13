@@ -1,0 +1,236 @@
+import CodeBlock from '@theme/CodeBlock';
+import {getCurrentVersion} from '@site/src/getCurrentVersion';
+
+# 使用 Codegen
+
+本指南介绍如何：
+
+- 配置 **Codegen**
+- 在每个平台上手动调用它
+
+本指南还介绍生成的代码。
+
+## 前提条件
+
+始终需要一个 React Native 应用来正确生成代码，即使是手动调用 **Codegen** 也是如此。
+
+**Codegen** 过程与应用的构建紧密耦合，相关脚本位于 `react-native` NPM package 中。
+
+在本指南中，使用 React Native CLI 按如下方式创建项目：
+
+<CodeBlock language="bash" title="shell">
+  {`npx @react-native-community/cli@latest init SampleApp --version ${getCurrentVersion()}`}
+</CodeBlock>
+
+**Codegen** 用于为自定义模块或组件生成胶水代码。有关如何创建 Turbo Native Modules 和 Fabric Native Components 的更多详细信息，请参阅相关指南。
+
+{/* TODO: add links */}
+
+## 配置 **Codegen**
+
+可以通过修改 `package.json` 文件在应用中配置 **Codegen**。**Codegen** 由一个名为 `codegenConfig` 的自定义字段控制。
+
+```json title="package.json"
+  "codegenConfig": {
+    "name": "<SpecName>",
+    "type": "<types>",
+    "jsSrcsDir": "<source_dir>",
+    "android": {
+      "javaPackageName": "<java.package.name>"
+    },
+    "ios": {
+      "modules": {
+        "TestModule": {
+          "className": "<iOS-class-implementing-the-RCTModuleProvider-protocol>",
+          "unstableRequiresMainQueueSetup": false,
+          "conformsToProtocols": ["RCTImageURLLoader", "RCTURLRequestHandler", "RCTImageDataDecoder"],
+        }
+      },
+      "components": {
+        "TestComponent": {
+          "className": "<iOS-class-implementing-the-component>"
+        }
+      }
+    }
+  },
+```
+
+可以将此代码片段添加到应用中，并自定义各个字段：
+
+- `name:` Codegen 配置的名称。这将自定义 Codegen 输出：文件名和代码
+- `type:`
+  - `modules:` 仅为模块生成代码
+  - `components:` 仅为组件生成代码
+  - `all`：为所有内容生成代码
+- `jsSrcsDir`：所有 spec 所在的根文件夹
+- `android`：Android 的 Codegen 配置（全部可选）：
+  - `.javaPackageName`：配置 Android Java Codegen 输出的包名
+- `ios`：iOS 的 Codegen 配置（全部可选）：
+  - `.modules[moduleName]:`
+    - `.className`：此模块的 ObjC 类。或者，如果它是一个 [仅 C++ 模块](/docs/next/the-new-architecture/pure-cxx-modules)，则为其 `RCTModuleProvider` 类
+    - `.unstableRequiresMainQueueSetup`：在运行任何 JavaScript 之前，于 UI 线程上初始化此模块
+    - `.conformsToProtocols`：标注此模块遵循以下协议中的哪些协议：[`RCTImageURLLoader`](https://github.com/facebook/react-native/blob/00d5caee9921b6c10be8f7d5b3903c6afe8dbefa/packages/react-native/Libraries/Image/RCTImageURLLoader.h#L26-L81)、[`RCTURLRequestHandler`](https://github.com/facebook/react-native/blob/00d5caee9921b6c10be8f7d5b3903c6afe8dbefa/packages/react-native/React/Base/RCTURLRequestHandler.h#L11-L52)、[`RCTImageDataDecoder`](https://github.com/facebook/react-native/blob/00d5caee9921b6c10be8f7d5b3903c6afe8dbefa/packages/react-native/Libraries/Image/RCTImageDataDecoder.h#L15-L53)
+  - `.components[componentName]`：
+    - `.className`：此组件的 ObjC 类（例如：`TextInput` -> `RCTTextInput`）
+
+运行 **Codegen** 时，它会在应用的所有依赖中进行搜索，查找遵循特定约定的 JS 文件，并生成所需的代码：
+
+- Turbo Native Modules 要求 spec 文件以 `Native` 作为前缀。例如，`NativeLocalStorage.ts` 是一个有效的 spec 文件名
+- Native Fabric Components 要求 spec 文件以 `NativeComponent` 作为后缀。例如，`WebViewNativeComponent.ts` 是一个有效的 spec 文件名
+
+## 运行 **Codegen**
+
+本指南的其余部分假定你已经在项目中设置好了 Native Turbo Module、Native Fabric Component 或两者。我们还假定你已经在 `package.json` 中指定的 `jsSrcsDir` 中放置了有效的 specification 文件。
+
+### Android
+
+Android 的 **Codegen** 已集成到 React Native Gradle Plugin（RNGP）中。RNGP 包含一个可调用的任务，该任务会读取 `package.json` 文件中定义的配置并执行 **Codegen**。要运行 gradle 任务，请先进入项目的 `android` 文件夹。然后运行：
+
+```bash
+./gradlew generateCodegenArtifactsFromSchema
+```
+
+此任务会在应用的所有导入项目（应用本身以及所有链接到它的 node modules）上调用 `generateCodegenArtifactsFromSchema` 命令。它会在对应的 `node_modules/<dependency>` 文件夹中生成代码。例如，如果你有一个名为 `my-fabric-component` 的 Node module，其中包含 Fabric Native Component，则生成的代码位于 `SampleApp/node_modules/my-fabric-component/android/build/generated/source/codegen` 路径中。对于应用本身，代码会生成在 `android/app/build/generated/source/codegen` 文件夹中。
+
+#### 生成的代码
+
+运行上述 gradle 命令后，你将在 `SampleApp/android/app/build` 文件夹中找到 Codegen 代码。其结构如下：
+
+```
+build
+└── generated
+    └── source
+        └── codegen
+            ├── java
+            │   └── com
+            │       ├── facebook
+            │       │   └── react
+            │       │       └── viewmanagers
+            │       │           ├── <nativeComponent>ManagerDelegate.java
+            │       │           └── <nativeComponent>ManagerInterface.java
+            │       └── sampleapp
+            │           └── NativeLocalStorageSpec.java
+            ├── jni
+            │   ├── <codegenConfig.name>-generated.cpp
+            │   ├── <codegenConfig.name>.h
+            │   ├── CMakeLists.txt
+            │   └── react
+            │       └── renderer
+            │           └── components
+            │               └── <codegenConfig.name>
+            │                   ├── <codegenConfig.name>JSI-generated.cpp
+            │                   ├── <codegenConfig.name>.h
+            │                   ├── ComponentDescriptors.cpp
+            │                   ├── ComponentDescriptors.h
+            │                   ├── EventEmitters.cpp
+            │                   ├── EventEmitters.h
+            │                   ├── Props.cpp
+            │                   ├── Props.h
+            │                   ├── ShadowNodes.cpp
+            │                   ├── ShadowNodes.h
+            │                   ├── States.cpp
+            │                   └── States.h
+            └── schema.json
+```
+
+生成的代码分为两个文件夹：
+
+- `java`，包含平台特定的代码
+- `jni`，包含让 JS 和 Java 正确交互所需的 C++ 代码
+
+在 `java` 文件夹中，可以在 `com/facebook/viewmanagers` 子文件夹中找到生成的 Fabric Native component 代码。
+
+- `<nativeComponent>ManagerDelegate.java` 包含 `ViewManager` 可以在自定义 Native Component 上调用的方法
+- `<nativeComponent>ManagerInterface.java` 包含 `ViewManager` 的接口
+
+在名称由 `codegenConfig.android.javaPackageName` 设置的文件夹中，则可以找到 Turbo Native Module 必须实现的抽象类，以执行其任务。
+
+最后，在 `jni` 文件夹中，可以找到连接 JS 与 Android 所需的全部样板代码。
+
+- `<codegenConfig.name>.h`：包含自定义 C++ Turbo Native Modules 的接口
+- `<codegenConfig.name>-generated.cpp`：包含自定义 C++ Turbo Native Modules 的 glue 代码
+- `react/renderer/components/<codegenConfig.name>`：此文件夹包含自定义组件所需的全部 glue 代码
+
+此结构是通过将 `all` 用作 `codegenConfig.type` 字段的值生成的。如果使用 `modules`，则不会看到 `react/renderer/components/` 文件夹。如果使用 `components`，则不会看到其他任何文件。
+
+### iOS
+
+iOS 的 **Codegen** 依赖于一些在构建过程中调用的 Node 脚本。这些脚本位于 `SampleApp/node_modules/react-native/scripts/` 文件夹中。
+
+主脚本是 `generate-codegen-artifacts.js` 脚本。要调用此脚本，可以从应用的根文件夹运行以下命令：
+
+```bash
+node node_modules/react-native/scripts/generate-codegen-artifacts.js
+
+Usage: generate-codegen-artifacts.js -p [path to app] -t [target platform] -o [output path]
+
+Options:
+      --help            Show help                                      [boolean]
+      --version         Show version number                            [boolean]
+  -p, --path            Path to the React Native project root.        [required]
+  -t, --targetPlatform  Target platform. Supported values: "android", "ios",
+                        "all".                                        [required]
+  -o, --outputPath      Path where generated artifacts will be output to.
+```
+
+其中：
+
+- `--path` 是应用根文件夹的路径
+- `--outputPath` 是 **Codegen** 写入生成文件的目标位置
+- `--targetPlatform` 是你希望为其生成代码的平台
+
+#### 生成的代码
+
+使用以下参数运行脚本：
+
+```shell
+node node_modules/react-native/scripts/generate-codegen-artifacts.js \
+    --path . \
+    --outputPath ios/ \
+    --targetPlatform ios
+```
+
+将在 `ios/build` 文件夹中生成以下文件：
+
+```
+build
+└── generated
+    └── ios
+        ├── <codegenConfig.name>
+        │   ├── <codegenConfig.name>-generated.mm
+        │   └── <codegenConfig.name>.h
+        ├── <codegenConfig.name>JSI-generated.cpp
+        ├── <codegenConfig.name>JSI.h
+        ├── FBReactNativeSpec
+        │   ├── FBReactNativeSpec-generated.mm
+        │   └── FBReactNativeSpec.h
+        ├── FBReactNativeSpecJSI-generated.cpp
+        ├── FBReactNativeSpecJSI.h
+        ├── RCTModulesConformingToProtocolsProvider.h
+        ├── RCTModulesConformingToProtocolsProvider.mm
+        └── react
+            └── renderer
+                └── components
+                    └── <codegenConfig.name>
+                        ├── ComponentDescriptors.cpp
+                        ├── ComponentDescriptors.h
+                        ├── EventEmitters.cpp
+                        ├── EventEmitters.h
+                        ├── Props.cpp
+                        ├── Props.h
+                        ├── RCTComponentViewHelpers.h
+                        ├── ShadowNodes.cpp
+                        ├── ShadowNodes.h
+                        ├── States.cpp
+                        └── States.h
+```
+
+这些生成文件中的一部分由 React Native Core 使用。除此之外，还有一组文件的名称与你在 `package.json` 的 `codegenConfig.name` 字段中指定的名称相同。
+
+- `<codegenConfig.name>/<codegenConfig.name>.h`：包含自定义 iOS Turbo Native Modules 的接口
+- `<codegenConfig.name>/<codegenConfig.name>-generated.mm`：包含自定义 iOS Turbo Native Modules 的 glue 代码
+- `<codegenConfig.name>JSI.h`：包含自定义 C++ Turbo Native Modules 的接口
+- `<codegenConfig.name>JSI-generated.h`：包含自定义 C++ Turbo Native Modules 的 glue 代码
+- `react/renderer/components/<codegenConfig.name>`：此文件夹包含自定义组件所需的全部 glue 代码
+
+此结构是通过将 `all` 用作 `codegenConfig.type` 字段的值生成的。如果使用 `modules`，则不会看到 `react/renderer/components/` 文件夹。如果使用 `components`，则不会看到其他任何文件。

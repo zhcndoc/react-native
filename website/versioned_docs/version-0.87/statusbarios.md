@@ -1,0 +1,10 @@
+---
+id: statusbarios
+title: '❌ StatusBarIOS'
+---
+
+:::danger[已从 React Native 中移除]
+使用 [`StatusBar`](statusbar.md) 修改状态栏
+:::
+
+---

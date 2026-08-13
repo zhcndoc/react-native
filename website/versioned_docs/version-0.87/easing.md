@@ -1,0 +1,568 @@
+---
+id: easing
+title: 缓动
+---
+
+import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
+
+`Easing` 模块实现了常见的缓动函数。此模块由 [`Animated.timing()`](animated.md#timing) 使用，用于在动画中传达符合物理规律的运动。
+
+你可以在 https://easings.net/ 查看一些常见缓动函数的可视化效果
+
+### 预定义动画
+
+`Easing` 模块通过以下方法提供了几个预定义动画：
+
+- [`back`](easing.md#back) 提供基本动画，对象会先稍微向后移动，然后向前移动
+- [`bounce`](easing.md#bounce) 提供弹跳动画
+- [`ease`](easing.md#ease) 提供基本的惯性动画
+- [`elastic`](easing.md#elastic) 提供基本的弹簧交互效果
+
+### 标准函数
+
+提供了三个标准缓动函数：
+
+- [`linear`](easing.md#linear)
+- [`quad`](easing.md#quad)
+- [`cubic`](easing.md#cubic)
+
+可以使用 [`poly`](easing.md#poly) 函数实现四次、五次以及其他更高次幂函数。
+
+### 其他函数
+
+以下方法提供了额外的数学函数：
+
+- [`bezier`](easing.md#bezier) 提供三次 bezier 曲线
+- [`circle`](easing.md#circle) 提供圆形函数
+- [`sin`](easing.md#sin) 提供正弦函数
+- [`exp`](easing.md#exp) 提供指数函数
+
+以下辅助函数用于修改其他缓动函数。
+
+- [`in`](easing.md#in) 使缓动函数正向运行
+- [`inOut`](easing.md#inout) 使任意缓动函数保持对称
+- [`out`](easing.md#out) 使缓动函数反向运行
+
+## 示例
+
+<Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
+<TabItem value="javascript">
+
+```SnackPlayer name=Easing%20Demo&ext=js
+import {useRef} from 'react';
+import {
+  Animated,
+  Easing,
+  SectionList,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
+
+const App = () => {
+  const opacity = useRef(new Animated.Value(0)).current;
+
+  const animate = easing => {
+    opacity.setValue(0);
+    Animated.timing(opacity, {
+      toValue: 1,
+      duration: 1200,
+      easing,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const size = opacity.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 80],
+  });
+
+  const animatedStyles = [
+    styles.box,
+    {
+      opacity,
+      width: size,
+      height: size,
+    },
+  ];
+
+  return (
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.container} edges={['right', 'top', 'left']}>
+        <StatusBar hidden={true} />
+        <Text style={styles.title}>
+          Press rows below to preview the Easing!
+        </Text>
+        <View style={styles.boxContainer}>
+          <Animated.View style={animatedStyles} />
+        </View>
+        <SectionList
+          style={styles.list}
+          sections={SECTIONS}
+          keyExtractor={item => item.title}
+          renderItem={({item}) => (
+            <TouchableOpacity
+              onPress={() => animate(item.easing)}
+              style={styles.listRow}>
+              <Text>{item.title}</Text>
+            </TouchableOpacity>
+          )}
+          renderSectionHeader={({section: {title}}) => (
+            <Text style={styles.listHeader}>{title}</Text>
+          )}
+        />
+      </SafeAreaView>
+    </SafeAreaProvider>
+  );
+};
+
+const SECTIONS = [
+  {
+    title: 'Predefined animations',
+    data: [
+      {title: 'Bounce', easing: Easing.bounce},
+      {title: 'Ease', easing: Easing.ease},
+      {title: 'Elastic', easing: Easing.elastic(4)},
+    ],
+  },
+  {
+    title: 'Standard functions',
+    data: [
+      {title: 'Linear', easing: Easing.linear},
+      {title: 'Quad', easing: Easing.quad},
+      {title: 'Cubic', easing: Easing.cubic},
+    ],
+  },
+  {
+    title: 'Additional functions',
+    data: [
+      {
+        title: 'Bezier',
+        easing: Easing.bezier(0, 2, 1, -1),
+      },
+      {title: 'Circle', easing: Easing.circle},
+      {title: 'Sin', easing: Easing.sin},
+      {title: 'Exp', easing: Easing.exp},
+    ],
+  },
+  {
+    title: 'Combinations',
+    data: [
+      {
+        title: 'In + Bounce',
+        easing: Easing.in(Easing.bounce),
+      },
+      {
+        title: 'Out + Exp',
+        easing: Easing.out(Easing.exp),
+      },
+      {
+        title: 'InOut + Elastic',
+        easing: Easing.inOut(Easing.elastic(1)),
+      },
+    ],
+  },
+];
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#20232a',
+  },
+  title: {
+    marginTop: 10,
+    textAlign: 'center',
+    color: '#61dafb',
+  },
+  boxContainer: {
+    height: 160,
+    alignItems: 'center',
+  },
+  box: {
+    marginTop: 32,
+    borderRadius: 4,
+    backgroundColor: '#61dafb',
+  },
+  list: {
+    backgroundColor: '#fff',
+  },
+  listHeader: {
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    backgroundColor: '#f4f4f4',
+    color: '#999',
+    fontSize: 12,
+    textTransform: 'uppercase',
+  },
+  listRow: {
+    padding: 8,
+  },
+});
+
+export default App;
+```
+
+</TabItem>
+<TabItem value="typescript">
+
+```SnackPlayer name=Easing%20Demo&ext=tsx
+import {useRef} from 'react';
+import {
+  Animated,
+  Easing,
+  SectionList,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  type EasingFunction,
+} from 'react-native';
+import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
+
+const App = () => {
+  const opacity = useRef(new Animated.Value(0)).current;
+
+  const animate = (easing: EasingFunction) => {
+    opacity.setValue(0);
+    Animated.timing(opacity, {
+      toValue: 1,
+      duration: 1200,
+      easing,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const size = opacity.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 80],
+  });
+
+  const animatedStyles = [
+    styles.box,
+    {
+      opacity,
+      width: size,
+      height: size,
+    },
+  ];
+
+  return (
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.container} edges={['right', 'top', 'left']}>
+        <StatusBar hidden={true} />
+        <Text style={styles.title}>
+          Press rows below to preview the Easing!
+        </Text>
+        <View style={styles.boxContainer}>
+          <Animated.View style={animatedStyles} />
+        </View>
+        <SectionList
+          style={styles.list}
+          sections={SECTIONS}
+          keyExtractor={item => item.title}
+          renderItem={({item}) => (
+            <TouchableOpacity
+              onPress={() => animate(item.easing)}
+              style={styles.listRow}>
+              <Text>{item.title}</Text>
+            </TouchableOpacity>
+          )}
+          renderSectionHeader={({section: {title}}) => (
+            <Text style={styles.listHeader}>{title}</Text>
+          )}
+        />
+      </SafeAreaView>
+    </SafeAreaProvider>
+  );
+};
+
+const SECTIONS = [
+  {
+    title: 'Predefined animations',
+    data: [
+      {title: 'Bounce', easing: Easing.bounce},
+      {title: 'Ease', easing: Easing.ease},
+      {title: 'Elastic', easing: Easing.elastic(4)},
+    ],
+  },
+  {
+    title: 'Standard functions',
+    data: [
+      {title: 'Linear', easing: Easing.linear},
+      {title: 'Quad', easing: Easing.quad},
+      {title: 'Cubic', easing: Easing.cubic},
+    ],
+  },
+  {
+    title: 'Additional functions',
+    data: [
+      {
+        title: 'Bezier',
+        easing: Easing.bezier(0, 2, 1, -1),
+      },
+      {title: 'Circle', easing: Easing.circle},
+      {title: 'Sin', easing: Easing.sin},
+      {title: 'Exp', easing: Easing.exp},
+    ],
+  },
+  {
+    title: 'Combinations',
+    data: [
+      {
+        title: 'In + Bounce',
+        easing: Easing.in(Easing.bounce),
+      },
+      {
+        title: 'Out + Exp',
+        easing: Easing.out(Easing.exp),
+      },
+      {
+        title: 'InOut + Elastic',
+        easing: Easing.inOut(Easing.elastic(1)),
+      },
+    ],
+  },
+];
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#20232a',
+  },
+  title: {
+    marginTop: 10,
+    textAlign: 'center',
+    color: '#61dafb',
+  },
+  boxContainer: {
+    height: 160,
+    alignItems: 'center',
+  },
+  box: {
+    marginTop: 32,
+    borderRadius: 4,
+    backgroundColor: '#61dafb',
+  },
+  list: {
+    backgroundColor: '#fff',
+  },
+  listHeader: {
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    backgroundColor: '#f4f4f4',
+    color: '#999',
+    fontSize: 12,
+    textTransform: 'uppercase',
+  },
+  listRow: {
+    padding: 8,
+  },
+});
+
+export default App;
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+# 参考
+
+## 方法
+
+### `step0()`
+
+```tsx
+static step0(n: number);
+```
+
+步进函数，对于任意正值 `n` 返回 1。
+
+---
+
+### `step1()`
+
+```tsx
+static step1(n: number);
+```
+
+步进函数，当 `n` 大于或等于 1 时返回 1。
+
+---
+
+### `linear()`
+
+```tsx
+static linear(t: number);
+```
+
+线性函数，`f(t) = t`。位置与经过的时间一一对应。
+
+https://cubic-bezier.com/#0,0,1,1
+
+---
+
+### `ease()`
+
+```tsx
+static ease(t: number);
+```
+
+基本的惯性交互效果，类似于对象缓慢加速至目标速度。
+
+https://cubic-bezier.com/#.42,0,1,1
+
+---
+
+### `quad()`
+
+```tsx
+static quad(t: number);
+```
+
+二次函数，`f(t) = t * t`。位置等于经过时间的平方。
+
+https://easings.net/#easeInQuad
+
+---
+
+### `cubic()`
+
+```tsx
+static cubic(t: number);
+```
+
+三次函数，`f(t) = t * t * t`。位置等于经过时间的立方。
+
+https://easings.net/#easeInCubic
+
+---
+
+### `poly()`
+
+```tsx
+static poly(n: number);
+```
+
+幂函数。位置等于经过时间的 N 次幂。
+
+n = 4：https://easings.net/#easeInQuart n = 5：https://easings.net/#easeInQuint
+
+---
+
+### `sin()`
+
+```tsx
+static sin(t: number);
+```
+
+正弦函数。
+
+https://easings.net/#easeInSine
+
+---
+
+### `circle()`
+
+```tsx
+static circle(t: number);
+```
+
+圆形函数。
+
+https://easings.net/#easeInCirc
+
+---
+
+### `exp()`
+
+```tsx
+static exp(t: number);
+```
+
+指数函数。
+
+https://easings.net/#easeInExpo
+
+---
+
+### `elastic()`
+
+```tsx
+static elastic(bounciness: number);
+```
+
+基本的弹性交互效果，类似于弹簧来回振荡。
+
+默认弹性系数为 1，会轻微地超调一次。弹性系数为 0 时完全不会超调，弹性系数为 N > 1 时大约会超调 N 次。
+
+https://easings.net/#easeInElastic
+
+---
+
+### `back()`
+
+```tsx
+static back(s)
+```
+
+与 `Animated.parallel()` 搭配使用，可创建对象在动画开始时稍微向后运动的基本效果。
+
+---
+
+### `bounce()`
+
+```tsx
+static bounce(t: number);
+```
+
+提供基本的弹跳效果。
+
+https://easings.net/#easeInBounce
+
+---
+
+### `bezier()`
+
+```tsx
+static bezier(x1: number, y1: number, x2: number, y2: number);
+```
+
+提供三次 bezier 曲线，等同于 CSS Transitions 的 `transition-timing-function`。
+
+可在 https://cubic-bezier.com/ 找到用于可视化三次 bezier 曲线的实用工具
+
+---
+
+### `in()`
+
+```tsx
+static in(easing: number);
+```
+
+使缓动函数正向运行。
+
+---
+
+### `out()`
+
+```tsx
+static out(easing: number);
+```
+
+使缓动函数反向运行。
+
+---
+
+### `inOut()`
+
+```tsx
+static inOut(easing: number);
+```
+
+使任意缓动函数保持对称。缓动函数将在持续时间的前半段正向运行，然后在剩余时间内反向运行。
