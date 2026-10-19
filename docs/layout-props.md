@@ -197,8 +197,7 @@ import {
   StyleSheet,
   Text,
   View,
-  FlexAlignType,
-  FlexStyle,
+  ViewStyle,
 } from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -217,7 +216,7 @@ const App = () => {
     alignItems: alignItemsArr[alignItems],
     direction: directions[direction],
     flexWrap: wraps[wrap],
-  } as FlexStyle;
+  };
 
   const changeSetting = (
     value: number,
@@ -307,29 +306,29 @@ const App = () => {
   );
 };
 
-const flexDirections = [
+const flexDirections: ViewStyle['flexDirection'][] = [
   'row',
   'row-reverse',
   'column',
   'column-reverse',
-] as FlexStyle['flexDirection'][];
-const justifyContents = [
+];
+const justifyContents: ViewStyle['justifyContent'][] = [
   'flex-start',
   'flex-end',
   'center',
   'space-between',
   'space-around',
   'space-evenly',
-] as FlexStyle['justifyContent'][];
-const alignItemsArr = [
+];
+const alignItemsArr: ViewStyle['alignItems'][] = [
   'flex-start',
   'flex-end',
   'center',
   'stretch',
   'baseline',
-] as FlexAlignType[];
-const wraps = ['nowrap', 'wrap', 'wrap-reverse'];
-const directions = ['inherit', 'ltr', 'rtl'];
+];
+const wraps: ViewStyle['flexWrap'][] = ['nowrap', 'wrap', 'wrap-reverse'];
+const directions: ViewStyle['direction'][] = ['inherit', 'ltr', 'rtl'];
 
 const styles = StyleSheet.create({
   container: {
@@ -392,8 +391,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/align-content)。
 
 | 类型                                                                                                 | 必需 |
-| ---------------------------------------------------------------------------------------------------- | -------- |
-| enum('flex-start', 'flex-end', 'center', 'stretch', 'space-between', 'space-around', 'space-evenly') | 否       |
+| ---------------------------------------------------------------------------------------------------- | ---- |
+| enum('flex-start', 'flex-end', 'center', 'stretch', 'space-between', 'space-around', 'space-evenly') | 否   |
 
 ---
 
@@ -404,8 +403,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items)。
 
 | 类型                                                            | 必需 |
-| --------------------------------------------------------------- | -------- |
-| enum('flex-start', 'flex-end', 'center', 'stretch', 'baseline') | 否       |
+| --------------------------------------------------------------- | ---- |
+| enum('flex-start', 'flex-end', 'center', 'stretch', 'baseline') | 否   |
 
 ---
 
@@ -416,8 +415,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/align-self)。
 
 | 类型                                                                    | 必需 |
-| ----------------------------------------------------------------------- | -------- |
-| enum('auto', 'flex-start', 'flex-end', 'center', 'stretch', 'baseline') | 否       |
+| ----------------------------------------------------------------------- | ---- |
+| enum('auto', 'flex-start', 'flex-end', 'center', 'stretch', 'baseline') | 否   |
 
 ---
 
@@ -434,8 +433,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -446,8 +445,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-width)。
 
 | 类型   | 必需 |
-| ------ | -------- |
-| number | 否       |
+| ------ | ---- |
+| number | 否   |
 
 ---
 
@@ -456,8 +455,8 @@ export default App;
 当方向为 `ltr` 时，`borderEndWidth` 等同于 `borderRightWidth`。当方向为 `rtl` 时，`borderEndWidth` 等同于 `borderLeftWidth`。
 
 | 类型   | 必需 |
-| ------ | -------- |
-| number | 否       |
+| ------ | ---- |
+| number | 否   |
 
 ---
 
@@ -468,8 +467,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-width)。
 
 | 类型   | 必需 |
-| ------ | -------- |
-| number | 否       |
+| ------ | ---- |
+| number | 否   |
 
 ---
 
@@ -480,8 +479,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-width)。
 
 | 类型   | 必需 |
-| ------ | -------- |
-| number | 否       |
+| ------ | ---- |
+| number | 否   |
 
 ---
 
@@ -490,8 +489,8 @@ export default App;
 当方向为 `ltr` 时，`borderStartWidth` 等同于 `borderLeftWidth`。当方向为 `rtl` 时，`borderStartWidth` 等同于 `borderRightWidth`。
 
 | 类型   | 必需 |
-| ------ | -------- |
-| number | 否       |
+| ------ | ---- |
+| number | 否   |
 
 ---
 
@@ -502,8 +501,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-width)。
 
 | 类型   | 必需 |
-| ------ | -------- |
-| number | 否       |
+| ------ | ---- |
+| number | 否   |
 
 ---
 
@@ -514,8 +513,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/border-width)。
 
 | 类型   | 必需 |
-| ------ | -------- |
-| number | 否       |
+| ------ | ---- |
+| number | 否   |
 
 ---
 
@@ -528,8 +527,8 @@ export default App;
 有关 `bottom` 如何影响布局的更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/bottom)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -538,20 +537,20 @@ export default App;
 `boxSizing` 定义元素的各类尺寸属性（`width`、`height`、`minWidth`、`minHeight` 等）如何计算。如果 `boxSizing` 为 `border-box`，这些尺寸适用于元素的边框盒。如果为 `content-box`，这些尺寸适用于元素的内容盒。默认值为 `border-box`。如果你想了解这个属性的更多工作方式，[网页文档](https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing) 是很好的信息来源。
 
 | 类型                              | 必需 |
-| --------------------------------- | -------- |
-| enum('border-box', 'content-box') | 否       |
+| --------------------------------- | ---- |
+| enum('border-box', 'content-box') | 否   |
 
 ---
 
 ### `columnGap`
 
-`columnGap` 的作用类似于 CSS 中的 `column-gap`。在 React Native 中只支持像素单位。
+`columnGap` 的作用类似于 CSS 中的 `column-gap`。它接受数字（单位为 point）或百分比字符串（例如 `'10%'`）。百分比值在[新架构](/architecture/landing-page)中受支持。
 
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap)。
 
-| 类型   | 必需 |
-| ------ | -------- |
-| number | 否       |
+| 类型           | 必需 |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -562,8 +561,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://www.yogalayout.dev/docs/styling/layout-direction)。
 
 | 类型                          | 必需 |
-| ----------------------------- | -------- |
-| enum('inherit', 'ltr', 'rtl') | 否       |
+| ----------------------------- | ---- |
+| enum('inherit', 'ltr', 'rtl') | 否   |
 
 ---
 
@@ -574,8 +573,8 @@ export default App;
 它的作用类似于 CSS 中的 `display`，但只支持 `flex`、`none` 和 `contents`。默认值为 `flex`。
 
 | 类型                             | 必需 |
-| -------------------------------- | -------- |
-| enum('none', 'flex', 'contents') | 否       |
+| -------------------------------- | ---- |
+| enum('none', 'flex', 'contents') | 否   |
 
 ---
 
@@ -586,8 +585,8 @@ export default App;
 此样式优先于 `left` 和 `right` 样式。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -604,8 +603,8 @@ export default App;
 `flexGrow`、`flexShrink` 和 `flexBasis` 的作用与 CSS 中相同。
 
 | 类型   | 必需 |
-| ------ | -------- |
-| number | 否       |
+| ------ | ---- |
+| number | 否   |
 
 ---
 
@@ -614,8 +613,8 @@ export default App;
 `flexBasis` 是一种与轴无关的方式，用于提供项目在主轴上的默认尺寸。为子元素设置 `flexBasis`，类似于在其父元素为 `flexDirection: row` 的容器时设置该子元素的 `width`，或者在其父元素为 `flexDirection: column` 的容器时设置该子元素的 `height`。项目的 `flexBasis` 是该项目的默认尺寸，也就是在执行任何 `flexGrow` 和 `flexShrink` 计算之前的尺寸。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -626,8 +625,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction)。
 
 | 类型                                                   | 必需 |
-| ------------------------------------------------------ | -------- |
-| enum('row', 'row-reverse', 'column', 'column-reverse') | 否       |
+| ------------------------------------------------------ | ---- |
+| enum('row', 'row-reverse', 'column', 'column-reverse') | 否   |
 
 ---
 
@@ -638,8 +637,8 @@ export default App;
 `flexGrow` 接受任何大于等于 0 的浮点数，默认值为 0。容器会按子元素的 `flexGrow` 值加权分配剩余空间。
 
 | 类型   | 必需 |
-| ------ | -------- |
-| number | 否       |
+| ------ | ---- |
+| number | 否   |
 
 ---
 
@@ -650,8 +649,8 @@ export default App;
 `flexShrink` 接受任何大于等于 0 的浮点数，默认值为 0。容器会按子元素的 `flexShrink` 值加权缩小它们。
 
 | 类型   | 必需 |
-| ------ | -------- |
-| number | 否       |
+| ------ | ---- |
+| number | 否   |
 
 ---
 
@@ -659,25 +658,25 @@ export default App;
 
 `flexWrap` 控制子元素在到达 flex 容器末尾后是否可以换行。它的作用类似于 CSS 中的 `flex-wrap`（默认值：nowrap）。
 
-请注意，它不再与 `alignItems: stretch`（默认值）一起工作，因此例如你可能希望改用 `alignItems: flex-start`（破坏性变更详情：https://github.com/facebook/react-native/releases/tag/v0.28.0）。
+请注意，它不再与默认值 `alignItems: stretch` 一起工作，因此你可能需要改用 `alignItems: flex-start`（破坏性变更详情：https://github.com/react/react-native/releases/tag/v0.28.0）。
 
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap)。
 
 | 类型                                   | 必需 |
-| -------------------------------------- | -------- |
-| enum('wrap', 'nowrap', 'wrap-reverse') | 否       |
+| -------------------------------------- | ---- |
+| enum('wrap', 'nowrap', 'wrap-reverse') | 否   |
 
 ---
 
 ### `gap`
 
-`gap` 的作用类似于 CSS 中的 `gap`。在 React Native 中只支持像素单位。
+`gap` 的作用类似于 CSS 中的 `gap`，是 `rowGap` 和 `columnGap` 的简写。它接受数字（单位为 point）或百分比字符串（例如 `'10%'`）。百分比值在[新架构](/architecture/landing-page)中受支持。
 
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/gap)。
 
-| 类型   | 必需 |
-| ------ | -------- |
-| number | 否       |
+| 类型           | 必需 |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -690,8 +689,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/height)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -706,8 +705,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/inset)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -722,8 +721,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/inset-block)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -738,8 +737,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/inset-block-end)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -754,8 +753,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/inset-block-start)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -770,8 +769,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -786,8 +785,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline-end)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -802,8 +801,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline-start)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -821,8 +820,8 @@ export default App;
 - `isolate`：形成一个堆叠上下文。
 
 | 类型                    | 必需 |
-| ----------------------- | -------- |
-| enum('auto', 'isolate') | 否       |
+| ----------------------- | ---- |
+| enum('auto', 'isolate') | 否   |
 
 ---
 
@@ -833,8 +832,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content)。
 
 | 类型                                                                                      | 必需 |
-| ----------------------------------------------------------------------------------------- | -------- |
-| enum('flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly') | 否       |
+| ----------------------------------------------------------------------------------------- | ---- |
+| enum('flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly') | 否   |
 
 ---
 
@@ -847,8 +846,8 @@ export default App;
 有关 `left` 如何影响布局的更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/left)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -859,8 +858,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/margin)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -869,8 +868,8 @@ export default App;
 `marginBottom` 的作用类似于 CSS 中的 `margin-bottom`。有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -881,8 +880,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/margin-block)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -893,8 +892,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/margin-block-end)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -905,8 +904,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/margin-block-start)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -915,8 +914,8 @@ export default App;
 当方向为 `ltr` 时，`marginEnd` 等同于 `marginRight`。当方向为 `rtl` 时，`marginEnd` 等同于 `marginLeft`。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -925,8 +924,8 @@ export default App;
 设置 `marginHorizontal` 的效果与同时设置 `marginLeft` 和 `marginRight` 相同。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -937,8 +936,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/margin-inline)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -949,8 +948,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/margin-inline-end)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -961,8 +960,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/margin-inline-start)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -971,8 +970,8 @@ export default App;
 `marginLeft` 的作用类似于 CSS 中的 `margin-left`。有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-left)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -983,8 +982,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-right)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -993,8 +992,8 @@ export default App;
 当方向为 `ltr` 时，`marginStart` 等同于 `marginLeft`。当方向为 `rtl` 时，`marginStart` 等同于 `marginRight`。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -1005,8 +1004,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -1015,8 +1014,8 @@ export default App;
 设置 `marginVertical` 的效果与同时设置 `marginTop` 和 `marginBottom` 相同。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -1029,8 +1028,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/max-height)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -1043,8 +1042,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/max-width)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -1057,8 +1056,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/min-height)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -1071,8 +1070,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/min-width)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -1083,8 +1082,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow)。
 
 | 类型                                | 必需 |
-| ----------------------------------- | -------- |
-| enum('visible', 'hidden', 'scroll') | 否       |
+| ----------------------------------- | ---- |
+| enum('visible', 'hidden', 'scroll') | 否   |
 
 ---
 
@@ -1095,8 +1094,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/padding)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -1107,8 +1106,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -1119,8 +1118,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/padding-block)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -1131,8 +1130,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/padding-block-end)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -1143,8 +1142,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/padding-block-start)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -1153,8 +1152,8 @@ export default App;
 当方向为 `ltr` 时，`paddingEnd` 等同于 `paddingRight`。当方向为 `rtl` 时，`paddingEnd` 等同于 `paddingLeft`。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -1163,8 +1162,8 @@ export default App;
 设置 `paddingHorizontal` 类似于同时设置 `paddingLeft` 和 `paddingRight`。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -1175,8 +1174,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/padding-inline)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -1187,8 +1186,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/padding-inline-end)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -1199,8 +1198,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/padding-inline-start)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -1211,8 +1210,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-left)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -1223,8 +1222,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-right)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -1233,8 +1232,8 @@ export default App;
 当方向为 `ltr` 时，`paddingStart` 等同于 `paddingLeft`。当方向为 `rtl` 时，`paddingStart` 等同于 `paddingRight`。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -1245,8 +1244,8 @@ export default App;
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -1255,8 +1254,8 @@ export default App;
 设置 `paddingVertical` 类似于同时设置 `paddingTop` 和 `paddingBottom`。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -1274,8 +1273,8 @@ React Native 中的 `position` 类似于 [普通 CSS](https://developer.mozilla.
 有关更多信息，请参见 [Flexbox 布局文档](./flexbox.md#position)。此外，[Yoga 文档](https://www.yogalayout.dev/docs/styling/position) 也提供了更多关于 `position` 在 React Native 与 CSS 之间差异的说明。
 
 | 类型                                   | 必需 |
-| -------------------------------------- | -------- |
-| enum('absolute', 'relative', 'static') | 否       |
+| -------------------------------------- | ---- |
+| enum('absolute', 'relative', 'static') | 否   |
 
 ---
 
@@ -1288,20 +1287,20 @@ React Native 中的 `position` 类似于 [普通 CSS](https://developer.mozilla.
 有关 `right` 如何影响布局的更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/right)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
 ### `rowGap`
 
-`rowGap` 的作用类似于 CSS 中的 `row-gap`。在 React Native 中只支持像素单位。
+`rowGap` 的作用类似于 CSS 中的 `row-gap`。它接受数字（单位为 point）或百分比字符串（例如 `'10%'`）。百分比值在[新架构](/architecture/landing-page)中受支持。
 
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap)。
 
-| 类型   | 必需 |
-| ------ | -------- |
-| number | 否       |
+| 类型           | 必需 |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -1312,8 +1311,8 @@ React Native 中的 `position` 类似于 [普通 CSS](https://developer.mozilla.
 此样式优先于 `left`、`right` 和 `end` 样式。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -1326,8 +1325,8 @@ React Native 中的 `position` 类似于 [普通 CSS](https://developer.mozilla.
 有关 `top` 如何影响布局的更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/top)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -1340,8 +1339,8 @@ React Native 中的 `position` 类似于 [普通 CSS](https://developer.mozilla.
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/width)。
 
 | 类型           | 必需 |
-| -------------- | -------- |
-| number, string | 否       |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -1356,5 +1355,5 @@ React Native 中的 `position` 类似于 [普通 CSS](https://developer.mozilla.
 有关更多细节，请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/z-index)。
 
 | 类型   | 必需 |
-| ------ | -------- |
-| number | 否       |
+| ------ | ---- |
+| number | 否   |

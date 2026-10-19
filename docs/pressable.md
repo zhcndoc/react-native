@@ -41,7 +41,7 @@ Pressable 是一个核心组件包装器，可检测其任意已定义子元素�
 </figure>
 
 :::info
-`Pressable` 使用 React Native 的 `Pressability` API。有关 Pressability 状态机流程及其工作方式的更多信息，请查看 [Pressability](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Pressability/Pressability.js#L350) 的实现。
+`Pressable` 使用 React Native 的 `Pressability` API。有关 Pressability 状态机流程及其工作方式的更多信息，请查看 [Pressability](https://github.com/react/react-native/blob/main/packages/react-native/Libraries/Pressability/Pressability.js#L350) 的实现。
 :::
 
 ## 示例
@@ -149,7 +149,7 @@ export default App;
 从 `onPressIn` 开始到调用 `onLongPress` 之间的持续时间（毫秒）。
 
 | Type   | Default |
-| ------- | ------- |
+| ------ | ------- |
 | number | `500`   |
 
 ### `disabled`
@@ -260,10 +260,10 @@ export default App;
 
 **Properties:**
 
-| Name       | Type                                              | Required | Description                                                                                                                                                                                                                                                  |
-| ---------- | ------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| color      | [color](colors) or [PlatformColor](platformcolor) | No       | 定义 ripple 效果的颜色。                                                                                                                                                                                                                                     |
-| borderless | boolean                                           | No       | 定义 ripple 效果是否不包含边框。                                                                                                                                                                                                                             |
-| radius     | number                                            | No       | 定义 ripple 效果的半径。                                                                                                                                                                                                                                    |
+| Name       | Type                                              | Required | Description                                                                                                                                                |
+| ---------- | ------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| color      | [color](colors) or [PlatformColor](platformcolor) | No       | 定义 ripple 效果的颜色。                                                                                                                                   |
+| borderless | boolean                                           | No       | 定义 ripple 效果是否不包含边框。                                                                                                                           |
+| radius     | number                                            | No       | 定义 ripple 效果的半径。                                                                                                                                   |
 | foreground | boolean                                           | No       | 设置为 true 可将 ripple 效果添加到视图前景，而不是背景。如果你的某个子视图本身带有背景，或者例如你正在显示图片，并且不希望 ripple 被它们遮挡，这会很有用。 |
-| alpha      | number                                            | No       | 控制 ripple 的不透明度。接受介于 `0.0`（完全透明）和 `1.0`（完全不透明）之间的值。该值会叠加在颜色中已存在的任何 alpha 之上。                                                                       |
+| alpha      | number                                            | No       | 控制 ripple 的不透明度。接受介于 `0.0`（完全透明）和 `1.0`（完全不透明）之间的值。该值会叠加在颜色中已存在的任何 alpha 之上。                              |

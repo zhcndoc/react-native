@@ -257,7 +257,7 @@ export default App;
 
 | Type    | Required | Default |
 | ------- | -------- | ------- |
-| boolean | 否 | `false` |
+| boolean | 否       | `false` |
 
 ---
 
@@ -269,9 +269,9 @@ export default App;
 由于 Android 15 引入的边到边强制要求，在 API 级别 35 中设置状态栏背景颜色已被弃用，设置它将不会生效。你可以在这里阅读更多关于我们的 [边到边建议](https://github.com/react-native-community/discussions-and-proposals/discussions/827)。
 :::
 
-| Type            | Required | Default                                                                |
-| --------------- | -------- | ---------------------------------------------------------------------- |
-| [color](colors) | 否 | 默认系统 `StatusBar` 背景颜色，或在未定义时为 `'black'` |
+| Type            | Required | Default                                                 |
+| --------------- | -------- | ------------------------------------------------------- |
+| [color](colors) | 否       | 默认系统 `StatusBar` 背景颜色，或在未定义时为 `'black'` |
 
 ---
 
@@ -283,7 +283,7 @@ export default App;
 
 | Type                                       | Required | Default     |
 | ------------------------------------------ | -------- | ----------- |
-| [StatusBarStyle](statusbar#statusbarstyle) | 否 | `'default'` |
+| [StatusBarStyle](statusbar#statusbarstyle) | 否       | `'default'` |
 
 ---
 
@@ -293,7 +293,7 @@ export default App;
 
 | Type    | Required | Default |
 | ------- | -------- | ------- |
-| boolean | 否 | `false` |
+| boolean | 否       | `false` |
 
 ---
 
@@ -341,8 +341,8 @@ static popStackEntry(entry: StatusBarProps);
 
 **参数：**
 
-| Name                                                       | Type | Description                           |
-| ---------------------------------------------------------- | ---- | ------------------------------------- |
+| Name                                                       | Type | Description                   |
+| ---------------------------------------------------------- | ---- | ----------------------------- |
 | entry <div className="label basic required">Required</div> | any  | `pushStackEntry` 返回的条目。 |
 
 ---
@@ -357,8 +357,8 @@ static pushStackEntry(props: StatusBarProps): StatusBarProps;
 
 **参数：**
 
-| Name                                                       | Type | Description                                                      |
-| ---------------------------------------------------------- | ---- | ---------------------------------------------------------------- |
+| Name                                                       | Type | Description                                     |
+| ---------------------------------------------------------- | ---- | ----------------------------------------------- |
 | props <div className="label basic required">Required</div> | any  | 包含要在栈条目中使用的 `StatusBar` 属性的对象。 |
 
 ---
@@ -376,9 +376,9 @@ static replaceStackEntry(
 
 **参数：**
 
-| Name                                                       | Type | Description                                                                  |
-| ---------------------------------------------------------- | ---- | ---------------------------------------------------------------------------- |
-| entry <div className="label basic required">Required</div> | any  | 要替换的 `pushStackEntry` 返回的条目。                             |
+| Name                                                       | Type | Description                                       |
+| ---------------------------------------------------------- | ---- | ------------------------------------------------- |
+| entry <div className="label basic required">Required</div> | any  | 要替换的 `pushStackEntry` 返回的条目。            |
 | props <div className="label basic required">Required</div> | any  | 包含要用于替换后栈条目的 `StatusBar` 属性的对象。 |
 
 ---
@@ -397,11 +397,10 @@ static setBackgroundColor(color: ColorValue, animated?: boolean);
 
 **参数：**
 
-| Name                                                       | Type    | Description               |
-| ---------------------------------------------------------- | ------- | ------------------------- |
-| color <div className="label basic required">Required</div> | string  | 背景颜色。         |
+| Name                                                       | Type    | Description          |
+| ---------------------------------------------------------- | ------- | -------------------- |
+| color <div className="label basic required">Required</div> | string  | 背景颜色。           |
 | animated                                                   | boolean | 为样式更改添加动画。 |
-
 
 ---
 
@@ -415,9 +414,9 @@ static setBarStyle(style: StatusBarStyle, animated?: boolean);
 
 **参数：**
 
-| Name                                                       | Type                                       | Description               |
-| ---------------------------------------------------------- | ------------------------------------------ | ------------------------- |
-| style <div className="label basic required">Required</div> | [StatusBarStyle](statusbar#statusbarstyle) | 要设置的状态栏样式。  |
+| Name                                                       | Type                                       | Description          |
+| ---------------------------------------------------------- | ------------------------------------------ | -------------------- |
+| style <div className="label basic required">Required</div> | [StatusBarStyle](statusbar#statusbarstyle) | 要设置的状态栏样式。 |
 | animated                                                   | boolean                                    | 为样式更改添加动画。 |
 
 ---
@@ -432,9 +431,9 @@ static setHidden(hidden: boolean, animation?: StatusBarAnimation);
 
 **参数：**
 
-| Name                                                        | Type                                               | Description                                             |
-| ----------------------------------------------------------- | -------------------------------------------------- | ------------------------------------------------------- |
-| hidden <div className="label basic required">Required</div> | boolean                                            | 隐藏状态栏。                                    |
+| Name                                                        | Type                                               | Description                  |
+| ----------------------------------------------------------- | -------------------------------------------------- | ---------------------------- |
+| hidden <div className="label basic required">Required</div> | boolean                                            | 隐藏状态栏。                 |
 | animation <div className="label ios">iOS</div>              | [StatusBarAnimation](statusbar#statusbaranimation) | 更改状态栏隐藏属性时的动画。 |
 
 ---
@@ -453,8 +452,8 @@ static setNetworkActivityIndicatorVisible(visible: boolean);
 
 **参数：**
 
-| Name                                                         | Type    | Description         |
-| ------------------------------------------------------------ | ------- | ------------------- |
+| Name                                                         | Type    | Description  |
+| ------------------------------------------------------------ | ------- | ------------ |
 | visible <div className="label basic required">Required</div> | boolean | 显示指示器。 |
 
 ---
@@ -473,8 +472,8 @@ static setTranslucent(translucent: boolean);
 
 **参数：**
 
-| Name                                                             | Type    | Description         |
-| ---------------------------------------------------------------- | ------- | ------------------- |
+| Name                                                             | Type    | Description  |
+| ---------------------------------------------------------------- | ------- | ------------ |
 | translucent <div className="label basic required">Required</div> | boolean | 设为半透明。 |
 
 ## 类型定义
@@ -489,11 +488,11 @@ static setTranslucent(translucent: boolean);
 
 **常量：**
 
-| Value     | Type   | Description     |
-| --------- | ------ | --------------- |
-| `'fade'`  | string | 淡入淡出动画  |
-| `'slide'` | string | 滑动动画 |
-| `'none'`  | string | 无动画    |
+| Value     | Type   | Description  |
+| --------- | ------ | ------------ |
+| `'fade'`  | string | 淡入淡出动画 |
+| `'slide'` | string | 滑动动画     |
+| `'none'`  | string | 无动画       |
 
 ---
 
@@ -507,8 +506,8 @@ static setTranslucent(translucent: boolean);
 
 **常量：**
 
-| Value             | Type   | Description                                                |
-| ----------------- | ------ | ---------------------------------------------------------- |
+| 值                | 类型   | 描述                                         |
+| ----------------- | ------ | -------------------------------------------- |
 | `'default'`       | string | 默认状态栏样式（iOS 为深色，Android 为浅色） |
-| `'light-content'` | string | 白色文本和图标                                      |
-| `'dark-content'`  | string | 深色文本和图标（Android 需要 API>=23）         |
+| `'light-content'` | string | 白色文本和图标                               |
+| `'dark-content'`  | string | 深色文本和图标（Android 需要 API>=23）       |

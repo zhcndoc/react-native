@@ -14,7 +14,7 @@ React Native 提供了让社区采用单个新功能的能力，只要这些功�
 React Native 也没有使用 `@canary` 或 `@experimental` NPM 标签，因为发布级别同时适用于 React Native 的稳定版本和 nightly 版本
 :::
 
-此外，由于 react-native 使用 React 版本的方式，将发布级别设置为 `EXPERIMENTAL` 或 `CANARY` **不会**导致使用 `react@nightly` 或 `react@canary`（[你可以在这里阅读更多相关信息](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Renderer/README.md#react--react-native-versions)）。
+此外，将发布级别设置为 `EXPERIMENTAL` 或 `CANARY` **不会** 导致使用 `react@nightly` 或 `react@canary`，这是由 react-native 使用 React 版本的方式决定的（[详情请参阅此处](https://github.com/react/react-native/blob/main/packages/react-native/Libraries/Renderer/README.md#react--react-native-versions)）。
 
 ## 何时使用各个发布级别
 

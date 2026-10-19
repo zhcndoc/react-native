@@ -162,9 +162,7 @@ html {
 
 ```tsx
 <View>
-  <MyAppText>
-    使用整个应用默认字体样式的文本
-  </MyAppText>
+  <MyAppText>使用整个应用默认字体样式的文本</MyAppText>
   <MyAppHeaderText>样式为标题的文本</MyAppHeaderText>
 </View>
 ```
@@ -240,7 +238,7 @@ React Native 仍然保留样式继承的概念，但仅限于文本子树。在�
 
 告诉屏幕阅读器将当前聚焦的元素视为具有特定角色。
 
-在 iOS 上，这些角色会映射到相应的辅助功能特性。图像按钮具有与同时设置为 `'image'` 和 `'button'` 相同的功能。更多信息请参见 [辅助功能指南](accessibility.md#accessibilitytraits-ios)。
+在 iOS 上，这些角色会映射到对应的无障碍特征。Image button 的功能与同时设置 `image` 和 `button` 特征相同。更多信息请参阅[无障碍指南](accessibility.md#accessibilityrole)。
 
 在 Android 上，这些角色在 TalkBack 中的功能与在 iOS 中为 VoiceOver 添加辅助功能特性类似
 
@@ -290,11 +288,11 @@ React Native 仍然保留样式继承的概念，但仅限于文本子树。在�
 
 设置为 `true` 时，表示该视图是一个辅助功能元素。
 
-更多信息请参见 [辅助功能指南](accessibility#accessible-ios-android)。
+更多信息请参阅[无障碍指南](accessibility.md#accessible)。
 
 | 类型    | 默认值 |
 | ------- | ------ |
-| boolean | `true`  |
+| boolean | `true` |
 
 ---
 
@@ -302,8 +300,8 @@ React Native 仍然保留样式继承的概念，但仅限于文本子树。在�
 
 指定在给定样式约束下，字体是否应自动缩小以适配。
 
-| 类型    | 默认值 |
-| ------- | ------ |
+| 类型    | 默认值  |
+| ------- | ------- |
 | boolean | `false` |
 
 ---
@@ -314,7 +312,7 @@ React Native 仍然保留样式继承的概念，但仅限于文本子树。在�
 
 | 类型    | 默认值 |
 | ------- | ------ |
-| boolean | `true`  |
+| boolean | `true` |
 
 ---
 
@@ -322,7 +320,7 @@ React Native 仍然保留样式继承的概念，但仅限于文本子树。在�
 
 设置在 Android API 23 及以上版本中确定单词断行时使用的自动连字符频率。
 
-| 类型                                | 默认值  |
+| 类型                                | 默认值   |
 | ----------------------------------- | -------- |
 | enum(`'none'`, `'normal'`,`'full'`) | `'none'` |
 
@@ -334,7 +332,7 @@ React Native 仍然保留样式继承的概念，但仅限于文本子树。在�
 
 | 类型    | 默认值 |
 | ------- | ------ |
-| boolean | false   |
+| boolean | false  |
 
 ---
 
@@ -344,7 +342,7 @@ React Native 仍然保留样式继承的概念，但仅限于文本子树。在�
 
 | 类型             | 默认值 |
 | ---------------- | ------ |
-| boolean, 'mixed' | false   |
+| boolean, 'mixed' | false  |
 
 ---
 
@@ -354,7 +352,7 @@ React Native 仍然保留样式继承的概念，但仅限于文本子树。在�
 
 | 类型    | 默认值 |
 | ------- | ------ |
-| boolean | false   |
+| boolean | false  |
 
 ---
 
@@ -364,7 +362,7 @@ React Native 仍然保留样式继承的概念，但仅限于文本子树。在�
 
 | 类型    | 默认值 |
 | ------- | ------ |
-| boolean | false   |
+| boolean | false  |
 
 ---
 
@@ -392,7 +390,7 @@ React Native 仍然保留样式继承的概念，但仅限于文本子树。在�
 
 你只能提供一种类型。
 
-| 类型                                                          | 默认值  |
+| 类型                                                          | 默认值   |
 | ------------------------------------------------------------- | -------- |
 | enum(`'phoneNumber'`, `'link'`, `'email'`, `'none'`, `'all'`) | `'none'` |
 
@@ -402,8 +400,8 @@ React Native 仍然保留样式继承的概念，但仅限于文本子树。在�
 
 指定用于测试目的的文本视图禁用状态。
 
-| 类型 | 默认值 |
-| ---- | ------ |
+| 类型 | 默认值  |
+| ---- | ------- |
 | bool | `false` |
 
 ---
@@ -412,7 +410,7 @@ React Native 仍然保留样式继承的概念，但仅限于文本子树。在�
 
 应用于 iOS 上该元素的 [Dynamic Type](https://developer.apple.com/documentation/uikit/uifont/scaling_fonts_automatically) 字号等级。
 
-| 类型                                                                                                                                                     | 默认值  |
+| 类型                                                                                                                                                     | 默认值   |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | enum(`'caption2'`, `'caption1'`, `'footnote'`, `'subheadline'`, `'callout'`, `'body'`, `'headline'`, `'title3'`, `'title2'`, `'title1'`, `'largeTitle'`) | `'body'` |
 
@@ -433,7 +431,7 @@ React Native 仍然保留样式继承的概念，但仅限于文本子树。在�
 
 | 类型                                           | 默认值 |
 | ---------------------------------------------- | ------ |
-| enum(`'head'`, `'middle'`, `'tail'`, `'clip'`) | `tail`  |
+| enum(`'head'`, `'middle'`, `'tail'`, `'clip'`) | `tail` |
 
 ---
 
@@ -455,7 +453,7 @@ React Native 仍然保留样式继承的概念，但仅限于文本子树。在�
 - `0`：没有最大值，忽略父级/全局默认值
 - `>= 1`：将此节点的 `maxFontSizeMultiplier` 设置为该值
 
-| 类型   | 默认值     |
+| 类型   | 默认值      |
 | ------ | ----------- |
 | number | `undefined` |
 
@@ -489,7 +487,7 @@ React Native 仍然保留样式继承的概念，但仅限于文本子树。在�
 
 | 类型   | 默认值 |
 | ------ | ------ |
-| number | `0`     |
+| number | `0`    |
 
 ---
 
@@ -649,8 +647,8 @@ responder 已从 `View` 中被接管。可能是在调用 `onResponderTerminatio
 
 允许用户选择文本，以使用原生复制和粘贴功能。
 
-| 类型    | 默认值 |
-| ------- | ------ |
+| 类型    | 默认值  |
+| ------- | ------- |
 | boolean | `false` |
 
 ---
@@ -677,8 +675,8 @@ responder 已从 `View` 中被接管。可能是在调用 `onResponderTerminatio
 
 设置为 `true` 时，文本按下时不会发生可视变化。默认情况下，按下文本时会以灰色椭圆高亮显示。
 
-| 类型    | 默认值 |
-| ------- | ------ |
+| 类型    | 默认值  |
+| ------- | ------- |
 | boolean | `false` |
 
 ---
@@ -697,7 +695,7 @@ responder 已从 `View` 中被接管。可能是在调用 `onResponderTerminatio
 
 在 Android API 23 及以上版本中设置文本断行策略，可用值为 `simple`、`highQuality`、`balanced`。
 
-| 类型                                            | 默认值       |
+| 类型                                            | 默认值        |
 | ----------------------------------------------- | ------------- |
 | enum(`'simple'`, `'highQuality'`, `'balanced'`) | `highQuality` |
 
@@ -707,7 +705,7 @@ responder 已从 `View` 中被接管。可能是在调用 `onResponderTerminatio
 
 在 iOS 14+ 上设置断行策略。可用值为 `none`、`standard`、`hangul-word` 和 `push-out`。
 
-| 类型                                                        | 默认值  |
+| 类型                                                        | 默认值   |
 | ----------------------------------------------------------- | -------- |
 | enum(`'none'`, `'standard'`, `'hangul-word'`, `'push-out'`) | `'none'` |
 
@@ -734,16 +732,16 @@ responder 已从 `View` 中被接管。可能是在调用 `onResponderTerminatio
 
 #### 属性
 
-| 名称      | 类型   | 可选 | 描述                                                              |
-| --------- | ------ | ---- | ----------------------------------------------------------------- |
-| ascender  | number | 否   | 文本布局变化后，该行的上升部高度。                                 |
-| capHeight | number | 否   | 基线以上的大写字母高度。                                           |
-| descender | number | 否   | 文本布局变化后，该行的下降部高度。                                 |
-| height    | number | 否   | 文本布局变化后，该行的高度。                                       |
-| width     | number | 否   | 文本布局变化后，该行的宽度。                                       |
-| x         | number | 否   | `Text` 组件内该行的 X 坐标。                                       |
-| xHeight   | number | 否   | 基线与该行中线（正文字号）之间的距离。                             |
-| y         | number | 否   | `Text` 组件内该行的 Y 坐标。                                       |
+| 名称      | 类型   | 可选 | 描述                                   |
+| --------- | ------ | ---- | -------------------------------------- |
+| ascender  | number | 否   | 文本布局变化后，该行的上升部高度。     |
+| capHeight | number | 否   | 基线以上的大写字母高度。               |
+| descender | number | 否   | 文本布局变化后，该行的下降部高度。     |
+| height    | number | 否   | 文本布局变化后，该行的高度。           |
+| width     | number | 否   | 文本布局变化后，该行的宽度。           |
+| x         | number | 否   | `Text` 组件内该行的 X 坐标。           |
+| xHeight   | number | 否   | 基线与该行中线（正文字号）之间的距离。 |
+| y         | number | 否   | `Text` 组件内该行的 Y 坐标。           |
 
 ### TextLayoutEvent
 
@@ -764,7 +762,7 @@ responder 已从 `View` 中被接管。可能是在调用 `onResponderTerminatio
 
 #### 属性
 
-| 名称   | 类型                                    | 可选 | 描述                                           |
-| ------ | --------------------------------------- | ---- | ---------------------------------------------- |
-| lines  | [TextLayout](text#textlayout) 数组      | 否   | 提供每一行已渲染文本的 TextLayout 数据。        |
-| target | number                                  | 否   | 元素的节点 id。                                |
+| 名称   | 类型                               | 可选 | 描述                                     |
+| ------ | ---------------------------------- | ---- | ---------------------------------------- |
+| lines  | [TextLayout](text#textlayout) 数组 | 否   | 提供每一行已渲染文本的 TextLayout 数据。 |
+| target | number                             | 否   | 元素的节点 id。                          |

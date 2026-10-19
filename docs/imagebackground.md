@@ -1,11 +1,15 @@
 ---
 id: imagebackground
-title: ImageBackground
+title: '🗑️ ImageBackground'
 ---
 
-对于熟悉 Web 的开发者来说，一个常见需求是 `background-image`。要处理这种使用场景，可以使用 `<ImageBackground>` 组件，它拥有与 `<Image>` 相同的 props，并且可以添加任何你希望叠加在其上的子元素。
+:::warning[Deprecated]
+请改用包含绝对定位 [`Image`](image.md) 的 [`View`](view.md)。
+:::
 
-在某些情况下，你可能不想使用 `<ImageBackground>`，因为它的实现比较基础。请参考 `<ImageBackground>` 的 [源代码](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Image/ImageBackground.js) 以获得更多理解，并在需要时创建你自己的自定义组件。
+熟悉 Web 的开发者常常需要使用 `background-image`。要处理这种场景，可以使用 `<ImageBackground>` 组件。它拥有与 `<Image>` 相同的 props，并可添加任意子元素叠加在图像上。
+
+在某些情况下，你可能不想使用 `<ImageBackground>`，因为它的实现比较基础。请参阅 `<ImageBackground>` 的[源代码](https://github.com/react/react-native/blob/main/packages/react-native/Libraries/Image/ImageBackground.js)以了解更多细节，并在需要时创建自定义组件。
 
 请注意，你必须指定一些宽度和高度样式属性。
 

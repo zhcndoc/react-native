@@ -19,7 +19,7 @@ import {getCurrentVersion} from '@site/src/getCurrentVersion';
 在本指南中，使用 React Native CLI 按如下方式创建项目：
 
 <CodeBlock language="bash" title="shell">
-  {`npx @react-native-community/cli@latest init SampleApp --version ${getCurrentVersion()}`}
+  {`npx @react-native-community/cli@latest init SampleApp --version "${getCurrentVersion()}"`}
 </CodeBlock>
 
 **Codegen** 用于为自定义模块或组件生成胶水代码。有关如何创建 Turbo Native Modules 和 Fabric Native Components 的更多详细信息，请参阅相关指南。
@@ -67,11 +67,11 @@ import {getCurrentVersion} from '@site/src/getCurrentVersion';
   - `.javaPackageName`：配置 Android Java Codegen 输出的包名
 - `ios`：iOS 的 Codegen 配置（全部可选）：
   - `.modules[moduleName]:`
-    - `.className`：此模块的 ObjC 类。或者，如果它是一个 [仅 C++ 模块](/docs/next/the-new-architecture/pure-cxx-modules)，则为其 `RCTModuleProvider` 类
-    - `.unstableRequiresMainQueueSetup`：在运行任何 JavaScript 之前，于 UI 线程上初始化此模块
-    - `.conformsToProtocols`：标注此模块遵循以下协议中的哪些协议：[`RCTImageURLLoader`](https://github.com/facebook/react-native/blob/00d5caee9921b6c10be8f7d5b3903c6afe8dbefa/packages/react-native/Libraries/Image/RCTImageURLLoader.h#L26-L81)、[`RCTURLRequestHandler`](https://github.com/facebook/react-native/blob/00d5caee9921b6c10be8f7d5b3903c6afe8dbefa/packages/react-native/React/Base/RCTURLRequestHandler.h#L11-L52)、[`RCTImageDataDecoder`](https://github.com/facebook/react-native/blob/00d5caee9921b6c10be8f7d5b3903c6afe8dbefa/packages/react-native/Libraries/Image/RCTImageDataDecoder.h#L15-L53)
-  - `.components[componentName]`：
-    - `.className`：此组件的 ObjC 类（例如：`TextInput` -> `RCTTextInput`）
+    - `.className`: This module's ObjC class. Or, if it's a [C++-only module](/docs/next/the-new-architecture/pure-cxx-modules), its `RCTModuleProvider` class.
+    - `.unstableRequiresMainQueueSetup`: Initialize this module on the UI Thread, before running any JavaScript.
+    - `.conformsToProtocols`: Annotate which of these protocols this module conforms to any of the following protocols: [`RCTImageURLLoader`](https://github.com/react/react-native/blob/00d5caee9921b6c10be8f7d5b3903c6afe8dbefa/packages/react-native/Libraries/Image/RCTImageURLLoader.h#L26-L81), [`RCTURLRequestHandler`](https://github.com/react/react-native/blob/00d5caee9921b6c10be8f7d5b3903c6afe8dbefa/packages/react-native/React/Base/RCTURLRequestHandler.h#L11-L52), [`RCTImageDataDecoder`](https://github.com/react/react-native/blob/00d5caee9921b6c10be8f7d5b3903c6afe8dbefa/packages/react-native/Libraries/Image/RCTImageDataDecoder.h#L15-L53).
+  - `.components[componentName]`:
+    - `.className`: This component's ObjC class (e.g: `TextInput` -> `RCTTextInput`).
 
 运行 **Codegen** 时，它会在应用的所有依赖中进行搜索，查找遵循特定约定的 JS 文件，并生成所需的代码：
 

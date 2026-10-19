@@ -208,7 +208,15 @@ export default App;
 }
 ```
 
-### 矩阵变换
+平移变换（`translateX` 和 `translateY`）接受数字（单位为 point）或百分比字符串（例如 `'50%'`、`'100%'`）。使用百分比时，偏移量相对于元素的宽度（`translateX`）或高度（`translateY`）。百分比平移在[新架构](/architecture/landing-page)中受支持。例如：
+
+```js
+{
+  transform: [{translateX: '50%'}, {translateY: 100}],
+}
+```
+
+### Matrix Transform
 
 `matrix` 变换接受一个 4x4 的变换矩阵数组，共 16 个数字。这使你可以在单个操作中应用组合了平移、旋转、缩放和倾斜的复杂变换。
 
@@ -259,9 +267,9 @@ export default App;
 当你需要应用预先计算好的变换矩阵时，例如来自动画库的矩阵，或者在构建 UI 编辑器应用时，矩阵变换非常有用。对于基本变换，建议使用单独的变换属性（scale、rotate、translate 等），因为它们更易读。
 :::
 
-| 类型                                                                                                                                                                                                                                                                                                          | 是否必需 |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| 对象数组：`{matrix: number[]}`、`{perspective: number}`、`{rotate: string}`、`{rotateX: string}`、`{rotateY: string}`、`{rotateZ: string}`、`{scale: number}`、`{scaleX: number}`、`{scaleY: number}`、`{translateX: number}`、`{translateY: number}`、`{skewX: string}`、`{skewY: string}` 或字符串 | 否       |
+| 类型                                                                                                                                                                                                                                                                                                                       | 是否必需 |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| 对象数组： `{matrix: number[]}`, `{perspective: number}`, `{rotate: string}`, `{rotateX: string}`, `{rotateY: string}`, `{rotateZ: string}`, `{scale: number}`, `{scaleX: number}`, `{scaleY: number}`, `{translateX: number \| string}`, `{translateY: number \| string}`, `{skewX: string}`, `{skewY: string}`，或字符串 | 否       |
 
 ---
 

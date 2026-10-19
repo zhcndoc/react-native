@@ -29,11 +29,11 @@ function Hero() {
           Follow @reactnative
         </a>
         <GitHubButton
-          href="https://github.com/facebook/react-native"
+          href="https://github.com/react/react-native"
           data-icon="octicon-star"
           data-size="large"
           data-color-scheme={colorMode}
-          aria-label="Star facebook/react-native on GitHub">
+          aria-label="在 GitHub 上为 react/react-native 点星">
           Star
         </GitHubButton>
       </div>

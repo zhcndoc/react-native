@@ -109,12 +109,73 @@ style={{
 
 更多复杂用法示例可在 RNTester 应用中找到（支持 `PlatformColor`）：
 
-- <a href={`https://github.com/facebook/react-native/blob/${getCoreBranchNameForCurrentVersion()}/packages/rn-tester/js/examples/LinearGradient/LinearGradientExample.js`}>LinearGradientExample.js</a>
-- <a href={`https://github.com/facebook/react-native/blob/${getCoreBranchNameForCurrentVersion()}/packages/rn-tester/js/examples/RadialGradient/RadialGradientExample.js`}>RadialGradientExample.js</a>
+- <a href={`https://github.com/react/react-native/blob/${getCoreBranchNameForCurrentVersion()}/packages/rn-tester/js/examples/LinearGradient/LinearGradientExample.js`}>LinearGradientExample.js</a>
+- <a href={`https://github.com/react/react-native/blob/${getCoreBranchNameForCurrentVersion()}/packages/rn-tester/js/examples/RadialGradient/RadialGradientExample.js`}>RadialGradientExample.js</a>
 
 | 类型                                                                                                                                                                                               |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | string, array of objects: `{type: 'linear-gradient', direction: string, colorStops: object[] }`, `{type: 'radial-gradient', shape: string, position: object, size: string, colorStops: object[] }` |
+
+---
+
+### `backgroundPosition`
+
+控制背景渐变在视图中的位置。设置了 `backgroundImage`，并希望偏移或居中渐变而不是填满整个区域时，此属性很有用。
+
+```tsx
+<View
+  style={{
+    backgroundImage: 'radial-gradient(circle, #ff6b6b, #4ecdc4)',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: '50px 50px',
+  }}
+/>
+```
+
+| 类型                                                                            |
+| ------------------------------------------------------------------------------- |
+| string \| 对象数组 `{top: string, left: string, right: string, bottom: string}` |
+
+---
+
+### `backgroundRepeat`
+
+控制是否重复背景渐变以及重复方式。它与 `backgroundImage` 配合使用，可让渐变在视图中平铺。
+
+```tsx
+<View
+  style={{
+    backgroundImage: 'linear-gradient(45deg, #ff6b6b, #4ecdc4)',
+    backgroundRepeat: 'repeat',
+    backgroundSize: '20px 20px',
+  }}
+/>
+```
+
+| 类型                                                                                       |
+| ------------------------------------------------------------------------------------------ |
+| enum(`'repeat'`, `'space'`, `'round'`, `'no-repeat'`) \| 对象数组 `{x: string, y: string}` |
+
+---
+
+### `backgroundSize`
+
+控制背景渐变的尺寸。设置了 `backgroundImage` 且不希望渐变默认填满整个视图时，此属性最有用。
+
+```tsx
+<View
+  style={{
+    backgroundImage: 'linear-gradient(90deg, #a8edea, #fed6e3)',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: '100px 100px',
+  }}
+/>
+```
+
+| 类型                                        |
+| ------------------------------------------- |
+| string \| 对象数组 `{x: number, y: number}` |
 
 ---
 

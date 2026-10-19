@@ -1,9 +1,13 @@
 ---
 id: inputaccessoryview
-title: InputAccessoryView
+title: '🗑️ InputAccessoryView'
 ---
 
-一个支持自定义 iOS 键盘输入辅助视图的组件。只要 `TextInput` 获得焦点，输入辅助视图就会显示在键盘上方。此组件可用于创建自定义工具栏。
+:::warning[Deprecated]
+`InputAccessoryView` 已弃用，并将在未来版本中移除。
+:::
+
+此组件用于自定义 iOS 键盘输入辅助视图。`TextInput` 获得焦点时，输入辅助视图会显示在键盘上方。此组件可用于创建自定义工具栏。
 
 要使用此组件，请用 InputAccessoryView 组件包裹你的自定义工具栏，并设置一个 `nativeID`。然后，将该 `nativeID` 作为你想要使用的任意 `TextInput` 的 `inputAccessoryViewID` 传入。下面是一个基本示例：
 
@@ -60,7 +64,7 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-此组件还可用于创建粘性文本输入（即锚定在键盘顶部的文本输入）。要实现这一点，请用 `InputAccessoryView` 组件包裹一个 `TextInput`，并且不要设置 `nativeID`。示例请参阅 [InputAccessoryViewExample.js](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/InputAccessoryView/InputAccessoryViewExample.js)。
+此组件还可用于创建固定在键盘顶部的文本输入框。要实现这一点，请用 `InputAccessoryView` 组件包裹一个 `TextInput`，并且不要设置 `nativeID`。示例请参阅 [InputAccessoryViewExample.js](https://github.com/react/react-native/blob/main/packages/rn-tester/js/examples/InputAccessoryView/InputAccessoryViewExample.js)。
 
 ---
 
@@ -70,8 +74,8 @@ export default App;
 
 ### `backgroundColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
@@ -88,11 +92,11 @@ export default App;
 
 ### `style`
 
-| 类型                              |
-| --------------------------------- |
+| 类型                            |
+| ------------------------------- |
 | [视图样式](view-style-props.md) |
 
 # 已知问题
 
-- [react-native#18997](https://github.com/facebook/react-native/issues/18997)：不支持多行 `TextInput`
-- [react-native#20157](https://github.com/facebook/react-native/issues/20157)：不能与底部标签栏一起使用
+- [react-native#18997](https://github.com/react/react-native/issues/18997)：不支持多行 `TextInput`
+- [react-native#20157](https://github.com/react/react-native/issues/20157)：不能与底部标签栏一起使用

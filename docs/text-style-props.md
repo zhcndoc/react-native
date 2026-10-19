@@ -27,7 +27,6 @@ import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const fontStyles = ['normal', 'italic'];
 const fontVariants = [
-  undefined,
   'small-caps',
   'oldstyle-nums',
   'lining-nums',
@@ -626,7 +625,7 @@ const CustomSlider = ({
 
 type CustomPickerProps = {
   label: string;
-  data?: ArrayLike<any> | null;
+  data?: ArrayLike<string> | undefined;
   currentIndex: number;
   onSelected: (index: number) => void;
 };
@@ -674,7 +673,6 @@ const CustomPicker = ({
 
 const fontStyles = ['normal', 'italic'];
 const fontVariants = [
-  undefined,
   'small-caps',
   'oldstyle-nums',
   'lining-nums',
@@ -763,8 +761,8 @@ export default App;
 
 ### `color`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
@@ -799,7 +797,7 @@ export default App;
 
 指定字体粗细。对于大多数字体，支持 `'normal'` 和 `'bold'` 两个值。并非所有字体都对每个数值都有对应的变体，在这种情况下会选择最接近的一个。
 
-| 类型                                                                                                                  | 默认值    |
+| 类型                                                                                                                  | 默认值     |
 | --------------------------------------------------------------------------------------------------------------------- | ---------- |
 | enum(`'normal'`, `'bold'`, `'100'`, `'200'`, `'300'`, `'400'`, `'500'`, `'600'`, `'700'`, `'800'`, `'900'`) or number | `'normal'` |
 
@@ -810,8 +808,8 @@ export default App;
 设为 `false` 可移除额外的字体内边距，这些内边距用于为某些上伸部 / 下伸部留出空间。对于某些字体，这种内边距会使文本在垂直居中时看起来略微不对齐。为获得最佳效果，还应将 `textAlignVertical` 设置为 `center`。
 
 | 类型 | 默认值 |
-| ---- | ------- |
-| bool | `true`  |
+| ---- | ------ |
+| bool | `true` |
 
 ---
 
@@ -820,8 +818,33 @@ export default App;
 允许你为字体设置所有字体变体。可通过数组形式的枚举值或以空格分隔的字符串进行设置，例如 `'small-caps common-ligatures'`。
 
 | 类型                                                                                                                 | 默认值 |
-| -------------------------------------------------------------------------------------------------------------------- | ------- |
-| array of enum(`'small-caps'`, `'oldstyle-nums'`, `'lining-nums'`, `'tabular-nums'`, `'proportional-nums'`) or string | `[]`    |
+| -------------------------------------------------------------------------------------------------------------------- | ------ |
+| array of enum(`'small-caps'`, `'oldstyle-nums'`, `'lining-nums'`, `'tabular-nums'`, `'proportional-nums'`) or string | `[]`   |
+
+---
+
+### `fontVariationSettings`
+
+配置可变字体的变化轴。每个轴由四字符 OpenType 标签标识，例如表示字重的 `wght`、表示宽度的 `wdth`、表示光学尺寸的 `opsz`，或字体支持的自定义轴。设置可以使用对象或兼容 CSS 的字符串。
+
+以下对象和字符串形式等效；两者都会将 wght 轴设为 500：
+
+```tsx
+<Text
+  style={{
+    fontVariationSettings: {wght: 500},
+    // Equivalent CSS-compatible string:
+    fontVariationSettings: "'wght' 500",
+  }}>
+  Variable font
+</Text>
+```
+
+有关变化轴和 CSS 字符串语法的更多信息，请参阅 MDN 的 [font-variation-settings 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/font-variation-settings)。
+
+| 类型                                         |
+| -------------------------------------------- |
+| string or object: `{[axis: string]: number}` |
 
 ---
 
@@ -849,7 +872,7 @@ export default App;
 
 指定文本对齐方式。在 Android 上，值 'justify' 仅支持 Oreo（8.0）或更高版本（API level >= 26）。在较低版本的 Android 上，该值将回退为 `left`。
 
-| 类型                                                         | 默认值  |
+| 类型                                                         | 默认值   |
 | ------------------------------------------------------------ | -------- |
 | enum(`'auto'`, `'left'`, `'right'`, `'center'`, `'justify'`) | `'auto'` |
 
@@ -859,7 +882,7 @@ export default App;
 
 `verticalAlign` 样式属性的别名，如果同时使用这两个属性，`verticalAlign` 将优先于 `textAlignVertical`
 
-| 类型                                            | 默认值  |
+| 类型                                            | 默认值   |
 | ----------------------------------------------- | -------- |
 | enum(`'auto'`, `'top'`, `'bottom'`, `'center'`) | `'auto'` |
 
@@ -867,8 +890,8 @@ export default App;
 
 ### `textDecorationColor` <div className="label ios">iOS</div>
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
@@ -876,14 +899,14 @@ export default App;
 ### `textDecorationLine`
 
 | 类型                                                                        | 默认值   |
-| --------------------------------------------------------------------------- | --------- |
+| --------------------------------------------------------------------------- | -------- |
 | enum(`'none'`, `'underline'`, `'line-through'`, `'underline line-through'`) | `'none'` |
 
 ---
 
 ### `textDecorationStyle` <div className="label ios">iOS</div>
 
-| 类型                                                | 默认值   |
+| 类型                                                | 默认值    |
 | --------------------------------------------------- | --------- |
 | enum(`'solid'`, `'double'`, `'dotted'`, `'dashed'`) | `'solid'` |
 
@@ -891,8 +914,8 @@ export default App;
 
 ### `textShadowColor`
 
-| 类型               |
-| ------------------ |
+| 类型              |
+| ----------------- |
 | [颜色](colors.md) |
 
 ---
@@ -915,7 +938,7 @@ export default App;
 
 ### `textTransform`
 
-| 类型                                                         | 默认值  |
+| 类型                                                         | 默认值   |
 | ------------------------------------------------------------ | -------- |
 | enum(`'none'`, `'uppercase'`, `'lowercase'`, `'capitalize'`) | `'none'` |
 
@@ -923,7 +946,7 @@ export default App;
 
 ### `verticalAlign` <div className="label android">Android</div>
 
-| 类型                                            | 默认值  |
+| 类型                                            | 默认值   |
 | ----------------------------------------------- | -------- |
 | enum(`'auto'`, `'top'`, `'bottom'`, `'middle'`) | `'auto'` |
 
@@ -931,7 +954,7 @@ export default App;
 
 ### `writingDirection` <div className="label ios">iOS</div>
 
-| 类型                             | 默认值  |
+| 类型                             | 默认值   |
 | -------------------------------- | -------- |
 | enum(`'auto'`, `'ltr'`, `'rtl'`) | `'auto'` |
 
@@ -942,5 +965,5 @@ export default App;
 它允许用户选择文本并使用原生复制和粘贴功能。其优先级高于 `selectable` 属性。
 
 | 类型                                                     | 默认值 |
-| -------------------------------------------------------- | ------- |
-| enum(`'auto'`, `'text'`, `'none'`, `'contain'`, `'all'`) | `none`  |
+| -------------------------------------------------------- | ------ |
+| enum(`'auto'`, `'text'`, `'none'`, `'contain'`, `'all'`) | `none` |

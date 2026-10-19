@@ -88,7 +88,7 @@ export default TouchableWithoutFeedbackExample;
 
 一个值，指示当颜色反转开启时，此视图是否应该被反转。值为 `true` 将告诉视图即使开启了颜色反转也不要被反转。
 
-参见 [无障碍指南](accessibility.md#accessibilityignoresinvertcolors) 获取更多信息。
+更多信息请参见[无障碍指南](accessibility.md#accessibilityignoresinvertcolors-ios)。
 
 | 类型    |
 | ------- |
@@ -182,7 +182,7 @@ export default TouchableWithoutFeedbackExample;
 
 描述组件当前状态给辅助技术用户。
 
-参见 [无障碍指南](accessibility.md#accessibilitystate-ios-android) 获取更多信息。
+更多信息请参见[无障碍指南](accessibility.md#accessibilitystate)。
 
 | 类型                                                                                             |
 | ------------------------------------------------------------------------------------------------ |
@@ -207,8 +207,8 @@ export default TouchableWithoutFeedbackExample;
 指示元素正在被修改，辅助技术可能希望在通知用户更新之前等待更改完成。
 
 | 类型    | 默认值 |
-| ------- | ------- |
-| boolean | false   |
+| ------- | ------ |
+| boolean | false  |
 
 ---
 
@@ -217,8 +217,8 @@ export default TouchableWithoutFeedbackExample;
 指示可检查元素的状态。此字段可以采用布尔值或 "mixed" 字符串来表示混合复选框。
 
 | 类型             | 默认值 |
-| ---------------- | ------- |
-| boolean, 'mixed' | false   |
+| ---------------- | ------ |
+| boolean, 'mixed' | false  |
 
 ---
 
@@ -227,8 +227,8 @@ export default TouchableWithoutFeedbackExample;
 指示元素是可感知的但被禁用，因此不可编辑或以其他方式操作。
 
 | 类型    | 默认值 |
-| ------- | ------- |
-| boolean | false   |
+| ------- | ------ |
+| boolean | false  |
 
 ---
 
@@ -237,8 +237,8 @@ export default TouchableWithoutFeedbackExample;
 指示可展开元素当前是展开还是折叠。
 
 | 类型    | 默认值 |
-| ------- | ------- |
-| boolean | false   |
+| ------- | ------ |
+| boolean | false  |
 
 ---
 
@@ -249,8 +249,8 @@ export default TouchableWithoutFeedbackExample;
 例如，在包含兄弟视图 `A` 和 `B` 的窗口中，在视图 `B` 上将 `aria-hidden` 设置为 `true` 会导致 VoiceOver 忽略视图 `B` 中的元素。
 
 | 类型    | 默认值 |
-| ------- | ------- |
-| boolean | false   |
+| ------- | ------ |
+| boolean | false  |
 
 ---
 
@@ -272,7 +272,7 @@ export default TouchableWithoutFeedbackExample;
 - **polite** 无障碍服务应宣布此视图的更改。
 - **assertive** 无障碍服务应中断正在进行的语音以立即宣布此视图的更改。
 
-| 类型                                     | 默认值 |
+| 类型                                     | 默认值  |
 | ---------------------------------------- | ------- |
 | enum(`'assertive'`, `'off'`, `'polite'`) | `'off'` |
 
@@ -280,11 +280,11 @@ export default TouchableWithoutFeedbackExample;
 
 ### `aria-modal` <div className="label ios">iOS</div>
 
-布尔值，指示 VoiceOver 是否应忽略接收器兄弟视图内的元素。优先于 [`accessibilityViewIsModal`](#accessibilityviewismodal-ios) 属性。
+布尔值，表示 VoiceOver 是否应忽略接收者兄弟视图中的元素。其优先级高于 [`accessibilityViewIsModal`](accessibility.md#accessibilityviewismodal-ios) 属性。
 
 | 类型    | 默认值 |
-| ------- | ------- |
-| boolean | false   |
+| ------- | ------ |
+| boolean | false  |
 
 ---
 
@@ -312,7 +312,7 @@ export default TouchableWithoutFeedbackExample;
 
 表示组件的当前值。它可以是组件值的文本描述，或者对于基于范围的组件（如滑块和进度条），它包含范围信息（最小值、当前值和最大值）。
 
-参见 [无障碍指南](accessibility.md#accessibilityvalue-ios-android) 获取更多信息。
+更多信息请参见[无障碍指南](accessibility.md#accessibilityvalue)。
 
 | 类型                                                            |
 | --------------------------------------------------------------- |

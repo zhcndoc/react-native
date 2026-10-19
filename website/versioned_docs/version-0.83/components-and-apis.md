@@ -199,6 +199,12 @@ React Native 提供了许多内置的 [核心组件](intro-react-native-componen
     </a>
   </div>
   <div className="component">
+    <a href="./reactnativeversion">
+      <h3>ReactNativeVersion</h3>
+      <p>Exposes the resolved React Native package version on the JS side.</p>
+    </a>
+  </div>
+  <div className="component">
     <a href="./refreshcontrol">
       <h3>RefreshControl</h3>
       <p>此组件用于 <code>ScrollView</code> 内，添加下拉刷新功能。</p>

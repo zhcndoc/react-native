@@ -22,41 +22,43 @@ title: ViewToken 对象类型
 
 分配给数据元素的唯一数字标识符。
 
-| Type   | Optional |
-| ------ | -------- |
-| number | Yes      |
+当可视元素不是数据数组中的数据项时，此属性可能为 `null`，例如 [`SectionList`](sectionlist) 的分区标题或分区页脚进入可视区域时。
+
+| 类型   | 可选 |
+| ------ | ---- |
+| number | Yes  |
 
 ### `isViewable`
 
 指定列表元素是否至少有一部分在视口中可见。
 
-| Type    | Optional |
-| ------- | -------- |
-| boolean | No       |
+| 类型    | 可选 |
+| ------- | ---- |
+| boolean | No   |
 
 ### `item`
 
 项目数据
 
-| Type | Optional |
-| ---- | -------- |
-| any  | No       |
+| 类型 | 可选 |
+| ---- | ---- |
+| any  | No   |
 
 ### `key`
 
 提取到顶层后分配给数据元素的键标识符。
 
-| Type   | Optional |
-| ------ | -------- |
-| string | No       |
+| 类型   | 可选 |
+| ------ | ---- |
+| string | No   |
 
 ### `section`
 
 与 `SectionList` 一起使用时的项目分区数据。
 
-| Type | Optional |
-| ---- | -------- |
-| any  | Yes      |
+| 类型 | 可选 |
+| ---- | ---- |
+| any  | Yes  |
 
 ## 由以下组件使用
 

@@ -5,7 +5,7 @@ title: Button
 
 一个基础按钮组件，应能在任何平台上良好呈现。支持最基本程度的自定义。
 
-如果这个按钮在你的应用里看起来不合适，你可以使用 [Pressable](pressable) 自己构建按钮。作为参考，可以查看 [Button 组件的源代码](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Components/Button.js)。
+如果此按钮不适合你的应用，可以使用 [Pressable](pressable) 自行构建按钮。你可以参考 [Button 组件的源代码](https://github.com/react/react-native/blob/main/packages/react-native/Libraries/Components/Button.js)。
 
 ```tsx
 <Button

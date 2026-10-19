@@ -1141,6 +1141,6 @@ isFocused(): boolean;
 
 # 已知问题
 
-- [react-native#19096](https://github.com/facebook/react-native/issues/19096)：不支持 Android 的 `onKeyPreIme`。
-- [react-native#19366](https://github.com/facebook/react-native/issues/19366)：通过返回键关闭 Android 键盘后再调用 `.focus()` 不会重新弹出键盘。
-- [react-native#26799](https://github.com/facebook/react-native/issues/26799)：当 `keyboardType="email-address"` 或 `keyboardType="phone-pad"` 时，不支持 Android 的 `secureTextEntry`。
+- [react-native#19096](https://github.com/react/react-native/issues/19096)：不支持 Android 的 `onKeyPreIme`。
+- [react-native#19366](https://github.com/react/react-native/issues/19366)：通过返回键关闭 Android 键盘后调用 .focus()，无法再次弹出键盘。
+- [react-native#26799](https://github.com/react/react-native/issues/26799)：当 `keyboardType="email-address"` 或 `keyboardType="phone-pad"` 时，Android 不支持 `secureTextEntry`。

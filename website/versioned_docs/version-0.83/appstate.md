@@ -106,7 +106,7 @@ export default AppStateExample;
 static addEventListener(
   type: AppStateEvent,
   listener: (state: AppStateStatus) => void,
-): NativeEventSubscription;
+): EventSubscription;
 ```
 
 设置一个函数，在 AppState 上发生指定类型事件时调用。`eventType` 的有效值已在[上文](#events)列出。返回 `EventSubscription`。

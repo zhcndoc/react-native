@@ -17,13 +17,16 @@ const DraggableView = () => {
 
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: () => true,
-    onPanResponderMove: Animated.event([
-      null,
-      {
-        dx: pan.x, // x、y 是 Animated.Value
-        dy: pan.y,
-      },
-    ]),
+    onPanResponderMove: Animated.event(
+      [
+        null,
+        {
+          dx: pan.x, // x,y are Animated.Value
+          dy: pan.y,
+        },
+      ],
+      {useNativeDriver: false},
+    ),
     onPanResponderRelease: () => {
       Animated.spring(
         pan, // 自动多路复用
@@ -131,8 +134,8 @@ addListener(callback: (value: {x: number; y: number}) => void);
 
 **参数：**
 
-| 名称     | 类型     | 必需 | 描述                                                                                 |
-| -------- | -------- | ---- | ------------------------------------------------------------------------------------ |
+| 名称     | 类型     | 必需 | 描述                                                          |
+| -------- | -------- | ---- | ------------------------------------------------------------- |
 | callback | function | 是   | 回调函数，它将接收一个对象，其中 `value` 键的值被设置为新值。 |
 
 ---
@@ -147,8 +150,8 @@ removeListener(id: string);
 
 **参数：**
 
-| 名称 | 类型   | 必需 | 描述                        |
-| ---- | ------ | ---- | --------------------------- |
+| 名称 | 类型   | 必需 | 描述                  |
+| ---- | ------ | ---- | --------------------- |
 | id   | string | 是   | 要移除的监听器的 Id。 |
 
 ---
@@ -173,8 +176,8 @@ stopAnimation(callback?: (value: {x: number; y: number}) => void);
 
 **参数：**
 
-| 名称     | 类型     | 必需 | 描述                                   |
-| -------- | -------- | ---- | -------------------------------------- |
+| 名称     | 类型     | 必需 | 描述                     |
+| -------- | -------- | ---- | ------------------------ |
 | callback | function | 否   | 一个会接收最终值的函数。 |
 
 ---
@@ -189,8 +192,8 @@ resetAnimation(callback?: (value: {x: number; y: number}) => void);
 
 **参数：**
 
-| 名称     | 类型     | 必需 | 描述                                      |
-| -------- | -------- | ---- | ----------------------------------------- |
+| 名称     | 类型     | 必需 | 描述                     |
+| -------- | -------- | ---- | ------------------------ |
 | callback | function | 否   | 一个会接收初始值的函数。 |
 
 ---

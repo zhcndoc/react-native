@@ -203,7 +203,7 @@ class NativeLocalStoragePackage : BaseReactPackage() {
 
 最后，我们需要告诉 React Native 在我们的主应用中如何找到这个 `Package`。我们把这称为在 React Native 中“注册”该包。
 
-在这种情况下，你需要将它添加到 [getPackages](https://github.com/facebook/react-native/blob/8d8b8c343e62115a5509e1aed62047053c2f6e39/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/ReactNativeHost.java#L233) 方法返回的列表中。
+在这种情况下，你需要将它添加到 [getPackages](https://github.com/react/react-native/blob/8d8b8c343e62115a5509e1aed62047053c2f6e39/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/ReactNativeHost.java#L233) 方法返回的列表中。
 
 :::info
 稍后你将学习如何将你的原生模块作为 [npm 包](the-new-architecture/create-module-library.mdx#publish-the-library-on-npm) 分发，我们的构建工具会为你自动链接它。

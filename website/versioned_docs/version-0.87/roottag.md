@@ -21,7 +21,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 ## 如何访问 RootTag……如果你需要的话
 
-在 0.65 及更早版本中，RootTag 通过[旧版 context](https://github.com/facebook/react-native/blob/v0.64.1/Libraries/ReactNative/AppContainer.js#L56)进行访问。为了让 React Native 为 React 18 及更高版本中即将推出的 Concurrent 功能做好准备，我们将在 0.66 中通过 `RootTagContext` 迁移到最新的 [Context API](https://react.dev/reference/react/createContext)。0.65 版本同时支持旧版 context 和推荐使用的 `RootTagContext`，以便开发者有时间迁移调用位置。请参阅重大变更摘要。
+在 0.65 及更早版本中，RootTag 通过[旧版 context](https://github.com/react/react-native/blob/v0.64.1/Libraries/ReactNative/AppContainer.js#L56)进行访问。为了让 React Native 为 React 18 及更高版本中即将推出的 Concurrent 功能做好准备，我们将在 0.66 中通过 `RootTagContext` 迁移到最新的 [Context API](https://react.dev/reference/react/createContext)。0.65 版本同时支持旧版 context 和推荐使用的 `RootTagContext`，以便开发者有时间迁移调用位置。请参阅重大变更摘要。
 
 如何通过 `RootTagContext` 访问 `RootTag`。
 
@@ -71,4 +71,4 @@ class ScreenB extends React.Component {
 
 ## 未来计划
 
-随着新的 React Native 架构不断推进，未来将对 `RootTag` 进行迭代，旨在保持 `RootTag` 类型的不透明性，并避免 React Native 代码库发生反复变更。请不要依赖 RootTag 当前与数字互为别名这一事实！如果你的应用依赖 RootTag，请关注我们的版本变更日志，你可以在[这里](https://github.com/facebook/react-native/blob/main/CHANGELOG.md)找到这些日志。
+随着新的 React Native 架构不断推进，未来将对 `RootTag` 进行迭代，旨在保持 `RootTag` 类型的不透明性，并避免 React Native 代码库发生反复变更。请不要依赖 RootTag 当前与数字互为别名这一事实！如果你的应用依赖 RootTag，请关注我们的版本变更日志，你可以在[这里](https://github.com/react/react-native/blob/main/CHANGELOG.md)找到这些日志。

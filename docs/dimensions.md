@@ -26,9 +26,14 @@ const windowHeight = Dimensions.get('window').height;
 
 ## 示例
 
-```SnackPlayer name=Dimensions%20Example
+```SnackPlayer name=Dimensions%20Example&ext=tsx
 import {useState, useEffect} from 'react';
-import {StyleSheet, Text, Dimensions} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  Dimensions,
+  type DimensionsPayload,
+} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const windowDimensions = Dimensions.get('window');
@@ -43,8 +48,10 @@ const App = () => {
   useEffect(() => {
     const subscription = Dimensions.addEventListener(
       'change',
-      ({window, screen}) => {
-        setDimensions({window, screen});
+      ({window, screen}: DimensionsPayload) => {
+        if (window && screen) {
+          setDimensions({window, screen});
+        }
       },
     );
     return () => subscription?.remove();
@@ -97,20 +104,20 @@ static addEventListener(
   handler: ({
     window,
     screen,
-  }: DimensionsValue) => void,
-): EmitterSubscription;
+  }: DimensionsPayload) => void,
+): EventSubscription;
 ```
 
 添加事件处理器。支持的事件：
 
-- `change`：当 `Dimensions` 对象中的某个属性发生变化时触发。传递给事件处理器的参数是一个 [`DimensionsValue`](#dimensionsvalue) 类型对象。
+- `change`：当 `Dimensions` 对象中的某个属性发生变化时触发。事件处理器的参数是一个 [`DimensionsPayload`](#dimensionspayload) 对象。
 
 ---
 
 ### `get()`
 
 ```tsx
-static get(dim: 'window' | 'screen'): ScaledSize;
+static get(dim: string): DisplayMetrics | DisplayMetricsAndroid;
 ```
 
 在调用 `runApplication` 之前就会设置初始尺寸，因此它们应该在任何其他 require 运行之前可用，但之后可能会更新。
@@ -119,8 +126,8 @@ static get(dim: 'window' | 'screen'): ScaledSize;
 
 **参数：**
 
-| 名称                                                              | 类型   | 描述                                                                       |
-| ----------------------------------------------------------------- | ------ | -------------------------------------------------------------------------- |
+| 名称                                                           | 类型   | 描述                                          |
+| -------------------------------------------------------------- | ------ | --------------------------------------------- |
 | dim <div className="label basic required two-lines">必填</div> | string | 调用 `set` 时定义的尺寸名称。返回该尺寸的值。 |
 
 :::note
@@ -129,16 +136,18 @@ static get(dim: 'window' | 'screen'): ScaledSize;
 
 ## 类型定义
 
-### DimensionsValue
+### DimensionsPayload
 
 **属性：**
 
-| 名称   | 类型                                | 描述                             |
-| ------ | ----------------------------------- | -------------------------------- |
-| window | [ScaledSize](dimensions#scaledsize) | 可见应用窗口的大小。             |
-| screen | [ScaledSize](dimensions#scaledsize) | 设备屏幕的大小。                 |
+| 名称                 | 类型                                                      | 描述                     |
+| -------------------- | --------------------------------------------------------- | ------------------------ |
+| window               | [DisplayMetrics](dimensions#displaymetrics)               | 可见应用窗口的尺寸。     |
+| screen               | [DisplayMetrics](dimensions#displaymetrics)               | 设备屏幕的尺寸。         |
+| windowPhysicalPixels | [DisplayMetricsAndroid](dimensions#displaymetricsandroid) | Android 窗口的物理像素。 |
+| screenPhysicalPixels | [DisplayMetricsAndroid](dimensions#displaymetricsandroid) | Android 屏幕的物理像素。 |
 
-### ScaledSize
+### DisplayMetrics
 
 | 类型   |
 | ------ |
@@ -152,3 +161,11 @@ static get(dim: 'window' | 'screen'): ScaledSize;
 | height    | number |
 | scale     | number |
 | fontScale | number |
+
+### DisplayMetricsAndroid
+
+`DisplayMetricsAndroid` 包含所有 [`DisplayMetrics`](dimensions#displaymetrics) 属性，以及以下属性：
+
+| 名称       | 类型   |
+| ---------- | ------ |
+| densityDpi | number |

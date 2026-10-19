@@ -41,7 +41,7 @@ Pressable 是一个 Core Component 包装器，可以检测其定义的任意子
 </figure>
 
 :::info
-`Pressable` 使用 React Native 的 `Pressability` API。有关 Pressability 的状态机流程及其工作方式的更多信息，请参阅 [Pressability](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Pressability/Pressability.js#L350) 的实现。
+`Pressable` uses React Native's `Pressability` API. For more information around the state machine flow of Pressability and how it works, check out the implementation for [Pressability](https://github.com/react/react-native/blob/main/packages/react-native/Libraries/Pressability/Pressability.js#L350).
 :::
 
 ## 示例

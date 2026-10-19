@@ -57,7 +57,7 @@ rootView.appProperties = @{@"images" : imageList};
 随时更新属性都是可以的。但是，更新必须在主线程上执行。你可以在任意线程上使用 getter。
 
 :::note
-目前存在一个已知问题：如果在 bridge 启动期间设置 appProperties，该更改可能会丢失。有关更多信息，请参阅 https://github.com/facebook/react-native/issues/20115。
+目前存在一个已知问题：如果在 bridge 启动期间设置 appProperties，该更改可能会丢失。详情请参阅 https://github.com/react/react-native/issues/20115。
 :::
 
 无法一次只更新少量属性。我们建议你将此功能构建到自己的包装器中。
@@ -188,7 +188,7 @@ typedef NS_ENUM(NSInteger, RCTRootViewSizeFlexibility) {
 
 在这个示例中，我们有一个承载根视图的 `FlexibleSizeExampleView` 视图。我们创建根视图、对其进行初始化并设置代理。代理将处理尺寸更新。然后，我们将根视图的尺寸灵活性设置为 `RCTRootViewSizeFlexibilityHeight`，这意味着每当 React Native 内容的高度发生变化时，都会调用 `rootViewDidChangeIntrinsicSize:` 方法。最后，我们设置根视图的宽度和位置。请注意，我们也设置了高度，但这不会产生任何效果，因为我们已将高度设置为由 RN 决定。
 
-你可以在[此处](https://github.com/facebook/react-native/blob/main/packages/rn-tester/RNTester/NativeExampleViews/FlexibleSizeExampleView.mm)查看示例的完整源代码。
+示例的完整源代码请参见[此处](https://github.com/react/react-native/blob/main/packages/rn-tester/RNTester/NativeExampleViews/FlexibleSizeExampleView.mm)。
 
 动态更改根视图的尺寸灵活性模式是可以的。更改根视图的灵活性模式会安排一次布局重新计算，并且在内容尺寸确定后调用一次 `rootViewDidChangeIntrinsicSize:` 代理方法。
 

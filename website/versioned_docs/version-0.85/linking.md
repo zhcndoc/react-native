@@ -19,12 +19,12 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 如引言所述，每个平台都提供了一些用于核心功能的 URL scheme。下面的列表并不完整，但涵盖了最常用的 scheme。
 
-| Scheme           | 描述                                   | iOS | Android |
-| ---------------- | -------------------------------------- | --- | ------- |
+| Scheme           | 描述                                        | iOS | Android |
+| ---------------- | ------------------------------------------- | --- | ------- |
 | `mailto`         | 打开邮件应用，例如：mailto: hello@world.dev | ✅  | ✅      |
-| `tel`            | 打开电话应用，例如：tel:+123456789         | ✅  | ✅      |
-| `sms`            | 打开短信应用，例如：sms:+123456789           | ✅  | ✅      |
-| `https` / `http` | 打开网页浏览器应用，例如：https://expo.dev | ✅  | ✅      |
+| `tel`            | 打开电话应用，例如：tel:+123456789          | ✅  | ✅      |
+| `sms`            | 打开短信应用，例如：sms:+123456789          | ✅  | ✅      |
+| `https` / `http` | 打开网页浏览器应用，例如：https://expo.dev  | ✅  | ✅      |
 
 ### 启用深度链接
 
@@ -555,7 +555,7 @@ export default App;
 static addEventListener(
   type: 'url',
   handler: (event: {url: string}) => void,
-): EmitterSubscription;
+): EventSubscription;
 ```
 
 通过监听 `url` 事件类型并提供处理函数，向 Linking 变化添加一个处理函数。
@@ -576,8 +576,8 @@ static canOpenURL(url: string): Promise<boolean>;
 
 **参数：**
 
-| 名称                                                     | 类型   | 描述         |
-| -------------------------------------------------------- | ------ | ------------ |
+| 名称                                                     | 类型   | 描述           |
+| -------------------------------------------------------- | ------ | -------------- |
 | url <div className="label basic required">Required</div> | string | 要打开的 URL。 |
 
 :::note
@@ -606,7 +606,6 @@ static canOpenURL(url: string): Promise<boolean>;
   </queries>
 </manifest>
 ```
-
 
 :::
 
@@ -654,8 +653,8 @@ static openURL(url: string): Promise<any>;
 
 **参数：**
 
-| 名称                                                     | 类型   | 描述         |
-| -------------------------------------------------------- | ------ | ------------ |
+| 名称                                                     | 类型   | 描述           |
+| -------------------------------------------------------- | ------ | -------------- |
 | url <div className="label basic required">Required</div> | string | 要打开的 URL。 |
 
 :::note

@@ -52,9 +52,9 @@ export default ViewBoxesWithColorAndText;
 
 更多信息请参阅 [辅助功能指南](accessibility.md#accessibility-actions)。
 
-| 类型  |
-| ----- |
-| 数组  |
+| 类型 |
+| ---- |
+| 数组 |
 
 ---
 
@@ -64,8 +64,8 @@ export default ViewBoxesWithColorAndText;
 
 更多信息请参阅 [辅助功能指南](accessibility.md#accessibilityelementshidden-ios)。
 
-| 类型  |
-| ----- |
+| 类型   |
+| ------ |
 | 布尔值 |
 
 ---
@@ -74,8 +74,8 @@ export default ViewBoxesWithColorAndText;
 
 辅助功能提示帮助用户理解当他们操作此辅助功能元素时将发生什么，尤其是当结果无法从辅助功能标签中清楚看出时。
 
-| 类型  |
-| ----- |
+| 类型   |
+| ------ |
 | 字符串 |
 
 ---
@@ -86,8 +86,8 @@ export default ViewBoxesWithColorAndText;
 
 更多信息请参阅 [iOS `accessibilityLanguage` 文档](https://developer.apple.com/documentation/objectivec/nsobject/1615192-accessibilitylanguage)。
 
-| 类型  |
-| ----- |
+| 类型   |
+| ------ |
 | 字符串 |
 
 ---
@@ -96,10 +96,10 @@ export default ViewBoxesWithColorAndText;
 
 指示在启用颜色反转时，此视图是否应被反转。值为 `true` 时，即使启用了颜色反转，也将告诉视图不被反转。
 
-更多信息请参阅 [辅助功能指南](accessibility.md#accessibilityignoresinvertcolors)。
+更多信息请参见[无障碍指南](accessibility.md#accessibilityignoresinvertcolors-ios)。
 
-| 类型  |
-| ----- |
+| 类型   |
+| ------ |
 | 布尔值 |
 
 ---
@@ -108,8 +108,8 @@ export default ViewBoxesWithColorAndText;
 
 覆盖屏幕朗读器在用户与元素交互时朗读的文字。默认情况下，标签由遍历所有子元素并累积所有 `Text` 节点内容，以空格分隔组成。
 
-| 类型  |
-| ----- |
+| 类型   |
+| ------ |
 | 字符串 |
 
 ---
@@ -124,8 +124,8 @@ export default ViewBoxesWithColorAndText;
 
 参考 [Android `View` 文档](https://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion)。
 
-| 类型                             |
-| -------------------------------- |
+| 类型                                 |
+| ------------------------------------ |
 | 枚举 ('none', 'polite', 'assertive') |
 
 ---
@@ -165,8 +165,8 @@ export default ViewBoxesWithColorAndText;
 - `'toolbar'` - 代表工具栏（动作按钮或组件的容器）。
 - `'grid'` - 与 `ScrollView`、`VirtualizedList`、`FlatList` 或 `SectionList` 配合使用代表网格，增加进/出网格时的通知。
 
-| 类型  |
-| ----- |
+| 类型   |
+| ------ |
 | 字符串 |
 
 ---
@@ -175,10 +175,10 @@ export default ViewBoxesWithColorAndText;
 
 向辅助技术用户描述组件的当前状态。
 
-更多信息请参阅 [辅助功能指南](accessibility.md#accessibilitystate-ios-android)。
+更多信息请参见[无障碍指南](accessibility.md#accessibilitystate)。
 
-| 类型                                                         |
-| ------------------------------------------------------------ |
+| 类型                                                                                           |
+| ---------------------------------------------------------------------------------------------- |
 | 对象：`{disabled: bool, selected: bool, checked: bool 或 'mixed', busy: bool, expanded: bool}` |
 
 ---
@@ -187,10 +187,10 @@ export default ViewBoxesWithColorAndText;
 
 表示组件的当前值。可以是组件值的文本描述，或者对于基于范围的组件，如滑块和进度条，包含范围信息（最小值、当前值和最大值）。
 
-更多信息请参阅 [辅助功能指南](accessibility.md#accessibilityvalue-ios-android)。
+更多信息请参见[无障碍指南](accessibility.md#accessibilityvalue)。
 
-| 类型                                                       |
-| ---------------------------------------------------------- |
+| 类型                                                          |
+| ------------------------------------------------------------- |
 | 对象：`{min: number, max: number, now: number, text: string}` |
 
 ---
@@ -201,8 +201,8 @@ export default ViewBoxesWithColorAndText;
 
 更多信息请参阅 [辅助功能指南](accessibility.md#accessibilityviewismodal-ios)。
 
-| 类型  |
-| ----- |
+| 类型   |
+| ------ |
 | 布尔值 |
 
 ---
@@ -219,9 +219,9 @@ export default ViewBoxesWithColorAndText;
 
 表示元素正被修改，辅助技术可能希望等待修改完成后再通知用户。
 
-| 类型    | 默认   |
-| ------- | ------- |
-| 布尔值  | false   |
+| 类型   | 默认  |
+| ------ | ----- |
+| 布尔值 | false |
 
 ---
 
@@ -229,9 +229,9 @@ export default ViewBoxesWithColorAndText;
 
 表示可检查元素的状态。此字段可以是布尔值或字符串 `'mixed'`，用于表示混合状态的复选框。
 
-| 类型               | 默认   |
-| ------------------ | ------- |
-| 布尔值或 `'mixed'` | false   |
+| 类型               | 默认  |
+| ------------------ | ----- |
+| 布尔值或 `'mixed'` | false |
 
 ---
 
@@ -239,9 +239,9 @@ export default ViewBoxesWithColorAndText;
 
 表示元素是可感知的但被禁用，因此不可编辑或操作。
 
-| 类型    | 默认   |
-| ------- | ------- |
-| 布尔值  | false   |
+| 类型   | 默认  |
+| ------ | ----- |
+| 布尔值 | false |
 
 ---
 
@@ -249,9 +249,9 @@ export default ViewBoxesWithColorAndText;
 
 表示可展开元素当前是否处于展开或折叠状态。
 
-| 类型    | 默认   |
-| ------- | ------- |
-| 布尔值  | false   |
+| 类型   | 默认  |
+| ------ | ----- |
+| 布尔值 | false |
 
 ---
 
@@ -261,9 +261,9 @@ export default ViewBoxesWithColorAndText;
 
 例如，在包含同级视图 `A` 和 `B` 的窗口中，将视图 `B` 的 `aria-hidden` 设置为 `true` 会导致 VoiceOver 忽略 `B` 及其子元素。
 
-| 类型    | 默认   |
-| ------- | ------- |
-| 布尔值  | false   |
+| 类型   | 默认  |
+| ------ | ----- |
+| 布尔值 | false |
 
 ---
 
@@ -271,8 +271,8 @@ export default ViewBoxesWithColorAndText;
 
 定义标签交互元素的字符串值。
 
-| 类型  |
-| ----- |
+| 类型   |
+| ------ |
 | 字符串 |
 
 ---
@@ -288,8 +288,8 @@ export default ViewBoxesWithColorAndText;
 </View>
 ```
 
-| 类型  |
-| ----- |
+| 类型   |
+| ------ |
 | 字符串 |
 
 ---
@@ -302,8 +302,8 @@ export default ViewBoxesWithColorAndText;
 - **polite** 辅助功能服务应宣布此视图的变化。
 - **assertive** 辅助功能服务应打断当前语音立即宣布视图变化。
 
-| 类型                               | 默认   |
-| --------------------------------- | ------- |
+| 类型                                      | 默认    |
+| ----------------------------------------- | ------- |
 | 枚举 (`'assertive'`, `'off'`, `'polite'`) | `'off'` |
 
 ---
@@ -312,9 +312,9 @@ export default ViewBoxesWithColorAndText;
 
 布尔值，指示 VoiceOver 是否应忽略与接收器为同级的其他视图中的元素。此属性优先于 [`accessibilityViewIsModal`](#accessibilityviewismodal-ios) 属性。
 
-| 类型    | 默认   |
-| ------- | ------- |
-| 布尔值  | false   |
+| 类型   | 默认  |
+| ------ | ----- |
+| 布尔值 | false |
 
 ---
 
@@ -322,8 +322,8 @@ export default ViewBoxesWithColorAndText;
 
 表示一个可选元素当前是否被选中。
 
-| 类型  |
-| ----- |
+| 类型   |
+| ------ |
 | 布尔值 |
 
 ---
@@ -332,9 +332,9 @@ export default ViewBoxesWithColorAndText;
 
 表示基于范围的组件（如滑块和进度条）的最大值。优先级高于 `accessibilityValue` 属性中的 `max`。
 
-| 类型  |
-| ----- |
-| 数字  |
+| 类型 |
+| ---- |
+| 数字 |
 
 ---
 
@@ -342,9 +342,9 @@ export default ViewBoxesWithColorAndText;
 
 表示基于范围的组件（如滑块和进度条）的最小值。优先级高于 `accessibilityValue` 属性中的 `min`。
 
-| 类型  |
-| ----- |
-| 数字  |
+| 类型 |
+| ---- |
+| 数字 |
 
 ---
 
@@ -352,9 +352,9 @@ export default ViewBoxesWithColorAndText;
 
 表示基于范围的组件（如滑块和进度条）的当前值。优先级高于 `accessibilityValue` 属性中的 `now`。
 
-| 类型  |
-| ----- |
-| 数字  |
+| 类型 |
+| ---- |
+| 数字 |
 
 ---
 
@@ -362,8 +362,8 @@ export default ViewBoxesWithColorAndText;
 
 表示组件的文本描述。优先级高于 `accessibilityValue` 属性中的 `text`。
 
-| 类型  |
-| ----- |
+| 类型   |
+| ------ |
 | 字符串 |
 
 ---
@@ -372,9 +372,9 @@ export default ViewBoxesWithColorAndText;
 
 仅用于布局子元素或不绘制任何内容的视图，可能会为优化自动从原生层级中移除。将此属性设置为 `false` 以禁用此优化，确保此 `View` 存在于原生视图层级中。
 
-| 类型    | 默认   |
-| ------- | ------- |
-| 布尔值  | true    |
+| 类型   | 默认 |
+| ------ | ---- |
+| 布尔值 | true |
 
 ---
 
@@ -382,9 +382,9 @@ export default ViewBoxesWithColorAndText;
 
 设置为 `false` 可以防止视图的直接子视图被从原生视图层级中移除，效果类似于对每个子视图设置 `collapsable={false}`。
 
-| 类型    | 默认   |
-| ------- | ------- |
-| 布尔值  | true    |
+| 类型   | 默认 |
+| ------ | ---- |
+| 布尔值 | true |
 
 ---
 
@@ -399,8 +399,8 @@ export default ViewBoxesWithColorAndText;
 
 详见 [辅助功能指南](accessibility.md#experimental_accessibilityorder)。
 
-| 类型  |
-| ----- |
+| 类型       |
+| ---------- |
 | 字符串数组 |
 
 ---
@@ -409,8 +409,8 @@ export default ViewBoxesWithColorAndText;
 
 指示此 `View` 是否可通过非触摸输入设备获得焦点，例如硬件键盘。
 
-| 类型  |
-| ----- |
+| 类型   |
+| ------ |
 | 布尔值 |
 
 ---
@@ -425,8 +425,8 @@ export default ViewBoxesWithColorAndText;
 触摸区域永远不会超出父视图的边界，并且如果触摸区域覆盖多个视图，兄弟视图的 Z-index 始终具有优先权。
 :::
 
-| 类型                                                          |
-| ------------------------------------------------------------- |
+| 类型                                                               |
+| ------------------------------------------------------------------ |
 | 对象：`{top: number, left: number, bottom: number, right: number}` |
 
 ---
@@ -439,8 +439,8 @@ export default ViewBoxesWithColorAndText;
 此设置会禁用该视图的“仅布局视图移除”优化！
 :::
 
-| 类型  |
-| ----- |
+| 类型   |
+| ------ |
 | 字符串 |
 
 ---
@@ -458,8 +458,8 @@ export default ViewBoxesWithColorAndText;
 
 参考 [Android `importantForAccessibility` 文档](https://developer.android.com/reference/android/R.attr.html#importantForAccessibility)。
 
-| 类型                                            |
-| ------------------------------------------------ |
+| 类型                                              |
+| ------------------------------------------------- |
 | 枚举 ('auto', 'yes', 'no', 'no-hide-descendants') |
 
 ---
@@ -472,8 +472,8 @@ export default ViewBoxesWithColorAndText;
 此设置会禁用该视图的“仅布局视图移除”优化！
 :::
 
-| 类型  |
-| ----- |
+| 类型   |
+| ------ |
 | 字符串 |
 
 ---
@@ -484,8 +484,8 @@ export default ViewBoxesWithColorAndText;
 
 离屏渲染开销极大，调试困难，故默认关闭。如果因为动画需要启用此属性，建议结合 `renderToHardwareTextureAndroid` 使用（如果视图内容静态，即不需每帧重绘）。这样视图会被离屏渲染一次，缓存为硬件纹理，然后每帧以 alpha 合成，无需频繁切换 GPU 渲染目标。
 
-| 类型  |
-| ----- |
+| 类型   |
+| ------ |
 | 布尔值 |
 
 ---
@@ -494,9 +494,9 @@ export default ViewBoxesWithColorAndText;
 
 指定用户导航向下时应获取焦点的下一个视图。参考 [Android 文档](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusDown)。
 
-| 类型  |
-| ----- |
-| 数字  |
+| 类型 |
+| ---- |
+| 数字 |
 
 ---
 
@@ -504,9 +504,9 @@ export default ViewBoxesWithColorAndText;
 
 指定用户导航向前时应获取焦点的下一个视图。参考 [Android 文档](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusForward)。
 
-| 类型  |
-| ----- |
-| 数字  |
+| 类型 |
+| ---- |
+| 数字 |
 
 ---
 
@@ -514,9 +514,9 @@ export default ViewBoxesWithColorAndText;
 
 指定用户导航向左时应获取焦点的下一个视图。参考 [Android 文档](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusLeft)。
 
-| 类型  |
-| ----- |
-| 数字  |
+| 类型 |
+| ---- |
+| 数字 |
 
 ---
 
@@ -524,9 +524,9 @@ export default ViewBoxesWithColorAndText;
 
 指定用户导航向右时应获取焦点的下一个视图。参考 [Android 文档](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusRight)。
 
-| 类型  |
-| ----- |
-| 数字  |
+| 类型 |
+| ---- |
+| 数字 |
 
 ---
 
@@ -534,9 +534,9 @@ export default ViewBoxesWithColorAndText;
 
 指定用户导航向上时应获取焦点的下一个视图。参考 [Android 文档](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusUp)。
 
-| 类型  |
-| ----- |
-| 数字  |
+| 类型 |
+| ---- |
+| 数字 |
 
 ---
 
@@ -546,9 +546,9 @@ export default ViewBoxesWithColorAndText;
 
 更多信息请参阅 [辅助功能指南](accessibility.md#accessibility-actions)。
 
-| 类型   |
-| ------ |
-| 函数   |
+| 类型 |
+| ---- |
+| 函数 |
 
 ---
 
@@ -556,9 +556,9 @@ export default ViewBoxesWithColorAndText;
 
 当 `accessible` 为 `true` 时，用户执行退出手势时系统调用此函数。
 
-| 类型   |
-| ------ |
-| 函数   |
+| 类型 |
+| ---- |
+| 函数 |
 
 ---
 
@@ -566,9 +566,9 @@ export default ViewBoxesWithColorAndText;
 
 当 `accessible` 为真时，用户执行辅助功能点击手势时，系统尝试调用此函数。
 
-| 类型   |
-| ------ |
-| 函数   |
+| 类型 |
+| ---- |
+| 函数 |
 
 ---
 
@@ -578,8 +578,8 @@ export default ViewBoxesWithColorAndText;
 
 此事件在布局计算完成后立即触发，但此时新布局可能尚未在屏幕上显示，特别是处于布局动画期间时。
 
-| 类型                                                     |
-| -------------------------------------------------------- |
+| 类型                                                       |
+| ---------------------------------------------------------- |
 | `(md ({nativeEvent: [LayoutEvent](layoutevent)}) => void)` |
 
 ---
@@ -588,9 +588,9 @@ export default ViewBoxesWithColorAndText;
 
 当 `accessible` 为 `true` 时，用户执行魔法点击手势时系统调用此函数。
 
-| 类型   |
-| ------ |
-| 函数   |
+| 类型 |
+| ---- |
+| 函数 |
 
 ---
 
@@ -598,8 +598,8 @@ export default ViewBoxesWithColorAndText;
 
 此视图是否希望“声明”触摸响应器？当视图不是响应者时，每一步触摸移动都会调用此函数。
 
-| 类型                                                     |
-| -------------------------------------------------------- |
+| 类型                                                        |
+| ----------------------------------------------------------- |
 | `(md ({nativeEvent: [PressEvent](pressevent)}) => boolean)` |
 
 ---
@@ -608,8 +608,8 @@ export default ViewBoxesWithColorAndText;
 
 当父视图想要阻止子视图在移动时成为响应者，应提供此处理函数并返回 `true`。
 
-| 类型                                                     |
-| -------------------------------------------------------- |
+| 类型                                                        |
+| ----------------------------------------------------------- |
 | `(md ({nativeEvent: [PressEvent](pressevent)}) => boolean)` |
 
 ---
@@ -620,7 +620,7 @@ export default ViewBoxesWithColorAndText;
 
 在 Android 上，若要防止其他原生组件在此响应者终止前成为响应者，应返回 `true`。
 
-| 类型                                                             |
+| 类型                                                              |
 | ----------------------------------------------------------------- |
 | `md ({nativeEvent: [PressEvent](pressevent)}) => void ｜ boolean` |
 
@@ -630,8 +630,8 @@ export default ViewBoxesWithColorAndText;
 
 用户正在移动手指。
 
-| 类型                                                    |
-| ------------------------------------------------------- |
+| 类型                                                     |
+| -------------------------------------------------------- |
 | `(md ({nativeEvent: [PressEvent](pressevent)}) => void)` |
 
 ---
@@ -640,8 +640,8 @@ export default ViewBoxesWithColorAndText;
 
 已有其他响应者活跃且不会放弃响应权，该视图请求成为响应者被拒绝时调用。
 
-| 类型                                                    |
-| ------------------------------------------------------- |
+| 类型                                                     |
+| -------------------------------------------------------- |
 | `(md ({nativeEvent: [PressEvent](pressevent)}) => void)` |
 
 ---
@@ -650,8 +650,8 @@ export default ViewBoxesWithColorAndText;
 
 触摸结束时触发。
 
-| 类型                                                    |
-| ------------------------------------------------------- |
+| 类型                                                     |
+| -------------------------------------------------------- |
 | `(md ({nativeEvent: [PressEvent](pressevent)}) => void)` |
 
 ---
@@ -660,8 +660,8 @@ export default ViewBoxesWithColorAndText;
 
 响应者被夺走。可能发生于调用 `onResponderTerminationRequest` 后被其他视图夺走，或被系统无询问夺走（例如 iOS 控制中心/通知中心出现时）。
 
-| 类型                                                    |
-| ------------------------------------------------------- |
+| 类型                                                     |
+| -------------------------------------------------------- |
 | `(md ({nativeEvent: [PressEvent](pressevent)}) => void)` |
 
 ---
@@ -670,8 +670,8 @@ export default ViewBoxesWithColorAndText;
 
 有其他视图希望成为响应者，请求此视图释放响应者，如果返回 `true` 则允许释放。
 
-| 类型                                                    |
-| ------------------------------------------------------- |
+| 类型                                                     |
+| -------------------------------------------------------- |
 | `(md ({nativeEvent: [PressEvent](pressevent)}) => void)` |
 
 ---
@@ -680,8 +680,8 @@ export default ViewBoxesWithColorAndText;
 
 视图是否希望在触摸开始时成为响应者？
 
-| 类型                                                     |
-| -------------------------------------------------------- |
+| 类型                                                        |
+| ----------------------------------------------------------- |
 | `(md ({nativeEvent: [PressEvent](pressevent)}) => boolean)` |
 
 ---
@@ -690,8 +690,8 @@ export default ViewBoxesWithColorAndText;
 
 父视图想要阻止子视图在触摸开始时成为响应者，应提供此处理函数并返回 `true`。
 
-| 类型                                                     |
-| -------------------------------------------------------- |
+| 类型                                                        |
+| ----------------------------------------------------------- |
 | `(md ({nativeEvent: [PressEvent](pressevent)}) => boolean)` |
 
 ---
@@ -724,8 +724,8 @@ export default ViewBoxesWithColorAndText;
 }
 ```
 
-| 类型                                 |
-| ------------------------------------ |
+| 类型                                          |
+| --------------------------------------------- |
 | 枚举 ('box-none', 'none', 'box-only', 'auto') |
 
 ---
@@ -740,8 +740,8 @@ export default ViewBoxesWithColorAndText;
 
 这是 `RCTView` 暴露的保留性能属性，当内容多且大部分视图在屏幕外滚动时非常有用。为了使其生效，需应用于包含许多超出自身边界子视图的视图。子视图需设置 `overflow: hidden`，且其容器视图（或某一父视图）亦应如此。
 
-| 类型  |
-| ----- |
+| 类型   |
+| ------ |
 | 布尔值 |
 
 ---
@@ -752,8 +752,8 @@ export default ViewBoxesWithColorAndText;
 
 在 Android 上，对于只改动透明度、旋转、平移和/或缩放的动画和交互很有用：视图无需重绘，显示列表无需重复执行。纹理可以重复使用并以不同参数复合。缺点是可能消耗有限的视频内存，因此动画结束后应将此属性设为 false。
 
-| 类型  |
-| ----- |
+| 类型   |
+| ------ |
 | 布尔值 |
 
 ---
@@ -762,8 +762,8 @@ export default ViewBoxesWithColorAndText;
 
 `role` 用于向辅助技术用户传达组件的用途。优先级高于 [`accessibilityRole`](view#accessibilityrole)。
 
-| 类型          |
-| ------------- |
+| 类型                       |
+| -------------------------- |
 | [Role](accessibility#role) |
 
 ---
@@ -776,17 +776,17 @@ export default ViewBoxesWithColorAndText;
 
 光栅化会带来离屏绘制开销和内存消耗，使用时需测试和测量性能。
 
-| 类型  |
-| ----- |
+| 类型   |
+| ------ |
 | 布尔值 |
 
 ---
 
 ### `style`
 
-| 类型                               |
-| ---------------------------------- |
-| [视图样式](view-style-props)       |
+| 类型                         |
+| ---------------------------- |
+| [视图样式](view-style-props) |
 
 ---
 
@@ -797,9 +797,9 @@ export default ViewBoxesWithColorAndText;
 - `0` - 视图可聚焦
 - `-1` - 视图不可聚焦
 
-| 类型           |
-| -------------- |
-| 枚举 (0, -1)  |
+| 类型         |
+| ------------ |
+| 枚举 (0, -1) |
 
 ---
 
@@ -811,6 +811,6 @@ export default ViewBoxesWithColorAndText;
 此设置会禁用该视图的“仅布局视图移除”优化！
 :::
 
-| 类型  |
-| ----- |
+| 类型   |
+| ------ |
 | 字符串 |

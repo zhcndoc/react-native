@@ -176,4 +176,4 @@ export default Touchables;
 
 ## 已知问题
 
-- [react-native#29308](https://github.com/facebook/react-native/issues/29308#issuecomment-792864162)：触摸区域永远不会扩展到父视图边界之外，并且在 Android 上不支持负边距。
+- [react-native#29308](https://github.com/react/react-native/issues/29308#issuecomment-792864162)：触摸区域不会超出父视图边界，而且 Android 不支持负边距。

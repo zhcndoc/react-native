@@ -163,9 +163,7 @@ html {
 
 ```tsx
 <View>
-  <MyAppText>
-    使用整个应用程序默认字体样式的文本
-  </MyAppText>
+  <MyAppText>使用整个应用程序默认字体样式的文本</MyAppText>
   <MyAppHeaderText>样式化为标题的文本</MyAppHeaderText>
 </View>
 ```
@@ -241,7 +239,7 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 
 告诉屏幕阅读器将当前聚焦的元素视为具有特定角色。
 
-在 iOS 上，这些角色映射到相应的无障碍特性。图像按钮的功能与将特性设置为“image”和“button”相同。参见 [无障碍指南](accessibility.md#accessibilitytraits-ios) 以获取更多信息。
+在 iOS 上，这些角色会映射到对应的无障碍特征。Image button 的功能与同时设置 `image` 和 `button` 特征相同。更多信息请参阅[无障碍指南](accessibility.md#accessibilityrole)。
 
 在 Android 上，这些角色在 TalkBack 上具有类似的功能，就像在 iOS 上的 Voiceover 中添加无障碍特性一样。
 
@@ -270,8 +268,8 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 参见 [无障碍指南](accessibility.md#accessibility-actions) 以获取更多信息。
 
 | 类型  | 必填 |
-| ----- | -------- |
-| array | 否       |
+| ----- | ---- |
+| array | 否   |
 
 ---
 
@@ -282,8 +280,8 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 参见 [无障碍指南](accessibility.md#accessibility-actions) 以获取更多信息。
 
 | 类型     | 必填 |
-| -------- | -------- |
-| function | 否       |
+| -------- | ---- |
+| function | 否   |
 
 ---
 
@@ -291,11 +289,11 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 
 当设置为 `true` 时，表示视图是一个无障碍元素。
 
-参见 [无障碍指南](accessibility#accessible-ios-android) 以获取更多信息。
+更多信息请参阅[无障碍指南](accessibility.md#accessible)。
 
 | 类型    | 默认值 |
-| ------- | ------- |
-| boolean | `true`  |
+| ------- | ------ |
+| boolean | `true` |
 
 ---
 
@@ -303,7 +301,7 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 
 指定字体是否应自动缩小以适应给定的样式约束。
 
-| 类型    | 默认值 |
+| 类型    | 默认值  |
 | ------- | ------- |
 | boolean | `false` |
 
@@ -314,8 +312,8 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 指定字体是否应缩放以尊重文本大小无障碍设置。
 
 | 类型    | 默认值 |
-| ------- | ------- |
-| boolean | `true`  |
+| ------- | ------ |
+| boolean | `true` |
 
 ---
 
@@ -323,7 +321,7 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 
 设置在 Android API Level 23+ 上确定单词断字时使用的自动连字符频率。
 
-| 类型                                | 默认值  |
+| 类型                                | 默认值   |
 | ----------------------------------- | -------- |
 | enum(`'none'`, `'normal'`,`'full'`) | `'none'` |
 
@@ -334,8 +332,8 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 指示元素正在被修改，辅助技术可能希望等待更改完成后再告知用户更新。
 
 | 类型    | 默认值 |
-| ------- | ------- |
-| boolean | false   |
+| ------- | ------ |
+| boolean | false  |
 
 ---
 
@@ -344,8 +342,8 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 指示可检查元素的状态。此字段可以采用布尔值或 "mixed" 字符串来表示混合复选框。
 
 | 类型             | 默认值 |
-| ---------------- | ------- |
-| boolean, 'mixed' | false   |
+| ---------------- | ------ |
+| boolean, 'mixed' | false  |
 
 ---
 
@@ -354,8 +352,8 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 指示元素是可感知但禁用的，因此不可编辑或以其他方式操作。
 
 | 类型    | 默认值 |
-| ------- | ------- |
-| boolean | false   |
+| ------- | ------ |
+| boolean | false  |
 
 ---
 
@@ -364,8 +362,8 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 指示可展开元素当前是展开还是折叠。
 
 | 类型    | 默认值 |
-| ------- | ------- |
-| boolean | false   |
+| ------- | ------ |
+| boolean | false  |
 
 ---
 
@@ -393,7 +391,7 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 
 你只能提供一种类型。
 
-| 类型                                                          | 默认值  |
+| 类型                                                          | 默认值   |
 | ------------------------------------------------------------- | -------- |
 | enum(`'phoneNumber'`, `'link'`, `'email'`, `'none'`, `'all'`) | `'none'` |
 
@@ -403,7 +401,7 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 
 指定文本视图的禁用状态以用于测试目的。
 
-| 类型 | 默认值 |
+| 类型 | 默认值  |
 | ---- | ------- |
 | bool | `false` |
 
@@ -411,9 +409,9 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 
 ### `dynamicTypeRamp` <div className="label ios">iOS</div>
 
-要应用于 iOS 上此元素的 [动态类型](https://developer.apple.com/documentation/uikit/uifont/scaling_fonts_automatically)  ramp。
+要应用于 iOS 上此元素的 [动态类型](https://developer.apple.com/documentation/uikit/uifont/scaling_fonts_automatically) ramp。
 
-| 类型                                                                                                                                                     | 默认值  |
+| 类型                                                                                                                                                     | 默认值   |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | enum(`'caption2'`, `'caption1'`, `'footnote'`, `'subheadline'`, `'callout'`, `'body'`, `'headline'`, `'title3'`, `'title2'`, `'title1'`, `'largeTitle'`) | `'body'` |
 
@@ -433,8 +431,8 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 > 在 Android 上，当 `numberOfLines` 设置为高于 `1` 的值时，只有 `tail` 值能正常工作。
 
 | 类型                                           | 默认值 |
-| ---------------------------------------------- | ------- |
-| enum(`'head'`, `'middle'`, `'tail'`, `'clip'`) | `tail`  |
+| ---------------------------------------------- | ------ |
+| enum(`'head'`, `'middle'`, `'tail'`, `'clip'`) | `tail` |
 
 ---
 
@@ -456,7 +454,7 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 - `0`: 无最大值，忽略父节点/全局默认值
 - `>= 1`: 将此节点的 `maxFontSizeMultiplier` 设置为此值
 
-| 类型   | 默认值     |
+| 类型   | 默认值      |
 | ------ | ----------- |
 | number | `undefined` |
 
@@ -489,8 +487,8 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 此属性通常与 `ellipsizeMode` 一起使用。
 
 | 类型   | 默认值 |
-| ------ | ------- |
-| number | `0`     |
+| ------ | ------ |
+| number | `0`    |
 
 ---
 
@@ -650,7 +648,7 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 
 允许用户选择文本，以使用本机复制和粘贴功能。
 
-| 类型    | 默认值 |
+| 类型    | 默认值  |
 | ------- | ------- |
 | boolean | `false` |
 
@@ -678,7 +676,7 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 
 当 `true` 时，按下文本时不进行视觉更改。默认情况下，按下时灰色椭圆高亮显示文本。
 
-| 类型    | 默认值 |
+| 类型    | 默认值  |
 | ------- | ------- |
 | boolean | `false` |
 
@@ -698,7 +696,7 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 
 在 Android API Level 23+ 上设置文本断字策略，可能的值是 `simple`, `highQuality`, `balanced`。
 
-| 类型                                            | 默认值       |
+| 类型                                            | 默认值        |
 | ----------------------------------------------- | ------------- |
 | enum(`'simple'`, `'highQuality'`, `'balanced'`) | `highQuality` |
 
@@ -708,7 +706,7 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 
 在 iOS 14+ 上设置换行策略。可能的值是 `none`, `standard`, `hangul-word` 和 `push-out`。
 
-| 类型                                                        | 默认值  |
+| 类型                                                        | 默认值   |
 | ----------------------------------------------------------- | -------- |
 | enum(`'none'`, `'standard'`, `'hangul-word'`, `'push-out'`) | `'none'` |
 
@@ -735,16 +733,16 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 
 #### 属性
 
-| Name      | Type   | Optional | Description                                                         |
-| --------- | ------ | -------- | ------------------------------------------------------------------- |
-| ascender  | number | 否       | 文本布局更改后的行上升高度。             |
-| capHeight | number | 否       | 基线上方大写字母的高度。                        |
-| descender | number | 否       | 文本布局更改后的行下降高度。            |
-| height    | number | 否       | 文本布局更改后的行高度。                   |
-| width     | number | 否       | 文本布局更改后的行宽度。                    |
-| x         | number | 否       | Text 组件内部的行 X 坐标。                        |
+| Name      | Type   | Optional | Description                          |
+| --------- | ------ | -------- | ------------------------------------ |
+| ascender  | number | 否       | 文本布局更改后的行上升高度。         |
+| capHeight | number | 否       | 基线上方大写字母的高度。             |
+| descender | number | 否       | 文本布局更改后的行下降高度。         |
+| height    | number | 否       | 文本布局更改后的行高度。             |
+| width     | number | 否       | 文本布局更改后的行宽度。             |
+| x         | number | 否       | Text 组件内部的行 X 坐标。           |
 | xHeight   | number | 否       | 基线与行中线之间的距离（字身大小）。 |
-| y         | number | 否       | Text 组件内部的行 Y 坐标。                        |
+| y         | number | 否       | Text 组件内部的行 Y 坐标。           |
 
 ### TextLayoutEvent
 
@@ -765,7 +763,7 @@ React Native 仍然有样式继承的概念，但仅限于文本子树。在这�
 
 #### 属性
 
-| Name   | Type                                    | Optional | Description                                           |
-| ------ | --------------------------------------- | -------- | ----------------------------------------------------- |
+| Name   | Type                               | Optional | Description                        |
+| ------ | ---------------------------------- | -------- | ---------------------------------- |
 | lines  | [TextLayout](text#textlayout) 数组 | 否       | 提供每个渲染行的 TextLayout 数据。 |
-| target | number                                  | 否       | 元素的节点 id。                           |
+| target | number                             | 否       | 元素的节点 id。                    |

@@ -45,7 +45,7 @@ $ ./gradlew :app:assembleDebug -PreactNativeArchitectures=x86,x86_64
 
 如果你希望在 CI 上构建 Android 应用，并使用矩阵并行构建不同架构，这会非常有用。
 
-如果需要，你也可以使用项目[顶级文件夹](https://github.com/facebook/react-native/blob/19cf70266eb8ca151aa0cc46ac4c09cb987b2ceb/template/android/gradle.properties#L30-L33)中的 `gradle.properties` 文件在本地覆盖此值：
+如果需要，你也可以使用项目[顶级文件夹](https://github.com/react/react-native/blob/19cf70266eb8ca151aa0cc46ac4c09cb987b2ceb/template/android/gradle.properties#L30-L33)中的 `gradle.properties` 文件在本地覆盖此值：
 
 ```
 # Use this property to specify which architecture you want to build.
@@ -152,7 +152,7 @@ Primary storage:
 
 ```ruby
   post_install do |installer|
-    # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
+    # https://github.com/react/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
     react_native_post_install(
       installer,
       config[:reactNativePath],

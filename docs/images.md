@@ -250,19 +250,18 @@ _在 React Native 中_，这种行为是有意不实现的。开发者需要提�
 
 ## 通过嵌套实现背景图
 
-对熟悉 Web 的开发者来说，一个常见的需求是 `background-image`。要处理这个用例，你可以使用 `<ImageBackground>` 组件，它和 `<Image>` 有相同的 props，并且你可以在其中添加任意子元素，将它们叠放在图片上方。
-
-在某些情况下，你可能不想使用 `<ImageBackground>`，因为它的实现比较基础。更多说明请参阅 `<ImageBackground>` 的[文档](imagebackground.md)，并在需要时创建你自己的自定义组件。
+要在图像上叠加内容，请在 [`View`](view.md) 中渲染一个绝对定位的 [`Image`](image.md)，再添加要显示在上层的内容。
 
 ```tsx
 return (
-  <ImageBackground source={...} style={{width: '100%', height: '100%'}}>
+  <View style={{width: '100%', height: '100%'}}>
+    <Image source={...} style={StyleSheet.absoluteFill} />
     <Text>Inside</Text>
-  </ImageBackground>
+  </View>
 );
 ```
 
-请注意，你必须指定一些 `width` 和 `height` 样式属性。
+请注意，必须为容器 `View` 指定宽度和高度样式属性。
 
 ## iOS 边框圆角样式
 
@@ -279,7 +278,7 @@ return (
 
 ## 配置 iOS 图片缓存限制
 
-在 iOS 上，我们提供了一个 API，用于覆盖 React Native 的默认图片缓存限制。这个 API 应该在你的原生 `AppDelegate` 代码中调用（例如在 `didFinishLaunchingWithOptions` 中）。
+在 iOS 上，我们提供了一个 API，用于覆盖 React Native 的默认图片缓存限制。请在应用启动早期从 `SceneDelegate` 中调用此 API（位于 `scene:willConnectToSession:options:`），如果未使用 UIScene 生命周期，则从 `AppDelegate` 中调用（例如在 `application:didFinishLaunchingWithOptions:` 中）。
 
 ```objectivec
 RCTSetImageCacheLimits(4*1024*1024, 200*1024*1024);

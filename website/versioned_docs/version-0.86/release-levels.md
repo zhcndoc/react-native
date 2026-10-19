@@ -63,4 +63,4 @@ let factory = RCTReactNativeFactory(delegate: delegate, releaseLevel: RCTRelease
 </TabItem>
 </Tabs>
 
-The system ensures that only one release level is active per app instance, and will crash if multiple factories are created with different release levels.
+系统会确保每个应用实例只激活一个发布级别；如果创建了多个使用不同发布级别的 factory，则会崩溃。

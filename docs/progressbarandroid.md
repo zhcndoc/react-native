@@ -18,16 +18,20 @@ const App = () => {
   return (
     <View style={styles.container}>
       <View style={styles.example}>
-        <Text>圆形进度指示器</Text>
-        <ProgressBarAndroid />
+        <Text>Circle Progress Indicator</Text>
+        <ProgressBarAndroid indeterminate styleAttr="Normal" />
       </View>
       <View style={styles.example}>
-        <Text>水平进度指示器</Text>
-        <ProgressBarAndroid styleAttr="Horizontal" />
+        <Text>Horizontal Progress Indicator</Text>
+        <ProgressBarAndroid indeterminate styleAttr="Horizontal" />
       </View>
       <View style={styles.example}>
-        <Text>彩色进度指示器</Text>
-        <ProgressBarAndroid styleAttr="Horizontal" color="#2196F3" />
+        <Text>Colored Progress Indicator</Text>
+        <ProgressBarAndroid
+          indeterminate
+          styleAttr="Horizontal"
+          color="#2196F3"
+        />
       </View>
       <View style={styles.example}>
         <Text>固定进度值</Text>
@@ -69,7 +73,7 @@ export default App;
 
 | 类型 | 必需 |
 | ---- | ---- |
-| bool | 否       |
+| bool | 否   |
 
 ---
 
@@ -77,9 +81,9 @@ export default App;
 
 进度条的颜色。
 
-| 类型               | 必需 |
-| ------------------ | -------- |
-| [颜色](colors.md) | 否       |
+| 类型              | 必需 |
+| ----------------- | ---- |
+| [颜色](colors.md) | 否   |
 
 ---
 
@@ -88,8 +92,8 @@ export default App;
 进度条是否显示不确定进度。请注意，只有当 styleAttr 为 Horizontal 时才能为 false，并且需要提供 `progress` 值。
 
 | 类型              | 必需 |
-| ----------------- | -------- |
-| indeterminateType | 否       |
+| ----------------- | ---- |
+| indeterminateType | 否   |
 
 ---
 
@@ -98,8 +102,8 @@ export default App;
 进度值（介于 0 和 1 之间）。
 
 | 类型   | 必需 |
-| ------ | -------- |
-| number | 否       |
+| ------ | ---- |
+| number | 否   |
 
 ---
 
@@ -116,8 +120,8 @@ ProgressBar 的样式。可选值之一：
 - LargeInverse
 
 | 类型                                                                                      | 必需 |
-| ----------------------------------------------------------------------------------------- | -------- |
-| enum('Horizontal', 'Normal', 'Small', 'Large', 'Inverse', 'SmallInverse', 'LargeInverse') | 否       |
+| ----------------------------------------------------------------------------------------- | ---- |
+| enum('Horizontal', 'Normal', 'Small', 'Large', 'Inverse', 'SmallInverse', 'LargeInverse') | 否   |
 
 ---
 
@@ -126,5 +130,5 @@ ProgressBar 的样式。可选值之一：
 用于在端到端测试中定位此视图。
 
 | 类型   | 必需 |
-| ------ | -------- |
-| string | 否       |
+| ------ | ---- |
+| string | 否   |

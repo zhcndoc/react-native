@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-`BackHandler.addEventListener` 会创建一个事件监听器，并返回一个 `NativeEventSubscription` 对象，应使用 `NativeEventSubscription.remove` 方法将其清除。
+`BackHandler.addEventListener` 会创建事件监听器并返回一个 `EventSubscription` 对象，应使用 `EventSubscription.remove` 方法将其清除。
 
 ## Usage with React Navigation
 
@@ -122,7 +122,7 @@ export default App;
 static addEventListener(
   eventName: BackPressEventName,
   handler: () => boolean | null | undefined,
-): NativeEventSubscription;
+): EventSubscription;
 ```
 
 ---

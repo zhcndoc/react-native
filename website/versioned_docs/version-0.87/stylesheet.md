@@ -60,7 +60,7 @@ static compose(style1: Object, style2: Object): Object | Object[];
 
 合并两个样式，使得 `style2` 会覆盖 `style1` 中的任何样式。如果任一样式为假值，则返回另一个样式，而不会分配数组，从而节省分配并在 PureComponent 检查中保持引用相等性。
 
-```SnackPlayer name=Compose
+```SnackPlayer name=Compose&ext=js
 import {StyleSheet, Text} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 

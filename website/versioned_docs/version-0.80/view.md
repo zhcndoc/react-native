@@ -92,7 +92,7 @@ export default ViewBoxesWithColorAndText;
 
 一个值，指示当颜色反转开启时，此视图是否应该被反转。值为 `true` 将告诉视图即使颜色反转开启也不要被反转。
 
-请参阅 [无障碍指南](accessibility.md#accessibilityignoresinvertcolors) 以获取更多信息。
+更多信息请参见[无障碍指南](accessibility.md#accessibilityignoresinvertcolors-ios)。
 
 | 类型 |
 | ---- |
@@ -171,7 +171,7 @@ export default ViewBoxesWithColorAndText;
 
 向辅助技术用户描述组件的当前状态。
 
-请参阅 [无障碍指南](accessibility.md#accessibilitystate-ios-android) 以获取更多信息。
+更多信息请参见[无障碍指南](accessibility.md#accessibilitystate)。
 
 | 类型                                                                                             |
 | ------------------------------------------------------------------------------------------------ |
@@ -183,7 +183,7 @@ export default ViewBoxesWithColorAndText;
 
 代表组件的当前值。它可以是组件值的文本描述，或者对于基于范围的组件（如滑块和进度条），它包含范围信息（最小值、当前值和最大值）。
 
-请参阅 [无障碍指南](accessibility.md#accessibilityvalue-ios-android) 以获取更多信息。
+更多信息请参见[无障碍指南](accessibility.md#accessibilityvalue)。
 
 | 类型                                                            |
 | --------------------------------------------------------------- |
@@ -216,8 +216,8 @@ export default ViewBoxesWithColorAndText;
 指示元素正在被修改，辅助技术可能希望等待更改完成后再告知用户更新。
 
 | 类型    | 默认值 |
-| ------- | ------- |
-| boolean | false   |
+| ------- | ------ |
+| boolean | false  |
 
 ---
 
@@ -226,8 +226,8 @@ export default ViewBoxesWithColorAndText;
 指示可勾选元素的状态。此字段可以采用布尔值或 "mixed" 字符串来表示混合复选框。
 
 | 类型             | 默认值 |
-| ---------------- | ------- |
-| boolean, 'mixed' | false   |
+| ---------------- | ------ |
+| boolean, 'mixed' | false  |
 
 ---
 
@@ -236,8 +236,8 @@ export default ViewBoxesWithColorAndText;
 指示元素是可感知的但已禁用，因此不可编辑或以其他方式操作。
 
 | 类型    | 默认值 |
-| ------- | ------- |
-| boolean | false   |
+| ------- | ------ |
+| boolean | false  |
 
 ---
 
@@ -246,8 +246,8 @@ export default ViewBoxesWithColorAndText;
 指示可展开元素当前是展开还是折叠。
 
 | 类型    | 默认值 |
-| ------- | ------- |
-| boolean | false   |
+| ------- | ------ |
+| boolean | false  |
 
 ---
 
@@ -258,8 +258,8 @@ export default ViewBoxesWithColorAndText;
 例如，在包含兄弟视图 `A` 和 `B` 的窗口中，在视图 `B` 上将 `aria-hidden` 设置为 `true` 会导致 VoiceOver 忽略 `B` 元素及其子元素。
 
 | 类型    | 默认值 |
-| ------- | ------- |
-| boolean | false   |
+| ------- | ------ |
+| boolean | false  |
 
 ---
 
@@ -298,7 +298,7 @@ export default ViewBoxesWithColorAndText;
 - **polite** 无障碍服务应宣布对此视图的更改。
 - **assertive** 无障碍服务应中断正在进行的语音以立即宣布对此视图的更改。
 
-| 类型                                     | 默认值 |
+| 类型                                     | 默认值  |
 | ---------------------------------------- | ------- |
 | enum(`'assertive'`, `'off'`, `'polite'`) | `'off'` |
 
@@ -309,8 +309,8 @@ export default ViewBoxesWithColorAndText;
 布尔值，指示 VoiceOver 是否应忽略接收者兄弟视图内的元素。优先级高于 [`accessibilityViewIsModal`](#accessibilityviewismodal-ios) 属性。
 
 | 类型    | 默认值 |
-| ------- | ------- |
-| boolean | false   |
+| ------- | ------ |
+| boolean | false  |
 
 ---
 
@@ -367,8 +367,8 @@ export default ViewBoxesWithColorAndText;
 仅用于布局其子元素或不绘制任何内容的视图可能会作为优化自动从原生层级中移除。将此属性设置为 `false` 以禁用此优化，并确保此 `View` 存在于原生视图层级中。
 
 | 类型    | 默认值 |
-| ------- | ------- |
-| boolean | true    |
+| ------- | ------ |
+| boolean | true   |
 
 ---
 
@@ -377,8 +377,8 @@ export default ViewBoxesWithColorAndText;
 设置为 false 可防止视图的直接子元素从原生视图层级中移除，类似于在每个子元素上设置 `collapsable={false}` 的效果。
 
 | 类型    | 默认值 |
-| ------- | ------- |
-| boolean | true    |
+| ------- | ------ |
+| boolean | true   |
 
 ---
 

@@ -96,7 +96,7 @@ export default ViewBoxesWithColorAndText;
 
 一个值，表示在启用颜色反转时，此视图是否应被反转。值为 `true` 时，即使开启了颜色反转，也会告知视图不要被反转。
 
-有关更多信息，请参见 [无障碍指南](accessibility.md#accessibilityignoresinvertcolors)。
+更多信息请参见[无障碍指南](accessibility.md#accessibilityignoresinvertcolors-ios)。
 
 | 类型 |
 | ---- |
@@ -175,7 +175,7 @@ export default ViewBoxesWithColorAndText;
 
 向辅助技术用户描述组件的当前状态。
 
-有关更多信息，请参见 [无障碍指南](accessibility.md#accessibilitystate-ios-android)。
+更多信息请参见[无障碍指南](accessibility.md#accessibilitystate)。
 
 | 类型                                                                                             |
 | ------------------------------------------------------------------------------------------------ |
@@ -187,7 +187,7 @@ export default ViewBoxesWithColorAndText;
 
 表示组件的当前值。它可以是组件值的文本描述；对于基于范围的组件，例如滑块和进度条，则包含范围信息（最小值、当前值和最大值）。
 
-有关更多信息，请参见 [无障碍指南](accessibility.md#accessibilityvalue-ios-android)。
+更多信息请参见[无障碍指南](accessibility.md#accessibilityvalue)。
 
 | 类型                                                            |
 | --------------------------------------------------------------- |
@@ -221,7 +221,7 @@ export default ViewBoxesWithColorAndText;
 
 | 类型    | 默认值 |
 | ------- | ------ |
-| boolean | false   |
+| boolean | false  |
 
 ---
 
@@ -231,7 +231,7 @@ export default ViewBoxesWithColorAndText;
 
 | 类型             | 默认值 |
 | ---------------- | ------ |
-| boolean, 'mixed' | false   |
+| boolean, 'mixed' | false  |
 
 ---
 
@@ -241,7 +241,7 @@ export default ViewBoxesWithColorAndText;
 
 | 类型    | 默认值 |
 | ------- | ------ |
-| boolean | false   |
+| boolean | false  |
 
 ---
 
@@ -251,7 +251,7 @@ export default ViewBoxesWithColorAndText;
 
 | 类型    | 默认值 |
 | ------- | ------ |
-| boolean | false   |
+| boolean | false  |
 
 ---
 
@@ -263,7 +263,7 @@ export default ViewBoxesWithColorAndText;
 
 | 类型    | 默认值 |
 | ------- | ------ |
-| boolean | false   |
+| boolean | false  |
 
 ---
 
@@ -302,8 +302,8 @@ export default ViewBoxesWithColorAndText;
 - **polite** 无障碍服务应播报对此视图的更改。
 - **assertive** 无障碍服务应打断当前语音，立即播报对此视图的更改。
 
-| 类型                                     | 默认值 |
-| ---------------------------------------- | ------ |
+| 类型                                     | 默认值  |
+| ---------------------------------------- | ------- |
 | enum(`'assertive'`, `'off'`, `'polite'`) | `'off'` |
 
 ---
@@ -314,7 +314,7 @@ export default ViewBoxesWithColorAndText;
 
 | 类型    | 默认值 |
 | ------- | ------ |
-| boolean | false   |
+| boolean | false  |
 
 ---
 

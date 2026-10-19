@@ -197,8 +197,7 @@ import {
   StyleSheet,
   Text,
   View,
-  FlexAlignType,
-  FlexStyle,
+  ViewStyle,
 } from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -217,7 +216,7 @@ const App = () => {
     alignItems: alignItemsArr[alignItems],
     direction: directions[direction],
     flexWrap: wraps[wrap],
-  } as FlexStyle;
+  };
 
   const changeSetting = (
     value: number,
@@ -307,29 +306,29 @@ const App = () => {
   );
 };
 
-const flexDirections = [
+const flexDirections: ViewStyle['flexDirection'][] = [
   'row',
   'row-reverse',
   'column',
   'column-reverse',
-] as FlexStyle['flexDirection'][];
-const justifyContents = [
+];
+const justifyContents: ViewStyle['justifyContent'][] = [
   'flex-start',
   'flex-end',
   'center',
   'space-between',
   'space-around',
   'space-evenly',
-] as FlexStyle['justifyContent'][];
-const alignItemsArr = [
+];
+const alignItemsArr: ViewStyle['alignItems'][] = [
   'flex-start',
   'flex-end',
   'center',
   'stretch',
   'baseline',
-] as FlexAlignType[];
-const wraps = ['nowrap', 'wrap', 'wrap-reverse'];
-const directions = ['inherit', 'ltr', 'rtl'];
+];
+const wraps: ViewStyle['flexWrap'][] = ['nowrap', 'wrap', 'wrap-reverse'];
+const directions: ViewStyle['direction'][] = ['inherit', 'ltr', 'rtl'];
 
 const styles = StyleSheet.create({
   container: {
@@ -545,13 +544,13 @@ export default App;
 
 ### `columnGap`
 
-`columnGap` 的工作方式类似于 CSS 中的 `column-gap`。React Native 仅支持像素单位。
+`columnGap` works like `column-gap` in CSS. It accepts numbers (in points) or percentage strings (e.g. `'10%'`). Percentage values are supported on the [New Architecture](/architecture/landing-page).
 
 有关更多详细信息，请参见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap)。
 
-| 类型   | 必需 |
-| ------ | ---- |
-| number | 否   |
+| 类型           | 必需 |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -659,7 +658,7 @@ export default App;
 
 `flexWrap` 控制子元素在到达 flex 容器末端后是否可以换行。它的工作方式类似于 CSS 中的 `flex-wrap`（默认值：nowrap）。
 
-请注意，它不再与 `alignItems: stretch`（默认值）一起工作，因此你可能需要使用 `alignItems: flex-start`，例如（重大变更详情：https://github.com/facebook/react-native/releases/tag/v0.28.0）。
+请注意，它不再与默认值 `alignItems: stretch` 一起工作，因此你可能需要改用 `alignItems: flex-start`（破坏性变更详情：https://github.com/react/react-native/releases/tag/v0.28.0）。
 
 有关更多详细信息，请参见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap)。
 
@@ -671,13 +670,13 @@ export default App;
 
 ### `gap`
 
-`gap` 的工作方式类似于 CSS 中的 `gap`。React Native 仅支持像素单位。
+`gap` works like `gap` in CSS. It is a shorthand for `rowGap` and `columnGap`. It accepts numbers (in points) or percentage strings (e.g. `'10%'`). Percentage values are supported on the [New Architecture](/architecture/landing-page).
 
 有关更多详细信息，请参见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/gap)。
 
-| 类型   | 必需 |
-| ------ | ---- |
-| number | 否   |
+| 类型           | 必需 |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -1295,13 +1294,13 @@ React Native 中的 `position` 类似于[常规 CSS](https://developer.mozilla.o
 
 ### `rowGap`
 
-`rowGap` 的工作方式类似于 CSS 中的 `row-gap`。React Native 仅支持像素单位。
+`rowGap` works like `row-gap` in CSS. It accepts numbers (in points) or percentage strings (e.g. `'10%'`). Percentage values are supported on the [New Architecture](/architecture/landing-page).
 
 有关更多详细信息，请参见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap)。
 
-| 类型   | 必需 |
-| ------ | ---- |
-| number | 否   |
+| 类型           | 必需 |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 

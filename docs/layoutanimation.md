@@ -7,7 +7,8 @@ title: LayoutAnimation
 
 在函数组件中，通常会在更新状态 Hook 之前调用此 API；在类组件中，则会在调用 `setState` 之前调用它。
 
-请注意，要在 **Android** 上正常使用此功能，需要通过 `UIManager` 设置以下标志：
+:::note
+在 **Android** 上使用**旧架构**时，需要通过 `UIManager` 启用布局动画。此标志会全局启用布局动画，只需在触发布局动画前调用一次（例如在应用的根入口文件 `index.js` 或根组件中）：
 
 ```js
 if (Platform.OS === 'android') {
@@ -16,6 +17,9 @@ if (Platform.OS === 'android') {
   }
 }
 ```
+
+在**新架构**中，布局动画会自动启用，无需调用 `setLayoutAnimationEnabledExperimental`（该调用不会产生任何效果）。
+:::
 
 ## 示例
 
@@ -99,11 +103,11 @@ static configureNext(
 
 #### 参数：
 
-| 名称               | 类型     | 必填 | 描述                         |
-| ------------------ | -------- | ---- | ---------------------------- |
-| config             | object   | 是   | 参见下面的配置说明。         |
-| onAnimationDidEnd  | function | 否   | 动画完成时调用。             |
-| onAnimationDidFail | function | 否   | 动画失败时调用。             |
+| 名称               | 类型     | 必填 | 描述                 |
+| ------------------ | -------- | ---- | -------------------- |
+| config             | object   | 是   | 参见下面的配置说明。 |
+| onAnimationDidEnd  | function | 否   | 动画完成时调用。     |
+| onAnimationDidFail | function | 否   | 动画失败时调用。     |
 
 `config` 参数是一个包含以下键的对象。[`create`](layoutanimation.md#create) 会返回一个可用于 `config` 的有效对象，[`Presets`](layoutanimation.md#presets) 对象也都可以作为 `config` 传入。
 

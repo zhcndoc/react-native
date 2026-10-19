@@ -484,6 +484,16 @@ renderItem({
 
 ---
 
+### `ListItemComponent`
+
+每个数据项都会由此元素渲染，可用作 `renderItem` 的替代项。它接收相同的 props；两者同时提供时，此元素优先于 `renderItem`。
+
+| 类型               |
+| ------------------ |
+| component, element |
+
+---
+
 ### `columnWrapperStyle`
 
 当 `numColumns > 1` 时，为生成的多项行提供可选的自定义样式。
@@ -541,8 +551,8 @@ renderItem({
 初始批次中要渲染多少个 item。这个数量应该足以填满屏幕，但不要多太多。请注意，为了提升滚动回顶部的感知性能，这些 item 作为窗口化渲染的一部分永远不会被卸载。
 
 | 类型   | 默认值 |
-| ------ | ------- |
-| number | `10`    |
+| ------ | ------ |
+| number | `10`   |
 
 ---
 
@@ -650,7 +660,7 @@ renderItem({
 
 ### `viewabilityConfig`
 
-有关 flow type 和进一步文档，请参见 [`ViewabilityHelper.js`](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Lists/ViewabilityHelper.js)。
+关于 flow type 和更多文档，请参阅 [`ViewabilityHelper.js`](https://github.com/react/react-native/blob/main/packages/react-native/Libraries/Lists/ViewabilityHelper.js)。
 
 | 类型              |
 | ----------------- |
@@ -665,7 +675,7 @@ renderItem({
 | itemVisiblePercentThreshold      | number  |
 | waitForInteraction               | boolean |
 
-`viewAreaCoveragePercentThreshold` 或 `itemVisiblePercentThreshold` 至少需要设置一个。需要在 `constructor` 中完成，以避免以下错误（[参考](https://github.com/facebook/react-native/issues/17408)）：
+必须设置 `viewAreaCoveragePercentThreshold` 或 `itemVisiblePercentThreshold` 中的至少一个。需要在 `constructor` 中设置，以避免出现以下错误（[参考](https://github.com/react/react-native/issues/17408)）：
 
 ```
   错误：不支持动态更改 viewabilityConfig

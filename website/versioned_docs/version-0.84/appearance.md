@@ -108,7 +108,7 @@ static setColorScheme('light' | 'dark' | null): void;
 ```tsx
 static addChangeListener(
   listener: (preferences: {colorScheme: 'light' | 'dark' | null}) => void,
-): NativeEventSubscription;
+): EventSubscription;
 ```
 
 添加当外观偏好变化时触发的事件处理函数。

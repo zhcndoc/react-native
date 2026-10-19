@@ -391,8 +391,8 @@ export default App;
 
 参见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/align-content) 了解更多详情。
 
-| 类型                                                                                                 | 是否必填 |
-| ---------------------------------------------------------------------------------------------------- | -------- |
+| 类型                                                                                                  | 是否必填 |
+| ----------------------------------------------------------------------------------------------------- | -------- |
 | 枚举 ('flex-start', 'flex-end', 'center', 'stretch', 'space-between', 'space-around', 'space-evenly') | 否       |
 
 ---
@@ -403,8 +403,8 @@ export default App;
 
 参见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items) 了解更多详情。
 
-| 类型                                                            | 是否必填 |
-| --------------------------------------------------------------- | -------- |
+| 类型                                                             | 是否必填 |
+| ---------------------------------------------------------------- | -------- |
 | 枚举 ('flex-start', 'flex-end', 'center', 'stretch', 'baseline') | 否       |
 
 ---
@@ -415,8 +415,8 @@ export default App;
 
 参见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/align-self) 了解更多详情。
 
-| 类型                                                                    | 是否必填 |
-| ----------------------------------------------------------------------- | -------- |
+| 类型                                                                     | 是否必填 |
+| ------------------------------------------------------------------------ | -------- |
 | 枚举 ('auto', 'flex-start', 'flex-end', 'center', 'stretch', 'baseline') | 否       |
 
 ---
@@ -537,21 +537,21 @@ export default App;
 
 `boxSizing` 定义如何计算元素的各种尺寸属性（`width`、`height`、`minWidth`、`minHeight` 等）。如果 `boxSizing` 为 `border-box`，这些尺寸适用于元素的边框盒。如果为 `content-box`，它们适用于元素的内容盒。默认值为 `border-box`。如果你想了解更多关于此属性如何工作的信息，[Web 文档](https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing) 是一个很好的信息来源。
 
-| 类型                              | 是否必填 |
-| --------------------------------- | -------- |
+| 类型                               | 是否必填 |
+| ---------------------------------- | -------- |
 | 枚举 ('border-box', 'content-box') | 否       |
 
 ---
 
 ### `columnGap`
 
-`columnGap` 的工作原理类似于 CSS 中的 `column-gap`。React Native 中仅支持像素单位。
+`columnGap` works like `column-gap` in CSS. It accepts numbers (in points) or percentage strings (e.g. `'10%'`). Percentage values are supported on the [New Architecture](/architecture/landing-page).
 
 参见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap) 了解更多详情。
 
-| 类型   | 是否必填 |
-| ------ | -------- |
-| number | 否       |
+| 类型           | 必需 |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -561,8 +561,8 @@ export default App;
 
 参见 [MDN CSS 参考](https://www.yogalayout.dev/docs/styling/layout-direction) 了解更多详情。
 
-| 类型                          | 是否必填 |
-| ----------------------------- | -------- |
+| 类型                           | 是否必填 |
+| ------------------------------ | -------- |
 | 枚举 ('inherit', 'ltr', 'rtl') | 否       |
 
 ---
@@ -573,8 +573,8 @@ export default App;
 
 它的工作原理类似于 CSS 中的 `display`，但仅支持值 'flex'、'none' 和 'contents'。默认值为 `flex`。
 
-| 类型                             | 是否必填 |
-| -------------------------------- | -------- |
+| 类型                              | 是否必填 |
+| --------------------------------- | -------- |
 | 枚举 ('none', 'flex', 'contents') | 否       |
 
 ---
@@ -625,8 +625,8 @@ export default App;
 
 参见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction) 了解更多详情。
 
-| 类型                                                   | 是否必填 |
-| ------------------------------------------------------ | -------- |
+| 类型                                                    | 是否必填 |
+| ------------------------------------------------------- | -------- |
 | 枚举 ('row', 'row-reverse', 'column', 'column-reverse') | 否       |
 
 ---
@@ -663,21 +663,21 @@ export default App;
 
 参见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap) 了解更多详情。
 
-| 类型                                   | 是否必填 |
-| -------------------------------------- | -------- |
+| 类型                                    | 是否必填 |
+| --------------------------------------- | -------- |
 | 枚举 ('wrap', 'nowrap', 'wrap-reverse') | 否       |
 
 ---
 
 ### `gap`
 
-`gap` 的工作原理类似于 CSS 中的 `gap`。React Native 中仅支持像素单位。
+`gap` works like `gap` in CSS. It is a shorthand for `rowGap` and `columnGap`. It accepts numbers (in points) or percentage strings (e.g. `'10%'`). Percentage values are supported on the [New Architecture](/architecture/landing-page).
 
 参见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/gap) 了解更多详情。
 
-| 类型   | 是否必填 |
-| ------ | -------- |
-| number | 否       |
+| 类型           | 必需 |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -820,8 +820,8 @@ export default App;
 - `auto`（默认）：什么都不做。
 - `isolate`：形成一个堆叠上下文。
 
-| 类型                    | 是否必填 |
-| ----------------------- | -------- |
+| 类型                     | 是否必填 |
+| ------------------------ | -------- |
 | 枚举 ('auto', 'isolate') | 否       |
 
 ---
@@ -832,8 +832,8 @@ export default App;
 
 参见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content) 了解更多详情。
 
-| 类型                                                                                      | 是否必填 |
-| ----------------------------------------------------------------------------------------- | -------- |
+| 类型                                                                                       | 是否必填 |
+| ------------------------------------------------------------------------------------------ | -------- |
 | 枚举 ('flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly') | 否       |
 
 ---
@@ -1082,8 +1082,8 @@ export default App;
 
 参见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow) 了解更多详情。
 
-| 类型                                | 是否必填 |
-| ----------------------------------- | -------- |
+| 类型                                 | 是否必填 |
+| ------------------------------------ | -------- |
 | 枚举 ('visible', 'hidden', 'scroll') | 否       |
 
 ---
@@ -1273,8 +1273,8 @@ React Native 中的 `position` 类似于 [常规 CSS](https://developer.mozilla.
 
 有关更多信息，请参阅 [使用 Flexbox 布局文档](./flexbox.md#position)。此外，[Yoga 文档](https://www.yogalayout.dev/docs/styling/position) 有关於 `position` 在 React Native 和 CSS 之间如何不同的更多详情。
 
-| 类型                                   | 是否必填 |
-| -------------------------------------- | -------- |
+| 类型                                    | 是否必填 |
+| --------------------------------------- | -------- |
 | 枚举 ('absolute', 'relative', 'static') | 否       |
 
 ---
@@ -1295,13 +1295,13 @@ React Native 中的 `position` 类似于 [常规 CSS](https://developer.mozilla.
 
 ### `rowGap`
 
-`rowGap` 的工作原理类似于 CSS 中的 `row-gap`。React Native 中仅支持像素单位。
+`rowGap` works like `row-gap` in CSS. It accepts numbers (in points) or percentage strings (e.g. `'10%'`). Percentage values are supported on the [New Architecture](/architecture/landing-page).
 
 参见 [MDN CSS 参考](https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap) 了解更多详情。
 
-| 类型   | 是否必填 |
-| ------ | -------- |
-| number | 否       |
+| 类型           | 必需 |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 

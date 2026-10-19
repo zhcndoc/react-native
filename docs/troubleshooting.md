@@ -5,7 +5,7 @@ title: 故障排查
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
-这些是你在设置 React Native 时可能遇到的一些常见问题。如果你遇到这里未列出的问题，可以尝试在 [GitHub 中搜索该问题](https://github.com/facebook/react-native/issues/)。
+以下是设置 React Native 时可能遇到的一些常见问题。如果遇到未列出的问题，可以尝试在 [GitHub 中搜索](https://github.com/react/react-native/issues/)。
 
 ### 端口已被占用
 
@@ -88,7 +88,7 @@ pod 'React', :path => '../node_modules/react-native', :subspecs => [
 
 ### 没有可用的传输方式
 
-React Native 为 WebSockets 实现了一个 polyfill。这些 [polyfill](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Core/InitializeCore.js) 会作为你通过 `import React from 'react'` 引入到应用中的 react-native 模块的一部分进行初始化。如果你加载了另一个需要 WebSockets 的模块，例如 [Firebase](https://github.com/facebook/react-native/issues/3645)，请确保在 react-native 之后加载/require 它：
+React Native 为 WebSockets 实现了一个 polyfill。这些 [polyfill](https://github.com/react/react-native/blob/main/packages/react-native/Libraries/Core/InitializeCore.js) 会作为你通过 `import React from 'react'` 引入到应用中的 react-native 模块的一部分进行初始化。如果加载了另一个需要 WebSockets 的模块，例如 [Firebase](https://github.com/react/react-native/issues/3645)，请确保在 react-native 之后加载或 require 它：
 
 ```
 import Firebase from 'firebase';
@@ -122,6 +122,6 @@ echo fs.inotify.max_user_watches=582222 | sudo tee -a /etc/sysctl.conf && sudo s
 
 ### 错误：spawnSync ./gradlew EACCES
 
-如果你在 macOS 上运行 `npm run android` 或 `yarn android` 时遇到上述错误，请尝试运行 `sudo chmod +x android/gradlew` 命令，使 `gradlew` 文件变为可执行。 
+如果你在 macOS 上运行 `npm run android` 或 `yarn android` 时遇到上述错误，请尝试运行 `sudo chmod +x android/gradlew` 命令，使 `gradlew` 文件变为可执行。
 
 [metro]: https://metrobundler.dev/

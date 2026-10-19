@@ -256,9 +256,9 @@ ws.onclose = e => {
 - `redirect:manual`
 - `credentials:omit`
 
-* 在 Android 上使用同名请求头会导致最终只保留最新的请求头。可以在这里找到临时解决方案：https://github.com/facebook/react-native/issues/18837#issuecomment-398779994。
-* 基于 Cookie 的身份验证目前不稳定。你可以在这里查看一些已提出的问题：https://github.com/facebook/react-native/issues/23185
-* 至少在 iOS 上，当通过 `302` 重定向且存在 `Set-Cookie` 请求头时，Cookie 不会被正确设置。由于无法手动处理重定向，如果重定向是由会话过期导致的，这可能会造成无限请求。
+* Having same name headers on Android will result in only the latest one being present. A temporary solution can be found here: https://github.com/react/react-native/issues/18837#issuecomment-398779994.
+* Cookie based authentication is currently unstable. You can view some of the issues raised here: https://github.com/react/react-native/issues/23185
+* As a minimum on iOS, when redirected through a `302`, if a `Set-Cookie` header is present, the cookie is not set properly. Since the redirect cannot be handled manually this might cause a scenario where infinite requests occur if the redirect is the result of an expired session.
 
 ## 在 iOS 上配置 NSURLSession
 

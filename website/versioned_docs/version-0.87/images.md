@@ -250,19 +250,18 @@ _在 React Native 中_，这种行为是有意不实现的。开发者需要提�
 
 ## 通过嵌套实现背景图片
 
-熟悉 Web 的开发者经常请求的一个功能是 `background-image`。要处理这种使用场景，你可以使用 `<ImageBackground>` 组件。它具有与 `<Image>` 相同的 props，并且你可以向其中添加任意子元素，使其叠加在图片之上。
-
-在某些情况下，你可能不希望使用 `<ImageBackground>`，因为其实现比较基础。请参阅 `<ImageBackground>` 的[文档](imagebackground.md)以了解更多信息，并在需要时创建自己的自定义组件。
+要在图像上叠加内容，请在 [`View`](view.md) 中渲染一个绝对定位的 [`Image`](image.md)，再添加要显示在上层的内容。
 
 ```tsx
 return (
-  <ImageBackground source={...} style={{width: '100%', height: '100%'}}>
+  <View style={{width: '100%', height: '100%'}}>
+    <Image source={...} style={StyleSheet.absoluteFill} />
     <Text>Inside</Text>
-  </ImageBackground>
+  </View>
 );
 ```
 
-请注意，你必须指定一些宽度和高度样式属性。
+请注意，必须为容器 `View` 指定宽度和高度样式属性。
 
 ## iOS 边框圆角样式
 

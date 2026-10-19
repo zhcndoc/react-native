@@ -209,7 +209,7 @@ JSI 使得流行的 React Native 摄像头库 [VisionCamera](https://github.com/
 
 从 0.76 版本起，新架构已在所有 React Native 项目中默认启用。
 
-如果你发现有任何问题，请使用 [此模板](https://github.com/facebook/react-native/issues/new?assignees=&labels=Needs%3A+Triage+%3Amag%3A%2CType%3A+New+Architecture&projects=&template=new_architecture_bug_report.yml) 提交 issue。
+如果发现任何问题，请使用[此模板](https://github.com/react/react-native/issues/new?assignees=&labels=Needs%3A+Triage+%3Amag%3A%2CType%3A+New+Architecture&projects=&template=new_architecture_bug_report.yml)提交 issue。
 
 如果出于任何原因你无法使用新架构，仍然可以选择关闭它：
 

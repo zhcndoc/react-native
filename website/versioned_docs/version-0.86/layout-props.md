@@ -545,13 +545,13 @@ export default App;
 
 ### `columnGap`
 
-`columnGap` 的作用类似于 CSS 中的 `column-gap`。在 React Native 中只支持像素单位。
+`columnGap` works like `column-gap` in CSS. It accepts numbers (in points) or percentage strings (e.g. `'10%'`). Percentage values are supported on the [New Architecture](/architecture/landing-page).
 
 更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap)。
 
-| 类型   | 必需 |
-| ------ | ---- |
-| number | 否   |
+| 类型           | 必需 |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -671,13 +671,13 @@ export default App;
 
 ### `gap`
 
-`gap` 的作用类似于 CSS 中的 `gap`。在 React Native 中只支持像素单位。
+`gap` works like `gap` in CSS. It is a shorthand for `rowGap` and `columnGap`. It accepts numbers (in points) or percentage strings (e.g. `'10%'`). Percentage values are supported on the [New Architecture](/architecture/landing-page).
 
 更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/gap)。
 
-| 类型   | 必需 |
-| ------ | ---- |
-| number | 否   |
+| 类型           | 必需 |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 
@@ -795,7 +795,7 @@ export default App;
 
 :::note
 `insetInlineStart` 仅在 [新架构](/architecture/landing-page) 中可用
-::: 
+:::
 
 当方向为 `ltr` 时，`insetInlineStart` 等同于 [`left`](layout-props#left)。当方向为 `rtl` 时，`insetInlineStart` 等同于 [`right`](layout-props#right)。
 
@@ -1295,13 +1295,13 @@ React Native 中的 `position` 与[常规 CSS](https://developer.mozilla.org/en-
 
 ### `rowGap`
 
-`rowGap` 的作用类似于 CSS 中的 `row-gap`。在 React Native 中只支持像素单位。
+`rowGap` works like `row-gap` in CSS. It accepts numbers (in points) or percentage strings (e.g. `'10%'`). Percentage values are supported on the [New Architecture](/architecture/landing-page).
 
 更多详情请参见 [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap)。
 
-| 类型   | 必需 |
-| ------ | ---- |
-| number | 否   |
+| 类型           | 必需 |
+| -------------- | ---- |
+| number, string | 否   |
 
 ---
 

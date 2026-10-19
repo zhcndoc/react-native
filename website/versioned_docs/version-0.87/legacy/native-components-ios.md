@@ -45,9 +45,9 @@ RCT_EXPORT_MODULE(RNTMap)
 
 :::note
 不要尝试在你通过 `-view` 方法暴露的 `UIView` 实例上设置 `frame` 或 `backgroundColor` 属性。
-React Native 会覆盖自定义类设置的值，以匹配 JavaScript 组件的布局属性。
-如果你需要这种粒度的控制，最好将你想要设置样式的 `UIView` 实例包装在另一个 `UIView` 中，并改为返回这个包装器 `UIView`。
-有关更多背景信息，请参阅 [Issue 2948](https://github.com/facebook/react-native/issues/2948)。
+React Native 会覆盖你通过自定义类设置的值，使其与 JavaScript 组件的布局属性一致。
+如果需要如此精细的控制，最好将希望设置样式的 `UIView` 实例包裹在另一个 `UIView` 中，并返回这个包装视图。
+更多背景信息请参见 [Issue 2948](https://github.com/react/react-native/issues/2948)。
 :::
 
 :::info
@@ -476,4 +476,4 @@ const styles = StyleSheet.create({
 }
 ```
 
-本指南介绍了桥接自定义原生组件的许多方面，但你可能还需要考虑更多内容，例如用于插入和布局子视图的自定义钩子。如果你想进一步深入了解，请查看一些已实现组件的[源代码](https://github.com/facebook/react-native/tree/main/packages/react-native/React/Views)。
+本指南介绍了桥接自定义原生组件的许多方面，但你可能还需要考虑更多内容，例如插入和布局子视图的自定义钩子。如果想深入了解，可以查看一些已实现组件的[源代码](https://github.com/react/react-native/tree/main/packages/react-native/React/Views)。

@@ -19,12 +19,12 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 如前言所述，每个平台都存在一些用于核心功能的 URL scheme。下面的列表并不完整，但涵盖了最常用的 scheme。
 
-| Scheme           | 描述                                       | iOS | Android |
-| ---------------- | ------------------------------------------ | --- | ------- |
+| Scheme           | 描述                                        | iOS | Android |
+| ---------------- | ------------------------------------------- | --- | ------- |
 | `mailto`         | 打开邮件应用，例如：mailto: hello@world.dev | ✅  | ✅      |
-| `tel`            | 打开电话应用，例如：tel:+123456789         | ✅  | ✅      |
-| `sms`            | 打开短信应用，例如：sms:+123456789         | ✅  | ✅      |
-| `https` / `http` | 打开网页浏览器应用，例如：https://expo.dev | ✅  | ✅      |
+| `tel`            | 打开电话应用，例如：tel:+123456789          | ✅  | ✅      |
+| `sms`            | 打开短信应用，例如：sms:+123456789          | ✅  | ✅      |
+| `https` / `http` | 打开网页浏览器应用，例如：https://expo.dev  | ✅  | ✅      |
 
 ### 启用深度链接
 
@@ -540,7 +540,7 @@ const styles = StyleSheet.create({
 });
 
 export default App;
-``` 
+```
 
 </TabItem>
 </Tabs>
@@ -555,7 +555,7 @@ export default App;
 static addEventListener(
   type: 'url',
   handler: (event: {url: string}) => void,
-): EmitterSubscription;
+): EventSubscription;
 ```
 
 通过监听 `url` 事件类型并提供处理函数，为 Linking 变化添加处理程序。
@@ -576,8 +576,8 @@ static canOpenURL(url: string): Promise<boolean>;
 
 **参数：**
 
-| 名称                                                     | 类型   | 描述        |
-| -------------------------------------------------------- | ------ | ----------- |
+| 名称                                                 | 类型   | 描述           |
+| ---------------------------------------------------- | ------ | -------------- |
 | url <div className="label basic required">必填</div> | string | 要打开的 URL。 |
 
 :::note
@@ -606,7 +606,6 @@ static canOpenURL(url: string): Promise<boolean>;
   </queries>
 </manifest>
 ```
-
 
 :::
 
@@ -654,8 +653,8 @@ static openURL(url: string): Promise<any>;
 
 **参数：**
 
-| 名称                                                     | 类型   | 描述        |
-| -------------------------------------------------------- | ------ | ----------- |
+| 名称                                                 | 类型   | 描述           |
+| ---------------------------------------------------- | ------ | -------------- |
 | url <div className="label basic required">必填</div> | string | 要打开的 URL。 |
 
 :::note
@@ -681,7 +680,7 @@ static sendIntent(
 
 **参数：**
 
-| 名称                                                        | 类型                                                       |
-| ----------------------------------------------------------- | ---------------------------------------------------------- |
+| 名称                                                    | 类型                                                       |
+| ------------------------------------------------------- | ---------------------------------------------------------- |
 | action <div className="label basic required">必填</div> | string                                                     |
-| extras                                                      | `Array<{key: string, value: string ｜ number ｜ boolean}>` |
+| extras                                                  | `Array<{key: string, value: string ｜ number ｜ boolean}>` |

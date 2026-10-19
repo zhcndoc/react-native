@@ -74,7 +74,7 @@ export default App;
 
 ### `StickyHeaderComponent`
 
-一个 React 组件，用于渲染粘性标题，应与 `stickyHeaderIndices` 一起使用。如果你的粘性标题使用了自定义变换，可能需要设置此组件，例如当你希望列表拥有一个可动画和可隐藏的标题时。如果未提供该组件，将使用默认的 [`ScrollViewStickyHeader`](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Components/ScrollView/ScrollViewStickyHeader.js) 组件。
+用于渲染粘性标题的 React 组件，应与 `stickyHeaderIndices` 一起使用。如果粘性标题使用了自定义变换，可能需要设置此组件，例如希望列表具有可动画且可隐藏的标题时。如果未提供组件，将使用默认的 [`ScrollViewStickyHeader`](https://github.com/react/react-native/blob/main/packages/react-native/Libraries/Components/ScrollView/ScrollViewStickyHeader.js) 组件。
 
 | 类型       |
 | ---------- |

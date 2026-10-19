@@ -6,7 +6,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 本指南假设你熟悉[**纯 C++ Turbo Native Modules**](pure-cxx-modules.md)指南。本指南将在此基础上展开。
 :::
 
-C++ Turbo Native Modules 支持大多数 `std::` 标准类型的[桥接功能](https://github.com/facebook/react-native/tree/main/packages/react-native/ReactCommon/react/bridging)。你可以在模块中使用其中大多数类型，而无需任何额外代码。
+C++ Turbo Native Modules support [bridging functionality](https://github.com/react/react-native/tree/main/packages/react-native/ReactCommon/react/bridging) for most `std::` standard types. You can use most of those types in your modules without any additional code required.
 
 如果你想在应用或库中添加对新类型和自定义类型的支持，则需要提供必要的 `bridging` 头文件。
 

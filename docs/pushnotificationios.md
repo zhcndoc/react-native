@@ -22,6 +22,8 @@ title: '🗑️ PushNotificationIOS'
 
 然后，在你的项目中 [启用远程通知](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app#2980038)。这将自动启用所需的设置。
 
+推送通知注册和传递回调属于 `UIApplicationDelegate`，因此即使 React Native 从 `SceneDelegate` 启动，也应在 `AppDelegate` 中实现这些回调。
+
 ### 启用 `register` 事件支持
 
 在你的 `AppDelegate.m` 中添加：
@@ -201,9 +203,9 @@ static getDeliveredNotifications(callback: (notifications: Object[]) => void);
 
 **参数：**
 
-| 名称     | 类型     | 必填 | 描述                         |
-| -------- | -------- | ---- | ---------------------------- |
-| callback | function | 是   | 接收已送达通知数组的函数。   |
+| 名称     | 类型     | 必填 | 描述                       |
+| -------- | -------- | ---- | -------------------------- |
+| callback | function | 是   | 接收已送达通知数组的函数。 |
 
 已送达的通知是一个包含以下内容的对象：
 
@@ -226,9 +228,9 @@ static removeDeliveredNotifications(identifiers: string[]);
 
 **参数：**
 
-| 名称        | 类型  | 必填 | 描述                 |
-| ----------- | ----- | ---- | -------------------- |
-| identifiers | array | 是   | 通知标识符数组。     |
+| 名称        | 类型  | 必填 | 描述             |
+| ----------- | ----- | ---- | ---------------- |
+| identifiers | array | 是   | 通知标识符数组。 |
 
 ---
 
@@ -242,9 +244,9 @@ static setApplicationIconBadgeNumber(num: number);
 
 **参数：**
 
-| 名称   | 类型   | 必填 | 描述                     |
-| ------ | ------ | ---- | ------------------------ |
-| number | number | 是   | 应用图标的角标数字。     |
+| 名称   | 类型   | 必填 | 描述                 |
+| ------ | ------ | ---- | -------------------- |
+| number | number | 是   | 应用图标的角标数字。 |
 
 ---
 
@@ -258,9 +260,9 @@ static getApplicationIconBadgeNumber(callback: (num: number) => void);
 
 **参数：**
 
-| 名称     | 类型     | 必填 | 描述                         |
-| -------- | -------- | ---- | ---------------------------- |
-| callback | function | 是   | 处理当前角标数字的函数。     |
+| 名称     | 类型     | 必填 | 描述                     |
+| -------- | -------- | ---- | ------------------------ |
+| callback | function | 是   | 处理当前角标数字的函数。 |
 
 ---
 
@@ -292,9 +294,9 @@ static getScheduledLocalNotifications(
 
 **参数：**
 
-| 名称     | 类型     | 必填 | 描述                                                                     |
-| -------- | -------- | ---- | ------------------------------------------------------------------------ |
-| callback | function | 是   | 处理描述本地通知对象数组的函数。                                         |
+| 名称     | 类型     | 必填 | 描述                             |
+| -------- | -------- | ---- | -------------------------------- |
+| callback | function | 是   | 处理描述本地通知对象数组的函数。 |
 
 ---
 
@@ -314,10 +316,10 @@ static addEventListener(
 
 **参数：**
 
-| 名称    | 类型     | 必填 | 描述                         |
-| ------- | -------- | ---- | ---------------------------- |
-| type    | string   | 是   | 要监听的事件类型。见下文。   |
-| handler | function | 是   | 监听器。                     |
+| 名称    | 类型     | 必填 | 描述                       |
+| ------- | -------- | ---- | -------------------------- |
+| type    | string   | 是   | 要监听的事件类型。见下文。 |
+| handler | function | 是   | 监听器。                   |
 
 有效的事件类型包括：
 
@@ -340,8 +342,8 @@ static removeEventListener(
 
 **参数：**
 
-| 名称 | 类型   | 必填 | 描述                               |
-| ---- | ------ | ---- | ---------------------------------- |
+| 名称 | 类型   | 必填 | 描述                                    |
+| ---- | ------ | ---- | --------------------------------------- |
 | type | string | 是   | 事件类型。选项见 `addEventListener()`。 |
 
 ---
@@ -364,8 +366,8 @@ static requestPermissions(permissions?: PushNotificationPermissions[]);
 
 **参数：**
 
-| 名称        | 类型  | 必填 | 描述                 |
-| ----------- | ----- | ---- | -------------------- |
+| 名称        | 类型  | 必填 | 描述                  |
+| ----------- | ----- | ---- | --------------------- |
 | permissions | array | 否   | alert、badge 或 sound |
 
 ---

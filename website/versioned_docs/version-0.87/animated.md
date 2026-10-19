@@ -15,7 +15,7 @@ title: Animated
 
 以下示例包含一个 `View`，它将根据动画值 `fadeAnim` 淡入和淡出
 
-```SnackPlayer name=Animated%20Example
+```SnackPlayer name=Animated%20Example&supportedPlatforms=ios,android
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 import {
   Animated,
@@ -192,7 +192,8 @@ Animated.timing({}).start(({finished}) => {
           x: scrollX
         }
       }
-    }]
+    }],
+    {useNativeEvent: true}
  )}
 ```
 

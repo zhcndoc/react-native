@@ -91,7 +91,9 @@ const App = () => {
   const panResponder = useRef(
     PanResponder.create({
       onMoveShouldSetPanResponder: () => true,
-      onPanResponderMove: Animated.event([null, {dx: pan.x, dy: pan.y}]),
+      onPanResponderMove: Animated.event([null, {dx: pan.x, dy: pan.y}], {
+        useNativeDriver: false,
+      }),
       onPanResponderRelease: () => {
         pan.extractOffset();
       },
@@ -136,7 +138,7 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-请尝试 [RNTester 中的 PanResponder 示例](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/PanResponder/PanResponderExample.js)。
+请试用 RNTester 中的 [PanResponder 示例](https://github.com/react/react-native/blob/main/packages/rn-tester/js/examples/PanResponder/PanResponderExample.js)。
 
 ---
 

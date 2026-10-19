@@ -48,4 +48,4 @@ export default LotsOfStyles;
 
 ## 已知问题
 
-- [react-native#29308](https://github.com/facebook/react-native/issues/29308#issuecomment-792864162)：在某些情况下，React Native 的表现与网页上的 CSS 不一致，例如触摸区域永远不会超出父视图边界，并且 Android 不支持负边距。
+- [react-native#29308](https://github.com/react/react-native/issues/29308#issuecomment-792864162): In some cases React Native does not match how CSS works on the web, for example the touch area never extends past the parent view bounds and on Android negative margin is not supported.

@@ -19,7 +19,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 本指南的其余部分假设你已经运行以下命令创建了应用：
 
 <CodeBlock language="bash" title="shell">
-{`npx @react-native-community/cli@latest init SampleApp --version ${getCurrentVersion()}`}
+{`npx @react-native-community/cli@latest init SampleApp --version "${getCurrentVersion()}"`}
 </CodeBlock>
 
 ## 1. 创建 JS 规范
@@ -229,7 +229,7 @@ Gradle 是负责协调 Android 构建的工具。我们需要告诉它在哪里�
 1. 在文件夹 `SampleApp/android/app/src/main/jni` 中运行以下命令：
 
 <CodeBlock language="sh" title="shell">
-{`curl -O https://raw.githubusercontent.com/facebook/react-native/${getCoreBranchNameForCurrentVersion()}/packages/react-native/ReactAndroid/cmake-utils/default-app-setup/OnLoad.cpp`}
+{`curl -O https://raw.githubusercontent.com/react/react-native/${getCoreBranchNameForCurrentVersion()}/packages/react-native/ReactAndroid/cmake-utils/default-app-setup/OnLoad.cpp`}
 </CodeBlock>
 
 2. 然后，按如下方式修改该文件：

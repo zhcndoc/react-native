@@ -15,7 +15,7 @@ date: 2026-08-11
 
 - [默认使用 Strict TypeScript API](/blog/2026/08/11/react-native-0.87#strict-typescript-api-by-default)
 - [更快速、更精简的 Metro](/blog/2026/08/11/react-native-0.87#faster-leaner-metro)
-- [针对 iOS 的实验性 Swift Package Manager 支持](/blog/2026/08/11/react-native-0.87#experimental-swift-package-manager-support-for-ios)
+- [针对 iOS 的实验性 Swift Package Manager 支持](/blog/2026/08/11/react-native-0.87#ios-实验性支持-swift-package-manager)
 - [Android Gradle Plugin（AGP）v9](/blog/2026/08/11/react-native-0.87#android-gradle-plugin-agp-v9)
 
 {/* truncate */}
@@ -125,6 +125,8 @@ React Native 的公共 JavaScript API 现在是 [Strict TypeScript API](/docs/st
 - 新增包括 package self-resolve 在内的解析器功能
 - 各种修复和改进，详见 Metro 的[发布说明](https://github.com/react/metro/releases)
 
+<a id="experimental-swift-package-manager-support-for-ios"></a>
+
 ### iOS 实验性支持 Swift Package Manager
 
 React Native 0.87 为 iOS 添加了对 Swift Package Manager 的实验性支持，可作为 CocoaPods 的替代方案。这是可选且增量式的；CocoaPods 仍然是默认设置和受支持的路径。SwiftPM 路径使用 React Native 已经发布的相同预构建 XCFramework。
@@ -136,7 +138,7 @@ React Native 0.87 为 iOS 添加了对 Swift Package Manager 的实验性支持�
 ```sh
 cd ios
 # deintegrate will remove CocoaPods from your project
-npx react-native spm -- deintegrate
+npx react-native spm --deintegrate
 ```
 
 该命令会将 Swift package 引用注入现有的 `.xcodeproj`，而不是替换项目。你的签名、功能和构建阶段都会保持不变。`npx react-native spm deinit` 可以准确地撤销此变更。
@@ -155,7 +157,7 @@ npx react-native spm -- deintegrate
 
 #### Headers 破坏性变更
 
-为了正确支持与 React Native 的 SwiftPM 集成，我们必须重新考虑 React Native 自身预编译二进制文件的发布方式。这是因为 SwiftPM 对 XCFramework 结构和 headers 位置的要求比 Cocoapods 严格得多。
+为了正确支持 SwiftPM 与 React Native 的集成，我们必须重新考虑 React Native 自身预编译二进制文件的发布方式。这是因为 SwiftPM 对 XCFramework 结构和 headers 位置的要求比 CocoaPods 严格得多。
 
 你可能会注意到几个新的 XCFramework：
 

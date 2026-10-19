@@ -1,0 +1,264 @@
+---
+title: 'React Native 0.88：基于 Web 的事件分发、可变字体、SceneDelegate，无破坏性变更'
+authors: [fabriziocucci, cipolleschi, chrfalch]
+tags: [announcement, release]
+date: 2026-10-19
+---
+
+# React Native 0.88：基于 Web 的事件分发、可变字体、SceneDelegate，无破坏性变更
+
+今天我们很高兴发布 React Native 0.88！
+
+此版本默认切换到基于 Web 的事件分发路径，为两个平台上的 `Text` 和 `TextInput` 带来可变字体支持，并在 iOS 上增加 `SceneDelegate` 生命周期支持。此外，React 版本升级至 19.3.0，Metro 升级至 0.87。
+
+继 [0.83](/blog/2025/12/10/react-native-0.83) 和 [0.86](/blog/2026/06/11/react-native-0.86) 之后，这是第三个没有面向用户的破坏性变更的 React Native 版本，体现了我们持续致力于让升级更可预期、更顺畅。
+
+## 亮点
+
+- [基于 Web 的事件分发](/blog/2026/10/19/react-native-0.88#基于-web-的事件分发)
+- [通过 fontVariationSettings 使用可变字体](/blog/2026/10/19/react-native-0.88#通过-fontvariationsettings-使用可变字体)
+- [iOS SceneDelegate 生命周期支持](/blog/2026/10/19/react-native-0.88#iosscenedelegate-支持)
+- [Java TurboModules 支持 ArrayBuffer](/blog/2026/10/19/react-native-0.88#java-turbomodules-支持-arraybuffer)
+- [实验性的 Swift Package Manager 支持](/blog/2026/10/19/react-native-0.88#实验性功能swift-package-manager-支持)
+
+{/* truncate */}
+
+<a id="web-based-event-dispatching"></a>
+
+## 基于 Web 的事件分发
+
+React Native 现在默认通过 W3C [`EventTarget`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget) API 分发事件，取代渲染器自早期以来一直使用的基于插件的系统。本次版本升级至 react@19.3.0 后，这项改动得以实现，也是 0.88 中影响最大的运行时变更。
+
+现在，事件会沿真实的捕获路径向下传递至目标，再沿真正的事件目标节点向上冒泡。带来的改进包括：
+
+- **与 Web 相同的模型**：传播、`capture`、`stopPropagation()` 和 `preventDefault()` 不再是 React Native 对 DOM 的重新实现。依赖事件流行为的库将越来越能够基于同一模型编写一次，到处使用。
+- **迈向兼容 Web 的命令式 API**：Canary 构建版本会在原生 ref 上开放 `addEventListener`、`removeEventListener` 和 `dispatchEvent`，供开发者提前试用并反馈。
+- **只需维护一条路径**：后续将移除旧的插件注册表，从两条事件分发路径收敛为一条。
+
+在 0.88 中，命令式 API 可通过 [Canary 通道](/docs/release-levels)使用：
+
+```tsx
+const ref = useRef(null);
+
+useEffect(() => {
+  const onClick = event => {
+    // ...
+  };
+  ref.current?.addEventListener('click', onClick);
+  return () => ref.current?.removeEventListener('click', onClick);
+}, []);
+```
+
+在 Canary 通道中，如果元素对同一事件同时设置了声明式 prop 和命令式监听器，则先运行 prop。
+
+#### 对应用的影响
+
+应用行为应该不会发生变化。事件 props 保持原有名称，接收相同的合成事件对象（包括 `nativeEvent`、`persist()` 等），执行顺序也相同。像 `onLayout` 这样的直接事件仍只在目标上触发。错误仍会同步传递到 React 错误边界。触摸 responder 系统也保持不变。
+
+需要重点测试的是任何绕过公共 API、直接访问 React Native 事件内部实现的代码，因为事件不再经过这些代码所依赖的插件注册表。0.88 中仍通过内部标志保留旧路径，但预计会在后续版本中移除；如果发现只有旧路径可用的情况，请反馈给我们。
+
+<a id="variable-fonts-with-fontvariationsettings"></a>
+
+## 通过 fontVariationSettings 使用可变字体
+
+`fontVariationSettings` 现在同时支持 Android 和 iOS 上的 `<Text>` 与 `<TextInput>`。它接受 CSS 字符串形式和对象形式：
+
+```tsx
+<Text style={{fontVariationSettings: {wght: 700, slnt: -10}}}>Object form</Text>
+<Text style={{fontVariationSettings: "'wght' 700, 'slnt' -10"}}>String form</Text>
+```
+
+对象的键是四字符的轴标签，值为有限数值。
+
+<a id="arraybuffer-for-java-turbomodules"></a>
+
+## Java TurboModules 支持 ArrayBuffer
+
+Java TurboModules 现在可以直接接收和返回 JavaScript `ArrayBuffer` 值。Codegen 会将其映射到 `com.facebook.react.bridge.ArrayBuffer`，因此二进制数据不再需要编码为字符串或数字数组：
+
+```diff
+ export interface Spec extends TurboModule {
+-  process(data: string): string; // for example, Base64
++  process(data: ArrayBuffer): ArrayBuffer;
+ }
+```
+
+对于同步方法，输入可以借用 JavaScript 内存，避免复制。借用的字节仅在方法返回前有效。如果需要保留它们，请在调用期间复制：
+
+```kotlin
+override fun keepForLater(data: ArrayBuffer) {
+  retained = ArrayBuffer.arrayBufferWithCopiedBytes(data)
+}
+```
+
+借用的缓冲区失效后再访问 `ArrayBuffer.bytes` 或 `ArrayBuffer.size`，会抛出 `IllegalStateException`。
+
+<a id="ios-scenedelegate-support"></a>
+
+## iOS：SceneDelegate 支持
+
+从 iOS 27 SDK 开始，Apple 要求使用 [UIScene 生命周期](https://developer.apple.com/documentation/uikit/transitioning-to-the-uikit-scene-based-life-cycle)：使用 Xcode 27 构建的 UIKit 应用将无法启动。
+
+React Native 0.88 以新增功能的方式支持此生命周期，同时保持与 `AppDelegate` 路径的向后兼容。`RCTReactNativeFactory` 新增两个 SceneDelegate 入口：
+
+- `startReactNativeWithModuleName:inWindow:connectionOptions:`
+- `startReactNativeWithModuleName:inWindow:initialProperties:connectionOptions:`
+
+  0.88 目前仅支持单个 scene，因此请将 `UIApplicationSupportsMultipleScenes` 设为 `false`。启动时，React Native 只会转发 scene 连接选项中的第一个 URL context 或 user activity。
+
+迁移时需要：
+
+- 将 React Native 入口点从 `AppDelegate` 移至 `SceneDelegate`
+- 将 scene 的 URL 和 user activity 回调转发给 `RCTLinkingManager`
+- 在 `Info.plist` 中添加 `UIApplicationSceneManifest` 键
+
+社区模板[已完成更新](https://react-native-community.github.io/upgrade-helper/)，因此新建应用已经使用新的入口点。迁移应用时，可以参考社区模板或升级助手，尤其是 [`SceneDelegate.swift`](https://github.com/react-native-community/template/blob/0.88-stable/template/ios/HelloWorld/SceneDelegate.swift) 和 [`Info.plist`](https://github.com/react-native-community/template/blob/0.88-stable/template/ios/HelloWorld/Info.plist) 文件。
+
+使用 UIScene 生命周期后，应用窗口可以调整大小。`Dimensions.get()` 和 `useWindowDimensions()` 会更新为当前值。
+
+<a id="experimental-swift-package-manager-support"></a>
+
+## 实验性功能：Swift Package Manager 支持
+
+React Native 0.88 中的 Swift Package Manager 支持仍是实验性功能，需要主动启用；CocoaPods 仍获完整支持。自 0.87 预览版以来，我们根据真实应用和库的反馈改进了相关工具。
+
+当前的推出计划如下：
+
+- **0.87**：引入实验性的 Swift Package Manager 支持。
+- **0.88**：改进脚本，以支持更多库和边缘情况。
+- **0.89**：计划默认使用 Swift Package Manager；对于仍受阻的应用，可选择退回 CocoaPods。
+
+我们计划在未来的 React Native 版本中移除对 CocoaPods 的支持。
+
+请试用预览版，并在 [RFC #0994](https://github.com/react-native-community/discussions-and-proposals/pull/994) 中报告阻塞问题。
+
+如何启用该功能，请参阅 [React Native 0.87 博客文章](/blog/2026/08/11/react-native-0.87#ios-实验性支持-swift-package-manager)。
+
+### Swift Package Manager 改进
+
+0.87 中发布的 `npx react-native spm` 工具在 0.88 中根据真实应用和库的反馈进行了改进，使 SwiftPM 项目在 Xcode 和命令行中构建得更加可靠。
+
+<details>
+<summary>**改进列表**</summary>
+
+- **从应用读取 iOS 版本**：生成的清单现在会从应用的部署目标读取最低 iOS 版本，而不再固定为 iOS 15。Expo 等需要较新 iOS 版本的软件包现在也可以自动链接。
+- **稳定的 Xcode 构建**：对于自带 `Package.swift` 的库，Xcode 构建不再出错。
+- **可移植的项目**：应用不再提交依赖特定机器的 Hermes 编译器路径。
+- **使用 Bash 运行构建脚本**：生成的构建脚本现在由 bash 执行。
+- **在 package.json 中配置**：库现在可以在 `package.json` 的 `swiftpmConfig` 部分声明 SwiftPM 设置。`react-native.config.js` 中的 Swift Package Manager 配置块已弃用。
+- **从 podspec 获取名称**：库未声明 SwiftPM 名称时，脚手架会从 podspec 中读取名称。
+- **优先从镜像下载构件**：预构建构件现在会优先从 React Native Maven 镜像下载，Maven Central 作为备用来源。
+
+</details>
+
+## 破坏性变更
+
+React Native 0.88 **没有面向用户的破坏性变更**。
+
+如果你正在使用 React Native 0.87，升级到 React Native 0.88 时应该无需修改应用代码。
+
+关于我们对破坏性变更的定义，请参阅[这篇文章](/releases/versioning-policy#什么是破坏性变更)。
+
+## 弃用项
+
+以下 API 已弃用，计划在未来的 React Native 版本中移除：
+
+- **`InitializeCore`**：`'react-native/Libraries/Core/InitializeCore'` 已弃用，请改用 `'react-native/setup-env'`。
+- **带前缀的背景样式**：`experimental_backgroundSize`、`experimental_backgroundPosition` 和 `experimental_backgroundRepeat` 已弃用，请改用不带前缀的名称。带前缀的名称仍作为别名可用。
+- **`InputAccessoryView`**：仅限 iOS。为精简核心库而弃用。`react-native-keyboard-controller` 的 [`KeyboardStickyView`](https://kirillzyusko.github.io/react-native-keyboard-controller/docs/api/components/keyboard-sticky-view) 是跨平台替代方案。0.88 除添加 JSDoc 标记和在导入时显示一次警告外，行为没有变化。
+- `ReactFragment.fabricEnabled`：此路径已无条件启用新架构，因此针对单个 fragment 的覆盖设置不再生效。请删除该参数及对应的 builder 调用。
+- **`ReactImageManager` 的 `String?` 重载**：`setDefaultSource` 和 `setLoadingIndicatorSource` 现在接收 `Dynamic`。`String?` 版本仍可使用，但在 props 2.0 下会出错；请直接传递 prop 值，不要预先解析。
+
+## 其他变更
+
+### 运行时与 Web 规范对齐
+
+- **样式**：`backgroundSize`、`backgroundPosition` 和 `backgroundRepeat` 移除了 `experimental_` 前缀，现在已稳定。带前缀的名称仍可用。
+- **运行时**：任务抛出异常时，`RuntimeScheduler` 会清除待处理任务和渲染更新。
+- **运行时**：异步 `CallInvoker` 工作现在会与可调用模块调用一起缓冲，因此不会在 JS bundle 准备就绪前运行。
+
+- **FileReader**：会触发 `loadstart`；并发读取时会抛出 `InvalidStateError`；同时将 `FileReader.error` 暴露为 `DOMException`，与 Web 规范一致（544141efab）。
+- **FileReader**：读取中止后会保持正确状态（e92816c5a5）。
+- **Blob**：原生读取等待期间会保留 `Blob`，避免读取过程中被回收（568eaa6b69）。
+- **Blob**：修复了从网络响应推导 Blob 名称时偶发的 iOS 崩溃（671705dfb1）。
+- **i18n**：RTL 方向现在根据当前启用的区域设置检测，而不是根据任意已安装的区域设置检测（e46189e1e1）。
+
+### 渲染、布局与动画
+
+- **iOS RTL 文本**：未设置 `textAlign` 时，RTL 文本现在默认右对齐，与 Android 一致（[1b92b02f99](https://github.com/react/react-native/commit/1b92b02f99)）。
+- **径向渐变**：圆形渐变现在会拒绝百分比半径，与 Web 行为一致（[5821fcaf5d](https://github.com/react/react-native/commit/5821fcaf5d)）。
+
+- **Animated**：由 `add`、`subtract`、`multiply`、`divide`、`modulo`、`diffClamp` 或 `interpolate` 派生的原生驱动值现在会再次触发 `addListener`。
+- **ScrollView**：快速更新数据时，`maintainVisibleContentPosition` 会保持当前位置（5cb65244dc）。
+- **ScrollView**：以编程方式滚动时，不再取消外层滚动视图中的活动触摸（06eb1fefab）。
+- **ScrollView**：回收复用的滚动视图不再保留之前的自动键盘 inset 行为（e0aa7a8b0a）。
+- **Image**：`getSize()` 和 `getSizeWithHeaders()` 接受 `data:` URI（8cfde6d083）。
+- **Image**：图片源的请求头现在会在 `crossOrigin` 和 `referrerPolicy` 配置下保留（08c7781e5a）。
+- **Image**：修复了 `borderRadius` 为百分比时发生的崩溃（f2a250ad89）。
+- **Image**：同时设置 `accessibilityState` 时，`aria-*` 状态 props 不再被忽略（c3caea9b5e）。
+- **渲染器**：修复了 `SurfaceMountingManager.removeViewAt` 中的 `IllegalStateException`，以及视图注册表条目丢失的问题（3f553d76bc、d6a5f159c6）。
+- **渲染器**：回收复用的 iOS 视图现在会正确清除 `UIView.hidden`（711a9a5e07）。
+- **渲染器**：两个平台都会记录缺失的原生组件注册信息（ef28a2c9d5）。
+
+### TypeScript 与 JavaScript API
+
+- **模块扩展**：现在可以通过模块扩展来扩展额外生成的 props 和样式类型，从而提升与样式库的兼容性。
+- 新增了 `requestIdleCallback`/`cancelIdleCallback`、`LogBox.isInstalled()`/`clearAllLogs()`、`FlatList` 的 `strictMode` prop 以及 `VirtualizedList` 的 `ListItemComponent` 声明。
+
+### 基础设施与依赖
+
+- **React** 19.3.0 已同步至 React Native。
+- **Metro** 升级至 0.87，最低版本提升至 0.87.1，使升级的项目与新建项目解析到相同版本的 Metro。
+- **Hermes** 升级至 260318099.0.4。
+
+### iOS
+
+- **资源**：在应用的 `Info.plist` 中设置 `RCTUseAssetCatalog` 后，可以从资源目录提供图片。该选项默认关闭。
+- **CocoaPods**：第三方新架构 pod 新增 `React-cxxstableapi` 依赖，以便解析 React Native 的 C++ API。
+- **Codegen**：发现组件时不再遍历 `node_modules`，也不再跟随符号链接。
+
+### Android
+
+- **网络**：默认 `User-Agent` 现在包含应用名称和版本，与 iOS 一致（[04e50d540d](https://github.com/react/react-native/commit/04e50d540d)）。依赖旧默认值进行判断的服务器会看到不同的值。
+- **渲染器**：`androidx.collection` 升级至 1.4.4，修复了 `SurfaceMountingManager` 中视图注册表条目丢失的问题。
+- **网络检查**：网络事件报告作为不稳定 API 开放给第三方网络栈。
+
+### 开发者工具
+
+- **React Native DevTools**：现在默认支持通过 `Page.captureScreenshot` 获取应用截图。
+- **React Native DevTools**：Network 面板中的 WebSocket 检查功能可在 [CANARY 通道](/docs/release-levels)使用。
+
+## 致谢
+
+React Native 0.88 包含来自 91 位贡献者的 568 个提交。感谢大家的辛勤付出！
+
+我们还要特别感谢在此版本中作出重要贡献的社区成员：
+
+- [Artur Morys-Magiera](https://github.com/artus9033)：支持 SceneDelegate
+- [Jakub Piasecki](https://github.com/j-piasecki)：推进 C++ Stable API 工作、保护渲染器内部接口，并明确框架可以依赖的内容
+- [Christian Falch](https://github.com/chrfalch)：完善 Swift Package Manager 支持
+- [Dawid Malecki](https://github.com/coado)：通过镜像和代理缓存加快并稳定依赖下载
+- [Mathieu Acthernoene](https://github.com/zoontek)：使生成的 props 和样式类型可以扩展
+- [Rob Hogan](https://github.com/robhogan)：改进 Metro
+
+## 升级到 0.88
+
+:::info
+
+0.88 现在是 React Native 的最新稳定版本，0.85.x 已进入不再支持的状态。详情请参阅 [React Native 支持政策](https://github.com/reactwg/react-native-releases/blob/main/docs/support.md)。
+
+:::
+
+#### 升级现有项目
+
+除了阅读[升级文档](/docs/upgrading)，也请使用 [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/) 查看现有项目在不同 React Native 版本之间所需的代码变更。
+
+#### 创建新项目
+
+```sh
+npx @react-native-community/cli@latest init MyProject --version latest
+```
+
+#### Expo
+
+对于 Expo 项目，React Native 0.88 将随 Expo SDK 58 发布。

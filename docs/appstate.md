@@ -38,7 +38,7 @@ const AppStateExample = () => {
   useEffect(() => {
     const subscription = AppState.addEventListener('change', nextAppState => {
       if (
-        appState.current.match(/inactive|background/) &&
+        appState.current?.match(/inactive|background/) &&
         nextAppState === 'active'
       ) {
         console.log('应用已进入前台！');
@@ -106,7 +106,7 @@ export default AppStateExample;
 static addEventListener(
   type: AppStateEvent,
   listener: (state: AppStateStatus) => void,
-): NativeEventSubscription;
+): EventSubscription;
 ```
 
 设置一个函数，每当 AppState 上发生指定的事件类型时该函数将被调用。`eventType` 的有效值 [上文已列出](#events)。返回 `EventSubscription`。

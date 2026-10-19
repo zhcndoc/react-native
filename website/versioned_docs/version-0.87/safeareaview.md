@@ -50,5 +50,5 @@ export default App;
 继承 [View 属性](view.md#props)。
 
 :::note
-由于该组件使用内边距来实现其行为，因此应用于 `SafeAreaView` 的样式中的内边距规则将被忽略，并且可能会导致不同平台上的结果不同。详情请参阅 [#22211](https://github.com/facebook/react-native/issues/22211)
+由于该组件的行为是通过内边距实现的，应用到 `SafeAreaView` 的样式中的 padding 规则将被忽略，并且可能会因平台不同而产生不同结果。详情请参见 [#22211](https://github.com/react/react-native/issues/22211)。
 :::

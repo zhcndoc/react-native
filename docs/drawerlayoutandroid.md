@@ -1,7 +1,11 @@
 ---
 id: drawerlayoutandroid
-title: DrawerLayoutAndroid
+title: '🗑️ DrawerLayoutAndroid'
 ---
+
+:::warning[Deprecated]
+请改用 [`react-native-drawer-layout`](https://reactnavigation.org/docs/drawer-layout/)。
+:::
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
@@ -95,8 +99,12 @@ import {
   View,
 } from 'react-native';
 
+type DrawerLayoutAndroidInstance = React.ComponentRef<
+  typeof DrawerLayoutAndroid
+>;
+
 const App = () => {
-  const drawer = useRef<DrawerLayoutAndroid>(null);
+  const drawer = useRef<DrawerLayoutAndroidInstance>(null);
   const [drawerPosition, setDrawerPosition] = useState<'left' | 'right'>(
     'left',
   );
@@ -187,9 +195,9 @@ return (
 );
 ```
 
-| 类型                  | 必填 |
-| --------------------- | ---- |
-| [color](colors.md)    | 否   |
+| 类型               | 必填 |
+| ------------------ | ---- |
+| [color](colors.md) | 否   |
 
 ---
 
@@ -202,7 +210,7 @@ return (
 - locked-open，表示抽屉将保持打开且不响应手势。抽屉仍然可以通过程序方式打开和关闭（`openDrawer`/`closeDrawer`）。
 
 | 类型                                             | 必填 |
-| ----------------------------------------------- | ---- |
+| ------------------------------------------------ | ---- |
 | enum('unlocked', 'locked-closed', 'locked-open') | 否   |
 
 ---
@@ -223,7 +231,7 @@ return (
 
 | 类型   | 必填 |
 | ------ | ---- |
-| number | 否       |
+| number | 否   |
 
 ---
 

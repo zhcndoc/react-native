@@ -18,7 +18,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 ## TouchableOpacity 中的 setNativeProps
 
-[TouchableOpacity](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Components/Touchable/TouchableOpacity.js) 在内部使用 `setNativeProps` 来更新其子组件的不透明度：
+[TouchableOpacity](https://github.com/react/react-native/blob/main/packages/react-native/Libraries/Components/Touchable/TouchableOpacity.js) uses `setNativeProps` internally to update the opacity of its child component:
 
 ```tsx
 const viewRef = useRef<View>();
@@ -57,7 +57,7 @@ return (
 
 与原始示例相比，这种方式的计算开销更大——每次不透明度发生变化时，React 都需要重新渲染组件层次结构，即使视图及其子组件的其他属性并没有变化。通常，这种开销并不值得关注，但在执行连续动画和响应手势时，谨慎地优化组件可以提高动画的还原度。
 
-如果查看 [NativeMethodsMixin](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Renderer/implementations/ReactNativeRenderer-prod.js) 中 `setNativeProps` 的实现，你会注意到它是 `RCTUIManager.updateView` 的包装器——这与重新渲染所产生的函数调用完全相同——请参阅 [ReactNativeBaseComponent 中的 receiveComponent](https://github.com/facebook/react-native/blob/fb2ec1ea47c53c2e7b873acb1cb46192ac74274e/Libraries/Renderer/oss/ReactNativeRenderer-prod.js#L5793-L5813)。
+如果你查看 [NativeMethodsMixin](https://github.com/react/react-native/blob/main/packages/react-native/Libraries/Renderer/implementations/ReactNativeRenderer-prod.js) 中 `setNativeProps` 的实现，会发现它只是 `RCTUIManager.updateView` 的封装，与重新渲染最终调用的是同一个函数；参见 [ReactNativeBaseComponent 中的 receiveComponent](https://github.com/react/react-native/blob/fb2ec1ea47c53c2e7b873acb1cb46192ac74274e/Libraries/Renderer/oss/ReactNativeRenderer-prod.js#L5793-L5813)。
 
 ## 复合组件和 setNativeProps
 
@@ -140,14 +140,16 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Forwarding%20setNativeProps&ext=tsx
-import {forwardRef} from 'react';
+import {forwardRef, ElementRef} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 
-const MyButton = forwardRef<View, {label: string}>((props, ref) => (
-  <View {...props} ref={ref} style={{marginTop: 50}}>
-    <Text>{props.label}</Text>
-  </View>
-));
+const MyButton = forwardRef<ElementRef<typeof View>, {label: string}>(
+  (props, ref) => (
+    <View {...props} ref={ref} style={{marginTop: 50}}>
+      <Text>{props.label}</Text>
+    </View>
+  ),
+);
 
 const App = () => (
   <TouchableOpacity>
@@ -229,8 +231,10 @@ import {
   View,
 } from 'react-native';
 
+type TextInputInstance = React.ComponentRef<typeof TextInput>;
+
 const App = () => {
-  const inputRef = useRef<TextInput>(null);
+  const inputRef = useRef<TextInputInstance>(null);
   const editText = useCallback(() => {
     inputRef.current?.setNativeProps({text: 'Edited Text'});
   }, []);
@@ -379,9 +383,12 @@ type Measurements = {
   height: number;
 };
 
+type TextInstance = React.ComponentRef<typeof Text>;
+type ViewInstance = React.ComponentRef<typeof View>;
+
 const App = () => {
-  const textContainerRef = useRef<View>(null);
-  const textRef = useRef<Text>(null);
+  const textContainerRef = useRef<ViewInstance>(null);
+  const textRef = useRef<TextInstance>(null);
   const [measure, setMeasure] = useState<Measurements | null>(null);
 
   useEffect(() => {

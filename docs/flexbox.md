@@ -1099,12 +1099,17 @@ export default AlignSelfLayout;
 
 ```SnackPlayer name=Align%20Self&ext=tsx
 import {useState} from 'react';
-import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  type ViewStyle,
+} from 'react-native';
 import type {PropsWithChildren} from 'react';
-import type {FlexAlignType} from 'react-native';
 
 const AlignSelfLayout = () => {
-  const [alignSelf, setAlignSelf] = useState<FlexAlignType>('stretch');
+  const [alignSelf, setAlignSelf] = useState<ViewStyle['alignSelf']>('stretch');
 
   return (
     <PreviewLayout
@@ -1131,9 +1136,9 @@ const AlignSelfLayout = () => {
 
 type PreviewLayoutProps = PropsWithChildren<{
   label: string;
-  values: FlexAlignType[];
-  selectedValue: string;
-  setSelectedValue: (value: FlexAlignType) => void;
+  values: ViewStyle['alignSelf'][];
+  selectedValue: ViewStyle['alignSelf'];
+  setSelectedValue: (value: ViewStyle['alignSelf']) => void;
 }>;
 
 const PreviewLayout = ({
@@ -2079,7 +2084,7 @@ export default App;
 
 - [`gap`](layout-props#gap) 设置行与列之间间隙（gutter）的大小。它是 `rowGap` 和 `columnGap` 的简写。
 
-你可以将 `flexWrap` 和 `alignContent` 与 `gap` 一起使用，以在项目之间添加一致的间距。
+你可以将 `flexWrap` 和 `alignContent` 与 `gap` 一起使用，以在项目之间添加一致的间距。间隙属性接受数字（单位为 point）或百分比字符串（例如在[新架构](/architecture/landing-page)中使用 `'10%'`）。
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">

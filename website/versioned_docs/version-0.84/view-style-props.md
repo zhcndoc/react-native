@@ -73,33 +73,6 @@ export default App;
 
 ---
 
-### `experimental_backgroundImage`
-
-<ExperimentalAPIWarning />
-
-`experimental_backgroundImage` 提供了使用类似 Web 语法绘制 [`linear-gradient()`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/gradient/linear-gradient) ([0.76.x+](https://github.com/facebook/react-native/blob/main/CHANGELOG-0.7x.md#v0760)) 和 [`radial-gradient()`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/gradient/radial-gradient) ([0.80.x+](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0800)) 的能力。
-
-```tsx
-// 简单用法：
-<View style={{
-  experimental_backgroundImage: 'linear-gradient(45deg, blue, red)'
-}} />
-<View style={{
-  experimental_backgroundImage: 'radial-gradient(ellipse farthest-corner at 30% 40%, red, blue)'
-}} />
-```
-
-更复杂的用法示例可在 RNTester 应用中找到（支持 `PlatformColor`）：
-
-- <a href={`https://github.com/facebook/react-native/blob/${getCoreBranchNameForCurrentVersion()}/packages/rn-tester/js/examples/LinearGradient/LinearGradientExample.js`}>LinearGradientExample.js</a>
-- <a href={`https://github.com/facebook/react-native/blob/${getCoreBranchNameForCurrentVersion()}/packages/rn-tester/js/examples/RadialGradient/RadialGradientExample.js`}>RadialGradientExample.js</a>
-
-| 类型                                                                                                                                                                                               |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| string, array of objects: `{type: 'linear-gradient', direction: string, colorStops: object[] }`, `{type: 'radial-gradient', shape: string, position: object, size: string, colorStops: object[] }` |
-
----
-
 ### `borderBottomColor`
 
 | 类型              |
@@ -375,6 +348,103 @@ export default App;
 | 类型 |
 | ---- |
 | 数字 |
+
+---
+
+### `experimental_backgroundImage`
+
+<ExperimentalAPIWarning />
+
+`experimental_backgroundImage` provides the ability to draw a [`linear-gradient()`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/gradient/linear-gradient) ([0.76.x+](https://github.com/facebook/react-native/blob/main/CHANGELOG-0.7x.md#v0760)) and [`radial-gradient()`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/gradient/radial-gradient) ([0.80.x+](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0800)) using a web-like syntax.
+
+```tsx
+// Simple usage:
+<View style={{
+  experimental_backgroundImage: 'linear-gradient(45deg, blue, red)'
+}} />
+<View style={{
+  experimental_backgroundImage: 'radial-gradient(ellipse farthest-corner at 30% 40%, red, blue)'
+}} />
+```
+
+更多复杂用法示例可在 RNTester 应用中找到（支持 `PlatformColor`）：
+
+- <a href={`https://github.com/facebook/react-native/blob/${getCoreBranchNameForCurrentVersion()}/packages/rn-tester/js/examples/LinearGradient/LinearGradientExample.js`}>LinearGradientExample.js</a>
+- <a href={`https://github.com/facebook/react-native/blob/${getCoreBranchNameForCurrentVersion()}/packages/rn-tester/js/examples/RadialGradient/RadialGradientExample.js`}>RadialGradientExample.js</a>
+
+| Type                                                                                                                                                                                               |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| string, array of objects: `{type: 'linear-gradient', direction: string, colorStops: object[] }`, `{type: 'radial-gradient', shape: string, position: object, size: string, colorStops: object[] }` |
+
+---
+
+### `experimental_backgroundPosition`
+
+<ExperimentalAPIWarning />
+
+控制背景渐变在视图中的位置。设置了 `experimental_backgroundImage`，并希望偏移或居中渐变而不是填满整个区域时，此属性很有用。
+
+```tsx
+<View
+  style={{
+    experimental_backgroundImage:
+      'radial-gradient(circle, #ff6b6b, #4ecdc4)',
+    experimental_backgroundPosition: 'center',
+    experimental_backgroundRepeat: 'no-repeat',
+    experimental_backgroundSize: '50px 50px',
+  }}
+/>
+```
+
+| Type                                                                            |
+| ------------------------------------------------------------------------------- |
+| string \| 对象数组 `{top: string, left: string, right: string, bottom: string}` |
+
+---
+
+### `experimental_backgroundRepeat`
+
+<ExperimentalAPIWarning />
+
+控制是否重复背景渐变以及重复方式。它与 `experimental_backgroundImage` 配合使用，可让渐变在视图中平铺。
+
+```tsx
+<View
+  style={{
+    experimental_backgroundImage:
+      'linear-gradient(45deg, #ff6b6b, #4ecdc4)',
+    experimental_backgroundRepeat: 'repeat',
+    experimental_backgroundSize: '20px 20px',
+  }}
+/>
+```
+
+| Type                                                                                       |
+| ------------------------------------------------------------------------------------------ |
+| enum(`'repeat'`, `'space'`, `'round'`, `'no-repeat'`) \| 对象数组 `{x: string, y: string}` |
+
+---
+
+### `experimental_backgroundSize`
+
+<ExperimentalAPIWarning />
+
+控制背景渐变的尺寸。设置了 `experimental_backgroundImage` 且不希望渐变默认填满整个视图时，此属性最有用。
+
+```tsx
+<View
+  style={{
+    experimental_backgroundImage:
+      'linear-gradient(90deg, #a8edea, #fed6e3)',
+    experimental_backgroundRepeat: 'no-repeat',
+    experimental_backgroundSize: '100px 100px',
+  }}
+/>
+```
+
+| Type                                        |
+| ------------------------------------------- |
+| string \| 对象数组 `{x: number, y: number}` |
 
 ---
 

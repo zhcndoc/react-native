@@ -336,7 +336,7 @@ const useInitialURL = () => {
 
       // The setTimeout is just for testing purpose
       setTimeout(() => {
-        setUrl(initialUrl);
+        setUrl(initialUrl ?? null);
         setProcessing(false);
       }, 1000);
     };
@@ -390,7 +390,7 @@ const useInitialURL = () => {
 
       // The setTimeout is just for testing purpose
       setTimeout(() => {
-        setUrl(initialUrl);
+        setUrl(initialUrl ?? null);
         setProcessing(false);
       }, 1000);
     };
@@ -557,7 +557,7 @@ export default App;
 static addEventListener(
   type: 'url',
   handler: (event: {url: string}) => void,
-): EmitterSubscription;
+): EventSubscription;
 ```
 
 通过监听 `url` 事件类型并提供处理程序，为 Linking 的变化添加处理程序

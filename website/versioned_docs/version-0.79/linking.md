@@ -19,11 +19,11 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 如引言中所述，每个平台上都存在一些用于核心功能的 URL scheme。以下是一个非详尽的列表，但涵盖了最常用的 scheme。
 
-| Scheme           | 描述                                | iOS | Android |
-| ---------------- | ------------------------------------------ | --- | ------- |
+| Scheme           | 描述                                        | iOS | Android |
+| ---------------- | ------------------------------------------- | --- | ------- |
 | `mailto`         | 打开邮件应用，例如：mailto: hello@world.dev | ✅  | ✅      |
-| `tel`            | 打开电话应用，例如：tel:+123456789         | ✅  | ✅      |
-| `sms`            | 打开短信应用，例如：sms:+123456789           | ✅  | ✅      |
+| `tel`            | 打开电话应用，例如：tel:+123456789          | ✅  | ✅      |
+| `sms`            | 打开短信应用，例如：sms:+123456789          | ✅  | ✅      |
 | `https` / `http` | 打开 Web 浏览器应用，例如：https://expo.dev | ✅  | ✅      |
 
 ### 启用深度链接
@@ -552,7 +552,7 @@ export default App;
 static addEventListener(
   type: 'url',
   handler: (event: {url: string}) => void,
-): EmitterSubscription;
+): EventSubscription;
 ```
 
 通过监听 `url` 事件类型并提供处理程序，添加一个处理程序以响应 Linking 变化。
@@ -573,8 +573,8 @@ static canOpenURL(url: string): Promise<boolean>;
 
 **参数：**
 
-| 名称                                                     | 类型   | 描述      |
-| -------------------------------------------------------- | ------ | ---------------- |
+| 名称                                                 | 类型   | 描述           |
+| ---------------------------------------------------- | ------ | -------------- |
 | url <div className="label basic required">必需</div> | string | 要打开的 URL。 |
 
 > 对于 Web URL，必须相应地设置协议（`"http://"`, `"https://"`）！
@@ -640,8 +640,8 @@ static openURL(url: string): Promise<any>;
 
 **参数：**
 
-| 名称                                                     | 类型   | 描述      |
-| -------------------------------------------------------- | ------ | ---------------- |
+| 名称                                                 | 类型   | 描述           |
+| ---------------------------------------------------- | ------ | -------------- |
 | url <div className="label basic required">必需</div> | string | 要打开的 URL。 |
 
 > 如果系统不知道如何打开指定的 URL，此方法将失败。如果您传递的是非 http(s) URL，最好先检查 `canOpenURL()`。
@@ -665,7 +665,7 @@ static sendIntent(
 
 **参数：**
 
-| 名称                                                        | 类型                                                       |
-| ----------------------------------------------------------- | ---------------------------------------------------------- |
+| 名称                                                    | 类型                                                       |
+| ------------------------------------------------------- | ---------------------------------------------------------- |
 | action <div className="label basic required">必需</div> | string                                                     |
-| extras                                                      | `Array<{key: string, value: string ｜ number ｜ boolean}>` |
+| extras                                                  | `Array<{key: string, value: string ｜ number ｜ boolean}>` |

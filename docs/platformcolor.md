@@ -86,5 +86,5 @@ export default App;
 传递给 `PlatformColor` 函数的字符串值必须与应用运行所在原生平台中的字符串保持一致。为了避免运行时错误，该函数应通过平台检查进行包装，方式可以是 `Platform.OS === 'platform'` 或 `Platform.select()`，如上面的示例所示。
 
 :::note
-您可以在 [PlatformColorExample.js](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/PlatformColor/PlatformColorExample.js) 中找到一个演示 `PlatformColor` 正确、预期用法的完整示例。
+完整示例 [PlatformColorExample.js](https://github.com/react/react-native/blob/main/packages/rn-tester/js/examples/PlatformColor/PlatformColorExample.js) 展示了 `PlatformColor` 的正确预期用法。
 :::

@@ -85,7 +85,7 @@ static addEventListener(
   handler: (
     event: AccessibilityChangeEvent | AccessibilityAnnouncementFinishedEvent,
   ) => void,
-): EmitterSubscription;
+): EventSubscription;
 ```
 
 添加事件处理器。支持的事件：
@@ -118,18 +118,21 @@ static announceForAccessibility(announcement: string);
 ```tsx
 static announceForAccessibilityWithOptions(
   announcement: string,
-  options: {queue?: boolean},
+  options: {
+    queue?: boolean;
+    priority?: 'low' | 'default' | 'high';
+  },
 );
 ```
 
-发布一段由屏幕阅读器播报的字符串，并指定修改选项。默认情况下，播报会中断任何现有语音，但在 iOS 上，可以在选项对象中将 `queue` 设置为 `true`，使其排在现有语音之后。
+发送一个字符串供屏幕阅读器播报，并可设置选项。默认情况下，播报会中断现有语音；在 iOS 上，可在选项对象中将 `queue` 设为 `true`，使播报排在现有语音之后。iOS 上还可以指定可选的 `priority`。
 
 **参数：**
 
-| 名称                                                              | 类型   | 描述                                                                 |
-| ----------------------------------------------------------------- | ------ | -------------------------------------------------------------------- |
-| announcement <div className="label basic required">Required</div> | string | 要播报的字符串                                                       |
-| options <div className="label basic required">Required</div>      | object | `queue`——将播报排在现有语音之后 <div className="label ios">iOS</div> |
+| 名称                                                          | 类型   | 描述                                                                                                                                                                                                                                                                                                                                                                             |
+| ------------------------------------------------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| announcement <div className="label basic required">必需</div> | string | 要播报的字符串                                                                                                                                                                                                                                                                                                                                                                   |
+| options <div className="label basic required">必需</div>      | object | 包含以下键的选项对象：<ul><li>`queue`: 将播报排在现有语音之后。 <div className="label ios">iOS</div></li><li>`priority`: 播报优先级（`'low'`、`'default'` 或 `'high'`）。高优先级播报会中断正在进行的语音，且不会被打断。默认优先级播报会中断正在进行的语音，但也可以被打断。低优先级播报不会中断正在进行的语音，并且可以被打断。 <div className="label ios">iOS</div></li></ul> |
 
 ---
 
@@ -144,9 +147,9 @@ static getRecommendedTimeoutMillis(originalTimeout: number): Promise<number>;
 
 **参数：**
 
-| 名称                                                                 | 类型   | 描述                                                             |
-| -------------------------------------------------------------------- | ------ | ---------------------------------------------------------------- |
-| originalTimeout <div className="label basic required">Required</div> | number | 如果未设置“辅助功能超时”，则返回的超时时间。请以毫秒为单位指定。 |
+| 名称                                                             | 类型   | 描述                                                             |
+| ---------------------------------------------------------------- | ------ | ---------------------------------------------------------------- |
+| originalTimeout <div className="label basic required">必需</div> | number | 如果未设置“辅助功能超时”，则返回的超时时间。请以毫秒为单位指定。 |
 
 ---
 
@@ -286,7 +289,7 @@ static sendAccessibilityEvent(host: HostInstance, eventType: AccessibilityEventT
 请确保你希望接收辅助功能焦点的任何 `View` 都设置了 `accessible={true}`。
 :::
 
-| 名称                                                           | 类型                    | 描述                                                                                                                 |
-| -------------------------------------------------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| host <div className="label basic required">Required</div>      | HostInstance            | 用于发送事件的组件 ref。                                                                                             |
-| eventType <div className="label basic required">Required</div> | AccessibilityEventTypes | `'click'`（仅限 Android）、`'focus'`、`'viewHoverEnter'`（仅限 Android）或 `'windowStateChange'`（仅限 Android）之一 |
+| 名称                                                       | 类型                    | 描述                                                                                                                 |
+| ---------------------------------------------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| host <div className="label basic required">必需</div>      | HostInstance            | 用于发送事件的组件 ref。                                                                                             |
+| eventType <div className="label basic required">必需</div> | AccessibilityEventTypes | `'click'`（仅限 Android）、`'focus'`、`'viewHoverEnter'`（仅限 Android）或 `'windowStateChange'`（仅限 Android）之一 |

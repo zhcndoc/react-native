@@ -71,23 +71,38 @@ static constants: PlatformConstants;
 
 **属性:**
 
-| <div className="widerColumn">名称</div>                     | 类型    | 可选 | 说明                                                                                                                                                                                            |
-| ---------------------------------------------------------- | ------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| isTesting                                                  | boolean | 否   |                                                                                                                                                                                                   |
-| reactNativeVersion                                         | object  | 否   | React Native 版本信息。键为 `major`、`minor`、`patch`，可选 `prerelease`，值均为数字。                                                                                                            |
-| Version <div className="label android">Android</div>       | number  | 否   | Android 特定的操作系统版本常量。                                                                                                                                                                  |
-| Release <div className="label android">Android</div>       | string  | 否   |                                                                                                                                                                                                   |
-| Serial <div className="label android">Android</div>        | string  | 否   | Android 设备的硬件序列号。                                                                                                                                                                        |
-| Fingerprint <div className="label android">Android</div>   | string  | 否   | 唯一标识构建的字符串。                                                                                                                                                                            |
-| Model <div className="label android">Android</div>         | string  | 否   | Android 设备对最终用户显示的名称。                                                                                                                                                                |
-| Brand <div className="label android">Android</div>         | string  | 否   | 产品/硬件所关联的消费品品牌名称。                                                                                                                                                                |
-| Manufacturer <div className="label android">Android</div>  | string  | 否   | Android 设备的制造商。                                                                                                                                                                            |
-| ServerHost <div className="label android">Android</div>    | string  | 是   |                                                                                                                                                                                                   |
-| uiMode <div className="label android">Android</div>        | string  | 否   | 可能值：`'car'`、`'desk'`、`'normal'`、`'tv'`、`'watch'` 和 `'unknown'`。更多信息请参阅 [Android ModeType](https://developer.android.com/reference/android/app/UiModeManager.html)。         |
-| forceTouchAvailable <div className="label ios">iOS</div>   | boolean | 否   | 指示设备是否支持 3D Touch。                                                                                                                                                                      |
-| interfaceIdiom <div className="label ios">iOS</div>        | string  | 否   | 设备的界面类型。更多信息请参阅 [UIUserInterfaceIdiom](https://developer.apple.com/documentation/uikit/uiuserinterfaceidiom)。                                                               |
-| osVersion <div className="label ios">iOS</div>             | string  | 否   | iOS 特定的操作系统版本常量。                                                                                                                                                                    |
-| systemName <div className="label ios">iOS</div>            | string  | 否   | iOS 特定的操作系统名称常量。                                                                                                                                                                    |
+| <div className="widerColumn">名称</div>                   | 类型    | 可选 | 描述                                                                                                                                                                                  |
+| --------------------------------------------------------- | ------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| isDisableAnimations                                       | boolean | 是   | 是否应禁用动画。未设置时，默认使用 `isTesting` 的值。                                                                                                                                 |
+| isTesting                                                 | boolean | 否   |                                                                                                                                                                                       |
+| reactNativeVersion                                        | object  | 否   | React Native 版本信息。键为 `major`、`minor`、`patch`，可包含可选的 `prerelease`，值为 `number` 类型。                                                                                |
+| Version <div className="label android">Android</div>      | number  | 否   | Android 特有的操作系统版本常量。                                                                                                                                                      |
+| Release <div className="label android">Android</div>      | string  | 否   |                                                                                                                                                                                       |
+| Serial <div className="label android">Android</div>       | string  | 否   | Android 设备的硬件序列号。                                                                                                                                                            |
+| Fingerprint <div className="label android">Android</div>  | string  | 否   | 唯一标识此构建的字符串。                                                                                                                                                              |
+| Model <div className="label android">Android</div>        | string  | 否   | Android 设备面向最终用户显示的名称。                                                                                                                                                  |
+| Brand <div className="label android">Android</div>        | string  | 否   | 与产品或硬件关联、面向消费者的品牌。                                                                                                                                                  |
+| Manufacturer <div className="label android">Android</div> | string  | 否   | Android 设备的制造商。                                                                                                                                                                |
+| ServerHost <div className="label android">Android</div>   | string  | 是   |                                                                                                                                                                                       |
+| uiMode <div className="label android">Android</div>       | string  | 否   | 可选值为：`'car'`、`'desk'`、`'normal'`、`'tv'`、`'watch'` 和 `'unknown'`。更多信息请参阅 [Android ModeType](https://developer.android.com/reference/android/app/UiModeManager.html). |
+| forceTouchAvailable <div className="label ios">iOS</div>  | boolean | 否   | 指示设备是否支持 3D Touch。                                                                                                                                                           |
+| interfaceIdiom <div className="label ios">iOS</div>       | string  | 否   | 设备的界面类型。更多信息请参阅 [UIUserInterfaceIdiom](https://developer.apple.com/documentation/uikit/uiuserinterfaceidiom).                                                          |
+| osVersion <div className="label ios">iOS</div>            | string  | 否   | iOS 特有的操作系统版本常量。                                                                                                                                                          |
+| systemName <div className="label ios">iOS</div>           | string  | 否   | iOS 特有的操作系统名称常量。                                                                                                                                                          |
+
+---
+
+### `isDisableAnimations`
+
+```tsx
+static isDisableAnimations: boolean;
+```
+
+动画关闭时返回 `true`，通常发生在自动化测试期间。未设置时回退到 [`isTesting`](#istesting) 的值。在 Android 上，可通过 `IS_DISABLE_ANIMATIONS` 系统属性设置。
+
+| 类型    |
+| ------- |
+| boolean |
 
 ---
 
@@ -155,8 +170,8 @@ static OS: 'android' | 'ios';
 
 返回一个字符串，表示当前操作系统。
 
-| 类型                       |
-| -------------------------- |
+| 类型                        |
+| --------------------------- |
 | 枚举 (`'android'`, `'ios'`) |
 
 ---
@@ -169,8 +184,8 @@ static Version: 'number' | 'string';
 
 返回当前操作系统的版本。
 
-| 类型                                                                                               |
-| -------------------------------------------------------------------------------------------------- |
+| 类型                                                                                                 |
+| ---------------------------------------------------------------------------------------------------- |
 | number <div className="label android">Android</div><hr />string <div className="label ios">iOS</div> |
 
 ## 方法
@@ -185,9 +200,9 @@ static select(config: Record<string, T>): T;
 
 #### 参数：
 
-| 名称   | 类型   | 必填   | 说明                       |
-| ------ | ------ | ---- | -------------------------- |
-| config | object | 是     | 见下方配置说明。           |
+| 名称   | 类型   | 必填 | 说明             |
+| ------ | ------ | ---- | ---------------- |
+| config | object | 是   | 见下方配置说明。 |
 
 `select` 方法返回当前运行平台最匹配的值。也就是说，如果你运行在手机上，会优先选择 `android` 和 `ios` 键对应的值；如果这些没有指定，则会使用 `native` 键；最后是 `default` 键。
 

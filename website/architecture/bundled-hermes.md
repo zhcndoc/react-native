@@ -21,7 +21,7 @@ title: 内置 Hermes
 
 历史上，React Native 和 Hermes 有两个 **独立的发布流程** 和不同的版本号。不同的发布版本及版本号引起了社区混淆，因为不清楚某个 Hermes 版本是否兼容某个 React Native 版本（例如你需要知道 Hermes 0.11.0 只兼容 React Native 0.68.0 等）。
 
-Hermes 和 React Native 共享 JSI 代码（[Hermes 代码位置](https://github.com/facebook/hermes/tree/main/API/jsi/jsi) 和 [React Native 代码位置](https://github.com/facebook/react-native/tree/main/packages/react-native/ReactCommon/jsi/jsi)）。如果两个仓库中的 JSI 版本不同步，Hermes 构建版本将无法兼容 React Native 构建版本。你可查阅更多关于此 [ABI 不兼容问题](https://github.com/react-native-community/discussions-and-proposals/issues/257)。
+Hermes 和 React Native 共享 JSI 代码（[Hermes 代码位置](https://github.com/facebook/hermes/tree/main/API/jsi/jsi) 和 [React Native 代码位置](https://github.com/react/react-native/tree/main/packages/react-native/ReactCommon/jsi/jsi)）。如果两个仓库中的 JSI 版本不同步，Hermes 构建版本将无法兼容 React Native 构建版本。你可以在[此处](https://github.com/react-native-community/discussions-and-proposals/issues/257)了解更多关于 ABI 不兼容问题的信息。
 
 为了解决这个问题，我们扩展了 React Native 的发布流程以下载和构建 Hermes，确保构建 Hermes 时只使用一份 JSI 代码。
 
@@ -39,12 +39,12 @@ Hermes 和 React Native 共享 JSI 代码（[Hermes 代码位置](https://github
 
 在 React Native 0.69 之前，用户会下载一个 pod（这里是对应的 [podspec](https://github.com/CocoaPods/Specs/blob/master/Specs/5/d/0/hermes-engine/0.11.0/hermes-engine.podspec.json)）。
 
-从 React Native 0.69 开始，用户将使用定义在 `react-native` NPM 包中 `sdks/hermes-engine/hermes-engine.podspec` 文件内的 podspec。
-该 podspec 依赖我们在 React Native 发布流程中上传到 Maven 和 React Native GitHub Releases 的 Hermes 预构建包（见 [本次发布的资源](https://github.com/facebook/react-native/releases/tag/v0.70.4)）。
+从 React Native 0.69 开始，用户会改用定义在 `react-native` NPM 包中 `sdks/hermes-engine/hermes-engine.podspec` 文件内的 podspec。
+该 podspec 依赖我们在 React Native 发布流程中上传到 Maven 和 React Native GitHub Release 的 Hermes 预构建 tarball（例如[本次发布的资源](https://github.com/react/react-native/releases/tag/v0.70.4)）。
 
 ### Android 用户
 
-在 Android 上，我们将以如下方式更新默认模板中的 [`android/app/build.gradle`](https://github.com/facebook/react-native/blob/main/template/android/app/build.gradle) 文件：
+在 Android 上，我们将按如下方式更新默认模板中的 [`android/app/build.gradle`](https://github.com/react/react-native/blob/main/template/android/app/build.gradle) 文件：
 
 ```diff
 dependencies {
@@ -65,8 +65,8 @@ dependencies {
 
 在 React Native 0.69 之前，用户会从 `hermes-engine` NPM 包使用 `hermes-debug.aar` 和 `hermes-release.aar`。
 
-在 React Native 0.69 中，用户将使用包含在 `react-native` NPM 包 `android/com/facebook/react/hermes-engine/` 文件夹中的 Android 多变体工件。
-请注意，我们计划在未来某个版本中[完全移除对 `hermes-engine` 依赖](https://github.com/facebook/react-native/blob/c418bf4c8fe8bf97273e3a64211eaa38d836e0a0/package.json#L105)。
+在 React Native 0.69 中，用户将使用 `react-native` NPM 包中 `android/com/facebook/react/hermes-engine/` 文件夹内的 Android 多变体构件。
+另请注意，我们计划在未来某个 React Native 版本中[完全移除对 `hermes-engine` 的依赖](https://github.com/react/react-native/blob/c418bf4c8fe8bf97273e3a64211eaa38d836e0a0/package.json#L105)。
 
 #### 新架构下的 Android 用户
 
@@ -102,12 +102,11 @@ dependencies {
 
 ### 内置 Hermes 如何工作？
 
-该机制依赖于从 `facebook/hermes` 仓库下载 Hermes 源码 tarball，放置到 `facebook/react-native` 仓库中。
-对此类其他原生依赖（如 Folly，Glog 等）我们也有类似机制，Hermes 现已采用同样的方案。
+该机制会从 `facebook/hermes` 仓库**下载包含 Hermes 源代码的 tarball**，并放入 `react/react-native` 仓库。我们对其他原生依赖（如 Folly、Glog 等）也采用了类似机制，现在 Hermes 也使用同样的方案。
 
 从 React Native `main` 分支构建时，我们会拉取 `facebook/hermes` 仓库 `main` 分支的 tarball，并作为 React Native 构建流程一部分进行构建。
 
-从 React Native 发布分支（如 `0.69-stable`）构建时，我们使用 Hermes 仓库上的 **tag** 来 **同步两个仓库的代码**。具体 tag 名称存放于 React Native 发布分支的 `sdks/.hermesversion` 文件中（例如 [0.69 分支的该文件](https://github.com/facebook/react-native/blob/0.69-stable/sdks/.hermesversion)）。
+从 React Native 发布分支（例如 `0.69-stable`）构建时，我们会使用 Hermes 仓库上的 **tag** 来**同步两个仓库的代码**。所用 tag 名称会存放在 React Native 发布分支中的 `sdks/.hermesversion` 文件里（例如 [0.69 发布分支上的该文件](https://github.com/react/react-native/blob/0.69-stable/sdks/.hermesversion)）。
 
 在某种程度上，你可以把这个方法看作是 **git 子模块**。
 
@@ -115,7 +114,7 @@ dependencies {
 
 #### 安卓端实现细节
 
-安卓端实现位于 React Native 的 `/ReactAndroid/hermes-engine` 目录，负责构建 Hermes 并打包使用（[详见 PR #33396](https://github.com/facebook/react-native/pull/33396)）。
+为在 Android 上实现这一机制，我们在 React Native 的 `/ReactAndroid/hermes-engine` 目录中添加了新的构建流程，负责构建 Hermes 并打包供使用（[更多背景信息请参见此处](https://github.com/react/react-native/pull/33396)）。
 
 你可通过如下命令触发 Hermes 构建：
 
@@ -138,16 +137,16 @@ dependencies {
 exclude group:'com.facebook.fbjni'
 ```
 
-此配置是因为 React Native 使用非 prefab 方式消费 fbjni（即解压 `.aar` 并提取 `.so`），而 hermes-engine 等库使用的是 prefab 消费方式。我们计划在未来[解决此问题](https://github.com/facebook/react-native/pull/33397)，使 Hermes 导入可以简洁一行。
+这是因为 React Native 采用非 prefab 方式使用 `fbjni`（即解压 `.aar` 并提取 `.so` 文件），而 hermes-engine 等库使用 prefab 方式。我们计划未来[解决此问题](https://github.com/react/react-native/pull/33397)，让 Hermes 导入可以简化为一行。
 
 #### iOS 端实现细节
 
 iOS 端实现依赖一系列脚本，存于：
 
-- [`/scripts/hermes`](https://github.com/facebook/react-native/tree/main/scripts/hermes)：包含下载 Hermes tarball、解压和配置 iOS 构建的逻辑。`pod install` 时会在 `hermes_enabled` 为 true 时执行。
-- [`/sdks/hermes-engine`](https://github.com/facebook/react-native/tree/main/sdks/hermes-engine)：包含实际构建 Hermes 的逻辑，从 `facebook/hermes` 仓库复制并修改以适配 React Native。`utils` 文件夹中的脚本负责为所有 Mac 平台构建 Hermes。
+- [`/scripts/hermes`](https://github.com/react/react-native/tree/main/scripts/hermes)：这些脚本负责下载 Hermes tarball、解压并配置 iOS 构建。如果 `hermes_enabled` 字段设为 `true`，它们会在 `pod install` 时运行。
+- [`/sdks/hermes-engine`](https://github.com/react/react-native/tree/main/sdks/hermes-engine)：这些脚本包含实际构建 Hermes 的逻辑。它们从 `facebook/hermes` 仓库复制并调整而来，以便在 React Native 中正常工作。具体来说，`utils` 文件夹中的脚本负责为所有 Mac 平台构建 Hermes。
 
-Hermes 构建工作在 CircleCI 的 `build_hermes_macos` 任务中完成。该任务会产出一个 tarball，`hermes-engine` 的 podspec 在使用已发布的 React Native 版本时会下载该 tarball（[这里是 React Native 0.69 的构件实例](https://app.circleci.com/pipelines/github/facebook/react-native/13679/workflows/5172f8e4-6b02-4ccb-ab97-7cb954911fae/jobs/258701/artifacts)）。
+Hermes 会作为 CircleCI 上 `build_hermes_macos` 任务的一部分构建。该任务会生成一个 tarball 构件；使用已发布的 React Native 版本时，`hermes-engine` podspec 会下载它（[此处是 React Native 0.69 的 `build_hermes_macos` 构件示例](https://app.circleci.com/pipelines/github/react/react-native/13679/workflows/5172f8e4-6b02-4ccb-ab97-7cb954911fae/jobs/258701/artifacts)）。
 
 ##### 预构建 Hermes
 

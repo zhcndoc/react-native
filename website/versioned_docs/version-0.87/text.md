@@ -240,7 +240,7 @@ React Native 仍然具有样式继承的概念，但仅限于文本子树。在�
 
 告知屏幕阅读器将当前获得焦点的元素视为具有特定角色。
 
-在 iOS 上，这些角色映射到相应的 Accessibility Traits。Image button 的功能等同于同时设置 `image` 和 `button` 两个 trait。有关更多信息，请参阅 [Accessibility 指南](accessibility.md#accessibilitytraits-ios)。
+在 iOS 上，这些角色会映射到对应的无障碍特征。Image button 的功能与同时设置 `image` 和 `button` 特征相同。更多信息请参阅[无障碍指南](accessibility.md#accessibilityrole)。
 
 在 Android 上，这些角色在 TalkBack 中具有与 iOS Voiceover 中添加 Accessibility Traits 类似的功能
 
@@ -290,7 +290,7 @@ React Native 仍然具有样式继承的概念，但仅限于文本子树。在�
 
 设置为 `true` 时，表示该视图是一个辅助功能元素。
 
-有关更多信息，请参阅 [Accessibility 指南](accessibility#accessible-ios-android)。
+更多信息请参阅[无障碍指南](accessibility.md#accessible)。
 
 | Type    | Default |
 | ------- | ------- |

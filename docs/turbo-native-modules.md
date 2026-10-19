@@ -24,7 +24,7 @@ import {TurboNativeModulesAndroid, TurboNativeModulesIOS} from './\_turbo-native
 我们将通过构建一个示例 Turbo Native Module 来逐步完成这些步骤。本指南其余部分假设你已通过以下命令创建了应用：
 
 <CodeBlock language="bash" title="shell">
-{`npx @react-native-community/cli@latest init TurboModuleExample --version ${getCurrentVersion()}`}
+{`npx @react-native-community/cli@latest init TurboModuleExample --version "${getCurrentVersion()}"`}
 </CodeBlock>
 
 ## 原生持久化存储

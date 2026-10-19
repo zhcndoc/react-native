@@ -14,7 +14,7 @@ React Native 为社区提供了这样一种能力：即使某个新功能的设�
 React Native 也不会使用 `@canary` 或 `@experimental` 的 NPM 标签，因为发布级别同时适用于 React Native 的稳定版和 nightly 版本。
 :::
 
-此外，将发布级别设置为 `EXPERIMENTAL` 或 `CANARY` **不会** 导致消耗 `react@nightly` 或 `react@canary`，这是由于 react-native 消费 React 版本的方式所决定的（[你可以在这里阅读更多相关内容](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Renderer/README.md#react--react-native-versions)）。
+此外，将发布级别设置为 `EXPERIMENTAL` 或 `CANARY` **不会** 导致使用 `react@nightly` 或 `react@canary`，这是由 react-native 使用 React 版本的方式决定的（[详情请参阅此处](https://github.com/react/react-native/blob/main/packages/react-native/Libraries/Renderer/README.md#react--react-native-versions)）。
 
 ## 何时使用各个发布级别
 
@@ -44,7 +44,27 @@ DefaultNewArchitectureEntryPoint.load()
 
 ### iOS
 
-`RCTReactNativeFactory` 类现在有一个接收 `releaseLevel` 参数的初始化器。特性标志设置会使用该参数来选择正确的特性标志覆盖。
+`RCTReactNativeFactory` 类现在提供一个接收 `releaseLevel` 参数的初始化器。特性标志设置会使用该参数选择正确的覆盖项。请在 `SceneDelegate` 中创建 factory；如果未使用 UIScene 生命周期，则在 `AppDelegate` 中创建。
+
+<Tabs groupId="ios-language" queryString defaultValue={constants.defaultAppleLanguage} values={constants.appleLanguages}>
+<TabItem value="objc">
+
+```objc title="SceneDelegate.m"
+self.reactNativeFactory = [[RCTReactNativeFactory alloc] initWithDelegate:self releaseLevel:Canary];
+```
+
+</TabItem>
+<TabItem value="swift">
+
+```swift title="SceneDelegate.swift"
+reactNativeFactory = RCTReactNativeFactory(delegate: self, releaseLevel: RCTReleaseLevel.Canary)
+```
+
+</TabItem>
+</Tabs>
+
+<details>
+<summary>未使用 UIScene 生命周期的应用</summary>
 
 <Tabs groupId="ios-language" queryString defaultValue={constants.defaultAppleLanguage} values={constants.appleLanguages}>
 <TabItem value="objc">
@@ -63,4 +83,6 @@ let factory = RCTReactNativeFactory(delegate: delegate, releaseLevel: RCTRelease
 </TabItem>
 </Tabs>
 
-系统会确保每个应用实例只激活一个发布级别，如果创建了多个使用不同发布级别的 factory，则会崩溃。
+</details>
+
+系统会确保每个应用实例只激活一个发布级别；如果创建了多个使用不同发布级别的 factory，则会崩溃。

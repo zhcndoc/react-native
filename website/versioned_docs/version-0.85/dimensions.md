@@ -98,7 +98,7 @@ static addEventListener(
     window,
     screen,
   }: DimensionsValue) => void,
-): EmitterSubscription;
+): EventSubscription;
 ```
 
 添加事件处理程序。支持的事件：
@@ -119,8 +119,8 @@ static get(dim: 'window' | 'screen'): ScaledSize;
 
 **参数：**
 
-| 名称                                                               | 类型   | 描述                                                                       |
-| ------------------------------------------------------------------ | ------ | -------------------------------------------------------------------------- |
+| 名称                                                           | 类型   | 描述                                          |
+| -------------------------------------------------------------- | ------ | --------------------------------------------- |
 | dim <div className="label basic required two-lines">必填</div> | string | 调用 `set` 时定义的尺寸名称。返回该尺寸的值。 |
 
 :::note
@@ -133,10 +133,10 @@ static get(dim: 'window' | 'screen'): ScaledSize;
 
 **属性：**
 
-| 名称   | 类型                                | 描述                             |
-| ------ | ----------------------------------- | -------------------------------- |
+| 名称   | 类型                                | 描述                 |
+| ------ | ----------------------------------- | -------------------- |
 | window | [ScaledSize](dimensions#scaledsize) | 可见应用窗口的大小。 |
-| screen | [ScaledSize](dimensions#scaledsize) | 设备屏幕的大小。            |
+| screen | [ScaledSize](dimensions#scaledsize) | 设备屏幕的大小。     |
 
 ### ScaledSize
 

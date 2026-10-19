@@ -96,7 +96,7 @@ export default ViewBoxesWithColorAndText;
 
 一个值，指示启用颜色反转时是否应对该视图进行反转。值为 `true` 时，即使启用了颜色反转，也会告知视图不要进行反转。
 
-有关更多信息，请参阅[辅助功能指南](accessibility.md#accessibilityignoresinvertcolors)
+更多信息请参见[无障碍指南](accessibility.md#accessibilityignoresinvertcolors-ios)。
 
 | 类型 |
 | ---- |
@@ -175,7 +175,7 @@ export default ViewBoxesWithColorAndText;
 
 向辅助技术用户描述组件的当前状态。
 
-有关更多信息，请参阅[辅助功能指南](accessibility.md#accessibilitystate-ios-android)。
+更多信息请参见[无障碍指南](accessibility.md#accessibilitystate)。
 
 | 类型                                                                                             |
 | ------------------------------------------------------------------------------------------------ |
@@ -187,7 +187,7 @@ export default ViewBoxesWithColorAndText;
 
 表示组件的当前值。它可以是组件值的文本描述；对于滑块和进度条等基于范围的组件，它包含范围信息（最小值、当前值和最大值）。
 
-有关更多信息，请参阅[辅助功能指南](accessibility.md#accessibilityvalue-ios-android)。
+更多信息请参见[无障碍指南](accessibility.md#accessibilityvalue)。
 
 | 类型                                                            |
 | --------------------------------------------------------------- |

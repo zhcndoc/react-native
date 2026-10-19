@@ -112,7 +112,7 @@ dependencies {
 ```
 
 :::note
-上面列出的版本可能不会及时更新。请查看主仓库中的 [`packages/react-native/gradle/libs.versions.toml`](https://github.com/facebook/react-native/blob/main/packages/react-native/gradle/libs.versions.toml)，以了解在某个特定标签版本中使用的是哪个 fresco 版本。
+上面列出的版本可能不会及时更新。请查看主仓库中的 [`packages/react-native/gradle/libs.versions.toml`](https://github.com/react/react-native/blob/main/packages/react-native/gradle/libs.versions.toml)，以了解特定标签版本中使用的 fresco 版本。
 :::
 
 ---
@@ -486,8 +486,8 @@ static abortPrefetch(requestId: number);
 
 **参数：**
 
-| 名称                                                           | 类型   | 描述                             |
-| -------------------------------------------------------------- | ------ | -------------------------------- |
+| 名称                                                       | 类型   | 描述                            |
+| ---------------------------------------------------------- | ------ | ------------------------------- |
 | requestId <div className="label basic required">必需</div> | number | 由 `prefetch()` 返回的请求 ID。 |
 
 ---
@@ -504,8 +504,8 @@ static getSize(uri: string): Promise<{width: number, height: number}>;
 
 **参数：**
 
-| <div className="wideColumn">名称</div>                   | 类型   | 描述                |
-| -------------------------------------------------------- | ------ | ------------------- |
+| <div className="wideColumn">名称</div>               | 类型   | 描述         |
+| ---------------------------------------------------- | ------ | ------------ |
 | uri <div className="label basic required">必需</div> | string | 图像的位置。 |
 
 ---
@@ -525,9 +525,9 @@ static getSizeWithHeaders(
 
 **参数：**
 
-| <div className="wideColumn">名称</div>                       | 类型   | 描述                  |
-| ------------------------------------------------------------ | ------ | -------------------- |
-| uri <div className="label basic required">必需</div>     | string | 图像的位置。   |
+| <div className="wideColumn">名称</div>                   | 类型   | 描述             |
+| -------------------------------------------------------- | ------ | ---------------- |
+| uri <div className="label basic required">必需</div>     | string | 图像的位置。     |
 | headers <div className="label basic required">必需</div> | object | 请求的 headers。 |
 
 ---
@@ -542,10 +542,10 @@ await Image.prefetch(url);
 
 **参数：**
 
-| 名称                                                     | 类型                                                  | 描述                                            |
-| -------------------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------ |
-| url <div className="label basic required">必需</div> | string                                                | 图像的远程位置。                      |
-| callback                                                 | function <div className="label android">Android</div> | 将使用 `requestId` 调用的函数。 |
+| 名称                                                 | 类型                                                  | 描述                            |
+| ---------------------------------------------------- | ----------------------------------------------------- | ------------------------------- |
+| url <div className="label basic required">必需</div> | string                                                | 图像的远程位置。                |
+| callback                                             | function <div className="label android">Android</div> | 将使用 `requestId` 调用的函数。 |
 
 ---
 
@@ -561,8 +561,8 @@ static queryCache(
 
 **参数：**
 
-| 名称                                                      | 类型  | 描述                                |
-| --------------------------------------------------------- | ----- | ----------------------------------- |
+| 名称                                                  | 类型  | 描述                        |
+| ----------------------------------------------------- | ----- | --------------------------- |
 | urls <div className="label basic required">必需</div> | array | 要检查缓存的图像 URL 列表。 |
 
 ---
@@ -582,8 +582,8 @@ static resolveAssetSource(source: ImageSourcePropType): {
 
 **参数：**
 
-| <div className="wideColumn">名称</div>                      | 类型                                     | 描述                                                                  |
-| ----------------------------------------------------------- | ---------------------------------------- | -------------------------------------------------------------------- |
+| <div className="wideColumn">名称</div>                  | 类型                                     | 描述                                                                       |
+| ------------------------------------------------------- | ---------------------------------------- | -------------------------------------------------------------------------- |
 | source <div className="label basic required">必需</div> | [ImageSource](image#imagesource), number | 一个数字（由 `require('./foo.png')` 返回的不透明类型）或一个 ImageSource。 |
 
 ## 类型定义
@@ -611,18 +611,18 @@ static resolveAssetSource(source: ImageSourcePropType): {
 
 **属性：**
 
-| 名称   | 类型   | 描述                         |
-| ------ | ------ | ---------------------------- |
+| 名称   | 类型   | 描述                            |
+| ------ | ------ | ------------------------------- |
 | source | object | [source object](#source-object) |
 
 #### Source Object
 
 **属性：**
 
-| 名称   | 类型   | 描述                                                  |
-| ------ | ------ | ----------------------------------------------------- |
-| width  | number | 已加载图像的宽度。                                   |
-| height | number | 已加载图像的高度。                                  |
+| 名称   | 类型   | 描述                           |
+| ------ | ------ | ------------------------------ |
+| width  | number | 已加载图像的宽度。             |
+| height | number | 已加载图像的高度。             |
 | uri    | string | 表示该图像资源标识符的字符串。 |
 
 ### ImageSource
@@ -633,17 +633,17 @@ static resolveAssetSource(source: ImageSourcePropType): {
 
 **属性（如果作为对象或对象数组传入）：**
 
-| <div className="wideColumn">名称</div>     | Type                                       | 描述                                                                                                                                                                          |
-| ------------------------------------------ | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| uri                                        | string                                     | 表示图像资源标识符的字符串，它可以是一个 http 地址、本地文件路径，或静态图像资源的名称。                              |
-| width                                      | number                                     | 如果在构建时已知，可以指定该值，此时它将用于设置默认的 `<Image/>` 组件尺寸。                                                     |
-| height                                     | number                                     | 如果在构建时已知，可以指定该值，此时它将用于设置默认的 `<Image/>` 组件尺寸。                                                     |
-| scale                                      | number                                     | 用于指示图像的缩放因子。若未指定，默认为 `1.0`，表示一个图像像素等于一个显示点 / DIP。                                   |
-| bundle<div className="label ios">iOS</div> | string                                     | 图像所包含的 iOS 资源包。若未设置，默认为 `[NSBundle mainBundle]`。                                                                        |
-| method                                     | string                                     | 要使用的 HTTP 方法。若未指定，默认为 `'GET'`。                                                                                                                        |
-| headers                                    | object                                     | 表示要随远程图像请求一起发送的 HTTP headers 的对象。                                                                                           |
+| <div className="wideColumn">名称</div>     | Type                                       | 描述                                                                                                                        |
+| ------------------------------------------ | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| uri                                        | string                                     | 表示图像资源标识符的字符串，它可以是一个 http 地址、本地文件路径，或静态图像资源的名称。                                    |
+| width                                      | number                                     | 如果在构建时已知，可以指定该值，此时它将用于设置默认的 `<Image/>` 组件尺寸。                                                |
+| height                                     | number                                     | 如果在构建时已知，可以指定该值，此时它将用于设置默认的 `<Image/>` 组件尺寸。                                                |
+| scale                                      | number                                     | 用于指示图像的缩放因子。若未指定，默认为 `1.0`，表示一个图像像素等于一个显示点 / DIP。                                      |
+| bundle<div className="label ios">iOS</div> | string                                     | 图像所包含的 iOS 资源包。若未设置，默认为 `[NSBundle mainBundle]`。                                                         |
+| method                                     | string                                     | 要使用的 HTTP 方法。若未指定，默认为 `'GET'`。                                                                              |
+| headers                                    | object                                     | 表示要随远程图像请求一起发送的 HTTP headers 的对象。                                                                        |
 | body                                       | string                                     | 要随请求发送的 HTTP body。它必须是有效的 UTF-8 字符串，并会严格按指定内容发送，不会应用额外编码（例如 URL 转义或 base64）。 |
-| cache<div className="label ios">iOS</div>  | [ImageCacheEnum](image#imagecacheenum-ios) | 决定请求如何处理可能被缓存的响应。                                                                                                                    |
+| cache<div className="label ios">iOS</div>  | [ImageCacheEnum](image#imagecacheenum-ios) | 决定请求如何处理可能被缓存的响应。                                                                                          |
 
 **如果传入数字：**
 

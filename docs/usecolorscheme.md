@@ -45,4 +45,4 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-你可以在 [`AppearanceExample.js`](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/Appearance/AppearanceExample.js) 中找到一个完整示例，该示例展示了如何将这个 Hook 与 React context 结合使用，为你的应用添加对浅色和深色主题的支持。
+你可以在 [`AppearanceExample.js`](https://github.com/react/react-native/blob/main/packages/rn-tester/js/examples/Appearance/AppearanceExample.js) 中查看完整示例，了解如何将此 Hook 与 React context 结合，为应用添加浅色和深色主题支持。

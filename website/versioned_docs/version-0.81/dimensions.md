@@ -94,7 +94,7 @@ static addEventListener(
     window,
     screen,
   }: DimensionsValue) => void,
-): EmitterSubscription;
+): EventSubscription;
 ```
 
 添加事件处理器。支持的事件：
@@ -115,8 +115,8 @@ static get(dim: 'window' | 'screen'): ScaledSize;
 
 **参数：**
 
-| 名称                                                              | 类型   | 描述                                                                          |
-| ----------------------------------------------------------------- | ------ | ----------------------------------------------------------------------------- |
+| 名称                                                           | 类型   | 描述                                            |
+| -------------------------------------------------------------- | ------ | ----------------------------------------------- |
 | dim <div className="label basic required two-lines">必需</div> | string | 在调用 `set` 时定义的尺寸名称。返回该尺寸的值。 |
 
 > 对于 Android，`window` 尺寸会排除 `status bar`（如果它不是半透明的）和 `bottom navigation bar` 所占用的大小
@@ -127,10 +127,10 @@ static get(dim: 'window' | 'screen'): ScaledSize;
 
 **属性：**
 
-| 名称   | 类型                                | 描述                             |
-| ------ | ----------------------------------- | -------------------------------- |
+| 名称   | 类型                                | 描述                 |
+| ------ | ----------------------------------- | -------------------- |
 | window | [ScaledSize](dimensions#scaledsize) | 可见应用窗口的大小。 |
-| screen | [ScaledSize](dimensions#scaledsize) | 设备屏幕的大小。            |
+| screen | [ScaledSize](dimensions#scaledsize) | 设备屏幕的大小。     |
 
 ### ScaledSize
 

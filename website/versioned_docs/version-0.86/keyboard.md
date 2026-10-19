@@ -76,7 +76,7 @@ export default Example;
 static addListener: (
   eventType: KeyboardEventName,
   listener: KeyboardEventListener,
-) => EmitterSubscription;
+) => EventSubscription;
 ```
 
 `addListener` 函数将一个 JavaScript 函数连接到一个已识别的原生键盘通知事件。
@@ -85,10 +85,10 @@ static addListener: (
 
 **参数：**
 
-| 名称                                                                      | 类型     | 描述                                                                    |
-| ------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------ |
+| 名称                                                                 | 类型     | 描述                                             |
+| -------------------------------------------------------------------- | -------- | ------------------------------------------------ |
 | eventName <div className="label basic two-lines required">必填</div> | string   | 标识你正在监听的事件的字符串。请参见下面的列表。 |
-| callback <div className="label basic two-lines required">必填</div>  | function | 当事件触发时要调用的函数                                 |
+| callback <div className="label basic two-lines required">必填</div>  | function | 当事件触发时要调用的函数                         |
 
 **`eventName`**
 

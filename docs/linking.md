@@ -19,12 +19,12 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 
 如简介中所述，有一些用于核心功能的 URL scheme，存在于每个平台上。下面是一个不完全列表，但涵盖了最常用的 scheme。
 
-| Scheme           | 描述                                   | iOS | Android |
-| ---------------- | -------------------------------------- | --- | ------- |
+| Scheme           | 描述                                        | iOS | Android |
+| ---------------- | ------------------------------------------- | --- | ------- |
 | `mailto`         | 打开邮件应用，例如：mailto: hello@world.dev | ✅  | ✅      |
-| `tel`            | 打开电话应用，例如：tel:+123456789         | ✅  | ✅      |
-| `sms`            | 打开短信应用，例如：sms:+123456789           | ✅  | ✅      |
-| `https` / `http` | 打开网页浏览器应用，例如：https://expo.dev | ✅  | ✅      |
+| `tel`            | 打开电话应用，例如：tel:+123456789          | ✅  | ✅      |
+| `sms`            | 打开短信应用，例如：sms:+123456789          | ✅  | ✅      |
+| `https` / `http` | 打开网页浏览器应用，例如：https://expo.dev  | ✅  | ✅      |
 
 ### 启用深度链接
 
@@ -53,8 +53,93 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 </TabItem>
 <TabItem value="ios">
 
-:::note
-在 iOS 上，你需要按[这里](linking-libraries-ios#step-3)的第 3 步所述，将 `LinkingIOS` 文件夹添加到你的头文件搜索路径中。如果你还想在应用运行期间监听传入的应用链接，你需要在你的 `*AppDelegate.m` 中添加以下几行：
+在 iOS 上，你需要按照[此处](linking-libraries-ios#step-3)第 3 步的说明，将 `LinkingIOS` 文件夹添加到头文件搜索路径。如果还想在应用运行期间监听传入的应用链接，请从 `SceneDelegate` 转发深层链接。如果应用在 `Info.plist` 中声明了 `UIApplicationSceneManifest`，`RCTLinkingManager` 会忽略下方的 `AppDelegate` 链接方法，因此必须改为从 `SceneDelegate` 转发链接。
+
+<Tabs groupId="ios-language" queryString defaultValue={constants.defaultAppleLanguage} values={constants.appleLanguages}>
+<TabItem value="objc">
+
+```objc title="SceneDelegate.m"
+#import <React/RCTLinkingManager.h>
+
+- (void)scene:(UIScene *)scene openURLContexts:(NSSet<UIOpenURLContext *> *)URLContexts
+{
+  [RCTLinkingManager scene:scene openURLContexts:URLContexts];
+}
+```
+
+如果应用使用 [Universal Links](https://developer.apple.com/ios/universal-links/)，还需要添加以下代码：
+
+```objc title="SceneDelegate.m"
+- (void)scene:(UIScene *)scene continueUserActivity:(NSUserActivity *)userActivity
+{
+  [RCTLinkingManager scene:scene continueUserActivity:userActivity];
+}
+```
+
+</TabItem>
+<TabItem value="swift">
+
+```swift title="SceneDelegate.swift"
+func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+  RCTLinkingManager.scene(scene, openURLContexts: URLContexts)
+}
+```
+
+如果应用使用 [Universal Links](https://developer.apple.com/ios/universal-links/)，还需要添加以下代码：
+
+```swift title="SceneDelegate.swift"
+func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+  RCTLinkingManager.scene(scene, continue: userActivity)
+}
+```
+
+</TabItem>
+</Tabs>
+
+这些回调只涵盖 scene 已连接时收到的链接。若要处理冷启动时的链接（应用由自定义 URL scheme 或 Universal Link 启动），还需要在启动 React Native 时将 scene 的 `UIScene.ConnectionOptions` 传递给它，否则 [`getInitialURL()`](#getinitialurl) 会解析为 `null`：
+
+<Tabs groupId="ios-language" queryString defaultValue={constants.defaultAppleLanguage} values={constants.appleLanguages}>
+<TabItem value="objc">
+
+```objc title="SceneDelegate.m"
+- (void)scene:(UIScene *)scene
+    willConnectToSession:(UISceneSession *)session
+                 options:(UISceneConnectionOptions *)connectionOptions
+{
+  // ...
+  [self.reactNativeFactory startReactNativeWithModuleName:@"HelloWorld"
+                                                 inWindow:self.window
+                                        connectionOptions:connectionOptions];
+}
+```
+
+</TabItem>
+<TabItem value="swift">
+
+```swift title="SceneDelegate.swift"
+func scene(
+  _ scene: UIScene,
+  willConnectTo session: UISceneSession,
+  options connectionOptions: UIScene.ConnectionOptions
+) {
+  // ...
+  reactNativeFactory?.startReactNative(
+    withModuleName: "HelloWorld",
+    in: window,
+    connectionOptions: connectionOptions
+  )
+}
+```
+
+</TabItem>
+</Tabs>
+
+完整的 `SceneDelegate` 设置请参阅[使用 SceneDelegate 启动](integration-with-existing-apps#6-bootstrapping-with-scenedelegate)。
+
+<details>
+<summary>未使用 UIScene 生命周期的应用</summary>
+
+如果应用未使用 `SceneDelegate`，请改为将以下代码添加到 `AppDelegate`：
 
 <Tabs groupId="ios-language" queryString defaultValue={constants.defaultAppleLanguage} values={constants.appleLanguages}>
 <TabItem value="objc">
@@ -110,12 +195,14 @@ func application(
 </TabItem>
 </Tabs>
 
-:::
+</details>
 
 </TabItem>
 </Tabs>
 
-### 处理深度链接
+---
+
+### 处理深层链接
 
 处理打开你应用的 URL 有两种方式。
 
@@ -334,7 +421,7 @@ const useInitialURL = () => {
 
       // setTimeout 仅用于测试目的
       setTimeout(() => {
-        setUrl(initialUrl);
+        setUrl(initialUrl ?? null);
         setProcessing(false);
       }, 1000);
     };
@@ -388,7 +475,7 @@ const useInitialURL = () => {
 
       // setTimeout 仅用于测试目的
       setTimeout(() => {
-        setUrl(initialUrl);
+        setUrl(initialUrl ?? null);
         setProcessing(false);
       }, 1000);
     };
@@ -555,7 +642,7 @@ export default App;
 static addEventListener(
   type: 'url',
   handler: (event: {url: string}) => void,
-): EmitterSubscription;
+): EventSubscription;
 ```
 
 通过监听 `url` 事件类型并提供处理函数，为 Linking 变更添加一个处理函数。
@@ -576,8 +663,8 @@ static canOpenURL(url: string): Promise<boolean>;
 
 **Parameters:**
 
-| Name                                                     | Type   | Description      |
-| -------------------------------------------------------- | ------ | ---------------- |
+| Name                                                     | Type   | Description    |
+| -------------------------------------------------------- | ------ | -------------- |
 | url <div className="label basic required">Required</div> | string | 要打开的 URL。 |
 
 :::note
@@ -653,8 +740,8 @@ static openURL(url: string): Promise<any>;
 
 **Parameters:**
 
-| Name                                                     | Type   | Description      |
-| -------------------------------------------------------- | ------ | ---------------- |
+| Name                                                     | Type   | Description    |
+| -------------------------------------------------------- | ------ | -------------- |
 | url <div className="label basic required">Required</div> | string | 要打开的 URL。 |
 
 :::note

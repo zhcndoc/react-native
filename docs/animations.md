@@ -293,15 +293,15 @@ Animated.timing(opacity, {
 例如，在处理水平滚动手势时，你可以按如下方式将 `event.nativeEvent.contentOffset.x` 映射到 `scrollX`（一个 `Animated.Value`）：
 
 ```tsx
- onScroll={Animated.event(
-   // scrollX = e.nativeEvent.contentOffset.x
-   [{nativeEvent: {
-        contentOffset: {
-          x: scrollX
-        }
-      }
-    }]
- )}
+onScroll={Animated.event(
+  // scrollX = e.nativeEvent.contentOffset.x
+  [{
+    nativeEvent: {
+      contentOffset: { x: scrollX }
+    }
+  }],
+  {useNativeDriver: true}
+)}
 ```
 
 下面的示例实现了一个水平滚动轮播，其中滚动位置指示器通过 `ScrollView` 中使用的 `Animated.event` 进行动画处理
@@ -314,7 +314,7 @@ import {
   Text,
   StyleSheet,
   View,
-  ImageBackground,
+  Image,
   Animated,
   useWindowDimensions,
   useAnimatedValue,
@@ -338,28 +338,35 @@ const App = () => {
             horizontal={true}
             pagingEnabled
             showsHorizontalScrollIndicator={false}
-            onScroll={Animated.event([
-              {
-                nativeEvent: {
-                  contentOffset: {
-                    x: scrollX,
+            onScroll={Animated.event(
+              [
+                {
+                  nativeEvent: {
+                    contentOffset: {
+                      x: scrollX,
+                    },
                   },
                 },
-              },
-            ])}
+              ],
+              {useNativeDriver: true},
+            )}
             scrollEventThrottle={1}>
             {images.map((image, imageIndex) => {
               return (
                 <View
                   style={{width: windowWidth, height: 250}}
                   key={imageIndex}>
-                  <ImageBackground source={{uri: image}} style={styles.card}>
+                  <View style={styles.card}>
+                    <Image
+                      source={{uri: image}}
+                      style={StyleSheet.absoluteFill}
+                    />
                     <View style={styles.textContainer}>
                       <Text style={styles.infoText}>
                         {'Image - ' + imageIndex}
                       </Text>
                     </View>
-                  </ImageBackground>
+                  </View>
                 </View>
               );
             })}
@@ -459,7 +466,9 @@ const App = () => {
   const panResponder = useRef(
     PanResponder.create({
       onMoveShouldSetPanResponder: () => true,
-      onPanResponderMove: Animated.event([null, {dx: pan.x, dy: pan.y}]),
+      onPanResponderMove: Animated.event([null, {dx: pan.x, dy: pan.y}], {
+        useNativeDriver: false,
+      }),
       onPanResponderRelease: () => {
         Animated.spring(pan, {
           toValue: {x: 0, y: 0},
@@ -548,7 +557,7 @@ Animated.timing(this.state.animatedValue, {
 </Animated.ScrollView>
 ```
 
-你可以运行 [RNTester 应用](https://github.com/facebook/react-native/blob/main/packages/rn-tester/)，然后加载 Native Animated Example，来查看原生驱动的实际效果。你也可以查看 [源代码](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/NativeAnimation/NativeAnimationsExample.js) 了解这些示例是如何制作出来的。
+运行 [RNTester 应用](https://github.com/react/react-native/blob/main/packages/rn-tester/) 并加载 Native Animated Example，即可查看原生驱动的实际效果。你也可以查看[源代码](https://github.com/react/react-native/blob/main/packages/rn-tester/js/examples/NativeAnimation/NativeAnimationsExample.js)，了解这些示例的实现方式。
 
 #### 注意事项
 
@@ -576,8 +585,8 @@ Animated.timing(this.state.animatedValue, {
 
 RNTester 应用中有多个 `Animated` 的使用示例：
 
-- [AnimatedGratuitousApp](https://github.com/facebook/react-native/tree/main/packages/rn-tester/js/examples/AnimatedGratuitousApp)
-- [NativeAnimationsExample](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/NativeAnimation/NativeAnimationsExample.js)。
+- [AnimatedGratuitousApp](https://github.com/react/react-native/tree/main/packages/rn-tester/js/examples/AnimatedGratuitousApp)
+- [NativeAnimationsExample](https://github.com/react/react-native/blob/main/packages/rn-tester/js/examples/NativeAnimation/NativeAnimationsExample.js)
 
 ## `LayoutAnimation` API
 
@@ -655,7 +664,7 @@ const styles = StyleSheet.create({
 });
 ```
 
-此示例使用了一个预设值，你可以根据需要自定义动画；更多信息请参见 [LayoutAnimation.js](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/LayoutAnimation/LayoutAnimation.js)。
+此示例使用了预设值，你可以根据需要自定义动画。更多信息请参见 [LayoutAnimation.js](https://github.com/react/react-native/blob/main/packages/react-native/Libraries/LayoutAnimation/LayoutAnimation.js)。
 
 ## 其他说明
 

@@ -85,21 +85,21 @@ static addEventListener(
   handler: (
     event: AccessibilityChangeEvent | AccessibilityAnnouncementFinishedEvent,
   ) => void,
-): EmitterSubscription;
+): EventSubscription;
 ```
 
 添加一个事件处理器。支持的事件：
 
-| 事件名称                                                                                 | 描述                                                                                                                                                                                                                                                                                              |
-| ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `accessibilityServiceChanged`<br/><div className="label two-lines android">Android</div> | 当某些服务（如 TalkBack、其他 Android 辅助技术和第三方无障碍服务）启用时触发。事件处理器的参数是一个布尔值。当启用了某些无障碍服务时布尔值为 `true`，否则为 `false`。                          |
+| 事件名称                                                                                 | 描述                                                                                                                                                                                 |
+| ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `accessibilityServiceChanged`<br/><div className="label two-lines android">Android</div> | 当某些服务（如 TalkBack、其他 Android 辅助技术和第三方无障碍服务）启用时触发。事件处理器的参数是一个布尔值。当启用了某些无障碍服务时布尔值为 `true`，否则为 `false`。                |
 | `announcementFinished`<br/><div className="label two-lines ios">iOS</div>                | 当屏幕阅读器完成宣布时触发。事件处理器的参数是一个包含以下键的对象：<ul><li>`announcement`：屏幕阅读器宣布的字符串。</li><li>`success`：一个布尔值，指示宣布是否成功制作。</li></ul> |
-| `boldTextChanged`<br/><div className="label two-lines ios">iOS</div>                     | 当粗体文本切换的状态更改时触发。事件处理器的参数是一个布尔值。当启用了粗体文本时布尔值为 `true`，否则为 `false`。                                                                                                                             |
-| `grayscaleChanged`<br/><div className="label two-lines ios">iOS</div>                    | 当灰度切换的状态更改时触发。事件处理器的参数是一个布尔值。当启用了灰度时布尔值为 `true`，否则为 `false`。                                                                                                                         |
-| `invertColorsChanged`<br/><div className="label two-lines ios">iOS</div>                 | 当颜色反转切换的状态更改时触发。事件处理器的参数是一个布尔值。当启用了颜色反转时布尔值为 `true`，否则为 `false`。                                                                                                                     |
-| `reduceMotionChanged`                                                                    | 当减少运动切换的状态更改时触发。事件处理器的参数是一个布尔值。当启用了减少运动（或当“开发者选项”中的“过渡动画缩放”为“动画关闭”）时布尔值为 `true`，否则为 `false`。                                  |
-| `reduceTransparencyChanged`<br/><div className="label two-lines ios">iOS</div>           | 当减少透明度切换的状态更改时触发。事件处理器的参数是一个布尔值。当启用了减少透明度时布尔值为 `true`，否则为 `false`。                                                                                                         |
-| `screenReaderChanged`                                                                    | 当屏幕阅读器的状态更改时触发。事件处理器的参数是一个布尔值。当启用了屏幕阅读器时布尔值为 `true`，否则为 `false`。                                                                                                                          |
+| `boldTextChanged`<br/><div className="label two-lines ios">iOS</div>                     | 当粗体文本切换的状态更改时触发。事件处理器的参数是一个布尔值。当启用了粗体文本时布尔值为 `true`，否则为 `false`。                                                                    |
+| `grayscaleChanged`<br/><div className="label two-lines ios">iOS</div>                    | 当灰度切换的状态更改时触发。事件处理器的参数是一个布尔值。当启用了灰度时布尔值为 `true`，否则为 `false`。                                                                            |
+| `invertColorsChanged`<br/><div className="label two-lines ios">iOS</div>                 | 当颜色反转切换的状态更改时触发。事件处理器的参数是一个布尔值。当启用了颜色反转时布尔值为 `true`，否则为 `false`。                                                                    |
+| `reduceMotionChanged`                                                                    | 当减少运动切换的状态更改时触发。事件处理器的参数是一个布尔值。当启用了减少运动（或当“开发者选项”中的“过渡动画缩放”为“动画关闭”）时布尔值为 `true`，否则为 `false`。                  |
+| `reduceTransparencyChanged`<br/><div className="label two-lines ios">iOS</div>           | 当减少透明度切换的状态更改时触发。事件处理器的参数是一个布尔值。当启用了减少透明度时布尔值为 `true`，否则为 `false`。                                                                |
+| `screenReaderChanged`                                                                    | 当屏幕阅读器的状态更改时触发。事件处理器的参数是一个布尔值。当启用了屏幕阅读器时布尔值为 `true`，否则为 `false`。                                                                    |
 
 ---
 
@@ -126,10 +126,10 @@ static announceForAccessibilityWithOptions(
 
 **参数：**
 
-| 名称                                                              | 类型   | 描述                                                                                  |
-| ----------------------------------------------------------------- | ------ | -------------------------------------------------------------------------------------------- |
-| announcement <div className="label basic required">必需</div> | 字符串 | 要宣布的字符串                                                                   |
-| options <div className="label basic required">必需</div>      | 对象 | `queue` - 将宣布排在现有语音之后 <div className="label ios">iOS</div> |
+| 名称                                                          | 类型   | 描述                                                                  |
+| ------------------------------------------------------------- | ------ | --------------------------------------------------------------------- |
+| announcement <div className="label basic required">必需</div> | 字符串 | 要宣布的字符串                                                        |
+| options <div className="label basic required">必需</div>      | 对象   | `queue` - 将宣布排在现有语音之后 <div className="label ios">iOS</div> |
 
 ---
 
@@ -144,8 +144,8 @@ static getRecommendedTimeoutMillis(originalTimeout: number): Promise<number>;
 
 **参数：**
 
-| 名称                                                                 | 类型   | 描述                                                                           |
-| -------------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------- |
+| 名称                                                             | 类型 | 描述                                                       |
+| ---------------------------------------------------------------- | ---- | ---------------------------------------------------------- |
 | originalTimeout <div className="label basic required">必需</div> | 数字 | 如果未设置“无障碍超时”则返回的超时时间。以毫秒为单位指定。 |
 
 ---
@@ -284,7 +284,7 @@ static sendAccessibilityEvent(host: HostInstance, eventType: AccessibilityEventT
 确保任何想要接收无障碍焦点的 `View` 都有 `accessible={true}`。
 :::
 
-| 名称                                                           | 类型                    | 描述                                                                                                            |
-| -------------------------------------------------------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| host <div className="label basic required">必需</div>      | HostInstance            | 发送事件到的组件 ref。                                                                                |
+| 名称                                                       | 类型                    | 描述                                                                                                                 |
+| ---------------------------------------------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| host <div className="label basic required">必需</div>      | HostInstance            | 发送事件到的组件 ref。                                                                                               |
 | eventType <div className="label basic required">必需</div> | AccessibilityEventTypes | 其中之一：`'click'`（仅 Android）、`'focus'`、`'viewHoverEnter'`（仅 Android）或 `'windowStateChange'`（仅 Android） |

@@ -57,7 +57,7 @@ rootView.appProperties = @{@"images" : imageList};
 任何时候更新属性都是可以的。不过，更新必须在主线程上执行。getter 可以在任何线程上使用。
 
 :::note
-目前有一个已知问题：在 bridge 启动期间设置 `appProperties` 时，变更可能会丢失。更多信息请参见 https://github.com/facebook/react-native/issues/20115。
+目前已知一个问题：在 bridge 启动期间设置 appProperties 时，更改可能会丢失。详情请参见 https://github.com/react/react-native/issues/20115。
 :::
 
 不能一次只更新少量属性。我们建议你在自己的封装中实现这一点。
@@ -188,7 +188,7 @@ typedef NS_ENUM(NSInteger, RCTRootViewSizeFlexibility) {
 
 在这个示例中，我们有一个 `FlexibleSizeExampleView` 视图，它持有一个 root view。我们创建 root view，对其进行初始化并设置代理。代理将处理尺寸更新。然后，我们将 root view 的尺寸灵活性设置为 `RCTRootViewSizeFlexibilityHeight`，这意味着每当 React Native 内容改变高度时，`rootViewDidChangeIntrinsicSize:` 方法都会被调用。最后，我们设置 root view 的宽度和位置。注意，我们也设置了高度，但由于高度变成了由 RN 决定，因此它不会产生作用。
 
-你可以在[这里](https://github.com/facebook/react-native/blob/main/packages/rn-tester/RNTester/NativeExampleViews/FlexibleSizeExampleView.mm)查看该示例的完整源代码。
+示例的完整源代码请参见[此处](https://github.com/react/react-native/blob/main/packages/rn-tester/RNTester/NativeExampleViews/FlexibleSizeExampleView.mm)。
 
 动态更改 root view 的尺寸灵活性模式是可以的。更改 root view 的灵活性模式会安排一次布局重新计算，并且在内容尺寸已知后会调用代理 `rootViewDidChangeIntrinsicSize:` 方法。
 

@@ -112,7 +112,7 @@ dependencies {
 ```
 
 :::note
-上面列出的版本可能未及时更新。请在主仓库中查看 [`packages/react-native/gradle/libs.versions.toml`](https://github.com/facebook/react-native/blob/main/packages/react-native/gradle/libs.versions.toml)，以了解特定标记版本使用的 fresco 版本
+上面列出的版本可能不会及时更新。请查看主仓库中的 [`packages/react-native/gradle/libs.versions.toml`](https://github.com/react/react-native/blob/main/packages/react-native/gradle/libs.versions.toml)，以了解特定标签版本中使用的 fresco 版本。
 :::
 
 ---
